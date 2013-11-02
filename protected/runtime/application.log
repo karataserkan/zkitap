@@ -1,0 +1,321 @@
+2013/10/24 16:43:38 [error] [exception.CHttpException.403] exception 'CHttpException' with message 'You are not allowed to access this page.' in /home/dump/yii_framework/framework/gii/GiiModule.php:168
+Stack trace:
+#0 /home/dump/yii_framework/framework/web/CController.php(263): GiiModule->beforeControllerAction(Object(DefaultController), Object(CInlineAction))
+#1 /home/dump/yii_framework/framework/web/CWebApplication.php(282): CController->run('')
+#2 /home/dump/yii_framework/framework/web/CWebApplication.php(141): CWebApplication->runController('gii')
+#3 /home/dump/yii_framework/framework/base/CApplication.php(169): CWebApplication->processRequest()
+#4 /home/burak/index.php(14): CApplication->run()
+#5 {main}
+REQUEST_URI=/index.php?r=gii
+---
+2013/10/27 19:45:05 [error] [exception.CException] exception 'CException' with message 'Property "UserIdentity.email" is not defined.' in /home/dump/yii_framework/framework/base/CComponent.php:130
+Stack trace:
+#0 /home/burak/protected/components/UserIdentity.php(20): CComponent->__get('email')
+#1 /home/burak/protected/models/LoginForm.php(52): UserIdentity->authenticate()
+#2 /home/dump/yii_framework/framework/validators/CInlineValidator.php(42): LoginForm->authenticate('password', Array)
+#3 /home/dump/yii_framework/framework/validators/CValidator.php(213): CInlineValidator->validateAttribute(Object(LoginForm), 'password')
+#4 /home/dump/yii_framework/framework/base/CModel.php(159): CValidator->validate(Object(LoginForm), NULL)
+#5 /home/burak/protected/controllers/SiteController.php(94): CModel->validate()
+#6 /home/dump/yii_framework/framework/web/actions/CInlineAction.php(49): SiteController->actionLogin()
+#7 /home/dump/yii_framework/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#8 /home/dump/yii_framework/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#9 /home/dump/yii_framework/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#10 /home/dump/yii_framework/framework/web/CWebApplication.php(282): CController->run('login')
+#11 /home/dump/yii_framework/framework/web/CWebApplication.php(141): CWebApplication->runController('site/login')
+#12 /home/dump/yii_framework/framework/base/CApplication.php(169): CWebApplication->processRequest()
+#13 /home/burak/index.php(14): CApplication->run()
+#14 {main}
+REQUEST_URI=/index.php?r=site/login
+HTTP_REFERER=http://burak.dev.lindneo.com/index.php?r=site/login
+---
+2013/10/27 19:47:22 [error] [exception.CException] exception 'CException' with message 'Property "UserIdentity.email" is not defined.' in /home/dump/yii_framework/framework/base/CComponent.php:130
+Stack trace:
+#0 /home/burak/protected/components/UserIdentity.php(20): CComponent->__get('email')
+#1 /home/burak/protected/models/LoginForm.php(52): UserIdentity->authenticate()
+#2 /home/dump/yii_framework/framework/validators/CInlineValidator.php(42): LoginForm->authenticate('password', Array)
+#3 /home/dump/yii_framework/framework/validators/CValidator.php(213): CInlineValidator->validateAttribute(Object(LoginForm), 'password')
+#4 /home/dump/yii_framework/framework/base/CModel.php(159): CValidator->validate(Object(LoginForm), NULL)
+#5 /home/burak/protected/controllers/SiteController.php(94): CModel->validate()
+#6 /home/dump/yii_framework/framework/web/actions/CInlineAction.php(49): SiteController->actionLogin()
+#7 /home/dump/yii_framework/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#8 /home/dump/yii_framework/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#9 /home/dump/yii_framework/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#10 /home/dump/yii_framework/framework/web/CWebApplication.php(282): CController->run('login')
+#11 /home/dump/yii_framework/framework/web/CWebApplication.php(141): CWebApplication->runController('site/login')
+#12 /home/dump/yii_framework/framework/base/CApplication.php(169): CWebApplication->processRequest()
+#13 /home/burak/index.php(14): CApplication->run()
+#14 {main}
+REQUEST_URI=/index.php?r=site/login
+HTTP_REFERER=http://burak.dev.lindneo.com/index.php?r=site/login
+---
+2013/10/27 19:50:47 [error] [exception.CException] exception 'CException' with message 'Property "UserIdentity.email" is not defined.' in /home/dump/yii_framework/framework/base/CComponent.php:130
+Stack trace:
+#0 /home/burak/protected/components/UserIdentity.php(20): CComponent->__get('email')
+#1 /home/burak/protected/models/LoginForm.php(52): UserIdentity->authenticate()
+#2 /home/dump/yii_framework/framework/validators/CInlineValidator.php(42): LoginForm->authenticate('password', Array)
+#3 /home/dump/yii_framework/framework/validators/CValidator.php(213): CInlineValidator->validateAttribute(Object(LoginForm), 'password')
+#4 /home/dump/yii_framework/framework/base/CModel.php(159): CValidator->validate(Object(LoginForm), NULL)
+#5 /home/burak/protected/controllers/SiteController.php(94): CModel->validate()
+#6 /home/dump/yii_framework/framework/web/actions/CInlineAction.php(49): SiteController->actionLogin()
+#7 /home/dump/yii_framework/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#8 /home/dump/yii_framework/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#9 /home/dump/yii_framework/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#10 /home/dump/yii_framework/framework/web/CWebApplication.php(282): CController->run('login')
+#11 /home/dump/yii_framework/framework/web/CWebApplication.php(141): CWebApplication->runController('site/login')
+#12 /home/dump/yii_framework/framework/base/CApplication.php(169): CWebApplication->processRequest()
+#13 /home/burak/index.php(14): CApplication->run()
+#14 {main}
+REQUEST_URI=/index.php?r=site/login
+HTTP_REFERER=http://burak.dev.lindneo.com/index.php?r=site/login
+---
+2013/10/27 19:51:01 [error] [exception.CException] exception 'CException' with message 'Property "UserIdentity.email" is not defined.' in /home/dump/yii_framework/framework/base/CComponent.php:130
+Stack trace:
+#0 /home/burak/protected/components/UserIdentity.php(20): CComponent->__get('email')
+#1 /home/burak/protected/models/LoginForm.php(52): UserIdentity->authenticate()
+#2 /home/dump/yii_framework/framework/validators/CInlineValidator.php(42): LoginForm->authenticate('password', Array)
+#3 /home/dump/yii_framework/framework/validators/CValidator.php(213): CInlineValidator->validateAttribute(Object(LoginForm), 'password')
+#4 /home/dump/yii_framework/framework/base/CModel.php(159): CValidator->validate(Object(LoginForm), NULL)
+#5 /home/burak/protected/controllers/SiteController.php(94): CModel->validate()
+#6 /home/dump/yii_framework/framework/web/actions/CInlineAction.php(49): SiteController->actionLogin()
+#7 /home/dump/yii_framework/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#8 /home/dump/yii_framework/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#9 /home/dump/yii_framework/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#10 /home/dump/yii_framework/framework/web/CWebApplication.php(282): CController->run('login')
+#11 /home/dump/yii_framework/framework/web/CWebApplication.php(141): CWebApplication->runController('site/login')
+#12 /home/dump/yii_framework/framework/base/CApplication.php(169): CWebApplication->processRequest()
+#13 /home/burak/index.php(14): CApplication->run()
+#14 {main}
+REQUEST_URI=/index.php?r=site/login
+HTTP_REFERER=http://burak.dev.lindneo.com/index.php?r=site/login
+---
+2013/10/27 19:52:25 [error] [exception.CException] exception 'CException' with message 'Property "UserIdentity.email" is not defined.' in /home/dump/yii_framework/framework/base/CComponent.php:130
+Stack trace:
+#0 /home/burak/protected/components/UserIdentity.php(20): CComponent->__get('email')
+#1 /home/burak/protected/models/LoginForm.php(52): UserIdentity->authenticate()
+#2 /home/dump/yii_framework/framework/validators/CInlineValidator.php(42): LoginForm->authenticate('password', Array)
+#3 /home/dump/yii_framework/framework/validators/CValidator.php(213): CInlineValidator->validateAttribute(Object(LoginForm), 'password')
+#4 /home/dump/yii_framework/framework/base/CModel.php(159): CValidator->validate(Object(LoginForm), NULL)
+#5 /home/burak/protected/controllers/SiteController.php(94): CModel->validate()
+#6 /home/dump/yii_framework/framework/web/actions/CInlineAction.php(49): SiteController->actionLogin()
+#7 /home/dump/yii_framework/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#8 /home/dump/yii_framework/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#9 /home/dump/yii_framework/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#10 /home/dump/yii_framework/framework/web/CWebApplication.php(282): CController->run('login')
+#11 /home/dump/yii_framework/framework/web/CWebApplication.php(141): CWebApplication->runController('site/login')
+#12 /home/dump/yii_framework/framework/base/CApplication.php(169): CWebApplication->processRequest()
+#13 /home/burak/index.php(14): CApplication->run()
+#14 {main}
+REQUEST_URI=/index.php?r=site/login
+HTTP_REFERER=http://burak.dev.lindneo.com/index.php?r=site/login
+---
+2013/10/27 19:53:44 [error] [exception.CException] exception 'CException' with message 'Property "UserIdentity.email" is not defined.' in /home/dump/yii_framework/framework/base/CComponent.php:130
+Stack trace:
+#0 /home/burak/protected/components/UserIdentity.php(21): CComponent->__get('email')
+#1 /home/burak/protected/models/LoginForm.php(52): UserIdentity->authenticate()
+#2 /home/dump/yii_framework/framework/validators/CInlineValidator.php(42): LoginForm->authenticate('password', Array)
+#3 /home/dump/yii_framework/framework/validators/CValidator.php(213): CInlineValidator->validateAttribute(Object(LoginForm), 'password')
+#4 /home/dump/yii_framework/framework/base/CModel.php(159): CValidator->validate(Object(LoginForm), NULL)
+#5 /home/burak/protected/controllers/SiteController.php(94): CModel->validate()
+#6 /home/dump/yii_framework/framework/web/actions/CInlineAction.php(49): SiteController->actionLogin()
+#7 /home/dump/yii_framework/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#8 /home/dump/yii_framework/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#9 /home/dump/yii_framework/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#10 /home/dump/yii_framework/framework/web/CWebApplication.php(282): CController->run('login')
+#11 /home/dump/yii_framework/framework/web/CWebApplication.php(141): CWebApplication->runController('site/login')
+#12 /home/dump/yii_framework/framework/base/CApplication.php(169): CWebApplication->processRequest()
+#13 /home/burak/index.php(14): CApplication->run()
+#14 {main}
+REQUEST_URI=/index.php?r=site/login
+HTTP_REFERER=http://burak.dev.lindneo.com/index.php?r=site/login
+---
+2013/10/27 19:53:52 [error] [exception.CException] exception 'CException' with message 'Property "UserIdentity.email" is not defined.' in /home/dump/yii_framework/framework/base/CComponent.php:130
+Stack trace:
+#0 /home/burak/protected/components/UserIdentity.php(21): CComponent->__get('email')
+#1 /home/burak/protected/models/LoginForm.php(52): UserIdentity->authenticate()
+#2 /home/dump/yii_framework/framework/validators/CInlineValidator.php(42): LoginForm->authenticate('password', Array)
+#3 /home/dump/yii_framework/framework/validators/CValidator.php(213): CInlineValidator->validateAttribute(Object(LoginForm), 'password')
+#4 /home/dump/yii_framework/framework/base/CModel.php(159): CValidator->validate(Object(LoginForm), NULL)
+#5 /home/burak/protected/controllers/SiteController.php(94): CModel->validate()
+#6 /home/dump/yii_framework/framework/web/actions/CInlineAction.php(49): SiteController->actionLogin()
+#7 /home/dump/yii_framework/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#8 /home/dump/yii_framework/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#9 /home/dump/yii_framework/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#10 /home/dump/yii_framework/framework/web/CWebApplication.php(282): CController->run('login')
+#11 /home/dump/yii_framework/framework/web/CWebApplication.php(141): CWebApplication->runController('site/login')
+#12 /home/dump/yii_framework/framework/base/CApplication.php(169): CWebApplication->processRequest()
+#13 /home/burak/index.php(14): CApplication->run()
+#14 {main}
+REQUEST_URI=/index.php?r=site/login
+HTTP_REFERER=http://burak.dev.lindneo.com/index.php?r=site/login
+---
+2013/10/27 20:00:59 [warning] [application] Failed to set unsafe attribute "username" of "LoginForm".
+in /home/burak/protected/controllers/SiteController.php (92)
+in /home/burak/index.php (14)
+2013/10/27 20:05:59 [error] [exception.CException] exception 'CException' with message 'User and its behaviors do not have a method or closure named "validatePassword".' in /home/dump/yii_framework/framework/base/CComponent.php:265
+Stack trace:
+#0 /home/dump/yii_framework/framework/db/ar/CActiveRecord.php(225): CComponent->__call('validatePasswor...', Array)
+#1 /home/burak/protected/components/UserIdentity.php(24): CActiveRecord->__call('validatePasswor...', Array)
+#2 /home/burak/protected/components/UserIdentity.php(24): User->validatePassword('dene5me')
+#3 /home/burak/protected/models/LoginForm.php(52): UserIdentity->authenticate()
+#4 /home/dump/yii_framework/framework/validators/CInlineValidator.php(42): LoginForm->authenticate('password', Array)
+#5 /home/dump/yii_framework/framework/validators/CValidator.php(213): CInlineValidator->validateAttribute(Object(LoginForm), 'password')
+#6 /home/dump/yii_framework/framework/base/CModel.php(159): CValidator->validate(Object(LoginForm), NULL)
+#7 /home/burak/protected/controllers/SiteController.php(94): CModel->validate()
+#8 /home/dump/yii_framework/framework/web/actions/CInlineAction.php(49): SiteController->actionLogin()
+#9 /home/dump/yii_framework/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#10 /home/dump/yii_framework/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#11 /home/dump/yii_framework/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#12 /home/dump/yii_framework/framework/web/CWebApplication.php(282): CController->run('login')
+#13 /home/dump/yii_framework/framework/web/CWebApplication.php(141): CWebApplication->runController('site/login')
+#14 /home/dump/yii_framework/framework/base/CApplication.php(169): CWebApplication->processRequest()
+#15 /home/burak/index.php(14): CApplication->run()
+#16 {main}
+REQUEST_URI=/index.php?r=site/login
+HTTP_REFERER=http://burak.dev.lindneo.com/index.php?r=site/login
+---
+2013/10/27 20:10:31 [error] [exception.CException] exception 'CException' with message 'Property "UserIdentity._id" is not defined.' in /home/dump/yii_framework/framework/base/CComponent.php:173
+Stack trace:
+#0 /home/burak/protected/components/UserIdentity.php(29): CComponent->__set('_id', '1')
+#1 /home/burak/protected/models/LoginForm.php(52): UserIdentity->authenticate()
+#2 /home/dump/yii_framework/framework/validators/CInlineValidator.php(42): LoginForm->authenticate('password', Array)
+#3 /home/dump/yii_framework/framework/validators/CValidator.php(213): CInlineValidator->validateAttribute(Object(LoginForm), 'password')
+#4 /home/dump/yii_framework/framework/base/CModel.php(159): CValidator->validate(Object(LoginForm), NULL)
+#5 /home/burak/protected/controllers/SiteController.php(94): CModel->validate()
+#6 /home/dump/yii_framework/framework/web/actions/CInlineAction.php(49): SiteController->actionLogin()
+#7 /home/dump/yii_framework/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#8 /home/dump/yii_framework/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#9 /home/dump/yii_framework/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#10 /home/dump/yii_framework/framework/web/CWebApplication.php(282): CController->run('login')
+#11 /home/dump/yii_framework/framework/web/CWebApplication.php(141): CWebApplication->runController('site/login')
+#12 /home/dump/yii_framework/framework/base/CApplication.php(169): CWebApplication->processRequest()
+#13 /home/burak/index.php(14): CApplication->run()
+#14 {main}
+REQUEST_URI=/index.php?r=site/login
+HTTP_REFERER=http://burak.dev.lindneo.com/index.php?r=site/login
+---
+2013/10/27 20:15:28 [error] [exception.CException] exception 'CException' with message 'Alias "yiiadmin.YiiadminModule" is invalid. Make sure it points to an existing PHP file and the file is readable.' in /home/dump/yii_framework/framework/YiiBase.php:316
+Stack trace:
+#0 /home/dump/yii_framework/framework/YiiBase.php(196): YiiBase::import('yiiadmin.Yiiadm...', true)
+#1 /home/dump/yii_framework/framework/base/CModule.php(282): YiiBase::createComponent('yiiadmin.Yiiadm...', 'yiiadmin', NULL, Array)
+#2 /home/dump/yii_framework/framework/web/CWebApplication.php(337): CModule->getModule('yiiadmin')
+#3 /home/dump/yii_framework/framework/web/CWebApplication.php(276): CWebApplication->createController('yiiadmin')
+#4 /home/dump/yii_framework/framework/web/CWebApplication.php(141): CWebApplication->runController('yiiadmin')
+#5 /home/dump/yii_framework/framework/base/CApplication.php(169): CWebApplication->processRequest()
+#6 /home/burak/index.php(14): CApplication->run()
+#7 {main}
+REQUEST_URI=/index.php?r=yiiadmin
+---
+2013/10/27 20:15:59 [error] [exception.CException] exception 'CException' with message 'Alias "yiiadmin.YiiadminModule" is invalid. Make sure it points to an existing PHP file and the file is readable.' in /home/dump/yii_framework/framework/YiiBase.php:316
+Stack trace:
+#0 /home/dump/yii_framework/framework/YiiBase.php(196): YiiBase::import('yiiadmin.Yiiadm...', true)
+#1 /home/dump/yii_framework/framework/base/CModule.php(282): YiiBase::createComponent('yiiadmin.Yiiadm...', 'yiiadmin', NULL, Array)
+#2 /home/dump/yii_framework/framework/web/CWebApplication.php(337): CModule->getModule('yiiadmin')
+#3 /home/dump/yii_framework/framework/web/CWebApplication.php(276): CWebApplication->createController('yiiadmin')
+#4 /home/dump/yii_framework/framework/web/CWebApplication.php(141): CWebApplication->runController('yiiadmin')
+#5 /home/dump/yii_framework/framework/base/CApplication.php(169): CWebApplication->processRequest()
+#6 /home/burak/index.php(14): CApplication->run()
+#7 {main}
+REQUEST_URI=/index.php?r=yiiadmin
+---
+2013/10/27 20:16:00 [error] [exception.CException] exception 'CException' with message 'Alias "yiiadmin.YiiadminModule" is invalid. Make sure it points to an existing PHP file and the file is readable.' in /home/dump/yii_framework/framework/YiiBase.php:316
+Stack trace:
+#0 /home/dump/yii_framework/framework/YiiBase.php(196): YiiBase::import('yiiadmin.Yiiadm...', true)
+#1 /home/dump/yii_framework/framework/base/CModule.php(282): YiiBase::createComponent('yiiadmin.Yiiadm...', 'yiiadmin', NULL, Array)
+#2 /home/dump/yii_framework/framework/web/CWebApplication.php(337): CModule->getModule('yiiadmin')
+#3 /home/dump/yii_framework/framework/web/CWebApplication.php(276): CWebApplication->createController('yiiadmin')
+#4 /home/dump/yii_framework/framework/web/CWebApplication.php(141): CWebApplication->runController('yiiadmin')
+#5 /home/dump/yii_framework/framework/base/CApplication.php(169): CWebApplication->processRequest()
+#6 /home/burak/index.php(14): CApplication->run()
+#7 {main}
+REQUEST_URI=/index.php?r=yiiadmin
+---
+2013/10/27 20:30:36 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "Book\library".' in /home/dump/yii_framework/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /home/dump/yii_framework/framework/web/CWebApplication.php(141): CWebApplication->runController('Book\library')
+#1 /home/dump/yii_framework/framework/base/CApplication.php(169): CWebApplication->processRequest()
+#2 /home/burak/index.php(14): CApplication->run()
+#3 {main}
+REQUEST_URI=/index.php?r=Book\library
+---
+2013/10/27 20:31:42 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "Book\library".' in /home/dump/yii_framework/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /home/dump/yii_framework/framework/web/CWebApplication.php(141): CWebApplication->runController('Book\library')
+#1 /home/dump/yii_framework/framework/base/CApplication.php(169): CWebApplication->processRequest()
+#2 /home/burak/index.php(14): CApplication->run()
+#3 {main}
+REQUEST_URI=/index.php?r=Book\library
+---
+2013/10/27 20:31:43 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "Book\library".' in /home/dump/yii_framework/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /home/dump/yii_framework/framework/web/CWebApplication.php(141): CWebApplication->runController('Book\library')
+#1 /home/dump/yii_framework/framework/base/CApplication.php(169): CWebApplication->processRequest()
+#2 /home/burak/index.php(14): CApplication->run()
+#3 {main}
+REQUEST_URI=/index.php?r=Book\library
+---
+2013/10/27 20:31:44 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "Book\library".' in /home/dump/yii_framework/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /home/dump/yii_framework/framework/web/CWebApplication.php(141): CWebApplication->runController('Book\library')
+#1 /home/dump/yii_framework/framework/base/CApplication.php(169): CWebApplication->processRequest()
+#2 /home/burak/index.php(14): CApplication->run()
+#3 {main}
+REQUEST_URI=/index.php?r=Book\library
+---
+2013/10/27 20:33:13 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "book/library".' in /home/dump/yii_framework/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /home/dump/yii_framework/framework/web/CWebApplication.php(141): CWebApplication->runController('book/library')
+#1 /home/dump/yii_framework/framework/base/CApplication.php(169): CWebApplication->processRequest()
+#2 /home/burak/index.php(14): CApplication->run()
+#3 {main}
+REQUEST_URI=/index.php?r=book/library
+---
+2013/11/02 08:56:29 [error] [exception.CException] exception 'CException' with message 'Property "Book.id" is not defined.' in /home/dump/yii_framework/framework/base/CComponent.php:130
+Stack trace:
+#0 /home/dump/yii_framework/framework/db/ar/CActiveRecord.php(143): CComponent->__get('id')
+#1 /home/burak/protected/views/book/library.php(4): CActiveRecord->__get('id')
+#2 /home/dump/yii_framework/framework/web/CBaseController.php(126): require('/home/burak/pro...')
+#3 /home/dump/yii_framework/framework/web/CBaseController.php(95): CBaseController->renderInternal('/home/burak/pro...', Array, true)
+#4 /home/dump/yii_framework/framework/web/CController.php(869): CBaseController->renderFile('/home/burak/pro...', Array, true)
+#5 /home/dump/yii_framework/framework/web/CController.php(782): CController->renderPartial('library', Array, true)
+#6 /home/burak/protected/controllers/BookController.php(178): CController->render('library', Array)
+#7 /home/dump/yii_framework/framework/web/actions/CInlineAction.php(49): BookController->actionLibrary()
+#8 /home/dump/yii_framework/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#9 /home/dump/yii_framework/framework/web/filters/CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#10 /home/dump/yii_framework/framework/web/filters/CFilter.php(40): CFilterChain->run()
+#11 /home/dump/yii_framework/framework/web/CController.php(1145): CFilter->filter(Object(CFilterChain))
+#12 /home/dump/yii_framework/framework/web/filters/CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#13 /home/dump/yii_framework/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#14 /home/dump/yii_framework/framework/web/CController.php(291): CFilterChain->run()
+#15 /home/dump/yii_framework/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#16 /home/dump/yii_framework/framework/web/CWebApplication.php(282): CController->run('library')
+#17 /home/dump/yii_framework/framework/web/CWebApplication.php(141): CWebApplication->runController('book/library')
+#18 /home/dump/yii_framework/framework/base/CApplication.php(169): CWebApplication->processRequest()
+#19 /home/burak/index.php(14): CApplication->run()
+#20 {main}
+REQUEST_URI=/index.php?r=book/library&view=about
+---
+2013/11/02 08:59:39 [error] [exception.CException] exception 'CException' with message 'Property "Book.id" is not defined.' in /home/dump/yii_framework/framework/base/CComponent.php:130
+Stack trace:
+#0 /home/dump/yii_framework/framework/db/ar/CActiveRecord.php(143): CComponent->__get('id')
+#1 /home/burak/protected/views/book/library.php(4): CActiveRecord->__get('id')
+#2 /home/dump/yii_framework/framework/web/CBaseController.php(126): require('/home/burak/pro...')
+#3 /home/dump/yii_framework/framework/web/CBaseController.php(95): CBaseController->renderInternal('/home/burak/pro...', Array, true)
+#4 /home/dump/yii_framework/framework/web/CController.php(869): CBaseController->renderFile('/home/burak/pro...', Array, true)
+#5 /home/dump/yii_framework/framework/web/CController.php(782): CController->renderPartial('library', Array, true)
+#6 /home/burak/protected/controllers/BookController.php(178): CController->render('library', Array)
+#7 /home/dump/yii_framework/framework/web/actions/CInlineAction.php(49): BookController->actionLibrary()
+#8 /home/dump/yii_framework/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#9 /home/dump/yii_framework/framework/web/filters/CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#10 /home/dump/yii_framework/framework/web/filters/CFilter.php(40): CFilterChain->run()
+#11 /home/dump/yii_framework/framework/web/CController.php(1145): CFilter->filter(Object(CFilterChain))
+#12 /home/dump/yii_framework/framework/web/filters/CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#13 /home/dump/yii_framework/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#14 /home/dump/yii_framework/framework/web/CController.php(291): CFilterChain->run()
+#15 /home/dump/yii_framework/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#16 /home/dump/yii_framework/framework/web/CWebApplication.php(282): CController->run('library')
+#17 /home/dump/yii_framework/framework/web/CWebApplication.php(141): CWebApplication->runController('book/library')
+#18 /home/dump/yii_framework/framework/base/CApplication.php(169): CWebApplication->processRequest()
+#19 /home/burak/index.php(14): CApplication->run()
+#20 {main}
+REQUEST_URI=/index.php?r=book/library&view=about
+---
