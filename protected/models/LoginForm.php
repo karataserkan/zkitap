@@ -34,7 +34,7 @@ class LoginForm extends CFormModel
 	 * Declares attribute labels.
 	 */
 	public function attributeLabels()
-	{
+	{ 
 		return array(
 			'rememberMe'=>'Remember me next time',
 		);
@@ -48,7 +48,7 @@ class LoginForm extends CFormModel
 	{
 		if(!$this->hasErrors())
 		{
-			$this->_identity=new UserIdentity($this->email,$this->password);
+			$this->_identity=new UserIdentity($this->email,md5(sha1($this->password)));
 			if(!$this->_identity->authenticate())
 				$this->addError('password','Incorrect username or password.');
 		}
