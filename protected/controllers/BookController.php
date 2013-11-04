@@ -19,6 +19,10 @@ class BookController extends Controller
 		);
 	}
 
+	public function actionMybooks(){
+		$this->redirect( array('site/index' ) );
+	}
+
 	/**
 	 * Specifies the access control rules.
 	 * This method is used by the 'accessControl' filter.
@@ -28,7 +32,7 @@ class BookController extends Controller
 	{
 		return array(
 			array('allow',  // allow all users to perform 'index' and 'view' actions
-				'actions'=>array('index','view','author'),
+				'actions'=>array('mybooks','view','author'),
 				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
@@ -36,7 +40,7 @@ class BookController extends Controller
 				'users'=>array('@'),
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
-				'actions'=>array('admin','delete'),
+				'actions'=>array('index','admin','delete'),
 				'users'=>array('admin'),
 			),
 			array('deny',  // deny all users
@@ -95,7 +99,7 @@ class BookController extends Controller
 		));
 	}
 
-	
+
 	public function actionSelectLayout($bookId){
 
 	}

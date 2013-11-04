@@ -19,6 +19,16 @@ $this->menu=array(
 
 <h1><?php echo $model->title; ?></h1>
 <hr>
+<div id='editor_view_pane' style='background:#000; padding:5px;margin:5px;'>
+	<div id='ruler' style='background:yellow; padding:25px;margin:5px;' >
+		<div id='guide'> 
+			<div id='current_page' style='background:white;border:thin solid black;zoom:1;padding:1cm;  height:800px;' >
+				Page Here Drag&drops
+			</div>
+		</div> <!-- guide -->
+	</div><!-- ruler -->
+</div><!-- editor_pane -->
+
 <a href='?r=chapter/create&book_id=<?php echo $model->book_id; ?>' >Add Chapter</a>
 <a href='?r=chapter/add&book_id=<?php echo $model->book_id; ?>' >Add Page</a>
 
