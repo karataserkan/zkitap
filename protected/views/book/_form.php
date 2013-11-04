@@ -13,12 +13,50 @@
 
 	<p class="note">Fields with <span class="required">*</span> are required.</p>
 
-	<?php echo $form->errorSummary($model); ?>
-
+	<?php echo $form->errorSummary($model); 
+	/*
 	<div class="row">
-		<?php echo $form->labelEx($model,'id'); ?>
-		<?php echo $form->textField($model,'id'); ?>
-		<?php echo $form->error($model,'id'); ?>
+		<?php echo $form->labelEx($model,'book_id'); ?>
+		<?php echo $form->textField($model,'book_id',array('size'=>44,'maxlength'=>44)); ?>
+		<?php echo $form->error($model,'book_id'); ?>
+	</div>
+	*/
+	?>
+	<div class="row">
+		Select Template:
+		<?php 
+			
+		?>
+	</hr>
+	</div>
+	<div class="row">
+		<?php echo $form->labelEx($model,'workspace_id'); ?>
+
+		<?php // echo $form->textField($model,'workspace_id',array('size'=>44,'maxlength'=>44)); 
+		$userid=Yii::app()->user->id;
+		//$workspacesOfUser= new WorkspacesUsers();
+
+		$workspacesOfUser= Yii::app()->db->createCommand()
+	    ->select("*")
+	    ->from("workspaces_users x")
+	    ->join("workspaces w",'w.workspace_id=x.workspace_id')
+	    ->join("user u","x.userid=u.id")
+	    ->where("userid=:id", array(':id' => $userid ) )->queryAll();
+		
+		$workspace_id_value = CHtml::listData($workspacesOfUser, 
+                'workspace_id', 'workspace_name');    
+		//print_r($workspace_id_value);
+
+	   /* foreach ($workspacesOfUser as $key => $workspace) {
+	    	$workspace_id_value[$workspace['workspace_id']]=$workspace['workspace_name'];
+
+	    }
+	    */
+	    echo  $form->dropDownList($model,'workspace_id', $workspace_id_value
+              ,$workspace_id_value
+              );
+		?>
+		<?php echo $form->error($model,'workspace_id'); ?>
 	</div>
 
 	<div class="row">

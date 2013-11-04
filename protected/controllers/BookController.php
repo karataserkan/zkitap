@@ -28,7 +28,7 @@ class BookController extends Controller
 	{
 		return array(
 			array('allow',  // allow all users to perform 'index' and 'view' actions
-				'actions'=>array('index','view', 'library'),
+				'actions'=>array('index','view','author'),
 				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
@@ -60,24 +60,46 @@ class BookController extends Controller
 	 * Creates a new model.
 	 * If creation is successful, the browser will be redirected to the 'view' page.
 	 */
-	public function actionCreate()
+	public function actionCreate($workspace=null,$book_id=null)
 	{
 		$model=new Book;
+		$model->book_id=functions::get_random_string();
+		$model->created=date("Y-m-d H:i:s");
+
 
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
 
+
+
+
 		if(isset($_POST['Book']))
 		{
 			$model->attributes=$_POST['Book'];
+
 			if($model->save())
-				$this->redirect(array('view','id'=>$model->id));
+				$this->redirect(array('author','bookId'=>$model->book_id));
 		}
 
+		$model->workspace_id=$workspace;
 		$this->render('create',array(
 			'model'=>$model,
 		));
+
 	}
+
+	public function actionAuthor($bookId){ 
+		$model=$this->loadModel($bookId);
+		$this->render('author',array(
+			'model'=>$model,
+		));
+	}
+
+	
+	public function actionSelectLayout($bookId){
+
+	}
+
 
 	/**
 	 * Updates a particular model.
@@ -95,7 +117,7 @@ class BookController extends Controller
 		{
 			$model->attributes=$_POST['Book'];
 			if($model->save())
-				$this->redirect(array('view','id'=>$model->id));
+				$this->redirect(array('view','id'=>$model->book_id));
 		}
 
 		$this->render('update',array(
@@ -138,7 +160,7 @@ class BookController extends Controller
 		if(isset($_GET['Book']))
 			$model->attributes=$_GET['Book'];
 
-		$this->render('admin',array(
+		$this->render('admodelmin',array(
 			'model'=>$model,
 		));
 	}
@@ -147,7 +169,7 @@ class BookController extends Controller
 	 * Returns the data model based on the primary key given in the GET variable.
 	 * If the data model is not found, an HTTP exception will be raised.
 	 * @param integer $id the ID of the model to be loaded
-	 * @return Book the loaded model
+	 * @return Book the lomodeladed model
 	 * @throws CHttpException
 	 */
 	public function loadModel($id)
@@ -172,9 +194,7 @@ class BookController extends Controller
 	}
 
 
-	public function actionLibrary(){
-	    $books = Book::Model()->findAll();
+	protected function add($model){
 
-        $this->render("library",array("books"=>$books));
 	}
 }
