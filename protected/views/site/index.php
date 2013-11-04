@@ -3,7 +3,8 @@
 
 $this->pageTitle=Yii::app()->name;
 ?>
-
+<a href='?r=book/create' 
+class='book_create'/>New Book</a>
 
 
 <h1>Welcome to <i><?php echo CHtml::encode(Yii::app()->name); ?></i></h1>
@@ -27,6 +28,7 @@ $this->pageTitle=Yii::app()->name;
 	    	?>
 	    	<div class='workspace'>
 	    		<h1><?php echo $workspace->workspace_name; ?></h1>
+	    		<a href='?r=book/create&workspace=<?php echo $workspace->workspace_id; ?>' class='book_create'/>New Book</a>
 	    		<div class='book_list'>
 	    			<?php 
 	    			$all_books= Book::model()->findAll('workspace_id=:workspace_id', 
@@ -34,14 +36,21 @@ $this->pageTitle=Yii::app()->name;
 	    			foreach ($all_books as $key => $book) {
 	    				
 	    				?>
-	    				<div class='book' style='display:inline; float:left; width:200px; height:300px;border:thin solid #000;margin:10px;padding:10px; background:#eee;'>
+						<a href='<?php echo Yii::app()->createUrl('book/author', array('bookId'=>$book->book_id) ); ?>' />
+	    					<div class='book' style='display:inline; float:left; width:200px; height:300px;border:thin solid #000;margin:10px;padding:10px; background:#eee;'>
+	    							
 	    						<h2><?php echo $book->title ?></h2>
 	    						<h3>Yazar: <?php echo $book->author ?></h3>
-	    				</div>
+	    					</div>
+						</a>	
 	    				
 	    				<?php
 
 	    			}
+
+
+
+
 
 	    			?>
 	    		</div>

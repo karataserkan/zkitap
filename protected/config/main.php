@@ -1,5 +1,5 @@
 <?php
-
+	
 // uncomment the following to define a path alias
 // Yii::setPathOfAlias('local','path/to/local-folder');
 
@@ -16,6 +16,8 @@ return array(
 	'import'=>array(
 		'application.models.*',
 		'application.components.*',
+		'application.utilities.*'
+		
 	),
 
 	'modules'=>array(
@@ -23,7 +25,7 @@ return array(
 
 		'gii'=>array(
 			'class'=>'system.gii.GiiModule',
-			'password'=>'dene5me',
+			'password'=>'dene5me', 
 			// If removed, Gii defaults to localhost only. Edit carefully to taste.
 			'ipFilters'=>false,
 		),
@@ -52,7 +54,7 @@ return array(
 				'<controller:\w+>/<action:\w+>/<id:\d+>'=>'<controller>/<action>',
 				'<controller:\w+>/<action:\w+>'=>'<controller>/<action>',
 			),
-		),
+		), 
 		*/
 
 		// uncomment the following to use a MySQL database
@@ -91,5 +93,6 @@ return array(
 	'params'=>array(
 		// this is used in contact page
 		'adminEmail'=>'webmaster@example.com',
-	),
+	)
+
 );

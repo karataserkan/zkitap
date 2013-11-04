@@ -2,5 +2,5 @@
 return array (
   'template' => 'default',
   'baseClass' => 'Controller',
-  'actions' => 'edit',
+  'actions' => 'addChapter updateChapter deleteChapter addPage updatePage deletePage addComponent updateComponent deleteComponent',
 );
