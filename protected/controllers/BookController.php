@@ -92,11 +92,13 @@ class BookController extends Controller
 
 	}
 
-	public function actionAuthor($bookId){ 
+	public function actionAuthor($bookId,$page=null){ 
 		$model=$this->loadModel($bookId);
+		
 		$this->render('author',array(
 			'model'=>$model,
-		));
+			'page'=>$page
+		)); 
 	}
 
 
