@@ -75,7 +75,8 @@ print_r($page);
 	</div>
 
 </div> <!-- Top Box -->
-<div id='author_pane' style='width:1240px; margin: 0 auto;margin-top:210px;'> <!-- Outhor Pane -->
+<div id='placeholder' style='height:210px;'></div>
+<div id='author_pane' style='width:1240px; margin: 0 auto;'> <!-- Outhor Pane -->
 <div id='editor_view_pane' style='background:#000; padding:5px;margin:5px;float:left;'>
 	<div id='ruler' style='background:yellow; padding:25px;margin:5px;' >
 		<div id='guide'> 
@@ -138,8 +139,12 @@ print_r($page);
 			
 	</div>
 
-
+ 
 </div> <!-- Outhor Pane -->
 
 
 
+
+<div  style='position:fixed; left:0px;bottom:10px; height:20px;width:100px;'>
+	<div id='zoom-pane'></div>
+</div>

@@ -28,7 +28,8 @@
 
 <body>
 
-<div class="container" id="page">
+<div class="container editor_blue" id="page" >
+	
 	<div id='top views' style='position:fixed;background:#fff;width:100%;height:220px;z-index:999999999999'>
 
 	<div id="header">

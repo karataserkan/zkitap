@@ -17,6 +17,17 @@ $( document ).ready(function () {
 
 		new Tlingit().componentHasCreated(component);
 	 	} } );
+
+
+	 	$('#zoom-pane').slider({
+	      value:100,
+	      min: 25,
+	      max: 500,
+	      step: 25,
+	      slide: function( event, ui ) {
+	        $('#author_pane').css({'zoom': (ui.value/100) });
+	      }
+	    });
 	}
 
 	
