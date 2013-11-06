@@ -12,6 +12,14 @@
 	<link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/ie.css" media="screen, projection" />
 	<![endif]-->
 
+	<link href="<?php echo Yii::app()->request->baseUrl; ?>css/editor_blue/jquery-ui-1.10.3.custom.css" rel="stylesheet">
+	<script src="<?php echo Yii::app()->request->baseUrl; ?>js/jquery-1.9.1.js"></script>
+	<script src="<?php echo Yii::app()->request->baseUrl; ?>js/jquery-ui-1.10.3.custom.js"></script>
+
+	<script src="<?php echo Yii::app()->request->baseUrl; ?>js/Tlingit.js"></script>
+	<script src="<?php echo Yii::app()->request->baseUrl; ?>js/Tsimshian.js"></script>
+	<script src="<?php echo Yii::app()->request->baseUrl; ?>js/Nisga.js"></script>
+	
 	<link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/main.css" />
 	<link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/form.css" />
 
@@ -21,6 +29,7 @@
 <body>
 
 <div class="container" id="page">
+	<div id='top views' style='position:fixed;background:#fff;width:100%;height:220px;z-index:999999999999'>
 
 	<div id="header">
 		<div id='login_area' style='float:right;'>
@@ -51,6 +60,7 @@
 			),
 		)); 
 		*/?>
+
 	</div><!-- mainmenu -->
 	<?php if(isset($this->breadcrumbs)):?>
 		<?php $this->widget('zii.widgets.CBreadcrumbs', array(
@@ -58,15 +68,11 @@
 		)); ?><!-- breadcrumbs -->
 	<?php endif?>
 
+
 	<?php echo $content; ?>
 
-	<div class="clear"></div>
 
-	<div id="footer">
-		Copyright &copy; <?php echo date('Y'); ?> by My Company.<br/>
-		All Rights Reserved.<br/>
-		<?php echo Yii::powered(); ?>
-	</div><!-- footer -->
+
 
 </div><!-- page -->
 

@@ -69,16 +69,11 @@ class ChapterController extends Controller
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
 
-		if(isset($_POST['Chapter']))
-		{
-			$model->attributes=$_POST['Chapter'];
+		
+			
 			if($model->save())
-				$this->redirect(array('book/author','bookId'=>$model->book_id));
-		}
-
-		$this->render('create',array(
-			'model'=>$model,
-		));
+				$this->redirect(array('page/create','chapter_id'=>$model->chapter_id));
+		
 	}
 
 	/**
