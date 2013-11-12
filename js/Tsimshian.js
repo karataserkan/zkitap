@@ -1,13 +1,21 @@
 // Tsimshian Tribe Library for Co-working
 // Triggers Framework events and Coworking events
+'use strict';
+window.lindneo = window.lindneo || {};
 
-var C= new Tsimshian();
+window.lindneo.tsimshian = (function(window, $, undefined){
 
+  var serverName = function (){
+    return "Server Name";
+  };
 
-function Tsimshian (){
-	this.serverName='lindneo.com'
-	this.init=function (serverName){
+  var init = function (serverName){
 
-	}
-	
-}
+  };
+
+  return {
+    serverName: serverName,
+    init: init
+  };
+
+})( window, jQuery );

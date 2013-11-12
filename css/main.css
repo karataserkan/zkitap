@@ -1,3 +1,5 @@
+@charset "utf-8";
+/*
 body
 {
 	margin: 0;
@@ -6,26 +8,164 @@ body
 	font: normal 10pt Arial,Helvetica,sans-serif;
 	background: #EFEFEF;
 }
+*/
+i
+{
+font-style: normal;
+}
+
+a
+{
+cursor: pointer;
+text-decoration:none;
+-webkit-transition: all 0.1s linear;
+-moz-transition: all 0.1s linear;
+-ms-transition: all 0.1s linear;
+-o-transition: all 0.1s linear;
+transition: all 0.1s linear;
+}
+
+
 
 #page
 {
-	
-	margin-bottom: 5px;
-	background: white;
-	
+		
 }
 
 #header
 {
+	min-width:1366px;
 	margin: 0;
 	padding: 0;
-	border-top: 3px solid #C9E0ED;
+	width: 100%;
+	position: fixed;
+	height: 36px;
+	z-index:9999;
+	padding-top:4px; 
+	background-color:#ffffff;
+	border-bottom: 2px solid #d1d2d4;
 }
+
+
+
+
+.styler_box
+{
+height: 36px;
+position: fixed;
+top: 42px;
+width: 100%;
+padding-left: 10px;
+background-color:#e6e7e8;
+border-bottom: 2px solid #d1d2d4;
+padding-top: 3px;
+display: block;
+ z-index:9999;
+
+}
+
+
+.span-19 { width: 100%}
+
+#components{
+
+position:fixed;
+top:83px;
+width:120px;
+bottom:0px;
+left:0px;
+overflow:none; 
+background:#f4f4f4; 
+z-index:9999;
+border-right: 2px solid #d1d2d4;
+
+
+
+
+
+
+
+
+
+
+}
+
+
+.color-picker-box
+{
+width: 25px;
+height: 25px;
+background-color: transparent;
+display: inline-block;
+vertical-align: middle;
+padding: 0px;
+margin: 0px;
+border: none;
+}
+.vertical-line
+
+{
+border-left: 1px solid #C5C5C5;
+margin-left: 5px;
+margin-right: 5px;
+height: 32px;
+display: inline-block;
+width: 1px;
+vertical-align: middle;
+}
+.component{
+		
+}
+.components-header{
+
+		width:95px;
+		display: block;
+		color:#404041;
+		width:100%;
+		background-color:#939597;
+		padding: 5px 10px 5px 0px;
+		border-bottom: 1px solid #d1d2d4;
+
+}
+
+
+
+.ui-draggable{
+		z-index:9999;
+}
+.toolbox{
+float:left;
+border-right: 1px dashed #ccc;
+border-left: 1px dashed #ccc;
+padding: 5px;
+
+}
+
+.hruler{
+background:#ffffff; 
+position:absolute;
+top:0; 
+left: -230px;
+width:160cm;
+height:12px;
+width: 1500px;
+overflow:hidden;
+
+
+}
+
+#ruler .cm {
+		width: 1cm;
+		float:left; 
+		font-size:9px;
+	}
 
 #content
 {
     padding: 20px;
 }
+
+
 
 #sidebar
 {
@@ -43,8 +183,8 @@ body
 
 #logo
 {
-	padding: 10px 20px;
-	font-size: 200%;
+padding-left: 10px;
+margin-top:-5px;
 }
 
 #mainmenu

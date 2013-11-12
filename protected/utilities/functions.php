@@ -25,4 +25,21 @@ class functions {
         // return our finished random string
         return $random_string;
     }
+    
+    public static function new_id($length=44,$valid_chars="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"){
+        $unique=true;
+
+        while ( $unique) {
+        $new_id=functions::get_random_string($length,$valid_chars);
+        $unique=Yii::app()->db->createCommand()
+        ->select('id')
+        ->from('ids')
+        ->where('id=:id', array(':id'=>$new_id))
+        ->queryRow();
+       
+            
+        }
+       return $new_id;
+
+    }
 }

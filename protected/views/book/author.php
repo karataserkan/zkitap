@@ -1,11 +1,12 @@
 <?php
 /* @var $this BookController */
 /* @var $model Book */
-
+/*
 $this->breadcrumbs=array(
 	'Books'=>array('index'),
 	$model->title,
 );
+*/
 /*
 $this->menu=array(
 	array('label'=>'List Book', 'url'=>array('index')),
@@ -15,136 +16,393 @@ $this->menu=array(
 	array('label'=>'Manage Book', 'url'=>array('admin')),
 );
 */
-if($page=null)
+if($page=null) 
 		{
 			$chapter=Chapter::model()->find('book_id=:book_id', array(':book_id' => $model->book_id ));
 				$page=Page::model()->find('chapter_id=:chapter_id', array(':chapter_id' => $chapter->chapter_id ));
-
+ 
 		} else 
 $page=Page::model()->findByPk($page); 
-print_r($page);
-
+print_r($page); 
+ 
 //$chapter=Chapter::model()->findByPk($page->chapter_id);
-
+  
 ?>
-	<style>
-	.span-19 { width: 100%}
-	.component{
-		float:left;
-		margin-right:10px;
-		background: #ccc;
+	
+	
+	
 
-	}
-	.ui-draggable{
-		z-index:9999999;
-	}
-	.toolbox{float:left;border-right: 1px dashed #ccc;border-left: 1px dashed #ccc;padding: 5px;}
-	.tool{float:left;}
-	</style>
-	<h1><?php echo $model->title; ?></h1>
-	<hr>
-	<div id='components'>
-		<div class='component'>Text</div>
-		<div class='component'>Image</div>
-		<div class='component'>Gallery</div>
-	</div>
+	
+	
+	
+		
+	
 
-	<div id='styler_box' style='clear:both'>
-		<div class='toolbox'>
-			<div class='tool radio'>Left Align</div>
-			<div class='tool radio'>Right Align</div>
-			<div class='tool select'>
-				<select id='font-type'>
-					<option value='helvetica'>Helvetica</option> 
-					<option value='arial'>Arial</option> 
-				</select> 
-			</div>
-			<div class='tool check'>Right Allign</div>
-		</div>
-		<div class='toolbox'>
-			<div class='tool text'>ImageUrl: <input type='text' id='imagesrc' /></div>
-		</div>
-	</div>
-		<a href='?r=chapter/create&book_id=<?php echo $model->book_id; ?>' >Add Chapter</a>
+	<label id="options">
+					<select id="general-options" class="radius">
+						<option selected> Seçenekler </option>
+						<option>Seçenek 1</option>
+						<option>Seçenek 2</option>
+						<option>Seçenek 3</option>
+						<option>Seçenek 4</option>
+					</select>
+					</label>
+					
+					
+					<input type="text" id="search" class="search radius" placeholder="Ara">
+					
+	
+	
+	
+	
+	<label id="user">
+					<select id="user-account" class="radius icon-users">
+						<option selected> Kullanıcı Adı </option>
+						<option>Seçenek 1</option>
+						<option>Seçenek 2</option>
+						<option>Seçenek 3</option>
+						<option>Seçenek 4</option>
+					</select>
+					</label>
+					
+					
+	<a href="#" class="btn bck-light-green white radius" id="header-buttons"><i class="icon-publish"> Yayınla</i></a>
+	<a href="#" class="btn bck-light-green white radius" id="header-buttons"><i class="icon-save"> Kaydet</i></a>
+
+	<div id='book_title'><?php echo $model->title; ?></div>
+	
+	</div> <!--Header -->
+	
+
+	
+			<div class="styler_box">
+			<!-- <ul id="text-styles" ></ul> -->
+				<a id="undo" class="icon-undo dark-blue size-20"></a>
+				<a id="redo" class="icon-redo grey-8 size-20"></a>
+				
+				<div class="vertical-line"></div>
+				
+					
+					
+					<input type="color" class="color-picker-box radius" placeholder="e.g. #bbbbbb" />
+					
+					<label>
+					<select id="font-type" class="radius">
+						<option selected="" value="Arial"> Arial </option>
+						<option value="helvetica" >Helvetica</option>
+						<option value="Open Sans" >Open Sans</option>
+						<option value="Times New Roman" >Times New Roman</option>
+						<option value="Courier New" >Courier New</option>
+					</select>
+					</label>
+					
+					<label>
+						<select id="font-size" class="radius">
+						<option selected="" value="8"> 8 </option>
+						<option value="10" >10</option>
+						<option value="12" >12</option>
+						<option value="14" >14</option>
+						<option value="16" >16</option>
+						<option value="18" >18</option>
+					</select>	
+					</label>					
+				<div class="vertical-line"></div>
+				
+				<a id="font-bold"  href="#" class="dark-blue radius toolbox-items"><i class="icon-font-bold  size-15"></i></a>
+				<a id="font-italic"  href="#" class="dark-blue radius toolbox-items"><i class="icon-font-italic size-15"></i></a>
+				<a id="font-underline"  href="#" class="dark-blue radius toolbox-items"><i class="icon-font-underline size-15"></i></a>
+				<div class="vertical-line"></div>
+				<a id="text-align-left"  href="#" class="dark-blue radius toolbox-items"><i class="icon-text-align-left size-15"></i></a>
+				<a id="text-align-center"  href="#" class="dark-blue radius toolbox-items"><i class="icon-text-align-center  size-15"></i></a>
+				<a id="text-align-right"  href="#" class="dark-blue radius toolbox-items"><i class="icon-text-align-right  size-15"></i></a>
+				<div class="vertical-line"></div>
+				<a id="make-list-bullet"  href="#" class="dark-blue radius toolbox-items"><i class="icon-list-bullet size-15"></i></a>
+				<a id="make-list-number"  href="#" class="dark-blue radius toolbox-items"><i class="icon-list-number size-15"></i></a>
+				<div class="vertical-line"></div>
+				<a id="text-left-indent"  href="#" class="dark-blue radius toolbox-items"><i class="icon-left-indent size-15"></i></a>
+				<a id="text-right-indent"  href="#" class="dark-blue radius toolbox-items"><i class="icon-right-indent size-15"></i></a>
+				<div class="vertical-line"></div>
+								<label>
+				<i class="icon-leading grey-6"></i>
+						<select id="font-size" class="radius">
+						<option selected="" value="8"> 100 </option>
+						<option value="0" >0</option>
+						<option value="10" >10</option>
+						<option value="20" >20</option>
+						<option value="30" >30</option>
+						<option value="40" >40</option>
+						<option value="50" >50</option>
+						<option value="60" >60</option>
+						<option value="70" >70</option>
+						<option value="80" >80</option>
+						<option value="90" >90</option>
+						<option value="100" >100</option>
+					</select>	
+					</label>
+				<div class="vertical-line"></div>
+				
+					<label>
+				<i class="icon-opacity grey-6"></i>
+						<select id="font-size" class="radius">
+						<option selected="" value="8"> 100 </option>
+						<option value="0" >0</option>
+						<option value="10" >10</option>
+						<option value="20" >20</option>
+						<option value="30" >30</option>
+						<option value="40" >40</option>
+						<option value="50" >50</option>
+						<option value="60" >60</option>
+						<option value="70" >70</option>
+						<option value="80" >80</option>
+						<option value="90" >90</option>
+						<option value="100" >100</option>
+					</select>	
+					</label>
+					<div class="vertical-line"></div>
+				
+				<a href="#" class="bck-dark-blue white toolbox-items radius" id="pop-align"><i class="icon-align-center size-20"></i></a>
+				<a href="#" class="bck-dark-blue white toolbox-items radius" id="pop-arrange"><i class="icon-send-backward size-15"></i></a>
+				
+				<a href="#" class="btn grey white radius">Grupla</a>
+			
+		
+							
+			
+			
 	<?php if(isset($chapter)) { ?>
 		<a href='?r=page/create&chapter_id=<?php echo (isset($this->current_chapter) ? $this->current_chapter->chapter_id :  $chapter->chapter_id); ?>' >Add Page</a>
 	<?php } ?>
-	<div style='clear:both;'>
-
-
-	</div>
-
-</div> <!-- Top Box -->
-<div id='placeholder' style='height:210px;'></div>
-<div id='author_pane' style='width:1240px; margin: 0 auto;'> <!-- Outhor Pane -->
-<div id='editor_view_pane' style='background:#000; padding:5px;margin:5px;float:left;'>
-	<div id='ruler' style='background:yellow; padding:25px;margin:5px;' >
-		<div id='guide'> 
-			<div id='current_page' style='background:white;border:thin solid black;zoom:1;padding:1cm;  height:700px;width:600px;position:relative' >
-				Page Here Drag&drops 
 			</div>
-		</div> <!-- guide -->
-	</div><!-- ruler -->
-
-
-</div><!-- editor_pane -->
-
-
-	<div id='chapters_pages_view' style='float:left; overflow:scroll;height:800px' >
-		<?php 
-		$page_NUM=0;
-
-		$chapters=Chapter::model()->findAll(array('order'=>  '`order` asc ,  created asc', "condition"=>'book_id=:book_id', "params" => array(':book_id' => $model->book_id )));
-		//print_r($chapters);
-		foreach ($chapters as $key => $chapter) {
 		
-				$pagesOfChapter=Page::model()->findAll(array('order'=>  '`order` asc ,  created asc', "condition"=>'chapter_id=:chapter_id', "params" =>array(':chapter_id' => $chapter->chapter_id )) );
-						$chapter_page=0;
-				foreach ($pagesOfChapter as $key => $pages) {
-					
-					/* if( $pages->page_id
-						==
-						$page->page_id ){
-						$this->current_page=$page;
-						$this->current_chapter=$chapter;
-					}*/
-					$page_NUM++;
-					?>
-						<a href='<?php $this->createUrl("book/author", array('bookId' => $model->book_id,'page'=>$pages->page_id ));?>' >
-							<?php
-							if($chapter_page==0){
-								?> 
-								<div class='chapter' chapter_id='<?php echo $pages->chapter_id; ?>' chapter_id='<?php echo $pages->page_id; ?>' style='border:1px solid #000;width:30px;height:45px;padding:10px;margin:10px;'>
-									<?php echo $chapter->title; ?>
-								
-								<?php
-							} else {
-								?>
-								<div class='page' chapter_id='<?php echo $pages->chapter_id; ?>' chapter_id='<?php echo $pages->page_id; ?>'   style='border:1px solid #000;width:30px;height:45px;padding:10px;margin:20px;'>
-
-								<?php
-							}
-							?>
-							<?php echo $page_NUM . " $chapter_page"; ?>
-							</div>
-						</a>	
-					<?php
-					$chapter_page++;
-				}
-
-		}
-		//$this->current_chapter=null;
-		?>
+		<div style="height:83px;"></div>
 		
+		<!-- popuplar -->
+		
+		<script >
+	$(function(){
+ 
+ $('a[id^="pop-"]').click(function() {
+  
+  var  a = $(this).attr("id");
+       $("#"+a+"-popup").toggle("blind", 400);
+       
+  });
+ 
+  $('.popup').draggable();
+  
+   $('.popup').click(function(){
+  $(this).parent().append(this);
+   });
+    
+	
+ $('.popup-close').click(function(){
+  var  b = $(this).parents().eq(1);
+  	$(b).hide("blind", 400);
+		
+   });
+   
+   
+  });
+		
+	</script>
+	
+<div class="popup" id="pop-align-popup">
+<div class="popup-header">
+Hizala
+<div class="popup-close">x</div>
+</div>
+<div class="popup-inner-title">Dikey</div>
+
+<div class="popup-even">
+
+<i class="icon-align-left size-20 dark-blue"></i>
+<i class="icon-align-center size-20 dark-blue"></i>
+<i class="icon-align-right size-20 dark-blue"></i>
+</div>
+
+<div class="horizontal-line "></div>
+<div class="popup-inner-title">Yatay</div>
+<div class="popup-even">
+<i class="icon-align-top size-20 dark-blue"></i>
+<i class="icon-align-middle size-20 dark-blue"></i>
+<i class="icon-align-bottom size-20 dark-blue"></i>
+</div>
+
+<div class="horizontal-line "></div>
+<div class="popup-inner-title">Boşluklar</div>
+<div class="popup-even">
+<i class="icon-vertical-gaps size-20 dark-blue"></i>
+<i class="icon-horizontal-gaps size-20 dark-blue"></i>
+
+</div>
+
+
+</div>
+
+
+
+
+<div class="popup" id="pop-arrange-popup">
+<div class="popup-header">
+Katman
+<div class="popup-close">x</div>
+</div>
+<i class="icon-bring-front size-20 dark-blue"><a> En Üste Çıkart</a></i>
+<i class="icon-bring-front-1 size-20 dark-blue"><a> Üste Çıkart</a></i>
+<div class="horizontal-line "></div>
+<i class="icon-send-back size-20 dark-blue"><a> En Alta İndir</a></i>
+<i class="icon-send-backward size-20 dark-blue"><a> Alta İndir</a></i>
+
+
+</div>
+		
+
+			<!-- popuplar -->
+	
+		
+		
+<div id='components' >
+		<!--<div class="components-header">MEDYA</div>
+		<a href="#" ctype="galery" class="radius component grey-9"><i class="icon-m-galery  size-20"></i> Galeri</a>
+		<a href="#" ctype="text" class="radius component grey-9"><i class="icon-m-text size-20"></i> Text</a>
+		<a href="#" ctype="sound" class="radius component grey-9"><i class="icon-m-sound size-20"></i> Ses</a>
+		<a href="#" ctype="image" class="radius component grey-9"><i class="icon-m-image size-20"></i> Görsel</a>
+			-->
+		<ul class="component_holder">
+		
+			<li class="left_bar_titles">Medya</li>
+			<li ctype="image" class="component icon-m-image">&nbsp;&nbsp;&nbsp;&nbsp;Görsel</li>
+			<li ctype="sound" class="component icon-m-sound">&nbsp;&nbsp;&nbsp;&nbsp;Ses</li>
+			<li ctype="video" class="component icon-m-video">&nbsp;&nbsp;&nbsp;&nbsp;Video</li>
+			<li class="left_bar_titles">Uygulama</li>
+			<li ctype="galery" class="component icon-m-galery">&nbsp;&nbsp;&nbsp;&nbsp;Galeri</li>
+			<li ctype="quiz"  class="component icon-m-quiz">&nbsp;&nbsp;&nbsp;&nbsp;Quiz</li>
+			<li ctype="listbox"  class="component icon-m-listbox">&nbsp;&nbsp;&nbsp;&nbsp;Yazı Kutusu</li>
+			<li ctype="popup" class="component icon-m-popup">&nbsp;&nbsp;&nbsp;&nbsp;Pop-up</li>
+			<li class="left_bar_titles">Araçlar</li>
+			<li ctype="text" class="component icon-m-text">&nbsp;&nbsp;&nbsp;&nbsp;Yazı</li>
+			<li ctype="grafik" class="component icon-m-charts">&nbsp;&nbsp;&nbsp;&nbsp;Grafik</li>
+			<li ctype="shape" class="component icon-m-shape">&nbsp;&nbsp;&nbsp;&nbsp;Şekil</li>
+		</ul>	
 			
+			
+		<div>Zoom:	<div id='zoom-pane'></div>
+			</div>	
 	</div>
 
- 
-</div> <!-- Outhor Pane -->
+<div id='chapters_pages_view' class="chapter-view" >
 
 
 
 
-<div  style='position:fixed; left:0px;bottom:10px; height:20px;width:100px;'>
-	<div id='zoom-pane'></div>
+
+
+
+
+	<?php 
+	$page_NUM=0;
+
+	$chapters=Chapter::model()->findAll(array('order'=>  '`order` asc ,  created asc', "condition"=>'book_id=:book_id', "params" => array(':book_id' => $model->book_id )));
+	//print_r($chapters);
+	foreach ($chapters as $key => $chapter) {
+	
+			$pagesOfChapter=Page::model()->findAll(array('order'=>  '`order` asc ,  created asc', "condition"=>'chapter_id=:chapter_id', "params" =>array(':chapter_id' => $chapter->chapter_id )) );
+					$chapter_page=0;
+					?>
+<div class='chapter' chapter_id='<?php echo $chapter->chapter_id; ?>'>
+<input type="text" class="chapter-title" placeholder="chapter title">
+<a class="btn red white size-15 radius icon-delete page-chapter-delete hidden-delete" style="float: right; margin-top: -23px;"></a>
+ <!-- <?php echo $chapter->title; ?>  chapter title-->
+					<ul class="pages" >
+							<?php
+							
+			foreach ($pagesOfChapter as $key => $pages) {
+				
+				/* if( $pages->page_id	<div style='	<div style='clear:both;'>
+
+
+	</div>clear:both;'>
+
+
+	</div>
+					==
+					$page->page_id ){
+					$this->current_page=$page;
+					$this->current_chapter=$chapter;
+				}*/
+				$page_NUM++;
+				?>
+					
+					<li class='page' chapter_id='<?php echo $pages->chapter_id; ?>' chapter_id='<?php echo $pages->page_id; ?>'   >
+						<a class="btn red white size-15 radius icon-delete page-chapter-delete hidden-delete" style="margin-left: 38px;"></a>
+						<a href='<?php $this->createUrl("book/author", array('bookId' => $model->book_id,'page'=>$pages->page_id ));?>' >
+
+								
+							<span class="page-number" > <?php echo $page_NUM; ?></span>
+						</a>	
+					</li>
+				<?php
+				$chapter_page++;
+			}
+									?>
+						</ul>
+						</div>
+			<?php
+
+	}
+	//$this->current_chapter=null;
+	?>
+	<div id="add-button" class="bck-dark-blue size-25 icon-add white" style="position: fixed; bottom: 0px; right: 0px; width: 140px; text-align: center;"></div>
+	
+	<script>
+	
+$( "#add-button" ).hover(
+  function() {
+    $( this ).append( $( "<span id='add-buttons' class='add-button-container'> <a class='add-button-cp'>Sayfa ekle</a><a class='add-button-cp white' href='?r=chapter/create&amp;book_id=PhotoBookV1'> Bölüm ekle</a></span>" ) );
+ },
+ function(){
+			 $('#add-buttons').remove();
+    }
+   
+);
+
+
+
+</script>
+		
 </div>
+
+<div id='author_pane_container' style=' width:100%'>
+	<div id='author_pane' style='position:relative;width:1240px; margin: 0 auto; '> <!-- Outhor Pane -->
+		<div id='ruler' class="hruler" >
+			<?php for ($k=0;$k<150;$k++) {
+				echo "<div class='cm'>$k|</div>";
+			}
+			?>
+			
+		</div><!-- ruler -->
+		
+		<div id='guide'> 
+		</div> <!-- guide -->
+		<div id='editor_view_pane' style=' padding:5px 130px;margin:5px;float:left;'>
+			
+					<div id='current_page' style='background:white;border:thin solid black;zoom:1;padding:1cm; margin-top:5px;  height:700px;width:600px;position:relative' >
+						Page Here Drag&drops 
+					</div>
+
+
+		</div><!-- editor_pane -->
+
+
+
+	 
+	</div> <!-- Outhor Pane -->
+	<div style='float:right;clear:both;'>
+		&nbsp;
+
+	</div>
+</div><!-- Outhor Pane Container -->
+
+
+
+

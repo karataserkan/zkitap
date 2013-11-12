@@ -1,5 +1,6 @@
 <?php
 ini_set('display_errors', 'On');
+ini_set('set_time_limit', '5');
 error_reporting(E_ALL);
 // change the following paths if necessary
 $yii=dirname(__FILE__).'/../dump/yii_framework/framework/yii.php';
