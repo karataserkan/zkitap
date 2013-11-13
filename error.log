@@ -270,3 +270,32 @@
 [Tue Nov 12 20:05:57 2013] [error] [client 92.44.153.206] File does not exist: /home/ugur/favicon.ico
 [Tue Nov 12 22:11:22 2013] [error] [client 92.44.153.206] File does not exist: /home/ugur/favicon.ico
 [Wed Nov 13 07:22:12 2013] [error] [client 81.215.15.54] File does not exist: /home/ugur/favicon.ico
+[Wed Nov 13 07:55:49 2013] [error] [client 88.227.230.205] File does not exist: /home/ugur/favicon.ico
+[Wed Nov 13 09:17:12 2013] [error] [client 81.215.15.54] PHP Fatal error:  Call to undefined method epub3::createUrl() in /home/ugur/protected/utilities/epub3/epub3.php on line 89
+[Wed Nov 13 09:17:13 2013] [error] [client 81.215.15.54] PHP Fatal error:  Call to undefined method epub3::createUrl() in /home/ugur/protected/utilities/epub3/epub3.php on line 89
+[Wed Nov 13 09:18:32 2013] [error] [client 31.210.53.80] (13)Permission denied: file permissions deny server access: /home/ugur/css/cover.jpg
+[Wed Nov 13 09:18:44 2013] [error] [client 81.215.15.54] (13)Permission denied: file permissions deny server access: /home/ugur/css/cover.jpg
+[Wed Nov 13 09:20:13 2013] [error] [client 81.215.15.54] (13)Permission denied: file permissions deny server access: /home/ugur/css/cover.jpg, referer: http://ugur.dev.lindneo.com/css/
+[Wed Nov 13 09:20:14 2013] [error] [client 81.215.15.54] (13)Permission denied: file permissions deny server access: /home/ugur/css/cover.jpg, referer: http://ugur.dev.lindneo.com/css/
+[Wed Nov 13 09:20:20 2013] [error] [client 81.215.15.54] (13)Permission denied: file permissions deny server access: /home/ugur/css/cover.jpg, referer: http://ugur.dev.lindneo.com/css/
+[Wed Nov 13 09:20:20 2013] [error] [client 81.215.15.54] (13)Permission denied: file permissions deny server access: /home/ugur/css/cover.jpg, referer: http://ugur.dev.lindneo.com/css/
+[Wed Nov 13 09:20:21 2013] [error] [client 81.215.15.54] (13)Permission denied: file permissions deny server access: /home/ugur/css/cover.jpg, referer: http://ugur.dev.lindneo.com/css/
+[Wed Nov 13 10:04:53 2013] [error] [client 81.215.15.54] PHP Parse error:  syntax error, unexpected '}' in /home/ugur/protected/utilities/epub3/epub3.php on line 202
+[Wed Nov 13 10:15:54 2013] [error] [client 81.215.15.54] PHP Fatal error:  Call to undefined method epub3::error() in /home/ugur/protected/controllers/EditorActionsController.php on line 89
+[Wed Nov 13 10:16:44 2013] [error] [client 81.215.15.54] PHP Parse error:  syntax error, unexpected T_VARIABLE in /home/ugur/protected/utilities/epub3/epub3.php on line 210
+[Wed Nov 13 10:16:50 2013] [error] [client 81.215.15.54] PHP Parse error:  syntax error, unexpected T_VARIABLE in /home/ugur/protected/utilities/epub3/epub3.php on line 210
+[Wed Nov 13 10:41:10 2013] [error] [client 81.215.15.54] PHP Parse error:  syntax error, unexpected ';' in /home/ugur/protected/utilities/epub3/epub3.php on line 227
+[Wed Nov 13 10:52:45 2013] [error] [client 144.122.27.0] File does not exist: /home/ugur/favicon.ico
+[Wed Nov 13 10:59:16 2013] [error] [client 81.215.15.54] PHP Fatal error:  Class 'CListIterator' not found in /home/ugur/protected/utilities/epub3/epub3.php on line 243
+[Wed Nov 13 10:59:19 2013] [error] [client 81.215.15.54] PHP Fatal error:  Class 'CListIterator' not found in /home/ugur/protected/utilities/epub3/epub3.php on line 243
+[Wed Nov 13 11:01:29 2013] [error] [client 81.215.15.54] PHP Parse error:  syntax error, unexpected T_FOREACH in /home/ugur/protected/utilities/epub3/epub3.php on line 275
+[Wed Nov 13 11:01:30 2013] [error] [client 81.215.15.54] PHP Parse error:  syntax error, unexpected T_FOREACH in /home/ugur/protected/utilities/epub3/epub3.php on line 275
+[Wed Nov 13 11:02:10 2013] [error] [client 81.215.15.54] PHP Parse error:  syntax error, unexpected T_STRING, expecting T_VARIABLE in /home/ugur/protected/utilities/epub3/componentHTML.php on line 5
+[Wed Nov 13 11:02:33 2013] [error] [client 81.215.15.54] PHP Parse error:  syntax error, unexpected '}' in /home/ugur/protected/utilities/epub3/componentHTML.php on line 11
+[Wed Nov 13 11:02:42 2013] [error] [client 81.215.15.54] PHP Parse error:  syntax error, unexpected '.' in /home/ugur/protected/utilities/epub3/componentHTML.php on line 22
+[Wed Nov 13 11:02:50 2013] [error] [client 81.215.15.54] PHP Fatal error:  Call to undefined function create_container() in /home/ugur/protected/utilities/epub3/componentHTML.php on line 30
+[Wed Nov 13 12:17:50 2013] [error] [client 144.122.27.0] File does not exist: /home/ugur/favicon.ico
+[Wed Nov 13 12:28:20 2013] [error] [client 81.215.15.54] PHP Parse error:  syntax error, unexpected T_RETURN in /home/ugur/protected/utilities/epub3/epub3.php on line 288
+[Wed Nov 13 12:28:21 2013] [error] [client 81.215.15.54] PHP Parse error:  syntax error, unexpected T_RETURN in /home/ugur/protected/utilities/epub3/epub3.php on line 288
+[Wed Nov 13 13:14:44 2013] [error] [client 81.215.15.54] PHP Parse error:  syntax error, unexpected T_OBJECT_OPERATOR, expecting ')' in /home/ugur/protected/utilities/epub3/componentHTML.php on line 9
+[Wed Nov 13 13:35:42 2013] [error] [client 81.215.15.54] PHP Parse error:  syntax error, unexpected T_DNUMBER in /home/ugur/protected/utilities/epub3/epub3.php on line 302

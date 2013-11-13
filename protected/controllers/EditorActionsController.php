@@ -86,7 +86,7 @@ class EditorActionsController extends Controller
 
 
 		if(!$components)  {
-			$this->error("EA-GPCom","Component Not Found",func_get_args(),$new_component);
+			$this->error("EA-GPCom","Component Not Found",func_get_args());
 			return false;
 		}
 
@@ -390,8 +390,11 @@ class EditorActionsController extends Controller
 
 
 	public function actionExportBook($bookId=null){
-		$ebook=new epub3();
-		print_r($ebook);
+		$book=Book::model()->findByPk($bookId);
+		$ebook=new epub3($book);
+		if ($ebook) readfile($ebook->download() );
+
+		//print_r($ebook);
 
 	}
 	// Uncomment the following methods and override them if needed

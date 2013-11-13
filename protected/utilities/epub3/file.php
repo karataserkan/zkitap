@@ -8,7 +8,7 @@ class file {
 
 	public  function __construct($filename,$pathWithout){
 		$this->path=$pathWithout;
-		$this->filename=$filename;
+		$this->filename=$this->sanitize($filename);
 		if(substr($this->path,-1)!='/') $this->path.='/';
 
 		$this->filepath=$this->path.$this->filename;
@@ -43,6 +43,14 @@ class file {
 
 		return fclose($this->handler);
 
+	}
+
+	public static function sanitize($baslik){
+		$bul = array('Ç', 'Ş', 'Ğ', 'Ü', 'İ', 'Ö', 'ç', 'ş', 'ğ', 'ü', 'ö', 'ı', ' ');
+		$yap = array('C', 'S', 'G', 'U', 'I', 'O', 'c', 's', 'g', 'u', 'o', 'i', '-');
+		$perma = str_replace($bul, $yap, $baslik);
+		$perma = preg_replace("@[^A-Za-z0-9\.\-_]@i", '', $perma);
+		return $perma;
 	}
 
 
