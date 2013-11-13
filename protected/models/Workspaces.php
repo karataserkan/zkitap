@@ -52,6 +52,7 @@ class Workspaces extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
+			'workspace_id'=> array(self::MANY_MANY, 'WorkspacesUsers','workspaces_users(workspace_id, userid)')
 		);
 	}
 
