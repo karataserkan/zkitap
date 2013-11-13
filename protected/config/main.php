@@ -16,7 +16,8 @@ return array(
 	'import'=>array(
 		'application.models.*',
 		'application.components.*',
-		'application.utilities.*'
+		'application.utilities.*',
+		'application.utilities.epub3.*'
 		
 	),
 

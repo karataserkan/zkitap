@@ -1,0 +1,301 @@
+[Wed Nov 06 16:17:21 2013] [error] [client 92.45.183.198] File does not exist: /home/ugur/favicon.ico
+[Wed Nov 06 16:17:25 2013] [error] [client 92.45.183.198] File does not exist: /home/ugur/favicon.ico
+[Wed Nov 06 16:17:27 2013] [error] [client 92.45.183.198] File does not exist: /home/ugur/favicon.ico
+[Wed Nov 06 16:17:27 2013] [error] [client 92.45.183.198] File does not exist: /home/ugur/favicon.ico
+[Wed Nov 06 16:17:29 2013] [error] [client 92.45.183.198] File does not exist: /home/ugur/favicon.ico
+[Wed Nov 06 16:17:31 2013] [error] [client 92.45.183.198] File does not exist: /home/ugur/favicon.ico
+[Wed Nov 06 16:17:35 2013] [error] [client 92.45.183.198] File does not exist: /home/ugur/favicon.ico
+[Wed Nov 06 16:17:38 2013] [error] [client 92.45.183.198] File does not exist: /home/ugur/favicon.ico
+[Wed Nov 06 16:17:39 2013] [error] [client 92.45.183.198] File does not exist: /home/ugur/favicon.ico
+[Wed Nov 06 16:18:09 2013] [error] [client 92.45.183.198] File does not exist: /home/ugur/favicon.ico
+[Wed Nov 06 16:18:11 2013] [error] [client 92.45.183.198] File does not exist: /home/ugur/favicon.ico
+[Wed Nov 06 16:18:11 2013] [error] [client 92.45.183.198] File does not exist: /home/ugur/favicon.ico
+[Thu Nov 07 07:04:27 2013] [error] [client 81.215.15.54] File does not exist: /home/ugur/favicon.ico
+[Thu Nov 07 07:31:03 2013] [error] [client 81.215.15.54] PHP Fatal error:  Call to undefined function get_random_string() in /home/ugur/protected/utilities/functions.php on line 33
+[Thu Nov 07 07:31:12 2013] [error] [client 81.215.15.54] PHP Fatal error:  Using $this when not in object context in /home/ugur/protected/utilities/functions.php on line 33
+[Thu Nov 07 07:33:47 2013] [error] [client 81.215.15.54] PHP Parse error:  syntax error, unexpected T_VARIABLE, expecting T_FUNCTION in /home/ugur/protected/controllers/EditorActionsController.php on line 6
+[Thu Nov 07 07:33:57 2013] [error] [client 81.215.15.54] PHP Parse error:  syntax error, unexpected T_VARIABLE, expecting T_FUNCTION in /home/ugur/protected/controllers/EditorActionsController.php on line 6
+[Thu Nov 07 07:37:04 2013] [error] [client 81.215.15.54] PHP Parse error:  syntax error, unexpected T_ELSE in /home/ugur/protected/controllers/EditorActionsController.php on line 24
+[Thu Nov 07 07:40:51 2013] [error] [client 81.215.15.54] PHP Parse error:  syntax error, unexpected T_OBJECT_OPERATOR in /home/ugur/protected/controllers/EditorActionsController.php on line 13
+[Thu Nov 07 07:41:11 2013] [error] [client 81.215.15.54] PHP Fatal error:  Call to undefined function model() in /home/ugur/protected/controllers/EditorActionsController.php on line 18
+[Thu Nov 07 08:05:22 2013] [error] [client 81.215.15.54] PHP Parse error:  syntax error, unexpected ')' in /home/ugur/protected/controllers/EditorActionsController.php on line 42
+[Thu Nov 07 08:10:32 2013] [error] [client 81.215.15.54] PHP Parse error:  syntax error, unexpected ')' in /home/ugur/protected/controllers/EditorActionsController.php on line 44
+[Thu Nov 07 08:13:47 2013] [error] [client 81.215.15.54] PHP Fatal error:  Constructor error::__construct() cannot be static in /home/ugur/protected/utilities/error.php on line 9
+[Thu Nov 07 08:13:53 2013] [error] [client 81.215.15.54] PHP Fatal error:  Constructor error::__construct() cannot be static in /home/ugur/protected/utilities/error.php on line 9
+[Thu Nov 07 09:01:40 2013] [error] [client 81.215.15.54] PHP Fatal error:  Maximum execution time of 30 seconds exceeded in /home/ugur/protected/views/book/author.php on line 151, referer: http://ugur.dev.lindneo.com/index.php?r=
+[Thu Nov 07 09:02:11 2013] [error] [client 81.215.15.54] PHP Fatal error:  Maximum execution time of 30 seconds exceeded in /home/ugur/protected/views/book/author.php on line 151, referer: http://ugur.dev.lindneo.com/index.php?r=
+[Thu Nov 07 09:02:41 2013] [error] [client 81.215.15.54] PHP Fatal error:  Maximum execution time of 30 seconds exceeded in /home/ugur/protected/views/book/author.php on line 151, referer: http://ugur.dev.lindneo.com/index.php?r=
+[Thu Nov 07 09:03:12 2013] [error] [client 81.215.15.54] File does not exist: /home/ugur/favicon.ico
+[Thu Nov 07 09:03:13 2013] [error] [client 81.215.15.54] PHP Fatal error:  Maximum execution time of 30 seconds exceeded in /home/ugur/protected/views/book/author.php on line 151, referer: http://ugur.dev.lindneo.com/index.php?r=
+[Thu Nov 07 09:03:13 2013] [error] [client 81.215.15.54] PHP Fatal error:  Maximum execution time of 30 seconds exceeded in /home/ugur/protected/views/book/author.php on line 151
+[Thu Nov 07 09:03:58 2013] [error] [client 81.215.15.54] PHP Fatal error:  Maximum execution time of 30 seconds exceeded in /home/ugur/protected/views/book/author.php on line 151, referer: http://ugur.dev.lindneo.com/index.php?r=
+[Thu Nov 07 09:04:12 2013] [error] [client 81.215.15.54] PHP Fatal error:  Maximum execution time of 30 seconds exceeded in /home/ugur/protected/views/book/author.php on line 151
+[Thu Nov 07 09:04:54 2013] [error] [client 81.215.15.54] PHP Fatal error:  Maximum execution time of 30 seconds exceeded in /home/ugur/protected/views/book/author.php on line 151
+[Thu Nov 07 09:04:56 2013] [error] [client 81.215.15.54] PHP Fatal error:  Maximum execution time of 30 seconds exceeded in /home/ugur/protected/views/book/author.php on line 151, referer: http://ugur.dev.lindneo.com/
+[Thu Nov 07 09:04:56 2013] [error] [client 81.215.15.54] PHP Fatal error:  Allowed memory size of 1073741824 bytes exhausted (tried to allocate 670900225 bytes) in Unknown on line 0, referer: http://ugur.dev.lindneo.com/
+[Thu Nov 07 09:05:10 2013] [error] [client 81.215.15.54] PHP Fatal error:  Maximum execution time of 30 seconds exceeded in /home/ugur/protected/views/book/author.php on line 151
+[Thu Nov 07 09:05:16 2013] [error] [client 81.215.15.54] File does not exist: /home/ugur/favicon.ico
+[Thu Nov 07 09:05:18 2013] [error] [client 81.215.15.54] PHP Fatal error:  Maximum execution time of 30 seconds exceeded in /home/ugur/protected/views/book/author.php on line 151
+[Thu Nov 07 09:05:23 2013] [error] [client 81.215.15.54] PHP Fatal error:  Maximum execution time of 30 seconds exceeded in /home/ugur/protected/views/book/author.php on line 151
+[Thu Nov 07 09:06:01 2013] [error] [client 81.215.15.54] PHP Fatal error:  Maximum execution time of 30 seconds exceeded in /home/ugur/protected/views/book/author.php on line 151, referer: http://ugur.dev.lindneo.com/
+[Thu Nov 07 09:06:12 2013] [error] [client 81.215.15.54] PHP Fatal error:  Maximum execution time of 30 seconds exceeded in /home/ugur/protected/views/book/author.php on line 151
+[Thu Nov 07 09:06:13 2013] [error] [client 81.215.15.54] PHP Fatal error:  Allowed memory size of 1073741824 bytes exhausted (tried to allocate 675385345 bytes) in Unknown on line 0
+[Thu Nov 07 09:06:20 2013] [error] [client 81.215.15.54] PHP Fatal error:  Maximum execution time of 30 seconds exceeded in /home/ugur/protected/views/book/author.php on line 151, referer: http://ugur.dev.lindneo.com/index.php?r=
+[Thu Nov 07 09:06:23 2013] [error] [client 81.215.15.54] PHP Fatal error:  Maximum execution time of 30 seconds exceeded in /home/ugur/protected/views/book/author.php on line 151, referer: http://ugur.dev.lindneo.com/index.php
+[Thu Nov 07 09:06:41 2013] [error] [client 81.215.15.54] PHP Fatal error:  Maximum execution time of 30 seconds exceeded in /home/ugur/protected/views/book/author.php on line 151, referer: http://ugur.dev.lindneo.com/
+[Thu Nov 07 09:06:41 2013] [error] [client 81.215.15.54] PHP Fatal error:  Allowed memory size of 1073741824 bytes exhausted (tried to allocate 644276225 bytes) in Unknown on line 0, referer: http://ugur.dev.lindneo.com/
+[Thu Nov 07 09:06:54 2013] [error] [client 81.215.15.54] PHP Fatal error:  Maximum execution time of 30 seconds exceeded in /home/ugur/protected/views/book/author.php on line 151, referer: http://ugur.dev.lindneo.com/index.php
+[Thu Nov 07 09:06:54 2013] [error] [client 81.215.15.54] PHP Fatal error:  Allowed memory size of 1073741824 bytes exhausted (tried to allocate 652173313 bytes) in Unknown on line 0, referer: http://ugur.dev.lindneo.com/index.php
+[Thu Nov 07 09:06:54 2013] [error] [client 81.215.15.54] PHP Parse error:  syntax error, unexpected ';', expecting ')' in /home/ugur/protected/views/book/author.php on line 150, referer: http://ugur.dev.lindneo.com/index.php
+[Thu Nov 07 09:37:06 2013] [error] [client 88.227.217.49] File does not exist: /home/ugur/favicon.ico
+[Thu Nov 07 09:42:29 2013] [error] [client 88.227.217.49] File does not exist: /home/ugur/favicon.ico
+[Thu Nov 07 10:26:15 2013] [error] [client 81.215.15.54] PHP Parse error:  syntax error, unexpected '}' in /home/ugur/protected/controllers/EditorActionsController.php on line 26
+[Thu Nov 07 10:27:28 2013] [error] [client 81.215.15.54] File does not exist: /home/ugur/favicon.ico
+[Thu Nov 07 10:34:48 2013] [error] [client 88.227.217.49] File does not exist: /home/ugur/favicon.ico
+[Thu Nov 07 12:35:05 2013] [error] [client 88.227.217.49] File does not exist: /home/ugur/favicon.ico
+[Thu Nov 07 12:35:09 2013] [error] [client 88.227.217.49] File does not exist: /home/ugur/favicon.ico
+[Thu Nov 07 12:35:50 2013] [error] [client 88.227.217.49] File does not exist: /home/ugur/favicon.ico
+[Thu Nov 07 12:35:53 2013] [error] [client 88.227.217.49] File does not exist: /home/ugur/favicon.ico
+[Thu Nov 07 13:24:03 2013] [error] [client 81.215.15.54] PHP Parse error:  syntax error, unexpected ',', expecting '&' or T_VARIABLE in /home/ugur/protected/controllers/EditorActionsController.php on line 30
+[Thu Nov 07 13:24:42 2013] [error] [client 81.215.15.54] PHP Parse error:  syntax error, unexpected ',', expecting '&' or T_VARIABLE in /home/ugur/protected/controllers/EditorActionsController.php on line 30
+[Thu Nov 07 13:24:50 2013] [error] [client 81.215.15.54] PHP Parse error:  syntax error, unexpected ',', expecting '&' or T_VARIABLE in /home/ugur/protected/controllers/EditorActionsController.php on line 30
+[Thu Nov 07 13:24:52 2013] [error] [client 81.215.15.54] PHP Fatal error:  Call to undefined function addChapter() in /home/ugur/protected/controllers/EditorActionsController.php on line 91
+[Thu Nov 07 13:27:26 2013] [error] [client 81.215.15.54] PHP Parse error:  syntax error, unexpected '~' in /home/ugur/index.php on line 4
+[Thu Nov 07 13:27:33 2013] [error] [client 81.215.15.54] PHP Parse error:  syntax error, unexpected '~' in /home/ugur/index.php on line 4
+[Thu Nov 07 13:27:43 2013] [error] [client 81.215.15.54] PHP Parse error:  syntax error, unexpected '~' in /home/ugur/index.php on line 4
+[Thu Nov 07 13:40:28 2013] [error] [client 81.215.15.54] PHP Parse error:  syntax error, unexpected '{', expecting T_FUNCTION in /home/ugur/protected/controllers/EditorActionsController.php on line 166
+[Thu Nov 07 13:40:51 2013] [error] [client 81.215.15.54] PHP Fatal error:  Call to undefined function addPage() in /home/ugur/protected/controllers/EditorActionsController.php on line 159
+[Thu Nov 07 13:45:16 2013] [error] [client 88.227.217.49] File does not exist: /home/ugur/favicon.ico
+[Thu Nov 07 13:45:18 2013] [error] [client 88.227.217.49] File does not exist: /home/ugur/favicon.ico
+[Thu Nov 07 13:46:22 2013] [error] [client 88.227.217.49] File does not exist: /home/ugur/favicon.ico
+[Thu Nov 07 13:46:25 2013] [error] [client 88.227.217.49] File does not exist: /home/ugur/favicon.ico
+[Thu Nov 07 13:59:39 2013] [error] [client 88.227.217.49] File does not exist: /home/ugur/font, referer: http://ugur.dev.lindneo.com/index.php?r=book/author&bookId=EwCPTrsOXFmniE9DNfeF4hH7O5z6ev2V4sqtzx3UgSKq
+[Thu Nov 07 13:59:39 2013] [error] [client 88.227.217.49] File does not exist: /home/ugur/font, referer: http://ugur.dev.lindneo.com/index.php?r=book/author&bookId=EwCPTrsOXFmniE9DNfeF4hH7O5z6ev2V4sqtzx3UgSKq
+[Thu Nov 07 13:59:39 2013] [error] [client 88.227.217.49] File does not exist: /home/ugur/font, referer: http://ugur.dev.lindneo.com/index.php?r=book/author&bookId=EwCPTrsOXFmniE9DNfeF4hH7O5z6ev2V4sqtzx3UgSKq
+[Thu Nov 07 14:26:07 2013] [error] [client 88.227.217.49] File does not exist: /home/ugur/font, referer: http://ugur.dev.lindneo.com/index.php?r=book/author&bookId=EwCPTrsOXFmniE9DNfeF4hH7O5z6ev2V4sqtzx3UgSKq
+[Thu Nov 07 14:26:07 2013] [error] [client 88.227.217.49] File does not exist: /home/ugur/font, referer: http://ugur.dev.lindneo.com/index.php?r=book/author&bookId=EwCPTrsOXFmniE9DNfeF4hH7O5z6ev2V4sqtzx3UgSKq
+[Thu Nov 07 14:26:07 2013] [error] [client 88.227.217.49] File does not exist: /home/ugur/font, referer: http://ugur.dev.lindneo.com/index.php?r=book/author&bookId=EwCPTrsOXFmniE9DNfeF4hH7O5z6ev2V4sqtzx3UgSKq
+[Thu Nov 07 14:30:48 2013] [error] [client 88.227.217.49] File does not exist: /home/ugur/font, referer: http://ugur.dev.lindneo.com/index.php?r=book/author&bookId=EwCPTrsOXFmniE9DNfeF4hH7O5z6ev2V4sqtzx3UgSKq
+[Thu Nov 07 14:30:48 2013] [error] [client 88.227.217.49] File does not exist: /home/ugur/font, referer: http://ugur.dev.lindneo.com/index.php?r=book/author&bookId=EwCPTrsOXFmniE9DNfeF4hH7O5z6ev2V4sqtzx3UgSKq
+[Thu Nov 07 14:30:48 2013] [error] [client 88.227.217.49] File does not exist: /home/ugur/font, referer: http://ugur.dev.lindneo.com/index.php?r=book/author&bookId=EwCPTrsOXFmniE9DNfeF4hH7O5z6ev2V4sqtzx3UgSKq
+[Thu Nov 07 14:42:24 2013] [error] [client 88.227.217.49] File does not exist: /home/ugur/font, referer: http://ugur.dev.lindneo.com/index.php?r=book/author&bookId=EwCPTrsOXFmniE9DNfeF4hH7O5z6ev2V4sqtzx3UgSKq
+[Thu Nov 07 14:42:24 2013] [error] [client 88.227.217.49] File does not exist: /home/ugur/font, referer: http://ugur.dev.lindneo.com/index.php?r=book/author&bookId=EwCPTrsOXFmniE9DNfeF4hH7O5z6ev2V4sqtzx3UgSKq
+[Thu Nov 07 14:42:24 2013] [error] [client 88.227.217.49] File does not exist: /home/ugur/font, referer: http://ugur.dev.lindneo.com/index.php?r=book/author&bookId=EwCPTrsOXFmniE9DNfeF4hH7O5z6ev2V4sqtzx3UgSKq
+[Thu Nov 07 14:42:29 2013] [error] [client 88.227.217.49] File does not exist: /home/ugur/font, referer: http://ugur.dev.lindneo.com/index.php?r=book/author&bookId=EwCPTrsOXFmniE9DNfeF4hH7O5z6ev2V4sqtzx3UgSKq
+[Thu Nov 07 14:42:29 2013] [error] [client 88.227.217.49] File does not exist: /home/ugur/font, referer: http://ugur.dev.lindneo.com/index.php?r=book/author&bookId=EwCPTrsOXFmniE9DNfeF4hH7O5z6ev2V4sqtzx3UgSKq
+[Thu Nov 07 14:42:29 2013] [error] [client 88.227.217.49] File does not exist: /home/ugur/font, referer: http://ugur.dev.lindneo.com/index.php?r=book/author&bookId=EwCPTrsOXFmniE9DNfeF4hH7O5z6ev2V4sqtzx3UgSKq
+[Thu Nov 07 14:45:13 2013] [error] [client 88.227.217.49] File does not exist: /home/ugur/font, referer: http://ugur.dev.lindneo.com/index.php?r=book/author&bookId=EwCPTrsOXFmniE9DNfeF4hH7O5z6ev2V4sqtzx3UgSKq
+[Thu Nov 07 14:45:13 2013] [error] [client 88.227.217.49] File does not exist: /home/ugur/font, referer: http://ugur.dev.lindneo.com/index.php?r=book/author&bookId=EwCPTrsOXFmniE9DNfeF4hH7O5z6ev2V4sqtzx3UgSKq
+[Thu Nov 07 14:45:13 2013] [error] [client 88.227.217.49] File does not exist: /home/ugur/font, referer: http://ugur.dev.lindneo.com/index.php?r=book/author&bookId=EwCPTrsOXFmniE9DNfeF4hH7O5z6ev2V4sqtzx3UgSKq
+[Thu Nov 07 14:55:01 2013] [error] [client 81.215.15.54] PHP Parse error:  syntax error, unexpected '}' in /home/ugur/protected/controllers/EditorActionsController.php on line 179
+[Thu Nov 07 15:08:39 2013] [error] [client 81.215.15.54] PHP Parse error:  syntax error, unexpected '}' in /home/ugur/protected/controllers/EditorActionsController.php on line 54
+[Thu Nov 07 15:16:05 2013] [error] [client 81.215.15.54] PHP Parse error:  syntax error, unexpected ')' in /home/ugur/protected/controllers/EditorActionsController.php on line 65
+[Thu Nov 07 15:20:58 2013] [error] [client 81.215.15.54] PHP Parse error:  syntax error, unexpected T_PUBLIC, expecting '(' in /home/ugur/protected/controllers/EditorActionsController.php on line 73
+[Thu Nov 07 15:20:58 2013] [error] [client 81.215.15.54] PHP Parse error:  syntax error, unexpected T_PUBLIC, expecting '(' in /home/ugur/protected/controllers/EditorActionsController.php on line 73
+[Thu Nov 07 15:21:07 2013] [error] [client 81.215.15.54] PHP Fatal error:  Non-abstract method EditorActionsController::addTemplate() must contain body in /home/ugur/protected/controllers/EditorActionsController.php on line 71
+[Thu Nov 07 15:21:40 2013] [error] [client 81.215.15.54] PHP Parse error:  syntax error, unexpected ';', expecting T_FUNCTION in /home/ugur/protected/controllers/EditorActionsController.php on line 71
+[Thu Nov 07 15:23:58 2013] [error] [client 81.215.15.54] File does not exist: /home/ugur/font, referer: http://ugur.dev.lindneo.com/
+[Thu Nov 07 15:23:58 2013] [error] [client 81.215.15.54] File does not exist: /home/ugur/font, referer: http://ugur.dev.lindneo.com/
+[Thu Nov 07 15:23:58 2013] [error] [client 81.215.15.54] File does not exist: /home/ugur/font, referer: http://ugur.dev.lindneo.com/
+[Thu Nov 07 15:31:29 2013] [error] [client 88.227.217.49] File does not exist: /home/ugur/font, referer: http://ugur.dev.lindneo.com/index.php?r=book/author&bookId=EwCPTrsOXFmniE9DNfeF4hH7O5z6ev2V4sqtzx3UgSKq
+[Thu Nov 07 15:31:29 2013] [error] [client 88.227.217.49] File does not exist: /home/ugur/font, referer: http://ugur.dev.lindneo.com/index.php?r=book/author&bookId=EwCPTrsOXFmniE9DNfeF4hH7O5z6ev2V4sqtzx3UgSKq
+[Thu Nov 07 15:31:29 2013] [error] [client 88.227.217.49] File does not exist: /home/ugur/font, referer: http://ugur.dev.lindneo.com/index.php?r=book/author&bookId=EwCPTrsOXFmniE9DNfeF4hH7O5z6ev2V4sqtzx3UgSKq
+[Thu Nov 07 15:42:29 2013] [error] [client 88.227.217.49] File does not exist: /home/ugur/font, referer: http://ugur.dev.lindneo.com/index.php?r=book/author&bookId=EwCPTrsOXFmniE9DNfeF4hH7O5z6ev2V4sqtzx3UgSKq
+[Thu Nov 07 15:42:29 2013] [error] [client 88.227.217.49] File does not exist: /home/ugur/font, referer: http://ugur.dev.lindneo.com/index.php?r=book/author&bookId=EwCPTrsOXFmniE9DNfeF4hH7O5z6ev2V4sqtzx3UgSKq
+[Thu Nov 07 15:42:29 2013] [error] [client 88.227.217.49] File does not exist: /home/ugur/font, referer: http://ugur.dev.lindneo.com/index.php?r=book/author&bookId=EwCPTrsOXFmniE9DNfeF4hH7O5z6ev2V4sqtzx3UgSKq
+[Thu Nov 07 16:18:15 2013] [error] [client 88.227.217.49] File does not exist: /home/ugur/font, referer: http://ugur.dev.lindneo.com/index.php?r=book/author&bookId=EwCPTrsOXFmniE9DNfeF4hH7O5z6ev2V4sqtzx3UgSKq
+[Thu Nov 07 16:18:15 2013] [error] [client 88.227.217.49] File does not exist: /home/ugur/font, referer: http://ugur.dev.lindneo.com/index.php?r=book/author&bookId=EwCPTrsOXFmniE9DNfeF4hH7O5z6ev2V4sqtzx3UgSKq
+[Thu Nov 07 16:18:15 2013] [error] [client 88.227.217.49] File does not exist: /home/ugur/font, referer: http://ugur.dev.lindneo.com/index.php?r=book/author&bookId=EwCPTrsOXFmniE9DNfeF4hH7O5z6ev2V4sqtzx3UgSKq
+[Thu Nov 07 16:26:23 2013] [error] [client 88.227.217.49] File does not exist: /home/ugur/font, referer: http://ugur.dev.lindneo.com/index.php?r=book/author&bookId=EwCPTrsOXFmniE9DNfeF4hH7O5z6ev2V4sqtzx3UgSKq
+[Thu Nov 07 16:26:23 2013] [error] [client 88.227.217.49] File does not exist: /home/ugur/font, referer: http://ugur.dev.lindneo.com/index.php?r=book/author&bookId=EwCPTrsOXFmniE9DNfeF4hH7O5z6ev2V4sqtzx3UgSKq
+[Thu Nov 07 16:26:23 2013] [error] [client 88.227.217.49] File does not exist: /home/ugur/font, referer: http://ugur.dev.lindneo.com/index.php?r=book/author&bookId=EwCPTrsOXFmniE9DNfeF4hH7O5z6ev2V4sqtzx3UgSKq
+[Thu Nov 07 17:15:58 2013] [error] [client 88.227.217.49] File does not exist: /home/ugur/favicon.ico
+[Thu Nov 07 19:54:21 2013] [error] [client 88.227.217.49] File does not exist: /home/ugur/favicon.ico
+[Thu Nov 07 19:55:27 2013] [error] [client 88.227.217.49] File does not exist: /home/ugur/favicon.ico
+[Thu Nov 07 21:58:01 2013] [error] [client 78.162.144.88] File does not exist: /home/ugur/favicon.ico
+[Fri Nov 08 07:25:47 2013] [error] [client 81.215.15.54] File does not exist: /home/ugur/favicon.ico
+[Fri Nov 08 07:33:17 2013] [error] [client 88.227.217.49] File does not exist: /home/ugur/favicon.ico
+[Fri Nov 08 07:33:17 2013] [error] [client 88.227.217.49] File does not exist: /home/ugur/favicon.ico
+[Fri Nov 08 07:33:17 2013] [error] [client 88.227.217.49] File does not exist: /home/ugur/favicon.ico
+[Fri Nov 08 07:33:17 2013] [error] [client 88.227.217.49] File does not exist: /home/ugur/favicon.ico
+[Fri Nov 08 08:03:36 2013] [error] [client 88.227.217.49] File does not exist: /home/ugur/favicon.ico
+[Fri Nov 08 09:16:10 2013] [error] [client 81.215.15.54] File does not exist: /home/ugur/favicon.ico
+[Fri Nov 08 12:06:32 2013] [error] [client 88.227.217.49] File does not exist: /home/ugur/favicon.ico
+[Fri Nov 08 12:57:00 2013] [error] [client 81.215.15.54] PHP Fatal error:  Undefined class constant 'data' in /home/ugur/protected/models/Component.php on line 105
+[Fri Nov 08 12:57:11 2013] [error] [client 81.215.15.54] PHP Fatal error:  Access to undeclared static property: CActiveRecord::$data in /home/ugur/protected/models/Component.php on line 105
+[Fri Nov 08 12:59:08 2013] [error] [client 81.215.15.54] PHP Parse error:  syntax error, unexpected ';' in /home/ugur/protected/models/Component.php on line 104
+[Fri Nov 08 13:08:05 2013] [error] [client 81.215.15.54] File does not exist: /home/ugur/favicon.ico
+[Fri Nov 08 13:27:18 2013] [error] [client 81.215.15.54] File does not exist: /home/ugur/favicon.ico
+[Fri Nov 08 15:22:32 2013] [error] [client 81.215.15.54] File does not exist: /home/ugur/js/Nisga.js, referer: http://ugur.dev.lindneo.com/index.php?bookId=EwCPTrsOXFmniE9DNfeF4hH7O5z6ev2V4sqtzx3UgSKq&page=Ip38yh5mNn2uzH6JTwmO29oI65Qy7c745YskdqualT85&r=book/author
+[Fri Nov 08 15:28:39 2013] [error] [client 81.215.15.54] File does not exist: /home/ugur/js/Nisga.js, referer: http://ugur.dev.lindneo.com/index.php?bookId=EwCPTrsOXFmniE9DNfeF4hH7O5z6ev2V4sqtzx3UgSKq&page=Ip38yh5mNn2uzH6JTwmO29oI65Qy7c745YskdqualT85&r=book/author
+[Fri Nov 08 16:38:41 2013] [error] [client 88.231.234.245] File does not exist: /home/ugur/favicon.ico
+[Fri Nov 08 16:39:01 2013] [error] [client 88.231.234.245] File does not exist: /home/ugur/favicon.ico
+[Fri Nov 08 16:39:39 2013] [error] [client 88.231.234.245] File does not exist: /home/ugur/favicon.ico
+[Fri Nov 08 16:39:43 2013] [error] [client 88.231.234.245] File does not exist: /home/ugur/favicon.ico
+[Fri Nov 08 16:41:35 2013] [error] [client 88.231.234.245] File does not exist: /home/ugur/favicon.ico
+[Fri Nov 08 18:39:09 2013] [error] [client 92.45.183.198] File does not exist: /home/ugur/favicon.ico
+[Fri Nov 08 18:39:23 2013] [error] [client 92.45.183.198] File does not exist: /home/ugur/favicon.ico
+[Fri Nov 08 19:31:16 2013] [error] [client 92.44.153.206] File does not exist: /home/ugur/favicon.ico
+[Fri Nov 08 19:31:16 2013] [error] [client 92.44.153.206] File does not exist: /home/ugur/favicon.ico
+[Sat Nov 09 08:03:01 2013] [error] [client 88.227.217.49] File does not exist: /home/ugur/favicon.ico
+[Sat Nov 09 08:05:03 2013] [error] [client 88.227.217.49] File does not exist: /home/ugur/favicon.ico
+[Sat Nov 09 08:05:07 2013] [error] [client 88.227.217.49] File does not exist: /home/ugur/favicon.ico
+[Sat Nov 09 08:15:23 2013] [error] [client 81.215.15.54] File does not exist: /home/ugur/favicon.ico
+[Sat Nov 09 08:23:16 2013] [error] [client 81.215.15.54] File does not exist: /home/ugur/favicon.ico
+[Sat Nov 09 08:54:07 2013] [error] [client 88.227.217.49] File does not exist: /home/ugur/favicon.ico
+[Sat Nov 09 08:54:09 2013] [error] [client 88.227.217.49] File does not exist: /home/ugur/favicon.ico
+[Sat Nov 09 10:37:23 2013] [error] [client 88.227.217.49] File does not exist: /home/ugur/favicon.ico
+[Sat Nov 09 10:50:16 2013] [error] [client 88.227.217.49] File does not exist: /home/ugur/css/editor_blue/images/ui-bg_highlight-soft_100_eeeeee_1x100.png, referer: http://ugur.dev.lindneo.com/index.php?r=book/author&bookId=PhotoBookV1
+[Sat Nov 09 10:50:16 2013] [error] [client 88.227.217.49] File does not exist: /home/ugur/css/editor_blue/images/ui-bg_glass_100_f6f6f6_1x400.png, referer: http://ugur.dev.lindneo.com/index.php?r=book/author&bookId=PhotoBookV1
+[Sat Nov 09 10:50:17 2013] [error] [client 88.227.217.49] File does not exist: /home/ugur/css/editor_blue/images/ui-bg_highlight-soft_100_eeeeee_1x100.png, referer: http://ugur.dev.lindneo.com/index.php?r=book/author&bookId=PhotoBookV1
+[Sat Nov 09 10:50:17 2013] [error] [client 88.227.217.49] File does not exist: /home/ugur/css/editor_blue/images/ui-bg_glass_100_f6f6f6_1x400.png, referer: http://ugur.dev.lindneo.com/index.php?r=book/author&bookId=PhotoBookV1
+[Sat Nov 09 10:54:23 2013] [error] [client 88.227.217.49] File does not exist: /home/ugur/css/editor_blue/images/ui-bg_highlight-soft_100_eeeeee_1x100.png
+[Sat Nov 09 10:54:23 2013] [error] [client 88.227.217.49] File does not exist: /home/ugur/css/editor_blue/images/ui-bg_glass_100_f6f6f6_1x400.png
+[Sat Nov 09 10:56:57 2013] [error] [client 88.227.217.49] File does not exist: /home/ugur/css/editor_blue/images/ui-bg_glass_100_f6f6f6_1x400.png
+[Sat Nov 09 12:34:40 2013] [error] [client 88.227.217.49] File does not exist: /home/ugur/css/editor_blue/images/ui-bg_highlight-soft_100_eeeeee_1x100.png, referer: http://ugur.dev.lindneo.com/index.php?r=book/author&bookId=PhotoBookV1
+[Sat Nov 09 12:34:40 2013] [error] [client 88.227.217.49] File does not exist: /home/ugur/css/editor_blue/images/ui-bg_glass_100_f6f6f6_1x400.png, referer: http://ugur.dev.lindneo.com/index.php?r=book/author&bookId=PhotoBookV1
+[Sat Nov 09 12:34:41 2013] [error] [client 88.227.217.49] File does not exist: /home/ugur/css/editor_blue/images/ui-bg_highlight-soft_100_eeeeee_1x100.png, referer: http://ugur.dev.lindneo.com/index.php?r=book/author&bookId=PhotoBookV1
+[Sat Nov 09 12:34:41 2013] [error] [client 88.227.217.49] File does not exist: /home/ugur/css/editor_blue/images/ui-bg_glass_100_f6f6f6_1x400.png, referer: http://ugur.dev.lindneo.com/index.php?r=book/author&bookId=PhotoBookV1
+[Sat Nov 09 12:36:04 2013] [error] [client 88.227.217.49] File does not exist: /home/ugur/css/editor_blue/edimages, referer: http://ugur.dev.lindneo.com/index.php?r=book/author&bookId=PhotoBookV1
+[Sat Nov 09 12:36:04 2013] [error] [client 88.227.217.49] File does not exist: /home/ugur/css/editor_blue/images/ui-bg_glass_100_f6f6f6_1x400.png, referer: http://ugur.dev.lindneo.com/index.php?r=book/author&bookId=PhotoBookV1
+[Sat Nov 09 12:36:04 2013] [error] [client 88.227.217.49] File does not exist: /home/ugur/css/editor_blue/ediimages, referer: http://ugur.dev.lindneo.com/index.php?r=book/author&bookId=PhotoBookV1
+[Sat Nov 09 12:36:04 2013] [error] [client 88.227.217.49] File does not exist: /home/ugur/css/editor_blue/images/ui-bg_glass_100_f6f6f6_1x400.png, referer: http://ugur.dev.lindneo.com/index.php?r=book/author&bookId=PhotoBookV1
+[Sat Nov 09 12:36:04 2013] [error] [client 88.227.217.49] File does not exist: /home/ugur/css/editor_blue/editoimages, referer: http://ugur.dev.lindneo.com/index.php?r=book/author&bookId=PhotoBookV1
+[Sat Nov 09 12:36:04 2013] [error] [client 88.227.217.49] File does not exist: /home/ugur/css/editor_blue/images/ui-bg_glass_100_f6f6f6_1x400.png, referer: http://ugur.dev.lindneo.com/index.php?r=book/author&bookId=PhotoBookV1
+[Sat Nov 09 12:36:04 2013] [error] [client 88.227.217.49] File does not exist: /home/ugur/css/editor_blue/editorimages, referer: http://ugur.dev.lindneo.com/index.php?r=book/author&bookId=PhotoBookV1
+[Sat Nov 09 12:36:04 2013] [error] [client 88.227.217.49] File does not exist: /home/ugur/css/editor_blue/images/ui-bg_glass_100_f6f6f6_1x400.png, referer: http://ugur.dev.lindneo.com/index.php?r=book/author&bookId=PhotoBookV1
+[Sat Nov 09 12:36:06 2013] [error] [client 88.227.217.49] File does not exist: /home/ugur/css/editor_blue/editor_images, referer: http://ugur.dev.lindneo.com/index.php?r=book/author&bookId=PhotoBookV1
+[Sat Nov 09 12:36:06 2013] [error] [client 88.227.217.49] File does not exist: /home/ugur/css/editor_blue/images/ui-bg_glass_100_f6f6f6_1x400.png, referer: http://ugur.dev.lindneo.com/index.php?r=book/author&bookId=PhotoBookV1
+[Sat Nov 09 12:36:07 2013] [error] [client 88.227.217.49] File does not exist: /home/ugur/css/editor_blue/editor_blimages, referer: http://ugur.dev.lindneo.com/index.php?r=book/author&bookId=PhotoBookV1
+[Sat Nov 09 12:36:07 2013] [error] [client 88.227.217.49] File does not exist: /home/ugur/css/editor_blue/images/ui-bg_glass_100_f6f6f6_1x400.png, referer: http://ugur.dev.lindneo.com/index.php?r=book/author&bookId=PhotoBookV1
+[Sat Nov 09 12:36:07 2013] [error] [client 88.227.217.49] File does not exist: /home/ugur/css/editor_blue/editor_blueimages, referer: http://ugur.dev.lindneo.com/index.php?r=book/author&bookId=PhotoBookV1
+[Sat Nov 09 12:36:07 2013] [error] [client 88.227.217.49] File does not exist: /home/ugur/css/editor_blue/images/ui-bg_glass_100_f6f6f6_1x400.png, referer: http://ugur.dev.lindneo.com/index.php?r=book/author&bookId=PhotoBookV1
+[Sat Nov 09 12:36:09 2013] [error] [client 88.227.217.49] File does not exist: /home/ugur/css/editor_blue/editor_blue, referer: http://ugur.dev.lindneo.com/index.php?r=book/author&bookId=PhotoBookV1
+[Sat Nov 09 12:36:09 2013] [error] [client 88.227.217.49] File does not exist: /home/ugur/css/editor_blue/images/ui-bg_glass_100_f6f6f6_1x400.png, referer: http://ugur.dev.lindneo.com/index.php?r=book/author&bookId=PhotoBookV1
+[Sat Nov 09 12:36:14 2013] [error] [client 88.227.217.49] File does not exist: /home/ugur/css/editor_blue/editor_blue, referer: http://ugur.dev.lindneo.com/index.php?r=book/author&bookId=PhotoBookV1
+[Sat Nov 09 12:36:14 2013] [error] [client 88.227.217.49] File does not exist: /home/ugur/css/editor_blue/images/ui-bg_glass_100_f6f6f6_1x400.png, referer: http://ugur.dev.lindneo.com/index.php?r=book/author&bookId=PhotoBookV1
+[Sat Nov 09 12:37:00 2013] [error] [client 88.227.217.49] File does not exist: /home/ugur/css/editor_blue/images/ui-bg_highlight-soft_100_eeeeee_1x100.png, referer: http://ugur.dev.lindneo.com/index.php?r=book/author&bookId=PhotoBookV1
+[Sat Nov 09 12:37:00 2013] [error] [client 88.227.217.49] File does not exist: /home/ugur/css/editor_blue/images/ui-bg_glass_100_f6f6f6_1x400.png, referer: http://ugur.dev.lindneo.com/index.php?r=book/author&bookId=PhotoBookV1
+[Sat Nov 09 12:37:04 2013] [error] [client 88.227.217.49] File does not exist: /home/ugur/css/editor_blue/images/ui-bg_highlight-soft_100_eeeeee_1x100.png, referer: http://ugur.dev.lindneo.com/index.php?r=book/author&bookId=PhotoBookV1
+[Sat Nov 09 12:37:04 2013] [error] [client 88.227.217.49] File does not exist: /home/ugur/css/editor_blue/images/ui-bg_glass_100_f6f6f6_1x400.png, referer: http://ugur.dev.lindneo.com/index.php?r=book/author&bookId=PhotoBookV1
+[Sat Nov 09 14:03:10 2013] [error] [client 81.215.15.54] File does not exist: /home/ugur/favicon.ico
+[Sat Nov 09 14:32:13 2013] [error] [client 78.162.128.186] File does not exist: /home/ugur/favicon.ico
+[Sat Nov 09 19:14:48 2013] [error] [client 88.227.217.49] File does not exist: /home/ugur/favicon.ico
+[Sat Nov 09 19:19:12 2013] [error] [client 88.227.217.49] File does not exist: /home/ugur/favicon.ico
+[Sat Nov 09 21:39:30 2013] [error] [client 88.227.217.49] File does not exist: /home/ugur/favicon.ico
+[Sun Nov 10 12:43:06 2013] [error] [client 88.227.217.49] File does not exist: /home/ugur/favicon.ico
+[Sun Nov 10 15:08:23 2013] [error] [client 92.44.153.206] File does not exist: /home/ugur/favicon.ico
+[Sun Nov 10 20:57:55 2013] [error] [client 92.44.153.206] File does not exist: /home/ugur/favicon.ico
+[Mon Nov 11 07:37:43 2013] [error] [client 81.215.15.54] File does not exist: /home/ugur/favicon.ico
+[Mon Nov 11 07:38:56 2013] [error] [client 88.227.217.49] File does not exist: /home/ugur/favicon.ico
+[Mon Nov 11 07:55:48 2013] [error] [client 88.227.217.49] File does not exist: /home/ugur/favicon.ico
+[Mon Nov 11 08:55:06 2013] [error] [client 88.227.217.49] PHP Parse error:  syntax error, unexpected '<' in /home/ugur/protected/views/book/author.php on line 305
+[Mon Nov 11 08:55:09 2013] [error] [client 88.227.217.49] PHP Parse error:  syntax error, unexpected '<' in /home/ugur/protected/views/book/author.php on line 305
+[Mon Nov 11 08:55:20 2013] [error] [client 88.227.217.49] PHP Parse error:  syntax error, unexpected '}' in /home/ugur/protected/views/book/author.php on line 309
+[Mon Nov 11 08:55:23 2013] [error] [client 88.227.217.49] PHP Parse error:  syntax error, unexpected '}' in /home/ugur/protected/views/book/author.php on line 309
+[Mon Nov 11 08:55:24 2013] [error] [client 88.227.217.49] PHP Parse error:  syntax error, unexpected '}' in /home/ugur/protected/views/book/author.php on line 309
+[Mon Nov 11 09:04:18 2013] [error] [client 88.227.217.49] File does not exist: /home/ugur/favicon.ico
+[Mon Nov 11 09:04:19 2013] [error] [client 88.227.217.49] File does not exist: /home/ugur/favicon.ico
+[Mon Nov 11 09:04:20 2013] [error] [client 88.227.217.49] File does not exist: /home/ugur/favicon.ico
+[Mon Nov 11 09:07:25 2013] [error] [client 88.227.217.49] File does not exist: /home/ugur/favicon.ico
+[Mon Nov 11 09:54:55 2013] [error] [client 88.227.217.49] File does not exist: /home/ugur/favicon.ico, referer: http://ugur.dev.lindneo.com/index.php?r=book/author&bookId=PhotoBookV1&page=5Rl8WiPoKrNduckNM2ppRyRA471b9IU8UnP7iSEP4DHN
+[Mon Nov 11 10:09:08 2013] [error] [client 81.215.15.54] PHP Parse error:  syntax error, unexpected '}' in /home/ugur/protected/controllers/EditorActionsController.php on line 98
+[Mon Nov 11 10:14:35 2013] [error] [client 81.215.15.54] PHP Fatal error:  Call to a member function delete() on a non-object in /home/ugur/protected/controllers/EditorActionsController.php on line 295
+[Mon Nov 11 10:19:21 2013] [error] [client 81.215.15.54] PHP Parse error:  syntax error, unexpected ';' in /home/ugur/protected/controllers/EditorActionsController.php on line 314
+[Mon Nov 11 10:49:51 2013] [error] [client 88.227.217.49] File does not exist: /home/ugur/images, referer: http://ugur.dev.lindneo.com/index.php?r=book/author&bookId=PhotoBookV1
+[Mon Nov 11 10:50:32 2013] [error] [client 88.227.217.49] File does not exist: /home/ugur/images, referer: http://ugur.dev.lindneo.com/index.php?r=book/author&bookId=PhotoBookV1
+[Mon Nov 11 12:02:43 2013] [error] [client 81.215.15.54] File does not exist: /home/ugur/images, referer: http://ugur.dev.lindneo.com/index.php?r=book/author&bookId=EwCPTrsOXFmniE9DNfeF4hH7O5z6ev2V4sqtzx3UgSKq
+[Mon Nov 11 12:08:58 2013] [error] [client 88.227.217.49] File does not exist: /home/ugur/images, referer: http://ugur.dev.lindneo.com/index.php?r=book/author&bookId=PhotoBookV1
+[Mon Nov 11 12:12:54 2013] [error] [client 88.227.217.49] File does not exist: /home/ugur/images, referer: http://ugur.dev.lindneo.com/index.php?r=book/author&bookId=PhotoBookV1
+[Mon Nov 11 12:38:48 2013] [error] [client 88.227.217.49] File does not exist: /home/ugur/favicon.ico
+[Mon Nov 11 15:23:37 2013] [error] [client 88.227.217.49] File does not exist: /home/ugur/favicon.ico
+[Mon Nov 11 18:41:22 2013] [error] [client 92.44.153.206] File does not exist: /home/ugur/favicon.ico
+[Tue Nov 12 07:45:58 2013] [error] [client 88.227.217.49] File does not exist: /home/ugur/favicon.ico
+[Tue Nov 12 08:14:43 2013] [error] [client 81.215.15.54] File does not exist: /home/ugur/favicon.ico
+[Tue Nov 12 09:36:01 2013] [error] [client 81.215.15.54] PHP Parse error:  syntax error, unexpected T_CONSTANT_ENCAPSED_STRING, expecting ')' in /home/ugur/protected/config/main.php on line 20
+[Tue Nov 12 09:36:18 2013] [error] [client 81.215.15.54] PHP Parse error:  syntax error, unexpected T_VARIABLE, expecting T_FUNCTION in /home/ugur/protected/utilities/epub3/epub3.php on line 3
+[Tue Nov 12 09:37:02 2013] [error] [client 81.215.15.54] PHP Parse error:  syntax error, unexpected '{' in /home/ugur/protected/utilities/epub3/epub3.php on line 60
+[Tue Nov 12 09:37:17 2013] [error] [client 81.215.15.54] PHP Parse error:  syntax error, unexpected T_VARIABLE, expecting T_FUNCTION in /home/ugur/protected/utilities/epub3/file.php on line 4
+[Tue Nov 12 09:37:26 2013] [error] [client 81.215.15.54] PHP Parse error:  syntax error, unexpected T_STRING, expecting T_FUNCTION in /home/ugur/protected/utilities/epub3/file.php on line 9
+[Tue Nov 12 10:17:18 2013] [error] [client 81.215.15.54] PHP Parse error:  syntax error, unexpected ';' in /home/ugur/protected/utilities/epub3/epub3.php on line 91
+[Tue Nov 12 10:24:58 2013] [error] [client 81.215.15.54] PHP Fatal error:  Call to undefined function imagecreatefromjpeg() in /home/ugur/protected/utilities/epub3/epub3.php on line 91
+[Tue Nov 12 10:25:10 2013] [error] [client 81.215.15.54] PHP Fatal error:  Call to undefined function imagecreatefromjpg() in /home/ugur/protected/utilities/epub3/epub3.php on line 91
+[Tue Nov 12 10:25:32 2013] [error] [client 81.215.15.54] PHP Fatal error:  Call to undefined function imagecreatefromjpeg() in /home/ugur/protected/utilities/epub3/epub3.php on line 91
+[Tue Nov 12 10:27:48 2013] [error] [client 81.215.15.54] PHP Fatal error:  Call to undefined function imagecreatefromjpeg() in /home/ugur/protected/utilities/epub3/epub3.php on line 91
+[Tue Nov 12 10:27:49 2013] [error] [client 81.215.15.54] PHP Fatal error:  Call to undefined function imagecreatefromjpeg() in /home/ugur/protected/utilities/epub3/epub3.php on line 91
+[Tue Nov 12 10:27:49 2013] [error] [client 81.215.15.54] PHP Fatal error:  Call to undefined function imagecreatefromjpeg() in /home/ugur/protected/utilities/epub3/epub3.php on line 91
+[Tue Nov 12 10:27:50 2013] [error] [client 81.215.15.54] PHP Fatal error:  Call to undefined function imagecreatefromjpeg() in /home/ugur/protected/utilities/epub3/epub3.php on line 91
+[Tue Nov 12 10:27:50 2013] [error] [client 81.215.15.54] PHP Fatal error:  Call to undefined function imagecreatefromjpeg() in /home/ugur/protected/utilities/epub3/epub3.php on line 91
+[Tue Nov 12 10:27:51 2013] [error] [client 81.215.15.54] PHP Fatal error:  Call to undefined function imagecreatefromjpeg() in /home/ugur/protected/utilities/epub3/epub3.php on line 91
+[Tue Nov 12 10:27:51 2013] [error] [client 81.215.15.54] PHP Fatal error:  Call to undefined function imagecreatefromjpeg() in /home/ugur/protected/utilities/epub3/epub3.php on line 91
+[Tue Nov 12 10:27:51 2013] [error] [client 81.215.15.54] PHP Fatal error:  Call to undefined function imagecreatefromjpeg() in /home/ugur/protected/utilities/epub3/epub3.php on line 91
+[Tue Nov 12 10:27:54 2013] [error] [client 81.215.15.54] PHP Fatal error:  Call to undefined function imagecreatefromjpeg() in /home/ugur/protected/utilities/epub3/epub3.php on line 91
+[Tue Nov 12 13:52:17 2013] [error] [client 88.227.217.49] File does not exist: /home/ugur/favicon.ico
+[Tue Nov 12 14:02:44 2013] [error] [client 78.162.205.183] File does not exist: /home/ugur/favicon.ico
+[Tue Nov 12 15:20:45 2013] [error] [client 81.215.15.54] File does not exist: /home/ugur/favicon.ico
+[Tue Nov 12 15:26:13 2013] [error] [client 88.227.217.49] File does not exist: /home/ugur/favicon.ico
+[Tue Nov 12 15:56:28 2013] [error] [client 78.162.205.183] File does not exist: /home/ugur/favicon.ico
+[Tue Nov 12 16:13:55 2013] [error] [client 88.227.217.49] File does not exist: /home/ugur/drag-drop-default-image.png, referer: http://ugur.dev.lindneo.com/index.php?r=book/author&bookId=PhotoBookV1
+[Tue Nov 12 16:14:03 2013] [error] [client 88.227.217.49] File does not exist: /home/ugur/css/.drag-drop-default-image.png, referer: http://ugur.dev.lindneo.com/index.php?r=book/author&bookId=PhotoBookV1
+[Tue Nov 12 16:14:04 2013] [error] [client 88.227.217.49] File does not exist: /home/ugur/css/..drag-drop-default-image.png, referer: http://ugur.dev.lindneo.com/index.php?r=book/author&bookId=PhotoBookV1
+[Tue Nov 12 16:14:05 2013] [error] [client 88.227.217.49] File does not exist: /home/ugur/css/..drag-drop-default-image.png, referer: http://ugur.dev.lindneo.com/index.php?r=book/author&bookId=PhotoBookV1
+[Tue Nov 12 16:14:05 2013] [error] [client 88.227.217.49] File does not exist: /home/ugur/drag-drop-default-image.png, referer: http://ugur.dev.lindneo.com/index.php?r=book/author&bookId=PhotoBookV1
+[Tue Nov 12 16:14:07 2013] [error] [client 88.227.217.49] File does not exist: /home/ugur/drag-drop-default-image.png, referer: http://ugur.dev.lindneo.com/index.php?r=book/author&bookId=PhotoBookV1
+[Tue Nov 12 16:14:07 2013] [error] [client 88.227.217.49] File does not exist: /home/ugur/drag-drop-default-image.png, referer: http://ugur.dev.lindneo.com/index.php?r=book/author&bookId=PhotoBookV1
+[Tue Nov 12 16:14:08 2013] [error] [client 88.227.217.49] File does not exist: /home/ugur/drag-drop-default-image.png, referer: http://ugur.dev.lindneo.com/index.php?r=book/author&bookId=PhotoBookV1
+[Tue Nov 12 16:14:08 2013] [error] [client 88.227.217.49] File does not exist: /home/ugur/drag-drop-default-image.png, referer: http://ugur.dev.lindneo.com/index.php?r=book/author&bookId=PhotoBookV1
+[Tue Nov 12 16:14:08 2013] [error] [client 88.227.217.49] File does not exist: /home/ugur/drag-drop-default-image.png, referer: http://ugur.dev.lindneo.com/index.php?r=book/author&bookId=PhotoBookV1
+[Tue Nov 12 16:14:16 2013] [error] [client 88.227.217.49] File does not exist: /home/ugur/drag-drop-default-image.png, referer: http://ugur.dev.lindneo.com/index.php?r=book/author&bookId=PhotoBookV1
+[Tue Nov 12 16:14:41 2013] [error] [client 88.227.217.49] File does not exist: /home/ugur/drag-drop-default-image.png, referer: http://ugur.dev.lindneo.com/index.php?r=book/author&bookId=PhotoBookV1
+[Tue Nov 12 16:14:43 2013] [error] [client 88.227.217.49] File does not exist: /home/ugur/drag-drop-default-image.png, referer: http://ugur.dev.lindneo.com/index.php?r=book/author&bookId=PhotoBookV1
+[Tue Nov 12 16:14:45 2013] [error] [client 88.227.217.49] File does not exist: /home/ugur/drag-drop-default-image.png, referer: http://ugur.dev.lindneo.com/index.php?r=book/author&bookId=PhotoBookV1
+[Tue Nov 12 16:14:45 2013] [error] [client 88.227.217.49] File does not exist: /home/ugur/drag-drop-default-image.png, referer: http://ugur.dev.lindneo.com/index.php?r=book/author&bookId=PhotoBookV1
+[Tue Nov 12 16:14:50 2013] [error] [client 88.227.217.49] File does not exist: /home/ugur/drag-drop-default-image.png, referer: http://ugur.dev.lindneo.com/index.php?r=book/author&bookId=PhotoBookV1
+[Tue Nov 12 16:14:51 2013] [error] [client 88.227.217.49] File does not exist: /home/ugur/drag-drop-default-image.png, referer: http://ugur.dev.lindneo.com/index.php?r=book/author&bookId=PhotoBookV1
+[Tue Nov 12 16:16:29 2013] [error] [client 88.227.217.49] File does not exist: /home/ugur/drag-drop-default-image.png, referer: http://ugur.dev.lindneo.com/index.php?r=book/author&bookId=PhotoBookV1
+[Tue Nov 12 16:16:35 2013] [error] [client 88.227.217.49] File does not exist: /home/ugur/drag-drop-default-image.png, referer: http://ugur.dev.lindneo.com/index.php?r=book/author&bookId=PhotoBookV1
+[Tue Nov 12 16:19:16 2013] [error] [client 88.227.217.49] File does not exist: /home/ugur/favicon.ico
+[Tue Nov 12 16:21:18 2013] [error] [client 88.227.217.49] File does not exist: /home/ugur/favicon.ico
+[Tue Nov 12 16:21:37 2013] [error] [client 88.227.217.49] File does not exist: /home/ugur/favicon.ico
+[Tue Nov 12 17:11:39 2013] [error] [client 88.227.217.49] File does not exist: /home/ugur/favicon.ico
+[Tue Nov 12 17:11:41 2013] [error] [client 88.227.217.49] File does not exist: /home/ugur/favicon.ico
+[Tue Nov 12 17:26:12 2013] [error] [client 88.227.217.49] File does not exist: /home/ugur/favicon.ico
+[Tue Nov 12 17:26:14 2013] [error] [client 88.227.217.49] File does not exist: /home/ugur/favicon.ico
+[Tue Nov 12 17:26:17 2013] [error] [client 88.227.217.49] File does not exist: /home/ugur/favicon.ico
+[Tue Nov 12 17:26:19 2013] [error] [client 88.227.217.49] File does not exist: /home/ugur/favicon.ico
+[Tue Nov 12 18:41:38 2013] [error] [client 88.227.217.49] File does not exist: /home/ugur/favicon.ico
+[Tue Nov 12 19:44:39 2013] [error] [client 88.227.217.49] File does not exist: /home/ugur/favicon.ico
+[Tue Nov 12 19:44:42 2013] [error] [client 88.227.217.49] File does not exist: /home/ugur/favicon.ico
+[Tue Nov 12 19:59:20 2013] [error] [client 88.227.217.49] File does not exist: /home/ugur/favicon.ico
+[Tue Nov 12 20:05:57 2013] [error] [client 92.44.153.206] File does not exist: /home/ugur/favicon.ico
+[Tue Nov 12 22:11:22 2013] [error] [client 92.44.153.206] File does not exist: /home/ugur/favicon.ico
+[Wed Nov 13 07:22:12 2013] [error] [client 81.215.15.54] File does not exist: /home/ugur/favicon.ico
+[Wed Nov 13 07:55:49 2013] [error] [client 88.227.230.205] File does not exist: /home/ugur/favicon.ico
+[Wed Nov 13 09:17:12 2013] [error] [client 81.215.15.54] PHP Fatal error:  Call to undefined method epub3::createUrl() in /home/ugur/protected/utilities/epub3/epub3.php on line 89
+[Wed Nov 13 09:17:13 2013] [error] [client 81.215.15.54] PHP Fatal error:  Call to undefined method epub3::createUrl() in /home/ugur/protected/utilities/epub3/epub3.php on line 89
+[Wed Nov 13 09:18:32 2013] [error] [client 31.210.53.80] (13)Permission denied: file permissions deny server access: /home/ugur/css/cover.jpg
+[Wed Nov 13 09:18:44 2013] [error] [client 81.215.15.54] (13)Permission denied: file permissions deny server access: /home/ugur/css/cover.jpg
+[Wed Nov 13 09:20:13 2013] [error] [client 81.215.15.54] (13)Permission denied: file permissions deny server access: /home/ugur/css/cover.jpg, referer: http://ugur.dev.lindneo.com/css/
+[Wed Nov 13 09:20:14 2013] [error] [client 81.215.15.54] (13)Permission denied: file permissions deny server access: /home/ugur/css/cover.jpg, referer: http://ugur.dev.lindneo.com/css/
+[Wed Nov 13 09:20:20 2013] [error] [client 81.215.15.54] (13)Permission denied: file permissions deny server access: /home/ugur/css/cover.jpg, referer: http://ugur.dev.lindneo.com/css/
+[Wed Nov 13 09:20:20 2013] [error] [client 81.215.15.54] (13)Permission denied: file permissions deny server access: /home/ugur/css/cover.jpg, referer: http://ugur.dev.lindneo.com/css/
+[Wed Nov 13 09:20:21 2013] [error] [client 81.215.15.54] (13)Permission denied: file permissions deny server access: /home/ugur/css/cover.jpg, referer: http://ugur.dev.lindneo.com/css/
+[Wed Nov 13 10:04:53 2013] [error] [client 81.215.15.54] PHP Parse error:  syntax error, unexpected '}' in /home/ugur/protected/utilities/epub3/epub3.php on line 202
+[Wed Nov 13 10:15:54 2013] [error] [client 81.215.15.54] PHP Fatal error:  Call to undefined method epub3::error() in /home/ugur/protected/controllers/EditorActionsController.php on line 89
+[Wed Nov 13 10:16:44 2013] [error] [client 81.215.15.54] PHP Parse error:  syntax error, unexpected T_VARIABLE in /home/ugur/protected/utilities/epub3/epub3.php on line 210
+[Wed Nov 13 10:16:50 2013] [error] [client 81.215.15.54] PHP Parse error:  syntax error, unexpected T_VARIABLE in /home/ugur/protected/utilities/epub3/epub3.php on line 210
+[Wed Nov 13 10:41:10 2013] [error] [client 81.215.15.54] PHP Parse error:  syntax error, unexpected ';' in /home/ugur/protected/utilities/epub3/epub3.php on line 227
+[Wed Nov 13 10:52:45 2013] [error] [client 144.122.27.0] File does not exist: /home/ugur/favicon.ico
+[Wed Nov 13 10:59:16 2013] [error] [client 81.215.15.54] PHP Fatal error:  Class 'CListIterator' not found in /home/ugur/protected/utilities/epub3/epub3.php on line 243
+[Wed Nov 13 10:59:19 2013] [error] [client 81.215.15.54] PHP Fatal error:  Class 'CListIterator' not found in /home/ugur/protected/utilities/epub3/epub3.php on line 243
+[Wed Nov 13 11:01:29 2013] [error] [client 81.215.15.54] PHP Parse error:  syntax error, unexpected T_FOREACH in /home/ugur/protected/utilities/epub3/epub3.php on line 275
+[Wed Nov 13 11:01:30 2013] [error] [client 81.215.15.54] PHP Parse error:  syntax error, unexpected T_FOREACH in /home/ugur/protected/utilities/epub3/epub3.php on line 275
+[Wed Nov 13 11:02:10 2013] [error] [client 81.215.15.54] PHP Parse error:  syntax error, unexpected T_STRING, expecting T_VARIABLE in /home/ugur/protected/utilities/epub3/componentHTML.php on line 5
+[Wed Nov 13 11:02:33 2013] [error] [client 81.215.15.54] PHP Parse error:  syntax error, unexpected '}' in /home/ugur/protected/utilities/epub3/componentHTML.php on line 11
+[Wed Nov 13 11:02:42 2013] [error] [client 81.215.15.54] PHP Parse error:  syntax error, unexpected '.' in /home/ugur/protected/utilities/epub3/componentHTML.php on line 22
+[Wed Nov 13 11:02:50 2013] [error] [client 81.215.15.54] PHP Fatal error:  Call to undefined function create_container() in /home/ugur/protected/utilities/epub3/componentHTML.php on line 30
+[Wed Nov 13 12:17:50 2013] [error] [client 144.122.27.0] File does not exist: /home/ugur/favicon.ico
+[Wed Nov 13 12:28:20 2013] [error] [client 81.215.15.54] PHP Parse error:  syntax error, unexpected T_RETURN in /home/ugur/protected/utilities/epub3/epub3.php on line 288
+[Wed Nov 13 12:28:21 2013] [error] [client 81.215.15.54] PHP Parse error:  syntax error, unexpected T_RETURN in /home/ugur/protected/utilities/epub3/epub3.php on line 288
+[Wed Nov 13 13:14:44 2013] [error] [client 81.215.15.54] PHP Parse error:  syntax error, unexpected T_OBJECT_OPERATOR, expecting ')' in /home/ugur/protected/utilities/epub3/componentHTML.php on line 9
+[Wed Nov 13 13:35:42 2013] [error] [client 81.215.15.54] PHP Parse error:  syntax error, unexpected T_DNUMBER in /home/ugur/protected/utilities/epub3/epub3.php on line 302
