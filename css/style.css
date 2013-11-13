@@ -19,8 +19,8 @@ select {
     select {padding-right:25px}
 }
 
-label {position:relative}
-label:after {
+.dropdown-label{position:relative}
+.dropdown-label:after {
     content:'>';
 	top: -2px;
     font:20px "Consolas", monospace;
@@ -34,7 +34,7 @@ label:after {
     position:absolute;
     pointer-events:none;
 }
-label:before {
+.dropdown-label:before {
     content:'';
     right:6px; top:0px;
     width:20px; height:20px;
@@ -123,12 +123,17 @@ background-color: #97a9a9;
 /*buttons */
 
 
-
+/*genel */
 
 .clearfix{
 clear:both;
 
 }
+.float-lef{
+float:left;
+}
+
+/*genel */
 
 /* toolbox items  */
 
@@ -468,6 +473,7 @@ ul.component_holder li {
 /* popups*/
 
 
+
 	div.popup{
 	position:fixed;
 	width:auto;
@@ -556,7 +562,51 @@ ul.component_holder li {
 	background-color: #e6e7e8;
 	
 }	
-	
+/* popup galeri */
+
+.gallery-inner-holder { 
+ width:300px; 
+ height:auto;
+ font-weight:bold;
+ padding:20px;
+}
+
+.add-image-drag-area{
+margin:0 auto 20px auto;
+width:100%; 
+height:200px;
+line-height:5em;
+background: url(drag-drop-default-image.png) center center no-repeat;
+background-size: contain;
+background-color:#E9E9E9;
+-webkit-box-shadow: inset 0 0 10px #939597;
+ -moz-box-shadow: inset 0 0 10px #939597;
+box-shadow: inset 0 0 10px #939597;
+border:3px dashed #4eb6a8;
+}
+.input-textbox {
+margin: 10px auto 20px auto;
+height: auto;
+border: 0;
+resize: none;
+font-size: 15px;
+width: 250px;
+font-family: Calibri;
+line-height: 2em;
+font-weight: bold;
+color: #58585B;
+white-space: nowrap;
+overflow: hidden;
+background-color: #E6E7E8;
+-webkit-border-radius: 5px;
+-moz-border-radius: 5px;
+border-radius: 5px;
+}
+
+/* popups*/
+
+
+
 	/*end of popups */
 
 		
@@ -665,8 +715,40 @@ background-color:#0b6f7f;
 	
 /*chapter viewer styles */
 	
+	/*login page */
+
+	.login-page-container{
+	background-color:#056380;
+	position: fixed;
+width: 100%;
+height: 100%;
+text-align:center;
 	
 	
+	}
 	
+.login-page-container-inside{
+	padding: 20px;
+	background:white;
+	width:auto;
+	height:auto;
+	 position:absolute;
+     top:50%;
+     left:50%;
+     margin:-150px 0 0 -150px;
+   
+	}
+.login-header-img{
+	background: url(loginlogo.png) center center no-repeat;
+	background-size: contain;
+
+	height:100px;
+	
+	}
+	
+
+	
+	
+	/*login page */
 	
 

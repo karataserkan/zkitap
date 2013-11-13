@@ -38,7 +38,7 @@ print_r($page);
 		
 	
 
-	<label id="options">
+	<label id="options" class="dropdown-label">
 					<select id="general-options" class="radius">
 						<option selected> Seçenekler </option>
 						<option>Seçenek 1</option>
@@ -55,7 +55,7 @@ print_r($page);
 	
 	
 	
-	<label id="user">
+	<label class="dropdown-label" id="user">
 					<select id="user-account" class="radius icon-users">
 						<option selected> Kullanıcı Adı </option>
 						<option>Seçenek 1</option>
@@ -86,7 +86,7 @@ print_r($page);
 					
 					<input type="color" class="color-picker-box radius" placeholder="e.g. #bbbbbb" />
 					
-					<label>
+					<label class="dropdown-label">
 					<select id="font-type" class="radius">
 						<option selected="" value="Arial"> Arial </option>
 						<option value="helvetica" >Helvetica</option>
@@ -96,7 +96,7 @@ print_r($page);
 					</select>
 					</label>
 					
-					<label>
+					<label class="dropdown-label">
 						<select id="font-size" class="radius">
 						<option selected="" value="8"> 8 </option>
 						<option value="10" >10</option>
@@ -122,26 +122,26 @@ print_r($page);
 				<a id="text-left-indent"  href="#" class="dark-blue radius toolbox-items"><i class="icon-left-indent size-15"></i></a>
 				<a id="text-right-indent"  href="#" class="dark-blue radius toolbox-items"><i class="icon-right-indent size-15"></i></a>
 				<div class="vertical-line"></div>
-								<label>
-				<i class="icon-leading grey-6"></i>
-						<select id="font-size" class="radius">
-						<option selected="" value="8"> 100 </option>
-						<option value="0" >0</option>
-						<option value="10" >10</option>
-						<option value="20" >20</option>
-						<option value="30" >30</option>
-						<option value="40" >40</option>
-						<option value="50" >50</option>
-						<option value="60" >60</option>
-						<option value="70" >70</option>
-						<option value="80" >80</option>
-						<option value="90" >90</option>
-						<option value="100" >100</option>
-					</select>	
+					<label class="dropdown-label">
+						<i class="icon-leading grey-6"></i>
+							<select id="font-size" class="radius">
+								<option selected="" value="8"> 100 </option>
+								<option value="0" >0</option>
+								<option value="10" >10</option>
+								<option value="20" >20</option>
+								<option value="30" >30</option>
+								<option value="40" >40</option>
+								<option value="50" >50</option>
+								<option value="60" >60</option>
+								<option value="70" >70</option>
+								<option value="80" >80</option>
+								<option value="90" >90</option>
+								<option value="100" >100</option>
+							</select>	
 					</label>
 				<div class="vertical-line"></div>
 				
-					<label>
+					<label class="dropdown-label">
 				<i class="icon-opacity grey-6"></i>
 						<select id="font-size" class="radius">
 						<option selected="" value="8"> 100 </option>
@@ -162,6 +162,9 @@ print_r($page);
 				
 				<a href="#" class="bck-dark-blue white toolbox-items radius" id="pop-align"><i class="icon-align-center size-20"></i></a>
 				<a href="#" class="bck-dark-blue white toolbox-items radius" id="pop-arrange"><i class="icon-send-backward size-15"></i></a>
+				
+				<a href="#" class="btn white btn radius " id="pop-image">Add Image</a>
+				<a href="#" class="btn white btn radius " id="pop-video">Add video</a>
 				
 				<a href="#" class="btn grey white radius">Grupla</a>
 			
@@ -206,58 +209,97 @@ print_r($page);
 		
 	</script>
 	
+	
+<!--  align popup -->	
 <div class="popup" id="pop-align-popup">
 <div class="popup-header">
 Hizala
 <div class="popup-close">x</div>
 </div>
+<!--  arrange popup -->
 <div class="popup-inner-title">Dikey</div>
-
-<div class="popup-even">
-
-<i class="icon-align-left size-20 dark-blue"></i>
-<i class="icon-align-center size-20 dark-blue"></i>
-<i class="icon-align-right size-20 dark-blue"></i>
+	<div class="popup-even">
+		<i class="icon-align-left size-20 dark-blue"></i>
+		<i class="icon-align-center size-20 dark-blue"></i>
+		<i class="icon-align-right size-20 dark-blue"></i>
+	</div>
+	<div class="horizontal-line "></div>
+	<div class="popup-inner-title">Yatay</div>
+	<div class="popup-even">
+		<i class="icon-align-top size-20 dark-blue"></i>
+		<i class="icon-align-middle size-20 dark-blue"></i>
+		<i class="icon-align-bottom size-20 dark-blue"></i>
+	</div>
+	<div class="horizontal-line "></div>
+	<div class="popup-inner-title">Boşluklar</div>
+	<div class="popup-even">
+		<i class="icon-vertical-gaps size-20 dark-blue"></i>
+		<i class="icon-horizontal-gaps size-20 dark-blue"></i>
+	</div>
+<!--  arrange popup -->
 </div>
+<!-- end align popup -->
 
-<div class="horizontal-line "></div>
-<div class="popup-inner-title">Yatay</div>
-<div class="popup-even">
-<i class="icon-align-top size-20 dark-blue"></i>
-<i class="icon-align-middle size-20 dark-blue"></i>
-<i class="icon-align-bottom size-20 dark-blue"></i>
-</div>
-
-<div class="horizontal-line "></div>
-<div class="popup-inner-title">Boşluklar</div>
-<div class="popup-even">
-<i class="icon-vertical-gaps size-20 dark-blue"></i>
-<i class="icon-horizontal-gaps size-20 dark-blue"></i>
-
-</div>
-
-
-</div>
-
-
-
+	
+<!--  arrange popup -->
 
 <div class="popup" id="pop-arrange-popup">
 <div class="popup-header">
 Katman
 <div class="popup-close">x</div>
 </div>
-<i class="icon-bring-front size-20 dark-blue"><a> En Üste Çıkart</a></i>
-<i class="icon-bring-front-1 size-20 dark-blue"><a> Üste Çıkart</a></i>
-<div class="horizontal-line "></div>
-<i class="icon-send-back size-20 dark-blue"><a> En Alta İndir</a></i>
-<i class="icon-send-backward size-20 dark-blue"><a> Alta İndir</a></i>
-
-
+<!-- popup content-->
+	<i class="icon-bring-front size-20 dark-blue"><a> En Üste Çıkart</a></i>
+	<i class="icon-bring-front-1 size-20 dark-blue"><a> Üste Çıkart</a></i>
+	<div class="horizontal-line "></div>
+	<i class="icon-send-back size-20 dark-blue"><a> En Alta İndir</a></i>
+	<i class="icon-send-backward size-20 dark-blue"><a> Alta İndir</a></i>
+<!-- popup content-->
 </div>
+<!--  end arrange popup -->		
+
+
+<!--  add image popup -->	
+<div class="popup" id="pop-image-popup">
+<div class="popup-header">
+Görsel Ekle
+<div class="popup-close">x</div>
+</div>
+<!-- popup content-->
+	<div class="gallery-inner-holder">
+		<div style="clear:both"></div>
+		<div class="add-image-drag-area"> </div>
+		<a href="#" class="btn bck-light-green white radius" id="add-image" style="padding: 5px 30px;">Ekle</a>
+	</div>
+<!-- popup content-->
+</div>	
+
+
+<!--  end add image popup -->		
+
+<!--  add video popup -->	
+<div class="popup" id="pop-video-popup">
+<div class="popup-header">
+Video Ekle
+<div class="popup-close">x</div>
+</div>
+
+<!-- popup content-->
+	<div class="gallery-inner-holder">
+		<form id="video-url">
+		<input class="input-textbox" type="url" value="URL Adresini Giriniz">
+		<a href="#" class="btn bck-light-green white radius" id="add-image" style="padding: 5px 30px;">Ekle</a>
+		</form>
+	</div>		
+	
+<!-- popup content-->
+</div>	
+<!--  end add image popup -->		
+		
+		
 		
 
-			<!-- popuplar -->
+<!-- popuplar -->
 	
 		
 		

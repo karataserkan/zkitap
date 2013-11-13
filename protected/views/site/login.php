@@ -1,3 +1,4 @@
+<!--
 <?php
 /* @var $this SiteController */
 /* @var $model LoginForm */
@@ -8,12 +9,15 @@ $this->breadcrumbs=array(
 	'Login',
 );
 ?>
+-->
+<div class="login-page-container">
 
-<h1>Login</h1>
+<div class="login-page-container-inside radius ">
 
-<p>Please fill out the following form with your login credentials:</p>
+<div class="login-header-img tooltip" title="Hint: You may login with demo/demo or admin/admin."></div>
 
 <div class="form">
+
 <?php $form=$this->beginWidget('CActiveForm', array(
 	'id'=>'login-form',
 	'enableClientValidation'=>true,
@@ -21,8 +25,6 @@ $this->breadcrumbs=array(
 		'validateOnSubmit'=>true,
 	),
 )); ?>
-
-	<p class="note">Fields with <span class="required">*</span> are required.</p>
 
 	<div class="row">
 		<?php echo $form->labelEx($model,'email'); ?>
@@ -34,9 +36,7 @@ $this->breadcrumbs=array(
 		<?php echo $form->labelEx($model,'password'); ?>
 		<?php echo $form->passwordField($model,'password'); ?>
 		<?php echo $form->error($model,'password'); ?>
-		<p class="hint">
-			Hint: You may login with <kbd>demo</kbd>/<kbd>demo</kbd> or <kbd>admin</kbd>/<kbd>admin</kbd>.
-		</p>
+		<!--<p class="hint">Hint: You may login with <kbd>demo</kbd>/<kbd>demo</kbd> or <kbd>admin</kbd>/<kbd>admin</kbd>.</p>-->
 	</div>
 
 	<div class="row rememberMe">
@@ -45,9 +45,11 @@ $this->breadcrumbs=array(
 		<?php echo $form->error($model,'rememberMe'); ?>
 	</div>
 
-	<div class="row buttons">
-		<?php echo CHtml::submitButton('Login'); ?>
+	<div class="row buttons ">
+		<?php echo CHtml::submitButton('Giris'); ?>
 	</div>
 
 <?php $this->endWidget(); ?>
 </div><!-- form -->
+</div><!-- login page container inside -->
+</div><!-- login page container -->

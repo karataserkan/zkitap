@@ -58,3 +58,9 @@ cp /home/ugur/protected/utilities/epub3/cover.jpg /tmp/pNb2N7
 cp /home/ugur/protected/utilities/epub3/cover.jpg /tmp/pNb2N7/
 touch /tmp/pNb2N7/cover.jpg
 ls /tmp/pNb2N7/
+ls
+cd
+ls
+git add -A
+git commit 
+git push origin infra 

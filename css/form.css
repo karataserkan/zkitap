@@ -34,8 +34,9 @@
  * @license http://www.yiiframework.com/license/
  */
 
-div.form
+div.form *
 {
+margin-top:10px;
 }
 
 div.form input,
@@ -43,6 +44,26 @@ div.form textarea,
 div.form select
 {
 	margin: 0.2em 0 0.5em 0;
+	height: auto;
+	border: 0;
+	resize: none;
+	font-size: 15px;
+	width:300px;
+	font-family: Calibri;
+	line-height: 2em;
+	font-weight: bold;
+	color: #58585B;
+	white-space: nowrap;
+	overflow: hidden;
+	background-color: #E6E7E8;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	border-radius: 5px;
+}
+#LoginForm_rememberMe{
+width:50px;
+
+
 }
 
 div.form fieldset
@@ -58,11 +79,40 @@ div.form label
 	font-weight: bold;
 	font-size: 0.9em;
 	display: block;
+
+	margin-left:20px;
 }
 
 div.form .row
 {
+	
 	margin: 5px 0;
+}
+div.form .row.buttons input
+{	
+	overflow:hidden;
+	margin-bottom:3px;
+	
+	white-space: nowrap;
+	text-align:center;
+	padding: 6px 5px 6px 5px;
+	font-size: 14px;
+		color: #fff;
+	display:inline-block;
+	vertical-align: middle;
+	cursor: pointer;
+	font-weight: bold;
+	text-shadow: 0 1px rgba(0, 0, 0, 0.3);
+ 	outline: 0 none;
+	text-decoration: none;
+	font-family: Helvetica, sans-serif;
+	background-color: #4eb6a8;
+	box-shadow: 0px 3px 0px 0px #29a290;
+}
+
+div.form .row.buttons input:active
+{	
+	background-color: #29a290;
 }
 
 div.form .hint
@@ -162,3 +212,25 @@ div.wide.form .buttons, div.wide.form .hint, div.wide.form .errorMessage
 	clear: left;
 	padding-left: 110px;
 }
+
+
+.tooltip{
+   			
+    		position: relative;
+		}
+		
+.tooltip:hover:after{
+    		background: #333;
+    		background: rgba(0,0,0,.8);
+    		border-radius: 5px;
+    		top: -50px;
+    		color: #fff;
+    		content: attr(title);
+    		left: 10%;
+    		padding: 5px 15px;
+    		position: absolute;
+    		z-index: 98;
+    		width: 220px;
+		}
+		
+

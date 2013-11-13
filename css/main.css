@@ -25,7 +25,10 @@ text-decoration:none;
 transition: all 0.1s linear;
 }
 
+ul {
+list-style:none;
 
+}
 
 #page
 {
@@ -162,7 +165,7 @@ overflow:hidden;
 
 #content
 {
-    padding: 20px;
+    padding: 0px;
 }
 
 
