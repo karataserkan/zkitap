@@ -322,9 +322,37 @@ class EditorActionsController extends Controller
 		$this->render('deletePage');
 	}
 
-	public function actionUpdateChapter($chapterId,$jsonProperties=null,$property=null,$field=null)
+	public function UpdateChapter($chapterId,$title=null,$order=null){
+		$chapter=Chapter::model()->findByPk($chapterId);
+		if (!$chapter) {
+			$this->error("EA-UChapter","Chapter Not Found",func_get_args(),$chapterId);
+			return false;
+		}
+		$chapter->title=$title;
+		$chapter->order=$order;
+
+
+		if(!$chapter->save()){
+			$this->error("EA-UChapter","Chapter Not Saved",func_get_args(),$chapterId);
+			return false;
+		}
+		return $chapter->attributes;
+
+
+	}
+
+
+	public function actionUpdateChapter($chapterId,$title=null,$order=null)
 	{
-		$this->render('updateChapter');
+
+		$response=false;
+
+		if($return=$this->UpdateChapter($chapterId,$title,$order) ){
+				$response['chapter']=$return; 
+		}
+
+		return $this->response($response);
+
 	}
 
 	public function actionUpdateComponentData($componentId,$data_field,$data_value)
@@ -393,10 +421,10 @@ class EditorActionsController extends Controller
 		$book=Book::model()->findByPk($bookId);
 		$ebook=new epub3($book);
 		if ($ebook) readfile($ebook->download() );
-
-		//print_r($ebook);
-
 	}
+
+
+
 	// Uncomment the following methods and override them if needed
 	/*
 	public function filters()

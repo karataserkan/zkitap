@@ -14,7 +14,7 @@ return array(
 
 	// autoloading model and component classes
 	'import'=>array(
-		'application.models.*',
+		'application.models.*', 
 		'application.components.*',
 		'application.utilities.*',
 		'application.utilities.epub3.*'
@@ -26,12 +26,12 @@ return array(
 
 		'gii'=>array(
 			'class'=>'system.gii.GiiModule',
-			'password'=>'dene5me', 
+			'password'=>'ln14@KlMrsqd', 
 			// If removed, Gii defaults to localhost only. Edit carefully to taste.
 			'ipFilters'=>false,
 		),
 		'yiiadmin' =>array(
-            'password'=>'dene5me',
+            'password'=>'ln14@KlMrsqd',
             'registerModels'=>array(
                 //add the models you want to manage
                 'application.models.User',
