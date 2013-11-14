@@ -13,12 +13,23 @@
 	<![endif]-->
 
 	<link href="<?php echo Yii::app()->request->baseUrl; ?>css/editor_blue/jquery-ui-1.10.3.custom.css" rel="stylesheet">
-	<script src="<?php echo Yii::app()->request->baseUrl; ?>js/jquery-1.9.1.js"></script>
-	<script src="<?php echo Yii::app()->request->baseUrl; ?>js/jquery-ui-1.10.3.custom.js"></script>
+	<script src="<?php echo Yii::app()->request->baseUrl; ?>js/lib/jquery-1.9.1.js"></script>
+	<script src="<?php echo Yii::app()->request->baseUrl; ?>js/lib/jquery-ui-1.10.3.custom.js"></script>
 
-	<script src="<?php echo Yii::app()->request->baseUrl; ?>js/Tlingit.js"></script>
-	<script src="<?php echo Yii::app()->request->baseUrl; ?>js/Tsimshian.js"></script>
-	<script src="<?php echo Yii::app()->request->baseUrl; ?>js/Nisga.js"></script>
+	<script src="<?php echo Yii::app()->request->baseUrl; ?>js/app/lindneo.js"></script>	
+
+	<script src="<?php echo Yii::app()->request->baseUrl; ?>js/app/modules/dataservice.js"></script>	
+	<script src="<?php echo Yii::app()->request->baseUrl; ?>js/app/modules/tlingit.js"></script>
+	<script src="<?php echo Yii::app()->request->baseUrl; ?>js/app/modules/nisga.js"></script>
+	<script src="<?php echo Yii::app()->request->baseUrl; ?>js/app/modules/tsimshian.js"></script>
+	<script src="<?php echo Yii::app()->request->baseUrl; ?>js/app/modules/toolbox.js"></script>
+
+	<script src="<?php echo Yii::app()->request->baseUrl; ?>js/app/components/component.js"></script>	
+	<script src="<?php echo Yii::app()->request->baseUrl; ?>js/app/components/text-component.js"></script>	
+
+	<script src="<?php echo Yii::app()->request->baseUrl; ?>js/app/other/page-drag-drop.js"></script>
+	<script src="<?php echo Yii::app()->request->baseUrl; ?>js/app/other/page-load.js"></script>
+	
 	
 	<link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/main.css" />
 	<link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/style.css" />

@@ -299,3 +299,5 @@
 [Wed Nov 13 12:28:21 2013] [error] [client 81.215.15.54] PHP Parse error:  syntax error, unexpected T_RETURN in /home/ugur/protected/utilities/epub3/epub3.php on line 288
 [Wed Nov 13 13:14:44 2013] [error] [client 81.215.15.54] PHP Parse error:  syntax error, unexpected T_OBJECT_OPERATOR, expecting ')' in /home/ugur/protected/utilities/epub3/componentHTML.php on line 9
 [Wed Nov 13 13:35:42 2013] [error] [client 81.215.15.54] PHP Parse error:  syntax error, unexpected T_DNUMBER in /home/ugur/protected/utilities/epub3/epub3.php on line 302
+[Thu Nov 14 05:52:01 2013] [error] [client 78.162.171.168] File does not exist: /home/ugur/favicon.ico
+[Thu Nov 14 06:54:23 2013] [error] [client 81.215.15.54] File does not exist: /home/ugur/favicon.ico
