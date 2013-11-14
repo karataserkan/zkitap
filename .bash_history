@@ -188,3 +188,41 @@ ls
 cat epub3
 cat epub3.php
 sudo su
+su root
+sudo su
+sudo su
+ssh-keygen 
+cat .ssh/id_rsa.pub 
+git checkout -b infra
+git add .
+git commit -m 'Deleted Files'
+git push origin infra
+git pull
+git push origin infra
+git checkout -b newinfra
+git add .
+git commit -m'initial'
+git push origin newinfra
+su erkan
+sudo su
+ls
+ls
+ls
+cd ..
+cd ugur
+ls
+sudo su
+git add .
+cd
+git add .
+git commit -m 'Sifre Degisti'
+git push origin newinfra
+git pull
+git add .
+git commit -m 'JS path index olarak ayarlandı'
+git push origin newinfra
+lws
+updatedb
+clear
+ls
+sudo su

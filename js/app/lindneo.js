@@ -3,7 +3,7 @@
 window.lindneo = (function(window){
 
   var url = '/index.php';
-  var currentPageId = 'Ip38yh5mNn2uzH6JTwmO29oI65Qy7c745YskdqualT85';
+  var currentPageId ;
   var currentComponent = {};
 
   return {

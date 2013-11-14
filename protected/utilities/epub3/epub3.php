@@ -501,7 +501,7 @@ class epub3 {
 	}
 
 
-	public function __construct($book_model=null){
+	public function __construct($book_model=null){ 
 		
 		$this->book=$book_model;
 		

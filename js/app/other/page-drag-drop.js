@@ -28,7 +28,7 @@ $( document ).ready(function () {
                 'padding': '0px',
                 'border': 'none 0px',
                 'outline': 'none'
-              } ,
+              } , 
               'attr': {
                 'asd': 'coadsad'
               },
@@ -48,6 +48,28 @@ $( document ).ready(function () {
 
 		    window.lindneo.tlingit.componentHasCreated(component);
 	 	  }
+    
+    });
+    
+    $('.chapter-title').change(function(){
+        window.lindneo.tlingit.ChapterUpdated(
+          $(this).parent().attr('chapter_id'),
+          $(this).val( ),
+          $(this).parent().index() 
+        );
+    });
+
+    $('.delete-chapter').click(function(){
+      var chapter_id=$(this).parent().attr('chapter_id');
+      console.log(chapter_id);
+      window.lindneo.tlingit.ChapterHasDeleted( chapter_id );
+    });
+
+    $('.delete-page').click(function(){
+      var page_id=$(this).parent().attr('page_id');
+          window.lindneo.tlingit.PageHasDeleted( page_id );
+      
+
     });
 
 	 	$('#zoom-pane').slider({

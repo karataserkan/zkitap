@@ -1,7 +1,8 @@
 <?php
-// yeni satır
+
 /* @var $this BookController */
 /* @var $model Book */
+/* @var $page page_id */
 /*
 $this->breadcrumbs=array(
 	'Books'=>array('index'),
@@ -17,22 +18,34 @@ $this->menu=array(
 	array('label'=>'Manage Book', 'url'=>array('admin')),
 );
 */
-if($page=null) 
-		{
+
+
+
+$page=Page::model()->findByPk($page_id); 
+if($page==null) 
+		{ 
+
 			$chapter=Chapter::model()->find('book_id=:book_id', array(':book_id' => $model->book_id ));
-				$page=Page::model()->find('chapter_id=:chapter_id', array(':chapter_id' => $chapter->chapter_id ));
+			$page=Page::model()->find('chapter_id=:chapter_id', array(':chapter_id' => $chapter->chapter_id ));
+
  
-		} else 
-$page=Page::model()->findByPk($page); 
-print_r($page); 
+		} 
+
+
+
+
+
  
-//$chapter=Chapter::model()->findByPk($page->chapter_id);
+$current_chapter=Chapter::model()->findByPk($page->chapter_id);
+$current_page=Page::model()->findByPk($page->page_id);
   
 ?>
 	
 	
 	
-
+<script type="text/javascript">
+window.lindneo.currentPageId='<?php echo $current_page->page_id; ?>'
+</script>
 	
 	
 	
@@ -348,13 +361,13 @@ Video Ekle
 	$chapters=Chapter::model()->findAll(array('order'=>  '`order` asc ,  created asc', "condition"=>'book_id=:book_id', "params" => array(':book_id' => $model->book_id )));
 	//print_r($chapters);
 	foreach ($chapters as $key => $chapter) {
-	
+			
 			$pagesOfChapter=Page::model()->findAll(array('order'=>  '`order` asc ,  created asc', "condition"=>'chapter_id=:chapter_id', "params" =>array(':chapter_id' => $chapter->chapter_id )) );
 					$chapter_page=0;
 					?>
 <div class='chapter' chapter_id='<?php echo $chapter->chapter_id; ?>'>
-<input type="text" class="chapter-title" placeholder="chapter title">
-<a class="btn red white size-15 radius icon-delete page-chapter-delete hidden-delete" style="float: right; margin-top: -23px;"></a>
+<input type="text" class="chapter-title" placeholder="chapter title" value=" <?php echo $chapter->title; ?>">
+<a class="btn red white size-15 radius icon-delete page-chapter-delete  delete-chapter hidden-delete" style="float: right; margin-top: -23px;"></a>
  <!-- <?php echo $chapter->title; ?>  chapter title-->
 					<ul class="pages" >
 							<?php
@@ -374,14 +387,14 @@ Video Ekle
 					$this->current_chapter=$chapter;
 				}*/
 				$page_NUM++;
-				?>
+				?> 
 					
-					<li class='page' chapter_id='<?php echo $pages->chapter_id; ?>' chapter_id='<?php echo $pages->page_id; ?>'   >
-						<a class="btn red white size-15 radius icon-delete page-chapter-delete hidden-delete" style="margin-left: 38px;"></a>
-						<a href='<?php $this->createUrl("book/author", array('bookId' => $model->book_id,'page'=>$pages->page_id ));?>' >
+					<li class='page' chapter_id='<?php echo $pages->chapter_id; ?>' page_id='<?php echo $pages->page_id; ?>' chapter_id='<?php echo $pages->page_id; ?>'   >
+						<a class="btn red white size-15 radius icon-delete page-chapter-delete delete-page hidden-delete" style="margin-left: 38px;"></a>
+						<a href='<?php echo $this->createUrl("book/author", array('bookId' => $model->book_id, 'page'=>$pages->page_id ));?>' >
 
 								
-							<span class="page-number" > <?php echo $page_NUM; ?></span>
+							<span class="page-number" >s <?php echo $page_NUM; ?></span>
 						</a>	
 					</li>
 				<?php
@@ -401,7 +414,7 @@ Video Ekle
 	
 $( "#add-button" ).hover(
   function() {
-    $( this ).append( $( "<span id='add-buttons' class='add-button-container'> <a class='add-button-cp'>Sayfa ekle</a><a class='add-button-cp white' href='?r=chapter/create&amp;book_id=PhotoBookV1'> Bölüm ekle</a></span>" ) );
+    $( this ).append( $(   	'<span id="add-buttons" class="add-button-container">  	    	<a class="add-button-cp white" href="?r=page/create&chapter_id=<?php echo $current_chapter->chapter_id; ?>"> Sayfa ekle </a>  	    	<a class="add-button-cp white" href="?r=chapter/create&book_id=<?php echo $model->book_id; ?>"> Bölüm ekle </a>     	</span>'    	) );
  },
  function(){
 			 $('#add-buttons').remove();
@@ -429,8 +442,8 @@ $( "#add-button" ).hover(
 		</div> <!-- guide -->
 		<div id='editor_view_pane' style=' padding:5px 130px;margin:5px;float:left;'>
 			
-					<div id='current_page' style='background:white;border:thin solid black;zoom:1;padding:1cm; margin-top:5px;  height:700px;width:600px;position:relative' >
-						Page Here Drag&drops 
+					<div id='current_page' page_id='<?php echo $page->page_id ;?>' style='background:white;border:thin solid black;zoom:1;padding:1cm; margin-top:5px;  height:700px;width:600px;position:relative' >
+						
 					</div>
 
 
