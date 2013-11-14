@@ -103,7 +103,7 @@ class EditorActionsController extends Controller
 
 
 	public function actionGetPageComponents($pageId){
-
+		$response=null;
 		if($return=$this->get_page_components($pageId)){
 			$response['components']=$return;
 		} 
@@ -279,7 +279,7 @@ class EditorActionsController extends Controller
 			$this->error("EA-DC","Chapter Not Found!");
 			return false;
 		} 
-		if( $result->delete() ){return true;}
+		if( $result->delete() ){return $chapterId;}
 
 	}
 
@@ -317,9 +317,20 @@ class EditorActionsController extends Controller
 		return $this->response($response);
 	}
 
+
+	public function deletePage($pageId){
+		$result=Page::model()->findByPk($pageId);
+		if(!$result){
+			$this->error("EA-DP","Page Not Found!");
+			return false;
+		} 
+		if( $result->delete() ){return $pageId;}
+
+	}
+
 	public function actionDeletePage($pageId)
 	{
-		$this->render('deletePage');
+		return $this->response($this->deletePage($pageId));
 	}
 
 	public function UpdateChapter($chapterId,$title=null,$order=null){
@@ -398,6 +409,7 @@ class EditorActionsController extends Controller
 	}
 
 
+
 	public function actionUpdateWholeComponentData($componentId,$jsonProperties)
 	{
 		$response=false;
@@ -410,9 +422,36 @@ class EditorActionsController extends Controller
 
 	}
 
-	public function actionUpdatePage($componentId,$jsonProperties=null,$property=null,$field=null)
+	public function UpdateChapter($pageId,$chapterId,$order){
+		$page=Page::model()->findByPk($chapterId);
+		if (!$page) {
+			$this->error("EA-UPage","Page Not Found",func_get_args(),$pageId);
+			return false;
+		}
+		$page->title=$title;
+		$page->order=$order;
+
+
+		if(!$page->save()){
+			$this->error("EA-UPage","UPage Not Saved",func_get_args(),$pageId);
+			return false;
+		}
+		
+		return $page->attributes;
+
+
+	}
+
+	public function actionUpdatePage($pageId,$chapterId,$order)
 	{
-		$this->render('updatePage');
+
+		$response=false;
+
+		if($return=$this->UpdateChapter($pageId,$chapterId,$order) ){
+				$response['component']=$return; 
+		}
+
+		return $this->response($response);
 	}
 
 

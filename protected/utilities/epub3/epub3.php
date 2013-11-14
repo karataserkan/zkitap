@@ -176,7 +176,19 @@ class epub3 {
 						<title>'.$this->title.'</title>
 						<style type="text/css" title="override_css">
 							@page {padding: 0pt; margin:0pt}
-							body { text-align: center; padding:0pt; margin: 0pt; }
+							body { 
+								text-align: center; padding:0pt; margin: 0pt; background: white;
+								border: thin solid black;
+								zoom: 1;
+								padding: 1cm;
+								margin-top: 5px;
+								height: 700px;
+								width: 600px;
+								position: relative;
+								color: #333;
+								font-family: "Helvetica Neue", Arial, Helvetica, sans-serif;
+								font-size: 13px;
+							}
 						</style>
 					</head>
 					<body>
@@ -501,7 +513,7 @@ class epub3 {
 	}
 
 
-	public function __construct($book_model=null){
+	public function __construct($book_model=null){ 
 		
 		$this->book=$book_model;
 		

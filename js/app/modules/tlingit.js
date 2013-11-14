@@ -111,7 +111,7 @@ window.lindneo.tlingit = (function(window, $, undefined){
 
   var loadPage = function (pageId){
     //page ile ilgili componentların hepsini serverdan çek.
-    // hepsi için createComponent
+    // hepsi için createComponent 
 
     // find current page id from somewhere
     window.lindneo.dataservice
@@ -133,11 +133,87 @@ window.lindneo.tlingit = (function(window, $, undefined){
     //Socket API for Co-Working
   };
 
+  var ChapterUpdated = function (chapterId, title, order){
+    window.lindneo.dataservice
+    .send( 'UpdateChapter', 
+      { 
+        'chapterId' : chapterId,
+        'title' : title,
+        'order' : order
+      },
+      UpdateChapter,
+      function(err){
+        console.log('error:' + err);
+    });
+  
+  };
+
+  var UpdateChapter =function(response){
+    var response = responseFromJson(response);
+    //pass to nisga new chapter
+    console.log(response);
+
+  };
+
+
+  var ChapterHasDeleted = function (chapterId){
+    window.lindneo.dataservice
+    .send( 'DeleteChapter', 
+      { 
+        'chapterId' : chapterId,
+      },
+      DeleteChapter,
+      function(err){
+        console.log('error:' + err);
+      });
+
+   
+  };
+
+  var DeleteChapter =function(response){
+    var response = responseFromJson(response);
+    //pass to nisga to destroy chapter
+    console.log(response);
+
+  }; 
+
+
+  var PageHasDeleted = function (pageId){
+    window.lindneo.dataservice
+    .send( 'DeletePage', 
+      { 
+        'pageId' : pageId,
+      },
+      DeletePage,
+      function(err){
+        console.log('error:' + err);
+      });
+
+   
+  };
+
+  var DeletePage =function(response){
+    var response = responseFromJson(response);
+    //pass to nisga to destroy page
+    console.log(response);
+
+  }; 
+
+
+
+
+
   return {
     componentHasCreated: componentHasCreated,
     componentHasUpdated: componentHasUpdated,
     componentHasDeleted: componentHasDeleted,
-    loadPage: loadPage
+    ChapterUpdated: ChapterUpdated,
+    UpdateChapter: UpdateChapter,
+    loadPage: loadPage ,
+    ChapterHasDeleted: ChapterHasDeleted,
+    PageHasDeleted: PageHasDeleted,
+    DeletePage: DeletePage,
+    DeleteChapter: DeleteChapter
   };
 
 })( window, jQuery );

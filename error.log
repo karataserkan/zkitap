@@ -301,3 +301,10 @@
 [Wed Nov 13 13:35:42 2013] [error] [client 81.215.15.54] PHP Parse error:  syntax error, unexpected T_DNUMBER in /home/ugur/protected/utilities/epub3/epub3.php on line 302
 [Thu Nov 14 05:52:01 2013] [error] [client 78.162.171.168] File does not exist: /home/ugur/favicon.ico
 [Thu Nov 14 06:54:23 2013] [error] [client 81.215.15.54] File does not exist: /home/ugur/favicon.ico
+[Thu Nov 14 10:25:44 2013] [error] [client 144.122.25.20] File does not exist: /home/ugur/favicon.ico
+[Thu Nov 14 10:32:27 2013] [error] [client 81.215.15.54] PHP Parse error:  syntax error, unexpected T_CONSTANT_ENCAPSED_STRING, expecting ')' in /home/ugur/protected/views/book/author.php on line 391, referer: http://ugur.dev.lindneo.com/index.php?r=book/author&bookId=PhotoBookV1
+[Thu Nov 14 10:32:30 2013] [error] [client 81.215.15.54] PHP Parse error:  syntax error, unexpected T_CONSTANT_ENCAPSED_STRING, expecting ')' in /home/ugur/protected/views/book/author.php on line 391
+[Thu Nov 14 10:32:32 2013] [error] [client 81.215.15.54] PHP Parse error:  syntax error, unexpected T_CONSTANT_ENCAPSED_STRING, expecting ')' in /home/ugur/protected/views/book/author.php on line 391
+[Thu Nov 14 11:58:13 2013] [error] [client 81.215.15.54] File does not exist: /home/ugur/favicon.ico
+[Thu Nov 14 12:13:28 2013] [error] [client 144.122.238.171] File does not exist: /home/ugur/favicon.ico
+[Thu Nov 14 15:02:34 2013] [error] [client 81.215.15.54] File does not exist: /home/ugur/js/app/other/page-drag-drop.js, referer: http://ugur.dev.lindneo.com/index.php?r=book/author&bookId=PhotoBookV1&page=LAf3B0G9ptSbsBGonqJTUhOKiNPm5OeJoZFRdxUXrqrI

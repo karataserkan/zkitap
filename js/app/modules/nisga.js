@@ -54,13 +54,18 @@ window.lindneo.nisga = (function(window, $, undefined){
 
   }
 
+  var destroyChapter=function(chapter){
+    $(".chapter[chapter_id='"+chapter+"']").remove();
+  }
+
   var imageComponentBuilder = function ( component ) {
     console.log('image compnnent builder not implemented yet');
   };
 
   return {
     createComponent: createComponent,
-    deleteComponent: deleteComponent
+    deleteComponent: deleteComponent,
+    destroyChapter: destroyChapter
   };
 
 })( window, jQuery );

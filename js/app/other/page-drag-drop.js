@@ -28,7 +28,7 @@ $( document ).ready(function () {
                 'padding': '0px',
                 'border': 'none 0px',
                 'outline': 'none'
-              } ,
+              } , 
               'attr': {
                 'asd': 'coadsad'
               },
@@ -48,7 +48,44 @@ $( document ).ready(function () {
 
 		    window.lindneo.tlingit.componentHasCreated(component);
 	 	  }
+    
     });
+    
+    $('.chapter-title').change(function(){
+        window.lindneo.tlingit.ChapterUpdated(
+          $(this).parent().attr('chapter_id'),
+          $(this).val( ),
+          $(this).parent().index() 
+        );
+    });
+
+    $('.delete-chapter').click(function(){
+      var chapter_id=$(this).parent().attr('chapter_id');
+      console.log(chapter_id);
+      window.lindneo.tlingit.ChapterHasDeleted( chapter_id );
+    });
+
+    $('.delete-page').click(function(){
+      var page_id=$(this).parent().attr('page_id');
+          window.lindneo.tlingit.PageHasDeleted( page_id );
+      
+
+    });
+
+    $('#chapters_pages_view').sortable({
+      stop: function(event,ui){
+        $('.chapter input').change();
+      }
+    });
+
+    $('.pages').sortable({ connectWith: '.pages' , stop: function( event,ui){
+
+      console.log(event.toElement);
+      console.log('page_id: ' +$(event.toElement).attr('page_id'));
+      console.log('new Chapter_id: ' +$(event.toElement).parent().parent().attr('chapter_id'));
+      console.log('new order: ' +$(event.toElement).index());
+      console.log(ui);
+    }  });
 
 	 	$('#zoom-pane').slider({
 	    value:100,

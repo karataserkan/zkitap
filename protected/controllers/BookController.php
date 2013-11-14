@@ -97,7 +97,7 @@ class BookController extends Controller
 		
 		$this->render('author',array(
 			'model'=>$model,
-			'page'=>$page
+			'page_id'=>$page
 		)); 
 	}
 
