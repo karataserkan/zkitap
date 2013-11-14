@@ -80,9 +80,9 @@ window.lindneo.currentPageId='<?php echo $current_page->page_id; ?>'
 					</label>
 					
 					
-	<a href="#" class="btn bck-light-green white radius" id="header-buttons"><i class="icon-publish"> Yayınla</i></a>
-	<a href="#" class="btn bck-light-green white radius" id="header-buttons"><i class="icon-save"> Kaydet</i></a>
-
+	<a href="<?php echo $this->createUrl("EditorActions/ExportBook", array('bookId' => $model->book_id ));?>" class="btn bck-light-green white radius" id="header-buttons"><i class="icon-publish"> Yayınla</i></a>
+<!--	<a href="#" class="btn bck-light-green white radius" id="header-buttons"><i class="icon-save"> Kaydet</i></a>
+ -->
 	<div id='book_title'><?php echo $model->title; ?></div>
 	
 	</div> <!--Header -->

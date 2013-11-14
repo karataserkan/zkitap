@@ -54,8 +54,9 @@ class componentHTML {
 	}
 
 	public function create_container($component){
-		$container ="
-		<div id='{$component->id}' class='{$component->type}' ";
+		//print_r($component);die;
+				$container ="
+		<div id='".$component->id."' class='{$component->type}' ";
 		if(isset($component->data->self->attr))
 			foreach ($component->data->self->attr as $attr_name => $attr_val ) {
 				$container.=" $attr_name='$attr_val' ";
@@ -78,8 +79,9 @@ class componentHTML {
 	}
 
 	public function __construct($component){
-		//print_r((object)$component);die;
-		$component=(object)$component;
+		
+		//if(!$component) return "";
+		
 		$this->create_container($component);
 
 		$this->create_inner($component);

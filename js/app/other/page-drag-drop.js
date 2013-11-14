@@ -72,6 +72,21 @@ $( document ).ready(function () {
 
     });
 
+    $('#chapters_pages_view').sortable({
+      stop: function(event,ui){
+        $('.chapter input').change();
+      }
+    });
+
+    $('.pages').sortable({ connectWith: '.pages' , stop: function( event,ui){
+
+      console.log(event.toElement);
+      console.log('page_id: ' +$(event.toElement).attr('page_id'));
+      console.log('new Chapter_id: ' +$(event.toElement).parent().parent().attr('chapter_id'));
+      console.log('new order: ' +$(event.toElement).index());
+      console.log(ui);
+    }  });
+
 	 	$('#zoom-pane').slider({
 	    value:100,
 	    min: 25,

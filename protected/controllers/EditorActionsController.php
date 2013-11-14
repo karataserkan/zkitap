@@ -409,6 +409,7 @@ class EditorActionsController extends Controller
 	}
 
 
+
 	public function actionUpdateWholeComponentData($componentId,$jsonProperties)
 	{
 		$response=false;
@@ -421,9 +422,36 @@ class EditorActionsController extends Controller
 
 	}
 
-	public function actionUpdatePage($componentId,$jsonProperties=null,$property=null,$field=null)
+	public function UpdateChapter($pageId,$chapterId,$order){
+		$page=Page::model()->findByPk($chapterId);
+		if (!$page) {
+			$this->error("EA-UPage","Page Not Found",func_get_args(),$pageId);
+			return false;
+		}
+		$page->title=$title;
+		$page->order=$order;
+
+
+		if(!$page->save()){
+			$this->error("EA-UPage","UPage Not Saved",func_get_args(),$pageId);
+			return false;
+		}
+		
+		return $page->attributes;
+
+
+	}
+
+	public function actionUpdatePage($pageId,$chapterId,$order)
 	{
-		$this->render('updatePage');
+
+		$response=false;
+
+		if($return=$this->UpdateChapter($pageId,$chapterId,$order) ){
+				$response['component']=$return; 
+		}
+
+		return $this->response($response);
 	}
 
 
