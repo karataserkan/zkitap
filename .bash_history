@@ -226,3 +226,119 @@ updatedb
 clear
 ls
 sudo su
+clear
+sudo su
+ls
+cd ls
+ls
+ls
+clear
+ls
+cd ..
+mkdir socket.io
+ls
+cd socket.io/
+ls
+git clone https://github.com/LearnBoost/socket.io.git
+clear
+ls
+ls
+cd socket.io/
+ls
+node index.js 
+ls
+cd lib/
+ls
+cd ..
+ls
+ls
+ls
+cd ..
+ls
+ls -ltr
+ls -ltra
+chmod ugur:www-data socket.io/
+chmod ugur:www-data socket.io
+chmod ugur:www-data socket.io
+chownugur:www-data socket.io
+chown ugur:www-data socket.io
+sudo chown ugur:www-data socket.io
+ls
+ls -ltr
+sudo chown ugur:www-data -Rf socket.io
+ls -ltr
+cd 
+cd ../socket.io/socket.io/
+ls -ltr
+node index.js 
+nano index.js 
+ls
+clear
+ls
+sudo apt-get install npm 
+npm index.js 
+npm install socket.io
+node index.js 
+clear
+cd ..
+ls
+ls
+clear
+mkdir
+mkdir coworking
+ls
+mv coworking/ ../
+ls
+cd .
+cd ..
+ls
+cd coworking/
+ls
+ls
+nano cowork.js
+node cowork.js 
+nmp cowork.js 
+clear
+ls
+npm install socket.io
+rm cowork.js 
+nano cowork.js 
+nano cowork.js 
+node cowork.js 
+nano cowork.js 
+node cowork.js 
+pwd
+nano cowork.js 
+node cowork.js 
+bg 1
+ls
+telnet localhost:1881
+telnet localhost 1881
+telnet localhost 1882
+telnet localhost 1881
+fg
+node cowork.js  > deneme
+bg 1
+telnet localhost 1881
+cat deneme 
+nano cowork.js 
+fg
+node cowork.js 
+nano cowork.js 
+node cowork.js 
+nano cowork.js 
+node cowork.js 
+nano cowork.js 
+node cowork.js 
+nano cowork.js 
+node cowork.js 
+node cowork.js 
+node cowork.js 
+nano cowork.js 
+nano cowork.js 
+node cowork.js 
+node cowork.js 
+node cowork.js 
+node cowork.js 
+while :; do node cowork.js; sleep 1; done
+while :; do node cowork.js; sleep 1; done

@@ -13,6 +13,7 @@ window.lindneo.tlingit = (function(window, $, undefined){
   var componentHasCreated = function (component){
 
     //co-workers have created a new component, fuck them all.
+    
     createComponent(component);
 
   };
@@ -42,7 +43,7 @@ window.lindneo.tlingit = (function(window, $, undefined){
     } 
     
     window.lindneo.nisga.createComponent( response.result.component );
-    
+    window.lindneo.tsimshian.componentCreated(response.result.component);
   };
 
   var componentHasUpdated = function ( component ) {
@@ -204,6 +205,7 @@ window.lindneo.tlingit = (function(window, $, undefined){
 
 
   return {
+    createComponent: createComponent,
     componentHasCreated: componentHasCreated,
     componentHasUpdated: componentHasUpdated,
     componentHasDeleted: componentHasDeleted,
