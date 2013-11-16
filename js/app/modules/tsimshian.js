@@ -3,7 +3,7 @@
 'use strict'; 
 
 window.lindneo = window.lindneo || {};
-
+ 
 // tsimshian module
 window.lindneo.tsimshian = (function(window, $, undefined){
 
@@ -21,6 +21,13 @@ window.lindneo.tsimshian = (function(window, $, undefined){
   	this.socket.emit('newComponent', component);
   };
 
+
+  var componentDestroyed = function(componentId){
+    window.lindneo.tsimshian.myComponent=componentId;
+    console.log('Sending');
+    this.socket.emit('destroyComponent', componentId);
+  };
+
   var changePage = function (pageId){
     window.lindneo.tsimshian.socket.emit('changePage',pageId);
   };
@@ -35,7 +42,7 @@ window.lindneo.tsimshian = (function(window, $, undefined){
 		     
 	 
 	 });
-	    this.socket.on('newComponent', function(component){
+	     this.socket.on('newComponent', function(component){
 	        console.log(component.id) ;
 	        console.log(window.lindneo.tsimshian.myComponent) ;
 	    	if(window.lindneo.tsimshian.myComponent!=component.id ){
@@ -44,10 +51,22 @@ window.lindneo.tsimshian = (function(window, $, undefined){
 	    	} else
 	    		console.log('I had sent it');
 	     } );
+
+ 
+       this.socket.on('destroyComponent', function(componentId){
+          console.log(componentId) ;
+          console.log(window.lindneo.tsimshian.myComponent) ;
+        if(window.lindneo.tsimshian.myComponent!=componentId ){
+          console.log('Its new');
+          window.lindneo.nisga.destroyComponent(componentId);
+        } else
+          console.log('I had sent it');
+       } );
   }; 
 
   return {
     changePage: changePage,
+    componentDestroyed: componentDestroyed,
     componentCreated: componentCreated,
     myComponent: myComponent,
     serverName: serverName,

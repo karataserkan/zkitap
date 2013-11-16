@@ -355,3 +355,113 @@ cd ..
 ls
 exit
 >>>>>>> 36c1f89bdeff4c5eff255b7e247b340a7f238136
+sudo npm install forever
+ls
+rm -Rf node_modules/
+sudo rm -Rf node_modules/
+ls -ltr
+sudo rm -f npm-debug.log 
+ls
+ls -ltr
+ls
+sudo apt-get upgrade
+git status
+rm -rf .npm/
+sudo rm -rf .npm/
+git status 
+Graph Members
+Keyboard shortcuts available 
+The squid-pacific network graph
+All branches in the network using kurtulus/squid-pacific as the reference point. Read our blog post about how it works.
+Show Help
+git status 
+git add .
+git status
+git commit -m 'newWay'
+git push origin newinfra 
+git push origin newinfra 
+git fetch origin
+git checkout -b newinfra origin/newinfra
+git merge master
+git checkout master
+git merge newinfra
+git push origin master
+locgit push --help
+locgit push --help
+git push --help
+git push origin master -f
+nano .gitignore 
+ls
+git add .
+git commit -m 'force'
+git push origin newinfra 
+git push origin newinfra -f
+git merge newinfra master -f
+git merge newinfra master -ff
+git merge newinfra master --ff
+git pull origin master 
+sudo su
+node cowork.js 
+node cowork.js 
+node /home/coworking/cowork.js 
+git add .
+git commit 
+git push origin newinfra 
+git merge master 
+git merge master newinfra 
+git merge newinfra master
+git add .
+git commit 
+git push origin master
+git push newinfra
+git pull master
+git pull origin master
+rm protected/runtime/application.log
+git pull origin master
+git commit -a
+git push origin master 
+git pull origin master
+git merge JS master 
+git add .
+git commit -a
+git push origin newinfra 
+git push origin newinfra -f
+git fetch origin
+git checkout -b JS origin/JS
+git merge master
+git checkout master
+git merge JS
+git push origin master
+git fetch origin
+git checkout -b JS origin/JS
+git merge master
+git merge master -F
+git merge master -f
+git merge master --ff
+git commit -a
+git merge master --ff
+git merge master 
+git checkout master
+git merge JS
+git push origin master
+git pull origin master
+node /home/coworking/cowork.js 
+git add .
+git commit -a
+git checkout -b infra1
+git add .
+git commit -a
+git push origin 
+git checkout infra
+git checkout -b infra1
+git checkout infra
+git commit -a
+git push origin infra
+git checkout -b infra1
+git checkout infra1
+git commit -a
+git add .
+git commit -a
+git push origin infra
+git push origin infra1
+node /home/coworking/cowork.js 

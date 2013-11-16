@@ -63,8 +63,9 @@ window.lindneo.tlingit = (function(window, $, undefined){
 
   var updateArrivalComponent = function(res) {
     var response = responseFromJson(res);
-
-    //console.log(response.result);
+    console.log(response.result);
+    window.lindneo.tsimshian.componentDestroyed(response.result.component.id);
+    window.lindneo.tsimshian.componentCreated(response.result.component);
   };
 
   var componentHasDeleted = function ( componentId ) {
@@ -83,7 +84,7 @@ window.lindneo.tlingit = (function(window, $, undefined){
     var response = responseFromJson(res);
 
     window.lindneo.nisga.destroyComponent(response.result.delete);
-
+    window.lindneo.tsimshian.componentDestroyed(response.result.delete);
   };
 
   var loadComponents = function( res ) {
