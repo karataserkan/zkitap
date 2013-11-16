@@ -342,3 +342,11 @@ node cowork.js
 node cowork.js 
 while :; do node cowork.js; sleep 1; done
 while :; do node cowork.js; sleep 1; done
+ls
+cd home/
+ls
+cd ahmet
+ls
+cd ..
+ls
+exit
