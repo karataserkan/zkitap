@@ -21,10 +21,14 @@ window.lindneo.tsimshian = (function(window, $, undefined){
   	this.socket.emit('newComponent', component);
   };
 
+  var changePage = function (pageId){
+    window.lindneo.tsimshian.socket.emit('changePage',pageId);
+  };
+
   var init = function (serverName){
 	  this.socket = io.connect("http://ugur.dev.lindneo.com:1881");
 	  this.socket.on('connection', function (data) {
-			 this.socket.emit('changePage','12');
+			 this.socket.emit('changePage',window.lindneo.currentPageId);
     
 
 			
@@ -43,6 +47,7 @@ window.lindneo.tsimshian = (function(window, $, undefined){
   }; 
 
   return {
+    changePage: changePage,
     componentCreated: componentCreated,
     myComponent: myComponent,
     serverName: serverName,
@@ -51,4 +56,3 @@ window.lindneo.tsimshian = (function(window, $, undefined){
 
 })( window, jQuery );
 
-window.lindneo.tsimshian.init(); 

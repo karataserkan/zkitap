@@ -27,6 +27,10 @@ window.lindneo.nisga = (function(window, $, undefined){
          // what can I do sometimes
     }
     
+  }; 
+
+  var destroyComponent = function ( component ) {
+    $('[id="'+component.id+'"]').parent().remove();
   };
 
   var deleteComponent = function ( component ) {
@@ -54,8 +58,10 @@ window.lindneo.nisga = (function(window, $, undefined){
 
   }
 
+
+
   var destroyChapter=function(chapter){
-    $(".chapter[chapter_id='"+chapter+"']").remove();
+    $(".chapter[chapter_id='"+chapter.id+"']").remove();
   }
 
   var imageComponentBuilder = function ( component ) {

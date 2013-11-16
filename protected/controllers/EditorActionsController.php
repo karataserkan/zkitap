@@ -454,6 +454,10 @@ class EditorActionsController extends Controller
 		return $this->response($response);
 	}
 
+	public function actionSearchOnBook($bookId,$searchTerm){
+		
+	}
+
 
 
 	public function actionExportBook($bookId=null){

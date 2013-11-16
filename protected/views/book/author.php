@@ -44,7 +44,9 @@ $current_page=Page::model()->findByPk($page->page_id);
 	
 	
 <script type="text/javascript">
-window.lindneo.currentPageId='<?php echo $current_page->page_id; ?>'
+window.lindneo.currentPageId='<?php echo $current_page->page_id; ?>';
+window.lindneo.tsimshian.init(); 
+window.lindneo.tsimshian.changePage(window.lindneo.currentPageId); 
 </script>
 	
 	
