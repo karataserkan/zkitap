@@ -1239,3 +1239,29 @@ Stack trace:
 REQUEST_URI=/index.php?attributes=%7B%22data%22%3A%7B%22id%22%3A%22yHayTEOWiW4pakM4iCcoJJ5t6JVycmSnp1J9DCtpp19O%22%2C%22type%22%3Anull%2C%22data%22%3A%7B%22id%22%3A%227HhqZWzBlZuBJZaWg9zS08nxKeOGX1C7SdWs7YshRYiu%22%2C%22type%22%3Anull%2C%22data%22%3A%7B%22id%22%3A%22CGZVIQPdV4af9kfzOBjVccGmjyp3xio68KXJ8Xyg6xzu%22%2C%22type%22%3Anull%2C%22data%22%3A%7B%22id%22%3A%22zs55DfQld7wvJVPryafO1CpCISo70lxmOJRN9U3y7K4m%22%2C%22type%22%3Anull%2C%22data%22%3A%7B%22id%22%3A%22VgxhpBH74xo0IzJyGL0vORtsbbNmMECqsobPOyPc0GG2%22%2C%22type%22%3Anull%2C%22data%22%3A%7B%22id%22%3A%22ZcVFgIUx4fE5woj7wvPdlPU19CgJT7VKnisgNO8d69uZ%22%2C%22type%22%3Anull%2C%22data%22%3A%7B%22id%22%3A%22PraWX5ndwawGzXJ2X3Meg4DbWM0xrUQWJyWCkvHDVwQw%22%2C%22type%22%3Anull%2C%22data%22%3A%7B%22id%22%3A%22QOreM0Xho7D2z4j3izmW42ANmSQzWcNaH9SSjfs5CUEi%22%2C%22type%22%3A%22text%22%2C%22data%22%3A%7B%22textarea%22%3A%7B%22css%22%3A%7B%22width%22%3A%22100%25%22%2C%22height%22%3A%22100%25%22%2C%22margin%22%3A%220%22%2C%22padding%22%3A%220px%22%2C%22border%22%3A%22none+0px%22%2C%22outline%22%3A%22none%22%7D%2C%22attr%22%3A%7B%22asd%22%3A%22coadsad%22%7D%2C%22val%22%3A%22some+text%22%7D%2C%22self%22%3A%7B%22css%22%3A%7B%22position%22%3A%22absolute%22%2C%22top%22%3A%22240px%22%2C%22left%22%3A%22149px%22%2C%22width%22%3A%22100px%22%2C%22height%22%3A%2220px%22%7D%7D%7D%2C%22created%22%3A%222013-11-15+15%3A21%3A18%22%2C%22page_id%22%3A%22jeHDWIyd7pWhC1hQHiyyvV1PTqR1fRMzpIwIyOLCF1wE%22%7D%2C%22created%22%3A%222013-11-15+15%3A21%3A19%22%2C%22page_id%22%3A%22jeHDWIyd7pWhC1hQHiyyvV1PTqR1fRMzpIwIyOLCF1wE%22%7D%2C%22created%22%3A%222013-11-15+15%3A21%3A19%22%2C%22page_id%22%3A%22jeHDWIyd7pWhC1hQHiyyvV1PTqR1fRMzpIwIyOLCF1wE%22%7D%2C%22created%22%3A%222013-11-15+15%3A21%3A19%22%2C%22page_id%22%3A%22jeHDWIyd7pWhC1hQHiyyvV1PTqR1fRMzpIwIyOLCF1wE%22%7D%2C%22created%22%3A%222013-11-15+15%3A21%3A20%22%2C%22page_id%22%3A%22jeHDWIyd7pWhC1hQHiyyvV1PTqR1fRMzpIwIyOLCF1wE%22%7D%2C%22created%22%3A%222013-11-15+15%3A21%3A21%22%2C%22page_id%22%3A%22jeHDWIyd7pWhC1hQHiyyvV1PTqR1fRMzpIwIyOLCF1wE%22%7D%2C%22created%22%3A%222013-11-15+15%3A21%3A24%22%2C%22page_id%22%3A%22jeHDWIyd7pWhC1hQHiyyvV1PTqR1fRMzpIwIyOLCF1wE%22%7D%2C%22created%22%3A%222013-11-15+15%3A21%3A27%22%2C%22page_id%22%3A%22jeHDWIyd7pWhC1hQHiyyvV1PTqR1fRMzpIwIyOLCF1wE%22%7D%7D&r=EditorActions%2FAddComponent
 HTTP_REFERER=http://ugur.dev.lindneo.com/index.php?r=book/author&bookId=9jOKjIdE59VAU6cPffyy3UheUE3XyHXxLqzxgKw5ELR0&page=jeHDWIyd7pWhC1hQHiyyvV1PTqR1fRMzpIwIyOLCF1wE
 ---
+2013/11/16 07:37:05 [error] [exception.CHttpException.400] exception 'CHttpException' with message 'Your request is invalid.' in /home/dump/yii_framework/framework/web/CController.php:336
+Stack trace:
+#0 /home/dump/yii_framework/framework/web/CController.php(309): CController->invalidActionParams(Object(CInlineAction))
+#1 /home/dump/yii_framework/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#2 /home/dump/yii_framework/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#3 /home/dump/yii_framework/framework/web/CWebApplication.php(282): CController->run('GetPageComponen...')
+#4 /home/dump/yii_framework/framework/web/CWebApplication.php(141): CWebApplication->runController('EditorActions/G...')
+#5 /home/dump/yii_framework/framework/base/CApplication.php(169): CWebApplication->processRequest()
+#6 /home/ugur/index.php(15): CApplication->run()
+#7 {main}
+REQUEST_URI=/index.php?r=EditorActions%2FGetPageComponents
+HTTP_REFERER=http://ugur.dev.lindneo.com/
+---
+2013/11/16 08:32:10 [error] [exception.CHttpException.400] exception 'CHttpException' with message 'Your request is invalid.' in /home/dump/yii_framework/framework/web/CController.php:336
+Stack trace:
+#0 /home/dump/yii_framework/framework/web/CController.php(309): CController->invalidActionParams(Object(CInlineAction))
+#1 /home/dump/yii_framework/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#2 /home/dump/yii_framework/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#3 /home/dump/yii_framework/framework/web/CWebApplication.php(282): CController->run('GetPageComponen...')
+#4 /home/dump/yii_framework/framework/web/CWebApplication.php(141): CWebApplication->runController('EditorActions/G...')
+#5 /home/dump/yii_framework/framework/base/CApplication.php(169): CWebApplication->processRequest()
+#6 /home/ugur/index.php(15): CApplication->run()
+#7 {main}
+REQUEST_URI=/index.php?r=EditorActions%2FGetPageComponents
+HTTP_REFERER=http://ugur.dev.lindneo.com/
+---

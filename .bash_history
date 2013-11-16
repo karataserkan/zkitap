@@ -342,3 +342,5 @@ node cowork.js
 node cowork.js 
 while :; do node cowork.js; sleep 1; done
 while :; do node cowork.js; sleep 1; done
+cd ../coworking/
+node cowork.js 
