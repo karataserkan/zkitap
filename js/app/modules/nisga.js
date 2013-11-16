@@ -30,7 +30,7 @@ window.lindneo.nisga = (function(window, $, undefined){
   }; 
 
   var destroyComponent = function ( componentId ) {
-    $('[id="'+componentId+'"]').parent().remove();
+    $('[id="'+componentId+'"]').remove();
   };
 
   var deleteComponent = function ( component ) {
@@ -61,8 +61,6 @@ window.lindneo.nisga = (function(window, $, undefined){
 
 
   var destroyChapter=function(chapter){
-
-
     $(".chapter[chapter_id='"+chapter+"']").remove();
   }; 
 
@@ -74,7 +72,8 @@ window.lindneo.nisga = (function(window, $, undefined){
   return {
     createComponent: createComponent,
     deleteComponent: deleteComponent,
-    destroyChapter: destroyChapter
+    destroyChapter: destroyChapter,
+    destroyComponent: destroyComponent
   };
 
 })( window, jQuery );
