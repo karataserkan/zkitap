@@ -31,7 +31,7 @@ window.lindneo.nisga = (function(window, $, undefined){
 
   var deleteComponent = function ( component ) {
     
-    window.lindneo.tlingit.componentHasDeleted( component );
+    window.lindneo.tlingit.componentHasDeleted( component.id );
 
   };
 
@@ -52,11 +52,11 @@ window.lindneo.nisga = (function(window, $, undefined){
       }
     });
 
-  }
+  };
 
   var destroyChapter=function(chapter){
     $(".chapter[chapter_id='"+chapter+"']").remove();
-  }
+  };
 
   var imageComponentBuilder = function ( component ) {
     console.log('image compnnent builder not implemented yet');

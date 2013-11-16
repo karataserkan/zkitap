@@ -36,6 +36,8 @@ $(document).ready(function(){
           
       });
 
+
+
       this.element.parent()
       .attr('component-instance', 'true')
       .draggable({
@@ -43,9 +45,25 @@ $(document).ready(function(){
           that._resizeDraggable( event, ui );
         }
       })
-      .mouseover(function(event){
-  
+      .mouseenter(function(event){
+        // add delete button
+        var deleteButton = $('<a id="delete-button-' +  that.options.component.id + '" href style="">delete</a>');
+        
+        deleteButton.click(function(e){
+          e.preventDefault();
+
+          window.lindneo.nisga.deleteComponent( that.options.component );
+
+        }).appendTo(event.currentTarget);
+
+      })
+      .mouseleave(function(event){
+        // remove delete button
+        var deleteButton = $('#delete-button-' + that.options.component.id);
+        deleteButton.remove();
+
       });
+
 
       var _data = this.options.component.data;
 

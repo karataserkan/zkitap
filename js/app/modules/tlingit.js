@@ -82,7 +82,7 @@ window.lindneo.tlingit = (function(window, $, undefined){
   var deleteArrivalResult = function ( res ) {
     var response = responseFromJson(res);
 
-    console.log(response);
+    window.lindneo.nisga.destroyComponent(response.result.delete);
 
   };
 
