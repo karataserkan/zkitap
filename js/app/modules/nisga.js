@@ -27,6 +27,10 @@ window.lindneo.nisga = (function(window, $, undefined){
          // what can I do sometimes
     }
     
+  }; 
+
+  var destroyComponent = function ( componentId ) {
+    $('[id="'+componentId+'"]').parent().remove();
   };
 
   var deleteComponent = function ( component ) {
@@ -54,9 +58,16 @@ window.lindneo.nisga = (function(window, $, undefined){
 
   };
 
+
+
   var destroyChapter=function(chapter){
+<<<<<<< HEAD
     $(".chapter[chapter_id='"+chapter+"']").remove();
   };
+=======
+    $(".chapter[chapter_id='"+chapter.id+"']").remove();
+  }
+>>>>>>> master
 
   var imageComponentBuilder = function ( component ) {
     console.log('image compnnent builder not implemented yet');

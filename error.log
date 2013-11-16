@@ -403,3 +403,5 @@
 [Fri Nov 15 14:14:48 2013] [error] [client 81.215.15.54] PHP Fatal error:  Cannot redeclare EditorActionsController::UpdateChapter() in /home/ugur/protected/controllers/EditorActionsController.php on line 425, referer: http://ugur.dev.lindneo.com/index.php?r=book/author&bookId=9jOKjIdE59VAU6cPffyy3UheUE3XyHXxLqzxgKw5ELR0&page=jeHDWIyd7pWhC1hQHiyyvV1PTqR1fRMzpIwIyOLCF1wE
 [Fri Nov 15 14:14:57 2013] [error] [client 81.215.15.54] PHP Fatal error:  Cannot redeclare EditorActionsController::UpdateChapter() in /home/ugur/protected/controllers/EditorActionsController.php on line 425, referer: http://ugur.dev.lindneo.com/index.php?r=book/author&bookId=9jOKjIdE59VAU6cPffyy3UheUE3XyHXxLqzxgKw5ELR0&page=jeHDWIyd7pWhC1hQHiyyvV1PTqR1fRMzpIwIyOLCF1wE
 [Fri Nov 15 14:19:08 2013] [error] [client 92.44.153.206] File does not exist: /home/ugur/favicon.ico
+[Sat Nov 16 07:37:05 2013] [error] [client 81.215.15.54] File does not exist: /home/ugur/favicon.ico
+[Sat Nov 16 08:32:10 2013] [error] [client 81.215.15.54] File does not exist: /home/ugur/favicon.ico
