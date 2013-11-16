@@ -19,6 +19,8 @@
 	<script src="<?php echo Yii::app()->request->baseUrl; ?>js/app/lindneo.js"></script>	
 
 	<script src="<?php echo Yii::app()->request->baseUrl; ?>js/app/modules/dataservice.js"></script>	
+	<script src="http://lindneo.com:1881/socket.io/socket.io.js"></script>
+	
 	<script src="<?php echo Yii::app()->request->baseUrl; ?>js/app/modules/tlingit.js"></script>
 	<script src="<?php echo Yii::app()->request->baseUrl; ?>js/app/modules/nisga.js"></script>
 	<script src="<?php echo Yii::app()->request->baseUrl; ?>js/app/modules/tsimshian.js"></script>

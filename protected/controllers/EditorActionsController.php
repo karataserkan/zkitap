@@ -422,7 +422,7 @@ class EditorActionsController extends Controller
 
 	}
 
-	public function UpdateChapter($pageId,$chapterId,$order){
+	public function UpdatePage($pageId,$chapterId,$order){
 		$page=Page::model()->findByPk($chapterId);
 		if (!$page) {
 			$this->error("EA-UPage","Page Not Found",func_get_args(),$pageId);
@@ -447,7 +447,7 @@ class EditorActionsController extends Controller
 
 		$response=false;
 
-		if($return=$this->UpdateChapter($pageId,$chapterId,$order) ){
+		if($return=$this->UpdatePage($pageId,$chapterId,$order) ){
 				$response['component']=$return; 
 		}
 
