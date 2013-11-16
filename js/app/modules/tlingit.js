@@ -11,9 +11,9 @@ window.lindneo = window.lindneo || {};
 window.lindneo.tlingit = (function(window, $, undefined){
 
   var componentHasCreated = function (component){
-
+ 
     //co-workers have created a new component, fuck them all.
-    
+     
     createComponent(component);
 
   };
