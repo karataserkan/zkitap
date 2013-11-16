@@ -1,2 +1,4 @@
 .ssh/
 .bash_history
+.*
+*.log
