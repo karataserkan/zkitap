@@ -29,8 +29,8 @@ window.lindneo.nisga = (function(window, $, undefined){
     
   }; 
 
-  var destroyComponent = function ( component ) {
-    $('[id="'+component.id+'"]').parent().remove();
+  var destroyComponent = function ( componentId ) {
+    $('[id="'+componentId+'"]').parent().remove();
   };
 
   var deleteComponent = function ( component ) {
