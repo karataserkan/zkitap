@@ -43,7 +43,7 @@ window.lindneo.tlingit = (function(window, $, undefined){
     } 
     
     window.lindneo.nisga.createComponent( response.result.component );
-    window.lindneo.tsimshian.componentCreated(response.result.component);
+    window.lindneo.tsimshian.componentCreated( response.result.component );
   };
 
   var componentHasUpdated = function ( component ) {
@@ -63,7 +63,7 @@ window.lindneo.tlingit = (function(window, $, undefined){
 
   var updateArrivalComponent = function(res) {
     var response = responseFromJson(res);
-    console.log(response.result);
+    //console.log(response.result);
     window.lindneo.tsimshian.componentDestroyed(response.result.component.id);
     window.lindneo.tsimshian.componentCreated(response.result.component);
   };

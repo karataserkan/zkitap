@@ -1,29 +1,3 @@
-ls
-clear
-ifconfig 
-ls
-git checkout infra 
-git add -A
-git commit 
-git push origin infra
-<<<<<<< HEAD
-ls
-ls -ltr
-=======
-sudo 
-sudo su
-exit
-clear
-git add -A
-git commit 
-git push origin infra 
-git push origin infra 
-ls
-sudo su
-cd
-ls
-git add -A
-git commit 
 git push origin infra
 su erkan
 su sudo
@@ -465,3 +439,62 @@ git commit -a
 git push origin infra
 git push origin infra1
 node /home/coworking/cowork.js 
+ls
+node
+ls -ltr
+ls -al
+cd .npm/
+ls -al
+cd ..
+cd /
+ls
+cd home/
+cd ugur/
+ls
+ls -al
+cd js
+cd ..
+cd ..
+cd home/
+cd ahmet
+ls
+cd js
+ls
+cd ..
+ls
+ cat < .bash_history 
+cd /home/
+cd ugur/
+ls -al
+cd ..
+ls
+cd coworking/
+ls
+node cowork.js 
+cat < cowork.js 
+exit
+git status
+vim .gitignore 
+git checkout .bash_history
+git status
+git status
+git add js/app/components/component.js
+git js/app/modules/nisga.js
+git add js/app/modules/nisga.js
+git status
+git commit
+git push origin JS
+git status
+git status
+git checkout js/app/components/component.js
+git checkout js/app/modules/tsimshian.js
+git status
+git pull origin master
+git status
+node cowork.js
+exit
+cd ..
+ls
+cd tubitak/
+ls
+exit
