@@ -66,7 +66,7 @@ window.lindneo.nisga = (function(window, $, undefined){
 
 
   var imageComponentBuilder = function ( component ) {
-    //console.log('image compnnent builder not implemented yet');
+    console.log('image compnnent builder not implemented yet');
   };
 
   var setBgColorOfSelectedComponent = function ( componentId ){
