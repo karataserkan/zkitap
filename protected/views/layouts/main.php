@@ -16,6 +16,7 @@
 	<script src="<?php echo Yii::app()->request->baseUrl; ?>js/lib/jquery-1.9.1.js"></script>
 	<script src="<?php echo Yii::app()->request->baseUrl; ?>js/lib/jquery-ui-1.10.3.custom.js"></script>
 
+	
 	<script src="<?php echo Yii::app()->request->baseUrl; ?>js/app/lindneo.js"></script>	
 
 	<script src="<?php echo Yii::app()->request->baseUrl; ?>js/app/modules/dataservice.js"></script>	

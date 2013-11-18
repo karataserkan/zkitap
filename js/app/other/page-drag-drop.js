@@ -4,10 +4,12 @@ $( document ).ready(function () {
 
     $( ".component" ).draggable({
      // helper: "clone",
-      revert: "valid"
+      revert: "valid",
+      snap: true,
     });
 
 		$('#current_page').droppable({
+      tolerance: 'fit',
       drop: function (event, ui) {
 			  //create a component object from dom object
 			  //pass it to tlingit        
@@ -27,7 +29,8 @@ $( document ).ready(function () {
                 'margin': '0',
                 'padding': '0px',
                 'border': 'none 0px',
-                'outline': 'none'
+                'outline': 'none',
+                'background-color': 'transparent'
               } , 
               'attr': {
                 'asd': 'coadsad'
@@ -40,7 +43,9 @@ $( document ).ready(function () {
                 'top': (ui.offset.top-$(event.target).offset().top ) + 'px',
                 'left':  ( ui.offset.left-$(event.target).offset().left ) + 'px',
                 'width': '100px',
-                'height': '20px'
+                'height': '20px',
+                'background-color': 'transparent',
+                'overflow': 'visible'
               }
             }
           }
@@ -48,6 +53,8 @@ $( document ).ready(function () {
 
 		    window.lindneo.tlingit.componentHasCreated(component);
 	 	  }
+      ,
+      accept:'.component'
     
     });
     
