@@ -34,7 +34,7 @@ window.lindneo.nisga = (function(window, $, undefined){
   };
 
   var deleteComponent = function ( component ) {
-    
+
     window.lindneo.tlingit.componentHasDeleted( component.id );
 
   };
@@ -61,21 +61,27 @@ window.lindneo.nisga = (function(window, $, undefined){
 
 
   var destroyChapter=function(chapter){
-
-
     $(".chapter[chapter_id='"+chapter+"']").remove();
   }; 
 
 
   var imageComponentBuilder = function ( component ) {
-    console.log('image compnnent builder not implemented yet');
+    //console.log('image compnnent builder not implemented yet');
+  };
+
+  var setBgColorOfSelectedComponent = function ( componentId ){
+    $('[id="' + componentId + '"]').css({
+      'border': '1px solid #ccc',
+      'border-color': '#FF0000'
+    });
   };
 
   return {
     createComponent: createComponent,
     deleteComponent: deleteComponent,
     destroyChapter: destroyChapter,
-    destroyComponent: destroyComponent
+    destroyComponent: destroyComponent,
+    setBgColorOfSelectedComponent: setBgColorOfSelectedComponent
   };
 
 })( window, jQuery );
