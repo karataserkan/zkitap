@@ -14,14 +14,14 @@ window.lindneo.tsimshian = (function(window, $, undefined){
     return "http://ugur.dev.lindneo.com:1881";
   }; 
 
--
+
   var componentCreated = function (component) {    
 
   	window.lindneo.tsimshian.myComponent = component.id;
   	//console.log('Sending');
   	//console.log(window.lindneo.tsimshian.myComponent);
   	this.socket.emit('newComponent', component);
--
+
   };
 
 
@@ -55,8 +55,7 @@ window.lindneo.tsimshian = (function(window, $, undefined){
     });
   
          
-   
-   });
+  
        this.socket.on('newComponent', function(component){
           console.log(component.id) ;
           console.log(window.lindneo.tsimshian.myComponent) ;
