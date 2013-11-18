@@ -1,106 +1,3 @@
-ls
-clear
-ifconfig 
-ls
-git checkout infra 
-git add -A
-git commit 
-git push origin infra
-<<<<<<< HEAD
-ls
-ls -ltr
-=======
-sudo 
-sudo su
-exit
-clear
-git add -A
-git commit 
-git push origin infra 
-git push origin infra 
-ls
-sudo su
-cd
-ls
-git add -A
-git commit 
-git push origin infra
-su erkan
-su sudo
-sudo su
-sudo su
-ls
-clear
-sudo su
-sudo su
-cd 
-cd 
-cd js/
-ls
-ls -ltr
-cd..
-ls
-cd ..
-ls
-sudo su
-cd ../ahmet/
-ls
-ls -ltr
-clear
-sudo su
-clear
-sudo su
-cat  /tmp/S6FRdT/mimetype 
-ls /tmp/mEWUqN
-ls /tmp/mEWUqN
-sudo apt-get install php5-gd
-ls /tmp/Q3oXyF
-ls /tmp/Q3oXyF
-cp /home/ugur/protected/utilities/epub3/cover.jpg /tmp/pNb2N7/cover.jpg
-cp /home/ugur/protected/utilities/epub3/cover.jpg /tmp/pNb2N7/cover.jpg
-cp /home/ugur/protected/utilities/epub3/cover.jpg /tmp/pNb2N7
-cp /home/ugur/protected/utilities/epub3/cover.jpg /tmp/pNb2N7/
-touch /tmp/pNb2N7/cover.jpg
-ls /tmp/pNb2N7/
-ls
-cd
-ls
-git add -A
-git commit 
-git push origin infra 
->>>>>>> 6db3768885b48dfd2c2834c63202387ee6b946e6
-tar -cf ugur *
-ls
-git remote set-url origin ssh://81.215.15.54/git/squid-pacific.git
-git add .
-git commit 
-cat .ssh/id_rsa.pub 
-git push origin infra 
-git remote set-url origin ssh://git@81.215.15.54/git/squid-pacific.git
-git push origin infra 
-ls
-ls
-ls
-ls
-ls
-clear
-ls
-ls
-ls
-ls
-cd css/
-ls
-ls -ltr
-chown ugur:www-data cover.jpg 
-sudo chown ugur:www-data cover.jpg 
-sudo chown ugur:www-data cover.jpg 
-ls -ltr
-chmod 774 cover.jpg 
-ls  /tmp/CpFn6Y
-ls  /tmp/LeCJ56/book
-ls
-ls
-clear
 ls  /tmp/LeCJ56/book
 ls  /tmp/LeCJ56/
 ls /tmp/3ysLDR/book/
@@ -465,3 +362,139 @@ git commit -a
 git push origin infra
 git push origin infra1
 node /home/coworking/cowork.js 
+node /home/coworking/cowork.js 
+node /home/coworking/cowork.js 
+git add .
+git commit -a
+git push origin master
+git push origin infra5
+git checkout -b infra5
+git checkout infra5
+git add .
+git commit -a
+git push origin infra5
+node /home/coworking/cowork.js 
+clear
+node /home/coworking/cowork.js 
+nohup node /home/coworking/cowork.js  > output.log &
+ps -ef | grep cowork.js
+ps -ef | grep cowork.js | grep -v grep
+ps -ef | grep cowork.js | grep -v grep | awk 'print { #2}'
+ps -ef | grep cowork.js | grep -v grep | awk 'print { $2}'
+ps -ef | grep cowork.js | grep -v grep | awk 'print { $2}'
+ps -ef | grep cowork.js | grep -v grep | awk '{print  $2}'
+cd ..
+ls
+cd coworking/
+ps aux
+ps aux | grep -i cowork.js
+ps aux | grep -i cowork.js
+ps aux | grep -i cowork
+which node
+which tail
+chmod +x cowork_service.sh 
+./cowork_service.sh stop
+which ps
+which grep
+which awk
+which pkill
+which nohup
+./cowork_service.sh stop
+./cowork_service.sh stop
+./cowork_service.sh stop
+./cowork_service.sh stop
+./cowork_service.sh stop
+which echo
+./cowork_service.sh stop
+./cowork_service.sh start
+sudo ln -s cowork_service.sh /etc/init.d/cowork
+sudo service cowork stop
+sudo service cowork start
+sudo service cowork start
+sudo chmod +x /etc/init.d/cowork
+ls -ltr
+chmod +x cowor_serive.sh
+chmod +x cowork_serive.sh
+chmod +x cowork_service.sh 
+sudo service cowork start
+ls
+clear
+cd ../coworking/
+mv cowork_service.sh service.sh
+ls
+sudo service stop
+sudo ./service.sh stop
+sudo ./service.sh start
+sudo ./service.sh start
+sudo ./service.sh start
+sudo ./service.sh start
+sudo ./service.sh start
+sudo ./service.sh stop
+sudo ./service.sh start
+sudo ./service.sh status
+sudo ./service.sh status
+sudo ./service.sh logs
+sudo ./service.sh status
+sudo ./service.sh logs
+sudo ./service.sh start
+sudo ./service.sh stop
+sudo ./service.sh stop
+sudo ./service.sh stop
+sudo ./service.sh stop
+sudo ./service.sh stop
+sudo ./service.sh stop
+sudo ./service.sh stop
+sudo ./service.sh start
+sudo ./service.sh start
+ps -ef | grep cowork.js | grep -v grep | awk '{print  $2}'
+ps -ef | grep cowork.js | grep -v grep | awk '{print  $2}'
+ps -ef | grep cowork.js 
+pkill 4919
+pkill 4919
+pkill 4919
+pkill 4919
+pkill 4919
+ps -ef | grep cowork.js 
+ps -ef | grep cowork.js 
+ps -ef | grep cowork.js 
+pkill 4919
+pkill -9 4919
+pkill -9 4919
+pkill 4919
+pkill -9 4919
+ls
+ps -ef | grep cowork.js 
+pkill -9 1
+pkill top
+top
+ls
+ls -ltr
+ps -ef 
+pkill -9 node
+pkill -9 node
+ps -ef 
+
+sudo ./service.sh start
+sudo ./service.sh status
+ps -ef | grep cowork.js 
+sudo ./service.sh start
+sudo ./service.sh status
+sudo ./service.sh stop
+sudo ./service.sh stop
+sudo ./service.sh star
+ps -ef | grep cowork.js 
+sudo pkill 6855
+ps -ef | grep cowork.js 
+pkill node
+sudo pkill node
+ps -ef | grep cowork.js 
+sudo ./service.sh start
+sudo ./service.sh stop
+which kill
+sudo ./service.sh stop
+sudo ./service.sh stop
+sudo ./service.sh start
+sudo ./service.sh start
+sudo ./service.sh start
+sudo ./service.sh start
+sudo ./service.sh start

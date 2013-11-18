@@ -48,8 +48,10 @@ window.lindneo.tsimshian = (function(window, $, undefined){
 	    	if(window.lindneo.tsimshian.myComponent!=component.id ){
 	    		console.log('Its new');
 	    		window.lindneo.nisga.createComponent(component);
-	    	} else
-	    		console.log('I had sent it');
+	    	} else {
+          window.lindneo.tsimshian.myComponent='';
+          console.log('I had sent it');
+        }
 	     } );
 
  
@@ -59,8 +61,9 @@ window.lindneo.tsimshian = (function(window, $, undefined){
         if(window.lindneo.tsimshian.myComponent!=componentId ){
           console.log('Its new');
           window.lindneo.nisga.destroyComponent(componentId);
-        } else
+        } else {
           console.log('I had sent it');
+        }
        } );
   }; 
 
