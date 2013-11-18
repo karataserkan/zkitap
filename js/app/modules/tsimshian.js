@@ -14,11 +14,13 @@ window.lindneo.tsimshian = (function(window, $, undefined){
     return "http://ugur.dev.lindneo.com:1881";
   }; 
 
+ 
+
   var componentCreated = function (component) {
-  	window.lindneo.tsimshian.myComponent=component.id;
-  	console.log('Sending');
-  	console.log(window.lindneo.tsimshian.myComponent);
-  	this.socket.emit('newComponent', component);
+    window.lindneo.tsimshian.myComponent=component.id;
+    console.log('Sending');
+    console.log(window.lindneo.tsimshian.myComponent);
+    this.socket.emit('newComponent', component);
   };
 
 
@@ -33,26 +35,26 @@ window.lindneo.tsimshian = (function(window, $, undefined){
   };
 
   var init = function (serverName){
-	  this.socket = io.connect("http://ugur.dev.lindneo.com:1881");
-	  this.socket.on('connection', function (data) {
-			 this.socket.emit('changePage',window.lindneo.currentPageId);
+    this.socket = io.connect("http://ugur.dev.lindneo.com:1881");
+    this.socket.on('connection', function (data) {
+       this.socket.emit('changePage',window.lindneo.currentPageId);
     
 
-			
-		     
-	 
-	 });
-	     this.socket.on('newComponent', function(component){
-	        console.log(component.id) ;
-	        console.log(window.lindneo.tsimshian.myComponent) ;
-	    	if(window.lindneo.tsimshian.myComponent!=component.id ){
-	    		console.log('Its new');
-	    		window.lindneo.nisga.createComponent(component);
-	    	} else {
+      
+         
+   
+   });
+       this.socket.on('newComponent', function(component){
+          console.log(component.id) ;
+          console.log(window.lindneo.tsimshian.myComponent) ;
+        if(window.lindneo.tsimshian.myComponent!=component.id ){
+          console.log('Its new');
+          window.lindneo.nisga.createComponent(component);
+        } else {
           window.lindneo.tsimshian.myComponent='';
           console.log('I had sent it');
         }
-	     } );
+       } );
 
  
        this.socket.on('destroyComponent', function(componentId){
