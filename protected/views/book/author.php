@@ -38,14 +38,21 @@ if($page==null)
  
 $current_chapter=Chapter::model()->findByPk($page->chapter_id);
 $current_page=Page::model()->findByPk($page->page_id);
-  
+$current_user=User::model()->findByPk(Yii::app()->user->id);
+
 ?>
 	
 	
 	
 <script type="text/javascript">
 window.lindneo.currentPageId='<?php echo $current_page->page_id; ?>';
+window.lindneo.user={};
+window.lindneo.user.username='<?php echo Yii::app()->user->name; ?>';
+window.lindneo.user.name='<?php echo $current_user->name . " ". $current_user->surname; ?>';
+
+
 window.lindneo.tsimshian.init(); 
+
 window.lindneo.tsimshian.changePage(window.lindneo.currentPageId); 
 </script>
 	

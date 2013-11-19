@@ -21,8 +21,9 @@ $( document ).ready(function () {
       if ( $('#pop-image-popup').length ){
         $('#pop-image-popup').remove();  
       }
-    });
     
+    });
+
     var el = document.getElementById("dummy-dropzone");
     var imageBinary = '';
 
@@ -65,7 +66,8 @@ $( document ).ready(function () {
                 'margin': '0',
                 'padding': '0px',
                 'border': 'none 0px',
-                'outline': 'none'
+                'outline': 'none',
+                'background-color': 'transparent'
               } , 
               'src': imageBinary
             },
@@ -75,7 +77,11 @@ $( document ).ready(function () {
                 'top': (ui.offset.top-$(event.target).offset().top ) + 'px',
                 'left':  ( ui.offset.left-$(event.target).offset().left ) + 'px',
                 'width': '200px',
-                'height': '100px'
+                'height': '100px',
+                'width': '100px',
+                'height': '20px',
+                'background-color': 'transparent',
+                'overflow': 'visible'
               }
             }
           }
@@ -130,10 +136,12 @@ $( document ).ready(function () {
 
     $( ".component" ).draggable({
      // helper: "clone",
-      revert: "valid"
+      revert: "valid",
+      snap: true
     });
 
 		$('#current_page').droppable({
+      tolerance: 'fit',
       drop: function (event, ui) {
 			  //create a component object from dom object
 			  //pass it to tlingit        
@@ -157,6 +165,8 @@ $( document ).ready(function () {
         }
 
 	 	  }
+      ,
+      accept:'.component'
     
     });
     
