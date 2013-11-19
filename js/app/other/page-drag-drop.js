@@ -81,7 +81,7 @@ $( document ).ready(function () {
           }
         };
 
-        //window.lindneo.tlingit.componentHasCreated( component );
+        window.lindneo.tlingit.componentHasCreated( component );
       };
 
       reader.readAsDataURL( e.dataTransfer.files[0] );
