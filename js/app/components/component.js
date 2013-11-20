@@ -12,7 +12,9 @@ $(document).ready(function(){
       .attr('id', this.options.component.id)
       .attr('component-instance', 'true')
       .resizable({
+        containment: "#current_page",
         'stop': function( event, ui ){
+
           that._resize(event, ui);
         }
       })

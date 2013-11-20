@@ -663,6 +663,14 @@ padding:5px;
  position:absolute;
 }
 
+#chapters_pages_view .page.current_page {
+	border-color: red!important;
+}
+
+#chapters_pages_view .page.current_page .page-number {
+	background: red!important;
+}
+
 
 .chapter-title{
 border-top:1px solid #bbb !important;

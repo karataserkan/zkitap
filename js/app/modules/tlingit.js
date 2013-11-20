@@ -100,6 +100,10 @@ window.lindneo.tlingit = (function(window, $, undefined){
       window.lindneo.nisga.createComponent( val );
     });
 
+    if (window.lindneo.highlightComponent!=''){
+      $('#'+window.lindneo.highlightComponent).parent().css('border','1px solid red');
+    }
+
   };
 
   var componentToJson = function (component){
@@ -133,6 +137,29 @@ window.lindneo.tlingit = (function(window, $, undefined){
 
   var snycCoworkers = function (action,jsonComponent) {
     //Socket API for Co-Working
+  };
+
+
+  var PageUpdated = function (pageId, chapterId, order){
+    window.lindneo.dataservice
+    .send( 'UpdatePage', 
+      { 
+        'pageId' : pageId,
+        'chapterId' : chapterId,
+        'order' : order
+      },
+      UpdatePage,
+      function(err){
+        console.log('error:' + err);
+    });
+  
+  };
+
+  var UpdatePage =function(response){
+    var response = responseFromJson(response);
+    //pass to nisga new chapter
+    console.log(response);
+
   };
 
   var ChapterUpdated = function (chapterId, title, order){
@@ -206,6 +233,8 @@ window.lindneo.tlingit = (function(window, $, undefined){
 
 
   return {
+    UpdatePage: UpdatePage,
+    PageUpdated: PageUpdated,
     createComponent: createComponent,
     componentHasCreated: componentHasCreated,
     componentHasUpdated: componentHasUpdated,

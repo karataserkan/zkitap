@@ -1,5 +1,15 @@
 <?php
 class functions {  
+
+    function ufalt($text) {
+        $search = array("Ç", "İ", "I", "Ğ", "Ö", "Ş", "Ü");
+        $replace = array("ç", "i", "ı", "ğ", "ö", "ş", "ü");
+        $text = str_replace($search, $replace, $text);
+        $text = strtolower($text);
+        return $text;
+    }
+
+
     public static function get_random_string($length=44,$valid_chars="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789")
     {
         // start with an empty random string
