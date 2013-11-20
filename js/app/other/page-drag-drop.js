@@ -1,80 +1,8 @@
 $( document ).ready(function () {
-<<<<<<< HEAD
-    var termTemplate = "<span class='ui-autocomplete-term'>%s</span>";
-	function first_time(){
 
-    $('#search').autocomplete({
-      appendTo: "#page" ,
-      minLength: 2, 
-      source: function( request, response ) {
-              $.ajax({
-                url: "http://ugur.dev.lindneo.com/index.php?r=EditorActions/SearchOnBook",
-                dataType: "json",
-                data: {
-                  currentPageId: window.lindneo.currentPageId,
-                  searchTerm:request.term 
-                },
-                success: function( data ) {
-                  if (data.result==null) return;
-                 
-                  response( $.map( 
-                    data.result.components, function( item ) {
-                      // console.log(item.search);
-                      var result={
-                        label: item.search.similar_result,
-                        value: item.id
-                      };
-                      
-                      return result;
-                    })
-                  );
-                }
-              });
-            },
-      select: function( event, ui ) {
-          if (ui.item) {
-            $('#searchform').submit();
-          }
+  var termTemplate = "<span class='ui-autocomplete-term'>%s</span>";
+	
 
-          
-        },   
-
-        open: function(e,ui) {
-            var
-                acData = $(this).data('uiAutocomplete');
-    
-              
-
-                
-            acData
-                .menu
-                .element
-                .find('a')
-                .each(function() {
-                    var me = $(this);
-                    var str = me.text() ;
-                    var patt1 = new RegExp(acData.term,'i');
-
-                    var result = str.match(patt1);
-                    var styledTerm = termTemplate.replace('%s', result);
-                    console.log(result);
-                    console.log(str);
-                    console.log(acData.term);
-                    me.html( me.text().replace(result, styledTerm) );
-                });
-        }
-
-
-
-      });
-
-
-
-    $( ".component" ).draggable({
-     // helper: "clone",
-      revert: "valid",
-      snap: true,
-=======
 
 
   var createImageComponent = function ( event, ui ) {
@@ -97,8 +25,7 @@ $( document ).ready(function () {
       if ( $('#pop-image-popup').length ){
         $('#pop-image-popup').remove();  
       }
-    
->>>>>>> fa65898e80c322800cd4844f3b69e5ff10c7909f
+
     });
 
     var el = document.getElementById("dummy-dropzone");
@@ -209,13 +136,82 @@ $( document ).ready(function () {
     window.lindneo.tlingit.componentHasCreated(component);
   };
 
-	function first_time(){
+
+function first_time(){
+
+    $('#search').autocomplete({
+      appendTo: "#page" ,
+      minLength: 2, 
+      source: function( request, response ) {
+              $.ajax({
+                url: "http://ugur.dev.lindneo.com/index.php?r=EditorActions/SearchOnBook",
+                dataType: "json",
+                data: {
+                  currentPageId: window.lindneo.currentPageId,
+                  searchTerm:request.term 
+                },
+                success: function( data ) {
+                  if (data.result==null) return;
+                 
+                  response( $.map( 
+                    data.result.components, function( item ) {
+                      // console.log(item.search);
+                      var result={
+                        label: item.search.similar_result,
+                        value: item.id
+                      };
+                      
+                      return result;
+                    })
+                  );
+                }
+              });
+            },
+      select: function( event, ui ) {
+          if (ui.item) {
+            $('#searchform').submit();
+          }
+
+          
+        },   
+
+        open: function(e,ui) {
+            var
+                acData = $(this).data('uiAutocomplete');
+    
+              
+
+                
+            acData
+                .menu
+                .element
+                .find('a')
+                .each(function() {
+                    var me = $(this);
+                    var str = me.text() ;
+                    var patt1 = new RegExp(acData.term,'i');
+
+                    var result = str.match(patt1);
+                    var styledTerm = termTemplate.replace('%s', result);
+                    console.log(result);
+                    console.log(str);
+                    console.log(acData.term);
+                    me.html( me.text().replace(result, styledTerm) );
+                });
+        }
+
+
+
+      });
+
+
 
     $( ".component" ).draggable({
      // helper: "clone",
       revert: "valid",
       snap: true
     });
+
 
 		$('#current_page').droppable({
       tolerance: 'fit',
@@ -267,15 +263,12 @@ $( document ).ready(function () {
 
     $('.delete-page').click(function(){
       var page_id=$(this).parent().attr('page_id');
-<<<<<<< HEAD
+
       window.lindneo.tlingit.PageHasDeleted( page_id );
 
       $('.page[page_id="'+page_id+'"]').hide('slow', function(){  $('.page[page_id="'+page_id+'"]').remove();});
       sortPages();
 
-=======
-          window.lindneo.tlingit.PageHasDeleted( page_id );
->>>>>>> fa65898e80c322800cd4844f3b69e5ff10c7909f
     });
 
     $('#chapters_pages_view').sortable({
@@ -287,16 +280,12 @@ $( document ).ready(function () {
 
 
 
-    $('.pages').sortable({ connectWith: '.pages' , stop: function( event,ui){
-      sortPages();
-      console.log(event.toElement);
-      console.log('page_id: ' +$(event.toElement).attr('page_id'));
-      console.log('new Chapter_id: ' +$(event.toElement).parent().parent().attr('chapter_id'));
-      console.log('new order: ' +$(event.toElement).index());
-      console.log(ui);
-
-
-    }  });
+    $('.pages').sortable({ 
+      connectWith: '.pages' , 
+      stop: function( event,ui){
+        sortPages();
+      }  
+    });
 
 	 	$('#zoom-pane').slider({
 	    value:100,
