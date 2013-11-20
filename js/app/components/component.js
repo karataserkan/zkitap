@@ -141,6 +141,14 @@ $(document).ready(function(){
       this.element.css({
         'border': 'none'
       });
+    },
+
+    field: function(key, value) {
+      
+      if( value === undefined ) {
+        return this.options.component[key];
+      }
+
     }
 
   });

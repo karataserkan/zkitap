@@ -64,8 +64,7 @@ window.lindneo.tsimshian = (function(window, $, undefined){
 
     });
   
-         
-   
+        
   
        this.socket.on('newComponent', function(component){
           console.log(component.id) ;

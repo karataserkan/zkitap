@@ -66,7 +66,22 @@ window.lindneo.nisga = (function(window, $, undefined){
 
 
   var imageComponentBuilder = function ( component ) {
-    //console.log('image compnnent builder not implemented yet');
+    
+    var element = $('<img></img>');
+
+    element
+    .appendTo( page_div_selector )
+    .imageComponent({
+      'component': component,
+      'update': function ( event, component ) {
+        window.lindneo.tlingit.componentHasUpdated( component );
+      },
+      'selected': function (event, element) {
+        window.lindneo.currentComponentWidget = element;
+        window.lindneo.toolbox.refresh( element );
+      }
+    });
+
   };
 
   var setBgColorOfSelectedComponent = function ( componentId ,activeUser){

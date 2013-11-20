@@ -1,4 +1,5 @@
 $( document ).ready(function () {
+<<<<<<< HEAD
     var termTemplate = "<span class='ui-autocomplete-term'>%s</span>";
 	function first_time(){
 
@@ -73,23 +74,69 @@ $( document ).ready(function () {
      // helper: "clone",
       revert: "valid",
       snap: true,
+=======
+
+
+  var createImageComponent = function ( event, ui ) {
+
+    $("<div class='popup ui-draggable' id='pop-image-popup' style='display: block; top:" + (ui.offset.top-$(event.target).offset().top ) + "px; left: " + ( ui.offset.left-$(event.target).offset().left ) + "px;'> \
+    <div class='popup-header'> \
+    Görsel Ekle \
+    <div class='popup-close' id='image-add-dummy-close-button'>x</div> \
+    </div> \
+      <div class='gallery-inner-holder'> \
+        <div style='clear:both'></div> \
+        <div class='add-image-drag-area' id='dummy-dropzone'> </div> \
+      </div> \
+    </div>").appendTo('body');
+
+    $('#image-add-dummy-close-button').click(function(){
+
+      $('#pop-image-popup').remove();  
+
+      if ( $('#pop-image-popup').length ){
+        $('#pop-image-popup').remove();  
+      }
+    
+>>>>>>> fa65898e80c322800cd4844f3b69e5ff10c7909f
     });
 
-		$('#current_page').droppable({
-      tolerance: 'fit',
-      drop: function (event, ui) {
-			  //create a component object from dom object
-			  //pass it to tlingit        
+    var el = document.getElementById("dummy-dropzone");
+    var imageBinary = '';
 
+    el.addEventListener("dragenter", function(e){
+      e.stopPropagation();
+      e.preventDefault();
+    }, false);
 
-        if( $(event.toElement).attr('component-instance') ){
-          return;
-        }
+    el.addEventListener("dragexit", function(e){
+      e.stopPropagation();
+      e.preventDefault();
+    },false);
 
-        var component = { 
-          'type' : $(event.toElement).attr('ctype'),
+    el.addEventListener("dragover", function(e){
+      e.stopPropagation();
+      e.preventDefault();
+    }, false);
+
+    el.addEventListener("drop", function(e){
+      
+      e.stopPropagation();
+      e.preventDefault();
+
+      var reader = new FileReader();
+      var component = {};
+
+      reader.onload = function (evt) {
+
+        imageBinary = evt.target.result;        
+        
+        $("#image-add-dummy-close-button").trigger('click');
+
+        component = {
+          'type' : 'image',
           'data': {
-            'textarea':{
+            'img':{
               'css' : {
                 'width':'100%',
                 'height':'100%',
@@ -99,16 +146,15 @@ $( document ).ready(function () {
                 'outline': 'none',
                 'background-color': 'transparent'
               } , 
-              'attr': {
-                'asd': 'coadsad'
-              },
-              'val': 'some text'
+              'src': imageBinary
             },
             'self': {
               'css': {
                 'position':'absolute',
                 'top': (ui.offset.top-$(event.target).offset().top ) + 'px',
                 'left':  ( ui.offset.left-$(event.target).offset().left ) + 'px',
+                'width': '200px',
+                'height': '100px',
                 'width': '100px',
                 'height': '20px',
                 'background-color': 'transparent',
@@ -118,7 +164,83 @@ $( document ).ready(function () {
           }
         };
 
-		    window.lindneo.tlingit.componentHasCreated(component);
+        window.lindneo.tlingit.componentHasCreated( component );
+      };
+
+      reader.readAsDataURL( e.dataTransfer.files[0] );
+
+    }, false);
+
+  };
+
+
+
+  var createTextComponent = function ( event, ui ) {
+
+    var component = {
+      'type' : 'text',
+      'data': {
+        'textarea':{
+          'css' : {
+            'width':'100%',
+            'height':'100%',
+            'margin': '0',
+            'padding': '0px',
+            'border': 'none 0px',
+            'outline': 'none'
+          } , 
+          'attr': {
+            'asd': 'coadsad'
+          },
+          'val': 'some text'
+        },
+        'self': {
+          'css': {
+            'position':'absolute',
+            'top': (ui.offset.top-$(event.target).offset().top ) + 'px',
+            'left':  ( ui.offset.left-$(event.target).offset().left ) + 'px',
+            'width': '100px',
+            'height': '20px'
+          }
+        }
+      }
+    };
+
+    window.lindneo.tlingit.componentHasCreated(component);
+  };
+
+	function first_time(){
+
+    $( ".component" ).draggable({
+     // helper: "clone",
+      revert: "valid",
+      snap: true
+    });
+
+		$('#current_page').droppable({
+      tolerance: 'fit',
+      drop: function (event, ui) {
+			  //create a component object from dom object
+			  //pass it to tlingit        
+
+        if( $(event.toElement).attr('component-instance') ){
+          return;
+        }
+
+        switch( $(event.toElement).attr('ctype') ) {
+
+          case 'text':
+            createTextComponent( event, ui );
+            break;
+
+          case 'image':
+            createImageComponent( event, ui );
+            break;
+
+          default:
+
+        }
+
 	 	  }
       ,
       accept:'.component'
@@ -145,11 +267,15 @@ $( document ).ready(function () {
 
     $('.delete-page').click(function(){
       var page_id=$(this).parent().attr('page_id');
+<<<<<<< HEAD
       window.lindneo.tlingit.PageHasDeleted( page_id );
 
       $('.page[page_id="'+page_id+'"]').hide('slow', function(){  $('.page[page_id="'+page_id+'"]').remove();});
       sortPages();
 
+=======
+          window.lindneo.tlingit.PageHasDeleted( page_id );
+>>>>>>> fa65898e80c322800cd4844f3b69e5ff10c7909f
     });
 
     $('#chapters_pages_view').sortable({
