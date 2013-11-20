@@ -85,6 +85,7 @@ class BookController extends Controller
 				$this->redirect(array('author','bookId'=>$model->book_id));
 		}
 
+
 		$model->workspace_id=$workspace;
 		$this->render('create',array(
 			'model'=>$model,

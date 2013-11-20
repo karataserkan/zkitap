@@ -385,7 +385,7 @@ Video Ekle
 <div class='chapter' chapter_id='<?php echo $chapter->chapter_id; ?>'>
 <input type="text" class="chapter-title" placeholder="chapter title" value="<?php echo $chapter->title; ?>">
 <a class="btn red white size-15 radius icon-delete page-chapter-delete  delete-chapter hidden-delete" style="float: right; margin-top: -23px;"></a>
- <!-- <?php echo $chapter->title; ?>  chapter title-->
+ <!-- <?php echo $chapter->title; ?>  chapter title--> 
 					<ul class="pages" >
 							<?php
 							

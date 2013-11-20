@@ -12,6 +12,8 @@
  * @property string $publish_time
  * @property string $data
  */
+
+
 class Book extends CActiveRecord
 {
 	/**
