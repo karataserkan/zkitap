@@ -129,14 +129,25 @@ background-color: #97a9a9;
 clear:both;
 
 }
-.float-lef{
+.float-left{
 float:left;
+}
+.float-right{
+float:right;
 }
 
 /*genel */
 
 /* toolbox items  */
-
+.text-options{
+ display:inline-block;
+}
+.image-options{
+ display:inline-block;
+}
+.shape-options{
+ display:inline-block;
+}
 
 .toolbox-items{
 width:35px;
@@ -482,7 +493,7 @@ ul.component_holder li {
 	left:1000px;
 	text-align:center;
 	height:auto;
-	min-height:100px;
+	min-height:50px;
 	margin:10px;
 	padding-bottom:20px;
 	z-index:99999;
@@ -602,6 +613,58 @@ background-color: #E6E7E8;
 -moz-border-radius: 5px;
 border-radius: 5px;
 }
+
+.pie-chart-textbox{
+width: 60px;
+height: 30px;
+background-color: #e5e5e4;
+border: 0;
+padding-left: 10px;
+margin:10px;
+}
+
+.pie-chart-textbox-wide{
+width: 120px;
+height: 30px;
+background-color: #e5e5e4;
+border: 0;
+padding-left: 10px;
+margin:5px 10px;
+}
+
+.pie-chart-slice-holder{
+text-align:left;
+margin-bottom:20px;
+border-bottom: 1px solid #d1d2d4;
+
+
+}
+/*quiz popups*/
+.popup-text-area{
+max-width:280px; 
+min-width:280px; 
+max-height:500px; 
+min-height:100px;
+border:none;
+background-color: #e5e5e4;
+
+}
+
+.popup-choices-area{
+max-width:280px; 
+min-width:280px; 
+max-height:150px; 
+min-height:50px;
+border:none;
+background-color: #e5e5e4;
+}
+.quiz-inner{
+text-align:left;
+
+}
+
+/*quiz popups*/
+
 
 /* popups*/
 
@@ -754,8 +817,72 @@ text-align:center;
 	height:100px;
 	
 	}
+<<<<<<< HEAD
+
+	/*login page */
+
+
+/* book list page*/
+
+.booklistcontainer{
+position:relative ;
+background-color: #056380;
+padding-top: 45px;
+}
+
+.book-list-box{
+background: #f4f4f4;
+width: 400px;
+height: 200px;
+float: left;
+margin: 20px;
+padding: 10px;
+border: 2px solid #808284;
+}
+
+.book-list-box-book-cover{
+width:112px;
+height:170px;
+background-color: #123456;
+margin:10px;
+float:left;
+}
+
+.book-list-box-text-container{
+width: 260px;
+height: 30px;
+margin: 10px 5px 3px 0px;
+float: left;
+font-size:15px;
+}
+.book-list-textbox {
+width: 120px;
+height: 30px;
+background-color: #e5e5e4;
+border: 0;
+padding-left: 10px;
+
+}
+
+.settings-box{
+position: absolute;
+background: #123456;
+color: #ffffff;
+padding: 5px;
+
+width: 100px;
+margin-top: 40px;
+margin-left: 55px;
+height: 150px;
+
+}
+
+
+
+=======
 	
 #current_page .ui-draggable:hover {border: 1px dashed grey }
 #current_page .ui-draggable:hover .dragging_holder{
 background-color:grey; height:10px; border: 1px dashed grey;cursor: move;
 } 
+>>>>>>> b4a0e2f13c7e83b63a655abdad478578ae475c10
