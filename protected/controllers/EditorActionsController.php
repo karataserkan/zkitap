@@ -11,7 +11,7 @@ class EditorActionsController extends Controller
 		if ($this->errors) $response['errors']=$this->errors;
 		echo json_encode($response);
 	}
-
+ 
 	public function error($domain='EditorActions',$explanation='Error', $arguments=null,$debug_vars=null ){
 		$error=new error($domain,$explanation, $arguments,$debug_vars);
 		$this->errors[]=$error; 
@@ -184,20 +184,38 @@ class EditorActionsController extends Controller
 	}
 
 
+
+
 	public function addComponent($pageId,$attributes=null){
+		
 		$page=Page::model()->findByPk($pageId);
+
 		if (!$page) {
 			$this->error("EA-ACom","Page Not Found",func_get_args(),$page);
 			return false;
 		}
-		
+
 		$new_component= new Component;
 		$new_id=functions::new_id();
 		
 		$new_component->id=$new_id;
 		$new_component->page_id=$page->page_id;
 
+
+
 		$component_attribs=json_decode($attributes);
+
+
+
+		if($component_attribs->data->img->src  ) {
+			$component_attribs->data->img->src = functions::compressBase64Image($component_attribs->data->img->src);
+		}
+
+		if($component_attribs->data->imgs)
+			foreach ($component_attribs->data->imgs as $gallery_key => &$gallery_image) {
+				if($gallery_image->src)
+					$gallery_image->src=functions::compressBase64Image($gallery_image->src);
+			}
 		//know bug : component type validation
 
 
@@ -209,10 +227,12 @@ class EditorActionsController extends Controller
 			$this->error("EA-ACom","Component Not Saved",func_get_args(),$new_component);
 			return false;
 		} 
-		 
 		$result= Component::model()->findByPk($new_id);
+
+		
 		$result->data=$result->get_data();
 
+		
 
 		if(!$result)  {
 			$this->error("EA-ACom","Component Not Found",func_get_args(),$new_component);
@@ -371,6 +391,7 @@ class EditorActionsController extends Controller
 		$this->render('updateComponent');
 	}
 
+
 	public function updateComponent($componentId,$jsonProperties){
 		$component=Component::model()->findByPk($componentId);
 		if (!$component) {
@@ -408,7 +429,7 @@ class EditorActionsController extends Controller
 
 	}
 
-
+ 
 
 	public function actionUpdateWholeComponentData($componentId,$jsonProperties)
 	{
@@ -423,12 +444,14 @@ class EditorActionsController extends Controller
 	}
 
 	public function UpdatePage($pageId,$chapterId,$order){
-		$page=Page::model()->findByPk($chapterId);
+		
+		$page=Page::model()->findByPk($pageId);
 		if (!$page) {
 			$this->error("EA-UPage","Page Not Found",func_get_args(),$pageId);
 			return false;
 		}
-		$page->title=$title;
+
+		$page->chapter_id=$chapterId;
 		$page->order=$order;
 
 
@@ -441,7 +464,7 @@ class EditorActionsController extends Controller
 
 
 	}
-
+ 
 	public function actionUpdatePage($pageId,$chapterId,$order)
 	{
 
@@ -454,7 +477,88 @@ class EditorActionsController extends Controller
 		return $this->response($response);
 	}
 
-	public function actionSearchOnBook($bookId,$searchTerm){
+	public function SearchOnBook($currentPageId,$searchTerm=' '){
+
+		$currentPage= Page::model()->findByPk($currentPageId) ;
+		$chapter=Chapter:: model()->findByPk($currentPage->chapter_id) ;
+		$bookId=$chapter->book_id;
+
+		if(strlen($searchTerm)<2) {
+			$this->error("EA-SearchOnBook","Too Short Seach Term",func_get_args(),$searchTerm);
+			return null;
+		}
+
+
+		$sql="select * from component 
+right join page  using (page_id) 
+right join chapter using (chapter_id) 
+right join book using (book_id) where book_id='$bookId' ;";
+ 		//echo $sql;
+
+		$components = Component::model()->findAllBySql($sql);
+		foreach ($components as $keyz => &$value) {
+			$searchable="";
+			if ($value->get_data())
+			foreach ($value->get_data() as $key2 => $items) {
+				foreach ($items as $key => $value2) {
+					if($key!='css') $searchable.=serialize($value2);
+				}
+			}
+ 
+			$searchable.=" ";
+
+
+			$searchable=str_replace(array('O:',':','"','{','}',';'), ' ', $searchable);
+			$searchable_small=functions::ufalt($searchable);
+				
+			if( 
+			 	substr_count ( $searchable_small , functions::ufalt($searchTerm) )==0 
+			 ) 
+				unset($components[$keyz]);
+			else {
+
+
+				$value->data = $value->get_data();
+				$value=$value->attributes;
+ 
+				$value[search]->searchable=$searchable;
+				$value[search]->searchTerm=$searchTerm;
+				$value[search]->position=strpos($searchable_small,functions::ufalt($searchTerm));
+
+				$value[search]->next_space_position= strpos($searchable, " ", $value[search]->position + strlen($searchTerm)+1 );
+				
+
+				$value[search]->previous_space_position= strrpos(substr($searchable,0,$value[search]->position),' ' );
+
+
+
+				$value[search]->similar_result=substr($searchable,$value[search]->previous_space_position+1,  $value[search]->next_space_position - $value[search]->previous_space_position);
+				$value[search]->similar_result_old=substr($searchable,$value[search]->position,  $value[search]->next_space_position - $value[search]->position);
+				
+
+			}
+		
+		} 
+		//new dBug($components);
+		usort($components,'sortify');
+
+		return $components;
+
+
+
+	}
+
+ 
+	public function actionSearchOnBook($currentPageId,$searchTerm=' '){
+		
+
+		$response=false;
+
+		if($return=$this->SearchOnBook($currentPageId,$searchTerm) ){
+				$response['components']=$return; 
+		}
+
+		return $this->response($response);
 		
 	}
 
@@ -494,4 +598,11 @@ class EditorActionsController extends Controller
 		);
 	}
 	*/
+}
+
+function sortify($a,$b){
+	if( levenshtein($a[search]->similar_result,$a[search]->searchTerm) > levenshtein($b[search]->similar_result,$b[search]->searchTerm) ){
+		return 1;
+	}
+	else return -1;
 }

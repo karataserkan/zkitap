@@ -85,6 +85,7 @@ class BookController extends Controller
 				$this->redirect(array('author','bookId'=>$model->book_id));
 		}
 
+
 		$model->workspace_id=$workspace;
 		$this->render('create',array(
 			'model'=>$model,
@@ -92,12 +93,13 @@ class BookController extends Controller
 
 	}
 
-	public function actionAuthor($bookId,$page=null){ 
+	public function actionAuthor($bookId,$page=null,$component=null){ 
 		$model=$this->loadModel($bookId);
 		
 		$this->render('author',array(
 			'model'=>$model,
-			'page_id'=>$page
+			'page_id'=>$page,
+			'component_id'=>$component
 		)); 
 	}
 

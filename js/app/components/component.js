@@ -12,6 +12,8 @@ $(document).ready(function(){
       .attr('id', this.options.component.id)
       .attr('component-instance', 'true')
       .resizable({
+        containment: "#current_page",
+        snap:'10px',
         'stop': function( event, ui ){
           that._resize(event, ui);
         }
@@ -73,7 +75,8 @@ $(document).ready(function(){
         var deleteButton = $('#delete-button-' + that.options.component.id);
         deleteButton.remove();
 
-      });
+      }).
+      append('<div class="dragging_holder"></div>' );
 
 
       var _data = this.options.component.data;
@@ -139,6 +142,14 @@ $(document).ready(function(){
       this.element.css({
         'border': 'none'
       });
+    },
+
+    field: function(key, value) {
+      
+      if( value === undefined ) {
+        return this.options.component[key];
+      }
+
     }
 
   });

@@ -726,6 +726,14 @@ padding:5px;
  position:absolute;
 }
 
+#chapters_pages_view .page.current_page {
+	border-color: red!important;
+}
+
+#chapters_pages_view .page.current_page .page-number {
+	background: red!important;
+}
+
 
 .chapter-title{
 border-top:1px solid #bbb !important;
@@ -809,6 +817,7 @@ text-align:center;
 	height:100px;
 	
 	}
+<<<<<<< HEAD
 
 	/*login page */
 
@@ -870,3 +879,10 @@ height: 150px;
 
 
 
+=======
+	
+#current_page .ui-draggable:hover {border: 1px dashed grey }
+#current_page .ui-draggable:hover .dragging_holder{
+background-color:grey; height:10px; border: 1px dashed grey;cursor: move;
+} 
+>>>>>>> b4a0e2f13c7e83b63a655abdad478578ae475c10

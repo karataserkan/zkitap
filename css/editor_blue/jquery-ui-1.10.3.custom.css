@@ -192,7 +192,11 @@
 	top: 0;
 	left: 0;
 	cursor: default;
+	z-index: 999999999999999999!important;
+	
 }
+.ui-autocomplete-term { display:inline;font-weight: bold; color: blue; }
+
 .ui-button {
 	display: inline-block;
 	position: relative;

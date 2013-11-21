@@ -29,6 +29,8 @@
 
 	<script src="<?php echo Yii::app()->request->baseUrl; ?>js/app/components/component.js"></script>	
 	<script src="<?php echo Yii::app()->request->baseUrl; ?>js/app/components/text-component.js"></script>	
+	<script src="<?php echo Yii::app()->request->baseUrl; ?>js/app/components/image-component.js"></script>	
+	<script src="<?php echo Yii::app()->request->baseUrl; ?>js/app/components/gallery-component.js"></script>	
 
 	<script src="<?php echo Yii::app()->request->baseUrl; ?>js/app/other/page-drag-drop.js"></script>
 	<script src="<?php echo Yii::app()->request->baseUrl; ?>js/app/other/page-load.js"></script>
@@ -42,12 +44,15 @@
 	
 
 	<title><?php echo CHtml::encode($this->pageTitle); ?></title>
+
+
+	
+
 </head>
 
 <body>
 
 <div class="container editor_blue" id="page" >
-	
 	
 
 	<div id="header">
@@ -68,11 +73,7 @@
 		
 
 
-
-
 	<?php echo $content; ?>
-
-
 
 
 </div><!-- page -->

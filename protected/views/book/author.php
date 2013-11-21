@@ -24,10 +24,13 @@ $this->menu=array(
 $page=Page::model()->findByPk($page_id); 
 if($page==null) 
 		{ 
-
-			$chapter=Chapter::model()->find('book_id=:book_id', array(':book_id' => $model->book_id ));
-			$page=Page::model()->find('chapter_id=:chapter_id', array(':chapter_id' => $chapter->chapter_id ));
-
+			if($component_id) {
+				$highlight_component=Component::model()->findByPk( $component_id);
+				$page=Page::model()->findByPk($highlight_component->page_id);
+			}else {
+				$chapter=Chapter::model()->find('book_id=:book_id', array(':book_id' => $model->book_id ));
+				$page=Page::model()->find('chapter_id=:chapter_id', array(':chapter_id' => $chapter->chapter_id ));
+			}
  
 		} 
 
@@ -45,15 +48,17 @@ $current_user=User::model()->findByPk(Yii::app()->user->id);
 	
 	
 <script type="text/javascript">
-window.lindneo.currentPageId='<?php echo $current_page->page_id; ?>';
-window.lindneo.user={};
-window.lindneo.user.username='<?php echo Yii::app()->user->name; ?>';
-window.lindneo.user.name='<?php echo $current_user->name . " ". $current_user->surname; ?>';
+	window.lindneo.currentPageId='<?php echo $current_page->page_id; ?>';
+	window.lindneo.user={};
+	window.lindneo.user.username='<?php echo Yii::app()->user->name; ?>';
+	window.lindneo.user.name='<?php echo $current_user->name . " ". $current_user->surname; ?>';
 
 
-window.lindneo.tsimshian.init(); 
+	window.lindneo.tsimshian.init(); 
 
-window.lindneo.tsimshian.changePage(window.lindneo.currentPageId); 
+	window.lindneo.tsimshian.changePage(window.lindneo.currentPageId); 
+	window.lindneo.highlightComponent='<?php echo $highlight_component->id; ?>';
+
 </script>
 	
 	
@@ -71,9 +76,12 @@ window.lindneo.tsimshian.changePage(window.lindneo.currentPageId);
 					</select>
 					</label>
 					
-					
-					<input type="text" id="search" class="search radius" placeholder="Ara">
-					
+					<form action='' id='searchform' >
+
+					<input type="text" id="search" name='component' class="search radius" placeholder="Ara">
+					<input type="hidden" name='r' value='book/author'>
+					<input type="hidden" name='bookId' value='<?php echo $model->book_id; ?>'>
+					</form>
 	
 	
 	
@@ -651,9 +659,9 @@ Grafik Ekle
 					$chapter_page=0;
 					?>
 <div class='chapter' chapter_id='<?php echo $chapter->chapter_id; ?>'>
-<input type="text" class="chapter-title" placeholder="chapter title" value=" <?php echo $chapter->title; ?>">
+<input type="text" class="chapter-title" placeholder="chapter title" value="<?php echo $chapter->title; ?>">
 <a class="btn red white size-15 radius icon-delete page-chapter-delete  delete-chapter hidden-delete" style="float: right; margin-top: -23px;"></a>
- <!-- <?php echo $chapter->title; ?>  chapter title-->
+ <!-- <?php echo $chapter->title; ?>  chapter title--> 
 					<ul class="pages" >
 							<?php
 							
@@ -674,8 +682,8 @@ Grafik Ekle
 				$page_NUM++;
 				?> 
 					
-					<li class='page' chapter_id='<?php echo $pages->chapter_id; ?>' page_id='<?php echo $pages->page_id; ?>' chapter_id='<?php echo $pages->page_id; ?>'   >
-						<a class="btn red white size-15 radius icon-delete page-chapter-delete delete-page hidden-delete" style="margin-left: 38px;"></a>
+					<li class='page <?php echo ( $current_page->page_id== $pages->page_id  ? "current_page": "" ); ?>' chapter_id='<?php echo $pages->chapter_id; ?>' page_id='<?php echo $pages->page_id; ?>' chapter_id='<?php echo $pages->page_id; ?>'   >
+						<a class="btn red white size-15 radius icon-delete page-chapter-delete delete-page hidden-delete "  style="margin-left: 38px;"></a>
 						<a href='<?php echo $this->createUrl("book/author", array('bookId' => $model->book_id, 'page'=>$pages->page_id ));?>' >
 
 								
