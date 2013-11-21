@@ -11,6 +11,7 @@ $(document).ready(function(){
 
       var that = this;
 
+    
       if( this.options.component.data.img ) {
         this.element.attr('src', this.options.component.data.img.src);  
       }

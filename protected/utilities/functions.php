@@ -1,7 +1,7 @@
 <?php
 class functions {  
 
-    function ufalt($text) {
+    public static function ufalt($text) {
         $search = array("Ç", "İ", "I", "Ğ", "Ö", "Ş", "Ü");
         $replace = array("ç", "i", "ı", "ğ", "ö", "ş", "ü");
         $text = str_replace($search, $replace, $text);
@@ -9,6 +9,25 @@ class functions {
         return $text;
     }
 
+    public static function compressBase64Image($imagecontent, $sizeTrashold=20000, $quality=100, $pixelarea = 180000 ){
+        $parts=explode(',',$imagecontent);
+        $changeQuality="";
+        if ( strlen($imagecontent) > $sizeTrashold || $quality <50) $quality=75;
+        if ( $pixelarea <10000 || $pixelarea > 250000) $pixelarea = 180000;
+
+        if ($parts[1]){
+            $image_file=new file ('tmp.img','/tmp');
+            $image_file->writeLine($parts[1]);
+            $command=' base64 -d '.$image_file->filepath . " | convert - -quality $quality - | convert -  -resize '".$pixelarea."@>' - |  base64 | cat > /tmp/compressed.img ";
+            shell_exec($command);
+            $parts[1]= file_get_contents('/tmp/compressed.img');
+            $image_file->closeFile();
+            unlink('/tmp/compressed.img');
+            unlink($image_file->filepath);
+            return $imagecontent_new =implode(',',$parts);
+        }
+        return $imagecontent;
+    }
 
     public static function get_random_string($length=44,$valid_chars="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789")
     {

@@ -755,9 +755,7 @@ text-align:center;
 	
 	}
 	
-
-	
-	
-	/*login page */
-
-//hi
+#current_page .ui-draggable:hover {border: 1px dashed grey }
+#current_page .ui-draggable:hover .dragging_holder{
+background-color:grey; height:10px; border: 1px dashed grey;cursor: move;
+} 

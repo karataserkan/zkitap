@@ -184,20 +184,38 @@ class EditorActionsController extends Controller
 	}
 
 
+
+
 	public function addComponent($pageId,$attributes=null){
+		
 		$page=Page::model()->findByPk($pageId);
+
 		if (!$page) {
 			$this->error("EA-ACom","Page Not Found",func_get_args(),$page);
 			return false;
 		}
-		
+
 		$new_component= new Component;
 		$new_id=functions::new_id();
 		
 		$new_component->id=$new_id;
 		$new_component->page_id=$page->page_id;
 
+
+
 		$component_attribs=json_decode($attributes);
+
+
+
+		if($component_attribs->data->img->src  ) {
+			$component_attribs->data->img->src = functions::compressBase64Image($component_attribs->data->img->src);
+		}
+
+		if($component_attribs->data->imgs)
+			foreach ($component_attribs->data->imgs as $gallery_key => &$gallery_image) {
+				if($gallery_image->src)
+					$gallery_image->src=functions::compressBase64Image($gallery_image->src);
+			}
 		//know bug : component type validation
 
 
@@ -209,10 +227,12 @@ class EditorActionsController extends Controller
 			$this->error("EA-ACom","Component Not Saved",func_get_args(),$new_component);
 			return false;
 		} 
-		 
 		$result= Component::model()->findByPk($new_id);
+
+		
 		$result->data=$result->get_data();
 
+		
 
 		if(!$result)  {
 			$this->error("EA-ACom","Component Not Found",func_get_args(),$new_component);
