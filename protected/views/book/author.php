@@ -96,20 +96,19 @@ window.lindneo.tsimshian.changePage(window.lindneo.currentPageId);
 	
 	</div> <!--Header -->
 	
-
 	
 			<div class="styler_box">
 			<!-- <ul id="text-styles" ></ul> -->
-				<a id="undo" class="icon-undo dark-blue size-20"></a>
-				<a id="redo" class="icon-redo grey-8 size-20"></a>
+			<a id="undo" class="icon-undo dark-blue size-20"></a>
+			<a id="redo" class="icon-redo grey-8 size-20"></a>
 				
-				<div class="vertical-line"></div>
-				
+			<div class="vertical-line"></div>
+			<div class="text-options" style="display:inline-block;">
 					
 					
-					<input type="color" class="color-picker-box radius" placeholder="e.g. #bbbbbb" />
+					<input type="color" class="color-picker-box radius " placeholder="e.g. #bbbbbb" />
 					
-					<label class="dropdown-label">
+					<label class="dropdown-label  ">
 					<select id="font-type" class="radius">
 						<option selected="" value="Arial"> Arial </option>
 						<option value="helvetica" >Helvetica</option>
@@ -119,7 +118,7 @@ window.lindneo.tsimshian.changePage(window.lindneo.currentPageId);
 					</select>
 					</label>
 					
-					<label class="dropdown-label">
+					<label class="dropdown-label ">
 						<select id="font-size" class="radius">
 						<option selected="" value="8"> 8 </option>
 						<option value="10" >10</option>
@@ -131,23 +130,23 @@ window.lindneo.tsimshian.changePage(window.lindneo.currentPageId);
 					</label>					
 				<div class="vertical-line"></div>
 				
-				<a id="font-bold"  href="#" class="dark-blue radius toolbox-items"><i class="icon-font-bold  size-15"></i></a>
-				<a id="font-italic"  href="#" class="dark-blue radius toolbox-items"><i class="icon-font-italic size-15"></i></a>
-				<a id="font-underline"  href="#" class="dark-blue radius toolbox-items"><i class="icon-font-underline size-15"></i></a>
+				<a id="font-bold"  href="#" class="dark-blue radius toolbox-items "><i class="icon-font-bold  size-15"></i></a>
+				<a id="font-italic"  href="#" class="dark-blue radius toolbox-items "><i class="icon-font-italic size-15"></i></a>
+				<a id="font-underline"  href="#" class="dark-blue radius toolbox-items "><i class="icon-font-underline size-15"></i></a>
 				<div class="vertical-line"></div>
-				<a id="text-align-left"  href="#" class="dark-blue radius toolbox-items"><i class="icon-text-align-left size-15"></i></a>
-				<a id="text-align-center"  href="#" class="dark-blue radius toolbox-items"><i class="icon-text-align-center  size-15"></i></a>
-				<a id="text-align-right"  href="#" class="dark-blue radius toolbox-items"><i class="icon-text-align-right  size-15"></i></a>
+				<a id="text-align-left"  href="#" class="dark-blue radius toolbox-items "><i class="icon-text-align-left size-15"></i></a>
+				<a id="text-align-center"  href="#" class="dark-blue radius toolbox-items "><i class="icon-text-align-center  size-15"></i></a>
+				<a id="text-align-right"  href="#" class="dark-blue radius toolbox-items "><i class="icon-text-align-right  size-15"></i></a>
 				<div class="vertical-line"></div>
-				<a id="make-list-bullet"  href="#" class="dark-blue radius toolbox-items"><i class="icon-list-bullet size-15"></i></a>
-				<a id="make-list-number"  href="#" class="dark-blue radius toolbox-items"><i class="icon-list-number size-15"></i></a>
+				<a id="make-list-bullet"  href="#" class="dark-blue radius toolbox-items "><i class="icon-list-bullet size-15"></i></a>
+				<a id="make-list-number"  href="#" class="dark-blue radius toolbox-items "><i class="icon-list-number size-15"></i></a>
 				<div class="vertical-line"></div>
-				<a id="text-left-indent"  href="#" class="dark-blue radius toolbox-items"><i class="icon-left-indent size-15"></i></a>
-				<a id="text-right-indent"  href="#" class="dark-blue radius toolbox-items"><i class="icon-right-indent size-15"></i></a>
+				<a id="text-left-indent"  href="#" class="dark-blue radius toolbox-items "><i class="icon-left-indent size-15"></i></a>
+				<a id="text-right-indent"  href="#" class="dark-blue radius toolbox-items "><i class="icon-right-indent size-15"></i></a>
 				<div class="vertical-line"></div>
-					<label class="dropdown-label">
+					<label class="dropdown-label " id="leading">
 						<i class="icon-leading grey-6"></i>
-							<select id="font-size" class="radius">
+							<select id="leading" class="radius">
 								<option selected="" value="8"> 100 </option>
 								<option value="0" >0</option>
 								<option value="10" >10</option>
@@ -164,40 +163,80 @@ window.lindneo.tsimshian.changePage(window.lindneo.currentPageId);
 					</label>
 				<div class="vertical-line"></div>
 				
-					<label class="dropdown-label">
-				<i class="icon-opacity grey-6"></i>
+				<label class="dropdown-label  image-options graph-options shape-options">
+					<i class="icon-opacity grey-6"></i>
 						<select id="font-size" class="radius">
-						<option selected="" value="8"> 100 </option>
-						<option value="0" >0</option>
-						<option value="10" >10</option>
-						<option value="20" >20</option>
-						<option value="30" >30</option>
-						<option value="40" >40</option>
-						<option value="50" >50</option>
-						<option value="60" >60</option>
-						<option value="70" >70</option>
-						<option value="80" >80</option>
-						<option value="90" >90</option>
-						<option value="100" >100</option>
-					</select>	
-					</label>
+							<option selected="" value="8"> 100 </option>
+							<option value="0" >0</option>
+							<option value="10" >10</option>
+							<option value="20" >20</option>
+							<option value="30" >30</option>
+							<option value="40" >40</option>
+							<option value="50" >50</option>
+							<option value="60" >60</option>
+							<option value="70" >70</option>
+							<option value="80" >80</option>
+							<option value="90" >90</option>
+							<option value="100" >100</option>
+						</select>	
+				</label>
 					<div class="vertical-line"></div>
-				
+			</div>
+			
+			
+			<div class="image-options" style="display:inline-block;">
+			<div class="vertical-line"></div>
+			<label class="dropdown-label  image-options graph-options shape-options">
+					<i class="icon-opacity grey-6"></i>
+						<select id="font-size" class="radius">
+							<option selected="" value="8"> 100 </option>
+							<option value="0" >0</option>
+							<option value="10" >10</option>
+							<option value="20" >20</option>
+							<option value="30" >30</option>
+							<option value="40" >40</option>
+							<option value="50" >50</option>
+							<option value="60" >60</option>
+							<option value="70" >70</option>
+							<option value="80" >80</option>
+							<option value="90" >90</option>
+							<option value="100" >100</option>
+						</select>	
+				</label>
+			
+			</div>
+			
+			<div class="shape-options" style="display:inline-block;">
+			<div class="vertical-line"></div>
+			<input type="color" class="color-picker-box radius " placeholder="e.g. #bbbbbb" />
+			<div class="vertical-line"></div>
+			<label class="dropdown-label  image-options graph-options shape-options">
+					<i class="icon-opacity grey-6"></i>
+						<select id="font-size" class="radius">
+							<option selected="" value="8"> 100 </option>
+							<option value="0" >0</option>
+							<option value="10" >10</option>
+							<option value="20" >20</option>
+							<option value="30" >30</option>
+							<option value="40" >40</option>
+							<option value="50" >50</option>
+							<option value="60" >60</option>
+							<option value="70" >70</option>
+							<option value="80" >80</option>
+							<option value="90" >90</option>
+							<option value="100" >100</option>
+						</select>	
+				</label>
+			
+			</div>
+
 				<a href="#" class="bck-dark-blue white toolbox-items radius" id="pop-align"><i class="icon-align-center size-20"></i></a>
 				<a href="#" class="bck-dark-blue white toolbox-items radius" id="pop-arrange"><i class="icon-send-backward size-15"></i></a>
-				
-				<a href="#" class="btn white btn radius " id="pop-image">Add Image</a>
-				<a href="#" class="btn white btn radius " id="pop-video">Add video</a>
-				
 				<a href="#" class="btn grey white radius">Grupla</a>
 			
-		
-							
+				
 			
 			
-	<?php if(isset($chapter)) { ?>
-		<a href='?r=page/create&chapter_id=<?php echo (isset($this->current_chapter) ? $this->current_chapter->chapter_id :  $chapter->chapter_id); ?>' >Add Page</a>
-	<?php } ?>
 			</div>
 		
 		<div style="height:83px;"></div>
@@ -229,6 +268,10 @@ window.lindneo.tsimshian.changePage(window.lindneo.currentPageId);
    
    
   });
+  
+	$(function() {
+    $( "#tabss" ).tabs();
+	});
 		
 	</script>
 	
@@ -239,7 +282,7 @@ window.lindneo.tsimshian.changePage(window.lindneo.currentPageId);
 Hizala
 <div class="popup-close">x</div>
 </div>
-<!--  arrange popup -->
+<!--  popup content -->
 <div class="popup-inner-title">Dikey</div>
 	<div class="popup-even">
 		<i class="icon-align-left size-20 dark-blue"></i>
@@ -259,7 +302,7 @@ Hizala
 		<i class="icon-vertical-gaps size-20 dark-blue"></i>
 		<i class="icon-horizontal-gaps size-20 dark-blue"></i>
 	</div>
-<!--  arrange popup -->
+<!--  popup content -->
 </div>
 <!-- end align popup -->
 
@@ -296,9 +339,26 @@ Görsel Ekle
 	</div>
 <!-- popup content-->
 </div>	
+<!--  end add image popup -->	
 
+	
+<!--  add sound popup -->	
+<div class="popup" id="pop-sound-popup">
+<div class="popup-header">
+Ses Ekle
+<div class="popup-close">x</div>
+</div>
+<!-- popup content-->
+	<div class="gallery-inner-holder">
+		<div style="clear:both"></div>
+		<div class="add-image-drag-area"> </div>
+		<input class="input-textbox" type="url" value="sesin adını yazınız">
+		<a href="#" class="btn bck-light-green white radius" id="add-image" style="padding: 5px 30px;">Ekle</a>
+	</div>
+<!-- popup content-->
+</div>	
+<!--  end add sound popup -->		
 
-<!--  end add image popup -->		
 
 <!--  add video popup -->	
 <div class="popup" id="pop-video-popup">
@@ -317,7 +377,214 @@ Video Ekle
 	
 <!-- popup content-->
 </div>	
-<!--  end add image popup -->		
+<!--  end add video popup -->		
+		
+		
+
+<!--  add galery popup -->	
+<div class="popup" id="pop-galery-popup">
+<div class="popup-header">
+Galeri Ekle
+<div class="popup-close">x</div>
+</div>
+<!-- popup content-->
+	<div class="gallery-inner-holder">
+		<div style="clear:both"></div>
+			<div style="margin-bottom:20px;">
+				<label class="dropdown-label" id="leading">
+						Görsel Adedi:
+							<select id="leading" class="radius">
+								<option selected="" value="8"> 1 </option>
+								<option value="0" >2</option>
+								<option value="10" >3</option>
+								<option value="20" >4</option>
+								<option value="30" >5</option>
+								<option value="40" >6</option>
+								<option value="50" >7</option>
+								<option value="60" >8</option>
+								<option value="70" >9</option>
+								<option value="80" >10</option>
+							</select>	
+					</label>
+					
+			</div>
+			<div class="add-image-drag-area"> </div>
+		<a href="#" class="btn bck-light-green white radius" id="add-image" style="padding: 5px 30px;">Ekle</a>
+	</div>
+<!-- popup content-->
+</div>	
+<!--  end add galery popup -->	
+
+	
+<!--  add quiz popup -->	
+<div class="popup" id="pop-quiz-popup">
+<div class="popup-header">
+Quiz Ekle
+<div class="popup-close">x</div>
+</div>
+
+<!-- popup content-->
+	<div class="gallery-inner-holder">
+		<label class="dropdown-label" id="leading">
+				Şık Sayısı:
+					<select id="leading" class="radius">
+						<option value="0" >2</option>
+						<option value="10" >3</option>
+						<option selected="" value="20" >4</option>
+						<option value="30" >5</option>
+					</select>	
+		</label> 
+		</br>
+		<label class="dropdown-label" id="leading">
+				Doğru Cevap:
+					<select id="leading" class="radius">
+						<option value="0" >A</option>
+						<option value="10" >B</option>
+						<option selected="" value="20" >C</option>
+						<option value="30" >D</option>
+					</select>	
+		</label> 
+
+		</br></br>
+		<div class="quiz-inner">
+			Soru kökü:
+			<form id="video-url">
+			<textarea class="popup-text-area">Soru kökünü buraya yazınız.
+			</textarea> </br>
+			<!--burası çoğalıp azalacak-->
+			1. Soru:
+			<form id="video-url">
+			<textarea class="popup-choices-area">
+			</textarea> </br>
+			
+			2. Soru:
+			<form id="video-url">
+			<textarea class="popup-choices-area">
+			</textarea> </br>
+			
+			3. Soru:
+			<form id="video-url">
+			<textarea class="popup-choices-area">
+			</textarea> </br>
+		</div>
+		
+		<a href="#" class="btn bck-light-green white radius" id="add-image" style="padding: 5px 30px;">Ekle</a>
+		</form>
+		
+		
+	</div>		
+	
+<!-- popup content-->
+</div>	
+<!--  end add quiz popup -->		
+	
+	
+<!--  add popup popup -->	
+<div class="popup" id="pop-popup-popup">
+<div class="popup-header">
+Açılır Kutu Ekle
+<div class="popup-close">x</div>
+</div>
+<!-- popup content-->
+	<div class="gallery-inner-holder">
+		<textarea class="popup-text-area">Açılır kutunun içeriğini yazınız.
+		</textarea> </br>
+		<a href="#" class="btn bck-light-green white radius" id="add-image" style="padding: 5px 30px;">Ekle</a>
+	</div>
+<!-- popup content-->
+</div>	
+<!--  end add popup popup -->	
+	
+		
+<!--  add chart popup -->	
+<div class="popup" id="pop-chart-popup">
+<div class="popup-header">
+Grafik Ekle
+<div class="popup-close">x</div>
+</div>
+<!-- popup content-->
+	<div class="gallery-inner-holder">
+		
+			<label class="dropdown-label" id="leading">
+							Grafik Çeşidi: 
+								<select id="Graph Type" class="radius">
+									<option selected="" value="8"> Pasta </option>
+									<option value="80" >Çubuk</option>
+								</select>	
+			</label>
+			<div class="pie-chart" >
+			Dilim sayısı: 
+				<input type="text" class="pie-chart-textbox radius grey-9 " value="1">
+					<!-- yeni dilimler eklendikçe aşağıdaki div çoğalacak-->
+					<div class="pie-chart-slice-holder">
+						1. Dilim </br>
+						%<input type="text" class="pie-chart-textbox radius grey-9 " value="1"></br>
+						Etiket<input type="text" class="pie-chart-textbox-wide radius grey-9 " value="1">
+						<input type="color" class="color-picker-box radius " placeholder="e.g. #bbbbbb" />
+					</div>
+					<!-- dilim-->
+					<div class="pie-chart-slice-holder">
+						2. Dilim </br>
+						%<input type="text" class="pie-chart-textbox radius grey-9 " value="1"></br>
+						Etiket<input type="text" class="pie-chart-textbox-wide radius grey-9 " value="1">
+						<input type="color" class="color-picker-box radius " placeholder="e.g. #bbbbbb" />
+						</div>
+								
+			</div>
+			<div class="bar-chart" >
+				<div class="pie-chart-slice-holder">
+					X doğrusu adı: 
+					<input type="text" class="pie-chart-textbox-wide radius grey-9 " value="1"></br>
+					Y doğrusu adı: 
+					<input type="text" class="pie-chart-textbox-wide radius grey-9 " value="1"></br>
+					Sütun Sayısı: 	<input type="text" class="pie-chart-textbox radius grey-9 " value="1"></br>
+				</div>
+				<!--burası çoğaltılacak-->
+				<div class="pie-chart-slice-holder">
+					1. sütun adı: 
+					<input type="text" class="pie-chart-textbox-wide radius grey-9 " value="1"></br>
+					1. sütun değeri: 
+					<input type="text" class="pie-chart-textbox-wide radius grey-9 " value="1"></br>
+				</div>
+				<!--end burası çoğaltılacak-->
+				
+				<!--burası çoğaltılacak-->
+				<div class="pie-chart-slice-holder">
+					2. sütun adı:
+					<input type="text" class="pie-chart-textbox-wide radius grey-9 " value="1"></br>
+					2. sütun değeri: 
+					<input type="text" class="pie-chart-textbox-wide radius grey-9 " value="1"></br>
+				</div>
+				<!--end burası çoğaltılacak-->
+					
+			</div>
+					
+	<a href="#" class="btn bck-light-green white radius" id="add-image" style="padding: 5px 30px;">Ekle</a>
+	</div>		
+	
+<!-- popup content-->
+</div>	
+<!--  end add chart popup -->
+		
+<!--  shape popup -->	
+<div class="popup" id="pop-shape-popup">
+<div class="popup-header">
+Şekil Ekle
+<div class="popup-close">x</div>
+</div>
+<!--  popup content -->
+</br>
+	<div class="popup-even">
+		<i class="icon-s-circle size-20 dark-blue"></i>
+		<i class="icon-s-triangle size-20 dark-blue"></i>
+		<i class="icon-s-square size-20 dark-blue"></i>
+		<i class="icon-s-line size-20 dark-blue"></i>
+	</div>
+<!--  popup content -->
+</div>
+<!-- end align popup -->
+
+		
 		
 		
 		
@@ -352,6 +619,15 @@ Video Ekle
 			
 			
 		<div>Zoom:	<div id='zoom-pane'></div>
+			</br>
+			<a href="#" class="btn white btn radius " id="pop-image">Add Image</a>
+			<a href="#" class="btn white btn radius " id="pop-sound">Add Sound</a>
+			<a href="#" class="btn white btn radius " id="pop-video">Add Video</a>
+			<a href="#" class="btn white btn radius " id="pop-galery">Add Galery</a>
+			<a href="#" class="btn white btn radius " id="pop-quiz">Add Quiz</a>
+			<a href="#" class="btn white btn radius " id="pop-popup">Add popup</a>
+			<a href="#" class="btn white btn radius " id="pop-chart">Add Chart</a>
+			<a href="#" class="btn white btn radius " id="pop-shape">Add Shape</a>
 			</div>	
 	</div>
 
