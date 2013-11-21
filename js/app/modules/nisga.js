@@ -23,6 +23,9 @@ window.lindneo.nisga = (function(window, $, undefined){
       case 'image':
         imageComponentBuilder( component );
         break;
+      case 'galery':
+        galeryComponentBuilder( component );
+      break; 
       default:
          // what can I do sometimes
     }
@@ -84,6 +87,28 @@ window.lindneo.nisga = (function(window, $, undefined){
 
   };
 
+  var galeryComponentBuilder = function ( component ) {
+    
+    var element  = $('<div> </div>');
+    var elementWrap=$('<div ></div>');
+    elementWrap.appendTo( page_div_selector );
+
+    element
+    .appendTo( elementWrap )
+    .galeryComponent({
+      'component': component,
+      'update': function ( event, component ) {
+        window.lindneo.tlingit.componentHasUpdated( component );
+      },
+      'selected': function (event, element) {
+        window.lindneo.currentComponentWidget = element;
+        window.lindneo.toolbox.refresh( element );
+      }
+    });
+
+  };
+
+
   var setBgColorOfSelectedComponent = function ( componentId ,activeUser){
     $('[id="' + componentId + '"]').parent().css({
       'border': '1px solid #ccc',
@@ -105,6 +130,7 @@ window.lindneo.nisga = (function(window, $, undefined){
   };
 
   return {
+    galeryComponentBuilder: galeryComponentBuilder,
     createComponent: createComponent,
     deleteComponent: deleteComponent,
     destroyChapter: destroyChapter,

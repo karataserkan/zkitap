@@ -14,6 +14,16 @@ window.lindneo.tsimshian = (function(window, $, undefined){
     return "http://ugur.dev.lindneo.com:1881";
   }; 
 
+
+  var componentUpdated = function (component) {    
+
+    window.lindneo.tsimshian.myComponent = component.id;
+    //console.log('Sending');
+    //console.log(window.lindneo.tsimshian.myComponent);
+    this.socket.emit('updateComponent', component);
+
+  };
+
   var componentCreated = function (component) {    
 
   	window.lindneo.tsimshian.myComponent = component.id;
@@ -90,6 +100,21 @@ window.lindneo.tsimshian = (function(window, $, undefined){
         }
        } );
 
+
+
+
+       this.socket.on('updateComponent', function(component){
+          console.log(componentId) ;
+          console.log(window.lindneo.tsimshian.myComponent) ;
+        if(window.lindneo.tsimshian.myComponent!=component.id ){
+          console.log('Its new');
+          window.lindneo.nisga.destroyComponent(component.id);
+          window.lindneo.nisga.createComponent(component);
+        } else {
+          console.log('I had sent it');
+        }
+       } );
+
       this.socket.on('emitSelectedComponent', function( select_item ) {
        var componentId=select_item.componentId;
        var activeUser=select_item.user;
@@ -116,6 +141,7 @@ window.lindneo.tsimshian = (function(window, $, undefined){
   return {
     
 
+    componentUpdated: componentUpdated,
     changePage: changePage,
     componentDestroyed: componentDestroyed,
     componentCreated: componentCreated,

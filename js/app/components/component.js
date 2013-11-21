@@ -13,8 +13,8 @@ $(document).ready(function(){
       .attr('component-instance', 'true')
       .resizable({
         containment: "#current_page",
+        snap:'10px',
         'stop': function( event, ui ){
-
           that._resize(event, ui);
         }
       })
@@ -75,7 +75,8 @@ $(document).ready(function(){
         var deleteButton = $('#delete-button-' + that.options.component.id);
         deleteButton.remove();
 
-      });
+      }).
+      append('<div class="dragging_holder"></div>' );
 
 
       var _data = this.options.component.data;
