@@ -82,7 +82,7 @@ class BookController extends Controller
 			$model->attributes=$_POST['Book'];
 
 			if($model->save())
-				$this->redirect(array('author','bookId'=>$model->book_id));
+				$this->redirect(array('selectTemplate','bookId'=>$model->book_id));
 		}
 
 
@@ -92,6 +92,13 @@ class BookController extends Controller
 		));
 
 	}
+
+	public function actionSelectTemplate($bookId){ 
+
+			$this->redirect(array('author','bookId'=>$model->book_id));
+	}
+
+
 
 	public function actionAuthor($bookId,$page=null,$component=null){ 
 		$model=$this->loadModel($bookId);
