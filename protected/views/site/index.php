@@ -30,21 +30,55 @@ class='book_create'/>New Book</a>
 	    	?>
 	    	<div class='workspace'>
 	    		<h1><?php echo $workspace->workspace_name; ?></h1>
-	    		<a href='?r=book/create&workspace=<?php echo $workspace->workspace_id; ?>' class='book_create'/>New Book</a>
+	    		<a href='?r=book/create&workspace=<?php echo $workspace->workspace_id; ?> class='book_create'/>New Book</a>
 	    		<div class='book_list'>
 	    			<?php 
+					
 	    			$all_books= Book::model()->findAll('workspace_id=:workspace_id', 
 	    				array(':workspace_id' => $workspace->workspace_id  ) ); 
 	    			foreach ($all_books as $key => $book) {
 	    				
 	    				?>
-						<a href='<?php echo Yii::app()->createUrl('book/author', array('bookId'=>$book->book_id) ); ?>' />
+						
+						<!-- kitap kutusu-->
+						<div class="book-list-box radius" id="book-list-box">
+							<div class="book-list-box-book-cover"></div>
+							<div class="book-list-box-text-container">
+								Kitabın Adı<input type="text" class="book-list-textbox radius grey-9 float-right" value="<?php echo $book->title ?>">
+							</div>
+
+							<div class="book-list-box-text-container">
+								Yazar Adı<input type="text" class="book-list-textbox radius grey-9 float-right" value="<?php echo $book->author ?>">
+								
+							</div>
+
+							<div class="book-list-box-text-container">
+								Kitap Editörleri <a href="#" class="btn icon-settings white btn radius float-right" id="book-editors-settings"></a> 
+									<label class="dropdown-label">
+										<select id="font-type" class="book-list-textbox radius grey-9">
+													<option selected="" value="k1"> kullanıcı 1 </option>
+													<option value="k2" >kullanıcı 2</option>
+													<option value="k3" >kullanıcı 3</option>
+										</select>
+									</label>
+								
+							</div>
+							<div class="book-list-box-text-container" style="text-align:right;">
+								<a href="<?php echo Yii::app()->createUrl('book/delete', array('bookId'=>$book->book_id) ); ?>" class="btn red radius white icon-delete " style="font-weight:normal;" id="pop-video"></a>
+								<a href="<?php echo Yii::app()->createUrl('book/author', array('bookId'=>$book->book_id) ); ?>" class="btn white btn radius " id="pop-video">Düzenle</a>
+							</div>
+						</div>
+
+						<!-- kitap kutusu-->
+												
+						<!--<a href='<?php echo Yii::app()->createUrl('book/author', array('bookId'=>$book->book_id) ); ?>' />
 	    					<div class='book' style='display:inline; float:left; width:200px; height:300px;border:thin solid #000;margin:10px;padding:10px; background:#eee;'>
 	    							
 	    						<h2><?php echo $book->title ?></h2>
 	    						<h3>Yazar: <?php echo $book->author ?></h3>
 	    					</div>
 						</a>	
+						-->
 	    				
 	    				<?php
 
@@ -64,34 +98,6 @@ class='book_create'/>New Book</a>
 
 </div>
 
-<!-- kitap kutusu-->
-<div class="book-list-box radius" id="book-list-box">
-	<div class="book-list-box-book-cover"></div>
-	<div class="book-list-box-text-container">
-		Kitabın Adı<input type="text" class="book-list-textbox radius grey-9 float-right" value="kitabın adı">
-	</div>
-
-	<div class="book-list-box-text-container">
-		Yazar Adı<input type="text" class="book-list-textbox radius grey-9 float-right" value="kitabın adı">
-	</div>
-
-	<div class="book-list-box-text-container">
-		Kitap Editörleri <a href="#" class="btn icon-settings white btn radius float-right" id="book-editors-settings"></a> 
-			<label class="dropdown-label">
-				<select id="font-type" class="book-list-textbox radius grey-9">
-							<option selected="" value="k1"> kullanıcı 1 </option>
-							<option value="k2" >kullanıcı 2</option>
-							<option value="k3" >kullanıcı 3</option>
-				</select>
-			</label>
-		
-	</div>
-	<div class="book-list-box-text-container" style="text-align:right;">
-		<a href="#" class="btn red radius white icon-delete " style="font-weight:normal;" id="pop-video"></a>
-		<a href="#" class="btn white btn radius " id="pop-video">Düzenle</a>
-	</div>
-</div>
-<!-- kitap kutusu-->
 
 
 <!-- seçenekler popup-->

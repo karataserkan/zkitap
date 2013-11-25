@@ -4,14 +4,17 @@
 /* @var $form CActiveForm */
 ?>
 
-<div class="form">
+</div> <!--header-->
+
+<div style="height: 40px;"></div>
+
+
+<div class="form create-page-container white" >
 
 <?php $form=$this->beginWidget('CActiveForm', array(
 	'id'=>'book-form',
 	'enableAjaxValidation'=>false,
 )); ?>
-
-	<p class="note">Fields with <span class="required">*</span> are required.</p>
 
 	<?php echo $form->errorSummary($model); 
 	/*
