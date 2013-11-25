@@ -26,6 +26,9 @@ window.lindneo.nisga = (function(window, $, undefined){
       case 'galery':
         galeryComponentBuilder( component );
       break; 
+      case 'sound':
+        soundComponentBuilder( component );
+      break; 
       default:
          // what can I do sometimes
     }
@@ -87,9 +90,35 @@ window.lindneo.nisga = (function(window, $, undefined){
 
   };
 
+
+
+
+
+
+
+  var soundComponentBuilder = function ( component ) {
+    var element  = $('<div class="sound-controllers"> </div>');
+    var elementWrap=$('<div ></div>');
+    elementWrap.appendTo( page_div_selector );
+
+    element
+    .appendTo( elementWrap )
+    .soundComponent({
+      'component': component,
+      'update': function ( event, component ) {
+        window.lindneo.tlingit.componentHasUpdated( component );
+      },
+      'selected': function (event, element) {
+        window.lindneo.currentComponentWidget = element;
+        window.lindneo.toolbox.refresh( element );
+      }
+    });
+
+  }
+  
   var galeryComponentBuilder = function ( component ) {
     
-    var element  = $('<div> </div>');
+    var element  = $('<div class="some-gallery"> </div>');
     var elementWrap=$('<div ></div>');
     elementWrap.appendTo( page_div_selector );
 

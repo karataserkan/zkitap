@@ -83,16 +83,17 @@ $(document).ready(function(){
 
       $.each( _data, function(p, data) {
         
-        if( p === 'self' ){
+        if( p === 'self' ){ 
 
           if( data.css ) that.element.parent().css(data.css);
           if( data.attr ) that.element.parent().attr(data.attr);
 
         } else {
-
+          
           if( data.css ) that.element.css(data.css);
           if( data.attr )  that.element.attr(data.attr);
           if( data.val ) that.element.val( data.val );
+
         }
 
       });

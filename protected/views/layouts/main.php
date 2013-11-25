@@ -31,6 +31,7 @@
 	<script src="<?php echo Yii::app()->request->baseUrl; ?>js/app/components/text-component.js"></script>	
 	<script src="<?php echo Yii::app()->request->baseUrl; ?>js/app/components/image-component.js"></script>	
 	<script src="<?php echo Yii::app()->request->baseUrl; ?>js/app/components/gallery-component.js"></script>	
+	<script src="<?php echo Yii::app()->request->baseUrl; ?>js/app/components/sound-component.js"></script>	
 
 	<script src="<?php echo Yii::app()->request->baseUrl; ?>js/app/other/page-drag-drop.js"></script>
 	<script src="<?php echo Yii::app()->request->baseUrl; ?>js/app/other/page-load.js"></script>

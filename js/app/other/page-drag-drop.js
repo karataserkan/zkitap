@@ -2,6 +2,8 @@ $( document ).ready(function () {
 
   var termTemplate = "<span class='ui-autocomplete-term'>%s</span>";
 	
+ 
+
 
   var createGaleryComponent = function (event,ui){
 
@@ -369,6 +371,10 @@ function first_time(){
 
           case 'galery':
             createGaleryComponent( event, ui );
+            break;
+
+          case 'sound':
+            createSoundComponent( event, ui );
             break;
 
           default:
