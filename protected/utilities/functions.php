@@ -9,6 +9,32 @@ class functions {
         return $text;
     }
 
+
+    public static function save_base64_file($file_content,$filename,$folder,$extension=null){
+         $parts=explode(',',$file_content);
+         
+         if ($parts[1]){
+
+             if( $extension === null ){
+                 $extension_props=explode('/', $parts[0]);
+                 $extension_props=explode('+', $extension_props[1]);
+                 $extension_props=explode(';', $extension_props[0]);
+                 $extension='.'.$extension_props[0];
+             } 
+             else if($extension == false){
+                $extension='';
+             }
+
+             $file=new file ( $filename.$extension ,$folder);
+             $file->writeLine(base64_decode($parts[1]));
+             $file->closeFile();
+
+             return $file;
+         }
+
+
+    }
+
     public static function compressBase64Image($imagecontent, $sizeTrashold=20000, $quality=100, $pixelarea = 180000 ){
         $parts=explode(',',$imagecontent);
         $changeQuality="";

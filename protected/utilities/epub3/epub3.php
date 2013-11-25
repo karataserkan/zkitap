@@ -33,6 +33,7 @@ class epub3 {
 		{ 
 			$this->tempdirParent=$tempfile;
 			mkdir($tempfile.'/book');
+			mkdir($tempfile.'/book/META-INF');
 			return $tempfile.'/book'; 
 		}
 
@@ -67,11 +68,52 @@ class epub3 {
 
 	}
 
+	public function createGenericFiles(){
+
+			$genericFiles = new stdClass;
+
+			$genericFiles->URL=Yii::app()->request->hostInfo . '/css/epubPublish/generic.zip';
+
+			$genericFiles->filename='generic.zip';
+
+			$genericFiles->contents=file_get_contents($genericFiles->URL);
+
+
+
+			$this->files->genericFiles= new file( $genericFiles->filename, $this->get_tmp_file() );
+			
+			$this->files->genericFiles->writeLine($genericFiles->contents);
+
+			$this->files->genericFiles->closeFile();
+
+			$zip = new ZipArchive;
+
+			$res[]= $result = $zip->open($this->files->genericFiles->filepath);
+			if ($result === TRUE) {
+				$res[]=$zip->extractTo( $this->get_tmp_file().'/' );
+
+			 	$zip->close();
+				unlink($this->files->genericFiles->filepath);
+				unset($this->files->genericFiles);
+
+			} else {
+				$this->errors[]=new error('Epub3-createGenericFiles','File could not be unzipped created');
+				
+
+
+			}
+			return $res;
+
+
+
+	}
+
 
 	public function createCssStyleSheets(){
 
 
-			//page_styles.css
+
+			//page_styles.css 
 
 			if(! $res[]=$this->files->styleSheets->page_style=new file('page_styles.css',$this->get_tmp_file()) )
 			 {
@@ -79,10 +121,23 @@ class epub3 {
 			 }
 
 				$page_styles="
-				@page {
-				  margin-bottom: 5pt;
-				  margin-top: 5pt
+				body {
+
+					border: 1px solid black;
+					zoom: 1;
+					margin-top: 5px;
+					position: relative;
+					color: #000;
+					font-family: monospace;
+					font-size: 13px;
+					line-height: normal
+					width:600px;
+					height:700px;
+					padding: 38px;
+					
 				}
+
+				
 				";
 
 
@@ -168,38 +223,27 @@ class epub3 {
 			 	$this->errors[]=new error('Epub3-createCssStyleSheets','File could not be created');
 			 }
 			
-				$title_page='
-				<?xml version="1.0" encoding="utf-8"?>
-				<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
-					<head>
-						<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-						<title>'.$this->title.'</title>
-						<style type="text/css" title="override_css">
-							@page {padding: 0pt; margin:0pt}
-							body { 
-								text-align: center; padding:0pt; margin: 0pt; background: white;
-								border: thin solid black;
-								zoom: 1;
-								padding: 1cm;
-								margin-top: 5px;
-								height: 700px;
-								width: 600px;
-								position: relative;
-								color: #333;
-								font-family: "Helvetica Neue", Arial, Helvetica, sans-serif;
-								font-size: 13px;
-							}
-						</style>
-					</head>
-					<body>
-						<div>
-							<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="100%" height="100%" viewBox="0 0 425 616" preserveAspectRatio="none">
-								<image width="425" height="616" xlink:href="' . $this->coverImage->filename . '"/>
-							</svg>
-						</div>
-					</body>
-				</html>
-				';
+				$title_page=
+'<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:epub="http://www.idpf.org/2007/ops" lang="en">
+  <head>
+    <meta http-equiv="default-style" content="text/html; charset=utf-8"/>
+    	<title>'.$this->title.'</title>
+
+
+		<meta name="viewport" content="width=600, height=700"/>
+	
+
+		
+	</head>
+	<body>
+		<div>
+			<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="100%" height="100%" viewBox="0 0 425 616" preserveAspectRatio="none">
+				<image width="425" height="616" xlink:href="' . $this->coverImage->filename . '"/>
+			</svg>
+		</div>
+	</body>
+</html>';
 
 
 			if(!$res[]=$this->files->titlepage->writeLine($title_page))	
@@ -236,7 +280,7 @@ class epub3 {
 
 					$new_page=(object)$page->attributes;
 
-					$this->files->pages[]=$new_page->file=new file($new_page->page_id . '.xhtml', $this->get_tmp_file() );
+					$this->files->pages[]=$new_page->file=new file($new_page->page_id . '.html', $this->get_tmp_file() );
 
 
 
@@ -275,25 +319,49 @@ class epub3 {
 	public function prepare_PageHtml(&$page){
 		$components_html='';
 		$page_styles='';
-		$page_structure='
-		<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
-    		"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-		<html>
-			<head>
-				<style type="text/css">
-				%style%
-				</style>
-			</head>
-			<body>
-				%components%
-			</body>
-		</html>
+		$page_structure=
+'<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:epub="http://www.idpf.org/2007/ops" lang="en">
+  <head>
+    <meta http-equiv="default-style" content="text/html; charset=utf-8"/>
+    <title>My first book</title>
 
-		';
+		<meta name="viewport" content="width=680, height=780"/>
+
+		<link rel="stylesheet" href="stylesheet.css" type="text/css"/>
+		<link rel="stylesheet" href="page_styles.css" type="text/css"/>
+		<link rel="stylesheet" href="widgets.css" type="text/css"/>
+		<script type="text/javascript" src="jquery-1.4.4.min.js"></script>
+	    <script type="text/javascript" src="aie_core.js"></script>
+	    <script type="text/javascript" src="aie_events.js"></script>
+	    <script type="text/javascript" src="aie_explore.js"></script>
+	    <script type="text/javascript" src="aie_gameutils.js"></script>
+	    <script type="text/javascript" src="aie_qaa.js"></script>
+	    <script type="text/javascript" src="aie_storyline.js"></script>
+	    <script type="text/javascript" src="aie_textsound.js"></script>
+	    <script type="text/javascript" src="igp_audio.js"></script>
+	    <script type="text/javascript" src="iscroll.js"></script>
+	    <script type="text/javascript" src="jquery.min.js"></script>
+	    <script type="text/javascript" src="jquery-ui.min.js"></script>
+	    <script type="text/javascript" src="LAB.min.js"></script>
+	    <script type="text/javascript" src="panelnav.js"></script>
+	    <script type="text/javascript" src="popup.js"></script>
+	    <script type="text/javascript" src="pubsub.js"></script>
+
+
+	</head>
+	<body>
+	<section epub:type="frontmatter titlepage">
+
+%components%
+	</section>
+
+	</body>
+</html>';
 
 		foreach ($page->components as $component){
 			$component=(object)$component;
-			$component->html=new componentHTML($component);
+			$component->html=new componentHTML($component,$this);
 			$components_html.=$component->html->html;
 		}
 		$page_file_inside=str_replace(array(
@@ -315,23 +383,23 @@ class epub3 {
 			 	$this->errors[]=new error('Epub3-createTOC','File could not be created');
 			 }
 
-				$TOC_Html='
-				<?xml version="1.0" encoding="utf-8"?>
-				<ncx xmlns="http://www.daisy.org/z3986/2005/ncx/" version="2005-1" xml:lang="eng">
-					<head>
-						<meta content="0c159d12-f5fe-4323-8194-f5c652b89f5c" name="dtb:uid"/>
-						<meta content="2" name="dtb:depth"/>
-						<meta content="calibre (0.8.68)" name="dtb:generator"/>
-						<meta content="0" name="dtb:totalPageCount"/>
-						<meta content="0" name="dtb:maxPageNumber"/>
-					</head>
-					<docTitle>
-						<text>'.$this->book->title.'</text>
-					</docTitle>
-					<navMap>
-						%navPoints%
-					</navMap>
-				</ncx>
+				$TOC_Html=
+'<?xml version="1.0" encoding="utf-8"?>
+<ncx xmlns="http://www.daisy.org/z3986/2005/ncx/" version="2005-1" xml:lang="eng">
+	<head>
+		<meta content="0c159d12-f5fe-4323-8194-f5c652b89f5c" name="dtb:uid"/>
+		<meta content="2" name="dtb:depth"/>
+		<meta content="calibre (0.8.68)" name="dtb:generator"/>
+		<meta content="0" name="dtb:totalPageCount"/>
+		<meta content="0" name="dtb:maxPageNumber"/>
+	</head>
+	<docTitle>
+		<text>'.$this->book->title.'</text>
+	</docTitle>
+	<navMap>
+%navPoints%
+	</navMap>
+</ncx>
 				';
 
 
@@ -339,14 +407,14 @@ class epub3 {
 				$index_referance=0;
 				foreach ($this->toc as $key => $toc) {
 
-					$toc_items.='
-					<navPoint id="a'. ($index_referance+1) .'" playOrder="'. $index_referance .'">
-						<navLabel>
-							<text>'.$toc->title.'</text>
-						</navLabel>
-						<content src="'. $toc->page . ( $toc->anchor!="" ? '#'. $toc->anchor : "" ) .'" />
-					</navPoint>
-					';
+					$toc_items.=
+'		<navPoint id="a'. ($index_referance+1) .'" playOrder="'. $index_referance .'">
+			<navLabel>
+				<text>'.$toc->title.'</text>
+			</navLabel>
+			<content src="'. $toc->page . ( $toc->anchor!="" ? '#'. $toc->anchor : "" ) .'" />
+		</navPoint>
+';
 					$index_referance++;
 
 				}
@@ -368,25 +436,22 @@ class epub3 {
 
 
 	public function containerXML(){
-		if(!$res[]=mkdir($this->get_tmp_file_path('META-INF')) ){
-			$this->errors[]=new error('Epub3-containerXML','META-INF could not be Created');
-		}
+		
 
 		//containerXML
 
-		if(! $res[]=$this->files->containerXML=new file('META-INF/container.xml',$this->get_tmp_file()) )
+		if(! $res[]=$this->files->containerXML=new file('container.xml',$this->get_tmp_file().'/META-INF') )
 		 {
 		 	$this->errors[]=new error('Epub3-containerXML','File could not be created');
 		 }
 
-			$containerXML_inside='
-			<?xml version="1.0"?>
-			<container version="1.0" xmlns="urn:oasis:names:tc:opendocument:xmlns:container">
-				<rootfiles>
-					<rootfile full-path="content.opf" media-type="application/oebps-package+xml"/>
-				</rootfiles>
-			</container>
-			';
+			$containerXML_inside=
+'<?xml version="1.0" encoding="UTF-8" ?>
+<container version="1.0" xmlns="urn:oasis:names:tc:opendocument:xmlns:container">
+   <rootfiles>
+      <rootfile full-path="package.opf" media-type="application/oebps-package+xml"/>
+   </rootfiles>
+</container>';
 
 
 		if(!$res[]=$this->files->containerXML->writeLine($containerXML_inside))	
@@ -406,46 +471,77 @@ class epub3 {
 		
 		//contentOPF
 
-		if(! $res[]=$this->files->content=new file('content.opf',$this->get_tmp_file()) )
+		if(! $res[]=$this->files->content=new file('package.opf',$this->get_tmp_file()) )
 		 {
-		 	$this->errors[]=new error('Epub3-contentOPF','File could not be created');
+		 	$this->errors[]=new error('Epub3-OPF','File could not be created');
 		 }
 
-			$content_inside='
-			<?xml version="1.0" encoding="utf-8"?>
-			<package xmlns="http://www.idpf.org/2007/opf" version="2.0" unique-identifier="uuid_id">
-				<metadata xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:opf="http://www.idpf.org/2007/opf" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:calibre="http://calibre.kovidgoyal.net/2009/metadata" xmlns:dc="http://purl.org/dc/elements/1.1/">
-					<dc:language>tr</dc:language>
-					<dc:title>'.$this->title.'</dc:title>
-					<dc:creator opf:role="aut">'.$this->book->author.'</dc:creator>
-					<meta name="cover" content="cover"/>
-					<dc:date>'. date('Y-m-d\TH:i:s+P', strtotime( $this->book->created)).'</dc:date>
-					<dc:contributor opf:role="bkp"></dc:contributor>
-					<dc:identifier id="uuid_id" opf:scheme="uuid">'.functions::uuid().'</dc:identifier>
-				</metadata>
-				<manifest>
-					<item href="cover.jpg" id="cover" media-type="image/jpg"/>
-					%pages_manifest%
-					<item href="page_styles.css" id="page_css" media-type="text/css"/>
-					<item href="stylesheet.css" id="css" media-type="text/css"/>
-					<item href="titlepage.xhtml" id="titlepage" media-type="application/xhtml+xml"/>
-					<item href="toc.ncx" media-type="application/x-dtbncx+xml" id="ncx"/>
-				</manifest>
-				<spine toc="ncx">
-					<itemref idref="titlepage"/>
-					%page_spine%
-				</spine>
-				<guide>
-					<reference href="titlepage.xhtml" type="cover" title="Cover"/>
-				</guide>
-			</package>
-			';
+			$content_inside=
+'<?xml version="1.0" encoding="UTF-8"?>
+<package xmlns="http://www.idpf.org/2007/opf" version="3.0" xml:lang="en" unique-identifier="pub-id" prefix="rendition: http://www.idpf.org/vocab/rendition/#">
+	<metadata xmlns:dc="http://purl.org/dc/elements/1.1/">
+		<dc:language>tr</dc:language>
+		<dc:title id="title" >'.$this->title.'</dc:title>
+		<dc:creator id="creator" >'.$this->book->author.'</dc:creator>
+		<meta property="dcterms:modified">'. date('Y-m-d\TH:i:sP', strtotime( $this->book->created)).'</meta>
+		<dc:date>'. date('Y', strtotime( $this->book->created)).'</dc:date>
+		<dc:contributor></dc:contributor> 
+		<dc:identifier id="uuid_id" >'.functions::uuid().'</dc:identifier>
+		<dc:source>Linden-digital</dc:source>
+		<dc:publisher>Linden digital</dc:publisher>
+		<dc:rights>©2005-13 Linden Digital. All rights reserved</dc:rights>
+		<dc:description>by linden</dc:description>
+		<meta name="cover" content="cover"/>
+		<meta property="rendition:layout">pre-paginated</meta>
+		<meta property="rendition:orientation">portrait</meta>
+		<meta property="rendition:spread">none</meta>
+
+
+
+	</metadata>
+	<manifest>
+		<item href="cover.jpg" id="cover" media-type="image/jpg" />
+%pages_manifest%
+		<item href="page_styles.css" id="page_css" media-type="text/css" />
+		<item href="stylesheet.css" id="css" media-type="text/css" />
+		<item id="css-001" href="widgets.css" media-type="text/css" />
+		<item href="titlepage.xhtml" id="titlepage" media-type="application/xhtml+xml" />
+		<item href="toc.ncx" media-type="application/x-dtbncx+xml" id="ncx" />
+		<item id="js001" href="jquery-1.4.4.min.js" media-type="text/javascript" />
+	    <item id="js002" href="aie_core.js" media-type="text/javascript" />
+	    <item id="js003" href="aie_events.js" media-type="text/javascript" />
+	    <item id="js004" href="aie_explore.js" media-type="text/javascript" />
+	    <item id="js005" href="aie_gameutils.js" media-type="text/javascript" />
+	    <item id="js006" href="aie_qaa.js" media-type="text/javascript" />
+	    <item id="js007" href="aie_storyline.js" media-type="text/javascript" />
+	    <item id="js008" href="aie_textsound.js" media-type="text/javascript" />
+	    <item id="js008" href="Chart.js" media-type="text/javascript" />
+	    <item id="js009" href="igp_audio.js" media-type="text/javascript" />
+	    <item id="js010" href="iscroll.js" media-type="text/javascript" />
+	    <item id="js011" href="jquery.min.js" media-type="text/javascript" />
+	    <item id="js012" href="jquery-ui.min.js" media-type="text/javascript" />
+	    <item id="js013" href="LAB.min.js" media-type="text/javascript" />
+	    <item id="js013" href="kinetic-v4.5.3.min.js" media-type="text/javascript" />
+	    <item id="js014" href="panelnav.js" media-type="text/javascript" />
+	    <item id="js015" href="popup.js" media-type="text/javascript" />
+	    <item id="js016" href="pubsub.js" media-type="text/javascript" />
+	</manifest>
+	<spine toc="ncx" page-progression-direction="ltr">
+		<itemref idref="titlepage" />
+%page_spine%
+	</spine>
+</package>';
 			$pages_manifest="";
 			$page_spine="";
 			foreach ($this->files->pages as $key => $page) {
-				$pages_manifest.='<item href="'.$page->filename.'" id="id'.$key.'" media-type="application/xhtml+xml"/>';
-				$page_spine.='<itemref idref="id'.$key.'"/>';
+				$pages_manifest.="\t\t". '<item href="'.$page->filename.'" id="id'.$key.'" properties="scripted" media-type="application/xhtml+xml"/>'. "\n";
+				$page_spine.="\t\t".'<itemref idref="id'.$key.'" linear="yes" />' . "\n";
 
+			}
+
+			if($this->files->others)
+			foreach ($this->files->others as $assets_key => $asset) {
+				$pages_manifest.="\t\t". '<item href="'.$asset->filename.'" id="asset'.$assets_key.'"  media-type="'. substr(system(' file -i '.$asset->filepath." | awk '{ print $2}'" ),0,-1). '"/>'. "\n";
 			}
 
 
@@ -457,11 +553,11 @@ class epub3 {
 
 		if(!$res[]=$this->files->content->writeLine($content_inside))	
 			 {
-			 	$this->errors[]=new error('Epub3-contentOPF','File could not be written');
+			 	$this->errors[]=new error('Epub3-OPF','File could not be written');
 			 }
 		if(!$res[]=$this->files->content->closeFile())
 			 {
-			 	$this->errors[]=new error('Epub3-contentOPF','File could not be closed');
+			 	$this->errors[]=new error('Epub3-OPF','File could not be closed');
 			 }
 		return $res;
 
@@ -473,26 +569,44 @@ class epub3 {
 		$this->ebookFile=$this->tempdirParent.'/'.file::sanitize($this->title). '.epub';
 
 		$zip->open($this->ebookFile, ZipArchive::CREATE);
-		if (false !== ($dir = opendir($this->get_tmp_file())))
-		     {
-		         while (false !== ($file = readdir($dir)))
-		         {
-		             if ($file != '.' && $file != '..')
-		             {
-		                       $zip->addFile($this->get_tmp_file().DIRECTORY_SEPARATOR.$file);
-		                       //delete if need
-		                       //if($file!=='important.txt') 
-		                       //  unlink($this->get_tmp_file().DIRECTORY_SEPARATOR.$file);
-		             }
-		         }
-		     }
-		     else
-		     {
-		         $this->errors[]=new error('Epub3-zipfolder','Can\'t read folder',$this->get_tmp_file() );
-		         return false;
 
-		     }
-		$zip->close();
+
+
+
+		$source = str_replace('\\', '/', realpath($this->get_tmp_file()));
+
+	    if (is_dir($source) === true)
+	    {
+	        $files = new RecursiveIteratorIterator(new RecursiveDirectoryIterator($source), RecursiveIteratorIterator::SELF_FIRST);
+
+	        foreach ($files as $file)
+	        {
+	            $file = str_replace('\\', '/', $file);
+
+	            // Ignore "." and ".." folders
+	            if( in_array(substr($file, strrpos($file, '/')+1), array('.', '..')) )
+	                continue;
+
+	            $file = realpath($file);
+
+	            if (is_dir($file) === true)
+	            {
+	                $zip->addEmptyDir(str_replace($source . '/', '', $file . '/'));
+	            }
+	            else if (is_file($file) === true)
+	            {
+	                $zip->addFromString(str_replace($source . '/', '', $file), file_get_contents($file));
+	            }
+	        }
+	    }
+	    else if (is_file($source) === true)
+	    {
+	        $zip->addFromString(basename($source), file_get_contents($source));
+	    }
+
+	    return $zip->close();
+
+		
 	}
 
 	public function download(){
@@ -543,6 +657,13 @@ class epub3 {
 		//Copy cover image.
 		if( in_array(false,$this->copyCoverImage() ) ) {
 			$this->errors[]=new error('Epub3-Construction','Problem with Cover Image file');
+			return false;
+		}
+
+
+		//Generic files.
+		if( in_array(false,$this->createGenericFiles() ) ) {
+			$this->errors[]=new error('Epub3-Construction','Problem with Generic files');
 			return false;
 		}
 
