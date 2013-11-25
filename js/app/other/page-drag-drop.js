@@ -2,10 +2,7 @@ $( document ).ready(function () {
 
   var termTemplate = "<span class='ui-autocomplete-term'>%s</span>";
 	
-<<<<<<< HEAD
- 
 
-=======
   var createQuizComponent = function ( event, ui ) {
 
     $("<div class='popup ui-draggable' id='pop-quiz-popup' style='display: block; top:" + (ui.offset.top-$(event.target).offset().top ) + "px; left: " + ( ui.offset.left-$(event.target).offset().left ) + "px;'> \
@@ -123,7 +120,7 @@ $( document ).ready(function () {
 
 
   };
->>>>>>> f2eeeeaf062ac5fc0d69353b37e464fd712cc4d5
+
 
   var createGaleryComponent = function (event,ui){
 
@@ -492,17 +489,15 @@ function first_time(){
           case 'galery':
             createGaleryComponent( event, ui );
             break;
-<<<<<<< HEAD
 
           case 'sound':
             createSoundComponent( event, ui );
             break;
 
-=======
           case 'quiz':
             createQuizComponent( event, ui );
             break;
->>>>>>> f2eeeeaf062ac5fc0d69353b37e464fd712cc4d5
+
           default:
 
         }
