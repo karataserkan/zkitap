@@ -31,7 +31,11 @@
 	<script src="<?php echo Yii::app()->request->baseUrl; ?>js/app/components/text-component.js"></script>	
 	<script src="<?php echo Yii::app()->request->baseUrl; ?>js/app/components/image-component.js"></script>	
 	<script src="<?php echo Yii::app()->request->baseUrl; ?>js/app/components/gallery-component.js"></script>	
+<<<<<<< HEAD
 	<script src="<?php echo Yii::app()->request->baseUrl; ?>js/app/components/sound-component.js"></script>	
+=======
+	<script src="<?php echo Yii::app()->request->baseUrl; ?>js/app/components/quiz-component.js"></script>	
+>>>>>>> f2eeeeaf062ac5fc0d69353b37e464fd712cc4d5
 
 	<script src="<?php echo Yii::app()->request->baseUrl; ?>js/app/other/page-drag-drop.js"></script>
 	<script src="<?php echo Yii::app()->request->baseUrl; ?>js/app/other/page-load.js"></script>
