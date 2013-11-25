@@ -25,19 +25,20 @@ window.lindneo.nisga = (function(window, $, undefined){
         break;
       case 'galery':
         galeryComponentBuilder( component );
-<<<<<<< HEAD
+
       break; 
       case 'sound':
         soundComponentBuilder( component );
       break; 
-=======
+
         break;
       case 'quiz':
         quizComponentBuilder( component );
         break;
->>>>>>> f2eeeeaf062ac5fc0d69353b37e464fd712cc4d5
+
       default:
          // what can I do sometimes
+         break;
     }
     
   }; 
@@ -125,13 +126,10 @@ window.lindneo.nisga = (function(window, $, undefined){
   
   var galeryComponentBuilder = function ( component ) {
     
-<<<<<<< HEAD
+
     var element  = $('<div class="some-gallery"> </div>');
     var elementWrap=$('<div ></div>');
-=======
-    var element  = $('<div></div>');
-    var elementWrap=$('<div></div>');
->>>>>>> f2eeeeaf062ac5fc0d69353b37e464fd712cc4d5
+
     elementWrap.appendTo( page_div_selector );
 
     element
