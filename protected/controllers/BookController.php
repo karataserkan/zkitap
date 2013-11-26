@@ -36,7 +36,7 @@ class BookController extends Controller
 				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
-				'actions'=>array('create','update'),
+				'actions'=>array('create','update','selectTemplate'),
 				'users'=>array('@'),
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
@@ -95,7 +95,15 @@ class BookController extends Controller
 
 	public function actionSelectTemplate($bookId){ 
 
-			$this->redirect(array('author','bookId'=>$model->book_id));
+		$layouts= Book::model()->findAll(array(
+		    'condition'=>'workspace_id=:workspace_id',
+		    'params'=>array(':workspace_id'=>'layouts'),
+		));
+		
+		$this->render('select_template',array(
+			'layouts'=>$layouts,
+		));
+			//$this->redirect(array('author','bookId'=>$model->book_id));
 	}
 
 
