@@ -12,8 +12,8 @@ $(document).ready(function(){
       .attr('id', this.options.component.id)
       .attr('component-instance', 'true')
       .resizable({
-        containment: "#current_page",
-        snap:'10px',
+       
+       
         'stop': function( event, ui ){
           that._resize(event, ui);
         }
@@ -109,10 +109,10 @@ $(document).ready(function(){
     },
 
     _resize: function ( event, ui ) {
-
+    
       this.options.component.data.self.css.width = ui.size.width + "px";
       this.options.component.data.self.css.height = ui.size.height + "px";
-
+   
       this._trigger('update', null, this.options.component );
       
     },
@@ -122,7 +122,8 @@ $(document).ready(function(){
 
       this.options.component.data.self.css.left = ui.position.left + "px";
       this.options.component.data.self.css.top = ui.position.top + "px";
-
+    
+      
       this._trigger('update', null, this.options.component );
     },
 

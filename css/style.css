@@ -13,7 +13,7 @@ select {
     appearance:none;
     cursor:pointer;
 }
-
+;
 /* Targetting Webkit browsers only. FF will show the dropdown arrow with so much padding. */
 @media screen and (-webkit-min-device-pixel-ratio:0) {
     select {padding-right:25px}
@@ -614,7 +614,7 @@ background-color: #E6E7E8;
 border-radius: 5px;
 }
 
-.pie-chart-textbox{
+.chart-textbox{
 width: 60px;
 height: 30px;
 background-color: #e5e5e4;
@@ -623,7 +623,7 @@ padding-left: 10px;
 margin:10px;
 }
 
-.pie-chart-textbox-wide{
+.chart-textbox-wide{
 width: 120px;
 height: 30px;
 background-color: #e5e5e4;
@@ -632,7 +632,7 @@ padding-left: 10px;
 margin:5px 10px;
 }
 
-.pie-chart-slice-holder{
+.slice-holder{
 text-align:left;
 margin-bottom:20px;
 border-bottom: 1px solid #d1d2d4;
