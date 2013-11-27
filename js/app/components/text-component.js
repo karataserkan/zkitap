@@ -40,3 +40,41 @@ $(document).ready(function(){
   }) (window, jQuery);
   
 });
+
+
+
+
+  var createTextComponent = function ( event, ui ) {
+
+    var component = {
+      'type' : 'text',
+      'data': {
+        'textarea':{
+          'css' : {
+            'width':'100%',
+            'height':'100%',
+            'margin': '0',
+            'padding': '0px',
+            'border': 'none 0px',
+            'outline': 'none'
+          } , 
+          'attr': {
+            'asd': 'coadsad'
+          },
+          'val': 'some text'
+        },
+        'self': {
+          'css': {
+            'overflow':'visible',
+            'position':'absolute',
+            'top': (ui.offset.top-$(event.target).offset().top ) + 'px',
+            'left':  ( ui.offset.left-$(event.target).offset().left ) + 'px',
+            'width': '100px',
+            'height': '20px'
+          }
+        }
+      }
+    };
+
+    window.lindneo.tlingit.componentHasCreated(component);
+  };

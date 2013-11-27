@@ -36,6 +36,24 @@ window.lindneo.nisga = (function(window, $, undefined){
         quizComponentBuilder( component );
         break;
 
+      case 'video':
+        videoComponentBuilder( component );
+        break;
+
+      case 'popup':
+        popupComponentBuilder( component );
+        break;
+
+      case 'grafik':
+        graphComponentBuilder( component );
+        break;
+
+      case 'shape':
+        shapeComponentBuilder( component );
+        break;
+
+
+
       default:
          // what can I do sometimes
          break;
@@ -53,14 +71,80 @@ window.lindneo.nisga = (function(window, $, undefined){
 
   };
 
+
+  var shapeComponentBuilder = function( component ) {
+    
+    var element  = $('<canvas> </canvas>');
+    var elementWrap=$('<div ></div>');
+    elementWrap.appendTo( page_div_selector );
+
+    element
+    .appendTo( elementWrap )
+    .shapeComponent({
+      'component': component,
+      'update': function ( event, component ) {
+        window.lindneo.tlingit.componentHasUpdated( component );
+      },
+      'selected': function (event, element) {
+        window.lindneo.currentComponentWidget = element;
+        window.lindneo.toolbox.refresh( element );
+      }
+    });
+
+  };
+
+  var graphComponentBuilder = function( component ) {
+    
+    var element  = $('<canvas> </canvas>');
+    var elementWrap=$('<div ></div>');
+    elementWrap.appendTo( page_div_selector );
+
+    element
+    .appendTo( elementWrap )
+    .graphComponent({
+      'component': component,
+      'update': function ( event, component ) {
+        window.lindneo.tlingit.componentHasUpdated( component );
+      },
+      'selected': function (event, element) {
+        window.lindneo.currentComponentWidget = element;
+        window.lindneo.toolbox.refresh( element );
+      }
+    });
+
+  };
+
   var textComponentBuilder = function( component ) {
 
-    var element = $('<textarea></textarea>');
+    var element = $('<textarea></textarea>'); 
 
     element
     .appendTo( page_div_selector )
     .textComponent({
       'component': component,
+      'update': function ( event, component ) {
+        window.lindneo.tlingit.componentHasUpdated( component );
+      },
+      'selected': function (event, element) {
+        window.lindneo.currentComponentWidget = element;
+        window.lindneo.toolbox.refresh( element );
+      }
+    });
+
+  };
+
+  var popupComponentBuilder = function ( component ) {
+    
+    
+    var element  = $('<div class="popup-controllers"> </div>');
+    var elementWrap=$('<div ></div>');
+    elementWrap.appendTo( page_div_selector );
+
+    element
+    .appendTo( elementWrap )
+    .popupComponent({
+      'component': component,
+      'marker': 'http://ugur.dev.lindneo.com/css/popupmarker.png'  ,
       'update': function ( event, component ) {
         window.lindneo.tlingit.componentHasUpdated( component );
       },
@@ -79,6 +163,7 @@ window.lindneo.nisga = (function(window, $, undefined){
   }; 
 
 
+  
   var imageComponentBuilder = function ( component ) {
     
     var element = $('<img></img>');
@@ -98,7 +183,26 @@ window.lindneo.nisga = (function(window, $, undefined){
 
   };
 
+  var videoComponentBuilder = function ( component ) {
+    
+    var element  = $('<div class="video-controllers"> </div>');
+    var elementWrap=$('<div ></div>');
+    elementWrap.appendTo( page_div_selector );
 
+    element
+    .appendTo( elementWrap )
+    .videoComponent({
+      'component': component,
+      'update': function ( event, component ) {
+        window.lindneo.tlingit.componentHasUpdated( component );
+      },
+      'selected': function (event, element) {
+        window.lindneo.currentComponentWidget = element;
+        window.lindneo.toolbox.refresh( element );
+      }
+    });
+
+  };
 
 
 
