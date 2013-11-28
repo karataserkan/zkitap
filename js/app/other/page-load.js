@@ -6,11 +6,8 @@ $( document ).ready(function(){
   $('#current_page').dblclick(function(e){
     
 
+  	$('.selected').trigger('unselect');
 
-    if( window.lindneo.currentComponentWidget ) {
-      window.lindneo.currentComponentWidget.unselect();
-      window.lindneo.currentComponentWidget = null;
-    }
     
   });
 

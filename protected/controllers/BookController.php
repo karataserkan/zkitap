@@ -36,7 +36,7 @@ class BookController extends Controller
 				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
-				'actions'=>array('create','update'),
+				'actions'=>array('create','update','selectTemplate'),
 				'users'=>array('@'),
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
@@ -82,7 +82,7 @@ class BookController extends Controller
 			$model->attributes=$_POST['Book'];
 
 			if($model->save())
-				$this->redirect(array('author','bookId'=>$model->book_id));
+				$this->redirect(array('selectTemplate','bookId'=>$model->book_id));
 		}
 
 
@@ -92,6 +92,95 @@ class BookController extends Controller
 		));
 
 	}
+
+	public function actionSelectTemplate($bookId=null,$layout_id=null){ 
+
+		$layouts= Book::model()->findAll(array(
+		    'condition'=>'workspace_id=:workspace_id',
+		    'params'=>array(':workspace_id'=>'layouts'),
+		));
+		
+		if(isset($_GET['layout']))
+		{
+			$layout_id = $_GET['layout'];
+			$bookId=$_GET['book_id'];
+			
+			if ($layout_id == 'blank') {
+				$this->redirect(array('author','bookId'=>$bookId));
+			}
+			
+			
+			
+			$chapters= Chapter::model()->findAll(array(
+				'condition' => 'book_id=:book_id',
+				'params' => array(':book_id' => $layout_id),
+			));
+			if ($chapters) {
+				foreach ($chapters as $key => $chapter) {
+					$newchapterid=functions::get_random_string();
+					$newChapter=new Chapter;
+					$newChapter->book_id=$bookId;
+					$newChapter->chapter_id=$newchapterid;
+					$newChapter->title=$chapter->title;
+					$newChapter->start_page=$chapter->start_page;
+					$newChapter->order=$chapter->order;
+					$newChapter->data=$chapter->data;
+					$newChapter->created=date("Y-m-d H:i:s");
+					$newChapter->save();
+
+					$pages = Page::model()->findAll(array(
+						'condition' => 'chapter_id=:chapter_id',
+						'params' => array(':chapter_id'=> $chapter->chapter_id)
+					));
+					if ($pages) {
+						foreach ($pages as $pkey => $page) {
+							$newpageid=functions::get_random_string();
+							$newPage= new Page;
+							$newPage->page_id=$newpageid;
+							$newPage->created=date("Y-m-d H:i:s");
+							$newPage->chapter_id=$newchapterid;
+							$newPage->data=$page->data;
+							$newPage->order=$page->order;
+							$newPage->save();
+
+							$components = Component::model()->findAll(array(
+								'condition' => 'page_id=:page_id',
+								'params' => array(':page_id'=> $page->page_id)
+								));
+
+							if ($components) {
+								foreach ($components as $ckey => $component) {
+									$newComponent = new Component;
+									$newComponent->id=functions::get_random_string();
+									$newComponent->type=$component->type;
+									$newComponent->data=$component->data;
+									$newComponent->created=date("Y-m-d H:i:s");
+									$newComponent->page_id=$newpageid;
+									$newComponent->save();
+								}
+							}
+
+						}
+					}
+					
+				}
+
+			}
+			
+		$this->redirect(array('author','bookId'=>$bookId));
+		}
+
+		
+
+		$this->render('select_template',array(
+			'layouts'=>$layouts,
+			'book_id'=>$bookId,
+		));
+
+			
+	}
+
+
 
 	public function actionAuthor($bookId,$page=null,$component=null){ 
 		$model=$this->loadModel($bookId);

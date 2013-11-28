@@ -107,17 +107,20 @@ $current_user=User::model()->findByPk(Yii::app()->user->id);
 	
 			<div class="styler_box">
 			<!-- <ul id="text-styles" ></ul> -->
-			<a id="undo" class="icon-undo dark-blue size-20"></a>
-			<a id="redo" class="icon-redo grey-8 size-20"></a>
-				
+			<div class="generic-options toolbox"  style="display:inline-block;">
+				<a id="undo" class="icon-undo dark-blue size-20"></a>
+				<a id="redo" class="icon-redo grey-8 size-20"></a>
+			</div>
+
+
 			<div class="vertical-line"></div>
-			<div class="text-options" style="display:inline-block;">
+			<div class="text-options toolbox" style="display:inline-block;">
 					
 					
-					<input type="color" class="color-picker-box radius " placeholder="e.g. #bbbbbb" />
+					<input class='tool color' rel='color' type="color" class="color-picker-box radius " placeholder="e.g. #bbbbbb" />
 					
 					<label class="dropdown-label  ">
-					<select id="font-type" class="radius">
+					<select class='tool select' rel='font-family' id="font-family" class="radius">
 						<option selected="" value="Arial"> Arial </option>
 						<option value="helvetica" >Helvetica</option>
 						<option value="Open Sans" >Open Sans</option>
@@ -127,30 +130,52 @@ $current_user=User::model()->findByPk(Yii::app()->user->id);
 					</label>
 					
 					<label class="dropdown-label ">
-						<select id="font-size" class="radius">
-						<option selected="" value="8"> 8 </option>
-						<option value="10" >10</option>
-						<option value="12" >12</option>
-						<option value="14" >14</option>
-						<option value="16" >16</option>
-						<option value="18" >18</option>
+						<select class='tool select' rel='font-size' id="font-size" class="radius">
+						<option selected="" value="8px"> 8 </option>
+						<option value="10px" >10</option>
+						<option value="12px" >12</option>
+						<option value="14px" >14</option>
+						<option value="16px" >16</option>
+						<option value="18px" >18</option>
+						<option value="20px" >20</option>
+						<option value="24px" >24</option>
+						<option value="26px" >26</option>
+						<option value="28px" >28</option>
+						<option value="30px" >30</option>
 					</select>	
 					</label>					
 				<div class="vertical-line"></div>
 				
-				<a id="font-bold"  href="#" class="dark-blue radius toolbox-items "><i class="icon-font-bold  size-15"></i></a>
-				<a id="font-italic"  href="#" class="dark-blue radius toolbox-items "><i class="icon-font-italic size-15"></i></a>
-				<a id="font-underline"  href="#" class="dark-blue radius toolbox-items "><i class="icon-font-underline size-15"></i></a>
+				<input type="checkbox" id="font-bold" rel='font-weight' activeVal='bold' passiveVal='normal'  class="dark-blue radius toolbox-items btn-checkbox tool checkbox"><label class="icon-font-bold  size-15"> </label>
+				<input type="checkbox" id="font-italic" rel='font-style' activeVal='italic' passiveVal='normal'  class="dark-blue radius toolbox-items btn-checkbox tool checkbox"><label class="icon-font-italic size-15"> </label>
+				<input type="checkbox" id="font-underline" rel='text-decoration' activeVal='underline' passiveVal='none'  class="dark-blue radius toolbox-items btn-checkbox tool checkbox"><label class="icon-font-underline size-15"> </label>
+				
 				<div class="vertical-line"></div>
-				<a id="text-align-left"  href="#" class="dark-blue radius toolbox-items "><i class="icon-text-align-left size-15"></i></a>
-				<a id="text-align-center"  href="#" class="dark-blue radius toolbox-items "><i class="icon-text-align-center  size-15"></i></a>
-				<a id="text-align-right"  href="#" class="dark-blue radius toolbox-items "><i class="icon-text-align-right  size-15"></i></a>
+
+				<input type='radio' rel='text-align' name='text-align' activeVal='left' id="text-align-left"  href="#" class="dark-blue radius toolbox-items radio tool"><label for='text-align-left' class="icon-text-align-left size-15"></label>
+				<input type='radio' rel='text-align' name='text-align' activeVal='center' id="text-align-center"  href="#" class="dark-blue radius toolbox-items  radio tool"><label for='text-align-center' class="icon-text-align-center  size-15"></label>
+				<input type='radio' rel='text-align' name='text-align' activeVal='right' id="text-align-right"  href="#" class="dark-blue radius toolbox-items  radio tool"><label for='text-align-right' class="icon-text-align-right  size-15"></label>
+
 				<div class="vertical-line"></div>
-				<a id="make-list-bullet"  href="#" class="dark-blue radius toolbox-items "><i class="icon-list-bullet size-15"></i></a>
-				<a id="make-list-number"  href="#" class="dark-blue radius toolbox-items "><i class="icon-list-number size-15"></i></a>
+
+				<input type='checkbox' rel='text-listing' name='listing' activeVal='bullet' id="make-list-bullet"   class="dark-blue radius toolbox-items tool checkbox"><label for='make-list-bullet' class="icon-list-bullet size-15" ></label>
+
+
+
+				<input type='checkbox' rel='text-listing' name='listing' activeVal='number' id="make-list-number"   class="dark-blue radius toolbox-items tool checkbox" ><label for='make-list-number' class="icon-list-number size-15"></label>
+
+				<script type="text/javascript">
+				$('#make-list-bullet').change(function(){ if( $(this).is(':checked')==true  ) $('#make-list-number').prop('checked',false);   });
+				$('#make-list-number').change(function(){ if( $(this).is(':checked')==true ) $('#make-list-bullet').prop('checked',false);   });
+
+				
+				</script>
+
 				<div class="vertical-line"></div>
+
 				<a id="text-left-indent"  href="#" class="dark-blue radius toolbox-items "><i class="icon-left-indent size-15"></i></a>
 				<a id="text-right-indent"  href="#" class="dark-blue radius toolbox-items "><i class="icon-right-indent size-15"></i></a>
+
 				<div class="vertical-line"></div>
 					<label class="dropdown-label " id="leading">
 						<i class="icon-leading grey-6"></i>
@@ -192,56 +217,57 @@ $current_user=User::model()->findByPk(Yii::app()->user->id);
 			</div>
 			
 			
-			<div class="image-options" style="display:inline-block;">
-			<div class="vertical-line"></div>
-			<label class="dropdown-label  image-options graph-options shape-options">
-					<i class="icon-opacity grey-6"></i>
-						<select id="font-size" class="radius">
-							<option selected="" value="8"> 100 </option>
-							<option value="0" >0</option>
-							<option value="10" >10</option>
-							<option value="20" >20</option>
-							<option value="30" >30</option>
-							<option value="40" >40</option>
-							<option value="50" >50</option>
-							<option value="60" >60</option>
-							<option value="70" >70</option>
-							<option value="80" >80</option>
-							<option value="90" >90</option>
-							<option value="100" >100</option>
-						</select>	
-				</label>
+			<div class="image-options toolbox" style="display:inline-block;">
+				<div class="vertical-line"></div>
+				<label class="dropdown-label  image-options graph-options shape-options">
+						<i class="icon-opacity grey-6"></i>
+							<select class='tool-select tool select' rel='opacity' rel='color' id="font-size" class="radius">
+								
+								<option value="0" >0</option>
+								<option value="0.10" >10</option>
+								<option value="0.20" >20</option>
+								<option value="0.30" >30</option>
+								<option value="0.40" >40</option>
+								<option value="0.50" >50</option>
+								<option value="0.60" >60</option>
+								<option value="0.70" >70</option>
+								<option value="0.80" >80</option>
+								<option value="0.90" >90</option>
+								<option selected="selected"  value="1" >100</option>
+							</select>	
+					</label>
 			
 			</div>
 			
-			<div class="shape-options" style="display:inline-block;">
-			<div class="vertical-line"></div>
-			<input type="color" class="color-picker-box radius " placeholder="e.g. #bbbbbb" />
-			<div class="vertical-line"></div>
-			<label class="dropdown-label  image-options graph-options shape-options">
-					<i class="icon-opacity grey-6"></i>
-						<select id="font-size" class="radius">
-							<option selected="" value="8"> 100 </option>
-							<option value="0" >0</option>
-							<option value="10" >10</option>
-							<option value="20" >20</option>
-							<option value="30" >30</option>
-							<option value="40" >40</option>
-							<option value="50" >50</option>
-							<option value="60" >60</option>
-							<option value="70" >70</option>
-							<option value="80" >80</option>
-							<option value="90" >90</option>
-							<option value="100" >100</option>
-						</select>	
-				</label>
-			
+			<div class="shape-options toolbox"  style="display:inline-block;">
+				<div class="vertical-line"></div>
+				<input class='tool-color tool color' rel='fillStyle' type="color" class="color-picker-box radius " placeholder="e.g. #bbbbbb" />
+				<div class="vertical-line"></div>
+				<label class="dropdown-label  image-options graph-options shape-options">
+						<i class="icon-opacity grey-6"></i>
+								<select class='tool-select tool select' rel='opacity' rel='color' id="font-size" class="radius">
+								
+								<option value="0" >0</option>
+								<option value="0.10" >10</option>
+								<option value="0.20" >20</option>
+								<option value="0.30" >30</option>
+								<option value="0.40" >40</option>
+								<option value="0.50" >50</option>
+								<option value="0.60" >60</option>
+								<option value="0.70" >70</option>
+								<option value="0.80" >80</option>
+								<option value="0.90" >90</option>
+								<option selected="selected"  value="1" >100</option>
+							</select>	
+					</label>
+				
 			</div>
 
+			<div class="generic-options toolbox"  style="display:inline-block;">
 				<a href="#" class="bck-dark-blue white toolbox-items radius" id="pop-align"><i class="icon-align-center size-20"></i></a>
 				<a href="#" class="bck-dark-blue white toolbox-items radius" id="pop-arrange"><i class="icon-send-backward size-15"></i></a>
 				<a href="#" class="btn grey white radius">Grupla</a>
-			
+			</div>
 				
 			
 			

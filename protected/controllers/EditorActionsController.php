@@ -255,7 +255,7 @@ class EditorActionsController extends Controller
 	}
 
 
-	public function addPage($chapterId,$attributes=null){
+	public function addPage($chapterId,$pageTeplateId=null,$attributes=null){
 		$chapter=Chapter::model()->findByPk($chapterId);
 		if (!$chapter) { 
 			$this->error("EA-ACom","Chapter Not Found",func_get_args(),$chapter);
@@ -267,10 +267,27 @@ class EditorActionsController extends Controller
 		
 		$new_page->page_id=$new_id;
 		$new_page->chapter_id=$chapter->chapter_id;
-
-
-
 		$new_page->save();
+
+		if (isset($pageTeplateId)) {
+			$components = Component::model()->findAll(array(
+				'condition' => 'page_id=:page_id',
+				'params' => array(':page_id'=> $pageTeplateId)
+				));
+
+			if ($components) {
+				foreach ($components as $ckey => $component) {
+					$newComponent = new Component;
+					$newComponent->id=functions::get_random_string();
+					$newComponent->type=$component->type;
+					$newComponent->data=$component->data;
+					$newComponent->created=date("Y-m-d H:i:s");
+					$newComponent->page_id=$new_id;
+					$newComponent->save();
+				}
+			}
+		}
+
 		
 		$result= Page::model()->findByPk($new_id);
 		
@@ -500,6 +517,7 @@ right join book using (book_id) where book_id='$bookId' ;";
 			$searchable="";
 			if ($value->get_data())
 			foreach ($value->get_data() as $key2 => $items) {
+				if ( is_array($items) || is_object($items) )
 				foreach ($items as $key => $value2) {
 					if($key!='css') $searchable.=serialize($value2);
 				}
@@ -601,7 +619,8 @@ right join book using (book_id) where book_id='$bookId' ;";
 }
 
 function sortify($a,$b){
-	if( levenshtein($a[search]->similar_result,$a[search]->searchTerm) > levenshtein($b[search]->similar_result,$b[search]->searchTerm) ){
+	if( levenshtein( substr( $a[search]->similar_result, 0, 250) ,$a[search]->searchTerm ) > 
+		levenshtein( substr( $b[search]->similar_result, 0 , 250) , $b[search]->searchTerm ) ){
 		return 1;
 	}
 	else return -1;

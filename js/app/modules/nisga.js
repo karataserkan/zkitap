@@ -11,6 +11,7 @@ window.lindneo.nisga = (function(window, $, undefined){
   var page_div_selector = '#current_page';
 
   var createComponent = function( component ){
+    console.log(component);
     componentBuilder( component );   
   };
 
@@ -36,6 +37,24 @@ window.lindneo.nisga = (function(window, $, undefined){
         quizComponentBuilder( component );
         break;
 
+      case 'video':
+        videoComponentBuilder( component );
+        break;
+
+      case 'popup':
+        popupComponentBuilder( component );
+        break;
+
+      case 'grafik':
+        graphComponentBuilder( component );
+        break;
+
+      case 'shape':
+        shapeComponentBuilder( component );
+        break;
+
+
+
       default:
          // what can I do sometimes
          break;
@@ -53,14 +72,80 @@ window.lindneo.nisga = (function(window, $, undefined){
 
   };
 
+
+  var shapeComponentBuilder = function( component ) {
+    
+    var element  = $('<canvas> </canvas>');
+    var elementWrap=$('<div ></div>');
+    elementWrap.appendTo( page_div_selector );
+
+    element
+    .appendTo( elementWrap )
+    .shapeComponent({
+      'component': component,
+      'update': function ( event, component ) {
+        window.lindneo.tlingit.componentHasUpdated( component );
+      },
+      'selected': function (event, element) {
+        window.lindneo.currentComponentWidget = element;
+        window.lindneo.toolbox.refresh( element );
+      }
+    });
+
+  };
+
+  var graphComponentBuilder = function( component ) {
+    
+    var element  = $('<canvas> </canvas>');
+    var elementWrap=$('<div ></div>');
+    elementWrap.appendTo( page_div_selector );
+
+    element
+    .appendTo( elementWrap )
+    .graphComponent({
+      'component': component,
+      'update': function ( event, component ) {
+        window.lindneo.tlingit.componentHasUpdated( component );
+      },
+      'selected': function (event, element) {
+        window.lindneo.currentComponentWidget = element;
+        window.lindneo.toolbox.refresh( element );
+      }
+    });
+
+  };
+
   var textComponentBuilder = function( component ) {
 
-    var element = $('<textarea></textarea>');
+    var element = $('<textarea></textarea>'); 
 
     element
     .appendTo( page_div_selector )
     .textComponent({
       'component': component,
+      'update': function ( event, component ) {
+        window.lindneo.tlingit.componentHasUpdated( component );
+      },
+      'selected': function (event, element) {
+        window.lindneo.currentComponentWidget = element;
+        window.lindneo.toolbox.refresh( element );
+      }
+    });
+
+  };
+
+  var popupComponentBuilder = function ( component ) {
+    
+    
+    var element  = $('<div class="popup-controllers"> </div>');
+    var elementWrap=$('<div ></div>');
+    elementWrap.appendTo( page_div_selector );
+
+    element
+    .appendTo( elementWrap )
+    .popupComponent({
+      'component': component,
+      'marker': 'http://ugur.dev.lindneo.com/css/popupmarker.png'  ,
       'update': function ( event, component ) {
         window.lindneo.tlingit.componentHasUpdated( component );
       },
@@ -79,6 +164,7 @@ window.lindneo.nisga = (function(window, $, undefined){
   }; 
 
 
+  
   var imageComponentBuilder = function ( component ) {
     
     var element = $('<img></img>');
@@ -98,7 +184,26 @@ window.lindneo.nisga = (function(window, $, undefined){
 
   };
 
+  var videoComponentBuilder = function ( component ) {
+    
+    var element  = $('<div class="video-controllers"> </div>');
+    var elementWrap=$('<div ></div>');
+    elementWrap.appendTo( page_div_selector );
 
+    element
+    .appendTo( elementWrap )
+    .videoComponent({
+      'component': component,
+      'update': function ( event, component ) {
+        window.lindneo.tlingit.componentHasUpdated( component );
+      },
+      'selected': function (event, element) {
+        window.lindneo.currentComponentWidget = element;
+        window.lindneo.toolbox.refresh( element );
+      }
+    });
+
+  };
 
 
 
@@ -168,18 +273,19 @@ window.lindneo.nisga = (function(window, $, undefined){
   };
 
   var setBgColorOfSelectedComponent = function ( componentId ,activeUser){
-    $('[id="' + componentId + '"]').parent().css({
+    $('[id="' + componentId + '"]').css({
       'border': '1px solid #ccc',
       'border-color': activeUser.color
     });
-    
+    console.log(activeUser.color);
+
+    $('[color="' +activeUser.color+ '"]').parent().find('[component-instance="true"]').css( {'border': 'none'});
     $('[color="' +activeUser.color+ '"]').parent().children('.activeUser').remove();
-    $('[color="' +activeUser.color+ '"]').css( {'border': 'none'});
 
 
     $('[id="' + componentId + '"]').parent().children('.activeUser').remove();
     var activeUserDOM=$('<span class="activeUser" style="position: absolute; top: -20px; right: -20px;color:'+activeUser.color+'; " color="'+activeUser.color+'">'+activeUser.name+'</span>');
-    console.log(activeUserDOM);   
+ 
 
     $('[id="' + componentId + '"]').parent().append(activeUserDOM); 
 
