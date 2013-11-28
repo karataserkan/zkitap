@@ -70,11 +70,11 @@ class Book extends CActiveRecord
 	public function attributeLabels()
 	{
 		return array(
-			'book_id' => 'Book',
-			'workspace_id' => 'Workspace',
-			'title' => 'Title',
-			'author' => 'Author',
-			'created' => 'Created',
+			'book_id' => 'Kitap',
+			'workspace_id' => 'Çalisma Grubu',
+			'title' => 'Kitap Adi',
+			'author' => 'Yazar',
+			'created' => 'Oluşturulma Tarihi',
 			'publish_time' => 'Publish Time',
 			'data' => 'Data',
 		);

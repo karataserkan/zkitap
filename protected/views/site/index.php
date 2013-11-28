@@ -6,10 +6,9 @@ $this->pageTitle=Yii::app()->name;
 
 </div>
 
-<div class="booklistcontainer">
 
-<a href='?r=book/create' 
-class='book_create'/>New Book</a>
+<div style="height:42px;"></div>
+<div style="position: fixed; width: 100%; height: 100%; background-color: #056380; padding:20px; overflow-y: scroll;">
 
 <?php
 		// renders the view file 'protected/views/site/index.php'
@@ -29,8 +28,9 @@ class='book_create'/>New Book</a>
 	    	$workspace=(object)$workspace;
 	    	?>
 	    	<div class='workspace'>
-	    		<h1><?php echo $workspace->workspace_name; ?></h1>
-	    		<a href='?r=book/create&workspace=<?php echo $workspace->workspace_id; ?> class='book_create'/>New Book</a>
+	    		<h1 class="float-left white"><?php echo $workspace->workspace_name; ?></h1>
+	    		<a href='?r=book/create' class="btn white btn radius " style="margin-left:20px;">Yeni Kitap</a>
+				<div style="clear:both"></div>
 	    		<div class='book_list'>
 	    			<?php 
 					

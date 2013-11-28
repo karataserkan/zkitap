@@ -68,7 +68,7 @@ class BookController extends Controller
 	{
 		$model=new Book;
 		$model->book_id=functions::get_random_string();
-		$model->created=date("Y-m-d H:i:s");
+		$model->created=date("Y-m-d");
 
 
 		// Uncomment the following line if AJAX validation is needed

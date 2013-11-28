@@ -357,7 +357,7 @@ margin-right: 20px;
 select#general-options {
 	background-color:#e6e7e8;
 	line-height:1.5em;
-	float:left;
+
 }
 
 
@@ -440,15 +440,128 @@ label#user:after {
 /* END OF HEADER --------------------------------------------------------*/
 
 
+/* ruler */
+.hruler{
+position:absolute;
+top:0; 
+left: 135px;
+
+}
+
+.vbruler{
+position:absolute;
+top: 15px;
+left: 118px;
+}
+
+#ruler .cm {
+		width: 1cm;
+		float:left; 
+		font-size:9px;
+	}
+
+	
+	
+
+.ruler, .ruler li {
+    margin: 0;
+    padding: 0;
+	font-size: 8px;
+    list-style: none;
+    display: inline-block;
+}
+/* IE6-7 Fix */
+.ruler, .ruler li {
+    *display: inline;
+}
+
+
+
+.ruler {
+    background: lightYellow;
+    border-radius: 2px;
+    border: 1px solid #ccc;
+    color: #333;
+    margin: 0;
+    height: 2em;
+    padding-right: 1cm;
+    white-space: nowrap;
+}
+.ruler li {
+    padding-left: 0.99cm;
+    width: 2em;
+    margin: .54em -2em -.40em;
+    text-align: center;
+    position: relative;
+  
+}
+.ruler li:before {
+    content: '';
+    position: absolute;
+    border-left: 1px solid #ccc;
+    height: .64em;
+    top: -.64em;
+    right: 1em;
+}
+
+/* vruler */
+
+	
+
+.vruler, .vruler li {
+    margin: 0;
+    padding: 0;
+		font-size: 8px;
+    list-style: none;
+    display: inline-block;
+}
+/* IE6-7 Fix */
+.vruler, .vruler li {
+    *display: inline;
+}
 
 
 
 
+
+.vruler {
+    background: lightYellow;
+    border-radius: 2px;
+    border: 1px solid #ccc;
+    color: #333;
+	text-align: center;
+    margin: 0;
+    width: 2em;
+	padding-top:20px;
+    white-space: nowrap;
+}
+.vruler hr{
+margin: 0 0 10px;
+}
+
+
+
+
+.vruler li {
+     text-align: center;
+    position: relative;
+  
+}
+
+/* vruler */
+
+
+
+/* ruler */
 
 
 
 
 /* components */
+
+
+
+
 ul li.left_bar_titles {
  background-color:#939597;
  color:#404041;
@@ -666,10 +779,6 @@ text-align:left;
 /*quiz popups*/
 
 
-/* popups*/
-
-
-
 	/*end of popups */
 
 		
@@ -786,18 +895,29 @@ background-color:#0b6f7f;
 }
 	
 /*chapter viewer styles */
+
+	.create-book-container
+{
+	background-color:#056380;
+	position: fixed;
+	width: 100%;
+	height: 100%;
+	text-align:center;
+}
+	
+	
+	
 	
 	/*login page */
 
-	.login-page-container{
+.login-page-container
+{
 	background-color:#056380;
 	position: fixed;
-width: 100%;
-height: 100%;
-text-align:center;
-	
-	
-	}
+	width: 100%;
+	height: 100%;
+	text-align:center;
+}
 	
 .login-page-container-inside{
 	padding: 20px;
@@ -817,17 +937,17 @@ text-align:center;
 	height:100px;
 	
 	}
-<<<<<<< HEAD
 
 	/*login page */
 
 
 /* book list page*/
 
-.booklistcontainer{
+
+.book-list-continer{
 position:relative ;
 background-color: #056380;
-padding-top: 45px;
+padding:20px;
 }
 
 .book-list-box{
@@ -863,13 +983,12 @@ border: 0;
 padding-left: 10px;
 
 }
-
+ 
 .settings-box{
 position: absolute;
 background: #123456;
 color: #ffffff;
 padding: 5px;
-
 width: 100px;
 margin-top: 40px;
 margin-left: 55px;
@@ -879,10 +998,8 @@ height: 150px;
 
 
 
-=======
 	
 #current_page .ui-draggable:hover {border: 1px dashed grey }
 #current_page .ui-draggable:hover .dragging_holder{
 background-color:grey; height:10px; border: 1px dashed grey;cursor: move;
 } 
->>>>>>> b4a0e2f13c7e83b63a655abdad478578ae475c10

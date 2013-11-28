@@ -76,7 +76,7 @@ $current_user=User::model()->findByPk(Yii::app()->user->id);
 					</select>
 					</label>
 					
-					<form action='' id='searchform' >
+					<form action='' id='searchform' style="float:left;">
 
 					<input type="text" id="search" name='component' class="search radius" placeholder="Ara">
 					<input type="hidden" name='r' value='book/author'>
@@ -663,6 +663,7 @@ Grafik Ekle
 			<li ctype="galery" class="component icon-m-galery">&nbsp;&nbsp;&nbsp;&nbsp;Galeri</li>
 			<li ctype="quiz"  class="component icon-m-quiz">&nbsp;&nbsp;&nbsp;&nbsp;Quiz</li>
 			<li ctype="listbox"  class="component icon-m-listbox">&nbsp;&nbsp;&nbsp;&nbsp;Yazı Kutusu</li>
+			<li ctype="link" class="component icon-m-link ui-draggable">&nbsp;&nbsp;&nbsp;&nbsp;Link</li>
 			<li ctype="popup" class="component icon-m-popup">&nbsp;&nbsp;&nbsp;&nbsp;Pop-up</li>
 			<li class="left_bar_titles">Araçlar</li>
 			<li ctype="text" class="component icon-m-text">&nbsp;&nbsp;&nbsp;&nbsp;Yazı</li>
@@ -673,14 +674,7 @@ Grafik Ekle
 			
 		<div>Zoom:	<div id='zoom-pane'></div>
 			</br>
-			<a href="#" class="btn white btn radius " id="pop-image">Add Image</a>
-			<a href="#" class="btn white btn radius " id="pop-sound">Add Sound</a>
-			<a href="#" class="btn white btn radius " id="pop-video">Add Video</a>
-			<a href="#" class="btn white btn radius " id="pop-galery">Add Galery</a>
-			<a href="#" class="btn white btn radius " id="pop-quiz">Add Quiz</a>
-			<a href="#" class="btn white btn radius " id="pop-popup">Add popup</a>
-			<a href="#" class="btn white btn radius " id="pop-chart">Add Chart</a>
-			<a href="#" class="btn white btn radius " id="pop-shape">Add Shape</a>
+			
 			</div>	
 	</div>
 
@@ -768,19 +762,78 @@ $( "#add-button" ).hover(
 
 <div id='author_pane_container' style=' width:100%'>
 	<div id='author_pane' style='position:relative;width:1240px; margin: 0 auto; '> <!-- Outhor Pane -->
-		<div id='ruler' class="hruler" >
-			<?php for ($k=0;$k<150;$k++) {
-				echo "<div class='cm'>$k|</div>";
-			}
-			?>
+		
+			<div class="hruler">
+			<ul class="ruler" data-items="50"></ul>
+			</div>
 			
-		</div><!-- ruler -->
+			<div class="vbruler">
+			<ul class="vruler" data-items="38"></ul>
+			</div>
+			
+			
+			<script>
+			$(function() {
+    // Build "dynamic" rulers by adding items
+    $(".ruler[data-items]").each(function() {
+        var ruler = $(this).empty(),
+            len = Number(ruler.attr("data-items")) || 0,
+            item = $(document.createElement("li")),
+            i;
+        for (i = 0; i < len; i++) {
+            ruler.append(item.clone().text(i + 1));
+        }
+    });
+    // Change the spacing programatically
+    function changeRulerSpacing(spacing) {
+        $(".ruler").
+          css("padding-right", spacing).
+          find("li").
+            css("padding-left", spacing);
+    }
+    
+});
+			</script>
+			
+			
+			<script>
+			$(function() {
+    // Build "dynamic" rulers by adding items
+    $(".vruler[data-items]").each(function() {
+        var ruler = $(this).empty(),
+            len = Number(ruler.attr("data-items")) || 0,
+            item = $(document.createElement("li")),
+			item2 = $(document.createElement("hr")),
+            i;
+        for (i = 0; i < len; i++) {
+            ruler.append(item.clone().text(i + 1));
+			ruler.append(item2.clone());
+        }
+    });
+    // Change the spacing programatically
+    function changeRulerSpacing(spacing) {
+        $(".vruler").
+          css("padding-right", spacing ).
+          find("li").
+            css("padding-left", spacing );
+    }
+    
+});
+			</script>
+			
+			
+			
+		<!-- ruler -->
 		
 		<div id='guide'> 
 		</div> <!-- guide -->
 		<div id='editor_view_pane' style=' padding:5px 130px;margin:5px;float:left;'>
 			
+<<<<<<< HEAD
 					<div id='current_page' page_id='<?php echo $page->page_id ;?>' style='background:white;border:thin solid black;zoom:1; height:768px;width:1024px;position:relative' >
+=======
+					<div id='current_page' page_id='<?php echo $page->page_id ;?>' style='background:white;border:thin solid black;zoom:1;padding:1cm; margin-top:5px;  height:748px;width:1024px;position:relative' >
+>>>>>>> 077f710bf95d21d37368113279860b52ecfebac4
 						
 					</div>
 
