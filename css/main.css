@@ -58,6 +58,7 @@ height: 36px;
 position: fixed;
 top: 42px;
 width: 100%;
+
 padding-left: 10px;
 background-color:#e6e7e8;
 border-bottom: 2px solid #d1d2d4;
@@ -144,24 +145,6 @@ padding: 5px;
 
 }
 
-.hruler{
-background:#ffffff; 
-position:absolute;
-top:0; 
-left: -230px;
-width:160cm;
-height:12px;
-width: 1500px;
-overflow:hidden;
-
-
-}
-
-#ruler .cm {
-		width: 1cm;
-		float:left; 
-		font-size:9px;
-	}
 
 #content
 {
@@ -370,9 +353,6 @@ div.search-form
 {
 	background: #80CFFF;
 }
-
-
-
 
 
 
