@@ -76,7 +76,7 @@
 		</div>
 		
 		<div id="logo" style='float:left'>
-			<a href='<?php $this->createUrl('/site/index');  ?>'/> <img src="<?php echo Yii::app()->request->baseUrl; ?>/css/logo.png" alt="<?php echo CHtml::encode(Yii::app()->name); ?>" /></a>
+			<a href="<?php echo $this->createUrl('site/index');  ?>"/> <img src="<?php echo Yii::app()->request->baseUrl; ?>/css/logo.png" alt="<?php echo CHtml::encode(Yii::app()->name); ?>" /></a>
 		</div>
 		
 

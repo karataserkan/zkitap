@@ -125,6 +125,7 @@ $current_user=User::model()->findByPk(Yii::app()->user->id);
 						<option value="helvetica" >Helvetica</option>
 						<option value="Open Sans" >Open Sans</option>
 						<option value="Times New Roman" >Times New Roman</option>
+						<option value="georgia" >Georgia</option>
 						<option value="Courier New" >Courier New</option>
 					</select>
 					</label>
@@ -142,6 +143,21 @@ $current_user=User::model()->findByPk(Yii::app()->user->id);
 						<option value="26px" >26</option>
 						<option value="28px" >28</option>
 						<option value="30px" >30</option>
+						<option value="32px" >32</option>
+						<option value="34px" >34</option>
+						<option value="36px" >36</option>
+						<option value="38px" >38</option>
+						<option value="40px" >40</option>
+						<option value="42px" >42</option>
+						<option value="44px" >44</option>
+						<option value="46px" >46</option>
+						<option value="48px" >48</option>
+						<option value="50px" >50</option>
+						<option value="52px" >52</option>
+						<option value="54px" >54</option>
+						<option value="56px" >56</option>
+						<option value="58px" >58</option>
+						<option value="60px" >60</option>
 					</select>	
 					</label>					
 				<div class="vertical-line"></div>
@@ -198,20 +214,20 @@ $current_user=User::model()->findByPk(Yii::app()->user->id);
 				
 				<label class="dropdown-label  image-options graph-options shape-options">
 					<i class="icon-opacity grey-6"></i>
-						<select id="font-size" class="radius">
-							<option selected="" value="8"> 100 </option>
-							<option value="0" >0</option>
-							<option value="10" >10</option>
-							<option value="20" >20</option>
-							<option value="30" >30</option>
-							<option value="40" >40</option>
-							<option value="50" >50</option>
-							<option value="60" >60</option>
-							<option value="70" >70</option>
-							<option value="80" >80</option>
-							<option value="90" >90</option>
-							<option value="100" >100</option>
-						</select>	
+							<select class='tool-select tool select' rel='opacity' rel='color' id="font-size" class="radius">
+								
+								<option value="0" >0</option>
+								<option value="0.10" >10</option>
+								<option value="0.20" >20</option>
+								<option value="0.30" >30</option>
+								<option value="0.40" >40</option>
+								<option value="0.50" >50</option>
+								<option value="0.60" >60</option>
+								<option value="0.70" >70</option>
+								<option value="0.80" >80</option>
+								<option value="0.90" >90</option>
+								<option selected="selected"  value="1" >100</option>
+							</select>	
 				</label>
 					<div class="vertical-line"></div>
 			</div>
@@ -264,9 +280,12 @@ $current_user=User::model()->findByPk(Yii::app()->user->id);
 			</div>
 
 			<div class="generic-options toolbox"  style="display:inline-block;">
-				<a href="#" class="bck-dark-blue white toolbox-items radius" id="pop-align"><i class="icon-align-center size-20"></i></a>
+				<!-- <a href="#" class="bck-dark-blue white toolbox-items radius" id="pop-align"><i class="icon-align-center size-20"></i></a>
 				<a href="#" class="bck-dark-blue white toolbox-items radius" id="pop-arrange"><i class="icon-send-backward size-15"></i></a>
 				<a href="#" class="btn grey white radius">Grupla</a>
+				-->
+				<a href="#" class="bck-dark-blue white toolbox-items radius" id="generic-copy" ><i class="icon-copy size-20"></i></a>
+				<a href="#" class="bck-dark-blue white toolbox-items radius" id="generic-paste" ><i class="icon-copy size-20"></i></a>
 			</div>
 				
 			
@@ -761,7 +780,7 @@ $( "#add-button" ).hover(
 		</div> <!-- guide -->
 		<div id='editor_view_pane' style=' padding:5px 130px;margin:5px;float:left;'>
 			
-					<div id='current_page' page_id='<?php echo $page->page_id ;?>' style='background:white;border:thin solid black;zoom:1;padding:1cm; margin-top:5px;  height:700px;width:600px;position:relative' >
+					<div id='current_page' page_id='<?php echo $page->page_id ;?>' style='background:white;border:thin solid black;zoom:1; height:768px;width:1024px;position:relative' >
 						
 					</div>
 

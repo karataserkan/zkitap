@@ -54,7 +54,7 @@ $(document).ready(function(){
               break;
             
             default:
-              return null;
+              return this._super(propertyName,propertyValue);
               break;
           }
       },
@@ -102,7 +102,7 @@ $(document).ready(function(){
               break;
             
             default:
-              return null;
+              return this._super(propertyName);
               break;
           }
 
