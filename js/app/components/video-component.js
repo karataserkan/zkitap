@@ -1,7 +1,7 @@
 'use strict';
 
 $(document).ready(function(){
-  $.widget('lindneo.soundComponent', $.lindneo.component, {
+  $.widget('lindneo.videoComponent', $.lindneo.component, {
     
     options: {
 
@@ -14,25 +14,17 @@ $(document).ready(function(){
     
       if(this.options.component.data.source.attr.src ) {
         var source=$('<source src="'+this.options.component.data.source.attr.src+'" /> ');
-        var audio=$('<audio controls="controls"></audio>');
-        var audio_name=$('<span class="audio-name" >'+this.options.component.data.audio.name+'</span>');
- 
-        source.appendTo(audio);
+        var video=$('<video controls="controls"></video>');
 
-        audio_name.appendTo(this.element);
-        audio.appendTo(this.element);
-        audio.css(this.options.component.data.audio.css);
+        source.appendTo(video);
+        video.appendTo(this.element);
+        video.css(this.options.component.data.video.css);
 
         // this.element.attr('src', this.options.component.data.img.src);  
       }
       
 
       this._super();
-      this.element.height(60);
-      
-      this.element.resizable("option",'maxHeight', 60 );
-      this.element.resizable("option",'minHeight', 60 );
-
     },
 
     field: function(key, value){
@@ -49,21 +41,24 @@ $(document).ready(function(){
 
 
 
- var createSoundComponent = function (event,ui){
+ var createVideoComponent = function (event,ui){
 
   $("<div class='popup ui-draggable' id='pop-image-popup' style='display: block; top:" + (ui.offset.top-$(event.target).offset().top ) + "px; left: " + ( ui.offset.left-$(event.target).offset().left ) + "px;'> \
     <div class='popup-header'> \
-    Ses Ekle \
+    Görsel Ekle \
     <div class='popup-close' id='image-add-dummy-close-button'>x</div> \
     </div> \
-      <div class='gallery-inner-holder'> \
-        <div style='clear:both'></div> \
-        <div class='add-image-drag-area' id='dummy-dropzone'> </div> \
-      </div> \
-         <input type='text' class='input-textbox' id='pop-sound-name' placeholder='Ses Adı'  /> \
-      <div style='clear:both' > </div> \
-     <a id='pop-image-OK' class='btn white btn radius ' >Tamam</a>\
-    </div>").appendTo('body');
+ \
+<!-- popup content--> \
+  <div class='gallery-inner-holder'> \
+    <form id='video-url'> \
+    <input id='video-url-text' class='input-textbox' type='url' placeholder='URL Adresini Giriniz'   value='http://lindneo.com/mp4.mp4'> \
+    <a href='#' id='pop-image-OK' class='btn bck-light-green white radius' id='add-image' style='padding: 5px 30px;'>Ekle</a> \
+    </form> \
+  </div>     \
+   \
+<!-- popup content--> \
+</div>").appendTo('body');
 
     $('#image-add-dummy-close-button').click(function(){
 
@@ -78,24 +73,37 @@ $(document).ready(function(){
 
     $('#pop-image-OK').click(function (){
 
-      
+    var req = new XMLHttpRequest();
+    var videoURL = $('#video-url-text').val();
 
-      var component = {
-          'type' : 'sound',
+    req.open('HEAD',  videoURL , false);
+    req.send(null);
+    var headers = req.getAllResponseHeaders().toLowerCase();
+    var contentType = req.getResponseHeader('content-type');
+    var contenttypes=contentType.split('/');
+    console.log(contenttypes);
+    if (contenttypes[0]!='video'){
+      alert('Lütfen bir video dosyası URL adresi giriniz');
+      return;
+    }
+
+
+    var component = {
+          'type' : 'video',
           'data': {
-              'audio':{
+              'video':{
                 'attr': {
                   'controls':'controls'
                 },
                 'css': {
                   'width' : '100%',
-                  'height': '30px',
+                  'height' : '100%',
                 },
-                'name': $('#pop-sound-name').val()
+                'contentType': contentType
               },
               'source': {
                 'attr': {
-                  'src':imageBinary
+                  'src': videoURL
                 }
               },
               '.audio-name': {
@@ -125,41 +133,6 @@ $(document).ready(function(){
 
     });
 
-    var el = document.getElementById("dummy-dropzone");
-    var imageBinary = '';
-
-    el.addEventListener("dragenter", function(e){
-      e.stopPropagation();
-      e.preventDefault();
-    }, false);
-
-    el.addEventListener("dragexit", function(e){
-      e.stopPropagation();
-      e.preventDefault();
-    },false);
-
-    el.addEventListener("dragover", function(e){
-      e.stopPropagation();
-      e.preventDefault();
-    }, false);
-
-    el.addEventListener("drop", function(e){
-      
-      e.stopPropagation();
-      e.preventDefault();
-
-      var reader = new FileReader();
-      var component = {};
-
-      reader.onload = function (evt) {
-
-         imageBinary = evt.target.result;        
-        
-        
-      };
-
-      reader.readAsDataURL( e.dataTransfer.files[0] );
-
-    }, false);
+   
 
   };

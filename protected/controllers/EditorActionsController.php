@@ -517,6 +517,7 @@ right join book using (book_id) where book_id='$bookId' ;";
 			$searchable="";
 			if ($value->get_data())
 			foreach ($value->get_data() as $key2 => $items) {
+				if ( is_array($items) || is_object($items) )
 				foreach ($items as $key => $value2) {
 					if($key!='css') $searchable.=serialize($value2);
 				}
@@ -618,7 +619,8 @@ right join book using (book_id) where book_id='$bookId' ;";
 }
 
 function sortify($a,$b){
-	if( levenshtein($a[search]->similar_result,$a[search]->searchTerm) > levenshtein($b[search]->similar_result,$b[search]->searchTerm) ){
+	if( levenshtein( substr( $a[search]->similar_result, 0, 250) ,$a[search]->searchTerm ) > 
+		levenshtein( substr( $b[search]->similar_result, 0 , 250) , $b[search]->searchTerm ) ){
 		return 1;
 	}
 	else return -1;

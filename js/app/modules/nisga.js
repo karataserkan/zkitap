@@ -11,6 +11,7 @@ window.lindneo.nisga = (function(window, $, undefined){
   var page_div_selector = '#current_page';
 
   var createComponent = function( component ){
+    console.log(component);
     componentBuilder( component );   
   };
 
@@ -272,18 +273,19 @@ window.lindneo.nisga = (function(window, $, undefined){
   };
 
   var setBgColorOfSelectedComponent = function ( componentId ,activeUser){
-    $('[id="' + componentId + '"]').parent().css({
+    $('[id="' + componentId + '"]').css({
       'border': '1px solid #ccc',
       'border-color': activeUser.color
     });
-    
+    console.log(activeUser.color);
+
+    $('[color="' +activeUser.color+ '"]').parent().find('[component-instance="true"]').css( {'border': 'none'});
     $('[color="' +activeUser.color+ '"]').parent().children('.activeUser').remove();
-    $('[color="' +activeUser.color+ '"]').css( {'border': 'none'});
 
 
     $('[id="' + componentId + '"]').parent().children('.activeUser').remove();
     var activeUserDOM=$('<span class="activeUser" style="position: absolute; top: -20px; right: -20px;color:'+activeUser.color+'; " color="'+activeUser.color+'">'+activeUser.name+'</span>');
-    console.log(activeUserDOM);   
+ 
 
     $('[id="' + componentId + '"]').parent().append(activeUserDOM); 
 
