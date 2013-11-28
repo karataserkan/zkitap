@@ -829,12 +829,9 @@ $( "#add-button" ).hover(
 		</div> <!-- guide -->
 		<div id='editor_view_pane' style=' padding:5px 130px;margin:5px;float:left;'>
 			
-<<<<<<< HEAD
+
 					<div id='current_page' page_id='<?php echo $page->page_id ;?>' style='background:white;border:thin solid black;zoom:1; height:768px;width:1024px;position:relative' >
-=======
-					<div id='current_page' page_id='<?php echo $page->page_id ;?>' style='background:white;border:thin solid black;zoom:1;padding:1cm; margin-top:5px;  height:748px;width:1024px;position:relative' >
->>>>>>> 077f710bf95d21d37368113279860b52ecfebac4
-						
+
 					</div>
 
 
