@@ -937,7 +937,6 @@ background-color:#0b6f7f;
 	height:100px;
 	
 	}
-<<<<<<< HEAD
 
 	/*login page */
 
@@ -984,7 +983,7 @@ border: 0;
 padding-left: 10px;
 
 }
-
+ 
 .settings-box{
 position: absolute;
 background: #123456;
@@ -999,18 +998,8 @@ height: 150px;
 
 
 
-<<<<<<< HEAD
-
-
-
-
-
-=======
->>>>>>> bd54bf606f066ac333d792f782c37ef9f1ca9db0
-=======
 	
 #current_page .ui-draggable:hover {border: 1px dashed grey }
 #current_page .ui-draggable:hover .dragging_holder{
 background-color:grey; height:10px; border: 1px dashed grey;cursor: move;
 } 
->>>>>>> b4a0e2f13c7e83b63a655abdad478578ae475c10
