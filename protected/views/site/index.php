@@ -11,6 +11,27 @@ $this->pageTitle=Yii::app()->name;
 <div style="position: fixed; width: 100%; height: 100%; background-color: #056380; padding:20px; overflow-y: scroll;">
 
 <?php
+		
+	/**
+	* this returns the user type for $bookId
+	* return owner | editor | user | false
+	*/
+	function userType($bookId)
+	{
+		$userid=Yii::app()->user->id;
+
+		$bookOfUser= Yii::app()->db->createCommand()
+	    ->select("*")
+	    ->from("book_users")
+	    ->where("book_id=:book_id", array(':book_id' => $bookId))
+	    ->andWhere("user_id=:user_id", array(':user_id' => $userid))
+	    ->queryRow();
+	    
+	    return ($bookOfUser) ? $bookOfUser['type'] : false;
+	}
+
+
+
 		// renders the view file 'protected/views/site/index.php'
 		// using the default layout 'protected/views/layouts/main.php'
 		$userid=Yii::app()->user->id;
@@ -37,7 +58,8 @@ $this->pageTitle=Yii::app()->name;
 	    			$all_books= Book::model()->findAll('workspace_id=:workspace_id', 
 	    				array(':workspace_id' => $workspace->workspace_id  ) ); 
 	    			foreach ($all_books as $key => $book) {
-	    				
+	    				$userType = userType($book->book_id);
+
 	    				?>
 						
 						<!-- kitap kutusu-->
@@ -51,7 +73,7 @@ $this->pageTitle=Yii::app()->name;
 								Yazar Adı<input type="text" class="book-list-textbox radius grey-9 float-right" value="<?php echo $book->author ?>">
 								
 							</div>
-
+<!--
 							<div class="book-list-box-text-container">
 								Kitap Editörleri <a href="#" class="btn icon-settings white btn radius float-right" id="book-editors-settings"></a> 
 									<label class="dropdown-label">
@@ -63,9 +85,24 @@ $this->pageTitle=Yii::app()->name;
 									</label>
 								
 							</div>
+-->
 							<div class="book-list-box-text-container" style="text-align:right;">
-								<a href="<?php echo Yii::app()->createUrl('book/delete', array('bookId'=>$book->book_id) ); ?>" class="btn red radius white icon-delete " style="font-weight:normal;" id="pop-video"></a>
-								<a href="<?php echo Yii::app()->createUrl('book/author', array('bookId'=>$book->book_id) ); ?>" class="btn white btn radius " id="pop-video">Düzenle</a>
+								<?php
+									if ($userType==='owner') {
+										?>
+										<a href="#" class="btn icon-settings white btn radius float-right" id="book-editors-settings"></a>
+										<a href="<?php echo Yii::app()->createUrl('book/delete', array('bookId'=>$book->book_id) ); ?>" class="btn red radius white icon-delete " style="font-weight:normal;" id="pop-video"></a>
+										<a href="<?php echo Yii::app()->createUrl('book/author', array('bookId'=>$book->book_id) ); ?>" class="btn white btn radius " id="pop-video">Düzenle</a>
+										<?php
+									}
+									elseif ($userType==='editor') {
+										?>
+										<a href="<?php echo Yii::app()->createUrl('book/author', array('bookId'=>$book->book_id) ); ?>" class="btn white btn radius " id="pop-video">Düzenle</a>
+										<?php
+									}
+								?>
+
+								<a href="<?php echo Yii::app()->createUrl('EditorActions/ExportBook', array('bookId'=>$book->book_id) ); ?>" class="btn bck-light-green white radius" id="header-buttons"><i class="icon-publish"> Indir</i></a>
 							</div>
 						</div>
 
