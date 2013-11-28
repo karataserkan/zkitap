@@ -28,6 +28,86 @@ $(document).ready(function(){
           
       },
 
+      getSettable : function (){
+        return this.options.component.data.textarea;
+      },
+
+
+      setPropertyofObject : function (propertyName,propertyValue){
+
+        switch (propertyName){
+
+
+            case 'font-size':           
+            case 'text-align':           
+            case 'font-family':         
+            case 'color':
+            case 'font-weight':           
+            case 'font-style':         
+            case 'text-decoration':   
+
+                this.getSettable().css[propertyName]=propertyValue;
+                console.log(this.getSettable());
+                var return_val;
+                return this.getProperty(propertyName) ;
+              
+              break;
+            
+            default:
+              return null;
+              break;
+          }
+      },
+
+      getProperty : function (propertyName){
+
+          switch (propertyName){
+            case 'font-size':           
+            case 'font-type':         
+            case 'color':
+            case 'font-weight':           
+            case 'font-style':         
+            case 'text-decoration': 
+            case 'text-align':         
+            
+
+                switch (propertyName){
+                  case 'text-align':
+                    var default_val='left';
+                    break;
+                  case 'font-weight':
+                    var default_val='normal';
+                    break;
+                  case 'font-style':
+                    var default_val='normal';
+                    break;
+                  case 'text-decoration':
+                    var default_val='none';
+                    break;
+                  case 'font-size':
+                    var default_val='14px';
+                    break;
+                  case 'font-type':
+                    var default_val='Arial';
+                    break;
+                  case 'color':
+                    var default_val='#000';
+                    break;
+                }
+
+                var return_val=this.getSettable().css[propertyName];
+
+                return ( return_val ? return_val : default_val );
+              
+              break;
+            
+            default:
+              return null;
+              break;
+          }
+
+      },
+
       _change: function ( ui ) {
 
         this.options.component.data.textarea.val = $(ui.target).val();
@@ -36,7 +116,7 @@ $(document).ready(function(){
       }
 
     });
-
+         
   }) (window, jQuery);
   
 });
@@ -56,7 +136,14 @@ $(document).ready(function(){
             'margin': '0',
             'padding': '0px',
             'border': 'none 0px',
-            'outline': 'none'
+            'outline': 'none',
+            'color' : '#000',
+            'font-size' : '14px',
+            'font-family' : 'Arial',
+            'font-weight' : 'normal',
+            'font-style' : 'normal',
+            'text-decoration' : 'none',
+            'background-color' : 'transparent'  
           } , 
           'attr': {
             'asd': 'coadsad'
@@ -69,8 +156,10 @@ $(document).ready(function(){
             'position':'absolute',
             'top': (ui.offset.top-$(event.target).offset().top ) + 'px',
             'left':  ( ui.offset.left-$(event.target).offset().left ) + 'px',
-            'width': '100px',
-            'height': '20px'
+            'width': '150px',
+            'height': '100px',
+            'opacity': '1'
+
           }
         }
       }

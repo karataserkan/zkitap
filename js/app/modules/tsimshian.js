@@ -18,8 +18,8 @@ window.lindneo.tsimshian = (function(window, $, undefined){
   var componentUpdated = function (component) {    
 
     window.lindneo.tsimshian.myComponent = component.id;
-    //console.log('Sending');
-    //console.log(window.lindneo.tsimshian.myComponent);
+    console.log('Sending');
+    console.log(window.lindneo.tsimshian.myComponent);
     this.socket.emit('updateComponent', component);
 
   };
@@ -79,54 +79,27 @@ window.lindneo.tsimshian = (function(window, $, undefined){
        this.socket.on('newComponent', function(component){
           console.log(component.id) ;
           console.log(window.lindneo.tsimshian.myComponent) ;
-        if(window.lindneo.tsimshian.myComponent!=component.id ){
-          console.log('Its new');
           window.lindneo.nisga.createComponent(component);
-        } else {
-          window.lindneo.tsimshian.myComponent='';
-          console.log('I had sent it');
-        }
        } );
 
  
        this.socket.on('destroyComponent', function(componentId){
-          console.log(componentId) ;
-          console.log(window.lindneo.tsimshian.myComponent) ;
-        if(window.lindneo.tsimshian.myComponent!=componentId ){
-          console.log('Its new');
           window.lindneo.nisga.destroyComponent(componentId);
-        } else {
-          console.log('I had sent it');
-        }
+        
        } );
 
-
-
-
        this.socket.on('updateComponent', function(component){
-          console.log(componentId) ;
-          console.log(window.lindneo.tsimshian.myComponent) ;
-        if(window.lindneo.tsimshian.myComponent!=component.id ){
-          console.log('Its new');
+   
           window.lindneo.nisga.destroyComponent(component.id);
           window.lindneo.nisga.createComponent(component);
-        } else {
-          console.log('I had sent it');
-        }
+  
        } );
 
       this.socket.on('emitSelectedComponent', function( select_item ) {
-       var componentId=select_item.componentId;
-       var activeUser=select_item.user;
-
-
-
-        console.log(select_item);
-        console.log(window.lindneo.tsimshian.myComponent);
-
-        if( window.lindneo.tsimshian.myComponent != componentId ) { 
+          var componentId=select_item.componentId;
+          var activeUser=select_item.user;
           window.lindneo.nisga.setBgColorOfSelectedComponent( componentId,activeUser );
-        }
+        
       });
 
 
