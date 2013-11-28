@@ -145,7 +145,7 @@ window.lindneo.nisga = (function(window, $, undefined){
     .appendTo( elementWrap )
     .popupComponent({
       'component': component,
-      'marker': 'http://ugur.dev.lindneo.com/css/popupmarker.png'  ,
+      'marker': 'http://dev.lindneo.com/css/popupmarker.png'  ,
       'update': function ( event, component ) {
         window.lindneo.tlingit.componentHasUpdated( component );
       },
