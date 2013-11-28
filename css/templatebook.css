@@ -78,15 +78,5 @@ a {
 	height:300px;
 	margin-left:auto;
 	margin-right:auto;
-	background-color:#C66;
-}
-
-.modern_cover {
-	background-image:url(../images/landscape/modern.png);
-	background-size:cover;
-}
-
-.classic_cover {
-	background-image:url(../images/landscape/classic.png);
-	background-size:cover;
+	background-color:#fff;
 }
