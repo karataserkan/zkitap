@@ -11,7 +11,7 @@ window.lindneo.tsimshian = (function(window, $, undefined){
   var myComponent='';
  
   var serverName = function (){
-    return "http://ugur.dev.lindneo.com:1881";
+    return "http://dev.lindneo.com:1881";
   }; 
 
 
@@ -67,7 +67,7 @@ window.lindneo.tsimshian = (function(window, $, undefined){
 
   var init = function (serverName){
 
-    this.socket = io.connect("http://ugur.dev.lindneo.com:1881");
+    this.socket = io.connect("http://dev.lindneo.com:1881");
     this.socket.on('connection', function (data) {
       var user=window.lindneo.tsimshian.getCurrentUser();
        this.socket.emit('changePage',user);

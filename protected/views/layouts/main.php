@@ -38,6 +38,8 @@
 	<script src="<?php echo Yii::app()->request->baseUrl; ?>js/app/components/popup-component.js"></script>	
 	<script src="<?php echo Yii::app()->request->baseUrl; ?>js/app/components/shape-component.js"></script>	
 	<script src="<?php echo Yii::app()->request->baseUrl; ?>js/app/components/graph-component.js"></script>	
+	<script src="<?php echo Yii::app()->request->baseUrl; ?>js/app/components/link-component.js"></script>	
+	<script src="<?php echo Yii::app()->request->baseUrl; ?>js/app/components/sidebar-component.js"></script>	
 
 
 	<script src="<?php echo Yii::app()->request->baseUrl; ?>js/app/other/page-drag-drop.js"></script>

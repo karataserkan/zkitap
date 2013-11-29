@@ -9,7 +9,7 @@ $( document ).ready(function () {
       minLength: 2, 
       source: function( request, response ) {
               $.ajax({
-                url: "http://ugur.dev.lindneo.com/index.php?r=EditorActions/SearchOnBook",
+                url: "http://dev.lindneo.com/index.php?r=EditorActions/SearchOnBook",
                 dataType: "json",
                 data: {
                   currentPageId: window.lindneo.currentPageId,
@@ -72,8 +72,9 @@ $( document ).ready(function () {
 
 
     $( ".component" ).draggable({
-     // helper: "clone",
-      revert: "valid",
+      //helper: "clone",
+      revert: true, 
+
       snap: true
     });
 
@@ -124,6 +125,10 @@ $( document ).ready(function () {
 
           case 'shape':
             createShapeComponent( event, ui  );
+            break;
+
+          case 'link':
+            createLinkComponent( event, ui  );
             break;
 
           default:
