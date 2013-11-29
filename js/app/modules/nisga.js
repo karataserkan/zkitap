@@ -67,11 +67,13 @@ window.lindneo.nisga = (function(window, $, undefined){
   }; 
 
   var destroyComponent = function ( componentId ) {
+    $('[id="'+componentId+'"]').parent().not('#current_page').remove();
     $('[id="'+componentId+'"]').remove();
   };
 
   var deleteComponent = function ( component ) {
 
+    window.lindneo.toolbox.removeComponentFromSelection( $('#'+ component.id) );
     window.lindneo.tlingit.componentHasDeleted( component.id );
 
   };
@@ -148,7 +150,7 @@ window.lindneo.nisga = (function(window, $, undefined){
     element
     .appendTo( elementWrap )
     .popupComponent({
-      'component': component, 
+      'component': component,
       'marker': 'http://dev.lindneo.com/css/linkmarker.png'  ,
       'update': function ( event, component ) {
         window.lindneo.tlingit.componentHasUpdated( component );

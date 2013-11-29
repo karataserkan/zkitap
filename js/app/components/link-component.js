@@ -72,7 +72,7 @@ var IsURL = function (url) {
 
 var createLinkComponent = function ( event, ui ) {
 
-    $("<div class='popup ui-draggable' id='pop-image-popup' style='display: block; top:" + (ui.offset.top-$(event.target).offset().top ) + "px; left: " + ( ui.offset.left-$(event.target).offset().left ) + "px;'> \
+    $("<div class='popup ui-draggable' id='pop-image-link' style='display: block; top:" + (ui.offset.top-$(event.target).offset().top ) + "px; left: " + ( ui.offset.left-$(event.target).offset().left ) + "px;'> \
       <div class='popup-header'> \
       Görsel Ekle \
       <div class='popup-close' id='image-add-dummy-close-button'>x</div> \
@@ -124,7 +124,7 @@ var createLinkComponent = function ( event, ui ) {
                 'z-index': '99997'
               },
               'attr':{
-                'href': targetURL,
+                'href': targetURL
               }
             }
           }
