@@ -118,7 +118,16 @@ $current_user=User::model()->findByPk(Yii::app()->user->id);
 					
 					
 					<input class='tool color' rel='color' type="color" class="color-picker-box radius " placeholder="e.g. #bbbbbb" />
-					
+					<label class="dropdown-label  ">
+					<select class='tool select' rel='fast-style' id="fast-style" class="radius">
+						<option value="">Serbest</option>
+						<option value="h1" >Başlık</option>
+						<option value="h2" >Alt Başlık</option>
+						<option value="h3" >Kucuk Başlık</option>
+						<option value="p"  >Paragraf</option>
+						<option value="blockqoute" >Alıntı</option>
+					</select>
+					</label>				
 					<label class="dropdown-label  ">
 					<select class='tool select' rel='font-family' id="font-family" class="radius">
 						<option selected="" value="Arial"> Arial </option>
@@ -284,8 +293,9 @@ $current_user=User::model()->findByPk(Yii::app()->user->id);
 				<a href="#" class="bck-dark-blue white toolbox-items radius" id="pop-arrange"><i class="icon-send-backward size-15"></i></a>
 				<a href="#" class="btn grey white radius">Grupla</a>
 				-->
-				<a href="#" class="bck-dark-blue white toolbox-items radius" id="generic-copy" ><i class="icon-copy size-20"></i></a>
-				<a href="#" class="bck-dark-blue white toolbox-items radius" id="generic-paste" ><i class="icon-copy size-20"></i></a>
+				<a href="#" class="bck-dark-blue white  radius" id="generic-copy" ><i class="icon-copy size-20">Kes</i></a>
+				<a href="#" class="bck-dark-blue white  radius" id="generic-copy" ><i class="icon-copy size-20">Kopyala</i></a>
+				<a href="#" class="bck-dark-blue white  radius" id="generic-paste" ><i class="icon-copy size-20">Yapıştır</i></a>
 			</div>
 				
 			

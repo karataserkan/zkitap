@@ -67,6 +67,7 @@ window.lindneo.nisga = (function(window, $, undefined){
   }; 
 
   var destroyComponent = function ( componentId ) {
+    $('[id="'+componentId+'"]').parent().not('#current_page').remove();
     $('[id="'+componentId+'"]').remove();
   };
 
@@ -148,7 +149,7 @@ window.lindneo.nisga = (function(window, $, undefined){
     element
     .appendTo( elementWrap )
     .popupComponent({
-      'component': component, 
+      'component': component,
       'marker': 'http://dev.lindneo.com/css/linkmarker.png'  ,
       'update': function ( event, component ) {
         window.lindneo.tlingit.componentHasUpdated( component );

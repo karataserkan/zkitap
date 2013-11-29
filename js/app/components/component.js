@@ -55,7 +55,7 @@ $(document).ready(function(){
 
       .mouseenter(function(event){
         // add delete button
-        var deleteButton = $('<a id="delete-button-' + that.options.component.id + '"class="btn red white size-15 radius icon-delete page-chapter-delete delete-page" style="position: absolute; top: -20px; right: -20px;"></a>');
+        var deleteButton = $('<a id="delete-button-' + that.options.component.id + '"class="btn red white size-15 radius icon-delete page-chapter-delete delete-page" style="position: absolute; top: 0px; right: -20px;"></a>');
         
         deleteButton.click(function(e){
           e.preventDefault();
