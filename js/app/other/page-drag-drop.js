@@ -72,8 +72,9 @@ $( document ).ready(function () {
 
 
     $( ".component" ).draggable({
-     // helper: "clone",
-      revert: "valid",
+      //helper: "clone",
+      revert: true, 
+
       snap: true
     });
 
@@ -124,6 +125,10 @@ $( document ).ready(function () {
 
           case 'shape':
             createShapeComponent( event, ui  );
+            break;
+
+          case 'link':
+            createLinkComponent( event, ui  );
             break;
 
           default:
