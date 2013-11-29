@@ -10,15 +10,23 @@ window.lindneo.toolbox = (function(window, $, undefined){
 
 
 
-  var _create = function () {
+   
 
+
+
+  var _create = function () {
+    
 
   };
 
 
   var getClipboardItems = function  (){
     return JSON.parse( localStorage.getItem('clipboard') );
-  };
+  }; 
+  var clearClipboard = function () {
+    return localStorage.removeItem('clipboard');
+  }
+
   var setClipboardItems = function (newClipboard){
     return localStorage.setItem('clipboard', JSON.stringify( newClipboard ));
   };
@@ -117,7 +125,8 @@ window.lindneo.toolbox = (function(window, $, undefined){
   var copySelectedItemsToClipboard = function (cut) {
 
         var newClipboard=[];
-        this.setClipboardItems(newClipboard);
+
+        this.clearClipboard();
 
         $.each(window.lindneo.toolbox.selectedComponents, function( key, component ) {
 
@@ -136,8 +145,9 @@ window.lindneo.toolbox = (function(window, $, undefined){
  
   };
 
+
   var pasteClipboardItems = function () {
-      var oldClipboard = that.getClipboardItems();
+      var oldClipboard = this.getClipboardItems();
       var newClipboard=[];
 
       $.each(oldClipboard, function( key, component ) {
@@ -148,19 +158,21 @@ window.lindneo.toolbox = (function(window, $, undefined){
 
         window.lindneo.tlingit.componentHasCreated( component );
       });
-      return that.setClipboardItems(newClipboard);
-  }
+      return this.setClipboardItems(newClipboard);
+  };
 
   var load = function () {
     // creates toolbox
+
     var that=this;
 
-    $('.toolbox').hide();
+
+     $('.toolbox').hide();
 
     $('#generic-cut').click(function(){
       that.copySelectedItemsToClipboard(true);
     });
-
+ 
     $('#generic-copy').click(function(){
       that.copySelectedItemsToClipboard(false);
     });
@@ -189,6 +201,7 @@ window.lindneo.toolbox = (function(window, $, undefined){
   return {
     pasteClipboardItems: pasteClipboardItems,
     copySelectedItemsToClipboard: copySelectedItemsToClipboard,
+    clearClipboard: clearClipboard,
     setClipboardItems: setClipboardItems,
     getClipboardItems: getClipboardItems,
     selectionUpdated: selectionUpdated,
