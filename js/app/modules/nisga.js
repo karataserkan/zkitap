@@ -73,6 +73,7 @@ window.lindneo.nisga = (function(window, $, undefined){
 
   var deleteComponent = function ( component ) {
 
+    window.lindneo.toolbox.removeComponentFromSelection( $('#'+ component.id) );
     window.lindneo.tlingit.componentHasDeleted( component.id );
 
   };

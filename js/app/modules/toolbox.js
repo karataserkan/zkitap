@@ -9,13 +9,19 @@ window.lindneo.toolbox = (function(window, $, undefined){
   var selectedComponents=[];
 
 
+
   var _create = function () {
 
 
   };
 
 
-
+  var getClipboardItems = function  (){
+    return JSON.parse( localStorage.getItem('clipboard') );
+  };
+  var setClipboardItems = function (newClipboard){
+    return localStorage.setItem('clipboard', JSON.stringify( newClipboard ));
+  };
 
   var selectionUpdated = function (){
       $('.toolbox').hide();
@@ -85,9 +91,11 @@ window.lindneo.toolbox = (function(window, $, undefined){
       });
 
      
+     
 
 
   };
+
 
 
   var addComponentToSelection = function (component){
@@ -106,10 +114,61 @@ window.lindneo.toolbox = (function(window, $, undefined){
 
 
 
+  var copySelectedItemsToClipboard = function (cut) {
+
+        var newClipboard=[];
+        this.setClipboardItems(newClipboard);
+
+        $.each(window.lindneo.toolbox.selectedComponents, function( key, component ) {
+
+          if(cut==true) window.lindneo.nisga.deleteComponent( component.options.component );
+          
+          var newComponent =JSON.parse(JSON.stringify(component.options.component)); 
+
+          newComponent.id= '';
+          newComponent.page_id= '';
+
+          newClipboard.push(newComponent);
+
+        });
+
+        return this.setClipboardItems(newClipboard);
+ 
+  };
+
+  var pasteClipboardItems = function () {
+      var oldClipboard = that.getClipboardItems();
+      var newClipboard=[];
+
+      $.each(oldClipboard, function( key, component ) {
+        component.data.self.css.top = (parseInt(component.data.self.css.top)+25 ) +"px";
+        component.data.self.css.left = (parseInt(component.data.self.css.left)+25 ) +"px";
+
+        newClipboard.push(component);
+
+        window.lindneo.tlingit.componentHasCreated( component );
+      });
+      return that.setClipboardItems(newClipboard);
+  }
 
   var load = function () {
     // creates toolbox
-     $('.toolbox').hide();
+    var that=this;
+
+    $('.toolbox').hide();
+
+    $('#generic-cut').click(function(){
+      that.copySelectedItemsToClipboard(true);
+    });
+
+    $('#generic-copy').click(function(){
+      that.copySelectedItemsToClipboard(false);
+    });
+
+    $('#generic-paste').click(function(){
+      that.pasteClipboardItems();
+    });
+
   };
 
   var refresh = function ( component ) {
@@ -128,6 +187,10 @@ window.lindneo.toolbox = (function(window, $, undefined){
   };
 
   return {
+    pasteClipboardItems: pasteClipboardItems,
+    copySelectedItemsToClipboard: copySelectedItemsToClipboard,
+    setClipboardItems: setClipboardItems,
+    getClipboardItems: getClipboardItems,
     selectionUpdated: selectionUpdated,
     selectedComponents: selectedComponents,
     addComponentToSelection: addComponentToSelection,

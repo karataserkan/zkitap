@@ -287,13 +287,17 @@ $current_user=User::model()->findByPk(Yii::app()->user->id);
 					</label>
 				
 			</div>
-
 			<div class="generic-options toolbox"  style="display:inline-block;">
+				<a href="#" class="bck-dark-blue white toolbox-items radius" id="pop-align"><i class="icon-align-center size-20"></i></a>
+				<a href="#" class="bck-dark-blue white toolbox-items radius" id="pop-arrange"><i class="icon-send-backward size-15"></i></a>
+				<a href="#" class="btn grey white radius">Grupla</a>
+			</div>
+			<div class="generic-options"  style="display:inline-block;">
 				<!-- <a href="#" class="bck-dark-blue white toolbox-items radius" id="pop-align"><i class="icon-align-center size-20"></i></a>
 				<a href="#" class="bck-dark-blue white toolbox-items radius" id="pop-arrange"><i class="icon-send-backward size-15"></i></a>
 				<a href="#" class="btn grey white radius">Grupla</a>
 				-->
-				<a href="#" class="bck-dark-blue white  radius" id="generic-copy" ><i class="icon-copy size-20">Kes</i></a>
+				<a href="#" class="bck-dark-blue white  radius" id="generic-cut" ><i class="icon-cut size-20">Kes</i></a>
 				<a href="#" class="bck-dark-blue white  radius" id="generic-copy" ><i class="icon-copy size-20">Kopyala</i></a>
 				<a href="#" class="bck-dark-blue white  radius" id="generic-paste" ><i class="icon-copy size-20">Yapıştır</i></a>
 			</div>
