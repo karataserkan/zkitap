@@ -13,7 +13,7 @@ $(document).ready(function(){
       this._super();
       this.redraw();
     },
-    redraw: function(){
+    redraw: function(){ 
             this.options.canvas = this.element[0];
       this.options.context = this.options.canvas.getContext("2d");
         switch(this.options.component.data.shapeType){
