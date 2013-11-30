@@ -122,23 +122,16 @@ class epub3 {
 
 				$page_styles="
 				body {
-
 					border: 1px solid black;
 					zoom: 1;
-					margin-top: 5px;
-					position: relative;
 					color: #000;
-					font-family: monospace;
-					font-size: 13px;
-					line-height: normal
-					width:600px;
-					height:700px;
-					padding: 38px;
-					
-				}
-
-				
-				";
+					font-family: Arial;
+					font-size: 14px;
+					line-height: normal;
+					width:1204px;
+					height:768px;
+					}
+";
 
 
 			if(!$res[]=$this->files->styleSheets->page_style->writeLine($page_styles))
@@ -231,7 +224,7 @@ class epub3 {
     	<title>'.$this->title.'</title>
 
 
-		<meta name="viewport" content="width=600, height=700"/>
+		<meta name="viewport" content="width=1024, height=768"/>
 	
 
 		
@@ -326,7 +319,7 @@ class epub3 {
     <meta http-equiv="default-style" content="text/html; charset=utf-8"/>
     <title>My first book</title>
 
-		<meta name="viewport" content="width=680, height=780"/>
+		<meta name="viewport" content="width=1024, height=768"/>
 
 		<link rel="stylesheet" href="stylesheet.css" type="text/css"/>
 		<link rel="stylesheet" href="page_styles.css" type="text/css"/>
@@ -347,12 +340,12 @@ class epub3 {
 	    <script type="text/javascript" src="panelnav.js"></script>
 	    <script type="text/javascript" src="popup.js"></script>
 	    <script type="text/javascript" src="pubsub.js"></script>
+	    <script type="text/javascript" src="Chart.js"></script>
 
 
 	</head>
 	<body>
 	<section epub:type="frontmatter titlepage">
-
 %components%
 	</section>
 
@@ -493,7 +486,7 @@ class epub3 {
 		<dc:description>by linden</dc:description>
 		<meta name="cover" content="cover"/>
 		<meta property="rendition:layout">pre-paginated</meta>
-		<meta property="rendition:orientation">portrait</meta>
+		<meta property="rendition:orientation">landscape</meta>
 		<meta property="rendition:spread">none</meta>
 
 
