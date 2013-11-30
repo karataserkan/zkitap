@@ -16,6 +16,9 @@ class componentHTML {
 			case 'galery':
 				$this->galeryInner($component);			
 				break;
+			case 'sound':
+				$this->galeryInner($component);			
+				break;
 			default:
 				$this->someOther_inner($component->data);			
 
@@ -26,55 +29,83 @@ class componentHTML {
 
 	}
 
-	
-	public function galeryInner($component){ 
-	
+	public function soundInner($component){
+
 		if($component->data->self->css){
 			$size_style="width:" .$component->data->self->css->width. ";height:".$component->data->self->css->height.";";
 			$size_style_attr="style='$size_style'";
-
-
 		}
-		$container ='<div id="container'.$component->id.'" class="widgets-rw panel-sliding-rw exclude-auto-rw"  '.$size_style_attr.'>
-			<div class="frame-rw"  style="width:' .( $component->data->self->css->width * count($component->data->ul->imgs)). 'px;height:'.$component->data->self->css->height.';" >
-			';
-		$container.=' <ul class="ul2" epub:type="list">
-		';
+
+
+	}
+
+	
+	public function galeryInner($component){ 
 		
-		if($component->data->ul->imgs)
-		foreach ($component->data->ul->imgs as $images_key => &$images_value) {
-			$new_file= functions::save_base64_file ( $images_value->src , $component->id .$images_key, $this->epub->get_tmp_file() );
-			$images_value->attr->src =  $new_file->filename;
 
-			$container .=' <li id="li-'.$component->id.$images_key.'" '.$size_style_attr.'><img ';
-			if(isset($images_value->attr))
-				foreach ($images_value->attr as $attr_name => $attr_val ) {
-					$container.=" $attr_name='$attr_val' ";
-				}
+		$file = functions::save_base64_file ( $component->data->source->attr->src , $component->id , $this->epub->get_tmp_file());
+		$this->epub->files->others[] = $file;
+		$component->data->source->attr->src=$file->filename;
+		//new dBug($component); die;
 
-			if(isset($images_value->css)){
-				$container.=" style=' " .$size_style;
-				foreach ($images_value->css as $css_name => $css_val ) {
-					$container.="$css_name:$css_val;";
-				}
-				$container.="' ";
+
+
+
+
+		$data=$component->data;
+		$container ="
+		<audio  class='audio' controls='controls' ";
+		if(isset($data->audio->attr))
+			foreach ($data->audio->attr as $attr_name => $attr_val ) {
+				$container.=" $attr_name='$attr_val' ";
 			}
 
-			$container .='/>
-			<p class="caption-rw" id="caption-'.$component->id.$images_key.'" >Galeri</p>
-			</li>';
-			$this->epub->files->others[] = $new_file;
-			unset($new_file);
-
+		if(isset($data->audio->css)){
+			$container.=" style=' ";
+			foreach ($data->audio->css as $css_name => $css_val ) {
+				$container.="$css_name:$css_val;";
+			}
+			$container.="' ";
 		}
 
 
-		$container .='  
-		</ul>
-               </div>
+		$container.=" 
+			>	
 
-         </div>';
-         $this->html=str_replace('%component_inner%' ,$container, $this->html);
+
+			%source%
+			</audio>
+		";
+
+		$source ="
+		<source  class='audio' controls='controls' ";
+		if(isset($data->source->attr))
+			foreach ($data->source->attr as $attr_name => $attr_val ) {
+				$source.=" $attr_name='$attr_val' ";
+			}
+
+		if(isset($data->source->css)){
+			$source.=" style=' ";
+			foreach ($data->source->css as $css_name => $css_val ) {
+				$source.="$css_name:$css_val;";
+			}
+			$source.="' ";
+		}
+
+
+		$source.=" 
+			/>	
+
+
+			
+		";
+
+		$container=str_replace('%source%' ,$source, $container);
+
+
+
+		$this->html=str_replace('%component_inner%' ,$container, $this->html);
+		
 
 
 

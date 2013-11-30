@@ -29,7 +29,7 @@ class EditorActionsController extends Controller
 
 		do {
 
-			$url='video'.functions::get_random_string(30);
+			$url='file'.functions::get_random_string(30);
 			$isVideo= Yii::app()->db->createCommand()
 		    ->select("*")
 		    ->from("video_id")
@@ -38,18 +38,17 @@ class EditorActionsController extends Controller
 
 		} while ($isVideo);
 
-		$addVideoId = Yii::app()->db->createCommand()
-			->insert('video_id', array('id'=>$url));
+		
 		
 
-		$this->response['URL']=$url;
+		$this->response['URL']= $url;
 		$this->response();
 
 	}
 
 
 
-    public function actionUploadVideo( $url=null ) {
+    public function actionUploadFile	( $url=null ) {
 
     	/*
 		get file contents
@@ -64,26 +63,39 @@ class EditorActionsController extends Controller
 
     	*/
     	    	
-    	if ($url && isset($_POST['video'])) {
+    	if ($url && isset($_POST['file'])) {
     		
     		//$videoFileContents = $_POST['video'];
     		
     		
     		//$videoFile = new file(path);
 
-            $model= new files;
-            $model->attributes=$_POST['video'];
-            $uploadedFile = CUploadedFile::getInstance($model, 'filename');
-            $model->filename = $url;
 
-            if($model->save()){
-            	$uploadedFile->saveAs(Yii::app()->basePath.'/../uploads/video/'.$url);
-            }
-    	}
+			$file= functions::save_base64_file ( $_POST['file'] , $url , Yii::app()->basePath.'/../uploads/files');
+            
+       
+           	$addVideoId = Yii::app()->db->createCommand()
+			->insert('video_id', array('id'=>$url));
 
 
-    	$this->response['videoUrl']=Yii::app()->basePath.'/../uploads/video/'.$url;
-    	return $this->response();
+            $CompleteURL=Yii::app()->request->hostInfo . "/uploads/files/".$file->filename ;
+
+          
+
+
+            $this->response['fileUrl']=$CompleteURL;
+
+            
+
+            
+    	} else 
+    	$this->error("EA-UpFile","File not sent",func_get_args(),$page);
+
+  		return $this->response();
+
+
+
+    	
     }
 
 
