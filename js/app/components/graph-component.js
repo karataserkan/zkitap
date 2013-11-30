@@ -11,9 +11,16 @@ $(document).ready(function(){
 
       var that = this;
       this._super(this.options.component.data.series);
+      
+      this.element.resizable( "option", "aspectRatio", true );
+      
 
       this.options.context = this.element[0].getContext("2d");
+
+
       console.log(this.options.component.data.series)
+
+
       switch (this.options.component.data.type) {
         case 'pie-chart':
           
@@ -38,12 +45,7 @@ $(document).ready(function(){
           this.options.pieData = pieData;
     
           this.options.pieGraph = new Chart(this.options.context).Pie(this.options.pieData);
-
-
           
-          this.options.context.fillStyle = "blue";
-          this.options.context.font = "bold 16px Arial";
-          this.options.context.fillText("Zibri", 100, 100);
           break;
         case 'bar-chart':
 
@@ -155,6 +157,8 @@ $(document).ready(function(){
 
 
       }
+
+
 
 
       
