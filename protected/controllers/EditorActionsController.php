@@ -18,7 +18,7 @@ class EditorActionsController extends Controller
 		return $error;
 	}
 
-	public function actionGetFileURL(){
+	public function actionGetFileURL($type=null){
 
 		/* 
 		generate a temp file url
@@ -42,6 +42,7 @@ class EditorActionsController extends Controller
 		
 
 		$this->response['URL']= $url;
+		$this->response['token']= Yii::app()->request->hostInfo . "/uploads/files/".$url.".".$type;
 		$this->response();
 
 	}
@@ -85,7 +86,7 @@ class EditorActionsController extends Controller
 
             $this->response['fileUrl']=$CompleteURL;
 
-            
+
 
             
     	} else 
