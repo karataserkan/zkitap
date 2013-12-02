@@ -11,27 +11,23 @@ $(document).ready(function(){
       this.element
       .attr('id', this.options.component.id)
       .attr('component-instance', 'true')
+      .click(function (e) {
+        that._selected(e,null);
+      })
       .resizable({
-        containment: "#current_page",
-        snap:'10px',
         'stop': function( event, ui ){
           that._resize(event, ui);
         }
       })
       .selectable({
-        'selected': function(){
-          console.log('selected');
+        'selected': function(event, ui){
+          that._selected(event, ui);
         }
       })
       .focus(function( event, ui ){
 
-        $('[component-instance]').css({
-          'border': 'none'
-        });
 
-        $(event.currentTarget).css({
-          'border': '1px solid #ccc'
-        });
+
 
         that._selected( event, ui );
       })
@@ -59,7 +55,7 @@ $(document).ready(function(){
 
       .mouseenter(function(event){
         // add delete button
-        var deleteButton = $('<a id="delete-button-' + that.options.component.id + '"class="btn red white size-15 radius icon-delete page-chapter-delete delete-page" style="position: absolute; top: -20px; right: -20px;"></a>');
+        var deleteButton = $('<a id="delete-button-' + that.options.component.id + '"class="btn red white size-15 radius icon-delete page-chapter-delete delete-page" style="position: absolute; top: 0px; right: -20px;"></a>');
         
         deleteButton.click(function(e){
           e.preventDefault();
@@ -76,9 +72,21 @@ $(document).ready(function(){
         deleteButton.remove();
 
       }).
-      append('<div class="dragging_holder"></div>' );
+      append('<div class="dragging_holder"></div>' )
+      
+      .on('unselect', function(){
+        that.unselect();
 
+      });
 
+      this.setFromData();
+
+      
+
+    },
+
+    setFromData : function () {
+      var that=this;
       var _data = this.options.component.data;
 
       $.each( _data, function(p, data) {
@@ -90,14 +98,13 @@ $(document).ready(function(){
 
         } else {
           
-          if( data.css ) that.element.css(data.css);
-          if( data.attr )  that.element.attr(data.attr);
-          if( data.val ) that.element.val( data.val );
+          if( data.css ) that.element.parent().find(p).css(data.css);
+          if( data.attr )  that.element.parent().find(p).attr(data.attr);
+          if( data.val ) that.element.parent().find(p).val( data.val );
 
         }
 
       });
-
     },
 
     type: function () {
@@ -109,11 +116,12 @@ $(document).ready(function(){
     },
 
     _resize: function ( event, ui ) {
-
+    
       this.options.component.data.self.css.width = ui.size.width + "px";
       this.options.component.data.self.css.height = ui.size.height + "px";
-
+   
       this._trigger('update', null, this.options.component );
+      this._selected(event, ui)
       
     },
 
@@ -122,27 +130,85 @@ $(document).ready(function(){
 
       this.options.component.data.self.css.left = ui.position.left + "px";
       this.options.component.data.self.css.top = ui.position.top + "px";
-
+    
+      
       this._trigger('update', null, this.options.component );
+      this._selected(event, ui);
     },
 
     _change: function ( ui ){
 
       this._trigger('update', null, this.options.component );
+      this._selected(null, ui);
 
     },
 
     _selected: function( event, ui ) {
-      
-      this._trigger('selected', null, this );
+      console.log('selected');
 
+      
+      
+      if(  event.ctrlKey || event.metaKey )
+        console.log('control is pressed');
+      else
+        $('.selected').trigger('unselect');
+
+
+      this.element.removeClass('unselected');
+      this.element.addClass('selected');
+      window.lindneo.toolbox.addComponentToSelection(this);
+      this.element.css({
+          'border': '1px solid #ccc'
+      });
+
+      this._trigger('selected', null, this );
       window.lindneo.tsimshian.emitSelectedComponent( this );
+      
+
+    },
+
+    selected: function ( event, ui) {
+     
+     that._selected(event, ui);
+
     },
 
     unselect: function (){
+      this.element.removeClass('selected');
+      this.element.addClass('unselected');
       this.element.css({
         'border': 'none'
       });
+      window.lindneo.toolbox.removeComponentFromSelection(this);
+    },
+    _getSettable : function (propertyName){
+     return this.options.component.data.self;
+    },
+    getSettable : function (propertyName){
+     return this._getSettable(propertyName);
+    },
+
+    _getProperty : function (propertyName){
+      return this.getSettable().css[propertyName];
+    }, 
+    getProperty : function (propertyName){
+      return this._getProperty(propertyName);
+    },
+    setPropertyofObject : function (propertyName,propertyValue){
+      return this._setPropertyofObject(propertyName,propertyValue) ;
+    },
+    _setPropertyofObject : function (propertyName,propertyValue){
+      this.getSettable().css[propertyName]=propertyValue;
+      return this.getProperty(propertyName) ;
+    },
+    setProperty : function (propertyName,propertyValue){
+        this._setProperty(propertyName,propertyValue);
+    },
+    _setProperty : function (propertyName,propertyValue){
+        this.setPropertyofObject(propertyName,propertyValue);
+        this.setFromData();
+        this._trigger('update', null, this.options.component );
+        
     },
 
     field: function(key, value) {

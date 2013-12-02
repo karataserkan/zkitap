@@ -19,15 +19,20 @@ $(document).ready(function(){
  
         source.appendTo(audio);
 
+        audio_name.appendTo(this.element);
         audio.appendTo(this.element);
-        audio.appendTo(this.element);
-
+        audio.css(this.options.component.data.audio.css);
 
         // this.element.attr('src', this.options.component.data.img.src);  
       }
       
 
       this._super();
+      this.element.height(60);
+      
+      this.element.resizable("option",'maxHeight', 60 );
+      this.element.resizable("option",'minHeight', 60 );
+
     },
 
     field: function(key, value){

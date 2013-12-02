@@ -9,7 +9,7 @@
 <div style="height: 40px;"></div>
 
 
-<div class="form create-page-container white" >
+<div class="form create-book-container white" >
 
 <?php $form=$this->beginWidget('CActiveForm', array(
 	'id'=>'book-form',
@@ -26,11 +26,8 @@
 	*/
 	?>
 	<div class="row">
-		Select Template:
-		<?php 
-			
-		?>
-	</hr>
+		<h1>Kitap Oluştur</h1>
+	
 	</div>
 	<div class="row">
 		<?php echo $form->labelEx($model,'workspace_id'); ?>
@@ -73,25 +70,25 @@
 		<?php echo $form->textField($model,'author',array('size'=>60,'maxlength'=>255)); ?>
 		<?php echo $form->error($model,'author'); ?>
 	</div>
-
-	<div class="row">
-		<?php echo $form->labelEx($model,'created'); ?>
-		<?php echo $form->textField($model,'created'); ?>
-		<?php echo $form->error($model,'created'); ?>
-	</div>
-
+<!--
 	<div class="row">
 		<?php echo $form->labelEx($model,'publish_time'); ?>
 		<?php echo $form->textField($model,'publish_time'); ?>
 		<?php echo $form->error($model,'publish_time'); ?>
 	</div>
-
+-->
 	<div class="row">
 		<?php echo $form->labelEx($model,'data'); ?>
 		<?php echo $form->textField($model,'data'); ?>
 		<?php echo $form->error($model,'data'); ?>
 	</div>
-
+	
+	<div class="row">
+		<?php echo $form->labelEx($model,'created'); ?>
+		<!-- <?php //echo $form->textField($model,'created'); ?>-->
+		<?php echo $model->created; ?>
+		<?php echo $form->error($model,'created'); ?>
+	</div>
 	<div class="row buttons">
 		<?php echo CHtml::submitButton($model->isNewRecord ? 'Create' : 'Save'); ?>
 	</div>

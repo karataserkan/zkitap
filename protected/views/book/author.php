@@ -76,7 +76,7 @@ $current_user=User::model()->findByPk(Yii::app()->user->id);
 					</select>
 					</label>
 					
-					<form action='' id='searchform' >
+					<form action='' id='searchform' style="float:left;">
 
 					<input type="text" id="search" name='component' class="search radius" placeholder="Ara">
 					<input type="hidden" name='r' value='book/author'>
@@ -107,50 +107,105 @@ $current_user=User::model()->findByPk(Yii::app()->user->id);
 	
 			<div class="styler_box">
 			<!-- <ul id="text-styles" ></ul> -->
-			<a id="undo" class="icon-undo dark-blue size-20"></a>
-			<a id="redo" class="icon-redo grey-8 size-20"></a>
+			<div class="generic-options toolbox"  style="display:inline-block;">
+				<a id="undo" class="icon-undo dark-blue size-20"></a>
+				<a id="redo" class="icon-redo grey-8 size-20"></a>
+			</div>
+			<div class="generic-options"  style="display:inline-block;">
+				<a href="#" class="bck-dark-blue white  radius" id="generic-cut" ><i class="icon-cut size-20">Kes</i></a>
+				<a href="#" class="bck-dark-blue white  radius" id="generic-copy" ><i class="icon-copy size-20">Kopyala</i></a>
+				<a href="#" class="bck-dark-blue white  radius" id="generic-paste" ><i class="icon-copy size-20">Yapıştır</i></a>
+			</div>
 				
+
 			<div class="vertical-line"></div>
-			<div class="text-options" style="display:inline-block;">
+			<div class="text-options toolbox" style="display:inline-block;">
 					
 					
-					<input type="color" class="color-picker-box radius " placeholder="e.g. #bbbbbb" />
-					
+					<input class='tool color' rel='color' type="color" class="color-picker-box radius " placeholder="e.g. #bbbbbb" />
 					<label class="dropdown-label  ">
-					<select id="font-type" class="radius">
+					<select class='tool select' rel='fast-style' id="fast-style" class="radius">
+						<option value="">Serbest</option>
+						<option value="h1" >Başlık</option>
+						<option value="h2" >Alt Başlık</option>
+						<option value="h3" >Kucuk Başlık</option>
+						<option value="p"  >Paragraf</option>
+						<option value="blockqoute" >Alıntı</option>
+					</select>
+					</label>				
+					<label class="dropdown-label  ">
+					<select class='tool select' rel='font-family' id="font-family" class="radius">
 						<option selected="" value="Arial"> Arial </option>
 						<option value="helvetica" >Helvetica</option>
 						<option value="Open Sans" >Open Sans</option>
 						<option value="Times New Roman" >Times New Roman</option>
+						<option value="georgia" >Georgia</option>
 						<option value="Courier New" >Courier New</option>
 					</select>
 					</label>
 					
 					<label class="dropdown-label ">
-						<select id="font-size" class="radius">
-						<option selected="" value="8"> 8 </option>
-						<option value="10" >10</option>
-						<option value="12" >12</option>
-						<option value="14" >14</option>
-						<option value="16" >16</option>
-						<option value="18" >18</option>
+						<select class='tool select' rel='font-size' id="font-size" class="radius">
+						<option selected="" value="8px"> 8 </option>
+						<option value="10px" >10</option>
+						<option value="12px" >12</option>
+						<option value="14px" >14</option>
+						<option value="16px" >16</option>
+						<option value="18px" >18</option>
+						<option value="20px" >20</option>
+						<option value="24px" >24</option>
+						<option value="26px" >26</option>
+						<option value="28px" >28</option>
+						<option value="30px" >30</option>
+						<option value="32px" >32</option>
+						<option value="34px" >34</option>
+						<option value="36px" >36</option>
+						<option value="38px" >38</option>
+						<option value="40px" >40</option>
+						<option value="42px" >42</option>
+						<option value="44px" >44</option>
+						<option value="46px" >46</option>
+						<option value="48px" >48</option>
+						<option value="50px" >50</option>
+						<option value="52px" >52</option>
+						<option value="54px" >54</option>
+						<option value="56px" >56</option>
+						<option value="58px" >58</option>
+						<option value="60px" >60</option>
 					</select>	
 					</label>					
 				<div class="vertical-line"></div>
 				
-				<a id="font-bold"  href="#" class="dark-blue radius toolbox-items "><i class="icon-font-bold  size-15"></i></a>
-				<a id="font-italic"  href="#" class="dark-blue radius toolbox-items "><i class="icon-font-italic size-15"></i></a>
-				<a id="font-underline"  href="#" class="dark-blue radius toolbox-items "><i class="icon-font-underline size-15"></i></a>
+				<input type="checkbox" id="font-bold" rel='font-weight' activeVal='bold' passiveVal='normal'  class="dark-blue radius toolbox-items btn-checkbox tool checkbox"><label class="icon-font-bold  size-15"> </label>
+				<input type="checkbox" id="font-italic" rel='font-style' activeVal='italic' passiveVal='normal'  class="dark-blue radius toolbox-items btn-checkbox tool checkbox"><label class="icon-font-italic size-15"> </label>
+				<input type="checkbox" id="font-underline" rel='text-decoration' activeVal='underline' passiveVal='none'  class="dark-blue radius toolbox-items btn-checkbox tool checkbox"><label class="icon-font-underline size-15"> </label>
+				
 				<div class="vertical-line"></div>
-				<a id="text-align-left"  href="#" class="dark-blue radius toolbox-items "><i class="icon-text-align-left size-15"></i></a>
-				<a id="text-align-center"  href="#" class="dark-blue radius toolbox-items "><i class="icon-text-align-center  size-15"></i></a>
-				<a id="text-align-right"  href="#" class="dark-blue radius toolbox-items "><i class="icon-text-align-right  size-15"></i></a>
+
+				<input type='radio' rel='text-align' name='text-align' activeVal='left' id="text-align-left"  href="#" class="dark-blue radius toolbox-items radio tool"><label for='text-align-left' class="icon-text-align-left size-15"></label>
+				<input type='radio' rel='text-align' name='text-align' activeVal='center' id="text-align-center"  href="#" class="dark-blue radius toolbox-items  radio tool"><label for='text-align-center' class="icon-text-align-center  size-15"></label>
+				<input type='radio' rel='text-align' name='text-align' activeVal='right' id="text-align-right"  href="#" class="dark-blue radius toolbox-items  radio tool"><label for='text-align-right' class="icon-text-align-right  size-15"></label>
+
 				<div class="vertical-line"></div>
-				<a id="make-list-bullet"  href="#" class="dark-blue radius toolbox-items "><i class="icon-list-bullet size-15"></i></a>
-				<a id="make-list-number"  href="#" class="dark-blue radius toolbox-items "><i class="icon-list-number size-15"></i></a>
+
+				<input type='checkbox' rel='text-listing' name='listing' activeVal='bullet' id="make-list-bullet"   class="dark-blue radius toolbox-items tool checkbox"><label for='make-list-bullet' class="icon-list-bullet size-15" ></label>
+
+
+
+				<input type='checkbox' rel='text-listing' name='listing' activeVal='number' id="make-list-number"   class="dark-blue radius toolbox-items tool checkbox" ><label for='make-list-number' class="icon-list-number size-15"></label>
+
+				<script type="text/javascript">
+				$('#make-list-bullet').change(function(){ if( $(this).is(':checked')==true  ) $('#make-list-number').prop('checked',false);   });
+				$('#make-list-number').change(function(){ if( $(this).is(':checked')==true ) $('#make-list-bullet').prop('checked',false);   });
+
+				
+				</script>
+
 				<div class="vertical-line"></div>
+
 				<a id="text-left-indent"  href="#" class="dark-blue radius toolbox-items "><i class="icon-left-indent size-15"></i></a>
 				<a id="text-right-indent"  href="#" class="dark-blue radius toolbox-items "><i class="icon-right-indent size-15"></i></a>
+
 				<div class="vertical-line"></div>
 					<label class="dropdown-label " id="leading">
 						<i class="icon-leading grey-6"></i>
@@ -173,76 +228,76 @@ $current_user=User::model()->findByPk(Yii::app()->user->id);
 				
 				<label class="dropdown-label  image-options graph-options shape-options">
 					<i class="icon-opacity grey-6"></i>
-						<select id="font-size" class="radius">
-							<option selected="" value="8"> 100 </option>
-							<option value="0" >0</option>
-							<option value="10" >10</option>
-							<option value="20" >20</option>
-							<option value="30" >30</option>
-							<option value="40" >40</option>
-							<option value="50" >50</option>
-							<option value="60" >60</option>
-							<option value="70" >70</option>
-							<option value="80" >80</option>
-							<option value="90" >90</option>
-							<option value="100" >100</option>
-						</select>	
+							<select class='tool-select tool select' rel='opacity' rel='color' id="font-size" class="radius">
+								
+								<option value="0" >0</option>
+								<option value="0.10" >10</option>
+								<option value="0.20" >20</option>
+								<option value="0.30" >30</option>
+								<option value="0.40" >40</option>
+								<option value="0.50" >50</option>
+								<option value="0.60" >60</option>
+								<option value="0.70" >70</option>
+								<option value="0.80" >80</option>
+								<option value="0.90" >90</option>
+								<option selected="selected"  value="1" >100</option>
+							</select>	
 				</label>
 					<div class="vertical-line"></div>
 			</div>
 			
 			
-			<div class="image-options" style="display:inline-block;">
-			<div class="vertical-line"></div>
-			<label class="dropdown-label  image-options graph-options shape-options">
-					<i class="icon-opacity grey-6"></i>
-						<select id="font-size" class="radius">
-							<option selected="" value="8"> 100 </option>
-							<option value="0" >0</option>
-							<option value="10" >10</option>
-							<option value="20" >20</option>
-							<option value="30" >30</option>
-							<option value="40" >40</option>
-							<option value="50" >50</option>
-							<option value="60" >60</option>
-							<option value="70" >70</option>
-							<option value="80" >80</option>
-							<option value="90" >90</option>
-							<option value="100" >100</option>
-						</select>	
-				</label>
+			<div class="image-options toolbox" style="display:inline-block;">
+				<div class="vertical-line"></div>
+				<label class="dropdown-label  image-options graph-options shape-options">
+						<i class="icon-opacity grey-6"></i>
+							<select class='tool-select tool select' rel='opacity' rel='color' id="font-size" class="radius">
+								
+								<option value="0" >0</option>
+								<option value="0.10" >10</option>
+								<option value="0.20" >20</option>
+								<option value="0.30" >30</option>
+								<option value="0.40" >40</option>
+								<option value="0.50" >50</option>
+								<option value="0.60" >60</option>
+								<option value="0.70" >70</option>
+								<option value="0.80" >80</option>
+								<option value="0.90" >90</option>
+								<option selected="selected"  value="1" >100</option>
+							</select>	
+					</label>
 			
 			</div>
 			
-			<div class="shape-options" style="display:inline-block;">
-			<div class="vertical-line"></div>
-			<input type="color" class="color-picker-box radius " placeholder="e.g. #bbbbbb" />
-			<div class="vertical-line"></div>
-			<label class="dropdown-label  image-options graph-options shape-options">
-					<i class="icon-opacity grey-6"></i>
-						<select id="font-size" class="radius">
-							<option selected="" value="8"> 100 </option>
-							<option value="0" >0</option>
-							<option value="10" >10</option>
-							<option value="20" >20</option>
-							<option value="30" >30</option>
-							<option value="40" >40</option>
-							<option value="50" >50</option>
-							<option value="60" >60</option>
-							<option value="70" >70</option>
-							<option value="80" >80</option>
-							<option value="90" >90</option>
-							<option value="100" >100</option>
-						</select>	
-				</label>
-			
+			<div class="shape-options toolbox"  style="display:inline-block;">
+				<div class="vertical-line"></div>
+				<input class='tool-color tool color' rel='fillStyle' type="color" class="color-picker-box radius " placeholder="e.g. #bbbbbb" />
+				<div class="vertical-line"></div>
+				<label class="dropdown-label  image-options graph-options shape-options">
+						<i class="icon-opacity grey-6"></i>
+								<select class='tool-select tool select' rel='opacity' rel='color' id="font-size" class="radius">
+								
+								<option value="0" >0</option>
+								<option value="0.10" >10</option>
+								<option value="0.20" >20</option>
+								<option value="0.30" >30</option>
+								<option value="0.40" >40</option>
+								<option value="0.50" >50</option>
+								<option value="0.60" >60</option>
+								<option value="0.70" >70</option>
+								<option value="0.80" >80</option>
+								<option value="0.90" >90</option>
+								<option selected="selected"  value="1" >100</option>
+							</select>	
+					</label>
+				
 			</div>
-
+			<div class="generic-options toolbox"  style="display:inline-block;">
 				<a href="#" class="bck-dark-blue white toolbox-items radius" id="pop-align"><i class="icon-align-center size-20"></i></a>
 				<a href="#" class="bck-dark-blue white toolbox-items radius" id="pop-arrange"><i class="icon-send-backward size-15"></i></a>
 				<a href="#" class="btn grey white radius">Grupla</a>
+			</div>
 			
-				
 			
 			
 			</div>
@@ -617,7 +672,8 @@ Grafik Ekle
 			<li class="left_bar_titles">Uygulama</li>
 			<li ctype="galery" class="component icon-m-galery">&nbsp;&nbsp;&nbsp;&nbsp;Galeri</li>
 			<li ctype="quiz"  class="component icon-m-quiz">&nbsp;&nbsp;&nbsp;&nbsp;Quiz</li>
-			<li ctype="listbox"  class="component icon-m-listbox">&nbsp;&nbsp;&nbsp;&nbsp;Yazı Kutusu</li>
+			<li ctype="text"  class="component icon-m-listbox">&nbsp;&nbsp;&nbsp;&nbsp;Yazı Kutusu</li>
+			<li ctype="link" class="component icon-m-link ui-draggable">&nbsp;&nbsp;&nbsp;&nbsp;Link</li>
 			<li ctype="popup" class="component icon-m-popup">&nbsp;&nbsp;&nbsp;&nbsp;Pop-up</li>
 			<li class="left_bar_titles">Araçlar</li>
 			<li ctype="text" class="component icon-m-text">&nbsp;&nbsp;&nbsp;&nbsp;Yazı</li>
@@ -628,14 +684,7 @@ Grafik Ekle
 			
 		<div>Zoom:	<div id='zoom-pane'></div>
 			</br>
-			<a href="#" class="btn white btn radius " id="pop-image">Add Image</a>
-			<a href="#" class="btn white btn radius " id="pop-sound">Add Sound</a>
-			<a href="#" class="btn white btn radius " id="pop-video">Add Video</a>
-			<a href="#" class="btn white btn radius " id="pop-galery">Add Galery</a>
-			<a href="#" class="btn white btn radius " id="pop-quiz">Add Quiz</a>
-			<a href="#" class="btn white btn radius " id="pop-popup">Add popup</a>
-			<a href="#" class="btn white btn radius " id="pop-chart">Add Chart</a>
-			<a href="#" class="btn white btn radius " id="pop-shape">Add Shape</a>
+			
 			</div>	
 	</div>
 
@@ -723,20 +772,76 @@ $( "#add-button" ).hover(
 
 <div id='author_pane_container' style=' width:100%'>
 	<div id='author_pane' style='position:relative;width:1240px; margin: 0 auto; '> <!-- Outhor Pane -->
-		<div id='ruler' class="hruler" >
-			<?php for ($k=0;$k<150;$k++) {
-				echo "<div class='cm'>$k|</div>";
-			}
-			?>
+		
+			<div class="hruler">
+			<ul class="ruler" data-items="50"></ul>
+			</div>
 			
-		</div><!-- ruler -->
+			<div class="vbruler">
+			<ul class="vruler" data-items="38"></ul>
+			</div>
+			
+			
+			<script>
+			$(function() {
+    // Build "dynamic" rulers by adding items
+    $(".ruler[data-items]").each(function() {
+        var ruler = $(this).empty(),
+            len = Number(ruler.attr("data-items")) || 0,
+            item = $(document.createElement("li")),
+            i;
+        for (i = 0; i < len; i++) {
+            ruler.append(item.clone().text(i + 1));
+        }
+    });
+    // Change the spacing programatically
+    function changeRulerSpacing(spacing) {
+        $(".ruler").
+          css("padding-right", spacing).
+          find("li").
+            css("padding-left", spacing);
+    }
+    
+});
+			</script>
+			
+			
+			<script>
+			$(function() {
+    // Build "dynamic" rulers by adding items
+    $(".vruler[data-items]").each(function() {
+        var ruler = $(this).empty(),
+            len = Number(ruler.attr("data-items")) || 0,
+            item = $(document.createElement("li")),
+			item2 = $(document.createElement("hr")),
+            i;
+        for (i = 0; i < len; i++) {
+            ruler.append(item.clone().text(i + 1));
+			ruler.append(item2.clone());
+        }
+    });
+    // Change the spacing programatically
+    function changeRulerSpacing(spacing) {
+        $(".vruler").
+          css("padding-right", spacing ).
+          find("li").
+            css("padding-left", spacing );
+    }
+    
+});
+			</script>
+			
+			
+			
+		<!-- ruler -->
 		
 		<div id='guide'> 
 		</div> <!-- guide -->
 		<div id='editor_view_pane' style=' padding:5px 130px;margin:5px;float:left;'>
 			
-					<div id='current_page' page_id='<?php echo $page->page_id ;?>' style='background:white;border:thin solid black;zoom:1;padding:1cm; margin-top:5px;  height:700px;width:600px;position:relative' >
-						
+
+					<div id='current_page' page_id='<?php echo $page->page_id ;?>' style='background:white;border:thin solid black;zoom:1; height:768px;width:1024px;position:relative' >
+
 					</div>
 
 

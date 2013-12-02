@@ -15,6 +15,7 @@
 	<link href="<?php echo Yii::app()->request->baseUrl; ?>css/editor_blue/jquery-ui-1.10.3.custom.css" rel="stylesheet">
 	<script src="<?php echo Yii::app()->request->baseUrl; ?>js/lib/jquery-1.9.1.js"></script>
 	<script src="<?php echo Yii::app()->request->baseUrl; ?>js/lib/jquery-ui-1.10.3.custom.js"></script>
+	<script src="<?php echo Yii::app()->request->baseUrl; ?>js/lib/Chart.js"></script>
 
 	
 	<script src="<?php echo Yii::app()->request->baseUrl; ?>js/app/lindneo.js"></script>	
@@ -31,10 +32,14 @@
 	<script src="<?php echo Yii::app()->request->baseUrl; ?>js/app/components/text-component.js"></script>	
 	<script src="<?php echo Yii::app()->request->baseUrl; ?>js/app/components/image-component.js"></script>	
 	<script src="<?php echo Yii::app()->request->baseUrl; ?>js/app/components/gallery-component.js"></script>	
-
+	<script src="<?php echo Yii::app()->request->baseUrl; ?>js/app/components/video-component.js"></script>	
 	<script src="<?php echo Yii::app()->request->baseUrl; ?>js/app/components/sound-component.js"></script>	
-
 	<script src="<?php echo Yii::app()->request->baseUrl; ?>js/app/components/quiz-component.js"></script>	
+	<script src="<?php echo Yii::app()->request->baseUrl; ?>js/app/components/popup-component.js"></script>	
+	<script src="<?php echo Yii::app()->request->baseUrl; ?>js/app/components/shape-component.js"></script>	
+	<script src="<?php echo Yii::app()->request->baseUrl; ?>js/app/components/graph-component.js"></script>	
+	<script src="<?php echo Yii::app()->request->baseUrl; ?>js/app/components/link-component.js"></script>	
+	<script src="<?php echo Yii::app()->request->baseUrl; ?>js/app/components/sidebar-component.js"></script>	
 
 
 	<script src="<?php echo Yii::app()->request->baseUrl; ?>js/app/other/page-drag-drop.js"></script>
@@ -73,7 +78,7 @@
 		</div>
 		
 		<div id="logo" style='float:left'>
-			<a href='<?php $this->createUrl('/site/index');  ?>'/> <img src="<?php echo Yii::app()->request->baseUrl; ?>/css/logo.png" alt="<?php echo CHtml::encode(Yii::app()->name); ?>" /></a>
+			<a href="<?php echo $this->createUrl('site/index');  ?>"/> <img src="<?php echo Yii::app()->request->baseUrl; ?>/css/logo.png" alt="<?php echo CHtml::encode(Yii::app()->name); ?>" /></a>
 		</div>
 		
 
