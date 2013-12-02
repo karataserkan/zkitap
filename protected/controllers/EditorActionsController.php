@@ -39,10 +39,10 @@ class EditorActionsController extends Controller
 		} while ($isVideo);
 
 		
-		
+		                    
 
-		$this->response['URL']= $url;
-		$this->response['token']= Yii::app()->request->hostInfo . "/uploads/files/".$url.".".$type;
+		$this->response['token']= $url;
+		$this->response['URL']= Yii::app()->request->hostInfo . "/uploads/files/".$url.".".$type;
 		$this->response();
 
 	}
@@ -602,7 +602,7 @@ right join book using (book_id) where book_id='$bookId' ;";
 				if ( is_array($items) || is_object($items) )
 				foreach ($items as $key => $value2) {
 					if($key!='css') $searchable.=serialize($value2);
-				}
+				} 
 			}
  
 			$searchable.=" ";
