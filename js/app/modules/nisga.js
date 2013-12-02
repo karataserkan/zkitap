@@ -53,6 +53,10 @@ window.lindneo.nisga = (function(window, $, undefined){
         shapeComponentBuilder( component );
         break;
 
+      case 'link':
+        linkComponentBuilder( component );
+        break;
+
 
 
       default:
@@ -63,11 +67,13 @@ window.lindneo.nisga = (function(window, $, undefined){
   }; 
 
   var destroyComponent = function ( componentId ) {
+    $('[id="'+componentId+'"]').parent().not('#current_page').remove();
     $('[id="'+componentId+'"]').remove();
   };
 
   var deleteComponent = function ( component ) {
 
+    window.lindneo.toolbox.removeComponentFromSelection( $('#'+ component.id) );
     window.lindneo.tlingit.componentHasDeleted( component.id );
 
   };
@@ -134,6 +140,30 @@ window.lindneo.nisga = (function(window, $, undefined){
 
   };
 
+  var linkComponentBuilder = function ( component ) {
+    
+    
+    var element  = $('<a class="link-component"></a>');
+    var elementWrap=$('<div ></div>');
+    elementWrap.appendTo( page_div_selector );
+
+    element
+    .appendTo( elementWrap )
+    .popupComponent({
+      'component': component,
+      'marker': 'http://dev.lindneo.com/css/linkmarker.png'  ,
+      'update': function ( event, component ) {
+        window.lindneo.tlingit.componentHasUpdated( component );
+      },
+      'selected': function (event, element) {
+        window.lindneo.currentComponentWidget = element;
+        window.lindneo.toolbox.refresh( element );
+      }
+    });
+
+  };
+
+
   var popupComponentBuilder = function ( component ) {
     
     
@@ -145,7 +175,7 @@ window.lindneo.nisga = (function(window, $, undefined){
     .appendTo( elementWrap )
     .popupComponent({
       'component': component,
-      'marker': 'http://ugur.dev.lindneo.com/css/popupmarker.png'  ,
+      'marker': 'http://dev.lindneo.com/css/popupmarker.png'  ,
       'update': function ( event, component ) {
         window.lindneo.tlingit.componentHasUpdated( component );
       },

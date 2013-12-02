@@ -38,6 +38,8 @@
 	<script src="<?php echo Yii::app()->request->baseUrl; ?>js/app/components/popup-component.js"></script>	
 	<script src="<?php echo Yii::app()->request->baseUrl; ?>js/app/components/shape-component.js"></script>	
 	<script src="<?php echo Yii::app()->request->baseUrl; ?>js/app/components/graph-component.js"></script>	
+	<script src="<?php echo Yii::app()->request->baseUrl; ?>js/app/components/link-component.js"></script>	
+	<script src="<?php echo Yii::app()->request->baseUrl; ?>js/app/components/sidebar-component.js"></script>	
 
 
 	<script src="<?php echo Yii::app()->request->baseUrl; ?>js/app/other/page-drag-drop.js"></script>
@@ -76,7 +78,7 @@
 		</div>
 		
 		<div id="logo" style='float:left'>
-			<a href='<?php $this->createUrl('/site/index');  ?>'/> <img src="<?php echo Yii::app()->request->baseUrl; ?>/css/logo.png" alt="<?php echo CHtml::encode(Yii::app()->name); ?>" /></a>
+			<a href="<?php echo $this->createUrl('site/index');  ?>"/> <img src="<?php echo Yii::app()->request->baseUrl; ?>/css/logo.png" alt="<?php echo CHtml::encode(Yii::app()->name); ?>" /></a>
 		</div>
 		
 

@@ -18,6 +18,88 @@ class EditorActionsController extends Controller
 		return $error;
 	}
 
+	public function actionGetFileURL($type=null){
+
+		/* 
+		generate a temp file url
+		
+		resposnse olarak URL string donsun
+
+		*/
+
+		do {
+
+			$url='file'.functions::get_random_string(30);
+			$isVideo= Yii::app()->db->createCommand()
+		    ->select("*")
+		    ->from("video_id")
+		    ->where("id=:id", array(':id' => $url))
+		    ->queryRow();
+
+		} while ($isVideo);
+
+		
+		 
+
+		$this->response['token']= $url;
+		$this->response['URL']= Yii::app()->request->hostInfo . "/uploads/files/".$url.".".$type;
+		$this->response();
+
+	}
+
+
+
+    public function actionUploadFile	( $url=null ) {
+
+    	/*
+		get file contents
+
+		find a place to write video file 
+
+		which can be served as file to public access
+
+		create file
+
+		generate file url to  $Url
+
+    	*/
+    	    	
+    	if ($url && isset($_POST['file'])) {
+    		
+    		//$videoFileContents = $_POST['video'];
+    		
+    		
+    		//$videoFile = new file(path);
+
+
+			$file= functions::save_base64_file ( $_POST['file'] , $url , Yii::app()->basePath.'/../uploads/files');
+            
+       
+           	$addVideoId = Yii::app()->db->createCommand()
+			->insert('video_id', array('id'=>$url));
+
+
+            $CompleteURL=Yii::app()->request->hostInfo . "/uploads/files/".$file->filename ;
+
+          
+
+
+            $this->response['fileUrl']=$CompleteURL;
+
+
+
+            
+    	} else 
+    	$this->error("EA-UpFile","File not sent",func_get_args(),$page);
+
+  		return $this->response();
+
+
+
+    	
+    }
+
+
 	public function actionListBooks(){
 		$books=Book::model()->findAll();
 		
@@ -520,7 +602,7 @@ right join book using (book_id) where book_id='$bookId' ;";
 				if ( is_array($items) || is_object($items) )
 				foreach ($items as $key => $value2) {
 					if($key!='css') $searchable.=serialize($value2);
-				}
+				} 
 			}
  
 			$searchable.=" ";

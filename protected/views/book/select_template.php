@@ -5,14 +5,6 @@
 
 <div class="templates_holder">
 
-<?php $tum='<div class="template_box"> 
-	    <div class="template_title">Blank</div>
-	    <div class="template_thumbnail"></div>
-</div>'; ?>
-
-
-<?=CHtml::link($tum,array('book/selectTemplate',"layout"=>'blank','book_id'=>$book_id))?>
-
 <?php
 
 foreach ($layouts as $layout)

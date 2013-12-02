@@ -19,6 +19,9 @@ $(document).ready(function(){
 
       this._super();
     },
+    getSettable : function (propertyName){
+     return this.options.component.data.img;
+    },
 
     field: function(key, value){
       

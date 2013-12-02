@@ -32,15 +32,15 @@ class BookController extends Controller
 	{
 		return array(
 			array('allow',  // allow all users to perform 'index' and 'view' actions
-				'actions'=>array('mybooks','view','author'),
+				'actions'=>array('mybooks'),
 				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
-				'actions'=>array('create','update','selectTemplate'),
+				'actions'=>array('create','update','selectTemplate','delete','view','author'),
 				'users'=>array('@'),
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
-				'actions'=>array('index','admin','delete'),
+				'actions'=>array('index','admin'),
 				'users'=>array('admin'),
 			),
 			array('deny',  // deny all users
@@ -81,7 +81,16 @@ class BookController extends Controller
 		{
 			$model->attributes=$_POST['Book'];
 
+
+
 			if($model->save())
+				$userid=Yii::app()->user->id;
+				$addOwner = Yii::app()->db->createCommand();
+				$addOwner->insert('book_users', array(
+				    'user_id'=>$userid,
+				    'book_id'=>$model->book_id,
+				    'type'   =>'owner'
+				));
 				$this->redirect(array('selectTemplate','bookId'=>$model->book_id));
 		}
 

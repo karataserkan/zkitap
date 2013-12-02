@@ -34,9 +34,80 @@ $(document).ready(function(){
 
 
       setPropertyofObject : function (propertyName,propertyValue){
-
+        var that = this;
         switch (propertyName){
+            case 'fast-style': 
+                this.getSettable().attr[propertyName]=propertyValue;
 
+                  var styles=[];
+
+                  switch (propertyValue){
+                    case 'h1':
+                      styles=[
+                      {name:'font-size', val:'45px'},
+                      {name:'font-family', val:'Arial'},
+                      {name:'text-decoration', val:'normal'},
+                      {name:'font-weight', val:'bold'},
+                      {name:'text-align', val:'left'},
+                      {name:'text-transform', val:'capitalize'},
+
+                       ];
+                      break;
+                    case 'h2':
+                      styles=[
+                      {name:'font-size', val:'30px'},
+                      {name:'font-family', val:'Arial'},
+                      {name:'text-decoration', val:'normal'},
+                      {name:'font-weight', val:'normal'},
+                      {name:'text-align', val:'left'},
+                      {name:'text-transform', val:'none'},
+                       ];
+                       break;
+                    case 'h3':
+                      styles=[
+                      {name:'font-size', val:'14px'},
+                      {name:'font-family', val:'Arial'},
+                      {name:'text-decoration', val:'normal'},
+                      {name:'font-weight', val:'bold'},
+                      {name:'text-align', val:'left'},
+                      {name:'text-transform', val:'none'},
+                       ];
+                       break;
+                    case 'p':
+                      styles=[
+                      {name:'font-size', val:'14px'},
+                      {name:'font-family', val:'Arial'},
+                      {name:'text-decoration', val:'normal'},
+                      {name:'font-weight', val:'normal'},
+                      {name:'text-align', val:'left'},
+                      {name:'text-transform', val:'none'},
+                       ];
+                       break;
+                    case 'blockqoute':
+                      styles=[
+                      {name:'font-size', val:'12px'},
+                      {name:'font-family', val:'Arial'},
+                      {name:'text-decoration', val:'italic'},
+                      {name:'font-weight', val:'normal'},
+                      {name:'text-align', val:'left'},
+                      {name:'text-transform', val:'none'},
+                       ];
+                       break;
+                    default: 
+                    console.log(styles);
+                    
+                      break;
+
+
+                  }
+                   $.each( styles , function(i,v) {
+                        that.setProperty(v.name , v.val);
+                    });
+
+
+                return this.getProperty(propertyName) ;
+                
+              break;
 
             case 'font-size':           
             case 'text-align':           
@@ -54,7 +125,7 @@ $(document).ready(function(){
               break;
             
             default:
-              return null;
+              return this._super(propertyName,propertyValue);
               break;
           }
       },
@@ -62,6 +133,12 @@ $(document).ready(function(){
       getProperty : function (propertyName){
 
           switch (propertyName){
+            case 'fast-style': 
+                var default_val='';
+                var return_val=this.getSettable().attr[propertyName];
+                return ( return_val ? return_val : default_val );
+              break;
+
             case 'font-size':           
             case 'font-type':         
             case 'color':
@@ -102,7 +179,7 @@ $(document).ready(function(){
               break;
             
             default:
-              return null;
+              return this._super(propertyName);
               break;
           }
 
@@ -160,6 +237,9 @@ $(document).ready(function(){
             'height': '100px',
             'opacity': '1'
 
+          },
+          'attr' : {
+            'fast-style':''
           }
         }
       }

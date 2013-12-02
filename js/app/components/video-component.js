@@ -52,7 +52,7 @@ $(document).ready(function(){
 <!-- popup content--> \
   <div class='gallery-inner-holder'> \
     <form id='video-url'> \
-    <input id='video-url-text' class='input-textbox' type='url' placeholder='URL Adresini Giriniz'   value='http://lindneo.com/mp4.mp4'> \
+    <input id='video-url-text' class='input-textbox' type='url' placeholder='URL Adresini Giriniz'   value='http://lindneo.com/5.mp4'> \
     <a href='#' id='pop-image-OK' class='btn bck-light-green white radius' id='add-image' style='padding: 5px 30px;'>Ekle</a> \
     </form> \
   </div>     \
@@ -86,6 +86,15 @@ $(document).ready(function(){
       alert('Lütfen bir video dosyası URL adresi giriniz');
       return;
     }
+    /*
+    $.ajax({
+      type: "POST",
+      url: 'http://ugur.dev.lindneo.com/index.php?r=EditorActions/UploadFile&url=fileiQH34JPdOLbbOyhW5vfLzpwrtbWlfr',
+      data: {file:'data:video/mp4;base64,AAAAGGZ0eXBtcDQyAAAAAW1wNDJhdmMxAAJwqW1vb3YAAABsbXZoZAAAAADFzieXxc4nmQAACcQACJVEAAEAAAEAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAUAANpZdHJhawAAAFx0a2hkAAAAAcXOJ5LFzieZAAAAAQAAAAAACJVEAAAAAAAAAAAAAAAAAQAAAAABAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAJGVkdHMAAAAcZWxzdAAAAAAAAAABAAiVRAAAAAAAAQAAAADZ0W1kaWEAAAAgbWRoZAAAAADFzieXxc4nlwAArEQAl2gAFccAAAAAADpoZGxyAAAAAAAAAABzb3VuAAAAAAAAAAAAAAAAQXBwbGUgU291bmQgTWVkaWEgSGFuZGxlcgAAANlvbWluZgAAABBzbWhkAAAAAAAAAAAAAAAkZGluZgAAABxkcmVmAAAAAAAAAAEAAAAMdXJsIAAAAAEAANkzc3RibAAAAGdzdHNkAAAAAAAAAAEAAABXbXA0YQAAAAAAAAABAAAAAAAAAAAAAgAQAAAAAKxEAAAAAAAzZXNkcwAAAAADgICAIgAAAASAgIAUQBUAGAAAAfQAAAH0AAWAgIACEhAGgICAAQIAAAAYc3R0cwAAAAAAAAABAAAl2gAABAAA'},
+      success: function(data){console.log(data);},
+    });
+
+    */
 
 
     var component = {

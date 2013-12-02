@@ -11,8 +11,8 @@ $(document).ready(function(){
       this.element
       .attr('id', this.options.component.id)
       .attr('component-instance', 'true')
-      .click(function () {
-        that._selected(null,null);
+      .click(function (e) {
+        that._selected(e,null);
       })
       .resizable({
         'stop': function( event, ui ){
@@ -55,7 +55,7 @@ $(document).ready(function(){
 
       .mouseenter(function(event){
         // add delete button
-        var deleteButton = $('<a id="delete-button-' + that.options.component.id + '"class="btn red white size-15 radius icon-delete page-chapter-delete delete-page" style="position: absolute; top: -20px; right: -20px;"></a>');
+        var deleteButton = $('<a id="delete-button-' + that.options.component.id + '"class="btn red white size-15 radius icon-delete page-chapter-delete delete-page" style="position: absolute; top: 0px; right: -20px;"></a>');
         
         deleteButton.click(function(e){
           e.preventDefault();
@@ -146,7 +146,14 @@ $(document).ready(function(){
     _selected: function( event, ui ) {
       console.log('selected');
 
-      $('.selected').trigger('unselect');
+      
+      
+      if(  event.ctrlKey || event.metaKey )
+        console.log('control is pressed');
+      else
+        $('.selected').trigger('unselect');
+
+
       this.element.removeClass('unselected');
       this.element.addClass('selected');
       window.lindneo.toolbox.addComponentToSelection(this);
