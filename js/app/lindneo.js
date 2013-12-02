@@ -10,6 +10,6 @@ window.lindneo = (function(window){
     url: url,
     currentPageId: currentPageId,
     currentComponent: currentComponent
-  };
+  }; 
 
 })( window );
