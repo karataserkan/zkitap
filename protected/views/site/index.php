@@ -10,6 +10,13 @@ $this->pageTitle=Yii::app()->name;
 <div style="height:42px;"></div>
 <div style="position: fixed; width: 100%; height: 100%; background-color: #056380; padding:20px; overflow-y: scroll;">
 
+
+
+
+
+
+
+
 <?php
 		
 	/**
@@ -164,8 +171,6 @@ $( "#book-editors-settings" ).toggle(
 	
 	
 </script>
-
-
 
 
 

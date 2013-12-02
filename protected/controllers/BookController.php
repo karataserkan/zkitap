@@ -81,7 +81,16 @@ class BookController extends Controller
 		{
 			$model->attributes=$_POST['Book'];
 
+
+
 			if($model->save())
+				$userid=Yii::app()->user->id;
+				$addOwner = Yii::app()->db->createCommand();
+				$addOwner->insert('book_users', array(
+				    'user_id'=>$userid,
+				    'book_id'=>$model->book_id,
+				    'type'   =>'owner'
+				));
 				$this->redirect(array('selectTemplate','bookId'=>$model->book_id));
 		}
 
