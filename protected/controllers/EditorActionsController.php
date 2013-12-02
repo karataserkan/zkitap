@@ -18,6 +18,75 @@ class EditorActionsController extends Controller
 		return $error;
 	}
 
+	public function actionGetFileURL(){
+
+		/* 
+		generate a temp file url
+		
+		resposnse olarak URL string donsun
+
+		*/
+
+		do {
+
+			$url='video'.functions::get_random_string(30);
+			$isVideo= Yii::app()->db->createCommand()
+		    ->select("*")
+		    ->from("video_id")
+		    ->where("id=:id", array(':id' => $url))
+		    ->queryRow();
+
+		} while ($isVideo);
+
+		$addVideoId = Yii::app()->db->createCommand()
+			->insert('video_id', array('id'=>$url));
+		
+
+		$this->response['URL']=$url;
+		$this->response();
+
+	}
+
+
+
+    public function actionUploadVideo( $url=null ) {
+
+    	/*
+		get file contents
+
+		find a place to write video file 
+
+		which can be served as file to public access
+
+		create file
+
+		generate file url to  $Url
+
+    	*/
+    	    	
+    	if ($url && isset($_POST['video'])) {
+    		
+    		//$videoFileContents = $_POST['video'];
+    		
+    		
+    		//$videoFile = new file(path);
+
+            $model= new files;
+            $model->attributes=$_POST['video'];
+            $uploadedFile = CUploadedFile::getInstance($model, 'filename');
+            $model->filename = $url;
+
+            if($model->save()){
+            	$uploadedFile->saveAs(Yii::app()->basePath.'/../uploads/video/'.$url);
+            }
+    	}
+
+
+    	$this->response['videoUrl']=Yii::app()->basePath.'/../uploads/video/'.$url;
+    	return $this->response();
+    }
+
+
 	public function actionListBooks(){
 		$books=Book::model()->findAll();
 		
