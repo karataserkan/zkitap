@@ -39,7 +39,7 @@ class EditorActionsController extends Controller
 		} while ($isVideo);
 
 		
-		 
+		                    
 
 		$this->response['token']= $url;
 		$this->response['URL']= Yii::app()->request->hostInfo . "/uploads/files/".$url.".".$type;
