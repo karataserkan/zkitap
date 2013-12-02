@@ -31,6 +31,35 @@ class SiteController extends Controller
 		// using the default layout 'protected/views/layouts/main.php'
 		if(Yii::app()->user->isGuest)
 			$this->redirect( array('site/login' ) );
+
+
+		if (isset($_POST['user']) && isset($_POST['type']) && isset($_POST['book'])) {
+			//email adresi geldi $_POST['user']
+			//type geldi $_POST['type']
+			//book_id geldi $_POST['book']
+
+
+			//gelen emaildeki elamanın id'sini buldum
+			$userid= Yii::app()->db->createCommand()
+		    ->select("*")
+		    ->from("user")
+		    ->where("email=:email", array(':email' => $_POST['user']))
+		    ->queryRow();
+			$userid=$userid['id'];
+
+
+			//öyle bir kullanıcı varsa atanan hakkı verdim
+			if ($userid) {
+				$addUser = Yii::app()->db->createCommand();
+				$addUser->insert('book_users', array(
+				    'user_id'=>$userid,
+				    'book_id'=>$_POST['book'],
+				    'type'   =>$_POST['type']
+				));
+			}
+			
+		}
+
 		$this->render('index');
 	}
 
