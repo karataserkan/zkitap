@@ -38,6 +38,18 @@ $this->pageTitle=Yii::app()->name;
 	}
 
 
+	//kitabın kullanıcılarını return ediyorum
+	function bookUsers($bookId)
+	{
+		$bookUsers = Yii::app()->db->createCommand()
+		->select ("*")
+		->from("book_users")
+		->where("book_id=:book_id", array(':book_id' => $bookId))
+		->join("user","user_id=id")
+		->queryAll();
+
+		return $bookUsers;
+	}
 
 		// renders the view file 'protected/views/site/index.php'
 		// using the default layout 'protected/views/layouts/main.php'
@@ -98,6 +110,30 @@ $this->pageTitle=Yii::app()->name;
 									if ($userType==='owner') {
 										?>
 										<a href="#" class="btn icon-settings white btn radius float-right" id="book-editors-settings"></a>
+
+										<!--
+												buraya hakları düzenlemek için popup eklenecek
+										-->
+									<?php
+									/*  kullanıcıları popup içerisinde listeliyorum */
+										$users = bookUsers($book->book_id);
+										foreach ($users as $key => $user) {
+											
+
+
+
+										}
+										//owner ya da editor eklemek için siteController 3 tane değerin post edilmesini bekliyor
+										//user: eklenecek olan elemanın mail adresi
+										//book: kitabın id'si
+										//type: owner | editor | user
+
+
+										
+
+									?>
+
+
 										<a href="<?php echo Yii::app()->createUrl('book/delete', array('bookId'=>$book->book_id) ); ?>" class="btn red radius white icon-delete " style="font-weight:normal;" id="pop-video"></a>
 										<a href="<?php echo Yii::app()->createUrl('book/author', array('bookId'=>$book->book_id) ); ?>" class="btn white btn radius " id="pop-video">Düzenle</a>
 										<?php
