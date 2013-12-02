@@ -21,7 +21,7 @@ class EditorActionsController extends Controller
 	public function actionGetFileURL($type=null){
 
 		/* 
-		generate a temp file url
+		generate a temp file url 
 		
 		resposnse olarak URL string donsun
 
