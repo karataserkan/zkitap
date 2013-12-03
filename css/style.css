@@ -1003,3 +1003,23 @@ height: 150px;
 #current_page .ui-draggable:hover .dragging_holder{
 background-color:grey; height:10px; border: 1px dashed grey;cursor: move;
 } 
+
+
+
+.guide{
+    display: none; 
+    position: absolute; 
+    left: 0; 
+    top: 0; 
+}
+
+#guide-h{
+    border-top: 1px dashed #55f; 
+    width: 100%; 
+}
+
+#guide-v{
+    border-left: 1px dashed #55f; 
+    height: 100%; 
+}
+
