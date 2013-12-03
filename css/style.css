@@ -1,5 +1,8 @@
 @charset "utf-8";
-
+/*
+deneme
+deneme
+*/
 select {
     padding:3px;
     padding-left:10px;
@@ -997,6 +1000,55 @@ height: 150px;
 }
 
 
+.book-editors-options-box{
+width: 100%;
+display: none;
+ height: 100%; 
+ position: fixed; 
+ vertical-align: middle; 
+ background-color: rgba(34, 34, 34, 0.72);
+}
+.book-editors-options-box-container{
+padding: 20px;
+
+width:460px; 
+height: 550px; 
+background-color:#084f5f; 
+color:#fff; 
+margin-top:10%;
+ text-align:left;
+}
+.book-editors-options-box-container .editor-list{
+width:440px; 
+height:430px; 
+margin:10px auto;
+overflow-y:scroll;
+background-color:#fff; 
+}
+.book-editors-options-box-container .editor-list-item{
+font-size:20px; 
+padding:5px; 
+height:27px; 
+border-bottom:1px solid #333;
+}
+.editor-list-item .editor-name{
+max-width:300px; 
+text-overflow:ellipsis; 
+overflow: hidden;
+max-height:27px;
+display: block;
+white-space: nowrap;
+color:#333; 
+float:left;
+}
+.editor-list-item .delete-icon{
+ padding-left: 10px;
+ padding-top: 7px;
+ float:right;
+ vertical-align:middle;
+ font-weight:normal;
+ color:#cf5827;
+}
 
 	
 #current_page .ui-draggable:hover {border: 1px dashed grey }
