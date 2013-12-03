@@ -2,3 +2,4 @@
 .bash_history
 .*
 *.log
+protected/config/*
