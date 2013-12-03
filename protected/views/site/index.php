@@ -241,6 +241,7 @@ $this->pageTitle=Yii::app()->name;
 				<!-- editor options-->
 
 
+				
 <script>
 	
  $( "#boook-editors-settings" ).click(function() {
