@@ -38,7 +38,6 @@ class SiteController extends Controller
 			//type geldi $_POST['type']
 			//book_id geldi $_POST['book']
 
-
 			//gelen emaildeki elamanın id'sini buldum
 			$userid= Yii::app()->db->createCommand()
 		    ->select("*")

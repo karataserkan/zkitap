@@ -118,7 +118,7 @@ $this->pageTitle=Yii::app()->name;
 									/*  kullanıcıları popup içerisinde listeliyorum */
 										$users = bookUsers($book->book_id);
 										foreach ($users as $key => $user) {
-											
+
 
 
 
@@ -134,7 +134,18 @@ $this->pageTitle=Yii::app()->name;
 									?>
 
 
-										<a href="<?php echo Yii::app()->createUrl('book/delete', array('bookId'=>$book->book_id) ); ?>" class="btn red radius white icon-delete " style="font-weight:normal;" id="pop-video"></a>
+										
+
+										<?php 
+										echo CHtml::link(CHtml::encode(''), array('book/delete', 'bookId'=>$book->book_id),
+										  array(
+										    'submit'=>array('book/delete', 'bookId'=>$book->book_id),
+										    'class' => 'delete','confirm'=>'kitap silinecek. Onaylıyor musun?',
+										    'class' => 'btn red radius white icon-delete'
+										  )
+										);
+										?>
+
 										<a href="<?php echo Yii::app()->createUrl('book/author', array('bookId'=>$book->book_id) ); ?>" class="btn white btn radius " id="pop-video">Düzenle</a>
 										<?php
 									}
