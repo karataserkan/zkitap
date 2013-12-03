@@ -21,7 +21,7 @@ class EditorActionsController extends Controller
 	public function actionGetFileURL($type=null){
 
 		/* 
-		generate a temp file url 
+		generate a temp file url
 		
 		resposnse olarak URL string donsun
 
@@ -39,10 +39,10 @@ class EditorActionsController extends Controller
 		} while ($isVideo);
 
 		
-		                    
+		
 
-		$this->response['token']= $url;
-		$this->response['URL']= Yii::app()->request->hostInfo . "/uploads/files/".$url.".".$type;
+		$this->response['URL']= $url;
+		$this->response['token']= Yii::app()->request->hostInfo . "/uploads/files/".$url.".".$type;
 		$this->response();
 
 	}
@@ -287,7 +287,8 @@ class EditorActionsController extends Controller
 
 		$component_attribs=json_decode($attributes);
 
-
+                //var_dump($component_attribs);
+                //exit();
 
 		if($component_attribs->data->img->src  ) {
 			$component_attribs->data->img->src = functions::compressBase64Image($component_attribs->data->img->src);
@@ -602,7 +603,7 @@ right join book using (book_id) where book_id='$bookId' ;";
 				if ( is_array($items) || is_object($items) )
 				foreach ($items as $key => $value2) {
 					if($key!='css') $searchable.=serialize($value2);
-				} 
+				}
 			}
  
 			$searchable.=" ";
