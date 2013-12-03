@@ -235,6 +235,8 @@ window.lindneo.tlingit = (function(window, $, undefined){
 
 
   return {
+    responseFromJson: responseFromJson,
+    componentToJson: componentToJson,
     UpdatePage: UpdatePage,
     PageUpdated: PageUpdated,
     createComponent: createComponent,
