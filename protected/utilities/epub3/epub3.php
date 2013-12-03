@@ -222,7 +222,9 @@ class epub3 {
   <head>
     <meta http-equiv="default-style" content="text/html; charset=utf-8"/>
     	<title>'.$this->title.'</title>
-
+    	<link rel="stylesheet" href="stylesheet.css" type="text/css"/>
+		<link rel="stylesheet" href="page_styles.css" type="text/css"/>
+		<link rel="stylesheet" href="widgets.css" type="text/css"/>
 
 		<meta name="viewport" content="width=1024, height=768"/>
 	

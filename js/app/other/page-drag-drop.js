@@ -197,6 +197,22 @@ $( document ).ready(function () {
 	}
 
 
+  $('.ruler, .vruler').hide();
+
+  $('#general-options').change(function(){
+    var value=$(this).val();
+    console.log (value);
+    $('.ruler, .vruler').hide();
+    if( value.indexOf("cetvel") !== -1) {
+      $('.ruler, .vruler').show();
+    }
+    if( value.indexOf("rehber")!==-1 ){
+
+    }
+
+  });
+
+
 
   first_time();
 
