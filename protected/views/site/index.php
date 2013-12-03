@@ -70,6 +70,9 @@ $this->pageTitle=Yii::app()->name;
 	    	<div class='workspace'>
 	    		<h1 class="float-left white"><?php echo $workspace->workspace_name; ?></h1>
 	    		<a href='?r=book/create' class="btn white btn radius " style="margin-left:20px;">Yeni Kitap</a>
+				
+					
+				
 				<div style="clear:both"></div>
 	    		<div class='book_list'>
 	    			<?php 
@@ -92,28 +95,29 @@ $this->pageTitle=Yii::app()->name;
 								Yazar Adı<input type="text" class="book-list-textbox radius grey-9 float-right" value="<?php echo $book->author ?>">
 								
 							</div>
-<!--
+
 							<div class="book-list-box-text-container">
-								Kitap Editörleri <a href="#" class="btn icon-settings white btn radius float-right" id="book-editors-settings"></a> 
-									<label class="dropdown-label">
-										<select id="font-type" class="book-list-textbox radius grey-9">
-													<option selected="" value="k1"> kullanıcı 1 </option>
-													<option value="k2" >kullanıcı 2</option>
-													<option value="k3" >kullanıcı 3</option>
-										</select>
-									</label>
+							<!-- Editor options popupunu açan buton -->
+				<a href="#" class="btn white radius float-right book-editors-settings"id="boook-editors-settings" ><i class="icon-settings" style="font-weight:normal; margin-right:5px;"></i>Editörler</a>
+					<!-- Editor options popupunu açan buton -->
 								
 							</div>
--->
+
 							<div class="book-list-box-text-container" style="text-align:right;">
 								<?php
 									if ($userType==='owner') {
 										?>
-										<a href="#" class="btn icon-settings white btn radius float-right" id="book-editors-settings"></a>
-
+										
 										<!--
 												buraya hakları düzenlemek için popup eklenecek
+												
+												!!!!!!!!!!!!!! (can: aşağıda, editor options  yazan commentler arasında)!!!!!!!!!!!!!!
+												
 										-->
+															
+										
+										
+										
 									<?php
 									/*  kullanıcıları popup içerisinde listeliyorum */
 										$users = bookUsers($book->book_id);
@@ -160,6 +164,8 @@ $this->pageTitle=Yii::app()->name;
 							</div>
 						</div>
 
+						
+						
 						<!-- kitap kutusu-->
 												
 						<!--<a href='<?php echo Yii::app()->createUrl('book/author', array('bookId'=>$book->book_id) ); ?>' />
@@ -189,33 +195,62 @@ $this->pageTitle=Yii::app()->name;
 
 </div>
 
+				<!-- editor options-->
+				<center id="popup-close-area" class="book-editors-options-box">
+				<div id="close-div" style="background-color:#123456; width:100% height:#123456; position:fixed;"> </div>
+				<div class="book-editors-options-box-container">
+				<h2>Kitap Editörleri<a id="close-option-box"class="icon-close white size-15 delete-icon float-right" ></a></h2>
+				<div class="editor-list">
+
+				<!-- editorlerin olduğu satır burası burayı çoğalt-->
+				<div id="editor-list-istems" class="editor-list-item">
+				<span id="editor-name" class="editor-name">
+				Can Deniz Güngörmüş
+				</span>
+				<a id="delete-editor"class="icon-close size-15 delete-icon" ></a>
+				<span id="editor-tag" style="color:#477738; float:right;">
+				sahibi
+				</span>
+				</div>
+				<!-- editorlerin olduğu satır burası burayı çoğalt-->
+
+				<!-- editorlerin olduğu satır burası burayı çoğalt-->
+				<div id="editor-list-istems" class="editor-list-item">
+				<span id="editor-name" class="editor-name">
+				Can Deniz Güngörmüş
+				</span>
+				<a id="delete-editor"class="icon-close size-15 delete-icon" ></a>
+				<span id="editor-tag" style="color:#fbae3c; float:right;">
+				editör
+				</span>
+				</div>
+				<!-- editorlerin olduğu satır burası burayı çoğalt-->
+				</div>
+
+				<div style="background-color:#fff; height: 60px; padding:5px; margin:10px; color:#333; text-align:left;">
+
+				<span class="editor-name" >Kullanıcı Ekle(e-posta adresi):</span>
+				<br style="clear:both; margin-bottom:20px;">
+
+				<input type="text" class="book-list-textbox radius grey-9 float-left"  style=" width: 300px;  "value="e-posta adresi"> 
+				<a href="" class="btn white radius float-right" style="margin-left:20px; width:50px; text-align:center;" id="pop-video">Ekle</a>
+				</div>
+
+				</div>
+				</center>
+				<!-- editor options-->
 
 
-<!-- seçenekler popup-->
-
-<!-- seçenekler popup-->
-
-<!--	
-$( "#book-editors-settings" ).toggle(
-	  function() {
-		$( this ).after( $( '<span class="settings-box"> a asdfasd fasd fasd fasd fa</span>'  ) );
-	 },
-	  function() {
-		$(".settings-box").remove()
-	 },
-	);-->
 <script>
 	
-	$( "#book-editors-settings" ).click(function() {
-    $( "#book-list-box" ).after('<span class="settings-box" id="settings-box"> a asdfasd fasd fasd fasd fa</span>');
-	
-	$( "#book-editors-settings" ).click(function() {
-	$( ".settings-box" ).remove();
+ $( "#boook-editors-settings" ).click(function() {
+  $( ".book-editors-options-box" ).show( "fast" );
   
+  $( "#close-option-box" ).click(function() {
+  $( ".book-editors-options-box" ).hide( "fast" );
+  });
+
 });
-  
-});
-	
 	
 </script>
 
