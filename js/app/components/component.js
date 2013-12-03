@@ -7,6 +7,9 @@ $(document).ready(function(){
     _create: function () {
 
       var that = this;
+      var MIN_DISTANCE = 50; // minimum distance to "snap" to a guide
+      var guides = []; // no guides available ... 
+      var innerOffsetX, innerOffsetY; // we'll use those during drag ... 
 
       this.element
       .attr('id', this.options.component.id)
@@ -47,9 +50,76 @@ $(document).ready(function(){
         snapMode: 'outer',
         'stop': function(event, ui){
         console.log();
-         
+          $( "#guide-v, #guide-h" ).hide(); 
           that._resizeDraggable( event, ui );
+        },
+        drag: function( event, ui ){
+
+
+
+        if( $('#general-options').val().indexOf("rehber")===-1 ) return ;
+
+        // iterate all guides, remember the closest h and v guides
+        var guideV, guideH, distV = MIN_DISTANCE+1, distH = MIN_DISTANCE+1, offsetV, offsetH; 
+        var chosenGuides = { top: { dist: MIN_DISTANCE+1 }, left: { dist: MIN_DISTANCE+1 } }; 
+        var $t = $(this); 
+        var pos = { top: event.originalEvent.pageY , left: event.originalEvent.pageX - innerOffsetX }; 
+      
+        
+
+        var w = $t.outerWidth() - 1; 
+        var h = $t.outerHeight() - 1; 
+    //    var sispos= $('#current_page').offset();
+      
+        
+
+        var elemGuides = computeGuidesForElement( null, pos, w, h ); 
+        
+        $.each( guides, function( i, guide ){
+            $.each( elemGuides, function( i , elemGuide ){
+              
+                if( guide.type == elemGuide.type ){
+                    var prop = guide.type == "h"? "top":"left"; 
+                    var d = Math.abs( elemGuide[prop] - guide[prop] ); 
+
+                    if( d < chosenGuides[prop].dist ){
+                        chosenGuides[prop].dist = d; 
+                        chosenGuides[prop].offset = elemGuide[prop] - pos[prop]; 
+                        chosenGuides[prop].guide = guide; 
+                    }
+                }
+            } ); 
+        } );
+
+
+        
+
+
+        if( chosenGuides.top.dist <= MIN_DISTANCE ){
+            $( "#guide-h" ).css( "top", chosenGuides.top.guide.top- $('#current_page').offset().top ).show(); 
+            //ui.position.top = chosenGuides.top.guide.top - chosenGuides.top.offset - $('#current_page').offset().top;
         }
+        else{
+            $( "#guide-h" ).hide(); 
+            //ui.position.top = pos.top; 
+        }
+        
+        if( chosenGuides.left.dist <= MIN_DISTANCE ){
+            $( "#guide-v" ).css( "left", chosenGuides.left.guide.left- $('#current_page').offset().left ).show(); 
+            //ui.position.left = chosenGuides.left.guide.left - chosenGuides.left.offset- $('#current_page').offset().left; 
+        }
+        else{
+            $( "#guide-v" ).hide(); 
+            //ui.position.left = pos.left; 
+        }
+      }, 
+       start: function( event, ui ) {
+        guides = $.map( $( "#current_page .ui-draggable" ).not( this ), computeGuidesForElement );
+        console.log(guides);
+
+        innerOffsetX = event.originalEvent.offsetX;
+        innerOffsetY = event.originalEvent.offsetY;
+        }, 
       }) 
 
 
@@ -258,3 +328,28 @@ $(function () {
 
     $( 'body' ).append( html );
 });
+
+
+
+function computeGuidesForElement( elem, pos, w, h ){
+    if( elem != null ){
+        var $t = $(elem); 
+        pos = $t.offset();
+
+        w = $t.outerWidth() - 1; 
+        h = $t.outerHeight() - 1; 
+
+    }
+
+
+    
+    return [
+        { type: "h", left: pos.left , top: pos.top }, 
+        { type: "h", left: pos.left, top: pos.top + h }, 
+        { type: "v", left: pos.left, top: pos.top }, 
+        { type: "v", left: pos.left + w, top: pos.top },
+        // you can add _any_ other guides here as well (e.g. a guide 10 pixels to the left of an element)
+        { type: "h", left: pos.left, top: pos.top + h/2 },
+        { type: "v", left: pos.left + w/2, top: pos.top } 
+    ]; 
+}

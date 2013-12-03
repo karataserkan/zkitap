@@ -68,12 +68,15 @@ $current_user=User::model()->findByPk(Yii::app()->user->id);
 
 	<label id="options" class="dropdown-label">
 					<select id="general-options" class="radius">
-						<option selected> Seçenekler </option>
-						<option>Seçenek 1</option>
-						<option>Seçenek 2</option>
-						<option>Seçenek 3</option>
-						<option>Seçenek 4</option>
+						<option selected value=''> Hiçbiri </option>
+						<option value='rehber'> Rehber</option>
+						<option value='cetvel'>Cetvel</option>
+						<option value='rehber+cetvel'>Rehber & Cetvel</option>
+						
 					</select>
+					<script type="text/javascript">
+
+					</script>
 					</label>
 					
 					<form action='' id='searchform' style="float:left;">
@@ -841,6 +844,8 @@ $( "#add-button" ).hover(
 			
 
 					<div id='current_page' page_id='<?php echo $page->page_id ;?>' style='background:white;border:thin solid black;zoom:1; height:768px;width:1024px;position:relative' >
+						<div id="guide-h" class="guide"></div>
+						<div id="guide-v" class="guide"></div>
 
 					</div>
 
