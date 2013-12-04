@@ -30,6 +30,10 @@ $(document).ready(function(){
         </div>").appendTo('body');
 
         // set question text
+
+        var image=$("<img src='"+hat.options.component.data.a.image+"' />");
+
+        
         $('#question-text').text( that.options.component.data.question );
         var n = that.options.component.data.numberOfSelections;
 
@@ -172,15 +176,16 @@ $(document).ready(function(){
             'css': {
 
             },
-            'text': 'Quiz Click'
+            'text': 'Quiz Click',
+            'image': '/css/help.png'
           },
           'self': {
             'css': {
               'position':'absolute',
               'top': (ui.offset.top-$(event.target).offset().top ) + 'px',
               'left':  ( ui.offset.left-$(event.target).offset().left ) + 'px',
-              'width': '100px',
-              'height': '20px'
+              'width': '128px',
+              'height': '128px'
             }
           }
         }
