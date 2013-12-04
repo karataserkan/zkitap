@@ -181,10 +181,19 @@ $current_user=User::model()->findByPk(Yii::app()->user->id);
 					</select>	
 								
 				<div class="vertical-line"></div>
+				<div id="checkbox-container">
+				<input type="checkbox" id="font-bold" rel='font-weight' activeVal='bold' passiveVal='normal'  class="dark-blue radius toolbox-items btn-checkbox tool checkbox"> 
+				<label class="icon-font-bold  size-15" for="font-bold"></label>
 				
-				<input type="checkbox" id="font-bold" rel='font-weight' activeVal='bold' passiveVal='normal'  class="dark-blue radius toolbox-items btn-checkbox tool checkbox"><label class="icon-font-bold  size-15"> </label>
-				<input type="checkbox" id="font-italic" rel='font-style' activeVal='italic' passiveVal='normal'  class="dark-blue radius toolbox-items btn-checkbox tool checkbox"><label class="icon-font-italic size-15"> </label>
-				<input type="checkbox" id="font-underline" rel='text-decoration' activeVal='underline' passiveVal='none'  class="dark-blue radius toolbox-items btn-checkbox tool checkbox"><label class="icon-font-underline size-15"> </label>
+				<input type="checkbox" id="font-italic" rel='font-style' activeVal='italic' passiveVal='normal'  class="dark-blue radius toolbox-items btn-checkbox tool checkbox"> 
+				<label class="icon-font-italic size-15" for="font-italic"></label>
+								
+				<input type="checkbox" id="font-underline" rel='text-decoration' activeVal='underline' passiveVal='none'  class="dark-blue radius toolbox-items btn-checkbox tool checkbox">
+				<label class="icon-font-underline size-15" for="font-underline"></label>
+				</div>
+					
+				
+				
 				
 				<div class="vertical-line"></div>
 
@@ -312,6 +321,7 @@ $current_user=User::model()->findByPk(Yii::app()->user->id);
 		<!-- popuplar -->
 		
 		<script >
+		
 	$(function(){
  
  $('a[id^="pop-"]').click(function() {
