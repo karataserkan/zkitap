@@ -86,7 +86,7 @@ $this->pageTitle=Yii::app()->name;
 						
 						<!-- kitap kutusu-->
 						<div class="book-list-box radius" id="book-list-box">
-							<div class="book-list-box-book-cover"></div>
+							<div class="book-list-box-book-cover"><img src="/css/images/default-cover.jpg" alt="Book Cover" ></div>
 							<div class="book-list-box-text-container">
 								Kitabın Adı<input type="text" class="book-list-textbox radius grey-9 float-right" value="<?php echo $book->title ?>">
 							</div>
@@ -98,7 +98,7 @@ $this->pageTitle=Yii::app()->name;
 
 							<div class="book-list-box-text-container">
 							<!-- Editor options popupunu açan buton -->
-				<a href="#" class="btn white radius float-right book-editors-settings"id="boook-editors-settings" ><i class="icon-settings" style="font-weight:normal; margin-right:5px;"></i>Editörler</a>
+							<a href="#" class="btn white radius float-right book-editors-settings"id="boook-editors-settings" ><i class="icon-settings" style="font-weight:normal; margin-right:5px;"></i>Editörler</a>
 					<!-- Editor options popupunu açan buton -->
 								
 							</div>
