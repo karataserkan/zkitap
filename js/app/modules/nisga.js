@@ -105,8 +105,8 @@ window.lindneo.nisga = (function(window, $, undefined){
                 console.log(revision_array[revision_id].revisions[0].even_type);
                 console.log(revision_id);
             }
-            //revision_array.pop();
-            //revision_id=revision_id-1;
+            revision_array.pop();
+            revision_id=revision_id-1;
         }
     }
     
