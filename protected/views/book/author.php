@@ -48,7 +48,10 @@ $current_user=User::model()->findByPk(Yii::app()->user->id);
 	
 	
 <script type="text/javascript">
+	
 	window.lindneo.currentPageId='<?php echo $current_page->page_id; ?>';
+	window.lindneo.currentBookId='<?php echo $model->book_id; ?>';
+
 	window.lindneo.user={};
 	window.lindneo.user.username='<?php echo Yii::app()->user->name; ?>';
 	window.lindneo.user.name='<?php echo $current_user->name . " ". $current_user->surname; ?>';
@@ -66,7 +69,7 @@ $current_user=User::model()->findByPk(Yii::app()->user->id);
 		
 	
 
-	<label id="options" class="dropdown-label">
+	
 					<select id="general-options" class="radius">
 						<option selected value=''> Hiçbiri </option>
 						<option value='rehber'> Rehber</option>
@@ -77,7 +80,7 @@ $current_user=User::model()->findByPk(Yii::app()->user->id);
 					<script type="text/javascript">
 
 					</script>
-					</label>
+				
 					
 					<form action='' id='searchform' style="float:left;">
 
@@ -89,7 +92,7 @@ $current_user=User::model()->findByPk(Yii::app()->user->id);
 	
 	
 	
-	<label class="dropdown-label" id="user">
+
 					<select id="user-account" class="radius icon-users">
 						<option selected> Kullanıcı Adı </option>
 						<option>Seçenek 1</option>
@@ -97,7 +100,7 @@ $current_user=User::model()->findByPk(Yii::app()->user->id);
 						<option>Seçenek 3</option>
 						<option>Seçenek 4</option>
 					</select>
-					</label>
+					
 					
 					
 	<a href="<?php echo $this->createUrl("EditorActions/ExportBook", array('bookId' => $model->book_id ));?>" class="btn bck-light-green white radius" id="header-buttons"><i class="icon-publish"> Yayınla</i></a>
@@ -115,9 +118,10 @@ $current_user=User::model()->findByPk(Yii::app()->user->id);
 				<a id="redo" class="icon-redo grey-8 size-20"></a>
 			</div>
 			<div class="generic-options"  style="display:inline-block;">
-				<a href="#" class="bck-dark-blue white  radius" id="generic-cut" ><i class="icon-cut size-20">Kes</i></a>
-				<a href="#" class="bck-dark-blue white  radius" id="generic-copy" ><i class="icon-copy size-20">Kopyala</i></a>
-				<a href="#" class="bck-dark-blue white  radius" id="generic-paste" ><i class="icon-copy size-20">Yapıştır</i></a>
+				<a href="#" class="toolbox-items" id="generic-cut" ><img src="/css/images/cut.png" alt="Book Cover" style="margin-top:-5px;" ></a>
+				<a href="#" class="toolbox-items" id="generic-copy" ><img src="/css/images/copy.png" alt="Book Cover" style="margin-top:-5px;" ></a>
+				<a href="#" class="toolbox-items" id="generic-paste" ><img src="/css/images/paste.png" alt="Book Cover" style="margin-top:-5px;" ></a>
+				
 			</div>
 				
 
@@ -126,7 +130,7 @@ $current_user=User::model()->findByPk(Yii::app()->user->id);
 					
 					
 					<input class='tool color' rel='color' type="color" class="color-picker-box radius " placeholder="e.g. #bbbbbb" />
-					<label class="dropdown-label  ">
+				
 					<select class='tool select' rel='fast-style' id="fast-style" class="radius">
 						<option value="">Serbest</option>
 						<option value="h1" >Başlık</option>
@@ -135,8 +139,7 @@ $current_user=User::model()->findByPk(Yii::app()->user->id);
 						<option value="p"  >Paragraf</option>
 						<option value="blockqoute" >Alıntı</option>
 					</select>
-					</label>				
-					<label class="dropdown-label  ">
+					
 					<select class='tool select' rel='font-family' id="font-family" class="radius">
 						<option selected="" value="Arial"> Arial </option>
 						<option value="helvetica" >Helvetica</option>
@@ -145,9 +148,9 @@ $current_user=User::model()->findByPk(Yii::app()->user->id);
 						<option value="georgia" >Georgia</option>
 						<option value="Courier New" >Courier New</option>
 					</select>
-					</label>
+				
 					
-					<label class="dropdown-label ">
+					
 						<select class='tool select' rel='font-size' id="font-size" class="radius">
 						<option selected="" value="8px"> 8 </option>
 						<option value="10px" >10</option>
@@ -176,7 +179,7 @@ $current_user=User::model()->findByPk(Yii::app()->user->id);
 						<option value="58px" >58</option>
 						<option value="60px" >60</option>
 					</select>	
-					</label>					
+								
 				<div class="vertical-line"></div>
 				
 				<input type="checkbox" id="font-bold" rel='font-weight' activeVal='bold' passiveVal='normal'  class="dark-blue radius toolbox-items btn-checkbox tool checkbox"><label class="icon-font-bold  size-15"> </label>
@@ -210,7 +213,7 @@ $current_user=User::model()->findByPk(Yii::app()->user->id);
 				<a id="text-right-indent"  href="#" class="dark-blue radius toolbox-items "><i class="icon-right-indent size-15"></i></a>
 
 				<div class="vertical-line"></div>
-					<label class="dropdown-label " id="leading">
+				
 						<i class="icon-leading grey-6"></i>
 							<select id="leading" class="radius">
 								<option selected="" value="8"> 100 </option>
@@ -226,10 +229,10 @@ $current_user=User::model()->findByPk(Yii::app()->user->id);
 								<option value="90" >90</option>
 								<option value="100" >100</option>
 							</select>	
-					</label>
+				
 				<div class="vertical-line"></div>
 				
-				<label class="dropdown-label  image-options graph-options shape-options">
+				
 					<i class="icon-opacity grey-6"></i>
 							<select class='tool-select tool select' rel='opacity' rel='color' id="font-size" class="radius">
 								
@@ -245,14 +248,14 @@ $current_user=User::model()->findByPk(Yii::app()->user->id);
 								<option value="0.90" >90</option>
 								<option selected="selected"  value="1" >100</option>
 							</select>	
-				</label>
+				
 					<div class="vertical-line"></div>
 			</div>
 			
 			
 			<div class="image-options toolbox" style="display:inline-block;">
 				<div class="vertical-line"></div>
-				<label class="dropdown-label  image-options graph-options shape-options">
+				
 						<i class="icon-opacity grey-6"></i>
 							<select class='tool-select tool select' rel='opacity' rel='color' id="font-size" class="radius">
 								
@@ -268,15 +271,14 @@ $current_user=User::model()->findByPk(Yii::app()->user->id);
 								<option value="0.90" >90</option>
 								<option selected="selected"  value="1" >100</option>
 							</select>	
-					</label>
-			
+							
 			</div>
 			
 			<div class="shape-options toolbox"  style="display:inline-block;">
 				<div class="vertical-line"></div>
 				<input class='tool-color tool color' rel='fillStyle' type="color" class="color-picker-box radius " placeholder="e.g. #bbbbbb" />
 				<div class="vertical-line"></div>
-				<label class="dropdown-label  image-options graph-options shape-options">
+				
 						<i class="icon-opacity grey-6"></i>
 								<select class='tool-select tool select' rel='opacity' rel='color' id="font-size" class="radius">
 								
@@ -292,7 +294,7 @@ $current_user=User::model()->findByPk(Yii::app()->user->id);
 								<option value="0.90" >90</option>
 								<option selected="selected"  value="1" >100</option>
 							</select>	
-					</label>
+					
 				
 			</div>
 			<div class="generic-options toolbox"  style="display:inline-block;">
@@ -722,20 +724,20 @@ Grafik Ekle
 				/* if( $pages->page_id	<div style='	<div style='clear:both;'>
 
 
-	</div>clear:both;'>
+	</div>clear:both;'> 
 
-
+ 
 	</div>
 					==
 					$page->page_id ){
-					$this->current_page=$page;
+					$this->current_page=$page; 
 					$this->current_chapter=$chapter;
 				}*/
 				$page_NUM++;
 				?> 
 					
 					<li class='page <?php echo ( $current_page->page_id== $pages->page_id  ? "current_page": "" ); ?>' chapter_id='<?php echo $pages->chapter_id; ?>' page_id='<?php echo $pages->page_id; ?>' chapter_id='<?php echo $pages->page_id; ?>'   >
-						<a class="btn red white size-15 radius icon-delete page-chapter-delete delete-page hidden-delete "  style="margin-left: 38px;"></a>
+						<a class="btn red white size-15 radius icon-delete page-chapter-delete delete-page hidden-delete "  style="top: 0px;right: 0px; position: absolute;"></a>
 						<a href='<?php echo $this->createUrl("book/author", array('bookId' => $model->book_id, 'page'=>$pages->page_id ));?>' >
 
 								
