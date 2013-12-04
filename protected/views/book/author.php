@@ -721,20 +721,20 @@ Grafik Ekle
 				/* if( $pages->page_id	<div style='	<div style='clear:both;'>
 
 
-	</div>clear:both;'>
+	</div>clear:both;'> 
 
-
+ 
 	</div>
 					==
 					$page->page_id ){
-					$this->current_page=$page;
+					$this->current_page=$page; 
 					$this->current_chapter=$chapter;
 				}*/
 				$page_NUM++;
 				?> 
 					
 					<li class='page <?php echo ( $current_page->page_id== $pages->page_id  ? "current_page": "" ); ?>' chapter_id='<?php echo $pages->chapter_id; ?>' page_id='<?php echo $pages->page_id; ?>' chapter_id='<?php echo $pages->page_id; ?>'   >
-						<a class="btn red white size-15 radius icon-delete page-chapter-delete delete-page hidden-delete "  style="margin-left: 38px;"></a>
+						<a class="btn red white size-15 radius icon-delete page-chapter-delete delete-page hidden-delete "  style="top: 0px;right: 0px; position: absolute;"></a>
 						<a href='<?php echo $this->createUrl("book/author", array('bookId' => $model->book_id, 'page'=>$pages->page_id ));?>' >
 
 								
