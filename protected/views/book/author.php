@@ -48,7 +48,10 @@ $current_user=User::model()->findByPk(Yii::app()->user->id);
 	
 	
 <script type="text/javascript">
+	
 	window.lindneo.currentPageId='<?php echo $current_page->page_id; ?>';
+	window.lindneo.currentBookId='<?php echo $model->book_id; ?>';
+
 	window.lindneo.user={};
 	window.lindneo.user.username='<?php echo Yii::app()->user->name; ?>';
 	window.lindneo.user.name='<?php echo $current_user->name . " ". $current_user->surname; ?>';
