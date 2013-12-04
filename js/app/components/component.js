@@ -7,7 +7,7 @@ $(document).ready(function(){
     _create: function () {
 
       var that = this;
-      var MIN_DISTANCE = 50; // minimum distance to "snap" to a guide
+      var MIN_DISTANCE = 10; // minimum distance to "snap" to a guide
       var guides = []; // no guides available ... 
       var innerOffsetX, innerOffsetY; // we'll use those during drag ... 
 
@@ -97,7 +97,7 @@ $(document).ready(function(){
 
         if( chosenGuides.top.dist <= MIN_DISTANCE ){
             $( "#guide-h" ).css( "top", chosenGuides.top.guide.top- $('#current_page').offset().top ).show(); 
-            //ui.position.top = chosenGuides.top.guide.top - chosenGuides.top.offset - $('#current_page').offset().top;
+            ui.position.top = chosenGuides.top.guide.top - chosenGuides.top.offset - $('#current_page').offset().top;
         }
         else{
             $( "#guide-h" ).hide(); 
@@ -106,7 +106,7 @@ $(document).ready(function(){
         
         if( chosenGuides.left.dist <= MIN_DISTANCE ){
             $( "#guide-v" ).css( "left", chosenGuides.left.guide.left- $('#current_page').offset().left ).show(); 
-            //ui.position.left = chosenGuides.left.guide.left - chosenGuides.left.offset- $('#current_page').offset().left; 
+            ui.position.left = chosenGuides.left.guide.left - chosenGuides.left.offset- $('#current_page').offset().left; 
         }
         else{
             $( "#guide-v" ).hide(); 
@@ -217,7 +217,7 @@ $(document).ready(function(){
       console.log('selected');
 
       
-      
+      if (event)
       if(  event.ctrlKey || event.metaKey )
         console.log('control is pressed');
       else
@@ -351,5 +351,9 @@ function computeGuidesForElement( elem, pos, w, h ){
         // you can add _any_ other guides here as well (e.g. a guide 10 pixels to the left of an element)
         { type: "h", left: pos.left, top: pos.top + h/2 },
         { type: "v", left: pos.left + w/2, top: pos.top } 
+
+
+
+
     ]; 
 }

@@ -15,7 +15,7 @@ $(document).ready(function(){
       _create: function() {
 
         if( this.options.component.data.textarea.val === '' ){
-          this.options.component.data.textarea.val = 'My name is text component';
+          this.options.component.data.textarea.val = '';
         }
 
         var that = this;
@@ -24,13 +24,26 @@ $(document).ready(function(){
           that._change( ui );
         })
 
+
+        this.element.autogrow({element:this});
+
         this._super();
           
+      },
+
+      autoResize: function(){
+
+          this.element.trigger('focus');
+          console.log("AutoResize");
+
+
       },
 
       getSettable : function (){
         return this.options.component.data.textarea;
       },
+
+
 
 
       setPropertyofObject : function (propertyName,propertyValue){
@@ -129,6 +142,10 @@ $(document).ready(function(){
               break;
           }
       },
+      setProperty : function (propertyName,propertyValue){
+        this._setProperty(propertyName,propertyValue);
+        this.autoResize();
+      },
 
       getProperty : function (propertyName){
 
@@ -223,9 +240,9 @@ $(document).ready(function(){
             'background-color' : 'transparent'  
           } , 
           'attr': {
-            'asd': 'coadsad'
+            'placeholder':'Metin Kutusu'
           },
-          'val': 'some text'
+          'val': ''
         },
         'self': {
           'css': {
