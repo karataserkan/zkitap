@@ -32,17 +32,13 @@ class SiteController extends Controller
 		if(Yii::app()->user->isGuest)
 			$this->redirect( array('site/login' ) );
 
+		if (isset($_POST['data'])) {
+			$data = json_decode($_POST['data'],true);
 
-		if (isset($_POST['user']) && isset($_POST['type']) && isset($_POST['book'])) {
-			//email adresi geldi $_POST['user']
-			//type geldi $_POST['type']
-			//book_id geldi $_POST['book']
-
-			//gelen emaildeki elamanın id'sini buldum
 			$userid= Yii::app()->db->createCommand()
 		    ->select("*")
 		    ->from("user")
-		    ->where("email=:email", array(':email' => $_POST['user']))
+		    ->where("email=:email", array(':email' => $data[0]))
 		    ->queryRow();
 			$userid=$userid['id'];
 
@@ -52,11 +48,17 @@ class SiteController extends Controller
 				$addUser = Yii::app()->db->createCommand();
 				$addUser->insert('book_users', array(
 				    'user_id'=>$userid,
-				    'book_id'=>$_POST['book'],
-				    'type'   =>$_POST['type']
+				    'book_id'=>$data[2],
+				    'type'   =>$data[1]
 				));
 			}
-			
+
+		}
+
+		if (isset($_POST['del']) && isset($_POST['bookId']) && isset($_POST['user'])) {
+				$command = Yii::app()->db->createCommand();
+				$command->delete('book_users', 'user_id=:user_id && book_id=:book_id', array(':user_id'=>$_POST['user'],':book_id'=>$_POST['bookId']));
+				
 		}
 
 		$this->render('index');

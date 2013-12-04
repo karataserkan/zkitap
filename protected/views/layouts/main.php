@@ -8,6 +8,7 @@
 	<!-- blueprint CSS framework -->
 	<link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/screen.css" media="screen, projection" />
 	<link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/print.css" media="print" />
+	<link rel=”icon” type=”image/png” href=”/css/favicon.png” />
 	<!--[if lt IE 8]>
 	<link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/ie.css" media="screen, projection" />
 	<![endif]-->
@@ -16,6 +17,7 @@
 	<script src="<?php echo Yii::app()->request->baseUrl; ?>/js/lib/jquery-1.9.1.js"></script>
 	<script src="<?php echo Yii::app()->request->baseUrl; ?>/js/lib/jquery-ui-1.10.3.custom.js"></script>
 	<script src="<?php echo Yii::app()->request->baseUrl; ?>/js/lib/Chart.js"></script>
+	<script src="<?php echo Yii::app()->request->baseUrl; ?>/js/lib/jquery.autogrow-min.js"></script>
 
 	
 	<script src="<?php echo Yii::app()->request->baseUrl; ?>/js/app/lindneo.js"></script>	

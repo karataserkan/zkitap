@@ -761,14 +761,14 @@ Grafik Ekle
 	
 $( "#add-button" ).hover(
   function() {
-    $( this ).append( $(   	'<span id="add-buttons" class="add-button-container">  	    	<a class="add-button-cp white" href="?r=page/create&chapter_id=<?php echo $current_chapter->chapter_id; ?>"> Sayfa ekle </a>  	    	<a class="add-button-cp white" href="?r=chapter/create&book_id=<?php echo $model->book_id; ?>"> Bölüm ekle </a>     	</span>'    	) );
+    $( this ).append( $(   	'<span id="add-buttons" class="add-button-container"><a id="add-page" class="add-button-cp white" href="?r=page/create&chapter_id=<?php echo $current_chapter->chapter_id; ?>"> Sayfa ekle </a>  	    	<a class="add-button-cp white" href="?r=chapter/create&book_id=<?php echo $model->book_id; ?>"> Bölüm ekle </a> <div class="add-button-page-template white" > <span>Sayfa Şablonları</span>  <a><img src="css/images/template/klasik_1_400x300.jpg" ></a><a><img src="css/images/template/klasik_2_400x300.jpg" ></a> <a><img src="css/images/template/klasik_3_400x300.jpg" ></a>  <a><img src="css/images/template/klasik_4_400x300.jpg" ></a> <a><img src="css/images/template/klasik_4_400x300.jpg" ></a> <a><img src="css/images/template/klasik_4_400x300.jpg"></a>           </div>  	</span>'    	) );
  },
+  
  function(){
 			 $('#add-buttons').remove();
     }
    
 );
-
 
 
 </script>

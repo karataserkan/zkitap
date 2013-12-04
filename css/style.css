@@ -880,6 +880,28 @@ text-align:center;
 
 background-color: #084f5f;
 }
+
+.add-button-page-template{
+padding-top:10px;
+position: fixed;
+right: 150px;
+color: #fff;
+bottom: 0px;
+max-height:600px;
+min-height:300px;
+width: 250px;
+text-align:center;
+background-color: #084f5f;
+font-size:15px;
+overflow-y:scroll;
+text-align:center;
+}
+
+.add-button-page-template img{
+margin: 5px; auto;
+}
+
+
 .add-button-cp{
 padding: 5px 0px;
 border-bottom: 2px solid #d1d2d4;
