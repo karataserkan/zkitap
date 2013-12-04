@@ -193,11 +193,11 @@ $( document ).ready(function () {
 	    slide: function( event, ui ) {
 	      $('#author_pane').css({'zoom': (ui.value / 100) });
 	    }
-	  });
+	  }); 
 	}
 
 
-  $('.ruler, .vruler').hide();
+  $('.ruler, .vruler').hide(); 
 
   $('#general-options').change(function(){
     var value=$(this).val();
@@ -208,7 +208,7 @@ $( document ).ready(function () {
     }
 
 
- 
+
     
 
   });
