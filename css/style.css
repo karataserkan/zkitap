@@ -1124,4 +1124,32 @@ input[type=checkbox]:checked + label{
 }
 
 
+input[type=radio] {
+   display:none;
+}
+
+
+input[type=radio] + label{
+  width:35px;
+ height:25px;
+ padding-top:8px;
+ text-align:center; 
+ display:inline-block;
+ vertical-align:middle;
+}
+
+
+input[type=radio]:checked + label{
+   width:35px;
+ height:25px;
+ padding-top:8px;
+ text-align:center; 
+ display:inline-block;
+ vertical-align:middle;
+   background-color:#f7f7f7;
+-webkit-box-shadow: inset 0px 0px 3px 0px rgba(100, 100, 100, 100);
+ box-shadow: inset 0px 0px 3px 0px rgba(100, 100, 100, 100);
+}
+
+
 

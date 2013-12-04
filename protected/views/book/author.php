@@ -879,7 +879,7 @@ $( "#add-button" ).hover(
 		
 		<div id='guide'> 
 		</div> <!-- guide -->
-		<div id='editor_view_pane' style=' padding:5px 130px;margin:5px;float:left;'>
+		<div id='editor_view_pane' style=' padding:5px 130px;margin: 10px 5px 5px 5px;float:left;'>
 			
 
 					<div id='current_page' page_id='<?php echo $page->page_id ;?>' style='background:white;border:thin solid black;zoom:1; height:768px;width:1024px;position:relative' >
