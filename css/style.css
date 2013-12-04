@@ -882,8 +882,9 @@ background-color: #084f5f;
 }
 
 .add-button-page-template{
+padding-top:10px;
 position: fixed;
-right: 151px;
+right: 150px;
 color: #fff;
 bottom: 0px;
 max-height:600px;
@@ -892,7 +893,12 @@ width: 250px;
 text-align:center;
 background-color: #084f5f;
 font-size:15px;
+overflow-y:scroll;
+text-align:center;
+}
 
+.add-button-page-template img{
+margin: 5px; auto;
 }
 
 
