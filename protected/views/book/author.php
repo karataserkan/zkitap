@@ -181,7 +181,7 @@ $current_user=User::model()->findByPk(Yii::app()->user->id);
 					</select>	
 								
 				<div class="vertical-line"></div>
-				<div id="checkbox-container">
+				<div id="checkbox-container" style="display:inline-block">
 				<input type="checkbox" id="font-bold" rel='font-weight' activeVal='bold' passiveVal='normal'  class="dark-blue radius toolbox-items btn-checkbox tool checkbox"> 
 				<label class="icon-font-bold  size-15" for="font-bold"></label>
 				
