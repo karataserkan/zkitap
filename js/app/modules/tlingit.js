@@ -142,6 +142,8 @@ window.lindneo.tlingit = (function(window, $, undefined){
   };
 
   var loadPagesPreviews = function (pageId) {
+    var pageSlice=$('[page_id="'+pageId+'"]');
+    if (pageSlice)
      window.lindneo.dataservice
       .send( 'GetPageComponents', 
         { 
@@ -180,18 +182,51 @@ window.lindneo.tlingit = (function(window, $, undefined){
         canvas_reset[component.page_id]=true;
       }
         switch (component.type){
+
+
           case 'text':
+
+
+
             var fontHeight=(parseInt(component.data.textarea.css['font-size'] ) /ratio );
             var lines = component.data.textarea.val.match(/[^\n]+(?:\r?\n|$)/g) ;
+            var y= parseInt( parseInt(component.data.self.css['top'] ) /ratio ) ;
+            var x= parseInt( parseInt(component.data.self.css['left'] )  /ratio );
+            var starty=y;
+
+            var maxWidth=parseInt( parseInt(component.data.self.css['width']  ) /ratio );
+            var maxHeight=parseInt( parseInt(component.data.self.css['height']  ) /ratio );
 
             context.font= fontHeight + 'px Arial';
             context.fillStyle= component.data.textarea.css['color'];
 
 
             $.each(lines, function (lineNumber,line){
-            var y= parseInt( parseInt(component.data.self.css['top'] ) /ratio ) + ( fontHeight * (lineNumber +1 ) );
-            var x= parseInt( parseInt(component.data.self.css['left'] )  /ratio );
-            context.fillText(line, x,y );
+                y += fontHeight;
+                var words = line.split(' ');
+                var sublines = '';
+                console.log(y + ' ' +line) ;
+                for(var n = 0; n < words.length; n++) {
+
+                  var testLine = sublines + words[n] + ' ';
+                  var metrics = context.measureText(testLine);
+                  var testWidth = metrics.width;
+
+                  if (testWidth > maxWidth && n > 0 ) {
+                    if ( y - starty <= maxHeight ) context.fillText(sublines, x, y);
+                    sublines = words[n] + ' ';
+                    y += fontHeight;
+                    
+
+                  }
+                  else {
+                    sublines = testLine;
+                  }
+
+                } 
+
+         
+            if ( y - starty  <= maxHeight ) context.fillText(sublines, x,y );
 
             })
             

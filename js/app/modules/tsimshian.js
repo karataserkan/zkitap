@@ -10,7 +10,7 @@ window.lindneo.tsimshian = (function(window, $, undefined){
   var socket;
   var myComponent='';
  
-  var serverName = function (){
+  var serverName = function (){ 
     return "http://dev.lindneo.com:1881";
   }; 
 
@@ -55,6 +55,7 @@ window.lindneo.tsimshian = (function(window, $, undefined){
   var changePage = function (pageId){
     var user={
       pageid:pageId,
+      bookid:window.lindneo.currentBookId,
       name:window.lindneo.user.name,
       username:window.lindneo.user.username
     }
@@ -102,11 +103,15 @@ window.lindneo.tsimshian = (function(window, $, undefined){
         
       });
 
+       this.socket.on('pagePreviewUpdate', function(pageid){
+         window.lindneo.tlingit.loadPagesPreviews(pageid);
+
+       });
 
        this.socket.on('userListUpdate', function(userList){
           console.log(userList) ;
          
-       } );
+       });
  
 
   }; 
