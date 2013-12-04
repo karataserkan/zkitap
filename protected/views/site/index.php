@@ -97,9 +97,7 @@ $this->pageTitle=Yii::app()->name;
 							</div>
 
 							<div class="book-list-box-text-container">
-							<!-- Editor options popupunu açan buton -->
-				<a href="#" class="btn white radius float-right book-editors-settings"id="boook-editors-settings" ><i class="icon-settings" style="font-weight:normal; margin-right:5px;"></i>Editörler</a>
-					<!-- Editor options popupunu açan buton -->
+							
 								
 							</div>
 
@@ -107,38 +105,118 @@ $this->pageTitle=Yii::app()->name;
 								<?php
 									if ($userType==='owner') {
 										?>
-										
+										<!-- Editor options popupunu açan buton -->
+										<a href="#" popup="<?php echo $book->book_id; ?>" class="btn white radius float-right book-editors-settings"id="boook-editors-settings" ><i class="icon-settings" style="font-weight:normal; margin-right:5px;"></i>Editörler</a>
+										<!-- Editor options popupunu açan buton -->
 										<!--
 												buraya hakları düzenlemek için popup eklenecek
 												
 												!!!!!!!!!!!!!! (can: aşağıda, editor options  yazan commentler arasında)!!!!!!!!!!!!!!
 												
 										-->
-															
+										<?php //echo $book->book_id; ?>
 										
+										<!-- editor options-->
+										<center id="popup-close-area" class="book-editors-options-box" popup="pop-<?php echo $book->book_id; ?>" style="position:relative">
+										<div id="close-div" style="background-color:#123456; width:100% height:#123456; position:fixed;"> </div>
+										<div class="book-editors-options-box-container">
+										<h2>Kitap Editörleri<a popup="close-<?php echo $book->book_id; ?>" id="close-option-box"class="icon-close white size-15 delete-icon float-right" ></a></h2>
+										<div class="editor-list">
+										<?php 
+											$users = bookUsers($book->book_id);
+
+											foreach ($users as $key => $user): 
+												if ($user['type']=='owner' || $user['type']=='editor'){?>
+												<div id="editor-list-istems" class="editor-list-item">
+													<span id="editor-name" class="editor-name">
+													<?php echo $user['name']." ".$user['surname']; ?>
+													</span>
+													
+														<?php 
+															echo CHtml::link(CHtml::encode(''), array('site/index'),
+															  array(
+															    'submit'=>array('site/index', 'bookId'=>$book->book_id, 'user'=>$user['id'], 'del'=>'true'),
+															    'params' => array('bookId'=>$book->book_id, 'user'=>$user['id'], 'del'=>'true'),
+															    'class' => 'icon-close size-15 delete-icon'
+															  )
+															);
+															?>
+
+													
+													<span id="editor-tag" style="color:#477738; float:right;">
+														<?php 
+															if ($user['type']=='owner') {
+																echo "sahibi";
+															}
+															elseif ($user['type']=='editor') {
+																echo "editör";
+															}
+														?>
+													</span>
+												</div>	
+										<?php } endforeach; ?>
+										</div>
+
+										<div style="background-color:#fff; height: 60px; padding:5px; margin:10px; color:#333; text-align:left;">
+											<?php
+												//owner ya da editor eklemek için siteController 3 tane değerin post edilmesini bekliyor
+												//user: eklenecek olan elemanın mail adresi
+												//book: kitabın id'si
+												//type: owner | editor | user
+
+											?>
+											<span class="editor-name" >Kullanıcı Ekle(e-posta adresi):</span>
+											<br style="clear:both; margin-bottom:20px;">
+											<form id="<?php echo $book->book_id; ?>" method="post">
+											<input id="book" value="<?php echo $book->book_id; ?>" style="display:none">
+											<input id="user" type="text" class="book-list-textbox radius grey-9 float-left"  style=" width: 250;" value="">
+											 <select id="type" class="book-list-textbox radius grey-9 float-left"  style=" width: 70px;" >
+											  <option value="editor">Editör</option>
+											  <option value="owner">Sahibi</option>
+											</select>
+											</form>
+											<a href="#" class="btn white radius float-right" onclick="send(<?php echo $book->book_id; ?>)" style="margin-left:20px; width:50px; text-align:center;" id="pop-video">
+												Ekle
+											</a>
+											<script language="JavaScript">
+											function send(e){
+												$("[popup='pop-<?php echo $book->book_id; ?>']").hide("fast");
+											    var data= [];
+											    data[0]=$("#user",e).val();
+											    data[1]=$("#type",e).val();
+											    data[2]=$("#book",e).val();
+											    data="data="+JSON.stringify(data, null, 3);
+											      $.ajax({
+											           type: 'POST',
+											            url: "<?php echo Yii::app()->createUrl('site/index'); ?>",
+											            data:data,
+											            success:function(data){
+											                        
+											                      },
+											           error: function(data) {
+											                 
+											            },
+											          dataType:'html'
+											      });
+											}
+											</script>
+											
+										</div>
+
+										</div>
+										</center>
+
 										
-										
-									<?php
-									/*  kullanıcıları popup içerisinde listeliyorum */
-										$users = bookUsers($book->book_id);
-										foreach ($users as $key => $user) {
+										<script>
+										$("[popup='<?php echo $book->book_id; ?>']").click(function(){
+											$("[popup='pop-<?php echo $book->book_id; ?>']").show("fast");
+										});
+										$("[popup='close-<?php echo $book->book_id; ?>']").click(function(){
+											$("[popup='pop-<?php echo $book->book_id; ?>']").hide("fast");
+										});
+										</script>
+										<!-- editor options-->
 
-
-
-
-										}
-										//owner ya da editor eklemek için siteController 3 tane değerin post edilmesini bekliyor
-										//user: eklenecek olan elemanın mail adresi
-										//book: kitabın id'si
-										//type: owner | editor | user
-
-
-										
-
-									?>
-
-
-										
 
 										<?php 
 										echo CHtml::link(CHtml::encode(''), array('book/delete', 'bookId'=>$book->book_id),
@@ -195,65 +273,11 @@ $this->pageTitle=Yii::app()->name;
 
 </div>
 
-				<!-- editor options-->
-				<center id="popup-close-area" class="book-editors-options-box">
-				<div id="close-div" style="background-color:#123456; width:100% height:#123456; position:fixed;"> </div>
-				<div class="book-editors-options-box-container">
-				<h2>Kitap Editörleri<a id="close-option-box"class="icon-close white size-15 delete-icon float-right" ></a></h2>
-				<div class="editor-list">
-
-				<!-- editorlerin olduğu satır burası burayı çoğalt-->
-				<div id="editor-list-istems" class="editor-list-item">
-				<span id="editor-name" class="editor-name">
-				Can Deniz Güngörmüş
-				</span>
-				<a id="delete-editor"class="icon-close size-15 delete-icon" ></a>
-				<span id="editor-tag" style="color:#477738; float:right;">
-				sahibi
-				</span>
-				</div>
-				<!-- editorlerin olduğu satır burası burayı çoğalt-->
-
-				<!-- editorlerin olduğu satır burası burayı çoğalt-->
-				<div id="editor-list-istems" class="editor-list-item">
-				<span id="editor-name" class="editor-name">
-				Can Deniz Güngörmüş
-				</span>
-				<a id="delete-editor"class="icon-close size-15 delete-icon" ></a>
-				<span id="editor-tag" style="color:#fbae3c; float:right;">
-				editör
-				</span>
-				</div>
-				<!-- editorlerin olduğu satır burası burayı çoğalt-->
-				</div>
-
-				<div style="background-color:#fff; height: 60px; padding:5px; margin:10px; color:#333; text-align:left;">
-
-				<span class="editor-name" >Kullanıcı Ekle(e-posta adresi):</span>
-				<br style="clear:both; margin-bottom:20px;">
-
-				<input type="text" class="book-list-textbox radius grey-9 float-left"  style=" width: 300px;  "value="e-posta adresi"> 
-				<a href="" class="btn white radius float-right" style="margin-left:20px; width:50px; text-align:center;" id="pop-video">Ekle</a>
-				</div>
-
-				</div>
-				</center>
-				<!-- editor options-->
+				
 
 
 				
-<script>
-	
- $( "#boook-editors-settings" ).click(function() {
-  $( ".book-editors-options-box" ).show( "fast" );
-  
-  $( "#close-option-box" ).click(function() {
-  $( ".book-editors-options-box" ).hide( "fast" );
-  });
 
-});
-	
-</script>
 
 
 
