@@ -761,13 +761,17 @@ Grafik Ekle
 	
 $( "#add-button" ).hover(
   function() {
-    $( this ).append( $(   	'<span id="add-buttons" class="add-button-container">  	    	<a class="add-button-cp white" href="?r=page/create&chapter_id=<?php echo $current_chapter->chapter_id; ?>"> Sayfa ekle </a>  	    	<a class="add-button-cp white" href="?r=chapter/create&book_id=<?php echo $model->book_id; ?>"> Bölüm ekle </a>     	</span>'    	) );
+
+    $( this ).append( $(   	'<span id="add-buttons" class="add-button-container"><a id="add-page" class="add-button-cp red" href="?r=page/create&chapter_id=<?php echo $current_chapter->chapter_id; ?>&pageTeplateId=i6QpanEnH0fL8dei23TM41DObGHDyZjayFulRXyuotS6"> Sablon 1 </a><a id="add-page" class="add-button-cp white" href="?r=page/create&chapter_id=<?php echo $current_chapter->chapter_id; ?>"> Sayfa ekle </a><a class="add-button-cp white" href="?r=chapter/create&book_id=<?php echo $model->book_id; ?>"> Bölüm ekle </a></span>'
+
+      	) );
  },
  function(){
 			 $('#add-buttons').remove();
     }
    
 );
+
 
 
 

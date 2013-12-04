@@ -60,10 +60,11 @@ class PageController extends Controller
 	 * Creates a new model.
 	 * If creation is successful, the browser will be redirected to the 'view' page.
 	 */
-	public function actionCreate($chapter_id)
+	public function actionCreate($chapter_id,$pageTeplateId=null)
 	{
 		$model=new Page;
-		$model->page_id=functions::get_random_string();
+		$new_id=functions::get_random_string();
+		$model->page_id=$new_id;
 		$model->chapter_id=$chapter_id;
 
 		$chapter=Chapter::model()->findByPk($chapter_id)
@@ -75,7 +76,28 @@ class PageController extends Controller
 		
 			//$model->attributes=$_POST['Page'];
 			if($model->save())
+			{
+				if (isset($pageTeplateId)) {
+						$components = Component::model()->findAll(array(
+							'condition' => 'page_id=:page_id',
+							'params' => array(':page_id'=> $pageTeplateId)
+							));
+
+						if ($components) {
+							foreach ($components as $ckey => $component) {
+								$newComponent = new Component;
+								$newComponent->id=functions::get_random_string();
+								$newComponent->type=$component->type;
+								$newComponent->data=$component->data;
+								$newComponent->created=date("Y-m-d H:i:s");
+								$newComponent->page_id=$new_id;
+								$newComponent->save();
+							}
+						}
+					}
 				$this->redirect(array('book/author','bookId'=>$chapter->book_id,'page'=>$model->page_id));
+			}
+				
 	
 
 		
