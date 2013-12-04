@@ -206,9 +206,10 @@ $( document ).ready(function () {
     if( value.indexOf("cetvel") !== -1) {
       $('.ruler, .vruler').show();
     }
-    if( value.indexOf("rehber")!==-1 ){
 
-    }
+
+ 
+    
 
   });
 
