@@ -152,7 +152,7 @@ $( document ).ready(function () {
     $('.delete-chapter').click(function(){
       var chapter_id=$(this).parent().attr('chapter_id');
       console.log(chapter_id);
-
+      
       $('.chapter[chapter_id="'+chapter_id+'"]').hide('slow', function(){  $('.chapter[chapter_id="'+chapter_id+'"]').remove();});
       window.lindneo.tlingit.ChapterHasDeleted( chapter_id );
       sortPages();
@@ -163,6 +163,14 @@ $( document ).ready(function () {
       var page_id=$(this).parent().attr('page_id');
 
       window.lindneo.tlingit.PageHasDeleted( page_id );
+
+      //ekaratas start
+      //sayfa silindiğinde sayfaya ait olan çalışma alanını kaldırdım
+
+      if (page_id==window.lindneo.currentPageId) {
+        $('#current_page').hide().remove();
+      };
+      //ekaratas end
 
       $('.page[page_id="'+page_id+'"]').hide('slow', function(){  $('.page[page_id="'+page_id+'"]').remove();});
       sortPages();
