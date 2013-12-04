@@ -98,7 +98,7 @@ $this->pageTitle=Yii::app()->name;
 
 							<div class="book-list-box-text-container">
 
-								
+							<a href="#" popup="<?php echo $book->book_id; ?>" class="btn white radius float-right book-editors-settings"id="boook-editors-settings" ><i class="icon-settings" style="font-weight:normal; margin-right:5px;"></i>Editörler</a>	
 							</div>
 
 							<div class="book-list-box-text-container" style="text-align:right;">
@@ -106,7 +106,7 @@ $this->pageTitle=Yii::app()->name;
 									if ($userType==='owner') {
 										?>
 										<!-- Editor options popupunu açan buton -->
-										<a href="#" popup="<?php echo $book->book_id; ?>" class="btn white radius float-right book-editors-settings"id="boook-editors-settings" ><i class="icon-settings" style="font-weight:normal; margin-right:5px;"></i>Editörler</a>
+										
 										<!-- Editor options popupunu açan buton -->
 										<!--
 												buraya hakları düzenlemek için popup eklenecek
