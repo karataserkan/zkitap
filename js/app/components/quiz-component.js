@@ -25,7 +25,7 @@ $(document).ready(function(){
             <div id='question-text'></div> \
             <div id='question-options-container'></div> \
             <div> \
-              <a id='send' href='#'>send</a> \
+              <a href='' class='btn bck-light-green white radius' id='send'> Yanıtla </a> \
             </div> \
         </div>").appendTo('body');
 
@@ -173,6 +173,7 @@ $(document).ready(function(){
 
             },
             'text': 'Quiz Click'
+			
           },
           'self': {
             'css': {

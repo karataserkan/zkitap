@@ -139,10 +139,6 @@ vertical-align: middle;
 }
 .toolbox{
 float:left;
-border-right: 1px dashed #ccc;
-border-left: 1px dashed #ccc;
-padding: 5px;
-
 }
 
 
