@@ -64,7 +64,7 @@ return array(
 			'connectionString' => 'mysql:host=localhost;dbname=squid_pacific',
 			'emulatePrepare' => true,
 			'username' => 'root',
-			'password' => '',
+			'password' => '12548442',
 			'charset' => 'utf8',
 		),
 
