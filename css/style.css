@@ -11,9 +11,6 @@ select {
     border:none;
     outline:none;
     display: inline-block;
-    -webkit-appearance:none;
-    -moz-appearance:none;
-    appearance:none;
     cursor:pointer;
 }
 ;
@@ -1053,7 +1050,8 @@ float:left;
 	
 #current_page .ui-draggable:hover {border: 1px dashed grey }
 #current_page .ui-draggable:hover .dragging_holder{
-background-color:grey; height:10px; border: 1px dashed grey;cursor: move;
+background-color:grey; height:20px; width:100%; border: 1px dashed grey;cursor: move;
+position: absolute; top: -23px; right: 0px;
 } 
 
 
