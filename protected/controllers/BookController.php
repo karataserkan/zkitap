@@ -109,17 +109,20 @@ class BookController extends Controller
 		    'params'=>array(':workspace_id'=>'layouts'),
 		));
 		
+
+
+
 		if(isset($_GET['layout']))
 		{
+			
+
 			$layout_id = $_GET['layout'];
 			$bookId=$_GET['book_id'];
-			
-			if ($layout_id == 'blank') {
-				$this->redirect(array('author','bookId'=>$bookId));
-			}
-			
-			
-			
+
+			$book=$this->loadModel($bookId);
+			$book->data=$layout_id;
+			$book->save();		
+				
 			$chapters= Chapter::model()->findAll(array(
 				'condition' => 'book_id=:book_id',
 				'params' => array(':book_id' => $layout_id),

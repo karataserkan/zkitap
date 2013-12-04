@@ -758,12 +758,34 @@ Grafik Ekle
 	<div id="add-button" class="bck-dark-blue size-25 icon-add white" style="position: fixed; bottom: 0px; right: 0px; width: 140px; text-align: center;"></div>
 	
 	<script>
+
+	<?php 
+
+	$template_links='';
+	$template_id=$model->data;
+	$template_chapter=Chapter::model()->find( 'book_id=:book_id', array(':book_id' => $template_id )  );
 	
+
+	$template_pages=Page::model()->findAll(array('order'=>  '`order` asc ,  created asc', "condition"=>'chapter_id=:chapter_id', "params" =>array(':chapter_id' => $template_chapter->chapter_id  ) ) );
+	foreach ($template_pages as $template_page){
+		$template_links .=  "<a href='?r=page/create&chapter_id=".$current_chapter->chapter_id."&pageTeplateId=".$template_page->page_id."' ><img src='".$template_page->data. "' ></a>";
+	}
+
+	?>	
 $( "#add-button" ).hover(
   function() {
 
 
-    $( this ).append( $(   	'<span id="add-buttons" class="add-button-container"><a id="add-page" class="add-button-cp red" href="?r=page/create&chapter_id=<?php echo $current_chapter->chapter_id; ?>&pageTeplateId=i6QpanEnH0fL8dei23TM41DObGHDyZjayFulRXyuotS6"> Sablon 1 </a><a id="add-page" class="add-button-cp white" href="?r=page/create&chapter_id=<?php echo $current_chapter->chapter_id; ?>"> Sayfa ekle </a><a class="add-button-cp white" href="?r=chapter/create&book_id=<?php echo $model->book_id; ?>"> Bölüm ekle </a></span>'
+    $( this ).append( $(  "<span id='add-buttons' class='add-button-container'>\
+ 	<a id='add-page' class='add-button-cp white' href='?r=page/create&chapter_id=<?php echo $current_chapter->chapter_id; ?>'> Sayfa ekle </a>\
+ 	\
+ 	<a class='add-button-cp white' href='?r=chapter/create&book_id=<?php echo $model->book_id; ?>'> Bölüm ekle </a> \
+ 	<div class='add-button-page-template white' > <span>Sayfa Şablonları</span>  \
+ 	\
+ 	<?php echo $template_links; ?> \
+ 	\
+ 	</div> \
+ 	</span>" 
 
       	) );
 
