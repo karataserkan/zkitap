@@ -1095,3 +1095,33 @@ position: absolute; top: -23px; right: 0px;
     height: 100%; 
 }
 
+
+input[type=checkbox] {
+   display:none;
+}
+
+
+input[type=checkbox] + label{
+  width:35px;
+ height:25px;
+ padding-top:8px;
+ text-align:center; 
+ display:inline-block;
+ vertical-align:middle;
+}
+
+
+input[type=checkbox]:checked + label{
+   width:35px;
+ height:25px;
+ padding-top:8px;
+ text-align:center; 
+ display:inline-block;
+ vertical-align:middle;
+   background-color:#f7f7f7;
+-webkit-box-shadow: inset 0px 0px 3px 0px rgba(100, 100, 100, 100);
+ box-shadow: inset 0px 0px 3px 0px rgba(100, 100, 100, 100);
+}
+
+
+
