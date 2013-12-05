@@ -11,18 +11,22 @@ window.lindneo.nisga = (function(window, $, undefined){
   var page_div_selector = '#current_page';
   var revision_array = new Array();
   var revision_id=0;
+  var revision_value = 0;
 
   var createComponent = function( component ){
     console.log(component);
     componentBuilder( component );  
-    revision_array.push({
-            page_id: component.page_id,
-            revisions: [
-                {component_id: component.id, component: component, revision_date: $.now(), even_type: 'CREATE'}
-            ]
-        });
-        revision_id++;
-        console.log(revision_array); 
+    if(revision_value==0){
+        revision_array.push({
+                page_id: component.page_id,
+                revisions: [
+                    {component_id: component.id, component: component, revision_date: $.now(), even_type: 'CREATE'}
+                ]
+            });
+            revision_id++;
+    }
+    else revision_value=0;
+    console.log(revision_array);
   };
 
   var componentBuilder = function( component ){
@@ -87,7 +91,7 @@ window.lindneo.nisga = (function(window, $, undefined){
            if(revision_array[revision_id].revisions[0].even_type=='CREATE'){
                 deleteComponent(revision_array[revision_id].revisions[0].component);
                 console.log(revision_array[revision_id].revisions[0].even_type);
-                console.log(revision_id);
+                
             }
             if(revision_array[revision_id].revisions[0].even_type=='UPDATE'){
                 //console.log(revision_array[revision_id-1].revisions[0].component);
@@ -96,17 +100,15 @@ window.lindneo.nisga = (function(window, $, undefined){
                 this.createComponent(revision_array[revision_id-1].revisions[0].component);
                 window.lindneo.tlingit.componentHasUpdated(revision_array[revision_id-1].revisions[0].component);
                 
-                console.log(revision_id);
                 //revision_id--;
                 //console.log(revision_array);
             }
             if(revision_array[revision_id].revisions[0].even_type=='DELETE'){
                 window.lindneo.tlingit.createComponent(revision_array[revision_id].revisions[0].component,'undo');
                 console.log(revision_array[revision_id].revisions[0].even_type);
-                console.log(revision_id);
             }
-            revision_array.pop();
-            revision_id=revision_id-1;
+            
+            revision_value=1;
         }
     }
     
@@ -149,13 +151,16 @@ window.lindneo.nisga = (function(window, $, undefined){
   };
 
   var deleteComponent = function ( component ) {
-    revision_array.push({
-            page_id: component.page_id,
-            revisions: [
-                {component_id: component.id, component: component, revision_date: $.now(), even_type: 'DELETE'}
-            ]
-        });
-        revision_id++;
+      if(revision_value==0){
+        revision_array.push({
+                page_id: component.page_id,
+                revisions: [
+                    {component_id: component.id, component: component, revision_date: $.now(), even_type: 'DELETE'}
+                ]
+            });
+            revision_id++;
+      }
+      else revision_value=0;
         console.log(revision_array);
     window.lindneo.toolbox.removeComponentFromSelection( $('#'+ component.id) );
     window.lindneo.tlingit.componentHasDeleted( component.id );
@@ -174,14 +179,18 @@ window.lindneo.nisga = (function(window, $, undefined){
     .shapeComponent({
       'component': component,
       'update': function ( event, component ) {
-        revision_array.push({
-                    page_id: component.page_id,
-                    revisions: [
-                        {component_id: component.id, component: component, revision_date: $.now(), even_type: 'UPDATE'}
-                    ]
-                });
-                revision_id++;
-                console.log(revision_array);
+          if(revision_value==0){
+            revision_array.push({
+                        page_id: component.page_id,
+                        revisions: [
+                            {component_id: component.id, component: component, revision_date: $.now(), even_type: 'UPDATE'}
+                        ]
+                    });
+                    revision_id++;
+                    
+          }
+          else revision_value=0;
+          console.log(revision_array);
         window.lindneo.tlingit.componentHasUpdated( component );
       },
       'selected': function (event, element) {
@@ -203,14 +212,18 @@ window.lindneo.nisga = (function(window, $, undefined){
     .graphComponent({
       'component': component,
       'update': function ( event, component ) {
-        revision_array.push({
-                    page_id: component.page_id,
-                    revisions: [
-                        {component_id: component.id, component: component, revision_date: $.now(), even_type: 'UPDATE'}
-                    ]
-                });
-                revision_id++;
-                console.log(revision_array);
+        if(revision_value==0){
+            revision_array.push({
+                        page_id: component.page_id,
+                        revisions: [
+                            {component_id: component.id, component: component, revision_date: $.now(), even_type: 'UPDATE'}
+                        ]
+                    });
+                    revision_id++;
+                    
+          }
+          else revision_value=0;
+          console.log(revision_array);
         window.lindneo.tlingit.componentHasUpdated( component );
       },
       'selected': function (event, element) {
@@ -230,14 +243,18 @@ window.lindneo.nisga = (function(window, $, undefined){
     .textComponent({
       'component': component,
       'update': function ( event, component ) {
-        revision_array.push({
-                    page_id: component.page_id,
-                    revisions: [
-                        {component_id: component.id, component: component, revision_date: $.now(), even_type: 'UPDATE'}
-                    ]
-                });
-                revision_id++;
-                console.log(revision_array);  
+        if(revision_value==0){
+            revision_array.push({
+                        page_id: component.page_id,
+                        revisions: [
+                            {component_id: component.id, component: component, revision_date: $.now(), even_type: 'UPDATE'}
+                        ]
+                    });
+                    revision_id++;
+                    
+          }
+          else revision_value=0;
+          console.log(revision_array);  
         window.lindneo.tlingit.componentHasUpdated( component );
       },
       'selected': function (event, element) {
@@ -261,14 +278,18 @@ window.lindneo.nisga = (function(window, $, undefined){
       'component': component,
       'marker': 'http://dev.lindneo.com/css/linkmarker.png'  ,
       'update': function ( event, component ) {
-        revision_array.push({
-                    page_id: component.page_id,
-                    revisions: [
-                        {component_id: component.id, component: component, revision_date: $.now(), even_type: 'UPDATE'}
-                    ]
-                });
-                revision_id++;
-                console.log(revision_array);
+        if(revision_value==0){
+            revision_array.push({
+                        page_id: component.page_id,
+                        revisions: [
+                            {component_id: component.id, component: component, revision_date: $.now(), even_type: 'UPDATE'}
+                        ]
+                    });
+                    revision_id++;
+                    
+          }
+          else revision_value=0;
+          console.log(revision_array);
         window.lindneo.tlingit.componentHasUpdated( component );
       },
       'selected': function (event, element) {
@@ -293,14 +314,18 @@ window.lindneo.nisga = (function(window, $, undefined){
       'component': component,
       'marker': 'http://dev.lindneo.com/css/popupmarker.png'  ,
       'update': function ( event, component ) {
-        revision_array.push({
-                    page_id: component.page_id,
-                    revisions: [
-                        {component_id: component.id, component: component, revision_date: $.now(), even_type: 'UPDATE'}
-                    ]
-                });
-                revision_id++;
-                console.log(revision_array);
+        if(revision_value==0){
+            revision_array.push({
+                        page_id: component.page_id,
+                        revisions: [
+                            {component_id: component.id, component: component, revision_date: $.now(), even_type: 'UPDATE'}
+                        ]
+                    });
+                    revision_id++;
+                    
+          }
+          else revision_value=0;
+          console.log(revision_array);
         window.lindneo.tlingit.componentHasUpdated( component );
       },
       'selected': function (event, element) {
@@ -328,14 +353,18 @@ window.lindneo.nisga = (function(window, $, undefined){
     .imageComponent({
       'component': component,
       'update': function ( event, component ) {
-        revision_array.push({
-                    page_id: component.page_id,
-                    revisions: [
-                        {component_id: component.id, component: component, revision_date: $.now(), even_type: 'UPDATE'}
-                    ]
-                });
-                revision_id++;
-                console.log(revision_array);
+        if(revision_value==0){
+            revision_array.push({
+                        page_id: component.page_id,
+                        revisions: [
+                            {component_id: component.id, component: component, revision_date: $.now(), even_type: 'UPDATE'}
+                        ]
+                    });
+                    revision_id++;
+                    
+          }
+          else revision_value=0;
+          console.log(revision_array);
         window.lindneo.tlingit.componentHasUpdated( component );
       },
       'selected': function (event, element) {
@@ -357,14 +386,18 @@ window.lindneo.nisga = (function(window, $, undefined){
     .videoComponent({
       'component': component,
       'update': function ( event, component ) {
-        revision_array.push({
-                    page_id: component.page_id,
-                    revisions: [
-                        {component_id: component.id, component: component, revision_date: $.now(), even_type: 'UPDATE'}
-                    ]
-                });
-                revision_id++;
-                console.log(revision_array);
+        if(revision_value==0){
+            revision_array.push({
+                        page_id: component.page_id,
+                        revisions: [
+                            {component_id: component.id, component: component, revision_date: $.now(), even_type: 'UPDATE'}
+                        ]
+                    });
+                    revision_id++;
+                    
+          }
+          else revision_value=0;
+          console.log(revision_array);
         window.lindneo.tlingit.componentHasUpdated( component );
       },
       'selected': function (event, element) {
@@ -389,14 +422,18 @@ window.lindneo.nisga = (function(window, $, undefined){
     .soundComponent({
       'component': component,
       'update': function ( event, component ) {
-        revision_array.push({
-                    page_id: component.page_id,
-                    revisions: [
-                        {component_id: component.id, component: component, revision_date: $.now(), even_type: 'UPDATE'}
-                    ]
-                });
-                revision_id++;
-                console.log(revision_array);
+        if(revision_value==0){
+            revision_array.push({
+                        page_id: component.page_id,
+                        revisions: [
+                            {component_id: component.id, component: component, revision_date: $.now(), even_type: 'UPDATE'}
+                        ]
+                    });
+                    revision_id++;
+                    
+          }
+          else revision_value=0;
+          console.log(revision_array);
         window.lindneo.tlingit.componentHasUpdated( component );
       },
       'selected': function (event, element) {
@@ -420,14 +457,18 @@ window.lindneo.nisga = (function(window, $, undefined){
     .galeryComponent({
       'component': component,
       'update': function ( event, component ) {
-        revision_array.push({
-                    page_id: component.page_id,
-                    revisions: [
-                        {component_id: component.id, component: component, revision_date: $.now(), even_type: 'UPDATE'}
-                    ]
-                });
-                revision_id++;
-                console.log(revision_array);
+        if(revision_value==0){
+            revision_array.push({
+                        page_id: component.page_id,
+                        revisions: [
+                            {component_id: component.id, component: component, revision_date: $.now(), even_type: 'UPDATE'}
+                        ]
+                    });
+                    revision_id++;
+                    
+          }
+          else revision_value=0;
+          console.log(revision_array);
         window.lindneo.tlingit.componentHasUpdated( component );
       },
       'selected': function (event, element) {
@@ -449,14 +490,18 @@ window.lindneo.nisga = (function(window, $, undefined){
     .quizComponent({
       'component': component,
       'update': function( event, component ){
-        revision_array.push({
-                    page_id: component.page_id,
-                    revisions: [
-                        {component_id: component.id, component: component, revision_date: $.now(), even_type: 'UPDATE'}
-                    ]
-                });
-                revision_id++;
-                console.log(revision_array);
+        if(revision_value==0){
+            revision_array.push({
+                        page_id: component.page_id,
+                        revisions: [
+                            {component_id: component.id, component: component, revision_date: $.now(), even_type: 'UPDATE'}
+                        ]
+                    });
+                    revision_id++;
+                    
+          }
+          else revision_value=0;
+          console.log(revision_array);
         window.lindneo.tlingit.componentHasUpdated( component );
       },
       'selected': function ( event, element_ ){
