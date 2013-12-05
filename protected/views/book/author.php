@@ -113,7 +113,7 @@ $current_user=User::model()->findByPk(Yii::app()->user->id);
 	
 			<div class="styler_box">
 			<!-- <ul id="text-styles" ></ul> -->
-			<div class="generic-options"  style="display:inline-block;">
+			<div class="generic-options toolbox"  style="display:inline-block;">
 				<a id="undo" class="icon-undo dark-blue size-20"></a>
 				<a id="redo" class="icon-redo grey-8 size-20"></a>
 			</div>
@@ -181,19 +181,10 @@ $current_user=User::model()->findByPk(Yii::app()->user->id);
 					</select>	
 								
 				<div class="vertical-line"></div>
-				<div id="checkbox-container" style="display:inline-block">
-				<input type="checkbox" id="font-bold" rel='font-weight' activeVal='bold' passiveVal='normal'  class="dark-blue radius toolbox-items btn-checkbox tool checkbox"> 
-				<label class="icon-font-bold  size-15" for="font-bold"></label>
 				
-				<input type="checkbox" id="font-italic" rel='font-style' activeVal='italic' passiveVal='normal'  class="dark-blue radius toolbox-items btn-checkbox tool checkbox"> 
-				<label class="icon-font-italic size-15" for="font-italic"></label>
-								
-				<input type="checkbox" id="font-underline" rel='text-decoration' activeVal='underline' passiveVal='none'  class="dark-blue radius toolbox-items btn-checkbox tool checkbox">
-				<label class="icon-font-underline size-15" for="font-underline"></label>
-				</div>
-					
-				
-				
+				<input type="checkbox" id="font-bold" rel='font-weight' activeVal='bold' passiveVal='normal'  class="dark-blue radius toolbox-items btn-checkbox tool checkbox"><label class="icon-font-bold  size-15"> </label>
+				<input type="checkbox" id="font-italic" rel='font-style' activeVal='italic' passiveVal='normal'  class="dark-blue radius toolbox-items btn-checkbox tool checkbox"><label class="icon-font-italic size-15"> </label>
+				<input type="checkbox" id="font-underline" rel='text-decoration' activeVal='underline' passiveVal='none'  class="dark-blue radius toolbox-items btn-checkbox tool checkbox"><label class="icon-font-underline size-15"> </label>
 				
 				<div class="vertical-line"></div>
 
@@ -321,7 +312,6 @@ $current_user=User::model()->findByPk(Yii::app()->user->id);
 		<!-- popuplar -->
 		
 		<script >
-		
 	$(function(){
  
  $('a[id^="pop-"]').click(function() {
@@ -879,7 +869,7 @@ $( "#add-button" ).hover(
 		
 		<div id='guide'> 
 		</div> <!-- guide -->
-		<div id='editor_view_pane' style=' padding:5px 130px;margin: 10px 5px 5px 5px;float:left;'>
+		<div id='editor_view_pane' style=' padding:5px 130px;margin:5px;float:left;'>
 			
 
 					<div id='current_page' page_id='<?php echo $page->page_id ;?>' style='background:white;border:thin solid black;zoom:1; height:768px;width:1024px;position:relative' >
