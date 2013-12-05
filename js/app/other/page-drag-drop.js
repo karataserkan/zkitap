@@ -85,10 +85,12 @@ $( document ).ready(function () {
 			  //create a component object from dom object
 			  //pass it to tlingit        
 
+        /*
+        //Dont add if on to other component
         if( $(event.toElement).attr('component-instance') ){
           return;
         }
-
+        */
         switch( $(event.toElement).attr('ctype') ) {
 
           case 'text':

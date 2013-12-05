@@ -496,6 +496,8 @@ class epub3 {
 	</metadata>
 	<manifest>
 		<item href="cover.jpg" id="cover" media-type="image/jpg" />
+		<item href="linkmarker.png" id="linkmarker" media-type="image/png" />
+		<item href="popupmarker.png" id="popupmarker" media-type="image/png" />
 %pages_manifest%
 		<item href="page_styles.css" id="page_css" media-type="text/css" />
 		<item href="stylesheet.css" id="css" media-type="text/css" />
