@@ -121,14 +121,19 @@ $current_user=User::model()->findByPk(Yii::app()->user->id);
 			
 			<div class="vertical-line"></div>
 			
-			<div class="generic-options"  style="display:inline-block;">
+			<div class="generic-options responsive_1"  style="display:inline-block;">
 				<a href="#" class="toolbox-items" id="generic-cut" ><img src="/css/images/cut.png" alt="Book Cover" style="margin-top:-5px;" ></a>
 				<a href="#" class="toolbox-items" id="generic-copy" ><img src="/css/images/copy.png" alt="Book Cover" style="margin-top:-5px;" ></a>
 				<a href="#" class="toolbox-items" id="generic-paste" ><img src="/css/images/paste.png" alt="Book Cover" style="margin-top:-5px;" ></a>
 				
 			</div>
 				
-			<div class="vertical-line"></div>
+			
+			
+			
+			<span class="example" data-dropdown="#dropdown-1">More</span>
+			<span class="example second_dropdown" data-dropdown="#dropdown-2">More2</span>
+			
 			
 			<div class="text-options toolbox" style="display:inline-block;">
 					
@@ -902,5 +907,28 @@ $( "#add-button" ).hover(
 </div><!-- Outhor Pane Container -->
 
 
+<div id="dropdown-1" class="dropdown dropdown-tip dropdown-anchor-right">
+		<ul class="dropdown-menu">
+			<div class="generic-options" style="display:inline-block;">
+				<a href="#" class="toolbox-items" id="generic-cut"><img src="css/images/cut.png" alt="Book Cover" style="margin-top:-5px;"></a>
+				<a href="#" class="toolbox-items" id="generic-copy"><img src="css/images/copy.png" alt="Book Cover" style="margin-top:-5px;"></a>
+				<a href="#" class="toolbox-items" id="generic-paste"><img src="css/images/paste.png" alt="Book Cover" style="margin-top:-5px;"></a>
+				
+			</div>
+		</ul>
+	</div>
 
+	
+<div id="dropdown-2" class="dropdown dropdown-tip dropdown-anchor-right">
+		<ul class="dropdown-menu">
+			<a href="#" class="bck-dark-blue white toolbox-items radius" id="pop-arrange"><i class="icon-send-backward size-15"></i></a>
+
+<div class="generic-options" style="display:inline-block;">
+				<a href="#" class="toolbox-items" id="generic-cut"><img src="css/images/cut.png" alt="Book Cover" style="margin-top:-5px;"></a>
+				<a href="#" class="toolbox-items" id="generic-copy"><img src="css/images/copy.png" alt="Book Cover" style="margin-top:-5px;"></a>
+				<a href="#" class="toolbox-items" id="generic-paste"><img src="css/images/paste.png" alt="Book Cover" style="margin-top:-5px;"></a>
+				
+			</div>           
+		</ul>
+	</div>
 

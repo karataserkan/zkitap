@@ -54,11 +54,11 @@ list-style:none;
 
 .styler_box
 {
+min-width:1700px;
 height: 36px;
 position: fixed;
 top: 42px;
 width: 100%;
-
 padding-left: 10px;
 background-color:#e6e7e8;
 border-bottom: 2px solid #d1d2d4;
