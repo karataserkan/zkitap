@@ -120,7 +120,16 @@ window.lindneo.toolbox = (function(window, $, undefined){
 
   };
 
-
+  var undoSelectedItemsClipboard = function () {
+      //console.log("undooooo");
+      window.lindneo.nisga.undoComponent();
+ 
+  };
+  
+  var redoSelectedItemsClipboard = function () {
+      window.lindneo.nisga.redoComponent();
+ 
+  };
 
   var copySelectedItemsToClipboard = function (cut) {
 
@@ -168,7 +177,15 @@ window.lindneo.toolbox = (function(window, $, undefined){
 
 
      $('.toolbox').hide();
-
+     
+    $('#undo').click(function(){
+      that.undoSelectedItemsClipboard();
+    });
+    
+    $('#redo').click(function(){
+      that.redoSelectedItemsClipboard();
+    });
+    
     $('#generic-cut').click(function(){
       that.copySelectedItemsToClipboard(true);
     });
@@ -208,6 +225,8 @@ window.lindneo.toolbox = (function(window, $, undefined){
     selectedComponents: selectedComponents,
     addComponentToSelection: addComponentToSelection,
     removeComponentFromSelection: removeComponentFromSelection,
+    undoSelectedItemsClipboard: undoSelectedItemsClipboard,
+    redoSelectedItemsClipboard: redoSelectedItemsClipboard,
     load: load,
     refresh: refresh
   };
