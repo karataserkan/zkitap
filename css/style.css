@@ -1183,3 +1183,68 @@ color:#084f5f;
 float: right;
 }
 
+
+
+
+
+
+
+
+<!----- Aşağısı Extra Bölüm, Taşınacak --------------->
+
+
+
+.dropdown-menu li {
+	float:left;
+}
+
+
+
+
+
+
+
+
+
+@media only screen and (min-width: 1240px) {
+	.example {
+		display:none;	
+	}
+	
+	.second_dropdown {
+		display:none;
+	}
+}
+
+@media only screen and (max-width: 1240px) {
+	.responsive_1 {
+		display:none !important;	
+	}
+	
+	.example {
+		display:inline-block;
+		margin-top:3px;
+	}
+	
+	.second_dropdown {
+		display:none;
+	}
+	
+}
+
+@media only screen and (max-width: 1120px) {
+	.responsive_2 {
+		display:none !important;	
+	}
+	
+	.example {
+		display:none;
+	}
+	
+	.second_dropdown {
+		display:inline-block;
+		margin-top:3px;
+	}
+	
+}
+
