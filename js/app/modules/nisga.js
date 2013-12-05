@@ -14,7 +14,7 @@ window.lindneo.nisga = (function(window, $, undefined){
   var revision_value = 0;
 
   var createComponent = function( component ){
-    console.log(component);
+//    console.log(component);
     componentBuilder( component );  
     if(revision_value==0){
         revision_array.push({
@@ -26,7 +26,7 @@ window.lindneo.nisga = (function(window, $, undefined){
             revision_id++;
     }
     else revision_value=0;
-    console.log(revision_array);
+    //console.log(revision_array);
   };
 
   var componentBuilder = function( component ){
@@ -85,12 +85,12 @@ window.lindneo.nisga = (function(window, $, undefined){
         //console.log(revision_id);
         if(revision_id!=0){ //console.log(revision_array[revision_id-1].revisions[0].component);
             revision_id=revision_id-1;
-            console.log(revision_id);
-            console.log(revision_array[revision_id].revisions[0].even_type);
+            //console.log(revision_id);
+            //console.log(revision_array[revision_id].revisions[0].even_type);
             
            if(revision_array[revision_id].revisions[0].even_type=='CREATE'){
                 deleteComponent(revision_array[revision_id].revisions[0].component);
-                console.log(revision_array[revision_id].revisions[0].even_type);
+//          //      console.log(revision_array[revision_id].revisions[0].even_type);
                 
             }
             if(revision_array[revision_id].revisions[0].even_type=='UPDATE'){
@@ -105,7 +105,7 @@ window.lindneo.nisga = (function(window, $, undefined){
             }
             if(revision_array[revision_id].revisions[0].even_type=='DELETE'){
                 window.lindneo.tlingit.createComponent(revision_array[revision_id].revisions[0].component,'undo');
-                console.log(revision_array[revision_id].revisions[0].even_type);
+//                console.log(revision_array[revision_id].revisions[0].even_type);
             }
             
             revision_value=1;
@@ -116,13 +116,13 @@ window.lindneo.nisga = (function(window, $, undefined){
         //console.log(revision_array[0].revisions[0].component_id);
         //console.log(revision_id);
         if(revision_id<revision_array.length){ //console.log(revision_array[revision_id-1].revisions[0].component);
-            console.log(revision_id);
-            console.log(revision_array[revision_id].revisions[0].even_type);
+//            console.log(revision_id);
+//            console.log(revision_array[revision_id].revisions[0].even_type);
             
            if(revision_array[revision_id].revisions[0].even_type=='CREATE'){
                 window.lindneo.tlingit.createComponent(revision_array[revision_id].revisions[0].component);
-                console.log(revision_array[revision_id].revisions[0].even_type);
-                console.log(revision_id);
+//                console.log(revision_array[revision_id].revisions[0].even_type);
+//                console.log(revision_id);
             }
             if(revision_array[revision_id].revisions[0].even_type=='UPDATE'){
                 //console.log(revision_array[revision_id-1].revisions[0].component);
@@ -131,14 +131,14 @@ window.lindneo.nisga = (function(window, $, undefined){
                 this.createComponent(revision_array[revision_id].revisions[0].component);
                 window.lindneo.tlingit.componentHasUpdated(revision_array[revision_id].revisions[0].component);
                 
-                console.log(revision_id);
+//                console.log(revision_id);
                 //revision_id--;
                 //console.log(revision_array);
             }
             if(revision_array[revision_id].revisions[0].even_type=='DELETE'){
                 deleteComponent(revision_array[revision_id].revisions[0].component);
-                console.log(revision_array[revision_id].revisions[0].even_type);
-                console.log(revision_id);
+//                console.log(revision_array[revision_id].revisions[0].even_type);
+//                console.log(revision_id);
                 
             }
             revision_array.pop();
@@ -161,7 +161,7 @@ window.lindneo.nisga = (function(window, $, undefined){
             revision_id++;
       }
       else revision_value=0;
-        console.log(revision_array);
+//        console.log(revision_array);
     window.lindneo.toolbox.removeComponentFromSelection( $('#'+ component.id) );
     window.lindneo.tlingit.componentHasDeleted( component.id );
 
@@ -190,7 +190,7 @@ window.lindneo.nisga = (function(window, $, undefined){
                     
           }
           else revision_value=0;
-          console.log(revision_array);
+//          console.log(revision_array);
         window.lindneo.tlingit.componentHasUpdated( component );
       },
       'selected': function (event, element) {
@@ -223,7 +223,7 @@ window.lindneo.nisga = (function(window, $, undefined){
                     
           }
           else revision_value=0;
-          console.log(revision_array);
+//          console.log(revision_array);
         window.lindneo.tlingit.componentHasUpdated( component );
       },
       'selected': function (event, element) {
@@ -254,7 +254,7 @@ window.lindneo.nisga = (function(window, $, undefined){
                     
           }
           else revision_value=0;
-          console.log(revision_array);  
+//          console.log(revision_array);  
         window.lindneo.tlingit.componentHasUpdated( component );
       },
       'selected': function (event, element) {
@@ -289,7 +289,7 @@ window.lindneo.nisga = (function(window, $, undefined){
                     
           }
           else revision_value=0;
-          console.log(revision_array);
+//          console.log(revision_array);
         window.lindneo.tlingit.componentHasUpdated( component );
       },
       'selected': function (event, element) {
@@ -325,7 +325,7 @@ window.lindneo.nisga = (function(window, $, undefined){
                     
           }
           else revision_value=0;
-          console.log(revision_array);
+//          console.log(revision_array);
         window.lindneo.tlingit.componentHasUpdated( component );
       },
       'selected': function (event, element) {
@@ -364,7 +364,7 @@ window.lindneo.nisga = (function(window, $, undefined){
                     
           }
           else revision_value=0;
-          console.log(revision_array);
+//          console.log(revision_array);
         window.lindneo.tlingit.componentHasUpdated( component );
       },
       'selected': function (event, element) {
@@ -397,7 +397,7 @@ window.lindneo.nisga = (function(window, $, undefined){
                     
           }
           else revision_value=0;
-          console.log(revision_array);
+//          console.log(revision_array);
         window.lindneo.tlingit.componentHasUpdated( component );
       },
       'selected': function (event, element) {
@@ -433,7 +433,7 @@ window.lindneo.nisga = (function(window, $, undefined){
                     
           }
           else revision_value=0;
-          console.log(revision_array);
+//          console.log(revision_array);
         window.lindneo.tlingit.componentHasUpdated( component );
       },
       'selected': function (event, element) {
@@ -468,7 +468,7 @@ window.lindneo.nisga = (function(window, $, undefined){
                     
           }
           else revision_value=0;
-          console.log(revision_array);
+//          console.log(revision_array);
         window.lindneo.tlingit.componentHasUpdated( component );
       },
       'selected': function (event, element) {
@@ -501,7 +501,7 @@ window.lindneo.nisga = (function(window, $, undefined){
                     
           }
           else revision_value=0;
-          console.log(revision_array);
+//          console.log(revision_array);
         window.lindneo.tlingit.componentHasUpdated( component );
       },
       'selected': function ( event, element_ ){
@@ -516,7 +516,7 @@ window.lindneo.nisga = (function(window, $, undefined){
       'border': '1px solid #ccc',
       'border-color': activeUser.color
     });
-    console.log(activeUser.color);
+//    console.log(activeUser.color);
 
     $('[color="' +activeUser.color+ '"]').parent().find('[component-instance="true"]').css( {'border': 'none'});
     $('[color="' +activeUser.color+ '"]').parent().children('.activeUser').remove();

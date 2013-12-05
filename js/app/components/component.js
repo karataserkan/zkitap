@@ -268,8 +268,36 @@ $(document).ready(function(){
       return this._setPropertyofObject(propertyName,propertyValue) ;
     },
     _setPropertyofObject : function (propertyName,propertyValue){
-      this.getSettable().css[propertyName]=propertyValue;
-      return this.getProperty(propertyName) ;
+      switch(propertyName){
+        case 'zindex':
+
+            switch (propertyValue){
+              case 'top':
+                this.setProperty ('z-index',  window.lindneo.toolbox.findHighestZIndexToSet('[component-instance="true"]',this.options.component.id ));
+              break;
+              case 'higher':
+                this.setProperty ('z-index',window.lindneo.toolbox.findHigherZIndexToSet('[component-instance="true"]',this.options.component.id ) );
+              break;
+              case 'lower':
+                this.setProperty ('z-index', window.lindneo.toolbox.findlowerZIndexToSet('[component-instance="true"]',this.options.component.id ) );
+              break;
+              case 'bottom':
+                this.setProperty ('z-index', window.lindneo.toolbox.findlowestZIndexToSet('[component-instance="true"]',this.options.component.id ) );
+              break;
+
+            }
+
+          break;
+        case 'z-index':
+          console.log('z-index girdi'+ propertyValue);
+          this.options.component.data.self.css[propertyName]=propertyValue;
+        break;
+        default:
+          
+          this.getSettable().css[propertyName]=propertyValue;
+          return this.getProperty(propertyName) ;
+          break;
+      }
     },
     setProperty : function (propertyName,propertyValue){
         this._setProperty(propertyName,propertyValue);

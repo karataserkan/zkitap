@@ -10,27 +10,23 @@ $(document).ready(function(){
     _create: function(){
 
       var that = this;
-      var anchor = $('<a></a>');
-      anchor.attr('id', 'quiz-' + this.options.component.id );
-      
-      anchor.text( this.options.component.data.a.text );
+    
 
-      this.element.append( anchor );
 
-      anchor.click(function(e){
 
 
         // open a window
-        $("<div id='quiz-popup' class='quiz-component' style='position:absolute; top: " + ( e.pageY + 30 )+ "px; left: "+ e.pageX + "px; '> \
-            <div id='question-text'></div> \
-            <div id='question-options-container'></div> \
-            <div> \
-              <a href='' class='btn bck-light-green white radius' id='send'> Yanıtla </a> \
+        $("<div  class='quiz-component' style=''> \
+            <div class='question-text'></div> \
+            <div class='question-options-container'></div> \
+            <div style='margin-bottom:25px'> \
+              <a href='' class='btn bck-light-green white radius send' > Yanıtla </a> \
             </div> \
-        </div>").appendTo('body');
+        </div>").appendTo(this.element);
 
         // set question text
-        $('#question-text').text( that.options.component.data.question );
+        console.log(this.element);
+        this.element.find('.question-text').text( that.options.component.data.question );
         var n = that.options.component.data.numberOfSelections;
 
         var appendText = "";
@@ -41,12 +37,15 @@ $(document).ready(function(){
             "+ that.options.component.data.options[i] + " \
           </div>";
         }
-        $('#question-options-container').append(appendText);
 
+
+        this.element.find('.question-options-container').append(appendText);
+        var that = this;
+        
         // prepare question options
 
         // click event
-        $('#send').click(function(evt){
+        this.element.find('.send').click(function(evt){
 
           var ind = $('input[type=radio]:checked').val();
           
@@ -58,17 +57,23 @@ $(document).ready(function(){
             'selected option': that.options.component.data.options[ind]
           };
 
-          alert(JSON.stringify(answer));
-  
+          var color = 'red';
+          if (that.options.component.data.correctAnswerIndex== ind) color ='green';
+          that.element.find('.question-options-container').index(ind).css('color',color);
+
+
+
+
           }
 
-          $('#quiz-popup').remove();
-          if( $('#quiz-popup').length ) {
-            $('#quiz-popup').remove();
+          this.element.find('.quiz-popup').remove();
+          if( this.element.find('.quiz-popup').length ) {
+            this.element.find('.quiz-popup').remove();
           }
         });
 
-      });
+
+      
 
       this._super();
     },
@@ -180,8 +185,7 @@ $(document).ready(function(){
               'position':'absolute',
               'top': (ui.offset.top-$(event.target).offset().top ) + 'px',
               'left':  ( ui.offset.left-$(event.target).offset().left ) + 'px',
-              'width': '100px',
-              'height': '20px'
+
             }
           }
         }
