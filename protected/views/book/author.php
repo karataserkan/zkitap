@@ -118,6 +118,9 @@ $current_user=User::model()->findByPk(Yii::app()->user->id);
 				<a id="undo" class="icon-undo dark-blue size-20"></a>
 				<a id="redo" class="icon-redo grey-8 size-20"></a>
 			</div>
+			
+			<div class="vertical-line"></div>
+			
 			<div class="generic-options"  style="display:inline-block;">
 				<a href="#" class="toolbox-items" id="generic-cut" ><img src="/css/images/cut.png" alt="Book Cover" style="margin-top:-5px;" ></a>
 				<a href="#" class="toolbox-items" id="generic-copy" ><img src="/css/images/copy.png" alt="Book Cover" style="margin-top:-5px;" ></a>
@@ -125,8 +128,8 @@ $current_user=User::model()->findByPk(Yii::app()->user->id);
 				
 			</div>
 				
-
 			<div class="vertical-line"></div>
+			
 			<div class="text-options toolbox" style="display:inline-block;">
 					
 					
@@ -216,12 +219,16 @@ $current_user=User::model()->findByPk(Yii::app()->user->id);
 				</script>
 
 				<div class="vertical-line"></div>
-
+				
+				<!-- indent sonra eklenecek -->
+				<!--
 				<a id="text-left-indent"  href="#" class="dark-blue radius toolbox-items "><i class="icon-left-indent size-15"></i></a>
 				<a id="text-right-indent"  href="#" class="dark-blue radius toolbox-items "><i class="icon-right-indent size-15"></i></a>
-
-				<div class="vertical-line"></div>
 				
+				<div class="vertical-line"></div>
+				-->
+				<!-- leading sonra eklenecek -->
+				<!-- 
 						<i class="icon-leading grey-6"></i>
 							<select id="leading" class="radius">
 								<option selected="" value="8"> 100 </option>
@@ -239,7 +246,7 @@ $current_user=User::model()->findByPk(Yii::app()->user->id);
 							</select>	
 				
 				<div class="vertical-line"></div>
-				
+				-->
 				
 					<i class="icon-opacity grey-6"></i>
 							<select class='tool-select tool select' rel='opacity' rel='color' id="font-size" class="radius">
