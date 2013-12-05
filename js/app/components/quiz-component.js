@@ -21,7 +21,7 @@ $(document).ready(function(){
 
 
         // open a window
-        $("<div id='quiz-popup' style='position:absolute; top: " + ( e.pageY + 30 )+ "px; left: "+ e.pageX + "px; '> \
+        $("<div id='quiz-popup' class='quiz-component' style='position:absolute; top: " + ( e.pageY + 30 )+ "px; left: "+ e.pageX + "px; '> \
             <div id='question-text'></div> \
             <div id='question-options-container'></div> \
             <div> \
@@ -172,7 +172,7 @@ $(document).ready(function(){
             'css': {
 
             },
-            'text': 'Quiz Click'
+            'text': 'Quiz Sorusu'
 			
           },
           'self': {

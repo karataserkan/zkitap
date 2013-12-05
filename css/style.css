@@ -589,6 +589,16 @@ ul.component_holder li {
  cursor:pointer;
 }
 
+.quiz-component{
+outline: 10px solid rgb(235, 235, 235);
+padding: 20px;
+max-width: 400px;
+}
+.quiz-component div{
+margin: 5px 0px;
+}
+
+
 
 
 
@@ -1096,12 +1106,12 @@ position: absolute; top: -23px; right: 0px;
 }
 
 
-input[type=checkbox] {
+.toolbox-items input[type=checkbox] {
    display:none;
 }
 
 
-input[type=checkbox] + label{
+.toolbox-items input[type=checkbox] + label{
   width:35px;
  height:25px;
  padding-top:8px;
@@ -1111,7 +1121,7 @@ input[type=checkbox] + label{
 }
 
 
-input[type=checkbox]:checked + label{
+.toolbox-items input[type=checkbox]:checked + label{
    width:35px;
  height:25px;
  padding-top:8px;
@@ -1124,12 +1134,12 @@ input[type=checkbox]:checked + label{
 }
 
 
-input[type=radio] {
+.toolbox-items input[type=radio] {
    display:none;
 }
 
 
-input[type=radio] + label{
+.toolbox-items input[type=radio] + label{
   width:35px;
  height:25px;
  padding-top:8px;
@@ -1139,7 +1149,7 @@ input[type=radio] + label{
 }
 
 
-input[type=radio]:checked + label{
+.toolbox-items input[type=radio]:checked + label{
    width:35px;
  height:25px;
  padding-top:8px;
@@ -1152,4 +1162,28 @@ input[type=radio]:checked + label{
 }
 
 
+.quiz-component{
+outline: 10px solid rgb(235, 235, 235);
+padding: 20px;
+max-width: 400px;
+}
+
+.quiz-component div{
+margin: 5px 0px;
+font-weight:normal;
+}
+
+.quiz-component #question-text  {
+font-weight:bold;
+color:#084f5f;
+}
+
+.quiz-component #question-text  {
+font-weight:bold;
+color:#084f5f;
+}
+
+.quiz-component a{
+float: right;
+}
 
