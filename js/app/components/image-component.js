@@ -115,7 +115,8 @@ var createImageComponent = function ( event, ui ) {
                 'width': '100px',
                 'height': '20px',
                 'background-color': 'transparent',
-                'overflow': 'visible'
+                'overflow': 'visible',
+                'z-index': '990'
               }
             }
           }

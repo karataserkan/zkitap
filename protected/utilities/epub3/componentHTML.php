@@ -29,7 +29,12 @@ class componentHTML {
 			case 'shape':
 				$this->shapeInner($component);			
 				break;
-
+			case 'link':
+				$this->linkInner($component);			
+				break;
+			case 'popup':
+				$this->popupInner($component);			
+				break;
 			default:
 				$this->someOther_inner($component->data);			
 
@@ -436,7 +441,7 @@ class componentHTML {
 		$container ="<span style='display:block' class='audio_name'>" . $data->audio->name . "</span><br/>"."<audio  class='audio' ";
 		if(isset($data->audio->attr))
 			foreach ($data->audio->attr as $attr_name => $attr_val ) {
-				$container.=" $attr_name='$attr_val' ";
+				$container.=" $attr_name='$attr_val' ";findHigherZIndexToSet
 			}
 
 		if(isset($data->audio->css)){
@@ -534,6 +539,52 @@ class componentHTML {
 
 	}
 
+	public function popupInner($component){
+
+		$data=$component->data;
+
+		$popup_id= "popup".functions::get_random_string();
+
+
+		
+
+		$container.=" 
+			
+			<img  class='popup ref-popup-rw' data-popup-target='$popup_id' src='popupmarker.png' />
+			
+			<div class='widgets-rw popup-text-rw exclude-auto-rw' id='$popup_id' style='width:300px; height:300px'>
+				".$component->data->html_inner."
+				 <button xmlns='http://www.w3.org/1999/xhtml' onclick='$(this).parent().remove();' class='ppclose' style='float:right;'>X</button>
+			</div>
+	
+		
+		";
+
+		$this->html=str_replace('%component_inner%' ,$container, $this->html);
+		
+
+	}
+
+	public function linkInner($component){
+
+		$data=$component->data;
+		$container ="
+		<a  ";
+		if(isset($data->self->attr))
+			foreach ($data->self->attr as $attr_name => $attr_val ) {
+				$container.=" $attr_name='$attr_val' ";
+			}
+
+		
+
+		$container.=" 
+			><img  class='image' src='linkmarker.png' /></a>
+		";
+
+		$this->html=str_replace('%component_inner%' ,$container, $this->html);
+		
+
+	}
 
 	public function imageInner($component){
 
@@ -569,8 +620,9 @@ class componentHTML {
 
 
 	public function textInner($data){
-		$container ="
-		<div class='textarea' ";
+
+		$container='';
+
 		if(isset($data->textarea->attr))
 			foreach ($data->textarea->attr as $attr_name => $attr_val ) {
 				$container.=" $attr_name='$attr_val' ";
@@ -585,12 +637,26 @@ class componentHTML {
 		}
 
 
-		$container.=" >
-			%component_text%
-		</div>
-		";
+		if ($data->self->attr->componentType == "side-text" ){
+			$container = "<div id='". functions::get_random_string()  ."' $container  class='widgets-rw panel-scrolling-rw scroll-horizontal-rw exclude-auto-rw' >";
+			$container .= "<div class='textarea frame-rw' style='width:".$data->textarea->css->width."'> %component_text% </div> </div>";
+		}else {
+			$container = "<div class='textarea' $container  >%component_text% </div>";
+		}
+	
+	
 
-		$this->html=str_replace(array('%component_inner%', '%component_text%') , array($container, str_replace("\n", "<br/>", $data->textarea->val) ), $this->html);
+
+
+		
+
+
+	
+
+		$this->html=str_replace(
+			array('%component_inner%', '%component_text%') , 
+			array($container, str_replace("\n", "<br/>", $this->textSanitize($data->textarea->val) ) )
+			, $this->html);
 
 
 
@@ -639,6 +705,10 @@ class componentHTML {
 
 
 		return $this->html;
+	}
+
+	public function textSanitize($string){
+		return preg_replace('/[\x01-\x07]/', '', $string);
 	}
 
 }

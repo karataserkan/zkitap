@@ -8,10 +8,95 @@ window.lindneo.toolbox = (function(window, $, undefined){
   var that=this;
   var selectedComponents=[];
 
+  var  findHighestZIndexToSet = function (elem)
+  {
+    var elems = $(elem);
+    var highest = 0;
+    for (var i = 0; i < elems.length; i++)
+    {
+      var zindex=document.defaultView.getComputedStyle(elems[i],null).getPropertyValue("z-index");
 
+        console.log(highest);
+      if ((zindex >= highest) && zindex<9000 && (zindex != 'auto'))
+      {
+        highest = zindex;
+        
+      }
+    }
+    return parseInt(highest)+1;
+  };
+
+
+
+  var  findHigherZIndexToSet = function (elem,id)
+  {
+    var elems = $(elem);
+    var eleman= $('#'+id).parent();
+
+    var zindexCompare= parseInt( $(eleman).css('z-index') );
+    
+
+    for (var i = 0; i < elems.length; i++)
+    {
+      var zindex=document.defaultView.getComputedStyle(elems[i],null).getPropertyValue("z-index");
+      if (zindex != 'auto' && !(eleman[0] === elems[i]) ){
+
+        zindex=parseInt(zindex);
+        //console.log(zindex);
+
+        if (( zindex>= zindexCompare) && zindex<9000)
+        {
+          //console.log(zindex);
+          return parseInt(zindex)+1;
+        }
+      }
+    }
+    return parseInt(zindex);
+  };
 
    
+  var  findlowerZIndexToSet = function (elem,id)
+  {
+    var elems = $(elem);
+    var eleman= $('#'+id).parent();
+    var zindexCompare= parseInt( eleman.css('z-index') );
 
+    for (var i = 0; i < elems.length; i++)
+    {
+      var zindex=document.defaultView.getComputedStyle(elems[i],null).getPropertyValue("z-index");
+      if (zindex != 'auto' && !(eleman[0] === elems[i]) ){
+
+        zindex=parseInt(zindex);
+        //console.log(zindex);
+        //console.log(zindexCompare);
+
+        if (( zindex<= zindexCompare) && zindex>100)
+        {
+          return parseInt(zindex)-1;
+        }
+      }
+    }
+    return parseInt(zindex);
+  };
+
+  var  findlowestZIndexToSet = function (elem)
+  {
+    var elems = $(elem);
+    var lowest = 9999;
+
+    for (var i = 0; i < elems.length; i++)
+    {
+
+      var zindex=document.defaultView.getComputedStyle(elems[i],null).getPropertyValue("z-index");
+
+      if ((zindex <= lowest) && zindex>100 &&  (zindex != 'auto'))
+      {
+        lowest = zindex;
+        
+      }
+    }
+    return parseInt(lowest)-1;
+  };
 
 
   var _create = function () {
@@ -33,19 +118,20 @@ window.lindneo.toolbox = (function(window, $, undefined){
 
   var selectionUpdated = function (){
       $('.toolbox').hide();
-      console.log('All Selecteds:');
-      console.log(this.selectedComponents);
+      //console.log('All Selecteds:');
+      //console.log(this.selectedComponents);
 
       $.each(this.selectedComponents, function( key, component ) {
         //console.log('.toolbox.'+component.options.component.type+'-options, .toolbox.generic-options');
         $('.toolbox.'+component.options.component.type+'-options, .toolbox.generic-options').show();
 
         $('.toolbox .tool').unbind( "change" );
+        $('.toolbox-btn').unbind( "click" );
 
 
-        $('.toolbox .tool').each(function (index) {
+        $('.toolbox .tool, .toolbox-btn').each(function (index) {
               var rel=$(this).attr('rel');
-              console.log  ( rel );
+              //console.log  ( rel );
               var relValue = component.getProperty(rel);
               if( relValue != null) { 
                 // text select ve color icin
@@ -55,7 +141,7 @@ window.lindneo.toolbox = (function(window, $, undefined){
                 $(this).prop('checked', ( $(this).attr('activeVal') == relValue ? true : false )); 
           
 
-                console.log  ( rel + ' is ' + relValue); 
+                //console.log  ( rel + ' is ' + relValue); 
 
               }
 
@@ -79,7 +165,7 @@ window.lindneo.toolbox = (function(window, $, undefined){
 
                   var isChecked= $(this).is(':checked')    ; 
                   var newValue = ( isChecked == true ? $(this).attr('activeVal') : $(this).attr('passiveVal') );
-                  console.log($(this).attr('rel')+' is '+ newValue );
+                  //console.log($(this).attr('rel')+' is '+ newValue );
                   component.setProperty ( $(this).attr('rel') ,newValue  );
 
             
@@ -88,6 +174,11 @@ window.lindneo.toolbox = (function(window, $, undefined){
 
                 });
                
+             } else if($(this).hasClass('toolbox-btn')){
+                $(this).click(function(){
+                  component.setProperty ( $(this).attr('rel') ,$(this).attr('action')  );
+                });
+
              }
 
 
@@ -216,6 +307,10 @@ window.lindneo.toolbox = (function(window, $, undefined){
   };
 
   return {
+    findHighestZIndexToSet: findHighestZIndexToSet,
+    findHigherZIndexToSet: findHigherZIndexToSet,
+    findlowerZIndexToSet: findlowerZIndexToSet,
+    findlowestZIndexToSet: findlowestZIndexToSet,
     pasteClipboardItems: pasteClipboardItems,
     copySelectedItemsToClipboard: copySelectedItemsToClipboard,
     clearClipboard: clearClipboard,

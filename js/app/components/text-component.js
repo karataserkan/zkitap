@@ -25,7 +25,7 @@ $(document).ready(function(){
         })
 
 
-        this.element.autogrow({element:this});
+        if (this.options.component.data.self.attr.componentType != 'side-text' )this.element.autogrow({element:this});
 
         this._super();
           
@@ -218,7 +218,7 @@ $(document).ready(function(){
 
 
 
-  var createTextComponent = function ( event, ui ) {
+  var createTextComponent = function ( event, ui ,type) {
 
     var component = {
       'type' : 'text',
@@ -237,7 +237,8 @@ $(document).ready(function(){
             'font-weight' : 'normal',
             'font-style' : 'normal',
             'text-decoration' : 'none',
-            'background-color' : 'transparent'  
+            'background-color' : 'transparent',
+             'overflow': (type == 'text' ? 'visible' : 'hidden' )
           } , 
           'attr': {
             'placeholder':'Metin Kutusu'
@@ -246,17 +247,19 @@ $(document).ready(function(){
         },
         'self': {
           'css': {
-            'overflow':'visible',
+            'overflow': 'visible',
             'position':'absolute',
             'top': (ui.offset.top-$(event.target).offset().top ) + 'px',
             'left':  ( ui.offset.left-$(event.target).offset().left ) + 'px',
-            'width': '150px',
+            'width': '400px',
             'height': '100px',
-            'opacity': '1'
+            'opacity': '1',
+            'z-index': '1000'
 
           },
           'attr' : {
-            'fast-style':''
+            'fast-style':'',
+            'componentType': type
           }
         }
       }
