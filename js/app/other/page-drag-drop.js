@@ -175,9 +175,7 @@ $( document ).ready(function () {
 
         var link=$("#chapters_pages_view > div:first-child > ul:first-child > li:first-child > a:nth-child(2)").attr('href');
         
-        //var chapter_id=$('.chapter').attr('chapter_id');
         var page_id = $(".page:first-child").attr("page_id");
-        //http://ekaratas.dev.lindneo.com/index.php?r=book/author&bookId=1IFAQ5rLflOs6LASioCCtc4tCXO24YFco15NWp5JROUu&page=WNEgCWv8fONkdOCtdzazPnWDrqHCpNmpUESm3UFgti71
         
         var link='?r=book/author&bookId='+window.lindneo.currentBookId+'&page='+page_id;
 
