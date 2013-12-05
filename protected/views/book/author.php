@@ -113,7 +113,7 @@ $current_user=User::model()->findByPk(Yii::app()->user->id);
 	
 			<div class="styler_box">
 			<!-- <ul id="text-styles" ></ul> -->
-			<div class="generic-options toolbox"  style="display:inline-block;">
+			<div class="generic-options"  style="display:inline-block;">
 				<a id="undo" class="icon-undo dark-blue size-20"></a>
 				<a id="redo" class="icon-redo grey-8 size-20"></a>
 			</div>
