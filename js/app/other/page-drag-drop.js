@@ -92,7 +92,10 @@ $( document ).ready(function () {
         switch( $(event.toElement).attr('ctype') ) {
 
           case 'text':
-            createTextComponent( event, ui );
+            createTextComponent( event, ui , $(event.toElement).attr('ctype'));
+            break;
+          case 'side-text':
+            createTextComponent( event, ui , $(event.toElement).attr('ctype'));
             break;
 
           case 'image':
