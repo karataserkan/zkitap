@@ -182,11 +182,11 @@ $this->pageTitle=Yii::app()->name;
 												//type: owner | editor | user
 
 											?>
-											<span class="editor-name" >Kullanıcı Ekle(e-posta adresi):</span>
+											<span class="editor-name" >Kullanıcı Ekle:</span>
 											<br style="clear:both; margin-bottom:20px;">
 											<form id="a<?php echo $book->book_id; ?>" method="post">
 											<input id="book" value="<?php echo $book->book_id; ?>" style="display:none">
-											<select id="user" class="book-list-textbox radius grey-9 float-left"  style=" width: 250;">
+											<select id="user" class="book-list-textbox radius grey-9 float-left"  style=" width: 350px;">
 												<?php
 													$workspaceUsers = workspaceUsers($workspace->workspace_id);
 													
@@ -195,10 +195,7 @@ $this->pageTitle=Yii::app()->name;
 													}
 												 ?>
 											</select>
-											 <select id="type" class="book-list-textbox radius grey-9 float-left"  style=" width: 70px;" >
-											  <option value="editor">Editör</option>
-											  <option value="owner">Sahibi</option>
-											</select>
+											
 											</form>
 											<a href="#" onclick="sendRight(a<?php echo $book->book_id; ?>)" class="btn white radius float-right" style="margin-left:20px; width:50px; text-align:center;">
 												Ekle
