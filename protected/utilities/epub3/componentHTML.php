@@ -35,12 +35,93 @@ class componentHTML {
 			case 'popup':
 				$this->popupInner($component);			
 				break;
+			case 'quiz':
+				$this->quizInner($component);			
+				break;
 			default:
 				$this->someOther_inner($component->data);			
 
 				break;
 		}
 
+
+
+	}
+
+	public function quizInner($component){
+
+
+
+		$container.="
+		
+        <div  class='quiz-component' style=''> 
+            <div class='question-text'>".$component->data->question."</div> 
+            <div class='question-options-container'>";
+
+            foreach ($component->data->options as $key => $value) {
+            	
+
+            	$container.=  
+            	"<div> 
+	            	<input type='radio' value='" . $key . "' name='question' /> 
+	            ". $value .   
+	            "</div>";
+ 
+            }
+
+         	$container.="  
+         	</div> 
+            <div style='margin-bottom:25px'> 
+              <a class='btn bck-light-green white radius send' > Yanıtla </a> 
+            </div> 
+        </div>";
+
+        $container.="
+	<script type='text/javascript'>
+       	$( document ).ready(function(){
+			var component= JSON.parse('".json_encode($component)."');
+			var that = $('#'+component.id)
+			
+			that.find('.send').click(function(evt){
+			evt.preventDefault();
+			var ind = $('input[type=radio]:checked').val();
+			  
+			if( ind === undefined ){
+			    alert('secilmemis');
+			} else {
+			    var answer = {
+			      'selected-index': ind,
+			      'selected-option': component.data.options[ind]
+			    };
+
+			    
+			    that.find('.question-options-container div').each(function(i,element){
+				    var color = 'red';
+				    
+				    if (i==component.data.correctAnswerIndex) color ='green';
+
+					$(this).find(\"input[type='radio']\").remove();
+					$(this).prepend( $('<div style=\"border-radius: 50%; width:10px; height:10px; display: inline-block; background:' + color + '; \"> </div>' ) );
+					
+					if (ind==i) {
+						if(component.data.correctAnswerIndex==ind){
+						    $(this).prepend('+');
+				      	} else if (component.data.correctAnswerIndex!=ind){
+				        	$(this).prepend('x');
+				      	}
+				  	}
+
+				    $(this).css('color',color);
+				}); 
+
+			}
+
+
+		});
+	});
+	</script>
+		";
+		$this->html=str_replace('%component_inner%' , $container, $this->html);
 
 
 	}
@@ -441,7 +522,7 @@ class componentHTML {
 		$container ="<span style='display:block' class='audio_name'>" . $data->audio->name . "</span><br/>"."<audio  class='audio' ";
 		if(isset($data->audio->attr))
 			foreach ($data->audio->attr as $attr_name => $attr_val ) {
-				$container.=" $attr_name='$attr_val' ";findHigherZIndexToSet
+				$container.=" $attr_name='$attr_val' ";
 			}
 
 		if(isset($data->audio->css)){
