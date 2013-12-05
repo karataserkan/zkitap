@@ -172,6 +172,22 @@ $( document ).ready(function () {
 
       if (page_id==window.lindneo.currentPageId) {
         $('#current_page').hide().remove();
+
+        var link=$("#chapters_pages_view > div:first-child > ul:first-child > li:first-child > a:nth-child(2)").attr('href');
+        
+        var page_id = $(".page:first-child").attr("page_id");
+        
+        var link='?r=book/author&bookId='+window.lindneo.currentBookId+'&page='+page_id;
+
+        var slink='?r=chapter/create&book_id='+window.lindneo.currentBookId;
+
+        if (link != "") {
+          window.location.assign(link);
+        }
+        else
+          window.location.assign(slink);
+
+
       };
       //ekaratas end
 
