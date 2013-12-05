@@ -119,7 +119,7 @@ $current_user=User::model()->findByPk(Yii::app()->user->id);
 				<a id="redo" class="icon-redo grey-8 size-20"></a>
 			</div>
 			
-			<div class="vertical-line"></div>
+			<div class="vertical-line responsive_2"></div>
 			
 				
 			
@@ -301,7 +301,7 @@ $current_user=User::model()->findByPk(Yii::app()->user->id);
 			</div>
 			<div class="generic-options toolbox float-left"  style="display:inline-block;">
 			<!--	<a href="#" class="bck-dark-blue white toolbox-items radius" id="pop-align"><i class="icon-align-center size-20"></i></a> -->
-				<a href="#" class="bck-dark-blue white toolbox-items radius" id="pop-arrange"><i class="icon-send-backward size-15"></i></a>
+				<a href="#" class="bck-dark-blue white toolbox-items radius responsive_2" id="pop-arrange"><i class="icon-send-backward size-15"></i></a>
 			<!--	<a href="#" class="btn grey white radius">Grupla</a>    -->
 			</div>
 			
@@ -315,8 +315,8 @@ $current_user=User::model()->findByPk(Yii::app()->user->id);
 			
 			
 			
-			<span class="example" data-dropdown="#dropdown-1">More</span>
-			<span class="example second_dropdown" data-dropdown="#dropdown-2">More2</span>
+			<span class="example btn white radius " data-dropdown="#dropdown-1">Diğer</span>
+			<span class="example second_dropdown btn white radius" data-dropdown="#dropdown-2">Diğer</span>
 			
 			
 			</div>
