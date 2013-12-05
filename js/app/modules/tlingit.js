@@ -151,15 +151,15 @@ window.lindneo.tlingit = (function(window, $, undefined){
         },
         PreviewOfPage,  
         function(err){
-          console.log('error:' + err);
+          //console.log('error:' + err);
       });
   };
 
   var PreviewOfPage = function (response) {
     
-    console.log(response);
+    //console.log(response);
     var components= responseFromJson(response).result.components;
-    console.log(components);
+    //console.log(components);
     var pagePreview = $('<canvas class="preview" height="90" width="120"> </canvas>');
     $.each(components,function(i,component){
       var pageSlice=$('[page_id="'+component.page_id+'"]');
@@ -205,7 +205,7 @@ window.lindneo.tlingit = (function(window, $, undefined){
                 y += fontHeight;
                 var words = line.split(' ');
                 var sublines = '';
-                console.log(y + ' ' +line) ;
+                //console.log(y + ' ' +line) ;
                 for(var n = 0; n < words.length; n++) {
 
                   var testLine = sublines + words[n] + ' ';
@@ -285,7 +285,7 @@ window.lindneo.tlingit = (function(window, $, undefined){
       },
       UpdatePage,
       function(err){
-        console.log('error:' + err);
+        //console.log('error:' + err);
     });
   
   };
@@ -293,7 +293,7 @@ window.lindneo.tlingit = (function(window, $, undefined){
   var UpdatePage =function(response){
     var response = responseFromJson(response);
     //pass to nisga new chapter
-    console.log(response);
+    //console.log(response);
 
   };
 
@@ -307,7 +307,7 @@ window.lindneo.tlingit = (function(window, $, undefined){
       },
       UpdateChapter,
       function(err){
-        console.log('error:' + err);
+        //console.log('error:' + err);
     });
   
   };
@@ -315,7 +315,7 @@ window.lindneo.tlingit = (function(window, $, undefined){
   var UpdateChapter =function(response){
     var response = responseFromJson(response);
     //pass to nisga new chapter
-    console.log(response);
+    //console.log(response);
 
   };
 
@@ -328,7 +328,7 @@ window.lindneo.tlingit = (function(window, $, undefined){
       },
       DeleteChapter,
       function(err){
-        console.log('error:' + err);
+        //console.log('error:' + err);
       });
 
    
@@ -337,7 +337,7 @@ window.lindneo.tlingit = (function(window, $, undefined){
   var DeleteChapter =function(response){
     var response = responseFromJson(response);
     //pass to nisga to destroy chapter
-    console.log(response);
+    //console.log(response);
 
   }; 
 
@@ -350,7 +350,7 @@ window.lindneo.tlingit = (function(window, $, undefined){
       },
       DeletePage,
       function(err){
-        console.log('error:' + err);
+        //console.log('error:' + err);
       });
 
    
@@ -359,7 +359,7 @@ window.lindneo.tlingit = (function(window, $, undefined){
   var DeletePage =function(response){
     var response = responseFromJson(response);
     //pass to nisga to destroy page
-    console.log(response);
+    //console.log(response);
 
   }; 
 
