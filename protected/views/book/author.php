@@ -118,6 +118,9 @@ $current_user=User::model()->findByPk(Yii::app()->user->id);
 				<a id="undo" class="icon-undo dark-blue size-20"></a>
 				<a id="redo" class="icon-redo grey-8 size-20"></a>
 			</div>
+			
+			<div class="vertical-line"></div>
+			
 			<div class="generic-options"  style="display:inline-block;">
 				<a href="#" class="toolbox-items" id="generic-cut" ><img src="/css/images/cut.png" alt="Book Cover" style="margin-top:-5px;" ></a>
 				<a href="#" class="toolbox-items" id="generic-copy" ><img src="/css/images/copy.png" alt="Book Cover" style="margin-top:-5px;" ></a>
@@ -125,8 +128,8 @@ $current_user=User::model()->findByPk(Yii::app()->user->id);
 				
 			</div>
 				
-
 			<div class="vertical-line"></div>
+			
 			<div class="text-options toolbox" style="display:inline-block;">
 					
 					
@@ -185,14 +188,11 @@ $current_user=User::model()->findByPk(Yii::app()->user->id);
 				<div id="checkbox-container" style="display:inline-block">
 					<input type="checkbox" id="font-bold" rel='font-weight' activeVal='bold' passiveVal='normal'  class="dark-blue radius toolbox-items btn-checkbox tool checkbox"> 
 					<label class="icon-font-bold  size-15" for="font-bold"></label>
-					        
 					<input type="checkbox" id="font-italic" rel='font-style' activeVal='italic' passiveVal='normal'  class="dark-blue radius toolbox-items btn-checkbox tool checkbox"> 
 					<label class="icon-font-italic size-15" for="font-italic"></label>
-					                
 					<input type="checkbox" id="font-underline" rel='text-decoration' activeVal='underline' passiveVal='none'  class="dark-blue radius toolbox-items btn-checkbox tool checkbox">
-					<label class="icon-font-underline size-15" for="font-underline"></label>
-				</div>
-
+					<label class="icon-font-underline size-15" for="font-underline"></label>				</div>
+ 
 				
 				<div class="vertical-line"></div>
 
@@ -201,11 +201,8 @@ $current_user=User::model()->findByPk(Yii::app()->user->id);
 				<input type='radio' rel='text-align' name='text-align' activeVal='right' id="text-align-right"  href="#" class="dark-blue radius toolbox-items  radio tool"><label for='text-align-right' class="icon-text-align-right  size-15"></label>
 
 				<div class="vertical-line"></div>
-
+				<!--
 				<input type='checkbox' rel='text-listing' name='listing' activeVal='bullet' id="make-list-bullet"   class="dark-blue radius toolbox-items tool checkbox"><label for='make-list-bullet' class="icon-list-bullet size-15" ></label>
-
-
-
 				<input type='checkbox' rel='text-listing' name='listing' activeVal='number' id="make-list-number"   class="dark-blue radius toolbox-items tool checkbox" ><label for='make-list-number' class="icon-list-number size-15"></label>
 
 				<script type="text/javascript">
@@ -216,12 +213,16 @@ $current_user=User::model()->findByPk(Yii::app()->user->id);
 				</script>
 
 				<div class="vertical-line"></div>
-
+				
+				<!-- indent sonra eklenecek -->
+				<!--
 				<a id="text-left-indent"  href="#" class="dark-blue radius toolbox-items "><i class="icon-left-indent size-15"></i></a>
 				<a id="text-right-indent"  href="#" class="dark-blue radius toolbox-items "><i class="icon-right-indent size-15"></i></a>
-
-				<div class="vertical-line"></div>
 				
+				<div class="vertical-line"></div>
+				-->
+				<!-- leading sonra eklenecek -->
+				<!-- 
 						<i class="icon-leading grey-6"></i>
 							<select id="leading" class="radius">
 								<option selected="" value="8"> 100 </option>
@@ -239,10 +240,10 @@ $current_user=User::model()->findByPk(Yii::app()->user->id);
 							</select>	
 				
 				<div class="vertical-line"></div>
-				
+				-->
 				
 					<i class="icon-opacity grey-6"></i>
-							<select class='tool-select tool select' rel='opacity' rel='color' id="font-size" class="radius">
+							<select class='tool-select tool select' rel='opacitypop' rel='color' id="font-size" class="radius">
 								
 								<option value="0" >0</option>
 								<option value="0.10" >10</option>
@@ -391,11 +392,11 @@ Katman
 <div class="popup-close">x</div>
 </div>
 <!-- popup content-->
-	<i class="icon-bring-front size-20 dark-blue"><a> En Üste Çıkart</a></i>
-	<i class="icon-bring-front-1 size-20 dark-blue"><a> Üste Çıkart</a></i>
+	<i rel='zindex' action='top' class="toolbox-btn icon-bring-front size-20 dark-blue"><a> En Üste Çıkart</a></i>
+	<i rel='zindex' action='higher' class="toolbox-btn icon-bring-front-1 size-20 dark-blue"><a> Üste Çıkart</a></i>
 	<div class="horizontal-line "></div>
-	<i class="icon-send-back size-20 dark-blue"><a> En Alta İndir</a></i>
-	<i class="icon-send-backward size-20 dark-blue"><a> Alta İndir</a></i>
+	<i rel='zindex' action='lower' class="toolbox-btn icon-send-backward size-20 dark-blue"><a> Alta İndir</a></i>
+	<i rel='zindex' action='bottom' class="toolbox-btn icon-send-back size-20 dark-blue"><a> En Alta İndir</a></i>
 <!-- popup content-->
 </div>
 <!--  end arrange popup -->		
