@@ -253,7 +253,8 @@ $(document).ready(function(){
             'left':  ( ui.offset.left-$(event.target).offset().left ) + 'px',
             'width': '400px',
             'height': '100px',
-            'opacity': '1'
+            'opacity': '1',
+            'z-index': '1000'
 
           },
           'attr' : {
