@@ -12,17 +12,19 @@ window.lindneo.toolbox = (function(window, $, undefined){
   {
     var elems = $(elem);
     var highest = 0;
+    
     for (var i = 0; i < elems.length; i++)
     {
       var zindex=document.defaultView.getComputedStyle(elems[i],null).getPropertyValue("z-index");
 
-        console.log(highest);
+        
       if ((zindex >= highest) && zindex<9000 && (zindex != 'auto'))
       {
         highest = zindex;
         
       }
     }
+    console.log(highest);
     return parseInt(highest)+1;
   };
 
