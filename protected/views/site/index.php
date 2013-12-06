@@ -240,7 +240,7 @@ $this->pageTitle=Yii::app()->name;
 									}
 								?>
 
-								<a href="<?php echo Yii::app()->createUrl('EditorActions/ExportBook', array('bookId'=>$book->book_id) ); ?>" class="btn bck-light-green white radius" id="header-buttons"><i class="icon-publish"> Indir</i></a>
+								<a href="<?php echo Yii::app()->createUrl('EditorActions/ExportBook', array('bookId'=>$book->book_id) ); ?>" class="btn bck-light-green white radius" ><i class="icon-download"> İndir</i></a>
 							</div>
 						</div>
 
