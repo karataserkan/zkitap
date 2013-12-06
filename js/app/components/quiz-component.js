@@ -136,7 +136,7 @@ $(document).ready(function(){
         <a href='#' class='btn bck-light-green white radius' id='add-quiz' style='padding: 5px 30px;'>Ekle</a> \
       </div> \
       <!-- popup content--> \
-    </div>").appendTo('body');
+    </div>").appendTo('body').draggable();
   
     // initialize options
     var n = $('#leading-option-count').val();

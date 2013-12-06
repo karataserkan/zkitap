@@ -28,6 +28,9 @@ $(document).ready(function(){
       if( that.options.component.data.ul.imgs ) {
         var counter=0;
         var ul=$('<ul></ul>');
+        ul.css(that.options.component.data.ul.css);
+        this.element.parent().find('.some-gallery').css(that.options.component.data['some-gallery'].css);
+        
         console.log(that);  
         $.each (that.options.component.data.ul.imgs , function (index,value) {
           if(  value.src ) {
@@ -86,7 +89,7 @@ var createGaleryComponent = function (event,ui){
       </ul> \
      <div style='clear:both' > </div> \
      <a id='pop-image-OK' class='btn white btn radius ' >Tamam</a>\
-    </div> ").appendTo('body');
+    </div> ").appendTo('body').draggable();
     $('#image-add-dummy-close-button').click(function(){
 
       $('#pop-image-popup').remove();  
@@ -96,6 +99,10 @@ var createGaleryComponent = function (event,ui){
       }
 
     });
+
+
+    
+
 
     $('#pop-image-OK').click(function (){
 
@@ -122,14 +129,27 @@ var createGaleryComponent = function (event,ui){
       var component = {
           'type' : 'galery',
           'data': {
+            'some-gallery':{
+              'css': {
+                'width': '100%',
+                'height': '100%',
+                'min-height':'100px',
+                'min-width':'100px',
+              }
+            },
             'ul':{
               'css': {
                 'overflow':'hidden',
                 'margin': '0',
                 'padding': '0',
                 'position': 'relative',
+                'min-height':'100px',
+                'min-width':'100px',
+
                 'width': '100%',
                 'height': '100%',
+
+
               },
             'imgs':imgs
             
@@ -140,8 +160,8 @@ var createGaleryComponent = function (event,ui){
                 'position':'absolute',
                 'top': (ui.offset.top-$(event.target).offset().top ) + 'px',
                 'left':  ( ui.offset.left-$(event.target).offset().left ) + 'px',
-                'width': '300px',
-                'height': '200px',
+
+          
 
                 'background-color': 'transparent',
                 
