@@ -89,20 +89,23 @@ window.lindneo.nisga = (function(window, $, undefined){
             revision_value=1;
            if(revision_array.revisions[revision_id].even_type=='CREATE'){
                 deleteComponent(revision_array.revisions[revision_id].component);
-                console.log(revision_array.revisions[revision_id].even_type);
+                //console.log(revision_array.revisions[revision_id].even_type);
+                //console.log(revision_array);
                 console.log(revision_array);
-                
+                console.log(revision_id);
             }
             if(revision_array.revisions[revision_id].even_type=='UPDATE'){
                 //console.log(revision_array[revision_id-1].revisions[0].component);
                 //console.log(revision_array[revision_id-2].revisions[0].component);
-                deleteComponent(revision_array.revisions[revision_id-1].component.id);
+                destroyComponent(revision_array.revisions[revision_id-1].component.id);
                 createComponent(revision_array.revisions[revision_id-1].component);
                 window.lindneo.tlingit.componentHasUpdated(revision_array.revisions[revision_id-1].component);
                 
                 //revision_id--;
-                console.log(revision_array.revisions[revision_id].even_type);
+                //console.log(revision_array.revisions[revision_id].even_type);
                 console.log(revision_array);
+                console.log(revision_id);
+                
             }
             if(revision_array.revisions[revision_id].even_type=='DELETE'){
                 createComponent(revision_array.revisions[revision_id].component);
@@ -115,40 +118,55 @@ window.lindneo.nisga = (function(window, $, undefined){
     }
     
     var redoComponent = function() {
-        //console.log(revision_array[0].revisions[0].component_id);
+        //console.log(revision_array.revisions[revision_id].component_id);
         //console.log(revision_id);
-        if(revision_id<revision_array.length){ //console.log(revision_array[revision_id-1].revisions[0].component);
-//            console.log(revision_id);
-//            console.log(revision_array.revisions[revision_id].even_type);
-            
+        console.log(revision_id+' '+revision_array.revisions.length);
+        if(revision_id<revision_array.revisions.length){ //console.log(revision_array[revision_id-1].revisions[0].component);
+            //revision_id=revision_id-1;
+            console.log(revision_id);
+            console.log(revision_array.revisions[revision_id].even_type);
+            revision_value=1;
            if(revision_array.revisions[revision_id].even_type=='CREATE'){
-                window.lindneo.tlingit.createComponent(revision_array.revisions[revision_id].component);
-//                console.log(revision_array.revisions[revision_id].even_type);
-//                console.log(revision_id);
+               createComponent(revision_array.revisions[revision_id].component);
+                console.log(revision_array.revisions[revision_id].even_type);
+                console.log(revision_array);
+                
+                
             }
             if(revision_array.revisions[revision_id].even_type=='UPDATE'){
-                //console.log(revision_array[revision_id-1].revisions[0].component);
+                console.log(revision_value);
                 //console.log(revision_array[revision_id-2].revisions[0].component);
-                this.destroyComponent(revision_array.revisions[revision_id].component.id);
-                this.createComponent(revision_array.revisions[revision_id].component);
+                destroyComponent(revision_array.revisions[revision_id].component.id);
+                createComponent(revision_array.revisions[revision_id].component);
                 window.lindneo.tlingit.componentHasUpdated(revision_array.revisions[revision_id].component);
                 
-//                console.log(revision_id);
                 //revision_id--;
-                //console.log(revision_array);
+                console.log(revision_array.revisions[revision_id].even_type);
+                console.log(revision_array);
             }
             if(revision_array.revisions[revision_id].even_type=='DELETE'){
-                this.deleteComponent(revision_array.revisions[revision_id].component);
-//                console.log(revision_array.revisions[revision_id].even_type);
-//                console.log(revision_id);
-                
+                deleteComponent(revision_array.revisions[revision_id].component);
+                console.log(revision_array.revisions[revision_id].even_type);
+                console.log(revision_array);
             }
-            revision_array.pop();
+          revision_array.revisions.pop();
+          revision_id++;
         }
+   }
+   
+   var updateRevisions = function() {
+    if(revision_value==0){
+        var newObject = jQuery.extend(true, {}, component);
+        revision_array.revisions.push({component_id: component.id, component: newObject, revision_date: $.now(), even_type: 'UPDATE'});
+                revision_id++;
+
+      }
+      else revision_value=0;
+      console.log(revision_array);
    }
 
   var destroyComponent = function ( componentId ) {
-      console.log(componentId);
+    //  console.log(componentId);
     $('[id="'+componentId+'"]').parent().not('#current_page').remove();
     $('[id="'+componentId+'"]').remove();
   };
@@ -177,13 +195,7 @@ window.lindneo.nisga = (function(window, $, undefined){
     .shapeComponent({
       'component': component,
       'update': function ( event, component ) {
-          if(revision_value==0){
-            revision_array.revisions.push({component_id: component.id, component: component, revision_date: $.now(), even_type: 'UPDATE'});
-            revision_id++;
-                    
-          }
-          else revision_value=0;
-//          console.log(revision_array);
+        updateRevisions();
         window.lindneo.tlingit.componentHasUpdated( component );
       },
       'selected': function (event, element) {
@@ -205,13 +217,7 @@ window.lindneo.nisga = (function(window, $, undefined){
     .graphComponent({
       'component': component,
       'update': function ( event, component ) {
-        if(revision_value==0){
-            revision_array.revisions.push({component_id: component.id, component: component, revision_date: $.now(), even_type: 'UPDATE'});
-                    revision_id++;
-                    
-          }
-          else revision_value=0;
-//          console.log(revision_array);
+        updateRevisions();
         window.lindneo.tlingit.componentHasUpdated( component );
       },
       'selected': function (event, element) {
@@ -230,14 +236,8 @@ window.lindneo.nisga = (function(window, $, undefined){
     .appendTo( page_div_selector )
     .textComponent({
       'component': component,
-      'update': function ( event, component ) {
-        if(revision_value==0){
-            revision_array.revisions.push({component_id: component.id, component: component, revision_date: $.now(), even_type: 'UPDATE'});
-                    revision_id++;
-                    
-          }
-          else revision_value=0;
-//          console.log(revision_array);  
+      'update': function ( event, component ) {  
+        updateRevisions();
         window.lindneo.tlingit.componentHasUpdated( component );
       },
       'selected': function (event, element) {
@@ -261,13 +261,7 @@ window.lindneo.nisga = (function(window, $, undefined){
       'component': component,
       'marker': 'http://dev.lindneo.com/css/linkmarker.png'  ,
       'update': function ( event, component ) {
-        if(revision_value==0){
-            revision_array.revisions.push({component_id: component.id, component: component, revision_date: $.now(), even_type: 'UPDATE'});
-                    revision_id++;
-                    
-          }
-          else revision_value=0;
-//          console.log(revision_array);
+        updateRevisions();
         window.lindneo.tlingit.componentHasUpdated( component );
       },
       'selected': function (event, element) {
@@ -292,13 +286,7 @@ window.lindneo.nisga = (function(window, $, undefined){
       'component': component,
       'marker': 'http://dev.lindneo.com/css/popupmarker.png'  ,
       'update': function ( event, component ) {
-        if(revision_value==0){
-            revision_array.revisions.push({component_id: component.id, component: component, revision_date: $.now(), even_type: 'UPDATE'});
-                    revision_id++;
-                    
-          }
-          else revision_value=0;
-//          console.log(revision_array);
+        updateRevisions();
         window.lindneo.tlingit.componentHasUpdated( component );
       },
       'selected': function (event, element) {
@@ -326,13 +314,7 @@ window.lindneo.nisga = (function(window, $, undefined){
     .imageComponent({
       'component': component,
       'update': function ( event, component ) {
-        if(revision_value==0){
-            revision_array.revisions.push({component_id: component.id, component: component, revision_date: $.now(), even_type: 'UPDATE'});
-                    revision_id++;
-                    
-          }
-          else revision_value=0;
-//          console.log(revision_array);
+        updateRevisions();
         window.lindneo.tlingit.componentHasUpdated( component );
       },
       'selected': function (event, element) {
@@ -354,13 +336,7 @@ window.lindneo.nisga = (function(window, $, undefined){
     .videoComponent({
       'component': component,
       'update': function ( event, component ) {
-        if(revision_value==0){
-            revision_array.revisions.push({component_id: component.id, component: component, revision_date: $.now(), even_type: 'UPDATE'});
-                    revision_id++;
-                    
-          }
-          else revision_value=0;
-//          console.log(revision_array);
+        updateRevisions();
         window.lindneo.tlingit.componentHasUpdated( component );
       },
       'selected': function (event, element) {
@@ -385,13 +361,7 @@ window.lindneo.nisga = (function(window, $, undefined){
     .soundComponent({
       'component': component,
       'update': function ( event, component ) {
-        if(revision_value==0){
-            revision_array.revisions.push({component_id: component.id, component: component, revision_date: $.now(), even_type: 'UPDATE'});
-                    revision_id++;
-                    
-          }
-          else revision_value=0;
-//          console.log(revision_array);
+        updateRevisions();
         window.lindneo.tlingit.componentHasUpdated( component );
       },
       'selected': function (event, element) {
@@ -415,13 +385,7 @@ window.lindneo.nisga = (function(window, $, undefined){
     .galeryComponent({
       'component': component,
       'update': function ( event, component ) {
-        if(revision_value==0){
-            revision_array.revisions.push({component_id: component.id, component: component, revision_date: $.now(), even_type: 'UPDATE'});
-                    revision_id++;
-                    
-          }
-          else revision_value=0;
-//          console.log(revision_array);
+        updateRevisions();
         window.lindneo.tlingit.componentHasUpdated( component );
       },
       'selected': function (event, element) {
@@ -443,13 +407,7 @@ window.lindneo.nisga = (function(window, $, undefined){
     .quizComponent({
       'component': component,
       'update': function( event, component ){
-        if(revision_value==0){
-            revision_array.revisions.push({component_id: component.id, component: component, revision_date: $.now(), even_type: 'UPDATE'});
-                    revision_id++;
-                    
-          }
-          else revision_value=0;
-//          console.log(revision_array);
+        updateRevisions();
         window.lindneo.tlingit.componentHasUpdated( component );
       },
       'selected': function ( event, element_ ){
