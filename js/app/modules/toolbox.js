@@ -220,8 +220,8 @@ window.lindneo.toolbox = (function(window, $, undefined){
   };
   
   var redoSelectedItemsClipboard = function () {
+      //console.log("undooooo");
       window.lindneo.nisga.redoComponent();
- 
   };
 
   var copySelectedItemsToClipboard = function (cut) {
