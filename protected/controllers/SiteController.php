@@ -32,28 +32,6 @@ class SiteController extends Controller
 		if(Yii::app()->user->isGuest)
 			$this->redirect( array('site/login' ) );
 
-		if (isset($_POST['data'])) {
-			$data = json_decode($_POST['data'],true);
-
-			$userid= Yii::app()->db->createCommand()
-		    ->select("*")
-		    ->from("user")
-		    ->where("email=:email", array(':email' => $data[0]))
-		    ->queryRow();
-			$userid=$userid['id'];
-
-
-			//öyle bir kullanıcı varsa atanan hakkı verdim
-			if ($userid) {
-				$addUser = Yii::app()->db->createCommand();
-				$addUser->insert('book_users', array(
-				    'user_id'=>$userid,
-				    'book_id'=>$data[2],
-				    'type'   =>$data[1]
-				));
-			}
-
-		}
 
 		if (isset($_POST['del']) && isset($_POST['bookId']) && isset($_POST['user'])) {
 				$command = Yii::app()->db->createCommand();
@@ -63,6 +41,45 @@ class SiteController extends Controller
 
 		$this->render('index');
 	}
+
+	//kullanıcı haklarını burada düzenliyorum
+	//ekaratas start
+
+	public function actionRight($userId,$bookId,$type)
+	{
+		if(Yii::app()->user->isGuest)
+			$this->redirect( array('site/login' ) );
+
+		$hasRight=Yii::app()->db
+		    ->createCommand("SELECT * FROM book_users WHERE user_id=:user_id AND book_id=:book_id")
+		    ->bindValues(array(':user_id' => $userId, ':book_id' => $bookId))
+		    ->execute();
+		
+	    
+	    if ($hasRight) {
+	    	
+	    	
+		    Yii::app()->db
+		    ->createCommand("UPDATE book_users SET type = :type WHERE user_id=:user_id AND book_id=:book_id")
+		    ->bindValues(array(':type' => $type, ':user_id' => $userId, ':book_id' => $bookId))
+		    ->execute();
+		}
+	    else
+	    {
+	    	$addUser = Yii::app()->db->createCommand();
+			$addUser->insert('book_users', array(
+			    'user_id'=>$userId,
+			    'book_id'=>$bookId,
+			    'type'   =>$type
+			));	
+	    }
+		
+
+		$this->render('index');
+	}
+
+	//ekaratas end
+
 
 	/**
 	 * This is the action to handle external exceptions.

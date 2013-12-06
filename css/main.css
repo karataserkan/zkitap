@@ -43,7 +43,7 @@ list-style:none;
 	width: 100%;
 	position: fixed;
 	height: 36px;
-	z-index:9999;
+	z-index:999999;
 	padding-top:4px; 
 	background-color:#ffffff;
 	border-bottom: 2px solid #d1d2d4;
@@ -54,17 +54,17 @@ list-style:none;
 
 .styler_box
 {
+min-width:1700px;
 height: 36px;
 position: fixed;
 top: 42px;
 width: 100%;
-
 padding-left: 10px;
 background-color:#e6e7e8;
 border-bottom: 2px solid #d1d2d4;
 padding-top: 3px;
 display: block;
- z-index:9999;
+ z-index:999999;
 
 }
 
@@ -80,7 +80,7 @@ bottom:0px;
 left:0px;
 overflow:none; 
 background:#f4f4f4; 
-z-index:9999;
+z-index:999999;
 border-right: 2px solid #d1d2d4;
 
 

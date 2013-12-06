@@ -53,23 +53,31 @@ $(document).ready(function(){
             alert('secilmemis');
           } else {
             var answer = {
-            'selected index': ind,
-            'selected option': that.options.component.data.options[ind]
-          };
+              'selected-index': ind,
+              'selected-option': that.options.component.data.options[ind]
+            };
 
-          var color = 'red';
-          if (that.options.component.data.correctAnswerIndex== ind) color ='green';
-          that.element.find('.question-options-container').index(ind).css('color',color);
+            
+            that.element.find('.question-options-container div').each(function(i,element){
+              var color = 'red';
+              if (i==that.options.component.data.correctAnswerIndex) color ='green';
+              var newAnserBtn=$("<span style='border-radius: 50%;width:10px;height:10px;display: inline-block;background:"+color+"'></span>");
+              $(this).find('input[type=radio]').remove();
+              $(this).prepend(newAnserBtn);
+              if (ind==i && that.options.component.data.correctAnswerIndex==ind){
+                that.element.css('background','color');
+                $(this).prepend('+');
+              } else if (ind==i && that.options.component.data.correctAnswerIndex!=ind){
+                that.element.css('background','color');
+                $(this).prepend('x');
+              }
 
-
-
+              $(this).css('color',color);
+            }); 
 
           }
 
-          this.element.find('.quiz-popup').remove();
-          if( this.element.find('.quiz-popup').length ) {
-            this.element.find('.quiz-popup').remove();
-          }
+
         });
 
 
@@ -128,7 +136,7 @@ $(document).ready(function(){
         <a href='#' class='btn bck-light-green white radius' id='add-quiz' style='padding: 5px 30px;'>Ekle</a> \
       </div> \
       <!-- popup content--> \
-    </div>").appendTo('body');
+    </div>").appendTo('body').draggable();
   
     // initialize options
     var n = $('#leading-option-count').val();

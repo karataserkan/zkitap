@@ -8,7 +8,7 @@ $this->pageTitle=Yii::app()->name;
 
 
 <div style="height:42px;"></div>
-<div style="position: fixed; width: 100%; height: 100%; background-color: #056380; padding:20px; overflow-y: scroll;">
+<div id='allWorkspaces' style="position: fixed; width: 100%; height: 100%; background-color: #056380; padding:20px; overflow-y: scroll;">
 
 
 
@@ -49,6 +49,18 @@ $this->pageTitle=Yii::app()->name;
 		->queryAll();
 
 		return $bookUsers;
+	}
+
+	function workspaceUsers($workspace_id)
+	{
+		$workspaceUsers = Yii::app()->db->createCommand()
+		->select ("*")
+		->from("workspaces_users")
+		->where("workspace_id=:workspace_id", array(':workspace_id' => $workspace_id))
+		->join("user","userid=id")
+		->queryAll();
+
+		return $workspaceUsers;
 	}
 
 		// renders the view file 'protected/views/site/index.php'
@@ -170,42 +182,27 @@ $this->pageTitle=Yii::app()->name;
 												//type: owner | editor | user
 
 											?>
-											<span class="editor-name" >Kullanıcı Ekle(e-posta adresi):</span>
+											<span class="editor-name" >Kullanıcı Ekle:</span>
 											<br style="clear:both; margin-bottom:20px;">
-											<form id="<?php echo $book->book_id; ?>" method="post">
+											<form id="a<?php echo $book->book_id; ?>" method="post">
 											<input id="book" value="<?php echo $book->book_id; ?>" style="display:none">
-											<input id="user" type="text" class="book-list-textbox radius grey-9 float-left"  style=" width: 250;" value="">
+											<select id="user" class="book-list-textbox radius grey-9 float-left"  style=" width: 280px;">
+												<?php
+													$workspaceUsers = workspaceUsers($workspace->workspace_id);
+													
+													foreach ($workspaceUsers as $key => $workspaceUser) {
+														echo '<option value="'.$workspaceUser['userid'].'">'.$workspaceUser['name'].' '.$workspaceUser['surname'].'</option>';
+													}
+												 ?>
+											</select>
 											 <select id="type" class="book-list-textbox radius grey-9 float-left"  style=" width: 70px;" >
 											  <option value="editor">Editör</option>
 											  <option value="owner">Sahibi</option>
 											</select>
 											</form>
-											<a href="#" class="btn white radius float-right" onclick="send(<?php echo $book->book_id; ?>)" style="margin-left:20px; width:50px; text-align:center;" id="pop-video">
+											<a href="#" onclick="sendRight(a<?php echo $book->book_id; ?>)" class="btn white radius float-right" style="margin-left:20px; width:50px; text-align:center;">
 												Ekle
 											</a>
-											<script language="JavaScript">
-											function send(e){
-												$("[popup='pop-<?php echo $book->book_id; ?>']").hide("fast");
-											    var data= [];
-											    data[0]=$("#user",e).val();
-											    data[1]=$("#type",e).val();
-											    data[2]=$("#book",e).val();
-											    data="data="+JSON.stringify(data, null, 3);
-											      $.ajax({
-											           type: 'POST',
-											            url: "<?php echo Yii::app()->createUrl('site/index'); ?>",
-											            data:data,
-											            success:function(data){
-											                        
-											                      },
-											           error: function(data) {
-											                 
-											            },
-											          dataType:'html'
-											      });
-											}
-											</script>
-											
 										</div>
 
 										</div>
@@ -214,7 +211,7 @@ $this->pageTitle=Yii::app()->name;
 										
 										<script>
 										$("[popup='<?php echo $book->book_id; ?>']").click(function(){
-											$("[popup='pop-<?php echo $book->book_id; ?>']").show("fast");
+											$("[popup='pop-<?php echo $book->book_id; ?>']").show("fast").draggable({containment: "#allWorkspaces"});
 										});
 										$("[popup='close-<?php echo $book->book_id; ?>']").click(function(){
 											$("[popup='pop-<?php echo $book->book_id; ?>']").hide("fast");
@@ -287,3 +284,16 @@ $this->pageTitle=Yii::app()->name;
 
 
 
+<script>
+//burada kullanıcıya hakları vermek için seçilmiş olan user | book | type il link oluşturup yönlendiriyorum
+//ekaratas start											
+function sendRight(e){
+    var b = e.id;
+    var userId=$('#' + b + '> #user').val();
+    var type=$('#' + b + '> #type').val();
+    var bookId=$('#' + b + ' > #book').val();
+    var link ='?r=site/right&userId='+userId+'&bookId='+bookId+'&type='+type;
+    window.location.assign(link);
+    }
+    //ekaratas end
+</script>

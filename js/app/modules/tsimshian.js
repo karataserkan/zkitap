@@ -18,8 +18,8 @@ window.lindneo.tsimshian = (function(window, $, undefined){
   var componentUpdated = function (component) {    
 
     window.lindneo.tsimshian.myComponent = component.id;
-    console.log('Sending');
-    console.log(window.lindneo.tsimshian.myComponent);
+    //console.log('Sending');
+    //console.log(window.lindneo.tsimshian.myComponent);
     this.socket.emit('updateComponent', component);
 
   };
@@ -109,7 +109,7 @@ window.lindneo.tsimshian = (function(window, $, undefined){
        });
 
        this.socket.on('userListUpdate', function(userList){
-          console.log(userList) ;
+          //console.log(userList) ;
          
        });
  

@@ -81,13 +81,13 @@ var createLinkComponent = function ( event, ui ) {
   <!-- popup content--> \
     <div class='gallery-inner-holder'> \
       <form id='video-url'> \
-      <input id='link-url-text' class='input-textbox' type='url' placeholder='URL Adresini Giriniz'   value='http://lindneo.com/mp4.mp4'> \
+      <input id='link-url-text' class='input-textbox' type='url' placeholder='URL Adresini Giriniz'   value='http://linden-tech.com'> \
       <a href='#' id='pop-image-OK' class='btn bck-light-green white radius' id='add-image' style='padding: 5px 30px;'>Ekle</a> \
       </form> \
     </div>     \
      \
   <!-- popup content--> \
-  </div>").appendTo('body');
+  </div>").appendTo('body').draggable();
 
     $('#image-add-dummy-close-button').click(function(){
 
