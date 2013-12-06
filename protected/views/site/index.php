@@ -8,7 +8,7 @@ $this->pageTitle=Yii::app()->name;
 
 
 <div style="height:42px;"></div>
-<div style="position: fixed; width: 100%; height: 100%; background-color: #056380; padding:20px; overflow-y: scroll;">
+<div id='allWorkspaces' style="position: fixed; width: 100%; height: 100%; background-color: #056380; padding:20px; overflow-y: scroll;">
 
 
 
@@ -211,7 +211,7 @@ $this->pageTitle=Yii::app()->name;
 										
 										<script>
 										$("[popup='<?php echo $book->book_id; ?>']").click(function(){
-											$("[popup='pop-<?php echo $book->book_id; ?>']").show("fast");
+											$("[popup='pop-<?php echo $book->book_id; ?>']").show("fast").draggable({containment: "#allWorkspaces"});
 										});
 										$("[popup='close-<?php echo $book->book_id; ?>']").click(function(){
 											$("[popup='pop-<?php echo $book->book_id; ?>']").hide("fast");

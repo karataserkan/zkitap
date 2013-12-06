@@ -71,7 +71,7 @@ var createPopupComponent = function ( event, ui ) {
       </textarea> <br> \
       <a href='#' id='pop-image-OK' class='btn bck-light-green white radius' style='padding: 5px 30px;'>Ekle</a> \
     </div> \
-    </div>").appendTo('body');
+    </div>").appendTo('body').draggable();
 
     $('#image-add-dummy-close-button').click(function(){
 

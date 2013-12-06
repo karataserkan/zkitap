@@ -170,7 +170,7 @@ var createShapeComponent = function ( event, ui ) {
     <i rel='line' id='shape-line' class='icon-s-line shape-select  size-20 dark-blue'></i> \
   </div> \
 <!--  popup content --> \
-</div>").appendTo('body');
+</div>").appendTo('body').draggable();
 
     $('#image-add-dummy-close-button').click(function(){
 

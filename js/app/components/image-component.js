@@ -91,7 +91,7 @@ var createImageComponent = function ( event, ui ) {
         <div style='clear:both'></div> \
         <div class='add-image-drag-area' id='dummy-dropzone'> </div> \
       </div> \
-    </div>").appendTo('body');
+    </div>").appendTo('body').draggable();
 
     $('#image-add-dummy-close-button').click(function(){
 

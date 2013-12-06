@@ -50,7 +50,7 @@ var createVideoComponent = function(event, ui) {
         <input id='video-url-text' class='input-textbox' type='url' placeholder='URL Adresini Giriniz'   value='http://lindneo.com/5.mp4'> \
         <a href='#' id='pop-image-OK' class='btn bck-light-green white radius' id='add-image' style='padding: 5px 30px;'>Ekle</a> \
       </div> \
-    </div>").appendTo('body');
+    </div>").appendTo('body').draggable();
 
     $('#image-add-dummy-close-button').click(function() {
 

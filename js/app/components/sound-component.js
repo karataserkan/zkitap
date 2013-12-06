@@ -63,7 +63,7 @@ $(document).ready(function(){
          <input type='text' class='input-textbox' id='pop-sound-name' placeholder='Ses Adı'  /> \
       <div style='clear:both' > </div> \
      <a id='pop-image-OK' class='btn white btn radius ' >Tamam</a>\
-    </div>").appendTo('body');
+    </div>").appendTo('body').draggable();
 
     $('#image-add-dummy-close-button').click(function(){
 

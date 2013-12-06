@@ -241,7 +241,7 @@ var createGraphComponent = function ( event, ui ) {
   <a href='#' class='btn bck-light-green white radius' id='pop-image-OK' style='padding: 5px 30px;'>Ekle</a> \
   </div> \
       </div> \
-    </div>").appendTo('body');
+    </div>").appendTo('body').draggable();
 
     $('#image-add-dummy-close-button').click(function(){
 

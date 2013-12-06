@@ -484,9 +484,9 @@ class epub3 {
 		<dc:identifier id="uuid_id" >'.functions::uuid().'</dc:identifier>
 		<dc:source>Linden-digital</dc:source>
 		<dc:publisher>Linden digital</dc:publisher>
-		<dc:rights>©2005-13 Linden Digital. All rights reserved</dc:rights>
+		<dc:rights>2005-13 Linden Digital. All rights reserved</dc:rights>
 		<dc:description>by linden</dc:description>
-		<meta name="cover" content="cover"/>
+		<meta name="covers" content="cover"/>
 		<meta property="rendition:layout">pre-paginated</meta>
 		<meta property="rendition:orientation">landscape</meta>
 		<meta property="rendition:spread">none</meta>
@@ -500,8 +500,8 @@ class epub3 {
 		<item href="popupmarker.png" id="popupmarker" media-type="image/png" />
 %pages_manifest%
 		<item href="page_styles.css" id="page_css" media-type="text/css" />
-		<item href="stylesheet.css" id="css" media-type="text/css" />
-		<item id="css-001" href="widgets.css" media-type="text/css" />
+		<item href="stylesheet.css" id="stylesheet_css" media-type="text/css" />
+		<item id="widgets_css" href="widgets.css" media-type="text/css" />
 		<item href="titlepage.xhtml" id="titlepage" media-type="application/xhtml+xml" />
 		<item href="toc.ncx" media-type="application/x-dtbncx+xml" id="ncx" />
 		<item id="js001" href="jquery-1.4.4.min.js" media-type="text/javascript" />
@@ -512,16 +512,16 @@ class epub3 {
 	    <item id="js006" href="aie_qaa.js" media-type="text/javascript" />
 	    <item id="js007" href="aie_storyline.js" media-type="text/javascript" />
 	    <item id="js008" href="aie_textsound.js" media-type="text/javascript" />
-	    <item id="js008" href="Chart.js" media-type="text/javascript" />
 	    <item id="js009" href="igp_audio.js" media-type="text/javascript" />
 	    <item id="js010" href="iscroll.js" media-type="text/javascript" />
 	    <item id="js011" href="jquery.min.js" media-type="text/javascript" />
 	    <item id="js012" href="jquery-ui.min.js" media-type="text/javascript" />
 	    <item id="js013" href="LAB.min.js" media-type="text/javascript" />
-	    <item id="js013" href="kinetic-v4.5.3.min.js" media-type="text/javascript" />
 	    <item id="js014" href="panelnav.js" media-type="text/javascript" />
 	    <item id="js015" href="popup.js" media-type="text/javascript" />
 	    <item id="js016" href="pubsub.js" media-type="text/javascript" />
+	    <item id="js017" href="Chart.js" media-type="text/javascript" />
+	    <item id="js018" href="kinetic-v4.5.3.min.js" media-type="text/javascript" />
 	</manifest>
 	<spine toc="ncx" page-progression-direction="ltr">
 		<itemref idref="titlepage" />
