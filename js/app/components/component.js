@@ -49,7 +49,7 @@ $(document).ready(function(){
         snap: '.ui-wrapper',
         snapMode: 'outer',
         'stop': function(event, ui){
-        console.log();
+        //console.log();
           $( "#guide-v, #guide-h" ).hide(); 
           that._resizeDraggable( event, ui );
         },
@@ -115,7 +115,7 @@ $(document).ready(function(){
       }, 
        start: function( event, ui ) {
         guides = $.map( $( "#current_page .ui-draggable" ).not( this ), computeGuidesForElement );
-        console.log(guides);
+        //console.log(guides);
 
         innerOffsetX = event.originalEvent.offsetX;
         innerOffsetY = event.originalEvent.offsetY;
@@ -214,7 +214,7 @@ $(document).ready(function(){
     },
 
     _selected: function( event, ui ) {
-      console.log('selected');
+      //console.log('selected');
 
       
       if (event)
@@ -289,7 +289,7 @@ $(document).ready(function(){
 
           break;
         case 'z-index':
-          console.log('z-index girdi'+ propertyValue);
+          //console.log('z-index girdi'+ propertyValue);
           this.options.component.data.self.css[propertyName]=propertyValue;
         break;
         default:

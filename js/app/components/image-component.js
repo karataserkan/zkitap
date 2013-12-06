@@ -10,12 +10,55 @@ $(document).ready(function(){
     _create: function(){
 
       var that = this;
+      
 
     
       if( this.options.component.data.img ) {
         this.element.attr('src', this.options.component.data.img.src);  
       }
       
+      var el=this.element.get(0);
+      var imageBinary;
+
+
+      el.addEventListener("dragenter", function(e){
+        e.stopPropagation();
+        e.preventDefault();
+      }, false);
+
+    el.addEventListener("dragexit", function(e){
+      e.stopPropagation();
+      e.preventDefault();
+    },false);
+
+    el.addEventListener("dragover", function(e){
+      e.stopPropagation();
+      e.preventDefault();
+    }, false);
+
+    el.addEventListener("drop", function(e){
+      
+      e.stopPropagation();
+      e.preventDefault();
+
+      var reader = new FileReader();
+      var component = {};
+
+      reader.onload = function (evt) {
+
+        imageBinary = evt.target.result;        
+        
+        component = $.parseJSON(window.lindneo.tlingit.componentToJson(that.options.component));
+        console.log(component);
+        component.data.img.src = imageBinary;
+
+        window.lindneo.tlingit.componentHasCreated(component);
+        window.lindneo.nisga.deleteComponent(that.options.component)
+      };
+
+      reader.readAsDataURL( e.dataTransfer.files[0] );
+
+    }, false);
 
       this._super();
     },
