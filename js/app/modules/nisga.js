@@ -16,6 +16,7 @@ window.lindneo.nisga = (function(window, $, undefined){
   var revision_value = 0;
 
   var createComponent = function( component ){
+      //console.log(revision_value);
 //    console.log(component);
     componentBuilder( component );  
     if(revision_value==0){
@@ -85,7 +86,7 @@ window.lindneo.nisga = (function(window, $, undefined){
             revision_id=revision_id-1;
             //console.log(revision_id);
             //console.log(revision_array.revisions[revision_id].even_type);
-            
+            revision_value=1;
            if(revision_array.revisions[revision_id].even_type=='CREATE'){
                 deleteComponent(revision_array.revisions[revision_id].component);
                 console.log(revision_array.revisions[revision_id].even_type);
@@ -95,8 +96,8 @@ window.lindneo.nisga = (function(window, $, undefined){
             if(revision_array.revisions[revision_id].even_type=='UPDATE'){
                 //console.log(revision_array[revision_id-1].revisions[0].component);
                 //console.log(revision_array[revision_id-2].revisions[0].component);
-                //this.deleteComponent(revision_array.revisions[revision_id-1].component);
-                //this.createComponent(revision_array.revisions[revision_id-1].component);
+                deleteComponent(revision_array.revisions[revision_id-1].component.id);
+                createComponent(revision_array.revisions[revision_id-1].component);
                 window.lindneo.tlingit.componentHasUpdated(revision_array.revisions[revision_id-1].component);
                 
                 //revision_id--;
@@ -104,12 +105,12 @@ window.lindneo.nisga = (function(window, $, undefined){
                 console.log(revision_array);
             }
             if(revision_array.revisions[revision_id].even_type=='DELETE'){
-                window.lindneo.tlingit.createComponent(revision_array.revisions[revision_id].component,'undo');
+                createComponent(revision_array.revisions[revision_id].component);
                 console.log(revision_array.revisions[revision_id].even_type);
                 console.log(revision_array);
             }
             
-            revision_value=1;
+            
         }
     }
     
@@ -137,7 +138,7 @@ window.lindneo.nisga = (function(window, $, undefined){
                 //console.log(revision_array);
             }
             if(revision_array.revisions[revision_id].even_type=='DELETE'){
-                deleteComponent(revision_array.revisions[revision_id].component);
+                this.deleteComponent(revision_array.revisions[revision_id].component);
 //                console.log(revision_array.revisions[revision_id].even_type);
 //                console.log(revision_id);
                 
@@ -147,6 +148,7 @@ window.lindneo.nisga = (function(window, $, undefined){
    }
 
   var destroyComponent = function ( componentId ) {
+      console.log(componentId);
     $('[id="'+componentId+'"]').parent().not('#current_page').remove();
     $('[id="'+componentId+'"]').remove();
   };
