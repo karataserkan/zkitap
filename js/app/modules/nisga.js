@@ -193,7 +193,14 @@ window.lindneo.nisga = (function(window, $, undefined){
     .shapeComponent({
       'component': component,
       'update': function ( event, component ) {
-        updateRevisions();
+        if(revision_value==0){
+        var newObject = jQuery.extend(true, {}, component);
+        revision_array.revisions.push({component_id: component.id, component: newObject, revision_date: $.now(), even_type: 'UPDATE'});
+                revision_id++;
+
+      }
+      else revision_value=0;
+      console.log(revision_array);
         window.lindneo.tlingit.componentHasUpdated( component );
       },
       'selected': function (event, element) {
@@ -215,7 +222,14 @@ window.lindneo.nisga = (function(window, $, undefined){
     .graphComponent({
       'component': component,
       'update': function ( event, component ) {
-        updateRevisions();
+        if(revision_value==0){
+        var newObject = jQuery.extend(true, {}, component);
+        revision_array.revisions.push({component_id: component.id, component: newObject, revision_date: $.now(), even_type: 'UPDATE'});
+                revision_id++;
+
+      }
+      else revision_value=0;
+      console.log(revision_array);
         window.lindneo.tlingit.componentHasUpdated( component );
       },
       'selected': function (event, element) {
@@ -235,7 +249,14 @@ window.lindneo.nisga = (function(window, $, undefined){
     .textComponent({
       'component': component,
       'update': function ( event, component ) {  
-        updateRevisions();
+        if(revision_value==0){
+        var newObject = jQuery.extend(true, {}, component);
+        revision_array.revisions.push({component_id: component.id, component: newObject, revision_date: $.now(), even_type: 'UPDATE'});
+                revision_id++;
+
+      }
+      else revision_value=0;
+      console.log(revision_array);
         window.lindneo.tlingit.componentHasUpdated( component );
       },
       'selected': function (event, element) {
@@ -259,7 +280,14 @@ window.lindneo.nisga = (function(window, $, undefined){
       'component': component,
       'marker': 'http://dev.lindneo.com/css/linkmarker.png'  ,
       'update': function ( event, component ) {
-        updateRevisions();
+        if(revision_value==0){
+        var newObject = jQuery.extend(true, {}, component);
+        revision_array.revisions.push({component_id: component.id, component: newObject, revision_date: $.now(), even_type: 'UPDATE'});
+                revision_id++;
+
+      }
+      else revision_value=0;
+      console.log(revision_array);
         window.lindneo.tlingit.componentHasUpdated( component );
       },
       'selected': function (event, element) {
@@ -284,7 +312,14 @@ window.lindneo.nisga = (function(window, $, undefined){
       'component': component,
       'marker': 'http://dev.lindneo.com/css/popupmarker.png'  ,
       'update': function ( event, component ) {
-        updateRevisions();
+        if(revision_value==0){
+        var newObject = jQuery.extend(true, {}, component);
+        revision_array.revisions.push({component_id: component.id, component: newObject, revision_date: $.now(), even_type: 'UPDATE'});
+                revision_id++;
+
+      }
+      else revision_value=0;
+      console.log(revision_array);
         window.lindneo.tlingit.componentHasUpdated( component );
       },
       'selected': function (event, element) {
@@ -312,7 +347,14 @@ window.lindneo.nisga = (function(window, $, undefined){
     .imageComponent({
       'component': component,
       'update': function ( event, component ) {
-        updateRevisions();
+        if(revision_value==0){
+        var newObject = jQuery.extend(true, {}, component);
+        revision_array.revisions.push({component_id: component.id, component: newObject, revision_date: $.now(), even_type: 'UPDATE'});
+                revision_id++;
+
+      }
+      else revision_value=0;
+      console.log(revision_array);
         window.lindneo.tlingit.componentHasUpdated( component );
       },
       'selected': function (event, element) {
@@ -334,7 +376,14 @@ window.lindneo.nisga = (function(window, $, undefined){
     .videoComponent({
       'component': component,
       'update': function ( event, component ) {
-        updateRevisions();
+        if(revision_value==0){
+        var newObject = jQuery.extend(true, {}, component);
+        revision_array.revisions.push({component_id: component.id, component: newObject, revision_date: $.now(), even_type: 'UPDATE'});
+                revision_id++;
+
+      }
+      else revision_value=0;
+      console.log(revision_array);
         window.lindneo.tlingit.componentHasUpdated( component );
       },
       'selected': function (event, element) {
@@ -359,7 +408,14 @@ window.lindneo.nisga = (function(window, $, undefined){
     .soundComponent({
       'component': component,
       'update': function ( event, component ) {
-        updateRevisions();
+        if(revision_value==0){
+        var newObject = jQuery.extend(true, {}, component);
+        revision_array.revisions.push({component_id: component.id, component: newObject, revision_date: $.now(), even_type: 'UPDATE'});
+                revision_id++;
+
+      }
+      else revision_value=0;
+      console.log(revision_array);
         window.lindneo.tlingit.componentHasUpdated( component );
       },
       'selected': function (event, element) {
@@ -383,7 +439,14 @@ window.lindneo.nisga = (function(window, $, undefined){
     .galeryComponent({
       'component': component,
       'update': function ( event, component ) {
-        updateRevisions();
+        if(revision_value==0){
+        var newObject = jQuery.extend(true, {}, component);
+        revision_array.revisions.push({component_id: component.id, component: newObject, revision_date: $.now(), even_type: 'UPDATE'});
+                revision_id++;
+
+      }
+      else revision_value=0;
+      console.log(revision_array);
         window.lindneo.tlingit.componentHasUpdated( component );
       },
       'selected': function (event, element) {
@@ -405,7 +468,14 @@ window.lindneo.nisga = (function(window, $, undefined){
     .quizComponent({
       'component': component,
       'update': function( event, component ){
-        updateRevisions();
+        if(revision_value==0){
+        var newObject = jQuery.extend(true, {}, component);
+        revision_array.revisions.push({component_id: component.id, component: newObject, revision_date: $.now(), even_type: 'UPDATE'});
+                revision_id++;
+
+      }
+      else revision_value=0;
+      console.log(revision_array);
         window.lindneo.tlingit.componentHasUpdated( component );
       },
       'selected': function ( event, element_ ){
