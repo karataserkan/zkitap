@@ -157,7 +157,7 @@ window.lindneo.tlingit = (function(window, $, undefined){
 
   var PreviewOfPage = function (response) {
     
-    //console.log(response);
+    console.log(response);
     var components= responseFromJson(response).result.components;
     //console.log(components);
     var pagePreview = $('<canvas class="preview" height="90" width="120"> </canvas>');
