@@ -7,6 +7,7 @@ $( document ).ready(function () {
     $('#search').autocomplete({
       appendTo: "#page" ,
       minLength: 2, 
+      autoFocus: true,
       source: function( request, response ) {
               $.ajax({
                 url: "http://dev.lindneo.com/index.php?r=EditorActions/SearchOnBook",
@@ -31,10 +32,14 @@ $( document ).ready(function () {
                   );
                 }
               });
+              console.log(response);
             },
       select: function( event, ui ) {
+          console.log('event       ');
+          console.log(event);
           if (ui.item) {
-            $('#searchform').submit();
+              console.log(ui.item);
+            //$('#searchform').submit();
           }
 
           
