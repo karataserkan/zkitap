@@ -8,6 +8,7 @@ window.lindneo.toolbox = (function(window, $, undefined){
   var that=this;
   var selectedComponents=[];
   var add_value=0;
+  var is_copy=0;
   var  findHighestZIndexToSet = function (elem)
   {
     var elems = $(elem);
@@ -24,7 +25,7 @@ window.lindneo.toolbox = (function(window, $, undefined){
         
       }
     }
-    console.log(highest);
+    //console.log(highest);
     return parseInt(highest)+1;
   };
 
@@ -108,7 +109,8 @@ window.lindneo.toolbox = (function(window, $, undefined){
 
 
   var getClipboardItems = function  (){
-    return JSON.parse( localStorage.getItem('clipboard') );
+      //return this.selectedComponents;
+      return JSON.parse( localStorage.getItem('clipboard') );
   }; 
   var clearClipboard = function () {
     return localStorage.removeItem('clipboard');
@@ -147,8 +149,6 @@ window.lindneo.toolbox = (function(window, $, undefined){
 
               }
 
-
-
              if( $(this).hasClass('color') ){
 
                 $(this).change(function(){
@@ -170,10 +170,6 @@ window.lindneo.toolbox = (function(window, $, undefined){
                   //console.log($(this).attr('rel')+' is '+ newValue );
                   component.setProperty ( $(this).attr('rel') ,newValue  );
 
-            
-
-
-
                 });
                
              } else if($(this).hasClass('toolbox-btn')){
@@ -182,12 +178,6 @@ window.lindneo.toolbox = (function(window, $, undefined){
                 });
 
              }
-
-
-
-
-
-
         });
       });
 
@@ -202,20 +192,23 @@ window.lindneo.toolbox = (function(window, $, undefined){
   var addComponentToSelection = function (component){
       
       var newObject = jQuery.extend(true, {}, component);
-      var is_copy=0;
-        for(var i=0; i<selectedComponents.length;i++){
-            if(selectedComponents[i].options.component.id === newObject.options.component.id) {is_copy=1; console.log('niden...');}
-            console.log('selectedComponents..............');
-            console.log(selectedComponents[i]);
-            console.log('newObject..............');
-            console.log(newObject);
-        }
+        this.selectedComponents=$.grep(this.selectedComponents, function (n,i){
+            //console.log(n);
+        return (n.options.component.id !== newObject.options.component.id);  
+      });
+        /*for(var i=0; i<selectedComponents.length;i++){
+            if(selectedComponents[i].options.component.id == newObject.options.component.id) {is_copy=1; console.log('niden...');}
+            //console.log('selectedComponents..............');
+            //console.log(selectedComponents[i]);
+            //console.log('newObject..............');
+            //console.log(newObject);
+        }*/
 
-        if(is_copy == 0){
+        
             this.selectedComponents.push(newObject);
             this.selectionUpdated();
-        }
-      console.log(selectedComponents);
+        
+      //console.log(selectedComponents);
   };
 
   var removeComponentFromSelection = function (component){
@@ -223,8 +216,16 @@ window.lindneo.toolbox = (function(window, $, undefined){
         return (n !== component);  
       });
       this.selectionUpdated();
-      console.log('remove selections....')
-      console.log(selectedComponents);
+      //console.log('remove selections....')
+      //console.log(selectedComponents);
+
+  };
+  
+  var deleteComponentFromSelection = function (component){
+      this.selectedComponents=[];
+      this.selectionUpdated();
+      //console.log('delete selections....')
+      //console.log(selectedComponents);
 
   };
 
@@ -244,20 +245,22 @@ window.lindneo.toolbox = (function(window, $, undefined){
         var newClipboard=[];
 
         this.clearClipboard();
-
+        
         $.each(window.lindneo.toolbox.selectedComponents, function( key, component ) {
-
+          //console.log(component.options.component);
           if(cut==true) window.lindneo.nisga.deleteComponent( component.options.component );
           
           var newComponent =JSON.parse(JSON.stringify(component.options.component)); 
+          //console.log(newComponent);
           
           newComponent.id= '';
           newComponent.page_id= '';
           
           newClipboard.push(newComponent);
+          
          
         });
-        console.log(newClipboard);
+        //console.log(newClipboard);
         return this.setClipboardItems(newClipboard);
  
   };
@@ -272,7 +275,7 @@ window.lindneo.toolbox = (function(window, $, undefined){
         component.data.self.css.left = (parseInt(component.data.self.css.left)+25 ) +"px";
 
         newClipboard.push(component);
-
+        
         window.lindneo.tlingit.componentHasCreated( component );
       });
       return this.setClipboardItems(newClipboard);
@@ -337,6 +340,7 @@ window.lindneo.toolbox = (function(window, $, undefined){
     selectedComponents: selectedComponents,
     addComponentToSelection: addComponentToSelection,
     removeComponentFromSelection: removeComponentFromSelection,
+    deleteComponentFromSelection: deleteComponentFromSelection,
     undoSelectedItemsClipboard: undoSelectedItemsClipboard,
     redoSelectedItemsClipboard: redoSelectedItemsClipboard,
     load: load,

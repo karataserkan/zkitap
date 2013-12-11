@@ -7,6 +7,7 @@ $( document ).ready(function(){
     
 
   	$('.selected').trigger('unselect');
+        window.lindneo.toolbox.deleteComponentFromSelection();
 
     
   });
