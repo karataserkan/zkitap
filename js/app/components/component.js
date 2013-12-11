@@ -130,7 +130,7 @@ $(document).ready(function(){
         deleteButton.click(function(e){
           e.preventDefault();
 
-          window.lindneo.nisga.deleteComponent( that.options.component );
+          window.lindneo.nisga.ComponentDelete( that.options.component );
 
         }).appendTo(event.currentTarget);
 

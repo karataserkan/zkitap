@@ -84,8 +84,10 @@ window.lindneo.nisga = (function(window, $, undefined){
         //console.log(revision_id);
         if(revision_id!=0){ //console.log(revision_array[revision_id-1].revisions[0].component);
             revision_id=revision_id-1;
-            //console.log(revision_id);
-            //console.log(revision_array.revisions[revision_id].even_type);
+            console.log(revision_id);
+            console.log(revision_array.revisions.length);
+            console.log(revision_array.revisions[revision_id].even_type);
+            console.log(revision_array.revisions);
             revision_value=1;
            if(revision_array.revisions[revision_id].even_type=='CREATE'){
                 if(revision_array.revisions[revision_id].component.type=='image'){
@@ -114,13 +116,12 @@ window.lindneo.nisga = (function(window, $, undefined){
                 
             }
             if(revision_array.revisions[revision_id].even_type=='DELETE'){
+                //window.lindneo.tlingit.componentHasCreated(revision_array.revisions[revision_id].component);
                 createComponent(revision_array.revisions[revision_id].component);
                 //console.log(revision_array.revisions[revision_id].even_type);
                 //console.log(revision_array);
             }
         }
-        console.log('revision_id : '+revision_id);
-        console.log('revision_array length : '+revision_array.length);
     }
     
     var redoComponent = function() {
@@ -183,6 +184,17 @@ window.lindneo.nisga = (function(window, $, undefined){
     //  console.log(componentId);
     $('[id="'+componentId+'"]').parent().not('#current_page').remove();
     $('[id="'+componentId+'"]').remove();
+  };
+  
+  var ComponentDelete = function ( component ) {
+    if(revision_value==0){
+        revision_array.revisions.push({component_id: component.id, component: component, revision_date: $.now(), even_type: 'DELETE'});
+        revision_id++;
+      }
+      else revision_value=0;
+    //  console.log(componentId);
+    $('[id="'+component.id+'"]').parent().not('#current_page').remove();
+    $('[id="'+component.id+'"]').remove();
   };
 
   var deleteComponent = function ( component ) {
@@ -272,6 +284,7 @@ window.lindneo.nisga = (function(window, $, undefined){
 
       }
       else revision_value=0;
+      console.log(newObject);
       //console.log(revision_array);
         window.lindneo.tlingit.componentHasUpdated( component );
       },
@@ -526,6 +539,7 @@ window.lindneo.nisga = (function(window, $, undefined){
     galeryComponentBuilder: galeryComponentBuilder,
     createComponent: createComponent,
     deleteComponent: deleteComponent,
+    ComponentDelete: ComponentDelete,
     destroyChapter: destroyChapter,
     destroyComponent: destroyComponent,
     undoComponent: undoComponent,
