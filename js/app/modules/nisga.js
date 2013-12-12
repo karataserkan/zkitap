@@ -12,6 +12,7 @@ window.lindneo.nisga = (function(window, $, undefined){
   var revision_array = {
                 revisions: []
             };
+  var array_revisions=[];
   var revision_id=0;
   var revision_value = 0;
 
@@ -105,9 +106,19 @@ window.lindneo.nisga = (function(window, $, undefined){
             if(revision_array.revisions[revision_id].even_type=='UPDATE'){
                 //console.log(revision_array[revision_id-1].revisions[0].component);
                 //console.log(revision_array[revision_id-2].revisions[0].component);
-                destroyComponent(revision_array.revisions[revision_id-1].component.id);
-                createComponent(revision_array.revisions[revision_id-1].component);
-                window.lindneo.tlingit.componentHasUpdated(revision_array.revisions[revision_id-1].component);
+                var array_where = [];
+                $.each(revision_array.revisions, function(index,value){ 
+                    if (value.component_id == revision_array.revisions[revision_id].component.id && index<=revision_id)
+                        array_where.push(value);
+                }); 
+
+                //var array_where = $.grep(revision_array.revisions, function(e){ return (e.component.id == revision_array.revisions[revision_id].component.id && e.indexOf('J')); }); 
+                array_where.pop();
+                console.log(array_where);
+                destroyComponent(array_where[array_where.length-1].component.id);
+                createComponent(array_where[array_where.length-1].component);
+                window.lindneo.tlingit.componentHasUpdated(array_where[array_where.length-1].component);
+                
                 
                 //revision_id--;
                 //console.log(revision_array.revisions[revision_id].even_type);
