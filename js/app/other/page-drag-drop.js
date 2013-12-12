@@ -6,7 +6,7 @@ $( document ).ready(function () {
 
     $('#search').autocomplete({
       appendTo: "#page" ,
-      minLength: 2, 
+      minLength: 1, 
       autoFocus: true,
       source: function( request, response ) {
               $.ajax({
@@ -32,13 +32,14 @@ $( document ).ready(function () {
                   );
                 }
               });
-              console.log(response);
+              //console.log(response);
             },
       select: function( event, ui ) {
-          console.log('event       ');
+          //console.log('event       ');
           console.log(event);
           if (ui.item) {
-              console.log(ui.item);
+              //console.log(ui.item);
+              //window.location.href=event.currentTarget.baseURI;
             //$('#searchform').submit();
           }
 
@@ -49,9 +50,6 @@ $( document ).ready(function () {
             var
                 acData = $(this).data('uiAutocomplete');
     
-              
-
-                
             acData
                 .menu
                 .element
@@ -63,19 +61,27 @@ $( document ).ready(function () {
 
                     var result = str.match(patt1);
                     var styledTerm = termTemplate.replace('%s', result);
-                    console.log(result);
-                    console.log(str);
-                    console.log(acData.term);
+                    //console.log(result);
+                    //console.log(str);
+                    //console.log(acData.term);
+                    console.log(me.html( me.text().replace(result, styledTerm) ));
                     me.html( me.text().replace(result, styledTerm) );
                 });
         }
 
-
+        
 
       });
 
-
-
+    $('#search').bind("keyup keypress", function(e) {
+        var code = e.keyCode || e.which; 
+        if (code  == 13) {               
+          e.preventDefault();
+          $('#searchform').submit();
+        }
+      });
+    
+    
     $( ".component" ).draggable({
       //helper: "clone",
       revert: true, 
