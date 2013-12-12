@@ -29,7 +29,7 @@ if($page==null)
 				$page=Page::model()->findByPk($highlight_component->page_id);
 			}else {
 				$chapter=Chapter::model()->find('book_id=:book_id', array(':book_id' => $model->book_id ));
-				$page=Page::model()->find('chapter_id=:chapter_id', array(':chapter_id' => $chapter->chapter_id ));
+				$page=Page::model()->find(  array('condition' => 'chapter_id=:chapter_id', 'params' =>  array(':chapter_id' => $chapter->chapter_id ) , 'order'=>  '`order` asc ,  created asc') );
 			}
  
 		} 

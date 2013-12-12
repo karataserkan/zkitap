@@ -291,7 +291,7 @@ class EditorActionsController extends Controller
                 //exit();
 
 		if($component_attribs->data->img->src  ) {
-			$component_attribs->data->img->src = functions::compressBase64Image($component_attribs->data->img->src);
+			$component_attribs->data->img->src =$component_attribs->data->img->src;
 		}
 
 		if($component_attribs->data->imgs)
