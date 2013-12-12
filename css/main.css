@@ -12,6 +12,7 @@ body
 i
 {
 font-style: normal;
+font-weight:normal;
 }
 
 a
@@ -23,6 +24,10 @@ text-decoration:none;
 -ms-transition: all 0.1s linear;
 -o-transition: all 0.1s linear;
 transition: all 0.1s linear;
+}
+a  i
+{
+margin-right:10px;
 }
 
 ul {

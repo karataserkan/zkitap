@@ -81,7 +81,7 @@ $this->pageTitle=Yii::app()->name;
 	    	?>
 	    	<div class='workspace'>
 	    		<h1 class="float-left white"><?php echo $workspace->workspace_name; ?></h1>
-	    		<a href='?r=book/create' class="btn white btn radius " style="margin-left:20px;">Yeni Kitap</a>
+	    		<a href='?r=book/create' class="btn white radius " style="margin-left:20px;">Yeni Kitap</a>
 				
 					
 				
@@ -111,7 +111,7 @@ $this->pageTitle=Yii::app()->name;
 							<div class="book-list-box-text-container">
 								<?php 
 								if ($userType==='owner') { ?>
-									<a href="#" popup="<?php echo $book->book_id; ?>" class="btn white radius float-right book-editors-settings"id="boook-editors-settings" ><i class="icon-settings" style="font-weight:normal; margin-right:5px;"></i>Editörler</a>	
+									<a href="#" popup="<?php echo $book->book_id; ?>" class="btn white radius float-right book-editors-settings"id="boook-editors-settings" ><i class="icon-users"></i>Editörler</a>	
 								<?php }
 								?>
 								</div>
@@ -133,99 +133,13 @@ $this->pageTitle=Yii::app()->name;
 										-->
 										<?php //echo $book->book_id; ?>
 										
-										<!-- editor options-->
-										<center id="popup-close-area" class="book-editors-options-box" popup="pop-<?php echo $book->book_id; ?>" style="position:relative">
-										<div id="close-div" style="background-color:#123456; width:100% height:#123456; position:fixed;"> </div>
-										<div class="book-editors-options-box-container">
-										<h2>Kitap Editörleri<a popup="close-<?php echo $book->book_id; ?>" id="close-option-box"class="icon-close white size-15 delete-icon float-right" ></a></h2>
-										<div class="editor-list">
-										<?php 
-											$users = bookUsers($book->book_id);
-
-											foreach ($users as $key => $user): 
-												if ($user['type']=='owner' || $user['type']=='editor'){?>
-												<div id="editor-list-istems" class="editor-list-item">
-													<span id="editor-name" class="editor-name">
-													<?php echo $user['name']." ".$user['surname']; ?>
-													</span>
-													
-														<?php 
-															echo CHtml::link(CHtml::encode(''), array('site/index'),
-															  array(
-															    'submit'=>array('site/index', 'bookId'=>$book->book_id, 'user'=>$user['id'], 'del'=>'true'),
-															    'params' => array('bookId'=>$book->book_id, 'user'=>$user['id'], 'del'=>'true'),
-															    'class' => 'icon-close size-15 delete-icon'
-															  )
-															);
-															?>
-
-													
-													<span id="editor-tag" style="color:#477738; float:right;">
-														<?php 
-															if ($user['type']=='owner') {
-																echo "sahibi";
-															}
-															elseif ($user['type']=='editor') {
-																echo "editör";
-															}
-														?>
-													</span>
-												</div>	
-										<?php } endforeach; ?>
-										</div>
-
-										<div style="background-color:#fff; height: 60px; padding:5px; margin:10px; color:#333; text-align:left;">
-											<?php
-												//owner ya da editor eklemek için siteController 3 tane değerin post edilmesini bekliyor
-												//user: eklenecek olan elemanın mail adresi
-												//book: kitabın id'si
-												//type: owner | editor | user
-
-											?>
-											<span class="editor-name" >Kullanıcı Ekle:</span>
-											<br style="clear:both; margin-bottom:20px;">
-											<form id="a<?php echo $book->book_id; ?>" method="post">
-											<input id="book" value="<?php echo $book->book_id; ?>" style="display:none">
-											<select id="user" class="book-list-textbox radius grey-9 float-left"  style=" width: 280px;">
-												<?php
-													$workspaceUsers = workspaceUsers($workspace->workspace_id);
-													
-													foreach ($workspaceUsers as $key => $workspaceUser) {
-														echo '<option value="'.$workspaceUser['userid'].'">'.$workspaceUser['name'].' '.$workspaceUser['surname'].'</option>';
-													}
-												 ?>
-											</select>
-											 <select id="type" class="book-list-textbox radius grey-9 float-left"  style=" width: 70px;" >
-											  <option value="editor">Editör</option>
-											  <option value="owner">Sahibi</option>
-											</select>
-											</form>
-											<a href="#" onclick="sendRight(a<?php echo $book->book_id; ?>)" class="btn white radius float-right" style="margin-left:20px; width:50px; text-align:center;">
-												Ekle
-											</a>
-										</div>
-
-										</div>
-										</center>
-
-										
-										<script>
-										$("[popup='<?php echo $book->book_id; ?>']").click(function(){
-											$("[popup='pop-<?php echo $book->book_id; ?>']").show("fast").draggable({containment: "#allWorkspaces"});
-										});
-										$("[popup='close-<?php echo $book->book_id; ?>']").click(function(){
-											$("[popup='pop-<?php echo $book->book_id; ?>']").hide("fast");
-										});
-										</script>
-										<!-- editor options-->
-
-
 										<?php 
 										echo CHtml::link(CHtml::encode(''), array('book/delete', 'bookId'=>$book->book_id),
 										  array(
 										    'submit'=>array('book/delete', 'bookId'=>$book->book_id),
-										    'class' => 'delete','confirm'=>'kitap silinecek. Onaylıyor musun?',
+										    'class' => 'delete','confirm'=>'Kitap silinecek. Onaylıyor musun?',
 										    'class' => 'btn red radius white icon-delete'
+											
 										  )
 										);
 										?>
@@ -240,7 +154,94 @@ $this->pageTitle=Yii::app()->name;
 									}
 								?>
 
-								<a href="<?php echo Yii::app()->createUrl('EditorActions/ExportBook', array('bookId'=>$book->book_id) ); ?>" class="btn bck-light-green white radius" ><i class="icon-download"> İndir</i></a>
+								<a href="<?php echo Yii::app()->createUrl('EditorActions/ExportBook', array('bookId'=>$book->book_id) ); ?>" class="btn bck-light-green white radius" ><i class="icon-download"></i>İndir</a>
+										<!-- editor options-->
+										<center id="popup-close-area" popup="pop-<?php echo $book->book_id; ?>" style="display:none; position:relative">
+											<div id="close-div" style="background-color:#123456; width:100% height:#123456; position:fixed;"> </div>
+											<div class="book-editors-options-box-container">
+											<h2>Kitap Editörleri<a popup="close-<?php echo $book->book_id; ?>" id="close-option-box"class="icon-close white size-15 delete-icon float-right" ></a></h2>
+											<div class="editor-list">
+											<?php 
+												$users = bookUsers($book->book_id);
+
+												foreach ($users as $key => $user): 
+													if ($user['type']=='owner' || $user['type']=='editor'){?>
+													<div id="editor-list-istems" class="editor-list-item">
+														<span id="editor-name" class="editor-name">
+														<?php echo $user['name']." ".$user['surname']; ?>
+														</span>
+														
+															<?php 
+																echo CHtml::link(CHtml::encode(''), array('site/index'),
+																  array(
+																	'submit'=>array('site/index', 'bookId'=>$book->book_id, 'user'=>$user['id'], 'del'=>'true'),
+																	'params' => array('bookId'=>$book->book_id, 'user'=>$user['id'], 'del'=>'true'),
+																	'class' => 'icon-close size-15 delete-icon'
+																  )
+																);
+																?>
+
+														
+														<span id="editor-tag" style="color:#477738; float:right;">
+															<?php 
+																if ($user['type']=='owner') {
+																	echo "sahibi";
+																}
+																elseif ($user['type']=='editor') {
+																	echo "editör";
+																}
+															?>
+														</span>
+													</div>	
+											<?php } endforeach; ?>
+											</div>
+
+											<div style="background-color:#fff; height: 60px; padding:5px; margin:10px; color:#333; text-align:left;">
+												<?php
+													//owner ya da editor eklemek için siteController 3 tane değerin post edilmesini bekliyor
+													//user: eklenecek olan elemanın mail adresi
+													//book: kitabın id'si
+													//type: owner | editor | user
+
+												?>
+												<span class="editor-name" >Kullanıcı Ekle:</span>
+												<br style="clear:both; margin-bottom:20px;">
+												<form id="a<?php echo $book->book_id; ?>" method="post">
+												<input id="book" value="<?php echo $book->book_id; ?>" style="display:none">
+												<select id="user" class="book-list-textbox radius grey-9 float-left"  style=" width: 280px;">
+													<?php
+														$workspaceUsers = workspaceUsers($workspace->workspace_id);
+														
+														foreach ($workspaceUsers as $key => $workspaceUser) {
+															echo '<option value="'.$workspaceUser['userid'].'">'.$workspaceUser['name'].' '.$workspaceUser['surname'].'</option>';
+														}
+													 ?>
+												</select>
+												 <select id="type" class="book-list-textbox radius grey-9 float-left"  style=" width: 70px;" >
+												  <option value="editor">Editör</option>
+												  <option value="owner">Sahibi</option>
+												</select>
+												</form>
+												<a href="#" onclick="sendRight(a<?php echo $book->book_id; ?>)" class="btn white radius float-right" style="margin-left:20px; width:50px; text-align:center;">
+													Ekle
+												</a>
+											</div>
+
+											</div>
+										</center>
+
+										
+										<script>
+										$("[popup='<?php echo $book->book_id; ?>']").click(function(){
+											$("[popup='pop-<?php echo $book->book_id; ?>']").show("fast").draggable({containment: "#allWorkspaces"});
+										});
+										$("[popup='close-<?php echo $book->book_id; ?>']").click(function(){
+											$("[popup='pop-<?php echo $book->book_id; ?>']").hide("fast");
+										});
+										</script>
+										<!-- editor options-->
+
+
 							</div>
 						</div>
 
