@@ -27,3 +27,8 @@ blockquote {margin:1.5em;padding:1em;font-style:italic;font-size:.9em;}
 .hide {display:none;}
 a:link, a:visited {background:transparent;font-weight:700;text-decoration:underline;}
 a:link:after, a:visited:after {content:" (" attr(href) ")";font-size:90%;}
+
+#current_page  { page-break-after: always ; }
+.styler_box  , .styler_box  * {display:none;}
+#components , #components * {display:none;}
+#chapters_pages_view , #chapters_pages_view * {display:none;}
