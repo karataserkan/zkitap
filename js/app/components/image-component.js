@@ -53,7 +53,7 @@ $(document).ready(function(){
         component.data.img.src = imageBinary;
 
         window.lindneo.tlingit.componentHasCreated(component);
-        window.lindneo.nisga.deleteComponent(that.options.component)
+        window.lindneo.nisga.deleteComponent(that.options.component);
       };
 
       reader.readAsDataURL( e.dataTransfer.files[0] );

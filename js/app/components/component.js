@@ -116,7 +116,7 @@ $(document).ready(function(){
        start: function( event, ui ) {
         guides = $.map( $( "#current_page .ui-draggable" ).not( this ), computeGuidesForElement );
         //console.log(guides);
-
+        
         innerOffsetX = event.originalEvent.offsetX;
         innerOffsetY = event.originalEvent.offsetY;
         }, 
@@ -130,7 +130,7 @@ $(document).ready(function(){
         deleteButton.click(function(e){
           e.preventDefault();
 
-          window.lindneo.nisga.deleteComponent( that.options.component );
+          window.lindneo.nisga.ComponentDelete( that.options.component );
 
         }).appendTo(event.currentTarget);
 
