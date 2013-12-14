@@ -78,7 +78,6 @@ select {
 	text-align:left;
 	padding: 6px 5px 6px 5px;
 	font-size: 14px;
-	
 	color: #fff;
 	display:inline-block;
 	vertical-align: middle;
@@ -91,12 +90,14 @@ select {
 	background-color: #4eb6a8;
 	box-shadow: 0px 3px 0px 0px #29a290;
 }
+.btn i{
+	margin: 0px auto;
+	font-weight:normal;
+}
 .btn:active {
 	background-color: #29a290;
 }
-.btn.img{
-padding: 10px 5px 5px 0px;
-}
+
 .btn.red{
 background-color: #cf5827;
 	-webkit-box-shadow: 0px 3px 0px 0px #95301f;
@@ -170,14 +171,7 @@ background-color:#f7f7f7;
 -webkit-box-shadow: inset 0px 0px 3px 0px rgba(100, 100, 100, 100);
  box-shadow: inset 0px 0px 3px 0px rgba(100, 100, 100, 100);
 }
-.icon-undo
-{
-margin-right: 20px;
-}
-.icon-redo
-{
-margin-right: 20px;
-}
+
 /* end of toolbox items */
 
 
@@ -1357,3 +1351,11 @@ float: right;
 .dropdown .delete A { background-image: url(icons/cross-script.png); }
 
 <!----- styler box more button için  --------------->
+
+
+
+
+
+
+
+

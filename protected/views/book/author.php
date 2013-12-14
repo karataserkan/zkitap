@@ -29,7 +29,7 @@ if($page==null)
 				$page=Page::model()->findByPk($highlight_component->page_id);
 			}else {
 				$chapter=Chapter::model()->find('book_id=:book_id', array(':book_id' => $model->book_id ));
-				$page=Page::model()->find('chapter_id=:chapter_id', array(':chapter_id' => $chapter->chapter_id ));
+				$page=Page::model()->find(  array('condition' => 'chapter_id=:chapter_id', 'params' =>  array(':chapter_id' => $chapter->chapter_id ) , 'order'=>  '`order` asc ,  created asc') );
 			}
  
 		} 
@@ -77,10 +77,10 @@ $current_user=User::model()->findByPk(Yii::app()->user->id);
 						<option value='rehber+cetvel'>Rehber & Cetvel</option>
 						
 					</select>
-					<script type="text/javascript">
-
-					</script>
-				
+					
+					
+					
+					
 					
 					<form action='' id='searchform' style="float:left;">
 
@@ -103,7 +103,7 @@ $current_user=User::model()->findByPk(Yii::app()->user->id);
 					
 					
 					
-	<a href="<?php echo $this->createUrl("EditorActions/ExportBook", array('bookId' => $model->book_id ));?>" class="btn bck-light-green white radius" id="header-buttons"><i class="icon-publish"> Yayınla</i></a>
+	<a href="<?php echo $this->createUrl("EditorActions/ExportBook", array('bookId' => $model->book_id ));?>" class="btn white radius" id="header-buttons"><i class="icon-publish"></i>Yayınla</a>
 <!--	<a href="#" class="btn bck-light-green white radius" id="header-buttons"><i class="icon-save"> Kaydet</i></a>
  -->
 	<div id='book_title'><?php echo $model->title; ?></div>
@@ -115,11 +115,12 @@ $current_user=User::model()->findByPk(Yii::app()->user->id);
 			<!-- <ul id="text-styles" ></ul> -->
 			<div class="generic-options float-left"  style="display:inline-block;">
 
-				<a id="undo" class="icon-undo dark-blue size-20"></a>
-				<a id="redo" class="icon-redo grey-8 size-20"></a>
+				<a id="undo" class="toolbox-items"><i class="icon-undo dark-blue"></i></a>
+				<a id="redo" class="toolbox-items"><i class="icon-redo grey-8"></i></a>
+			<div class="vertical-line responsive_2"></div>
 			</div>
 			
-			<div class="vertical-line responsive_2"></div>
+			
 			
 				
 			
