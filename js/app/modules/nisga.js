@@ -92,11 +92,11 @@ window.lindneo.nisga = (function(window, $, undefined){
             revision_value=1;
            if(revision_array.revisions[revision_id].even_type=='CREATE'){
                 if(revision_array.revisions[revision_id].component.type=='image'){
-                    deleteComponent(revision_array.revisions[revision_id].component);
+                    destroyComponent(revision_array.revisions[revision_id].component.id);
                     window.lindneo.tlingit.componentHasCreated(revision_array.revisions[revision_id-1].component)
                 }
                 else{
-                deleteComponent(revision_array.revisions[revision_id].component);
+                destroyComponent(revision_array.revisions[revision_id].component.id);
                 }
                 //console.log(revision_array.revisions[revision_id].even_type);
                 //console.log(revision_array);
@@ -148,11 +148,11 @@ window.lindneo.nisga = (function(window, $, undefined){
             revision_value=1;
            if(revision_array.revisions[revision_id].even_type=='CREATE'){
                if(revision_array.revisions[revision_id].component.type=='image'){
-                    deleteComponent(revision_array.revisions[revision_id].component);
+                    destroyComponent(revision_array.revisions[revision_id].component.id);
                     window.lindneo.tlingit.componentHasCreated(revision_array.revisions[revision_id+1].component);
                 }
                 else{
-                    window.lindneo.tlingit.componentHasCreated(revision_array.revisions[revision_id].component);
+                    createComponent(revision_array.revisions[revision_id].component);
                 }
                 //console.log(revision_array.revisions[revision_id].even_type);
                 //console.log(revision_array);
@@ -171,7 +171,7 @@ window.lindneo.nisga = (function(window, $, undefined){
                 //console.log(revision_array);
             }
             if(revision_array.revisions[revision_id].even_type=='DELETE'){
-                deleteComponent(revision_array.revisions[revision_id].component);
+                destroyComponent(revision_array.revisions[revision_id].component.id);
                 //console.log(revision_array.revisions[revision_id].even_type);
                 //console.log(revision_array);
             }

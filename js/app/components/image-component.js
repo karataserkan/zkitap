@@ -91,6 +91,10 @@ var createImageComponent = function ( event, ui ) {
         <div style='clear:both'></div> \
         <div class='add-image-drag-area' id='dummy-dropzone'> </div> \
       </div> \
+      <div>\
+        <input type='text' name='width' id='width' placeholder='Genişlik' value=''>\
+        <input type='text' name='height' id='height' placeholder='Yükseklik' value=''>\
+      </div> \
     </div>").appendTo('body').draggable();
 
     $('#image-add-dummy-close-button').click(function(){
@@ -122,7 +126,12 @@ var createImageComponent = function ( event, ui ) {
     }, false);
 
     el.addEventListener("drop", function(e){
-      
+      var image_width = '200px';
+      var image_height = '150px';
+      if($('#width').val() != '')
+        image_width = $('#width').val()+'px';
+      if($('#height').val() != '')
+        image_height = $('#height').val();
       e.stopPropagation();
       e.preventDefault();
 
@@ -155,8 +164,8 @@ var createImageComponent = function ( event, ui ) {
                 'position':'absolute',
                 'top': (ui.offset.top-$(event.target).offset().top ) + 'px',
                 'left':  ( ui.offset.left-$(event.target).offset().left ) + 'px',
-                'width': '100px',
-                'height': '20px',
+                'width': image_width,
+                'height': image_height,
                 'background-color': 'transparent',
                 'overflow': 'visible',
                 'z-index': '990'
