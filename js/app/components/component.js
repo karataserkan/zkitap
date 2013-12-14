@@ -129,8 +129,7 @@ $(document).ready(function(){
       
         deleteButton.click(function(e){
           e.preventDefault();
-          
-          //undo yaparken nesne tamamen silinince yeni id ile oluşuyor onun için diğer foksiyon yazıldı ancak, bu foksiyonda destroy ettiğinde nesne gerçek anlamıyla sayfadan silinmiyor.
+        
           //window.lindneo.nisga.ComponentDelete( that.options.component );
           window.lindneo.nisga.deleteComponent( that.options.component );
 
