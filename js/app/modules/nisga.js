@@ -22,6 +22,9 @@ window.lindneo.nisga = (function(window, $, undefined){
       <div class="chat_sent_message_text">'+line+'</div> \
     </div>');
     $('.chat_sent_messages').append(lineHtml);
+    $(".chat_sent_messages").animate({ scrollTop: $('.chat_sent_messages')[0].scrollHeight}, 1000);
+    $(".chat_window" ).show();
+
   }
 
 

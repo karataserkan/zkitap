@@ -240,13 +240,14 @@ $( document ).ready(function () {
           if (evt.shiftKey) {
               //pasteIntoInput(this, "\n");
           } else {
-          evt.preventDefault();
-          var text= $(evt.target);
-          console.log(text);
-
-
-          window.lindneo.tsimshian.chatSendMessage(text.val());
-          text.val("");
+            evt.preventDefault();
+            var text= $(evt.target);
+            console.log(text);
+            var line = text.val();
+            if (line != '' ) {
+            window.lindneo.tsimshian.chatSendMessage(line);
+            text.val("");
+            }
           }
       }
 
