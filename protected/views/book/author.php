@@ -707,11 +707,18 @@ Grafik Ekle
 			
 			</div>	
 		
-		<a class="chat_button"><i class="icon-chat-inv"></i>Yazışma</a>
+	
+
+	
+	
+		<ul class="component_holder" style="position:fixed; bottom:50px;">
+		<li ctype="comment" class="component icon-add ui-draggable" >&nbsp;&nbsp;&nbsp;&nbsp;Yorum Ekle</li>
+		</ul>
+<!-- chat  -->
+	<a class="chat_button"><i class="icon-chat-inv"></i>Yazışma</a>
 		<div class="chat_window">
 		
-		<div class="chat_inline_holder">
-
+	<div class="chat_inline_holder">
 
 <div class="chat_sent_messages">
 
@@ -766,15 +773,21 @@ Grafik Ekle
 		
 		</div>
 		<!-- chat_window END -->
-		
+
+<!-- chat  -->
 		
 		<script>
 		$( ".chat_button" ).click(function() {
 		$( ".chat_window" ).toggle();
 		});
 		</script>
+		
+		
+		
 	</div>
 
+	
+	
 <div id='chapters_pages_view' class="chapter-view" >
 
 
@@ -952,6 +965,35 @@ $( "#add-button" ).hover(
 		<div id='guide'> 
 		</div> <!-- guide -->
 <div id='editor_view_pane' style=' padding:5px 130px;margin: 10px 5px 5px 5px;float:left;'>
+
+
+
+<!-- comment_card -->
+<div class="comment_card">
+<div class="comment_card_user_name orange_msg_box">
+Erkan Öğümsöğütlü:
+<a><i class="icon-down-arrow comment-box-arrow size-10"></i></a>
+<a><i class='icon-delete comment-box-delete size-15'></i></a>
+
+</div>
+
+<!-- comment_card_user_name END -->
+
+<div contenteditable="true" data-ph="Notunuzu buraya giriniz." class="comment_editable_area"></div>
+
+</div>
+<!-- comment_card END -->
+
+<script>
+<!-- comment_card script -->
+$(".comment-box-arrow").click(function(){
+$(".comment_editable_area").toggle();
+$(".comment_card").toggleClass("opacity-level");
+$(this).toggleClass("icon-up-down");
+});
+
+$('.comment_card').draggable({handle: '.comment_card_user_name'});
+</script>
 
 
 					<div id='current_page' page_id='<?php echo $page->page_id ;?>' style='background:white;border:thin solid black;zoom:1; height:768px;width:1024px;position:relative'  >
