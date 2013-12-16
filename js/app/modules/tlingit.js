@@ -15,7 +15,7 @@ window.lindneo.tlingit = (function(window, $, undefined){
     //co-workers have created a new component, fuck them all.
 
     //console.log( component );
-
+    
     createComponent(component);
 
   };
