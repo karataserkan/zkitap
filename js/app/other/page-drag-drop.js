@@ -1,7 +1,7 @@
 $( document ).ready(function () {
 
   var termTemplate = "<span class='ui-autocomplete-term' style='display:inline-block'>%s</span>";
-        
+	
   function first_time(){
 
     $('#search').autocomplete({
@@ -90,11 +90,11 @@ $( document ).ready(function () {
     });
 
 
-                $('#current_page').droppable({
+		$('#current_page').droppable({
       tolerance: 'fit',
       drop: function (event, ui) {
-                          //create a component object from dom object
-                          //pass it to tlingit        
+			  //create a component object from dom object
+			  //pass it to tlingit        
 
         /*
         //Dont add if on to other component
@@ -151,7 +151,7 @@ $( document ).ready(function () {
             break; 
         }
 
-                   }
+	 	  }
       ,
       accept:'.component'
     
@@ -225,15 +225,15 @@ $( document ).ready(function () {
       }  
     });
 
-                 $('#zoom-pane').slider({
-            value:100,
-            min: 25,
-            max: 500,
-            step: 25,
-            slide: function( event, ui ) {
-              $('#author_pane').css({'zoom': (ui.value / 100) });
-            }
-          }); 
+	 	$('#zoom-pane').slider({
+	    value:100,
+	    min: 25,
+	    max: 500,
+	    step: 25,
+	    slide: function( event, ui ) {
+	      $('#author_pane').css({'zoom': (ui.value / 100) });
+	    }
+	  }); 
 
     function handleEnter(evt) {
       if (evt.keyCode == 13 ) {
@@ -286,7 +286,7 @@ $( document ).ready(function () {
 
 
 
-        }
+	}
 
 
   $('.ruler, .vruler').hide(); 
