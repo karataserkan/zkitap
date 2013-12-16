@@ -46,6 +46,7 @@ list-style:none;
 	margin: 0;
 	padding: 0;
 	width: 100%;
+	display: inline-block;
 	position: fixed;
 	height: 36px;
 	z-index:999999;
@@ -355,6 +356,14 @@ div.search-form
 	background: #80CFFF;
 }
 
-
-
+#page-draggable-handle
+{
+	position: absolute;
+	width: 10000px;
+	height: 10000px;
+	top: -5000px;
+	left: -5000px;
+	text-indent: -99999px;
+	overflow-x: auto;
+}
 
