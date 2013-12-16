@@ -91,7 +91,7 @@ select {
 	box-shadow: 0px 3px 0px 0px #29a290;
 }
 .btn i{
-	margin: 0px auto;
+	margin: 0px 10px 0px 5px;
 	font-weight:normal;
 }
 .btn:active {

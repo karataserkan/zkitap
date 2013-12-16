@@ -63,7 +63,7 @@
 		<div id='login_area' style='float:right;'>
 			<?php
 			if(Yii::app()->user->isGuest){
-				echo CHtml::link('Giriş<a>deneme</a>',array('site/login'));
+				echo CHtml::link('<a>Giriş yap</a>',array('site/login'));
 			}else{
 				echo CHtml::link('Çıkış<a>deneme</a> ('.Yii::app()->user->name.')',array('site/logout'));
 
