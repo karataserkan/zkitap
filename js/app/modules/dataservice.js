@@ -18,7 +18,13 @@ window.lindneo.dataservice = (function( $ ) {
         $('#save_status').addClass('saving');
       },
       'success': successCallback,
-      'error': failCallback,
+      //'error': failCallback,
+      error: function () {
+        console.log('ERROR');
+        $('#save_status').text('HATA VAR...');
+        $('#save_status').addClass('error');
+        $('#save_status').removeClass('saving');
+        },
       complete: function(){
         // Handle the complete event
         console.log('bitti');

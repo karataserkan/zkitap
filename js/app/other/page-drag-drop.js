@@ -64,7 +64,7 @@ $( document ).ready(function () {
                     //console.log(result);
                     //console.log(str);
                     //console.log(acData.term);
-                    //console.log(me.html( me.text().replace(result, styledTerm) ));
+                    console.log(me.html( me.text().replace(result, styledTerm) ));
                     me.html( me.text().replace(result, styledTerm) );
                 });
         }
