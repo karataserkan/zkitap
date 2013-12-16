@@ -272,6 +272,12 @@ $( document ).ready(function () {
     $(".chat_text_box_holder textarea").keydown(handleEnter).keypress(handleEnter);
 
     var chats = JSON.parse(localStorage.getItem("chat_"+window.lindneo.currentBookId ));
+    
+    if (chats.length > 20 ){
+      chats= chats.slice( chats.length - 20 );
+      localStorage.setItem("chat_"+window.lindneo.currentBookId , JSON.stringify(chats));
+    }
+
     $.each (chats, function (i,val) {
       window.lindneo.nisga.ChatNewLine( val.line,val.user );
     });
