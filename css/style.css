@@ -91,7 +91,7 @@ select {
 	box-shadow: 0px 3px 0px 0px #29a290;
 }
 .btn i{
-	margin: 0px auto;
+	margin: 0px 10px 0px 5px;
 	font-weight:normal;
 }
 .btn:active {
@@ -550,6 +550,136 @@ margin: 0 0 10px;
 
 
 
+
+/* CHAT COMPONENT ***********************************************************************************************/
+
+
+.chat_button {
+	width:100px;
+	padding:10px;
+	position:fixed;
+	left:0;
+	bottom:0;
+	background-color:#084F5F;
+	color:white;
+	text-align:center;
+	font-weight:bold;
+}
+.chat_window{
+position:fixed; 
+display:none; 
+left:120px;
+bottom:0px;
+padding-top:5px;
+background-color:#084F5F;
+width:300px;
+height:auto;
+min-height:100px;
+max-height:600px;
+float:left;
+-webkit-box-shadow: 4px -4px 15px 0px rgba(1, 1, 1, 0.2);
+box-shadow: 4px -4px 15px 0px rgba(1, 1, 1, 0.2);
+}
+
+
+
+.chat_inline_holder {
+	width:290px;
+	margin-left:auto;
+	margin-right:auto;	
+}
+
+.chat_text_box_holder {
+	bottom:5px;
+	position:relative;
+}
+
+
+.chat_text_box_holder textarea{
+	width:230px;
+	height:50px;
+	margin-left:auto;
+	margin-right:auto;
+	border:0;
+	resize: none;
+	float:left;
+}
+
+.chat_text_box_holder input[type='submit'] {
+	float:left;
+	width:56px;
+	height:54px;
+	border:0;
+	background-image:url(../images/editor_chat_send.png);
+	background-repeat:no-repeat;
+	background-size:30px;
+	background-position:15px;
+	background-color:#4eb6a8;
+	color:white;
+	font-weight:bold;
+}
+
+.chat_sent_messages {
+	max-height:500px;
+	position:relative;
+	margin-bottom:25px;
+	overflow-y:auto;
+	overflow-x:hidden;
+}
+
+div.chat_sent_messages::-webkit-scrollbar {  
+    width: 10px;  
+}
+
+div.chat_sent_messages::-webkit-scrollbar-track {  
+    background-color: #eaeaea;  
+    border-left: 1px solid #ccc;  
+}  
+div.chat_sent_messages::-webkit-scrollbar-thumb {  
+    background-color: #ccc;  
+}  
+div.chat_sent_messages::-webkit-scrollbar-thumb:hover {  
+    background-color: #aaa;  
+}  
+
+.chat_sent_message_holder {
+	width:270px;
+	margin-left:auto;
+	margin-right:auto;
+	background-color:#FFF;
+	padding:5px;
+	margin-top:5px;
+}
+
+.chat_sent_message_user_name {
+	color:#939597;
+}
+
+.chat_sent_message_text {
+	color:#404041;
+	font-weight:bold;
+	margin-top:3px;
+}
+
+.yellow_msg_box {
+	border-left:10px solid #FFD266;
+}
+
+.orange_msg_box {
+	border-left:10px solid #F19C65;
+}
+
+.red_msg_box {
+	border-left:10px solid #CE4C44;
+}
+
+.green_msg_box {
+	border-left:10px solid #27A876;
+}
+
+
+
+/* CHAT COMPONENT END***********************************************************************************************/
 
 /* components */
 
