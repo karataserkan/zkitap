@@ -572,4 +572,3 @@ window.lindneo.nisga = (function(window, $, undefined){
   };
 
 })( window, jQuery );
-

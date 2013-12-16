@@ -706,73 +706,6 @@ Grafik Ekle
 			</br>
 			
 			</div>	
-		
-		<a class="chat_button"><i class="icon-chat-inv"></i>Yazışma</a>
-		<div class="chat_window">
-		
-		<div class="chat_inline_holder">
-
-
-<div class="chat_sent_messages">
-
-<!-- chat_sent_message_holder-->
-<div class="chat_sent_message_holder green_msg_box">
-<div class="chat_sent_message_user_name">Uğur Dökmeci</div>
-<div class="chat_sent_message_text">Pellentesque elit velit, condimentum eu pellentesque id, viverra quis tortor. Donec apien aliquam, consectetur adipiscing a suscipit lacus vestibulum sit amet.</div>
-</div>
-<!-- chat_sent_message_holder SON -->
-
-
-<!-- chat_sent_message_holder-->
-<div class="chat_sent_message_holder red_msg_box">
-<div class="chat_sent_message_user_name">Kurtuluş Yıldız</div>
-<div class="chat_sent_message_text">Mauris rutrum nisl at orci.</div>
-</div>
-<!-- chat_sent_message_holder SON -->
-
-
-<!-- chat_sent_message_holder-->
-<div class="chat_sent_message_holder orange_msg_box">
-<div class="chat_sent_message_user_name">Erkan Öğümsöğütlü</div>
-<div class="chat_sent_message_text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec apien aliquam, a suscipit lacus vestibulum.</div>
-</div>
-<!-- chat_sent_message_holder SON -->
-
-
-
-
-<!-- chat_sent_message_holder-->
-<div class="chat_sent_message_holder yellow_msg_box">
-<div class="chat_sent_message_user_name">Can Deniz Güngörmüş</div>
-<div class="chat_sent_message_text">Lorem ipsum dolor sit amet.</div>
-</div>
-<!-- chat_sent_message_holder SON -->
-
-
-</div>
-<!-- chat_sent_messages SON -->
-
-
-
-<div class="chat_text_box_holder">
-<textarea placeholder="Mesajınızı yazın."></textarea>
-<input type="submit" value="Gönder"> 
-</div>
-<!-- chat_text_box_holder SON -->
-</div>
-<!-- chat_inline_holder SON -->
-		
-		
-		
-		</div>
-		<!-- chat_window END -->
-		
-		
-		<script>
-		$( ".chat_button" ).click(function() {
-		$( ".chat_window" ).toggle();
-		});
-		</script>
 	</div>
 
 <div id='chapters_pages_view' class="chapter-view" >
@@ -953,8 +886,9 @@ $( "#add-button" ).hover(
 		</div> <!-- guide -->
 <div id='editor_view_pane' style=' padding:5px 130px;margin: 10px 5px 5px 5px;float:left;'>
 
+			
 
-					<div id='current_page' page_id='<?php echo $page->page_id ;?>' style='background:white;border:thin solid black;zoom:1; height:768px;width:1024px;position:relative'  >
+					<div id='current_page' page_id='<?php echo $page->page_id ;?>' style='background:white;border:thin solid black;zoom:1; height:768px;width:1024px;position:relative' >
 						<div id="guide-h" class="guide"></div>
 						<div id="guide-v" class="guide"></div>
 
