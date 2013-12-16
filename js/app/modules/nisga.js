@@ -16,6 +16,15 @@ window.lindneo.nisga = (function(window, $, undefined){
   var revision_id=0;
   var revision_value = 0;
 
+  var ChatNewLine = function ( line,activeUser ){
+    var lineHtml = $('<div class="chat_sent_message_holder " style ="border-left: 10px solid '+activeUser.color+';"> \
+      <div class="chat_sent_message_user_name">'+activeUser.name+'</div> \
+      <div class="chat_sent_message_text">'+line+'</div> \
+    </div>');
+    $('.chat_sent_messages').append(lineHtml);
+  }
+
+
   var createComponent = function( component ){
       //console.log(revision_value);
 //    console.log(component);
@@ -547,6 +556,7 @@ window.lindneo.nisga = (function(window, $, undefined){
   };
 
   return {
+    ChatNewLine: ChatNewLine,
     galeryComponentBuilder: galeryComponentBuilder,
     createComponent: createComponent,
     deleteComponent: deleteComponent,
