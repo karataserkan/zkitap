@@ -234,6 +234,51 @@ $( document ).ready(function () {
 	      $('#author_pane').css({'zoom': (ui.value / 100) });
 	    }
 	  }); 
+
+    function handleEnter(evt) {
+      if (evt.keyCode == 13 ) {
+          if (evt.shiftKey) {
+              //pasteIntoInput(this, "\n");
+          } else {
+          evt.preventDefault();
+          var text= $(evt.target);
+          console.log(text);
+
+
+          window.lindneo.tsimshian.chatSendMessage(text.val());
+          text.val("");
+          }
+      }
+
+    }
+    function pasteIntoInput(el, text) {
+      el.focus();
+      if (typeof el.selectionStart == "number"
+              && typeof el.selectionEnd == "number") {
+          var val = el.value;
+          var selStart = el.selectionStart;
+          el.value = val.slice(0, selStart) + text + val.slice(el.selectionEnd);
+          el.selectionEnd = el.selectionStart = selStart + text.length;
+      } else if (typeof document.selection != "undefined") {
+          var textRange = document.selection.createRange();
+          textRange.text = text;
+          textRange.collapse(false);
+          textRange.select();
+      }
+    }
+
+
+    $(".chat_text_box_holder textarea").keydown(handleEnter).keypress(handleEnter);
+
+    var chats = JSON.parse(localStorage.getItem("chat_"+window.lindneo.currentBookId ));
+    $.each (chats, function (i,val) {
+      window.lindneo.nisga.ChatNewLine( val.line,val.user );
+    });
+
+
+
+
+
 	}
 
 
