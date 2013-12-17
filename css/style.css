@@ -681,6 +681,91 @@ div.chat_sent_messages::-webkit-scrollbar-thumb:hover {
 
 /* CHAT COMPONENT END***********************************************************************************************/
 
+/*commment components*/
+
+.comment_card {
+	width:300px;
+	position:fixed;
+	max-width:300px;
+	background-color:#2D2C29;
+	color:#D1D2D4;
+	font-family:Georgia, "Times New Roman", Times, serif;
+
+}
+.comment_card.opacity-level {
+	opacity:0.4;
+
+}
+
+
+
+.comment_card_user_name {
+	padding:7px;	
+	cursor: move;
+}
+.comment-box-arrow{
+width: 18px;
+float:right;
+margin:0px;
+}
+.comment-box-delete{
+width: 18px;
+float:right;
+margin:0px;
+}
+.comment-box-arrow.icon-up-down{
+-webkit-transform: rotate(180deg);
+       -moz-transform: rotate(180deg);
+        -ms-transform: rotate(180deg);
+         -o-transform: rotate(180deg);
+            transform: rotate(180deg);
+               /* IE6–IE9 */
+               filter: progid:DXImageTransform.Microsoft.Matrix(M11=0.9914448613738104, M12=-0.13052619222005157,M21=0.13052619222005157, M22=0.9914448613738104, sizingMethod='auto expand');
+                 zoom: 1;
+}
+
+
+
+.comment_editable_area {
+	width:280px;
+	height:inherit;
+	max-height:200px;
+	background-color:transparent;
+	resize:none;
+	border:0;
+	color:#D1D2D4;
+	font-family:Georgia, "Times New Roman", Times, serif;
+	font-size:16px;
+	padding-left:18px;
+	padding-bottom:5px;
+}
+
+
+
+.comment_card [contentEditable=true]:empty:not(:focus):before{
+        content:attr(data-ph);
+    }
+
+
+
+.yellow_msg_box {
+	border-left:10px solid #FFD266;
+}
+
+.orange_msg_box {
+	border-left:10px solid #F19C65;
+}
+
+.red_msg_box {
+	border-left:10px solid #CE4C44;
+}
+
+.green_msg_box {
+	border-left:10px solid #27A876;
+}
+
+
+
 /* components */
 
 
