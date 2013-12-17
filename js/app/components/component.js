@@ -5,7 +5,7 @@ $(document).ready(function(){
   $.widget('lindneo.component', {
 
     _create: function () {
-
+//$( ".comment_card" ).hide();
       var that = this;
       var MIN_DISTANCE = 10; // minimum distance to "snap" to a guide
       var guides = []; // no guides available ... 
@@ -121,11 +121,47 @@ $(document).ready(function(){
         innerOffsetY = event.originalEvent.offsetY;
         }, 
       }) 
+      /*
+        <!-- comment_card -->
+        <div class="comment_card">
+        <div class="comment_card_user_name orange_msg_box">
+        Erkan Öğümsöğütlü:
+        <a><i class="icon-down-arrow comment-box-arrow size-10"></i></a>
+        <a><i class='icon-delete comment-box-delete size-15'></i></a>
+        <a><i class='icon-add add-comment-answer comment-box-delete size-15' style="margin-right:10px;"></i></a>
 
+        </div>
+
+        <!-- comment_card_user_name END -->
+
+        <div contenteditable="true" data-ph="Notunuzu buraya giriniz." class="comment_editable_area"></div>
+
+        <!-- comment answer burasi cogalacak -->
+        <div class="comment_card_user_name2 orange_msg_box">
+        Can Deniz Güngörmüş <a><i class='icon-delete comment-box-delete size-15'></i></a></div>
+        <div contenteditable="true" data-ph="Notunuzu buraya giriniz." class="comment_editable_area"></div>
+        <!-- comment answer end -->
+
+        </div>
+        <!-- comment_card END -->
+
+        <script>
+        <!-- comment_card script -->
+        $(".comment-box-arrow").click(function(){
+        $(".comment_card_user_name2").toggle();
+        $(".comment_card").toggleClass("opacity-level");
+        $(this).toggleClass("icon-up-down");
+        });
+
+        $('.comment_card').draggable({handle: '.comment_card_user_name'});
+
+        </script>
+      */
 
       .mouseenter(function(event){
         // add delete button
          var deleteButton = $('<a id="delete-button-' + that.options.component.id + '" class="icon-delete white"style="position: absolute; top: -20px; right: 5px;"></a>');
+         var commentButton = $('<a id="comment-button-' + that.options.component.id + '" class="icon-down-arrow comment-box-arrow size-10 icon-up-down" style="position: absolute; top: -20px; right: 30px;"></a>');
       
         deleteButton.click(function(e){
           e.preventDefault();
@@ -134,14 +170,98 @@ $(document).ready(function(){
           window.lindneo.nisga.deleteComponent( that.options.component );
 
         }).appendTo(event.currentTarget);
+        /*$( ".comment_card" ).dialog({
+          autoOpen: false,
+          width:350,
+          left:-100,
+          show: {
+            effect: "blind",
+            duration: 1000
+          },
+          hide: {
+            effect: "explode",
+            duration: 1000
+          }
+        });*/
+        commentButton.click(function(e){
+          //$('#'+that.options.component.id).append('<div class="comment_window"></div>');
+
+          var commentBoxTop=that.options.component.data.self.css.top
+          var commentBoxLeft=that.options.component.data.self.css.left
+          var commentBoxParent=that.options.component.data.self.css.width;
+
+          commentBoxTop=commentBoxTop.replace("px","");
+          commentBoxTop=parseInt(commentBoxTop)+100;
+
+          commentBoxLeft=commentBoxLeft.replace("px","");
+          commentBoxLeft=parseInt(commentBoxLeft)+385;
+          commentBoxParent=commentBoxParent.replace("px","");
+          commentBoxParent=parseInt(commentBoxParent);
+
+         //console.log(that.options.component.data.self.css.top);
+          //console.log(that.options.component.data.self.css.left);
+          
+          //$( ".comment_card" ).dialog( "open" );
+          //$( ".comment_card" ).css('top',that.options.component.data.self.css.top+100);
+          //$( ".comment_card" ).css('left',that.options.component.data.self.css.left+that.options.component.data.self.css.width);
+          //$( ".comment_card" ).show();
+
+            //is comment box created before, control it..
+
+              console.log("top::"+commentBoxTop);
+
+            var isCommentBoxCreated=$('#commentBox_'+that.options.component.id).doesExist();
+            if (isCommentBoxCreated===false){
+
+
+
+
+                $('<div id="commentBox_'+that.options.component.id+'" class="comment_card" style="z-index:99999999999; top:'+commentBoxTop+'px; left:'+(commentBoxLeft+commentBoxParent)+'px">\
+                <div class="comment_card_user_name orange_msg_box">\
+                Erkan Öğümsöğütlü:\
+                <a><i class="icon-down-arrow comment-box-arrow size-10"></i></a>\
+                <a><i class="icon-delete comment-box-delete size-15"></i></a>\
+                <a><i class="icon-add add-comment-answer comment-box-delete size-15" style="margin-right:10px;"></i></a>\
+                </div>\
+                <div contenteditable="true" data-ph="Notunuzu buraya giriniz." class="comment_editable_area">\
+                  <textarea class="commentBoxTextarea" id="commentBoxTextarea'+that.options.component.id+'"></textarea>\
+                  <div><button id="commentBoxTextareaSend'+that.options.component.id+'" class="commentBoxTextareaSend">Gönder</button></div>\
+                </div>\
+                </div>').appendTo(event.currentTarget);
+
+            }else{
+                      $("#commentBox_"+that.options.component.id).toggle();
+                      $("comment_card_"+that.options.component.id).toggleClass("opacity-level");
+                      $(this).toggleClass("icon-up-down");
+            }
+
+
+          
+        }).appendTo(event.currentTarget);
+
+          $(".commentBoxTextarea").focus(function(){
+                $("#commentBoxTextareaSend"+that.options.component.id).show();
+
+              });
+         $(".commentBoxTextarea").blur(function(){
+                $("#commentBoxTextareaSend"+that.options.component.id).hide();
+
+              }); 
+
+         $("#commentBoxTextareaSend"+that.options.component.id).click(function(){
+                var commentBoxTextareaValue = $('.commentBoxTextarea'+that.options.component.id).val();
+                
+
+              }); 
 
       })
       .mouseleave(function(event){
 
         // remove delete button
         var deleteButton = $('#delete-button-' + that.options.component.id);
+        var commentButton = $('#comment-button-' + that.options.component.id);
         deleteButton.remove();
-
+        commentButton.remove();
       }).
       append('<div class="dragging_holder"></div>' )
       
@@ -386,3 +506,7 @@ function computeGuidesForElement( elem, pos, w, h ){
 
     ]; 
 }
+
+jQuery.fn.doesExist = function(){
+        return jQuery(this).length > 0;
+ };

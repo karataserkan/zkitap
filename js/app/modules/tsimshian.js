@@ -121,6 +121,20 @@ window.lindneo.tsimshian = (function(window, $, undefined){
         
       });
 
+       this.socket.on('commentBroadcast', function( response ) {
+          var line=response.line;
+          var activeUser=response.user;
+          var commentStored = localStorage.getItem("comment_"+window.lindneo.currentComponentWidget.element[0].id);
+	  var component_id = window.lindneo.currentComponentWidget.element[0].id;
+          var components = ( componentsStored != null ? JSON.parse(componentsStored) : [] );
+          
+          components.push(response) ;
+          localStorage.setItem("component_"+window.lindneo.currentBookId , JSON.stringify(components));
+
+          window.lindneo.nisga.ComponentNewLine( line, component_id,activeUser );
+        
+      });
+
        this.socket.on('pagePreviewUpdate', function(pageid){
          window.lindneo.tlingit.loadPagesPreviews(pageid);
 
@@ -137,6 +151,7 @@ window.lindneo.tsimshian = (function(window, $, undefined){
   return {
     
     chatSendMessage:chatSendMessage,
+    componentSendMessage:componentSendMessage,
     componentUpdated: componentUpdated,
     changePage: changePage,
     componentDestroyed: componentDestroyed,

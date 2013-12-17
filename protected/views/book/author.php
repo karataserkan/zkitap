@@ -968,40 +968,7 @@ $( "#add-button" ).hover(
 
 
 
-<!-- comment_card -->
-<div class="comment_card">
-<div class="comment_card_user_name orange_msg_box">
-Erkan Öğümsöğütlü:
-<a><i class="icon-down-arrow comment-box-arrow size-10"></i></a>
-<a><i class='icon-delete comment-box-delete size-15'></i></a>
-<a><i class='icon-add add-comment-answer comment-box-delete size-15' style="margin-right:10px;"></i></a>
 
-</div>
-
-<!-- comment_card_user_name END -->
-
-<div contenteditable="true" data-ph="Notunuzu buraya giriniz." class="comment_editable_area"></div>
-
-<!-- comment answer burasi cogalacak -->
-<div class="comment_card_user_name2 orange_msg_box">
-Can Deniz Güngörmüş	<a><i class='icon-delete comment-box-delete size-15'></i></a></div>
-<div contenteditable="true" data-ph="Notunuzu buraya giriniz." class="comment_editable_area"></div>
-<!-- comment answer end -->
-
-</div>
-<!-- comment_card END -->
-
-<script>
-<!-- comment_card script -->
-$(".comment-box-arrow").click(function(){
-$(".comment_card_user_name2").toggle();
-$(".comment_card").toggleClass("opacity-level");
-$(this).toggleClass("icon-up-down");
-});
-
-$('.comment_card').draggable({handle: '.comment_card_user_name'});
-
-</script>
 
 
 					<div id='current_page' page_id='<?php echo $page->page_id ;?>' style='background:white;border:thin solid black;zoom:1; height:768px;width:1024px;position:relative'  >
