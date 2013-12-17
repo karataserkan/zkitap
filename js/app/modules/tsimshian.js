@@ -27,11 +27,15 @@ window.lindneo.tsimshian = (function(window, $, undefined){
   var componentCreated = function (component) {    
 
   	window.lindneo.tsimshian.myComponent = component.id;
-  	//console.log('Sending');
-  	//console.log(window.lindneo.tsimshian.myComponent);
   	this.socket.emit('newComponent', component);
 
   };
+
+  var chatSendMessage = function (line){
+
+
+    this.socket.emit('chatBroadcast', line);
+  }
 
 
   var componentDestroyed = function(componentId){
@@ -80,7 +84,7 @@ window.lindneo.tsimshian = (function(window, $, undefined){
        this.socket.on('newComponent', function(component){
           console.log(component.id) ;
           console.log(window.lindneo.tsimshian.myComponent) ;
-          window.lindneo.nisga.createComponent(component);
+          window.lindneo.nisga.createComponent(component); 
        } );
 
  
@@ -103,6 +107,20 @@ window.lindneo.tsimshian = (function(window, $, undefined){
         
       });
 
+      this.socket.on('chatBroadcast', function( response ) {
+          var line=response.line;
+          var activeUser=response.user;
+          var chatsStored = localStorage.getItem("chat_"+window.lindneo.currentBookId);
+
+          var chats = ( chatsStored != null ? JSON.parse(chatsStored) : [] );
+          
+          chats.push(response) ;
+          localStorage.setItem("chat_"+window.lindneo.currentBookId , JSON.stringify(chats));
+
+          window.lindneo.nisga.ChatNewLine( line,activeUser );
+        
+      });
+
        this.socket.on('pagePreviewUpdate', function(pageid){
          window.lindneo.tlingit.loadPagesPreviews(pageid);
 
@@ -118,7 +136,7 @@ window.lindneo.tsimshian = (function(window, $, undefined){
 
   return {
     
-
+    chatSendMessage:chatSendMessage,
     componentUpdated: componentUpdated,
     changePage: changePage,
     componentDestroyed: componentDestroyed,
