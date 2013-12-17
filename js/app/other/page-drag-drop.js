@@ -234,6 +234,14 @@ $( document ).ready(function () {
 	      $('#author_pane').css({'zoom': (ui.value / 100) });
 	    }
 	  }); 
+    $(".chat_text_box_holder input").click(function(){
+        e = jQuery.Event("keypress")
+        e.keyCode = 13; //choose the one you want
+        console.log (e);
+
+        $(".chat_text_box_holder textarea").trigger(e);
+
+    });
 
     function handleEnter(evt) {
       if (evt.keyCode == 13 ) {
@@ -267,6 +275,7 @@ $( document ).ready(function () {
           textRange.select();
       }
     }
+
 
 
     $(".chat_text_box_holder textarea").keydown(handleEnter).keypress(handleEnter);
