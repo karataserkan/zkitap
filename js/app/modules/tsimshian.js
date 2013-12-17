@@ -84,7 +84,7 @@ window.lindneo.tsimshian = (function(window, $, undefined){
        this.socket.on('newComponent', function(component){
           console.log(component.id) ;
           console.log(window.lindneo.tsimshian.myComponent) ;
-          window.lindneo.nisga.createComponent(component);
+          window.lindneo.nisga.createComponent(component); 
        } );
 
  
@@ -114,7 +114,7 @@ window.lindneo.tsimshian = (function(window, $, undefined){
 
           var chats = ( chatsStored != null ? JSON.parse(chatsStored) : [] );
           
-          chats.push(response);
+          chats.push(response) ;
           localStorage.setItem("chat_"+window.lindneo.currentBookId , JSON.stringify(chats));
 
           window.lindneo.nisga.ChatNewLine( line,activeUser );
