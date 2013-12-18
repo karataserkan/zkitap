@@ -28,16 +28,15 @@ window.lindneo.nisga = (function(window, $, undefined){
   }
 
   var CommentNewLine = function ( line,component_id,activeUser ){
-    var lineHtml = $('<div class="comment_card_user_name orange_msg_box">\
-		        '+activeUser.name+': '+line+'\
-		        <a><i class="icon-down-arrow comment-box-arrow size-10"></i></a>\
-		        <a><i class="icon-delete comment-box-delete size-15"></i></a>\
-		        <a><i class="icon-add add-comment-answer comment-box-delete size-15" style="margin-right:10px;"></i></a>\
-		        </div>');
-    $('#commentBox_'+component_id).append(lineHtml);
-    $('#commentBox_'+component_id).animate({ scrollTop: $('#commentBox_'+component_id)[0].scrollHeight}, 100);
-    //$(".chat_window" ).show();
-
+    if(line!=""){
+        var lineHtml = $('<div class="comment_card_user_name orange_msg_box">\
+                            '+activeUser.name+': '+line+'\
+                            <a><i class="icon-delete comment-box-delete size-15" id="comment-box-delete_'+component_id+'"></i></a>\
+                            </div>');
+        $('#commentBox_'+component_id).prepend(lineHtml);
+        $('#commentBox_'+component_id).animate({ scrollTop: $('#commentBox_'+component_id)[0].scrollHeight}, 10);
+        
+    }
   }
 
 
@@ -573,7 +572,7 @@ window.lindneo.nisga = (function(window, $, undefined){
 
   return {
     ChatNewLine: ChatNewLine,
-    ComponentNewLine: ComponentNewLine,
+    CommentNewLine: CommentNewLine,
     galeryComponentBuilder: galeryComponentBuilder,
     createComponent: createComponent,
     deleteComponent: deleteComponent,

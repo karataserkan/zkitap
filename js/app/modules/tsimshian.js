@@ -37,6 +37,12 @@ window.lindneo.tsimshian = (function(window, $, undefined){
     this.socket.emit('chatBroadcast', line);
   }
 
+  var commentSendMessage = function (line){
+
+
+    this.socket.emit('commentBroadcast', line);
+  }
+
 
   var componentDestroyed = function(componentId){
  
@@ -151,7 +157,7 @@ window.lindneo.tsimshian = (function(window, $, undefined){
   return {
     
     chatSendMessage:chatSendMessage,
-    componentSendMessage:componentSendMessage,
+    commentSendMessage:commentSendMessage,
     componentUpdated: componentUpdated,
     changePage: changePage,
     componentDestroyed: componentDestroyed,
