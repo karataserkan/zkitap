@@ -185,7 +185,7 @@ $(document).ready(function(){
         });*/
         commentButton.click(function(e){
           //$('#'+that.options.component.id).append('<div class="comment_window"></div>');
-
+          if ($.type(that.options.component.data.comments) == "undefined") that.options.component.data.comments=[]
           var commentBoxTop=that.options.component.data.self.css.top
           var commentBoxLeft=that.options.component.data.self.css.left
           var commentBoxParent=that.options.component.data.self.css.width;
@@ -218,13 +218,9 @@ $(document).ready(function(){
 
                 $('<div id="commentBox_'+that.options.component.id+'" class="comment_card" style="z-index:99999999999; top:'+commentBoxTop+'px; left:'+(commentBoxLeft+commentBoxParent)+'px">\
                 <div class="comment_card_user_name orange_msg_box">\
-                Erkan Öğümsöğütlü:\
-                <a><i class="icon-down-arrow comment-box-arrow size-10"></i></a>\
-                <a><i class="icon-delete comment-box-delete size-15"></i></a>\
-                <a><i class="icon-add add-comment-answer comment-box-delete size-15" style="margin-right:10px;"></i></a>\
                 </div>\
                 <div contenteditable="true" data-ph="Notunuzu buraya giriniz." class="comment_editable_area">\
-                  <textarea class="commentBoxTextarea" id="commentBoxTextarea'+that.options.component.id+'"></textarea>\
+                  <textarea class="commentBoxTextarea" placeholder="Yorum giriniz..." id="commentBoxTextarea'+that.options.component.id+'"></textarea>\
                   <div><button id="commentBoxTextareaSend'+that.options.component.id+'" class="commentBoxTextareaSend">Gönder</button></div>\
                 </div>\
                 </div>').appendTo(event.currentTarget);
@@ -239,7 +235,7 @@ $(document).ready(function(){
           
         }).appendTo(event.currentTarget);
 
-          $(".commentBoxTextarea").focus(function(){
+          /*$(".commentBoxTextarea").focus(function(){
                 $("#commentBoxTextareaSend"+that.options.component.id).show();
 
               });
@@ -247,11 +243,22 @@ $(document).ready(function(){
                 $("#commentBoxTextareaSend"+that.options.component.id).hide();
 
               }); 
-
+*/
          $("#commentBoxTextareaSend"+that.options.component.id).click(function(){
-                var commentBoxTextareaValue = $('.commentBoxTextarea'+that.options.component.id).val();
+                var commentBoxTextareaValue = $('#commentBoxTextarea'+that.options.component.id).val();
+                var comment = {
+                  "text" : commentBoxTextareaValue,
+                  "user" : window.lindneo.user
+                };
                 
-
+                that._trigger('update', null, that.options.component );
+                window.lindneo.nisga.CommentNewLine(commentBoxTextareaValue, that.options.component.id, window.lindneo.user);
+                $('#commentBoxTextarea'+that.options.component.id).val("");
+              }); 
+             
+          $("#comment-box-delete_"+that.options.component.id).click(function(){
+                console.log('deneme');
+                
               }); 
 
       })
