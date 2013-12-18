@@ -12,6 +12,7 @@ window.lindneo.nisga = (function(window, $, undefined){
   var revision_array = {
                 revisions: []
             };
+  var comment_id_array = new Array();
   var array_revisions=[];
   var revision_id=0;
   var revision_value = 0;
@@ -29,13 +30,15 @@ window.lindneo.nisga = (function(window, $, undefined){
 
   var CommentNewLine = function ( line,component_id,activeUser ){
     if(line!=""){
-        var lineHtml = $('<div class="comment_card_user_name orange_msg_box">\
+        var lineHtml = $('<div class="comment_card_user_name orange_msg_box" id="orange_msg_box_' + component_id + '">\
                             '+activeUser.name+': '+line+'\
-                            <a><i class="icon-delete comment-box-delete size-15" id="comment-box-delete_'+component_id+'"></i></a>\
+                            <a><i class="icon-delete comment-box-delete size-15" id="comment-box-delete_' + component_id + '"></i></a>\
                             </div>');
         $('#commentBox_'+component_id).prepend(lineHtml);
         $('#commentBox_'+component_id).animate({ scrollTop: $('#commentBox_'+component_id)[0].scrollHeight}, 10);
-        
+        var maxcomponent_comment_id = Math.max.apply(Math, comment_id_array.id) +1;
+        comment_id_array.push({component_id: component_id, id: maxcomponent_comment_id});
+        //console.log(comment_id_array);
     }
   }
 
@@ -265,6 +268,20 @@ window.lindneo.nisga = (function(window, $, undefined){
       else revision_value=0;
       //console.log(revision_array);
         window.lindneo.tlingit.componentHasUpdated( component );
+        window.lindneo.tlingit.componentHasUpdated( component );
+        var commentBoxTop=component.data.self.css.top
+        var commentBoxLeft=component.data.self.css.left
+        var commentBoxParent=component.data.self.css.width;
+
+        commentBoxTop=commentBoxTop.replace("px","");
+        commentBoxTop=parseInt(commentBoxTop)+100;
+
+        commentBoxLeft=commentBoxLeft.replace("px","");
+        commentBoxLeft=parseInt(commentBoxLeft)+385;
+        commentBoxParent=commentBoxParent.replace("px","");
+        commentBoxParent=parseInt(commentBoxParent);
+        $('#commentBox_'+component.id).css('top',commentBoxTop);
+        $('#commentBox_'+component.id).css('left',commentBoxLeft+commentBoxParent);
       },
       'selected': function (event, element) {
         window.lindneo.currentComponentWidget = element;
@@ -294,6 +311,20 @@ window.lindneo.nisga = (function(window, $, undefined){
       else revision_value=0;
       //console.log(revision_array);
         window.lindneo.tlingit.componentHasUpdated( component );
+        window.lindneo.tlingit.componentHasUpdated( component );
+        var commentBoxTop=component.data.self.css.top
+        var commentBoxLeft=component.data.self.css.left
+        var commentBoxParent=component.data.self.css.width;
+
+        commentBoxTop=commentBoxTop.replace("px","");
+        commentBoxTop=parseInt(commentBoxTop)+100;
+
+        commentBoxLeft=commentBoxLeft.replace("px","");
+        commentBoxLeft=parseInt(commentBoxLeft)+385;
+        commentBoxParent=commentBoxParent.replace("px","");
+        commentBoxParent=parseInt(commentBoxParent);
+        $('#commentBox_'+component.id).css('top',commentBoxTop);
+        $('#commentBox_'+component.id).css('left',commentBoxLeft+commentBoxParent);
       },
       'selected': function (event, element) {
         window.lindneo.currentComponentWidget = element;
@@ -319,9 +350,22 @@ window.lindneo.nisga = (function(window, $, undefined){
 
       }
       else revision_value=0;
-      console.log(newObject);
+      //console.log(component);
       //console.log(revision_array);
         window.lindneo.tlingit.componentHasUpdated( component );
+        var commentBoxTop=component.data.self.css.top
+        var commentBoxLeft=component.data.self.css.left
+        var commentBoxParent=component.data.self.css.width;
+
+        commentBoxTop=commentBoxTop.replace("px","");
+        commentBoxTop=parseInt(commentBoxTop)+100;
+
+        commentBoxLeft=commentBoxLeft.replace("px","");
+        commentBoxLeft=parseInt(commentBoxLeft)+385;
+        commentBoxParent=commentBoxParent.replace("px","");
+        commentBoxParent=parseInt(commentBoxParent);
+        $('#commentBox_'+component.id).css('top',commentBoxTop);
+        $('#commentBox_'+component.id).css('left',commentBoxLeft+commentBoxParent);
       },
       'selected': function (event, element) {
         window.lindneo.currentComponentWidget = element;
@@ -353,6 +397,20 @@ window.lindneo.nisga = (function(window, $, undefined){
       else revision_value=0;
       //console.log(revision_array);
         window.lindneo.tlingit.componentHasUpdated( component );
+        window.lindneo.tlingit.componentHasUpdated( component );
+        var commentBoxTop=component.data.self.css.top
+        var commentBoxLeft=component.data.self.css.left
+        var commentBoxParent=component.data.self.css.width;
+
+        commentBoxTop=commentBoxTop.replace("px","");
+        commentBoxTop=parseInt(commentBoxTop)+100;
+
+        commentBoxLeft=commentBoxLeft.replace("px","");
+        commentBoxLeft=parseInt(commentBoxLeft)+385;
+        commentBoxParent=commentBoxParent.replace("px","");
+        commentBoxParent=parseInt(commentBoxParent);
+        $('#commentBox_'+component.id).css('top',commentBoxTop);
+        $('#commentBox_'+component.id).css('left',commentBoxLeft+commentBoxParent);
       },
       'selected': function (event, element) {
         window.lindneo.currentComponentWidget = element;
@@ -385,6 +443,20 @@ window.lindneo.nisga = (function(window, $, undefined){
       else revision_value=0;
       //console.log(revision_array);
         window.lindneo.tlingit.componentHasUpdated( component );
+        window.lindneo.tlingit.componentHasUpdated( component );
+        var commentBoxTop=component.data.self.css.top
+        var commentBoxLeft=component.data.self.css.left
+        var commentBoxParent=component.data.self.css.width;
+
+        commentBoxTop=commentBoxTop.replace("px","");
+        commentBoxTop=parseInt(commentBoxTop)+100;
+
+        commentBoxLeft=commentBoxLeft.replace("px","");
+        commentBoxLeft=parseInt(commentBoxLeft)+385;
+        commentBoxParent=commentBoxParent.replace("px","");
+        commentBoxParent=parseInt(commentBoxParent);
+        $('#commentBox_'+component.id).css('top',commentBoxTop);
+        $('#commentBox_'+component.id).css('left',commentBoxLeft+commentBoxParent);
       },
       'selected': function (event, element) {
         window.lindneo.currentComponentWidget = element;
@@ -420,6 +492,20 @@ window.lindneo.nisga = (function(window, $, undefined){
       else revision_value=0;
       //console.log(revision_array);
         window.lindneo.tlingit.componentHasUpdated( component );
+        window.lindneo.tlingit.componentHasUpdated( component );
+        var commentBoxTop=component.data.self.css.top
+        var commentBoxLeft=component.data.self.css.left
+        var commentBoxParent=component.data.self.css.width;
+
+        commentBoxTop=commentBoxTop.replace("px","");
+        commentBoxTop=parseInt(commentBoxTop)+100;
+
+        commentBoxLeft=commentBoxLeft.replace("px","");
+        commentBoxLeft=parseInt(commentBoxLeft)+385;
+        commentBoxParent=commentBoxParent.replace("px","");
+        commentBoxParent=parseInt(commentBoxParent);
+        $('#commentBox_'+component.id).css('top',commentBoxTop);
+        $('#commentBox_'+component.id).css('left',commentBoxLeft+commentBoxParent);
       },
       'selected': function (event, element) {
         window.lindneo.currentComponentWidget = element;
@@ -449,6 +535,20 @@ window.lindneo.nisga = (function(window, $, undefined){
       else revision_value=0;
       //console.log(revision_array);
         window.lindneo.tlingit.componentHasUpdated( component );
+        window.lindneo.tlingit.componentHasUpdated( component );
+        var commentBoxTop=component.data.self.css.top
+        var commentBoxLeft=component.data.self.css.left
+        var commentBoxParent=component.data.self.css.width;
+
+        commentBoxTop=commentBoxTop.replace("px","");
+        commentBoxTop=parseInt(commentBoxTop)+100;
+
+        commentBoxLeft=commentBoxLeft.replace("px","");
+        commentBoxLeft=parseInt(commentBoxLeft)+385;
+        commentBoxParent=commentBoxParent.replace("px","");
+        commentBoxParent=parseInt(commentBoxParent);
+        $('#commentBox_'+component.id).css('top',commentBoxTop);
+        $('#commentBox_'+component.id).css('left',commentBoxLeft+commentBoxParent);
       },
       'selected': function (event, element) {
         window.lindneo.currentComponentWidget = element;
@@ -481,6 +581,20 @@ window.lindneo.nisga = (function(window, $, undefined){
       else revision_value=0;
       //console.log(revision_array);
         window.lindneo.tlingit.componentHasUpdated( component );
+        window.lindneo.tlingit.componentHasUpdated( component );
+        var commentBoxTop=component.data.self.css.top
+        var commentBoxLeft=component.data.self.css.left
+        var commentBoxParent=component.data.self.css.width;
+
+        commentBoxTop=commentBoxTop.replace("px","");
+        commentBoxTop=parseInt(commentBoxTop)+100;
+
+        commentBoxLeft=commentBoxLeft.replace("px","");
+        commentBoxLeft=parseInt(commentBoxLeft)+385;
+        commentBoxParent=commentBoxParent.replace("px","");
+        commentBoxParent=parseInt(commentBoxParent);
+        $('#commentBox_'+component.id).css('top',commentBoxTop);
+        $('#commentBox_'+component.id).css('left',commentBoxLeft+commentBoxParent);
       },
       'selected': function (event, element) {
         window.lindneo.currentComponentWidget = element;
@@ -512,6 +626,20 @@ window.lindneo.nisga = (function(window, $, undefined){
       else revision_value=0;
       //console.log(revision_array);
         window.lindneo.tlingit.componentHasUpdated( component );
+        window.lindneo.tlingit.componentHasUpdated( component );
+        var commentBoxTop=component.data.self.css.top
+        var commentBoxLeft=component.data.self.css.left
+        var commentBoxParent=component.data.self.css.width;
+
+        commentBoxTop=commentBoxTop.replace("px","");
+        commentBoxTop=parseInt(commentBoxTop)+100;
+
+        commentBoxLeft=commentBoxLeft.replace("px","");
+        commentBoxLeft=parseInt(commentBoxLeft)+385;
+        commentBoxParent=commentBoxParent.replace("px","");
+        commentBoxParent=parseInt(commentBoxParent);
+        $('#commentBox_'+component.id).css('top',commentBoxTop);
+        $('#commentBox_'+component.id).css('left',commentBoxLeft+commentBoxParent);
       },
       'selected': function (event, element) {
         window.lindneo.currentComponentWidget = element;
@@ -541,6 +669,20 @@ window.lindneo.nisga = (function(window, $, undefined){
       else revision_value=0;
       //console.log(revision_array);
         window.lindneo.tlingit.componentHasUpdated( component );
+        window.lindneo.tlingit.componentHasUpdated( component );
+        var commentBoxTop=component.data.self.css.top
+        var commentBoxLeft=component.data.self.css.left
+        var commentBoxParent=component.data.self.css.width;
+
+        commentBoxTop=commentBoxTop.replace("px","");
+        commentBoxTop=parseInt(commentBoxTop)+100;
+
+        commentBoxLeft=commentBoxLeft.replace("px","");
+        commentBoxLeft=parseInt(commentBoxLeft)+385;
+        commentBoxParent=commentBoxParent.replace("px","");
+        commentBoxParent=parseInt(commentBoxParent);
+        $('#commentBox_'+component.id).css('top',commentBoxTop);
+        $('#commentBox_'+component.id).css('left',commentBoxLeft+commentBoxParent);
       }, 
       'selected': function ( event, element_ ){
         window.lindneo.currentComponentWidget = element_;
