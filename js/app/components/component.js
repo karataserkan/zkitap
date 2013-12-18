@@ -10,7 +10,7 @@ $(document).ready(function(){
       var MIN_DISTANCE = 10; // minimum distance to "snap" to a guide
       var guides = []; // no guides available ... 
       var innerOffsetX, innerOffsetY; // we'll use those during drag ... 
-
+      
       this.element
       .attr('id', this.options.component.id)
       .attr('component-instance', 'true')
@@ -256,10 +256,13 @@ $(document).ready(function(){
                 $('#commentBoxTextarea'+that.options.component.id).val("");
               }); 
              
-          $("#comment-box-delete_"+that.options.component.id).click(function(){
-                console.log('deneme');
-                
-              }); 
+             var commentdelete=$('.comment-box-delete').doesExist();
+             if(commentdelete) 
+                $(".comment-box-delete").click(function(){
+                    //$( "#orange_msg_box_"+that.options.component.id ).remove();
+                      console.log(window.lindneo.nisga.comment_id_array);
+
+                    }); 
 
       })
       .mouseleave(function(event){
