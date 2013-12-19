@@ -389,9 +389,11 @@ $(document).ready(function(){
       return this._getProperty(propertyName);
     },
     setPropertyofObject : function (propertyName,propertyValue){
+      console.log('****');
       return this._setPropertyofObject(propertyName,propertyValue) ;
     },
     _setPropertyofObject : function (propertyName,propertyValue){
+      console.log('****');
       switch(propertyName){
         case 'zindex':
 
@@ -424,9 +426,13 @@ $(document).ready(function(){
       }
     },
     setProperty : function (propertyName,propertyValue){
+      console.log('****');
         this._setProperty(propertyName,propertyValue);
     },
     _setProperty : function (propertyName,propertyValue){
+      console.log('****');
+      console.log(propertyName);
+      console.log(propertyValue);
         this.setPropertyofObject(propertyName,propertyValue);
         this.setFromData();
         this._trigger('update', null, this.options.component );
