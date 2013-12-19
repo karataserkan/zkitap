@@ -252,6 +252,7 @@ $(document).ready(function(){
                 };
                 
                 that._trigger('update', null, that.options.component );
+                //window.lindneo.tsimshian.commentSendMessage( commentBoxTextareaValue );
                 window.lindneo.nisga.CommentNewLine(commentBoxTextareaValue, that.options.component.id, window.lindneo.user);
                 $('#commentBoxTextarea'+that.options.component.id).val("");
               }); 
