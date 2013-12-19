@@ -5,7 +5,7 @@ $(document).ready(function(){
   $.widget('lindneo.component', {
 
     _create: function () {
-//$( ".comment_card" ).hide();
+
       var that = this;
       var MIN_DISTANCE = 10; // minimum distance to "snap" to a guide
       var guides = []; // no guides available ... 
@@ -44,225 +44,116 @@ $(document).ready(function(){
     
       .draggable({
         containment: "#current_page",
-        
-
         snap: '.ui-wrapper',
         snapMode: 'outer',
+
         'stop': function(event, ui){
         //console.log();
           $( "#guide-v, #guide-h" ).hide(); 
           that._resizeDraggable( event, ui );
         },
+
         drag: function( event, ui ){
+          if( $('#general-options').val().indexOf("rehber")===-1 ) return ;
 
-
-
-        if( $('#general-options').val().indexOf("rehber")===-1 ) return ;
-
-        // iterate all guides, remember the closest h and v guides
-        var guideV, guideH, distV = MIN_DISTANCE+1, distH = MIN_DISTANCE+1, offsetV, offsetH; 
-        var chosenGuides = { top: { dist: MIN_DISTANCE+1 }, left: { dist: MIN_DISTANCE+1 } }; 
-        var $t = $(this); 
-        var pos = { top: event.originalEvent.pageY , left: event.originalEvent.pageX - innerOffsetX }; 
-      
+          // iterate all guides, remember the closest h and v guides
+          var guideV, guideH, distV = MIN_DISTANCE+1, distH = MIN_DISTANCE+1, offsetV, offsetH; 
+          var chosenGuides = { top: { dist: MIN_DISTANCE+1 }, left: { dist: MIN_DISTANCE+1 } }; 
+          var $t = $(this); 
+          var pos = { top: event.originalEvent.pageY , left: event.originalEvent.pageX - innerOffsetX }; 
         
+          
 
-        var w = $t.outerWidth() - 1; 
-        var h = $t.outerHeight() - 1; 
-    //    var sispos= $('#current_page').offset();
-      
+          var w = $t.outerWidth() - 1; 
+          var h = $t.outerHeight() - 1; 
+      //    var sispos= $('#current_page').offset();
         
+          
 
-        var elemGuides = computeGuidesForElement( null, pos, w, h ); 
-        
-        $.each( guides, function( i, guide ){
-            $.each( elemGuides, function( i , elemGuide ){
-              
-                if( guide.type == elemGuide.type ){
-                    var prop = guide.type == "h"? "top":"left"; 
-                    var d = Math.abs( elemGuide[prop] - guide[prop] ); 
+          var elemGuides = computeGuidesForElement( null, pos, w, h ); 
+          
+          $.each( guides, function( i, guide ){
+              $.each( elemGuides, function( i , elemGuide ){
+                
+                  if( guide.type == elemGuide.type ){
+                      var prop = guide.type == "h"? "top":"left"; 
+                      var d = Math.abs( elemGuide[prop] - guide[prop] ); 
 
-                    if( d < chosenGuides[prop].dist ){
-                        chosenGuides[prop].dist = d; 
-                        chosenGuides[prop].offset = elemGuide[prop] - pos[prop]; 
-                        chosenGuides[prop].guide = guide; 
-                    }
-                }
-            } ); 
-        } );
+                      if( d < chosenGuides[prop].dist ){
+                          chosenGuides[prop].dist = d; 
+                          chosenGuides[prop].offset = elemGuide[prop] - pos[prop]; 
+                          chosenGuides[prop].guide = guide; 
+                      }
+                  }
+              } ); 
+          } );
 
+          if( chosenGuides.top.dist <= MIN_DISTANCE ){
+              $( "#guide-h" ).css( "top", chosenGuides.top.guide.top- $('#current_page').offset().top ).show(); 
+              ui.position.top = chosenGuides.top.guide.top - chosenGuides.top.offset - $('#current_page').offset().top;
+          }
+          else{
+              $( "#guide-h" ).hide(); 
+              //ui.position.top = pos.top; 
+          }
+          
+          if( chosenGuides.left.dist <= MIN_DISTANCE ){
+              $( "#guide-v" ).css( "left", chosenGuides.left.guide.left- $('#current_page').offset().left ).show(); 
+              ui.position.left = chosenGuides.left.guide.left - chosenGuides.left.offset- $('#current_page').offset().left; 
+          }
+          else{
+              $( "#guide-v" ).hide(); 
+              //ui.position.left = pos.left; 
+          }
 
-        
+        },
 
-
-        if( chosenGuides.top.dist <= MIN_DISTANCE ){
-            $( "#guide-h" ).css( "top", chosenGuides.top.guide.top- $('#current_page').offset().top ).show(); 
-            ui.position.top = chosenGuides.top.guide.top - chosenGuides.top.offset - $('#current_page').offset().top;
+        start: function( event, ui ) {
+          var that = this;
+          guides = $.map( $( "#current_page .ui-draggable" ).not( this ), computeGuidesForElement );
+          //console.log(guides);
+          
+          innerOffsetX = event.originalEvent.offsetX;
+          innerOffsetY = event.originalEvent.offsetY;
         }
-        else{
-            $( "#guide-h" ).hide(); 
-            //ui.position.top = pos.top; 
-        }
-        
-        if( chosenGuides.left.dist <= MIN_DISTANCE ){
-            $( "#guide-v" ).css( "left", chosenGuides.left.guide.left- $('#current_page').offset().left ).show(); 
-            ui.position.left = chosenGuides.left.guide.left - chosenGuides.left.offset- $('#current_page').offset().left; 
-        }
-        else{
-            $( "#guide-v" ).hide(); 
-            //ui.position.left = pos.left; 
-        }
-      }, 
-       start: function( event, ui ) {
-        guides = $.map( $( "#current_page .ui-draggable" ).not( this ), computeGuidesForElement );
-        //console.log(guides);
-        
-        innerOffsetX = event.originalEvent.offsetX;
-        innerOffsetY = event.originalEvent.offsetY;
-        }, 
+
       }) 
-      /*
-        <!-- comment_card -->
-        <div class="comment_card">
-        <div class="comment_card_user_name orange_msg_box">
-        Erkan Öğümsöğütlü:
-        <a><i class="icon-down-arrow comment-box-arrow size-10"></i></a>
-        <a><i class='icon-delete comment-box-delete size-15'></i></a>
-        <a><i class='icon-add add-comment-answer comment-box-delete size-15' style="margin-right:10px;"></i></a>
 
-        </div>
-
-        <!-- comment_card_user_name END -->
-
-        <div contenteditable="true" data-ph="Notunuzu buraya giriniz." class="comment_editable_area"></div>
-
-        <!-- comment answer burasi cogalacak -->
-        <div class="comment_card_user_name2 orange_msg_box">
-        Can Deniz Güngörmüş <a><i class='icon-delete comment-box-delete size-15'></i></a></div>
-        <div contenteditable="true" data-ph="Notunuzu buraya giriniz." class="comment_editable_area"></div>
-        <!-- comment answer end -->
-
-        </div>
-        <!-- comment_card END -->
-
-        <script>
-        <!-- comment_card script -->
-        $(".comment-box-arrow").click(function(){
-        $(".comment_card_user_name2").toggle();
-        $(".comment_card").toggleClass("opacity-level");
-        $(this).toggleClass("icon-up-down");
-        });
-
-        $('.comment_card').draggable({handle: '.comment_card_user_name'});
-
-        </script>
-      */
 
       .mouseenter(function(event){
         // add delete button
          var deleteButton = $('<a id="delete-button-' + that.options.component.id + '" class="icon-delete white"style="position: absolute; top: -20px; right: 5px;"></a>');
          var commentButton = $('<a id="comment-button-' + that.options.component.id + '" class="icon-down-arrow comment-box-arrow size-10 icon-up-down" style="position: absolute; top: -20px; right: 30px;"></a>');
       
-        deleteButton.click(function(e){
-          e.preventDefault();
+         deleteButton.click(function(e){
+         e.preventDefault();
         
           //window.lindneo.nisga.ComponentDelete( that.options.component );
           window.lindneo.nisga.deleteComponent( that.options.component );
 
         }).appendTo(event.currentTarget);
-        /*$( ".comment_card" ).dialog({
-          autoOpen: false,
-          width:350,
-          left:-100,
-          show: {
-            effect: "blind",
-            duration: 1000
-          },
-          hide: {
-            effect: "explode",
-            duration: 1000
-          }
-        });*/
+        
         commentButton.click(function(e){
           //$('#'+that.options.component.id).append('<div class="comment_window"></div>');
           if ($.type(that.options.component.data.comments) == "undefined") that.options.component.data.comments=[]
-          var commentBoxTop=that.options.component.data.self.css.top
-          var commentBoxLeft=that.options.component.data.self.css.left
-          var commentBoxParent=that.options.component.data.self.css.width;
-
-          commentBoxTop=commentBoxTop.replace("px","");
-          commentBoxTop=parseInt(commentBoxTop)+100;
-
-          commentBoxLeft=commentBoxLeft.replace("px","");
-          commentBoxLeft=parseInt(commentBoxLeft)+385;
-          commentBoxParent=commentBoxParent.replace("px","");
-          commentBoxParent=parseInt(commentBoxParent);
-
-         //console.log(that.options.component.data.self.css.top);
-          //console.log(that.options.component.data.self.css.left);
           
-          //$( ".comment_card" ).dialog( "open" );
-          //$( ".comment_card" ).css('top',that.options.component.data.self.css.top+100);
-          //$( ".comment_card" ).css('left',that.options.component.data.self.css.left+that.options.component.data.self.css.width);
-          //$( ".comment_card" ).show();
-
-            //is comment box created before, control it..
-
-              console.log("top::"+commentBoxTop);
-
-            var isCommentBoxCreated=$('#commentBox_'+that.options.component.id).doesExist();
-            if (isCommentBoxCreated===false){
-
-
-
-
-                $('<div id="commentBox_'+that.options.component.id+'" class="comment_card" style="z-index:99999999999; top:'+commentBoxTop+'px; left:'+(commentBoxLeft+commentBoxParent)+'px">\
-                <div class="comment_card_user_name orange_msg_box">\
-                </div>\
-                <div contenteditable="true" data-ph="Notunuzu buraya giriniz." class="comment_editable_area">\
-                  <textarea class="commentBoxTextarea" placeholder="Yorum giriniz..." id="commentBoxTextarea'+that.options.component.id+'"></textarea>\
-                  <div><button id="commentBoxTextareaSend'+that.options.component.id+'" class="commentBoxTextareaSend">Gönder</button></div>\
-                </div>\
-                </div>').appendTo(event.currentTarget);
-
-            }else{
-                      $("#commentBox_"+that.options.component.id).toggle();
-                      $("comment_card_"+that.options.component.id).toggleClass("opacity-level");
-                      $(this).toggleClass("icon-up-down");
-            }
-
-
+          var isCommentBoxCreated=$('#commentBox_'+that.options.component.id).doesExist();
           
+          if (isCommentBoxCreated===false){
+            
+            that.createCommentBox();
+           
+          }else{
+              
+              $("#commentBox_"+that.options.component.id).toggle();
+              $("comment_card_"+that.options.component.id).toggleClass("opacity-level");
+              $(this).toggleClass("icon-up-down");
+
+          }
+
         }).appendTo(event.currentTarget);
-
-          /*$(".commentBoxTextarea").focus(function(){
-                $("#commentBoxTextareaSend"+that.options.component.id).show();
-
-              });
-         $(".commentBoxTextarea").blur(function(){
-                $("#commentBoxTextareaSend"+that.options.component.id).hide();
-
-              }); 
-*/
-         $("#commentBoxTextareaSend"+that.options.component.id).click(function(){
-                var commentBoxTextareaValue = $('#commentBoxTextarea'+that.options.component.id).val();
-                var comment = {
-                  "text" : commentBoxTextareaValue,
-                  "user" : window.lindneo.user
-                };
-                
-                that._trigger('update', null, that.options.component );
-                window.lindneo.nisga.CommentNewLine(commentBoxTextareaValue, that.options.component.id, window.lindneo.user);
-                $('#commentBoxTextarea'+that.options.component.id).val("");
-              }); 
              
-             var commentdelete=$('.comment-box-delete').doesExist();
-             if(commentdelete) 
-                $(".comment-box-delete").click(function(){
-                    //$( "#orange_msg_box_"+that.options.component.id ).remove();
-                      console.log(window.lindneo.nisga.comment_id_array);
-
-                    }); 
+      
 
       })
       .mouseleave(function(event){
@@ -280,7 +171,111 @@ $(document).ready(function(){
       });
 
       this.setFromData();
+      this.listCommentsFromData();
 
+    },
+
+    createCommentBox : function () {
+
+      var that = this;
+
+      that.comment_box = $('<div id="commentBox_'+that.options.component.id+'" \
+            class="comment_card" style="z-index:99999999999; top:0px; right:-293px; position:absolute">\
+      </div>');
+
+
+      that.comment_list =  $('<div class="comment_cards_list"> </div>');
+
+      that.newCommentBox = $('<div></div>');
+
+      that.newCommentBox_textarea = $('<input type="text" class="commentBoxTextarea" placeholder="Yorum giriniz..." id="commentBoxTextarea'+that.options.component.id+'" />');
+      that.newCommentBox_button = $('<button id="commentBoxTextareaSend'+that.options.component.id+'" class="commentBoxTextareaSend">Gönder</button></div>');
+
+      that.newCommentBox_button.click(function(){
+                var commentBoxTextareaValue = that.newCommentBox_textarea.val();
+                var comment_id = window.lindneo.randomString();
+
+                var comment = {
+                  "text" : commentBoxTextareaValue,
+                  "user" : window.lindneo.user,
+                  "comment_id" : comment_id
+                };
+                
+                that.CommentNewLine(comment);
+                that.newCommentBox_textarea.val("");
+                
+
+                that.options.component.data.comments.push(comment);
+                that._trigger('update', null, that.options.component );
+        }); 
+
+      function commentTextareaEventHandler(evt) {
+        if (evt.keyCode == 13 ) {
+          that.newCommentBox_button.click();
+        }
+      }
+      that.newCommentBox_textarea.keydown(commentTextareaEventHandler).keypress(commentTextareaEventHandler);
+
+      that.newCommentBox.append(that.newCommentBox_textarea).append(that.newCommentBox_button);
+
+      that.comment_box.append(that.comment_list).append(that.newCommentBox);
+      
+      that.comment_box.appendTo(that.element.parent());
+
+    },
+
+    listCommentsFromData : function () {
+      var that = this;
+      if ($.type(that.options.component.data.comments) == "undefined") 
+        return;
+
+      if ( that.options.component.data.comments.length == 0 ) 
+        return;
+
+      this.createCommentBox();
+
+
+      $.each ( that.options.component.data.comments, function (key,comment){
+        that.CommentNewLine(comment);
+
+      });
+
+
+    },
+
+    CommentNewLine : function ( comment  ){
+    
+      var that = this;
+      var line = comment.text;
+      var activeUser = comment.user;
+      var component_id = that.options.component.id;
+
+      if(line!=""){
+        var lineHtml = $('<div class="comment_card_user_name yellow_msg_box" id="yellow_msg_box_' + component_id + '">\
+                            '+activeUser.name+': '+line+' \
+                 </div>');
+
+        var deleteThisCommentLink = $( '<a><i class="icon-delete comment-box-delete size-15" id="comment-box-delete_' + component_id + '"></i></a>');
+        
+        if ( comment.user === window.lindneo.user )  deleteThisCommentLink.appendTo(lineHtml);
+
+        deleteThisCommentLink.click(function(){
+          $.each (that.options.component.data.comments , function (i,val){
+            console.log(comment);
+            console.log(val.comment_id);
+            if (val.comment_id == comment.comment_id){
+              that.options.component.data.comments.splice(i,1);
+              lineHtml.remove();
+              that._trigger('update', null, that.options.component );
+              return;
+            }
+          });     
+        });
+
+        that.comment_list.append(lineHtml);
+        $('#commentBox_'+component_id).animate({ scrollTop: $('#commentBox_'+component_id)[0].scrollHeight}, 10);
+       
+      }
     },
 
     setFromData : function () {
