@@ -142,8 +142,8 @@ $(document).ready(function(){
         var deleteButton = $('#delete-button-' + that.options.component.id);
         deleteButton.remove();
 
-      }).
-      append('<div class="dragging_holder"></div>' )
+      })
+      .append('<div class="dragging_holder"></div>' )
       
       .on('unselect', function(){
         that.unselect();
