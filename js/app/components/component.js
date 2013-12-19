@@ -207,7 +207,20 @@ $(document).ready(function(){
 
                 that.options.component.data.comments.push(comment);
                 that._trigger('update', null, that.options.component );
+<<<<<<< HEAD
+                //window.lindneo.tsimshian.commentSendMessage( commentBoxTextareaValue );
+                window.lindneo.nisga.CommentNewLine(commentBoxTextareaValue, that.options.component.id, window.lindneo.user);
+                $('#commentBoxTextarea'+that.options.component.id).val("");
+              }); 
+             
+             var commentdelete=$('.comment-box-delete').doesExist();
+             if(commentdelete) 
+                $(".comment-box-delete").click(function(){
+                    //$( "#orange_msg_box_"+that.options.component.id ).remove();
+                      console.log(window.lindneo.nisga.comment_id_array);
+=======
         }); 
+>>>>>>> 0ced895c78c3b0a65c919b0831d3f394274500ce
 
       function commentTextareaEventHandler(evt) {
         if (evt.keyCode == 13 ) {
