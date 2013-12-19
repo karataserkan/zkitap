@@ -200,7 +200,9 @@ window.lindneo.tlingit = (function(window, $, undefined){
             context.font= fontHeight + 'px Arial';
             context.fillStyle= component.data.textarea.css['color'];
 
-
+            if ( $.type(lines) != "undefined")
+            if ( lines != null)
+            if (lines.length > 0)
             $.each(lines, function (lineNumber,line){
                 y += fontHeight;
                 var words = line.split(' ');
