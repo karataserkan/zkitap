@@ -210,6 +210,7 @@ $( document ).ready(function () {
     });
 
     $('#chapters_pages_view').sortable({
+      axis:'y',
       stop: function(event,ui){
         sortPages();
         $('.chapter input').change();
@@ -220,6 +221,7 @@ $( document ).ready(function () {
 
     $('.pages').sortable({ 
       connectWith: '.pages' , 
+      axis:'y',
       stop: function( event,ui){
         sortPages();
       }  

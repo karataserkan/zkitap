@@ -52,8 +52,7 @@
         options.element.options.autogrow=$(this);
         
 
-         console.log(options
-         	);
+      
 
         options.element.element.parent().not('#current_page').css("height", height + "px");
         if ($.isFunction(options.heightKeeperFunction)) {

@@ -28,19 +28,7 @@ window.lindneo.nisga = (function(window, $, undefined){
 
   }
 
-  var CommentNewLine = function ( line,component_id,activeUser ){
-    if(line!=""){
-        var lineHtml = $('<div class="comment_card_user_name orange_msg_box" id="orange_msg_box_' + component_id + '">\
-                            '+activeUser.name+': '+line+'\
-                            <a><i class="icon-delete comment-box-delete size-15" id="comment-box-delete_' + component_id + '"></i></a>\
-                            </div>');
-        $('#commentBox_'+component_id).prepend(lineHtml);
-        $('#commentBox_'+component_id).animate({ scrollTop: $('#commentBox_'+component_id)[0].scrollHeight}, 10);
-        var maxcomponent_comment_id = Math.max.apply(Math, comment_id_array.id) +1;
-        comment_id_array.push({component_id: component_id, id: maxcomponent_comment_id});
-        //console.log(comment_id_array);
-    }
-  }
+ 
 
 
   var createComponent = function( component ){
@@ -714,7 +702,6 @@ window.lindneo.nisga = (function(window, $, undefined){
 
   return {
     ChatNewLine: ChatNewLine,
-    CommentNewLine: CommentNewLine,
     galeryComponentBuilder: galeryComponentBuilder,
     createComponent: createComponent,
     deleteComponent: deleteComponent,
