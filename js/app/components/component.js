@@ -272,17 +272,14 @@ $(document).ready(function(){
         var commentButton = $('#comment-button-' + that.options.component.id);
         deleteButton.remove();
         commentButton.remove();
-      }).
-      append('<div class="dragging_holder"></div>' )
-      
+
+      })
+      .append('<div class="dragging_holder"></div>' )
       .on('unselect', function(){
         that.unselect();
-
       });
 
       this.setFromData();
-
-      
 
     },
 
