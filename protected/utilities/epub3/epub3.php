@@ -8,6 +8,7 @@ class epub3 {
 	public $toc;
 	public $chapters ;
 	public $coverImage ;
+	public $nicename;
 	public $ebookFile ;
 	public $title='Canim Kitabim';
 
@@ -563,7 +564,9 @@ class epub3 {
 
 	public function zipfolder(){
 		$zip = new ZipArchive;
-		$this->ebookFile=$this->tempdirParent.'/'.file::sanitize($this->title). '.epub';
+		
+
+		$this->ebookFile=$this->getNiceName('epub');
 
 		$zip->open($this->ebookFile, ZipArchive::CREATE);
 
@@ -607,31 +610,47 @@ class epub3 {
 	}
 
 	public function download(){
-		if (file_exists($this->ebookFile)) {
-	    header('Content-Description: File Transfer');
-	    header('Content-Type: application/epub+zip');
-	    header('Content-Disposition: attachment; filename='.basename($this->ebookFile));
-	    header('Content-Transfer-Encoding: binary');
-	    header('Expires: 0');
-	    header('Cache-Control: must-revalidate');
-	    header('Pragma: public');
-	    header('Content-Length: ' . filesize($this->ebookFile));
-	    ob_clean();
-	    flush();
-	    readfile($this->ebookFile);
-	    die;
+		if (file_exists($this->ebookFile)) {	
+			header('Content-Description: File Transfer');
+			header('Content-Type: application/epub+zip');
+			header('Content-Disposition: attachment; filename='.basename($this->ebookFile));
+			header('Content-Transfer-Encoding: binary');
+			header('Expires: 0');
+			header('Cache-Control: must-revalidate');
+			header('Pragma: public');
+			header('Content-Length: ' . filesize($this->ebookFile));
+			ob_clean();
+			flush();
+			readfile($this->ebookFile);
+			die;
 		}
+		echo "file not exists".$this->ebookFile;die();
+	}
+	public function getEbookFile()
+	{
+		return $this->ebookFile;
 	}
 
+	public function getNiceName($ext)
+	{
+		return $this->nicename.'.'.$ext;
+	}
 
-	public function __construct($book_model=null){ 
+	public function getTitle()
+	{
+		return $this->title;
+	}
+
+	public function getSanitizedFilename()
+	{
+		return $this->sanitized_filename;
+	}
+
+	public function __construct($book_model=null, $download=true){ 
 		
 		$this->book=$book_model;
+
 		
-		if($this->book){
-			$this->title	=$this->book->title;
-		
-		}
 
 
 		//Create Temp Folder and store
@@ -639,6 +658,16 @@ class epub3 {
 		{
 			$this->errors[]=new error('Epub3-Construction','No temprory folder created!');
 		}
+
+
+		
+		if($this->book){
+			$this->title=$this->book->title;
+			//$this->nicename=$this->tempdirParent.'/'.file::sanitize($this->title);
+			$this->sanitized_filename=file::sanitize($this->title);
+			$this->nicename=$this->tempdirParent.'/'.$this->sanitized_filename;
+		}
+
 
 		$this->prepareBookStructure();
 

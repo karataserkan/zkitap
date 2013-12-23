@@ -1,0 +1,3 @@
+#!/bin/bash
+`pdftk $1 $2 cat output temp_$3`
+mv temp_$3 $3
