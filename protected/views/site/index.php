@@ -81,7 +81,7 @@ $this->pageTitle=Yii::app()->name;
 	    	?>
 	    	<div class='workspace'>
 	    		<h1 class="float-left white"><?php echo $workspace->workspace_name; ?></h1>
-	    		<a href='?r=book/create' class="btn white radius " style="margin-left:20px;">Yeni Kitap</a>
+	    		<a href='?r=book/newBook' class="btn white radius " style="margin-left:20px;">Yeni Kitap</a>
 				
 					
 				
