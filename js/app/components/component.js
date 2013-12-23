@@ -354,7 +354,7 @@ $(document).ready(function(){
       this.element.css({
           'border': '1px solid #ccc'
       });
-
+      console.log(this);
       this._trigger('selected', null, this );
       window.lindneo.tsimshian.emitSelectedComponent( this );
       
@@ -430,9 +430,6 @@ $(document).ready(function(){
         this._setProperty(propertyName,propertyValue);
     },
     _setProperty : function (propertyName,propertyValue){
-      console.log('****');
-      console.log(propertyName);
-      console.log(propertyValue);
         this.setPropertyofObject(propertyName,propertyValue);
         this.setFromData();
         this._trigger('update', null, this.options.component );
