@@ -307,6 +307,7 @@ $current_user=User::model()->findByPk(Yii::app()->user->id);
 			</div>
 			
 			<div class="generic-options responsive_1"  style="display:inline-block;">
+				<a href="#" class="toolbox-items" id="generic-disable" >Lock</a>
 				<a href="#" class="toolbox-items" id="generic-cut" ><img src="/css/images/cut.png" alt="Book Cover" style="margin-top:-5px;" ></a>
 				<a href="#" class="toolbox-items" id="generic-copy" ><img src="/css/images/copy.png" alt="Book Cover" style="margin-top:-5px;" ></a>
 				<a href="#" class="toolbox-items" id="generic-paste" ><img src="/css/images/paste.png" alt="Book Cover" style="margin-top:-5px;" ></a>
