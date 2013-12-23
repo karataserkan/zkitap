@@ -67,7 +67,6 @@ $(document).ready(function(){
  
 
 var createGaleryComponent = function (event,ui){
-  console.log(image_width);
 
     $("<div class='popup ui-draggable' id='pop-image-popup' style='display: block; top:" + (ui.offset.top-$(event.target).offset().top ) + "px; left: " + ( ui.offset.left-$(event.target).offset().left ) + "px;'> \
     <div class='popup-header'> \
@@ -137,8 +136,8 @@ var createGaleryComponent = function (event,ui){
                 'min-height':'100px',
                 'min-width':'100px',
 
-                'width': '100%',
-                'height': '100%',
+                'width': image_width,
+                'height': image_height,
 
 
               },
@@ -167,7 +166,9 @@ var createGaleryComponent = function (event,ui){
 
     });
 
-
+    var control_val = 0;
+    var image_width = 0;
+    var image_height = 0;
     var el = document.getElementById("dummy-dropzone");
     var imageBinary = '';
 
@@ -193,12 +194,32 @@ var createGaleryComponent = function (event,ui){
 
       var reader = new FileReader();
       var component = {};
-
+      
+      
       reader.onload = function (evt) {
 
-        imageBinary = evt.target.result;      
+              
         
+        var image = new Image();
+        image.src = evt.target.result;
 
+        image.onload = function() {
+           
+            // access image size here 
+            if(control_val == 0)
+            {
+              //console.log(this.width);
+              image_width = this.width;
+              image_height = this.height;
+              var size = window.lindneo.findBestSize({'w':image_width,'h':image_height});
+              image_width = size.w;
+              image_height = size.h;
+              control_val++;
+            }
+        
+        console.log(image_width);
+        console.log(control_val);
+        imageBinary = evt.target.result;
         $('#galery-popup-images').append('<li style="height:60px; width:60px; margin:10px; border : 1px dashed #ccc; float:left;"><img style="height:100%;" src='+imageBinary+' /> \
           <a class="btn red white size-15 radius icon-delete galey-image-delete hidden-delete " style="margin-left: 38px;"></a> \
           </li>');
@@ -208,7 +229,7 @@ var createGaleryComponent = function (event,ui){
         $('#galery-popup-images').disableSelection();
      
 
-       
+      }; 
       };
 
       reader.readAsDataURL( e.dataTransfer.files[0] );
