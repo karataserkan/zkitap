@@ -27,7 +27,7 @@ window.lindneo = (function(window){
     }
     if (  typeof currentSize == 'undefined' ) return newSize;
 
-    if(currentSize.w >= currentSize.h) { // Image is wider than it's high
+    if(currentSize.w > currentSize.h) { // Image is wider than it's high
       //console.log("landscape");
       if (currentSize.w > containerSize.w){
         scale = containerSize.w / currentSize.w;
