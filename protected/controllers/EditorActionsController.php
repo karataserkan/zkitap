@@ -668,9 +668,30 @@ right join book using (book_id) where book_id='$bookId' ;";
 	public function actionExportBook($bookId=null){
 		$book=Book::model()->findByPk($bookId);
 		$ebook=new epub3($book);
-		if ($ebook) readfile($ebook->download() );
+		//if ($ebook) readfile($ebook->download() );
+		
+		//echo $ebook->getEbookFile();
+		//die();
+		//echo $ebook->getNiceName('pdf');
+		
+
+		$ebook->download() ;
 	}
 
+	public function actionExportPdfBook($bookId=null){
+		$book=Book::model()->findByPk($bookId);
+		$ebook=new epub3($book);
+		//echo $ebook->getEbookFile();
+		//die();
+		//echo $ebook->getNiceName('pdf');
+		//die();
+		$converter=new EpubConverter($ebook->getEbookFile(), $ebook->getNiceName('pdf'),5);
+		$converter->extract();
+		header("Content-type: application/pdf");
+		header("Content-Disposition: attachment; filename=".$ebook->getSanitizedFilename());
+		header("Pragma: no-cache");
+		readfile($ebook->getNiceName('pdf'));
+	}
 
 
 	// Uncomment the following methods and override them if needed
