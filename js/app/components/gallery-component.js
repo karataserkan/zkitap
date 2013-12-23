@@ -7,22 +7,13 @@ $(document).ready(function(){
       slideDur : 2000,
       fadeDur : 800 ,
       slideSelector : 'li', // selector for target elements
-     
-    }
-
-
+    }, 
     
-    , 
-
     _create: function(){
-
-     
-     
-      
-
+        
       this._super();
       var that = this;
-
+      var image_width = 0;
       //if( that.options.component.type=='galery')
 
       if( that.options.component.data.ul.imgs ) {
@@ -31,6 +22,8 @@ $(document).ready(function(){
         ul.css(that.options.component.data.ul.css);
         this.element.parent().find('.some-gallery').css(that.options.component.data['some-gallery'].css);
         
+    
+
         console.log(that);  
         $.each (that.options.component.data.ul.imgs , function (index,value) {
           if(  value.src ) {
@@ -61,7 +54,7 @@ $(document).ready(function(){
 
 
     field: function(key, value){
-      
+      console.log(image_width);
       this._super();
 
       // set
@@ -74,7 +67,7 @@ $(document).ready(function(){
  
 
 var createGaleryComponent = function (event,ui){
-
+  console.log(image_width);
 
     $("<div class='popup ui-draggable' id='pop-image-popup' style='display: block; top:" + (ui.offset.top-$(event.target).offset().top ) + "px; left: " + ( ui.offset.left-$(event.target).offset().left ) + "px;'> \
     <div class='popup-header'> \
@@ -100,8 +93,6 @@ var createGaleryComponent = function (event,ui){
 
     });
 
-
-    
 
 
     $('#pop-image-OK').click(function (){
@@ -205,7 +196,8 @@ var createGaleryComponent = function (event,ui){
 
       reader.onload = function (evt) {
 
-        imageBinary = evt.target.result;        
+        imageBinary = evt.target.result;      
+        
 
         $('#galery-popup-images').append('<li style="height:60px; width:60px; margin:10px; border : 1px dashed #ccc; float:left;"><img style="height:100%;" src='+imageBinary+' /> \
           <a class="btn red white size-15 radius icon-delete galey-image-delete hidden-delete " style="margin-left: 38px;"></a> \
