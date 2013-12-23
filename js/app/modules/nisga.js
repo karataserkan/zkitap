@@ -310,7 +310,7 @@ window.lindneo.nisga = (function(window, $, undefined){
 
       }
       else revision_value=0;
-      console.log(component);
+      console.log(event);
       //console.log(revision_array);
         window.lindneo.tlingit.componentHasUpdated( component );
         
@@ -576,4 +576,3 @@ window.lindneo.nisga = (function(window, $, undefined){
   };
 
 })( window, jQuery );
-
