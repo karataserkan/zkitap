@@ -255,7 +255,7 @@ window.lindneo.nisga = (function(window, $, undefined){
       }
       else revision_value=0;
       //console.log(revision_array);
-        window.lindneo.tlingit.componentHasUpdated( component );        
+        
       },
       'selected': function (event, element) {
         window.lindneo.currentComponentWidget = element;
@@ -284,7 +284,6 @@ window.lindneo.nisga = (function(window, $, undefined){
       }
       else revision_value=0;
       //console.log(revision_array);
-        window.lindneo.tlingit.componentHasUpdated( component );
       },
       'selected': function (event, element) {
         window.lindneo.currentComponentWidget = element;
@@ -305,15 +304,13 @@ window.lindneo.nisga = (function(window, $, undefined){
       'update': function ( event, component ) {  
         if(revision_value==0){
         var newObject = jQuery.extend(true, {}, component);
-        revision_array.revisions.push({component_id: component.id, component: component, revision_date: $.now(), even_type: 'UPDATE'});
+        revision_array.revisions.push({component_id: component.id, component: newObject, revision_date: $.now(), even_type: 'UPDATE'});
                 revision_id++;
 
       }
       else revision_value=0;
-      console.log(event);
+      //console.log(component);
       //console.log(revision_array);
-        window.lindneo.tlingit.componentHasUpdated( component );
-        
       },
       'selected': function (event, element) {
         window.lindneo.currentComponentWidget = element;
@@ -344,7 +341,6 @@ window.lindneo.nisga = (function(window, $, undefined){
       }
       else revision_value=0;
       //console.log(revision_array);
-        window.lindneo.tlingit.componentHasUpdated( component );
       },
       'selected': function (event, element) {
         window.lindneo.currentComponentWidget = element;
@@ -376,7 +372,6 @@ window.lindneo.nisga = (function(window, $, undefined){
       }
       else revision_value=0;
       //console.log(revision_array);
-        window.lindneo.tlingit.componentHasUpdated( component );
       },
       'selected': function (event, element) {
         window.lindneo.currentComponentWidget = element;
@@ -411,7 +406,6 @@ window.lindneo.nisga = (function(window, $, undefined){
       }
       else revision_value=0;
       //console.log(revision_array);
-        window.lindneo.tlingit.componentHasUpdated( component );
       },
       'selected': function (event, element) {
         window.lindneo.currentComponentWidget = element;
@@ -440,7 +434,6 @@ window.lindneo.nisga = (function(window, $, undefined){
       }
       else revision_value=0;
       //console.log(revision_array);
-        window.lindneo.tlingit.componentHasUpdated( component );
       },
       'selected': function (event, element) {
         window.lindneo.currentComponentWidget = element;
@@ -472,7 +465,6 @@ window.lindneo.nisga = (function(window, $, undefined){
       }
       else revision_value=0;
       //console.log(revision_array);
-        window.lindneo.tlingit.componentHasUpdated( component );
       },
       'selected': function (event, element) {
         window.lindneo.currentComponentWidget = element;
@@ -503,7 +495,6 @@ window.lindneo.nisga = (function(window, $, undefined){
       }
       else revision_value=0;
       //console.log(revision_array);
-        window.lindneo.tlingit.componentHasUpdated( component );
       },
       'selected': function (event, element) {
         window.lindneo.currentComponentWidget = element;
@@ -532,7 +523,6 @@ window.lindneo.nisga = (function(window, $, undefined){
       }
       else revision_value=0;
       //console.log(revision_array);
-        window.lindneo.tlingit.componentHasUpdated( component );
       }, 
       'selected': function ( event, element_ ){
         window.lindneo.currentComponentWidget = element_;
