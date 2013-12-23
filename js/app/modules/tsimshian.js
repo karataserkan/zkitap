@@ -26,8 +26,8 @@ window.lindneo.tsimshian = (function(window, $, undefined){
 
   var componentCreated = function (component) {    
 
-  	window.lindneo.tsimshian.myComponent = component.id;
-  	this.socket.emit('newComponent', component);
+          window.lindneo.tsimshian.myComponent = component.id;
+          this.socket.emit('newComponent', component);
 
   };
 
@@ -141,4 +141,3 @@ window.lindneo.tsimshian = (function(window, $, undefined){
   };
 
 })( window, jQuery );
-
