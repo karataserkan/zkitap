@@ -61,7 +61,8 @@ $(document).ready(function(){
         component = $.parseJSON(window.lindneo.tlingit.componentToJson(that.options.component));
         console.log(component);
         component.data.img.src = imageBinary;
-        component.data.self.css.width = 
+        component.data.self.css.width = image_width;
+        component.data.self.css.height = image_height;
         window.lindneo.tlingit.componentHasCreated(component);
         window.lindneo.nisga.deleteComponent(that.options.component);
       };
