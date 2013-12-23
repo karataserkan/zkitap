@@ -22,8 +22,8 @@ window.lindneo = (function(window){
     containerlement = typeof containerlement !== 'undefined' ? containerlement : '#current_page';
     if ( $(containerlement).size() == 0 ) return newSize;
     var containerSize = {
-      "w":$(containerlement).width(),
-      "h":$(containerlement).height()
+      "w":$(containerlement).width() * 0.8 ,
+      "h":$(containerlement).height() * 0.8
     }
     if (  typeof currentSize == 'undefined' ) return newSize;
 
