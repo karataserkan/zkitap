@@ -354,7 +354,7 @@ $(document).ready(function(){
       this.element.css({
           'border': '1px solid #ccc'
       });
-      console.log(this);
+
       this._trigger('selected', null, this );
       window.lindneo.tsimshian.emitSelectedComponent( this );
       
@@ -389,11 +389,9 @@ $(document).ready(function(){
       return this._getProperty(propertyName);
     },
     setPropertyofObject : function (propertyName,propertyValue){
-      console.log('****');
       return this._setPropertyofObject(propertyName,propertyValue) ;
     },
     _setPropertyofObject : function (propertyName,propertyValue){
-      console.log('****');
       switch(propertyName){
         case 'zindex':
 
@@ -426,7 +424,6 @@ $(document).ready(function(){
       }
     },
     setProperty : function (propertyName,propertyValue){
-      console.log('****');
         this._setProperty(propertyName,propertyValue);
     },
     _setProperty : function (propertyName,propertyValue){

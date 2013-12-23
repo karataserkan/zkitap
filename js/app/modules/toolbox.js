@@ -135,9 +135,8 @@ window.lindneo.toolbox = (function(window, $, undefined){
 
         $('.toolbox .tool, .toolbox-btn').each(function (index) {
               var rel=$(this).attr('rel');
-              
+              //console.log  ( rel );
               var relValue = component.getProperty(rel);
-              //console.log  ( relValue );
               if( relValue != null) { 
                 // text select ve color icin
                 $(this).not('radio').val(relValue);
@@ -192,16 +191,24 @@ window.lindneo.toolbox = (function(window, $, undefined){
 
   var addComponentToSelection = function (component){
       
-    var newObject = jQuery.extend(true, {}, component);
+      var newObject = jQuery.extend(true, {}, component);
+        this.selectedComponents=$.grep(this.selectedComponents, function (n,i){
+            //console.log(n);
+        return (n.options.component.id !== newObject.options.component.id);  
+      });
+        /*for(var i=0; i<selectedComponents.length;i++){
+            if(selectedComponents[i].options.component.id == newObject.options.component.id) {is_copy=1; console.log('niden...');}
+            //console.log('selectedComponents..............');
+            //console.log(selectedComponents[i]);
+            //console.log('newObject..............');
+            //console.log(newObject);
+        }*/
 
-    this.selectedComponents=$.grep(this.selectedComponents, function (n,i){
-      return (n.options.component.id !== newObject.options.component.id);  
-    });
-      
-    this.selectedComponents.push(newObject);
-    this.selectionUpdated();
         
-      
+            this.selectedComponents.push(newObject);
+            this.selectionUpdated();
+        
+      //console.log(selectedComponents);
   };
 
   var removeComponentFromSelection = function (component){
