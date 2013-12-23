@@ -305,12 +305,12 @@ window.lindneo.nisga = (function(window, $, undefined){
       'update': function ( event, component ) {  
         if(revision_value==0){
         var newObject = jQuery.extend(true, {}, component);
-        revision_array.revisions.push({component_id: component.id, component: newObject, revision_date: $.now(), even_type: 'UPDATE'});
+        revision_array.revisions.push({component_id: component.id, component: component, revision_date: $.now(), even_type: 'UPDATE'});
                 revision_id++;
 
       }
       else revision_value=0;
-      //console.log(component);
+      console.log(event);
       //console.log(revision_array);
         window.lindneo.tlingit.componentHasUpdated( component );
         

@@ -40,6 +40,7 @@ $(document).ready(function(){
       },
 
       getSettable : function (){
+ 
         return this.options.component.data.textarea;
       },
 
