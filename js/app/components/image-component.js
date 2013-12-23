@@ -45,17 +45,27 @@ $(document).ready(function(){
       var component = {};
 
       reader.onload = function (evt) {
+        
+        var image = new Image();
+        image.src = evt.target.result;
 
+        image.onload = function() {
+            // access image size here 
+            console.log(this.width);
+            var image_width = this.width;
+            var image_height = this.height;
+        
+        
         imageBinary = evt.target.result;        
         
         component = $.parseJSON(window.lindneo.tlingit.componentToJson(that.options.component));
         console.log(component);
         component.data.img.src = imageBinary;
-
+        component.data.self.css.width = 
         window.lindneo.tlingit.componentHasCreated(component);
         window.lindneo.nisga.deleteComponent(that.options.component);
       };
-
+      };
       reader.readAsDataURL( e.dataTransfer.files[0] );
 
     }, false);
@@ -139,7 +149,18 @@ var createImageComponent = function ( event, ui ) {
       var component = {};
 
       reader.onload = function (evt) {
+          
+        var image = new Image();
+        image.src = evt.target.result;
 
+        image.onload = function() {
+            // access image size here 
+            
+            image_width = this.width + 'px';
+            image_height = this.height + 'px';
+
+        
+console.log(image_width);
         imageBinary = evt.target.result;        
         
         $("#image-add-dummy-close-button").trigger('click');
@@ -176,7 +197,7 @@ var createImageComponent = function ( event, ui ) {
 
         window.lindneo.tlingit.componentHasCreated( component );
       };
-
+};
       reader.readAsDataURL( e.dataTransfer.files[0] );
 
     }, false);
