@@ -77,12 +77,13 @@
 		<?php echo $form->error($model,'publish_time'); ?>
 	</div>
 -->
+<!--
 	<div class="row">
 		<?php echo $form->labelEx($model,'data'); ?>
 		<?php echo $form->textField($model,'data'); ?>
 		<?php echo $form->error($model,'data'); ?>
 	</div>
-	
+	-->
 	<div class="row">
 		<?php echo $form->labelEx($model,'created'); ?>
 		<!-- <?php //echo $form->textField($model,'created'); ?>-->
