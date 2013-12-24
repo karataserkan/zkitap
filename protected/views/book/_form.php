@@ -14,6 +14,7 @@
 <?php $form=$this->beginWidget('CActiveForm', array(
 	'id'=>'book-form',
 	'enableAjaxValidation'=>false,
+	'htmlOptions' => array('enctype' => 'multipart/form-data'),
 )); ?>
 
 	<?php echo $form->errorSummary($model); 
@@ -90,6 +91,9 @@
 		<?php echo $model->created; ?>
 		<?php echo $form->error($model,'created'); ?>
 	</div>
+
+	
+
 	<div class="row buttons">
 		<?php echo CHtml::submitButton($model->isNewRecord ? 'Create' : 'Save'); ?>
 	</div>

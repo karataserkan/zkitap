@@ -75,8 +75,6 @@ class BookController extends Controller
 	}
 
 
-
-
 	/**
 	 * Creates a new model.
 	 * If creation is successful, the browser will be redirected to the 'view' page.
@@ -100,8 +98,6 @@ class BookController extends Controller
 		{
 			$model->attributes=$_POST['Book'];
 
-
-
 			if($model->save())
 				$userid=Yii::app()->user->id;
 				$addOwner = Yii::app()->db->createCommand();
@@ -110,6 +106,7 @@ class BookController extends Controller
 				    'book_id'=>$model->book_id,
 				    'type'   =>'owner'
 				));
+			
 				$this->redirect(array('selectTemplate','bookId'=>$model->book_id));
 		}
 
@@ -127,9 +124,6 @@ class BookController extends Controller
 		    'condition'=>'workspace_id=:workspace_id',
 		    'params'=>array(':workspace_id'=>'layouts'),
 		));
-		
-
-
 
 		if(isset($_GET['layout']))
 		{
@@ -144,7 +138,9 @@ class BookController extends Controller
 			$book_data['template_id']=$layout_id;
 			$book->data=json_encode($book_data);
 
-			$book->save();		
+			$book->save();
+
+
 				
 			$chapters= Chapter::model()->findAll(array(
 				'condition' => 'book_id=:book_id',
