@@ -36,7 +36,7 @@ class BookController extends Controller
 				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
-				'actions'=>array('create','update','selectTemplate','delete','view','author'),
+				'actions'=>array('create','update','selectTemplate','delete','view','author','newBook'),
 				'users'=>array('@'),
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
@@ -60,11 +60,25 @@ class BookController extends Controller
 		));
 	}
 
+
+
+	public function actionNewBook($bookType=null)
+	{
+		$this->render('new_book', array());
+
+		if ($bookType) {
+			$this->redirect(array('create','bookType'=>$bookType));
+		}
+	}
+
+
+
+
 	/**
 	 * Creates a new model.
 	 * If creation is successful, the browser will be redirected to the 'view' page.
 	 */
-	public function actionCreate($workspace=null,$book_id=null)
+	public function actionCreate($workspace=null,$book_id=null,$bookType='epub')
 	{
 		$model=new Book;
 		$model->book_id=functions::get_random_string();

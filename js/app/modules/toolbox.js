@@ -233,6 +233,33 @@ window.lindneo.toolbox = (function(window, $, undefined){
       window.lindneo.nisga.redoComponent();
   };
 
+  var lockSelectedItemsToClipboard = function () {
+      var newClipboard=[];
+
+      this.clearClipboard();
+      
+      $.each(window.lindneo.toolbox.selectedComponents, function( key, component ) {
+        console.log(component.options);
+        $('#'+component.options.component.id).parent().draggable({ disabled: true });
+        $('#'+component.options.component.id).droppable({ disabled: true });
+        $('#'+component.options.component.id).selectable({ disabled: true });
+        $('#'+component.options.component.id).sortable({ disabled: true });
+        $('#'+component.options.component.id).resizable({ disabled: true });
+        $('#'+component.options.component.id).attr('readonly','readonly');
+
+        
+        var newComponent =JSON.parse(JSON.stringify(component.options.component)); 
+        //console.log(newComponent);
+        
+        newComponent.id= '';
+        newComponent.page_id= '';
+        
+        newClipboard.push(newComponent);
+      });
+        //console.log(newClipboard);
+        return this.setClipboardItems(newClipboard);
+  };
+
   var copySelectedItemsToClipboard = function (cut) {
 
         var newClipboard=[];
@@ -290,6 +317,10 @@ window.lindneo.toolbox = (function(window, $, undefined){
       that.redoSelectedItemsClipboard();
     });
     
+    $('#generic-disable').click(function(){
+      that.lockSelectedItemsToClipboard();
+    });
+
     $('#generic-cut').click(function(){
       that.copySelectedItemsToClipboard(true);
     });
@@ -326,6 +357,7 @@ window.lindneo.toolbox = (function(window, $, undefined){
     findlowestZIndexToSet: findlowestZIndexToSet,
     pasteClipboardItems: pasteClipboardItems,
     copySelectedItemsToClipboard: copySelectedItemsToClipboard,
+    lockSelectedItemsToClipboard: lockSelectedItemsToClipboard,
     clearClipboard: clearClipboard,
     setClipboardItems: setClipboardItems,
     getClipboardItems: getClipboardItems,

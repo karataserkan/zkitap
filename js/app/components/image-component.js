@@ -54,6 +54,9 @@ $(document).ready(function(){
             console.log(this.width);
             var image_width = this.width;
             var image_height = this.height;
+            var size = window.lindneo.findBestSize({'w':image_width,'h':image_height});
+            image_width = size.w;
+            image_height = size.h;
         
         
         imageBinary = evt.target.result;        
@@ -157,8 +160,11 @@ var createImageComponent = function ( event, ui ) {
         image.onload = function() {
             // access image size here 
             
-            image_width = this.width + 'px';
-            image_height = this.height + 'px';
+            image_width = this.width;
+            image_height = this.height;
+            var size = window.lindneo.findBestSize({'w':image_width,'h':image_height});
+            image_width = size.w;
+            image_height = size.h;
 
         
 console.log(image_width);

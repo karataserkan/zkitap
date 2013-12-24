@@ -11,7 +11,7 @@ $(document).ready(function(){
       options: {
 
       },
-
+      
       _create: function() {
 
         if( this.options.component.data.textarea.val === '' ){

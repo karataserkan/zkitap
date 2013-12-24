@@ -116,8 +116,8 @@ $current_user=User::model()->findByPk(Yii::app()->user->id);
                         <div class="float-left" id="save_status" style="width:100px;"></div>
                         <div class="generic-options float-left"  style="display:inline-block;">
 
-				<a id="undo" class="icon-undo dark-blue size-20"></a>
-				<a id="redo" class="icon-redo grey-8 size-20"></a>
+				<a id="undo" class="icon-undo dark-blue size-25"></a>
+				<a id="redo" class="icon-redo grey-8 size-25"></a>
 			</div>
 			
 			<div class="vertical-line responsive_2"></div>
@@ -307,6 +307,7 @@ $current_user=User::model()->findByPk(Yii::app()->user->id);
 			</div>
 			
 			<div class="generic-options responsive_1"  style="display:inline-block;">
+				<a href="#" class="toolbox-items" id="generic-disable" >Lock</a>
 				<a href="#" class="toolbox-items" id="generic-cut" ><img src="/css/images/cut.png" alt="Book Cover" style="margin-top:-5px;" ></a>
 				<a href="#" class="toolbox-items" id="generic-copy" ><img src="/css/images/copy.png" alt="Book Cover" style="margin-top:-5px;" ></a>
 				<a href="#" class="toolbox-items" id="generic-paste" ><img src="/css/images/paste.png" alt="Book Cover" style="margin-top:-5px;" ></a>
