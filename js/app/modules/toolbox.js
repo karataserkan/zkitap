@@ -206,10 +206,10 @@ window.lindneo.toolbox = (function(window, $, undefined){
 
   var removeComponentFromSelection = function (component){
       this.selectedComponents=$.grep(this.selectedComponents, function (n,i){
-        return (n !== component);  
+        return (n.options.component.id !== component.options.component.id);  
       });
       this.selectionUpdated();
-      //console.log('remove selections....')
+      console.log('remove selections....')
       //console.log(selectedComponents);
 
   };

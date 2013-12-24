@@ -32,7 +32,7 @@ $(document).ready(function(){
 
 
 
-        that._selected( event, ui );
+        //that._selected( event, ui );
       })
       .focusout(function(event){
           
