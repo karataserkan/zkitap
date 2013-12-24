@@ -858,7 +858,10 @@ Grafik Ekle
 	<?php 
 
 	$template_links='';
-	$template_id=$model->data;
+	
+	$data=json_decode($model->data,true);
+	$template_id=$data["template_id"];
+	
 	$template_chapter=Chapter::model()->find( 'book_id=:book_id', array(':book_id' => $template_id )  );
 	
 

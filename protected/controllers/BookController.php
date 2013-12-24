@@ -61,12 +61,15 @@ class BookController extends Controller
 	}
 
 
-
+	/**
+	 * Selection of book type.
+	 * @param $bookType 'epub' || 'pdf'
+	 */
 	public function actionNewBook($bookType=null)
 	{
 		$this->render('new_book', array());
 
-		if ($bookType) {
+		if ($bookType=='epub' || $bookType=='pdf') {
 			$this->redirect(array('create','bookType'=>$bookType));
 		}
 	}
@@ -82,6 +85,8 @@ class BookController extends Controller
 	{
 		$model=new Book;
 		$model->book_id=functions::get_random_string();
+		//seçilen bookType json olarak eklendi
+		$model->data=json_encode(array('book_type' => $bookType));
 		$model->created=date("Y-m-d");
 
 
@@ -134,7 +139,11 @@ class BookController extends Controller
 			$bookId=$_GET['book_id'];
 
 			$book=$this->loadModel($bookId);
-			$book->data=$layout_id;
+			//book->data'ya template_id eklendi
+			$book_data=json_decode($book->data,true);
+			$book_data['template_id']=$layout_id;
+			$book->data=json_encode($book_data);
+
 			$book->save();		
 				
 			$chapters= Chapter::model()->findAll(array(
