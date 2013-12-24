@@ -113,8 +113,8 @@ $current_user=User::model()->findByPk(Yii::app()->user->id);
 	
 			<div class="styler_box">
 			<!-- <ul id="text-styles" ></ul> -->
-                        <div class="float-left" id="save_status" style="width:100px;"></div>
-                        <div class="generic-options float-left"  style="display:inline-block;">
+                        <div class="float-left" id="save_status" style="width:50px; height:33px; margin-right:5px;"></div>
+                        <div class="generic-options float-left"  style="display:inline-block; margin-right:5px;">
 
 				<a id="undo" class="icon-undo dark-blue size-25"></a>
 				<a id="redo" class="icon-redo grey-8 size-25"></a>
@@ -308,6 +308,7 @@ $current_user=User::model()->findByPk(Yii::app()->user->id);
 			
 			<div class="generic-options responsive_1"  style="display:inline-block;">
 				<a href="#" class="toolbox-items" id="generic-disable" >Lock</a>
+				<a href="#" class="toolbox-items" id="generic-undisable" >Unlock</a>
 				<a href="#" class="toolbox-items" id="generic-cut" ><img src="/css/images/cut.png" alt="Book Cover" style="margin-top:-5px;" ></a>
 				<a href="#" class="toolbox-items" id="generic-copy" ><img src="/css/images/copy.png" alt="Book Cover" style="margin-top:-5px;" ></a>
 				<a href="#" class="toolbox-items" id="generic-paste" ><img src="/css/images/paste.png" alt="Book Cover" style="margin-top:-5px;" ></a>

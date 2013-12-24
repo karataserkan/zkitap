@@ -45,8 +45,18 @@ select {
 
 
 
+.saving {
+	background-color:yellow;
+	}
 
-	
+.error {
+	background-color:red;
+	}
+
+.complete {
+	background-color:green;
+	}
+
 .radius {
 	-webkit-border-radius: 5px;
 	-moz-border-radius: 5px;
