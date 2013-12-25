@@ -122,7 +122,11 @@ $(document).ready(function(){
 
       .mouseenter(function(event){
         // add delete button
+         console.log(that.options.component.data.lock);
+         //if(that.options.component.data.lock == '')
          var deleteButton = $('<a id="delete-button-' + that.options.component.id + '" class="icon-delete white"style="position: absolute; top: -20px; right: 5px;"></a>');
+         //else
+         //var deleteButton=$('<a id="delete-button" class="icon-delete white"style="position: absolute; top: -20px; right: 5px;" hidden></a>');
          var commentButton = $('<a id="comment-button-' + that.options.component.id + '" class="icon-down-arrow comment-box-arrow size-10 icon-up-down" style="position: absolute; top: -20px; right: 30px;"></a>');
       
          deleteButton.click(function(e){
