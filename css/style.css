@@ -429,7 +429,27 @@ label#user:after {
 }
 
 
+table#componentTableSelectorTable {
+	border-spacing: 2px;
+	border-collapse: separate;
+	margin: 0 4px 0 4px;
+}
 
+table#componentTableSelectorTable td{
+	border:thin solid #d6d6d6;
+	width: 13px;
+	height: 13px;
+}
+
+table#componentTableSelectorTable td.active{
+	border-color: #a1a1a1;
+	background: #c8def4;
+}
+
+table#componentTableSelectorTable td:hover{
+	border-color: #fff;
+	background: #c8def4;
+}
 
 /* END OF HEADER --------------------------------------------------------*/
 
@@ -628,7 +648,7 @@ box-shadow: 4px -4px 15px 0px rgba(1, 1, 1, 0.2);
 }
 
 div.chat_sent_messages::-webkit-scrollbar {  
-    width: 10px;  
+    width: 10px;  componentTableSelectorTable
 }
 
 div.chat_sent_messages::-webkit-scrollbar-track {  
