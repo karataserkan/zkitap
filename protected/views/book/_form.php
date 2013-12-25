@@ -14,6 +14,7 @@
 <?php $form=$this->beginWidget('CActiveForm', array(
 	'id'=>'book-form',
 	'enableAjaxValidation'=>false,
+	'htmlOptions' => array('enctype' => 'multipart/form-data'),
 )); ?>
 
 	<?php echo $form->errorSummary($model); 
@@ -77,18 +78,22 @@
 		<?php echo $form->error($model,'publish_time'); ?>
 	</div>
 -->
+<!--
 	<div class="row">
 		<?php echo $form->labelEx($model,'data'); ?>
 		<?php echo $form->textField($model,'data'); ?>
 		<?php echo $form->error($model,'data'); ?>
 	</div>
-	
+	-->
 	<div class="row">
 		<?php echo $form->labelEx($model,'created'); ?>
 		<!-- <?php //echo $form->textField($model,'created'); ?>-->
 		<?php echo $model->created; ?>
 		<?php echo $form->error($model,'created'); ?>
 	</div>
+
+	
+
 	<div class="row buttons">
 		<?php echo CHtml::submitButton($model->isNewRecord ? 'Create' : 'Save'); ?>
 	</div>

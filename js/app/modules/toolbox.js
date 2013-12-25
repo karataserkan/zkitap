@@ -237,6 +237,8 @@ window.lindneo.toolbox = (function(window, $, undefined){
       var newClipboard=[];
 
       this.clearClipboard();
+      var lock_user = window.lindneo.user;
+      
       
       $.each(window.lindneo.toolbox.selectedComponents, function( key, component ) {
         console.log(component.options);
@@ -246,8 +248,11 @@ window.lindneo.toolbox = (function(window, $, undefined){
         $('#'+component.options.component.id).sortable({ disabled: true });
         $('#'+component.options.component.id).resizable({ disabled: true });
         $('#'+component.options.component.id).attr('readonly','readonly');
-
-        
+        $('#delete-button-'+component.options.component.id).remove();
+        if ($.type(component.options.component.data.lock) == "undefined") component.options.component.data.lock='';
+        component.options.component.data.lock=lock_user;
+        this._trigger('update', null, component.options.component );
+        console.log(component.options.component);
         var newComponent =JSON.parse(JSON.stringify(component.options.component)); 
         //console.log(newComponent);
         
@@ -255,6 +260,36 @@ window.lindneo.toolbox = (function(window, $, undefined){
         newComponent.page_id= '';
         
         newClipboard.push(newComponent);
+      });
+        //console.log(newClipboard);
+        return this.setClipboardItems(newClipboard);
+  };
+
+  var unlockSelectedItemsToClipboard = function () {
+      var newClipboard=[];
+
+      this.clearClipboard();
+      
+      $.each(window.lindneo.toolbox.selectedComponents, function( key, component ) {
+        console.log(component.options.component.data.lock);
+        if(component.options.component.data.lock.username==window.lindneo.user.username){
+          $('#'+component.options.component.id).parent().draggable({ disabled: false });
+          $('#'+component.options.component.id).droppable({ disabled: false });
+          $('#'+component.options.component.id).selectable({ disabled: false });
+          $('#'+component.options.component.id).sortable({ disabled: false });
+          $('#'+component.options.component.id).resizable({ disabled: false });
+          $('#'+component.options.component.id).removeAttr('readonly');
+
+        
+          var newComponent =JSON.parse(JSON.stringify(component.options.component)); 
+          //console.log(newComponent);
+          
+          newComponent.id= '';
+          newComponent.page_id= '';
+          
+          newClipboard.push(newComponent);
+        }
+        else alert('Yetkili değilsiniz....');
       });
         //console.log(newClipboard);
         return this.setClipboardItems(newClipboard);
@@ -321,6 +356,10 @@ window.lindneo.toolbox = (function(window, $, undefined){
       that.lockSelectedItemsToClipboard();
     });
 
+    $('#generic-undisable').click(function(){
+      that.unlockSelectedItemsToClipboard();
+    });
+
     $('#generic-cut').click(function(){
       that.copySelectedItemsToClipboard(true);
     });
@@ -358,6 +397,7 @@ window.lindneo.toolbox = (function(window, $, undefined){
     pasteClipboardItems: pasteClipboardItems,
     copySelectedItemsToClipboard: copySelectedItemsToClipboard,
     lockSelectedItemsToClipboard: lockSelectedItemsToClipboard,
+    unlockSelectedItemsToClipboard: unlockSelectedItemsToClipboard,
     clearClipboard: clearClipboard,
     setClipboardItems: setClipboardItems,
     getClipboardItems: getClipboardItems,
