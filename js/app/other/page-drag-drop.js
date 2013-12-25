@@ -146,6 +146,9 @@ $( document ).ready(function () {
           case 'link':
             createLinkComponent( event, ui  );
             break;
+          case 'table':
+            createTableComponent( event, ui  );
+            break;
 
           default:
             break; 
