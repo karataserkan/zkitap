@@ -270,8 +270,8 @@ $(document).ready(function(){
 
         deleteThisCommentLink.click(function(){
           $.each (that.options.component.data.comments , function (i,val){
-            console.log(comment);
-            console.log(val.comment_id);
+            //console.log(comment);
+            //console.log(val.comment_id);
             if (val.comment_id == comment.comment_id){
               that.options.component.data.comments.splice(i,1);
               lineHtml.remove();
@@ -326,7 +326,7 @@ $(document).ready(function(){
         $('#'+this.options.component.id).removeAttr('readonly');
         
       };
-      console.log(this.options.component.data.lock);
+      //console.log(this.options.component.data.lock);
     },
 
     type: function () {
@@ -404,7 +404,7 @@ $(document).ready(function(){
         $('#'+this.options.component.id).removeAttr('readonly');
         
       };
-      console.log(this.options.component.data.lock);
+      //console.log(this.options.component.data.lock);
     },
 
     selected: function ( event, ui) {
@@ -422,7 +422,7 @@ $(document).ready(function(){
       window.lindneo.toolbox.removeComponentFromSelection(this);
     },
     _getSettable : function (propertyName){
-      console.log (this.options.comment.data);
+      //console.log (this.options.comment.data);
      return this.options.component.data.self;
     },
     getSettable : function (propertyName){
@@ -436,11 +436,9 @@ $(document).ready(function(){
       return this._getProperty(propertyName);
     },
     setPropertyofObject : function (propertyName,propertyValue){
-      console.log('****');
       return this._setPropertyofObject(propertyName,propertyValue) ;
     },
     _setPropertyofObject : function (propertyName,propertyValue){
-      console.log('****');
       switch(propertyName){
         case 'zindex':
 
@@ -473,8 +471,7 @@ $(document).ready(function(){
       }
     },
     setProperty : function (propertyName,propertyValue){
-      console.log('****');
-        this._setProperty(propertyName,propertyValue);
+      this._setProperty(propertyName,propertyValue);
     },
     _setProperty : function (propertyName,propertyValue){
         this.setPropertyofObject(propertyName,propertyValue);

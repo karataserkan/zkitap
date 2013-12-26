@@ -45,31 +45,33 @@ $(document).ready(function(){
       var component = {};
 
       reader.onload = function (evt) {
-        
+
         var image = new Image();
         image.src = evt.target.result;
 
         image.onload = function() {
-            // access image size here 
-            console.log(this.width);
-            var image_width = this.width;
-            var image_height = this.height;
-            var size = window.lindneo.findBestSize({'w':image_width,'h':image_height});
-            image_width = size.w;
-            image_height = size.h;
-        
-        
-        imageBinary = evt.target.result;        
-        
-        component = $.parseJSON(window.lindneo.tlingit.componentToJson(that.options.component));
-        console.log(component);
-        component.data.img.src = imageBinary;
-        component.data.self.css.width = image_width;
-        component.data.self.css.height = image_height;
-        window.lindneo.tlingit.componentHasCreated(component);
-        window.lindneo.nisga.deleteComponent(that.options.component);
+
+          console.log(this.width);
+          var image_width = this.width;
+          var image_height = this.height;
+          var size = window.lindneo.findBestSize({'w':image_width,'h':image_height});
+          console.log(size);
+          image_width = size.w;
+          image_height = size.h;
+
+          imageBinary = evt.target.result;        
+          
+          component = $.parseJSON(window.lindneo.tlingit.componentToJson(that.options.component));
+          console.log(component);
+          component.data.img.src = imageBinary;
+          component.data.self.css.width = image_width;
+          component.data.self.css.height = image_height;
+
+          window.lindneo.tlingit.componentHasCreated(component);
+          window.lindneo.nisga.deleteComponent(that.options.component);
+        };
       };
-      };
+
       reader.readAsDataURL( e.dataTransfer.files[0] );
 
     }, false);
@@ -153,7 +155,7 @@ var createImageComponent = function ( event, ui ) {
       var component = {};
 
       reader.onload = function (evt) {
-          
+
         var image = new Image();
         image.src = evt.target.result;
 
@@ -167,8 +169,8 @@ var createImageComponent = function ( event, ui ) {
             image_height = size.h;
 
         
-console.log(image_width);
-        imageBinary = evt.target.result;        
+        console.log(image_width);
+        imageBinary = evt.target.result;      
         
         $("#image-add-dummy-close-button").trigger('click');
 
@@ -204,7 +206,8 @@ console.log(image_width);
 
         window.lindneo.tlingit.componentHasCreated( component );
       };
-};
+      };
+
       reader.readAsDataURL( e.dataTransfer.files[0] );
 
     }, false);
