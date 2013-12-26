@@ -245,6 +245,7 @@ $(document).ready(function(){
           },
           'val': ''
         },
+        'lock':'',
         'self': {
           'css': {
             'overflow': 'visible',

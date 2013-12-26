@@ -207,6 +207,7 @@ var createShapeComponent = function ( event, ui ) {
             'fillStyle': 'black',
             'strokeStyle': 'black',
             'shapeType': type ,
+            'lock':'',
             'self': {
               'css': {
                 'position':'absolute',

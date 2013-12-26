@@ -112,6 +112,7 @@ var createVideoComponent = function(event, ui) {
                         'width': '100%'
                     }
                 },
+                'lock':'',
                 'self': {
                     'css': {
                         'position': 'absolute',

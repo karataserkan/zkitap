@@ -307,6 +307,7 @@ $(document).ready(function(){
               'type' : 'table',
               'data': {
                   'table': tableData,
+                  'lock':'',
                   'self': {
                     'css': {
                       'position':'absolute',

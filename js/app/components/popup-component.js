@@ -90,6 +90,7 @@ var createPopupComponent = function ( event, ui ) {
           'type' : 'popup',
           'data': {
             'html_inner':  $("#popup-explanation").val(),
+            'lock':'',
             'self': {
               'css': {
                 'position':'absolute',

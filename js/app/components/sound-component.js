@@ -103,6 +103,7 @@ $(document).ready(function(){
                   'width':'100%'
                 }
               },
+              'lock':'',
               'self': {
                 'css': {
                   'position':'absolute',

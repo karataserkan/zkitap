@@ -111,7 +111,7 @@ var createLinkComponent = function ( event, ui ) {
        var  component = {
           'type' : 'link',
           'data': {
-            
+            'lock':'',
             'self': {
               'css': {
                 'position':'absolute',

@@ -145,6 +145,7 @@ var createGaleryComponent = function (event,ui){
             
          
             },
+            'lock':'',
             'self': {
               'css': {
                 'position':'absolute',
