@@ -135,7 +135,7 @@ $(document).ready(function(){
       
          deleteButton.click(function(e){
          e.preventDefault();
-        
+       
           //window.lindneo.nisga.ComponentDelete( that.options.component );
           window.lindneo.tlingit.componentHasDeleted( that.options.component.id );
 

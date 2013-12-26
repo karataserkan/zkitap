@@ -202,7 +202,6 @@ window.lindneo.toolbox = (function(window, $, undefined){
   };
 
   var removeComponentFromSelection = function (component){
-    console.log(component);
       this.selectedComponents=$.grep(this.selectedComponents, function (n,i){
         return (n.options.component.id !== component.options.component.id);  
       });
