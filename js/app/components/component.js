@@ -122,7 +122,7 @@ $(document).ready(function(){
 
       .mouseenter(function(event){
         // add delete button
-         console.log(that.options.component.data.lock);
+         console.log(that.options.component);
          //if(that.options.component.data.lock == '')
          var deleteButton = $('<a id="delete-button-' + that.options.component.id + '" class="icon-delete white"style="position: absolute; top: -20px; right: 5px;"></a>');
          //else
@@ -303,6 +303,26 @@ $(document).ready(function(){
         }
 
       });
+      
+      if($.type(this.options.component.data.lock.username) != "undefined" && this.options.component.data.lock.username!=''){
+        $('#'+this.options.component.id).parent().draggable({ disabled: true });
+        $('#'+this.options.component.id).droppable({ disabled: true });
+        $('#'+this.options.component.id).selectable({ disabled: true });
+        $('#'+this.options.component.id).sortable({ disabled: true });
+        $('#'+this.options.component.id).resizable({ disabled: true });
+        $('#'+this.options.component.id).attr('readonly','readonly');
+        $('#delete-button-'+this.options.component.id).hide();
+      }
+      else{
+        $('#'+this.options.component.id).parent().draggable({ disabled: false });
+        $('#'+this.options.component.id).droppable({ disabled: false });
+        $('#'+this.options.component.id).selectable({ disabled: false });
+        $('#'+this.options.component.id).sortable({ disabled: false });
+        $('#'+this.options.component.id).resizable({ disabled: false });
+        $('#'+this.options.component.id).removeAttr('readonly');
+        
+      };
+      console.log(this.options.component.data.lock);
     },
 
     type: function () {
@@ -362,7 +382,25 @@ $(document).ready(function(){
       this._trigger('selected', null, this );
       window.lindneo.tsimshian.emitSelectedComponent( this );
       
-
+      if($.type(this.options.component.data.lock.username) != "undefined" && this.options.component.data.lock.username!=''){
+        $('#'+this.options.component.id).parent().draggable({ disabled: true });
+        $('#'+this.options.component.id).droppable({ disabled: true });
+        $('#'+this.options.component.id).selectable({ disabled: true });
+        $('#'+this.options.component.id).sortable({ disabled: true });
+        $('#'+this.options.component.id).resizable({ disabled: true });
+        $('#'+this.options.component.id).attr('readonly','readonly');
+        $('#delete-button-'+this.options.component.id).hide();
+      }
+      else{
+        $('#'+this.options.component.id).parent().draggable({ disabled: false });
+        $('#'+this.options.component.id).droppable({ disabled: false });
+        $('#'+this.options.component.id).selectable({ disabled: false });
+        $('#'+this.options.component.id).sortable({ disabled: false });
+        $('#'+this.options.component.id).resizable({ disabled: false });
+        $('#'+this.options.component.id).removeAttr('readonly');
+        
+      };
+      console.log(this.options.component.data.lock);
     },
 
     selected: function ( event, ui) {
