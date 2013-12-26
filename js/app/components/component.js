@@ -126,7 +126,7 @@ $(document).ready(function(){
 
       .mouseenter(function(event){
         // add delete button
-         console.log(that.options.component.data.lock);
+         console.log(that.options.component);
          //if(that.options.component.data.lock == '')
          var deleteButton = $('<a id="delete-button-' + that.options.component.id + '" class="icon-delete white"style="position: absolute; top: -20px; right: 5px;"></a>');
          //else
@@ -270,8 +270,8 @@ $(document).ready(function(){
 
         deleteThisCommentLink.click(function(){
           $.each (that.options.component.data.comments , function (i,val){
-            console.log(comment);
-            console.log(val.comment_id);
+            //console.log(comment);
+            //console.log(val.comment_id);
             if (val.comment_id == comment.comment_id){
               that.options.component.data.comments.splice(i,1);
               lineHtml.remove();
@@ -307,6 +307,26 @@ $(document).ready(function(){
         }
 
       });
+      
+      if($.type(this.options.component.data.lock.username) != "undefined" && this.options.component.data.lock.username!=''){
+        $('#'+this.options.component.id).parent().draggable({ disabled: true });
+        $('#'+this.options.component.id).droppable({ disabled: true });
+        $('#'+this.options.component.id).selectable({ disabled: true });
+        $('#'+this.options.component.id).sortable({ disabled: true });
+        $('#'+this.options.component.id).resizable({ disabled: true });
+        $('#'+this.options.component.id).attr('readonly','readonly');
+        $('#delete-button-'+this.options.component.id).hide();
+      }
+      else{
+        $('#'+this.options.component.id).parent().draggable({ disabled: false });
+        $('#'+this.options.component.id).droppable({ disabled: false });
+        $('#'+this.options.component.id).selectable({ disabled: false });
+        $('#'+this.options.component.id).sortable({ disabled: false });
+        $('#'+this.options.component.id).resizable({ disabled: false });
+        $('#'+this.options.component.id).removeAttr('readonly');
+        
+      };
+      //console.log(this.options.component.data.lock);
     },
 
     type: function () {
@@ -366,7 +386,25 @@ $(document).ready(function(){
       this._trigger('selected', null, this );
       window.lindneo.tsimshian.emitSelectedComponent( this );
       
-
+      if($.type(this.options.component.data.lock.username) != "undefined" && this.options.component.data.lock.username!=''){
+        $('#'+this.options.component.id).parent().draggable({ disabled: true });
+        $('#'+this.options.component.id).droppable({ disabled: true });
+        $('#'+this.options.component.id).selectable({ disabled: true });
+        $('#'+this.options.component.id).sortable({ disabled: true });
+        $('#'+this.options.component.id).resizable({ disabled: true });
+        $('#'+this.options.component.id).attr('readonly','readonly');
+        $('#delete-button-'+this.options.component.id).hide();
+      }
+      else{
+        $('#'+this.options.component.id).parent().draggable({ disabled: false });
+        $('#'+this.options.component.id).droppable({ disabled: false });
+        $('#'+this.options.component.id).selectable({ disabled: false });
+        $('#'+this.options.component.id).sortable({ disabled: false });
+        $('#'+this.options.component.id).resizable({ disabled: false });
+        $('#'+this.options.component.id).removeAttr('readonly');
+        
+      };
+      //console.log(this.options.component.data.lock);
     },
 
     selected: function ( event, ui) {
@@ -386,7 +424,7 @@ $(document).ready(function(){
       $(document).unbind('keydown');
     },
     _getSettable : function (propertyName){
-    
+
      return this.options.component.data.self;
     },
     getSettable : function (propertyName){
@@ -400,11 +438,9 @@ $(document).ready(function(){
       return this._getProperty(propertyName);
     },
     setPropertyofObject : function (propertyName,propertyValue){
-      console.log('****');
       return this._setPropertyofObject(propertyName,propertyValue) ;
     },
     _setPropertyofObject : function (propertyName,propertyValue){
-      console.log('****');
       switch(propertyName){
         case 'zindex':
 
@@ -437,8 +473,7 @@ $(document).ready(function(){
       }
     },
     setProperty : function (propertyName,propertyValue){
-      console.log('****');
-        this._setProperty(propertyName,propertyValue);
+      this._setProperty(propertyName,propertyValue);
     },
     _setProperty : function (propertyName,propertyValue){
         this.setPropertyofObject(propertyName,propertyValue);

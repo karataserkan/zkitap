@@ -237,7 +237,7 @@ window.lindneo.toolbox = (function(window, $, undefined){
       this.clearClipboard();      
       
       $.each(window.lindneo.toolbox.selectedComponents, function( key, component ) {
-        console.log(component.options);
+        //console.log(component.options);
         $('#'+component.options.component.id).parent().draggable({ disabled: true });
         $('#'+component.options.component.id).droppable({ disabled: true });
         $('#'+component.options.component.id).selectable({ disabled: true });
@@ -246,9 +246,11 @@ window.lindneo.toolbox = (function(window, $, undefined){
         $('#'+component.options.component.id).attr('readonly','readonly');
         $('#delete-button-'+component.options.component.id).hide();
         if ($.type(component.options.component.data.lock) == "undefined") component.options.component.data.lock='';
+        
+        //console.log(component.options.component);
         component.options.component.data.lock=window.lindneo.user;
         this._trigger('update', null, component.options.component );
-        console.log(component.options.component);
+        //console.log(component.options.component);
         var newComponent =JSON.parse(JSON.stringify(component.options.component)); 
         //console.log(newComponent);
         this._trigger('update', null, component.options.component );
@@ -267,7 +269,7 @@ window.lindneo.toolbox = (function(window, $, undefined){
       this.clearClipboard();
       
       $.each(window.lindneo.toolbox.selectedComponents, function( key, component ) {
-        console.log(component.options.component.data.lock);
+        //console.log(component.options.component.data);
         if(component.options.component.data.lock!=''){
           if(component.options.component.data.lock.username==window.lindneo.user.username){
             $('#'+component.options.component.id).parent().draggable({ disabled: false });
@@ -277,7 +279,8 @@ window.lindneo.toolbox = (function(window, $, undefined){
             $('#'+component.options.component.id).resizable({ disabled: false });
             $('#'+component.options.component.id).removeAttr('readonly');
             component.options.component.data.lock='';
-            console.log(component.options.component.data.lock);
+            //console.log(component.options.component.data.lock);
+            
             var newComponent =JSON.parse(JSON.stringify(component.options.component)); 
             //console.log(newComponent);
             this._trigger('update', null, component.options.component );
