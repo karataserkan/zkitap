@@ -137,7 +137,7 @@ $(document).ready(function(){
          e.preventDefault();
         
           //window.lindneo.nisga.ComponentDelete( that.options.component );
-          window.lindneo.nisga.deleteComponent( that.options.component );
+          window.lindneo.tlingit.componentHasDeleted( that.options.component.id );
 
         }).appendTo(event.currentTarget);
         
@@ -366,14 +366,14 @@ $(document).ready(function(){
     },
 
     _selected: function( event, ui ) {
-
+      //console.log('selected');
 
       
       if (event)
       if(  event.ctrlKey || event.metaKey )
         console.log('control is pressed');
       else
-        $('.selected').not($(this.element)).trigger('unselect');
+        $('.selected').trigger('unselect');
 
 
       this.element.removeClass('unselected');
@@ -420,11 +420,9 @@ $(document).ready(function(){
         'border': 'none'
       });
       window.lindneo.toolbox.removeComponentFromSelection(this);
-      $('*').focusout();
-      $(document).unbind('keydown');
     },
     _getSettable : function (propertyName){
-
+      //console.log (this.options.comment.data);
      return this.options.component.data.self;
     },
     getSettable : function (propertyName){
