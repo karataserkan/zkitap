@@ -232,9 +232,7 @@ window.lindneo.toolbox = (function(window, $, undefined){
   var lockSelectedItemsToClipboard = function () {
       var newClipboard=[];
 
-      this.clearClipboard();
-      var lock_user = window.lindneo.user;
-      
+      this.clearClipboard();      
       
       $.each(window.lindneo.toolbox.selectedComponents, function( key, component ) {
         console.log(component.options);
@@ -244,14 +242,14 @@ window.lindneo.toolbox = (function(window, $, undefined){
         $('#'+component.options.component.id).sortable({ disabled: true });
         $('#'+component.options.component.id).resizable({ disabled: true });
         $('#'+component.options.component.id).attr('readonly','readonly');
-        $('#delete-button-'+component.options.component.id).remove();
+        $('#delete-button-'+component.options.component.id).hide();
         if ($.type(component.options.component.data.lock) == "undefined") component.options.component.data.lock='';
-        component.options.component.data.lock=lock_user;
+        component.options.component.data.lock=window.lindneo.user;
         this._trigger('update', null, component.options.component );
         console.log(component.options.component);
         var newComponent =JSON.parse(JSON.stringify(component.options.component)); 
         //console.log(newComponent);
-        
+        this._trigger('update', null, component.options.component );
         newComponent.id= '';
         newComponent.page_id= '';
         
@@ -268,24 +266,26 @@ window.lindneo.toolbox = (function(window, $, undefined){
       
       $.each(window.lindneo.toolbox.selectedComponents, function( key, component ) {
         console.log(component.options.component.data.lock);
-        if(component.options.component.data.lock.username==window.lindneo.user.username){
-          $('#'+component.options.component.id).parent().draggable({ disabled: false });
-          $('#'+component.options.component.id).droppable({ disabled: false });
-          $('#'+component.options.component.id).selectable({ disabled: false });
-          $('#'+component.options.component.id).sortable({ disabled: false });
-          $('#'+component.options.component.id).resizable({ disabled: false });
-          $('#'+component.options.component.id).removeAttr('readonly');
-
-        
-          var newComponent =JSON.parse(JSON.stringify(component.options.component)); 
-          //console.log(newComponent);
-          
-          newComponent.id= '';
-          newComponent.page_id= '';
-          
-          newClipboard.push(newComponent);
+        if(component.options.component.data.lock!=''){
+          if(component.options.component.data.lock.username==window.lindneo.user.username){
+            $('#'+component.options.component.id).parent().draggable({ disabled: false });
+            $('#'+component.options.component.id).droppable({ disabled: false });
+            $('#'+component.options.component.id).selectable({ disabled: false });
+            $('#'+component.options.component.id).sortable({ disabled: false });
+            $('#'+component.options.component.id).resizable({ disabled: false });
+            $('#'+component.options.component.id).removeAttr('readonly');
+            component.options.component.data.lock='';
+            console.log(component.options.component.data.lock);
+            var newComponent =JSON.parse(JSON.stringify(component.options.component)); 
+            //console.log(newComponent);
+            this._trigger('update', null, component.options.component );
+            newComponent.id= '';
+            newComponent.page_id= '';
+            
+            newClipboard.push(newComponent);
+          }
+          else alert('Yetkili değilsiniz....');
         }
-        else alert('Yetkili değilsiniz....');
       });
         //console.log(newClipboard);
         return this.setClipboardItems(newClipboard);
