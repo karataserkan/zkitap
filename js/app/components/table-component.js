@@ -10,12 +10,228 @@ $(document).ready(function(){
     _create: function(){
 
       var that = this;
-
-  
-
       this._super();
-      this.element.height(60);
+      
+
+
+      var newTable = $("<table class='table-component-table'></table>");
+      var newTbody = $("<tbody></tbody>");
+      var TableSelection = {};
+      var tableData =  this.options.component.data.table;
+      this.table=newTable;
+      this.tbody=newTbody;
+      this.cells=[];
+      this.excelCursor = $("<div class='ExcelCursor'></div>");
+
+
+      newTbody.appendTo(newTable);
+      var onlyoneselected;
+      var isMouseDown=false;
+      $(document)
+        .mouseup(function () {
+          isMouseDown = false;
+      });
+      var isHighlighted;
+      for ( var i = 0; i < tableData.length ; i++ ) {
+        this.cells[i]=[];
+
+        var newRow = $("<tr class='ExcelTableFormationRow'></tr>");
+        newRow.appendTo(newTbody);
+
+        for ( var k = 0; k< tableData[i].length; k++ ) { 
+          
+          var newColumn = $("<td class='ExcelTableFormationCol' rel ='"+i+","+k+"'></td>");
+          
+          
+          newColumn
+            .appendTo(newRow)
+            .text(that.options.component.data.table[i][k].attr.val)
+            .dblclick(function(e){
+              that.editableCell(this);
+
+          })
+          .mousedown(function (e) {
+                
+                
+                isMouseDown=true;
+                onlyoneselected = true;
+                TableSelection = {
+                  'start':{
+                    'rows':$(this).parent().prevAll().length,
+                    'columns':$(this).prevAll().length
+                  },
+                  'end':{
+                    'rows':$(this).parent().prevAll().length,
+                    'columns':$(this).prevAll().length
+                  }
+                };
+
+                that.selectionUpdated(TableSelection);
+
+                return false; // prevent text selection
+
+
+
+              })
+              .mouseover(function () {
+          
+
+
+                if (isMouseDown) {
+                  onlyoneselected = false;
+                  TableSelection.end={
+                    'rows':$(this).parent().prevAll().length,
+                    'columns':$(this).prevAll().length
+                  };
+                  that.selectionUpdated(TableSelection);
+                  
+                  $(this).toggleClass("highlighted", isHighlighted);
+                }
+              })
+              .bind("selectstart", function () {
+                return false;
+              });
+
+
+              that.cells[i][k]=newColumn;
+
+        }
+
+      }
+
+      
+
+      
+      newTable.appendTo(this.element);
+     // $(this.element).parent().resizable('destroy');
+     var parent_OBJ=($(that.element).parent());
+
+
+     
+      parent_OBJ.css('width','auto');
+      parent_OBJ.css('height','auto');
+      
+
+      this.table.attr('width',this.options.component.data.self.css.width);
+      this.table.attr('height',this.options.component.data.self.css.height);
+
+      newTable.resizable({
+        'stop': function( event, ui ){
+          that._resize(event, ui);
+        }
+      });
+
+
   
+    },
+
+    editableCell: function  (cell){
+      var that=this;
+      var cell=$(cell);
+      var value=$(cell).text();
+
+      var input = $("<textarea class='activeCellInput' style='width:100%;height:100%,margin:-4px;padding:0px' ></textarea> ");
+      cell.text('');
+      that.cellEditFinished();
+      that.activeCellInput=input;
+      that.activeCell=cell;
+      input
+        .text(value)
+        .autogrow({element:this})
+        .appendTo(cell)
+        .focus()
+        
+        .focusout(function(){
+          that.cellEditFinished();
+        })
+        .keyup(function(e) {
+            var code = e.keyCode || e.which;
+            if (code == 9) {
+                e.preventDefault();
+                console.log('tab');
+                that.editableCell(cell.next()[0]);
+            }
+        });
+    },
+
+    cellEditFinished:function(){
+      var that = this;
+      var cell = that.activeCell
+      var input = that.activeCellInput
+      if (typeof input == "undefined") return;
+      if (input.length == 0) return;
+      that.options.component.data.table[$(cell).parent().prevAll().length][$(cell).prevAll().length].attr.val=input.val();
+      cell.text(input.val());
+      that._trigger('update', null, that.options.component );
+    },
+
+    selectionUpdated: function(selection){
+      var that = this;
+      that.cellEditFinished();
+      var TableSelection = {
+          'start':{
+                    'rows':Math.min(selection.start.rows,selection.end.rows ),
+                    'columns':Math.min(selection.start.columns,selection.end.columns )
+          },
+          'end':{
+                    'rows':Math.max(selection.start.rows,selection.end.rows) ,
+                    'columns':Math.max(selection.start.columns,selection.end.columns )
+          }
+      }
+
+      console.log(TableSelection);
+
+
+
+      this.tbody.find('td')
+        .removeClass('right')
+        .removeClass('bottom')
+        .removeClass('left')
+        .removeClass('top');
+            
+              var selections_rows=that.tbody.children('tr').slice(TableSelection.start.rows,TableSelection.end.rows+1);
+
+           
+
+            $.each (selections_rows, function(row_index,row_element){
+              var cell_row_index= row_index+TableSelection.start.rows;
+              var selections_columns = $(row_element).children('td').slice(TableSelection.start.columns,TableSelection.end.columns+1);
+              
+
+               $.each (selections_columns, function(column_index,cell_element){
+                var cell_column_index=column_index+TableSelection.start.columns;
+                //top lines
+                console.log(row_index);
+                if (cell_row_index==TableSelection.start.rows)                
+                  $(cell_element).addClass('top');
+                //left lines
+                if (cell_column_index==TableSelection.start.columns)                
+                  $(cell_element).addClass('left');
+                //right lines
+                if (cell_column_index==TableSelection.end.columns)                
+                  $(cell_element).addClass('right');
+                //bottom lines
+                if (cell_row_index==TableSelection.end.rows)                
+                  $(cell_element).addClass('bottom');
+           
+                $(cell_element).addClass('active');
+               });
+
+
+            });
+
+            //add excel cursor
+            
+            this.excelCursor.remove();
+            //this.excelCursor.dblclick(function(){$(this).parent().dblclick();});
+
+            this.cells[TableSelection.end.rows][TableSelection.end.columns].prepend( this.excelCursor );
+
+
+
+
+
+            
     },
 
     field: function(key, value){
@@ -60,11 +276,13 @@ $(document).ready(function(){
         newColumn.appendTo(newRow);
 
         newColumn
+
           .click(function(){
             if (typeof TableSelection === null) return;
             var tableData = [];
 
               for ( var i = 0; i < TableSelection.rows; i++ ) {
+                tableData[i] = [];
                 for ( var k = 0; k < TableSelection.columns; k++ ) { 
                   var newCellData = {
                     'attr': {
@@ -78,7 +296,7 @@ $(document).ready(function(){
                     'format':'standart',
                     'function':''
                   };
-                  tableData[i] = []
+                  
                   tableData[i][k]= newCellData;
 
                 }
@@ -94,8 +312,8 @@ $(document).ready(function(){
                       'position':'absolute',
                       'top': (ui.offset.top-$(event.target).offset().top ) + 'px',
                       'left':  ( ui.offset.left-$(event.target).offset().left ) + 'px',
-                      'width': 'auto',
-                      'height': '60px',
+                      'width': '100%',
+                      'height': '100%',
                       'background-color': 'transparent',
                       'overflow': 'visible'
                     }

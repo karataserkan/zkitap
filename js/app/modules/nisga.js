@@ -270,8 +270,9 @@ window.lindneo.nisga = (function(window, $, undefined){
   };
 
   var tableComponentBuilder = function( component ) {
-    
-    var element  = $('<table> </table>');
+   
+
+    var element  = $('<div ></div>');
     var elementWrap=$('<div ></div>');
     elementWrap.appendTo( page_div_selector );
 

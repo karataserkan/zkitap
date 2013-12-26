@@ -13,8 +13,6 @@ window.lindneo.tlingit = (function(window, $, undefined){
   var componentHasCreated = function (component){
  
     //co-workers have created a new component, fuck them all.
-
-    //console.log( component );
     
     createComponent(component);
 
@@ -98,8 +96,9 @@ window.lindneo.tlingit = (function(window, $, undefined){
     if( response.result !== null ) {
       components = response.result.components;
     }
-
+    console.log( components );
     $.each(components, function(i, val){
+          
       window.lindneo.nisga.createComponent( val );
     });
 

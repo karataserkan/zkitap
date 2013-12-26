@@ -57,7 +57,7 @@ $(document).ready(function(){
                   switch (propertyValue){
                     case 'h1':
                       styles=[
-                      {name:'font-size', val:'45px'},
+                      {name:'font-size', val:'46px'},
                       {name:'font-family', val:'Arial'},
                       {name:'text-decoration', val:'normal'},
                       {name:'font-weight', val:'bold'},

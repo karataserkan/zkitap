@@ -154,28 +154,28 @@ window.lindneo.toolbox = (function(window, $, undefined){
 
                 $(this).change(function(){
                   component.setProperty ( $(this).attr('rel') , $(this).val() );
+                  that.selectionUpdated();
                 });
 
              } else if( $(this).hasClass('select') ){
                 $(this).change(function(){
                   var str =  $(this).children("option:selected").val();
-
                   component.setProperty ( $(this).attr('rel') ,str  );
+                  that.selectionUpdated();
                 });
 
              } else if( $(this).hasClass('checkbox') || $(this).hasClass('radio') ){
                 $(this).change(function(){ 
-
                   var isChecked= $(this).is(':checked')    ; 
                   var newValue = ( isChecked == true ? $(this).attr('activeVal') : $(this).attr('passiveVal') );
-                  //console.log($(this).attr('rel')+' is '+ newValue );
                   component.setProperty ( $(this).attr('rel') ,newValue  );
-
+                  that.selectionUpdated();
                 });
                
              } else if($(this).hasClass('toolbox-btn')){
                 $(this).click(function(){
                   component.setProperty ( $(this).attr('rel') ,$(this).attr('action')  );
+                  that.selectionUpdated();
                 });
 
              }
@@ -192,11 +192,8 @@ window.lindneo.toolbox = (function(window, $, undefined){
 
   var addComponentToSelection = function (component){
       
-    var newObject = jQuery.extend(true, {}, component);
-
-    this.selectedComponents=$.grep(this.selectedComponents, function (n,i){
-      return (n.options.component.id !== newObject.options.component.id);  
-    });
+    var newObject = component;
+    this.removeComponentFromSelection(newObject);
       
     this.selectedComponents.push(newObject);
     this.selectionUpdated();
@@ -209,8 +206,7 @@ window.lindneo.toolbox = (function(window, $, undefined){
         return (n.options.component.id !== component.options.component.id);  
       });
       this.selectionUpdated();
-      console.log('remove selections....')
-      //console.log(selectedComponents);
+
 
   };
   
