@@ -460,6 +460,62 @@ table#componentTableSelectorTable td:hover{
 	border-color: #fff;
 	background: #c8def4;
 }
+table.table-component-table {
+	border-spacing: 0;
+}
+table.table-component-table .ExcelTableFormationCol {
+	width: auto;
+	height: auto;
+	text-align: center;
+	font-family: Arial Narrow;
+	font-size: 14px;
+	position: relative;
+	min-width: 20px;
+	border: 3px solid #FFF;
+}
+
+table.table-component-table  .ExcelTableFormationRow {
+	background-color: #EEEEEE;
+	text-align: center;
+	height: 20px;
+}
+
+table.table-component-table .LastRow td {
+	border-bottom-width: 0px;
+}
+
+table.table-component-table .LastCol {
+    border-right-width: 0px;
+}
+
+ table.table-component-table .ExcelCursorOuter {
+      position: relative;
+     }
+
+table.table-component-table  .ExcelCursor {
+      position: absolute;
+      bottom: -5px;
+      right: -5px;
+      background: #000;
+      width: 5px;
+      height: 5px;
+      border: 1px solid #fff;
+      border-right: 0px;
+      border-bottom: 0px;
+     }
+
+table.table-component-table .top{
+	border-top:  3px #000 solid;
+}
+table.table-component-table .left{
+	border-left:  3px #000 solid;
+}
+table.table-component-table .right{
+	border-right:  3px #000 solid;
+}
+table.table-component-table .bottom{
+	border-bottom:  3px #000 solid;
+}
 
 /* END OF HEADER --------------------------------------------------------*/
 

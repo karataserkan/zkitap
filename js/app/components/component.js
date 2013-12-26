@@ -17,16 +17,18 @@ $(document).ready(function(){
       .click(function (e) {
         that._selected(e,null);
       })
+      
       .resizable({
         'stop': function( event, ui ){
           that._resize(event, ui);
         }
       })
-      .selectable({
+      /*.selectable({
         'selected': function(event, ui){
           that._selected(event, ui);
         }
       })
+*/
       .focus(function( event, ui ){
 
 
@@ -40,11 +42,13 @@ $(document).ready(function(){
 
 
       this.element.parent()
+      .append('<div class="dragging_holder"></div>' )
       .attr('component-instance', 'true')
     
       .draggable({
         containment: "#current_page",
         snap: '.ui-wrapper',
+        handle: '.dragging_holder',
         snapMode: 'outer',
 
         'stop': function(event, ui){
@@ -165,7 +169,7 @@ $(document).ready(function(){
         commentButton.remove();
 
       })
-      .append('<div class="dragging_holder"></div>' )
+      
       .on('unselect', function(){
         that.unselect();
       });
@@ -185,7 +189,6 @@ $(document).ready(function(){
 
 
       that.comment_list =  $('<div class="comment_cards_list"> </div>');
-
       that.newCommentBox = $('<div></div>');
 
       that.newCommentBox_textarea = $('<input type="text" class="commentBoxTextarea" placeholder="Yorum giriniz..." id="commentBoxTextarea'+that.options.component.id+'" />');
@@ -206,6 +209,7 @@ $(document).ready(function(){
                 
 
                 that.options.component.data.comments.push(comment);
+
                 that._trigger('update', null, that.options.component );
 
         }); 
@@ -354,7 +358,7 @@ $(document).ready(function(){
       this.element.css({
           'border': '1px solid #ccc'
       });
-      console.log(this);
+     
       this._trigger('selected', null, this );
       window.lindneo.tsimshian.emitSelectedComponent( this );
       
@@ -376,6 +380,7 @@ $(document).ready(function(){
       window.lindneo.toolbox.removeComponentFromSelection(this);
     },
     _getSettable : function (propertyName){
+      console.log (this.options.comment.data);
      return this.options.component.data.self;
     },
     getSettable : function (propertyName){
