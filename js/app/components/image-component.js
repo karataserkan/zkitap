@@ -62,13 +62,17 @@ $(document).ready(function(){
           imageBinary = evt.target.result;        
           
           component = $.parseJSON(window.lindneo.tlingit.componentToJson(that.options.component));
-          console.log(component);
-          component.data.img.src = imageBinary;
-          component.data.self.css.width = image_width;
-          component.data.self.css.height = image_height;
+          console.log(component.data.lock);
+          if(component.data.lock == ''){ 
+           
+            component.data.img.src = imageBinary;
+            component.data.self.css.width = image_width;
+            component.data.self.css.height = image_height;
 
-          window.lindneo.tlingit.componentHasCreated(component);
-          window.lindneo.tlingit.componentHasDeleted(that.options.component.id);
+            
+            window.lindneo.tlingit.componentHasCreated(component);
+            window.lindneo.tlingit.componentHasDeleted(that.options.component.id);
+          };
         };
       };
 
