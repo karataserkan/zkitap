@@ -48,7 +48,8 @@
 
         $e.css("overflow", ($e.prop("scrollHeight") > height ? "auto" : "hidden"));
         $e.css("height", height + "px");
-        options.element.options.component.data.self.css.height= height + "px";
+        if (options.element.options.component.type=='text')
+          options.element.options.component.data.self.css.height= height + "px";
         options.element.options.autogrow=$(this);
         
 
