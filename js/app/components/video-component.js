@@ -50,7 +50,7 @@ var createVideoComponent = function(event, ui) {
         <input id='video-url-text' class='input-textbox' type='url' placeholder='URL Adresini Giriniz'   value='http://lindneo.com/5.mp4'> \
         <a href='#' id='pop-image-OK' class='btn bck-light-green white radius' id='add-image' style='padding: 5px 30px;'>Ekle</a> \
       </div> \
-    </div>").appendTo('body').draggable();
+    </div>").appendTo('body');
 
     $('#image-add-dummy-close-button').click(function() {
 
@@ -73,7 +73,7 @@ var createVideoComponent = function(event, ui) {
         var headers = req.getAllResponseHeaders().toLowerCase();
         var contentType = req.getResponseHeader('content-type');
         var contenttypes = contentType.split('/');
-        console.log(contenttypes);
+        console.log(contentType);
         if (contenttypes[0] != 'video') {
             alert('Lütfen bir video dosyası URL adresi giriniz');
             return;
@@ -88,7 +88,7 @@ var createVideoComponent = function(event, ui) {
          
          */
 
-
+        console.log(contentType);
         var component = {
             'type': 'video',
             'data': {
@@ -157,95 +157,87 @@ var createVideoComponent = function(event, ui) {
 
         e.stopPropagation();
         e.preventDefault();
-        var token='';
-        
+
+        var token = '';
+
         var reader = new FileReader();
         var component = {};
+        var videoURL = '';
+        reader.onload = function(evt) {
 
-        //console.log("ok");
-        var videoURL ='';
-        var fileURL = "http://bekir.dev.lindneo.com/index.php?r=EditorActions/getFileUrl";
-        $.get( fileURL, { type: "mp4"} )
-            .done(function( data ) {
-             videoURL = window.lindneo.tlingit.responseFromJson( data ).result.URL;
-             
-             $.ajax({
-                type: "POST",
-                url: 'http://ugur.dev.lindneo.com/index.php?r=EditorActions/UploadFile&url=' + window.lindneo.tlingit.responseFromJson( data ).result.token,
-                data: {file:reader},
-                success: function(data){console.log(data);},
+            var videoBinary = evt.target.result;
+            var contentType = videoBinary.substr(0, videoBinary.indexOf(';'));
+            var videoType = contentType.substr(contentType.indexOf('/')+1);
+            console.log(videoType);
+            var response = '';
+            var sendFile = function() {
+                //console.log(response.result);
+                $.ajax({
+                    type: "POST",
+                    url: 'http://bekir.dev.lindneo.com/index.php?r=EditorActions/UploadFile&url=' + response.result.token,
+                    data: {file: videoBinary},
+                    success: function(data) {
+                        $("#image-add-dummy-close-button").trigger('click');
+                        console.log(videoURL);
+                        var component = {
+                            'type': 'video',
+                            'data': {
+                                'video': {
+                                    'attr': {
+                                        'controls': 'controls'
+                                    },
+                                    'css': {
+                                        'width': '100%',
+                                        'height': '100%',
+                                    },
+                                    'contentType': contentType
+                                },
+                                'source': {
+                                    'attr': {
+                                        'src': response.result.URL
+                                    }
+                                },
+                                '.audio-name': {
+                                    'css': {
+                                        'width': '100%'
+                                    }
+                                },
+                                'self': {
+                                    'css': {
+                                        'position': 'absolute',
+                                        'top': (ui.offset.top - $(event.target).offset().top) + 'px',
+                                        'left': (ui.offset.left - $(event.target).offset().left) + 'px',
+                                        'width': 'auto',
+                                        'height': '60px',
+                                        'background-color': 'transparent',
+                                        'overflow': 'visible'
+                                    }
+                                }
+
+                            }
+                        };
+
+
+                        window.lindneo.tlingit.componentHasCreated(component);
+                    }
                 });
-            
-        });
-       /* $.getJSON(fileURL, {
-            type: "mp4"
-        }).done(function(data) {
-            $.each(data.items, function(i, item) {
-                videoURL=item.token;
-                var videoToken=item.URL
-            });
-        });
-        console.log(videoURL);
-        var req = new XMLHttpRequest();
-        var videoURL = $('#video-url-text').val();
-
-        req.open('HEAD', videoURL, false);
-        req.send(null);
-        var headers = req.getAllResponseHeaders().toLowerCase();
-        var contentType = req.getResponseHeader('content-type');
-        var contenttypes = contentType.split('/');
-        console.log(contenttypes);
-        if (contenttypes[0] != 'video') {
-            alert('Lütfen bir video dosyası URL adresi giriniz');
-            return;
-        }
-        /*
-         
-
-         */
-
-
-       /* var component = {
-            'type': 'video',
-            'data': {
-                'video': {
-                    'attr': {
-                        'controls': 'controls'
-                    },
-                    'css': {
-                        'width': '100%',
-                        'height': '100%',
-                    },
-                    'contentType': contentType
-                },
-                'source': {
-                    'attr': {
-                        'src': videoURL
-                    }
-                },
-                '.audio-name': {
-                    'css': {
-                        'width': '100%'
-                    }
-                },
-                'self': {
-                    'css': {
-                        'position': 'absolute',
-                        'top': (ui.offset.top - $(event.target).offset().top) + 'px',
-                        'left': (ui.offset.left - $(event.target).offset().left) + 'px',
-                        'width': 'auto',
-                        'height': '60px',
-                        'background-color': 'transparent',
-                        'overflow': 'visible'
-                    }
-                }
-
             }
+            //console.log("ok");
+
+            var fileURL = "http://bekir.dev.lindneo.com/index.php?r=EditorActions/getFileUrl&type="+videoType;
+            $.get(fileURL)
+                    .done(function(data) {
+                videoURL = window.lindneo.tlingit.responseFromJson(data).result.URL;
+                token = window.lindneo.tlingit.responseFromJson(data).result.token;
+                response = window.lindneo.tlingit.responseFromJson(data);
+
+            }, function() {
+                sendFile(response);
+            });
+
         };
+        reader.readAsDataURL(e.dataTransfer.files[0]);
 
-
-        window.lindneo.tlingit.componentHasCreated(component);
-        $("#image-add-dummy-close-button").trigger('click');*/
-    });
+    }, false);
 
 };
