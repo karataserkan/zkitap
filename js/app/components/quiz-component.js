@@ -188,6 +188,7 @@ $(document).ready(function(){
             'text': 'Quiz Sorusu'
 			
           },
+          'lock':'',
           'self': {
             'css': {
               'position':'absolute',

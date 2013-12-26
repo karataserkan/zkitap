@@ -68,7 +68,7 @@ $(document).ready(function(){
           component.data.self.css.height = image_height;
 
           window.lindneo.tlingit.componentHasCreated(component);
-          window.lindneo.nisga.deleteComponent(that.options.component);
+          window.lindneo.tlingit.componentHasDeleted(that.options.component.id);
         };
       };
 
@@ -189,6 +189,7 @@ var createImageComponent = function ( event, ui ) {
               } , 
               'src': imageBinary
             },
+            'lock':'',
             'self': {
               'css': {
                 'position':'absolute',
