@@ -7,16 +7,18 @@ $(document).ready(function(){
 
     },
 
+
     _create: function(){
 
       var that = this;
       this._super();
       
 
+      var TableSelection = {};
 
       var newTable = $("<table class='table-component-table'></table>");
       var newTbody = $("<tbody></tbody>");
-      var TableSelection = {};
+      
       var tableData =  this.options.component.data.table;
       this.table=newTable;
       this.tbody=newTbody;
@@ -47,11 +49,12 @@ $(document).ready(function(){
             .appendTo(newRow)
             .text(that.options.component.data.table[i][k].attr.val)
             .dblclick(function(e){
+              e.stopPropagation();
               that.editableCell(this);
 
           })
           .mousedown(function (e) {
-                
+                if (e.target.localName == "textarea") return;
                 
                 isMouseDown=true;
                 onlyoneselected = true;
@@ -102,7 +105,7 @@ $(document).ready(function(){
       
 
       
-      newTable.appendTo(this.element);
+     newTable.appendTo(this.element);
      // $(this.element).parent().resizable('destroy');
      var parent_OBJ=($(that.element).parent());
 
@@ -111,9 +114,14 @@ $(document).ready(function(){
       parent_OBJ.css('width','auto');
       parent_OBJ.css('height','auto');
       
+      var width=this.options.component.data.self.css.width;
+      var height=this.options.component.data.self.css.height;
 
-      this.table.attr('width',this.options.component.data.self.css.width);
-      this.table.attr('height',this.options.component.data.self.css.height);
+      width=width.substring(0,width.length-2);
+      height=height.substring(0,height.length-2);
+
+      this.table.attr('width',width);
+      this.table.attr('height',height);
 
       newTable.resizable({
         'stop': function( event, ui ){
@@ -122,52 +130,123 @@ $(document).ready(function(){
       });
 
 
-  
+      newTable.click(function(){
+        that.TableSelection = TableSelection;
+        that.keyCapturing();
+      });     
+      this.table.focus();
+    },
+
+    keyCapturing: function (){
+      var that = this;
+      var TableSelection=that.TableSelection;
+        $(document).unbind('keydown');
+        $(document).on('keydown', function(ev){
+          //left
+          if(ev.keyCode === 37) {
+            ev.preventDefault();
+            TableSelection.start.columns= Math.max(TableSelection.start.columns-1,0);
+            TableSelection.end=TableSelection.start;  
+            that.selectionUpdated(TableSelection);
+          } else 
+          //upper
+          if(ev.keyCode === 38) {
+            ev.preventDefault();
+            TableSelection.start.rows= Math.max(TableSelection.start.rows-1,0);
+            TableSelection.end=TableSelection.start;  
+            that.selectionUpdated(TableSelection);
+          } else 
+          // right
+          if(ev.keyCode === 39) {
+            ev.preventDefault();
+            TableSelection.start.columns= Math.min(TableSelection.start.columns+1,that.options.component.data.table[TableSelection.start.rows].length-1);
+            TableSelection.end=TableSelection.start;  
+            that.selectionUpdated(TableSelection);
+          } else 
+          // down
+          if(ev.keyCode === 40) {
+              ev.preventDefault();
+              TableSelection.start.rows= Math.min(TableSelection.start.rows+1,that.options.component.data.table.length-1);
+              TableSelection.end=TableSelection.start;  
+              that.selectionUpdated(TableSelection);
+          }
+          else 
+            //typing
+          {
+            console.log(that.cellEditing );
+            if(that.cellEditing != true){
+              that.editableCell(that.cells[TableSelection.start.rows][TableSelection.start.columns]);
+              $(document).unbind('keydown');
+            }
+          }
+          
+        });
     },
 
     editableCell: function  (cell){
-      var that=this;
-      var cell=$(cell);
-      var value=$(cell).text();
 
-      var input = $("<textarea class='activeCellInput' style='width:100%;height:100%,margin:-4px;padding:0px' ></textarea> ");
-      cell.text('');
+      var that=this;
+      that.cellEditing=true;
+
+      var cell=$(cell);
+      var value=that.options.component.data.table[$(cell).parent().prevAll().length][$(cell).prevAll().length].attr.val;
+
+      var input = $("<textarea class='activeCellInput' style='width:100%;height:100%;padding:0px' ></textarea> ");
+      cell
+        .text('')
+        ;
+
+
+
+
       that.cellEditFinished();
       that.activeCellInput=input;
       that.activeCell=cell;
+    
+
       input
         .text(value)
         .autogrow({element:this})
         .appendTo(cell)
-        .focus()
-        
-        .focusout(function(){
-          that.cellEditFinished();
+        .focus(function(){
+          this.focus();this.select()
         })
-        .keyup(function(e) {
-            var code = e.keyCode || e.which;
-            if (code == 9) {
-                e.preventDefault();
-                console.log('tab');
-                that.editableCell(cell.next()[0]);
-            }
+        .focus()
+        .keydown(function(e){
+          console.log(e.keyCode);
+          if(e.keyCode >= 37 && e.keyCode <= 40 ) {
+            e.preventDefault();
+            $(this).blur();
+          } else if (e.keyCode == 9 ) {
+            e.preventDefault();
+          }
+        })
+        .focusout(function(){
+          that.keyCapturing();
+          that.cellEditFinished();
         });
+        
     },
 
     cellEditFinished:function(){
       var that = this;
+      that.cellEditing=false;
+
       var cell = that.activeCell
       var input = that.activeCellInput
       if (typeof input == "undefined") return;
       if (input.length == 0) return;
       that.options.component.data.table[$(cell).parent().prevAll().length][$(cell).prevAll().length].attr.val=input.val();
-      cell.text(input.val());
+      cell.html(input.val().replace(/\n/g, '<br />'));
+      that.keyCapturing();
+      
+
       that._trigger('update', null, that.options.component );
     },
 
     selectionUpdated: function(selection){
       var that = this;
-      that.cellEditFinished();
+      
       var TableSelection = {
           'start':{
                     'rows':Math.min(selection.start.rows,selection.end.rows ),
@@ -178,9 +257,10 @@ $(document).ready(function(){
                     'columns':Math.max(selection.start.columns,selection.end.columns )
           }
       }
+      that.TableSelection=TableSelection;
+      that.cellEditFinished();
 
-      console.log(TableSelection);
-
+      
 
 
       this.tbody.find('td')
@@ -201,7 +281,7 @@ $(document).ready(function(){
                $.each (selections_columns, function(column_index,cell_element){
                 var cell_column_index=column_index+TableSelection.start.columns;
                 //top lines
-                console.log(row_index);
+                
                 if (cell_row_index==TableSelection.start.rows)                
                   $(cell_element).addClass('top');
                 //left lines

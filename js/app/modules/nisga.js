@@ -17,14 +17,16 @@ window.lindneo.nisga = (function(window, $, undefined){
   var revision_id=0;
   var revision_value = 0;
 
-  var ChatNewLine = function ( line,activeUser ){
+  var ChatNewLine = function ( line,activeUser,show ){
+    if (show !== false)
+      $(".chat_window" ).show();
     var lineHtml = $('<div class="chat_sent_message_holder " style ="border-left: 10px solid '+activeUser.color+';"> \
       <div class="chat_sent_message_user_name">'+activeUser.name+'</div> \
       <div class="chat_sent_message_text">'+line.replace(/\n/g, '<br />')+'</div> \
     </div>');
     $('.chat_sent_messages').append(lineHtml);
     $(".chat_sent_messages").animate({ scrollTop: $('.chat_sent_messages')[0].scrollHeight}, 100);
-    $(".chat_window" ).show();
+    
 
   }
 

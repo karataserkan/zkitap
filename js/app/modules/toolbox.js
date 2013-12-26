@@ -121,6 +121,8 @@ window.lindneo.toolbox = (function(window, $, undefined){
   };
 
   var selectionUpdated = function (){
+    var that = this;
+      
       $('.toolbox').hide();
       //console.log('All Selecteds:');
       //console.log(this.selectedComponents);

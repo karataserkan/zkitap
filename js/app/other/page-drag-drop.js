@@ -293,7 +293,7 @@ $( document ).ready(function () {
     }
 
     $.each (chats, function (i,val) {
-      window.lindneo.nisga.ChatNewLine( val.line,val.user );
+      window.lindneo.nisga.ChatNewLine( val.line,val.user,false );
     });
 
 
