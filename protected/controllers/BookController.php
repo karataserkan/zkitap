@@ -36,7 +36,7 @@ class BookController extends Controller
 				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
-				'actions'=>array('create','update','selectTemplate','delete','view','author','newBook'),
+				'actions'=>array('create','update','selectTemplate','delete','view','author','newBook','selectData'),
 				'users'=>array('@'),
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
@@ -197,8 +197,7 @@ class BookController extends Controller
 				}
 
 			}
-			
-		$this->redirect(array('author','bookId'=>$bookId));
+		$this->redirect(array('selectData','bookId'=>$bookId));	
 		}
 
 		
@@ -211,7 +210,36 @@ class BookController extends Controller
 			
 	}
 
+	/**
+	 * display selectdata form and set data
+	 * @param  string $bookId id of the book
+	 * @return [type]         [description]
+	 */
+	public function actionSelectData($bookId=null){
 
+		$book=$this->loadModel($bookId);
+		
+		/**
+		 * BookDataForm -> CFormModel
+		 * @var BookDataForm
+		 */
+		$model = new BookDataForm;
+		if (isset($_POST['BookDataForm']['size'])) {
+			$book=$this->loadModel($bookId);
+			//book->data'ya size eklendi
+			$book_data=json_decode($book->data,true);
+			$book_data['size']=$_POST['BookDataForm']['size'];
+			$book->data=json_encode($book_data);
+
+			$book->save();
+			$this->redirect(array('author','bookId'=>$bookId));
+		}
+		
+		$this->render('select_data',array(
+			'book_id'=>$bookId,
+			'model' => $model
+		));
+	}
 
 	public function actionAuthor($bookId,$page=null,$component=null){ 
 		$model=$this->loadModel($bookId);
