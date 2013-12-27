@@ -148,10 +148,7 @@ var createImageComponent = function ( event, ui ) {
     el.addEventListener("drop", function(e){
       var image_width = '200px';
       var image_height = '150px';
-      if($('#width').val() != '')
-        image_width = $('#width').val()+'px';
-      if($('#height').val() != '')
-        image_height = $('#height').val();
+      
       e.stopPropagation();
       e.preventDefault();
 
@@ -168,6 +165,10 @@ var createImageComponent = function ( event, ui ) {
             
             image_width = this.width;
             image_height = this.height;
+            if($('#width').val() != '')
+              image_width = $('#width').val();
+            if($('#height').val() != '')
+              image_height = $('#height').val();
             var size = window.lindneo.findBestSize({'w':image_width,'h':image_height});
             image_width = size.w;
             image_height = size.h;

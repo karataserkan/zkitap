@@ -127,7 +127,9 @@ window.lindneo.toolbox = (function(window, $, undefined){
 
       $.each(this.selectedComponents, function( key, component ) {
         //console.log('.toolbox.'+component.options.component.type+'-options, .toolbox.generic-options');
-        $('.toolbox.'+component.options.component.type+'-options, .toolbox.generic-options').show();
+        //console.log(component.options.component.data.lock.);
+        if($.type(component.options.component.data.lock.username) == "undefined")
+          $('.toolbox.'+component.options.component.type+'-options, .toolbox.generic-options').show();
 
         $('.toolbox .tool').unbind( "change" );
         $('.toolbox-btn').unbind( "click" );
@@ -135,7 +137,7 @@ window.lindneo.toolbox = (function(window, $, undefined){
 
         $('.toolbox .tool, .toolbox-btn').each(function (index) {
               var rel=$(this).attr('rel');
-              
+              console.log(rel);
               var relValue = component.getProperty(rel);
               //console.log  ( relValue );
               if( relValue != null) { 
@@ -244,7 +246,7 @@ window.lindneo.toolbox = (function(window, $, undefined){
         $('#'+component.options.component.id).attr('readonly','readonly');
         $('#delete-button-'+component.options.component.id).hide();
         if ($.type(component.options.component.data.lock) == "undefined") component.options.component.data.lock='';
-        
+        window.lindneo.toolbox.selectionUpdated();
         //console.log(component.options.component);
         component.options.component.data.lock=window.lindneo.user;
         this._trigger('update', null, component.options.component );

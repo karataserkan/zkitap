@@ -290,6 +290,7 @@ $(document).ready(function(){
     setFromData : function () {
       var that=this;
       var _data = this.options.component.data;
+      if($.type(this.options.component.data.lock) == "undefined") {  this.options.component.data.lock=''; }
 
       $.each( _data, function(p, data) {
         
@@ -308,7 +309,7 @@ $(document).ready(function(){
 
       });
       
-      if($.type(this.options.component.data.lock.username) != "undefined" && this.options.component.data.lock.username!=''){
+      if(this.options.component.data.lock != "undefined" && this.options.component.data.lock.username != "undefined"){
         $('#'+this.options.component.id).parent().draggable({ disabled: true });
         $('#'+this.options.component.id).droppable({ disabled: true });
         $('#'+this.options.component.id).selectable({ disabled: true });
@@ -386,7 +387,7 @@ $(document).ready(function(){
       this._trigger('selected', null, this );
       window.lindneo.tsimshian.emitSelectedComponent( this );
       
-      if($.type(this.options.component.data.lock.username) != "undefined" && this.options.component.data.lock.username!=''){
+      if($.type(this.options.component.data.lock.username) != "undefined"){
         $('#'+this.options.component.id).parent().draggable({ disabled: true });
         $('#'+this.options.component.id).droppable({ disabled: true });
         $('#'+this.options.component.id).selectable({ disabled: true });
@@ -439,6 +440,7 @@ $(document).ready(function(){
       return this._setPropertyofObject(propertyName,propertyValue) ;
     },
     _setPropertyofObject : function (propertyName,propertyValue){
+      console.log(propertyName);
       switch(propertyName){
         case 'zindex':
 
