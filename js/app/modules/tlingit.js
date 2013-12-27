@@ -168,7 +168,11 @@ window.lindneo.tlingit = (function(window, $, undefined){
     });
 
     var canvas_reset=[];
-
+    components=components.sort (function(a,b){
+      if (a.data.self.css['z-index'] > b.data.self.css['z-index']) return +1;
+      return -1;
+    });
+    
     $.each(components,function(i,component){
       var page_slice= $('[page_id="'+component.page_id+'"]');
       var ratio = $('#current_page').width() / page_slice.width();
@@ -180,6 +184,7 @@ window.lindneo.tlingit = (function(window, $, undefined){
         context.fillRect(0,0,canvas.width,canvas.height);
         canvas_reset[component.page_id]=true;
       }
+
         switch (component.type){
 
 
@@ -217,8 +222,6 @@ window.lindneo.tlingit = (function(window, $, undefined){
                     if ( y - starty <= maxHeight ) context.fillText(sublines, x, y);
                     sublines = words[n] + ' ';
                     y += fontHeight;
-                    
-
                   }
                   else {
                     sublines = testLine;

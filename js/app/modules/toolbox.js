@@ -17,9 +17,10 @@ window.lindneo.toolbox = (function(window, $, undefined){
     for (var i = 0; i < elems.length; i++)
     {
       var zindex=document.defaultView.getComputedStyle(elems[i],null).getPropertyValue("z-index");
+      console.log(zindex);
 
         
-      if ((zindex >= highest) && zindex<9000 && (zindex != 'auto'))
+      if ((zindex >= highest) && zindex<10000 && (zindex != 'auto'))
       {
         highest = zindex;
         
@@ -121,6 +122,7 @@ window.lindneo.toolbox = (function(window, $, undefined){
   };
 
   var selectionUpdated = function (){
+    var that = this;
       $('.toolbox').hide();
       //console.log('All Selecteds:');
       //console.log(this.selectedComponents);
