@@ -20,11 +20,14 @@
 	<div class="row">
 	<?php
 		 echo $form->radioButtonList($model,'size',
-	                    array(  0 => '1920 X 1080',
-	                            1 => '1400 X 1050',
-	                            2 => '1280 X 960',
-	                            3 => '1024 X 768',
-	                            4 => '800 X 600' ),
+	                    array(  0 => '2048 X 1536',
+	                    array(  1 => '1920 X 1080',
+	                            2 => '1400 X 1050',
+	                            3 => '1366 X 768',
+	                            4 => '1280 X 960',
+	                            5 => '1280 X 800',
+	                            6 => '1024 X 768',
+	                            7 => '800 X 600' ),
 	                  
 	                   array(
 	    					'labelOptions'=>array('style'=>'display:inline'),
