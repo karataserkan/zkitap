@@ -21,7 +21,7 @@
 	<?php
 		 echo $form->radioButtonList($model,'size',
 	                    array(  0 => '2048 X 1536',
-	                    array(  1 => '1920 X 1080',
+	                    		1 => '1920 X 1080',
 	                            2 => '1400 X 1050',
 	                            3 => '1366 X 768',
 	                            4 => '1280 X 960',
