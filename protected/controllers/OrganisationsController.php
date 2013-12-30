@@ -32,7 +32,7 @@ class OrganisationsController extends Controller
 				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
-				'actions'=>array('create','update','workspaces'),
+				'actions'=>array('create','update','workspaces','delWorkspaceUser'),
 				'users'=>array('@'),
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
@@ -225,6 +225,13 @@ class OrganisationsController extends Controller
 
 		return $organizationUsers;
 	}
+
+	public function actiondelWorkspaceUser($workspaceId,$userId)
+	{
+		$command = Yii::app()->db->createCommand();
+		$command->delete('workspaces_users', 'userid=:userid && workspace_id=:workspace_id', array(':userid'=>$userId,':workspace_id'=>$workspaceId));
+	}
+
 	/**
 	 * Manages all models.
 	 */

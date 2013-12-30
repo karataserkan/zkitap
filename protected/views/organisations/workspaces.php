@@ -36,16 +36,8 @@ $organisationId=$organizationUser['organisation_id'];
 							<span id="editor-name" class="editor-name">
 							<?php echo $user['name']." ".$user['surname']; ?>
 							</span>
+							<a href="index.php?r=organisation/delWorkspaceUser&workspaceId=<?php echo $workspace['workspace_id']; ?>&userId=<?php echo $user['id']; ?>" class="icon-close size-15 delete-icon"></a>
 							
-								<?php 
-									echo CHtml::link(CHtml::encode(''), array('organisation/delWorkspaceUser'),
-									  array(
-										'submit'=>array('organisation/delWorkspaceUser', 'workspaceId'=>$workspace['workspace_id'], 'user'=>$user['id']),
-										'params' => array('workspaceId'=>$workspace['workspace_id'], 'user'=>$user['id']),
-										'class' => 'icon-close size-15 delete-icon'
-									  )
-									);
-									?>
 						</div>	
 				<?php endforeach; ?>
 				</div>
