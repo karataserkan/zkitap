@@ -32,7 +32,7 @@ class OrganisationsController extends Controller
 				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
-				'actions'=>array('create','update'),
+				'actions'=>array('create','update','workspaces'),
 				'users'=>array('@'),
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
@@ -120,34 +120,111 @@ class OrganisationsController extends Controller
 	/**
 	 * Lists all models.
 	 */
-	public function actionIndex()
+	public function actionIndex($organizationId=null)
 	{
 		$dataProvider=new CActiveDataProvider('Organisations');
 		$this->render('index',array(
+			'organizationId' => $organizationId,		
 			'dataProvider'=>$dataProvider,
 		));
 	}
 
+	/**
+	 * organisation's workspaces
+	 * @param  varchar $organizationId
+	 */
 	public function actionWorkspaces($organizationId=null)
 	{
 		if(Yii::app()->user->isGuest)
 			$this->redirect( array('site/login' ) );
 
+		/**
+		 * if $organisationId set
+		 */
 		if ($organizationId) {
-			$organization = Yii::app()->db->createCommand()
+			$organizationUser = Yii::app()->db->createCommand()
 		    ->select("*")
 		    ->from("organisation_users")
 		    ->where("user_id=:user_id", array(':user_id' => Yii::app()->user->id))
 		    ->queryRow();
-		    $isOrganizationUser = ($organization) ? $organization['role'] : null ;
-		    if ($isOrganizationUser) {
-		    	
-		    }
 
+		    /**
+		     * [$isOrganizationUser whether user has this organization]
+		     * @var user | null
+		     */
+		    $isOrganizationUser = ($organizationUser) ? $organizationUser : null ;
+		    if ($isOrganizationUser) {
+
+		    	$workspaces = Yii::app()->db->createCommand()
+				    ->select("*")
+				    ->from("organisation_workspaces x")
+				    ->join("workspaces w",'w.workspace_id=x.workspace_id')
+				    ->where("organisation_id=:organisation_id", array(':organisation_id' => $organizationId ) )
+				    ->queryAll();
+
+				$this->render('workspaces',array(
+					'organizationUser' => $organizationUser,
+					'workspaces' => $workspaces
+					));
+		    }
 		}
-		$this->render('workspaces');
 	}
 
+	/**
+	 * [workspaceUsers]
+	 * @param  varchar $workspace_id 
+	 * @return array               
+	 */
+	public function workspaceUsers($workspace_id)
+	{
+		$workspaceUsers = Yii::app()->db->createCommand()
+		->select ("*")
+		->from("workspaces_users")
+		->where("workspace_id=:workspace_id", array(':workspace_id' => $workspace_id))
+		->join("user","userid=id")
+		->queryAll();
+
+		return $workspaceUsers;
+	}
+
+	/**
+	 * [organizationUsers]
+	 * @param  varchar $organisationId
+	 * @return array           
+	 */
+	public function organizationUsers($organisationId)
+	{
+		$organizationUsers = Yii::app()->db->createCommand()
+		->select ("*")
+		->from("organisation_users")
+		->where("organisation_id=:organisation_id", array(':organisation_id' => $organisationId ) )
+		->join("user","user_id=id")
+		->queryAll();
+
+		return $organizationUsers;
+	}
+
+	/**
+	 * [noneWorkspaceUsers description]
+	 * @param  varchar $workspace_id   ID
+	 * @param  varchar $organisationId ID
+	 * @return array                 users who are in organisation but not in workspace
+	 */
+	public function freeWorkspaceUsers($workspace_id,$organisationId)
+	{
+		$workspaceUsers=$this->workspaceUsers($workspace_id);
+		$organizationUsers=$this->organizationUsers($organisationId);
+
+		foreach ($organizationUsers as $key => $organizationUser) {
+			foreach ($workspaceUsers as $key2 => $workspaceUser) {
+				if ($organizationUser['user_id']==$workspaceUser['userid']) {
+					unset($organizationUsers[$key]);
+				}
+			}
+		}
+
+		return $organizationUsers;
+	}
 	/**
 	 * Manages all models.
 	 */
