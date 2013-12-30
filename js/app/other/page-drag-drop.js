@@ -4,14 +4,12 @@ $( document ).ready(function () {
   var termTemplate = "<span class='ui-autocomplete-term' style='display:inline-block'>%s</span>";
         
   function first_time(){
-    /*
     $('#editor_view_pane, #header, #components, .styler_box, #chapters_pages_view')
       .attr('unselectable', 'on')
       .css('user-select', 'none')
       .on('selectstart', false);
     //disable in page draggin selection
-    //$('#editor_view_pane').mousemove(function(event){event.stopImmediatePropagation();return false;});
-  */
+   
     $('#search').autocomplete({
       appendTo: "#page" ,
       minLength: 1, 
