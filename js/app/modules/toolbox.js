@@ -19,24 +19,29 @@ window.lindneo.toolbox = (function(window, $, undefined){
   	var max_left = 0;
   	var max_top = 0;
   	$.each(this.selectedComponents, function( key, component ) {
-		var object_left = parseInt(component.options.component.data.self.css.left.replace("px", ""));
-		var object_width = parseInt(component.options.component.data.self.css.width);
-		var object_top = parseInt(component.options.component.data.self.css.top.replace("px", ""));
-		var object_height = parseInt(component.options.component.data.self.css.height);
-		var object_right = object_left + object_width;
-		var object_bottom = object_top + object_height;
+  		var object_left = parseInt(component.options.component.data.self.css.left.replace("px", ""));
+  		var object_width = parseInt(component.options.component.data.self.css.width);
+  		var object_top = parseInt(component.options.component.data.self.css.top.replace("px", ""));
+  		var object_height = parseInt(component.options.component.data.self.css.height);
+  		var object_right = object_left + object_width;
+  		var object_bottom = object_top + object_height;
 
-		if(min_left == 0) 	min_left = object_left;
-		if(max_left == 0) 	max_left = object_left;
-		if(min_top == 0) 	min_top = object_top;
-		if(max_top == 0) 	max_top = object_top;
-		
-		if(min_left > object_left) 	min_left = object_left;
-		if(max_left < object_left) 	max_left = object_left;
-		if(min_top > object_top) 	min_top = object_top;
-		if(max_top < object_top)	max_top = object_top;
 
-	});
+  		if(min_left > object_left) 	min_left = object_left;
+  		if(max_right < object_right) 	max_right = object_right;
+  		if(min_top > object_top) 	min_top = object_top;
+  		if(max_bottom < object_bottom)	max_bottom = object_bottom;
+
+
+
+	 });
+    return {
+      'left':min_left,
+      'right':max_right,
+      'top':min_top,
+      'bottom':max_bottom
+    };
+
 };
 
   var  componentsAlignmentLeftToSet = function ()
@@ -591,7 +596,7 @@ window.lindneo.toolbox = (function(window, $, undefined){
       //key capture problem fix
       $(document).unbind('keydown');
       console.log(component);
-      if (typeof component.options.component.id != "undefined")
+      if (typeof component.options != "undefined")
         this.selectedComponents=$.grep(this.selectedComponents, function (n,i){
           return (n.options.component.id !== 
             component.options.component.id);  
