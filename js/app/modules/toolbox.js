@@ -143,7 +143,7 @@ window.lindneo.toolbox = (function(window, $, undefined){
 
         $('.toolbox .tool, .toolbox-btn').each(function (index) {
               var rel=$(this).attr('rel');
-              console.log(rel);
+              //console.log(rel);
               var relValue = component.getProperty(rel);
               //console.log  ( relValue );
               if( relValue != null) { 
@@ -239,7 +239,7 @@ window.lindneo.toolbox = (function(window, $, undefined){
 
   var lockSelectedItemsToClipboard = function () {
       var newClipboard=[];
-
+      var that = this;
       this.clearClipboard();      
       
       $.each(window.lindneo.toolbox.selectedComponents, function( key, component ) {
@@ -256,6 +256,7 @@ window.lindneo.toolbox = (function(window, $, undefined){
         //console.log(component.options.component);
         component.options.component.data.lock=window.lindneo.user;
         this._trigger('update', null, component.options.component );
+        that.selectionUpdated();
         //console.log(component.options.component);
         var newComponent =JSON.parse(JSON.stringify(component.options.component)); 
         //console.log(newComponent);
@@ -271,7 +272,7 @@ window.lindneo.toolbox = (function(window, $, undefined){
 
   var unlockSelectedItemsToClipboard = function () {
       var newClipboard=[];
-
+      var that = this;
       this.clearClipboard();
       
       $.each(window.lindneo.toolbox.selectedComponents, function( key, component ) {
@@ -286,7 +287,7 @@ window.lindneo.toolbox = (function(window, $, undefined){
             $('#'+component.options.component.id).removeAttr('readonly');
             component.options.component.data.lock='';
             //console.log(component.options.component.data.lock);
-            
+            that.selectionUpdated();
             var newComponent =JSON.parse(JSON.stringify(component.options.component)); 
             //console.log(newComponent);
             this._trigger('update', null, component.options.component );

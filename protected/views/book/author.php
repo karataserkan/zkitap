@@ -307,12 +307,7 @@ $current_user=User::model()->findByPk(Yii::app()->user->id);
 			</div>
 			
 			<div class="generic-options responsive_1"  style="display:inline-block;">
-				<select class='tool select' rel='component_alignment' id="component_alignment" class="radius">
-					<option value="">Lütfen Seçiniz</option>
-					<option value="left" >Sola Yasla</option>
-					<option value="center" >Ortala</option>
-					<option value="right" >Sağa Yasla</option>
-				</select>
+				<a href="#" class="bck-dark-blue white toolbox-items radius responsive_2" id="pop-align"><i class="icon-align-center size-15"></i></a>
 				<a href="#" class="toolbox-items" id="generic-disable" >Lock</a>
 				<a href="#" class="toolbox-items" id="generic-undisable" >Unlock</a>
 				<a href="#" class="toolbox-items" id="generic-cut" ><img src="/css/images/cut.png" alt="Book Cover" style="margin-top:-5px;" ></a>
