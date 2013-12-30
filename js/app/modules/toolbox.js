@@ -9,6 +9,390 @@ window.lindneo.toolbox = (function(window, $, undefined){
   var selectedComponents=[];
   var add_value=0;
   var is_copy=0;
+
+  var positions = function (position)
+  {
+  	var component_values = [];
+  	var value = 0;
+  	var min_left = 0;
+  	var min_top = 0;
+  	var max_left = 0;
+  	var max_top = 0;
+  	$.each(this.selectedComponents, function( key, component ) {
+  		var object_left = parseInt(component.options.component.data.self.css.left.replace("px", ""));
+  		var object_width = parseInt(component.options.component.data.self.css.width);
+  		var object_top = parseInt(component.options.component.data.self.css.top.replace("px", ""));
+  		var object_height = parseInt(component.options.component.data.self.css.height);
+  		var object_right = object_left + object_width;
+  		var object_bottom = object_top + object_height;
+
+
+  		if(min_left > object_left) 	min_left = object_left;
+  		if(max_right < object_right) 	max_right = object_right;
+  		if(min_top > object_top) 	min_top = object_top;
+  		if(max_bottom < object_bottom)	max_bottom = object_bottom;
+
+
+
+	 });
+    return {
+      'left':min_left,
+      'right':max_right,
+      'top':min_top,
+      'bottom':max_bottom
+    };
+
+};
+
+  var  componentsAlignmentLeftToSet = function ()
+  {
+    var position = this.component_position('left');
+    //console.log(position);
+    $.each(this.selectedComponents, function( key, component ) {
+    	//console.log(component.options.component.data.self.css.left);
+    	component.options.component.data.self.css.left = position;
+    	window.lindneo.tlingit.componentHasUpdated(component.options.component);
+    	window.lindneo.nisga.destroyComponent(component.options.component.id);
+        window.lindneo.nisga.createComponent(component.options.component);
+    	
+  	});
+    //return position;
+  };
+
+  var  componentsAlignmentRightToSet = function ()
+  {
+    var position = this.component_position('right');
+    //console.log(position);
+    $.each(this.selectedComponents, function( key, component ) {
+    	//console.log(component.options.component.data.self.css.left);
+    	var left_position = position - parseInt(component.options.component.data.self.css.width,10);
+    	component.options.component.data.self.css.left = left_position+'px';
+    	window.lindneo.tlingit.componentHasUpdated(component.options.component);
+    	window.lindneo.nisga.destroyComponent(component.options.component.id);
+        window.lindneo.nisga.createComponent(component.options.component);
+
+  	});
+    //return position;
+  };
+
+  var  componentsAlignmentCenterToSet = function ()
+  {
+    var position = this.component_position('center');
+    console.log(position);
+    $.each(this.selectedComponents, function( key, component ) {
+    	//console.log(component.options.component.data.self.css.left);
+    	var object_width = parseInt(component.options.component.data.self.css.width);
+    	var object_position = position - (object_width / 2);
+    	component.options.component.data.self.css.left = object_position;
+    	window.lindneo.tlingit.componentHasUpdated(component.options.component);
+    	window.lindneo.nisga.destroyComponent(component.options.component.id);
+        window.lindneo.nisga.createComponent(component.options.component);
+  	});
+    //return position;
+  };
+
+  var  componentsAlignmentTopToSet = function ()
+  {
+    var position = this.component_position('top');
+    //console.log(position);
+    $.each(this.selectedComponents, function( key, component ) {
+    	//console.log(component.options.component.data.self.css.left);
+    	console.log(position);
+    	component.options.component.data.self.css.top = position;
+    	console.log(component.options.component.id);
+    	console.log(component.options.component.data.self.css.left);
+    	window.lindneo.tlingit.componentHasUpdated(component.options.component);
+    	window.lindneo.nisga.destroyComponent(component.options.component.id);
+        window.lindneo.nisga.createComponent(component.options.component);
+    	
+  	});
+    //return position;
+  };
+
+  var  componentsAlignmentBottomToSet = function ()
+  {
+    var position = this.component_position('bottom');
+    //console.log(position);
+    $.each(this.selectedComponents, function( key, component ) {
+    	//console.log(component.options.component.data.self.css.left);
+    	
+    	var top_position = position - parseInt(component.options.component.data.self.css.height,10);
+    	component.options.component.data.self.css.top = top_position+'px';
+    	window.lindneo.tlingit.componentHasUpdated(component.options.component);
+    	window.lindneo.nisga.destroyComponent(component.options.component.id);
+        window.lindneo.nisga.createComponent(component.options.component);
+
+  	});
+    //return position;
+  };
+
+  var  componentsAlignmentMiddleToSet = function ()
+  {
+    var position = this.component_position('middle');
+    console.log(position);
+    $.each(this.selectedComponents, function( key, component ) {
+    	//console.log(component.options.component.data.self.css.left);
+    	var object_height = parseInt(component.options.component.data.self.css.height);
+    	var object_position = position - (object_height / 2);
+    	component.options.component.data.self.css.top = object_position;
+    	window.lindneo.tlingit.componentHasUpdated(component.options.component);
+    	window.lindneo.nisga.destroyComponent(component.options.component.id);
+        window.lindneo.nisga.createComponent(component.options.component);
+  	});
+    //return position;
+  };
+
+  var  componentsAlignmentVerticalGapsToSet = function ()
+  {
+   console.log('Vertical Gaps');
+   var position = this.component_gaps('vertical');
+  };
+
+  var  componentsAlignmentHorizontalGapsToSet = function ()
+  {
+   console.log('Horizontal Gaps');
+   var position = this.component_gaps('horizontal');
+  };
+
+  var component_position = function(position)
+  {
+  	var value = 0;
+  	if(position == 'left'){
+	  	$.each(this.selectedComponents, function( key, component ) {
+	    	//console.log(component.options.component.data.self.css.left);
+	    	var object_left = parseInt(component.options.component.data.self.css.left.replace("px", ""));
+	    	if(value==0) value = object_left;
+	    	if(value > object_left) value = object_left;
+	  	});
+	  	value = value + 'px';
+	  }
+	 else if(position == 'right'){
+	 	console.log(position);
+	  	$.each(this.selectedComponents, function( key, component ) {
+	    	//console.log(component.options.component.data.self.css.left);
+	    	var object_left = component.options.component.data.self.css.left.replace("px", "");
+	    	object_left = parseInt(object_left);
+	    	var object_value = object_left + parseInt(component.options.component.data.self.css.width);
+	    	//alert(object_value);
+	    	if(value==0) value = object_value;
+	    	if(value < object_value) value = object_value;
+	  	});
+	  	//value = value + 'px';
+	  }
+	  else if(position == 'center'){
+	  	var value_max = 0;
+	  	var value_min = 0;
+	  	$.each(this.selectedComponents, function( key, component ) {
+	    	//console.log(component.options.component.data.self.css.left);
+	    	var object_left = component.options.component.data.self.css.left.replace("px", "");
+	    	object_left = parseInt(object_left);
+	    	var object_value = parseInt(component.options.component.data.self.css.width);
+	    	var object_right = object_left + object_value;
+	    	if(value_max==0) {
+	    		value_max = object_right;
+	    		value_min = object_left;
+	    	}
+	    	if(value_min > object_left) value_min = object_left;
+	    	if(value_max < object_right) value_max = object_right;
+	    	console.log(value_max);
+	    	console.log(value_min);
+	  	});
+	  	value = value_max - (value_max - value_min) / 2;
+	  }
+	  else if(position == 'top'){
+	  	$.each(this.selectedComponents, function( key, component ) {
+	    	//console.log(component.options.component.data.self.css.left);
+	    	var object_top = parseInt(component.options.component.data.self.css.top.replace("px", ""));
+	    	if(value==0) value = object_top;
+	    	if(value > object_top) value = object_top;
+	  	});
+	  	value = value + 'px';
+	  }
+	  else if(position == 'bottom'){
+	 	console.log(position);
+	  	$.each(this.selectedComponents, function( key, component ) {
+	    	//console.log(component.options.component.data.self.css.left);
+	    	var object_top = component.options.component.data.self.css.top.replace("px", "");
+	    	object_top = parseInt(object_top);
+	    	var object_value = object_top + parseInt(component.options.component.data.self.css.height);
+	    	//alert(object_value);
+	    	if(value==0) value = object_value;
+	    	if(value < object_value) value = object_value;
+	  	});
+	  	//value = value + 'px';
+	  }
+	  else if(position == 'middle'){
+	  	var value_max = 0;
+	  	var value_min = 0;
+	  	$.each(this.selectedComponents, function( key, component ) {
+	    	//console.log(component.options.component.data.self.css.left);
+	    	var object_top = component.options.component.data.self.css.top.replace("px", "");
+	    	object_top = parseInt(object_top);
+	    	var object_value = parseInt(component.options.component.data.self.css.height);
+	    	var object_bottom = object_top + object_value;
+	    	if(value_max==0) {
+	    		value_max = object_bottom;
+	    		value_min = object_top;
+	    	}
+	    	if(value_min > object_top) value_min = object_top;
+	    	if(value_max < object_bottom) value_max = object_bottom;
+	  	});
+	  	value = value_max - (value_max - value_min) / 2;
+	  }
+	  
+  	return value;
+  };
+
+  var component_gaps = function (position)
+  {
+  	var component_values = [];
+  	var value = 0;
+  	var min_left = 0;
+  	var min_top = 0;
+  	var max_left = 0;
+  	var max_top = 0;
+  	$.each(this.selectedComponents, function( key, component ) {
+  			var object_left = parseInt(component.options.component.data.self.css.left.replace("px", ""));
+  			var object_width = parseInt(component.options.component.data.self.css.width);
+  			var object_top = parseInt(component.options.component.data.self.css.top.replace("px", ""));
+  			var object_height = parseInt(component.options.component.data.self.css.height);
+  			var object_right = object_left + object_width;
+  			var object_bottom = object_top + object_height;
+
+  			if(min_left == 0) 	min_left = object_left;
+  			if(max_left == 0) 	max_left = object_left;
+  			if(min_top == 0) 	min_top = object_top;
+  			if(max_top == 0) 	max_top = object_top;
+  			
+  			if(min_left > object_left) 	min_left = object_left;
+  			if(max_left < object_left) 	max_left = object_left;
+  			if(min_top > object_top) 	min_top = object_top;
+  			if(max_top < object_top)	max_top = object_top;
+
+  			component_values.push({'component':component.options.component, 'id' : component.options.component.id, 'left': object_left, 'right': object_right, 'top': object_top, 'bottom': object_bottom});
+  		});
+  	
+  	
+  	if(position == 'vertical'){
+  		var component_spaces = [];
+  		var components_count = component_values.length;
+  		var spaces = 0;
+
+  		component_values.sort(function(obj1, obj2) {
+			return obj1.top - obj2.top;
+		});
+
+  		for(var i = 0; i<components_count - 1; i++){
+  			var space = component_values[i + 1].top - component_values[i].bottom;
+  			if(space > 0) spaces = spaces + space;
+  			component_spaces.push(space);
+  		};
+  		//console.log(components_count);
+		value = spaces / (components_count -1);
+		$.each(component_values, function( key, component ) {
+  			if(key!=0 && key!= components_count-1){
+  				if(component_spaces[key-1] > value){
+  					
+  					var object_top = component.component.data.self.css.top.replace("px", "");
+	    			object_top = parseInt(object_top);
+  					var div = component_spaces[key-1] - value;
+  					console.log(div);
+  					div = object_top - div;
+  					var key_value = div;
+  					console.log(div);
+  					div = div + 'px';
+  					component.component.data.self.css.top = div;
+  					
+  					window.lindneo.tlingit.componentHasUpdated(component.component);
+			    	window.lindneo.nisga.destroyComponent(component.component.id);
+			        window.lindneo.nisga.createComponent(component.component);
+			        component_spaces[key] = component_spaces[key] - key_value;
+			        console.log(component_spaces[key]);
+  				}
+  				else {
+  					
+  					var object_top = component.component.data.self.css.top.replace("px", "");
+	    			object_top = parseInt(object_top);
+  					var div = value - component_spaces[key-1];
+  					console.log(div);
+  					div = object_top + div;
+  					var key_value = div;
+  					console.log(div);
+  					div = div + 'px';
+  					component.component.data.self.css.top = div;
+  					console.log(component.component);
+  					window.lindneo.tlingit.componentHasUpdated(component.component);
+			    	window.lindneo.nisga.destroyComponent(component.component.id);
+			        window.lindneo.nisga.createComponent(component.component);
+			        component_spaces[key] = component_spaces[key] + key_value;
+			        console.log(component_spaces[key]);
+  				}
+  			}
+  		});
+		console.log(component_values);
+		console.log(component_spaces);
+		console.log(value);
+  	}
+  	else if(position == 'horizontal'){
+  		var component_spaces = [];
+  		var components_count = component_values.length;
+  		var spaces = 0;
+
+  		component_values.sort(function(obj1, obj2) {
+			return obj1.left - obj2.left;
+		});
+
+  		for(var i = 0; i < components_count - 1; i++){
+  			var space = component_values[i + 1].left - component_values[i].right;
+  			if(space > 0) spaces = spaces + space;
+  			component_spaces.push(space);
+  		};
+  		value = spaces / (components_count -1);
+		$.each(component_values, function( key, component ) {
+  			if(key!=0 && key!= components_count-1){
+  				if(component_spaces[key-1] > value){
+  					
+  					var object_left = component.component.data.self.css.left.replace("px", "");
+	    			object_left = parseInt(object_left);
+  					var div = component_spaces[key-1] - value;
+  					console.log(div);
+  					div = object_left - div;
+  					var key_value = div;
+  					console.log(div);
+  					div = div + 'px';
+  					component.component.data.self.css.left = div;
+  					console.log(component.component);
+  					window.lindneo.tlingit.componentHasUpdated(component.component);
+			    	window.lindneo.nisga.destroyComponent(component.component.id);
+			        window.lindneo.nisga.createComponent(component.component);
+			        component_spaces[key] = component_spaces[key] + div;
+  				}
+  				else {
+  					
+  					var object_left = component.component.data.self.css.left.replace("px", "");
+	    			object_left = parseInt(object_left);
+  					var div = value - component_spaces[key-1];
+  					console.log(div);
+  					div = object_left + div;
+  					var key_value = div;
+  					console.log(div);
+  					div = div + 'px';
+  					component.component.data.self.css.left = div;
+  					console.log(component.component);
+  					window.lindneo.tlingit.componentHasUpdated(component.component);
+			    	window.lindneo.nisga.destroyComponent(component.component.id);
+			        window.lindneo.nisga.createComponent(component.component);
+			        component_spaces[key] = component_spaces[key] - div;
+  				}
+  			}
+  		});
+		console.log(component_values);
+		console.log(component_spaces);
+		console.log(value);
+  	}
+  	return value;
+  }
+
   var  findHighestZIndexToSet = function (elem)
   {
     var elems = $(elem);
@@ -20,7 +404,7 @@ window.lindneo.toolbox = (function(window, $, undefined){
       console.log(zindex);
 
         
-      if ((zindex >= highest) && zindex<10000 && (zindex != 'auto'))
+      if ((zindex >= highest) && zindex<2000 && (zindex != 'auto'))
       {
         highest = zindex;
         
@@ -68,7 +452,7 @@ window.lindneo.toolbox = (function(window, $, undefined){
     for (var i = 0; i < elems.length; i++)
     {
       var zindex=document.defaultView.getComputedStyle(elems[i],null).getPropertyValue("z-index");
-      if (zindex != 'auto' && !(eleman[0] === elems[i]) ){
+      if (zindex != 'auto' && !isNaN(zindex) && !(eleman[0] === elems[i]) ){
 
         zindex=parseInt(zindex);
         //console.log(zindex);
@@ -122,6 +506,9 @@ window.lindneo.toolbox = (function(window, $, undefined){
   };
 
   var selectionUpdated = function (){
+
+    
+
     var that = this;
       $('.toolbox').hide();
       //console.log('All Selecteds:');
@@ -206,9 +593,14 @@ window.lindneo.toolbox = (function(window, $, undefined){
   };
 
   var removeComponentFromSelection = function (component){
-      this.selectedComponents=$.grep(this.selectedComponents, function (n,i){
-        return (n.options.component.id !== component.options.component.id);  
-      });
+      //key capture problem fix
+      $(document).unbind('keydown');
+      console.log(component);
+      if (typeof component.options != "undefined")
+        this.selectedComponents=$.grep(this.selectedComponents, function (n,i){
+          return (n.options.component.id !== 
+            component.options.component.id);  
+        });
       this.selectionUpdated();
 
 
@@ -306,10 +698,11 @@ window.lindneo.toolbox = (function(window, $, undefined){
         this.clearClipboard();
         
         $.each(window.lindneo.toolbox.selectedComponents, function( key, component ) {
+          
+          var newComponent =JSON.parse(JSON.stringify(component.options.component)); 
           //console.log(component.options.component);
           if(cut==true) window.lindneo.nisga.deleteComponent( component.options.component );
           
-          var newComponent =JSON.parse(JSON.stringify(component.options.component)); 
           //console.log(newComponent);
           
           newComponent.id= '';
@@ -412,6 +805,17 @@ window.lindneo.toolbox = (function(window, $, undefined){
     deleteComponentFromSelection: deleteComponentFromSelection,
     undoSelectedItemsClipboard: undoSelectedItemsClipboard,
     redoSelectedItemsClipboard: redoSelectedItemsClipboard,
+    componentsAlignmentLeftToSet: componentsAlignmentLeftToSet,
+    componentsAlignmentRightToSet: componentsAlignmentRightToSet,
+    componentsAlignmentCenterToSet: componentsAlignmentCenterToSet,
+    componentsAlignmentTopToSet: componentsAlignmentTopToSet,
+    componentsAlignmentBottomToSet: componentsAlignmentBottomToSet,
+    componentsAlignmentMiddleToSet: componentsAlignmentMiddleToSet,
+    componentsAlignmentVerticalGapsToSet: componentsAlignmentVerticalGapsToSet,
+    componentsAlignmentHorizontalGapsToSet: componentsAlignmentHorizontalGapsToSet,
+    component_position: component_position,
+    component_gaps: component_gaps,
+    positions: positions,
     load: load,
     refresh: refresh
   };

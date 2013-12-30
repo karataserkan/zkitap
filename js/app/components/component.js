@@ -423,7 +423,7 @@ $(document).ready(function(){
       window.lindneo.toolbox.removeComponentFromSelection(this);
     },
     _getSettable : function (propertyName){
-      //console.log (this.options.comment.data);
+     
      return this.options.component.data.self;
     },
     getSettable : function (propertyName){
@@ -440,7 +440,7 @@ $(document).ready(function(){
       return this._setPropertyofObject(propertyName,propertyValue) ;
     },
     _setPropertyofObject : function (propertyName,propertyValue){
-      console.log(propertyName);
+
       switch(propertyName){
         case 'zindex':
 
@@ -461,8 +461,35 @@ $(document).ready(function(){
             }
 
           break;
+        case 'component_alignment':
+            switch (propertyValue){
+              case 'vertical_align_left':
+                this.setProperty ('position',  window.lindneo.toolbox.componentsAlignmentLeftToSet('[component-instance="true"]'));
+              break;
+              case 'vertical_align_center':
+                this.setProperty ('position',  window.lindneo.toolbox.componentsAlignmentCenterToSet('[component-instance="true"]'));
+              break;
+              case 'vertical_align_right':
+                this.setProperty ('position',  window.lindneo.toolbox.componentsAlignmentRightToSet('[component-instance="true"]'));
+              break;
+              case 'horizontal_align_top':
+                this.setProperty ('position',  window.lindneo.toolbox.componentsAlignmentTopToSet('[component-instance="true"]'));
+              break;
+              case 'horizontal_align_middle':
+                this.setProperty ('position',  window.lindneo.toolbox.componentsAlignmentMiddleToSet('[component-instance="true"]'));
+              break;
+              case 'horizontal_align_bottom':
+                this.setProperty ('position',  window.lindneo.toolbox.componentsAlignmentBottomToSet('[component-instance="true"]'));
+              break;
+              case 'vertical_align_gaps':
+                this.setProperty ('position',  window.lindneo.toolbox.componentsAlignmentVerticalGapsToSet('[component-instance="true"]'));
+              break;
+              case 'horizontal_align_gaps':
+                this.setProperty ('position',  window.lindneo.toolbox.componentsAlignmentHorizontalGapsToSet('[component-instance="true"]'));
+              break;
+            }
+          break;
         case 'z-index':
-          //console.log('z-index girdi'+ propertyValue);
           this.options.component.data.self.css[propertyName]=propertyValue;
         break;
         default:
