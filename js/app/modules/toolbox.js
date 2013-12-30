@@ -296,9 +296,9 @@ window.lindneo.toolbox = (function(window, $, undefined){
   					var object_top = component.component.data.self.css.top.replace("px", "");
 	    			object_top = parseInt(object_top);
   					var div = component_spaces[key-1] - value;
+  					var key_value = div;
   					console.log(div);
   					div = object_top - div;
-  					var key_value = div;
   					console.log(div);
   					div = div + 'px';
   					component.component.data.self.css.top = div;
@@ -306,7 +306,7 @@ window.lindneo.toolbox = (function(window, $, undefined){
   					window.lindneo.tlingit.componentHasUpdated(component.component);
 			    	window.lindneo.nisga.destroyComponent(component.component.id);
 			        window.lindneo.nisga.createComponent(component.component);
-			        component_spaces[key] = component_spaces[key] - key_value;
+			        component_spaces[key] = component_spaces[key] + key_value;
 			        console.log(component_spaces[key]);
   				}
   				else {
@@ -314,9 +314,10 @@ window.lindneo.toolbox = (function(window, $, undefined){
   					var object_top = component.component.data.self.css.top.replace("px", "");
 	    			object_top = parseInt(object_top);
   					var div = value - component_spaces[key-1];
+  					var key_value = div;
   					console.log(div);
   					div = object_top + div;
-  					var key_value = div;
+  					
   					console.log(div);
   					div = div + 'px';
   					component.component.data.self.css.top = div;
@@ -324,7 +325,8 @@ window.lindneo.toolbox = (function(window, $, undefined){
   					window.lindneo.tlingit.componentHasUpdated(component.component);
 			    	window.lindneo.nisga.destroyComponent(component.component.id);
 			        window.lindneo.nisga.createComponent(component.component);
-			        component_spaces[key] = component_spaces[key] + key_value;
+			        console.log(component_spaces[key]);
+			        component_spaces[key] = component_spaces[key] - key_value;
 			        console.log(component_spaces[key]);
   				}
   			}
@@ -348,6 +350,7 @@ window.lindneo.toolbox = (function(window, $, undefined){
   			component_spaces.push(space);
   		};
   		value = spaces / (components_count -1);
+  		console.log(value);
 		$.each(component_values, function( key, component ) {
   			if(key!=0 && key!= components_count-1){
   				if(component_spaces[key-1] > value){
@@ -355,34 +358,38 @@ window.lindneo.toolbox = (function(window, $, undefined){
   					var object_left = component.component.data.self.css.left.replace("px", "");
 	    			object_left = parseInt(object_left);
   					var div = component_spaces[key-1] - value;
-  					console.log(div);
-  					div = object_left - div;
   					var key_value = div;
-  					console.log(div);
+  					//console.log(div);
+  					div = object_left - div;
+  					//console.log(div);
   					div = div + 'px';
   					component.component.data.self.css.left = div;
-  					console.log(component.component);
+  					//console.log(component.component);
   					window.lindneo.tlingit.componentHasUpdated(component.component);
 			    	window.lindneo.nisga.destroyComponent(component.component.id);
 			        window.lindneo.nisga.createComponent(component.component);
-			        component_spaces[key] = component_spaces[key] + div;
+			        console.log(component_spaces[key]);
+			        component_spaces[key] = component_spaces[key] + key_value;
+			        console.log(component_spaces[key]);
   				}
   				else {
   					
   					var object_left = component.component.data.self.css.left.replace("px", "");
 	    			object_left = parseInt(object_left);
   					var div = value - component_spaces[key-1];
-  					console.log(div);
-  					div = object_left + div;
   					var key_value = div;
-  					console.log(div);
+  					//console.log(div);
+  					div = object_left + div;
+  					//console.log(div);
   					div = div + 'px';
   					component.component.data.self.css.left = div;
-  					console.log(component.component);
+  					//console.log(component.component);
   					window.lindneo.tlingit.componentHasUpdated(component.component);
 			    	window.lindneo.nisga.destroyComponent(component.component.id);
 			        window.lindneo.nisga.createComponent(component.component);
-			        component_spaces[key] = component_spaces[key] - div;
+			        console.log(component_spaces[key]);
+			        component_spaces[key] = component_spaces[key] - key_value;
+			        console.log(component_spaces[key]);
   				}
   			}
   		});
