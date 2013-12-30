@@ -1,5 +1,27 @@
 $( document ).ready(function () {
 
+//burdan silinecek......
+	$('a[id^="pop-"]').click(function() {
+  
+  var  a = $(this).attr("id");
+       $("#"+a+"-popup").toggle("blind", 400);
+       
+  });
+ 
+  $('.popup').draggable();
+  
+   $('.popup').click(function(){
+  $(this).parent().append(this);
+   });
+    
+	
+ $('.popup-close').click(function(){
+  var  b = $(this).parents().eq(1);
+  	$(b).hide("blind", 400);
+		
+   });
+////////////////////////////////end erasing area   
+
   var termTemplate = "<span class='ui-autocomplete-term' style='display:inline-block'>%s</span>";
         
   function first_time(){
