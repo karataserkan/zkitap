@@ -26,6 +26,13 @@ $( document ).ready(function () {
         
   function first_time(){
 
+    $('#editor_view_pane, #header, #components, .styler_box, #chapters_pages_view')
+      .attr('unselectable', 'on')
+      .css('user-select', 'none')
+      .on('selectstart', false);
+    //disable in page draggin selection
+    //$('#editor_view_pane').mousemove(function(event){event.stopImmediatePropagation();return false;});
+
     $('#search').autocomplete({
       appendTo: "#page" ,
       minLength: 1, 
@@ -329,7 +336,7 @@ $( document ).ready(function () {
 
   $('#general-options').change(function(){
     var value=$(this).val();
-    console.log (value);
+    
     $('.ruler, .vruler').hide();
     if( value.indexOf("cetvel") !== -1) {
       $('.ruler, .vruler').show();

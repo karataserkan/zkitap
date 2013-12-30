@@ -399,7 +399,7 @@ window.lindneo.toolbox = (function(window, $, undefined){
       console.log(zindex);
 
         
-      if ((zindex >= highest) && zindex<10000 && (zindex != 'auto'))
+      if ((zindex >= highest) && zindex<2000 && (zindex != 'auto'))
       {
         highest = zindex;
         
@@ -447,7 +447,7 @@ window.lindneo.toolbox = (function(window, $, undefined){
     for (var i = 0; i < elems.length; i++)
     {
       var zindex=document.defaultView.getComputedStyle(elems[i],null).getPropertyValue("z-index");
-      if (zindex != 'auto' && !(eleman[0] === elems[i]) ){
+      if (zindex != 'auto' && !isNaN(zindex) && !(eleman[0] === elems[i]) ){
 
         zindex=parseInt(zindex);
         //console.log(zindex);
@@ -501,6 +501,9 @@ window.lindneo.toolbox = (function(window, $, undefined){
   };
 
   var selectionUpdated = function (){
+
+    
+
     var that = this;
       $('.toolbox').hide();
       //console.log('All Selecteds:');
@@ -585,9 +588,14 @@ window.lindneo.toolbox = (function(window, $, undefined){
   };
 
   var removeComponentFromSelection = function (component){
-      this.selectedComponents=$.grep(this.selectedComponents, function (n,i){
-        return (n.options.component.id !== component.options.component.id);  
-      });
+      //key capture problem fix
+      $(document).unbind('keydown');
+      console.log(component);
+      if (typeof component.options.component.id != "undefined")
+        this.selectedComponents=$.grep(this.selectedComponents, function (n,i){
+          return (n.options.component.id !== 
+            component.options.component.id);  
+        });
       this.selectionUpdated();
 
 
@@ -685,10 +693,11 @@ window.lindneo.toolbox = (function(window, $, undefined){
         this.clearClipboard();
         
         $.each(window.lindneo.toolbox.selectedComponents, function( key, component ) {
+          
+          var newComponent =JSON.parse(JSON.stringify(component.options.component)); 
           //console.log(component.options.component);
           if(cut==true) window.lindneo.nisga.deleteComponent( component.options.component );
           
-          var newComponent =JSON.parse(JSON.stringify(component.options.component)); 
           //console.log(newComponent);
           
           newComponent.id= '';

@@ -423,7 +423,7 @@ $(document).ready(function(){
       window.lindneo.toolbox.removeComponentFromSelection(this);
     },
     _getSettable : function (propertyName){
-      //console.log (this.options.comment.data);
+     
      return this.options.component.data.self;
     },
     getSettable : function (propertyName){
@@ -440,7 +440,7 @@ $(document).ready(function(){
       return this._setPropertyofObject(propertyName,propertyValue) ;
     },
     _setPropertyofObject : function (propertyName,propertyValue){
-      //console.log(propertyValue);
+
       switch(propertyName){
         case 'zindex':
 
@@ -490,7 +490,6 @@ $(document).ready(function(){
             }
           break;
         case 'z-index':
-          //console.log('z-index girdi'+ propertyValue);
           this.options.component.data.self.css[propertyName]=propertyValue;
         break;
         default:
