@@ -51,6 +51,20 @@ $this->pageTitle=Yii::app()->name;
 		return $bookUsers;
 	}
 
+	/**
+	 * is user has an organization?
+	 * @return organization
+	 */
+	function organization()
+	{
+		$organization = Yii::app()->db->createCommand()
+	    ->select("*")
+	    ->from("organisation_users")
+	    ->where("user_id=:user_id", array(':user_id' => Yii::app()->user->id))
+	    ->queryRow();
+	    return  ($organization) ? $organization : null ;
+	}
+
 	function workspaceUsers($workspace_id)
 	{
 		$workspaceUsers = Yii::app()->db->createCommand()
@@ -81,6 +95,15 @@ $this->pageTitle=Yii::app()->name;
 	    	?>
 	    	<div class='workspace'>
 	    		<h1 class="float-left white"><?php echo $workspace->workspace_name; ?></h1>
+	    		<?php
+	    			$organization = organization();
+	    			if($organization)
+	    			{
+		    		?>
+		    		<a href='?r=organisations/index' class="btn white radius " style="margin-left:20px;">Organizasyon</a>
+		    		<?php
+	    			}
+	    		?>
 	    		<a href='?r=book/newBook' class="btn white radius " style="margin-left:20px;">Yeni Kitap</a>
 				
 					
