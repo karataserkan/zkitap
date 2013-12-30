@@ -9,20 +9,40 @@ window.lindneo.toolbox = (function(window, $, undefined){
   var selectedComponents=[];
   var add_value=0;
   var is_copy=0;
+  var SelectionBox=$("<div class='mulithing' style='border:1px solid blue'> </div>");
+
+  var makeMultiSelectionBox = function(){
+    if ($("#current_page").find('.mulithing').length)
+      this.SelectionBox.remove();
+
+    if (this.selectedComponents.length<=1) return;
+    
+    var newBoxPosition=this.positions();
+    newBoxPosition['position']='absolute';
+    newBoxPosition['z-index']='9001';
+    this.SelectionBox.css(newBoxPosition);
+    this.SelectionBox.appendTo( $('#current_page'));
+
+  };
 
   var positions = function (position)
   {
   	var component_values = [];
   	var value = 0;
-  	var min_left = 0;
-  	var min_top = 0;
-  	var max_left = 0;
-  	var max_top = 0;
+  	var min_left = 10000000;
+  	var min_top = 10000000;
+  	var max_right = 0;
+  	var max_bottom = 0;
   	$.each(this.selectedComponents, function( key, component ) {
-  		var object_left = parseInt(component.options.component.data.self.css.left.replace("px", ""));
-  		var object_width = parseInt(component.options.component.data.self.css.width);
-  		var object_top = parseInt(component.options.component.data.self.css.top.replace("px", ""));
-  		var object_height = parseInt(component.options.component.data.self.css.height);
+      var wrapper = component.element;
+      if (wrapper.attr('component-instance')=='true')
+        wrapper=wrapper.parent();
+      var position = $(wrapper ).position();
+      console.log($(wrapper));
+  		var object_left = parseInt( position.left );
+  		var object_width = parseInt($(wrapper).width());
+  		var object_top = parseInt(position.top );
+  		var object_height = parseInt($(wrapper).height());
   		var object_right = object_left + object_width;
   		var object_bottom = object_top + object_height;
 
@@ -36,10 +56,10 @@ window.lindneo.toolbox = (function(window, $, undefined){
 
 	 });
     return {
-      'left':min_left,
-      'right':max_right,
-      'top':min_top,
-      'bottom':max_bottom
+      'left':min_left+'px',
+      'width':(max_right-min_left)+'px',
+      'top':min_top+'px',
+      'height':(max_bottom-min_top)+'px'
     };
 
 };
@@ -518,12 +538,8 @@ window.lindneo.toolbox = (function(window, $, undefined){
 
     var that = this;
       $('.toolbox').hide();
-      //console.log('All Selecteds:');
-      //console.log(this.selectedComponents);
 
       $.each(this.selectedComponents, function( key, component ) {
-        //console.log('.toolbox.'+component.options.component.type+'-options, .toolbox.generic-options');
-        //console.log(component.options.component.data.lock.);
         if($.type(component.options.component.data.lock.username) == "undefined")
           $('.toolbox.'+component.options.component.type+'-options, .toolbox.generic-options').show();
 
@@ -579,7 +595,7 @@ window.lindneo.toolbox = (function(window, $, undefined){
              }
         });
       });
-
+      this.makeMultiSelectionBox();
      
      
 
@@ -806,6 +822,7 @@ window.lindneo.toolbox = (function(window, $, undefined){
     setClipboardItems: setClipboardItems,
     getClipboardItems: getClipboardItems,
     selectionUpdated: selectionUpdated,
+    SelectionBox: SelectionBox,
     selectedComponents: selectedComponents,
     addComponentToSelection: addComponentToSelection,
     removeComponentFromSelection: removeComponentFromSelection,
@@ -822,6 +839,7 @@ window.lindneo.toolbox = (function(window, $, undefined){
     componentsAlignmentHorizontalGapsToSet: componentsAlignmentHorizontalGapsToSet,
     component_position: component_position,
     component_gaps: component_gaps,
+    makeMultiSelectionBox: makeMultiSelectionBox,
     positions: positions,
     load: load,
     refresh: refresh
