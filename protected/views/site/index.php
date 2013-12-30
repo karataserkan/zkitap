@@ -88,22 +88,21 @@ $this->pageTitle=Yii::app()->name;
 	    ->join("workspaces w",'w.workspace_id=x.workspace_id')
 	    ->join("user u","x.userid=u.id")
 	    ->where("userid=:id", array(':id' => $userid ) )->queryAll();
-		
+
+		$organization = organization();
+		if($organization)
+		{
+		?>
+		<a href='?r=organisations/index&organizationId=<?php echo $organization["organisation_id"]?>' class="btn white radius " style="margin-left:20px;">Organizasyon</a>
+		<?php
+		}
 
 	    foreach ($workspacesOfUser as $key => $workspace) {
 	    	$workspace=(object)$workspace;
 	    	?>
 	    	<div class='workspace'>
 	    		<h1 class="float-left white"><?php echo $workspace->workspace_name; ?></h1>
-	    		<?php
-	    			$organization = organization();
-	    			if($organization)
-	    			{
-		    		?>
-		    		<a href='?r=organisations/index' class="btn white radius " style="margin-left:20px;">Organizasyon</a>
-		    		<?php
-	    			}
-	    		?>
+	    		
 	    		<a href='?r=book/newBook' class="btn white radius " style="margin-left:20px;">Yeni Kitap</a>
 				
 					
