@@ -66,7 +66,7 @@
 			if(Yii::app()->user->isGuest){
 				echo CHtml::link('<a>Giriş yap</a>',array('site/login'));
 			}else{
-				echo CHtml::link('Çıkış<a>deneme</a> ('.Yii::app()->user->name.')',array('site/logout'));
+				echo CHtml::link('<a>Çıkış</a> ('.Yii::app()->user->name.')',array('site/logout'));
 
 			}
 			?>
