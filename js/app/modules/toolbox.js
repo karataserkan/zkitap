@@ -122,6 +122,10 @@ window.lindneo.toolbox = (function(window, $, undefined){
   };
 
   var selectionUpdated = function (){
+
+    //key capture problem fix
+    $(document).unbind('keydown');
+
     var that = this;
       $('.toolbox').hide();
       //console.log('All Selecteds:');
