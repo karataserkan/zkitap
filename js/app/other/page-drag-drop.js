@@ -1,38 +1,17 @@
 $( document ).ready(function () {
 
-//burdan silinecek......
-	$('a[id^="pop-"]').click(function() {
-  
-  var  a = $(this).attr("id");
-       $("#"+a+"-popup").toggle("blind", 400);
-       
-  });
- 
-  $('.popup').draggable();
-  
-   $('.popup').click(function(){
-  $(this).parent().append(this);
-   });
-    
-	
- $('.popup-close').click(function(){
-  var  b = $(this).parents().eq(1);
-  	$(b).hide("blind", 400);
-		
-   });
-////////////////////////////////end erasing area   
 
   var termTemplate = "<span class='ui-autocomplete-term' style='display:inline-block'>%s</span>";
         
   function first_time(){
-
+    /*
     $('#editor_view_pane, #header, #components, .styler_box, #chapters_pages_view')
       .attr('unselectable', 'on')
       .css('user-select', 'none')
       .on('selectstart', false);
     //disable in page draggin selection
     //$('#editor_view_pane').mousemove(function(event){event.stopImmediatePropagation();return false;});
-
+  */
     $('#search').autocomplete({
       appendTo: "#page" ,
       minLength: 1, 

@@ -440,7 +440,7 @@ $(document).ready(function(){
       return this._setPropertyofObject(propertyName,propertyValue) ;
     },
     _setPropertyofObject : function (propertyName,propertyValue){
-
+    
       switch(propertyName){
         case 'zindex':
 
