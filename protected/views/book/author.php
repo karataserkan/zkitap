@@ -370,24 +370,24 @@ Hizala
 </div>
 <!--  popup content -->
 <div class="popup-inner-title">Dikey</div>
-	<div class="popup-even">
-		<i class="icon-align-left size-20 dark-blue"></i>
-		<i class="icon-align-center size-20 dark-blue"></i>
-		<i class="icon-align-right size-20 dark-blue"></i>
-	</div>
-	<div class="horizontal-line "></div>
-	<div class="popup-inner-title">Yatay</div>
-	<div class="popup-even">
-		<i class="icon-align-top size-20 dark-blue"></i>
-		<i class="icon-align-middle size-20 dark-blue"></i>
-		<i class="icon-align-bottom size-20 dark-blue"></i>
-	</div>
-	<div class="horizontal-line "></div>
-	<div class="popup-inner-title">Boşluklar</div>
-	<div class="popup-even">
-		<i class="icon-vertical-gaps size-20 dark-blue"></i>
-		<i class="icon-horizontal-gaps size-20 dark-blue"></i>
-	</div>
+        <div class="popup-even">
+                <i rel="component_alignment" action="vertical_align_left" class="toolbox-btn icon-align-left size-20 dark-blue"></i>
+                <i rel="component_alignment" action="vertical_align_center" class="toolbox-btn icon-align-center size-20 dark-blue"></i>
+                <i rel="component_alignment" action="vertical_align_right" class="toolbox-btn icon-align-right size-20 dark-blue"></i>
+        </div>
+        <div class="horizontal-line "></div>
+        <div class="popup-inner-title">Yatay</div>
+        <div class="popup-even">
+                <i rel="component_alignment" action="horizontal_align_top" class="toolbox-btn icon-align-top size-20 dark-blue"></i>
+                <i rel="component_alignment" action="horizontal_align_middle" class="toolbox-btn icon-align-middle size-20 dark-blue"></i>
+                <i rel="component_alignment" action="horizontal_align_bottom" class="toolbox-btn icon-align-bottom size-20 dark-blue"></i>
+        </div>
+        <div class="horizontal-line "></div>
+        <div class="popup-inner-title">Boşluklar</div>
+        <div class="popup-even">
+                <i rel="component_alignment" action="vertical_align_gaps" class="toolbox-btn icon-vertical-gaps size-20 dark-blue"></i>
+                <i rel="component_alignment" action="horizontal_align_gaps" class="toolbox-btn icon-horizontal-gaps size-20 dark-blue"></i>
+        </div>
 <!--  popup content -->
 </div>
 <!-- end align popup -->
