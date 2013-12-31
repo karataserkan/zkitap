@@ -36,7 +36,7 @@ $organisationId=$organizationUser['organisation_id'];
 							<span id="editor-name" class="editor-name">
 							<?php echo $user['name']." ".$user['surname']; ?>
 							</span>
-							<a href="index.php?r=organisation/delWorkspaceUser&workspaceId=<?php echo $workspace['workspace_id']; ?>&userId=<?php echo $user['id']; ?>" class="icon-close size-15 delete-icon"></a>
+							<a href="index.php?r=organisations/delWorkspaceUser&workspaceId=<?php echo $workspace['workspace_id']; ?>&userId=<?php echo $user['id']; ?>&organizationId=<?php echo $organisationId; ?>" class="icon-close size-15 delete-icon"></a>
 							
 						</div>	
 				<?php endforeach; ?>
@@ -47,6 +47,7 @@ $organisationId=$organizationUser['organisation_id'];
 					<br style="clear:both; margin-bottom:20px;">
 					<form id="a<?php echo $workspace['workspace_id']; ?>" method="post">
 					<input id="workspaceId" value="<?php echo $workspace['workspace_id']; ?>" style="display:none">
+					<input id="organisationId" value="<?php echo $organisationId; ?>" style="display:none">
 					<select id="user" class="book-list-textbox radius grey-9 float-left"  style=" width: 280px;">
 						<?php
 							$organizationUsers = $this->freeWorkspaceUsers($workspace['workspace_id'],$organisationId);//$this->organizationUsers($organisationId);
@@ -79,9 +80,9 @@ $("[popup='close-<?php echo $workspace['workspace_id']; ?>']").click(function(){
 function sendUser(e){
     var b = e.id;
     var userId=$('#' + b + '> #user').val();
-    var type=$('#' + b + '> #type').val();
-    var bookId=$('#' + b + ' > #book').val();
-    var link ='?r=site/right&userId='+userId+'&bookId='+bookId+'&type='+type;
+    var workspaceId=$('#' + b + '> #workspaceId').val();
+    var organisationId=$('#' + b + ' > #organisationId').val();
+    var link ='?r=organisations/addWorkspaceUser&workspaceId='+workspaceId+'&userId='+userId+'&organizationId='+organisationId;
     window.location.assign(link);
     }
 </script>
