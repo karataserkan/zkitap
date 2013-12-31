@@ -36,7 +36,7 @@ class Workspaces extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('workspace_id, workspace_name, creation_time', 'required'),
+			array('workspace_id, workspace_name', 'required'),
 			array('workspace_id', 'length', 'max'=>44),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.

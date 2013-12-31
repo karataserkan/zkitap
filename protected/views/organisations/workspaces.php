@@ -9,6 +9,7 @@ $organisationId=$organizationUser['organisation_id'];
 
 
 <br><br><br>
+<a href="?r=workspaces/create&organisationId=<?php echo $organisationId; ?>" class="btn white radius float-right book-editors-settings"id="boook-editors-settings" ><i class="icon-add"></i>Çalışma Alanı Ekle</a>	
 <?php
 	foreach ($workspaces as $key => $workspace) {
 		?>
