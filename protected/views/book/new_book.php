@@ -20,8 +20,8 @@
 
 <div class="new_book_page_content">
 
-<div class="epub"><a href="#"><?=CHtml::link('Epub',array('book/newBook',"bookType"=>'epub'))?></a></div>
+<a href="?r=book/newBook&bookType=epub"><div class="epub"></div></a>
 
-<div class="pdf"><a href="#"><?=CHtml::link('Pdf',array('book/newBook',"bookType"=>'pdf'))?></a></div>
+<a href="?r=book/newBook&bookType=pdf"><div class="pdf"></div></a>
 
 </div>
