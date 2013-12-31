@@ -32,7 +32,7 @@ class OrganisationsController extends Controller
 				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
-				'actions'=>array('create','update','workspaces','delWorkspaceUser'),
+				'actions'=>array('create','update','workspaces','delWorkspaceUser','addWorkspaceUser'),
 				'users'=>array('@'),
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
@@ -226,12 +226,42 @@ class OrganisationsController extends Controller
 		return $organizationUsers;
 	}
 
-	public function actiondelWorkspaceUser($workspaceId,$userId)
+	/**
+	 * delete the selected workspace user from workspaces_users table
+	 * @param  string $workspaceId    ID
+	 * @param  int $userId         ID
+	 * @param  string $organizationId ID
+	 * @return redirect the previous page
+	 */
+	public function actiondelWorkspaceUser($workspaceId,$userId,$organizationId)
 	{
+		if(Yii::app()->user->isGuest)
+			$this->redirect( array('site/login' ) );
+
 		$command = Yii::app()->db->createCommand();
 		$command->delete('workspaces_users', 'userid=:userid && workspace_id=:workspace_id', array(':userid'=>$userId,':workspace_id'=>$workspaceId));
+		$this->redirect( array('organisations/workspaces&organizationId='.$organizationId ) );
 	}
 
+	/**
+	 * add selected user to workspace -> workspaces_users table
+	 * @param  string $workspaceId    ID
+	 * @param  int $userId         ID
+	 * @param  string $organizationId ID
+	 * @return redirect the previous page
+	 */
+	public function actionaddWorkspaceUser($workspaceId,$userId,$organizationId)
+	{
+		if(Yii::app()->user->isGuest)
+			$this->redirect( array('site/login' ) );
+
+			$addUser = Yii::app()->db->createCommand();
+			$addUser->insert('workspaces_users', array(
+			    'workspace_id'=>$workspaceId,
+			    'userid'=>$userId,
+			));	
+		$this->redirect( array('organisations/workspaces&organizationId='.$organizationId ) );
+	}
 	/**
 	 * Manages all models.
 	 */
