@@ -21,6 +21,9 @@ $(document).ready(function(){
       .resizable({
         'stop': function( event, ui ){
           that._resize(event, ui);
+        },
+        'resize':function(event,ui){
+          window.lindneo.toolbox.makeMultiSelectionBox();
         }
       })
       /*.selectable({
@@ -58,6 +61,8 @@ $(document).ready(function(){
         },
 
         drag: function( event, ui ){
+
+          window.lindneo.toolbox.makeMultiSelectionBox();
           if( $('#general-options').val().indexOf("rehber")===-1 ) return ;
 
           // iterate all guides, remember the closest h and v guides
@@ -367,12 +372,17 @@ $(document).ready(function(){
     },
 
     _selected: function( event, ui ) {
-      //console.log('selected');
+      console.log(event);
+     
+      if (typeof event.originalEvent != "undefined")
+        if (typeof event.originalEvent.originalEvent != "undefined")
+          if (typeof event.originalEvent.originalEvent.type != "undefined")
+            if ( event.originalEvent.originalEvent.type == "mouseup")
+              if (!$(this).has($(event.toElement)).lenght)
+                var false_out_selection=true;
 
-      
-      if (event)
-      if(  event.ctrlKey || event.metaKey )
-        console.log('control is pressed');
+      if( false_out_selection  || event.ctrlKey || event.metaKey || $(event.toElement).hasClass('ui-resizable-handle') || $(event.toElement).hasClass('dragging_holder')  )
+        console.log('multi selection');
       else
         $('.selected').trigger('unselect');
 

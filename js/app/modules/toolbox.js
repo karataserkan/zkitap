@@ -9,7 +9,7 @@ window.lindneo.toolbox = (function(window, $, undefined){
   var selectedComponents=[];
   var add_value=0;
   var is_copy=0;
-  var SelectionBox=$("<div class='mulithing' style='border:1px solid blue'> </div>");
+  var SelectionBox=$("<div class='mulithing' style='border:1px solid blue;pointer-events:none;'> </div>");
 
   var makeMultiSelectionBox = function(){
     if ($("#current_page").find('.mulithing').length)
@@ -38,6 +38,7 @@ window.lindneo.toolbox = (function(window, $, undefined){
       if (wrapper.attr('component-instance')=='true')
         wrapper=wrapper.parent();
       var position = $(wrapper ).position();
+<<<<<<< HEAD
       console.log($(wrapper));
                   var object_left = parseInt( position.left );
                   var object_width = parseInt($(wrapper).width());
@@ -45,6 +46,15 @@ window.lindneo.toolbox = (function(window, $, undefined){
                   var object_height = parseInt($(wrapper).height());
                   var object_right = object_left + object_width;
                   var object_bottom = object_top + object_height;
+=======
+     
+  		var object_left = parseInt( position.left );
+  		var object_width = parseInt($(wrapper).width());
+  		var object_top = parseInt(position.top );
+  		var object_height = parseInt($(wrapper).height());
+  		var object_right = object_left + object_width;
+  		var object_bottom = object_top + object_height;
+>>>>>>> e05a909e5a320f765809ff78f33334e87ec6ac0c
 
 
                   if(min_left > object_left)         min_left = object_left;
