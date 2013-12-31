@@ -3,13 +3,19 @@
 /* @var $model Book */
 /* @var $form CActiveForm */
 ?>
+<link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/templatebook.css" media="all" />
 
 </div> <!--header-->
 
-<div style="height: 40px;"></div>
 
+<ol class="steps">
+    <li class="step1"><span>Kitap Türü</span></li>
+    <li class="step2 current"><span>Kitap Bilgileri</span></li>
+    <li class="step3"><span>Şablonlar</span></li>
+    <li class="step4"><span>Çözünürlük</span></li>
+</ol>
 
-<div class="form create-book-container white" >
+<div class="form create-book-container white">
 
 <?php $form=$this->beginWidget('CActiveForm', array(
 	'id'=>'book-form',
@@ -27,7 +33,7 @@
 	*/
 	?>
 	<div class="row">
-		<h1>Kitap Oluştur</h1>
+		<h1>Kitap Bilgileri</h1>
 	
 	</div>
 	<div class="row">

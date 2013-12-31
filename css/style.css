@@ -1243,17 +1243,45 @@ background-color:#0b6f7f;
 	
 /*chapter viewer styles */
 
-	.create-book-container
-{
-	background-color:#056380;
+.create-book-container{
 	position: fixed;
-	width: 100%;
-	height: 100%;
-	text-align:center;
+	text-align: center;
+	margin-top: 200px;
+	width: 375px;
+	margin-left: auto;
+	margin-right: auto;
+	left: 0;
+	right: 0;
+	background-color: rgba(255,255,255, 0.3);
+	border-radius: 10px;
+	padding-top: 15px;
+	padding-bottom: 20px;
 }
 	
-	
-	
+.create-book-container .row h1{
+	font-size:25px;
+	font-weight:bold;
+	margin-bottom:20px;
+}
+
+.create-book-container .row input{
+	background-color:#FFF;
+}
+
+div.form select{
+	background-color:#FFF !important;
+}
+
+
+.create-book-container .row [type="radio"]{
+	width:auto !important;
+}
+
+.create-book-container .row span label{
+	margin-left:3px;
+	margin-right:70px;
+}
+
 	
 	/*login page */
 
@@ -1670,13 +1698,3 @@ float: right;
 .dropdown .copy A { background-image: url(icons/document-copy.png); }
 .dropdown .paste A { background-image: url(icons/clipboard.png); }
 .dropdown .delete A { background-image: url(icons/cross-script.png); }
-
-<!----- styler box more button için  --------------->
-
-
-
-
-
-
-
-
