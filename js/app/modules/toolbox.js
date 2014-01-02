@@ -27,45 +27,33 @@ window.lindneo.toolbox = (function(window, $, undefined){
 
   var positions = function (position)
   {
-          var component_values = [];
-          var value = 0;
-          var min_left = 10000000;
-          var min_top = 10000000;
-          var max_right = 0;
-          var max_bottom = 0;
-          $.each(this.selectedComponents, function( key, component ) {
+    var component_values = [];
+    var value = 0;
+    var min_left = 10000000;
+    var min_top = 10000000;
+    var max_right = 0;
+    var max_bottom = 0;
+    $.each(this.selectedComponents, function( key, component ) {
       var wrapper = component.element;
       if (wrapper.attr('component-instance')=='true')
         wrapper=wrapper.parent();
-      var position = $(wrapper ).position();
-<<<<<<< HEAD
-      console.log($(wrapper));
-                  var object_left = parseInt( position.left );
-                  var object_width = parseInt($(wrapper).width());
-                  var object_top = parseInt(position.top );
-                  var object_height = parseInt($(wrapper).height());
-                  var object_right = object_left + object_width;
-                  var object_bottom = object_top + object_height;
-=======
-     
-  		var object_left = parseInt( position.left );
-  		var object_width = parseInt($(wrapper).width());
-  		var object_top = parseInt(position.top );
-  		var object_height = parseInt($(wrapper).height());
-  		var object_right = object_left + object_width;
-  		var object_bottom = object_top + object_height;
->>>>>>> e05a909e5a320f765809ff78f33334e87ec6ac0c
+        var position = $(wrapper ).position();
+        //console.log(position);
+        if($.type(position) != "undefined"){
+      		var object_left = parseInt( position.left );
+      		var object_width = parseInt($(wrapper).width());
+      		var object_top = parseInt(position.top );
+      		var object_height = parseInt($(wrapper).height());
+      		var object_right = object_left + object_width;
+      		var object_bottom = object_top + object_height;
 
-
-                  if(min_left > object_left)         min_left = object_left;
-                  if(max_right < object_right)         max_right = object_right;
-                  if(min_top > object_top)         min_top = object_top;
-                  if(max_bottom < object_bottom)        max_bottom = object_bottom;
-
-
-
-         });
-    return {
+          if(min_left > object_left)         min_left = object_left;
+          if(max_right < object_right)         max_right = object_right;
+          if(min_top > object_top)         min_top = object_top;
+          if(max_bottom < object_bottom)        max_bottom = object_bottom;
+        }
+      });
+      return {
       'left':min_left+'px',
       'width':(max_right-min_left)+'px',
       'top':min_top+'px',
