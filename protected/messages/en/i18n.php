@@ -12,5 +12,6 @@ return array(
 'Editör'=>'Editor',
 'Sahibi'=>'Owner',
 'Organizasyon'=>'Organization',
+'Kullanıcı Ekle'=>'Add User',
 );
 ?>
