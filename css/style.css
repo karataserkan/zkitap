@@ -391,6 +391,21 @@ label#options:after {
 }
 
 
+#searchn {
+ width:150px;
+ height:auto;
+ border:0;
+ resize: none;
+ font-size:15px;
+ padding-left:10px;
+ line-height:1.75em;
+ font-weight:normal;
+ color:#58585B;
+ white-space: nowrap;
+ overflow:hidden;
+
+}
+
 #search {
  width:75px;
  height:auto;
@@ -1698,3 +1713,125 @@ float: right;
 .dropdown .copy A { background-image: url(icons/document-copy.png); }
 .dropdown .paste A { background-image: url(icons/clipboard.png); }
 .dropdown .delete A { background-image: url(icons/cross-script.png); }
+
+
+/* header menu*/
+
+
+#headermenu {
+	padding: 0px;
+	font: 67.5% 'Lucida Sans Unicode', 'Bitstream Vera Sans', 'Trebuchet Unicode MS', 'Lucida Grande', Verdana, Helvetica, sans-serif;
+	font-size: 14px;
+	min-width:900px;
+	margin: 0;
+	padding: 0;
+	width: 100%;
+	/* display: inline-block; */
+	display: none;
+	
+	
+	position: fixed;
+	height: 36px;
+	z-index:9999999;
+	border-bottom: 2px solid #d1d2d4;
+	top:0px;
+	left:0px;
+  
+}
+#headermenu ul {
+	background: #ffffff;
+	height: 39px;
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+
+#headermenu li {
+  float: left;
+  padding: 0px;
+}
+
+#headermenu li [contentEditable="true"] {
+outline:0px;
+max-width:150px;
+white-space:nowrap;
+overflow-x:hidden;
+}
+#headermenu ul li:last-child{
+border-left:1px solid #ddd;
+}
+
+
+#headermenu li a {
+  background: #ffffff url('images/seperator.png') bottom right no-repeat;
+  display: block;
+  font-weight: normal;
+  line-height: 39px;
+  margin: 0px;
+  padding: 0px 15px;
+  text-align: center;
+  text-decoration: none;
+}
+#headermenu > ul > li > a {
+  color: #6d6e70;
+}
+
+#headermenu > ul > li {
+border-right:1px solid #ddd;
+}
+#headermenu ul ul a {
+  color: #6d6e70;
+}
+#headermenu li > a:hover,
+#headermenu ul li:hover > a {
+  background: #e6e7e8;
+  color: #333333;
+  text-decoration: none;
+}
+#headermenu li ul {
+  background: #ffffff;
+  display: none;
+  height: auto;
+  padding: 0px;
+  margin: 0px;
+  border: 0px;
+  position: absolute;
+  width: 225px;
+  z-index: 200;
+  /*top:1em;
+	/*left:0;*/
+
+}
+#headermenu li:hover ul {
+  display: block;
+}
+#headermenu li li {
+  display: block;
+  float: none;
+  margin: 0px;
+  padding: 0px;
+  width: 225px;
+}
+#headermenu li:hover li a {
+  background: none;
+}
+#headermenu li ul a {
+  display: block;
+  height: 35px;
+  font-size: 12px;
+  font-style: normal;
+  margin: 0px;
+  padding: 0px 10px 0px 15px;
+  text-align: left;
+}
+#headermenu li ul a:hover,
+#headermenu li ul li:hover > a {
+  background: #e6e7e8 ;
+  border: 0px;
+  color: #333333;
+  text-decoration: none;
+}
+#headermenu p {
+  clear: left;
+}
+
