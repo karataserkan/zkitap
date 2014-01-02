@@ -103,7 +103,7 @@ $this->pageTitle=Yii::app()->name;
 	    	<div class='workspace'>
 	    		<h1 class="float-left white"><?php echo $workspace->workspace_name; ?></h1>
 	    		
-	    		<a href='?r=book/newBook' class="btn white radius " style="margin-left:20px;">Yeni Kitap</a>
+	    		<a href='?r=book/newBook' class="btn white radius " style="margin-left:20px;"><?php echo Yii::t('i18n','Yeni Kitap');?></a>
 				
 					
 				
@@ -122,18 +122,18 @@ $this->pageTitle=Yii::app()->name;
 						<div class="book-list-box radius" id="book-list-box">
 							<div class="book-list-box-book-cover"><img src="/css/images/default-cover.jpg" alt="Book Cover" ></div>
 							<div class="book-list-box-text-container">
-								Kitabın Adı<input type="text" class="book-list-textbox radius grey-9 float-right" value="<?php echo $book->title ?>">
+								<?php echo Yii::t('i18n','Kitabın Adı');?><input type="text" class="book-list-textbox radius grey-9 float-right" value="<?php echo $book->title ?>">
 							</div>
 
 							<div class="book-list-box-text-container">
-								Yazar Adı<input type="text" class="book-list-textbox radius grey-9 float-right" value="<?php echo $book->author ?>">
+								<?php echo Yii::t('i18n','Yazar Adı');?><input type="text" class="book-list-textbox radius grey-9 float-right" value="<?php echo $book->author ?>">
 								
 							</div>
 
 							<div class="book-list-box-text-container">
 								<?php 
 								if ($userType==='owner') { ?>
-									<a href="#" popup="<?php echo $book->book_id; ?>" class="btn white radius float-right book-editors-settings"id="boook-editors-settings" ><i class="icon-users"></i>Editörler</a>	
+									<a href="#" popup="<?php echo $book->book_id; ?>" class="btn white radius float-right book-editors-settings"id="boook-editors-settings" ><i class="icon-users"></i><?php echo Yii::t('i18n','Editörler');?></a>	
 								<?php }
 								?>
 								</div>
@@ -176,12 +176,12 @@ $this->pageTitle=Yii::app()->name;
 									}
 								?>
 
-								<a href="<?php echo Yii::app()->createUrl('EditorActions/ExportBook', array('bookId'=>$book->book_id) ); ?>" class="btn bck-light-green white radius" ><i class="icon-download"></i>İndir</a>
+								<a href="<?php echo Yii::app()->createUrl('EditorActions/ExportBook', array('bookId'=>$book->book_id) ); ?>" class="btn bck-light-green white radius" ><i class="icon-download"></i><?php echo Yii::t('i18n','İndir');?></a>
 										<!-- editor options-->
 										<center id="popup-close-area" popup="pop-<?php echo $book->book_id; ?>" style="display:none; position:relative">
 											<div id="close-div" style="background-color:#123456; width:100% height:#123456; position:fixed;"> </div>
 											<div class="book-editors-options-box-container">
-											<h2>Kitap Editörleri<a popup="close-<?php echo $book->book_id; ?>" id="close-option-box"class="icon-close white size-15 delete-icon float-right" ></a></h2>
+											<h2><?php echo Yii::t('i18n','Kitap Editörleri');?><a popup="close-<?php echo $book->book_id; ?>" id="close-option-box"class="icon-close white size-15 delete-icon float-right" ></a></h2>
 											<div class="editor-list">
 											<?php 
 												$users = bookUsers($book->book_id);
@@ -240,8 +240,8 @@ $this->pageTitle=Yii::app()->name;
 													 ?>
 												</select>
 												 <select id="type" class="book-list-textbox radius grey-9 float-left"  style=" width: 70px;" >
-												  <option value="editor">Editör</option>
-												  <option value="owner">Sahibi</option>
+												  <option value="editor"><?php echo Yii::t('i18n','Editör');?></option>
+												  <option value="owner"><?php echo Yii::t('i18n','Sahibi');?></option>
 												</select>
 												</form>
 												<a href="#" onclick="sendRight(a<?php echo $book->book_id; ?>)" class="btn white radius float-right" style="margin-left:20px; width:50px; text-align:center;">
