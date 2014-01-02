@@ -79,9 +79,92 @@ class SiteController extends Controller
 		$this->render('index');
 	}
 
-	//ekaratas end
+	/**
+	* this returns the user type for $bookId
+	* return owner | editor | user | false
+	*/
+	public function userType($bookId)
+	{
+		$userid=Yii::app()->user->id;
 
+		$bookOfUser= Yii::app()->db->createCommand()
+	    ->select("*")
+	    ->from("book_users")
+	    ->where("book_id=:book_id", array(':book_id' => $bookId))
+	    ->andWhere("user_id=:user_id", array(':user_id' => $userid))
+	    ->queryRow();
+	    
+	    return ($bookOfUser) ? $bookOfUser['type'] : false;
+	}
 
+	//kitabın kullanıcılarını return ediyorum
+	public function bookUsers($bookId)
+	{
+		$bookUsers = Yii::app()->db->createCommand()
+		->select ("*")
+		->from("book_users")
+		->where("book_id=:book_id", array(':book_id' => $bookId))
+		->join("user","user_id=id")
+		->queryAll();
+
+		return $bookUsers;
+	}
+
+	/**
+	 * is user has an organization?
+	 * @return organization
+	 */
+	public function organization()
+	{
+		$organization = Yii::app()->db->createCommand()
+	    ->select("*")
+	    ->from("organisation_users")
+	    ->where("user_id=:user_id", array(':user_id' => Yii::app()->user->id))
+	    ->queryRow();
+	    return  ($organization) ? $organization : null ;
+	}
+
+	/**
+	 * workspaceUsers
+	 * @param  ID $workspace_id 
+	 * @return array               workspace users
+	 */
+	public function workspaceUsers($workspace_id)
+	{
+		$workspaceUsers = Yii::app()->db->createCommand()
+		->select ("*")
+		->from("workspaces_users")
+		->where("workspace_id=:workspace_id", array(':workspace_id' => $workspace_id))
+		->join("user","userid=id")
+		->queryAll();
+
+		return $workspaceUsers;
+	}
+
+	/**
+	 * getUserWorkspaces
+	 * @return array user workspaces
+	 */
+	public function getUserWorkspaces()
+	{
+		$userid=Yii::app()->user->id;
+
+		$workspacesOfUser= Yii::app()->db->createCommand()
+	    ->select("*")
+	    ->from("workspaces_users x")
+	    ->join("workspaces w",'w.workspace_id=x.workspace_id')
+	    ->join("user u","x.userid=u.id")
+	    ->where("userid=:id", array(':id' => $userid ) )->queryAll();
+	    
+	    return $workspacesOfUser;	
+	}
+
+	public function getWorkspaceBooks($workspace_id)
+	{
+		$all_books= Book::model()->findAll('workspace_id=:workspace_id', 
+	    				array(':workspace_id' => $workspace_id) );
+		return $all_books; 
+	}
 	/**
 	 * This is the action to handle external exceptions.
 	 */
