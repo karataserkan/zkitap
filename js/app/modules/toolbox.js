@@ -27,7 +27,6 @@ window.lindneo.toolbox = (function(window, $, undefined){
 
   var positions = function (position)
   {
-    
   	var component_values = [];
   	var value = 0;
   	var min_left = 10000000;
