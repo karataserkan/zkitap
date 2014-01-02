@@ -93,7 +93,7 @@ $this->pageTitle=Yii::app()->name;
 		if($organization)
 		{
 		?>
-		<a href='?r=organisations/index&organizationId=<?php echo $organization["organisation_id"]?>' class="btn white radius " style="margin-left:20px;">Organizasyon</a>
+		<a href='?r=organisations/index&organizationId=<?php echo $organization["organisation_id"]?>' class="btn white radius " style="margin-left:20px;"><?php echo Yii::t('i18n','Organizasyon');?></a>
 		<?php
 		}
 
@@ -207,10 +207,10 @@ $this->pageTitle=Yii::app()->name;
 														<span id="editor-tag" style="color:#477738; float:right;">
 															<?php 
 																if ($user['type']=='owner') {
-																	echo "sahibi";
+																	echo Yii::t('i18n','Sahibi');
 																}
 																elseif ($user['type']=='editor') {
-																	echo "editör";
+																	echo Yii::t('i18n','Editör');
 																}
 															?>
 														</span>
@@ -226,7 +226,7 @@ $this->pageTitle=Yii::app()->name;
 													//type: owner | editor | user
 
 												?>
-												<span class="editor-name" >Kullanıcı Ekle:</span>
+												<span class="editor-name" ><?php echo Yii::t('i18n','Kullanıcı Ekle');?>:</span>
 												<br style="clear:both; margin-bottom:20px;">
 												<form id="a<?php echo $book->book_id; ?>" method="post">
 												<input id="book" value="<?php echo $book->book_id; ?>" style="display:none">
