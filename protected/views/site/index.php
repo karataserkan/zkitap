@@ -166,12 +166,12 @@ $this->pageTitle=Yii::app()->name;
 										);
 										?>
 
-										<a href="<?php echo Yii::app()->createUrl('book/author', array('bookId'=>$book->book_id) ); ?>" class="btn white btn radius " id="pop-video">Düzenle</a>
+										<a href="<?php echo Yii::app()->createUrl('book/author', array('bookId'=>$book->book_id) ); ?>" class="btn white btn radius " id="pop-video"><?php echo Yii::t('i18n','Düzenle');?></a>
 										<?php
 									}
 									elseif ($userType==='editor') {
 										?>
-										<a href="<?php echo Yii::app()->createUrl('book/author', array('bookId'=>$book->book_id) ); ?>" class="btn white btn radius " id="pop-video">Düzenle</a>
+										<a href="<?php echo Yii::app()->createUrl('book/author', array('bookId'=>$book->book_id) ); ?>" class="btn white btn radius " id="pop-video"><?php echo Yii::t('i18n','Düzenle');?></a>
 										<?php
 									}
 								?>
