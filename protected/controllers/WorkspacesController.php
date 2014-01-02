@@ -60,18 +60,34 @@ class WorkspacesController extends Controller
 	 * Creates a new model.
 	 * If creation is successful, the browser will be redirected to the 'view' page.
 	 */
-	public function actionCreate()
+	public function actionCreate($organisationId=null)
 	{
 		$model=new Workspaces;
 
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
 
-		if(isset($_POST['Workspaces']))
+		if(isset($_POST['Workspaces']) && $organisationId)
 		{
 			$model->attributes=$_POST['Workspaces'];
 			if($model->save())
-				$this->redirect(array('view','id'=>$model->workspace_id));
+			{
+				$addWorkspaceOrganization = Yii::app()->db->createCommand();
+				$addWorkspaceOrganization->insert('organisation_workspaces', array(
+				    'organisation_id'=>$organisationId,
+				    'workspace_id'=>$model->workspace_id,
+				));
+
+				$addWorkspaceOwner = Yii::app()->db->createCommand();
+				$addWorkspaceOwner->insert('workspaces_users', array(
+				    'workspace_id'=>$model->workspace_id,
+				    'userid'=>Yii::app()->user->id,
+				    'owner'=>'1',
+				));
+
+				$this->redirect( array('organisations/workspaces&organizationId='.$organisationId ) );
+			}
+				
 		}
 
 

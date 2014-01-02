@@ -110,7 +110,66 @@ $current_user=User::model()->findByPk(Yii::app()->user->id);
 	
 	</div> <!--Header -->
 	
-	
+			<div id='headermenu'>
+			<ul>
+			   <li><a style="height:40px;" href="<?php echo $this->createUrl('site/index');  ?>"><img  src="css/linden_logo.png" height="30px;" style="padding-top:5px;"></a></li>
+			   <li><a contenteditable="true"> <?php echo $model->title; ?></a></li>
+			   <li class='has-sub'><a href='#'><span>Dosya</span></a>
+					<ul>
+			         <li><a href="<?php echo $this->createUrl('site/index');  ?>"><span>Kitaplarım</span></a></li>
+			         <li><a href="<?php echo $this->createUrl("EditorActions/ExportPdfBook", array('bookId' => $model->book_id ));?>"> PDF Yayınla</i></a></li>
+			         <li><a href="<?php echo $this->createUrl("EditorActions/ExportBook", array('bookId' => $model->book_id ));?>">Yayınla</a></li>
+					</ul>
+			   </li>
+			   <li class='has-sub'><a href='#'><span>Düzenle</span></a>
+			      <ul>
+			         <li><a href='#'><span>Geri Al</span></a></li>
+			         <li><a href='#'><span>İleri Al</span></a></li>
+			         <li><a href='#'><span>Kes</span></a></li>
+			         <li><a href='#'><span>Kopyala</span></a></li>
+			         <li><a href='#'><span>Yapıştır</span></a></li>
+			         <li class='last'><a href='#'><span>Location</span></a></li>
+			      </ul>
+			   </li>
+
+			   <li class='has-sub'><a href='#'><span>Görünüm</span></a>
+			      <ul>
+			         <li><a href='#'><span>Cetvel</span></a></li>
+			         <li><a href='#'><span>Rehber</span></a></li>
+			         <li><a href='#'><span>Yorumlar</span></a></li>
+			      </ul>
+			   </li>
+			    
+			   <li><a href='#'>
+			   <input type="text" id="searchn" name="component" style="display:none;" class="search radius ui-autocomplete-input" placeholder="Ara" autocomplete="off">
+			   <span id="search_btn">&nbsp;<i class="icon-zoom size-15"></i></span></a></li>
+			  
+			  <li style="float:right; " class='has-sub'>
+			  
+					<a id='login_area' style='float:right;'>
+						<?php
+						if(Yii::app()->user->isGuest){
+							echo CHtml::link(array('site/login'));
+						}else{
+							echo CHtml::link('('.Yii::app()->user->name.')',array('site/logout'));
+						}
+						?>
+					</a>   
+			      <ul>
+			         <li><a href='#'><span>Çıkış</span></a></li>
+			         
+			      </ul>
+			   </li>
+			  
+			</ul>
+			<script>
+			$("#search_btn").click(function(){
+			$("#searchn").toggle();
+			})
+			</script>
+
+
+			</div>
 			<div class="styler_box">
 			<!-- <ul id="text-styles" ></ul> -->
                         <div class="float-left" id="save_status" style="width:50px; height:33px; margin-right:5px;"></div>
@@ -370,24 +429,24 @@ Hizala
 </div>
 <!--  popup content -->
 <div class="popup-inner-title">Dikey</div>
-	<div class="popup-even">
-		<i class="icon-align-left size-20 dark-blue"></i>
-		<i class="icon-align-center size-20 dark-blue"></i>
-		<i class="icon-align-right size-20 dark-blue"></i>
-	</div>
-	<div class="horizontal-line "></div>
-	<div class="popup-inner-title">Yatay</div>
-	<div class="popup-even">
-		<i class="icon-align-top size-20 dark-blue"></i>
-		<i class="icon-align-middle size-20 dark-blue"></i>
-		<i class="icon-align-bottom size-20 dark-blue"></i>
-	</div>
-	<div class="horizontal-line "></div>
-	<div class="popup-inner-title">Boşluklar</div>
-	<div class="popup-even">
-		<i class="icon-vertical-gaps size-20 dark-blue"></i>
-		<i class="icon-horizontal-gaps size-20 dark-blue"></i>
-	</div>
+        <div class="popup-even">
+                <i rel="component_alignment" action="vertical_align_left" class="toolbox-btn icon-align-left size-20 dark-blue"></i>
+                <i rel="component_alignment" action="vertical_align_center" class="toolbox-btn icon-align-center size-20 dark-blue"></i>
+                <i rel="component_alignment" action="vertical_align_right" class="toolbox-btn icon-align-right size-20 dark-blue"></i>
+        </div>
+        <div class="horizontal-line "></div>
+        <div class="popup-inner-title">Yatay</div>
+        <div class="popup-even">
+                <i rel="component_alignment" action="horizontal_align_top" class="toolbox-btn icon-align-top size-20 dark-blue"></i>
+                <i rel="component_alignment" action="horizontal_align_middle" class="toolbox-btn icon-align-middle size-20 dark-blue"></i>
+                <i rel="component_alignment" action="horizontal_align_bottom" class="toolbox-btn icon-align-bottom size-20 dark-blue"></i>
+        </div>
+        <div class="horizontal-line "></div>
+        <div class="popup-inner-title">Boşluklar</div>
+        <div class="popup-even">
+                <i rel="component_alignment" action="vertical_align_gaps" class="toolbox-btn icon-vertical-gaps size-20 dark-blue"></i>
+                <i rel="component_alignment" action="horizontal_align_gaps" class="toolbox-btn icon-horizontal-gaps size-20 dark-blue"></i>
+        </div>
 <!--  popup content -->
 </div>
 <!-- end align popup -->
@@ -1027,4 +1086,3 @@ $( "#add-button" ).hover(
 			</div>           
 		</ul>
 	</div>
-

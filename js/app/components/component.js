@@ -19,6 +19,10 @@ $(document).ready(function(){
       })
       
       .resizable({
+        'start': function (event,ui){
+          $(this).resizable("option", "alsoResize",".selected");
+          $(".selected").trigger("resize");
+        },
         'stop': function( event, ui ){
           that._resize(event, ui);
         },
@@ -130,8 +134,8 @@ $(document).ready(function(){
 
 
       .mouseenter(function(event){
-        // add delete button
-         console.log(that.options.component);
+        
+         
          if(that.options.component.data.lock == '')
          var deleteButton = $('<a id="delete-button-' + that.options.component.id + '" class="icon-delete white"style="position: absolute; top: -20px; right: 5px;"></a>');
          else
@@ -140,7 +144,7 @@ $(document).ready(function(){
       
          deleteButton.click(function(e){
          e.preventDefault();
-       
+          that._deleting();
           //window.lindneo.nisga.ComponentDelete( that.options.component );
           window.lindneo.tlingit.componentHasDeleted( that.options.component.id );
 
@@ -314,7 +318,7 @@ $(document).ready(function(){
 
       });
       
-      if(this.options.component.data.lock != "undefined" && this.options.component.data.lock.username != "undefined"){
+      if(typeof this.options.component.data.lock.username != "undefined"){
         $('#'+this.options.component.id).parent().draggable({ disabled: true });
         $('#'+this.options.component.id).droppable({ disabled: true });
         $('#'+this.options.component.id).selectable({ disabled: true });
@@ -332,6 +336,7 @@ $(document).ready(function(){
         $('#'+this.options.component.id).removeAttr('readonly');
         
       };
+      
       //console.log(this.options.component.data.lock);
     },
 
@@ -415,6 +420,7 @@ $(document).ready(function(){
         $('#'+this.options.component.id).removeAttr('readonly');
         
       };
+      
       //console.log(this.options.component.data.lock);
     },
 
@@ -431,6 +437,10 @@ $(document).ready(function(){
         'border': 'none'
       });
       window.lindneo.toolbox.removeComponentFromSelection(this);
+    },
+
+    _deleting: function(){
+      this.unselect();
     },
     _getSettable : function (propertyName){
      
