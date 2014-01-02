@@ -1,7 +1,7 @@
 <?php
 /* @var $this WorkspacesController */
 /* @var $model Workspaces */
-
+/*
 $this->breadcrumbs=array(
 	'Workspaces'=>array('index'),
 	$model->workspace_id=>array('view','id'=>$model->workspace_id),
@@ -14,8 +14,9 @@ $this->menu=array(
 	array('label'=>'View Workspaces', 'url'=>array('view', 'id'=>$model->workspace_id)),
 	array('label'=>'Manage Workspaces', 'url'=>array('admin')),
 );
+*/
 ?>
 
-<h1>Update Workspaces <?php echo $model->workspace_id; ?></h1>
+<!--<h1>Update Workspaces <?php echo $model->workspace_id; ?></h1>-->
 
-<?php echo $this->renderPartial('_form', array('model'=>$model)); ?>
+<?php echo $this->renderPartial('_form_edit', array('model'=>$model)); ?>
