@@ -18,7 +18,7 @@ $organisationId=$organizationUser['organisation_id'];
 		
 
 			<a href="#" popup="<?php echo $workspace['workspace_id']; ?>" class="btn white radius float-right book-editors-settings"id="boook-editors-settings" ><i class="icon-users"></i>Kullanıcılar</a>	
-			
+			<a href="?r=workspaces/deleteWorkspace&id=<?php echo $workspace['workspace_id']; ?>&organisationId=<?php echo $organisationId; ?>" class="btn white radius float-right book-editors-settings"id="boook-editors-settings" ><i class="icon-delete"></i>Sil</a>			
 
 
 
