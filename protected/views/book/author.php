@@ -8,7 +8,7 @@ $this->breadcrumbs=array(
 	'Books'=>array('index'),
 	$model->title,
 );
-*/
+*/ 
 /*
 $this->menu=array(
 	array('label'=>'List Book', 'url'=>array('index')),
@@ -189,7 +189,7 @@ $current_user=User::model()->findByPk(Yii::app()->user->id);
 					<input class='tool color' rel='color' type="color" class="color-picker-box radius " placeholder="e.g. #bbbbbb" />
 				
 					<select class='tool select' rel='fast-style' id="fast-style" class="radius">
-						<option value="">Serbest0</option>
+						<option value="">Serbest</option>
 						<option value="h1" >Başlık</option>
 						<option value="h2" >Alt Başlık</option>
 						<option value="h3" >Kucuk Başlık</option>
