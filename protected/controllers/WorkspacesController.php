@@ -32,7 +32,7 @@ class WorkspacesController extends Controller
 				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
-				'actions'=>array('create','update'),
+				'actions'=>array('create','update','delete','deleteWorkspace'),
 				'users'=>array('@'),
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
@@ -135,6 +135,16 @@ class WorkspacesController extends Controller
 	}
 
 
+	public function actionDeleteWorkspace($id,$organisationId)
+	{
+		$this->loadModel($id)->delete();
+
+		$command = Yii::app()->db->createCommand();
+		$command->delete('organisation_workspaces', 'organisation_id=:organisation_id && workspace_id=:workspace_id', array(':organisation_id'=>$organisationId,':workspace_id'=>$id));
+
+		$this->redirect( array('organisations/workspaces&organizationId='.$organisationId ) );
+	}
+
 	/**
 	 * Lists all models.
 	 */
@@ -161,7 +171,7 @@ class WorkspacesController extends Controller
 	 * Manages all models.
 	 */
 	public function actionAdmin()
-	{
+	{		
 		$model=new Workspaces('search');
 		$model->unsetAttributes();  // clear any default values
 		if(isset($_GET['Workspaces']))
