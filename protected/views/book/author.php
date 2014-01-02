@@ -8,7 +8,7 @@ $this->breadcrumbs=array(
 	'Books'=>array('index'),
 	$model->title,
 );
-*/
+*/ 
 /*
 $this->menu=array(
 	array('label'=>'List Book', 'url'=>array('index')),
