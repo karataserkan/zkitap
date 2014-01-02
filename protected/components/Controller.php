@@ -20,4 +20,30 @@ class Controller extends CController
 	 * for more details on how to specify this property.
 	 */
 	public $breadcrumbs=array();
+	public function init()
+	{
+
+		$language=Yii::app()->request->getQuery('language');
+		$language_cookie=Yii::app()->request->cookies['language'];
+		$cookie_time=time() + (10 * 365 * 24 * 60 * 60);
+		if(!isset($language_cookie))
+			{
+				
+				$cookie_var=new CHttpCookie('language', 'tr');
+				$cookie_var->expire=$cookie_time;
+				Yii::app()->request->cookies['language'] = $cookie_var;
+				Yii::app()->language='tr';
+			}
+		else if(isset($language))
+			{
+				$cookie_var=new CHttpCookie('language', $language);
+				$cookie_var->expire=$cookie_time;
+				Yii::app()->request->cookies['language'] = $cookie_var;
+				Yii::app()->language=$language;
+			}
+		else if(isset($language_cookie))
+			{
+				Yii::app()->language=(string)$language_cookie;
+			}
+	}
 }
