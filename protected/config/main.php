@@ -5,6 +5,8 @@
 
 // This is the main Web application configuration. Any writable
 // CWebApplication properties can be configured here.
+require_once(dirname(__FILE__).'/../includes/localization.php');
+
 return array(
 	'basePath'=>dirname(__FILE__).DIRECTORY_SEPARATOR.'..',
 	'name'=>'Squid Pacific',
@@ -45,7 +47,22 @@ return array(
 	'components'=>array(
 		'coreMessages'=>array(
     	'basePath'=>'/var/www/squid-pacific/egemen/protected/messages',
-	)	,
+		)	,
+		/*
+		 'coreMessages' => array(
+		 			'language'=>'en',
+                    'class' => 'CGettextMessageSoure',
+                    'basePath'=>'/var/www/squid-pacific/egemen/protected/messages',
+                    'useMoFile' => FALSE,
+            ),
+		 */
+		/*
+		'messages' => array(
+						
+                        'class' => 'CGettextMessageSource',
+                        'useMoFile' => FALSE,
+                ),
+		*/
 		'user'=>array(
 			// enable cookie-based authentication
 			'allowAutoLogin'=>true,
