@@ -270,8 +270,8 @@ window.lindneo.toolbox = (function(window, $, undefined){
   {
     var component_values = [];
     var value = 0;
-    var min_left = 0;
-    var min_top = 0;
+    var min_left = 10000000;
+    var min_top = 10000000;
     var max_left = 0;
     var max_top = 0;
     $.each(this.selectedComponents, function( key, component ) {
@@ -281,11 +281,6 @@ window.lindneo.toolbox = (function(window, $, undefined){
         var object_height = parseInt(component.options.component.data.self.css.height);
         var object_right = object_left + object_width;
         var object_bottom = object_top + object_height;
-
-        if(min_left == 0)   min_left = object_left;
-        if(max_left == 0)   max_left = object_left;
-        if(min_top == 0)  min_top = object_top;
-        if(max_top == 0)  max_top = object_top;
         
         if(min_left > object_left)  min_left = object_left;
         if(max_left < object_left)  max_left = object_left;
@@ -302,8 +297,8 @@ window.lindneo.toolbox = (function(window, $, undefined){
       var spaces = 0;
 
       component_values.sort(function(obj1, obj2) {
-      return obj1.top - obj2.top;
-    });
+        return obj1.top - obj2.top;
+      });
 
       for(var i = 0; i<components_count - 1; i++){
         var space = component_values[i + 1].top - component_values[i].bottom;
@@ -311,8 +306,9 @@ window.lindneo.toolbox = (function(window, $, undefined){
         component_spaces.push(space);
       };
       //console.log(components_count);
-    value = spaces / (components_count -1);
-    $.each(component_values, function( key, component ) {
+      value = spaces / (components_count -1);
+      if(spaces > 0)
+      $.each(component_values, function( key, component ) {
         if(key!=0 && key!= components_count-1){
           if(component_spaces[key-1] > value){
             
@@ -328,9 +324,9 @@ window.lindneo.toolbox = (function(window, $, undefined){
             
             window.lindneo.tlingit.componentHasUpdated(component.component);
             window.lindneo.nisga.destroyComponent(component.component.id);
-              window.lindneo.nisga.createComponent(component.component);
-              component_spaces[key] = component_spaces[key] + key_value;
-              console.log(component_spaces[key]);
+            window.lindneo.nisga.createComponent(component.component);
+            component_spaces[key] = component_spaces[key] + key_value;
+            console.log(component_spaces[key]);
           }
           else {
             
@@ -364,8 +360,8 @@ window.lindneo.toolbox = (function(window, $, undefined){
       var spaces = 0;
 
       component_values.sort(function(obj1, obj2) {
-      return obj1.left - obj2.left;
-    });
+        return obj1.left - obj2.left;
+      });
 
       for(var i = 0; i < components_count - 1; i++){
         var space = component_values[i + 1].left - component_values[i].right;
@@ -374,7 +370,8 @@ window.lindneo.toolbox = (function(window, $, undefined){
       };
       value = spaces / (components_count -1);
       console.log(value);
-    $.each(component_values, function( key, component ) {
+      if(spaces > 0)
+      $.each(component_values, function( key, component ) {
         if(key!=0 && key!= components_count-1){
           if(component_spaces[key-1] > value){
             

@@ -42,8 +42,8 @@ $( document ).ready(function () {
               //console.log(response);
             },
       select: function( event, ui ) {
-          //console.log('event       ');
           console.log(event);
+          console.log(ui);
           if (ui.item) {
               //console.log(ui.item);
               //window.location.href=event.currentTarget.baseURI;
@@ -86,6 +86,7 @@ $( document ).ready(function () {
           e.preventDefault();
           $('#searchform').submit();
         }
+        console.log(code);
       });
     
     
