@@ -1307,6 +1307,7 @@ div.form select{
 	width: 100%;
 	height: 100%;
 	text-align:center;
+	background-size:cover;
 }
 	
 .login-page-container-inside{
@@ -1437,13 +1438,49 @@ float:left;
 }
 
 	
-#current_page .ui-draggable:hover {border: 1px dashed grey }
-#current_page .ui-draggable:hover .dragging_holder{
-background-color:grey; height:20px; width:100%; border: 1px dashed grey;cursor: move;
+
+#current_page .ui-draggable:hover .top_holder{
+background:transparent; height:20px; width:100%;
 position: absolute; top: -23px; right: 0px;
 } 
+ .selected{
+	margin:0;
+}
+.dragging_holder {
+	position:absolute;
+	}
 
+.dragging_holder.top {
+	cursor: move;
+	height: 7px;
+	width: 100%;
+	top: -5px;
+	left: 0;
+}
 
+.dragging_holder.bottom {
+	cursor: move;
+	height: 10px;
+	width: 100%;
+	bottom: -5px;
+}
+
+.dragging_holder.left {
+	cursor: move;
+	height: 100%;
+	top:0;
+	width: 10px;
+	left: -5px;
+}
+
+.dragging_holder.right {
+	cursor: move;
+	height: 100%;
+	top:0;
+	width: 10px;
+	right: -5px;
+
+}
 
 .guide{
     display: none; 
@@ -1839,32 +1876,95 @@ border-right:1px solid #ddd;
 
 /* GROUPING OBJECTS ----------------------------------------------------- */
 
-.mulithing span {
-	position: absolute;
-	width: 10px;
-	height: 10px;
-	background-color: blue;	
+.ui-icon-gripsmall-diagonal-se{ background-image:none!important; 
+height: 10px!important;
+width: 10px!important; }
+
+.ui-resizable-handle {
+	visibility:hidden;	
 }
 
-.mulithing span.lt {
-	left:-6px;
-	top:-6px;	
+.ui-draggable.selected {
+	outline:3px solid #39F !important;	
 }
 
-.mulithing span.rt {
-	right:-6px;
-	top:-6px;	
+
+.selected ~ .ui-resizable-handle {
+	visibility:visible;
 }
 
-.mulithing span.lb {
-	left:-6px;
-	bottom:-6px;	
+.ui-resizable-n {
+	cursor: n-resize;
+	height: 7px;
+	width: 7px;
+	top: -6px;
+	left: 50%;
+	background-color:#39F;
+	border:1px solid #fff;
 }
-
-.mulithing span.rb {
-	right:-6px;
-	bottom:-6px;	
+.ui-resizable-s {
+	cursor: s-resize;	
+	height: 7px;
+	width: 7px;
+	bottom: -6px;
+	left: 50%;
+	background: #000;
+	background-color:#39F;
+	border:1px solid #fff;
 }
-
+.ui-resizable-e {
+	cursor: e-resize;	
+	height: 7px;
+	width: 7px;
+	right: -6px;
+	top: 50%;
+	background-color:#39F;
+	border:1px solid #fff;
+}
+.ui-resizable-w {
+	cursor: w-resize;	
+	height: 7px;
+	width: 7px;
+	left: -6px;
+	top: 50%;
+	background-color:#39F;
+	border:1px solid #fff;
+}
+.ui-resizable-se {
+	cursor: se-resize;	
+	height: 7px;
+	width: 7px;
+	right: -6px;
+	bottom: -6px;
+	background-color:#39F;
+	border:1px solid #fff;
+}
+.ui-resizable-sw {
+	cursor: sw-resize;	
+	height: 7px;
+	width: 7px;
+	left: -6px;
+	bottom: -6px;
+	background-color:#39F;
+	border:1px solid #fff;
+}
+.ui-resizable-nw {
+	cursor: nw-resize;	
+	height: 7px;
+	width: 7px;
+	left: -6px;
+	top: -6px;
+	background-color:#39F;
+	border:1px solid #fff;
+}
+.ui-resizable-ne {
+	cursor: ne-resize;
+	height: 7px;
+	width: 7px;
+	right: -6px;
+	top: -6px;
+	background-color:#39F;
+	border:1px solid #fff;
+}
 
 /* GROUPING OBJECTS ----------------------------------------------------- */

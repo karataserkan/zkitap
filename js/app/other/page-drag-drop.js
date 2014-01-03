@@ -328,10 +328,16 @@ $( document ).ready(function () {
 
   window.lindneo.tlingit.loadPage(window.lindneo.currentPageId);
   window.lindneo.toolbox.load();
-  $('#current_page').dblclick(function(e){
-  $('.selected').trigger('unselect');
-  window.lindneo.toolbox.deleteComponentFromSelection();
-  });
+  $('#current_page')
+	.click(function(e){
+		console.log(e);
+		if($(e.target).attr('id')=="current_page")
+			$('.selected').trigger('unselect');	
+	})
+  	.dblclick(function(e){
+		$('.selected').trigger('unselect');
+		//window.lindneo.toolbox.deleteComponentFromSelection();
+	});
 
   first_time();
 

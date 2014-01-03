@@ -577,7 +577,7 @@ window.lindneo.nisga = (function(window, $, undefined){
   };
 
   var setBgColorOfSelectedComponent = function ( componentId ,activeUser){
-    $('[id="' + componentId + '"]').css({
+    $('[id="' + componentId + '"]').parent().css({
       'border': '1px solid #ccc',
       'border-color': activeUser.color
     });
