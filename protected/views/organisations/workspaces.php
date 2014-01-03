@@ -15,13 +15,9 @@ $organisationId=$organizationUser['organisation_id'];
 		?>
 		<div class="row">
 			<h3><?php echo $workspace['workspace_name']; ?></h3>
-		
-
-			<a href="#" popup="<?php echo $workspace['workspace_id']; ?>" class="btn white radius float-right book-editors-settings"id="boook-editors-settings" ><i class="icon-users"></i>Kullanıcılar</a>	
-			
-
-
-
+				<a href="#" popup="<?php echo $workspace['workspace_id']; ?>" class="btn white radius float-right book-editors-settings"id="boook-editors-settings" ><i class="icon-users"></i>Kullanıcılar</a>	
+				<a href="?r=workspaces/deleteWorkspace&id=<?php echo $workspace['workspace_id']; ?>&organisationId=<?php echo $organisationId; ?>" class="btn white radius float-right book-editors-settings"id="boook-editors-settings" ><i class="icon-delete"></i>Sil</a>
+				<a href="?r=workspaces/updateWorkspace&id=<?php echo $workspace['workspace_id']; ?>&organisationId=<?php echo $organisationId; ?>" class="btn white radius float-right book-editors-settings"id="boook-editors-settings" ><i class="icon-update"></i>Düzenle</a>	
 		</div>
 <center id="popup-close-area" popup="pop-<?php echo $workspace['workspace_id']; ?>" style="display:none; position:relative">
 				<div id="close-div" style="background-color:#123456; width:100% height:#123456; position:fixed;"> </div>

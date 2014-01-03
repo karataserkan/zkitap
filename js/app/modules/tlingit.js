@@ -168,7 +168,9 @@ window.lindneo.tlingit = (function(window, $, undefined){
     });
 
     var canvas_reset=[];
+    //console.log(components);
     components=components.sort (function(a,b){
+      console.log(a.data);
       if (a.data.self.css['z-index'] > b.data.self.css['z-index']) return +1;
       return -1;
     });

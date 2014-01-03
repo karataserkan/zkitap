@@ -8,7 +8,7 @@ $this->breadcrumbs=array(
 	'Books'=>array('index'),
 	$model->title,
 );
-*/
+*/ 
 /*
 $this->menu=array(
 	array('label'=>'List Book', 'url'=>array('index')),
@@ -183,13 +183,13 @@ $current_user=User::model()->findByPk(Yii::app()->user->id);
 			
 				
 			
-			<div class="text-options table-options toolbox" style="display:inline-block;">
+			<div class="text-options toolbox" style="display:inline-block;">
 					
 					
 					<input class='tool color' rel='color' type="color" class="color-picker-box radius " placeholder="e.g. #bbbbbb" />
 				
 					<select class='tool select' rel='fast-style' id="fast-style" class="radius">
-						<option value="">Serbest0</option>
+						<option value="">Serbest</option>
 						<option value="h1" >Başlık</option>
 						<option value="h2" >Alt Başlık</option>
 						<option value="h3" >Kucuk Başlık</option>
@@ -362,7 +362,7 @@ $current_user=User::model()->findByPk(Yii::app()->user->id);
 			<div class="generic-options toolbox float-left"  style="display:inline-block;">
 			<!--	<a href="#" class="bck-dark-blue white toolbox-items radius" id="pop-align"><i class="icon-align-center size-20"></i></a> -->
 				<a href="#" class="bck-dark-blue white toolbox-items radius responsive_2" id="pop-arrange"><i class="icon-send-backward size-15"></i></a>
-				<a href="#" id='groupping_button' class="btn grey white radius hidden">Grupla</a>
+			<!--	<a href="#" class="btn grey white radius">Grupla</a>    -->
 			</div>
 			
 			<div class="generic-options responsive_1"  style="display:inline-block;">

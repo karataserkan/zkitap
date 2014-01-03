@@ -74,6 +74,9 @@
 		
 		<div id="logo" style='float:left'>
 			<a href="<?php echo $this->createUrl('site/index');  ?>"/> <img src="<?php echo Yii::app()->request->baseUrl; ?>/css/logo.png" alt="<?php echo CHtml::encode(Yii::app()->name); ?>" /></a>
+			<a href="<?php echo Yii::app()->request->requestUri.'&language=tr'; ?>">tr</a>
+			<a href="<?php echo Yii::app()->request->requestUri.'&language=en'; ?>">en</a>
+
 		</div>
 		
 

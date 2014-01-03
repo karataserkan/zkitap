@@ -10,90 +10,20 @@ $this->pageTitle=Yii::app()->name;
 <div style="height:42px;"></div>
 <div id='allWorkspaces' style="position: fixed; width: 100%; height: 100%; background-color: #056380; padding:20px; overflow-y: scroll;">
 
-
-
-
-
-
-
-
 <?php
 		
-	/**
-	* this returns the user type for $bookId
-	* return owner | editor | user | false
-	*/
-	function userType($bookId)
-	{
-		$userid=Yii::app()->user->id;
-
-		$bookOfUser= Yii::app()->db->createCommand()
-	    ->select("*")
-	    ->from("book_users")
-	    ->where("book_id=:book_id", array(':book_id' => $bookId))
-	    ->andWhere("user_id=:user_id", array(':user_id' => $userid))
-	    ->queryRow();
-	    
-	    return ($bookOfUser) ? $bookOfUser['type'] : false;
-	}
-
-
-	//kitabın kullanıcılarını return ediyorum
-	function bookUsers($bookId)
-	{
-		$bookUsers = Yii::app()->db->createCommand()
-		->select ("*")
-		->from("book_users")
-		->where("book_id=:book_id", array(':book_id' => $bookId))
-		->join("user","user_id=id")
-		->queryAll();
-
-		return $bookUsers;
-	}
-
-	/**
-	 * is user has an organization?
-	 * @return organization
-	 */
-	function organization()
-	{
-		$organization = Yii::app()->db->createCommand()
-	    ->select("*")
-	    ->from("organisation_users")
-	    ->where("user_id=:user_id", array(':user_id' => Yii::app()->user->id))
-	    ->queryRow();
-	    return  ($organization) ? $organization : null ;
-	}
-
-	function workspaceUsers($workspace_id)
-	{
-		$workspaceUsers = Yii::app()->db->createCommand()
-		->select ("*")
-		->from("workspaces_users")
-		->where("workspace_id=:workspace_id", array(':workspace_id' => $workspace_id))
-		->join("user","userid=id")
-		->queryAll();
-
-		return $workspaceUsers;
-	}
-
 		// renders the view file 'protected/views/site/index.php'
 		// using the default layout 'protected/views/layouts/main.php'
 		$userid=Yii::app()->user->id;
 		//$workspacesOfUser= new WorkspacesUsers();
 
-		$workspacesOfUser= Yii::app()->db->createCommand()
-	    ->select("*")
-	    ->from("workspaces_users x")
-	    ->join("workspaces w",'w.workspace_id=x.workspace_id')
-	    ->join("user u","x.userid=u.id")
-	    ->where("userid=:id", array(':id' => $userid ) )->queryAll();
+		$workspacesOfUser= $this->getUserWorkspaces();
 
-		$organization = organization();
+		$organization = $this->organization();
 		if($organization)
 		{
 		?>
-		<a href='?r=organisations/index&organizationId=<?php echo $organization["organisation_id"]?>' class="btn white radius " style="margin-left:20px;">Organizasyon</a>
+		<a href='?r=organisations/index&organizationId=<?php echo $organization["organisation_id"]?>' class="btn white radius " style="margin-left:20px;"><?php echo Yii::t('i18n','Organizasyon');?></a>
 		<?php
 		}
 
@@ -103,7 +33,7 @@ $this->pageTitle=Yii::app()->name;
 	    	<div class='workspace'>
 	    		<h1 class="float-left white"><?php echo $workspace->workspace_name; ?></h1>
 	    		
-	    		<a href='?r=book/newBook' class="btn white radius " style="margin-left:20px;">Yeni Kitap</a>
+	    		<a href='?r=book/newBook' class="btn white radius " style="margin-left:20px;"><?php echo Yii::t('i18n','Yeni Kitap');?></a>
 				
 					
 				
@@ -111,10 +41,9 @@ $this->pageTitle=Yii::app()->name;
 	    		<div class='book_list'>
 	    			<?php 
 					
-	    			$all_books= Book::model()->findAll('workspace_id=:workspace_id', 
-	    				array(':workspace_id' => $workspace->workspace_id  ) ); 
+	    			$all_books= $this->getWorkspaceBooks($workspace->workspace_id);
 	    			foreach ($all_books as $key => $book) {
-	    				$userType = userType($book->book_id);
+	    				$userType = $this->userType($book->book_id);
 
 	    				?>
 						
@@ -122,18 +51,18 @@ $this->pageTitle=Yii::app()->name;
 						<div class="book-list-box radius" id="book-list-box">
 							<div class="book-list-box-book-cover"><img src="/css/images/default-cover.jpg" alt="Book Cover" ></div>
 							<div class="book-list-box-text-container">
-								Kitabın Adı<input type="text" class="book-list-textbox radius grey-9 float-right" value="<?php echo $book->title ?>">
+								<?php echo Yii::t('i18n','Kitabın Adı');?><input type="text" class="book-list-textbox radius grey-9 float-right" value="<?php echo $book->title ?>">
 							</div>
 
 							<div class="book-list-box-text-container">
-								Yazar Adı<input type="text" class="book-list-textbox radius grey-9 float-right" value="<?php echo $book->author ?>">
+								<?php echo Yii::t('i18n','Yazar Adı');?><input type="text" class="book-list-textbox radius grey-9 float-right" value="<?php echo $book->author ?>">
 								
 							</div>
 
 							<div class="book-list-box-text-container">
 								<?php 
 								if ($userType==='owner') { ?>
-									<a href="#" popup="<?php echo $book->book_id; ?>" class="btn white radius float-right book-editors-settings"id="boook-editors-settings" ><i class="icon-users"></i>Editörler</a>	
+									<a href="#" popup="<?php echo $book->book_id; ?>" class="btn white radius float-right book-editors-settings"id="boook-editors-settings" ><i class="icon-users"></i><?php echo Yii::t('i18n','Editörler');?></a>	
 								<?php }
 								?>
 								</div>
@@ -141,21 +70,6 @@ $this->pageTitle=Yii::app()->name;
 							<div class="book-list-box-text-container" style="text-align:right;">
 								<?php
 									if ($userType==='owner') {
-										?>
-										
-						
-										<!-- Editor options popupunu açan buton -->
-										
-										<!-- Editor options popupunu açan buton -->
-										<!--
-												buraya hakları düzenlemek için popup eklenecek
-												
-												!!!!!!!!!!!!!! (can: aşağıda, editor options  yazan commentler arasında)!!!!!!!!!!!!!!
-												
-										-->
-										<?php //echo $book->book_id; ?>
-										
-										<?php 
 										echo CHtml::link(CHtml::encode(''), array('book/delete', 'bookId'=>$book->book_id),
 										  array(
 										    'submit'=>array('book/delete', 'bookId'=>$book->book_id),
@@ -166,25 +80,25 @@ $this->pageTitle=Yii::app()->name;
 										);
 										?>
 
-										<a href="<?php echo Yii::app()->createUrl('book/author', array('bookId'=>$book->book_id) ); ?>" class="btn white btn radius " id="pop-video">Düzenle</a>
+										<a href="<?php echo Yii::app()->createUrl('book/author', array('bookId'=>$book->book_id) ); ?>" class="btn white btn radius " id="pop-video"><?php echo Yii::t('i18n','Düzenle');?></a>
 										<?php
 									}
 									elseif ($userType==='editor') {
 										?>
-										<a href="<?php echo Yii::app()->createUrl('book/author', array('bookId'=>$book->book_id) ); ?>" class="btn white btn radius " id="pop-video">Düzenle</a>
+										<a href="<?php echo Yii::app()->createUrl('book/author', array('bookId'=>$book->book_id) ); ?>" class="btn white btn radius " id="pop-video"><?php echo Yii::t('i18n','Düzenle');?></a>
 										<?php
 									}
 								?>
 
-								<a href="<?php echo Yii::app()->createUrl('EditorActions/ExportBook', array('bookId'=>$book->book_id) ); ?>" class="btn bck-light-green white radius" ><i class="icon-download"></i>İndir</a>
+								<a href="<?php echo Yii::app()->createUrl('EditorActions/ExportBook', array('bookId'=>$book->book_id) ); ?>" class="btn bck-light-green white radius" ><i class="icon-download"></i><?php echo Yii::t('i18n','İndir');?></a>
 										<!-- editor options-->
 										<center id="popup-close-area" popup="pop-<?php echo $book->book_id; ?>" style="display:none; position:relative">
 											<div id="close-div" style="background-color:#123456; width:100% height:#123456; position:fixed;"> </div>
 											<div class="book-editors-options-box-container">
-											<h2>Kitap Editörleri<a popup="close-<?php echo $book->book_id; ?>" id="close-option-box"class="icon-close white size-15 delete-icon float-right" ></a></h2>
+											<h2><?php echo Yii::t('i18n','Kitap Editörleri');?><a popup="close-<?php echo $book->book_id; ?>" id="close-option-box"class="icon-close white size-15 delete-icon float-right" ></a></h2>
 											<div class="editor-list">
 											<?php 
-												$users = bookUsers($book->book_id);
+												$users = $this->bookUsers($book->book_id);
 
 												foreach ($users as $key => $user): 
 													if ($user['type']=='owner' || $user['type']=='editor'){?>
@@ -207,10 +121,10 @@ $this->pageTitle=Yii::app()->name;
 														<span id="editor-tag" style="color:#477738; float:right;">
 															<?php 
 																if ($user['type']=='owner') {
-																	echo "sahibi";
+																	echo Yii::t('i18n','Sahibi');
 																}
 																elseif ($user['type']=='editor') {
-																	echo "editör";
+																	echo Yii::t('i18n','Editör');
 																}
 															?>
 														</span>
@@ -226,13 +140,13 @@ $this->pageTitle=Yii::app()->name;
 													//type: owner | editor | user
 
 												?>
-												<span class="editor-name" >Kullanıcı Ekle:</span>
+												<span class="editor-name" ><?php echo Yii::t('i18n','Kullanıcı Ekle');?>:</span>
 												<br style="clear:both; margin-bottom:20px;">
 												<form id="a<?php echo $book->book_id; ?>" method="post">
 												<input id="book" value="<?php echo $book->book_id; ?>" style="display:none">
 												<select id="user" class="book-list-textbox radius grey-9 float-left"  style=" width: 280px;">
 													<?php
-														$workspaceUsers = workspaceUsers($workspace->workspace_id);
+														$workspaceUsers = $this->workspaceUsers($workspace->workspace_id);
 														
 														foreach ($workspaceUsers as $key => $workspaceUser) {
 															echo '<option value="'.$workspaceUser['userid'].'">'.$workspaceUser['name'].' '.$workspaceUser['surname'].'</option>';
@@ -240,8 +154,8 @@ $this->pageTitle=Yii::app()->name;
 													 ?>
 												</select>
 												 <select id="type" class="book-list-textbox radius grey-9 float-left"  style=" width: 70px;" >
-												  <option value="editor">Editör</option>
-												  <option value="owner">Sahibi</option>
+												  <option value="editor"><?php echo Yii::t('i18n','Editör');?></option>
+												  <option value="owner"><?php echo Yii::t('i18n','Sahibi');?></option>
 												</select>
 												</form>
 												<a href="#" onclick="sendRight(a<?php echo $book->book_id; ?>)" class="btn white radius float-right" style="margin-left:20px; width:50px; text-align:center;">
@@ -283,11 +197,6 @@ $this->pageTitle=Yii::app()->name;
 	    				<?php
 
 	    			}
-
-
-
-
-
 	    			?>
 	    		</div>
 	    	</div>
@@ -297,14 +206,6 @@ $this->pageTitle=Yii::app()->name;
 ?>
 
 </div>
-
-				
-
-
-				
-
-
-
 
 
 <script>

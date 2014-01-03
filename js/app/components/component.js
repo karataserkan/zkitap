@@ -318,7 +318,7 @@ $(document).ready(function(){
 
       });
       
-      if(this.options.component.data.lock != "undefined" && this.options.component.data.lock.username != "undefined"){
+      if(typeof this.options.component.data.lock.username != "undefined"){
         $('#'+this.options.component.id).parent().draggable({ disabled: true });
         $('#'+this.options.component.id).droppable({ disabled: true });
         $('#'+this.options.component.id).selectable({ disabled: true });
@@ -336,6 +336,7 @@ $(document).ready(function(){
         $('#'+this.options.component.id).removeAttr('readonly');
         
       };
+      
       //console.log(this.options.component.data.lock);
     },
 
@@ -419,6 +420,7 @@ $(document).ready(function(){
         $('#'+this.options.component.id).removeAttr('readonly');
         
       };
+      
       //console.log(this.options.component.data.lock);
     },
 

@@ -8,7 +8,8 @@
 return array(
 	'basePath'=>dirname(__FILE__).DIRECTORY_SEPARATOR.'..',
 	'name'=>'Squid Pacific',
-
+	'sourceLanguage'=>'tr',
+	'language'=>'en',
 	// preloading 'log' component
 	'preload'=>array('log'),
 
@@ -42,6 +43,9 @@ return array(
 
 	// application components
 	'components'=>array(
+		'coreMessages'=>array(
+    	'basePath'=>'/var/www/squid-pacific/egemen/protected/messages',
+	)	,
 		'user'=>array(
 			// enable cookie-based authentication
 			'allowAutoLogin'=>true,
