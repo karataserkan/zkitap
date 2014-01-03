@@ -91,6 +91,16 @@ return array(
 				*/
 			),
 		),
+		'Smtpmail'=>array(
+            'class'=>'application.extension.smtpmail.PHPMailer',
+            'Host'=>"tls://smtp.gmail.com",
+            'Username'=>'edubox@linden-tech.com',
+            'Password'=>'12548442',
+            'Mailer'=>'smtp',
+            'Port'=>465,
+            'SMTPAuth'=>true, 
+            //'ssl'=>'tls'
+        ),
 	),
 
 	// application-level parameters that can be accessed
