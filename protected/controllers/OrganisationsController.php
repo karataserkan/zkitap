@@ -32,7 +32,7 @@ class OrganisationsController extends Controller
 				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
-				'actions'=>array('create','update','workspaces','delWorkspaceUser','addWorkspaceUser'),
+				'actions'=>array('create','update','workspaces','delWorkspaceUser','addWorkspaceUser','users','addUser','deleteOrganisationUser'),
 				'users'=>array('@'),
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
@@ -262,6 +262,53 @@ class OrganisationsController extends Controller
 			));	
 		$this->redirect( array('organisations/workspaces&organizationId='.$organizationId ) );
 	}
+
+	/**
+	 * organisation users
+	 * @param  ID $organisationId 
+	 * @return render users.php sends users and organisation ID
+	 */
+	public function actionUsers($organisationId)
+	{
+		$organizationUsers= OrganisationUsers::model()->findAll('organisation_id=:organisation_id', 
+	    				array(':organisation_id' => $organisationId) );
+		$users=array();
+		foreach ($organizationUsers as $key => $organizationUser) {
+			$users[]= User::model()->findByPk($organizationUser->user_id);
+		}
+
+		$this->render('users', array(
+			'users'=>$users,
+			'organisationId'=>$organisationId));
+	}
+
+	/**
+	 * delete user from workspaces and organization
+	 * @param  ID $userId         
+	 * @param  ID $organisationId 
+	 * @return redirect previous page
+	 */
+	public function actionDeleteOrganisationUser($userId,$organisationId)
+	{
+		$organisationWorkspaces= OrganisationWorkspaces::model()->findAll('organisation_id=:organisation_id', 
+	    				array(':organisation_id' => $organisationId) );
+		foreach ($organisationWorkspaces as $key => $workspace) {
+			$workspaceUser = WorkspacesUsers::model()->findByPk(array('userid'=>$userId,'workspace_id'=>$workspace->workspace_id));
+			if ($workspaceUser) {
+				$workspaceUser->delete();
+			}
+		}
+
+		$user = OrganisationUsers::model()->findByPk(array('user_id'=>$userId,'organisation_id'=>$organisationId));
+		$user->delete();
+		$this->redirect( array('organisations/users&organizationId='.$organisationId ) );
+	}
+
+	public function actionAddUser()
+	{
+		$this->render('add_user', array());
+	}
+
 	/**
 	 * Manages all models.
 	 */
