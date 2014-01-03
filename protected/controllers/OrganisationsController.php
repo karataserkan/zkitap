@@ -304,9 +304,49 @@ class OrganisationsController extends Controller
 		$this->redirect( array('organisations/users&organizationId='.$organisationId ) );
 	}
 
-	public function actionAddUser()
+	public function actionAddUser($email,$organisationId)
 	{
-		$this->render('add_user', array());
+		$error="";
+		$success="";
+
+		$organisation = Organisations::model()->findByPk($organisationId);
+
+		$regexp = "/^[^0-9][A-z0-9_]+([.][A-z0-9_]+)*[@][A-z0-9_-]+([.][A-z0-9_]+)*[.][A-z]{2,4}$/";
+		if (preg_match($regexp, $email)) {
+		    //Email address is valid
+			$user= User::model()->findAllByAttributes(array('email'=>$email) );
+			if ($user) {
+				// a user has this email in users table. we only send invitation mail
+				$message=$organisation->organisation_name. " size editöre katılma isteği gönderdi. İsteği kabul etmek için <a href='http://linden-tech.com'>tıklayın</a>.";	
+			}
+			else
+			{
+				//we will create new user
+				$message="yeni kullanıcı";
+			}
+
+			$mail=Yii::app()->Smtpmail;
+	        $mail->SetFrom('edubox@linden-tech.com', $organisation->organisation_name);
+	        $mail->Subject    = $organisation->organisation_name.' davetiye.';
+	        $mail->MsgHTML($message);
+	        $mail->AddAddress($email, "");
+	        
+	        if(!$mail->Send()) {
+	            echo "Mailer Error: " . $mail->ErrorInfo;
+	        }else {
+	            $success="Kullanıcı davet edildi.";
+	        }
+
+
+
+		} else {
+		    //Email address is NOT valid
+		    $error = "Girdiğiniz e-posta adresi yanlış";
+		}
+
+		$this->render('add_user', array(
+			'error'=>$error,
+			'success'=>$success));
 	}
 
 	/**

@@ -19,6 +19,7 @@ $(document).ready(function(){
       })
       
       .resizable({
+		  "handles":"n, e, w, s, nw, se, sw, ne",
         'start': function (event,ui){
           $(this).resizable("option", "alsoResize",".selected");
           $(".selected").trigger("resize");
@@ -49,7 +50,13 @@ $(document).ready(function(){
 
 
       this.element.parent()
-      .append('<div class="dragging_holder"></div>' )
+      .append('  \
+	  <div class="top_holder"></div> \
+	  <div class="dragging_holder top"></div> \
+	  <div class="dragging_holder bottom "></div> \
+	  <div class="dragging_holder left "></div> \
+	  <div class="dragging_holder right"></div> \
+	  ' )
       .attr('component-instance', 'true')
     
       .draggable({
@@ -137,9 +144,9 @@ $(document).ready(function(){
         
          
          if(that.options.component.data.lock == '')
-         var deleteButton = $('<a id="delete-button-' + that.options.component.id + '" class="icon-delete white"style="position: absolute; top: -20px; right: 5px;"></a>');
+         var deleteButton = $('<a id="delete-button-' + that.options.component.id + '"class="icon-delete size-10" style="position: absolute; top: -20px; right: 5px;" ></a>');
          else
-         var deleteButton=$('<a id="delete-button" class="icon-delete white"style="position: absolute; top: -20px; right: 5px;" hidden></a>');
+         var deleteButton=$('<a id="delete-button" class="icon-delete size-10" style="position: absolute; top: -20px; right: 5px;" hidden></a>');
          var commentButton = $('<a id="comment-button-' + that.options.component.id + '" class="icon-down-arrow comment-box-arrow size-10 icon-up-down" style="position: absolute; top: -20px; right: 30px;"></a>');
       
          deleteButton.click(function(e){
@@ -189,7 +196,7 @@ $(document).ready(function(){
 
       this.setFromData();
       this.listCommentsFromData();
-
+	  $(".ui-resizable-se.ui-icon.ui-icon-gripsmall-diagonal-se").removeClass("ui-icon").removeClass("ui-icon-gripsmall-diagonal-se");
     },
 
     createCommentBox : function () {
@@ -394,10 +401,9 @@ $(document).ready(function(){
 
       this.element.removeClass('unselected');
       this.element.addClass('selected');
+	  this.element.parent().addClass('selected');
       window.lindneo.toolbox.addComponentToSelection(this);
-      this.element.css({
-          'border': '1px solid #ccc'
-      });
+
      
       this._trigger('selected', null, this );
       window.lindneo.tsimshian.emitSelectedComponent( this );
@@ -432,6 +438,8 @@ $(document).ready(function(){
 
     unselect: function (){
       this.element.removeClass('selected');
+	  this.element.parent().removeClass('selected');
+	  
       this.element.addClass('unselected');
       this.element.css({
         'border': 'none'

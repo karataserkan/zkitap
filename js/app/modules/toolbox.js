@@ -15,7 +15,7 @@ window.lindneo.toolbox = (function(window, $, undefined){
     $('#groupping_button').hide();
     if ($("#current_page").find('.mulithing').length)
       this.SelectionBox.remove();
-
+	
     if (this.selectedComponents.length<=1) return;
     
 
@@ -23,8 +23,15 @@ window.lindneo.toolbox = (function(window, $, undefined){
     var newBoxPosition=this.positions();
     newBoxPosition['position']='absolute';
     newBoxPosition['z-index']='9001';
-    this.SelectionBox.css(newBoxPosition);
-    this.SelectionBox.appendTo( $('#current_page'));
+    this.SelectionBox
+		.css(newBoxPosition)
+    	.appendTo( $('#current_page'))
+		.resizable({
+			"handles":"n, e, w, s, nw, se, sw, ne"
+		});
+
+
+
 
   };
 
