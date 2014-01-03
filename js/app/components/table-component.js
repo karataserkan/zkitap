@@ -48,12 +48,14 @@ $(document).ready(function(){
           newColumn
             .appendTo(newRow)
             .text(that.options.component.data.table[i][k].attr.val)
+            .css(that.options.component.data.table[i][k].css)
             .dblclick(function(e){
               e.stopPropagation();
               that.editableCell(this);
 
           })
           .mousedown(function (e) {
+                that._selected(e,null);
                 if (e.target.localName == "textarea") return;
                 
                 isMouseDown=true;
@@ -120,9 +122,9 @@ $(document).ready(function(){
       width=width.substring(0,width.length-2);
       height=height.substring(0,height.length-2);
 
-      this.table.attr('width',width);
+      /*this.table.attr('width',width);
       this.table.attr('height',height);
-
+  */
       newTable.resizable({
         'stop': function( event, ui ){
           that._resize(event, ui);
@@ -136,6 +138,8 @@ $(document).ready(function(){
       });     
       this.table.focus();
     },
+
+
 
     keyCapturing: function (){
       var that = this;
@@ -182,7 +186,238 @@ $(document).ready(function(){
           
         });
     },
+      getSettable : function (one){
+        if (typeof one == undefined || one < 1) one = false;
+        else one = true;
+        //if (typeof this.CellSelection == undefined )
+          return this.options.component.data.table[0][0];
 
+        //if (one) return this.CellSelection[0];
+        //else
+        return this.CellSelection;
+      },
+      
+      selectionDOMCells: function (){
+        var that = this;
+
+        var selections_rows=that.tbody.children('tr').slice(TableSelection.start.rows,TableSelection.end.rows+1);
+            $.each (selections_rows, function(row_index,row_element){
+              var cell_row_index= row_index+TableSelection.start.rows;
+              var selections_columns = $(row_element).children('td').slice(TableSelection.start.columns,TableSelection.end.columns+1);
+              that.CellSelection.push(selections_columns);
+            });
+
+      },
+
+      setPropertyOfCells: function (propertyName,propertyValue,node){
+
+
+        var that = this;
+
+        if (typeof that.TableSelection == "undefined") return false;
+
+   
+
+    
+        
+
+
+
+        for (var k=that.TableSelection.start.rows;k<=that.TableSelection.end.rows; k++ ) {
+          
+          for (var i=that.TableSelection.start.columns;k<=that.TableSelection.end.columns; k++ ) {
+            that.options.component.data.table
+              [k]
+              [i]
+              [node]
+              [propertyName] = propertyValue;
+              
+              if( node == 'attr')
+                this.cells[k][i].attr(propertyName,propertyValue);
+              else if( node == 'css')
+                this.cells[k][i].css(propertyName,propertyValue);
+          }     
+
+        }
+
+      },
+
+      getPropertyOfCells: function (propertyName,node){
+        var that = this;
+        if (typeof that.TableSelection == "undefined") return false;
+        if (typeof that.options.component.data.table
+          [that.TableSelection.start.rows]
+          [that.TableSelection.start.columns]
+          [node] == "undefined") return null;
+
+        var propertyValue = that.options.component.data.table
+          [that.TableSelection.start.rows]
+          [that.TableSelection.start.columns]
+          [node]
+          [propertyName];
+        
+        if ( typeof propertyValue == "undefined") return null;
+        
+
+
+
+      },
+
+      setPropertyofObject : function (propertyName,propertyValue){
+        var that = this;
+        switch (propertyName){
+            case 'fast-style': 
+                this.setPropertyOfCells(propertyName,propertyValue,'attr')
+
+                  var styles=[];
+
+                  switch (propertyValue){
+                    case 'h1':
+                      styles=[
+                      {name:'font-size', val:'46px'},
+                      {name:'font-family', val:'Arial'},
+                      {name:'text-decoration', val:'normal'},
+                      {name:'font-weight', val:'bold'},
+                      {name:'text-align', val:'left'},
+                      {name:'text-transform', val:'capitalize'},
+
+                       ];
+                      break;
+                    case 'h2':
+                      styles=[
+                      {name:'font-size', val:'30px'},
+                      {name:'font-family', val:'Arial'},
+                      {name:'text-decoration', val:'normal'},
+                      {name:'font-weight', val:'normal'},
+                      {name:'text-align', val:'left'},
+                      {name:'text-transform', val:'none'},
+                       ];
+                       break;
+                    case 'h3':
+                      styles=[
+                      {name:'font-size', val:'14px'},
+                      {name:'font-family', val:'Arial'},
+                      {name:'text-decoration', val:'normal'},
+                      {name:'font-weight', val:'bold'},
+                      {name:'text-align', val:'left'},
+                      {name:'text-transform', val:'none'},
+                       ];
+                       break;
+                    case 'p':
+                      styles=[
+                      {name:'font-size', val:'14px'},
+                      {name:'font-family', val:'Arial'},
+                      {name:'text-decoration', val:'normal'},
+                      {name:'font-weight', val:'normal'},
+                      {name:'text-align', val:'left'},
+                      {name:'text-transform', val:'none'},
+                       ];
+                       break;
+                    case 'blockqoute':
+                      styles=[
+                      {name:'font-size', val:'12px'},
+                      {name:'font-family', val:'Arial'},
+                      {name:'text-decoration', val:'italic'},
+                      {name:'font-weight', val:'normal'},
+                      {name:'text-align', val:'left'},
+                      {name:'text-transform', val:'none'},
+                       ];
+                       break;
+                    default: 
+                    
+                    
+                      break;
+
+
+                  }
+                   $.each( styles , function(i,v) {
+                        that.setProperty(v.name , v.val);
+                    });
+
+
+                return this.getPropertyOfCells(propertyName,'attr') ;
+                
+              break;
+
+            case 'font-size':           
+            case 'text-align':           
+            case 'font-family':         
+            case 'color':
+            case 'font-weight':           
+            case 'font-style':         
+            case 'text-decoration':   
+
+                this.setPropertyOfCells(propertyName,propertyValue,'css');
+                
+                var return_val;
+                return this.getPropertyOfCells(propertyName,'css') ;
+              
+              break;
+            
+            default:
+              return this._super(propertyName,propertyValue);
+              break;
+          }
+      },
+      setProperty : function (propertyName,propertyValue){
+        this._setProperty(propertyName,propertyValue);
+        
+      },
+
+      getProperty : function (propertyName){
+
+          switch (propertyName){
+            case 'fast-style': 
+                var default_val='';
+                var return_val=this.getPropertyOfCells(propertyName,'attr');
+                return ( return_val ? return_val : default_val );
+              break;
+
+            case 'font-size':           
+            case 'font-type':         
+            case 'color':
+            case 'font-weight':           
+            case 'font-style':         
+            case 'text-decoration': 
+            case 'text-align':         
+            
+
+                switch (propertyName){
+                  case 'text-align':
+                    var default_val='left';
+                    break;
+                  case 'font-weight':
+                    var default_val='normal';
+                    break;
+                  case 'font-style':
+                    var default_val='normal';
+                    break;
+                  case 'text-decoration':
+                    var default_val='none';
+                    break;
+                  case 'font-size':
+                    var default_val='14px';
+                    break;
+                  case 'font-type':
+                    var default_val='Arial';
+                    break;
+                  case 'color':
+                    var default_val='#000';
+                    break;
+                }
+
+                var return_val=this.getPropertyOfCells(propertyName,'css');
+
+                return ( return_val ? return_val : default_val );
+              
+              break;
+            
+            default:
+              return this._super(propertyName);
+              break;
+          }
+
+      },
     editableCell: function  (cell){
 
       var that=this;
@@ -276,7 +511,8 @@ $(document).ready(function(){
             $.each (selections_rows, function(row_index,row_element){
               var cell_row_index= row_index+TableSelection.start.rows;
               var selections_columns = $(row_element).children('td').slice(TableSelection.start.columns,TableSelection.end.columns+1);
-              
+              that.CellSelection = selections_columns;
+
 
                $.each (selections_columns, function(column_index,cell_element){
                 var cell_column_index=column_index+TableSelection.start.columns;
@@ -370,8 +606,14 @@ $(document).ready(function(){
                       'class' : 'tableComponentCell'
                     },
                    'css' : {
-                      'width':'20px',
-                      'height': '20px' 
+                      'width':'100px',
+                      'height': '30px',            
+                      'color' : '#000',
+                      'font-size' : '14px',
+                      'font-family' : 'Arial',
+                      'font-weight' : 'normal',
+                      'font-style' : 'normal',
+                      'text-decoration' : 'none'
                     },
                     'format':'standart',
                     'function':''

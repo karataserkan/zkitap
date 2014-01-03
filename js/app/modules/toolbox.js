@@ -12,11 +12,14 @@ window.lindneo.toolbox = (function(window, $, undefined){
   var SelectionBox=$("<div class='mulithing' style='border:1px solid blue;pointer-events:none;'> </div>");
 
   var makeMultiSelectionBox = function(){
+    $('#groupping_button').hide();
     if ($("#current_page").find('.mulithing').length)
       this.SelectionBox.remove();
 
     if (this.selectedComponents.length<=1) return;
     
+
+    $('#groupping_button').show();
     var newBoxPosition=this.positions();
     newBoxPosition['position']='absolute';
     newBoxPosition['z-index']='9001';
