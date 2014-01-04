@@ -554,7 +554,7 @@ window.lindneo.toolbox = (function(window, $, undefined){
               var rel=$(this).attr('rel');
               //console.log(rel);
               var relValue = component.getProperty(rel);
-              //console.log  ( relValue );
+              console.log  ( relValue );
               if( relValue != null) { 
                 // text select ve color icin
                 $(this).not('radio').val(relValue);

@@ -183,7 +183,7 @@ $current_user=User::model()->findByPk(Yii::app()->user->id);
 			
 				
 			
-			<div class="text-options toolbox" style="display:inline-block;">
+			<div class="text-options table-options toolbox" style="display:inline-block;">
 					
 					
 					<input class='tool color' rel='color' type="color" class="color-picker-box radius " placeholder="e.g. #bbbbbb" />
