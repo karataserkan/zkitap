@@ -1,24 +1,19 @@
 <?php
 
 /**
- * This is the model class for table "user".
+ * This is the model class for table "organisation_invitation".
  *
- * The followings are the available columns in table 'user':
- * @property integer $id
- * @property string $name
- * @property string $surname
- * @property string $created
- * @property string $password
- * @property string $email
- * @property string $data
+ * The followings are the available columns in table 'organisation_invitation':
+ * @property string $organisation_id
+ * @property integer $user_id
+ * @property string $invitation_id
  */
-class User extends CActiveRecord
+class OrganisationInvitation extends CActiveRecord
 {
-	public $maxColumn;
 	/**
 	 * Returns the static model of the specified AR class.
 	 * @param string $className active record class name.
-	 * @return User the static model class
+	 * @return OrganisationInvitation the static model class
 	 */
 	public static function model($className=__CLASS__)
 	{
@@ -30,7 +25,7 @@ class User extends CActiveRecord
 	 */
 	public function tableName()
 	{
-		return 'user';
+		return 'organisation_invitation';
 	}
 
 	/**
@@ -41,13 +36,12 @@ class User extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('id', 'required'),
-			array('id', 'numerical', 'integerOnly'=>true),
-			array('name, surname, password, email', 'length', 'max'=>255),
-			array('created, data', 'safe'),
+			array('organisation_id, user_id, invitation_id', 'required'),
+			array('user_id', 'numerical', 'integerOnly'=>true),
+			array('organisation_id, invitation_id', 'length', 'max'=>44),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('id, name, surname, created, password, email, data', 'safe', 'on'=>'search'),
+			array('organisation_id, user_id, invitation_id', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -68,13 +62,9 @@ class User extends CActiveRecord
 	public function attributeLabels()
 	{
 		return array(
-			'id' => 'ID',
-			'name' => 'Name',
-			'surname' => 'Surname',
-			'created' => 'Created',
-			'password' => 'Password',
-			'email' => 'Email',
-			'data' => 'Data',
+			'organisation_id' => 'Organisation',
+			'user_id' => 'User',
+			'invitation_id' => 'Invitation',
 		);
 	}
 
@@ -89,27 +79,12 @@ class User extends CActiveRecord
 
 		$criteria=new CDbCriteria;
 
-		$criteria->compare('id',$this->id);
-		$criteria->compare('name',$this->name,true);
-		$criteria->compare('surname',$this->surname,true);
-		$criteria->compare('created',$this->created,true);
-		$criteria->compare('password',$this->password,true);
-		$criteria->compare('email',$this->email,true);
-		$criteria->compare('data',$this->data,true);
+		$criteria->compare('organisation_id',$this->organisation_id,true);
+		$criteria->compare('user_id',$this->user_id);
+		$criteria->compare('invitation_id',$this->invitation_id,true);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
 		));
 	}
-
-	public function validatePassword($password){
-        if($this->password == $password)
-            return true;
-        else
-            return false;
-	}
-
-
-
-
 }
