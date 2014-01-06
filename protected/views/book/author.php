@@ -1038,11 +1038,7 @@ $( "#add-button" ).hover(
 <div id='editor_view_pane' style=' padding:5px 130px;margin: 10px 5px 5px 5px;float:left;'>
 
 
-
-
-
-
-					<div id='current_page' page_id='<?php echo $page->page_id ;?>' style='background:white;border:thin solid black;zoom:1; height:768px;width:1024px;position:relative'  >
+					<div id='current_page' page_id='<?php echo $page->page_id ;?>' style='background:white;border:thin solid black;zoom:1; height:<?php echo $bookHeight; ?>px;width:<?php echo $bookWidth; ?>px;position:relative'  >
 						<div id="guide-h" class="guide"></div>
 						<div id="guide-v" class="guide"></div>
 

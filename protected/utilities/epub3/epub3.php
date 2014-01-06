@@ -216,6 +216,7 @@ class epub3 {
 			 {
 			 	$this->errors[]=new error('Epub3-createCssStyleSheets','File could not be created');
 			 }
+			 $pageSize=$this->book->getPageSize();
 			
 				$title_page=
 '<?xml version="1.0" encoding="UTF-8"?>
@@ -227,7 +228,7 @@ class epub3 {
 		<link rel="stylesheet" href="page_styles.css" type="text/css"/>
 		<link rel="stylesheet" href="widgets.css" type="text/css"/>
 
-		<meta name="viewport" content="width=1024, height=768"/>
+		<meta name="viewport" content="width='.$pageSize['width'].', height='.$pageSize['height'].'"/>
 	
 
 		
