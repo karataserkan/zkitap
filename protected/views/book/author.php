@@ -156,6 +156,8 @@ $current_user=User::model()->findByPk(Yii::app()->user->id);
 						?>
 					</a>   
 			      <ul>
+			      	<?php ?>
+			         <li><a href='/index.php?r=user/profile'><span>Profil</span></a></li>
 			         <li><a href='#'><span>Çıkış</span></a></li>
 			         
 			      </ul>
