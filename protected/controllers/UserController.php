@@ -28,7 +28,7 @@ class UserController extends Controller
 	{
 		return array(
 			array('allow',  // allow all users to perform 'index' and 'view' actions
-				'actions'=>array('index','view'),
+				'actions'=>array('index','view','invitation'),
 				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
@@ -54,6 +54,47 @@ class UserController extends Controller
 		$this->render('view',array(
 			'model'=>$this->loadModel($id),
 		));
+	}
+
+	/**
+	 * davet edilen kullanıcı key ile birlikte geliyor. invitation tablosundan user ve organisation bulunuyor.
+	 * kullanıcı yeni ise şifre ve isim kaydediliyor
+	 * kullanıcı organizasyona kaydediliyor
+	 * kullanıcının tekrar aynı linki kullanamaması için invitationı siliyorum
+	 * @param  varchar $key 
+	 * @return model User, is Newuser or Not
+	 */
+	public function actionInvitation($key=null)
+	{
+		$invitation = OrganisationInvitation::model()->findByPk($key);
+
+		if ($invitation) {
+			$user=$this->loadModel($invitation->user_id);
+			$organisation=Organisations::model()->findByPk($invitation->organisation_id);
+			$organisationUser= new OrganisationUsers;
+			$organisationUser->user_id=$user->id;
+			$organisationUser->organisation_id=$organisation->organisation_id;
+			$organisationUser->role="user";
+			$organisationUser->save();
+
+			$invitation->delete();
+
+			
+			$newUser=false;
+			if ($user->name == "" || $user->surname=="" || $user->password=="") {
+				$newUser=true;
+			}
+			if(isset($_POST['User']))
+			{
+				$user->attributes=$_POST['User'];
+				$user->save();
+				$this->redirect( array('site/login' ) );
+			}
+			$this->render('invitation',array(
+				'model'=>$user,
+				'newUser'=>$newUser
+			));
+		}
 	}
 
 	/**
