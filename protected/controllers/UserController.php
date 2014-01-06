@@ -32,7 +32,7 @@ class UserController extends Controller
 				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
-				'actions'=>array('create','update'),
+				'actions'=>array('create','update','profile'),
 				'users'=>array('@'),
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
@@ -97,6 +97,10 @@ class UserController extends Controller
 		}
 	}
 
+	public function actionProfile()
+	{
+		echo Yii::app()->user->name;
+	}
 	/**
 	 * Creates a new model.
 	 * If creation is successful, the browser will be redirected to the 'view' page.
