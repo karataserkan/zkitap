@@ -103,4 +103,64 @@ class Book extends CActiveRecord
 			'criteria'=>$criteria,
 		));
 	}
+
+	public function getPageSize(){
+		//$model=$this->loadModel($bookId);
+		
+		$bookData = json_decode($this->data,true);
+		if (isset($bookData['size'])) {
+			$bookSize = $bookData['size'];
+			switch ($bookSize) {
+				case '0':
+					$bookWidth="2048";
+					$bookHeight="1536";
+					break;
+				
+				case '1':
+					$bookWidth="1920";
+					$bookHeight="1080";
+					break;
+
+				case '2':
+					$bookWidth="1400";
+					$bookHeight="1050";
+					break;
+
+				case '3':
+					$bookWidth="1366";
+					$bookHeight="768";
+					break;
+
+				case '4':
+					$bookWidth="1280";
+					$bookHeight="960";
+					break;
+
+				case '5':
+					$bookWidth="1280";
+					$bookHeight="800";
+					break;
+
+				case '6':
+					$bookWidth="1024";
+					$bookHeight="768";
+					break;
+
+				case '7':
+					$bookWidth="800";
+					$bookHeight="600";
+					break;
+				default:
+					# code...
+					break;
+			}
+		}
+		else
+		{
+			$bookHeight="768";
+			$bookWidth="1024";
+		}
+		return $bookSize = array('height'=>$bookHeight,
+					'width'=>$bookWidth);
+	}
 }
