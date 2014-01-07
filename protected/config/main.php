@@ -6,12 +6,14 @@
 // This is the main Web application configuration. Any writable
 // CWebApplication properties can be configured here.
 
+require_once(dirname(__FILE__).'/../includes/localization.php');
+
 
 return array(
 	'basePath'=>dirname(__FILE__).DIRECTORY_SEPARATOR.'..',
 	'name'=>'Squid Pacific',
-	'sourceLanguage'=>'tr',
-	'language'=>'en',
+	'sourceLanguage'=>'tr_TR',
+	'language'=>'en_US',
 	// preloading 'log' component
 	'preload'=>array('log'),
 
@@ -45,17 +47,18 @@ return array(
 
 	// application components
 	'components'=>array(
-		'coreMessages'=>array(
-    	'basePath'=>'/var/www/squid-pacific/egemen/protected/messages',
-		)	,
-		/*
-		 'coreMessages' => array(
-		 			'language'=>'en',
-                    'class' => 'CGettextMessageSoure',
-                    'basePath'=>'/var/www/squid-pacific/egemen/protected/messages',
-                    'useMoFile' => FALSE,
+		
+		/*'coreMessages'=>array(
+	    	'basePath'=>'/var/www/squid-pacific/egemen/protected/messages',
+			)	,*/
+		
+		 'messages' => array(
+		 			'language'=>'en_US',
+                    'class' => 'CGettextMessageSource',
+                    'basePath'=>'/var/www/squid-pacific/egemen/protected/locale/messages',
+                    'useMoFile' => TRUE,
             ),
-		 */
+		 
 		/*
 		'messages' => array(
 						
@@ -125,7 +128,11 @@ return array(
 	'params'=>array(
 		// this is used in contact page
 		'adminEmail'=>'webmaster@example.com',
-		 'epubtopdf'=>dirname(__FILE__).DIRECTORY_SEPARATOR.'../../'.'bin/epubtopdf/epubtopdf ',
+     	'epubtopdf'=>dirname(__FILE__).DIRECTORY_SEPARATOR.'../../'.'bin/epubtopdf/epubtopdf ',
+     	'availableLanguages' => array(
+     		'tr_TR' => 'Türkçe',
+     		'en_US' => 'English'
+     		)
 	)
 
 );
