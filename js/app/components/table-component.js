@@ -12,7 +12,8 @@ $(document).ready(function(){
 
       var that = this;
       this._super();
-      
+      console.log($(this.element));
+      $(this.element).resizable('destroy');
 
       var TableSelection = {};
 
@@ -27,13 +28,19 @@ $(document).ready(function(){
 
 
       newTbody.appendTo(newTable);
+     
       var onlyoneselected;
+     
       var isMouseDown=false;
+      
       $(document)
         .mouseup(function () {
           isMouseDown = false;
-      });
+        });
+
       var isHighlighted;
+
+
       for ( var i = 0; i < tableData.length ; i++ ) {
         this.cells[i]=[];
 
@@ -49,6 +56,18 @@ $(document).ready(function(){
             .appendTo(newRow)
             .text(that.options.component.data.table[i][k].attr.val)
             .css(that.options.component.data.table[i][k].css)
+            .resizable({
+              'handles': " e, s",
+              'start': function (event,ui){
+              },
+              'stop': function( event, ui ){
+
+                that._cellResize(event, ui,$(this));
+              },
+              'resize':function(event,ui){
+                window.lindneo.toolbox.makeMultiSelectionBox();
+              }
+            })
             .dblclick(function(e){
               e.stopPropagation();
               that.editableCell(this);
@@ -108,28 +127,30 @@ $(document).ready(function(){
 
       
      newTable.appendTo(this.element);
-     // $(this.element).parent().resizable('destroy');
+    
      var parent_OBJ=($(that.element).parent());
 
 
      
       parent_OBJ.css('width','auto');
       parent_OBJ.css('height','auto');
-      
+      /*
       var width=this.options.component.data.self.css.width;
       var height=this.options.component.data.self.css.height;
 
       width=width.substring(0,width.length-2);
       height=height.substring(0,height.length-2);
 
-      /*this.table.attr('width',width);
+      this.table.attr('width',width);
       this.table.attr('height',height);
-  */
+  
       newTable.resizable({
         'stop': function( event, ui ){
           that._resize(event, ui);
         }
       });
+  */
+  
 
 
       newTable.click(function(){
@@ -139,7 +160,18 @@ $(document).ready(function(){
       this.table.focus();
     },
 
+    _cellResize: function(event,ui,cell,row,column) {
+      var row = cell.attr('rel').split(',')[0];
+      var column = cell.attr('rel').split(',')[1];
+      
 
+      this.options.component.data.table[row][column].css.width = ui.size.width + "px";
+      this.options.component.data.table[row][column].css.height = ui.size.height + "px";
+   
+      this._trigger('update', null, this.options.component );
+      this._selected(event, ui);
+    },
+      
 
     keyCapturing: function (){
       var that = this;
@@ -225,7 +257,7 @@ $(document).ready(function(){
 
         for (var k=that.TableSelection.start.rows;k<=that.TableSelection.end.rows; k++ ) {
           
-          for (var i=that.TableSelection.start.columns;k<=that.TableSelection.end.columns; k++ ) {
+          for (var i=that.TableSelection.start.columns;i<=that.TableSelection.end.columns; i++ ) {
             that.options.component.data.table
               [k]
               [i]
@@ -255,9 +287,16 @@ $(document).ready(function(){
           [that.TableSelection.start.columns]
           [node]
           [propertyName];
-        
+        console.log(
+          that.TableSelection.start.rows + " - " +
+           that.TableSelection.start.columns + " - " +
+          node + " - " +
+          propertyName + " : " + 
+          propertyValue
+          );
         if ( typeof propertyValue == "undefined") return null;
-        
+        return propertyValue;
+
 
 
 

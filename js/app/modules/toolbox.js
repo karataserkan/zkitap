@@ -856,4 +856,3 @@ window.lindneo.toolbox = (function(window, $, undefined){
   };
 
 })( window, jQuery );
-
