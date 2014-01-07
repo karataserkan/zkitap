@@ -67,11 +67,11 @@ class BookController extends Controller
 	 */
 	public function actionNewBook($bookType=null)
 	{
-		$this->render('new_book', array());
 
 		if ($bookType=='epub' || $bookType=='pdf') {
 			$this->redirect(array('create','bookType'=>$bookType));
 		}
+		$this->render('new_book', array());
 	}
 
 

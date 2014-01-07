@@ -23,7 +23,7 @@ $this->pageTitle=Yii::app()->name;
 		if($organization)
 		{
 		?>
-		<a href='?r=organisations/index&organizationId=<?php echo $organization["organisation_id"]?>' class="btn white radius " style="margin-left:20px;"><?php echo Yii::t('i18n','Organizasyon');?></a>
+		<a href='?r=organisations/index&organizationId=<?php echo $organization["organisation_id"]?>' class="btn white radius " style="margin-left:20px;"><?php echo __('Organizasyon');?></a>
 		<?php
 		}
 
@@ -33,7 +33,12 @@ $this->pageTitle=Yii::app()->name;
 	    	<div class='workspace'>
 	    		<h1 class="float-left white"><?php echo $workspace->workspace_name; ?></h1>
 	    		
-	    		<a href='?r=book/newBook' class="btn white radius " style="margin-left:20px;"><?php echo Yii::t('i18n','Yeni Kitap');?></a>
+	    		<a href='?r=book/newBook' class="btn white radius " style="margin-left:20px;">
+	    			<?php 
+	    			echo __('Yeni Kitap');
+
+	    			?>
+	    		</a>
 				
 					
 				
@@ -51,18 +56,18 @@ $this->pageTitle=Yii::app()->name;
 						<div class="book-list-box radius" id="book-list-box">
 							<div class="book-list-box-book-cover"><img src="/css/images/default-cover.jpg" alt="Book Cover" ></div>
 							<div class="book-list-box-text-container">
-								<?php echo Yii::t('i18n','Kitabın Adı');?><input type="text" class="book-list-textbox radius grey-9 float-right" value="<?php echo $book->title ?>">
+								<?php echo __('Kitabın Adı');?><input type="text" class="book-list-textbox radius grey-9 float-right" value="<?php echo $book->title ?>">
 							</div>
 
 							<div class="book-list-box-text-container">
-								<?php echo Yii::t('i18n','Yazar Adı');?><input type="text" class="book-list-textbox radius grey-9 float-right" value="<?php echo $book->author ?>">
+								<?php echo __('Yazar Adı');?><input type="text" class="book-list-textbox radius grey-9 float-right" value="<?php echo $book->author ?>">
 								
 							</div>
 
 							<div class="book-list-box-text-container">
 								<?php 
 								if ($userType==='owner') { ?>
-									<a href="#" popup="<?php echo $book->book_id; ?>" class="btn white radius float-right book-editors-settings"id="boook-editors-settings" ><i class="icon-users"></i><?php echo Yii::t('i18n','Editörler');?></a>	
+									<a href="#" popup="<?php echo $book->book_id; ?>" class="btn white radius float-right book-editors-settings"id="boook-editors-settings" ><i class="icon-users"></i><?php echo __('Editörler');?></a>	
 								<?php }
 								?>
 								</div>
@@ -80,22 +85,22 @@ $this->pageTitle=Yii::app()->name;
 										);
 										?>
 
-										<a href="<?php echo Yii::app()->createUrl('book/author', array('bookId'=>$book->book_id) ); ?>" class="btn white btn radius " id="pop-video"><?php echo Yii::t('i18n','Düzenle');?></a>
+										<a href="<?php echo Yii::app()->createUrl('book/author', array('bookId'=>$book->book_id) ); ?>" class="btn white btn radius " id="pop-video"><?php echo __('Düzenle');?></a>
 										<?php
 									}
 									elseif ($userType==='editor') {
 										?>
-										<a href="<?php echo Yii::app()->createUrl('book/author', array('bookId'=>$book->book_id) ); ?>" class="btn white btn radius " id="pop-video"><?php echo Yii::t('i18n','Düzenle');?></a>
+										<a href="<?php echo Yii::app()->createUrl('book/author', array('bookId'=>$book->book_id) ); ?>" class="btn white btn radius " id="pop-video"><?php echo __('Düzenle');?></a>
 										<?php
 									}
 								?>
 
-								<a href="<?php echo Yii::app()->createUrl('EditorActions/ExportBook', array('bookId'=>$book->book_id) ); ?>" class="btn bck-light-green white radius" ><i class="icon-download"></i><?php echo Yii::t('i18n','İndir');?></a>
+								<a href="<?php echo Yii::app()->createUrl('EditorActions/ExportBook', array('bookId'=>$book->book_id) ); ?>" class="btn bck-light-green white radius" ><i class="icon-download"></i><?php echo __('İndir');?></a>
 										<!-- editor options-->
 										<center id="popup-close-area" popup="pop-<?php echo $book->book_id; ?>" style="display:none; position:relative">
 											<div id="close-div" style="background-color:#123456; width:100% height:#123456; position:fixed;"> </div>
 											<div class="book-editors-options-box-container">
-											<h2><?php echo Yii::t('i18n','Kitap Editörleri');?><a popup="close-<?php echo $book->book_id; ?>" id="close-option-box"class="icon-close white size-15 delete-icon float-right" ></a></h2>
+											<h2><?php echo __('Kitap Editörleri');?><a popup="close-<?php echo $book->book_id; ?>" id="close-option-box"class="icon-close white size-15 delete-icon float-right" ></a></h2>
 											<div class="editor-list">
 											<?php 
 												$users = $this->bookUsers($book->book_id);
@@ -121,10 +126,10 @@ $this->pageTitle=Yii::app()->name;
 														<span id="editor-tag" style="color:#477738; float:right;">
 															<?php 
 																if ($user['type']=='owner') {
-																	echo Yii::t('i18n','Sahibi');
+																	echo __('Sahibi');
 																}
 																elseif ($user['type']=='editor') {
-																	echo Yii::t('i18n','Editör');
+																	echo __('Editör');
 																}
 															?>
 														</span>
@@ -140,7 +145,7 @@ $this->pageTitle=Yii::app()->name;
 													//type: owner | editor | user
 
 												?>
-												<span class="editor-name" ><?php echo Yii::t('i18n','Kullanıcı Ekle');?>:</span>
+												<span class="editor-name" ><?php echo __('Kullanıcı Ekle');?>:</span>
 												<br style="clear:both; margin-bottom:20px;">
 												<form id="a<?php echo $book->book_id; ?>" method="post">
 												<input id="book" value="<?php echo $book->book_id; ?>" style="display:none">
@@ -154,8 +159,8 @@ $this->pageTitle=Yii::app()->name;
 													 ?>
 												</select>
 												 <select id="type" class="book-list-textbox radius grey-9 float-left"  style=" width: 70px;" >
-												  <option value="editor"><?php echo Yii::t('i18n','Editör');?></option>
-												  <option value="owner"><?php echo Yii::t('i18n','Sahibi');?></option>
+												  <option value="editor"><?php echo __('Editör');?></option>
+												  <option value="owner"><?php echo __('Sahibi');?></option>
 												</select>
 												</form>
 												<a href="#" onclick="sendRight(a<?php echo $book->book_id; ?>)" class="btn white radius float-right" style="margin-left:20px; width:50px; text-align:center;">
