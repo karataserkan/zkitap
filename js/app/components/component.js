@@ -440,6 +440,7 @@ $(document).ready(function(){
       
       return;
       if($.type(this.options.component.data.lock.username) != "undefined"){
+
        // $('#'+this.options.component.id).parent().draggable({ disabled: true });
         $('#'+this.options.component.id).droppable({ disabled: true });
        // $('#'+this.options.component.id).selectable({ disabled: true });
