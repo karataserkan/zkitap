@@ -7,7 +7,7 @@
 msgid   ""
 msgstr  "Project-Id-Version: PACKAGE VERSION\n"
         "Report-Msgid-Bugs-To: \n"
-        "POT-Creation-Date: 2014-01-07 15:34+0000\n"
+        "POT-Creation-Date: 2014-01-07 15:36+0000\n"
         "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
         "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
         "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -101,30 +101,31 @@ msgstr  "Templates"
 msgid   "Çözünürlük"
 msgstr  "Resolution"
 
-#: protected/views/book/author.php:135
+#: protected/views/book/author.php:135 protected/views/book/author.php:135
 msgid   "Görünüm"
-msgstr  ""
+msgstr  "View"
 
-#: protected/views/book/author.php:137
+#: protected/views/book/author.php:137 protected/views/book/author.php:137
 msgid   "Cetvel"
-msgstr  ""
+msgstr  "Rulers"
 
-#: protected/views/book/author.php:138
+#: protected/views/book/author.php:138 protected/views/book/author.php:138
 msgid   "Rehber"
-msgstr  ""
+msgstr  "Guides"
 
-#: protected/views/book/author.php:139
+#: protected/views/book/author.php:139 protected/views/book/author.php:139
 msgid   "Yorumlar"
-msgstr  ""
+msgstr  "Comments"
 
-#: protected/views/book/author.php:161
+#: protected/views/book/author.php:161 protected/views/book/author.php:161
 msgid   "Profil"
-msgstr  ""
+msgstr  "Profile"
 
 #: protected/views/book/author.php:162 protected/views/layouts/main.php:69
+#: protected/views/book/author.php:162 protected/views/layouts/main.php:69
 msgid   "Çıkış"
-msgstr  ""
+msgstr  "Sign Out"
 
-#: protected/views/layouts/main.php:67
+#: protected/views/layouts/main.php:67 protected/views/layouts/main.php:67
 msgid   "Giriş yap"
-msgstr  ""
+msgstr  "Sign In"
