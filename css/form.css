@@ -44,6 +44,8 @@ div.form textarea,
 div.form select
 {
 	margin: 0.2em 0 0.5em 0;
+	padding-left:5px;
+	padding-right:5px;
 	height: auto;
 	border: 0;
 	resize: none;
@@ -55,7 +57,7 @@ div.form select
 	color: #58585B;
 	white-space: nowrap;
 	overflow: hidden;
-	background-color: #E6E7E8;
+	background-color: #fff;
 	-webkit-border-radius: 5px;
 	-moz-border-radius: 5px;
 	border-radius: 5px;

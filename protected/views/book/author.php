@@ -199,6 +199,12 @@ $current_user=User::model()->findByPk(Yii::app()->user->id);
 					
 					<select class='tool select' rel='font-family' id="font-family" class="radius">
 						<option selected="" value="Arial"> Arial </option>
+						<option value="SourceSansPro" >Source Sans Pro</option>
+						<option value="AlexBrushRegular" >Alex Brush Regular</option>
+						<option value="ChunkFiveRoman" >ChunkFive Roman</option>
+						<option value="Aller" >Aller</option>
+						<option value="Cantarell" >Cantarell</option>
+						<option value="Exo" >Exo</option>
 						<option value="helvetica" >Helvetica</option>
 						<option value="Open Sans" >Open Sans</option>
 						<option value="Times New Roman" >Times New Roman</option>

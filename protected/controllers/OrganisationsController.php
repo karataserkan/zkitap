@@ -32,7 +32,7 @@ class OrganisationsController extends Controller
 				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
-				'actions'=>array('create','update','workspaces','delWorkspaceUser','addWorkspaceUser'),
+				'actions'=>array('create','update','workspaces','delWorkspaceUser','addWorkspaceUser','users','addUser','deleteOrganisationUser'),
 				'users'=>array('@'),
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
@@ -262,6 +262,93 @@ class OrganisationsController extends Controller
 			));	
 		$this->redirect( array('organisations/workspaces&organizationId='.$organizationId ) );
 	}
+
+	/**
+	 * organisation users
+	 * @param  ID $organisationId 
+	 * @return render users.php sends users and organisation ID
+	 */
+	public function actionUsers($organisationId)
+	{
+		$organizationUsers= OrganisationUsers::model()->findAll('organisation_id=:organisation_id', 
+	    				array(':organisation_id' => $organisationId) );
+		$users=array();
+		foreach ($organizationUsers as $key => $organizationUser) {
+			$users[]= User::model()->findByPk($organizationUser->user_id);
+		}
+
+		$this->render('users', array(
+			'users'=>$users,
+			'organisationId'=>$organisationId));
+	}
+
+	/**
+	 * delete user from workspaces and organization
+	 * @param  ID $userId         
+	 * @param  ID $organisationId 
+	 * @return redirect previous page
+	 */
+	public function actionDeleteOrganisationUser($userId,$organisationId)
+	{
+		$organisationWorkspaces= OrganisationWorkspaces::model()->findAll('organisation_id=:organisation_id', 
+	    				array(':organisation_id' => $organisationId) );
+		foreach ($organisationWorkspaces as $key => $workspace) {
+			$workspaceUser = WorkspacesUsers::model()->findByPk(array('userid'=>$userId,'workspace_id'=>$workspace->workspace_id));
+			if ($workspaceUser) {
+				$workspaceUser->delete();
+			}
+		}
+
+		$user = OrganisationUsers::model()->findByPk(array('user_id'=>$userId,'organisation_id'=>$organisationId));
+		$user->delete();
+		$this->redirect( array('organisations/users&organizationId='.$organisationId ) );
+	}
+
+	public function actionAddUser($email,$organisationId)
+	{
+		$error="";
+		$success="";
+
+		$organisation = Organisations::model()->findByPk($organisationId);
+
+		$regexp = "/^[^0-9][A-z0-9_]+([.][A-z0-9_]+)*[@][A-z0-9_-]+([.][A-z0-9_]+)*[.][A-z]{2,4}$/";
+		if (preg_match($regexp, $email)) {
+		    //Email address is valid
+			$user= User::model()->findAllByAttributes(array('email'=>$email) );
+			if ($user) {
+				// a user has this email in users table. we only send invitation mail
+				$message=$organisation->organisation_name. " size editöre katılma isteği gönderdi. İsteği kabul etmek için <a href='http://linden-tech.com'>tıklayın</a>.";	
+			}
+			else
+			{
+				//we will create new user
+				$message="yeni kullanıcı";
+			}
+
+			$mail=Yii::app()->Smtpmail;
+	        $mail->SetFrom('edubox@linden-tech.com', $organisation->organisation_name);
+	        $mail->Subject    = $organisation->organisation_name.' davetiye.';
+	        $mail->MsgHTML($message);
+	        $mail->AddAddress($email, "");
+	        
+	        if(!$mail->Send()) {
+	            echo "Mailer Error: " . $mail->ErrorInfo;
+	        }else {
+	            $success="Kullanıcı davet edildi.";
+	        }
+
+
+
+		} else {
+		    //Email address is NOT valid
+		    $error = "Girdiğiniz e-posta adresi yanlış";
+		}
+
+		$this->render('add_user', array(
+			'error'=>$error,
+			'success'=>$success));
+	}
+
 	/**
 	 * Manages all models.
 	 */

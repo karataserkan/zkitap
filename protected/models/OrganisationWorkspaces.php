@@ -1,19 +1,18 @@
 <?php
 
 /**
- * This is the model class for table "organisations".
+ * This is the model class for table "organisation_workspaces".
  *
- * The followings are the available columns in table 'organisations':
+ * The followings are the available columns in table 'organisation_workspaces':
  * @property string $organisation_id
- * @property string $organisation_name
- * @property string $organisation_admin
+ * @property string $workspace_id
  */
-class Organisation extends CActiveRecord
+class OrganisationWorkspaces extends CActiveRecord
 {
 	/**
 	 * Returns the static model of the specified AR class.
 	 * @param string $className active record class name.
-	 * @return Organisation the static model class
+	 * @return OrganisationWorkspaces the static model class
 	 */
 	public static function model($className=__CLASS__)
 	{
@@ -25,7 +24,7 @@ class Organisation extends CActiveRecord
 	 */
 	public function tableName()
 	{
-		return 'organisations';
+		return 'organisation_workspaces';
 	}
 
 	/**
@@ -36,12 +35,11 @@ class Organisation extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('organisation_id, organisation_name, organisation_admin', 'required'),
-			array('organisation_id', 'length', 'max'=>44),
-			array('organisation_admin', 'length', 'max'=>4),
+			array('organisation_id, workspace_id', 'required'),
+			array('organisation_id, workspace_id', 'length', 'max'=>44),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('organisation_id, organisation_name, organisation_admin', 'safe', 'on'=>'search'),
+			array('organisation_id, workspace_id', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -63,8 +61,7 @@ class Organisation extends CActiveRecord
 	{
 		return array(
 			'organisation_id' => 'Organisation',
-			'organisation_name' => 'Organisation Name',
-			'organisation_admin' => 'Organisation Admin',
+			'workspace_id' => 'Workspace',
 		);
 	}
 
@@ -80,8 +77,7 @@ class Organisation extends CActiveRecord
 		$criteria=new CDbCriteria;
 
 		$criteria->compare('organisation_id',$this->organisation_id,true);
-		$criteria->compare('organisation_name',$this->organisation_name,true);
-		$criteria->compare('organisation_admin',$this->organisation_admin,true);
+		$criteria->compare('workspace_id',$this->workspace_id,true);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,

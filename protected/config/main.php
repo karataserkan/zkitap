@@ -5,6 +5,8 @@
 
 // This is the main Web application configuration. Any writable
 // CWebApplication properties can be configured here.
+
+
 return array(
 	'basePath'=>dirname(__FILE__).DIRECTORY_SEPARATOR.'..',
 	'name'=>'Squid Pacific',
@@ -45,7 +47,22 @@ return array(
 	'components'=>array(
 		'coreMessages'=>array(
     	'basePath'=>'/var/www/squid-pacific/egemen/protected/messages',
-	)	,
+		)	,
+		/*
+		 'coreMessages' => array(
+		 			'language'=>'en',
+                    'class' => 'CGettextMessageSoure',
+                    'basePath'=>'/var/www/squid-pacific/egemen/protected/messages',
+                    'useMoFile' => FALSE,
+            ),
+		 */
+		/*
+		'messages' => array(
+						
+                        'class' => 'CGettextMessageSource',
+                        'useMoFile' => FALSE,
+                ),
+		*/
 		'user'=>array(
 			// enable cookie-based authentication
 			'allowAutoLogin'=>true,
@@ -91,6 +108,16 @@ return array(
 				*/
 			),
 		),
+		'Smtpmail'=>array(
+            'class'=>'application.extension.smtpmail.PHPMailer',
+            'Host'=>"tls://smtp.gmail.com",
+            'Username'=>'edubox@linden-tech.com',
+            'Password'=>'12548442',
+            'Mailer'=>'smtp',
+            'Port'=>465,
+            'SMTPAuth'=>true, 
+            //'ssl'=>'tls'
+        ),
 	),
 
 	// application-level parameters that can be accessed
