@@ -409,7 +409,7 @@ $(document).ready(function(){
       window.lindneo.tsimshian.emitSelectedComponent( this );
       
       if($.type(this.options.component.data.lock.username) != "undefined"){
-        $('#'+this.options.component.id).parent().draggable({ disabled: true });
+        $('#'+this.options.component.id).parent().draggable({ revert: true });
         $('#'+this.options.component.id).droppable({ disabled: true });
         $('#'+this.options.component.id).selectable({ disabled: true });
         $('#'+this.options.component.id).sortable({ disabled: true });
