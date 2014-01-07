@@ -4,13 +4,30 @@ $(document).ready(function(){
 
   $.widget('lindneo.component', {
 
+    options : {
+      'resizableParams' : {
+        "handles":"n, e, w, s, nw, se, sw, ne",
+          'start': function (event,ui){
+            this._selected(event,ui);
+            $(this).resizable("option", "alsoResize",".selected");
+            $(".selected").trigger("resize");
+          },
+          'stop': function( event, ui ){
+            this._resize(event, ui);
+          },
+          'resize':function(event,ui){
+            window.lindneo.toolbox.makeMultiSelectionBox();
+          }
+        },
+
+    },
+
     _create: function () {
 
       var that = this;
       var MIN_DISTANCE = 10; // minimum distance to "snap" to a guide
       var guides = []; // no guides available ... 
       var innerOffsetX, innerOffsetY; // we'll use those during drag ... 
-      
       this.element
       .attr('id', this.options.component.id)
       .attr('component-instance', 'true')
@@ -18,164 +35,174 @@ $(document).ready(function(){
         that._selected(e,null);
       })
       
-      .resizable({
-		  "handles":"n, e, w, s, nw, se, sw, ne",
-        'start': function (event,ui){
-          $(this).resizable("option", "alsoResize",".selected");
-          $(".selected").trigger("resize");
-        },
-        'stop': function( event, ui ){
-          that._resize(event, ui);
-        },
-        'resize':function(event,ui){
-          window.lindneo.toolbox.makeMultiSelectionBox();
-        }
-      })
+      .resizable(that.options.resizableParams)
       /*.selectable({
         'selected': function(event, ui){
           that._selected(event, ui);
         }
       })
-*/
+      */
       .focus(function( event, ui ){
-
-
-
-
         //that._selected( event, ui );
       })
       .focusout(function(event){
-          
+ 
       });
 
 
       this.element.parent()
-      .append('  \
-	  <div class="top_holder"></div> \
-	  <div class="dragging_holder top"></div> \
-	  <div class="dragging_holder bottom "></div> \
-	  <div class="dragging_holder left "></div> \
-	  <div class="dragging_holder right"></div> \
-	  ' )
-      .attr('component-instance', 'true')
-    
-      .draggable({
-        containment: "#current_page",
-        snap: '.ui-wrapper',
-        handle: '.dragging_holder',
-        snapMode: 'outer',
-
-        'stop': function(event, ui){
-        //console.log();
-          $( "#guide-v, #guide-h" ).hide(); 
-          that._resizeDraggable( event, ui );
-        },
-
-        drag: function( event, ui ){
-
-          window.lindneo.toolbox.makeMultiSelectionBox();
-          if( $('#general-options').val().indexOf("rehber")===-1 ) return ;
-
-          // iterate all guides, remember the closest h and v guides
-          var guideV, guideH, distV = MIN_DISTANCE+1, distH = MIN_DISTANCE+1, offsetV, offsetH; 
-          var chosenGuides = { top: { dist: MIN_DISTANCE+1 }, left: { dist: MIN_DISTANCE+1 } }; 
-          var $t = $(this); 
-          var pos = { top: event.originalEvent.pageY , left: event.originalEvent.pageX - innerOffsetX }; 
+          .append('  \
+    	  <div class="top_holder"></div> \
+    	  <div class="dragging_holder top"></div> \
+    	  <div class="dragging_holder bottom "></div> \
+    	  <div class="dragging_holder left "></div> \
+    	  <div class="dragging_holder right"></div> \
+    	  ' )
+          .attr('component-instance', 'true')
         
-          
+          .draggable({
+            containment: "#current_page",
+            snap: '.ui-wrapper',
+            handle: '.dragging_holder, img',
+            snapMode: 'outer',
 
-          var w = $t.outerWidth() - 1; 
-          var h = $t.outerHeight() - 1; 
-      //    var sispos= $('#current_page').offset();
-        
-          
+            'stop': function(event, ui){
+            //console.log();
+              $( "#guide-v, #guide-h" ).hide(); 
+              that._resizeDraggable( event, ui );
+            },
 
-          var elemGuides = computeGuidesForElement( null, pos, w, h ); 
-          
-          $.each( guides, function( i, guide ){
-              $.each( elemGuides, function( i , elemGuide ){
-                
-                  if( guide.type == elemGuide.type ){
-                      var prop = guide.type == "h"? "top":"left"; 
-                      var d = Math.abs( elemGuide[prop] - guide[prop] ); 
+            drag: function( event, ui ){
 
-                      if( d < chosenGuides[prop].dist ){
-                          chosenGuides[prop].dist = d; 
-                          chosenGuides[prop].offset = elemGuide[prop] - pos[prop]; 
-                          chosenGuides[prop].guide = guide; 
-                      }
-                  }
-              } ); 
-          } );
+              window.lindneo.toolbox.makeMultiSelectionBox();
 
-          if( chosenGuides.top.dist <= MIN_DISTANCE ){
-              $( "#guide-h" ).css( "top", chosenGuides.top.guide.top- $('#current_page').offset().top ).show(); 
-              ui.position.top = chosenGuides.top.guide.top - chosenGuides.top.offset - $('#current_page').offset().top;
-          }
-          else{
-              $( "#guide-h" ).hide(); 
-              //ui.position.top = pos.top; 
-          }
-          
-          if( chosenGuides.left.dist <= MIN_DISTANCE ){
-              $( "#guide-v" ).css( "left", chosenGuides.left.guide.left- $('#current_page').offset().left ).show(); 
-              ui.position.left = chosenGuides.left.guide.left - chosenGuides.left.offset- $('#current_page').offset().left; 
-          }
-          else{
-              $( "#guide-v" ).hide(); 
-              //ui.position.left = pos.left; 
-          }
+              var zoom = $('#author_pane').css('zoom');
+              var canvasHeight = $('#current_page').height() * zoom;
+              var canvasWidth = $('#current_page').width() * zoom;
 
-        },
-
-        start: function( event, ui ) {
-          var that = this;
-          guides = $.map( $( "#current_page .ui-draggable" ).not( this ), computeGuidesForElement );
-          //console.log(guides);
-          
-          innerOffsetX = event.originalEvent.offsetX;
-          innerOffsetY = event.originalEvent.offsetY;
-        }
-
-      }) 
-
-
-      .mouseenter(function(event){
-        
-         
-         if(that.options.component.data.lock == '')
-         var deleteButton = $('<a id="delete-button-' + that.options.component.id + '"class="icon-delete size-10" style="position: absolute; top: -20px; right: 5px;" ></a>');
-         else
-         var deleteButton=$('<a id="delete-button" class="icon-delete size-10" style="position: absolute; top: -20px; right: 5px;" hidden></a>');
-         var commentButton = $('<a id="comment-button-' + that.options.component.id + '" class="icon-down-arrow comment-box-arrow size-10 icon-up-down" style="position: absolute; top: -20px; right: 30px;"></a>');
-      
-         deleteButton.click(function(e){
-         e.preventDefault();
-          that._deleting();
-          //window.lindneo.nisga.ComponentDelete( that.options.component );
-          window.lindneo.tlingit.componentHasDeleted( that.options.component.id );
-
-        }).appendTo(event.currentTarget);
-        
-        commentButton.click(function(e){
-          //$('#'+that.options.component.id).append('<div class="comment_window"></div>');
-          if ($.type(that.options.component.data.comments) == "undefined") that.options.component.data.comments=[]
-          
-          var isCommentBoxCreated=$('#commentBox_'+that.options.component.id).doesExist();
-          
-          if (isCommentBoxCreated===false){
-            
-            that.createCommentBox();
-           
-          }else{
+              // zoom fix
+              ui.position.top = Math.round(ui.position.top / zoom);
+              ui.position.left = Math.round(ui.position.left / zoom);
               
-              $("#commentBox_"+that.options.component.id).toggle();
-              $("comment_card_"+that.options.component.id).toggleClass("opacity-level");
-              $(this).toggleClass("icon-up-down");
+             /* // don't let draggable to get outside of the canvas
+              if (ui.position.left < 0) 
+                  ui.position.left = 0;
+              if (ui.position.left + $(this).width() > canvasWidth)
+                  ui.position.left = canvasWidth - $(this).width();  
+              if (ui.position.top < 0)
+                  ui.position.top = 0;
+              if (ui.position.top + $(this).height() > canvasHeight)
+                  ui.position.top = canvasHeight - $(this).height();  
+    */
 
-          }
 
-        }).appendTo(event.currentTarget);
+
+
+
+              if( $('#general-options').val().indexOf("rehber")===-1 ) return ;
+
+              // iterate all guides, remember the closest h and v guides
+              var guideV, guideH, distV = MIN_DISTANCE+1, distH = MIN_DISTANCE+1, offsetV, offsetH; 
+              var chosenGuides = { top: { dist: MIN_DISTANCE+1 }, left: { dist: MIN_DISTANCE+1 } }; 
+              var $t = $(this); 
+              var pos = { top: event.originalEvent.pageY , left: event.originalEvent.pageX - innerOffsetX }; 
+            
+              
+
+              var w = $t.outerWidth() - 1; 
+              var h = $t.outerHeight() - 1; 
+          //    var sispos= $('#current_page').offset();
+            
+              
+
+              var elemGuides = computeGuidesForElement( null, pos, w, h ); 
+              
+              $.each( guides, function( i, guide ){
+                  $.each( elemGuides, function( i , elemGuide ){
+                    
+                      if( guide.type == elemGuide.type ){
+                          var prop = guide.type == "h"? "top":"left"; 
+                          var d = Math.abs( elemGuide[prop] - guide[prop] ); 
+
+                          if( d < chosenGuides[prop].dist ){
+                              chosenGuides[prop].dist = d; 
+                              chosenGuides[prop].offset = elemGuide[prop] - pos[prop]; 
+                              chosenGuides[prop].guide = guide; 
+                          }
+                      }
+                  } ); 
+              } );
+
+              if( chosenGuides.top.dist <= MIN_DISTANCE ){
+                  $( "#guide-h" ).css( "top", chosenGuides.top.guide.top- $('#current_page').offset().top ).show(); 
+                  ui.position.top = chosenGuides.top.guide.top - chosenGuides.top.offset - $('#current_page').offset().top;
+              }
+              else{
+                  $( "#guide-h" ).hide(); 
+                  //ui.position.top = pos.top; 
+              }
+              
+              if( chosenGuides.left.dist <= MIN_DISTANCE ){
+                  $( "#guide-v" ).css( "left", chosenGuides.left.guide.left- $('#current_page').offset().left ).show(); 
+                  ui.position.left = chosenGuides.left.guide.left - chosenGuides.left.offset- $('#current_page').offset().left; 
+              }
+              else{
+                  $( "#guide-v" ).hide(); 
+                  //ui.position.left = pos.left; 
+              }
+
+            },
+
+            start: function( event, ui ) {
+              var that = this;
+              this.selected(event,ui);
+              guides = $.map( $( "#current_page .ui-draggable" ).not( this ), computeGuidesForElement );
+              //console.log(guides);
+              
+              innerOffsetX = event.originalEvent.offsetX;
+              innerOffsetY = event.originalEvent.offsetY;
+            }
+
+          }) 
+
+
+          .mouseenter(function(event){
+            
+             
+             if(that.options.component.data.lock == '')
+             var deleteButton = $('<a id="delete-button-' + that.options.component.id + '"class="icon-delete size-10" style="position: absolute; top: -20px; right: 5px;" ></a>');
+             else
+             var deleteButton=$('<a id="delete-button" class="icon-delete size-10" style="position: absolute; top: -20px; right: 5px;" hidden></a>');
+             var commentButton = $('<a id="comment-button-' + that.options.component.id + '" class="icon-down-arrow comment-box-arrow size-10 icon-up-down" style="position: absolute; top: -20px; right: 30px;"></a>');
+          
+             deleteButton.click(function(e){
+             e.preventDefault();
+              that._deleting();
+              //window.lindneo.nisga.ComponentDelete( that.options.component );
+              window.lindneo.tlingit.componentHasDeleted( that.options.component.id );
+
+            }).appendTo(event.currentTarget);
+        
+        commentButton
+          .click(function(e){
+              //$('#'+that.options.component.id).append('<div class="comment_window"></div>');
+              if ($.type(that.options.component.data.comments) == "undefined") that.options.component.data.comments=[]
+              
+              var isCommentBoxCreated=$('#commentBox_'+that.options.component.id).doesExist();
+              
+              if (isCommentBoxCreated===false){
+                
+                that.createCommentBox();
+               
+              }else{
+                  
+                  $("#commentBox_"+that.options.component.id).toggle();
+                  $("comment_card_"+that.options.component.id).toggleClass("opacity-level");
+                  $(this).toggleClass("icon-up-down");
+
+              }
+
+            }).appendTo(event.currentTarget);
              
       
 
@@ -326,23 +353,26 @@ $(document).ready(function(){
       });
       
       if(typeof this.options.component.data.lock.username != "undefined"){
-        $('#'+this.options.component.id).parent().draggable({ disabled: true });
+        that.options.resizableParams['disabled']=true;
+
         $('#'+this.options.component.id).droppable({ disabled: true });
-        $('#'+this.options.component.id).selectable({ disabled: true });
+        //$('#'+this.options.component.id).selectable({ disabled: true });
         $('#'+this.options.component.id).sortable({ disabled: true });
         $('#'+this.options.component.id).resizable({ disabled: true });
         $('#'+this.options.component.id).attr('readonly','readonly');
         $('#delete-button-'+this.options.component.id).hide();
       }
-      else{
-        $('#'+this.options.component.id).parent().draggable({ disabled: false });
+      else{      
+        that.options.resizableParams['disabled']=false;
+        
         $('#'+this.options.component.id).droppable({ disabled: false });
-        $('#'+this.options.component.id).selectable({ disabled: false });
+        //$('#'+this.options.component.id).selectable({ disabled: false });
         $('#'+this.options.component.id).sortable({ disabled: false });
         $('#'+this.options.component.id).resizable({ disabled: false });
         $('#'+this.options.component.id).removeAttr('readonly');
         
       };
+       // this.element.draggable(that.options.resizableParams);
       
       //console.log(this.options.component.data.lock);
     },
@@ -408,17 +438,18 @@ $(document).ready(function(){
       this._trigger('selected', null, this );
       window.lindneo.tsimshian.emitSelectedComponent( this );
       
+      return;
       if($.type(this.options.component.data.lock.username) != "undefined"){
-        $('#'+this.options.component.id).parent().draggable({ disabled: true });
+       // $('#'+this.options.component.id).parent().draggable({ disabled: true });
         $('#'+this.options.component.id).droppable({ disabled: true });
-        $('#'+this.options.component.id).selectable({ disabled: true });
+       // $('#'+this.options.component.id).selectable({ disabled: true });
         $('#'+this.options.component.id).sortable({ disabled: true });
         $('#'+this.options.component.id).resizable({ disabled: true });
         $('#'+this.options.component.id).attr('readonly','readonly');
         $('#delete-button-'+this.options.component.id).hide();
       }
       else{
-        $('#'+this.options.component.id).parent().draggable({ disabled: false });
+        //$('#'+this.options.component.id).parent().draggable({ disabled: false });
         $('#'+this.options.component.id).droppable({ disabled: false });
         $('#'+this.options.component.id).selectable({ disabled: false });
         $('#'+this.options.component.id).sortable({ disabled: false });

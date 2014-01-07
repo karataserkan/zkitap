@@ -1,8 +1,10 @@
 @charset "utf-8";
-/*
-deneme
-deneme
-*/
+@import url('webfonts/sourcesanspro.css');
+@import url('webfonts/alexbrush-regular.css');
+@import url('webfonts/chunkfive.css');
+@import url('webfonts/aller.css');
+@import url('webfonts/cantarell.css');
+@import url('webfonts/exo.css');
 select {
     padding:3px;
     padding-left:10px;
@@ -13,7 +15,7 @@ select {
     display: inline-block;
     cursor:pointer;
 }
-;
+; 
 /* Targetting Webkit browsers only. FF will show the dropdown arrow with so much padding. */
 @media screen and (-webkit-min-device-pixel-ratio:0) {
     select {padding-right:25px}
