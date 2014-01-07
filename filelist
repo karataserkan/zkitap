@@ -16,6 +16,7 @@
 ./protected/controllers/BookAddFormController.php
 ./protected/controllers/PageController.php
 ./protected/controllers/OrganisationUsersController.php
+./protected/controllers/newBookSteps.php
 ./protected/controllers/ChapterController.php
 ./protected/controllers/OrganisationsController.php
 ./protected/controllers/WorkspacesController.php
@@ -54,6 +55,8 @@
 ./protected/views/user/admin.php
 ./protected/views/user/_form.php
 ./protected/views/user/create.php
+./protected/views/user/_invitation_form.php
+./protected/views/user/invitation.php
 ./protected/views/editor/edit.php
 ./protected/views/site/contact.php
 ./protected/views/site/error.php
@@ -92,6 +95,7 @@
 ./protected/views/book/_search.php
 ./protected/views/book/library.php
 ./protected/views/book/_view.php
+./protected/views/book/newBookSteps.php
 ./protected/views/book/select_template.php
 ./protected/views/book/view.php
 ./protected/views/book/index.php
@@ -141,6 +145,7 @@
 ./protected/models/OrganisationUsers.php
 ./protected/models/OrganisationWorkspaces.php
 ./protected/models/Page.php
+./protected/models/OrganisationInvitation.php
 ./protected/models/Book.php
 ./protected/models/Organisations.php
 ./protected/models/Workspaces.php
