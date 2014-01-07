@@ -3,83 +3,120 @@
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
-msgid ""
-msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-01-07 11:06+0000\n"
-"PO-Revision-Date: 2014-01-07 13:07+0200\n"
-"Last-Translator: \n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
-"MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 1.5.4\n"
+#, fuzzy
+msgid   ""
+msgstr  "Project-Id-Version: PACKAGE VERSION\n"
+        "Report-Msgid-Bugs-To: \n"
+        "POT-Creation-Date: 2014-01-07 15:29+0000\n"
+        "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+        "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+        "Language-Team: LANGUAGE <LL@li.org>\n"
+        "Language: \n"
+        "MIME-Version: 1.0\n"
+        "Content-Type: text/plain; charset=UTF-8\n"
+        "Content-Transfer-Encoding: 8bit\n"
 
 #: protected/views/site/index.php:88 protected/views/site/index.php:93
-msgid "Düzenle"
-msgstr "Edit"
+#: protected/views/site/index.php:88 protected/views/site/index.php:93
+msgid   "Düzenle"
+msgstr  "Edit"
 
-#: protected/views/site/index.php:38
-msgid "Yeni Kitap"
-msgstr "New Book"
+#: protected/views/site/index.php:38 protected/views/site/index.php:38
+msgid   "Yeni Kitap"
+msgstr  "New Book"
 
-#: protected/views/site/index.php:59
-msgid "Kitabın Adı"
-msgstr "Book Name"
+#: protected/views/site/index.php:59 protected/views/site/index.php:59
+msgid   "Kitabın Adı"
+msgstr  "Book Name"
 
-#: protected/views/site/index.php:63
-msgid "Yazar Adı"
-msgstr "Author Name"
+#: protected/views/site/index.php:63 protected/views/site/index.php:63
+msgid   "Yazar Adı"
+msgstr  "Author Name"
 
-#: protected/views/site/index.php:98
-msgid "İndir"
-msgstr "Download"
+#: protected/views/site/index.php:98 protected/views/site/index.php:98
+msgid   "İndir"
+msgstr  "Download"
 
-#: protected/views/site/index.php:103
-msgid "Kitap Editörleri"
-msgstr "Book Editors"
+#: protected/views/site/index.php:103 protected/views/site/index.php:103
+msgid   "Kitap Editörleri"
+msgstr  "Book Editors"
 
-#: protected/views/site/index.php:70
-msgid "Editörler"
-msgstr "Editors"
+#: protected/views/site/index.php:70 protected/views/site/index.php:70
+msgid   "Editörler"
+msgstr  "Editors"
 
 #: protected/views/site/index.php:132 protected/views/site/index.php:162
-msgid "Editör"
-msgstr "Editor"
+#: protected/views/site/index.php:132 protected/views/site/index.php:162
+msgid   "Editör"
+msgstr  "Editor"
 
 #: protected/views/site/index.php:129 protected/views/site/index.php:163
-msgid "Sahibi"
-msgstr "Owner"
+#: protected/views/site/index.php:129 protected/views/site/index.php:163
+msgid   "Sahibi"
+msgstr  "Owner"
 
-#: protected/views/site/index.php:26
-msgid "Organizasyon"
-msgstr "Organisation"
+#: protected/views/site/index.php:26 protected/views/site/index.php:26
+msgid   "Organizasyon"
+msgstr  "Organisation"
 
-#: protected/views/site/index.php:148
-msgid "Kullanıcı Ekle"
-msgstr "Add User"
+#: protected/views/site/index.php:148 protected/views/site/index.php:148
+msgid   "Kullanıcı Ekle"
+msgstr  "Add User"
 
 #: protected/views/organisations/index.php:5
-msgid "Çalışma Alanı"
-msgstr "Workspace"
+#: protected/views/organisations/index.php:5
+msgid   "Çalışma Alanı"
+msgstr  "Workspace"
 
 #: protected/views/organisations/index.php:7
-msgid "Kullanıcılar"
-msgstr "Users"
+#: protected/views/organisations/index.php:7
+msgid   "Kullanıcılar"
+msgstr  "Users"
 
-#: protected/views/book/_form.php:12
-msgid "Kitap Türü"
-msgstr "Book Type"
+#: protected/views/book/_form.php:12 protected/controllers/newBookSteps.php:7
+#: protected/views/book/newBookSteps.php:7
+msgid   "Kitap Türü"
+msgstr  "Book Type"
 
-#: protected/views/book/_form.php:13
-msgid "Kitap Bilgileri"
-msgstr "Book Information"
+#: protected/views/book/_form.php:13 protected/controllers/newBookSteps.php:8
+#: protected/views/book/newBookSteps.php:8
+msgid   "Kitap Bilgileri"
+msgstr  "Book Information"
 
-#: protected/views/book/_form.php:14
-msgid "Şablonlar"
-msgstr "Templates"
+#: protected/views/book/_form.php:14 protected/controllers/newBookSteps.php:9
+#: protected/views/book/newBookSteps.php:9
+msgid   "Şablonlar"
+msgstr  "Templates"
 
-#: protected/views/book/_form.php:15
-msgid "Çözünürlük"
-msgstr "Resolution"
+#: protected/views/book/_form.php:15 protected/controllers/newBookSteps.php:10
+#: protected/views/book/newBookSteps.php:10
+msgid   "Çözünürlük"
+msgstr  "Resolution"
+
+#: protected/views/book/author.php:135
+msgid   "Görünüm"
+msgstr  ""
+
+#: protected/views/book/author.php:137
+msgid   "Cetvel"
+msgstr  ""
+
+#: protected/views/book/author.php:138
+msgid   "Rehber"
+msgstr  ""
+
+#: protected/views/book/author.php:139
+msgid   "Yorumlar"
+msgstr  ""
+
+#: protected/views/book/author.php:161
+msgid   "Profil"
+msgstr  ""
+
+#: protected/views/book/author.php:162 protected/views/layouts/main.php:69
+msgid   "Çıkış"
+msgstr  ""
+
+#: protected/views/layouts/main.php:67
+msgid   "Giriş yap"
+msgstr  ""
