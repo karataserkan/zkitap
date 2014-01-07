@@ -1,0 +1,40 @@
+@font-face {
+    font-family: 'Cantarell';
+    src: url('cantarell-boldoblique.eot');
+    src: url('cantarell-boldoblique.eot') format('embedded-opentype'),
+         url('cantarell-boldoblique.woff') format('woff'),
+         url('cantarell-boldoblique.ttf') format('truetype'),
+         url('cantarell-boldoblique.svg#CantarellBoldOblique') format('svg');
+    font-weight: bold;
+    font-style: italic, oblique;
+}
+@font-face {
+    font-family: 'Cantarell';
+    src: url('cantarell-bold.eot');
+    src: url('cantarell-bold.eot') format('embedded-opentype'),
+         url('cantarell-bold.woff') format('woff'),
+         url('cantarell-bold.ttf') format('truetype'),
+         url('cantarell-bold.svg#CantarellBold') format('svg');
+    font-weight: bold;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'Cantarell';
+    src: url('cantarell-oblique.eot');
+    src: url('cantarell-oblique.eot') format('embedded-opentype'),
+         url('cantarell-oblique.woff') format('woff'),
+         url('cantarell-oblique.ttf') format('truetype'),
+         url('cantarell-oblique.svg#CantarellOblique') format('svg');
+    font-weight: normal;
+    font-style: italic, oblique;
+}
+@font-face {
+    font-family: 'Cantarell';
+    src: url('cantarell-regular.eot');
+    src: url('cantarell-regular.eot') format('embedded-opentype'),
+         url('cantarell-regular.woff') format('woff'),
+         url('cantarell-regular.ttf') format('truetype'),
+         url('cantarell-regular.svg#CantarellRegular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}

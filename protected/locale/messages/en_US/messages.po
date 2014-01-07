@@ -7,7 +7,7 @@
 msgid   ""
 msgstr  "Project-Id-Version: PACKAGE VERSION\n"
         "Report-Msgid-Bugs-To: \n"
-        "POT-Creation-Date: 2014-01-07 15:32+0000\n"
+        "POT-Creation-Date: 2014-01-07 15:34+0000\n"
         "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
         "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
         "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -100,3 +100,31 @@ msgstr  "Templates"
 #: protected/views/book/newBookSteps.php:10
 msgid   "Çözünürlük"
 msgstr  "Resolution"
+
+#: protected/views/book/author.php:135
+msgid   "Görünüm"
+msgstr  ""
+
+#: protected/views/book/author.php:137
+msgid   "Cetvel"
+msgstr  ""
+
+#: protected/views/book/author.php:138
+msgid   "Rehber"
+msgstr  ""
+
+#: protected/views/book/author.php:139
+msgid   "Yorumlar"
+msgstr  ""
+
+#: protected/views/book/author.php:161
+msgid   "Profil"
+msgstr  ""
+
+#: protected/views/book/author.php:162 protected/views/layouts/main.php:69
+msgid   "Çıkış"
+msgstr  ""
+
+#: protected/views/layouts/main.php:67
+msgid   "Giriş yap"
+msgstr  ""
