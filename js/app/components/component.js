@@ -155,7 +155,7 @@ $(document).ready(function(){
 
             start: function( event, ui ) {
               var that = this;
-              this.selected(event,ui);
+              //this.selected(event,ui);
               guides = $.map( $( "#current_page .ui-draggable" ).not( this ), computeGuidesForElement );
               //console.log(guides);
               
@@ -351,7 +351,7 @@ $(document).ready(function(){
         }
 
       });
-      /*
+      
       if(typeof this.options.component.data.lock.username != "undefined"){
         that.options.resizableParams['disabled']=true;
 
@@ -372,7 +372,6 @@ $(document).ready(function(){
         $('#'+this.options.component.id).removeAttr('readonly');
         
       };
-      */
        // this.element.draggable(that.options.resizableParams);
       
       //console.log(this.options.component.data.lock);
@@ -440,8 +439,8 @@ $(document).ready(function(){
       window.lindneo.tsimshian.emitSelectedComponent( this );
       
       return;
-      /*
       if($.type(this.options.component.data.lock.username) != "undefined"){
+
        // $('#'+this.options.component.id).parent().draggable({ disabled: true });
         $('#'+this.options.component.id).droppable({ disabled: true });
        // $('#'+this.options.component.id).selectable({ disabled: true });
@@ -459,7 +458,7 @@ $(document).ready(function(){
         $('#'+this.options.component.id).removeAttr('readonly');
         
       };
-      */
+      
       //console.log(this.options.component.data.lock);
     },
 

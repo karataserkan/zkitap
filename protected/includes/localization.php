@@ -1,8 +1,7 @@
 <?php
 /**
 
-find . -type f -iname "*.php" > filelist && 
-xgettext --keyword=__ --keyword=_e --from-code='UTF-8' --force-po --join-existing -n -i -o messages.po -p protected/locale/messages/en_US --files-from=filelist
+find . -type f -iname "*.php" > filelist && xgettext --keyword=__ --keyword=_e --from-code='UTF-8' --force-po --join-existing -n -i -o messages.po -p protected/locale/messages/en_US --files-from=filelist
 
  * Wrapper function for Yii::t()
  */

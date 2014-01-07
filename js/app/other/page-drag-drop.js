@@ -110,7 +110,7 @@ $( document ).ready(function () {
         }
         */
         switch( $(event.toElement).attr('ctype') ) {
-
+          
           case 'text':
             createTextComponent( event, ui , $(event.toElement).attr('ctype'));
             break;
@@ -166,64 +166,7 @@ $( document ).ready(function () {
       accept:'.component'
     
     });
-    //////
-
-    var el = document.getElementById("current_page");
-    var FileBinary = '';
-
-    el.addEventListener("dragenter", function(e){
-        e.stopPropagation();
-        e.preventDefault();
-      }, false);
-
-    el.addEventListener("dragexit", function(e){
-      e.stopPropagation();
-      e.preventDefault();
-    },false);
-
-    el.addEventListener("dragover", function(e){
-      e.stopPropagation();
-      e.preventDefault();
-    }, false);
-    el.addEventListener("drop", function(e){
-      e.stopPropagation();
-      e.preventDefault();
-      var file = e.dataTransfer.files[0];
-      var reader = new FileReader();
-      var component = {};
-      console.log(reader);
-      reader.onload = function (evt) { 
-        var FileBinary = evt.target.result;
-        var contentType = FileBinary.substr(0, FileBinary.indexOf(';'));
-        var FileType = contentType.substr(contentType.indexOf('/')+1);
-        console.log(FileType);
-      }
-    reader.readAsDataURL(file);
-    return false;
-  });
-/*
-    el.addEventListener("drop", function(e){
-
-      e.stopPropagation();
-      e.preventDefault();
-      var file = e.dataTransfer.files[0];
-
-      var reader = new FileReader();
-      console.log(reader);
-      var component = {};
-console.log(e.dataTransfer);
-      reader.onload = function (file) { 
-console.log('nirdeyim');
-            var FileBinary = evt.target.result;
-            var contentType = FileBinary.substr(0, FileBinary.indexOf(';'));
-            var FileType = contentType.substr(contentType.indexOf('/')+1);
-            console.log(videoType);
-          }
-        }*/
-
-        
-
-    //////
+    
     $('.chapter-title').change(function(){
         window.lindneo.tlingit.ChapterUpdated(
           $(this).parent().attr('chapter_id'),
@@ -419,3 +362,4 @@ console.log('nirdeyim');
 
     });
   }
+
