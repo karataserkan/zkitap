@@ -29,6 +29,11 @@ a  i
 {
 margin-right:10px;
 }
+.styler_box a i {
+margin-right:0px;
+}
+
+
 
 ul {
 list-style:none;
