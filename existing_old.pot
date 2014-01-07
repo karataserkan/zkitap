@@ -1,0 +1,47 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: Egemen\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.5.4\n"
+
+msgid "Kulanıcılar"
+msgstr "Users"
+
+msgid "Düzenle"
+msgstr "Edit"
+
+msgid "Yeni Kitap"
+msgstr "New Book"
+
+msgid "Kitabın Adı"
+msgstr "Book Name"
+
+msgid "Yazar Adı"
+msgstr "Author Name"
+
+msgid "İndir"
+msgstr "Download"
+
+msgid "Kitap Editörleri"
+msgstr "Book Editors"
+
+msgid "Editörler"
+msgstr "Editors"
+
+msgid "Editör"
+msgstr "Editor"
+
+msgid "Sahibi"
+msgstr "Owner"
+
+msgid "Organizasyon"
+msgstr "Organisation"
+
+msgid "Kullanıcı Ekle"
+msgstr "Add User"
