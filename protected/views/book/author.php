@@ -1017,7 +1017,7 @@ $( "#add-button" ).hover(
 					<div id='current_page' page_id='<?php echo $page->page_id ;?>' style='background:white;border:thin solid black;zoom:1; height:<?php echo $bookHeight; ?>px;width:<?php echo $bookWidth; ?>px;position:relative'  >
 						<div id="guide-h" class="guide"></div>
 						<div id="guide-v" class="guide"></div>
-
+						
 					</div>
 
 
