@@ -156,6 +156,7 @@ $current_user=User::model()->findByPk(Yii::app()->user->id);
 						?>
 					</a>   
 			      <ul>
+			         <li><a href='#'><span>Profil</span></a></li>
 			         <li><a href='#'><span>Çıkış</span></a></li>
 			         
 			      </ul>
@@ -367,11 +368,11 @@ $current_user=User::model()->findByPk(Yii::app()->user->id);
 			
 			<div class="generic-options responsive_1"  style="display:inline-block;">
 				<a href="#" class="bck-dark-blue white toolbox-items radius responsive_2" id="pop-align"><i class="icon-align-center size-15"></i></a>
-				<a href="#" class="toolbox-items" id="generic-disable" >Lock</a>
-				<a href="#" class="toolbox-items" id="generic-undisable" >Unlock</a>
-				<a href="#" class="toolbox-items" id="generic-cut" ><img src="/css/images/cut.png" alt="Book Cover" style="margin-top:-5px;" ></a>
-				<a href="#" class="toolbox-items" id="generic-copy" ><img src="/css/images/copy.png" alt="Book Cover" style="margin-top:-5px;" ></a>
-				<a href="#" class="toolbox-items" id="generic-paste" ><img src="/css/images/paste.png" alt="Book Cover" style="margin-top:-5px;" ></a>
+				<a href="#" class="toolbox-items" id="generic-disable" ><i class="icon-lock size-25 dark-blue"></i></a>
+				<a href="#" class="toolbox-items" id="generic-undisable" ><i class="icon-lock-open-alt size-25 dark-blue"></i></a>
+				<a href="#" class="toolbox-items" id="generic-cut"><i class="icon-cut size-25 dark-blue"></i></a>
+				<a href="#" class="toolbox-items" id="generic-copy"><i class="icon-copy size-25 dark-blue"></i></a>
+				<a href="#" class="toolbox-items" id="generic-paste"><i class="icon-paste size-25 dark-blue"></i></a>
 				
 			</div>
 				
@@ -780,7 +781,7 @@ Grafik Ekle
 	
 	
 		<ul class="component_holder" style="position:fixed; bottom:50px;">
-		<li ctype="comment" class="component icon-add ui-draggable" >&nbsp;&nbsp;&nbsp;&nbsp;Yorum Ekle</li>
+		
 		</ul>
 <!-- chat  -->
 	<a class="chat_button"><i class="icon-chat-inv"></i>Yazışma</a>
@@ -789,39 +790,6 @@ Grafik Ekle
 	<div class="chat_inline_holder">
 
 <div class="chat_sent_messages">
-
-<!-- chat_sent_message_holder-->
-<div class="chat_sent_message_holder green_msg_box">
-<div class="chat_sent_message_user_name">Uğur Dökmeci</div>
-<div class="chat_sent_message_text">Pellentesque elit velit, condimentum eu pellentesque id, viverra quis tortor. Donec apien aliquam, consectetur adipiscing a suscipit lacus vestibulum sit amet.</div>
-</div>
-<!-- chat_sent_message_holder SON -->
-
-
-<!-- chat_sent_message_holder-->
-<div class="chat_sent_message_holder red_msg_box">
-<div class="chat_sent_message_user_name">Kurtuluş Yıldız</div>
-<div class="chat_sent_message_text">Mauris rutrum nisl at orci.</div>
-</div>
-<!-- chat_sent_message_holder SON -->
-
-
-<!-- chat_sent_message_holder-->
-<div class="chat_sent_message_holder orange_msg_box">
-<div class="chat_sent_message_user_name">Erkan Öğümsöğütlü</div>
-<div class="chat_sent_message_text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec apien aliquam, a suscipit lacus vestibulum.</div>
-</div>
-<!-- chat_sent_message_holder SON -->
-
-
-
-
-<!-- chat_sent_message_holder-->
-<div class="chat_sent_message_holder yellow_msg_box">
-<div class="chat_sent_message_user_name">Can Deniz Güngörmüş</div>
-<div class="chat_sent_message_text">Lorem ipsum dolor sit amet.</div>
-</div>
-<!-- chat_sent_message_holder SON -->
 
 
 </div>
@@ -1061,9 +1029,11 @@ $( "#add-button" ).hover(
 <div id="dropdown-1" class="dropdown dropdown-tip dropdown-anchor-right">
 		<ul class="dropdown-menu">
 			<div class="generic-options" style="display:inline-block;">
-				<a href="#" class="toolbox-items" id="generic-cut"><img src="css/images/cut.png" alt="Book Cover" style="margin-top:-5px;"></a>
-				<a href="#" class="toolbox-items" id="generic-copy"><img src="css/images/copy.png" alt="Book Cover" style="margin-top:-5px;"></a>
-				<a href="#" class="toolbox-items" id="generic-paste"><img src="css/images/paste.png" alt="Book Cover" style="margin-top:-5px;"></a>
+				<a href="#" class="toolbox-items" id="generic-cut"><i class="icon-cut"></i></a>
+				<a href="#" class="toolbox-items" id="generic-copy"><i class="icon-copy"></i></a>
+				<a href="#" class="toolbox-items" id="generic-paste"><i class="icon-paste"></i></a>
+				
+				
 				
 			</div>
 		</ul>
@@ -1075,9 +1045,9 @@ $( "#add-button" ).hover(
 			<a href="#" class="bck-dark-blue white toolbox-items radius" id="pop-arrange"><i class="icon-send-backward size-15"></i></a>
 
 <div class="generic-options" style="display:inline-block;">
-				<a href="#" class="toolbox-items" id="generic-cut"><img src="css/images/cut.png" alt="Book Cover" style="margin-top:-5px;"></a>
-				<a href="#" class="toolbox-items" id="generic-copy"><img src="css/images/copy.png" alt="Book Cover" style="margin-top:-5px;"></a>
-				<a href="#" class="toolbox-items" id="generic-paste"><img src="css/images/paste.png" alt="Book Cover" style="margin-top:-5px;"></a>
+				<a href="#" class="toolbox-items" id="generic-cut"><i class="icon-cut"></i></a>
+				<a href="#" class="toolbox-items" id="generic-copy"><i class="icon-copy"></i></a>
+				<a href="#" class="toolbox-items" id="generic-paste"><i class="icon-paste"></i></a>
 				
 			</div>           
 		</ul>
