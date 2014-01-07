@@ -304,27 +304,56 @@ class OrganisationsController extends Controller
 		$this->redirect( array('organisations/users&organizationId='.$organisationId ) );
 	}
 
+	/**
+	 * organizasyona kullanıcı eklemek için, email adresine davetiye gönderiyorum
+	 * @param  string $email          
+	 * @param  string $organisationId 
+	 * @return string error | success
+	 */
 	public function actionAddUser($email,$organisationId)
 	{
 		$error="";
 		$success="";
-
+		//gönderilecek linkin ilk kısmını oluşturdum
+		$link=Yii::app()->getBaseUrl(true);
+		$link.='/index.php?r=user/invitation&key=';
 		$organisation = Organisations::model()->findByPk($organisationId);
 
+		//email adresinin doğruluğunu check eden regexp
 		$regexp = "/^[^0-9][A-z0-9_]+([.][A-z0-9_]+)*[@][A-z0-9_-]+([.][A-z0-9_]+)*[.][A-z]{2,4}$/";
 		if (preg_match($regexp, $email)) {
 		    //Email address is valid
 			$user= User::model()->findAllByAttributes(array('email'=>$email) );
 			if ($user) {
-				// a user has this email in users table. we only send invitation mail
-				$message=$organisation->organisation_name. " size editöre katılma isteği gönderdi. İsteği kabul etmek için <a href='http://linden-tech.com'>tıklayın</a>.";	
+				$userId = $user[0]->id;
 			}
 			else
 			{
+				// a user has NOT this email in users table.
 				//we will create new user
-				$message="yeni kullanıcı";
+				$user = new User;
+				$criteria=new CDbCriteria;
+				$criteria->select='max(id) AS maxColumn';
+				$row = $user->model()->find($criteria);
+				
+				$userId = $row['maxColumn']+1;
+				$user->id = $userId;
+				$user->email=$email;
+				$user->save();
 			}
+			
+			//yeni davetiye oluşturuyoruz
+			$invitation= new OrganisationInvitation;
+			$invitation->organisation_id = $organisation->organisation_id;
+			$invitation->user_id = $userId;
+			$invitation->invitation_id = functions::get_random_string();
+			$invitation->save();
+			//linke davetiye IDsini de ekliyorum
+			$link .= $invitation->invitation_id;
 
+			$message=$organisation->organisation_name. " size editöre katılma isteği gönderdi. İsteği kabul etmek için <a href='".$link."'>tıklayın</a>.<br>".$link;	
+
+			//mail gönderiyorum
 			$mail=Yii::app()->Smtpmail;
 	        $mail->SetFrom('edubox@linden-tech.com', $organisation->organisation_name);
 	        $mail->Subject    = $organisation->organisation_name.' davetiye.';

@@ -244,13 +244,19 @@ class BookController extends Controller
 	public function actionAuthor($bookId,$page=null,$component=null){ 
 		$model=$this->loadModel($bookId);
 		
+		$bookSize=$model->getPageSize();
+
+
 		$this->render('author',array(
 			'model'=>$model,
 			'page_id'=>$page,
-			'component_id'=>$component
+			'component_id'=>$component,
+			'bookWidth'=>$bookSize['width'],
+			'bookHeight'=>$bookSize['height']
 		)); 
 	}
 
+	
 
 	public function actionSelectLayout($bookId){
 
