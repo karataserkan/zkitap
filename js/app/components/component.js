@@ -155,7 +155,7 @@ $(document).ready(function(){
 
             start: function( event, ui ) {
               var that = this;
-              this.selected(event,ui);
+              //this.selected(event,ui);
               guides = $.map( $( "#current_page .ui-draggable" ).not( this ), computeGuidesForElement );
               //console.log(guides);
               
