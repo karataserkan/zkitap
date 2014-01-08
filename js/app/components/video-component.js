@@ -175,7 +175,7 @@ var createVideoComponent = function(event, ui) {
                 //console.log(response.result);
                 $.ajax({
                     type: "POST",
-                    url: 'http://bekir.dev.lindneo.com/index.php?r=EditorActions/UploadFile&url=' + response.result.token,
+                    url: window.location.origin + '/index.php?r=EditorActions/UploadFile&url=' + response.result.token,
                     data: {file: videoBinary},
                     success: function(data) {
                         $("#image-add-dummy-close-button").trigger('click');
@@ -225,7 +225,7 @@ var createVideoComponent = function(event, ui) {
             }
             //console.log("ok");
 
-            var fileURL = "http://bekir.dev.lindneo.com/index.php?r=EditorActions/getFileUrl&type="+videoType;
+            var fileURL = window.location.origin + "/index.php?r=EditorActions/getFileUrl&type="+videoType;
             $.get(fileURL)
                     .done(function(data) {
                 videoURL = window.lindneo.tlingit.responseFromJson(data).result.URL;
