@@ -245,7 +245,7 @@ $( document ).ready(function () {
             //console.log(response.result);
             $.ajax({
                 type: "POST",
-                url: 'http://bekir.dev.lindneo.com/index.php?r=EditorActions/UploadFile&url=' + response.result.token,
+                url: window.location.origin + '/index.php?r=EditorActions/UploadFile&url=' + response.result.token,
                 data: {file: FileBinary},
                 success: function(data) {
                 console.log(videoURL);
