@@ -8,6 +8,8 @@
 
  <?php
 if ($users) {
+	_en('%s Kullanıcı Bulundu', '%s Kullanıcılar Bulundu', count($user));
+	
 	foreach ($users as $key => $user):
 			?>
 		<div class="row">

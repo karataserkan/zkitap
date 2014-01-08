@@ -7,7 +7,11 @@
 msgid   ""
 msgstr  "Project-Id-Version: PACKAGE VERSION\n"
         "Report-Msgid-Bugs-To: \n"
+<<<<<<< HEAD
         "POT-Creation-Date: 2014-01-07 16:00+0000\n"
+=======
+        "POT-Creation-Date: 2014-01-08 08:11+0000\n"
+>>>>>>> 90877c453db0a1f8bf3549206870b531d7fe7a3c
         "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
         "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
         "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -15,6 +19,7 @@ msgstr  "Project-Id-Version: PACKAGE VERSION\n"
         "MIME-Version: 1.0\n"
         "Content-Type: text/plain; charset=UTF-8\n"
         "Content-Transfer-Encoding: 8bit\n"
+        "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 
 #: protected/views/site/index.php:88 protected/views/site/index.php:93
 #: protected/views/site/index.php:88 protected/views/site/index.php:93
@@ -75,68 +80,27 @@ msgstr  "Users"
 
 #: protected/views/book/_form.php:12 protected/controllers/newBookSteps.php:7
 #: protected/views/book/newBookSteps.php:7
-<<<<<<< HEAD
-=======
 #: protected/controllers/newBookSteps.php:7
 #: protected/views/book/newBookSteps.php:7
->>>>>>> 3081c382bd1d6b4871d869eeb4096db8dfae9fed
 msgid   "Kitap Türü"
 msgstr  "Book Type"
 
 #: protected/views/book/_form.php:13 protected/controllers/newBookSteps.php:8
 #: protected/views/book/newBookSteps.php:8
-<<<<<<< HEAD
-=======
 #: protected/controllers/newBookSteps.php:8
 #: protected/views/book/newBookSteps.php:8
->>>>>>> 3081c382bd1d6b4871d869eeb4096db8dfae9fed
 msgid   "Kitap Bilgileri"
 msgstr  "Book Information"
 
-#: protected/views/book/_form.php:14 protected/controllers/newBookSteps.php:9
-#: protected/views/book/newBookSteps.php:9
-<<<<<<< HEAD
-=======
 #: protected/controllers/newBookSteps.php:9
 #: protected/views/book/newBookSteps.php:9
->>>>>>> 3081c382bd1d6b4871d869eeb4096db8dfae9fed
+#: protected/controllers/newBookSteps.php:9
+#: protected/views/book/newBookSteps.php:9
 msgid   "Şablonlar"
 msgstr  "Templates"
 
-#: protected/views/book/_form.php:15 protected/controllers/newBookSteps.php:10
+#: protected/controllers/newBookSteps.php:10
 #: protected/views/book/newBookSteps.php:10
-<<<<<<< HEAD
-msgid   "Çözünürlük"
-msgstr  "Resolution"
-
-#: protected/views/book/author.php:135
-msgid   "Görünüm"
-msgstr  ""
-
-#: protected/views/book/author.php:137
-msgid   "Cetvel"
-msgstr  ""
-
-#: protected/views/book/author.php:138
-msgid   "Rehber"
-msgstr  ""
-
-#: protected/views/book/author.php:139
-msgid   "Yorumlar"
-msgstr  ""
-
-#: protected/views/book/author.php:161
-msgid   "Profil"
-msgstr  ""
-
-#: protected/views/book/author.php:162 protected/views/layouts/main.php:69
-msgid   "Çıkış"
-msgstr  ""
-
-#: protected/views/layouts/main.php:67
-msgid   "Giriş yap"
-msgstr  ""
-=======
 #: protected/controllers/newBookSteps.php:10
 #: protected/views/book/newBookSteps.php:10
 msgid   "Çözünürlük"
@@ -170,4 +134,11 @@ msgstr  "Sign Out"
 #: protected/views/layouts/main.php:67 protected/views/layouts/main.php:67
 msgid   "Giriş yap"
 msgstr  "Sign In"
->>>>>>> 3081c382bd1d6b4871d869eeb4096db8dfae9fed
+
+#: protected/views/organisations/users.php:11
+#: protected/views/organisations/users.php:11
+#, php-format
+msgid   "%s Kullanıcı Bulundu"
+msgid_plural    "%s Kullanıcılar Bulundu"
+msgstr[0]       ""
+msgstr[1]       ""
