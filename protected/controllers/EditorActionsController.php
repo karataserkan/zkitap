@@ -9,7 +9,13 @@ class EditorActionsController extends Controller
 	public function response($response_avoition=null){
 		$response['result']=$response_avoition ? $response_avoition : $this->response;
 		if ($this->errors) $response['errors']=$this->errors;
-		echo json_encode($response);
+
+		$response_string=json_encode($response);
+
+
+		header('Content-type: plain/text');
+		header("Content-length: " . strlen($response_string) ); // tells file size
+		echo $response_string;
 	}
  
 	public function error($domain='EditorActions',$explanation='Error', $arguments=null,$debug_vars=null ){

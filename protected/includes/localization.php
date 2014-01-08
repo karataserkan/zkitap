@@ -5,17 +5,21 @@
 
  * Wrapper function for Yii::t()
  */
-function __($string, $params = array(), $category = "") {
-        return Yii::t($category, $string, $params);
+function __($string, $params = null, $category = "") {
+	
+		if (is_array($params)) 
+        	return vsprintf (Yii::t($category, $string),$params);
+    	else
+			return sprintf (Yii::t($category, $string),$params);
 }
 
-function _e($string, $params = array(), $category = "") {
+function _e($string, $params = null, $category = "") {
         echo __($string, $params , $category);
 }
 
 
 function _n($string_single,$string_plural, $number, $category = "") {
-    if (n != 1) return __($string_plural, array($number) , $category);
+    if ($number != 1) return __($string_plural, array($number) , $category);
 	return __($string_single, array($number), $category);
 }
 
