@@ -8,7 +8,7 @@
 
  <?php
 if ($users) {
-	_en('%s Kullanıcı Bulundu', '%s Kullanıcılar Bulundu', count($user));
+	_en('%s Kullanıcı Bulundu', '%s Kullanıcılar Bulundu', count($users));
 	
 	foreach ($users as $key => $user):
 			?>

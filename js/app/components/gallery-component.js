@@ -30,28 +30,20 @@ $(document).ready(function(){
             counter++;
             var image= $('<img class="galery_component_image" style="display: block; margin: auto; min-width: 50%; min-height: 50%; " src="'+value.src+ '" />'); 
             var container=$('<li class="galery_component_li" style="float:left; position: absolute; width: 200%; height: 200%; left: -50%;'+ (counter==1 ? ''  : 'display:none;')+ '" ></li>');
-            image.appendTo(container);
-           
+            image.appendTo(container);        
             container.appendTo(ul);
-              
-            
-
-
-           
-            //$(that).html(image);   
           }       
         });
+
         ul.addClass('galery_component_ul');
         that.element.parent().addClass('galery_component_wrap');
         ul.appendTo(that.element);
-       // that.element.find('li').hide();
         that.element.first().show();
 
         $('<div style="clear:both"></div>').appendTo(that.element);
 
       }
     },
-
 
     field: function(key, value){
       console.log(image_width);
