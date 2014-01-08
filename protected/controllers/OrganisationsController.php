@@ -363,14 +363,14 @@ class OrganisationsController extends Controller
 	        if(!$mail->Send()) {
 	            echo "Mailer Error: " . $mail->ErrorInfo;
 	        }else {
-	            $success="Kullanıcı davet edildi.";
+	            $success=__("Kullanıcı davet edildi.");
 	        }
 
 
 
 		} else {
 		    //Email address is NOT valid
-		    $error = "Girdiğiniz e-posta adresi yanlış";
+		    $error = __("Girdiğiniz e-posta adresi yanlış");
 		}
 
 		$this->render('add_user', array(
