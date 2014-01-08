@@ -2,6 +2,7 @@
 $step_no=3;
 include 'newBookSteps.php';
 ?>
+</div>
 <div class="templates_holder">
 
 <?php
