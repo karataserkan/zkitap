@@ -242,12 +242,37 @@ $( document ).ready(function () {
           console.log(videoType);
           var response = '';
           var sendFile = function() {
+
+          var progressbar = window.lindneo.dataservice.newProgressBar();
             //console.log(response.result);
             $.ajax({
+                'xhr': function(){
+                   var xhr = new window.XMLHttpRequest();
+
+
+                   //Upload progress
+                   xhr.upload.addEventListener("progress", function(evt){
+
+                   if (evt.lengthComputable) {
+                     var percentage = evt.loaded / evt.total;
+                     progressbar.bar.progressbar('value', percentage*100);
+                     }
+                   }, false);
+                 
+                   //Download progress
+                   xhr.addEventListener("progress", function(evt){       
+                     if (evt.lengthComputable) {
+                       var percentage = evt.loaded / evt.total;
+                       progressbar.bar.progressbar('value', percentage*100);
+                     }
+                   }, false);
+                   return xhr;
+                },
                 type: "POST",
                 url: window.location.origin + '/index.php?r=EditorActions/UploadFile&url=' + response.result.token,
                 data: {file: FileBinary},
                 success: function(data) {
+                  window.lindneo.dataservice.removeProgressBar(progressbar.container);
                 console.log(videoURL);
                 var component = {
                     'type': 'video',

@@ -15,12 +15,13 @@ window.lindneo.dataservice = (function( $ ) {
     newProgressBarElement.progressbar({
       value: 0
     });
+
     var returnVal={
       'bar':newProgressBarElement,
       'container': newProgressBarContainer
     };
 
-    console.log(returnVal);
+    
     return returnVal;
 
   };
@@ -38,9 +39,12 @@ window.lindneo.dataservice = (function( $ ) {
 
     $.ajax({
 
-       xhr: function(){
+       'xhr': function(){
          var xhr = new window.XMLHttpRequest();
-         xhr.upload.onprogress = function(evt){console.log('progress')};
+         //xhr.upload.onprogress = function(evt){console.log('pprogress')};
+         
+         console.log(xhr.upload);
+
          //Upload progress
          xhr.upload.addEventListener("progress", function(evt){
           console.log('Upload');
@@ -63,10 +67,15 @@ window.lindneo.dataservice = (function( $ ) {
          }, false);
          return xhr;
        },
-      'contentType': 'plain/text; charset=UTF-8',
+      'headers': {
+        'X-PINGOTHER': 'pingpong',
+        'contentType': 'plain/text; charset=UTF-8'
+      },
+      
       'type': 'GET',
       'url': window.lindneo.url,
       'data': data,
+      
       beforeSend: function(){
         // Handle the beforeSend event
         //console.log('yükleniyor');

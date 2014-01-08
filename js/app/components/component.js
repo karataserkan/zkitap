@@ -65,7 +65,7 @@ $(document).ready(function(){
             snap: '.ui-wrapper',
             handle: '.dragging_holder, img',
             snapMode: 'outer',
-
+            'alsoDrag':'.selected',
             'stop': function(event, ui){
             //console.log();
               $( "#guide-v, #guide-h" ).hide(); 
@@ -154,8 +154,9 @@ $(document).ready(function(){
             },
 
             start: function( event, ui ) {
-              var that = this;
+             
               //this.selected(event,ui);
+              that._selected(event,ui);
               guides = $.map( $( "#current_page .ui-draggable" ).not( this ), computeGuidesForElement );
               //console.log(guides);
               
@@ -414,7 +415,7 @@ $(document).ready(function(){
     },
 
     _selected: function( event, ui ) {
-      console.log(event);
+      
      
       if (typeof event.originalEvent != "undefined")
         if (typeof event.originalEvent.originalEvent != "undefined")
@@ -424,7 +425,7 @@ $(document).ready(function(){
                 var false_out_selection=true;
 
       if( false_out_selection  || event.ctrlKey || event.metaKey || $(event.toElement).hasClass('ui-resizable-handle') || $(event.toElement).hasClass('dragging_holder')  )
-        console.log('multi selection');
+        window.lindneo.toolbox.makeMultiSelectionBox();
       else
         $('.selected').trigger('unselect');
 
