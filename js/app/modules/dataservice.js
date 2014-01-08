@@ -7,6 +7,128 @@ window.lindneo.dataservice = (function( $ ) {
   var that =this;
   var progressBars=[];
   var progressBarsCounter=0;
+
+  var newComponentDropPage = function(e, reader, file){
+    var component = {};
+    reader.onload = function (evt) { 
+        var FileBinary = evt.target.result;
+        var contentType = FileBinary.substr(5, FileBinary.indexOf('/')-5);
+        console.log(contentType);
+        if(contentType == 'image'){
+          var size = window.lindneo.findBestSize({'w':image_width,'h':image_height});
+          var image_width = size.w;
+          var image_height = size.h;
+        
+          console.log(image_width);
+
+          component = {
+            'type' : 'image',
+            'data': {
+              'img':{
+                'css' : {
+                  'width':'100%',
+                  'height':'100%',
+                  'margin': '0',
+                  'padding': '0px',
+                  'border': 'none 0px',
+                  'outline': 'none',
+                  'background-color': 'transparent'
+                } , 
+                'src': FileBinary
+              },
+              'lock':'',
+              'self': {
+                'css': {
+                  'position':'absolute',
+                  'top': (e.offsetY ) + 'px',
+                  'left':  ( e.offsetX ) + 'px',
+                  'width': image_width,
+                  'height': image_height,
+                  'background-color': 'transparent',
+                  'overflow': 'visible',
+                  'z-index': '990'
+                }
+              }
+            }
+          };
+
+          window.lindneo.tlingit.componentHasCreated( component );
+        }
+        else if(contentType == 'video'){
+          var contentType = FileBinary.substr(0, FileBinary.indexOf(';'));
+          var videoType = contentType.substr(contentType.indexOf('/')+1);
+          console.log(videoType);
+          var response = '';
+          var videoURL = '';
+          var token = '';
+          var sendFile = function() {
+            //console.log(response.result);
+            $.ajax({
+                type: "POST",
+                url: window.location.origin + '/index.php?r=EditorActions/UploadFile&url=' + response.result.token,
+                data: {file: FileBinary},
+                success: function(data) {
+                  var component = {
+                      'type': 'video',
+                      'data': {
+                          'video': {
+                              'attr': {
+                                  'controls': 'controls'
+                              },
+                              'css': {
+                                  'width': '100%',
+                                  'height': '100%',
+                              },
+                              'contentType': contentType
+                          },
+                          'source': {
+                              'attr': {
+                                  'src': response.result.URL
+                              }
+                          },
+                          '.audio-name': {
+                              'css': {
+                                  'width': '100%'
+                              }
+                          },
+                          'self': {
+                              'css': {
+                                  'position': 'absolute',
+                                  'top': (e.offsetY ) + 'px',
+                                  'left':  ( e.offsetX ) + 'px',
+                                  'width': 'auto',
+                                  'height': '60px',
+                                  'background-color': 'transparent',
+                                  'overflow': 'visible'
+                              }
+                          }
+
+                      }
+                  };
+
+
+                 window.lindneo.tlingit.componentHasCreated(component);
+              }
+            });
+          }
+          //console.log("ok");
+
+          var fileURL = window.location.origin + "/index.php?r=EditorActions/getFileUrl&type="+videoType;
+          $.get(fileURL)
+                  .done(function(data) {
+              videoURL = window.lindneo.tlingit.responseFromJson(data).result.URL;
+              token = window.lindneo.tlingit.responseFromJson(data).result.token;
+              response = window.lindneo.tlingit.responseFromJson(data);
+
+          }, function() {
+              sendFile(response);
+          });
+        }
+      }
+      reader.readAsDataURL(file);
+      return false;
+  };
+
   var newProgressBar= function(){
     var newProgressBarContainer=$("<li style='float:right; ' class='has-sub'></li>");
     var newProgressBarElement=$("<div style='width:100px;'></div>");
@@ -100,6 +222,7 @@ window.lindneo.dataservice = (function( $ ) {
   return {
     removeProgressBar: removeProgressBar,
     newProgressBar: newProgressBar,
+    newComponentDropPage: newComponentDropPage,
     send: send
   };
 
