@@ -1,0 +1,8 @@
+@font-face {
+    font-family: 'ChunkFiveRoman';
+    src: url('chunkfive.eot');
+    src: url('chunkfive.eot') format('embedded-opentype'),
+         url('chunkfive.woff') format('woff'),
+         url('chunkfive.ttf') format('truetype'),
+         url('chunkfive.svg#ChunkFiveRoman') format('svg');
+}
