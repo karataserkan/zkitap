@@ -7,7 +7,7 @@
 msgid   ""
 msgstr  "Project-Id-Version: PACKAGE VERSION\n"
         "Report-Msgid-Bugs-To: \n"
-        "POT-Creation-Date: 2014-01-08 12:30+0000\n"
+        "POT-Creation-Date: 2014-01-08 13:00+0000\n"
         "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
         "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
         "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -146,18 +146,17 @@ msgstr  "Sign In"
 #, php-format
 msgid   "%s Kullanıcı Bulundu"
 msgid_plural    "%s Kullanıcılar Bulundu"
-msgstr[0]       ""
-msgstr[1]       ""
+msgstr[0]       "%s User Found"
+msgstr[1]       "%s Users Found"
 
 #: protected/controllers/OrganisationsController.php:366
 #: protected/controllers/OrganisationsController.php:366
 msgid   "Kullanıcı davet edildi."
-msgstr  ""
+msgstr  "Invitation is sent to user."
 
 #: protected/controllers/OrganisationsController.php:373
-#: protected/controllers/OrganisationsController.php:373
 msgid   "Girdiğiniz e-posta adresi yanlış"
-msgstr  ""
+msgstr  "E-mail address is invalid."
 
 #: protected/views/user/invitation.php:5 protected/views/user/invitation.php:5
 msgid   "İsteği kabul ettiniz. Anasayfaya giderek sisteme giriş "
@@ -172,7 +171,7 @@ msgstr  ""
 #: protected/views/organisations/workspaces.php:19
 #: protected/views/organisations/workspaces.php:19
 msgid   "Sil"
-msgstr  ""
+msgstr  "Delete"
 
 #: protected/views/organisations/workspaces.php:25
 #: protected/views/organisations/workspaces.php:25
@@ -184,7 +183,7 @@ msgstr  ""
 #: protected/views/organisations/workspaces.php:58
 #: protected/views/organisations/users.php:40
 msgid   "Ekle"
-msgstr  ""
+msgstr  "Add"
 
 #: protected/views/book/library.php:4 protected/views/book/library.php:4
 msgid   "Edit Book"
@@ -193,4 +192,9 @@ msgstr  ""
 #: protected/views/book/select_data.php:39
 #: protected/views/book/select_data.php:39
 msgid   "Kaydet"
-msgstr  ""
+msgstr  "Save"
+
+#: protected/controllers/OrganisationsController.php:373
+#: protected/controllers/OrganisationsController.php:373
+msgid   "Girdiğiniz e-posta adresi yanlış."
+msgstr  "E-mail address is invalid."

@@ -370,7 +370,7 @@ class OrganisationsController extends Controller
 
 		} else {
 		    //Email address is NOT valid
-		    $error = __("Girdiğiniz e-posta adresi yanlış");
+		    $error = __("Girdiğiniz e-posta adresi yanlış.");
 		}
 
 		$this->render('add_user', array(
