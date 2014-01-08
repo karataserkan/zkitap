@@ -48,14 +48,15 @@
 
         $e.css("overflow", ($e.prop("scrollHeight") > height ? "auto" : "hidden"));
         $e.css("height", height + "px");
-        if (options.element.options.component.type=='text')
+        if (options.element.options.component.type=='text'){
           options.element.options.component.data.self.css.height= height + "px";
+          options.element.element.parent().not('#current_page').css("height", height + "px");
+          }
         options.element.options.autogrow=$(this);
         
 
       
 
-        options.element.element.parent().not('#current_page').css("height", height + "px");
         if ($.isFunction(options.heightKeeperFunction)) {
           (options.heightKeeperFunction($e)).css({ height: 'auto' });
         }
