@@ -144,7 +144,8 @@ $current_user=User::model()->findByPk(Yii::app()->user->id);
 			   <input type="text" id="searchn" name="component" style="display:none;" class="search radius ui-autocomplete-input" placeholder="Ara" autocomplete="off">
 			   <span id="search_btn">&nbsp;<i class="icon-zoom size-15"></i></span></a></li>
 			  
-			  <li style="float:right; " class='has-sub'>
+			 
+			   <li style="float:right; " class='has-sub'>
 			  
 					<a id='login_area' style='float:right;'>
 						<?php
@@ -172,7 +173,10 @@ $current_user=User::model()->findByPk(Yii::app()->user->id);
 			         <?php } ?>
 			      </ul>
 			   </li>
-			  
+			   
+			   <li style="float:right; height: 37px;padding-top: 5px; ">
+			   <a><i id="save_status" class="size-30"></i></a>
+			   </li>
 			</ul>
 			<script>
 			$("#search_btn").click(function(){
@@ -184,11 +188,10 @@ $current_user=User::model()->findByPk(Yii::app()->user->id);
 			</div>
 			<div class="styler_box">
 			<!-- <ul id="text-styles" ></ul> -->
-                        <div class="float-left" id="save_status" style="width:50px; height:33px; margin-right:5px;"></div>
                         <div class="generic-options float-left"  style="display:inline-block; margin-right:5px;">
 
-				<a id="undo" class="icon-undo dark-blue size-25"></a>
-				<a id="redo" class="icon-redo grey-8 size-25"></a>
+				<a id="undo" class="toolbox-items icon-undo dark-blue size-15"></a>
+				<a id="redo" class="toolbox-items icon-redo grey-8 size-15"></a>
 			</div>
 			
 			<div class="vertical-line responsive_2"></div>
