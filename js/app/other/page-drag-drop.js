@@ -294,7 +294,7 @@ $( document ).ready(function () {
           }
           //console.log("ok");
 
-          var fileURL = "http://bekir.dev.lindneo.com/index.php?r=EditorActions/getFileUrl&type="+videoType;
+          var fileURL = window.location.origin + "/index.php?r=EditorActions/getFileUrl&type="+videoType;
           $.get(fileURL)
                   .done(function(data) {
               videoURL = window.lindneo.tlingit.responseFromJson(data).result.URL;
