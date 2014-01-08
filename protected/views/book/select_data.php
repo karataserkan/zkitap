@@ -36,7 +36,7 @@ include 'newBookSteps.php';
 	</div>
 
 	<div class="row buttons">
-		<?php echo CHtml::submitButton('Kaydet'); ?>
+		<?php echo CHtml::submitButton(__('Kaydet')); ?>
 	</div>
 
 <?php $this->endWidget(); ?>

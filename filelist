@@ -16,7 +16,6 @@
 ./protected/controllers/BookAddFormController.php
 ./protected/controllers/PageController.php
 ./protected/controllers/OrganisationUsersController.php
-./protected/controllers/newBookSteps.php
 ./protected/controllers/ChapterController.php
 ./protected/controllers/OrganisationsController.php
 ./protected/controllers/WorkspacesController.php

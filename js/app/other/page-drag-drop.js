@@ -166,6 +166,33 @@ $( document ).ready(function () {
       accept:'.component'
     
     });
+  
+    var el = document.getElementById("current_page");
+    var FileBinary = '';
+
+    el.addEventListener("dragenter", function(e){
+        e.stopPropagation();
+        e.preventDefault();
+      }, false);
+
+    el.addEventListener("dragexit", function(e){
+      e.stopPropagation();
+      e.preventDefault();
+    },false);
+
+    el.addEventListener("dragover", function(e){
+      e.stopPropagation();
+      e.preventDefault();
+    }, false);
+    el.addEventListener("drop", function(e){
+      e.stopPropagation();
+      e.preventDefault();
+      var file = e.dataTransfer.files[0];
+      var reader = new FileReader();
+      var component = {};
+      console.log(e);
+      window.lindneo.dataservice.newComponentDropPage(e, reader, file);
+    });
     
     $('.chapter-title').change(function(){
         window.lindneo.tlingit.ChapterUpdated(
