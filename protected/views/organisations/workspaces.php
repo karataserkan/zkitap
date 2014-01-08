@@ -22,7 +22,7 @@ $organisationId=$organizationUser['organisation_id'];
 <center id="popup-close-area" popup="pop-<?php echo $workspace['workspace_id']; ?>" style="display:none; position:relative">
 				<div id="close-div" style="background-color:#123456; width:100% height:#123456; position:fixed;"> </div>
 				<div class="book-editors-options-box-container">
-				<h2><?php _e('Workspace Users');?><a popup="close-<?php echo $workspace['workspace_id']; ?>" id="close-option-box"class="icon-close white size-15 delete-icon float-right" ></a></h2>
+				<h2><?php _e('Çalışma Alanı Kullanıcıları');?><a popup="close-<?php echo $workspace['workspace_id']; ?>" id="close-option-box"class="icon-close white size-15 delete-icon float-right" ></a></h2>
 				<div class="editor-list">
 				<?php 
 					$workspaceUsers=$this->workspaceUsers($workspace['workspace_id']);
