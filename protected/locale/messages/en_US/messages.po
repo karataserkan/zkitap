@@ -7,7 +7,7 @@
 msgid   ""
 msgstr  "Project-Id-Version: PACKAGE VERSION\n"
         "Report-Msgid-Bugs-To: \n"
-        "POT-Creation-Date: 2014-01-08 13:00+0000\n"
+        "POT-Creation-Date: 2014-01-08 13:30+0000\n"
         "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
         "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
         "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -19,8 +19,10 @@ msgstr  "Project-Id-Version: PACKAGE VERSION\n"
 
 #: protected/views/site/index.php:88 protected/views/site/index.php:93
 #: protected/views/organisations/workspaces.php:20
-#: protected/views/site/index.php:88 protected/views/site/index.php:93
+#: protected/views/book/library.php:4 protected/views/site/index.php:88
+#: protected/views/site/index.php:93
 #: protected/views/organisations/workspaces.php:20
+#: protected/views/book/library.php:4
 msgid   "Düzenle"
 msgstr  "Edit"
 
@@ -161,22 +163,19 @@ msgstr  "E-mail address is invalid."
 #: protected/views/user/invitation.php:5 protected/views/user/invitation.php:5
 msgid   "İsteği kabul ettiniz. Anasayfaya giderek sisteme giriş "
         "yapabilirsiniz."
-msgstr  ""
+msgstr  "Invitation accepted. Login the system."
 
 #: protected/views/organisations/workspaces.php:12
 #: protected/views/organisations/workspaces.php:12
 msgid   "Çalışma Alanı Ekle"
-msgstr  ""
+msgstr  "Add Workspace"
 
 #: protected/views/organisations/workspaces.php:19
+#: protected/views/organisations/users.php:17
 #: protected/views/organisations/workspaces.php:19
+#: protected/views/organisations/users.php:17
 msgid   "Sil"
 msgstr  "Delete"
-
-#: protected/views/organisations/workspaces.php:25
-#: protected/views/organisations/workspaces.php:25
-msgid   "Workspace Users"
-msgstr  ""
 
 #: protected/views/organisations/workspaces.php:58
 #: protected/views/organisations/users.php:40
@@ -185,16 +184,12 @@ msgstr  ""
 msgid   "Ekle"
 msgstr  "Add"
 
-#: protected/views/book/library.php:4 protected/views/book/library.php:4
-msgid   "Edit Book"
-msgstr  ""
-
 #: protected/views/book/select_data.php:39
 #: protected/views/book/select_data.php:39
 msgid   "Kaydet"
 msgstr  "Save"
 
-#: protected/controllers/OrganisationsController.php:373
-#: protected/controllers/OrganisationsController.php:373
-msgid   "Girdiğiniz e-posta adresi yanlış."
-msgstr  "E-mail address is invalid."
+#: protected/views/organisations/workspaces.php:25
+#: protected/views/organisations/workspaces.php:25
+msgid   "Çalışma Alanı Kullanıcıları"
+msgstr  "Workspace Users"
