@@ -64,9 +64,9 @@
 		<div id='login_area' style='float:right;'>
 			<?php
 			if(Yii::app()->user->isGuest){
-				echo CHtml::link('<a>Giriş yap</a>',array('site/login'));
+				echo CHtml::link('<a>' . __('Giriş yap')  .'</a>',array('site/login'));
 			}else{
-				 echo CHtml::link('Çıkış<a>deneme</a> ('.Yii::app()->user->name.')',array('site/logout'));
+				 echo CHtml::link( __('Çıkış')  . '('.Yii::app()->user->name.')',array('site/logout'));
 
 			}
 			?>
@@ -74,8 +74,17 @@
 		
 		<div id="logo" style='float:left'>
 			<a href="<?php echo $this->createUrl('site/index');  ?>"/> <img src="<?php echo Yii::app()->request->baseUrl; ?>/css/logo.png" alt="<?php echo CHtml::encode(Yii::app()->name); ?>" /></a>
-			<a href="<?php echo Yii::app()->request->requestUri.'&language=tr'; ?>">tr</a>
-			<a href="<?php echo Yii::app()->request->requestUri.'&language=en'; ?>">en</a>
+			
+
+			<?php 
+				foreach (Yii::app()->params->availableLanguages  as $lang_id => $lang_name) {
+					$_GET['language']=$lang_id;
+					$lang_link_params = array_merge(array($this->route),$_GET ) ;
+
+					echo CHtml::link($lang_name,$lang_link_params );
+					
+				}
+			?>
 
 		</div>
 		

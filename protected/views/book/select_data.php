@@ -1,19 +1,11 @@
+
 <?php
 /* @var $this BookController */
 /* @var $model BookDataForm */
 /* @var $form CActiveForm */
+$step_no=4;
+include 'newBookSteps.php';	
 ?>
-<link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/templatebook.css" media="all" />
-
-</div> <!--header-->
-
-<ol class="steps">
-    <li class="step1"><span>Kitap Türü</span></li>
-    <li class="step2"><span>Kitap Bilgileri</span></li>
-    <li class="step3"><span>Şablonlar</span></li>
-    <li class="step4 current"><span>Çözünürlük</span></li>
-</ol>
-
 
 <div class="form create-book-container white" style="width:700px !important;">
 

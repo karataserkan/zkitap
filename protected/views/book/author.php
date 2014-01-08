@@ -132,11 +132,11 @@ $current_user=User::model()->findByPk(Yii::app()->user->id);
 			      </ul>
 			   </li>
 
-			   <li class='has-sub'><a href='#'><span>Görünüm</span></a>
+			   <li class='has-sub'><a href='#'><span><?php _e('Görünüm') ?> </span></a>
 			      <ul>
-			         <li><a href='#'><span>Cetvel</span></a></li>
-			         <li><a href='#'><span>Rehber</span></a></li>
-			         <li><a href='#'><span>Yorumlar</span></a></li>
+			         <li><a href='#'><span><?php _e('Cetvel') ?></span></a></li>
+			         <li><a href='#'><span><?php _e('Rehber') ?></span></a></li>
+			         <li><a href='#'><span><?php _e('Yorumlar') ?></span></a></li>
 			      </ul>
 			   </li>
 			    
@@ -159,8 +159,17 @@ $current_user=User::model()->findByPk(Yii::app()->user->id);
 			      <ul>
 
 			      	<?php if (!Yii::app()->user->isGuest) {?>
-			         <li><a href='/index.php?r=user/profile'><span>Profil</span></a></li>
-			         <li><a href='#'><span>Çıkış</span></a></li>
+			         <li><a href='/index.php?r=user/profile'><span><?php _e('Profil') ?></span></a></li>
+			         <li><a href='#'><span><?php _e('Çıkış') ?></span></a></li>
+					<?php 
+						foreach (Yii::app()->params->availableLanguages  as $lang_id => $lang_name) {
+							$_GET['language']=$lang_id;
+							$lang_link_params = array_merge(array($this->route),$_GET ) ;
+
+							echo " <li>". CHtml::link("<span>".$lang_name."</span>",$lang_link_params ) ."</li>";
+
+						}
+					?>
 			         <?php } ?>
 			      </ul>
 			   </li>
