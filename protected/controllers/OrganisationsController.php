@@ -134,7 +134,7 @@ class OrganisationsController extends Controller
 	 * @param  varchar $organizationId
 	 */
 	public function actionWorkspaces($organizationId=null)
-	{		
+	{
 		if(Yii::app()->user->isGuest)
 			$this->redirect( array('site/login' ) );
 

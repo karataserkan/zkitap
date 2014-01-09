@@ -9,7 +9,6 @@ window.lindneo.dataservice = (function( $ ) {
   var progressBarsCounter=0;
 
   var newComponentDropPage = function(e, reader, file){
-
     var that =this;
     var component = {};
     reader.onload = function (evt) { 
@@ -17,12 +16,9 @@ window.lindneo.dataservice = (function( $ ) {
         var contentType = FileBinary.substr(5, FileBinary.indexOf('/')-5);
         console.log(contentType);
         if(contentType == 'image'){
-          image_width = this.width;
-          image_height = this.height;
           var size = window.lindneo.findBestSize({'w':image_width,'h':image_height});
-          console.log(this);
-          image_width = size.w;
-          image_height = size.h;
+          var image_width = size.w;
+          var image_height = size.h;
         
           console.log(image_width);
 
@@ -134,12 +130,13 @@ window.lindneo.dataservice = (function( $ ) {
     newProgressBarElement.progressbar({
       value: 0
     });
+
     var returnVal={
       'bar':newProgressBarElement,
       'container': newProgressBarContainer
     };
 
-    console.log(returnVal);
+    
     return returnVal;
 
   };
@@ -158,9 +155,12 @@ window.lindneo.dataservice = (function( $ ) {
 
     $.ajax({
 
-       xhr: function(){
+       'xhr': function(){
          var xhr = new window.XMLHttpRequest();
-         xhr.upload.onprogress = function(evt){console.log('progress')};
+         //xhr.upload.onprogress = function(evt){console.log('pprogress')};
+         
+         console.log(xhr.upload);
+
          //Upload progress
          xhr.upload.addEventListener("progress", function(evt){
           console.log('Upload');
@@ -183,7 +183,6 @@ window.lindneo.dataservice = (function( $ ) {
          }, false);
          return xhr;
        },
-
       'headers': {
         'X-PINGOTHER': 'pingpong',
         'contentType': 'plain/text; charset=UTF-8'
@@ -192,6 +191,7 @@ window.lindneo.dataservice = (function( $ ) {
       'type': 'POST',
       'url': window.lindneo.url+requestRoute,
       'data': data,
+      
       beforeSend: function(){
         // Handle the beforeSend event
         //console.log('yükleniyor');
