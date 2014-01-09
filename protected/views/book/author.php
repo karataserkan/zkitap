@@ -112,7 +112,7 @@ $current_user=User::model()->findByPk(Yii::app()->user->id);
 	
 			<div id='headermenu'>
 			<ul>
-			   <li><a style="height:40px;" href="<?php echo $this->createUrl('site/index');  ?>"><img  src="css/linden_logo.png" height="30px;" style="padding-top:5px;"></a></li>
+			   <li><a style="height:40px;" href="<?php echo $this->createUrl('site/index');  ?>"><img  src="/css/linden_logo.png" height="30px;" style="padding-top:5px;"></a></li>
 			   <li><a contenteditable="true"> <?php echo $model->title; ?></a></li>
 			   <li class='has-sub'><a href='#'><span>Dosya</span></a>
 					<ul>
