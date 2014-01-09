@@ -2,7 +2,7 @@
 // all global variables and the things other than module should be defined here.
 window.lindneo = (function(window){
 
-  var url = '/index.php';
+  var url = '/';
   var currentPageId ;
   var currentComponent = {};
   var  randomString = function (length, chars) {

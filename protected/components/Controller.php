@@ -46,4 +46,6 @@ class Controller extends CController
 				Yii::app()->language=(string)$language_cookie;
 			}
 	}
+	//public function getActionParams() { return array_merge($_GET, $_POST); }
+
 }
