@@ -22,7 +22,7 @@ $(document).ready(function(){
         newimage.appendTo(this.element);
       }
       
-
+      console.log(this);
 
 
 

@@ -190,7 +190,7 @@ $( document ).ready(function () {
       var file = e.dataTransfer.files[0];
       var reader = new FileReader();
       var component = {};
-      console.log(e);
+      console.log(this);
       window.lindneo.dataservice.newComponentDropPage(e, reader, file);
     });
     

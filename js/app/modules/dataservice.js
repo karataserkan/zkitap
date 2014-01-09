@@ -9,15 +9,20 @@ window.lindneo.dataservice = (function( $ ) {
   var progressBarsCounter=0;
 
   var newComponentDropPage = function(e, reader, file){
+    var image_width = '200px';
+    var image_height = '150px';
     var component = {};
     reader.onload = function (evt) { 
         var FileBinary = evt.target.result;
         var contentType = FileBinary.substr(5, FileBinary.indexOf('/')-5);
         console.log(contentType);
         if(contentType == 'image'){
+          image_width = this.width;
+          image_height = this.height;
           var size = window.lindneo.findBestSize({'w':image_width,'h':image_height});
-          var image_width = size.w;
-          var image_height = size.h;
+          console.log(this);
+          image_width = size.w;
+          image_height = size.h;
         
           console.log(image_width);
 
@@ -137,13 +142,12 @@ window.lindneo.dataservice = (function( $ ) {
     newProgressBarElement.progressbar({
       value: 0
     });
-
     var returnVal={
       'bar':newProgressBarElement,
       'container': newProgressBarContainer
     };
 
-    
+    console.log(returnVal);
     return returnVal;
 
   };
@@ -161,12 +165,9 @@ window.lindneo.dataservice = (function( $ ) {
 
     $.ajax({
 
-       'xhr': function(){
+       xhr: function(){
          var xhr = new window.XMLHttpRequest();
-         //xhr.upload.onprogress = function(evt){console.log('pprogress')};
-         
-         console.log(xhr.upload);
-
+         xhr.upload.onprogress = function(evt){console.log('progress')};
          //Upload progress
          xhr.upload.addEventListener("progress", function(evt){
           console.log('Upload');
@@ -189,15 +190,10 @@ window.lindneo.dataservice = (function( $ ) {
          }, false);
          return xhr;
        },
-      'headers': {
-        'X-PINGOTHER': 'pingpong',
-        'contentType': 'plain/text; charset=UTF-8'
-      },
-      
+      'contentType': 'plain/text; charset=UTF-8',
       'type': 'GET',
       'url': window.lindneo.url,
       'data': data,
-      
       beforeSend: function(){
         // Handle the beforeSend event
         //console.log('yükleniyor');
