@@ -7,6 +7,7 @@ class EditorActionsController extends Controller
 	public $errors=null; 
 
 	public function response($response_avoition=null){
+
 		$response['result']=$response_avoition ? $response_avoition : $this->response;
 		if ($this->errors) $response['errors']=$this->errors;
 
@@ -23,7 +24,10 @@ class EditorActionsController extends Controller
 		$this->errors[]=$error; 
 		return $error;
 	}
-
+	public function actionDeneme()
+	{
+		echo "deneme";
+	}
 	public function actionGetFileURL($type=null){
 
 		/* 
@@ -47,15 +51,15 @@ class EditorActionsController extends Controller
 		
 		
 
-		$this->response['URL']= $url;
-		$this->response['token']= Yii::app()->request->hostInfo . "/uploads/files/".$url.".".$type;
+		$this->response['token']= $url;
+		$this->response['URL']= Yii::app()->request->hostInfo . "/uploads/files/".$url.".".$type;
 		$this->response();
 
 	}
 
 
 
-    public function actionUploadFile	( $url=null ) {
+    public function actionUploadFile	( $token=null ) {
 
     	/*
 		get file contents
@@ -70,7 +74,7 @@ class EditorActionsController extends Controller
 
     	*/
     	    	
-    	if ($url && isset($_POST['file'])) {
+    	if ($token && isset($_POST['file'])) {
     		
     		//$videoFileContents = $_POST['video'];
     		
@@ -78,11 +82,11 @@ class EditorActionsController extends Controller
     		//$videoFile = new file(path);
 
 
-			$file= functions::save_base64_file ( $_POST['file'] , $url , Yii::app()->basePath.'/../uploads/files');
+			$file= functions::save_base64_file ( $_POST['file'] , $token , Yii::app()->basePath.'/../uploads/files');
             
        
            	$addVideoId = Yii::app()->db->createCommand()
-			->insert('video_id', array('id'=>$url));
+			->insert('video_id', array('id'=>$token));
 
 
             $CompleteURL=Yii::app()->request->hostInfo . "/uploads/files/".$file->filename ;
@@ -152,10 +156,9 @@ class EditorActionsController extends Controller
 
 	}
 
-	public function getPageComponents($page_id){
+	public function getPageComponents($page_id=null){
 		$pages=Page::model()->findAll(array("condition"=>"page_id=:page_id","order"=>'`order` asc ,  created asc',"params"=> array('page_id' => $page_id )));
 	}
-
 	public function addTemplate(){
 		
 	}
@@ -197,7 +200,6 @@ class EditorActionsController extends Controller
 		} 
 		return $this->response($response);
 	}
-
 
 	public function actionGetTemplatePages($template_book_id){
 		$templatePages=getPagesOfBook($template_book_id);
@@ -726,12 +728,25 @@ right join book using (book_id) where book_id='$bookId' ;";
 		);
 	}
 	*/
+    public function getActionParams()
+        {
+                return  array_merge($_POST, $_GET);
+        }
+
+	/*public function runAction($id, $params=array()){
+
+    	$params = array_merge($_POST, $params);
+		print_r($this->filters);die;
+    	parent::runAction($id, $params);
+	}
+	*/
 }
 
-function sortify($a,$b){
+ function sortify($a,$b){
 	if( levenshtein( substr( $a[search]->similar_result, 0, 250) ,$a[search]->searchTerm ) > 
 		levenshtein( substr( $b[search]->similar_result, 0 , 250) , $b[search]->searchTerm ) ){
 		return 1;
 	}
 	else return -1;
 }
+
