@@ -123,22 +123,23 @@ $current_user=User::model()->findByPk(Yii::app()->user->id);
 			   </li>
 			   <li class='has-sub'><a href='#'><span>Düzenle</span></a>
 			      <ul>
-			         <li><a href='#'><span>Geri Al</span></a></li>
-			         <li><a href='#'><span>İleri Al</span></a></li>
-			         <li><a href='#'><span>Kes</span></a></li>
-			         <li><a href='#'><span>Kopyala</span></a></li>
-			         <li><a href='#'><span>Yapıştır</span></a></li>
+			         <li><a href='#' id="undo"><i class="icon-undo size-15"></i><span>Geri Al</span></a></li>
+			         <li><a href='#' id="redo"><i class="icon-redo size-15"></i><span>İleri Al</span></a></li>
+			         <li><a href='#' id="generic-cut"><i class="icon-cut size-20"></i><span>Kes</span></a></li>
+			         <li><a href='#' id="generic-copy"><i class="icon-copy size-20"></i><span>Kopyala</span></a></li>
+			         <li><a href='#' id="generic-paste"><i class="icon-paste size-20"></i><span>Yapıştır</span></a></li>
 			         <li class='last'><a href='#'><span>Location</span></a></li>
 			      </ul>
 			   </li>
 
 			   <li class='has-sub'><a href='#'><span><?php _e('Görünüm') ?> </span></a>
 			      <ul>
-			         <li><a href='#'><span><?php _e('Cetvel') ?></span></a></li>
-			         <li><a href='#'><span><?php _e('Rehber') ?></span></a></li>
-			         <li><a href='#'><span><?php _e('Yorumlar') ?></span></a></li>
+			         <li class="onoff"><a href='#' ><span><?php _e('Cetvel') ?></span><div class="onoffdiv"></div></a></li>
+			         <li class="onoff"><a href='#' ><span><?php _e('Rehber') ?></span><div class="onoffdiv open"></div></a></li>
+			         <li class="onoff"><a href='#' ><span><?php _e('Yorumlar') ?></span><div class="onoffdiv"></div></a></li>
 			      </ul>
 			   </li>
+				
 			    
 			   <li><a href='#'>
 			   <input type="text" id="searchn" name="component" style="display:none;" class="search radius ui-autocomplete-input" placeholder="Ara" autocomplete="off">
