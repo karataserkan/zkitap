@@ -96,21 +96,60 @@ return array(
 			// use 'site/error' action to display errors
 			'errorAction'=>'site/error',
 		),
+		// 'log'=>array(
+		// 	'class'=>'CLogRouter',
+		// 	'routes'=>array(
+		// 		array(
+		// 			'class'=>'CFileLogRoute',
+		// 			'levels'=>'error, warning',
+		// 		),
+		// 		// uncomment the following to show log messages on web pages
+		// 		/*
+		// 		array(
+		// 			'class'=>'CWebLogRoute',
+		// 		),
+		// 		*/
+		// 	),
+		// ),
 		'log'=>array(
-			'class'=>'CLogRouter',
-			'routes'=>array(
-				array(
-					'class'=>'CFileLogRoute',
-					'levels'=>'error, warning',
-				),
-				// uncomment the following to show log messages on web pages
-				/*
-				array(
-					'class'=>'CWebLogRoute',
-				),
-				*/
-			),
-		),
+            'class'=>'CLogRouter',
+            'routes'=>array(
+                array(
+                    'class' => 'CEmailLogRoute',
+                    'categories' => 'example',
+                    'levels' => CLogger::LEVEL_ERROR,
+                    'emails' => array('admin@example.com'),
+                    'sentFrom' => 'log@example.com',
+                    'subject' => 'Error at example.com',
+                ),
+                array(
+                   'class' => 'CFileLogRoute',
+                   'levels' => CLogger::LEVEL_WARNING,
+                   'logFile' => 'WARNING',
+                ), 
+                array(
+                    'class' => 'CFileLogRoute',
+                    'levels' => CLogger::LEVEL_INFO,
+                    'logFile' => 'INFO',
+                ),
+                array(
+                    'class' => 'CFileLogRoute',
+                    'levels' => CLogger::LEVEL_ERROR,
+                    'logFile' => 'ERROR',
+                ),  
+                array(
+                    'class' => 'CWebLogRoute',
+                    'categories' => 'example',
+                    'levels' => CLogger::LEVEL_PROFILE,
+                    'showInFireBug' => false,
+                    'ignoreAjaxInFireBug' => true,
+                ), 
+                array(
+                    'class' => 'CWebLogRoute',
+                    'categories' => 'example',
+                ),
+            ),
+        ),
 		'Smtpmail'=>array(
             'class'=>'application.extension.smtpmail.PHPMailer',
             'Host'=>"tls://smtp.gmail.com",
