@@ -1,5 +1,6 @@
 <?php
 
+
 /* @var $this BookController */
 /* @var $model Book */
 /* @var $page page_id */
