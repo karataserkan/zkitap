@@ -1799,7 +1799,6 @@ border-left:1px solid #ddd;
 
 
 #headermenu li a {
-  background: #ffffff url('images/seperator.png') bottom right no-repeat;
   display: block;
   font-weight: normal;
   line-height: 42px;
