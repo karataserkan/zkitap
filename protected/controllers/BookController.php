@@ -215,8 +215,12 @@ class BookController extends Controller
 	 * @param  string $bookId id of the book
 	 * @return [type]         [description]
 	 */
-	public function actionSelectData($bookId=null){
+	public function actionSelectData($bookId=null,$id=null){
 
+		if($bookId==null){
+			$bookId=$id;
+		}
+		
 		$book=$this->loadModel($bookId);
 		
 		/**
@@ -241,7 +245,10 @@ class BookController extends Controller
 		));
 	}
 
-	public function actionAuthor($bookId,$page=null,$component=null){ 
+	public function actionAuthor($bookId=null,$page=null,$component=null,$id=null){
+		if($bookId==null){
+			$bookId=$id;
+		} 
 		$model=$this->loadModel($bookId);
 		
 		$bookSize=$model->getPageSize();

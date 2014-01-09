@@ -169,18 +169,13 @@ var createVideoComponent = function(event, ui) {
             var videoBinary = evt.target.result;
             var contentType = videoBinary.substr(0, videoBinary.indexOf(';'));
             var videoType = contentType.substr(contentType.indexOf('/')+1);
-            console.log(videoType);
-            var response = '';
-            var sendFile = function() {
-                //console.log(response.result);
-                $.ajax({
-                    type: "POST",
-                    url: window.location.origin + '/index.php?r=EditorActions/UploadFile&url=' + response.result.token,
-                    data: {file: videoBinary},
-                    success: function(data) {
-                        $("#image-add-dummy-close-button").trigger('click');
-                        console.log(videoURL);
-                        var component = {
+           
+           
+            window.lindneo.dataservice.send( 'getFileUrl', {'type': videoType}, function(response) {
+            response=window.lindneo.tlingit.responseFromJson(response);
+          
+                window.lindneo.dataservice.send( 'UploadFile',{'token': response.result.token, 'file' : videoBinary} , function(data) {
+                  var component = {
                             'type': 'video',
                             'data': {
                                 'video': {
@@ -219,22 +214,31 @@ var createVideoComponent = function(event, ui) {
                         };
 
 
-                        window.lindneo.tlingit.componentHasCreated(component);
-                    }
-                });
-            }
-            //console.log("ok");
+                 window.lindneo.tlingit.componentHasCreated(component);
+              });
 
-            var fileURL = window.location.origin + "/index.php?r=EditorActions/getFileUrl&type="+videoType;
-            $.get(fileURL)
-                    .done(function(data) {
-                videoURL = window.lindneo.tlingit.responseFromJson(data).result.URL;
-                token = window.lindneo.tlingit.responseFromJson(data).result.token;
-                response = window.lindneo.tlingit.responseFromJson(data);
+          });
 
-            }, function() {
-                sendFile(response);
-            });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
         };
         reader.readAsDataURL(e.dataTransfer.files[0]);
