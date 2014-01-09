@@ -1802,7 +1802,7 @@ border-left:1px solid #ddd;
   background: #ffffff url('images/seperator.png') bottom right no-repeat;
   display: block;
   font-weight: normal;
-  line-height: 39px;
+  line-height: 42px;
   margin: 0px;
   padding: 0px 15px;
   text-align: center;
@@ -1971,6 +1971,36 @@ width: 10px!important; }
 	border:1px solid #fff;
 }
 
+
+td .ui-resizable-e {
+cursor: e-resize;
+width: 7px;
+right: -5px;
+top: 0;
+height: 100%;
+background-color: transparent;
+border:none;
+}
+
+td .ui-resizable-s {
+cursor: s-resize;
+height: 7px;
+width: 100%;
+bottom: -5px;
+left: 0;
+background-color: transparent;
+border:none;
+}
+
+td .ui-resizable-handle {
+position: absolute;
+font-size: 0.1px;
+display: block;
+}
+
+.selected td .ui-resizable-handle {
+visibility: visible;
+}
 /* GROUPING OBJECTS ----------------------------------------------------- */
 
 /* save status ----------------------------------------------------- */
@@ -2077,4 +2107,17 @@ font-size: 20px;
     }
   }
  /* Animation  */
-
+ 
+ .open{
+ background-color:#69c187;
+ color:#ffffff;
+ }
+ .onoffdiv{
+  width:20px;
+  height:20px;
+  float:right;
+  margin: 7px;
+  clear:both;
+  border:1px solid #d1d2d4;
+  }
+ 

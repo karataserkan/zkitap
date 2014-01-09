@@ -24,6 +24,7 @@
 	<script src="<?php echo Yii::app()->request->baseUrl; ?>/js/lib/Chart.js"></script>
 	<script src="<?php echo Yii::app()->request->baseUrl; ?>/js/lib/jquery.autogrow-min.js"></script>
 	<script src="<?php echo Yii::app()->request->baseUrl; ?>/js/lib/jquery.dropdown.js"></script>
+	<script src="<?php echo Yii::app()->request->baseUrl; ?>/js/lib/jquery-ui-draggable-alsoDrag.js"></script>
 	<script src="<?php echo Yii::app()->request->hostInfo; ?>:1881/socket.io/socket.io.js"></script>
 
 	<!-- JS Modules -->
@@ -74,18 +75,7 @@
 		
 		<div id="logo" style='float:left'>
 			<a href="<?php echo $this->createUrl('site/index');  ?>"/> <img src="<?php echo Yii::app()->request->baseUrl; ?>/css/logo.png" alt="<?php echo CHtml::encode(Yii::app()->name); ?>" /></a>
-			
-
-			<?php 
-				foreach (Yii::app()->params->availableLanguages  as $lang_id => $lang_name) {
-					$_GET['language']=$lang_id;
-					$lang_link_params = array_merge(array($this->route),$_GET ) ;
-
-					echo CHtml::link($lang_name,$lang_link_params );
 					
-				}
-			?>
-
 		</div>
 		
 

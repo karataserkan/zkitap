@@ -4,4 +4,4 @@
 *.log
 protected/config/*
 /nbproject/private/
-protected/locale/messages/en_US/messages.po
+*.po
