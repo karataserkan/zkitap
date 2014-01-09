@@ -2109,7 +2109,7 @@ font-size: 20px;
   }
  /* Animation  */
  
-<<<<<<< HEAD
+
  
  input[type=checkbox].css-checkbox {
 							display:none;
@@ -2144,18 +2144,4 @@ font-size: 20px;
 			}
 			
 			
-=======
- .open{
- background-color:#69c187;
- color:#ffffff;
- }
- .onoffdiv{
-  width:20px;
-  height:20px;
-  float:right;
-  margin: 7px;
-  clear:both;
-  border:1px solid #d1d2d4;
-  }
- 
->>>>>>> db8e66578a6b6755dc503ce83a97ef451dc74ba8
+
