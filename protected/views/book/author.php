@@ -81,14 +81,14 @@ $current_user=User::model()->findByPk(Yii::app()->user->id);
 
 					</script>
 				
-					
+					<!--
 					<form action='' id='searchform' style="float:left;">
 
 					<input type="text" id="search" name='component' class="search radius" placeholder="Ara">
 					<input type="hidden" name='r' value='book/author'>
 					<input type="hidden" name='bookId' value='<?php echo $model->book_id; ?>'>
 					</form>
-	
+					-->
 	
 	
 	
@@ -142,7 +142,12 @@ $current_user=User::model()->findByPk(Yii::app()->user->id);
 				
 			    
 			   <li><a href='#'>
-			   <input type="text" id="searchn" name="component" style="display:none;" class="search radius ui-autocomplete-input" placeholder="Ara" autocomplete="off">
+			   <form action='/book/author/<?php echo $model->book_id; ?>' id='searchform' style="float:left;" method="post">
+					<input type="text" id="searchn" name='component' class="search radius ui-autocomplete-input" placeholder="Ara" autocomplete="on">
+				</form>
+			   <!--
+			   <input type="text" id="searchn" name="component" style="display:none;" class="search radius ui-autocomplete-input" placeholder="Ara" autocomplete="on">
+			   -->
 			   <span id="search_btn">&nbsp;<i class="icon-zoom size-15"></i></span></a></li>
 			  
 			 
