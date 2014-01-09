@@ -358,7 +358,7 @@ $( document ).ready(function () {
   window.lindneo.toolbox.load();
   $('#current_page')
 	.click(function(e){
-		console.log(e);
+		//console.log(e);
 		if($(e.target).attr('id')=="current_page")
 			$('.selected').trigger('unselect');	
 	})

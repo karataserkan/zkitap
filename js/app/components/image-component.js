@@ -102,30 +102,7 @@ $(document).ready(function(){
 
 var createImageComponent = function ( event, ui ) {
 
-    $("<div class='popup ui-draggable' id='pop-image-popup' style='display: block; top:" + (ui.offset.top-$(event.target).offset().top ) + "px; left: " + ( ui.offset.left-$(event.target).offset().left ) + "px;'> \
-    <div class='popup-header'> \
-    Görsel Ekle \
-    <div class='popup-close' id='image-add-dummy-close-button'>x</div> \
-    </div> \
-      <div class='gallery-inner-holder'> \
-        <div style='clear:both'></div> \
-        <div class='add-image-drag-area' id='dummy-dropzone'> </div> \
-      </div> \
-      <div>\
-        <input type='text' name='width' id='width' placeholder='Genişlik' value=''>\
-        <input type='text' name='height' id='height' placeholder='Yükseklik' value=''>\
-      </div> \
-    </div>").appendTo('body').draggable();
-
-    $('#image-add-dummy-close-button').click(function(){
-
-      $('#pop-image-popup').remove();  
-
-      if ( $('#pop-image-popup').length ){
-        $('#pop-image-popup').remove();  
-      }
-
-    });
+    
 
     var el = document.getElementById("dummy-dropzone");
     var imageBinary = '';

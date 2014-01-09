@@ -34,7 +34,9 @@ $(document).ready(function(){
       .click(function (e) {
         that._selected(e,null);
       })
-      
+      .dblclick(function (e) {
+        console.log(window.lindneo);
+      })
       .resizable(that.options.resizableParams)
       /*.selectable({
         'selected': function(event, ui){
