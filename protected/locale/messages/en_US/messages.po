@@ -7,7 +7,7 @@
 msgid   ""
 msgstr  "Project-Id-Version: PACKAGE VERSION\n"
         "Report-Msgid-Bugs-To: \n"
-        "POT-Creation-Date: 2014-01-09 07:30+0000\n"
+        "POT-Creation-Date: 2014-01-09 08:00+0000\n"
         "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
         "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
         "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -130,13 +130,13 @@ msgid   "Yorumlar"
 msgstr  "Comments"
 
 #: protected/views/book/author.php:161 protected/views/book/author.php:162
-#: protected/views/book/author.php:162
+#: protected/views/book/author.php:163
 msgid   "Profil"
 msgstr  "Profile"
 
 #: protected/views/book/author.php:162 protected/views/layouts/main.php:69
 #: protected/views/book/author.php:163 protected/views/layouts/main.php:70
-#: protected/views/book/author.php:163 protected/views/layouts/main.php:70
+#: protected/views/book/author.php:164 protected/views/layouts/main.php:70
 msgid   "Çıkış"
 msgstr  "Sign Out"
 
