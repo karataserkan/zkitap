@@ -39,7 +39,7 @@ $( document ).ready(function () {
                         'label': item.search.similar_result,
                         'value': item.id
                       };
-                      console.log('REsult'+result);
+                      console.log('Result is'+item.id);
                       return result;
                     })
                   );
@@ -74,7 +74,7 @@ $( document ).ready(function () {
               //console.log(response);
             },
       select: function( event, ui ) {
-          //console.log('event       ');
+          //console.log('event');
           console.log(event);
           if (ui.item) {
               //console.log(ui.item);
