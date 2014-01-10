@@ -174,6 +174,10 @@ $(document).ready(function(){
               window.lindneo.dataservice.link_popup(event, ui, that.options.component);
             else if(that.options.component.type == 'video')
               window.lindneo.dataservice.video_popup(event, ui, that.options.component);
+            else if(that.options.component.type == 'popup')
+              window.lindneo.dataservice.popup_popup(event, ui, that.options.component);
+            else if(that.options.component.type == 'popup')
+              window.lindneo.dataservice.graph_popup(event, ui, that.options.component);
           })
   
           .mouseenter(function(event){

@@ -39,7 +39,7 @@ $( document ).ready(function () {
                         'label': item.search.similar_result,
                         'value': item.id
                       };
-                      console.log('Result is'+item.id);
+                      console.log('REsult'+result);
                       return result;
                     })
                   );
@@ -74,7 +74,7 @@ $( document ).ready(function () {
               //console.log(response);
             },
       select: function( event, ui ) {
-          //console.log('event');
+          //console.log('event       ');
           console.log(event);
           if (ui.item) {
               //console.log(ui.item);
@@ -172,7 +172,7 @@ $( document ).ready(function () {
             break; 
 
           case 'popup':
-            createPopupComponent( event, ui );
+            window.lindneo.dataservice.popup_popup(event, ui);
             break; 
 
           case 'grafik':

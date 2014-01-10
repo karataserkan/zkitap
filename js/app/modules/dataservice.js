@@ -8,6 +8,78 @@ window.lindneo.dataservice = (function( $ ) {
   var progressBars=[];
   var progressBarsCounter=0;
 
+  /*var graph_popup = function(event, ui, component){
+    console.log(component);
+    
+    if(typeof component == 'undefined'){
+      console.log('dene');
+      var top = (ui.offset.top-$(event.target).offset().top ) + 'px';
+      var left = ( ui.offset.left-$(event.target).offset().left ) + 'px';
+      var graph_value = {};
+    }
+    else{
+      top = component.data.self.css.top;
+      left = component.data.self.css.left;
+    };
+
+      var letters= ["A","B","C","D","E","F","G","H","I","J","K"];
+
+    $("<div class='popup ui-draggable' id='pop-image-popup' style='display: block; top:" + top + "; left: " + left + ";'> \
+        <div class='popup-header'> \
+        Görsel Ekle \
+        <div class='popup-close' id='image-add-dummy-close-button'>x</div> \
+        </div> \
+          <div class='gallery-inner-holder'> \
+            <div class='gallery-inner-holder'> \
+         \
+          <label class='dropdown-label' id='graph_leading'> \
+                  Grafik Çeşidi:  \
+                    <select id='Graph Type' class='radius'> \
+                      <option value='pie-chart'> Pasta</option> \
+                      <option value='bar-chart' >Çubuk</option> \
+                    </select>  \
+          </label> \
+          <select id='verisayisi' class='radius'> \
+                      <option value='1' >1</option> \
+                      <option value='2' selected='selected' >2</option> \
+                      <option value='3' >3</option> \
+                      <option value='4' >4</option> \
+                      <option value='5' >5</option> \
+                      <option value='6' >6</option> \
+                      <option value='7' >7</option> \
+                      <option value='8' >8</option> \
+                      <option value='9' >9</option> \
+                    </select>  \
+            <div id='bar-chart-properties' class='chart_prop bar-chart' style='display:none;'> \
+              <div class='bar-chart-slice-holder slice-holder'> \
+                Arkaplan Rengi:  \
+                <input type='color'  id='chart-bar-background' class='color-picker-box radius color' value='"+get_random_color()+"' placeholder='e.g. #bbbbbb'> \<br> \
+                Çubuk Rengi:  \
+                 <input type='color' id='chart-bar-stroke' class='color-picker-box radius color' value='"+get_random_color()+"' placeholder='e.g. #bbbbbb'> \<br> \
+              </div> \
+          </div> \
+          <div id='pie-chart-properties' class='chart_prop pie-chart'> \
+          </div> \
+               \
+          <a href='#' class='btn bck-light-green white radius' id='pop-image-OK' style='padding: 5px 30px;'>Ekle</a> \
+          </div> \
+          </div> \
+        </div>").appendTo('body').draggable();
+
+      $('#image-add-dummy-close-button').click(function(){
+
+        $('#pop-image-popup').remove();  
+
+        if ( $('#pop-image-popup').length ){
+          $('#pop-image-popup').remove();  
+        }
+
+      });
+      console.log(component);
+      createImageComponent( event, ui, component );
+
+    };
+*/
   var image_popup = function(event, ui, component){
     console.log(component);
     
@@ -96,6 +168,50 @@ window.lindneo.dataservice = (function( $ ) {
 
       console.log(component);
       createLinkComponent( event, ui, component );
+
+    };
+
+  var popup_popup = function(event, ui, component){
+    console.log(component);
+    
+    if(typeof component == 'undefined'){
+      console.log('dene');
+      var top = (ui.offset.top-$(event.target).offset().top ) + 'px';
+      var left = ( ui.offset.left-$(event.target).offset().left ) + 'px';
+      var popup_value = 'http://linden-tech.com';
+    }
+    else{
+      top = component.data.self.css.top;
+      left = component.data.self.css.left;
+      popup_value = component.data.html_inner;
+    };
+    console.log(top);
+    console.log(left);
+      $("<div class='popup ui-draggable' id='pop-image-popup' style='display: block; top:" + top + "; left: " + left + ";'> \
+        <div class='popup-header'> \
+        Görsel Ekle \
+        <div class='popup-close' id='image-add-dummy-close-button'>x</div> \
+        </div> \
+          <div class='gallery-inner-holder'> \
+          <textarea  id='popup-explanation' class='popup-text-area'>" + popup_value + ". \
+          </textarea> <br> \
+          <a href='#' id='pop-image-OK' class='btn bck-light-green white radius' style='padding: 5px 30px;'>Ekle</a> \
+        </div> \
+        </div>").appendTo('body').draggable();
+
+      $('#image-add-dummy-close-button').click(function(){
+
+        $('#pop-image-popup').remove();  
+
+        if ( $('#pop-image-popup').length ){
+          $('#pop-image-popup').remove();  
+        }
+
+      });
+
+
+      console.log(component);
+      createPopupComponent( event, ui, component );
 
     };
 
@@ -364,7 +480,8 @@ window.lindneo.dataservice = (function( $ ) {
     image_popup: image_popup,
     link_popup: link_popup,
     video_popup: video_popup,
-    //opup_popup: popup_popup,
+    popup_popup: popup_popup,
+    //graph_popup: graph_popup,
     send: send
   };
 
