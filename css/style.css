@@ -397,6 +397,7 @@ label#options:after {
  width:150px;
  height:auto;
  border:0;
+ margin-top: 7px;
  resize: none;
  font-size:15px;
  padding-left:10px;
@@ -658,9 +659,9 @@ margin: 0 0 10px;
 
 
 .chat_button {
-	width:100px;
-	padding:10px;
-	position:fixed;
+	position: absolute;
+	width: 100%;
+	padding: 5px 0px;
 	left:0;
 	bottom:0;
 	background-color:#084F5F;
@@ -668,10 +669,14 @@ margin: 0 0 10px;
 	text-align:center;
 	font-weight:bold;
 }
+.text-hidden{
+display:none;
+}
+
 .chat_window{
 position:fixed; 
 display:none; 
-left:120px;
+left:127px;
 bottom:0px;
 padding-top:5px;
 background-color:#084F5F;
@@ -682,6 +687,9 @@ max-height:600px;
 float:left;
 -webkit-box-shadow: 4px -4px 15px 0px rgba(1, 1, 1, 0.2);
 box-shadow: 4px -4px 15px 0px rgba(1, 1, 1, 0.2);
+}
+.chat_window_close{
+left:42px;
 }
 
 
@@ -890,20 +898,66 @@ margin:0px;
 
 /* components */
 
+.left_bar_shrink{
+    position: fixed;  
+	top: 83px;  
+    width: 7px;  
+	bottom: 0px;  
+    left: 120px;    
+    background: #E4E4E4;  
+    z-index: 999999;  
+	border-right: 2px solid #d1d2d4;
+	border-top: 1px solid #C5C5C5;
+}
 
+.left_bar_shrink i{
+height: 100%;
+display: -webkit-box;
+-webkit-box-pack: center;
+-webkit-box-align: center;
+}
 
+.left_bar_shrink_close {
+    position: fixed;  
+	top: 83px;  
+    width: 7px;  
+	bottom: 0px;  
+    left: 35px;    
+    background: #E4E4E4;  
+    z-index: 999999;  
+	border-right: 2px solid #d1d2d4;
+	border-top: 1px solid #C5C5C5;
+}
+
+.left_bar_shrink_close i{
+    height: 100%;
+	display: -webkit-box;
+	-webkit-box-pack: center;
+	-webkit-box-align: center;
+	-moz-transform: rotate(180deg);
+     -o-transform: rotate(180deg);
+     -webkit-transform: rotate(180deg);
+     transform: rotate(180deg);
+}
+
+.component-text-indent{
+	text-indent:-10000px;
+}
 
 ul li.left_bar_titles {
- background-color:#939597;
- color:#404041;
- height:20px;
- line-height:1.4em;
+
+ height:1px;
  text-align:left;
  padding-left:7px;
  margin-bottom:10px;
  font-weight:bold;
  text-transform:uppercase;
  padding-bottom:0 !important;
+ 
+ box-shadow: 0 -1px 0 rgba(0, 0, 0, .20) inset, 0 1px 0 rgba(255, 255, 255, .05);
+ -moz-box-shadow: 0 -1px 0 rgba(0, 0, 0, .20) inset, 0 1px 0 rgba(255, 255, 255, .05);
+ -webkit-box-shadow: 0 -1px 0 rgba(0, 0, 0, .20) inset, 0 1px 0 rgba(255, 255, 255, .05);
+
 }
 
 ul.component_holder {

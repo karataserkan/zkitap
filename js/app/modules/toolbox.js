@@ -628,7 +628,7 @@ window.lindneo.toolbox = (function(window, $, undefined){
   var removeComponentFromSelection = function (component){
       //key capture problem fix
       $(document).unbind('keydown');
-      console.log(component);
+      //sconsole.log(component);
       if (typeof component.options != "undefined")
         this.selectedComponents=$.grep(this.selectedComponents, function (n,i){
           return (n.options.component.id !== 
