@@ -852,7 +852,7 @@ Grafik Ekle
 		$(".left_bar_shrink").click(function () {
 		 $(".components").toggleClass('components-close');
 		 $(".component").toggleClass('component-close');
-		 
+		 $(".zoom").toggleClass('zoom-close');
 		 $(".text-visible").toggleClass('text-hidden');
 		 $(".chat_window").toggleClass('chat_window_close');
 		 $(".left_bar_shrink").toggleClass('left_bar_shrink_close');
