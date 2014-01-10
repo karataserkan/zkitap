@@ -120,8 +120,11 @@ class OrganisationsController extends Controller
 	/**
 	 * Lists all models.
 	 */
-	public function actionIndex($organizationId=null)
+	public function actionIndex($organizationId=null,$id=null)
 	{
+		if($organizationId==null){
+			$organizationId=$id;
+		}
 		$dataProvider=new CActiveDataProvider('Organisations');
 		$this->render('index',array(
 			'organizationId' => $organizationId,		
