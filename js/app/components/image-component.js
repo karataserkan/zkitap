@@ -100,9 +100,7 @@ $(document).ready(function(){
 
 
 
-var createImageComponent = function ( event, ui ) {
-
-    
+var createImageComponent = function ( event, ui ,oldcomponent) {
 
     var el = document.getElementById("dummy-dropzone");
     var imageBinary = '';
@@ -123,6 +121,22 @@ var createImageComponent = function ( event, ui ) {
     }, false);
 
     el.addEventListener("drop", function(e){
+
+      console.log(ui);
+
+
+    if(typeof oldcomponent == 'undefined'){
+      console.log('dene');
+      var top = (ui.offset.top-$(event.target).offset().top ) + 'px';
+      var left = ( ui.offset.left-$(event.target).offset().left ) + 'px';
+      
+    }
+    else{
+      top = oldcomponent.data.self.css.top;
+      left = oldcomponent.data.self.css.left;
+      window.lindneo.tlingit.componentHasDeleted( oldcomponent.id );
+    };
+      
       var image_width = '200px';
       var image_height = '150px';
       
@@ -175,8 +189,8 @@ var createImageComponent = function ( event, ui ) {
             'self': {
               'css': {
                 'position':'absolute',
-                'top': (ui.offset.top-$(event.target).offset().top ) + 'px',
-                'left':  ( ui.offset.left-$(event.target).offset().left ) + 'px',
+                'top': top ,
+                'left':  left ,
                 'width': image_width,
                 'height': image_height,
                 'background-color': 'transparent',

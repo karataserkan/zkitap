@@ -70,34 +70,7 @@ var IsURL = function (url) {
      return re.test(url);
  }
 
-var createLinkComponent = function ( event, ui ) {
-
-    $("<div class='popup ui-draggable' id='pop-image-link' style='display: block; top:" + (ui.offset.top-$(event.target).offset().top ) + "px; left: " + ( ui.offset.left-$(event.target).offset().left ) + "px;'> \
-      <div class='popup-header'> \
-      Görsel Ekle \
-      <div class='popup-close' id='image-add-dummy-close-button'>x</div> \
-      </div> \
-   \
-  <!-- popup content--> \
-    <div class='gallery-inner-holder'> \
-      <form id='video-url'> \
-      <input id='link-url-text' class='input-textbox' type='url' placeholder='URL Adresini Giriniz'   value='http://linden-tech.com'> \
-      <a href='#' id='pop-image-OK' class='btn bck-light-green white radius' id='add-image' style='padding: 5px 30px;'>Ekle</a> \
-      </form> \
-    </div>     \
-     \
-  <!-- popup content--> \
-  </div>").appendTo('body').draggable();
-
-    $('#image-add-dummy-close-button').click(function(){
-
-      $('#pop-image-link').remove();  
-
-      if ( $('#pop-image-link').length ){
-        $('#pop-image-link').remove();  
-      }
-
-    });
+var createLinkComponent = function ( event, ui, oldcomponent ) {
 
 
     $('#pop-image-OK').click(function (){   
@@ -108,6 +81,18 @@ var createLinkComponent = function ( event, ui ) {
         return;
 
       }
+      if(typeof oldcomponent == 'undefined'){
+        console.log('dene');
+        var top = (ui.offset.top-$(event.target).offset().top ) + 'px';
+        var left = ( ui.offset.left-$(event.target).offset().left ) + 'px';
+        var link_value = 'http://linden-tech.com';
+      }
+      else{
+        top = oldcomponent.data.self.css.top;
+        left = oldcomponent.data.self.css.left;
+        link_value = oldcomponent.data.self.attr.href;
+        window.lindneo.tlingit.componentHasDeleted( oldcomponent.id );
+      };
        var  component = {
           'type' : 'link',
           'data': {
@@ -115,8 +100,8 @@ var createLinkComponent = function ( event, ui ) {
             'self': {
               'css': {
                 'position':'absolute',
-                'top': (ui.offset.top-$(event.target).offset().top ) + 'px',
-                'left':  ( ui.offset.left-$(event.target).offset().left ) + 'px',
+                'top': top ,
+                'left':  left ,
                 'width': '128px',
                 'height': '128px',
                 'background-color': 'transparent',

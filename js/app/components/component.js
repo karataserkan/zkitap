@@ -34,9 +34,7 @@ $(document).ready(function(){
       .click(function (e) {
         that._selected(e,null);
       })
-      .dblclick(function (e) {
-        console.log(window.lindneo);
-      })
+      
       .resizable(that.options.resizableParams)
       /*.selectable({
         'selected': function(event, ui){
@@ -167,8 +165,17 @@ $(document).ready(function(){
             }
 
           }) 
-
-
+          .dblclick(function(event, ui) {
+            console.log(event);
+            console.log(that.options.component);
+            if(that.options.component.type == 'image')
+              window.lindneo.dataservice.image_popup(event, ui, that.options.component);
+            else if(that.options.component.type == 'link')
+              window.lindneo.dataservice.link_popup(event, ui, that.options.component);
+            else if(that.options.component.type == 'video')
+              window.lindneo.dataservice.video_popup(event, ui, that.options.component);
+          })
+  
           .mouseenter(function(event){
             
              
