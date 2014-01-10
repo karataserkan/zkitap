@@ -104,6 +104,8 @@ return array(
             'routes'=>array(
                  array(
                     'class' => 'application.extension.SquidLogRoute',
+                    'levels'=> 'trace,error,info,profile,warning',
+                 //   'categories'=>'Squid'
                 ),
             ),
         ),
