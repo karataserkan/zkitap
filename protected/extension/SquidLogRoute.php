@@ -7,7 +7,7 @@ class SquidLogRoute extends CLogRoute
 	 */
 	public function init()
 	{
-		openlog('Squid', LOG_PID, LOG_LOCAL0);
+		openlog('Squid', LOG_PID, LOG_LOCAL1);
 		
 	}
 	/*
@@ -28,10 +28,7 @@ class SquidLogRoute extends CLogRoute
 				case 'error':
 					$pri = LOG_ERR;
 			}
-		if ($log[2]=='Squid') {
 			syslog($pri, $log[1] . ' - ' . $log[0]);
-		}
-		
 		}
 		closelog();
 	}
