@@ -23,7 +23,7 @@ $this->pageTitle=Yii::app()->name;
 		if($organization)
 		{
 		?>
-		<a href='?r=organisations/index&organizationId=<?php echo $organization["organisation_id"]?>' class="btn white radius " style="margin-left:20px;"><?php echo __('Organizasyon');?></a>
+		<a href='/organisations/index?organizationId=<?php echo $organization["organisation_id"]?>' class="btn white radius " style="margin-left:20px;"><?php echo __('Organizasyon');?></a>
 		<?php
 		}
 
@@ -33,7 +33,7 @@ $this->pageTitle=Yii::app()->name;
 	    	<div class='workspace'>
 	    		<h1 class="float-left white"><?php echo $workspace->workspace_name; ?></h1>
 	    		
-	    		<a href='?r=book/newBook' class="btn white radius " style="margin-left:20px;">
+	    		<a href='/book/newBook' class="btn white radius " style="margin-left:20px;">
 	    			<?php 
 	    			echo __('Yeni Kitap');
 
