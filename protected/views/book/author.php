@@ -1,5 +1,4 @@
 <?php
-
 /* @var $this BookController */
 /* @var $model Book */
 /* @var $page page_id */
@@ -81,14 +80,14 @@ $current_user=User::model()->findByPk(Yii::app()->user->id);
 
 					</script>
 				
-					
+					<!--
 					<form action='' id='searchform' style="float:left;">
 
 					<input type="text" id="search" name='component' class="search radius" placeholder="Ara">
 					<input type="hidden" name='r' value='book/author'>
 					<input type="hidden" name='bookId' value='<?php echo $model->book_id; ?>'>
 					</form>
-	
+					-->
 	
 	
 	
@@ -112,7 +111,7 @@ $current_user=User::model()->findByPk(Yii::app()->user->id);
 	
 			<div id='headermenu'>
 			<ul>
-			   <li><a style="height:40px;" href="<?php echo $this->createUrl('site/index');  ?>"><img  src="css/linden_logo.png" height="30px;" style="padding-top:5px;"></a></li>
+			   <li><a style="height:40px;" href="<?php echo $this->createUrl('site/index');  ?>"><img  src="/css/linden_logo.png" height="30px;" style="padding-top:5px;"></a></li>
 			   <li><a contenteditable="true"> <?php echo $model->title; ?></a></li>
 			   <li class='has-sub'><a href='#'><span>Dosya</span></a>
 					<ul>
@@ -123,25 +122,31 @@ $current_user=User::model()->findByPk(Yii::app()->user->id);
 			   </li>
 			   <li class='has-sub'><a href='#'><span>Düzenle</span></a>
 			      <ul>
-			         <li><a href='#'><span>Geri Al</span></a></li>
-			         <li><a href='#'><span>İleri Al</span></a></li>
-			         <li><a href='#'><span>Kes</span></a></li>
-			         <li><a href='#'><span>Kopyala</span></a></li>
-			         <li><a href='#'><span>Yapıştır</span></a></li>
+			         <li><a href='#' id="undo"><i class="icon-undo size-15"></i><span>Geri Al</span></a></li>
+			         <li><a href='#' id="redo"><i class="icon-redo size-15"></i><span>İleri Al</span></a></li>
+			         <li><a href='#' id="generic-cut"><i class="icon-cut size-20"></i><span>Kes</span></a></li>
+			         <li><a href='#' id="generic-copy"><i class="icon-copy size-20"></i><span>Kopyala</span></a></li>
+			         <li><a href='#' id="generic-paste"><i class="icon-paste size-20"></i><span>Yapıştır</span></a></li>
 			         <li class='last'><a href='#'><span>Location</span></a></li>
 			      </ul>
 			   </li>
 
 			   <li class='has-sub'><a href='#'><span><?php _e('Görünüm') ?> </span></a>
-			      <ul>
-			         <li><a href='#'><span><?php _e('Cetvel') ?></span></a></li>
-			         <li><a href='#'><span><?php _e('Rehber') ?></span></a></li>
-			         <li><a href='#'><span><?php _e('Yorumlar') ?></span></a></li>
-			      </ul>
+					<ul>
+				     <li class="onoff"><a href='#' ><input type="checkbox" name="cetvel" id="cetvelcheck" class="css-checkbox" /><label for="cetvelcheck" class="css-label"><?php _e('Cetvel') ?></label></a></li>
+			         <li class="onoff"><a href='#' ><input type="checkbox" name="rehber" id="rehbercheck" class="css-checkbox" /><label for="rehbercheck" class="css-label"><?php _e('Rehber') ?></label></a></li>
+			         <li class="onoff"><a href='#' ><input type="checkbox" name="yorumlar" id="yorumlarcheck" class="css-checkbox" /><label for="yorumlarcheck" class="css-label"><?php _e('Yorumlar') ?></label></a></li>
+			        </ul>
 			   </li>
+				
 			    
 			   <li><a href='#'>
-			   <input type="text" id="searchn" name="component" style="display:none;" class="search radius ui-autocomplete-input" placeholder="Ara" autocomplete="off">
+			   <form action='/book/author/<?php echo $model->book_id; ?>' id='searchform' style="float:left;" method="post">
+					<input type="text" id="searchn" name='component' class="search radius ui-autocomplete-input" placeholder="Ara" autocomplete="on">
+				</form>
+			   <!--
+			   <input type="text" id="searchn" name="component" style="display:none;" class="search radius ui-autocomplete-input" placeholder="Ara" autocomplete="on">
+			   -->
 			   <span id="search_btn">&nbsp;<i class="icon-zoom size-15"></i></span></a></li>
 			  
 			 
@@ -174,7 +179,7 @@ $current_user=User::model()->findByPk(Yii::app()->user->id);
 			      </ul>
 			   </li>
 			   
-			   <li style="float:right; height: 37px;padding-top: 5px; ">
+			   <li class="left-border" style="float:right; height: 37px;padding-top: 5px; ">
 			   <a><i id="save_status" class="size-30"></i></a>
 			   </li>
 			</ul>

@@ -9,6 +9,7 @@ window.lindneo.dataservice = (function( $ ) {
   var progressBarsCounter=0;
 
   var newComponentDropPage = function(e, reader, file){
+    var that =this;
     var component = {};
     reader.onload = function (evt) { 
         var FileBinary = evt.target.result;
@@ -61,13 +62,12 @@ window.lindneo.dataservice = (function( $ ) {
           var response = '';
           var videoURL = '';
           var token = '';
-          var sendFile = function() {
-            //console.log(response.result);
-            $.ajax({
-                type: "POST",
-                url: window.location.origin + '/index.php?r=EditorActions/UploadFile&url=' + response.result.token,
-                data: {file: FileBinary},
-                success: function(data) {
+
+
+          that.send( 'getFileUrl', {'type': videoType}, function(response) {
+            response=window.lindneo.tlingit.responseFromJson(response);
+          
+            that.send( 'UploadFile', {'token': response.result.token, 'file' : FileBinary} , function(data) {
                   var component = {
                       'type': 'video',
                       'data': {
@@ -108,21 +108,14 @@ window.lindneo.dataservice = (function( $ ) {
 
 
                  window.lindneo.tlingit.componentHasCreated(component);
-              }
-            });
-          }
-          //console.log("ok");
+              });
 
-          var fileURL = window.location.origin + "/index.php?r=EditorActions/getFileUrl&type="+videoType;
-          $.get(fileURL)
-                  .done(function(data) {
-              videoURL = window.lindneo.tlingit.responseFromJson(data).result.URL;
-              token = window.lindneo.tlingit.responseFromJson(data).result.token;
-              response = window.lindneo.tlingit.responseFromJson(data);
-
-          }, function() {
-              sendFile(response);
           });
+
+
+
+
+          
         }
       }
       reader.readAsDataURL(file);
@@ -153,11 +146,12 @@ window.lindneo.dataservice = (function( $ ) {
 
   var send = function( action, data, successCallback, failCallback ){
     var that =this;
-
     var progressbar = this.newProgressBar();
-  
+    var requestRoute='EditorActions' +'/' + action;
 
-    data.r = 'EditorActions' +'/' + action;
+
+    
+    console.log(action);
 
     $.ajax({
 
@@ -194,8 +188,8 @@ window.lindneo.dataservice = (function( $ ) {
         'contentType': 'plain/text; charset=UTF-8'
       },
       
-      'type': 'GET',
-      'url': window.lindneo.url,
+      'type': 'POST',
+      'url': window.lindneo.url+requestRoute,
       'data': data,
       
       beforeSend: function(){
@@ -205,6 +199,7 @@ window.lindneo.dataservice = (function( $ ) {
         $('#save_status').addClass('icon-arrows-cw animate-spin size-30 light-blue');
       },
       'success': function(data) {
+
          that.removeProgressBar(progressbar.container);
          return successCallback(data); 
       },

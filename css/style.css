@@ -713,7 +713,6 @@ box-shadow: 4px -4px 15px 0px rgba(1, 1, 1, 0.2);
 	width:56px;
 	height:54px;
 	border:0;
-	background-image:url(../images/editor_chat_send.png);
 	background-repeat:no-repeat;
 	background-size:30px;
 	background-position:15px;
@@ -1793,16 +1792,15 @@ max-width:150px;
 white-space:nowrap;
 overflow-x:hidden;
 }
-#headermenu ul li:last-child{
+#headermenu .left-border{
 border-left:1px solid #ddd;
 }
 
 
 #headermenu li a {
-  background: #ffffff url('images/seperator.png') bottom right no-repeat;
   display: block;
   font-weight: normal;
-  line-height: 39px;
+  line-height: 42px;
   margin: 0px;
   padding: 0px 15px;
   text-align: center;
@@ -1829,6 +1827,9 @@ border-right:1px solid #ddd;
 }
 #headermenu li ul {
   background: #ffffff;
+  box-shadow: 1px 1px 1px #ddd;
+  -webkit-box-shadow: 1px 1px 1px #ddd;
+  -moz-box-shadow: 1px 1px 1px #ddd;
   display: none;
   height: auto;
   padding: 0px;
@@ -2111,4 +2112,40 @@ font-size: 20px;
     }
   }
  /* Animation  */
+ 
+
+ 
+ input[type=checkbox].css-checkbox {
+							display:none;
+						}
+
+						input[type=checkbox].css-checkbox + label.css-label {
+							padding-left:25px;
+							height:20px; 
+							margin-top: 8px;
+							display:inline-block;
+							line-height:20px;
+							background-repeat:no-repeat;
+							background-position: 0 0;
+							vertical-align:middle;
+							cursor:pointer;
+							
+
+						}
+
+						input[type=checkbox].css-checkbox:checked + label.css-label {
+							background-position: 0 -20px;
+							
+						}
+						label.css-label {
+				background-image:url(images/checkboximage.png);
+				-webkit-touch-callout: none;
+				-webkit-user-select: none;
+				-khtml-user-select: none;
+				-moz-user-select: none;
+				-ms-user-select: none;
+				user-select: none;
+			}
+			
+			
 
