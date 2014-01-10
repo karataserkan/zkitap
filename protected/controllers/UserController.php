@@ -75,7 +75,16 @@ class UserController extends Controller
 			$organisationUser->user_id=$user->id;
 			$organisationUser->organisation_id=$organisation->organisation_id;
 			$organisationUser->role="user";
-			$organisationUser->save();
+			if($organisationUser->save())
+			{
+				$msg="USER:INVITATION:0:". json_encode(array('userId'=>$user->id,'organisationId'=>$organisation->organisation_id,'role'=>'user', 'message'=>'invitation accepted'));
+				Yii::log($msg,'info');
+			}
+			else
+			{
+				$msg="USER:INVITATION:1:". json_encode(array('userId'=>$user->id,'organisationId'=>$organisation->organisation_id,'role'=>'user', 'message'=>'invitation accept error'));
+				Yii::log($msg,'info');
+			}
 
 			$invitation->delete();
 
