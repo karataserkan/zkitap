@@ -107,10 +107,10 @@ $this->pageTitle=Yii::app()->name;
 														</span>
 														
 															<?php 
-																echo CHtml::link(CHtml::encode(''), array('site/index'),
+																echo CHtml::link(CHtml::encode(''), array("site/removeUser?userId=".$user['id']."&bookId=".$book->book_id),
 																  array(
-																	'submit'=>array('site/index', 'bookId'=>$book->book_id, 'user'=>$user['id'], 'del'=>'true'),
-																	'params' => array('bookId'=>$book->book_id, 'user'=>$user['id'], 'del'=>'true'),
+																	'submit'=>array("site/removeUser?userId=".$user['id']."&bookId=".$book->book_id, 'userId'=>$user['id'],'bookId'=>$book->book_id),
+																	//'params' => array('bookId'=>$book->book_id, 'user'=>$user['id'], 'del'=>'true'),
 																	'class' => 'icon-close size-15 delete-icon'
 																  )
 																);

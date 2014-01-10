@@ -32,20 +32,21 @@ class SiteController extends Controller
 		// using the default layout 'protected/views/layouts/main.php'
 		if(Yii::app()->user->isGuest)
 			$this->redirect( array('site/login' ) );
-
-
-		if (isset($_POST['del']) && isset($_POST['bookId']) && isset($_POST['user'])) {
-				$command = Yii::app()->db->createCommand();
-				$command->delete('book_users', 'user_id=:user_id && book_id=:book_id', array(':user_id'=>$_POST['user'],':book_id'=>$_POST['bookId']));
-				
-		}
-
 		$this->render('index');
 	}
 
-	//kullanıcı haklarını burada düzenliyorum
-	//ekaratas start
+	public function actionRemoveUser($userId,$bookId)
+	{
+		$command = Yii::app()->db->createCommand();
+		$command->delete('book_users', 'user_id=:user_id && book_id=:book_id', array(':user_id'=>$userId,':book_id'=>$bookId));
 
+		$msg="SITE:REMOVE_USER:0:". json_encode(array(array('user'=>Yii::app()->user->id),array('userId'=>$userId,'bookId'=>$bookId)));
+		Yii::log($msg,'info');
+
+		$this->redirect('index');
+	}
+
+	//kullanıcı haklarını burada düzenliyorum
 	public function actionRight($userId,$bookId,$type)
 	{
 		if(Yii::app()->user->isGuest)
@@ -55,24 +56,41 @@ class SiteController extends Controller
 		    ->createCommand("SELECT * FROM book_users WHERE user_id=:user_id AND book_id=:book_id")
 		    ->bindValues(array(':user_id' => $userId, ':book_id' => $bookId))
 		    ->execute();
-		
 	    
 	    if ($hasRight) {
 	    	
 	    	
-		    Yii::app()->db
+		    if(Yii::app()->db
 		    ->createCommand("UPDATE book_users SET type = :type WHERE user_id=:user_id AND book_id=:book_id")
 		    ->bindValues(array(':type' => $type, ':user_id' => $userId, ':book_id' => $bookId))
-		    ->execute();
+		    ->execute())
+		    {
+		    	$msg="SITE:RIGHT:0:". json_encode(array(array('user'=>Yii::app()->user->id),array('userId'=>$userId,'bookId'=>$bookId,'type'=>$type)));
+				Yii::log($msg,'info');
+		    }
+		    else
+		    {
+		    	$msg="SITE:RIGHT:1:". json_encode(array(array('user'=>Yii::app()->user->id),array('userId'=>$userId,'bookId'=>$bookId,'type'=>$type)));
+				Yii::log($msg,'info');
+		    }
 		}
 	    else
 	    {
 	    	$addUser = Yii::app()->db->createCommand();
-			$addUser->insert('book_users', array(
+			if($addUser->insert('book_users', array(
 			    'user_id'=>$userId,
 			    'book_id'=>$bookId,
 			    'type'   =>$type
-			));	
+			)))
+			{
+				$msg="SITE:RIGHT:0:". json_encode(array(array('user'=>Yii::app()->user->id),array('userId'=>$userId,'bookId'=>$bookId,'type'=>$type)));
+				Yii::log($msg,'info');
+			}
+			else
+			{
+				$msg="SITE:RIGHT:1:". json_encode(array(array('user'=>Yii::app()->user->id),array('userId'=>$userId,'bookId'=>$bookId,'type'=>$type)));
+				Yii::log($msg,'info');
+			}
 	    }
 		
 
@@ -225,7 +243,17 @@ class SiteController extends Controller
 			$model->attributes=$_POST['LoginForm'];
 			// validate user input and redirect to the previous page if valid
 			if($model->validate() && $model->login())
+			{
+				$msg="SITE:LOGIN:0:". json_encode(array('user'=> Yii::app()->user->name,'userId'=>Yii::app()->user->id));
+				Yii::log($msg,'profile');
 				$this->redirect(Yii::app()->user->returnUrl);
+			}
+			else
+			{
+				$msg="SITE:LOGIN:1:". json_encode($_POST['LoginForm']);
+				Yii::log($msg,'profile');
+			}
+				
 		}
 		// display the login form
 		$this->render('login',array('model'=>$model));
@@ -237,7 +265,10 @@ class SiteController extends Controller
 	public function actionLogout()
 	{
 		Yii::app()->user->logout();
-		//$this->redirect(Yii::app()->homeUrl);
+		$msg="SITE:LOGOUT:0:". json_encode(array('user'=> Yii::app()->user->name,'userId'=>Yii::app()->user->id));
+		Yii::log($msg,'profile');
 		$this->redirect(array('login'));
+		//$this->redirect(Yii::app()->homeUrl);
+		
 	}
 }
