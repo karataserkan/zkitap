@@ -212,10 +212,10 @@ var createVideoComponent = function( event, ui, oldcomponent ) {
 
           });
 */
-window.lindneo.tlingit.componentHasDeleted( oldcomponent.id );
-var videoBinary = evt.target.result;
-            var contentType = videoBinary.substr(0, videoBinary.indexOf(';'));
-            var videoType = contentType.substr(contentType.indexOf('/')+1);
+          //window.lindneo.tlingit.componentHasDeleted( oldcomponent.id );
+          var videoBinary = evt.target.result;
+          var contentType = videoBinary.substr(0, videoBinary.indexOf(';'));
+          var videoType = contentType.substr(contentType.indexOf('/')+1);
         
           var response = '';
           var videoURL = '';
@@ -226,6 +226,7 @@ var videoBinary = evt.target.result;
             response=window.lindneo.tlingit.responseFromJson(response);
           
             window.lindneo.dataservice.send( 'UploadFile',{'token': response.result.token, 'file' : videoBinary} , function(data) {
+              videoURL = response.result.URL;
                   var component = {
                       'type': 'video',
                       'data': {
@@ -265,29 +266,19 @@ var videoBinary = evt.target.result;
                   };
 
 
-                 window.lindneo.tlingit.componentHasCreated(component);
+                 if(typeof oldcomponent == 'undefined')
+                  window.lindneo.tlingit.componentHasCreated( component );
+                else{
+                  oldcomponent.data.video.contentType = contentType;
+                  oldcomponent.data.source.attr.src = videoURL;
+                  window.lindneo.tlingit.componentHasUpdated( oldcomponent );
+                }
               });
 
           });
 
 
-$('#image-add-dummy-close-button').click();
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+        $("#image-add-dummy-close-button").trigger('click');
 
         };
         reader.readAsDataURL(e.dataTransfer.files[0]);
