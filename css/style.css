@@ -1879,6 +1879,10 @@ border-right:1px solid #ddd;
 
 
 /* GROUPING OBJECTS ----------------------------------------------------- */
+img.ui-draggable, .ui-draggable img{
+	cursor: move;
+}
+
 
 .ui-icon-gripsmall-diagonal-se{ background-image:none!important; 
 height: 10px!important;
