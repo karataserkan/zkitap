@@ -9,16 +9,18 @@ $organisationId=$organizationUser['organisation_id'];
 
 
 <br><br><br>
-<a href="?r=workspaces/create&organisationId=<?php echo $organisationId; ?>" class="btn white radius float-right book-editors-settings"id="boook-editors-settings" ><i class="icon-add"></i><?php _e('Çalışma Alanı Ekle'); ?></a>	
+	
+<ul style="width:450px">
 <?php
 	foreach ($workspaces as $key => $workspace) {
 		?>
-		<div class="row">
-			<h3><?php echo $workspace['workspace_name']; ?></h3>
-				<a href="#" popup="<?php echo $workspace['workspace_id']; ?>" class="btn white radius float-right book-editors-settings"id="boook-editors-settings" ><i class="icon-users"></i><?php _e('Kullanıcılar'); ?></a>	
-				<a href="?r=workspaces/deleteWorkspace&id=<?php echo $workspace['workspace_id']; ?>&organisationId=<?php echo $organisationId; ?>" class="btn white radius float-right book-editors-settings"id="boook-editors-settings" ><i class="icon-delete"></i><?php _e('Sil'); ?></a>
-				<a href="?r=workspaces/updateWorkspace&id=<?php echo $workspace['workspace_id']; ?>&organisationId=<?php echo $organisationId; ?>" class="btn white radius float-right book-editors-settings"id="boook-editors-settings" ><i class="icon-update"></i><?php _e('Düzenle'); ?></a>	
-		</div>
+		<li>
+			<span><?php echo $workspace['workspace_name']; ?></span>
+				<a href="#" popup="<?php echo $workspace['workspace_id']; ?>" class="btn white radius float-right"><i class="icon-users"></i><?php _e('Kullanıcılar'); ?></a>	
+				<a href="/workspaces/deleteWorkspace?id=<?php echo $workspace['workspace_id']; ?>&organisationId=<?php echo $organisationId; ?>" class="btn white radius float-right"><i class="icon-delete"></i><?php _e('Sil'); ?></a>
+				<a href="/workspaces/updateWorkspace?id=<?php echo $workspace['workspace_id']; ?>&organisationId=<?php echo $organisationId; ?>" class="btn white radius float-right"><i class="icon-update"></i><?php _e('Düzenle'); ?></a>	
+		<hr>
+		</li>
 <center id="popup-close-area" popup="pop-<?php echo $workspace['workspace_id']; ?>" style="display:none; position:relative">
 				<div id="close-div" style="background-color:#123456; width:100% height:#123456; position:fixed;"> </div>
 				<div class="book-editors-options-box-container">
@@ -33,7 +35,7 @@ $organisationId=$organizationUser['organisation_id'];
 							<span id="editor-name" class="editor-name">
 							<?php echo $user['name']." ".$user['surname']; ?>
 							</span>
-							<a href="index.php?r=organisations/delWorkspaceUser&workspaceId=<?php echo $workspace['workspace_id']; ?>&userId=<?php echo $user['id']; ?>&organizationId=<?php echo $organisationId; ?>" class="icon-close size-15 delete-icon"></a>
+							<a href="/organisations/delWorkspaceUser?workspaceId=<?php echo $workspace['workspace_id']; ?>&userId=<?php echo $user['id']; ?>&organizationId=<?php echo $organisationId; ?>" class="icon-close size-15 delete-icon"></a>
 							
 						</div>	
 				<?php endforeach; ?>
@@ -72,14 +74,15 @@ $("[popup='close-<?php echo $workspace['workspace_id']; ?>']").click(function(){
 		<?php
 	}
 ?>
-
+</ul>
+<a href="/workspaces/create?organisationId=<?php echo $organisationId; ?>" class="btn white radius"><i class="icon-add"></i><?php _e('Çalışma Alanı Ekle'); ?></a>
 <script>											
 function sendUser(e){
     var b = e.id;
     var userId=$('#' + b + '> #user').val();
     var workspaceId=$('#' + b + '> #workspaceId').val();
     var organisationId=$('#' + b + ' > #organisationId').val();
-    var link ='?r=organisations/addWorkspaceUser&workspaceId='+workspaceId+'&userId='+userId+'&organizationId='+organisationId;
+    var link ='/organisations/addWorkspaceUser?workspaceId='+workspaceId+'&userId='+userId+'&organizationId='+organisationId;
     window.location.assign(link);
     }
 </script>
