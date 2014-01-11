@@ -167,7 +167,7 @@ $(document).ready(function(){
           }) 
           .dblclick(function(event, ui) {
             console.log(event);
-            console.log(that.options.component);
+            console.log(that.options.component.type);
             if(that.options.component.type == 'image')
               window.lindneo.dataservice.image_popup(event, ui, that.options.component);
             else if(that.options.component.type == 'link')
@@ -176,7 +176,7 @@ $(document).ready(function(){
               window.lindneo.dataservice.video_popup(event, ui, that.options.component);
             else if(that.options.component.type == 'popup')
               window.lindneo.dataservice.popup_popup(event, ui, that.options.component);
-            else if(that.options.component.type == 'popup')
+            else if(that.options.component.type == 'grafik')
               window.lindneo.dataservice.graph_popup(event, ui, that.options.component);
           })
   
