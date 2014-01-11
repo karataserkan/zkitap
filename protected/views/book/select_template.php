@@ -6,7 +6,6 @@ include 'newBookSteps.php';
 <div class="templates_holder">
 
 <?php
-
 foreach ($layouts as $layout)
 {
 	?>
