@@ -178,6 +178,8 @@ $(document).ready(function(){
               window.lindneo.dataservice.popup_popup(event, ui, that.options.component);
             else if(that.options.component.type == 'grafik')
               window.lindneo.dataservice.graph_popup(event, ui, that.options.component);
+            else if(that.options.component.type == 'quiz')
+              window.lindneo.dataservice.quiz_popup(event, ui, that.options.component);
           })
   
           .mouseenter(function(event){
