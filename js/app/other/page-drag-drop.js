@@ -176,7 +176,7 @@ $( document ).ready(function () {
             break; 
 
           case 'grafik':
-            createGraphComponent( event, ui  );
+            window.lindneo.dataservice.graph_popup(event, ui);
             break;
 
           case 'shape':
