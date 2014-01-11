@@ -7,7 +7,7 @@
 msgid   ""
 msgstr  "Project-Id-Version: PACKAGE VERSION\n"
         "Report-Msgid-Bugs-To: \n"
-        "POT-Creation-Date: 2014-01-10 06:00+0000\n"
+        "POT-Creation-Date: 2014-01-11 06:00+0000\n"
         "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
         "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
         "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -113,30 +113,30 @@ msgstr  "Templates"
 msgid   "Çözünürlük"
 msgstr  "Resolution"
 
-#: protected/views/book/author.php:135 protected/views/book/author.php:135
+#: protected/views/book/author.php:135 protected/views/book/author.php:134
 msgid   "Görünüm"
 msgstr  "View"
 
-#: protected/views/book/author.php:137 protected/views/book/author.php:137
+#: protected/views/book/author.php:137 protected/views/book/author.php:136
 msgid   "Cetvel"
 msgstr  "Rulers"
 
-#: protected/views/book/author.php:138 protected/views/book/author.php:138
+#: protected/views/book/author.php:138 protected/views/book/author.php:137
 msgid   "Rehber"
 msgstr  "Guides"
 
-#: protected/views/book/author.php:139 protected/views/book/author.php:139
+#: protected/views/book/author.php:139 protected/views/book/author.php:138
 msgid   "Yorumlar"
 msgstr  "Comments"
 
 #: protected/views/book/author.php:161 protected/views/book/author.php:162
-#: protected/views/book/author.php:163 protected/views/book/author.php:163
+#: protected/views/book/author.php:163 protected/views/book/author.php:167
 msgid   "Profil"
 msgstr  "Profile"
 
 #: protected/views/book/author.php:162 protected/views/layouts/main.php:69
 #: protected/views/book/author.php:163 protected/views/layouts/main.php:70
-#: protected/views/book/author.php:164 protected/views/book/author.php:164
+#: protected/views/book/author.php:164 protected/views/book/author.php:168
 #: protected/views/layouts/main.php:70
 msgid   "Çıkış"
 msgstr  "Sign Out"
@@ -195,3 +195,7 @@ msgstr  "Save"
 #: protected/views/organisations/workspaces.php:25
 msgid   "Çalışma Alanı Kullanıcıları"
 msgstr  "Workspace Users"
+
+#: protected/controllers/OrganisationsController.php:373
+msgid   "Girdiğiniz e-posta adresi geçersiz."
+msgstr  ""

@@ -113,7 +113,11 @@ Stack trace:
 REQUEST_URI=/index.php?r=EditorActions%2FGetPageComponents
 HTTP_REFERER=http://ekaratas.dev.lindneo.com/?r=organisations/workspaces&organizationId=qwertyu
 ---
+<<<<<<< HEAD
 2014/01/09 09:08:20 [error] [exception.CHttpException.400] exception 'CHttpException' with message 'İsteğiniz geçersiz.' in /home/dump/yii_framework/framework/web/CController.php:336
+=======
+2014/01/09 12:40:34 [error] [exception.CHttpException.400] exception 'CHttpException' with message 'Your request is invalid.' in /home/dump/yii_framework/framework/web/CController.php:336
+>>>>>>> 3dd30aca5dd729f1cef32fa86d812f469c3704b0
 Stack trace:
 #0 /home/dump/yii_framework/framework/web/CController.php(309): CController->invalidActionParams(Object(CInlineAction))
 #1 /home/dump/yii_framework/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
@@ -121,6 +125,7 @@ Stack trace:
 #3 /home/dump/yii_framework/framework/web/CWebApplication.php(282): CController->run('GetPageComponen...')
 #4 /home/dump/yii_framework/framework/web/CWebApplication.php(141): CWebApplication->runController('EditorActions/G...')
 #5 /home/dump/yii_framework/framework/base/CApplication.php(169): CWebApplication->processRequest()
+<<<<<<< HEAD
 #6 /var/www/squid-pacific/master/index.php(15): CApplication->run()
 #7 {main}
 REQUEST_URI=/index.php?r=EditorActions%2FGetPageComponents
@@ -190,4 +195,18 @@ Stack trace:
 #7 {main}
 REQUEST_URI=/index.php?r=EditorActions%2FGetPageComponents
 HTTP_REFERER=http://master.lindneo.com/index.php?r=site/index
+=======
+#6 /var/www/squid-pacific/bekir/index.php(15): CApplication->run()
+#7 {main}
+REQUEST_URI=/EditorActions/GetPageComponents
+HTTP_REFERER=http://bekir.dev.lindneo.com/index.php?r=book/author&bookId=2GjHRKKEoDh6JxcjGoFIyE6cxT6eaUS57TWLdaBrSpDD&page=nwrzQWBWld1GDKZr618uqO6fMh4AdAgQiSsQfZelgddS
+---
+2014/01/09 12:40:34 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "css/favicon.png".' in /home/dump/yii_framework/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /home/dump/yii_framework/framework/web/CWebApplication.php(141): CWebApplication->runController('css/favicon.png')
+#1 /home/dump/yii_framework/framework/base/CApplication.php(169): CWebApplication->processRequest()
+#2 /var/www/squid-pacific/bekir/index.php(15): CApplication->run()
+#3 {main}
+REQUEST_URI=/css/favicon.png
+>>>>>>> 3dd30aca5dd729f1cef32fa86d812f469c3704b0
 ---

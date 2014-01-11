@@ -11,12 +11,44 @@ $( document ).ready(function () {
     //disable in page draggin selection
     //$('#editor_view_pane').mousemove(function(event){event.stopImmediatePropagation();return false;});
   */
-    $('#search').autocomplete({
+
+    $('#searchn').autocomplete({
       appendTo: "#page" ,
-      minLength: 1, 
+      minLength: 3, 
       autoFocus: true,
       source: function( request, response ) {
-              $.ajax({
+                console.log('request:'+request);
+                console.log('response:'+response);
+                var data= {
+                  'currentPageId': window.lindneo.currentPageId,
+                  'searchTerm':request.term 
+                };
+                window.lindneo.dataservice.send('SearchOnBook',data,
+
+                  function( data ) {
+                    data=window.lindneo.tlingit.responseFromJson(data);
+
+                    console.log(data);
+                    
+                  if (data.result==null) return;
+                 
+                  response( $.map( 
+                    data.result.components, function( item ) {
+                      // console.log(item.search);
+                      var result={
+                        'label': item.search.similar_result,
+                        'value': item.id
+                      };
+                      console.log('REsult'+result);
+                      return result;
+                    })
+                  );
+                }
+
+
+
+                  );
+              /*$.ajax({
                 url: "http://dev.lindneo.com/index.php?r=EditorActions/SearchOnBook",
                 dataType: "json",
                 data: {
@@ -38,7 +70,7 @@ $( document ).ready(function () {
                     })
                   );
                 }
-              });
+              });*/
               //console.log(response);
             },
       select: function( event, ui ) {
@@ -47,7 +79,7 @@ $( document ).ready(function () {
           if (ui.item) {
               //console.log(ui.item);
               //window.location.href=event.currentTarget.baseURI;
-            //$('#searchform').submit();
+            $('#searchform').submit();
           }
 
           
@@ -166,33 +198,34 @@ $( document ).ready(function () {
       accept:'.component'
     
     });
-  
-    var el = document.getElementById("current_page");
-    var FileBinary = '';
+    if(document.getElementById("current_page")!= null){
+      var el = document.getElementById("current_page");
+      var FileBinary = '';
 
-    el.addEventListener("dragenter", function(e){
+      el.addEventListener("dragenter", function(e){
+          e.stopPropagation();
+          e.preventDefault();
+        }, false);
+
+      el.addEventListener("dragexit", function(e){
+        e.stopPropagation();
+        e.preventDefault();
+      },false);
+
+      el.addEventListener("dragover", function(e){
         e.stopPropagation();
         e.preventDefault();
       }, false);
-
-    el.addEventListener("dragexit", function(e){
-      e.stopPropagation();
-      e.preventDefault();
-    },false);
-
-    el.addEventListener("dragover", function(e){
-      e.stopPropagation();
-      e.preventDefault();
-    }, false);
-    el.addEventListener("drop", function(e){
-      e.stopPropagation();
-      e.preventDefault();
-      var file = e.dataTransfer.files[0];
-      var reader = new FileReader();
-      var component = {};
-      console.log(e);
-      window.lindneo.dataservice.newComponentDropPage(e, reader, file);
-    });
+      el.addEventListener("drop", function(e){
+        e.stopPropagation();
+        e.preventDefault();
+        var file = e.dataTransfer.files[0];
+        var reader = new FileReader();
+        var component = {};
+        console.log(e);
+        window.lindneo.dataservice.newComponentDropPage(e, reader, file);
+      });
+    };
     
     $('.chapter-title').change(function(){
         window.lindneo.tlingit.ChapterUpdated(
