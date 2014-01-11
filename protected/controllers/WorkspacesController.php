@@ -73,10 +73,19 @@ class WorkspacesController extends Controller
 			if($model->save())
 			{
 				$addWorkspaceOrganization = Yii::app()->db->createCommand();
-				$addWorkspaceOrganization->insert('organisation_workspaces', array(
+				if($addWorkspaceOrganization->insert('organisation_workspaces', array(
 				    'organisation_id'=>$organisationId,
 				    'workspace_id'=>$model->workspace_id,
-				));
+				)))
+				{
+					$msg="WORKSPACE:CREATE:0:". json_encode(array(array('user'=>Yii::app()->user->id),array('workspaceId'=>$model->workspace_id,'organisationId'=>$organisationId)));
+					Yii::log($msg,'info');
+				}
+				else
+				{
+					$msg="WORKSPACE:CREATE:1:". json_encode(array(array('user'=>Yii::app()->user->id),array('workspaceId'=>$model->workspace_id,'organisationId'=>$organisationId)));
+					Yii::log($msg,'info');
+				}
 
 				$addWorkspaceOwner = Yii::app()->db->createCommand();
 				$addWorkspaceOwner->insert('workspaces_users', array(
@@ -85,7 +94,7 @@ class WorkspacesController extends Controller
 				    'owner'=>'1',
 				));
 
-				$this->redirect( array('organisations/workspaces&organizationId='.$organisationId ) );
+				$this->redirect( array('organisations/workspaces?organizationId='.$organisationId ) );
 			}
 				
 		}
@@ -136,7 +145,11 @@ class WorkspacesController extends Controller
 		{
 			$model->attributes=$_POST['Workspaces'];
 			if($model->save())
-				$this->redirect( array('organisations/workspaces&organizationId='.$organisationId ) );
+			{
+				$msg="WORKSPACE:UPDATE_WORKSPACE:0:". json_encode(array(array('user'=>Yii::app()->user->id),array('workspaceId'=>$id,'organisationId'=>$organisationId)));
+				Yii::log($msg,'info');
+				$this->redirect( array('organisations/workspaces?organizationId='.$organisationId ) );
+			}
 		}
 
 		$this->render('update',array(
@@ -166,7 +179,7 @@ class WorkspacesController extends Controller
 		$command = Yii::app()->db->createCommand();
 		$command->delete('organisation_workspaces', 'organisation_id=:organisation_id && workspace_id=:workspace_id', array(':organisation_id'=>$organisationId,':workspace_id'=>$id));
 
-		$this->redirect( array('organisations/workspaces&organizationId='.$organisationId ) );
+		$this->redirect( array('organisations/workspaces?organizationId='.$organisationId ) );
 	}
 
 	/**

@@ -687,7 +687,11 @@ right join book using (book_id) where book_id='$bookId' and type!='image';";
 		//echo $ebook->getNiceName('pdf');
 		
 
-		$ebook->download() ;
+		if($ebook->download())
+		{
+			$msg="EDITOR_ACTIONS:EXPORT_BOOK:0:". json_encode(array(array('user'=>Yii::app()->user->id),array('bookId'=>$bookId)));
+			Yii::log($msg,'info');
+		}
 	}
 
 	public function actionExportPdfBook($bookId=null){
@@ -703,6 +707,8 @@ right join book using (book_id) where book_id='$bookId' and type!='image';";
 		header("Content-Disposition: attachment; filename=".$ebook->getSanitizedFilename());
 		header("Pragma: no-cache");
 		readfile($ebook->getNiceName('pdf'));
+		$msg="EDITOR_ACTIONS:EXPORT_PDF_BOOK:0:". json_encode(array(array('user'=>Yii::app()->user->id),array('bookId'=>$bookId)));
+		Yii::log($msg,'info');
 	}
 
 

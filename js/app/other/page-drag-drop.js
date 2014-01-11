@@ -39,7 +39,7 @@ $( document ).ready(function () {
                         'label': item.search.similar_result,
                         'value': item.id
                       };
-                      console.log('Result is'+item.id);
+                      console.log('REsult'+result);
                       return result;
                     })
                   );
@@ -74,7 +74,7 @@ $( document ).ready(function () {
               //console.log(response);
             },
       select: function( event, ui ) {
-          //console.log('event');
+          //console.log('event       ');
           console.log(event);
           if (ui.item) {
               //console.log(ui.item);
@@ -141,6 +141,7 @@ $( document ).ready(function () {
           return;
         }
         */
+        console.log(ui);
         switch( $(event.toElement).attr('ctype') ) {
           
           case 'text':
@@ -151,7 +152,7 @@ $( document ).ready(function () {
             break;
 
           case 'image':
-            createImageComponent( event, ui );
+            window.lindneo.dataservice.image_popup(event, ui);
             break;
 
           case 'galery':
@@ -163,19 +164,19 @@ $( document ).ready(function () {
             break;
 
           case 'quiz':
-            createQuizComponent( event, ui );
+            window.lindneo.dataservice.quiz_popup(event, ui);
             break;
 
           case 'video':
-            createVideoComponent( event, ui );
+            window.lindneo.dataservice.video_popup(event, ui);
             break; 
 
           case 'popup':
-            createPopupComponent( event, ui );
+            window.lindneo.dataservice.popup_popup(event, ui);
             break; 
 
           case 'grafik':
-            createGraphComponent( event, ui  );
+            window.lindneo.dataservice.graph_popup(event, ui);
             break;
 
           case 'shape':
@@ -183,7 +184,7 @@ $( document ).ready(function () {
             break;
 
           case 'link':
-            createLinkComponent( event, ui  );
+            window.lindneo.dataservice.link_popup(event, ui);
             break;
           case 'table':
             createTableComponent( event, ui  );
@@ -198,6 +199,37 @@ $( document ).ready(function () {
       accept:'.component'
     
     });
+
+    function image_popup(event, ui, component){
+      $("<div class='popup ui-draggable' id='pop-image-popup' style='display: block; top:" + (ui.offset.top-$(event.target).offset().top ) + "px; left: " + ( ui.offset.left-$(event.target).offset().left ) + "px;'> \
+        <div class='popup-header'> \
+        Görsel Ekle \
+        <div class='popup-close' id='image-add-dummy-close-button'>x</div> \
+        </div> \
+          <div class='gallery-inner-holder'> \
+            <div style='clear:both'></div> \
+            <div class='add-image-drag-area' id='dummy-dropzone'> </div> \
+          </div> \
+          <div>\
+            <input type='text' name='width' id='width' placeholder='Genişlik' value=''>\
+            <input type='text' name='height' id='height' placeholder='Yükseklik' value=''>\
+          </div> \
+        </div>").appendTo('body').draggable();
+
+        $('#image-add-dummy-close-button').click(function(){
+
+        $('#pop-image-popup').remove();  
+
+        if ( $('#pop-image-popup').length ){
+          $('#pop-image-popup').remove();  
+        }
+
+      });
+      console.log(component);
+      createImageComponent( event, ui, component );
+
+    };
+
     if(document.getElementById("current_page")!= null){
       var el = document.getElementById("current_page");
       var FileBinary = '';
@@ -390,7 +422,7 @@ $( document ).ready(function () {
   window.lindneo.toolbox.load();
   $('#current_page')
 	.click(function(e){
-		console.log(e);
+		//console.log(e);
 		if($(e.target).attr('id')=="current_page")
 			$('.selected').trigger('unselect');	
 	})

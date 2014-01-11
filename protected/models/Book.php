@@ -46,6 +46,7 @@ class Book extends CActiveRecord
 			array('book_id, workspace_id', 'length', 'max'=>44),
 			array('title, author', 'length', 'max'=>255),
 			array('created, publish_time, data', 'safe'),
+			//array('pdf_file', 'file', 'types'=>'pdf,doc,docx'),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
 			array('book_id, workspace_id, title, author, created, publish_time, data', 'safe', 'on'=>'search'),
@@ -76,7 +77,9 @@ class Book extends CActiveRecord
 			'author' => 'Yazar',
 			'created' => 'Oluşturulma Tarihi',
 			'publish_time' => 'Publish Time',
+			//'pdf_file'=>'Pdf File',
 			'data' => 'Data',
+			'pdf_file' => 'File',
 		);
 	}
 
@@ -98,10 +101,33 @@ class Book extends CActiveRecord
 		$criteria->compare('created',$this->created,true);
 		$criteria->compare('publish_time',$this->publish_time,true);
 		$criteria->compare('data',$this->data,true);
+		$criteria->compare('pdf_file',$this->pdf_file,true);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
 		));
+	}
+	public function setData($attribute,$value)
+	{
+		$book_data=json_decode($this->data,true);
+		$book_data[$attribute]=$value;
+		$this->data=json_encode($book_data);
+	}
+
+	public function getData($attribute)
+	{
+		$bookData = json_decode($this->data,true);
+		return (isset($bookData[$attribute])) ? $bookData[$attribute] : false;
+	}
+
+	public function setPdfFile($value=null)
+	{
+		$this->pdf_file=$value;
+	}
+
+	public function getPdfFile()
+	{
+		return $this->pdf_file;
 	}
 
 	public function getPageSize(){
@@ -163,4 +189,5 @@ class Book extends CActiveRecord
 		return $bookSize = array('height'=>$bookHeight,
 					'width'=>$bookWidth);
 	}
+
 }
