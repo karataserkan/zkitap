@@ -164,7 +164,7 @@ $( document ).ready(function () {
             break;
 
           case 'quiz':
-            createQuizComponent( event, ui );
+            window.lindneo.dataservice.quiz_popup(event, ui);
             break;
 
           case 'video':
@@ -176,7 +176,7 @@ $( document ).ready(function () {
             break; 
 
           case 'grafik':
-            createGraphComponent( event, ui  );
+            window.lindneo.dataservice.graph_popup(event, ui);
             break;
 
           case 'shape':
