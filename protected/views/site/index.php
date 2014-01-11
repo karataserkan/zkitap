@@ -23,7 +23,7 @@ $this->pageTitle=Yii::app()->name;
 		if($organization)
 		{
 		?>
-		<a href='?r=organisations/index&organizationId=<?php echo $organization["organisation_id"]?>' class="btn white radius " style="margin-left:20px;"><?php echo __('Organizasyon');?></a>
+		<a href='/organisations/index/<?php echo $organization["organisation_id"]?>' class="btn white radius " style="margin-left:20px;"><?php echo __('Organizasyon');?></a>
 		<?php
 		}
 
@@ -33,7 +33,7 @@ $this->pageTitle=Yii::app()->name;
 	    	<div class='workspace'>
 	    		<h1 class="float-left white"><?php echo $workspace->workspace_name; ?></h1>
 	    		
-	    		<a href='?r=book/newBook' class="btn white radius " style="margin-left:20px;">
+	    		<a href='/book/newBook' class="btn white radius " style="margin-left:20px;">
 	    			<?php 
 	    			echo __('Yeni Kitap');
 
@@ -75,27 +75,21 @@ $this->pageTitle=Yii::app()->name;
 							<div class="book-list-box-text-container" style="text-align:right;">
 								<?php
 									if ($userType==='owner') {
-										echo CHtml::link(CHtml::encode(''), array('book/delete', 'bookId'=>$book->book_id),
-										  array(
-										    'submit'=>array('book/delete', 'bookId'=>$book->book_id),
-										    'class' => 'delete','confirm'=>'Kitap silinecek. Onaylıyor musun?',
-										    'class' => 'btn red radius white icon-delete'
-											
-										  )
-										);
+										?><a href="<?php echo '/book/delete/'.$book->book_id ?>" class="btn red radius white icon-delete" id="pop-video"><?php echo __('Sil');?></a> <?php
+										
 										?>
 
-										<a href="<?php echo Yii::app()->createUrl('book/author', array('bookId'=>$book->book_id) ); ?>" class="btn white btn radius " id="pop-video"><?php echo __('Düzenle');?></a>
+										<a href="<?php echo '/book/author/'.$book->book_id ?>" class="btn white btn radius " id="pop-video"><?php echo __('Düzenle');?></a>
 										<?php
 									}
 									elseif ($userType==='editor') {
 										?>
-										<a href="<?php echo Yii::app()->createUrl('book/author', array('bookId'=>$book->book_id) ); ?>" class="btn white btn radius " id="pop-video"><?php echo __('Düzenle');?></a>
+										<a href="<?php echo '/book/author/'.$book->book_id ?>" class="btn white btn radius " id="pop-video"><?php echo __('Düzenle');?></a>
 										<?php
 									}
 								?>
 
-								<a href="<?php echo Yii::app()->createUrl('EditorActions/ExportBook', array('bookId'=>$book->book_id) ); ?>" class="btn bck-light-green white radius" ><i class="icon-download"></i><?php echo __('İndir');?></a>
+								<a href="<?php echo 'EditorActions/ExportBook/'.$book->book_id; ?>" class="btn bck-light-green white radius" ><i class="icon-download"></i><?php echo __('İndir');?></a>
 										<!-- editor options-->
 										<center id="popup-close-area" popup="pop-<?php echo $book->book_id; ?>" style="display:none; position:relative">
 											<div id="close-div" style="background-color:#123456; width:100% height:#123456; position:fixed;"> </div>
@@ -113,10 +107,10 @@ $this->pageTitle=Yii::app()->name;
 														</span>
 														
 															<?php 
-																echo CHtml::link(CHtml::encode(''), array('site/index'),
+																echo CHtml::link(CHtml::encode(''), array("site/removeUser?userId=".$user['id']."&bookId=".$book->book_id),
 																  array(
-																	'submit'=>array('site/index', 'bookId'=>$book->book_id, 'user'=>$user['id'], 'del'=>'true'),
-																	'params' => array('bookId'=>$book->book_id, 'user'=>$user['id'], 'del'=>'true'),
+																	'submit'=>array("site/removeUser?userId=".$user['id']."&bookId=".$book->book_id, 'userId'=>$user['id'],'bookId'=>$book->book_id),
+																	//'params' => array('bookId'=>$book->book_id, 'user'=>$user['id'], 'del'=>'true'),
 																	'class' => 'icon-close size-15 delete-icon'
 																  )
 																);

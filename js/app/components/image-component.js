@@ -100,32 +100,7 @@ $(document).ready(function(){
 
 
 
-var createImageComponent = function ( event, ui ) {
-
-    $("<div class='popup ui-draggable' id='pop-image-popup' style='display: block; top:" + (ui.offset.top-$(event.target).offset().top ) + "px; left: " + ( ui.offset.left-$(event.target).offset().left ) + "px;'> \
-    <div class='popup-header'> \
-    Görsel Ekle \
-    <div class='popup-close' id='image-add-dummy-close-button'>x</div> \
-    </div> \
-      <div class='gallery-inner-holder'> \
-        <div style='clear:both'></div> \
-        <div class='add-image-drag-area' id='dummy-dropzone'> </div> \
-      </div> \
-      <div>\
-        <input type='text' name='width' id='width' placeholder='Genişlik' value=''>\
-        <input type='text' name='height' id='height' placeholder='Yükseklik' value=''>\
-      </div> \
-    </div>").appendTo('body').draggable();
-
-    $('#image-add-dummy-close-button').click(function(){
-
-      $('#pop-image-popup').remove();  
-
-      if ( $('#pop-image-popup').length ){
-        $('#pop-image-popup').remove();  
-      }
-
-    });
+var createImageComponent = function ( event, ui ,oldcomponent) {
 
     var el = document.getElementById("dummy-dropzone");
     var imageBinary = '';
@@ -146,6 +121,22 @@ var createImageComponent = function ( event, ui ) {
     }, false);
 
     el.addEventListener("drop", function(e){
+
+      console.log(ui);
+
+
+    if(typeof oldcomponent == 'undefined'){
+      console.log('dene');
+      var top = (ui.offset.top-$(event.target).offset().top ) + 'px';
+      var left = ( ui.offset.left-$(event.target).offset().left ) + 'px';
+      
+    }
+    else{
+      top = oldcomponent.data.self.css.top;
+      left = oldcomponent.data.self.css.left;
+      window.lindneo.tlingit.componentHasDeleted( oldcomponent.id );
+    };
+      
       var image_width = '200px';
       var image_height = '150px';
       
@@ -198,8 +189,8 @@ var createImageComponent = function ( event, ui ) {
             'self': {
               'css': {
                 'position':'absolute',
-                'top': (ui.offset.top-$(event.target).offset().top ) + 'px',
-                'left':  ( ui.offset.left-$(event.target).offset().left ) + 'px',
+                'top': top ,
+                'left':  left ,
                 'width': image_width,
                 'height': image_height,
                 'background-color': 'transparent',

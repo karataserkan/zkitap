@@ -245,10 +245,17 @@ class BookController extends Controller
 		));
 	}
 
-	public function actionAuthor($bookId=null,$page=null,$component=null,$id=null){
+	public function actionAuthor($bookId=null,$page=null,$component=null,$id=null,$id2=null){
 		if($bookId==null){
 			$bookId=$id;
-		} 
+		}
+		
+		if($page==null)
+		{
+			$page=$id2;
+		}
+		
+
 		$model=$this->loadModel($bookId);
 		
 		$bookSize=$model->getPageSize();
@@ -299,8 +306,11 @@ class BookController extends Controller
 	 * If deletion is successful, the browser will be redirected to the 'admin' page.
 	 * @param integer $id the ID of the model to be deleted
 	 */
-	public function actionDelete($bookId=null)
+	public function actionDelete($bookId=null,$id=null)
 	{ 
+		if($bookId==null){
+			$bookId=$id;
+		}
 		
 		if (isset($bookId)) {
 			$this->loadModel($bookId)->delete();

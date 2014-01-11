@@ -120,8 +120,11 @@ class OrganisationsController extends Controller
 	/**
 	 * Lists all models.
 	 */
-	public function actionIndex($organizationId=null)
+	public function actionIndex($organizationId=null,$id=null)
 	{
+		if($organizationId==null){
+			$organizationId=$id;
+		}
 		$dataProvider=new CActiveDataProvider('Organisations');
 		$this->render('index',array(
 			'organizationId' => $organizationId,		
@@ -239,8 +242,12 @@ class OrganisationsController extends Controller
 			$this->redirect( array('site/login' ) );
 
 		$command = Yii::app()->db->createCommand();
-		$command->delete('workspaces_users', 'userid=:userid && workspace_id=:workspace_id', array(':userid'=>$userId,':workspace_id'=>$workspaceId));
-		$this->redirect( array('organisations/workspaces&organizationId='.$organizationId ) );
+		if($command->delete('workspaces_users', 'userid=:userid && workspace_id=:workspace_id', array(':userid'=>$userId,':workspace_id'=>$workspaceId)))
+		{
+			$msg="ORGANISATIONS:DEL_WORKSPACE_USER:0:". json_encode(array(array('user'=>Yii::app()->user->id),array('userId'=>$userId,'workspaceId'=>$workspaceId,'organisationId'=>$organizationId)));
+			Yii::log($msg,'info');
+		}
+		$this->redirect( array('organisations/workspaces?organizationId='.$organizationId ) );
 	}
 
 	/**
@@ -259,7 +266,11 @@ class OrganisationsController extends Controller
 			$addUser->insert('workspaces_users', array(
 			    'workspace_id'=>$workspaceId,
 			    'userid'=>$userId,
-			));	
+			));
+
+			$msg="ORGANISATIONS:ADD_WORKSPACE_USER:0:". json_encode(array(array('user'=>Yii::app()->user->id),array('userId'=>$userId,'workspaceId'=>$workspaceId,'organisationId'=>$organizationId)));
+			Yii::log($msg,'info');
+
 		$this->redirect( array('organisations/workspaces&organizationId='.$organizationId ) );
 	}
 
@@ -300,8 +311,18 @@ class OrganisationsController extends Controller
 		}
 
 		$user = OrganisationUsers::model()->findByPk(array('user_id'=>$userId,'organisation_id'=>$organisationId));
-		$user->delete();
-		$this->redirect( array('organisations/users&organizationId='.$organisationId ) );
+		if($user->delete())
+		{
+			$msg="ORGANISATIONS:DELETE_ORGANISATION_USER:0:". json_encode(array(array('user'=>Yii::app()->user->id),array('userId'=>$userId,'organisationId'=>$organizationId)));
+			Yii::log($msg,'info');
+		}
+		else
+		{
+			$msg="ORGANISATIONS:DELETE_ORGANISATION_USER:1:". json_encode(array(array('user'=>Yii::app()->user->id),array('userId'=>$userId,'organisationId'=>$organizationId)));
+			Yii::log($msg,'info');
+		}
+
+		$this->redirect( array('organisations/users?organizationId='.$organisationId ) );
 	}
 
 	/**
@@ -362,16 +383,18 @@ class OrganisationsController extends Controller
 	        
 	        if(!$mail->Send()) {
 	            echo "Mailer Error: " . $mail->ErrorInfo;
+	            $msg="ORGANISATIONS:ADD_USER:1:". json_encode(array(array('user'=>Yii::app()->user->id),array('userId'=>$userId,'organisationId'=>$organisation->organisation_id,'message'=>'Mailer Error'.$mail->ErrorInfo)));
+				Yii::log($msg,'info');
 	        }else {
 	            $success=__("Kullanıcı davet edildi.");
+	            $msg="ORGANISATIONS:ADD_USER:0:". json_encode(array(array('user'=>Yii::app()->user->id),array('userId'=>$userId,'organisationId'=>$organisation->organisation_id)));
+				Yii::log($msg,'info');
 	        }
-
-
-
 		} else {
 		    //Email address is NOT valid
 		    $error = __("Girdiğiniz e-posta adresi geçersiz.");
-
+		    $msg="ORGANISATIONS:ADD_USER:1:". json_encode(array(array('user'=>Yii::app()->user->id),array('organisationId'=>$organisation->organisation_id,'message'=>'invalid email address')));
+			Yii::log($msg,'info');
 		}
 
 		$this->render('add_user', array(

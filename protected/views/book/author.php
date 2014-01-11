@@ -36,7 +36,6 @@ if($page==null)
 
 
 
-
  
 $current_chapter=Chapter::model()->findByPk($page->chapter_id);
 $current_page=Page::model()->findByPk($page->page_id);
@@ -115,15 +114,16 @@ $current_user=User::model()->findByPk(Yii::app()->user->id);
 			   <li><a contenteditable="true"> <?php echo $model->title; ?></a></li>
 			   <li class='has-sub'><a href='#'><span>Dosya</span></a>
 					<ul>
-			         <li><a href="<?php echo $this->createUrl('site/index');  ?>"><span>Kitaplarım</span></a></li>
-			         <li><a href="<?php echo $this->createUrl("EditorActions/ExportPdfBook", array('bookId' => $model->book_id ));?>"> PDF Yayınla</i></a></li>
-			         <li><a href="<?php echo $this->createUrl("EditorActions/ExportBook", array('bookId' => $model->book_id ));?>">Yayınla</a></li>
+			         <li><a href="<?php echo $this->createUrl('site/index');  ?>"><span><i class="icon-book"></i>Kitaplarım</span></a></li>
+			         <li><a href="<?php echo $this->createUrl('site/index');  ?>"><span><i class="icon-folder-open"></i>Pdf İçe Aktar </span></a></li>
+			         <li><a href="<?php echo $this->createUrl("EditorActions/ExportPdfBook", array('bookId' => $model->book_id ));?>"> <i class="icon-doc-inv"></i>PDF Yayınla</i></a></li>
+			         <li><a href="<?php echo $this->createUrl("EditorActions/ExportBook", array('bookId' => $model->book_id ));?>"><i class="icon-publish"></i>Yayınla</a></li>
 					</ul>
 			   </li>
 			   <li class='has-sub'><a href='#'><span>Düzenle</span></a>
 			      <ul>
-			         <li><a href='#' id="undo"><i class="icon-undo size-15"></i><span>Geri Al</span></a></li>
-			         <li><a href='#' id="redo"><i class="icon-redo size-15"></i><span>İleri Al</span></a></li>
+			         <li><a href='#' id="undo"><i class="icon-undo size-10"></i><span>Geri Al</span></a></li>
+			         <li><a href='#' id="redo"><i class="icon-redo size-10"></i><span>İleri Al</span></a></li>
 			         <li><a href='#' id="generic-cut"><i class="icon-cut size-20"></i><span>Kes</span></a></li>
 			         <li><a href='#' id="generic-copy"><i class="icon-copy size-20"></i><span>Kopyala</span></a></li>
 			         <li><a href='#' id="generic-paste"><i class="icon-paste size-20"></i><span>Yapıştır</span></a></li>
@@ -147,7 +147,7 @@ $current_user=User::model()->findByPk(Yii::app()->user->id);
 			   <!--
 			   <input type="text" id="searchn" name="component" style="display:none;" class="search radius ui-autocomplete-input" placeholder="Ara" autocomplete="on">
 			   -->
-			   <span id="search_btn">&nbsp;<i class="icon-zoom size-15"></i></span></a></li>
+			   <span id="search_btn">&nbsp;&nbsp;&nbsp;<i class="icon-zoom size-15"></i></span></a></li>
 			  
 			 
 			   <li style="float:right; " class='has-sub'>
@@ -165,7 +165,7 @@ $current_user=User::model()->findByPk(Yii::app()->user->id);
 
 			      	<?php if (!Yii::app()->user->isGuest) {?>
 			         <li><a href='/index.php?r=user/profile'><span><?php _e('Profil') ?></span></a></li>
-			         <li><a href='#'><span><?php _e('Çıkış') ?></span></a></li>
+			         <?php echo " <li>". CHtml::link(__("Çıkış"),"/site/logout") ."</li>"; ?>
 					<?php 
 						foreach (Yii::app()->params->availableLanguages  as $lang_id => $lang_name) {
 							$_GET['language']=$lang_id;
@@ -179,8 +179,8 @@ $current_user=User::model()->findByPk(Yii::app()->user->id);
 			      </ul>
 			   </li>
 			   
-			   <li class="left-border" style="float:right; height: 37px;padding-top: 5px; ">
-			   <a><i id="save_status" class="size-30"></i></a>
+			   <li class="left-border" style="float:right; height:37px; min-width:50px; text-align:center; padding-top: 5px; ">
+			  <i id="save_status" class="size-30"></i>
 			   </li>
 			</ul>
 			<script>
@@ -764,7 +764,7 @@ Grafik Ekle
 	
 		
 		
-<div id='components' >
+<div class='components' >
 		<!--<div class="components-header">MEDYA</div>
 		<a href="#" ctype="galery" class="radius component grey-9"><i class="icon-m-galery  size-20"></i> Galeri</a>
 		<a href="#" ctype="text" class="radius component grey-9"><i class="icon-m-text size-20"></i> Text</a>
@@ -773,13 +773,13 @@ Grafik Ekle
 			-->
 		<ul class="component_holder">
 		
-			<li class="left_bar_titles">Medya</li>
+			<li class="left_bar_titles"></li>
 			
 			<li ctype="image" class="component icon-m-image">&nbsp;&nbsp;&nbsp;&nbsp;Görsel</li>
 			<li ctype="sound" class="component icon-m-sound">&nbsp;&nbsp;&nbsp;&nbsp;Ses</li>
 			<li ctype="video" class="component icon-m-video">&nbsp;&nbsp;&nbsp;&nbsp;Video</li>
 			
-			<li class="left_bar_titles">Uygulama</li>
+			<li class="left_bar_titles"></li>
 			
 			<li ctype="galery" class="component icon-m-galery">&nbsp;&nbsp;&nbsp;&nbsp;Galeri</li>
 			<li ctype="quiz"  class="component icon-m-quiz">&nbsp;&nbsp;&nbsp;&nbsp;Quiz</li>
@@ -787,29 +787,26 @@ Grafik Ekle
 			<li ctype="link" class="component icon-m-link ui-draggable">&nbsp;&nbsp;&nbsp;&nbsp;Link</li>
 			<li ctype="popup" class="component icon-m-popup">&nbsp;&nbsp;&nbsp;&nbsp;Pop-up</li>
 			
-			<li class="left_bar_titles">Araçlar</li>
+			<li class="left_bar_titles"></li>
 
 			<li ctype="text" class="component icon-m-text">&nbsp;&nbsp;&nbsp;&nbsp;Yazı</li>
 			<li ctype="grafik" class="component icon-m-charts">&nbsp;&nbsp;&nbsp;&nbsp;Grafik</li>
 			<li ctype="shape" class="component icon-m-shape">&nbsp;&nbsp;&nbsp;&nbsp;Şekil</li>
-			<li ctype="table" class="component icon-m-shape">&nbsp;&nbsp;&nbsp;&nbsp;Tablo</li>
+			<li ctype="table" class="component icon-t-merge">&nbsp;&nbsp;&nbsp;&nbsp;Tablo</li>
+			
+			
+			<li class="left_bar_titles"></li>
 		</ul>	
 			
 			
-		<div>Zoom:	<div id='zoom-pane'></div>
-			</br>
+		
+		<i class="icon-zoom grey-5" style="margin:5px;"></i>	<div id='zoom-pane' class="zoom" style="margin-top: 10px; max-width:150px;"></div>
+		</br>
+				
 			
-			</div>	
 		
-	
-
-	
-	
-		<ul class="component_holder" style="position:fixed; bottom:50px;">
-		
-		</ul>
 <!-- chat  -->
-	<a class="chat_button"><i class="icon-chat-inv"></i>Yazışma</a>
+	<a class="chat_button"><i class="icon-chat-inv"></i><span class="text-visible">Yazışma</span></a>
 		<div class="chat_window">
 		
 	<div class="chat_inline_holder">
@@ -846,8 +843,24 @@ Grafik Ekle
 		
 		
 	</div>
-
 	
+<div class="left_bar_shrink">
+  <i class="icon-angle-left blue"></i>
+</div>
+
+		<script>
+		$(".left_bar_shrink").click(function () {
+		 $(".components").toggleClass('components-close');
+		 $(".component").toggleClass('component-close');
+		 
+		 $(".text-visible").toggleClass('text-hidden');
+		 $(".chat_window").toggleClass('chat_window_close');
+		 $(".left_bar_shrink").toggleClass('left_bar_shrink_close');
+		 
+		});
+				
+		</script>
+
 	
 <div id='chapters_pages_view' class="chapter-view" >
 
@@ -894,8 +907,8 @@ Grafik Ekle
 					
 					<li class='page <?php echo ( $current_page->page_id== $pages->page_id  ? "current_page": "" ); ?>' chapter_id='<?php echo $pages->chapter_id; ?>' page_id='<?php echo $pages->page_id; ?>' chapter_id='<?php echo $pages->page_id; ?>'   >
 						<a class="btn red white size-15 radius icon-delete page-chapter-delete delete-page hidden-delete "  style="top: 0px;right: 0px; position: absolute;"></a>
-						<a href='<?php echo $this->createUrl("book/author", array('bookId' => $model->book_id, 'page'=>$pages->page_id ));?>' >
-
+						<!--<a href='<?php echo $this->createUrl("book/author", array('bookId' => $model->book_id, 'page'=>$pages->page_id ));?>' >-->
+							<a href='<?php echo "/book/author/".$model->book_id.'/'.$pages->page_id;?>'/>
 								
 							<span class="page-number" >s <?php echo $page_NUM; ?></span>
 						</a>	

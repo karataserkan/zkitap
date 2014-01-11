@@ -90,8 +90,7 @@ z-index:999999;
 
 .span-19 { width: 100%}
 
-#components{
-
+.components{
 position:fixed;
 top:83px;
 width:120px;
@@ -101,16 +100,17 @@ overflow:none;
 background:#f4f4f4; 
 z-index:999999;
 border-right: 2px solid #d1d2d4;
+}
+.components-close{
+width:35px;
 
+}
 
-
-
-
-
-
-
-
-
+.component-close{
+width:30px;
+height: 9px;
+margin-bottom: 7px;
+overflow:hidden;
 }
 
 

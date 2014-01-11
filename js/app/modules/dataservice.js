@@ -8,19 +8,269 @@ window.lindneo.dataservice = (function( $ ) {
   var progressBars=[];
   var progressBarsCounter=0;
 
+  /*var graph_popup = function(event, ui, component){
+    console.log(component);
+    
+    if(typeof component == 'undefined'){
+      console.log('dene');
+      var top = (ui.offset.top-$(event.target).offset().top ) + 'px';
+      var left = ( ui.offset.left-$(event.target).offset().left ) + 'px';
+      var graph_value = {};
+    }
+    else{
+      top = component.data.self.css.top;
+      left = component.data.self.css.left;
+    };
+
+      var letters= ["A","B","C","D","E","F","G","H","I","J","K"];
+
+    $("<div class='popup ui-draggable' id='pop-image-popup' style='display: block; top:" + top + "; left: " + left + ";'> \
+        <div class='popup-header'> \
+        Görsel Ekle \
+        <div class='popup-close' id='image-add-dummy-close-button'>x</div> \
+        </div> \
+          <div class='gallery-inner-holder'> \
+            <div class='gallery-inner-holder'> \
+         \
+          <label class='dropdown-label' id='graph_leading'> \
+                  Grafik Çeşidi:  \
+                    <select id='Graph Type' class='radius'> \
+                      <option value='pie-chart'> Pasta</option> \
+                      <option value='bar-chart' >Çubuk</option> \
+                    </select>  \
+          </label> \
+          <select id='verisayisi' class='radius'> \
+                      <option value='1' >1</option> \
+                      <option value='2' selected='selected' >2</option> \
+                      <option value='3' >3</option> \
+                      <option value='4' >4</option> \
+                      <option value='5' >5</option> \
+                      <option value='6' >6</option> \
+                      <option value='7' >7</option> \
+                      <option value='8' >8</option> \
+                      <option value='9' >9</option> \
+                    </select>  \
+            <div id='bar-chart-properties' class='chart_prop bar-chart' style='display:none;'> \
+              <div class='bar-chart-slice-holder slice-holder'> \
+                Arkaplan Rengi:  \
+                <input type='color'  id='chart-bar-background' class='color-picker-box radius color' value='"+get_random_color()+"' placeholder='e.g. #bbbbbb'> \<br> \
+                Çubuk Rengi:  \
+                 <input type='color' id='chart-bar-stroke' class='color-picker-box radius color' value='"+get_random_color()+"' placeholder='e.g. #bbbbbb'> \<br> \
+              </div> \
+          </div> \
+          <div id='pie-chart-properties' class='chart_prop pie-chart'> \
+          </div> \
+               \
+          <a href='#' class='btn bck-light-green white radius' id='pop-image-OK' style='padding: 5px 30px;'>Ekle</a> \
+          </div> \
+          </div> \
+        </div>").appendTo('body').draggable();
+
+      $('#image-add-dummy-close-button').click(function(){
+
+        $('#pop-image-popup').remove();  
+
+        if ( $('#pop-image-popup').length ){
+          $('#pop-image-popup').remove();  
+        }
+
+      });
+      console.log(component);
+      createImageComponent( event, ui, component );
+
+    };
+*/
+  var image_popup = function(event, ui, component){
+    console.log(component);
+    
+    if(typeof component == 'undefined'){
+      console.log('dene');
+      var top = (ui.offset.top-$(event.target).offset().top ) + 'px';
+      var left = ( ui.offset.left-$(event.target).offset().left ) + 'px';
+      
+    }
+    else{
+      top = component.data.self.css.top;
+      left = component.data.self.css.left;
+    };
+
+      $("<div class='popup ui-draggable' id='pop-image-popup' style='display: block; top:" + top + "; left: " + left + ";'> \
+        <div class='popup-header'> \
+        Görsel Ekle \
+        <div class='popup-close' id='image-add-dummy-close-button'>x</div> \
+        </div> \
+          <div class='gallery-inner-holder'> \
+            <div style='clear:both'></div> \
+            <div class='add-image-drag-area' id='dummy-dropzone'> </div> \
+          </div> \
+          <div>\
+            <input type='text' name='width' id='width' placeholder='Genişlik' value=''>\
+            <input type='text' name='height' id='height' placeholder='Yükseklik' value=''>\
+          </div> \
+        </div>").appendTo('body').draggable();
+
+        $('#image-add-dummy-close-button').click(function(){
+
+        $('#pop-image-popup').remove();  
+
+        if ( $('#pop-image-popup').length ){
+          $('#pop-image-popup').remove();  
+        }
+
+      });
+      console.log(component);
+      createImageComponent( event, ui, component );
+
+    };
+
+  var link_popup = function(event, ui, component){
+    console.log(component);
+    
+    if(typeof component == 'undefined'){
+      console.log('dene');
+      var top = (ui.offset.top-$(event.target).offset().top ) + 'px';
+      var left = ( ui.offset.left-$(event.target).offset().left ) + 'px';
+      var link_value = 'http://linden-tech.com';
+    }
+    else{
+      top = component.data.self.css.top;
+      left = component.data.self.css.left;
+      link_value = component.data.self.attr.href;
+    };
+    console.log(top);
+    console.log(left);
+      $("<div class='popup ui-draggable' id='pop-image-link' style='display: block; top:" + top + "; left: " + left + ";'> \
+          <div class='popup-header'> \
+          Link Ekle \
+          <div class='popup-close' id='image-add-dummy-close-button'>x</div> \
+          </div> \
+         \
+        <!-- popup content--> \
+          <div class='gallery-inner-holder'> \
+            <form id='video-url'> \
+            <input id='link-url-text' class='input-textbox' type='url' placeholder='URL Adresini Giriniz'   value=" + link_value + "> \
+            <a href='#' id='pop-image-OK' class='btn bck-light-green white radius' id='add-image' style='padding: 5px 30px;'>Ekle</a> \
+            </form> \
+          </div>     \
+           \
+        <!-- popup content--> \
+        </div>").appendTo('body').draggable();
+
+      $('#image-add-dummy-close-button').click(function(){
+
+        $('#pop-image-link').remove();  
+
+        if ( $('#pop-image-link').length ){
+          $('#pop-image-link').remove();  
+        }
+
+      });
+
+      console.log(component);
+      createLinkComponent( event, ui, component );
+
+    };
+
+  var popup_popup = function(event, ui, component){
+    console.log(component);
+    
+    if(typeof component == 'undefined'){
+      console.log('dene');
+      var top = (ui.offset.top-$(event.target).offset().top ) + 'px';
+      var left = ( ui.offset.left-$(event.target).offset().left ) + 'px';
+      var popup_value = 'http://linden-tech.com';
+    }
+    else{
+      top = component.data.self.css.top;
+      left = component.data.self.css.left;
+      popup_value = component.data.html_inner;
+    };
+    console.log(top);
+    console.log(left);
+      $("<div class='popup ui-draggable' id='pop-image-popup' style='display: block; top:" + top + "; left: " + left + ";'> \
+        <div class='popup-header'> \
+        Görsel Ekle \
+        <div class='popup-close' id='image-add-dummy-close-button'>x</div> \
+        </div> \
+          <div class='gallery-inner-holder'> \
+          <textarea  id='popup-explanation' class='popup-text-area'>" + popup_value + ". \
+          </textarea> <br> \
+          <a href='#' id='pop-image-OK' class='btn bck-light-green white radius' style='padding: 5px 30px;'>Ekle</a> \
+        </div> \
+        </div>").appendTo('body').draggable();
+
+      $('#image-add-dummy-close-button').click(function(){
+
+        $('#pop-image-popup').remove();  
+
+        if ( $('#pop-image-popup').length ){
+          $('#pop-image-popup').remove();  
+        }
+
+      });
+
+
+      console.log(component);
+      createPopupComponent( event, ui, component );
+
+    };
+
+  var video_popup = function(event, ui, component){
+    console.log(component);
+    
+    if(typeof component == 'undefined'){
+      console.log('dene');
+      var top = (ui.offset.top-$(event.target).offset().top ) + 'px';
+      var left = ( ui.offset.left-$(event.target).offset().left ) + 'px';
+      var video_url = "http://lindneo.com/5.mp4";
+    }
+    else{
+      top = component.data.self.css.top;
+      left = component.data.self.css.left;
+      video_url = component.data.source.attr.src;
+    };
+    console.log(top);
+    console.log(left);
+      $("<div class='popup ui-draggable' id='pop-image-popup' style='display: block; top:" + top + "; left: " + left + ";'> \
+        <div class='popup-header'> \
+        Video Ekle \
+        <div class='popup-close' id='image-add-dummy-close-button'>x</div> \
+        </div> \
+          <div class='gallery-inner-holder'> \
+            <div style='clear:both'></div> \
+            <div class='add-image-drag-area' id='dummy-dropzone'> </div> \
+            <input id='video-url-text' class='input-textbox' type='url' placeholder='URL Adresini Giriniz'   value=" + video_url + "> \
+            <a href='#' id='pop-image-OK' class='btn bck-light-green white radius' id='add-image' style='padding: 5px 30px;'>Ekle</a> \
+          </div> \
+        </div>").appendTo('body');
+
+      $('#image-add-dummy-close-button').click(function() {
+
+          $('#pop-image-popup').remove();
+
+          if ($('#pop-image-popup').length) {
+              $('#pop-image-popup').remove();
+          }
+
+      });
+
+      console.log(component);
+      createVideoComponent( event, ui, component );
+
+    };
   var newComponentDropPage = function(e, reader, file){
     var that =this;
     var component = {};
     reader.onload = function (evt) { 
         var FileBinary = evt.target.result;
         var contentType = FileBinary.substr(5, FileBinary.indexOf('/')-5);
-        console.log(contentType);
+        //console.log(contentType);
         if(contentType == 'image'){
           var size = window.lindneo.findBestSize({'w':image_width,'h':image_height});
           var image_width = size.w;
           var image_height = size.h;
         
-          console.log(image_width);
+          //console.log(image_width);
 
           component = {
             'type' : 'image',
@@ -58,7 +308,7 @@ window.lindneo.dataservice = (function( $ ) {
         else if(contentType == 'video'){
           var contentType = FileBinary.substr(0, FileBinary.indexOf(';'));
           var videoType = contentType.substr(contentType.indexOf('/')+1);
-          console.log(videoType);
+          //console.log(videoType);
           var response = '';
           var videoURL = '';
           var token = '';
@@ -151,7 +401,7 @@ window.lindneo.dataservice = (function( $ ) {
 
 
     
-    console.log(action);
+    //console.log(action);
 
     $.ajax({
 
@@ -159,18 +409,18 @@ window.lindneo.dataservice = (function( $ ) {
          var xhr = new window.XMLHttpRequest();
          //xhr.upload.onprogress = function(evt){console.log('pprogress')};
          
-         console.log(xhr.upload);
+         //console.log(xhr.upload);
 
          //Upload progress
          xhr.upload.addEventListener("progress", function(evt){
-          console.log('Upload');
-          console.log(evt);
+          //console.log('Upload');
+          //console.log(evt);
          if (evt.lengthComputable) {
            var percentage = evt.loaded / evt.total;
            progressbar.bar.progressbar('value', percentage*100);
            //Do something with upload progress
 
-           console.log(percentage);
+           //console.log(percentage);
            }
          }, false);
        
@@ -227,6 +477,11 @@ window.lindneo.dataservice = (function( $ ) {
     removeProgressBar: removeProgressBar,
     newProgressBar: newProgressBar,
     newComponentDropPage: newComponentDropPage,
+    image_popup: image_popup,
+    link_popup: link_popup,
+    video_popup: video_popup,
+    popup_popup: popup_popup,
+    //graph_popup: graph_popup,
     send: send
   };
 

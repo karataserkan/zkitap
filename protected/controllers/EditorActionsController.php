@@ -600,7 +600,7 @@ class EditorActionsController extends Controller
 		$sql="select * from component 
 right join page  using (page_id) 
 right join chapter using (chapter_id) 
-right join book using (book_id) where book_id='$bookId' ;";
+right join book using (book_id) where book_id='$bookId' and type!='image';";
  		//echo $sql;
 
 		$components = Component::model()->findAllBySql($sql);
@@ -673,7 +673,11 @@ right join book using (book_id) where book_id='$bookId' ;";
 
 
 
-	public function actionExportBook($bookId=null){
+	public function actionExportBook($bookId=null,$id=null){
+		if($bookId==null){
+			$bookId=$id;
+		}
+		
 		$book=Book::model()->findByPk($bookId);
 		$ebook=new epub3($book);
 		//if ($ebook) readfile($ebook->download() );
