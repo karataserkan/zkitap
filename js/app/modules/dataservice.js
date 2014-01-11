@@ -160,6 +160,87 @@ window.lindneo.dataservice = (function( $ ) {
 
     };
 
+  var quiz_popup = function(event, ui, component){
+    console.log(component);
+    
+    if(typeof component == 'undefined'){
+      var top = (ui.offset.top-$(event.target).offset().top ) + 'px';
+      var left = ( ui.offset.left-$(event.target).offset().left ) + 'px';
+      var question = "Soru kökünü buraya yazınız.";
+      var answers = [];
+    }
+    else{
+      top = component.data.self.css.top;
+      left = component.data.self.css.left;
+      question = component.data.question;
+      answers = component.data.options;
+    };
+
+      $("<div class='popup ui-draggable' id='pop-quiz-popup' style='display: block; top:" + top  + "; left: " + left  + ";'> \
+      <div class='popup-header'> \
+        Quiz Ekle \
+        <div class='popup-close' id='create-quiz-close-button'>x</div> \
+      </div> \
+      <!-- popup content --> \
+      <div class='gallery-inner-holder'> \
+        <label class='dropdown-label' id='leading'> \
+          Şık Sayısı: \
+          <select id='leading-option-count' class='radius'> \
+            <option value='2'>2</option> \
+            <option selected value='3'>3</option> \
+            <option value='4'>4</option> \
+            <option value='5'>5</option> \
+          </select> \
+        </label> \
+        <br /> \
+        <label class='dropdown-label' id='leading'> \
+          Doğru Cevap: \
+          <select id='leading-answer-selection' class='radius'> \
+          </select> \
+        </label> \
+        <br /><br /> \
+        <div class='quiz-inner'> \
+          Soru kökü: \
+          <form id='video-url'> \
+            <textarea class='popup-text-area' id='question'>" + question + "</textarea><br> \
+            <!--burası çoğalıp azalacak--> \
+            <div id='selection-options-container'> \
+            </div> \
+          </form> \
+        </div> \
+        <a href='#' class='btn bck-light-green white radius' id='add-quiz' style='padding: 5px 30px;'>Ekle</a> \
+      </div> \
+      <!-- popup content--> \
+    </div>").appendTo('body').draggable();
+  
+    // initialize options
+    var n = $('#leading-option-count').val();
+    $('#selection-options-container').empty();
+    $('#leading-answer-selection').empty();  
+    var appendedText = "";    
+    var appendAnswerText = "";
+    for(var i = 0; i < parseInt(n); i++ ){
+      var answer = answers[i];
+      if(typeof answer == 'undefined') answer = '';
+      appendedText +=  (i + 1) + ". seçenek <textarea class='popup-choices-area' id='selection-option-index-" + i + "'>" + answer + "</textarea> <br>";
+
+      appendAnswerText += (i === 0) ? "<option selected value='" + ( i + 1 ) + "'>"+ ( i + 1 ) +"</option>" : "<option value='" + ( i + 1 ) + "'>"+ ( i + 1 ) +"</option>";  
+    }
+    $('#selection-options-container').append(appendedText);
+    $('#leading-answer-selection').append(appendAnswerText);      
+
+    // attach close event to close button
+    $('#create-quiz-close-button').click(function(){
+      $('#pop-quiz-popup').remove();  
+      if ( $('#pop-quiz-popup').length ){
+        $('#pop-quiz-popup').remove();  
+      }
+    });
+      console.log(component);
+      createQuizComponent( event, ui, component );
+
+    };
+
   var image_popup = function(event, ui, component){
     console.log(component);
     
@@ -562,6 +643,7 @@ window.lindneo.dataservice = (function( $ ) {
     video_popup: video_popup,
     popup_popup: popup_popup,
     graph_popup: graph_popup,
+    quiz_popup: quiz_popup,
     get_random_color: get_random_color,
     hexToRgb: hexToRgb,
     send: send
