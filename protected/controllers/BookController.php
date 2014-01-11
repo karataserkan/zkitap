@@ -98,6 +98,8 @@ class BookController extends Controller
 		{
 			$model->attributes=$_POST['Book'];
 
+			//$model->pdf_file=CUploadedFile::getInstance($model,'pdf_file');
+			//print($model->pdf_file);die();
 			if($model->save())
 				$userid=Yii::app()->user->id;
 				$addOwner = Yii::app()->db->createCommand();

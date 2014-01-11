@@ -46,6 +46,7 @@ class Book extends CActiveRecord
 			array('book_id, workspace_id', 'length', 'max'=>44),
 			array('title, author', 'length', 'max'=>255),
 			array('created, publish_time, data', 'safe'),
+			//array('pdf_file', 'file', 'types'=>'pdf,doc,docx'),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
 			array('book_id, workspace_id, title, author, created, publish_time, data', 'safe', 'on'=>'search'),
@@ -76,6 +77,7 @@ class Book extends CActiveRecord
 			'author' => 'Yazar',
 			'created' => 'Oluşturulma Tarihi',
 			'publish_time' => 'Publish Time',
+			//'pdf_file'=>'Pdf File',
 			'data' => 'Data',
 		);
 	}
