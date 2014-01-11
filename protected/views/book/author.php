@@ -198,11 +198,8 @@ $current_user=User::model()->findByPk(Yii::app()->user->id);
 				<a id="undo" class="toolbox-items icon-undo dark-blue size-15"></a>
 				<a id="redo" class="toolbox-items icon-redo grey-8 size-15"></a>
 			</div>
-			
 			<div class="vertical-line responsive_2"></div>
-			
-				
-			
+						
 			<div class="text-options table-options toolbox" style="display:inline-block;">
 					
 					
@@ -392,9 +389,11 @@ $current_user=User::model()->findByPk(Yii::app()->user->id);
 			</div>
 			
 			<div class="generic-options responsive_1"  style="display:inline-block;">
-				<a href="#" class="bck-dark-blue white toolbox-items radius responsive_2" id="pop-align"><i class="icon-align-center size-15"></i></a>
+				<a href="#" class="toolbox-items" id="pop-align"><i class="icon-align-center dark-blue size-20"></i></a>
+				<div class="vertical-line responsive_2"></div>
 				<a href="#" class="toolbox-items" id="generic-disable" ><i class="icon-lock size-25 dark-blue"></i></a>
 				<a href="#" class="toolbox-items" id="generic-undisable" ><i class="icon-lock-open-alt size-25 dark-blue"></i></a>
+				<div class="vertical-line responsive_2"></div>
 				<a href="#" class="toolbox-items" id="generic-cut"><i class="icon-cut size-25 dark-blue"></i></a>
 				<a href="#" class="toolbox-items" id="generic-copy"><i class="icon-copy size-25 dark-blue"></i></a>
 				<a href="#" class="toolbox-items" id="generic-paste"><i class="icon-paste size-25 dark-blue"></i></a>
