@@ -89,7 +89,7 @@ $this->pageTitle=Yii::app()->name;
 									}
 								?>
 
-								<a href="<?php echo 'EditorActions/ExportBook/'.$book->book_id; ?>" class="btn bck-light-green white radius" ><i class="icon-download"></i><?php echo __('İndir');?></a>
+								<a href="<?php echo '/EditorActions/ExportBook/'.$book->book_id; ?>" class="btn bck-light-green white radius" ><i class="icon-download"></i><?php echo __('İndir');?></a>
 										<!-- editor options-->
 										<center id="popup-close-area" popup="pop-<?php echo $book->book_id; ?>" style="display:none; position:relative">
 											<div id="close-div" style="background-color:#123456; width:100% height:#123456; position:fixed;"> </div>
