@@ -736,7 +736,7 @@ window.lindneo.toolbox = (function(window, $, undefined){
           //console.log(component.options.component);
           if(cut==true) window.lindneo.nisga.deleteComponent( component.options.component );
           
-          //console.log(newComponent);
+          console.log(newComponent);
           
           newComponent.id= '';
           newComponent.page_id= '';
@@ -790,15 +790,16 @@ window.lindneo.toolbox = (function(window, $, undefined){
       that.unlockSelectedItemsToClipboard();
     });
 
-    $('#generic-cut').click(function(){
+    $('.generic-cut').click(function(){
+      console.log('oldi mi');
       that.copySelectedItemsToClipboard(true);
     });
  
-    $('#generic-copy').click(function(){
+    $('.generic-copy').click(function(){
       that.copySelectedItemsToClipboard(false);
     });
 
-    $('#generic-paste').click(function(){
+    $('.generic-paste').click(function(){
       that.pasteClipboardItems();
     });
 
