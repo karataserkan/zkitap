@@ -79,6 +79,7 @@ class Book extends CActiveRecord
 			'publish_time' => 'Publish Time',
 			//'pdf_file'=>'Pdf File',
 			'data' => 'Data',
+			'pdf_file' => 'File',
 		);
 	}
 
@@ -100,10 +101,33 @@ class Book extends CActiveRecord
 		$criteria->compare('created',$this->created,true);
 		$criteria->compare('publish_time',$this->publish_time,true);
 		$criteria->compare('data',$this->data,true);
+		$criteria->compare('pdf_file',$this->pdf_file,true);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
 		));
+	}
+	public function setData($attribute,$value)
+	{
+		$book_data=json_decode($this->data,true);
+		$book_data[$attribute]=$value;
+		$this->data=json_encode($book_data);
+	}
+
+	public function getData($attribute)
+	{
+		$bookData = json_decode($this->data,true);
+		return (isset($bookData[$attribute])) ? $bookData[$attribute] : false;
+	}
+
+	public function setPdfFile($value=null)
+	{
+		$this->pdf_file=$value;
+	}
+
+	public function getPdfFile()
+	{
+		return $this->pdf_file;
 	}
 
 	public function getPageSize(){
@@ -165,4 +189,5 @@ class Book extends CActiveRecord
 		return $bookSize = array('height'=>$bookHeight,
 					'width'=>$bookWidth);
 	}
+
 }
