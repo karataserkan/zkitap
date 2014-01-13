@@ -9,20 +9,22 @@
  <?php
 if ($users) {
 	_en('%s Kullanıcı Bulundu', '%s Kullanıcılar Bulundu', count($users));
-	
+	?><ul style="width:250px;"><?php
 	foreach ($users as $key => $user):
 			?>
-		<div class="row">
-		<?php echo $user->name . "  " .$user->surname;?>
-		<a href="?r=organisations/deleteOrganisationUser&userId=<?php echo $user->id; ?>&organisationId=<?php echo $organisationId; ?>" class="btn white radius float-right book-editors-settings"id="boook-editors-settings" ><i class="icon-delete"></i><?php _e('Sil'); ?></a>
-		</div>
+		<li>
+		<span style="line-height:2;"><?php echo $user->name . "  " .$user->surname;?></span>
+		<a href="?r=organisations/deleteOrganisationUser&userId=<?php echo $user->id; ?>&organisationId=<?php echo $organisationId; ?>" class="float-right"><i class="icon-delete"></i><?php _e('Sil'); ?></a>
+		<hr>
+		</li>
 		<?php
 	endforeach;
+	?></ul><?php
 }
  ?>
 </div>
 <div class="row">
-	<a href="#" popup="<?php echo $organisationId; ?>" class="btn white radius float-right book-editors-settings"id="boook-editors-settings" ><i class="icon-add"></i><?php _e('Kullanıcı Ekle'); ?></a>	
+	<a href="#" popup="<?php echo $organisationId; ?>" class="btn white radius book-editors-settings"id="boook-editors-settings" ><i class="icon-add"></i><?php _e('Kullanıcı Ekle'); ?></a>	
 	<center id="popup-close-area" popup="pop-<?php echo $organisationId; ?>" style="display:none; position:relative">
 				<div id="close-div" style="background-color:#123456; width:100% height:#123456; position:fixed;"> </div>
 				<div class="book-editors-options-box-container" style="height:150px">

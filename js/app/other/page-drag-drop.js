@@ -277,6 +277,14 @@ $( document ).ready(function () {
 
     });
 
+    $( document ).on( "click",".preview" ,function() {
+     
+     var pageNumberLink = $(this).parent().find('.page-number').parent();
+     console.log(pageNumberLink);
+     pageNumberLink.trigger('click');
+      
+    });
+
     $('.delete-page').click(function(){
       var page_id=$(this).parent().attr('page_id');
 

@@ -71,6 +71,11 @@ apt-get install curl
 
 wkhtmltopdf Installation
 -----------------------------------------------------------------
-sudo apt-get install wkhtmltopdf
+apt-get install wkhtmltopdf
 
 
+pdf2htmlex
+-----------------------------------------------------------------
+add-apt-repository ppa:coolwanglu/pdf2htmlex
+apt-get update
+apt-get install pdf2htmlex

@@ -271,7 +271,7 @@ class OrganisationsController extends Controller
 			$msg="ORGANISATIONS:ADD_WORKSPACE_USER:0:". json_encode(array(array('user'=>Yii::app()->user->id),array('userId'=>$userId,'workspaceId'=>$workspaceId,'organisationId'=>$organizationId)));
 			Yii::log($msg,'info');
 
-		$this->redirect( array('organisations/workspaces&organizationId='.$organizationId ) );
+		$this->redirect( array('organisations/workspaces?organizationId='.$organizationId ) );
 	}
 
 	/**

@@ -233,31 +233,11 @@ $current_user=User::model()->findByPk(Yii::app()->user->id);
 					
 						<select class='tool select' rel='font-size' id="font-size" class="radius">
 						<option selected="" value="8px"> 8 </option>
-						<option value="10px" >10</option>
-						<option value="12px" >12</option>
-						<option value="14px" >14</option>
-						<option value="16px" >16</option>
-						<option value="18px" >18</option>
-						<option value="20px" >20</option>
-						<option value="24px" >24</option>
-						<option value="26px" >26</option>
-						<option value="28px" >28</option>
-						<option value="30px" >30</option>
-						<option value="32px" >32</option>
-						<option value="34px" >34</option>
-						<option value="36px" >36</option>
-						<option value="38px" >38</option>
-						<option value="40px" >40</option>
-						<option value="42px" >42</option>
-						<option value="44px" >44</option>
-						<option value="46px" >46</option>
-						<option value="48px" >48</option>
-						<option value="50px" >50</option>
-						<option value="52px" >52</option>
-						<option value="54px" >54</option>
-						<option value="56px" >56</option>
-						<option value="58px" >58</option>
-						<option value="60px" >60</option>
+						<?php for ($font_size_counter=10; $font_size_counter<=250;$font_size_counter+=2){
+							echo "<option value='{$font_size_counter}px' >{$font_size_counter}</option>";
+						} ?>
+
+
 					</select>	
 								
 				<div class="vertical-line"></div>
