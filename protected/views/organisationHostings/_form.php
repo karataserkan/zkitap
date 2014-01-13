@@ -14,13 +14,13 @@
 	<p class="note">Fields with <span class="required">*</span> are required.</p>
 
 	<?php echo $form->errorSummary($model); ?>
-
+<!--
 	<div class="row">
 		<?php echo $form->labelEx($model,'organisation_id'); ?>
 		<?php echo $form->textField($model,'organisation_id',array('size'=>44,'maxlength'=>44)); ?>
 		<?php echo $form->error($model,'organisation_id'); ?>
 	</div>
-
+-->
 	<div class="row">
 		<?php echo $form->labelEx($model,'hosting_client_IP'); ?>
 		<?php echo $form->textField($model,'hosting_client_IP',array('size'=>60,'maxlength'=>120)); ?>
@@ -32,13 +32,13 @@
 		<?php echo $form->textField($model,'hosting_client_port'); ?>
 		<?php echo $form->error($model,'hosting_client_port'); ?>
 	</div>
-
+<!--
 	<div class="row">
 		<?php echo $form->labelEx($model,'hosting_client_id'); ?>
 		<?php echo $form->textField($model,'hosting_client_id',array('size'=>10,'maxlength'=>10)); ?>
 		<?php echo $form->error($model,'hosting_client_id'); ?>
 	</div>
-
+-->
 	<div class="row">
 		<?php echo $form->labelEx($model,'hosting_client_key1'); ?>
 		<?php echo $form->textArea($model,'hosting_client_key1',array('rows'=>6, 'cols'=>50)); ?>
@@ -52,7 +52,7 @@
 	</div>
 
 	<div class="row buttons">
-		<?php echo CHtml::submitButton($model->isNewRecord ? 'Create' : 'Save'); ?>
+		<?php echo CHtml::submitButton($model->isNewRecord ? 'Ekle' : 'Kaydet'); ?>
 	</div>
 
 <?php $this->endWidget(); ?>

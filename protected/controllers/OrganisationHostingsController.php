@@ -32,11 +32,11 @@ class OrganisationHostingsController extends Controller
 				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
-				'actions'=>array('create','update'),
+				'actions'=>array('create','update','delete','deleteHost'),
 				'users'=>array('@'),
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
-				'actions'=>array('admin','delete'),
+				'actions'=>array('admin'),
 				'users'=>array('admin'),
 			),
 			array('deny',  // deny all users
@@ -60,18 +60,28 @@ class OrganisationHostingsController extends Controller
 	 * Creates a new model.
 	 * If creation is successful, the browser will be redirected to the 'view' page.
 	 */
-	public function actionCreate()
+	public function actionCreate($organisationId)
 	{
 		$model=new OrganisationHostings;
-
+		$model->organisation_id=$organisationId;
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
+
+		$criteria=new CDbCriteria;
+		$criteria->select='max(hosting_client_id) AS maxColumn';
+		$row = $model->model()->find($criteria);
+		
+		$model->hosting_client_id = $row['maxColumn']+1;
 
 		if(isset($_POST['OrganisationHostings']))
 		{
 			$model->attributes=$_POST['OrganisationHostings'];
 			if($model->save())
-				$this->redirect(array('view','id'=>$model->hosting_client_id));
+				{
+					$msg="ORGANISATION_HOSTINGS:CREATE:0:". json_encode(array(array('user'=>Yii::app()->user->id),array('organisationId'=>$organisationId,'hostingClientId'=>$model->hosting_client_id)));
+					Yii::log($msg,'info');
+					$this->redirect(array('index','organisationId'=>$model->organisation_id));
+				}
 		}
 
 		$this->render('create',array(
@@ -96,9 +106,9 @@ class OrganisationHostingsController extends Controller
 			$model->attributes=$_POST['OrganisationHostings'];
 			if($model->save())
 			{
-				// $msg="ORGANISATION_HOSTINGS:UPDATE:0:". json_encode(array(array('user'=>Yii::app()->user->id),array('organisationId'=>$organizationId,'hostingClientId'=>$model->hosting_client_id)));
-				// Yii::log($msg,'info');
-				// $this->redirect(array('index','organisationId'=>$model->organisation_id));
+				$msg="ORGANISATION_HOSTINGS:UPDATE:0:". json_encode(array(array('user'=>Yii::app()->user->id),array('organisationId'=>$organisationId,'hostingClientId'=>$model->hosting_client_id)));
+				Yii::log($msg,'info');
+				$this->redirect(array('index','organisationId'=>$model->organisation_id));
 			}
 		}
 
@@ -112,15 +122,28 @@ class OrganisationHostingsController extends Controller
 	 * If deletion is successful, the browser will be redirected to the 'admin' page.
 	 * @param integer $id the ID of the model to be deleted
 	 */
-	public function actionDelete($id)
+	public function actionDelete($organisationId,$id)
 	{
 		$this->loadModel($id)->delete();
-
-		// if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
+		//if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
 		if(!isset($_GET['ajax']))
 			$this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('admin'));
 	}
 
+	/**
+	 * Deletes a particular model.
+	 * If deletion is successful, the browser will be redirected to the 'index' page.
+	 * @param integer $id the ID of the model to be deleted
+	 */
+	public function actionDeleteHost($organisationId,$id)
+	{
+		$model=$this->loadModel($id);
+		$msg="ORGANISATION_HOSTINGS:DELETE_HOST:0:". json_encode(array(array('user'=>Yii::app()->user->id),array('organisationId'=>$organisationId,'hostingClientId'=>$model->hosting_client_id)));
+		if ($model->delete()) {
+			Yii::log($msg,'info');
+		}
+		$this->redirect(array('index','organisationId'=>$organisationId));
+	}
 
 	/**
 	 * Lists all models of organisation.
