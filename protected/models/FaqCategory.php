@@ -7,6 +7,7 @@
  * @property integer $faq_category_id
  * @property string $faq_category_title
  * @property integer $parent_id
+ * @property string $lang
  */
 class FaqCategory extends CActiveRecord
 {
@@ -39,9 +40,10 @@ class FaqCategory extends CActiveRecord
 			array('faq_category_id, faq_category_title, parent_id', 'required'),
 			array('faq_category_id, parent_id', 'numerical', 'integerOnly'=>true),
 			array('faq_category_title', 'length', 'max'=>244),
+			array('lang', 'length', 'max'=>2),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('faq_category_id, faq_category_title, parent_id', 'safe', 'on'=>'search'),
+			array('faq_category_id, faq_category_title, parent_id, lang', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -65,6 +67,7 @@ class FaqCategory extends CActiveRecord
 			'faq_category_id' => 'Faq Category',
 			'faq_category_title' => 'Faq Category Title',
 			'parent_id' => 'Parent',
+			'lang' => 'Lang',
 		);
 	}
 
@@ -82,6 +85,7 @@ class FaqCategory extends CActiveRecord
 		$criteria->compare('faq_category_id',$this->faq_category_id);
 		$criteria->compare('faq_category_title',$this->faq_category_title,true);
 		$criteria->compare('parent_id',$this->parent_id);
+		$criteria->compare('lang',$this->lang,true);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
