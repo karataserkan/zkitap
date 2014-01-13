@@ -62,21 +62,45 @@ class FaqController extends Controller
 	 */
 	public function actionCreate()
 	{
-		$model=new Faq;
+		$model=new FaqCreateForm;
+		$faq= new Faq;
 
+		$criteria=new CDbCriteria;
+		$criteria->select='max(faq_id) AS maxColumn';
+		$row = $faq->model()->find($criteria);
+		$id=$row['maxColumn']+1;
+		
+		$faq->faq_id = $id;
+		$faq->lang=$this->getCurrentLang();
+		$model->faq_id=$id;
+		$model->faq_lang=$this->getCurrentLang();
+
+		$all_categories=FaqCategory::model()->findAll(array(
+			'condition'=>'lang=:lang',
+			'params'=>array(':lang'=>$model->faq_lang)
+			));
+		foreach ($all_categories as $key => $category) {
+			$categories[$category->faq_category_title]=$category->faq_category_title;
+		}
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
 
-		if(isset($_POST['Faq']))
+		if(isset($_POST['FaqCreateForm']))
 		{
-			$model->attributes=$_POST['Faq'];
-			if($model->save())
-				$this->redirect(array('view','id'=>$model->faq_id));
+			$model->attributes=$_POST['FaqCreateForm'];
+			print_r($_POST['FaqCreateForm']);
 		}
 
 		$this->render('create',array(
 			'model'=>$model,
+			'categories'=>$categories
 		));
+	}
+
+	public function getCurrentLang()
+	{
+		$lang=explode('_',Yii::app()->language);
+		return ($lang[0]) ? $lang[0] : 'tr' ;
 	}
 
 	/**

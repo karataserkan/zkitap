@@ -1,20 +1,18 @@
 <?php
 
 /**
- * This is the model class for table "keywords".
+ * This is the model class for table "faq_category_faq".
  *
- * The followings are the available columns in table 'keywords':
- * @property integer $keyword_id
- * @property string $keyword
- * @property string $lang
+ * The followings are the available columns in table 'faq_category_faq':
+ * @property integer $faq_category_id
+ * @property integer $faq_id
  */
-class Keywords extends CActiveRecord
+class FaqCategoryFaq extends CActiveRecord
 {
-	public $maxColumn;
 	/**
 	 * Returns the static model of the specified AR class.
 	 * @param string $className active record class name.
-	 * @return Keywords the static model class
+	 * @return FaqCategoryFaq the static model class
 	 */
 	public static function model($className=__CLASS__)
 	{
@@ -26,7 +24,7 @@ class Keywords extends CActiveRecord
 	 */
 	public function tableName()
 	{
-		return 'keywords';
+		return 'faq_category_faq';
 	}
 
 	/**
@@ -37,13 +35,11 @@ class Keywords extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('keyword_id, keyword', 'required'),
-			array('keyword_id', 'numerical', 'integerOnly'=>true),
-			array('keyword', 'length', 'max'=>255),
-			array('lang', 'length', 'max'=>2),
+			array('faq_category_id, faq_id', 'required'),
+			array('faq_category_id, faq_id', 'numerical', 'integerOnly'=>true),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('keyword_id, keyword, lang', 'safe', 'on'=>'search'),
+			array('faq_category_id, faq_id', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -64,9 +60,8 @@ class Keywords extends CActiveRecord
 	public function attributeLabels()
 	{
 		return array(
-			'keyword_id' => 'Keyword',
-			'keyword' => 'Keyword',
-			'lang' => 'Lang',
+			'faq_category_id' => 'Faq Category',
+			'faq_id' => 'Faq',
 		);
 	}
 
@@ -81,9 +76,8 @@ class Keywords extends CActiveRecord
 
 		$criteria=new CDbCriteria;
 
-		$criteria->compare('keyword_id',$this->keyword_id);
-		$criteria->compare('keyword',$this->keyword,true);
-		$criteria->compare('lang',$this->lang,true);
+		$criteria->compare('faq_category_id',$this->faq_category_id);
+		$criteria->compare('faq_id',$this->faq_id);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
