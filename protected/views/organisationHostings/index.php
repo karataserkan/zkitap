@@ -15,10 +15,12 @@ if ($hostings):
 		<li><span><?php echo __("İstemci Key1").": ".$host->hosting_client_key1; ?></span></li>
 		<li><span><?php echo __("İstemci Key2").": ".$host->hosting_client_key2; ?></span></li>
 	</ul>
-	<?php echo CHtml::link(__('Düzenle'),"/organisationHostings/update?organisationId=".$organisationId.'&id'.$host->hosting_client_id,array('class'=>'btn white radius')); ?>
+	<?php echo CHtml::link(__('Düzenle'),"/organisationHostings/update?organisationId=".$organisationId.'&id='.$host->hosting_client_id,array('class'=>'btn white radius')); ?>
+	<?php echo CHtml::link(__('Sil'),"/organisationHostings/deleteHost?organisationId=".$organisationId.'&id='.$host->hosting_client_id,array('class'=>'btn white radius')); ?>
 	</div>
 	<hr>
 	<?php	
 	endforeach;
 endif;
 ?>
+<?php echo CHtml::link(__('Ekle'),"/organisationHostings/create?organisationId=".$organisationId,array('class'=>'btn white radius')); ?>

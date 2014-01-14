@@ -1,6 +1,6 @@
 <?php
 
-class OrganisationHostingsController extends Controller
+class FaqController extends Controller
 {
 	/**
 	 * @var string the default layout for the views. Defaults to '//layouts/column2', meaning
@@ -32,11 +32,11 @@ class OrganisationHostingsController extends Controller
 				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
-				'actions'=>array('create','update','delete','deleteHost'),
+				'actions'=>array('create','update'),
 				'users'=>array('@'),
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
-				'actions'=>array('admin'),
+				'actions'=>array('admin','delete'),
 				'users'=>array('admin'),
 			),
 			array('deny',  // deny all users
@@ -60,56 +60,66 @@ class OrganisationHostingsController extends Controller
 	 * Creates a new model.
 	 * If creation is successful, the browser will be redirected to the 'view' page.
 	 */
-	public function actionCreate($organisationId)
+	public function actionCreate()
 	{
-		$model=new OrganisationHostings;
-		$model->organisation_id=$organisationId;
+		$model=new FaqCreateForm;
+		$faq= new Faq;
+
+		$criteria=new CDbCriteria;
+		$criteria->select='max(faq_id) AS maxColumn';
+		$row = $faq->model()->find($criteria);
+		$id=$row['maxColumn']+1;
+		
+		$faq->faq_id = $id;
+		$faq->lang=$this->getCurrentLang();
+		$model->faq_id=$id;
+		$model->faq_lang=$this->getCurrentLang();
+
+		$all_categories=FaqCategory::model()->findAll(array(
+			'condition'=>'lang=:lang',
+			'params'=>array(':lang'=>$model->faq_lang)
+			));
+		foreach ($all_categories as $key => $category) {
+			$categories[$category->faq_category_title]=$category->faq_category_title;
+		}
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
 
-		$criteria=new CDbCriteria;
-		$criteria->select='max(hosting_client_id) AS maxColumn';
-		$row = $model->model()->find($criteria);
-		
-		$model->hosting_client_id = $row['maxColumn']+1;
-
-		if(isset($_POST['OrganisationHostings']))
+		if(isset($_POST['FaqCreateForm']))
 		{
-			$model->attributes=$_POST['OrganisationHostings'];
-			if($model->save())
-				{
-					$msg="ORGANISATION_HOSTINGS:CREATE:0:". json_encode(array(array('user'=>Yii::app()->user->id),array('organisationId'=>$organisationId,'hostingClientId'=>$model->hosting_client_id)));
-					Yii::log($msg,'info');
-					$this->redirect(array('index','organisationId'=>$model->organisation_id));
-				}
+			$model->attributes=$_POST['FaqCreateForm'];
+			print_r($_POST['FaqCreateForm']);
 		}
 
 		$this->render('create',array(
 			'model'=>$model,
+			'categories'=>$categories
 		));
+	}
+
+	public function getCurrentLang()
+	{
+		$lang=explode('_',Yii::app()->language);
+		return ($lang[0]) ? $lang[0] : 'tr' ;
 	}
 
 	/**
 	 * Updates a particular model.
-	 * If update is successful, the browser will be redirected to the 'index' page.
+	 * If update is successful, the browser will be redirected to the 'view' page.
 	 * @param integer $id the ID of the model to be updated
 	 */
-	public function actionUpdate($organisationId,$id)
+	public function actionUpdate($id)
 	{
 		$model=$this->loadModel($id);
 
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
 
-		if(isset($_POST['OrganisationHostings']))
+		if(isset($_POST['Faq']))
 		{
-			$model->attributes=$_POST['OrganisationHostings'];
+			$model->attributes=$_POST['Faq'];
 			if($model->save())
-			{
-				$msg="ORGANISATION_HOSTINGS:UPDATE:0:". json_encode(array(array('user'=>Yii::app()->user->id),array('organisationId'=>$organisationId,'hostingClientId'=>$model->hosting_client_id)));
-				Yii::log($msg,'info');
-				$this->redirect(array('index','organisationId'=>$model->organisation_id));
-			}
+				$this->redirect(array('view','id'=>$model->faq_id));
 		}
 
 		$this->render('update',array(
@@ -122,43 +132,23 @@ class OrganisationHostingsController extends Controller
 	 * If deletion is successful, the browser will be redirected to the 'admin' page.
 	 * @param integer $id the ID of the model to be deleted
 	 */
-	public function actionDelete($organisationId,$id)
+	public function actionDelete($id)
 	{
 		$this->loadModel($id)->delete();
-		//if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
+
+		// if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
 		if(!isset($_GET['ajax']))
 			$this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('admin'));
 	}
 
 	/**
-	 * Deletes a particular model.
-	 * If deletion is successful, the browser will be redirected to the 'index' page.
-	 * @param integer $id the ID of the model to be deleted
+	 * Lists all models.
 	 */
-	public function actionDeleteHost($organisationId,$id)
+	public function actionIndex()
 	{
-		$model=$this->loadModel($id);
-		$msg="ORGANISATION_HOSTINGS:DELETE_HOST:0:". json_encode(array(array('user'=>Yii::app()->user->id),array('organisationId'=>$organisationId,'hostingClientId'=>$model->hosting_client_id)));
-		if ($model->delete()) {
-			Yii::log($msg,'info');
-		}
-		$this->redirect(array('index','organisationId'=>$organisationId));
-	}
-
-	/**
-	 * Lists all models of organisation.
-	 */
-	public function actionIndex($organisationId=null)
-	{
-		if(Yii::app()->user->isGuest)
-			$this->redirect( array('/site/login' ) );
-
-		$hostings= OrganisationHostings::model()->findAll('organisation_id=:organisation_id', 
-	    				array(':organisation_id' => $organisationId) );
-		
+		$dataProvider=new CActiveDataProvider('Faq');
 		$this->render('index',array(
-			'hostings'=>$hostings,
-			'organisationId'=>$organisationId
+			'dataProvider'=>$dataProvider,
 		));
 	}
 
@@ -167,10 +157,10 @@ class OrganisationHostingsController extends Controller
 	 */
 	public function actionAdmin()
 	{
-		$model=new OrganisationHostings('search');
+		$model=new Faq('search');
 		$model->unsetAttributes();  // clear any default values
-		if(isset($_GET['OrganisationHostings']))
-			$model->attributes=$_GET['OrganisationHostings'];
+		if(isset($_GET['Faq']))
+			$model->attributes=$_GET['Faq'];
 
 		$this->render('admin',array(
 			'model'=>$model,
@@ -181,12 +171,12 @@ class OrganisationHostingsController extends Controller
 	 * Returns the data model based on the primary key given in the GET variable.
 	 * If the data model is not found, an HTTP exception will be raised.
 	 * @param integer $id the ID of the model to be loaded
-	 * @return OrganisationHostings the loaded model
+	 * @return Faq the loaded model
 	 * @throws CHttpException
 	 */
 	public function loadModel($id)
 	{
-		$model=OrganisationHostings::model()->findByPk($id);
+		$model=Faq::model()->findByPk($id);
 		if($model===null)
 			throw new CHttpException(404,'The requested page does not exist.');
 		return $model;
@@ -194,11 +184,11 @@ class OrganisationHostingsController extends Controller
 
 	/**
 	 * Performs the AJAX validation.
-	 * @param OrganisationHostings $model the model to be validated
+	 * @param Faq $model the model to be validated
 	 */
 	protected function performAjaxValidation($model)
 	{
-		if(isset($_POST['ajax']) && $_POST['ajax']==='organisation-hostings-form')
+		if(isset($_POST['ajax']) && $_POST['ajax']==='faq-form')
 		{
 			echo CActiveForm::validate($model);
 			Yii::app()->end();
