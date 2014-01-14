@@ -265,6 +265,7 @@ window.lindneo.dataservice = (function( $ ) {
             <div class='add-image-drag-area' id='dummy-dropzone'> </div> \
           </div> \
           <div>\
+            <input type='file' name='image_file' id='image_file' value='' ><br><br>\
             <input type='text' name='width' id='width' placeholder='Genişlik' value=''>\
             <input type='text' name='height' id='height' placeholder='Yükseklik' value=''>\
           </div> \
@@ -400,6 +401,7 @@ window.lindneo.dataservice = (function( $ ) {
           <div class='gallery-inner-holder'> \
             <div style='clear:both'></div> \
             <div class='add-image-drag-area' id='dummy-dropzone'> </div> \
+            <input type='file' name='video_file' id='video_file' value='' ><br><br>\
             <input id='video-url-text' class='input-textbox' type='url' placeholder='URL Adresini Giriniz'   value=" + video_url + "> \
             <a href='#' id='pop-image-OK' class='btn bck-light-green white radius' id='add-image' style='padding: 5px 30px;'>Ekle</a> \
           </div> \

@@ -341,6 +341,48 @@ $current_user=User::model()->findByPk(Yii::app()->user->id);
 							</select>	
 							
 			</div>
+
+			<div class="popup-options toolbox" style="display:inline-block;">
+				<div class="vertical-line"></div>
+				
+						<i class="icon-opacity grey-6"></i>
+							<select class='tool-select tool select' rel='opacity' rel='color' id="font-size" class="radius">
+								
+								<option value="0" >0</option>
+								<option value="0.10" >10</option>
+								<option value="0.20" >20</option>
+								<option value="0.30" >30</option>
+								<option value="0.40" >40</option>
+								<option value="0.50" >50</option>
+								<option value="0.60" >60</option>
+								<option value="0.70" >70</option>
+								<option value="0.80" >80</option>
+								<option value="0.90" >90</option>
+								<option selected="selected"  value="1" >100</option>
+							</select>	
+							
+			</div>
+
+			<div class="link-options toolbox" style="display:inline-block;">
+				<div class="vertical-line"></div>
+				
+						<i class="icon-opacity grey-6"></i>
+							<select class='tool-select tool select' rel='opacity' rel='color' id="font-size" class="radius">
+								
+								<option value="0" >0</option>
+								<option value="0.10" >10</option>
+								<option value="0.20" >20</option>
+								<option value="0.30" >30</option>
+								<option value="0.40" >40</option>
+								<option value="0.50" >50</option>
+								<option value="0.60" >60</option>
+								<option value="0.70" >70</option>
+								<option value="0.80" >80</option>
+								<option value="0.90" >90</option>
+								<option selected="selected"  value="1" >100</option>
+							</select>	
+							
+			</div>
 			
 			<div class="shape-options toolbox"  style="display:inline-block;">
 				<div class="vertical-line"></div>
