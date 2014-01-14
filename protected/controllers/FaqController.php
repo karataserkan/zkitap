@@ -1,5 +1,4 @@
 <?php
-
 class FaqController extends Controller
 {
 	/**
@@ -32,7 +31,7 @@ class FaqController extends Controller
 				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
-				'actions'=>array('create','update'),
+				'actions'=>array('create','update','searchKey'),
 				'users'=>array('@'),
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
@@ -72,6 +71,7 @@ class FaqController extends Controller
 		
 		$faq->faq_id = $id;
 		$faq->lang=$this->getCurrentLang();
+		$faq->rate=0;
 		$model->faq_id=$id;
 		$model->faq_lang=$this->getCurrentLang();
 
@@ -80,7 +80,7 @@ class FaqController extends Controller
 			'params'=>array(':lang'=>$model->faq_lang)
 			));
 		foreach ($all_categories as $key => $category) {
-			$categories[$category->faq_category_title]=$category->faq_category_title;
+			$categories[$category->faq_category_id]=$category->faq_category_title;
 		}
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
@@ -88,13 +88,82 @@ class FaqController extends Controller
 		if(isset($_POST['FaqCreateForm']))
 		{
 			$model->attributes=$_POST['FaqCreateForm'];
-			print_r($_POST['FaqCreateForm']);
+			$faq->faq_question=$model->faq_question;
+			$faq->faq_answer=$model->faq_answer;
+			if($faq->save())
+			{
+				if ($_POST['FaqCreateForm']['faq_keywords']) {
+					$keywords=explode(',', $_POST['FaqCreateForm']['faq_keywords']);
+					
+					foreach ($keywords as $key => $keyword) {
+						$isKey=Keywords::model()->findAll(array(
+							'condition'=>'keyword=:keyword',
+							'params'=>array(':keyword'=>$keyword)
+									)
+								);
+						if(empty($isKey))
+						{
+							$newKeyword= new Keywords;
+
+							$criteria=new CDbCriteria;
+							$criteria->select='max(keyword_id) AS maxColumn';
+							$row = $newKeyword->model()->find($criteria);
+
+							$newKeyword->keyword_id=$row['maxColumn']+1;
+							$newKeyword->keyword=$keyword;
+							$newKeyword->lang=$this->getCurrentLang();
+							if ($newKeyword->save()) {
+								$keywordFaq= new KeywordsFaq;
+								$keywordFaq->keyword_id=$newKeyword->keyword_id;
+								$keywordFaq->faq_id=$faq->faq_id;
+								$keywordFaq->save();
+							}
+						}
+						else
+						{
+							$keywordFaq= new KeywordsFaq;
+							$keywordFaq->keyword_id=$isKey['0']->keyword_id;
+							$keywordFaq->faq_id=$faq->faq_id;
+							$keywordFaq->save();
+						}
+					}
+				}
+				if(!empty($model->faq_categories))
+				{
+					foreach ($model->faq_categories as $key => $category) {
+						$faq_category_faq=new FaqCategoryFaq;
+						$faq_category_faq->faq_category_id=$category;
+						$faq_category_faq->faq_id=$faq->faq_id;
+						$faq_category_faq->save();
+					}
+				}
+			}
+
+			$this->redirect(array('view','id'=>$faq->faq_id));
+
 		}
 
 		$this->render('create',array(
 			'model'=>$model,
 			'categories'=>$categories
 		));
+	}
+
+	public function actionSearchKey($term)
+	{
+		$lang=$this->getCurrentLang();
+
+		$keywords= Keywords::model()->findAll(array(
+			'condition'=>'lang=:lang',
+			'params'=>array(':lang'=>$lang)
+			));
+
+ 		foreach ($keywords as $key => $keyword) {
+ 			if (strpos($keyword->keyword, $term) !==false) {
+ 				$data[]=array('label'=>$keyword->keyword,'value'=>$keyword->keyword);
+ 			}
+ 		}
+ 		echo json_encode($data);
 	}
 
 	public function getCurrentLang()
