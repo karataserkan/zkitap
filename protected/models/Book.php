@@ -131,55 +131,10 @@ class Book extends CActiveRecord
 	}
 
 	public function getPageSize(){
-		//$model=$this->loadModel($bookId);
-		
 		$bookData = json_decode($this->data,true);
-		if (isset($bookData['size'])) {
-			$bookSize = $bookData['size'];
-			switch ($bookSize) {
-				case '0':
-					$bookWidth="2048";
-					$bookHeight="1536";
-					break;
-				
-				case '1':
-					$bookWidth="1920";
-					$bookHeight="1080";
-					break;
-
-				case '2':
-					$bookWidth="1400";
-					$bookHeight="1050";
-					break;
-
-				case '3':
-					$bookWidth="1366";
-					$bookHeight="768";
-					break;
-
-				case '4':
-					$bookWidth="1280";
-					$bookHeight="960";
-					break;
-
-				case '5':
-					$bookWidth="1280";
-					$bookHeight="800";
-					break;
-
-				case '6':
-					$bookWidth="1024";
-					$bookHeight="768";
-					break;
-
-				case '7':
-					$bookWidth="800";
-					$bookHeight="600";
-					break;
-				default:
-					# code...
-					break;
-			}
+		if (isset($bookData['size']['height'])&&isset($bookData['size']['width'])) {
+			$bookHeight=$bookData['size']['height'];
+			$bookWidth=$bookData['size']['width'];
 		}
 		else
 		{
@@ -188,6 +143,14 @@ class Book extends CActiveRecord
 		}
 		return $bookSize = array('height'=>$bookHeight,
 					'width'=>$bookWidth);
+	}
+
+	public function setPageSize($width,$height)
+	{
+		$book_data=json_decode($this->data,true);
+		$book_data['size']['width']=$width;
+		$book_data['size']['height']=$height;
+		$this->data=json_encode($book_data);
 	}
 
 }
