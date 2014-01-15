@@ -128,7 +128,7 @@ class BookController extends Controller
 
 	}
 	private function getPDFData($filePath,$pageNumber,$pageJSON){
-		$data=array()
+		$data=array();
 		$imgPath=$filePath.'/page-'.$pageNumber.'.jpg';
 		$imgThumbnailPath=$filePath.'/thumbnailpage-'.$pageNumber.'.jpg';
 
@@ -378,7 +378,8 @@ class BookController extends Controller
 			$book=$this->loadModel($bookId);
 			//book->data'ya size eklendi
 			
-			$book->setData('size',$_POST['BookDataForm']['size']);
+			$bookSize=explode('x', $_POST['BookDataForm']['size']);
+			$book->setPageSize($bookSize[0],$bookSize[1]);
 
 			$book->save();
 			$this->redirect(array('author','bookId'=>$bookId));
