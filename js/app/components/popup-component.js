@@ -34,13 +34,13 @@ $(document).ready(function(){
       
       
       this._super(); 
-
+/*
       this.element.resizable("option",'maxHeight', 128 );
       this.element.resizable("option",'minHeight', 128 );
       this.element.resizable("option",'maxWidth', 128 );
       this.element.resizable("option",'minWidth', 128 );
 
- 
+*/ 
       
 
     },
