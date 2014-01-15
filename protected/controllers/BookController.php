@@ -36,7 +36,7 @@ class BookController extends Controller
 				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
-				'actions'=>array('create','update','selectTemplate','delete','view','author','newBook','selectData'),
+				'actions'=>array('create','update','selectTemplate','delete','view','author','newBook','selectData','uploadFile'),
 				'users'=>array('@'),
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
@@ -111,8 +111,13 @@ class BookController extends Controller
 				    'book_id'=>$model->book_id,
 				    'type'   =>'owner'
 				));
-			
-				$this->redirect(array('selectTemplate','bookId'=>$model->book_id));
+				if($bookType=='epub'){
+					$this->redirect(array('selectTemplate','bookId'=>$model->book_id));
+				}
+				else
+				{
+					$this->redirect(array('uploadFile','bookId'=>$model->book_id));
+				}
 		}
 
 
@@ -123,6 +128,117 @@ class BookController extends Controller
 
 	}
 
+	public function actionUploadFile($bookId)
+	{
+		$date = date('m/d/Y h:i:s a', time());
+		$file_form=new FileForm();
+
+		if (isset($_POST['FileForm'])) {
+			$file_form->attributes=$_POST['FileForm'];
+			$file_form->pdf_file=CUploadedFile::getInstance($file_form,'pdf_file');
+			//echo $file_form->pdf_file;
+			$filePath=Yii::app()->basePath.'/../uploads/files/'.$bookId;
+			if(!is_dir($filePath))
+				mkdir($filePath);
+			$file_form->pdf_file->saveAs($filePath.'/'.$bookId.'.pdf');
+			$pdfUtil=new PdfUtil($filePath,$bookId);
+			$pdfUtil->extractImages();
+			$tocs=$pdfUtil->extractTableofContents();
+			$nop=$pdfUtil->getNumberofPages();
+			if($tocs==null){
+				for($i=1;$i<=$nop;$i++){
+					$imgPath=$filePath.'/page-'.$i.'.jpg';
+					$imgData=base64_encode(file_get_contents($imgPath));
+					$imgData= 'data: '.mime_content_type($imgPath).';base64,'.$imgData;
+					if($i==1){
+						$chapter=new Chapter();
+						$chapter->chapter_id=functions::new_id();
+						$chapter->book_id=$bookId;
+						$chapter->order=$i;
+						$chapter->title=__("Bölüm")."-".$i;
+						$chapter->save();
+					}
+					$page=new Page();
+					$page->chapter_id=$chapter->chapter_id;
+					$page->pdf_data=$imgData;
+					$page->order=$i;
+					$page->page_id=functions::new_id();
+					$page->save();
+					print $i;
+
+				}
+				$this->redirect('/book/author/'.$bookId);
+			}
+			else{
+					print_r($tocs);
+					for($i=1;$i<=$nop;$i++){
+						$belongs_to_chapter=null;
+						foreach($tocs as $toc){
+							//list($toc_title,$start_page,$end_page)=$toc;
+							$toc_title=$toc['toc_title'];
+							$start_page=$toc['start_page'];
+							$end_page=$toc['end_page'];
+							if((int)$start_page<=$i && $i<=(int)$end_page){
+									$belongs_to_chapter=$toc;
+								}
+							
+							}
+						
+						if($belongs_to_chapter!=null){
+								$toc_title=$belongs_to_chapter['toc_title'];
+								$start_page=$belongs_to_chapter['start_page'];
+								$end_page=$belongs_to_chapter['end_page'];		
+								$newChapter=Chapter::model()->find('title=:title',array('title'=>$toc_title));	
+								if($newChapter==null){
+									$newChapter=new Chapter();
+									$newChapter->chapter_id=functions::new_id();
+									$newChapter->book_id=$bookId;
+									$newChapter->order=$i;
+									$newChapter->title=$toc_title;
+									$newChapter->save();
+								}
+								$imgPath=$filePath.'/page-'.$i.'.jpg';
+								$imgData=base64_encode(file_get_contents($imgPath));
+								$imgData= 'data: '.mime_content_type($imgPath).';base64,'.$imgData;
+								$page=new Page();
+								$page->chapter_id=$newChapter->chapter_id;
+								$page->pdf_data=$imgData;
+								$page->order=$i;
+								$page->page_id=functions::new_id();
+								$page->save();
+							}
+							else{
+									
+									$newChapter=new Chapter();
+									$newChapter->chapter_id=functions::new_id();
+									$newChapter->book_id=$bookId;
+									$newChapter->title=__("Bölüm")."-".$i;
+									$newChapter->order=$i;
+									$newChapter->save();
+									$imgPath=$filePath.'/page-'.$i.'.jpg';
+									$imgData=base64_encode(file_get_contents($imgPath));
+									$imgData= 'data: '.mime_content_type($imgPath).';base64,'.$imgData;
+									$page=new Page();
+									$page->chapter_id=$newChapter->chapter_id;
+									$page->pdf_data=$imgData;
+									$page->order=$i;
+									$page->page_id=functions::new_id();
+									$page->save();
+
+							}
+
+						}
+
+			}
+			$this->redirect('/book/author/'.$bookId);
+			//die();
+
+		}
+			$model=$this->loadModel($bookId);
+			$this->render('upload_file',array(
+			'model'=>$file_form));
+
+	}
 	public function actionSelectTemplate($bookId=null,$layout_id=null){ 
 
 		$layouts= Book::model()->findAll(array(
