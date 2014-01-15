@@ -61,20 +61,26 @@ class FaqController extends Controller
 	 */
 	public function actionCreate()
 	{
+		//creates the form model to collect data
 		$model=new FaqCreateForm;
+
+		//creates faq
 		$faq= new Faq;
 
+		//gets max Id in the table faq
 		$criteria=new CDbCriteria;
 		$criteria->select='max(faq_id) AS maxColumn';
 		$row = $faq->model()->find($criteria);
 		$id=$row['maxColumn']+1;
 		
+		//sets faq->id,lang,rate
 		$faq->faq_id = $id;
 		$faq->lang=$this->getCurrentLang();
 		$faq->rate=0;
 		$model->faq_id=$id;
 		$model->faq_lang=$this->getCurrentLang();
 
+		//gets categories to display in the form view
 		$all_categories=FaqCategory::model()->findAll(array(
 			'condition'=>'lang=:lang',
 			'params'=>array(':lang'=>$model->faq_lang)
@@ -88,39 +94,53 @@ class FaqController extends Controller
 		if(isset($_POST['FaqCreateForm']))
 		{
 			$model->attributes=$_POST['FaqCreateForm'];
+
+			//sets faq_question and faq_answer
 			$faq->faq_question=$model->faq_question;
 			$faq->faq_answer=$model->faq_answer;
 			if($faq->save())
 			{
+				//if faq keywords entered goes in
 				if ($_POST['FaqCreateForm']['faq_keywords']) {
+					//keywordleri , ile ayırarak alıyorum
 					$keywords=explode(',', $_POST['FaqCreateForm']['faq_keywords']);
 					
 					foreach ($keywords as $key => $keyword) {
+						//check if the keyword already exists
 						$isKey=Keywords::model()->findAll(array(
 							'condition'=>'keyword=:keyword',
 							'params'=>array(':keyword'=>$keyword)
 									)
 								);
+						//if not exists
 						if(empty($isKey))
 						{
+							//create ne keyword
 							$newKeyword= new Keywords;
 
+							//get max Id from keywords
 							$criteria=new CDbCriteria;
 							$criteria->select='max(keyword_id) AS maxColumn';
 							$row = $newKeyword->model()->find($criteria);
 
+							//sets keyword attributes
 							$newKeyword->keyword_id=$row['maxColumn']+1;
 							$newKeyword->keyword=$keyword;
 							$newKeyword->lang=$this->getCurrentLang();
+							
+							//save keyword
 							if ($newKeyword->save()) {
+								//creates and save KeywordFaq
 								$keywordFaq= new KeywordsFaq;
 								$keywordFaq->keyword_id=$newKeyword->keyword_id;
 								$keywordFaq->faq_id=$faq->faq_id;
 								$keywordFaq->save();
 							}
 						}
+						//if keyword exsists
 						else
 						{
+							//creates and save KeywordFaq
 							$keywordFaq= new KeywordsFaq;
 							$keywordFaq->keyword_id=$isKey['0']->keyword_id;
 							$keywordFaq->faq_id=$faq->faq_id;
@@ -128,8 +148,10 @@ class FaqController extends Controller
 						}
 					}
 				}
+				//if categories selected
 				if(!empty($model->faq_categories))
 				{
+					//save selected categories to FaqCategoryFaq (connects faq and category)
 					foreach ($model->faq_categories as $key => $category) {
 						$faq_category_faq=new FaqCategoryFaq;
 						$faq_category_faq->faq_category_id=$category;
@@ -138,7 +160,7 @@ class FaqController extends Controller
 					}
 				}
 			}
-
+			//redirects to new faq view
 			$this->redirect(array('view','id'=>$faq->faq_id));
 
 		}
@@ -215,9 +237,30 @@ class FaqController extends Controller
 	 */
 	public function actionIndex()
 	{
-		$dataProvider=new CActiveDataProvider('Faq');
+		$model=Faq::model()->findAll(array('order'=>'lang'));
+		foreach ($model as $key => $faq) {
+			$data[$key]['faq']=$faq;
+
+			$categoriesFaq=FaqCategoryFaq::model()->findAll(array(
+			'condition'=>'faq_id=:faq_id',
+			'params'=>array(':faq_id'=>$faq->faq_id)
+			));
+
+			foreach ($categoriesFaq as $keyCategory => $categoryFaq) {
+				$data[$key]['categories'][]=FaqCategory::model()->findByPk($categoryFaq->faq_category_id);
+			}
+
+			$categoriesKeywords=KeywordsFaq::model()->findAll(array(
+			'condition'=>'faq_id=:faq_id',
+			'params'=>array(':faq_id'=>$faq->faq_id)
+			));
+
+			foreach ($categoriesKeywords as $keyKeyword => $keyword) {
+				$data[$key]['keywords'][]=Keywords::model()->findByPk($keyword->keyword_id);
+			}
+		}
 		$this->render('index',array(
-			'dataProvider'=>$dataProvider,
+			'faqs'=>$data,
 		));
 	}
 

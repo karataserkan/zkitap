@@ -26,7 +26,9 @@ a img {border:none;}
  */
  
 /* typography.css */
-body {color:#333;background:#d7eff9;font-family:"Helvetica Neue", Arial, Helvetica, sans-serif;margin: 0;
+body {color:#333;background:#d7eff9;
+background-image: url(http://4.bp.blogspot.com/-QnGVKpSWUSk/T5PDF1PumAI/AAAAAAAAAKw/Q4rIhDR83YM/s000/wood_1.png);
+font-family:"Helvetica Neue", Arial, Helvetica, sans-serif;margin: 0;
 	padding: 0;}
 h1, h2, h3, h4, h5, h6 {font-weight:normal;}
 h1 {margin:0px}

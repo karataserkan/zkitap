@@ -100,6 +100,17 @@ var createLinkComponent = function ( event, ui, oldcomponent ) {
        var  component = {
           'type' : 'link',
           'data': {
+            'img':{
+              'css' : {
+                'width':'100%',
+                'height':'100%',
+                'margin': '0',
+                'padding': '0px',
+                'border': 'none 0px',
+                'outline': 'none',
+                'background-color': 'transparent'
+              } 
+            },
             'lock':'',
             'self': {
               'css': {

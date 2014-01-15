@@ -38,7 +38,7 @@ class Page extends CActiveRecord
 		// will receive user inputs.
 		return array(
 			array('page_id, chapter_id', 'required'),
-			array('page_id, chapter_id', 'length', 'max'=>44),
+			array('page_id, chapter_id, order', 'length', 'max'=>44),
 			array('created, data', 'safe'),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.

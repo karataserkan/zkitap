@@ -328,8 +328,8 @@ window.lindneo.nisga = (function(window, $, undefined){
     });
 
   };
-
-  var textComponentBuilder = function( component ) {
+//
+var textComponentBuilder = function( component ) {
 
     var element = $('<textarea></textarea>'); 
 
@@ -345,8 +345,8 @@ window.lindneo.nisga = (function(window, $, undefined){
 
       }
       else revision_value=0;
-      console.log(event);
-      //console.log(revision_array);
+      //console.log(event);
+      console.log(revision_array);
         window.lindneo.tlingit.componentHasUpdated( component );
         
       },
