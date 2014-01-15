@@ -76,6 +76,17 @@ var createPopupComponent = function ( event, ui, oldcomponent ) {
        var  component = {
           'type' : 'popup',
           'data': {
+            'img':{
+              'css' : {
+                'width': '100%',
+                'height': '100%',
+                'margin': '0',
+                'padding': '0px',
+                'border': 'none 0px',
+                'outline': 'none',
+                'background-color': 'transparent'
+              } 
+            },
             'html_inner':  $("#popup-explanation").val(),
             'lock':'',
             'self': {
@@ -83,8 +94,8 @@ var createPopupComponent = function ( event, ui, oldcomponent ) {
                 'position':'absolute',
                 'top': top ,
                 'left':  left ,
-                'width': '128px',
-                'height': '128px',
+                'width':'128px',
+                'height':'128px',
                 'background-color': 'transparent',
                 'overflow': 'visible',
                 'z-index': '99998'
