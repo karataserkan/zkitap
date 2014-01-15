@@ -118,6 +118,10 @@ window.lindneo.tlingit = (function(window, $, undefined){
   };
 
   var loadPage = function (pageId){
+
+    $('#current_page').empty();
+    window.lindneo.currentPageId=pageId;
+
     //page ile ilgili componentların hepsini serverdan çek.
     // hepsi için createComponent 
 
@@ -131,7 +135,8 @@ window.lindneo.tlingit = (function(window, $, undefined){
         function(err){
           console.log('error:' + err);
       });
-      loadAllPagesPreviews();
+      
+
   };
 
   var loadAllPagesPreviews = function (){
@@ -141,6 +146,8 @@ window.lindneo.tlingit = (function(window, $, undefined){
   };
 
   var loadPagesPreviews = function (pageId) {
+        //console.log(components);
+    
     var pageSlice=$('[page_id="'+pageId+'"]');
     if (pageSlice)
      window.lindneo.dataservice
@@ -155,16 +162,26 @@ window.lindneo.tlingit = (function(window, $, undefined){
   };
 
   var PreviewOfPage = function (response) {
+    $("li.page ").each(function(index, pageSlice){
+      var pagePreview = $('<canvas class="preview" height="90" width="120"> </canvas>');
     
-    //console.log(response);
+      $(pageSlice).children('.preview').remove();
+      $(pageSlice).prepend(pagePreview);
+        var canvas=page_slice.children('.preview')[0];
+      var context=canvas.getContext("2d");
+       context.fillStyle = '#FFF';
+        context.fillRect(0,0,canvas.width,canvas.height);
+        canvas_reset[component.page_id]=true;
+    });
+
+
     var components= responseFromJson(response).result.components;
-    //console.log(components);
-    var pagePreview = $('<canvas class="preview" height="90" width="120"> </canvas>');
+
     $.each(components,function(i,component){
       var pageSlice=$('[page_id="'+component.page_id+'"]');
-
-      pageSlice.children('.preview').remove();
-      pageSlice.prepend(pagePreview);
+    
+       
+      
     });
 
     var canvas_reset=[];
@@ -182,9 +199,7 @@ window.lindneo.tlingit = (function(window, $, undefined){
       var canvas=page_slice.children('.preview')[0];
       var context=canvas.getContext("2d");
       if(canvas_reset[component.page_id]!=true){
-        context.fillStyle = '#FFF';
-        context.fillRect(0,0,canvas.width,canvas.height);
-        canvas_reset[component.page_id]=true;
+      
       }
 
         switch (component.type){
@@ -374,6 +389,7 @@ window.lindneo.tlingit = (function(window, $, undefined){
 
 
   return {
+    loadAllPagesPreviews: loadAllPagesPreviews,
     loadPagesPreviews: loadPagesPreviews,
     responseFromJson: responseFromJson,
     componentToJson: componentToJson,
