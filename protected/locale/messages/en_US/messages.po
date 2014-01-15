@@ -7,7 +7,7 @@
 msgid   ""
 msgstr  "Project-Id-Version: PACKAGE VERSION\n"
         "Report-Msgid-Bugs-To: \n"
-        "POT-Creation-Date: 2014-01-14 06:00+0000\n"
+        "POT-Creation-Date: 2014-01-15 06:00+0000\n"
         "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
         "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
         "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -158,12 +158,13 @@ msgstr  "Profile"
 #: protected/views/book/author.php:162 protected/views/layouts/main.php:69
 #: protected/views/book/author.php:163 protected/views/layouts/main.php:70
 #: protected/views/book/author.php:164 protected/views/book/author.php:168
-#: protected/views/book/author.php:168 protected/views/layouts/main.php:72
+#: protected/views/layouts/main.php:72 protected/views/book/author.php:168
+#: protected/views/layouts/main.php:72
 msgid   "Çıkış"
 msgstr  "Sign Out"
 
 #: protected/views/layouts/main.php:67 protected/views/layouts/main.php:68
-#: protected/views/layouts/main.php:70
+#: protected/views/layouts/main.php:70 protected/views/layouts/main.php:70
 msgid   "Giriş yap"
 msgstr  "Sign In"
 
@@ -199,6 +200,7 @@ msgstr  "Add Workspace"
 #: protected/views/organisations/users.php:17
 #: protected/views/site/index.php:78
 #: protected/views/organisations/workspaces.php:20
+#: protected/views/organisationHostings/index.php:19
 #: protected/views/site/index.php:78
 #: protected/views/organisations/workspaces.php:20
 #: protected/views/organisations/users.php:17
@@ -210,6 +212,7 @@ msgstr  "Delete"
 #: protected/views/organisations/users.php:40
 #: protected/views/organisations/workspaces.php:60
 #: protected/views/organisations/users.php:42
+#: protected/views/organisationHostings/index.php:26
 #: protected/views/organisations/workspaces.php:60
 #: protected/views/organisations/users.php:42
 #: protected/views/organisationHostings/index.php:26
@@ -217,7 +220,7 @@ msgid   "Ekle"
 msgstr  "Add"
 
 #: protected/views/book/select_data.php:39 protected/views/faq/create.php:38
-#: protected/views/book/select_data.php:39
+#: protected/views/faq/create.php:44 protected/views/book/select_data.php:39
 msgid   "Kaydet"
 msgstr  "Save"
 
@@ -263,22 +266,22 @@ msgstr  ""
 msgid   "İstemci Key2"
 msgstr  ""
 
-#: protected/models/FaqCreateForm.php:36
+#: protected/models/FaqCreateForm.php:36 protected/models/FaqCreateForm.php:36
 msgid   "SSS Soru"
 msgstr  ""
 
-#: protected/models/FaqCreateForm.php:37
+#: protected/models/FaqCreateForm.php:37 protected/models/FaqCreateForm.php:37
 msgid   "SSS Cevap"
 msgstr  ""
 
-#: protected/models/FaqCreateForm.php:38
+#: protected/models/FaqCreateForm.php:38 protected/models/FaqCreateForm.php:38
 msgid   "Dil"
 msgstr  ""
 
-#: protected/models/FaqCreateForm.php:39
+#: protected/models/FaqCreateForm.php:39 protected/models/FaqCreateForm.php:39
 msgid   "Categoriler"
 msgstr  ""
 
-#: protected/models/FaqCreateForm.php:40
+#: protected/models/FaqCreateForm.php:40 protected/models/FaqCreateForm.php:40
 msgid   "Anahtar Kelimeler"
 msgstr  ""
