@@ -34,13 +34,13 @@ $(document).ready(function(){
       
       
       this._super(); 
-
+/*
       this.element.resizable("option",'maxHeight', 128 );
       this.element.resizable("option",'minHeight', 128 );
       this.element.resizable("option",'maxWidth', 128 );
       this.element.resizable("option",'minWidth', 128 );
 
- 
+*/ 
       
 
     },
@@ -50,8 +50,7 @@ $(document).ready(function(){
       this._super();
 
       // set
-      this.options.component[key] = value;
-
+      this.options.component[key] = value
     }
     
   });
@@ -59,33 +58,21 @@ $(document).ready(function(){
 
 
 
-var createPopupComponent = function ( event, ui ) {
-
-    $("<div class='popup ui-draggable' id='pop-image-popup' style='display: block; top:" + (ui.offset.top-$(event.target).offset().top ) + "px; left: " + ( ui.offset.left-$(event.target).offset().left ) + "px;'> \
-    <div class='popup-header'> \
-    Görsel Ekle \
-    <div class='popup-close' id='image-add-dummy-close-button'>x</div> \
-    </div> \
-      <div class='gallery-inner-holder'> \
-      <textarea  id='popup-explanation' class='popup-text-area'>Açılır kutunun içeriğini yazınız. \
-      </textarea> <br> \
-      <a href='#' id='pop-image-OK' class='btn bck-light-green white radius' style='padding: 5px 30px;'>Ekle</a> \
-    </div> \
-    </div>").appendTo('body').draggable();
-
-    $('#image-add-dummy-close-button').click(function(){
-
-      $('#pop-image-popup').remove();  
-
-      if ( $('#pop-image-popup').length ){
-        $('#pop-image-popup').remove();  
-      }
-
-    });
-
+var createPopupComponent = function ( event, ui, oldcomponent ) {
 
     $('#pop-image-OK').click(function (){        
-        
+      if(typeof oldcomponent == 'undefined'){
+        console.log('dene');
+        var top = (ui.offset.top-$(event.target).offset().top ) + 'px';
+        var left = ( ui.offset.left-$(event.target).offset().left ) + 'px';
+      }
+      else{
+        top = oldcomponent.data.self.css.top;
+        left = oldcomponent.data.self.css.left;
+        //window.lindneo.tlingit.componentHasDeleted( oldcomponent.id );
+        oldcomponent.data.html_inner = $("#popup-explanation").val();
+
+      };
        var  component = {
           'type' : 'popup',
           'data': {
@@ -94,8 +81,8 @@ var createPopupComponent = function ( event, ui ) {
             'self': {
               'css': {
                 'position':'absolute',
-                'top': (ui.offset.top-$(event.target).offset().top ) + 'px',
-                'left':  ( ui.offset.left-$(event.target).offset().left ) + 'px',
+                'top': top ,
+                'left':  left ,
                 'width': '128px',
                 'height': '128px',
                 'background-color': 'transparent',
@@ -105,8 +92,10 @@ var createPopupComponent = function ( event, ui ) {
             }
           }
         };
-        
-        window.lindneo.tlingit.componentHasCreated( component );
+        if(typeof oldcomponent == 'undefined')
+          window.lindneo.tlingit.componentHasCreated( component );
+        else 
+          window.lindneo.tlingit.componentHasUpdated( oldcomponent );
         $("#image-add-dummy-close-button").trigger('click');
 
     });

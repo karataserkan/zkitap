@@ -83,8 +83,11 @@ class BookController extends Controller
 	{
 		$model=new Book;
 		$model->book_id=functions::get_random_string();
-		//seçilen bookType json olarak eklendi
-		$model->data=json_encode(array('book_type' => $bookType));
+		
+		$model->setData('book_type',$bookType);
+
+		//seçilen bookType eklendi
+		
 		$model->created=date("Y-m-d");
 
 
@@ -98,6 +101,8 @@ class BookController extends Controller
 		{
 			$model->attributes=$_POST['Book'];
 
+			//$model->pdf_file=CUploadedFile::getInstance($model,'pdf_file');
+			//print($model->pdf_file);die();
 			if($model->save())
 				$userid=Yii::app()->user->id;
 				$addOwner = Yii::app()->db->createCommand();
@@ -134,9 +139,7 @@ class BookController extends Controller
 
 			$book=$this->loadModel($bookId);
 			//book->data'ya template_id eklendi
-			$book_data=json_decode($book->data,true);
-			$book_data['template_id']=$layout_id;
-			$book->data=json_encode($book_data);
+			$book->setData('template_id',$layout_id);
 
 			$book->save();
 
@@ -200,8 +203,6 @@ class BookController extends Controller
 		$this->redirect(array('selectData','bookId'=>$bookId));	
 		}
 
-		
-
 		$this->render('select_template',array(
 			'layouts'=>$layouts,
 			'book_id'=>$bookId,
@@ -231,9 +232,8 @@ class BookController extends Controller
 		if (isset($_POST['BookDataForm']['size'])) {
 			$book=$this->loadModel($bookId);
 			//book->data'ya size eklendi
-			$book_data=json_decode($book->data,true);
-			$book_data['size']=$_POST['BookDataForm']['size'];
-			$book->data=json_encode($book_data);
+			
+			$book->setData('size',$_POST['BookDataForm']['size']);
 
 			$book->save();
 			$this->redirect(array('author','bookId'=>$bookId));

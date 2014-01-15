@@ -31,10 +31,13 @@ $(document).ready(function(){
       
       this._super(); 
 
+/*
       this.element.resizable("option",'maxHeight', 128 );
       this.element.resizable("option",'minHeight', 128 );
       this.element.resizable("option",'maxWidth', 128 );
       this.element.resizable("option",'minWidth', 128 );
+
+*/ 
 
  
       
@@ -91,7 +94,8 @@ var createLinkComponent = function ( event, ui, oldcomponent ) {
         top = oldcomponent.data.self.css.top;
         left = oldcomponent.data.self.css.left;
         link_value = oldcomponent.data.self.attr.href;
-        window.lindneo.tlingit.componentHasDeleted( oldcomponent.id );
+        //window.lindneo.tlingit.componentHasDeleted( oldcomponent.id );
+        oldcomponent.data.self.attr.href = targetURL;
       };
        var  component = {
           'type' : 'link',
@@ -114,8 +118,10 @@ var createLinkComponent = function ( event, ui, oldcomponent ) {
             }
           }
         };
-        
-        window.lindneo.tlingit.componentHasCreated( component );
+        if(typeof oldcomponent == 'undefined')
+          window.lindneo.tlingit.componentHasCreated( component );
+        else
+          window.lindneo.tlingit.componentHasUpdated( oldcomponent );
         $("#image-add-dummy-close-button").trigger('click');
 
     });

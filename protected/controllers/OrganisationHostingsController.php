@@ -1,6 +1,6 @@
 <?php
 
-class UserController extends Controller
+class OrganisationHostingsController extends Controller
 {
 	/**
 	 * @var string the default layout for the views. Defaults to '//layouts/column2', meaning
@@ -28,15 +28,15 @@ class UserController extends Controller
 	{
 		return array(
 			array('allow',  // allow all users to perform 'index' and 'view' actions
-				'actions'=>array('index','view','invitation'),
+				'actions'=>array('index','view'),
 				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
-				'actions'=>array('create','update','profile'),
+				'actions'=>array('create','update','delete','deleteHost'),
 				'users'=>array('@'),
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
-				'actions'=>array('admin','delete'),
+				'actions'=>array('admin'),
 				'users'=>array('admin'),
 			),
 			array('deny',  // deny all users
@@ -57,75 +57,31 @@ class UserController extends Controller
 	}
 
 	/**
-	 * davet edilen kullanıcı key ile birlikte geliyor. invitation tablosundan user ve organisation bulunuyor.
-	 * kullanıcı yeni ise şifre ve isim kaydediliyor
-	 * kullanıcı organizasyona kaydediliyor
-	 * kullanıcının tekrar aynı linki kullanamaması için invitationı siliyorum
-	 * @param  varchar $key 
-	 * @return model User, is Newuser or Not
-	 */
-	public function actionInvitation($key=null)
-	{
-		$invitation = OrganisationInvitation::model()->findByPk($key);
-
-		if ($invitation) {
-			$user=$this->loadModel($invitation->user_id);
-			$organisation=Organisations::model()->findByPk($invitation->organisation_id);
-			$organisationUser= new OrganisationUsers;
-			$organisationUser->user_id=$user->id;
-			$organisationUser->organisation_id=$organisation->organisation_id;
-			$organisationUser->role="user";
-			if($organisationUser->save())
-			{
-				$msg="USER:INVITATION:0:". json_encode(array('userId'=>$user->id,'organisationId'=>$organisation->organisation_id,'role'=>'user', 'message'=>'invitation accepted'));
-				Yii::log($msg,'info');
-			}
-			else
-			{
-				$msg="USER:INVITATION:1:". json_encode(array('userId'=>$user->id,'organisationId'=>$organisation->organisation_id,'role'=>'user', 'message'=>'invitation accept error'));
-				Yii::log($msg,'info');
-			}
-
-			$invitation->delete();
-
-			
-			$newUser=false;
-			if ($user->name == "" || $user->surname=="" || $user->password=="") {
-				$newUser=true;
-			}
-			if(isset($_POST['User']))
-			{
-				$user->attributes=$_POST['User'];
-				$user->save();
-				$this->redirect( array('site/login' ) );
-			}
-			$this->render('invitation',array(
-				'model'=>$user,
-				'newUser'=>$newUser
-			));
-		}
-	}
-
-	public function actionProfile()
-	{
-		echo Yii::app()->user->name;
-	}
-	/**
 	 * Creates a new model.
 	 * If creation is successful, the browser will be redirected to the 'view' page.
 	 */
-	public function actionCreate()
+	public function actionCreate($organisationId)
 	{
-		$model=new User;
-
+		$model=new OrganisationHostings;
+		$model->organisation_id=$organisationId;
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
 
-		if(isset($_POST['User']))
+		$criteria=new CDbCriteria;
+		$criteria->select='max(hosting_client_id) AS maxColumn';
+		$row = $model->model()->find($criteria);
+		
+		$model->hosting_client_id = $row['maxColumn']+1;
+
+		if(isset($_POST['OrganisationHostings']))
 		{
-			$model->attributes=$_POST['User'];
+			$model->attributes=$_POST['OrganisationHostings'];
 			if($model->save())
-				$this->redirect(array('view','id'=>$model->id));
+				{
+					$msg="ORGANISATION_HOSTINGS:CREATE:0:". json_encode(array(array('user'=>Yii::app()->user->id),array('organisationId'=>$organisationId,'hostingClientId'=>$model->hosting_client_id)));
+					Yii::log($msg,'info');
+					$this->redirect(array('index','organisationId'=>$model->organisation_id));
+				}
 		}
 
 		$this->render('create',array(
@@ -135,21 +91,25 @@ class UserController extends Controller
 
 	/**
 	 * Updates a particular model.
-	 * If update is successful, the browser will be redirected to the 'view' page.
+	 * If update is successful, the browser will be redirected to the 'index' page.
 	 * @param integer $id the ID of the model to be updated
 	 */
-	public function actionUpdate($id)
+	public function actionUpdate($organisationId,$id)
 	{
 		$model=$this->loadModel($id);
 
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
 
-		if(isset($_POST['User']))
+		if(isset($_POST['OrganisationHostings']))
 		{
-			$model->attributes=$_POST['User'];
+			$model->attributes=$_POST['OrganisationHostings'];
 			if($model->save())
-				$this->redirect(array('view','id'=>$model->id));
+			{
+				$msg="ORGANISATION_HOSTINGS:UPDATE:0:". json_encode(array(array('user'=>Yii::app()->user->id),array('organisationId'=>$organisationId,'hostingClientId'=>$model->hosting_client_id)));
+				Yii::log($msg,'info');
+				$this->redirect(array('index','organisationId'=>$model->organisation_id));
+			}
 		}
 
 		$this->render('update',array(
@@ -162,23 +122,43 @@ class UserController extends Controller
 	 * If deletion is successful, the browser will be redirected to the 'admin' page.
 	 * @param integer $id the ID of the model to be deleted
 	 */
-	public function actionDelete($id)
+	public function actionDelete($organisationId,$id)
 	{
 		$this->loadModel($id)->delete();
-
-		// if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
+		//if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
 		if(!isset($_GET['ajax']))
 			$this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('admin'));
 	}
 
 	/**
-	 * Lists all models.
+	 * Deletes a particular model.
+	 * If deletion is successful, the browser will be redirected to the 'index' page.
+	 * @param integer $id the ID of the model to be deleted
 	 */
-	public function actionIndex()
+	public function actionDeleteHost($organisationId,$id)
 	{
-		$dataProvider=new CActiveDataProvider('User');
+		$model=$this->loadModel($id);
+		$msg="ORGANISATION_HOSTINGS:DELETE_HOST:0:". json_encode(array(array('user'=>Yii::app()->user->id),array('organisationId'=>$organisationId,'hostingClientId'=>$model->hosting_client_id)));
+		if ($model->delete()) {
+			Yii::log($msg,'info');
+		}
+		$this->redirect(array('index','organisationId'=>$organisationId));
+	}
+
+	/**
+	 * Lists all models of organisation.
+	 */
+	public function actionIndex($organisationId=null)
+	{
+		if(Yii::app()->user->isGuest)
+			$this->redirect( array('/site/login' ) );
+
+		$hostings= OrganisationHostings::model()->findAll('organisation_id=:organisation_id', 
+	    				array(':organisation_id' => $organisationId) );
+		
 		$this->render('index',array(
-			'dataProvider'=>$dataProvider,
+			'hostings'=>$hostings,
+			'organisationId'=>$organisationId
 		));
 	}
 
@@ -187,10 +167,10 @@ class UserController extends Controller
 	 */
 	public function actionAdmin()
 	{
-		$model=new User('search');
+		$model=new OrganisationHostings('search');
 		$model->unsetAttributes();  // clear any default values
-		if(isset($_GET['User']))
-			$model->attributes=$_GET['User'];
+		if(isset($_GET['OrganisationHostings']))
+			$model->attributes=$_GET['OrganisationHostings'];
 
 		$this->render('admin',array(
 			'model'=>$model,
@@ -201,12 +181,12 @@ class UserController extends Controller
 	 * Returns the data model based on the primary key given in the GET variable.
 	 * If the data model is not found, an HTTP exception will be raised.
 	 * @param integer $id the ID of the model to be loaded
-	 * @return User the loaded model
+	 * @return OrganisationHostings the loaded model
 	 * @throws CHttpException
 	 */
 	public function loadModel($id)
 	{
-		$model=User::model()->findByPk($id);
+		$model=OrganisationHostings::model()->findByPk($id);
 		if($model===null)
 			throw new CHttpException(404,'The requested page does not exist.');
 		return $model;
@@ -214,11 +194,11 @@ class UserController extends Controller
 
 	/**
 	 * Performs the AJAX validation.
-	 * @param User $model the model to be validated
+	 * @param OrganisationHostings $model the model to be validated
 	 */
 	protected function performAjaxValidation($model)
 	{
-		if(isset($_POST['ajax']) && $_POST['ajax']==='user-form')
+		if(isset($_POST['ajax']) && $_POST['ajax']==='organisation-hostings-form')
 		{
 			echo CActiveForm::validate($model);
 			Yii::app()->end();

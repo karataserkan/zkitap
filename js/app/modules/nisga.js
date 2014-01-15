@@ -135,7 +135,7 @@ window.lindneo.nisga = (function(window, $, undefined){
 
                 //var array_where = $.grep(revision_array.revisions, function(e){ return (e.component.id == revision_array.revisions[revision_id].component.id && e.indexOf('J')); }); 
                 array_where.pop();
-                console.log(array_where);
+                console.log(array_where[array_where.length-1].component);
                 destroyComponent(array_where[array_where.length-1].component.id);
                 createComponent(array_where[array_where.length-1].component);
                 window.lindneo.tlingit.componentHasUpdated(array_where[array_where.length-1].component);

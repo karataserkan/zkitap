@@ -88,7 +88,13 @@ include 'newBookSteps.php';
 		<?php echo $model->created; ?>
 		<?php echo $form->error($model,'created'); ?>
 	</div>
-
+	<!--
+	<div class="row">
+		<?php echo $form->labelEx($model,'pdf_file'); ?>
+		<?php echo $form->fileField($model, 'pdf_file'); ?>
+		<?php echo $form->error($model,'pdf_file'); ?>
+	</div>
+	-->
 	
 
 	<div class="row buttons">

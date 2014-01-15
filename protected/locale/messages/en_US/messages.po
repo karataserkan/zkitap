@@ -7,7 +7,7 @@
 msgid   ""
 msgstr  "Project-Id-Version: PACKAGE VERSION\n"
         "Report-Msgid-Bugs-To: \n"
-        "POT-Creation-Date: 2014-01-08 14:00+0000\n"
+        "POT-Creation-Date: 2014-01-13 06:00+0000\n"
         "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
         "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
         "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -19,10 +19,11 @@ msgstr  "Project-Id-Version: PACKAGE VERSION\n"
 
 #: protected/views/site/index.php:88 protected/views/site/index.php:93
 #: protected/views/organisations/workspaces.php:20
-#: protected/views/book/library.php:4 protected/views/site/index.php:88
-#: protected/views/site/index.php:93
-#: protected/views/organisations/workspaces.php:20
+#: protected/views/book/library.php:4 protected/views/site/index.php:82
+#: protected/views/site/index.php:87
+#: protected/views/organisations/workspaces.php:21
 #: protected/views/book/library.php:4
+#: protected/views/organisationHostings/index.php:18
 msgid   "Düzenle"
 msgstr  "Edit"
 
@@ -38,11 +39,11 @@ msgstr  "Book Name"
 msgid   "Yazar Adı"
 msgstr  "Author Name"
 
-#: protected/views/site/index.php:98 protected/views/site/index.php:98
+#: protected/views/site/index.php:98 protected/views/site/index.php:92
 msgid   "İndir"
 msgstr  "Download"
 
-#: protected/views/site/index.php:103 protected/views/site/index.php:103
+#: protected/views/site/index.php:103 protected/views/site/index.php:97
 msgid   "Kitap Editörleri"
 msgstr  "Book Editors"
 
@@ -51,12 +52,12 @@ msgid   "Editörler"
 msgstr  "Editors"
 
 #: protected/views/site/index.php:132 protected/views/site/index.php:162
-#: protected/views/site/index.php:132 protected/views/site/index.php:162
+#: protected/views/site/index.php:126 protected/views/site/index.php:156
 msgid   "Editör"
 msgstr  "Editor"
 
 #: protected/views/site/index.php:129 protected/views/site/index.php:163
-#: protected/views/site/index.php:129 protected/views/site/index.php:163
+#: protected/views/site/index.php:123 protected/views/site/index.php:157
 msgid   "Sahibi"
 msgstr  "Owner"
 
@@ -69,23 +70,23 @@ msgstr  "Organisation"
 #: protected/views/organisations/users.php:25
 #: protected/views/organisations/users.php:29
 #: protected/views/organisations/users.php:33
-#: protected/views/site/index.php:148
-#: protected/views/organisations/workspaces.php:43
-#: protected/views/organisations/users.php:25
-#: protected/views/organisations/users.php:29
-#: protected/views/organisations/users.php:33
+#: protected/views/site/index.php:142
+#: protected/views/organisations/workspaces.php:45
+#: protected/views/organisations/users.php:27
+#: protected/views/organisations/users.php:31
+#: protected/views/organisations/users.php:35
 msgid   "Kullanıcı Ekle"
 msgstr  "Add User"
 
 #: protected/views/organisations/index.php:5
-#: protected/views/organisations/index.php:5
+#: protected/views/organisations/index.php:6
 msgid   "Çalışma Alanı"
 msgstr  "Workspace"
 
 #: protected/views/organisations/index.php:7
 #: protected/views/organisations/workspaces.php:18
-#: protected/views/organisations/workspaces.php:18
-#: protected/views/organisations/index.php:7
+#: protected/views/organisations/workspaces.php:19
+#: protected/views/organisations/index.php:8
 msgid   "Kullanıcılar"
 msgstr  "Users"
 
@@ -113,34 +114,41 @@ msgstr  "Templates"
 msgid   "Çözünürlük"
 msgstr  "Resolution"
 
-#: protected/views/book/author.php:135 protected/views/book/author.php:135
+#: protected/views/book/author.php:135 protected/views/book/author.php:134
+#: protected/views/book/author.php:134
 msgid   "Görünüm"
 msgstr  "View"
 
-#: protected/views/book/author.php:137 protected/views/book/author.php:137
+#: protected/views/book/author.php:137 protected/views/book/author.php:136
+#: protected/views/book/author.php:136
 msgid   "Cetvel"
 msgstr  "Rulers"
 
-#: protected/views/book/author.php:138 protected/views/book/author.php:138
+#: protected/views/book/author.php:138 protected/views/book/author.php:137
+#: protected/views/book/author.php:137
 msgid   "Rehber"
 msgstr  "Guides"
 
-#: protected/views/book/author.php:139 protected/views/book/author.php:139
+#: protected/views/book/author.php:139 protected/views/book/author.php:138
+#: protected/views/book/author.php:138
 msgid   "Yorumlar"
 msgstr  "Comments"
 
 #: protected/views/book/author.php:161 protected/views/book/author.php:162
-#: protected/views/book/author.php:162
+#: protected/views/book/author.php:163 protected/views/book/author.php:167
+#: protected/views/book/author.php:167
 msgid   "Profil"
 msgstr  "Profile"
 
 #: protected/views/book/author.php:162 protected/views/layouts/main.php:69
-#: protected/views/book/author.php:163 protected/views/book/author.php:163
-#: protected/views/layouts/main.php:70
+#: protected/views/book/author.php:163 protected/views/layouts/main.php:70
+#: protected/views/book/author.php:164 protected/views/book/author.php:168
+#: protected/views/book/author.php:168 protected/views/layouts/main.php:70
 msgid   "Çıkış"
 msgstr  "Sign Out"
 
 #: protected/views/layouts/main.php:67 protected/views/layouts/main.php:68
+#: protected/views/layouts/main.php:68
 msgid   "Giriş yap"
 msgstr  "Sign In"
 
@@ -152,7 +160,7 @@ msgstr[0]       "%s User Found"
 msgstr[1]       "%s Users Found"
 
 #: protected/controllers/OrganisationsController.php:366
-#: protected/controllers/OrganisationsController.php:366
+#: protected/controllers/OrganisationsController.php:389
 msgid   "Kullanıcı davet edildi."
 msgstr  "Invitation is sent to user."
 
@@ -166,21 +174,22 @@ msgid   "İsteği kabul ettiniz. Anasayfaya giderek sisteme giriş "
 msgstr  "Invitation accepted. Login the system."
 
 #: protected/views/organisations/workspaces.php:12
-#: protected/views/organisations/workspaces.php:12
+#: protected/views/organisations/workspaces.php:78
 msgid   "Çalışma Alanı Ekle"
 msgstr  "Add Workspace"
 
 #: protected/views/organisations/workspaces.php:19
 #: protected/views/organisations/users.php:17
-#: protected/views/organisations/workspaces.php:19
+#: protected/views/site/index.php:78
+#: protected/views/organisations/workspaces.php:20
 #: protected/views/organisations/users.php:17
 msgid   "Sil"
 msgstr  "Delete"
 
 #: protected/views/organisations/workspaces.php:58
 #: protected/views/organisations/users.php:40
-#: protected/views/organisations/workspaces.php:58
-#: protected/views/organisations/users.php:40
+#: protected/views/organisations/workspaces.php:60
+#: protected/views/organisations/users.php:42
 msgid   "Ekle"
 msgstr  "Add"
 
@@ -190,6 +199,35 @@ msgid   "Kaydet"
 msgstr  "Save"
 
 #: protected/views/organisations/workspaces.php:25
-#: protected/views/organisations/workspaces.php:25
+#: protected/views/organisations/workspaces.php:27
 msgid   "Çalışma Alanı Kullanıcıları"
 msgstr  "Workspace Users"
+
+#: protected/controllers/OrganisationsController.php:373
+#: protected/controllers/OrganisationsController.php:395
+msgid   "Girdiğiniz e-posta adresi geçersiz."
+msgstr  ""
+
+#: protected/views/organisations/index.php:10
+msgid   "Sunucu"
+msgstr  ""
+
+#: protected/views/organisationHostings/index.php:11
+msgid   "İstemci ID"
+msgstr  ""
+
+#: protected/views/organisationHostings/index.php:13
+msgid   "İstemci IP"
+msgstr  ""
+
+#: protected/views/organisationHostings/index.php:14
+msgid   "İstemci Port"
+msgstr  ""
+
+#: protected/views/organisationHostings/index.php:15
+msgid   "İstemci Key1"
+msgstr  ""
+
+#: protected/views/organisationHostings/index.php:16
+msgid   "İstemci Key2"
+msgstr  ""

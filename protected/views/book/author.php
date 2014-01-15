@@ -124,9 +124,9 @@ $current_user=User::model()->findByPk(Yii::app()->user->id);
 			      <ul>
 			         <li><a href='#' id="undo"><i class="icon-undo size-10"></i><span>Geri Al</span></a></li>
 			         <li><a href='#' id="redo"><i class="icon-redo size-10"></i><span>İleri Al</span></a></li>
-			         <li><a href='#' id="generic-cut"><i class="icon-cut size-20"></i><span>Kes</span></a></li>
-			         <li><a href='#' id="generic-copy"><i class="icon-copy size-20"></i><span>Kopyala</span></a></li>
-			         <li><a href='#' id="generic-paste"><i class="icon-paste size-20"></i><span>Yapıştır</span></a></li>
+			         <li><a href='#' id="generic-cut"><i class="generic-cut icon-cut size-20"></i><span>Kes</span></a></li>
+			         <li><a href='#' id="generic-copy"><i class="generic-copy icon-copy size-20"></i><span>Kopyala</span></a></li>
+			         <li><a href='#' id="generic-paste"><i class="generic-paste icon-paste size-20"></i><span>Yapıştır</span></a></li>
 			         <li class='last'><a href='#'><span>Location</span></a></li>
 			      </ul>
 			   </li>
@@ -165,7 +165,7 @@ $current_user=User::model()->findByPk(Yii::app()->user->id);
 
 			      	<?php if (!Yii::app()->user->isGuest) {?>
 			         <li><a href='/index.php?r=user/profile'><span><?php _e('Profil') ?></span></a></li>
-			         <li><a href='#'><span><?php _e('Çıkış') ?></span></a></li>
+			         <?php echo " <li>". CHtml::link(__("Çıkış"),"/site/logout") ."</li>"; ?>
 					<?php 
 						foreach (Yii::app()->params->availableLanguages  as $lang_id => $lang_name) {
 							$_GET['language']=$lang_id;
@@ -341,6 +341,48 @@ $current_user=User::model()->findByPk(Yii::app()->user->id);
 							</select>	
 							
 			</div>
+
+			<div class="popup-options toolbox" style="display:inline-block;">
+				<div class="vertical-line"></div>
+				
+						<i class="icon-opacity grey-6"></i>
+							<select class='tool-select tool select' rel='opacity' rel='color' id="font-size" class="radius">
+								
+								<option value="0" >0</option>
+								<option value="0.10" >10</option>
+								<option value="0.20" >20</option>
+								<option value="0.30" >30</option>
+								<option value="0.40" >40</option>
+								<option value="0.50" >50</option>
+								<option value="0.60" >60</option>
+								<option value="0.70" >70</option>
+								<option value="0.80" >80</option>
+								<option value="0.90" >90</option>
+								<option selected="selected"  value="1" >100</option>
+							</select>	
+							
+			</div>
+
+			<div class="link-options toolbox" style="display:inline-block;">
+				<div class="vertical-line"></div>
+				
+						<i class="icon-opacity grey-6"></i>
+							<select class='tool-select tool select' rel='opacity' rel='color' id="font-size" class="radius">
+								
+								<option value="0" >0</option>
+								<option value="0.10" >10</option>
+								<option value="0.20" >20</option>
+								<option value="0.30" >30</option>
+								<option value="0.40" >40</option>
+								<option value="0.50" >50</option>
+								<option value="0.60" >60</option>
+								<option value="0.70" >70</option>
+								<option value="0.80" >80</option>
+								<option value="0.90" >90</option>
+								<option selected="selected"  value="1" >100</option>
+							</select>	
+							
+			</div>
 			
 			<div class="shape-options toolbox"  style="display:inline-block;">
 				<div class="vertical-line"></div>
@@ -375,9 +417,9 @@ $current_user=User::model()->findByPk(Yii::app()->user->id);
 				<a href="#" class="bck-dark-blue white toolbox-items radius responsive_2" id="pop-align"><i class="icon-align-center size-15"></i></a>
 				<a href="#" class="toolbox-items" id="generic-disable" ><i class="icon-lock size-25 dark-blue"></i></a>
 				<a href="#" class="toolbox-items" id="generic-undisable" ><i class="icon-lock-open-alt size-25 dark-blue"></i></a>
-				<a href="#" class="toolbox-items" id="generic-cut"><i class="icon-cut size-25 dark-blue"></i></a>
-				<a href="#" class="toolbox-items" id="generic-copy"><i class="icon-copy size-25 dark-blue"></i></a>
-				<a href="#" class="toolbox-items" id="generic-paste"><i class="icon-paste size-25 dark-blue"></i></a>
+				<a href="#" class="toolbox-items" id="generic-cut"><i class="generic-cut icon-cut size-25 dark-blue"></i></a>
+				<a href="#" class="toolbox-items" id="generic-copy"><i class="generic-copy icon-copy size-25 dark-blue"></i></a>
+				<a href="#" class="toolbox-items" id="generic-paste"><i class="generic-paste icon-paste size-25 dark-blue"></i></a>
 				
 			</div>
 				
@@ -883,9 +925,10 @@ Grafik Ekle
 					$this->current_chapter=$chapter;
 				}*/
 				$page_NUM++;
+				$page_link = "/book/author/".$model->book_id.'/'.$pages->page_id;
 				?> 
 					
-					<li class='page <?php echo ( $current_page->page_id== $pages->page_id  ? "current_page": "" ); ?>' chapter_id='<?php echo $pages->chapter_id; ?>' page_id='<?php echo $pages->page_id; ?>' chapter_id='<?php echo $pages->page_id; ?>'   >
+					<li onclick="document.location.href='<?php echo $page_link; ?>'" class='page <?php echo ( $current_page->page_id== $pages->page_id  ? "current_page": "" ); ?>' chapter_id='<?php echo $pages->chapter_id; ?>' page_id='<?php echo $pages->page_id; ?>' chapter_id='<?php echo $pages->page_id; ?>'   >
 						<a class="btn red white size-15 radius icon-delete page-chapter-delete delete-page hidden-delete "  style="top: 0px;right: 0px; position: absolute;"></a>
 						<!--<a href='<?php echo $this->createUrl("book/author", array('bookId' => $model->book_id, 'page'=>$pages->page_id ));?>' >-->
 							<a href='<?php echo "/book/author/".$model->book_id.'/'.$pages->page_id;?>'/>
@@ -1047,9 +1090,9 @@ $( "#add-button" ).hover(
 <div id="dropdown-1" class="dropdown dropdown-tip dropdown-anchor-right">
 		<ul class="dropdown-menu">
 			<div class="generic-options" style="display:inline-block;">
-				<a href="#" class="toolbox-items" id="generic-cut"><i class="icon-cut"></i></a>
-				<a href="#" class="toolbox-items" id="generic-copy"><i class="icon-copy"></i></a>
-				<a href="#" class="toolbox-items" id="generic-paste"><i class="icon-paste"></i></a>
+				<a href="#" class="toolbox-items" id="generic-cut"><i class="generic-cut icon-cut"></i></a>
+				<a href="#" class="toolbox-items" id="generic-copy"><i class="generic-copy icon-copy"></i></a>
+				<a href="#" class="toolbox-items" id="generic-paste"><i class="generic-paste icon-paste"></i></a>
 				
 				
 				
@@ -1063,9 +1106,9 @@ $( "#add-button" ).hover(
 			<a href="#" class="bck-dark-blue white toolbox-items radius" id="pop-arrange"><i class="icon-send-backward size-15"></i></a>
 
 <div class="generic-options" style="display:inline-block;">
-				<a href="#" class="toolbox-items" id="generic-cut"><i class="icon-cut"></i></a>
-				<a href="#" class="toolbox-items" id="generic-copy"><i class="icon-copy"></i></a>
-				<a href="#" class="toolbox-items" id="generic-paste"><i class="icon-paste"></i></a>
+				<a href="#" class="toolbox-items" id="generic-cut"><i class="generic-cut icon-cut"></i></a>
+				<a href="#" class="toolbox-items" id="generic-copy"><i class="generic-copy icon-copy"></i></a>
+				<a href="#" class="toolbox-items" id="generic-paste"><i class="generic-paste icon-paste"></i></a>
 				
 			</div>           
 		</ul>

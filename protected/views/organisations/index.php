@@ -2,6 +2,9 @@
 /* @var $this OrganisationsController */
 /* @var $dataProvider CActiveDataProvider */
  ?>
-<a href='?r=organisations/workspaces&organizationId=<?php echo $organizationId?>' class="btn white radius " style="margin-left:20px;"><?php _e('Çalışma Alanı') ?></a>
+ <br><br><br>
+ <?php echo CHtml::link(__('Çalışma Alanı'),"/organisations/workspaces?organizationId=".$organizationId,array('class'=>'btn white radius')); ?>
 <br><br>
-<a href='?r=organisations/users&organisationId=<?php echo $organizationId?>' class="btn white radius " style="margin-left:20px;"><?php _e('Kullanıcılar') ?></a>
+<?php echo CHtml::link(__('Kullanıcılar'),"/organisations/users?organisationId=".$organizationId,array('class'=>'btn white radius')); ?>
+<br><br>
+<?php echo CHtml::link(__('Sunucu'),"/organisationHostings/index?organisationId=".$organizationId,array('class'=>'btn white radius')); ?>
