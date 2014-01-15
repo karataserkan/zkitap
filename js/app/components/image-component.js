@@ -101,6 +101,91 @@ $(document).ready(function(){
 
 
 var createImageComponent = function ( event, ui ,oldcomponent) {
+  
+  $('#image_file').change(function(){
+    if(typeof oldcomponent == 'undefined'){
+      console.log('dene');
+      var top = (ui.offset.top-$(event.target).offset().top ) + 'px';
+      var left = ( ui.offset.left-$(event.target).offset().left ) + 'px';
+      
+    }
+    else{
+      top = oldcomponent.data.self.css.top;
+      left = oldcomponent.data.self.css.left;
+      window.lindneo.tlingit.componentHasDeleted( oldcomponent.id );
+    };
+
+    var image_width = '200px';
+    var image_height = '150px';
+    var file = this.files[0];
+    var name = file.name;
+    var size = file.size;
+    var type = file.type;
+    
+    var reader = new FileReader();
+    var component = {};
+    reader.readAsDataURL(file);
+    console.log(reader);
+    reader.onload = function(_file) {
+      console.log(_file);
+      var image = new Image();
+        image.src = _file.target.result;
+
+        image.onload = function() {
+            // access image size here 
+            
+            image_width = this.width;
+            image_height = this.height;
+            if($('#width').val() != '')
+              image_width = $('#width').val();
+            if($('#height').val() != '')
+              image_height = $('#height').val();
+            var size = window.lindneo.findBestSize({'w':image_width,'h':image_height});
+            image_width = size.w;
+            image_height = size.h;
+
+        
+        
+        imageBinary = _file.target.result;      
+        console.log(top);
+        //$("#image-add-dummy-close-button").trigger('click');
+
+        component = {
+          'type' : 'image',
+          'data': {
+            'img':{
+              'css' : {
+                'width':'100%',
+                'height':'100%',
+                'margin': '0',
+                'padding': '0px',
+                'border': 'none 0px',
+                'outline': 'none',
+                'background-color': 'transparent'
+              } , 
+              'src': imageBinary
+            },
+            'lock':'',
+            'self': {
+              'css': {
+                'position':'absolute',
+                'top': top ,
+                'left':  left ,
+                'width': image_width,
+                'height': image_height,
+                'background-color': 'transparent',
+                'overflow': 'visible',
+                'z-index': '990'
+              }
+            }
+          }
+        };
+        $('#image-add-dummy-close-button').click();
+        window.lindneo.tlingit.componentHasCreated( component );
+      };
+    };
+
+});
 
     var el = document.getElementById("dummy-dropzone");
     var imageBinary = '';
@@ -122,9 +207,6 @@ var createImageComponent = function ( event, ui ,oldcomponent) {
 
     el.addEventListener("drop", function(e){
 
-      console.log(ui);
-
-
     if(typeof oldcomponent == 'undefined'){
       console.log('dene');
       var top = (ui.offset.top-$(event.target).offset().top ) + 'px';
@@ -136,9 +218,11 @@ var createImageComponent = function ( event, ui ,oldcomponent) {
       left = oldcomponent.data.self.css.left;
       window.lindneo.tlingit.componentHasDeleted( oldcomponent.id );
     };
-      
-      var image_width = '200px';
-      var image_height = '150px';
+
+    var image_width = '200px';
+    var image_height = '150px';
+
+      console.log(ui);
       
       e.stopPropagation();
       e.preventDefault();

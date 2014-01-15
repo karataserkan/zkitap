@@ -6,3 +6,4 @@ protected/config/*
 /nbproject/private/
 *.po
 *.mp4
+uploads/files/*
