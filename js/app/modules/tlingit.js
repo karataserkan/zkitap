@@ -140,6 +140,19 @@ window.lindneo.tlingit = (function(window, $, undefined){
   };
 
   var loadAllPagesPreviews = function (){
+    $("li.page").each(function(index, pageSlice){
+      //console.log(pageSlice);
+
+      var pagePreview = $('<canvas class="preview" height="90" width="120"> </canvas>');
+    
+      $(pageSlice).children('.preview').remove();
+      $(pageSlice).prepend(pagePreview);
+      var canvas=$(pageSlice).children('.preview')[0];
+      var context=canvas.getContext("2d");
+       context.fillStyle = '#FFF';
+        context.fillRect(0,0,canvas.width,canvas.height);
+        
+    });
    $('.chapter .page').each(function(){
     loadPagesPreviews($(this).attr('page_id'));
    })
@@ -162,24 +175,17 @@ window.lindneo.tlingit = (function(window, $, undefined){
   };
 
   var PreviewOfPage = function (response) {
-    $("li.page ").each(function(index, pageSlice){
-      var pagePreview = $('<canvas class="preview" height="90" width="120"> </canvas>');
-    
-      $(pageSlice).children('.preview').remove();
-      $(pageSlice).prepend(pagePreview);
-        var canvas=page_slice.children('.preview')[0];
-      var context=canvas.getContext("2d");
-       context.fillStyle = '#FFF';
-        context.fillRect(0,0,canvas.width,canvas.height);
-        canvas_reset[component.page_id]=true;
-    });
+
 
 
     var components= responseFromJson(response).result.components;
 
     $.each(components,function(i,component){
       var pageSlice=$('[page_id="'+component.page_id+'"]');
-    
+      var canvas=$(pageSlice).children('.preview')[0];
+      var context=canvas.getContext("2d");
+       context.fillStyle = '#FFF';
+        context.fillRect(0,0,canvas.width,canvas.height);
        
       
     });
