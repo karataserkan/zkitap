@@ -19,9 +19,46 @@ $action=Yii::app()->controller->action->id;
 switch ($controller) {
 	case 'site':
 		?>
-		<!-- css for site -->
+		<!-- default styles and js -->
 
-		<!-- js for site -->
+
+
+		<!-- Style Sheets Reset -->
+		<link rel="stylesheet" type="text/css" href="/css/screen.css" media="screen, projection">
+		<link rel="stylesheet" type="text/css" href="/css/print.css" media="print">
+		<link href="/css/editor_blue/jquery-ui-1.10.3.custom.css" rel="stylesheet">
+		<link href="/css/editor_blue/jquery.ui.rotatable.css" rel="stylesheet">
+
+		<!-- Style Sheets -->
+		<link rel="stylesheet" type="text/css" href="/css/main.css">
+		<link rel="stylesheet" type="text/css" href="/css/style.css">
+		<link rel="stylesheet" type="text/css" href="/css/linden-editor-icons.css">
+		<link rel="stylesheet" type="text/css" href="/css/form.css">
+
+		<!-- JS Libraries -->
+		<script src="/js/lib/jquery-1.9.1.js"></script>
+		<script src="/js/lib/jquery-ui-1.10.3.custom.js"></script>
+		<script src="/js/lib/Chart.js"></script>
+		<script src="/js/lib/jquery.autogrow-min.js"></script>
+		<script src="/js/lib/jquery.dropdown.js"></script>
+		<script src="/js/lib/jquery-ui-draggable-alsoDrag.js"></script>
+		<script src="/js/lib/jquery.ui.rotatable.js"></script>
+		<script src="http://can.dev.lindneo.com:1881/socket.io/socket.io.js"></script>
+
+		<!-- JS Modules -->
+		<script src="/js/app/lindneo.js"></script>	
+		<script src="/js/app/modules/dataservice.js"></script>	
+		<script src="/js/app/modules/tlingit.js"></script>
+		<script src="/js/app/modules/nisga.js"></script>
+		<script src="/js/app/modules/tsimshian.js"></script>
+		<script src="/js/app/modules/toolbox.js"></script>
+
+		
+
+		<!-- Page JS Codes -->
+		<script src="/js/app/other/page-drag-drop.js"></script>
+		<script src="/js/app/other/page-load.js"></script>
+			
 
 		<?php
 		break;
