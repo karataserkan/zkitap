@@ -128,7 +128,7 @@ class BookController extends Controller
 
 	}
 	private function getPDFData($filePath,$pageNumber,$pageJSON){
-		$data=array()
+		$data=array();
 		$imgPath=$filePath.'/page-'.$pageNumber.'.jpg';
 		$imgThumbnailPath=$filePath.'/thumbnailpage-'.$pageNumber.'.jpg';
 
