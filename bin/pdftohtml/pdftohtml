@@ -1,0 +1,7 @@
+#!/bin/bash
+range=`pdfinfo $1 | awk '/Pages/ {print $2}\'`
+echo $range
+for page in `seq 1 $range`;
+do
+    pdftoppm -f $page -l $page -jpeg -r 300 $1 > $2"page-"$page".jpg";
+done
