@@ -314,6 +314,25 @@ class epub3 {
 	}
 
 	public function prepare_PageHtml(&$page){
+		$page_data=json_decode($page->pdf_data,true);
+		$bookSize=$this->book->getPageSize();
+		if (isset($page_data['image']['data'])&& !empty($page_data['image']['data'])) {
+			$img=$page_data['image']['data'];
+			//$bookSize=$page_data['image']['size'];
+		}
+		$background= (isset($img)&&!empty($img)) ? "background-image:url('".$img."')" : "background:white";
+		$background_size=(isset($bookSize)&&!empty($bookSize)) ? "background-size:".$bookSize['width']."px ".$bookSize['height']."px":"";
+		
+		$width="1024";
+		$height="768";
+		if ($background_size) {
+			$width=$bookSize['width'];
+			$height=$bookSize['height'];
+		}
+
+		//$bookSize=array('width'=>'768','height'=>'1024');
+		//$page->getPageSize();
+
 		$components_html='';
 		$page_styles='';
 		$page_structure=
@@ -323,7 +342,7 @@ class epub3 {
     <meta http-equiv="default-style" content="text/html; charset=utf-8"/>
     <title>My first book</title>
 
-		<meta name="viewport" content="width=1024, height=768"/>
+		<meta name="viewport" content="width='.$width.', height='.$height.'"/>
 
 		<link rel="stylesheet" href="stylesheet.css" type="text/css"/>
 		<link rel="stylesheet" href="page_styles.css" type="text/css"/>
@@ -348,7 +367,7 @@ class epub3 {
 
 
 	</head>
-	<body>
+	<body style="background-repeat:no-repeat; width:'.$width.'px; height:'.$height.'px;'.$background.';'.$background_size.';">
 	<section epub:type="frontmatter titlepage">
 %components%
 	</section>
