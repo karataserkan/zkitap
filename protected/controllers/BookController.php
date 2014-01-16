@@ -159,7 +159,7 @@ class BookController extends Controller
 		$imgPath=$filePath.'/page-1.jpg';
 		list($image_width, $image_height, $type, $attr) = getimagesize($imgPath);
 		$model=Book::model()->findByPk($bookId);
-		$model->setPageSize($image_width*0.2,$image_height*0.2);
+		$model->setPageSize($image_width*0.5,$image_height*0.5);
 		$model->save();
 
 	}
