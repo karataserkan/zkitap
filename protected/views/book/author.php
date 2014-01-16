@@ -1075,7 +1075,7 @@ if ($book_type=="pdf") {
 
 	$img=$page_data['image']['data'];
 }
-$background= ($book_type=='pdf') ? "background-image:url('".$img."')" : "background:white";
+$background= (!empty($img)) ? "background-image:url('".$img."')" : "background:white";
 ?>
 
 					<div id='current_page' page_id='<?php echo $page->page_id ;?>' style="<?php echo $background; ?>;border:thin solid black;zoom:1; background-size:<?php echo $bookWidth; ?>px <?php echo $bookHeight; ?>px; height:<?php echo $bookHeight; ?>px;width:<?php echo $bookWidth; ?>px;position:relative"  >
