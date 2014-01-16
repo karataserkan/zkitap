@@ -840,8 +840,9 @@ Grafik Ekle
 				
 		</script>
 
-	
-<div id='chapters_pages_view' class="chapter-view" >
+<div class='group'>
+	<h3><?php _e("Sayfalar"); ?> </h3>
+	<div id='chapters_pages_view' class="chapter-view" >
 
 
 
@@ -850,108 +851,109 @@ Grafik Ekle
 
 
 
-	<?php 
-	$page_NUM=0;
+		<?php 
+		$page_NUM=0;
 
-	$chapters=Chapter::model()->findAll(array('order'=>  '`order` asc ,  created asc', "condition"=>'book_id=:book_id', "params" => array(':book_id' => $model->book_id )));
-	//print_r($chapters);
-	foreach ($chapters as $key => $chapter) {
-			
-			$pagesOfChapter=Page::model()->findAll(array('order'=>  '`order` asc ,  created asc', "condition"=>'chapter_id=:chapter_id', "params" =>array(':chapter_id' => $chapter->chapter_id )) );
-					$chapter_page=0;
-					?>
-<div class='chapter' chapter_id='<?php echo $chapter->chapter_id; ?>'>
-<input type="text" class="chapter-title" placeholder="chapter title" value="<?php echo $chapter->title; ?>">
-<a class="btn red white size-15 radius icon-delete page-chapter-delete  delete-chapter hidden-delete" style="float: right; margin-top: -23px;"></a>
- <!-- <?php echo $chapter->title; ?>  chapter title--> 
-					<ul class="pages" >
-							<?php
-							
-			foreach ($pagesOfChapter as $key => $pages) {
+		$chapters=Chapter::model()->findAll(array('order'=>  '`order` asc ,  created asc', "condition"=>'book_id=:book_id', "params" => array(':book_id' => $model->book_id )));
+		//print_r($chapters);
+		foreach ($chapters as $key => $chapter) {
 				
-				/* if( $pages->page_id	<div style='	<div style='clear:both;'>
-
-
-	</div>clear:both;'> 
-
- 
-	</div>
-					==
-					$page->page_id ){
-					$this->current_page=$page; 
-					$this->current_chapter=$chapter;
-				}*/
-				$page_NUM++;
-				$page_link = "/book/author/".$model->book_id.'/'.$pages->page_id;
-				?> 
-					
-					<li onclick="document.location.href='<?php echo $page_link; ?>'" class='page <?php echo ( $current_page->page_id== $pages->page_id  ? "current_page": "" ); ?>' chapter_id='<?php echo $pages->chapter_id; ?>' page_id='<?php echo $pages->page_id; ?>' chapter_id='<?php echo $pages->page_id; ?>'   >
-						<a class="btn red white size-15 radius icon-delete page-chapter-delete delete-page hidden-delete "  style="top: 0px;right: 0px; position: absolute;"></a>
-						<!--<a href='<?php echo $this->createUrl("book/author", array('bookId' => $model->book_id, 'page'=>$pages->page_id ));?>' >-->
-							<a href='<?php echo "/book/author/".$model->book_id.'/'.$pages->page_id;?>'/>
+				$pagesOfChapter=Page::model()->findAll(array('order'=>  '`order` asc ,  created asc', "condition"=>'chapter_id=:chapter_id', "params" =>array(':chapter_id' => $chapter->chapter_id )) );
+						$chapter_page=0;
+						?>
+	<div class='chapter' chapter_id='<?php echo $chapter->chapter_id; ?>'>
+	<input type="text" class="chapter-title" placeholder="chapter title" value="<?php echo $chapter->title; ?>">
+	<a class="btn red white size-15 radius icon-delete page-chapter-delete  delete-chapter hidden-delete" style="float: right; margin-top: -23px;"></a>
+	 <!-- <?php echo $chapter->title; ?>  chapter title--> 
+						<ul class="pages" >
+								<?php
 								
-							<span class="page-number" >s <?php echo $page_NUM; ?></span>
-						</a>	
-					</li>
+				foreach ($pagesOfChapter as $key => $pages) {
+					
+					/* if( $pages->page_id	<div style='	<div style='clear:both;'>
+
+
+		</div>clear:both;'> 
+
+	 
+		</div>
+						==
+						$page->page_id ){
+						$this->current_page=$page; 
+						$this->current_chapter=$chapter;
+					}*/
+					$page_NUM++;
+					$page_link = "/book/author/".$model->book_id.'/'.$pages->page_id;
+					?> 
+						
+						<li class='page <?php echo ( $current_page->page_id== $pages->page_id  ? "current_page": "" ); ?>' chapter_id='<?php echo $pages->chapter_id; ?>' page_id='<?php echo $pages->page_id; ?>' chapter_id='<?php echo $pages->page_id; ?>'   >
+							<a class="btn red white size-15 radius icon-delete page-chapter-delete delete-page hidden-delete "  style="top: 0px;right: 0px; position: absolute;"></a>
+							<!--<a href='<?php echo $this->createUrl("book/author", array('bookId' => $model->book_id, 'page'=>$pages->page_id ));?>' >-->
+								<a href='<?php echo "/book/author/".$model->book_id.'/'.$pages->page_id;?>'/>
+									
+								<span class="page-number" >s <?php echo $page_NUM; ?></span>
+							</a>	
+						</li>
+					<?php
+					$chapter_page++;
+				}
+										?>
+							</ul>
+							</div>
 				<?php
-				$chapter_page++;
-			}
-									?>
-						</ul>
-						</div>
-			<?php
 
-	}
-	//$this->current_chapter=null;
-	?>
-	<div id="add-button" class="bck-dark-blue size-25 icon-add white" style="position: fixed; bottom: 0px; right: 0px; width: 140px; text-align: center;"></div>
-	
-	<script>
-
-	<?php 
-
-	$template_links='';
-	
-	$data=json_decode($model->data,true);
-	$template_id=$data["template_id"];
-	
-	$template_chapter=Chapter::model()->find( 'book_id=:book_id', array(':book_id' => $template_id )  );
-	
-
-	$template_pages=Page::model()->findAll(array('order'=>  '`order` asc ,  created asc', "condition"=>'chapter_id=:chapter_id', "params" =>array(':chapter_id' => $template_chapter->chapter_id  ) ) );
-	foreach ($template_pages as $template_page){
-		$template_links .=  "<a href='?r=page/create&chapter_id=".$current_chapter->chapter_id."&pageTeplateId=".$template_page->page_id."' ><img src='".$template_page->data. "' ></a>";
-	}
-
-	?>	
-$( "#add-button" ).hover(
-  function() {
-
-
-    $( this ).append( $(  "<span id='add-buttons' class='add-button-container'>\
- 	<a id='add-page' class='add-button-cp white' href='?r=page/create&chapter_id=<?php echo $current_chapter->chapter_id; ?>'> Sayfa ekle </a>\
- 	\
- 	<a class='add-button-cp white' href='?r=chapter/create&book_id=<?php echo $model->book_id; ?>'> Bölüm ekle </a> \
- 	<div class='add-button-page-template white' > <span>Sayfa Şablonları</span>  \
- 	\
- 	<?php echo $template_links; ?> \
- 	\
- 	</div> \
- 	</span>" 
-
-      	) );
-
- },
-  
- function(){
-			 $('#add-buttons').remove();
-    }
-   
-);
-
-
-</script>
+		}
+		//$this->current_chapter=null;
+		?>
+		<div id="add-button" class="bck-dark-blue size-25 icon-add white" style="position: fixed; bottom: 0px; right: 0px; width: 140px; text-align: center;"></div>
 		
+		<script>
+
+		<?php 
+
+		$template_links='';
+		
+		$data=json_decode($model->data,true);
+		$template_id=$data["template_id"];
+		
+		$template_chapter=Chapter::model()->find( 'book_id=:book_id', array(':book_id' => $template_id )  );
+		
+
+		$template_pages=Page::model()->findAll(array('order'=>  '`order` asc ,  created asc', "condition"=>'chapter_id=:chapter_id', "params" =>array(':chapter_id' => $template_chapter->chapter_id  ) ) );
+		foreach ($template_pages as $template_page){
+			$template_links .=  "<a href='?r=page/create&chapter_id=".$current_chapter->chapter_id."&pageTeplateId=".$template_page->page_id."' ><img src='".$template_page->data. "' ></a>";
+		}
+
+		?>	
+	$( "#add-button" ).hover(
+	  function() {
+
+
+	    $( this ).append( $(  "<span id='add-buttons' class='add-button-container'>\
+	 	<a id='add-page' class='add-button-cp white' href='?r=page/create&chapter_id=<?php echo $current_chapter->chapter_id; ?>'> Sayfa ekle </a>\
+	 	\
+	 	<a class='add-button-cp white' href='?r=chapter/create&book_id=<?php echo $model->book_id; ?>'> Bölüm ekle </a> \
+	 	<div class='add-button-page-template white' > <span>Sayfa Şablonları</span>  \
+	 	\
+	 	<?php echo $template_links; ?> \
+	 	\
+	 	</div> \
+	 	</span>" 
+
+	      	) );
+
+	 },
+	  
+	 function(){
+				 $('#add-buttons').remove();
+	    }
+	   
+	);
+
+
+	</script>
+			
+	</div>
 </div>
 
 <div id='author_pane_container' style=' width:100%'>
@@ -1023,14 +1025,22 @@ $( "#add-button" ).hover(
 		</div> <!-- guide -->
 <div id='editor_view_pane' style=' padding:5px 130px;margin: 10px 5px 5px 5px;float:left;'>
 
+<?php
+$book_data=json_decode($model->data,true);
+$book_type=$book_data['book_type'];
+if ($book_type=="pdf") {
+	
+	$page_data=json_decode($page->pdf_data,true);
 
-					<div id='current_page' page_id='<?php echo $page->page_id ;?>' style='background:white;border:thin solid black;zoom:1; height:<?php echo $bookHeight; ?>px;width:<?php echo $bookWidth; ?>px;position:relative'  >
+	$img=$page_data['image']['data'];
+}
+$background= (!empty($img)) ? "background-image:url('".$img."')" : "background:white";
+?>
+
+					<div id='current_page' page_id='<?php echo $page->page_id ;?>' style="<?php echo $background; ?>;border:thin solid black;zoom:1; background-size:<?php echo $bookWidth; ?>px <?php echo $bookHeight; ?>px; height:<?php echo $bookHeight; ?>px;width:<?php echo $bookWidth; ?>px;position:relative"  >
 						<div id="guide-h" class="guide"></div>
 						<div id="guide-v" class="guide"></div>
-
 					</div>
-
-
 		</div><!-- editor_pane -->
 
 

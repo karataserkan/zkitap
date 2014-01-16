@@ -4,41 +4,31 @@ $(document).ready(function(){
 
   $.widget('lindneo.component', {
 
-    _resizeStart: function (event,ui){
-      console.log(event);  
-            this._selected(event,ui);
-            //$(this).resizable("option", "alsoResize",".selected");
-            $(".selected").trigger("resize");
-          },
-
-    _resizeStop:function( event, ui ){
-            this._resize(event, ui);
-          },
-
     options : {
+      
+
     },
 
-  
-
-
     _create: function () {
-      //resizable Options
 
-      this.options.resizableParams =  {
+      var that = this;
+
+      that.options.resizableParams = {
         "handles":"n, e, w, s, nw, se, sw, ne",
-          'start': function(event,ui){that._resizeStart(event,ui)},
-          'stop': function(event,ui){that._resizeStop(event,ui)},
+          'start': function (event,ui){
+            that._selected(event,ui);
+            //console.log(ui);
+            ui.element.resizable("option", "alsoResize",".selected");
+            $(".selected").trigger("resize");
+          },
+          'stop': function( event, ui ){
+            that._resize(event, ui);
+          },
           'resize':function(event,ui){
             window.lindneo.toolbox.makeMultiSelectionBox();
           }
-      };
+        };
 
-
-
-
-
-
-      var that = this;
       var MIN_DISTANCE = 10; // minimum distance to "snap" to a guide
       var guides = []; // no guides available ... 
       var innerOffsetX, innerOffsetY; // we'll use those during drag ... 
@@ -49,11 +39,10 @@ $(document).ready(function(){
         that._selected(e,null);
       })
       
-
       .resizable(that.options.resizableParams)
-      
+
       .focus(function( event, ui ){
-      
+        //that._selected( event, ui );
       })
       .focusout(function(event){
  
@@ -69,28 +58,45 @@ $(document).ready(function(){
     	  <div class="dragging_holder right"></div> \
     	  ' )
           .attr('component-instance', 'true')
+        
           .draggable({
             containment: "#current_page",
             snap: '.ui-wrapper',
             handle: '.dragging_holder, img',
             snapMode: 'outer',
-            'alsoDrag':'.selected.ui-draggable',
+            'alsoDrag':'.selected',
             'stop': function(event, ui){
+            //console.log();
               $( "#guide-v, #guide-h" ).hide(); 
               that._resizeDraggable( event, ui );
             },
 
             drag: function( event, ui ){
-              console.log(event.target);
+
               window.lindneo.toolbox.makeMultiSelectionBox();
 
               var zoom = $('#author_pane').css('zoom');
               var canvasHeight = $('#current_page').height() * zoom;
               var canvasWidth = $('#current_page').width() * zoom;
 
-            
+              // zoom fix
               ui.position.top = Math.round(ui.position.top / zoom);
               ui.position.left = Math.round(ui.position.left / zoom);
+              
+             /* // don't let draggable to get outside of the canvas
+              if (ui.position.left < 0) 
+                  ui.position.left = 0;
+              if (ui.position.left + $(this).width() > canvasWidth)
+                  ui.position.left = canvasWidth - $(this).width();  
+              if (ui.position.top < 0)
+                  ui.position.top = 0;
+              if (ui.position.top + $(this).height() > canvasHeight)
+                  ui.position.top = canvasHeight - $(this).height();  
+    */
+
+
+
+
 
               if( $('#general-options').val().indexOf("rehber")===-1 ) return ;
 
@@ -99,10 +105,15 @@ $(document).ready(function(){
               var chosenGuides = { top: { dist: MIN_DISTANCE+1 }, left: { dist: MIN_DISTANCE+1 } }; 
               var $t = $(this); 
               var pos = { top: event.originalEvent.pageY , left: event.originalEvent.pageX - innerOffsetX }; 
-      
+            
+              
+
               var w = $t.outerWidth() - 1; 
               var h = $t.outerHeight() - 1; 
-   
+          //    var sispos= $('#current_page').offset();
+            
+              
+
               var elemGuides = computeGuidesForElement( null, pos, w, h ); 
               
               $.each( guides, function( i, guide ){
@@ -145,7 +156,6 @@ $(document).ready(function(){
              
               //this.selected(event,ui);
               that._selected(event,ui);
-              $( this ).draggable( "option", "alsoDrag", '.selected.ui-draggable' );
               guides = $.map( $( "#current_page .ui-draggable" ).not( this ), computeGuidesForElement );
               //console.log(guides);
               
@@ -154,7 +164,6 @@ $(document).ready(function(){
             }
 
           }) 
-
           .dblclick(function(event, ui) {
             console.log(event);
             console.log(that.options.component.type);
@@ -172,62 +181,60 @@ $(document).ready(function(){
               window.lindneo.dataservice.quiz_popup(event, ui, that.options.component);
           })
   
-
           .mouseenter(function(event){
             
              
              if(that.options.component.data.lock == '')
-               var deleteButton = $('<a id="delete-button-' + that.options.component.id + '"class="icon-delete size-10" style="position: absolute; top: -20px; right: 5px;" ></a>');
+             var deleteButton = $('<a id="delete-button-' + that.options.component.id + '"class="icon-delete size-10" style="position: absolute; top: -20px; right: 5px;" ></a>');
              else
-               var deleteButton=$('<a id="delete-button" class="icon-delete size-10" style="position: absolute; top: -20px; right: 5px;" hidden></a>');
+             var deleteButton=$('<a id="delete-button" class="icon-delete size-10" style="position: absolute; top: -20px; right: 5px;" hidden></a>');
              var commentButton = $('<a id="comment-button-' + that.options.component.id + '" class="icon-down-arrow comment-box-arrow size-10 icon-up-down" style="position: absolute; top: -20px; right: 30px;"></a>');
-             
-             deleteButton
-                .click(function(e){
-                  e.preventDefault();
-                  that._deleting();
-                  //window.lindneo.nisga.ComponentDelete( that.options.component );
-                  window.lindneo.tlingit.componentHasDeleted( that.options.component.id );
-                }).appendTo(event.currentTarget);
+          
+             deleteButton.click(function(e){
+             e.preventDefault();
+              that._deleting();
+              //window.lindneo.nisga.ComponentDelete( that.options.component );
+              window.lindneo.tlingit.componentHasDeleted( that.options.component.id );
+
+            }).appendTo(event.currentTarget);
         
-            commentButton
-                .click(function(e){
-                    //$('#'+that.options.component.id).append('<div class="comment_window"></div>');
-                    if ($.type(that.options.component.data.comments) == "undefined") that.options.component.data.comments=[]
-                    
-                    var isCommentBoxCreated=$('#commentBox_'+that.options.component.id).doesExist();
-                    
-                    if (isCommentBoxCreated===false){
-                      
-                      that.createCommentBox();
-                     
-                    }else{
-                        
-                        $("#commentBox_"+that.options.component.id).toggle();
-                        $("comment_card_"+that.options.component.id).toggleClass("opacity-level");
-                        $(this).toggleClass("icon-up-down");
+        commentButton
+          .click(function(e){
+              //$('#'+that.options.component.id).append('<div class="comment_window"></div>');
+              if ($.type(that.options.component.data.comments) == "undefined") that.options.component.data.comments=[]
+              
+              var isCommentBoxCreated=$('#commentBox_'+that.options.component.id).doesExist();
+              
+              if (isCommentBoxCreated===false){
+                
+                that.createCommentBox();
+               
+              }else{
+                  
+                  $("#commentBox_"+that.options.component.id).toggle();
+                  $("comment_card_"+that.options.component.id).toggleClass("opacity-level");
+                  $(this).toggleClass("icon-up-down");
 
-                    }
+              }
 
-                  }).appendTo(event.currentTarget);
-          })
-          .mouseleave(function(event){
+            }).appendTo(event.currentTarget);
+             
+      
 
-            // remove delete button
-            var deleteButton = $('#delete-button-' + that.options.component.id);
-            var commentButton = $('#comment-button-' + that.options.component.id);
-            deleteButton.remove();
-            commentButton.remove();
+      })
+      .mouseleave(function(event){
 
-          })
-          .on('unselect', function(){
-            that.unselect();
-          })
-          .rotatable({
-            'stop':function(event,angle){
-              console.log(angle);
-            }            
-          });
+        // remove delete button
+        var deleteButton = $('#delete-button-' + that.options.component.id);
+        var commentButton = $('#comment-button-' + that.options.component.id);
+        deleteButton.remove();
+        commentButton.remove();
+
+      })
+      
+      .on('unselect', function(){
+        that.unselect();
+      });
 
       this.setFromData();
       this.listCommentsFromData();
@@ -363,20 +370,20 @@ $(document).ready(function(){
       if(typeof this.options.component.data.lock.username != "undefined"){
         that.options.resizableParams['disabled']=true;
 
-        //$('#'+this.options.component.id).droppable({ disabled: true });
+        $('#'+this.options.component.id).droppable({ disabled: true });
         //$('#'+this.options.component.id).selectable({ disabled: true });
-        //$('#'+this.options.component.id).sortable({ disabled: true });
-        //$('#'+this.options.component.id).resizable({ disabled: true });
+        $('#'+this.options.component.id).sortable({ disabled: true });
+        $('#'+this.options.component.id).resizable({ disabled: true });
         $('#'+this.options.component.id).attr('readonly','readonly');
         $('#delete-button-'+this.options.component.id).hide();
       }
       else{      
         that.options.resizableParams['disabled']=false;
         
-        //$('#'+this.options.component.id).droppable({ disabled: false });
+        $('#'+this.options.component.id).droppable({ disabled: false });
         //$('#'+this.options.component.id).selectable({ disabled: false });
-        //$('#'+this.options.component.id).sortable({ disabled: false });
-        //$('#'+this.options.component.id).resizable({ disabled: false });
+        $('#'+this.options.component.id).sortable({ disabled: false });
+        $('#'+this.options.component.id).resizable({ disabled: false });
         $('#'+this.options.component.id).removeAttr('readonly');
         
       };
@@ -401,16 +408,6 @@ $(document).ready(function(){
       this._trigger('update', null, this.options.component );
       this._selected(event, ui)
       
-    },
-
-    _rotate: function ( event, ui ) {
-    /*
-      this.options.component.data.self.css.width = ui.size.width + "px";
-      this.options.component.data.self.css.height = ui.size.height + "px";
-   
-      this._trigger('update', null, this.options.component );
-      this._selected(event, ui)
-    */
     },
 
     _resizeDraggable: function( event, ui ){

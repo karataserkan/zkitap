@@ -277,12 +277,21 @@ $( document ).ready(function () {
 
     });
 
-    $( document ).on( "click",".preview" ,function() {
-     
-     var pageNumberLink = $(this).parent().find('.page-number').parent();
-     console.log(pageNumberLink);
-     pageNumberLink.trigger('click');
-      
+    $( document ).on( "click","canvas.preview" ,function() {
+
+      //get page id from parent li 
+      var page_id = $(this).parent().attr('page_id') ;
+
+      //Load Page
+      window.lindneo.tlingit.loadPage(page_id);
+
+
+      //Remove Current Page
+      $('.page').removeClass('current_page');
+
+      //Add Red Current Page
+      $(this).parent().addClass('current_page');
+
     });
 
     $('.delete-page').click(function(){
@@ -337,7 +346,7 @@ $( document ).ready(function () {
       }  
     });
 
-                 $('#zoom-pane').slider({
+        $('#zoom-pane').slider({
             value:100,
             min: 25,
             max: 500,
@@ -394,16 +403,17 @@ $( document ).ready(function () {
 
     var chats = JSON.parse(localStorage.getItem("chat_"+window.lindneo.currentBookId ));
     
-    if (chats.length > 20 ){
-      chats= chats.slice( chats.length - 20 );
-      localStorage.setItem("chat_"+window.lindneo.currentBookId , JSON.stringify(chats));
+    if ( chats !== null ){
+          if (chats.length > 20 ){
+            chats= chats.slice( chats.length - 20 );
+            localStorage.setItem("chat_"+window.lindneo.currentBookId , JSON.stringify(chats));
+          }
+    
+          $.each (chats, function (i,val) {
+            window.lindneo.nisga.ChatNewLine( val.line,val.user,false );
+          });
+    
     }
-
-    $.each (chats, function (i,val) {
-      window.lindneo.nisga.ChatNewLine( val.line,val.user,false );
-    });
-
-
 
 
 
@@ -427,6 +437,10 @@ $( document ).ready(function () {
   });
 
   window.lindneo.tlingit.loadPage(window.lindneo.currentPageId);
+  
+  //Load Previews
+  window.lindneo.tlingit.loadAllPagesPreviews();
+     
   window.lindneo.toolbox.load();
   $('#current_page')
 	.click(function(e){
@@ -438,6 +452,9 @@ $( document ).ready(function () {
 		$('.selected').trigger('unselect');
 		//window.lindneo.toolbox.deleteComponentFromSelection();
 	});
+
+
+
 
   first_time();
 

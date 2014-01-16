@@ -31,7 +31,7 @@ class FaqController extends Controller
 				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
-				'actions'=>array('create','update','searchKey'),
+				'actions'=>array('create','update','searchKey','category'),
 				'users'=>array('@'),
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
@@ -262,6 +262,40 @@ class FaqController extends Controller
 		$this->render('index',array(
 			'faqs'=>$data,
 		));
+	}
+
+	public function actionCategory($categories=null)
+	{
+		$categories=explode(',', $categories);
+		$data=array();
+		foreach ($categories as $key => $category) {
+			$categoryFaqs=FaqCategoryFaq::model()->findAll(array(
+			'condition'=>'faq_category_id=:faq_category_id',
+			'params'=>array(':faq_category_id'=>$category)
+			));
+
+			foreach ($categoryFaqs as $key4 => $categoryFaq) {
+				$data[$key][$key4]['category']=FaqCategory::model()->findByPk($category);
+				$faqs=Faq::model()->findAll(array(
+				'condition'=>'faq_id=:faq_id',
+				'params'=>array(':faq_id'=>$categoryFaq->faq_id)
+				));	
+			
+				foreach ($faqs as $key2 => $faq) {
+					$data[$key][$key4]['faq']=$faq;
+					$faqKeywords=KeywordsFaq::model()->findAll(array(
+					'condition'=>'faq_id=:faq_id',
+					'params'=>array(':faq_id'=>$faq->faq_id)
+					));
+					foreach ($faqKeywords as $key3 => $keyword) {
+						$data[$key][$key4]['keywords'][]=Keywords::model()->findByPk($keyword->keyword_id);
+					}
+				}
+			}
+		}
+		$this->render('categories',array(
+			'data'=>$data
+			));
 	}
 
 	/**

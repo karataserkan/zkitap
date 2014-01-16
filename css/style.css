@@ -1952,7 +1952,7 @@ width: 10px!important; }
 }
 
 
-.selected ~ .ui-resizable-handle{
+.selected .ui-resizable-handle{
 	visibility:visible;
 }
 

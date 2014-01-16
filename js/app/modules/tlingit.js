@@ -96,7 +96,7 @@ window.lindneo.tlingit = (function(window, $, undefined){
     if( response.result !== null ) {
       components = response.result.components;
     }
-    console.log( components );
+    //console.log( components );
     $.each(components, function(i, val){
           
       window.lindneo.nisga.createComponent( val );
@@ -118,6 +118,10 @@ window.lindneo.tlingit = (function(window, $, undefined){
   };
 
   var loadPage = function (pageId){
+
+    $('#current_page').empty();
+    window.lindneo.currentPageId=pageId;
+
     //page ile ilgili componentların hepsini serverdan çek.
     // hepsi için createComponent 
 
@@ -131,16 +135,32 @@ window.lindneo.tlingit = (function(window, $, undefined){
         function(err){
           console.log('error:' + err);
       });
-      loadAllPagesPreviews();
+      
+
   };
 
   var loadAllPagesPreviews = function (){
+    $("li.page").each(function(index, pageSlice){
+      //console.log(pageSlice);
+
+      var pagePreview = $('<canvas class="preview" height="90" width="120"> </canvas>');
+    
+      $(pageSlice).children('.preview').remove();
+      $(pageSlice).prepend(pagePreview);
+      var canvas=$(pageSlice).children('.preview')[0];
+      var context=canvas.getContext("2d");
+       context.fillStyle = '#FFF';
+        context.fillRect(0,0,canvas.width,canvas.height);
+        
+    });
    $('.chapter .page').each(function(){
     loadPagesPreviews($(this).attr('page_id'));
    })
   };
 
   var loadPagesPreviews = function (pageId) {
+        //console.log(components);
+    
     var pageSlice=$('[page_id="'+pageId+'"]');
     if (pageSlice)
      window.lindneo.dataservice
@@ -155,119 +175,126 @@ window.lindneo.tlingit = (function(window, $, undefined){
   };
 
   var PreviewOfPage = function (response) {
-    
-    //console.log(response);
+
+
+    if ($.isEmptyObject(responseFromJson(response).result)) return false;
+
     var components= responseFromJson(response).result.components;
-    //console.log(components);
-    var pagePreview = $('<canvas class="preview" height="90" width="120"> </canvas>');
+
     $.each(components,function(i,component){
       var pageSlice=$('[page_id="'+component.page_id+'"]');
-
-      pageSlice.children('.preview').remove();
-      pageSlice.prepend(pagePreview);
-    });
-
-    var canvas_reset=[];
-    //console.log(components);
-    components=components.sort (function(a,b){
-      //console.log(a.data);
-      if (a.data.self.css['z-index'] > b.data.self.css['z-index']) return +1;
-      return -1;
-    });
-    
-    $.each(components,function(i,component){
-      var page_slice= $('[page_id="'+component.page_id+'"]');
-      var ratio = $('#current_page').width() / page_slice.width();
-      
-      var canvas=page_slice.children('.preview')[0];
+      var canvas=$(pageSlice).children('.preview')[0];
       var context=canvas.getContext("2d");
-      if(canvas_reset[component.page_id]!=true){
-        context.fillStyle = '#FFF';
+       context.fillStyle = '#FFF';
         context.fillRect(0,0,canvas.width,canvas.height);
-        canvas_reset[component.page_id]=true;
-      }
-
-        switch (component.type){
-
-
-          case 'text':
-
-
-
-            var fontHeight=(parseInt(component.data.textarea.css['font-size'] ) /ratio );
-            var lines = component.data.textarea.val.match(/[^\n]+(?:\r?\n|$)/g) ;
-            var y= parseInt( parseInt(component.data.self.css['top'] ) /ratio ) ;
-            var x= parseInt( parseInt(component.data.self.css['left'] )  /ratio );
-            var starty=y;
-
-            var maxWidth=parseInt( parseInt(component.data.self.css['width']  ) /ratio );
-            var maxHeight=parseInt( parseInt(component.data.self.css['height']  ) /ratio );
-
-            context.font= fontHeight + 'px Arial';
-            context.fillStyle= component.data.textarea.css['color'];
-
-            if ( $.type(lines) != "undefined")
-            if ( lines != null)
-            if (lines.length > 0)
-            $.each(lines, function (lineNumber,line){
-                y += fontHeight;
-                var words = line.split(' ');
-                var sublines = '';
-                //console.log(y + ' ' +line) ;
-                for(var n = 0; n < words.length; n++) {
-
-                  var testLine = sublines + words[n] + ' ';
-                  var metrics = context.measureText(testLine);
-                  var testWidth = metrics.width;
-
-                  if (testWidth > maxWidth && n > 0 ) {
-                    if ( y - starty <= maxHeight ) context.fillText(sublines, x, y);
-                    sublines = words[n] + ' ';
-                    y += fontHeight;
-                  }
-                  else {
-                    sublines = testLine;
-                  }
-
-                } 
-
-         
-            if ( y - starty  <= maxHeight ) context.fillText(sublines, x,y );
-
-            })
-            
-           ;
-          
-            break;
-
-          case 'image':
-            var image=new Image();
-            image.src = component.data.img.src;
-            var y= parseInt( parseInt(component.data.self.css['top'] ) /ratio ) ;
-            var x= parseInt( parseInt(component.data.self.css['left'] )  /ratio );
-            var width= parseInt( parseInt(component.data.self.css['width'] )  /ratio );
-            var height= parseInt( parseInt(component.data.self.css['height'] )  /ratio );
-
-            image.onload= function(){
-              context.drawImage(image,x,y,width,height );
-            }
-            
-
-
-
-            break;
-
-          default:
-            
-            break;
-
-        }
-
-
+       
+      
     });
 
 
-  };
+      var canvas_reset=[];
+      //console.log(components);
+      components=components.sort (function(a,b){
+        //console.log(a.data);
+        if (a.data.self.css['z-index'] > b.data.self.css['z-index']) return +1;
+        return -1;
+      });
+      
+
+      $.each(components,function(i,component){
+        var page_slice= $('[page_id="'+component.page_id+'"]');
+        var ratio = $('#current_page').width() / page_slice.width();
+        
+        var canvas=page_slice.children('.preview')[0];
+        var context=canvas.getContext("2d");
+        
+          context.fillStyle = '#FFF';
+          context.fillRect(0,0,canvas.width,canvas.height);
+          canvas_reset[component.page_id]=true;
+       
+
+
+          switch (component.type){
+
+
+            case 'text':
+
+
+
+              var fontHeight=(parseInt(component.data.textarea.css['font-size'] ) /ratio );
+              var lines = component.data.textarea.val.match(/[^\n]+(?:\r?\n|$)/g) ;
+              var y= parseInt( parseInt(component.data.self.css['top'] ) /ratio ) ;
+              var x= parseInt( parseInt(component.data.self.css['left'] )  /ratio );
+              var starty=y;
+
+              var maxWidth=parseInt( parseInt(component.data.self.css['width']  ) /ratio );
+              var maxHeight=parseInt( parseInt(component.data.self.css['height']  ) /ratio );
+
+              context.font= fontHeight + 'px Arial';
+              context.fillStyle= component.data.textarea.css['color'];
+
+              if ( $.type(lines) != "undefined")
+              if ( lines != null)
+              if (lines.length > 0)
+              $.each(lines, function (lineNumber,line){
+                  y += fontHeight;
+                  var words = line.split(' ');
+                  var sublines = '';
+                  //console.log(y + ' ' +line) ;
+                  for(var n = 0; n < words.length; n++) {
+
+                    var testLine = sublines + words[n] + ' ';
+                    var metrics = context.measureText(testLine);
+                    var testWidth = metrics.width;
+
+                    if (testWidth > maxWidth && n > 0 ) {
+                      if ( y - starty <= maxHeight ) context.fillText(sublines, x, y);
+                      sublines = words[n] + ' ';
+                      y += fontHeight;
+                    }
+                    else {
+                      sublines = testLine;
+                    }
+
+                  } 
+
+           
+              if ( y - starty  <= maxHeight ) context.fillText(sublines, x,y );
+
+              })
+              
+             ;
+            
+              break;
+
+            case 'image':
+              var image=new Image();
+              image.src = component.data.img.src;
+              var y= parseInt( parseInt(component.data.self.css['top'] ) /ratio ) ;
+              var x= parseInt( parseInt(component.data.self.css['left'] )  /ratio );
+              var width= parseInt( parseInt(component.data.self.css['width'] )  /ratio );
+              var height= parseInt( parseInt(component.data.self.css['height'] )  /ratio );
+
+              image.onload= function(){
+                context.drawImage(image,x,y,width,height );
+              }
+              
+
+
+
+              break;
+
+            default:
+              
+              break;
+
+          }
+
+
+      });
+
+    };
+ 
 
 
 
@@ -374,6 +401,7 @@ window.lindneo.tlingit = (function(window, $, undefined){
 
 
   return {
+    loadAllPagesPreviews: loadAllPagesPreviews,
     loadPagesPreviews: loadPagesPreviews,
     responseFromJson: responseFromJson,
     componentToJson: componentToJson,
