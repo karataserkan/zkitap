@@ -558,6 +558,9 @@ window.lindneo.dataservice = (function( $ ) {
   var removeProgressBar= function(progressbar){
     progressbar.remove();
   }
+  var progressContinue = function(){
+     $('#save_status').addClass('icon-arrows-cw animate-spin size-30 light-blue');
+  }
 
   var send = function( action, data, successCallback, failCallback ){
     var that =this;
@@ -578,6 +581,7 @@ window.lindneo.dataservice = (function( $ ) {
 
          //Upload progress
          xhr.upload.addEventListener("progress", function(evt){
+          progressContinue();
           //console.log('Upload');
           //console.log(evt);
          if (evt.lengthComputable) {
@@ -591,6 +595,7 @@ window.lindneo.dataservice = (function( $ ) {
        
          //Download progress
          xhr.addEventListener("progress", function(evt){       
+          progressContinue();
            if (evt.lengthComputable) {
              var percentage = evt.loaded / evt.total;
              progressbar.bar.progressbar('value', percentage*100);
@@ -609,9 +614,7 @@ window.lindneo.dataservice = (function( $ ) {
       
       beforeSend: function(){
         // Handle the beforeSend event
-        //console.log('yükleniyor');
-        //$('#save_status').text('Yükleniyor...');
-        $('#save_status').addClass('icon-arrows-cw animate-spin size-30 light-blue');
+        progressContinue();
       },
       'success': function(data) {
 
@@ -639,6 +642,7 @@ window.lindneo.dataservice = (function( $ ) {
   };
 
   return {
+    progressContinue: progressContinue,
     removeProgressBar: removeProgressBar,
     newProgressBar: newProgressBar,
     newComponentDropPage: newComponentDropPage,

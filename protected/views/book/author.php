@@ -928,7 +928,7 @@ Grafik Ekle
 				$page_link = "/book/author/".$model->book_id.'/'.$pages->page_id;
 				?> 
 					
-					<li onclick="document.location.href='<?php echo $page_link; ?>'" class='page <?php echo ( $current_page->page_id== $pages->page_id  ? "current_page": "" ); ?>' chapter_id='<?php echo $pages->chapter_id; ?>' page_id='<?php echo $pages->page_id; ?>' chapter_id='<?php echo $pages->page_id; ?>'   >
+					<li class='page <?php echo ( $current_page->page_id== $pages->page_id  ? "current_page": "" ); ?>' chapter_id='<?php echo $pages->chapter_id; ?>' page_id='<?php echo $pages->page_id; ?>' chapter_id='<?php echo $pages->page_id; ?>'   >
 						<a class="btn red white size-15 radius icon-delete page-chapter-delete delete-page hidden-delete "  style="top: 0px;right: 0px; position: absolute;"></a>
 						<!--<a href='<?php echo $this->createUrl("book/author", array('bookId' => $model->book_id, 'page'=>$pages->page_id ));?>' >-->
 							<a href='<?php echo "/book/author/".$model->book_id.'/'.$pages->page_id;?>'/>
@@ -1066,14 +1066,22 @@ $( "#add-button" ).hover(
 		</div> <!-- guide -->
 <div id='editor_view_pane' style=' padding:5px 130px;margin: 10px 5px 5px 5px;float:left;'>
 
+<?php
+$book_data=json_decode($model->data,true);
+$book_type=$book_data['book_type'];
+if ($book_type=="pdf") {
+	
+	$page_data=json_decode($page->pdf_data,true);
 
-					<div id='current_page' page_id='<?php echo $page->page_id ;?>' style='background:white;border:thin solid black;zoom:1; height:<?php echo $bookHeight; ?>px;width:<?php echo $bookWidth; ?>px;position:relative'  >
+	$img=$page_data['image']['data'];
+}
+$background= ($book_type=='pdf') ? "background-image:url('".$img."')" : "background:white";
+?>
+
+					<div id='current_page' page_id='<?php echo $page->page_id ;?>' style="<?php echo $background; ?>;border:thin solid black;zoom:1; height:<?php echo $bookHeight; ?>px;width:<?php echo $bookWidth; ?>px;position:relative"  >
 						<div id="guide-h" class="guide"></div>
 						<div id="guide-v" class="guide"></div>
-
 					</div>
-
-
 		</div><!-- editor_pane -->
 
 

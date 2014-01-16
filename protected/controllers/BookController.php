@@ -127,7 +127,32 @@ class BookController extends Controller
 		));
 
 	}
+	private function getPDFData($filePath,$pageNumber,$pageJSON){
+		$data=array();
+		$imgPath=$filePath.'/page-'.$pageNumber.'.jpg';
+		$imgThumbnailPath=$filePath.'/thumbnailpage-'.$pageNumber.'.jpg';
 
+		$imgData=base64_encode(file_get_contents($imgPath));
+		$imgData= 'data: '.mime_content_type($imgPath).';base64,'.$imgData;
+
+		$thumbnailData=base64_encode(file_get_contents($imgThumbnailPath));
+		$thumbnailData= 'data: '.mime_content_type($imgThumbnailPath).';base64,'.$thumbnailData;
+
+		$data['image']['data']=$imgData;
+		$data['thumnail']['data']=$thumbnailData;
+
+		list($image_width, $image_height, $type, $attr) = getimagesize($imgPath);
+		$data['image']['size']['width']=$image_width;
+		$data['image']['size']['height']=$image_height;
+
+		list($image_width, $image_height, $type, $attr) = getimagesize($imgThumbnailPath);
+		$data['thumnail']['size']['width']=$image_width;
+		$data['thumnail']['size']['height']=$image_height;		
+
+		$data['pageJSON']=$pageJSON;
+
+
+	}
 	public function actionUploadFile($bookId)
 	{
 		$date = date('m/d/Y h:i:s a', time());
@@ -143,11 +168,13 @@ class BookController extends Controller
 			$file_form->pdf_file->saveAs($filePath.'/'.$bookId.'.pdf');
 			$pdfUtil=new PdfUtil($filePath,$bookId);
 			$pdfUtil->extractImages();
+			$pdfUtil->extractSearchIndex();
 			$tocs=$pdfUtil->extractTableofContents();
 			$nop=$pdfUtil->getNumberofPages();
 			if($tocs==null){
 				for($i=1;$i<=$nop;$i++){
 					$imgPath=$filePath.'/page-'.$i.'.jpg';
+					$imgThumbnailPath=$filePath.'/thumbnailpage-'.$i.'.jpg';
 					$imgData=base64_encode(file_get_contents($imgPath));
 					$imgData= 'data: '.mime_content_type($imgPath).';base64,'.$imgData;
 					if($i==1){
@@ -198,6 +225,7 @@ class BookController extends Controller
 									$newChapter->save();
 								}
 								$imgPath=$filePath.'/page-'.$i.'.jpg';
+								$imgThumbnailPath=$filePath.'/thumbnailpage-'.$i.'.jpg';
 								$imgData=base64_encode(file_get_contents($imgPath));
 								$imgData= 'data: '.mime_content_type($imgPath).';base64,'.$imgData;
 								$page=new Page();
@@ -216,6 +244,7 @@ class BookController extends Controller
 									$newChapter->order=$i;
 									$newChapter->save();
 									$imgPath=$filePath.'/page-'.$i.'.jpg';
+									$imgThumbnailPath=$filePath.'/thumbnailpage-'.$i.'.jpg';
 									$imgData=base64_encode(file_get_contents($imgPath));
 									$imgData= 'data: '.mime_content_type($imgPath).';base64,'.$imgData;
 									$page=new Page();
@@ -349,7 +378,8 @@ class BookController extends Controller
 			$book=$this->loadModel($bookId);
 			//book->data'ya size eklendi
 			
-			$book->setData('size',$_POST['BookDataForm']['size']);
+			$bookSize=explode('x', $_POST['BookDataForm']['size']);
+			$book->setPageSize($bookSize[0],$bookSize[1]);
 
 			$book->save();
 			$this->redirect(array('author','bookId'=>$bookId));
