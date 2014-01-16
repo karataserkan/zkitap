@@ -355,6 +355,8 @@ window.lindneo.dataservice = (function( $ ) {
         <div class='popup-close' id='image-add-dummy-close-button'>x</div> \
         </div> \
           <div class='gallery-inner-holder'> \
+          <div style='clear:both'></div> \
+          <div class='add-image-drag-area' id='dummy-dropzone'> </div> \
           <textarea  id='popup-explanation' class='popup-text-area'>" + popup_value + ". \
           </textarea> <br> \
           <a href='#' id='pop-image-OK' class='btn bck-light-green white radius' style='padding: 5px 30px;'>Ekle</a> \
