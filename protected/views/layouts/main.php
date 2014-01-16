@@ -62,6 +62,7 @@ switch ($controller) {
 
 		<?php
 		break;
+		
 	default:
 		?>
 		<!-- Style Sheets Reset -->
@@ -122,10 +123,20 @@ switch ($controller) {
 
 <body>
 
+
 <div class="container editor_blue" id="page" >
 	
+<?php 
+switch ($controller) {
+	case 'book':
+		?>
+		
 
-	<div id="header">
+
+	<?php 
+	break;
+	default:?>
+		<div id="header">
 		<div id='login_area' style='float:right;'>
 			<?php
 			if(Yii::app()->user->isGuest){
@@ -141,9 +152,10 @@ switch ($controller) {
 			<a href="<?php echo $this->createUrl('site/index');  ?>"/> <img src="<?php echo Yii::app()->request->baseUrl; ?>/css/logo.png" alt="<?php echo CHtml::encode(Yii::app()->name); ?>" /></a>
 					
 		</div>
-		
 
-
+	<?php
+	break;
+	} ?>
 	<?php echo $content; ?>
 
 
