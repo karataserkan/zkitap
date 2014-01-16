@@ -5,26 +5,30 @@ $(document).ready(function(){
   $.widget('lindneo.component', {
 
     options : {
-      'resizableParams' : {
-        "handles":"n, e, w, s, nw, se, sw, ne",
-          'start': function (event,ui){
-           // this._selected(event,ui);
-            $(this).resizable("option", "alsoResize",".selected");
-            $(".selected").trigger("resize");
-          },
-          'stop': function( event, ui ){
-            this._resize(event, ui);
-          },
-          'resize':function(event,ui){
-            window.lindneo.toolbox.makeMultiSelectionBox();
-          }
-        },
+      
 
     },
 
     _create: function () {
 
       var that = this;
+
+      that.options.resizableParams = {
+        "handles":"n, e, w, s, nw, se, sw, ne",
+          'start': function (event,ui){
+            that._selected(event,ui);
+            //console.log(ui);
+            ui.element.resizable("option", "alsoResize",".selected");
+            $(".selected").trigger("resize");
+          },
+          'stop': function( event, ui ){
+            that._resize(event, ui);
+          },
+          'resize':function(event,ui){
+            window.lindneo.toolbox.makeMultiSelectionBox();
+          }
+        };
+
       var MIN_DISTANCE = 10; // minimum distance to "snap" to a guide
       var guides = []; // no guides available ... 
       var innerOffsetX, innerOffsetY; // we'll use those during drag ... 
@@ -36,12 +40,7 @@ $(document).ready(function(){
       })
       
       .resizable(that.options.resizableParams)
-      /*.selectable({
-        'selected': function(event, ui){
-          that._selected(event, ui);
-        }
-      })
-      */
+
       .focus(function( event, ui ){
         //that._selected( event, ui );
       })
