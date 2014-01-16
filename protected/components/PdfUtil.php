@@ -17,6 +17,9 @@ class PdfUtil{
         exec('sh '.$pdftojpg.' '.$pdfSourcePath.' '.$extractPath);
 
 	}
+	public function extractSearchIndex() {
+		
+	}
 	public function extractTableofContents(){
 		$path=$this->getPdfPath().'/'.$this->getPdfFileId().'.pdf';
 		$input_stream=popen(Yii::app()->params->tocextractor.$path,'r');
