@@ -275,19 +275,20 @@ class FaqController extends Controller
 			));
 
 			foreach ($categoryFaqs as $key4 => $categoryFaq) {
+				$data[$key][$key4]['category']=FaqCategory::model()->findByPk($category);
 				$faqs=Faq::model()->findAll(array(
 				'condition'=>'faq_id=:faq_id',
 				'params'=>array(':faq_id'=>$categoryFaq->faq_id)
 				));	
 			
 				foreach ($faqs as $key2 => $faq) {
-					$data[$category][$faq->faq_id]['faq']=$faq;
+					$data[$key][$key4]['faq']=$faq;
 					$faqKeywords=KeywordsFaq::model()->findAll(array(
 					'condition'=>'faq_id=:faq_id',
 					'params'=>array(':faq_id'=>$faq->faq_id)
 					));
 					foreach ($faqKeywords as $key3 => $keyword) {
-						$data[$category][$faq->faq_id]['category']=Keywords::model()->findByPk($keyword->keyword_id);
+						$data[$key][$key4]['keywords'][]=Keywords::model()->findByPk($keyword->keyword_id);
 					}
 				}
 			}
