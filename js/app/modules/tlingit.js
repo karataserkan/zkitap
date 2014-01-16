@@ -177,6 +177,7 @@ window.lindneo.tlingit = (function(window, $, undefined){
   var PreviewOfPage = function (response) {
 
 
+    if ($.isEmptyObject(responseFromJson(response).result)) return false;
 
     var components= responseFromJson(response).result.components;
 
@@ -206,11 +207,11 @@ window.lindneo.tlingit = (function(window, $, undefined){
         
         var canvas=page_slice.children('.preview')[0];
         var context=canvas.getContext("2d");
-        if(canvas_reset[component.page_id]!=true){
+        
           context.fillStyle = '#FFF';
           context.fillRect(0,0,canvas.width,canvas.height);
           canvas_reset[component.page_id]=true;
-        }
+       
 
 
           switch (component.type){
@@ -293,7 +294,7 @@ window.lindneo.tlingit = (function(window, $, undefined){
       });
 
     };
-  };
+ 
 
 
 
