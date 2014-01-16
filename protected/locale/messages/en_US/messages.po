@@ -7,7 +7,7 @@
 msgid   ""
 msgstr  "Project-Id-Version: PACKAGE VERSION\n"
         "Report-Msgid-Bugs-To: \n"
-        "POT-Creation-Date: 2014-01-15 06:00+0000\n"
+        "POT-Creation-Date: 2014-01-16 06:00+0000\n"
         "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
         "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
         "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -159,12 +159,12 @@ msgstr  "Profile"
 #: protected/views/book/author.php:163 protected/views/layouts/main.php:70
 #: protected/views/book/author.php:164 protected/views/book/author.php:168
 #: protected/views/layouts/main.php:72 protected/views/book/author.php:168
-#: protected/views/layouts/main.php:72
+#: protected/views/layouts/main.php:134
 msgid   "Çıkış"
 msgstr  "Sign Out"
 
 #: protected/views/layouts/main.php:67 protected/views/layouts/main.php:68
-#: protected/views/layouts/main.php:70 protected/views/layouts/main.php:70
+#: protected/views/layouts/main.php:70 protected/views/layouts/main.php:132
 msgid   "Giriş yap"
 msgstr  "Sign In"
 
@@ -213,6 +213,7 @@ msgstr  "Delete"
 #: protected/views/organisations/workspaces.php:60
 #: protected/views/organisations/users.php:42
 #: protected/views/organisationHostings/index.php:26
+#: protected/views/faq/index.php:49
 #: protected/views/organisations/workspaces.php:60
 #: protected/views/organisations/users.php:42
 #: protected/views/organisationHostings/index.php:26
@@ -220,7 +221,8 @@ msgid   "Ekle"
 msgstr  "Add"
 
 #: protected/views/book/select_data.php:39 protected/views/faq/create.php:38
-#: protected/views/faq/create.php:44 protected/views/book/select_data.php:39
+#: protected/views/faq/create.php:44 protected/views/faq/create.php:44
+#: protected/views/book/select_data.php:39
 msgid   "Kaydet"
 msgstr  "Save"
 
@@ -274,7 +276,8 @@ msgstr  ""
 msgid   "SSS Cevap"
 msgstr  ""
 
-#: protected/models/FaqCreateForm.php:38 protected/models/FaqCreateForm.php:38
+#: protected/models/FaqCreateForm.php:38 protected/views/faq/index.php:13
+#: protected/models/FaqCreateForm.php:38
 msgid   "Dil"
 msgstr  ""
 
@@ -282,6 +285,40 @@ msgstr  ""
 msgid   "Categoriler"
 msgstr  ""
 
-#: protected/models/FaqCreateForm.php:40 protected/models/FaqCreateForm.php:40
+#: protected/models/FaqCreateForm.php:40 protected/views/faq/index.php:15
+#: protected/models/FaqCreateForm.php:40
 msgid   "Anahtar Kelimeler"
+msgstr  ""
+
+#: protected/controllers/BookController.php:185
+#: protected/controllers/BookController.php:243
+msgid   "Bölüm"
+msgstr  ""
+
+#: protected/views/faq/index.php:9
+msgid   "Soru"
+msgstr  ""
+
+#: protected/views/faq/index.php:10
+msgid   "Cevap"
+msgstr  ""
+
+#: protected/views/faq/index.php:11
+msgid   "Sıklık"
+msgstr  ""
+
+#: protected/views/faq/index.php:12
+msgid   "Değerlendirme"
+msgstr  ""
+
+#: protected/views/faq/index.php:14
+msgid   "Kategoriler"
+msgstr  ""
+
+#: protected/views/book/upload_file.php:22
+msgid   "Yükle"
+msgstr  ""
+
+#: protected/models/FileForm.php:25
+msgid   "PDF dosyası"
 msgstr  ""
