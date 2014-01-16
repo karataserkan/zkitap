@@ -1068,14 +1068,22 @@ Grafik Ekle
 		</div> <!-- guide -->
 <div id='editor_view_pane' style=' padding:5px 130px;margin: 10px 5px 5px 5px;float:left;'>
 
+<?php
+$book_data=json_decode($model->data,true);
+$book_type=$book_data['book_type'];
+if ($book_type=="pdf") {
+	
+	$page_data=json_decode($page->pdf_data,true);
 
-					<div id='current_page' page_id='<?php echo $page->page_id ;?>' style='background:white;border:thin solid black;zoom:1; height:<?php echo $bookHeight; ?>px;width:<?php echo $bookWidth; ?>px;position:relative'  >
+	$img=$page_data['image']['data'];
+}
+$background= ($book_type=='pdf') ? "background-image:url('".$img."')" : "background:white";
+?>
+
+					<div id='current_page' page_id='<?php echo $page->page_id ;?>' style="<?php echo $background; ?>;border:thin solid black;zoom:1; background-size:<?php echo $bookWidth; ?>px <?php echo $bookHeight; ?>px; height:<?php echo $bookHeight; ?>px;width:<?php echo $bookWidth; ?>px;position:relative"  >
 						<div id="guide-h" class="guide"></div>
 						<div id="guide-v" class="guide"></div>
-
 					</div>
-
-
 		</div><!-- editor_pane -->
 
 
