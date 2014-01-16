@@ -7,6 +7,8 @@ window.lindneo.dataservice = (function( $ ) {
   var that =this;
   var progressBars=[];
   var progressBarsCounter=0;
+  var GrandTotals=new Object();
+
 
   var get_random_color = function () {
     var letters = '0123456789ABCDEF'.split('');
@@ -559,45 +561,79 @@ window.lindneo.dataservice = (function( $ ) {
   var progressContinue = function(){
      $('#save_status').addClass('icon-arrows-cw animate-spin size-30 light-blue');
   }
-
-  var send = function( action, data, successCallback, failCallback ){
+  var ProgressOfTop = function () {
     var that =this;
-    var progressbar = this.newProgressBar();
-    var requestRoute='EditorActions' +'/' + action;
+    var Ftotal=0;
+    var Floaded=0;
+    //console.log(window.lindneo.dataservice.GrandTotals);
+    if (typeof window.lindneo.dataservice.GrandTotals == "undefined") return;
+    $.each(window.lindneo.dataservice.GrandTotals, function  (index,reqstat) {
+      if (reqstat.total != reqstat.loaded ){
+        Ftotal += reqstat.total;
+        Floaded += reqstat.loaded;
+      };
 
 
+
+    });
     
-    //console.log(action);
+   // console.log(Floaded / Ftotal);
+    if (Ftotal==0){
+      NProgress.done();
+    } else {
+    NProgress.set(Floaded / Ftotal);
+    }
 
+  }
+  var send = function( action, data, successCallback, failCallback ){
+    var that = this;
+    var requestRoute='EditorActions' +'/' + action;
+    
+    var timestamp = new Date().getTime().toString();
+    NProgress.configure({
+       ease: 'ease',
+       speed: 50,
+       showSpinner: false, 
+       trickleRate: 0.02, 
+       trickleSpeed: 10  
+    });
+    
+    
     $.ajax({
 
        'xhr': function(){
          var xhr = new window.XMLHttpRequest();
-         //xhr.upload.onprogress = function(evt){console.log('pprogress')};
          
-         //console.log(xhr.upload);
-
+         
          //Upload progress
          xhr.upload.addEventListener("progress", function(evt){
-          progressContinue();
-          //console.log('Upload');
-          //console.log(evt);
-         if (evt.lengthComputable) {
-           var percentage = evt.loaded / evt.total;
-           progressbar.bar.progressbar('value', percentage*100);
-           //Do something with upload progress
+           progressContinue();
+           if (evt.lengthComputable) {
+              var totalz={
+                total:evt.total,
+                loaded:evt.loaded
+              };
 
-           //console.log(percentage);
-           }
+             window.lindneo.dataservice.GrandTotals[timestamp]=totalz;
+             that.ProgressOfTop();         
+
+             }
          }, false);
        
          //Download progress
-         xhr.addEventListener("progress", function(evt){       
+        
+        xhr.addEventListener("progress", function(evt){      
           progressContinue();
            if (evt.lengthComputable) {
-             var percentage = evt.loaded / evt.total;
-             progressbar.bar.progressbar('value', percentage*100);
-           }
+              var totalz={
+                total:evt.total,
+                loaded:evt.loaded
+              };
+
+             window.lindneo.dataservice.GrandTotals[timestamp]=totalz;
+             that.ProgressOfTop();         
+             
+             }
          }, false);
          return xhr;
        },
@@ -615,24 +651,25 @@ window.lindneo.dataservice = (function( $ ) {
         progressContinue();
       },
       'success': function(data) {
-
-         that.removeProgressBar(progressbar.container);
+        that.ProgressOfTop();
+         //that.removeProgressBar(progressbar.container);
          return successCallback(data); 
       },
       //'error': failCallback,
       error: function () {
+        that.ProgressOfTop();
         //console.log('ERROR');
         //$('#save_status').text('HATA VAR...');
-        that.removeProgressBar(progressbar.container);
+        //that.removeProgressBar(progressbar.container);
         $('#save_status').addClass('icon-warning light-red');
         $('#save_status').removeClass('arrows-cw animate-spin size-30 light-blue ');
         },
       complete: function(){
-
+        that.ProgressOfTop();
         // Handle the complete event
         //console.log('bitti');
         //$('#save_status').text('Kaydedildi...');
-        that.removeProgressBar(progressbar.container);
+        //that.removeProgressBar(progressbar.container);
         $('#save_status').addClass('icon-tick light-green');
         $('#save_status').removeClass('icon-arrows-cw animate-spin size-30 light-blue');
       }
@@ -640,6 +677,8 @@ window.lindneo.dataservice = (function( $ ) {
   };
 
   return {
+    ProgressOfTop: ProgressOfTop,
+    GrandTotals: GrandTotals,
     progressContinue: progressContinue,
     removeProgressBar: removeProgressBar,
     newProgressBar: newProgressBar,
