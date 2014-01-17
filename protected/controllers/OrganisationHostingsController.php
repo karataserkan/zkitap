@@ -67,11 +67,7 @@ class OrganisationHostingsController extends Controller
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
 
-		$criteria=new CDbCriteria;
-		$criteria->select='max(hosting_client_id) AS maxColumn';
-		$row = $model->model()->find($criteria);
-		
-		$model->hosting_client_id = $row['maxColumn']+1;
+		$model->hosting_client_id = functions::new_id(15);
 
 		if(isset($_POST['OrganisationHostings']))
 		{

@@ -41,7 +41,7 @@ class Faq extends CActiveRecord
 		// will receive user inputs.
 		return array(
 			array('faq_id, faq_question, faq_answer, rate', 'required'),
-			array('faq_id, faq_frequency', 'numerical', 'integerOnly'=>true),
+			//array('faq_id, faq_frequency', 'numerical', 'integerOnly'=>true),
 			array('rate', 'numerical'),
 			array('faq_question, faq_answer', 'length', 'max'=>10000),
 			array('lang', 'length', 'max'=>2),
