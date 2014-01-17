@@ -168,8 +168,8 @@ $(document).ready(function(){
 
           }) 
           .dblclick(function(event, ui) {
-            console.log(event);
-            console.log(that.options.component.type);
+            //console.log(event);
+            //console.log(that.options.component.type);
             if(that.options.component.type == 'image')
               window.lindneo.dataservice.image_popup(event, ui, that.options.component);
             else if(that.options.component.type == 'link')
@@ -242,7 +242,7 @@ $(document).ready(function(){
         
         angle: that.options.component.data.self.rotation,
         'stop': function( event, angle){
-          console.log('sdasd');
+
           that._rotate(event, angle);
           }
       });
@@ -422,17 +422,17 @@ $(document).ready(function(){
     },
 
     _rotate: function ( event, angle ) {
-    /**/console.log(this);
+      //console.log(this);
       //this.options.component.data.self.css.width = ui.size.width + "px";
       //this.options.component.data.self.css.height = ui.size.height + "px";
       this.options.component.data.self.rotation = angle;
 
       this.options.component.data.self.css['-webkit-transform'] = "rotate("+angle+"rad)" ;
       //$(self).css('-webkit-transform',"rotate("+angle+"rad)");
-      console.log(angle);
+      //console.log(angle);
       this._trigger('update', null, this.options.component );
       //this._selected(event, ui)
-      console.log(this.options.component);
+      //console.log(this.options.component);
     },
 
     _resizeDraggable: function( event, ui ){
