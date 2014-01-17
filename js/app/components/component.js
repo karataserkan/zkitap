@@ -18,7 +18,10 @@ $(document).ready(function(){
           'start': function (event,ui){
             that._selected(event,ui);
             //console.log(ui);
-            ui.element.resizable("option", "alsoResize",".selected");
+
+            //$(ui.element.get(0)).resizable("option", "alsoResize",".selected");
+            $(this).resizable("option", "alsoResize",".selected");
+            //ui.element.resizable("option", "alsoResize",".selected");
             $(".selected").trigger("resize");
           },
           'stop': function( event, ui ){
@@ -51,12 +54,12 @@ $(document).ready(function(){
 
       this.element.parent()
           .append('  \
-    	  <div class="top_holder"></div> \
-    	  <div class="dragging_holder top"></div> \
-    	  <div class="dragging_holder bottom "></div> \
-    	  <div class="dragging_holder left "></div> \
-    	  <div class="dragging_holder right"></div> \
-    	  ' )
+        <div class="top_holder"></div> \
+        <div class="dragging_holder top"></div> \
+        <div class="dragging_holder bottom "></div> \
+        <div class="dragging_holder left "></div> \
+        <div class="dragging_holder right"></div> \
+        ' )
           .attr('component-instance', 'true')
         
           .draggable({
@@ -234,11 +237,19 @@ $(document).ready(function(){
       
       .on('unselect', function(){
         that.unselect();
+      })
+      .rotatable({
+        
+        angle: that.options.component.data.self.rotation,
+        'stop': function( event, angle){
+          console.log('sdasd');
+          that._rotate(event, angle);
+          }
       });
 
       this.setFromData();
       this.listCommentsFromData();
-	  $(".ui-resizable-se.ui-icon.ui-icon-gripsmall-diagonal-se").removeClass("ui-icon").removeClass("ui-icon-gripsmall-diagonal-se");
+    $(".ui-resizable-se.ui-icon.ui-icon-gripsmall-diagonal-se").removeClass("ui-icon").removeClass("ui-icon-gripsmall-diagonal-se");
     },
 
     createCommentBox : function () {
@@ -410,6 +421,20 @@ $(document).ready(function(){
       
     },
 
+    _rotate: function ( event, angle ) {
+    /**/console.log(this);
+      //this.options.component.data.self.css.width = ui.size.width + "px";
+      //this.options.component.data.self.css.height = ui.size.height + "px";
+      this.options.component.data.self.rotation = angle;
+
+      this.options.component.data.self.css['-webkit-transform'] = "rotate("+angle+"rad)" ;
+      //$(self).css('-webkit-transform',"rotate("+angle+"rad)");
+      console.log(angle);
+      this._trigger('update', null, this.options.component );
+      //this._selected(event, ui)
+      console.log(this.options.component);
+    },
+
     _resizeDraggable: function( event, ui ){
       var element = $(ui).find('textarea');
 
@@ -446,7 +471,7 @@ $(document).ready(function(){
 
       this.element.removeClass('unselected');
       this.element.addClass('selected');
-	  this.element.parent().addClass('selected');
+    this.element.parent().addClass('selected');
       window.lindneo.toolbox.addComponentToSelection(this);
 
      
@@ -485,8 +510,8 @@ $(document).ready(function(){
 
     unselect: function (){
       this.element.removeClass('selected');
-	  this.element.parent().removeClass('selected');
-	  
+    this.element.parent().removeClass('selected');
+    
       this.element.addClass('unselected');
       this.element.css({
         'border': 'none'
