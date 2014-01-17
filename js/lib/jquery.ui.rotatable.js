@@ -32,12 +32,12 @@ $.widget("ui.rotatable", $.ui.mouse, {
     },
 
 	stopRotate:	function (event) {
-			 console.log(this.options.stop);
+			// console.log(this.options.stop);
 			if (!elementBeingRotated) return;
 			$(document).unbind('mousemove');
 			setTimeout( function() { elementBeingRotated = false; }, 10 );
-			console.log(rotateAngle);
-			console.log(ui);
+			//console.log(rotateAngle);
+			//console.log(ui);
 			$(this).trigger('stop', null, rotateAngle);	
 			return false;
 	},
@@ -57,7 +57,7 @@ $.widget("ui.rotatable", $.ui.mouse, {
 
 			setTimeout( function() { 
 				if (elementBeingRotated){
-					console.log(nowRotating);
+					//console.log(nowRotating);
 					nowRotating.options.stop(event,rotateAngle);
 					//thatRotatable._trigger('rotate', null, thatRotatable.options.rotateAngle );	
 				}
