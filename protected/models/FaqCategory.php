@@ -38,7 +38,7 @@ class FaqCategory extends CActiveRecord
 		// will receive user inputs.
 		return array(
 			array('faq_category_id, faq_category_title, parent_id', 'required'),
-			array('faq_category_id, parent_id', 'numerical', 'integerOnly'=>true),
+			//array('faq_category_id, parent_id', 'numerical', 'integerOnly'=>true),
 			array('faq_category_title', 'length', 'max'=>244),
 			array('lang', 'length', 'max'=>2),
 			// The following rule is used by search().

@@ -63,7 +63,7 @@ class PageController extends Controller
 	public function actionCreate($chapter_id,$pageTeplateId=null)
 	{
 		$model=new Page;
-		$new_id=functions::get_random_string();
+		$new_id=functions::new_id();
 		$model->page_id=$new_id;
 		$model->chapter_id=$chapter_id;
 
@@ -86,7 +86,7 @@ class PageController extends Controller
 						if ($components) {
 							foreach ($components as $ckey => $component) {
 								$newComponent = new Component;
-								$newComponent->id=functions::get_random_string();
+								$newComponent->id=functions::new_id();
 								$newComponent->type=$component->type;
 								$newComponent->data=$component->data;
 								$newComponent->created=date("Y-m-d H:i:s");
