@@ -82,7 +82,7 @@ class BookController extends Controller
 	public function actionCreate($workspace=null,$book_id=null,$bookType='epub')
 	{
 		$model=new Book;
-		$model->book_id=functions::get_random_string();
+		$model->book_id=functions::new_id();//functions::get_random_string();
 		
 		$model->setData('book_type',$bookType);
 
@@ -93,9 +93,6 @@ class BookController extends Controller
 
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
-
-
-
 
 		if(isset($_POST['Book']))
 		{
@@ -311,7 +308,7 @@ class BookController extends Controller
 			));
 			if ($chapters) {
 				foreach ($chapters as $key => $chapter) {
-					$newchapterid=functions::get_random_string();
+					$newchapterid=functions::new_id();//functions::get_random_string();
 					$newChapter=new Chapter;
 					$newChapter->book_id=$bookId;
 					$newChapter->chapter_id=$newchapterid;
@@ -328,7 +325,7 @@ class BookController extends Controller
 					));
 					if ($pages) {
 						foreach ($pages as $pkey => $page) {
-							$newpageid=functions::get_random_string();
+							$newpageid=functions::new_id();//functions::get_random_string();
 							$newPage= new Page;
 							$newPage->page_id=$newpageid;
 							$newPage->created=date("Y-m-d H:i:s");
@@ -345,7 +342,7 @@ class BookController extends Controller
 							if ($components) {
 								foreach ($components as $ckey => $component) {
 									$newComponent = new Component;
-									$newComponent->id=functions::get_random_string();
+									$newComponent->id=functions::new_id();//functions::get_random_string();
 									$newComponent->type=$component->type;
 									$newComponent->data=$component->data;
 									$newComponent->created=date("Y-m-d H:i:s");

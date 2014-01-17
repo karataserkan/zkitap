@@ -67,12 +67,7 @@ class FaqController extends Controller
 		//creates faq
 		$faq= new Faq;
 
-		//gets max Id in the table faq
-		$criteria=new CDbCriteria;
-		$criteria->select='max(faq_id) AS maxColumn';
-		$row = $faq->model()->find($criteria);
-		$id=$row['maxColumn']+1;
-		
+		$id=functions::new_id(15);
 		//sets faq->id,lang,rate
 		$faq->faq_id = $id;
 		$faq->lang=$this->getCurrentLang();
@@ -117,14 +112,8 @@ class FaqController extends Controller
 						{
 							//create ne keyword
 							$newKeyword= new Keywords;
-
-							//get max Id from keywords
-							$criteria=new CDbCriteria;
-							$criteria->select='max(keyword_id) AS maxColumn';
-							$row = $newKeyword->model()->find($criteria);
-
 							//sets keyword attributes
-							$newKeyword->keyword_id=$row['maxColumn']+1;
+							$newKeyword->keyword_id=functions::new_id(15);
 							$newKeyword->keyword=$keyword;
 							$newKeyword->lang=$this->getCurrentLang();
 							

@@ -357,7 +357,7 @@ class OrganisationsController extends Controller
 				$criteria->select='max(id) AS maxColumn';
 				$row = $user->model()->find($criteria);
 				
-				$userId = $row['maxColumn']+1;
+				$userId = functions::new_id();
 				$user->id = $userId;
 				$user->email=$email;
 				$user->save();
@@ -367,7 +367,7 @@ class OrganisationsController extends Controller
 			$invitation= new OrganisationInvitation;
 			$invitation->organisation_id = $organisation->organisation_id;
 			$invitation->user_id = $userId;
-			$invitation->invitation_id = functions::get_random_string();
+			$invitation->invitation_id = functions::new_id();
 			$invitation->save();
 			//linke davetiye IDsini de ekliyorum
 			$link .= $invitation->invitation_id;
