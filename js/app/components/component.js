@@ -18,9 +18,13 @@ $(document).ready(function(){
           'start': function (event,ui){
             that._selected(event,ui);
             //console.log(ui);
+<<<<<<< HEAD
             //$(ui.element.get(0)).resizable("option", "alsoResize",".selected");
             $(this).resizable("option", "alsoResize",".selected");
             //ui.element.resizable("option", "alsoResize",".selected");
+=======
+            ui.element.resizable("option", "alsoResize",".selected");
+>>>>>>> da1982cdb99574e6731a40b2f34bd6652e1fd95c
             $(".selected").trigger("resize");
           },
           'stop': function( event, ui ){

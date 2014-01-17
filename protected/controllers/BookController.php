@@ -150,7 +150,17 @@ class BookController extends Controller
 		$data['thumnail']['size']['height']=$image_height;		
 
 		$data['pageJSON']=$pageJSON;
+		return json_encode($data);
 
+
+	}
+	private function setBookData($filePath,$bookId){
+
+		$imgPath=$filePath.'/page-1.jpg';
+		list($image_width, $image_height, $type, $attr) = getimagesize($imgPath);
+		$model=Book::model()->findByPk($bookId);
+		$model->setPageSize($image_width*0.5,$image_height*0.5);
+		$model->save();
 
 	}
 	public function actionUploadFile($bookId)
@@ -177,6 +187,7 @@ class BookController extends Controller
 					$imgThumbnailPath=$filePath.'/thumbnailpage-'.$i.'.jpg';
 					$imgData=base64_encode(file_get_contents($imgPath));
 					$imgData= 'data: '.mime_content_type($imgPath).';base64,'.$imgData;
+					$imgData=$this->getPDFData($filePath,$i,'');
 					if($i==1){
 						$chapter=new Chapter();
 						$chapter->chapter_id=functions::new_id();
@@ -194,6 +205,7 @@ class BookController extends Controller
 					print $i;
 
 				}
+				$this->setBookData($filePath,$bookId);
 				$this->redirect('/book/author/'.$bookId);
 			}
 			else{
@@ -257,9 +269,12 @@ class BookController extends Controller
 							}
 
 						}
+						$this->setBookData($filePath,$bookId);
+						$this->redirect('/book/author/'.$bookId);
 
 			}
-			$this->redirect('/book/author/'.$bookId);
+			
+			
 			//die();
 
 		}
