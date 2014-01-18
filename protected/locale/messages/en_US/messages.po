@@ -7,7 +7,7 @@
 msgid   ""
 msgstr  "Project-Id-Version: PACKAGE VERSION\n"
         "Report-Msgid-Bugs-To: \n"
-        "POT-Creation-Date: 2014-01-17 06:00+0000\n"
+        "POT-Creation-Date: 2014-01-18 06:00+0000\n"
         "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
         "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
         "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -295,6 +295,8 @@ msgstr  ""
 #: protected/controllers/BookController.php:243
 #: protected/controllers/BookController.php:196
 #: protected/controllers/BookController.php:255
+#: protected/controllers/BookController.php:193
+#: protected/controllers/BookController.php:252
 msgid   "Bölüm"
 msgstr  ""
 
@@ -327,6 +329,6 @@ msgstr  ""
 msgid   "PDF dosyası"
 msgstr  ""
 
-#: protected/views/book/author.php:887
+#: protected/views/book/author.php:887 protected/views/book/author.php:887
 msgid   "Sayfalar"
 msgstr  ""
