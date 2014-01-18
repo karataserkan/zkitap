@@ -101,6 +101,8 @@ class BookController extends Controller
 			//$model->pdf_file=CUploadedFile::getInstance($model,'pdf_file');
 			//print($model->pdf_file);die();
 			if($model->save())
+				$msg="BOOK:CREATE:0:". json_encode(array(array('user'=>Yii::app()->user->id),array('BookId'=>$model->book_id,'workspaceId'=>$workspace,'bookType'=>$bookType)));
+				Yii::log($msg,'info');
 				$userid=Yii::app()->user->id;
 				$addOwner = Yii::app()->db->createCommand();
 				$addOwner->insert('book_users', array(
@@ -202,6 +204,8 @@ class BookController extends Controller
 					print $i;
 
 				}
+				$msg="BOOK:UPLOAD_FILE:0:". json_encode(array(array('user'=>Yii::app()->user->id),array('BookId'=>$bookId)));
+				Yii::log($msg,'info');
 				$this->setBookData($filePath,$bookId);
 				$this->redirect('/book/author/'.$bookId);
 			}
@@ -266,6 +270,8 @@ class BookController extends Controller
 							}
 
 						}
+						$msg="BOOK:UPLOAD_FILE:0:". json_encode(array(array('user'=>Yii::app()->user->id),array('BookId'=>$bookId)));
+						Yii::log($msg,'info');
 						$this->setBookData($filePath,$bookId);
 						$this->redirect('/book/author/'.$bookId);
 
@@ -472,6 +478,8 @@ class BookController extends Controller
 		
 		if (isset($bookId)) {
 			$this->loadModel($bookId)->delete();
+			$msg="BOOK:DELETE:0:". json_encode(array(array('user'=>Yii::app()->user->id),array('BookId'=>$bookId)));
+			Yii::log($msg,'info');
 		}
 
 		// if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
