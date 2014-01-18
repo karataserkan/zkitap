@@ -29,6 +29,7 @@ switch ($controller) {
 		<link href="/css/editor_blue/jquery-ui-1.10.3.custom.css" rel="stylesheet">
 		<link href="/css/editor_blue/jquery.ui.rotatable.css" rel="stylesheet">
 
+
 		<!-- Style Sheets -->
 		<link rel="stylesheet" type="text/css" href="/css/main.css">
 		<link rel="stylesheet" type="text/css" href="/css/style.css">
@@ -43,6 +44,7 @@ switch ($controller) {
 		<script src="/js/lib/jquery.dropdown.js"></script>
 		<script src="/js/lib/jquery-ui-draggable-alsoDrag.js"></script>
 		<script src="/js/lib/jquery.ui.rotatable.js"></script>
+
 		<script src="http://can.dev.lindneo.com:1881/socket.io/socket.io.js"></script>
 
 		<!-- JS Modules -->
@@ -75,6 +77,7 @@ switch ($controller) {
 		<link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/style.css" />
 		<link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/linden-editor-icons.css" />
 		<link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/form.css" />
+		<link href="/css/nprogress.css" rel="stylesheet">
 
 		<!-- JS Libraries -->
 		<script src="<?php echo Yii::app()->request->baseUrl; ?>/js/lib/jquery-1.9.1.js"></script>
@@ -84,6 +87,7 @@ switch ($controller) {
 		<script src="<?php echo Yii::app()->request->baseUrl; ?>/js/lib/jquery.dropdown.js"></script>
 		<script src="<?php echo Yii::app()->request->baseUrl; ?>/js/lib/jquery-ui-draggable-alsoDrag.js"></script>
 		<script src="<?php echo Yii::app()->request->baseUrl; ?>/js/lib/jquery.ui.rotatable.js"></script>
+		<script src="<?php echo Yii::app()->request->baseUrl; ?>/js/lib/nprogress.js"></script>
 		<script src="<?php echo Yii::app()->request->hostInfo; ?>:1881/socket.io/socket.io.js"></script>
 
 		<!-- JS Modules -->
