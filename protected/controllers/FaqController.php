@@ -31,7 +31,7 @@ class FaqController extends Controller
 				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
-				'actions'=>array('create','update','searchKey','category'),
+				'actions'=>array('create','update','searchKey','category','keyword'),
 				'users'=>array('@'),
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
@@ -253,38 +253,81 @@ class FaqController extends Controller
 		));
 	}
 
+	public function actionKeyword($keywords=null)
+	{
+		$keywords=explode('|', $keywords);
+		$conditions = "";
+		$params= array();
+		foreach ($keywords as $keywords_key => $keyword) {
+			if($keywords_key != 0)  $conditions .= " OR ";
+			$conditions .= "ky.keyword=:cat_name_$keywords_key ";	
+			$params[ ":cat_name_$keywords_key" ]= functions::ufalt($keyword);
+		}
+
+
+		$conditions .= "AND lang=:lang" ;
+		$params[":lang"] = $this->getCurrentLang();
+		
+		$res= Yii::app()->db->createCommand()
+    		->select('*')
+    		->from('keywords ky')
+    		->naturalJoin('keywords_faq fk')
+    		->naturalJoin('faq f')
+    		->where($conditions, $params)
+    		->order('faq_frequency desc, rate desc')
+    		->queryAll()
+    		;
+   		foreach ($res as $res_key => &$res_value) {
+    		$res_value=(object)($res_value);
+    	}
+   		$this->render('keywords',array(
+			'data'=>$res
+			));
+	}
+
 	public function actionCategory($categories=null)
 	{
-		$categories=explode(',', $categories);
-		$data=array();
-		foreach ($categories as $key => $category) {
-			$categoryFaqs=FaqCategoryFaq::model()->findAll(array(
-			'condition'=>'faq_category_id=:faq_category_id',
-			'params'=>array(':faq_category_id'=>$category)
-			));
 
-			foreach ($categoryFaqs as $key4 => $categoryFaq) {
-				$data[$key][$key4]['category']=FaqCategory::model()->findByPk($category);
-				$faqs=Faq::model()->findAll(array(
-				'condition'=>'faq_id=:faq_id',
-				'params'=>array(':faq_id'=>$categoryFaq->faq_id)
-				));	
+		$categories=explode('|', $categories);
+		$conditions = "";
+		$params= array();	
+		foreach ($categories as $categories_key => $category) {
 			
-				foreach ($faqs as $key2 => $faq) {
-					$data[$key][$key4]['faq']=$faq;
-					$faqKeywords=KeywordsFaq::model()->findAll(array(
-					'condition'=>'faq_id=:faq_id',
-					'params'=>array(':faq_id'=>$faq->faq_id)
-					));
-					foreach ($faqKeywords as $key3 => $keyword) {
-						$data[$key][$key4]['keywords'][]=Keywords::model()->findByPk($keyword->keyword_id);
-					}
-				}
-			}
-		}
+			if($categories_key != 0)  $conditions .= " OR ";
+			$conditions .= "LOWER(fc.faq_category_title)=:cat_name_$categories_key ";	
+			$params[ ":cat_name_$categories_key" ]= functions::ufalt($category);
+		} 
+
+		$conditions .= "AND lang=:lang" ;
+		$params[":lang"] = $this->getCurrentLang();
+		
+		$res= Yii::app()->db->createCommand()
+    		->select('*')
+    		->from('faq_category fc')
+    		->naturalJoin('faq_category_faq fcf')
+    		->naturalJoin('faq f')
+    		->where($conditions, $params)
+    		->order('faq_frequency desc, rate desc')
+    		->queryAll()
+    		;
+    	
+    	foreach ($res as $res_key => &$res_value) {
+    		$res_value=(object)($res_value);
+    		$res_value->keywords = 
+    		Yii::app()->db->createCommand()
+	    		->select('*')
+	    		->from('keywords_faq kf')
+	    		->naturalJoin('keywords k')
+	    		->where("faq_id=:faq_id",  array(':faq_id' =>  $res_value->faq_id ))
+
+	    		->queryAll()
+    		;
+    	}
+    
 		$this->render('categories',array(
-			'data'=>$data
+			'data'=>$res
 			));
+		
 	}
 
 	/**
@@ -329,4 +372,5 @@ class FaqController extends Controller
 			Yii::app()->end();
 		}
 	}
+
 }
