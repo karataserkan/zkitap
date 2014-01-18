@@ -20,13 +20,6 @@
 				 <div id="collapse<?php echo $faq_key; ?>" class="panel-collapse collapse" style="height: 0px;">
 					<div class="panel-body">
 						<?php echo $faq->faq_answer; ?>
-						<?php if(!empty($faq->keywords)): ?>
-						<?php foreach ($faq->keywords as $keyword_key => $keyword):?>
-							<a href="/faq/keyword?keywords=<?php echo $keyword['keyword']; ?>" class="btn btn-warning">
-								<span><?php echo $keyword['keyword']; ?></span>
-							</a>
-						<?php endforeach; ?>
-						<?php endif; ?>
 					</div>
 				 </div>
 			  </div>
