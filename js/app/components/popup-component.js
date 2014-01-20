@@ -58,31 +58,79 @@ $(document).ready(function(){
 
 
 
-var createPopupComponent = function ( event, ui, oldcomponent ) {
+var createPopupComponent = function ( event, ui, oldcomponent ) {  
+console.log(oldcomponent);  
+  if(typeof oldcomponent == 'undefined'){
+      console.log('dene');
+      var top = (ui.offset.top-$(event.target).offset().top ) + 'px';
+      var left = ( ui.offset.left-$(event.target).offset().left ) + 'px';
+      var popup_value = 'http://linden-tech.com';
+      var width = 'auto';
+      var height = 'auto';
+    }
+    else{
+      top = oldcomponent.data.self.css.top;
+      left = oldcomponent.data.self.css.left;
+      popup_value = oldcomponent.data.html_inner;
+      var width = oldcomponent.data.width ;
+      var height = oldcomponent.data.height;
+    };
+    console.log(width);
+    console.log(height);
+   /* $("<div class='popup ui-draggable' id='pop-image-popup' style='display: block; top:" + top + "; left: " + left + ";'> \
+      <div class='popup-header'> \
+      Görsel/Video Ekle \
+      <div class='popup-close' id='image-add-dummy-close-button'>x</div> \
+      </div> \
+        <div class='gallery-inner-holder' style='width: " + width + "px; height: " + height + "px;'> \
+        <div style='clear:both'></div> \
+        <div class='add-image-drag-area' id='dummy-dropzone'> </div> \
+        <div class ='popup_wrapper drag-cancel' style='border: 1px #ccc solid; ' > \
+          <div  id='popup-explanation' style='width:100%;height:100%; ' contenteditable='true' class='drag-cancel'>" + popup_value + ". \
+         </div>  \
+        </div> <br>\
+        <a href='#' id='pop-image-OK' class='btn bck-light-green white radius' style='padding: 5px 30px;'>Ekle</a> \
+      </div> \
+      </div>").appendTo('body').draggable({cancel:'.drag-cancel'}).resizable();*/
+    
+    var pop_popup = $("<div class='popup ui-draggable' id='pop-popup' style='display: block; top:" + top + "; left: " + left + ";'> \
+      </div>");
+    pop_popup.appendTo('body').draggable({cancel:'.drag-cancel'}).resizable();
+    var poup_header = $("<div class='popup-header'> Görsel/Video Ekle </div> ");
+    var close_button = $("<div class='popup-close' id='image-add-dummy-close-button'>x</div> ");
+    var drag_file = $("<div class='add-image-drag-area' id='dummy-dropzone'> </div> ");
+    var galery_inner = $("<div class='gallery-inner-holder' style='width: " + width + "px; height: " + height + "px;'> \
+        <div style='clear:both'></div> \
+      </div> ");
+    var popup_wrapper = $("<div class ='popup_wrapper drag-cancel' style='border: 1px #ccc solid; ' ></div> <br>");
+    var popup_detail = $("<div  id='popup-explanation' contenteditable='true' class='drag-cancel'>" + popup_value + "</div>");
+    var add_button = $("<a href='#' id='pop-image-OK' class='btn bck-light-green white radius' style='padding: 5px 30px;'>Ekle</a> ");
+    poup_header.appendTo(pop_popup);
+    close_button.appendTo(poup_header);
+    galery_inner.appendTo(pop_popup);
+    popup_wrapper.appendTo(galery_inner).resizable({alsoResize: galery_inner});
+    drag_file.prependTo(popup_wrapper);
+    popup_detail.appendTo(popup_wrapper);
+    add_button.appendTo(galery_inner);
+    popup_detail.resizable({alsoResize: galery_inner});
+    close_button.click(function(){
 
-  var el = document.getElementById("dummy-dropzone");
-    var imageBinary = '';
+      pop_popup.remove();  
 
-    el.addEventListener("dragenter", function(e){
-      e.stopPropagation();
-      e.preventDefault();
-    }, false);
+      if ( pop_popup.length ){
+        pop_popup.remove();  
+      }
 
-    el.addEventListener("dragexit", function(e){
-      e.stopPropagation();
-      e.preventDefault();
-    },false);
-
-    el.addEventListener("dragover", function(e){
-      e.stopPropagation();
-      e.preventDefault();
-    }, false);
-
-    el.addEventListener("drop", function(e){
-      console.log('deneme');
     });
 
-    $('#pop-image-OK').click(function (){        
+    
+    
+    
+    add_button.click(function (){  
+    var width = pop_popup.width();
+    var height = pop_popup.height(); 
+    console.log(width);
+    console.log(height);      
       if(typeof oldcomponent == 'undefined'){
         console.log('dene');
         var top = (ui.offset.top-$(event.target).offset().top ) + 'px';
@@ -92,9 +140,10 @@ var createPopupComponent = function ( event, ui, oldcomponent ) {
         top = oldcomponent.data.self.css.top;
         left = oldcomponent.data.self.css.left;
         //window.lindneo.tlingit.componentHasDeleted( oldcomponent.id );
-        oldcomponent.data.html_inner = $("#popup-explanation").val();
+        oldcomponent.data.html_inner = $("#popup-explanation").html();
 
       };
+      
        var  component = {
           'type' : 'popup',
           'data': {
@@ -109,7 +158,9 @@ var createPopupComponent = function ( event, ui, oldcomponent ) {
                 'background-color': 'transparent'
               } 
             },
-            'html_inner':  $("#popup-explanation").val(),
+            'html_inner':  $("#popup-explanation").html(),
+            'width': width,
+            'height': height,
             'lock':'',
             'self': {
               'css': {
@@ -129,11 +180,85 @@ var createPopupComponent = function ( event, ui, oldcomponent ) {
           window.lindneo.tlingit.componentHasCreated( component );
         else 
           window.lindneo.tlingit.componentHasUpdated( oldcomponent );
-        $("#image-add-dummy-close-button").trigger('click');
+        close_button.trigger('click');
 
     });
     
-    
+    var el = document.getElementById("dummy-dropzone");
+    var FileBinary = '';
 
+    el.addEventListener("dragenter", function(e){
+      e.stopPropagation();
+      e.preventDefault();
+    }, false);
+
+    el.addEventListener("dragexit", function(e){
+      e.stopPropagation();
+      e.preventDefault();
+    },false);
+
+    el.addEventListener("dragover", function(e){
+      e.stopPropagation();
+      e.preventDefault();
+    }, false);
+
+    el.addEventListener("drop", function(e){
+
+      e.stopPropagation();
+      e.preventDefault();
+
+      var reader = new FileReader();
+      var component = {};
+      var imageBinary = '';
+      var videoContentType = '';
+      var videoURL = '';
+      console.log(reader);
+      reader.onload = function (evt) {
+
+        FileBinary = evt.target.result;
+        var contentType = FileBinary.substr(5, FileBinary.indexOf('/')-5);
+        
+        //console.log(contentType);
+        if(contentType == 'image'){
+          var imageBinary = FileBinary;
+          var newImage = $("<img style='width:80%' src='"+imageBinary+"' ></img>");
+
+          $('#popup-explanation').append(newImage);
+          return;
+          
+        }
+        else if(contentType == 'video'){
+         
+          var contentType = FileBinary.substr(0, FileBinary.indexOf(';'));
+          var videoType = contentType.substr(contentType.indexOf('/')+1);
+          console.log(videoType);
+          var response = '';
+          var token = '';
+          videoContentType = videoType;
+          console.log(videoContentType);
+          window.lindneo.dataservice.send( 'getFileUrl', {'type': videoType}, function(response) {
+            response=window.lindneo.tlingit.responseFromJson(response);
+          
+            window.lindneo.dataservice.send( 'UploadFile', {'token': response.result.token, 'file' : FileBinary} , function(data) {
+              console.log('denemeee');
+              videoURL = response.result.URL;
+              var newVideo = $("<video controls='controls' style='width:80%'><source src='"+videoURL+"'></video>");
+
+              $('#popup-explanation').append(newVideo);
+              return;
+              
+                
+            });
+
+          });
+
+        }
+
+        
+      };
+
+      reader.readAsDataURL( e.dataTransfer.files[0] );
+
+    }, false);
 
   };
