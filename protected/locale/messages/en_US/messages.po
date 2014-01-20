@@ -7,7 +7,7 @@
 msgid   ""
 msgstr  "Project-Id-Version: PACKAGE VERSION\n"
         "Report-Msgid-Bugs-To: \n"
-        "POT-Creation-Date: 2014-01-18 06:00+0000\n"
+        "POT-Creation-Date: 2014-01-20 06:00+0000\n"
         "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
         "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
         "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -159,13 +159,13 @@ msgstr  "Profile"
 #: protected/views/book/author.php:163 protected/views/layouts/main.php:70
 #: protected/views/book/author.php:164 protected/views/book/author.php:168
 #: protected/views/layouts/main.php:72 protected/views/layouts/main.php:134
-#: protected/views/book/author.php:168 protected/views/layouts/main.php:134
+#: protected/views/book/author.php:168 protected/views/layouts/main.php:138
 msgid   "Çıkış"
 msgstr  "Sign Out"
 
 #: protected/views/layouts/main.php:67 protected/views/layouts/main.php:68
 #: protected/views/layouts/main.php:70 protected/views/layouts/main.php:132
-#: protected/views/layouts/main.php:132
+#: protected/views/layouts/main.php:136
 msgid   "Giriş yap"
 msgstr  "Sign In"
 
@@ -297,6 +297,8 @@ msgstr  ""
 #: protected/controllers/BookController.php:255
 #: protected/controllers/BookController.php:193
 #: protected/controllers/BookController.php:252
+#: protected/controllers/BookController.php:195
+#: protected/controllers/BookController.php:256
 msgid   "Bölüm"
 msgstr  ""
 
