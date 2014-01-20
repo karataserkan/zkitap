@@ -107,9 +107,9 @@ $this->pageTitle=Yii::app()->name;
 														</span>
 														
 															<?php 
-																echo CHtml::link(CHtml::encode(''), array("site/removeUser?userId=".$user['id']."&bookId=".$book->book_id),
+																echo CHtml::link(CHtml::encode(''), array("/site/removeUser?userId=".$user['id']."&bookId=".$book->book_id),
 																  array(
-																	'submit'=>array("site/removeUser?userId=".$user['id']."&bookId=".$book->book_id, 'userId'=>$user['id'],'bookId'=>$book->book_id),
+																	'submit'=>array("/site/removeUser?userId=".$user['id']."&bookId=".$book->book_id, 'userId'=>$user['id'],'bookId'=>$book->book_id),
 																	//'params' => array('bookId'=>$book->book_id, 'user'=>$user['id'], 'del'=>'true'),
 																	'class' => 'icon-close size-15 delete-icon'
 																  )
@@ -215,7 +215,7 @@ function sendRight(e){
     var userId=$('#' + b + '> #user').val();
     var type=$('#' + b + '> #type').val();
     var bookId=$('#' + b + ' > #book').val();
-    var link ='?r=site/right&userId='+userId+'&bookId='+bookId+'&type='+type;
+    var link ='/site/right?userId='+userId+'&bookId='+bookId+'&type='+type;
     window.location.assign(link);
     }
     //ekaratas end
