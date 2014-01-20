@@ -39,7 +39,7 @@ class EditorActionsController extends Controller
 
 		do {
 
-			$url='file'.functions::get_random_string(30);
+			$url='file'.functions::new_id();//functions::get_random_string(30);
 			$isVideo= Yii::app()->db->createCommand()
 		    ->select("*")
 		    ->from("video_id")

@@ -60,6 +60,28 @@ $(document).ready(function(){
 
 var createPopupComponent = function ( event, ui, oldcomponent ) {
 
+  var el = document.getElementById("dummy-dropzone");
+    var imageBinary = '';
+
+    el.addEventListener("dragenter", function(e){
+      e.stopPropagation();
+      e.preventDefault();
+    }, false);
+
+    el.addEventListener("dragexit", function(e){
+      e.stopPropagation();
+      e.preventDefault();
+    },false);
+
+    el.addEventListener("dragover", function(e){
+      e.stopPropagation();
+      e.preventDefault();
+    }, false);
+
+    el.addEventListener("drop", function(e){
+      console.log('deneme');
+    });
+
     $('#pop-image-OK').click(function (){        
       if(typeof oldcomponent == 'undefined'){
         console.log('dene');
@@ -110,7 +132,8 @@ var createPopupComponent = function ( event, ui, oldcomponent ) {
         $("#image-add-dummy-close-button").trigger('click');
 
     });
-
+    
+    
 
 
   };

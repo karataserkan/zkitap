@@ -329,6 +329,7 @@ $( document ).ready(function () {
     });
 
     $('#chapters_pages_view').sortable({
+      distance: 15,
       axis:'y',
       stop: function(event,ui){
         sortPages();
@@ -339,6 +340,7 @@ $( document ).ready(function () {
 
 
     $('.pages').sortable({ 
+      distance: 15,
       connectWith: '.pages' , 
       axis:'y',
       stop: function( event,ui){

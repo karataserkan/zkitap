@@ -82,7 +82,7 @@ class BookController extends Controller
 	public function actionCreate($workspace=null,$book_id=null,$bookType='epub')
 	{
 		$model=new Book;
-		$model->book_id=functions::get_random_string();
+		$model->book_id=functions::new_id();//functions::get_random_string();
 		
 		$model->setData('book_type',$bookType);
 
@@ -94,9 +94,6 @@ class BookController extends Controller
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
 
-
-
-
 		if(isset($_POST['Book']))
 		{
 			$model->attributes=$_POST['Book'];
@@ -104,6 +101,8 @@ class BookController extends Controller
 			//$model->pdf_file=CUploadedFile::getInstance($model,'pdf_file');
 			//print($model->pdf_file);die();
 			if($model->save())
+				$msg="BOOK:CREATE:0:". json_encode(array(array('user'=>Yii::app()->user->id),array('BookId'=>$model->book_id,'workspaceId'=>$workspace,'bookType'=>$bookType)));
+				Yii::log($msg,'info');
 				$userid=Yii::app()->user->id;
 				$addOwner = Yii::app()->db->createCommand();
 				$addOwner->insert('book_users', array(
@@ -150,7 +149,17 @@ class BookController extends Controller
 		$data['thumnail']['size']['height']=$image_height;		
 
 		$data['pageJSON']=$pageJSON;
+		return json_encode($data);
 
+
+	}
+	private function setBookData($filePath,$bookId){
+
+		$imgPath=$filePath.'/page-1.jpg';
+		list($image_width, $image_height, $type, $attr) = getimagesize($imgPath);
+		$model=Book::model()->findByPk($bookId);
+		$model->setPageSize($image_width*0.5,$image_height*0.5);
+		$model->save();
 
 	}
 	public function actionUploadFile($bookId)
@@ -177,6 +186,7 @@ class BookController extends Controller
 					$imgThumbnailPath=$filePath.'/thumbnailpage-'.$i.'.jpg';
 					$imgData=base64_encode(file_get_contents($imgPath));
 					$imgData= 'data: '.mime_content_type($imgPath).';base64,'.$imgData;
+					$imgData=$this->getPDFData($filePath,$i,'');
 					if($i==1){
 						$chapter=new Chapter();
 						$chapter->chapter_id=functions::new_id();
@@ -194,6 +204,9 @@ class BookController extends Controller
 					print $i;
 
 				}
+				$msg="BOOK:UPLOAD_FILE:0:". json_encode(array(array('user'=>Yii::app()->user->id),array('BookId'=>$bookId)));
+				Yii::log($msg,'info');
+				$this->setBookData($filePath,$bookId);
 				$this->redirect('/book/author/'.$bookId);
 			}
 			else{
@@ -257,9 +270,14 @@ class BookController extends Controller
 							}
 
 						}
+						$msg="BOOK:UPLOAD_FILE:0:". json_encode(array(array('user'=>Yii::app()->user->id),array('BookId'=>$bookId)));
+						Yii::log($msg,'info');
+						$this->setBookData($filePath,$bookId);
+						$this->redirect('/book/author/'.$bookId);
 
 			}
-			$this->redirect('/book/author/'.$bookId);
+			
+			
 			//die();
 
 		}
@@ -296,7 +314,7 @@ class BookController extends Controller
 			));
 			if ($chapters) {
 				foreach ($chapters as $key => $chapter) {
-					$newchapterid=functions::get_random_string();
+					$newchapterid=functions::new_id();//functions::get_random_string();
 					$newChapter=new Chapter;
 					$newChapter->book_id=$bookId;
 					$newChapter->chapter_id=$newchapterid;
@@ -313,7 +331,7 @@ class BookController extends Controller
 					));
 					if ($pages) {
 						foreach ($pages as $pkey => $page) {
-							$newpageid=functions::get_random_string();
+							$newpageid=functions::new_id();//functions::get_random_string();
 							$newPage= new Page;
 							$newPage->page_id=$newpageid;
 							$newPage->created=date("Y-m-d H:i:s");
@@ -330,7 +348,7 @@ class BookController extends Controller
 							if ($components) {
 								foreach ($components as $ckey => $component) {
 									$newComponent = new Component;
-									$newComponent->id=functions::get_random_string();
+									$newComponent->id=functions::new_id();//functions::get_random_string();
 									$newComponent->type=$component->type;
 									$newComponent->data=$component->data;
 									$newComponent->created=date("Y-m-d H:i:s");
@@ -461,6 +479,8 @@ class BookController extends Controller
 		
 		if (isset($bookId)) {
 			$this->loadModel($bookId)->delete();
+			$msg="BOOK:DELETE:0:". json_encode(array(array('user'=>Yii::app()->user->id),array('BookId'=>$bookId)));
+			Yii::log($msg,'info');
 		}
 
 		// if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
