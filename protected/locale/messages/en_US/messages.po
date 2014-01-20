@@ -1,22 +1,22 @@
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# Language File For English Translation of Squid Pacific
+# Copyright (C) 2104 Linden Digital Publishing
+# This file is distributed under the same license as the Squid Pacific package.
+# Squid Pacific <pacific@linden-tech>, 2014.
 #
 #, fuzzy
 msgid   ""
-msgstr  "Project-Id-Version: PACKAGE VERSION\n"
-        "Report-Msgid-Bugs-To: \n"
-        "POT-Creation-Date: 2014-01-20 06:00+0000\n"
-        "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-        "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-        "Language-Team: LANGUAGE <LL@li.org>\n"
-        "Language: \n"
+msgstr  "Project-Id-Version: 0.1\n"
+        "Report-Msgid-Bugs-To: pacific@linden-tech\n"
+        "POT-Creation-Date: 2014-01-15 06:00+0000\n"
+        "PO-Revision-Date: 2014-01-20 00:08+2000\n"
+        "Last-Translator: Squid Pacific\n"
+        "Language-Team: Squid Pacific <pacific@linden-tech>\n"
+        "Language: en\n"
         "MIME-Version: 1.0\n"
         "Content-Type: text/plain; charset=UTF-8\n"
         "Content-Transfer-Encoding: 8bit\n"
-        "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
-
+        "Plural-Forms:nplurals=2; plural=(n != 1);\n"
+        
 #: protected/views/site/index.php:88 protected/views/site/index.php:93
 #: protected/views/organisations/workspaces.php:20
 #: protected/views/book/library.php:4 protected/views/site/index.php:82
@@ -159,13 +159,14 @@ msgstr  "Profile"
 #: protected/views/book/author.php:163 protected/views/layouts/main.php:70
 #: protected/views/book/author.php:164 protected/views/book/author.php:168
 #: protected/views/layouts/main.php:72 protected/views/layouts/main.php:134
-#: protected/views/book/author.php:168 protected/views/layouts/main.php:138
+#: protected/views/layouts/main.php:138 protected/views/book/author.php:168
+#: protected/views/layouts/main.php:138
 msgid   "Çıkış"
 msgstr  "Sign Out"
 
 #: protected/views/layouts/main.php:67 protected/views/layouts/main.php:68
 #: protected/views/layouts/main.php:70 protected/views/layouts/main.php:132
-#: protected/views/layouts/main.php:136
+#: protected/views/layouts/main.php:136 protected/views/layouts/main.php:136
 msgid   "Giriş yap"
 msgstr  "Sign In"
 
@@ -242,7 +243,7 @@ msgstr  ""
 #: protected/views/organisations/index.php:10
 #: protected/views/organisations/index.php:10
 msgid   "Sunucu"
-msgstr  ""
+msgstr  "Server"
 
 #: protected/views/organisationHostings/index.php:11
 #: protected/views/organisationHostings/index.php:11
@@ -297,6 +298,8 @@ msgstr  ""
 #: protected/controllers/BookController.php:255
 #: protected/controllers/BookController.php:193
 #: protected/controllers/BookController.php:252
+#: protected/controllers/BookController.php:195
+#: protected/controllers/BookController.php:256
 #: protected/controllers/BookController.php:195
 #: protected/controllers/BookController.php:256
 msgid   "Bölüm"
