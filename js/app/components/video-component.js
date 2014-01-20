@@ -39,6 +39,44 @@ var top = 0;
 var left = 0;
 
 var createVideoComponent = function( event, ui, oldcomponent ) {
+
+    if(typeof oldcomponent == 'undefined'){
+      console.log('dene');
+      var top = (ui.offset.top-$(event.target).offset().top ) + 'px';
+      var left = ( ui.offset.left-$(event.target).offset().left ) + 'px';
+      var video_url = "http://lindneo.com/5.mp4";
+    }
+    else{
+      top = oldcomponent.data.self.css.top;
+      left = oldcomponent.data.self.css.left;
+      video_url = oldcomponent.data.source.attr.src;
+    };
+    console.log(top);
+    console.log(left);
+      $("<div class='popup ui-draggable' id='pop-image-popup' style='display: block; top:" + top + "; left: " + left + ";'> \
+        <div class='popup-header'> \
+        Video Ekle \
+        <div class='popup-close' id='image-add-dummy-close-button'>x</div> \
+        </div> \
+          <div class='gallery-inner-holder'> \
+            <div style='clear:both'></div> \
+            <div class='add-image-drag-area' id='dummy-dropzone'> </div> \
+            <input type='file' name='video_file' id='video_file' value='' ><br><br>\
+            <input id='video-url-text' class='input-textbox' type='url' placeholder='URL Adresini Giriniz'   value=" + video_url + "> \
+            <a href='#' id='pop-image-OK' class='btn bck-light-green white radius' id='add-image' style='padding: 5px 30px;'>Ekle</a> \
+          </div> \
+        </div>").appendTo('body');
+
+      $('#image-add-dummy-close-button').click(function() {
+
+          $('#pop-image-popup').remove();
+
+          if ($('#pop-image-popup').length) {
+              $('#pop-image-popup').remove();
+          }
+
+      });
+      
     var change = false;
     var that = '';
     $('#video_file').change(function(){
