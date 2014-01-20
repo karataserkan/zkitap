@@ -190,6 +190,132 @@ var hexToRgb  = function(hex) {
 }
 
 var createGraphComponent = function ( event, ui, oldcomponent ) {
+  if(typeof oldcomponent == 'undefined'){
+      console.log('dene');
+      var top = (ui.offset.top-$(event.target).offset().top ) + 'px';
+      var left = ( ui.offset.left-$(event.target).offset().left ) + 'px';
+      var graph_value = {};
+    }
+    else{
+      top = oldcomponent.data.self.css.top;
+      left = oldcomponent.data.self.css.left;
+    };
+
+      var letters= ["A","B","C","D","E","F","G","H","I","J","K"];
+
+    $("<div class='popup ui-draggable' id='pop-image-popup' style='display: block; top:" + top + "; left: " + left + ";'> \
+        <div class='popup-header'> \
+        Görsel Ekle \
+        <div class='popup-close' id='image-add-dummy-close-button'>x</div> \
+        </div> \
+          <div class='gallery-inner-holder'> \
+            <div class='gallery-inner-holder'> \
+         \
+          <label class='dropdown-label' id='graph_leading'> \
+                  Grafik Çeşidi:  \
+                    <select id='Graph Type' class='radius'> \
+                      <option value='pie-chart'> Pasta</option> \
+                      <option value='bar-chart' >Çubuk</option> \
+                    </select>  \
+          </label> \
+          <select id='verisayisi' class='radius'> \
+                      <option value='1' >1</option> \
+                      <option value='2' selected='selected' >2</option> \
+                      <option value='3' >3</option> \
+                      <option value='4' >4</option> \
+                      <option value='5' >5</option> \
+                      <option value='6' >6</option> \
+                      <option value='7' >7</option> \
+                      <option value='8' >8</option> \
+                      <option value='9' >9</option> \
+                    </select>  \
+            <div id='bar-chart-properties' class='chart_prop bar-chart' style='display:none;'> \
+              <div class='bar-chart-slice-holder slice-holder'> \
+                Arkaplan Rengi:  \
+                <input type='color'  id='chart-bar-background' class='color-picker-box radius color' value='"+this.get_random_color()+"' placeholder='e.g. #bbbbbb'> \<br> \
+                Çubuk Rengi:  \
+                 <input type='color' id='chart-bar-stroke' class='color-picker-box radius color' value='"+this.get_random_color()+"' placeholder='e.g. #bbbbbb'> \<br> \
+              </div> \
+          </div> \
+          <div id='pie-chart-properties' class='chart_prop pie-chart'> \
+          </div> \
+               \
+          <a href='#' class='btn bck-light-green white radius' id='pop-image-OK' style='padding: 5px 30px;'>Ekle</a> \
+          </div> \
+          </div> \
+        </div>").appendTo('body').draggable();
+
+      $('#image-add-dummy-close-button').click(function(){
+
+        $('#pop-image-popup').remove();  
+
+        if ( $('#pop-image-popup').length ){
+          $('#pop-image-popup').remove();  
+        }
+
+      });
+
+      $('#verisayisi').change(function(){
+    var str = "";
+    $( "#verisayisi option:selected" ).each(function() {
+      str += $( this ).val() + " ";
+    });
+    var newlenght=parseInt(str);
+    var current= $( '.chart_prop').first().children('.data-row').length;
+
+    console.log(newlenght );
+    console.log(current );
+
+    if ( current  > newlenght ) {
+      console.log ((current  - newlenght) + 'Silinecek');
+
+      $('.chart_prop').each (function () {
+        $(this).children('.data-row').each(function (index) {
+          if(index > newlenght -1 ){
+            $(this).remove();     
+          }
+        });
+      });
+
+    } else 
+    if ( current  < newlenght ) {
+     
+      console.log ((newlenght - current) +  ' tane Eklenecek ');
+      for (var i= current ;i <  newlenght; i++){
+      
+          var newPieRow= $("<div class='pie-chart-slice-holder slice-holder data-row'> \
+                      "+(i+1)+". Dilim <br> \
+                      %<input type='text' class='chart-textbox radius grey-9 percent' value='"+Math.floor((Math.random()*100)+1)+"'><br> \
+                      Etiket<input type='text' class='chart-textbox-wide radius grey-9 label' value='"+letters[i]+"'> \
+                      <input type='color' class='color-picker-box radius color' value='"+ get_random_color()+"' placeholder='e.g. #bbbbbb'> \
+              </div> \
+              ");
+         var newBarRow= $("<div class='bar-chart-slice-holder slice-holder data-row'> \
+             "+(i+1)+". sütun adı: \
+            <input type='text' class='chart-textbox-wide radius grey-9 label ' value='"+letters[i]+"'><br> \
+             "+(i+1)+". sütun değeri:  \
+            <input type='text' class='chart-textbox-wide radius grey-9 value ' value='"+Math.floor((Math.random()*100)+1)+"'><br> \
+          </div> \
+                ");
+          newBarRow.appendTo( $('#bar-chart-properties') );
+          newPieRow.appendTo( $('#pie-chart-properties') );
+      
+          }
+        }
+      });  
+
+      $('#verisayisi').change();
+
+      $('#graph_leading').change(function(){
+        var str = "";
+        $( "#graph_leading option:selected" ).each(function() {
+          str += $( this ).val() + " ";
+        });
+        $('.chart_prop').hide();
+        $('.chart_prop.' + str ).show();
+      });
+
+      console.log(oldcomponent);
   
   $('#pop-image-OK').click(function (){        
     if(typeof oldcomponent == 'undefined'){
