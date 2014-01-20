@@ -392,6 +392,7 @@ class BookController extends Controller
 	}
 
 	public function actionAuthor($bookId=null,$page=null,$component=null,$id=null,$id2=null){
+		$this->layout = '//layouts/column1';
 		if($bookId==null){
 			$bookId=$id;
 		}

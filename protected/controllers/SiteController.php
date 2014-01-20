@@ -2,6 +2,7 @@
 
 class SiteController extends Controller
 {
+	public $layout = '//layouts/column2';
 	/**
 	 * Declares class-based actions.
 	 */
@@ -26,13 +27,27 @@ class SiteController extends Controller
 	 * This is the default 'index' action that is invoked
 	 * when an action is not explicitly requested by users.
 	 */
-	public function actionIndex()
+	public function actionIndex($id=null)
 	{
 		// renders the view file 'protected/views/site/index.php'
 		// using the default layout 'protected/views/layouts/main.php'
 		if(Yii::app()->user->isGuest)
 			$this->redirect( array('site/login' ) );
-		$this->render('index');
+
+		if (isset($id) && $id) {
+			$all_books= $this->getWorkspaceBooks($id);
+			$workspace=Workspaces::model()->findByPk($id);
+		}
+		else
+		{
+			$workspacesOfUser= $this->getUserWorkspaces();
+			$workspace=(object)$workspacesOfUser[0];
+			//$workspace=Workspace::model()->findByPk($workspace->workspace_id);
+			$all_books= $this->getWorkspaceBooks($workspace->workspace_id);
+		}
+
+		$this->render('index',array('all_books'=>$all_books,
+			'workspace'=>$workspace));
 	}
 
 	public function actionRemoveUser($userId,$bookId)
@@ -93,8 +108,8 @@ class SiteController extends Controller
 			}
 	    }
 		
-
-		$this->render('index');
+	    $this->redirect(array('/site/index'));
+		//$this->render('index');
 	}
 
 	/**
@@ -228,6 +243,7 @@ class SiteController extends Controller
 	 */
 	public function actionLogin()
 	{
+		$this->layout = '//layouts/column1';
 		$model=new LoginForm;
 
 		// if it is ajax validation request
