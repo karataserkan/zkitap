@@ -20,13 +20,12 @@ function sendRight(e){
 						<div class="row">
 							<div class="col-sm-12">
 								<div class="page-header">
-									<div class="clearfix">
 										<h3 class="content-title pull-left"><?php echo $workspace->workspace_name; ?></h3>
 										<a class="btn pull-right btn-primary" href="/book/newBook">
-							<i class="fa-plus"></i>
+							<i class="fa fa-plus-circle"></i>
 							<span>Kitap Ekle</span>
 						</a>
-									</div>
+									
 								</div>
 							</div>
 						</div>
@@ -56,33 +55,24 @@ function sendRight(e){
 	  <div class="modal-content">
 		<div class="modal-header">
 		  <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-		  <h4 class="modal-title">Box Settings</h4>
+		  <h4 class="modal-title">Editörler</h4>
 		</div>
 		<div class="modal-body">
-		  <div class="editor-list">
+		 
 		<?php 
 			$users = $this->bookUsers($book->book_id);
 
 			foreach ($users as $key => $user): 
 				if ($user['type']=='owner' || $user['type']=='editor'){?>
-				<div class="row">
-					<span id="editor-name" class="editor-name">
+				
+				
+					
+				<div class="well well-sm">
+					<div id="editor-name" class="col-md-10">
 					<?php echo $user['name']." ".$user['surname']; ?>
-					</span>
-					<span>
-						<?php 
-							echo CHtml::link(CHtml::encode('x'), array("site/removeUser?userId=".$user['id']."&bookId=".$book->book_id),
-							  array(
-								'submit'=>array("site/removeUser?userId=".$user['id']."&bookId=".$book->book_id, 'userId'=>$user['id'],'bookId'=>$book->book_id),
-								//'params' => array('bookId'=>$book->book_id, 'user'=>$user['id'], 'del'=>'true'),
-								'class' => 'close'
-							  )
-							);
-							?>
-
-					</span>
-					<span id="editor-tag" style="color:#477738; float:right;">
-						<?php 
+					</div>
+					<div id="editor-tag" class="col-md-1">
+					<?php 
 							if ($user['type']=='owner') {
 								echo __('Sahibi');
 							}
@@ -90,10 +80,25 @@ function sendRight(e){
 								echo __('Editör');
 							}
 						?>
-					</span>
+					</div>
+					
+					<div class="col-md-1">
+						<?php 
+							echo CHtml::link(CHtml::encode(''), array("site/removeUser?userId=".$user['id']."&bookId=".$book->book_id),
+							  array(
+								'submit'=>array("site/removeUser?userId=".$user['id']."&bookId=".$book->book_id, 'userId'=>$user['id'],'bookId'=>$book->book_id),
+								//'params' => array('bookId'=>$book->book_id, 'user'=>$user['id'], 'del'=>'true'),
+								'class' => 'fa fa-trash-o pull-right'
+							  )
+							);
+							?>
+
+					</div>
+					
+				<div class="clearfix"></div>	
 				</div>	
 		<?php } endforeach; ?>
-		</div>
+		
 
 		<div style="background-color:#fff; height: 60px; padding:5px; margin:10px; color:#333; text-align:left;">
 			<?php
@@ -148,7 +153,7 @@ function sendRight(e){
 									<img src="/css/images/default-cover.jpg" alt="Book Cover">
 								</div>
 								
-								<div class="col-md-7 form-horizontal">
+								<div class="col-md-8 form-vertical">
 								<div class="form-group">											
 								<input class="form-control" type="text" name="placeholder" readonly="" placeholder="<?php echo $book->title ?>" >
 								</div>
