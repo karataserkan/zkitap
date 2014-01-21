@@ -36,7 +36,7 @@ class KeywordsFaq extends CActiveRecord
 		// will receive user inputs.
 		return array(
 			array('keyword_id, faq_id', 'required'),
-			array('keyword_id, faq_id', 'numerical', 'integerOnly'=>true),
+			//array('keyword_id, faq_id', 'numerical', 'integerOnly'=>true),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
 			array('keyword_id, faq_id', 'safe', 'on'=>'search'),

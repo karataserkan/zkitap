@@ -36,7 +36,7 @@ class FaqCategoryFaq extends CActiveRecord
 		// will receive user inputs.
 		return array(
 			array('faq_category_id, faq_id', 'required'),
-			array('faq_category_id, faq_id', 'numerical', 'integerOnly'=>true),
+			//array('faq_category_id, faq_id', 'numerical', 'integerOnly'=>true),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
 			array('faq_category_id, faq_id', 'safe', 'on'=>'search'),

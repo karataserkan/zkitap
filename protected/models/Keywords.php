@@ -38,7 +38,7 @@ class Keywords extends CActiveRecord
 		// will receive user inputs.
 		return array(
 			array('keyword_id, keyword', 'required'),
-			array('keyword_id', 'numerical', 'integerOnly'=>true),
+			//array('keyword_id', 'numerical', 'integerOnly'=>true),
 			array('keyword', 'length', 'max'=>255),
 			array('lang', 'length', 'max'=>2),
 			// The following rule is used by search().

@@ -1851,7 +1851,7 @@ float: right;
 }
 #headermenu ul {
 	background: #ffffff;
-	height: 39px;
+	height: 42px;
 	list-style: none;
 	margin: 0;
 	padding: 0;
@@ -1965,20 +1965,20 @@ img.ui-draggable, .ui-draggable img{
 height: 10px!important;
 width: 10px!important; }
 
-.ui-resizable-handle {
+#current_page .ui-resizable-handle {
 	visibility:hidden;	
 }
 
-.ui-draggable.selected {
+#current_page  .ui-draggable.selected {
 	outline:3px solid #39F !important;	
 }
 
 
-.selected .ui-resizable-handle{
+#current_page  .selected .ui-resizable-handle{
 	visibility:visible;
 }
 
-.ui-resizable-n {
+#current_page  .ui-resizable-n {
 	cursor: n-resize;
 	height: 7px;
 	width: 7px;
@@ -1987,7 +1987,7 @@ width: 10px!important; }
 	background-color:#39F;
 	border:1px solid #fff;
 }
-.ui-resizable-s {
+#current_page  .ui-resizable-s {
 	cursor: s-resize;	
 	height: 7px;
 	width: 7px;
@@ -1997,7 +1997,7 @@ width: 10px!important; }
 	background-color:#39F;
 	border:1px solid #fff;
 }
-.ui-resizable-e {
+#current_page  .ui-resizable-e {
 	cursor: e-resize;	
 	height: 7px;
 	width: 7px;
@@ -2006,7 +2006,7 @@ width: 10px!important; }
 	background-color:#39F;
 	border:1px solid #fff;
 }
-.ui-resizable-w {
+#current_page  .ui-resizable-w {
 	cursor: w-resize;	
 	height: 7px;
 	width: 7px;
@@ -2015,7 +2015,7 @@ width: 10px!important; }
 	background-color:#39F;
 	border:1px solid #fff;
 }
-.ui-resizable-se {
+#current_page  .ui-resizable-se {
 	cursor: se-resize;	
 	height: 7px;
 	width: 7px;
@@ -2024,7 +2024,7 @@ width: 10px!important; }
 	background-color:#39F;
 	border:1px solid #fff;
 }
-.ui-resizable-sw {
+#current_page  .ui-resizable-sw {
 	cursor: sw-resize;	
 	height: 7px;
 	width: 7px;
@@ -2033,7 +2033,7 @@ width: 10px!important; }
 	background-color:#39F;
 	border:1px solid #fff;
 }
-.ui-resizable-nw {
+#current_page  .ui-resizable-nw {
 	cursor: nw-resize;	
 	height: 7px;
 	width: 7px;
@@ -2042,7 +2042,7 @@ width: 10px!important; }
 	background-color:#39F;
 	border:1px solid #fff;
 }
-.ui-resizable-ne {
+#current_page  .ui-resizable-ne {
 	cursor: ne-resize;
 	height: 7px;
 	width: 7px;
@@ -2053,7 +2053,7 @@ width: 10px!important; }
 }
 
 
-td .ui-resizable-e {
+#current_page  td .ui-resizable-e {
 cursor: e-resize;
 width: 7px;
 right: -5px;
@@ -2063,7 +2063,7 @@ background-color: transparent;
 border:none;
 }
 
-td .ui-resizable-s {
+#current_page  td .ui-resizable-s {
 cursor: s-resize;
 height: 7px;
 width: 100%;
@@ -2073,13 +2073,13 @@ background-color: transparent;
 border:none;
 }
 
-td .ui-resizable-handle {
+#current_page  td .ui-resizable-handle {
 position: absolute;
 font-size: 0.1px;
 display: block;
 }
 
-.selected td .ui-resizable-handle {
+#current_page  .selected td .ui-resizable-handle {
 visibility: visible;
 }
 /* GROUPING OBJECTS ----------------------------------------------------- */

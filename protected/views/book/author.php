@@ -62,50 +62,7 @@ $current_user=User::model()->findByPk(Yii::app()->user->id);
 
 </script>
 	
-	
-	
 		
-	
-
-	
-					<select id="general-options" class="radius">
-						<option selected value=''> Hiçbiri </option>
-						<option value='rehber'> Rehber</option>
-						<option value='cetvel'>Cetvel</option>
-						<option value='rehber+cetvel'>Rehber & Cetvel</option>
-						
-					</select>
-					<script type="text/javascript">
-
-					</script>
-				
-					<!--
-					<form action='' id='searchform' style="float:left;">
-
-					<input type="text" id="search" name='component' class="search radius" placeholder="Ara">
-					<input type="hidden" name='r' value='book/author'>
-					<input type="hidden" name='bookId' value='<?php echo $model->book_id; ?>'>
-					</form>
-					-->
-	
-	
-	
-
-					<select id="user-account" class="radius icon-users">
-						<option selected> Kullanıcı Adı </option>
-						<option>Seçenek 1</option>
-						<option>Seçenek 2</option>
-						<option>Seçenek 3</option>
-						<option>Seçenek 4</option>
-					</select>
-					
-					
-	<a href="<?php echo $this->createUrl("EditorActions/ExportPdfBook", array('bookId' => $model->book_id ));?>" class="btn bck-light-green white radius" > <i class="icon-publish"> PDF Yayınla</i></a>				
-	<a href="<?php echo $this->createUrl("EditorActions/ExportBook", array('bookId' => $model->book_id ));?>" class="btn bck-light-green white radius" id="header-buttons"><i class="icon-publish"> Yayınla</i></a>
-<!--	<a href="#" class="btn bck-light-green white radius" id="header-buttons"><i class="icon-save"> Kaydet</i></a>
- -->
-	<div id='book_title'><?php echo $model->title; ?></div>
-	
 	</div> <!--Header -->
 	
 			<div id='headermenu'>
