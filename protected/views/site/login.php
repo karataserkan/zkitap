@@ -202,7 +202,7 @@ $this->breadcrumbs=array(
 								  <div class="form-group">
 									<label for="exampleInputEmail1">Enter your Email address</label>
 									<i class="fa fa-envelope"></i>
-									<input type="email" class="form-control" id="exampleInputEmail1" >
+									<input name="Reset[email]" id="Reset_email" type="text">
 								  </div>
 								  <div>
 									<button type="submit" class="btn btn-info">Send Me Reset Instructions</button>

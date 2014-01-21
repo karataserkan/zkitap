@@ -337,7 +337,7 @@ class OrganisationsController extends Controller
 		$success="";
 		//gönderilecek linkin ilk kısmını oluşturdum
 		$link=Yii::app()->getBaseUrl(true);
-		$link.='/index.php?r=user/invitation&key=';
+		$link.='/user/invitation?key=';
 		$organisation = Organisations::model()->findByPk($organisationId);
 
 		//email adresinin doğruluğunu check eden regexp
@@ -357,7 +357,7 @@ class OrganisationsController extends Controller
 				$criteria->select='max(id) AS maxColumn';
 				$row = $user->model()->find($criteria);
 				
-				$userId = $row['maxColumn'];//functions::new_id();
+				$userId = $row['maxColumn']+1;//functions::new_id();
 				$user->id = $userId;
 				$user->email=$email;
 				$user->save();
