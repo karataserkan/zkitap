@@ -28,7 +28,7 @@ class UserController extends Controller
 	{
 		return array(
 			array('allow',  // allow all users to perform 'index' and 'view' actions
-				'actions'=>array('index','view','invitation','signup'),
+				'actions'=>array('index','view','invitation','signup','forgetPassword'),
 				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
@@ -86,7 +86,7 @@ class UserController extends Controller
 				Yii::log($msg,'info');
 			}
 
-			$invitation->delete();
+			//$invitation->delete();
 
 			
 			$newUser=false;
@@ -95,14 +95,85 @@ class UserController extends Controller
 			}
 			if(isset($_POST['User']))
 			{
+				
 				$user->attributes=$_POST['User'];
-				$user->save();
-				$this->redirect( array('site/login' ) );
+				$user->password=md5(sha1($_POST['User']["password"]));
+				$user->created=date('Y-n-d g:i:s',time());
+				if ($user->save()) {
+						$workspace= new Workspaces;
+						$workspace->workspace_id=functions::new_id();
+						$workspace->workspace_name = $user->name." Books";
+						$workspace->creation_time=date('Y-n-d g:i:s',time());
+						if ($workspace->save()) {
+							$workspaceUser=new WorkspacesUsers;
+							$workspaceUser->workspace_id=$workspace->workspace_id;
+							$workspaceUser->userid=$user->id;
+							$workspaceUser->added=date('Y-n-d g:i:s',time());
+							$workspaceUser->owner=$user->id;
+							if ($workspaceUser->save()) {
+								$model=new LoginForm;
+								$model->password=$user->password;
+								$model->email=$user->email;
+								$model->validate();
+								$model->login();
+								$invitation->delete();
+								$this->redirect(array('/site/index?id='.$workspace->workspace_id));
+							}
+						}
+				}
+
+
+
+				//$this->redirect( array('site/login' ) );
 			}
 			$this->render('invitation',array(
 				'model'=>$user,
 				'newUser'=>$newUser
 			));
+		}
+	}
+
+	public function deleteOldKeys()
+	{
+		$query="delete from user_meta where meta_data='password_reset' AND ((".time()."-created)/60)>10";
+		$command = Yii::app()->db->createCommand($query);
+		$command->execute();
+		//$query->queryAll($query);
+	}
+
+	public function actionForgetPassword($id=null)
+	{
+		$this->deleteOldKeys();
+
+		$meta= Yii::app()->db->createCommand()
+    		->select('*')
+    		->from('user_meta')
+    		->where('meta_id=:meta_id', array(':meta_id'=>$id))
+    		->andWhere('meta_data=:meta_data', array(':meta_data'=>"password_reset"))
+    		->queryRow()
+		;
+		if (!empty($meta)) {
+			$created=$meta['created'];
+			$now=time();
+			
+		  	$time = ($now-$created)/60;
+
+			if ($time<10) {
+
+				if (isset($_POST['Reset'])) {
+					$attributes=$_POST['Reset'];
+					if ($attributes['password']==$attributes['password2']) {
+						$newpassword=md5(sha1($attributes['password']));
+						$user=User::model()->findByPk($meta['user_id']);
+						$user->password=$newpassword;
+						$user->save();
+						$this->redirect('/site/login');
+					}
+
+				}
+				$this->layout = '//layouts/column1';
+				$this->render('forget_password');
+			}
 		}
 	}
 

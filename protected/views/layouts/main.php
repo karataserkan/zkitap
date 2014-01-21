@@ -20,6 +20,7 @@ $action=Yii::app()->controller->action->id;
 switch ($controller) {
 	case 'site':
 	case 'organisations':
+	case 'user'
 		?>
 
 		<!-- CSS -->
