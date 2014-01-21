@@ -246,6 +246,14 @@ class SiteController extends Controller
 		$this->layout = '//layouts/column1';
 		$model=new LoginForm;
 
+		$newUser = new User;
+		$criteria=new CDbCriteria;
+		$criteria->select='max(id) AS maxColumn';
+		$row = $newUser->model()->find($criteria);		
+		$userId = $row['maxColumn']+1;
+		
+		$newUser->id=$userId;
+
 		// if it is ajax validation request
 		if(isset($_POST['ajax']) && $_POST['ajax']==='login-form')
 		{
@@ -260,19 +268,81 @@ class SiteController extends Controller
 			// validate user input and redirect to the previous page if valid
 			if($model->validate() && $model->login())
 			{
-				$msg="SITE:LOGIN:0:". json_encode(array('user'=> Yii::app()->user->name,'userId'=>Yii::app()->user->id));
+				$msg="SITE:LOGIN:SignIn:0:". json_encode(array('user'=> Yii::app()->user->name,'userId'=>Yii::app()->user->id));
 				Yii::log($msg,'profile');
 				$this->redirect(Yii::app()->user->returnUrl);
 			}
 			else
 			{
-				$msg="SITE:LOGIN:1:". json_encode($_POST['LoginForm']);
+				$msg="SITE:LOGIN:SignIn:1:". json_encode($_POST['LoginForm']);
 				Yii::log($msg,'profile');
 			}
 				
 		}
+
+		if (isset($_GET['User'])) {
+			$attributes=$_GET['User'];
+			$newUser->name=$attributes['name'];
+			$newUser->surname=$attributes['surname'];
+			$newUser->email=$attributes['email'];
+			$newUser->created=date('Y-n-d g:i:s',time());
+			$hasEmail= User::model()->findAll('email=:email', 
+	    				array(':email' => $attributes['email']) );
+
+			if (empty($hasEmail)) {
+				if ($attributes['password']==$attributes['passwordR']) {
+					$newUser->password=md5(sha1($attributes['password']));
+					if ($newUser->save()) {
+						$msg="SITE:LOGIN:SignUp:0:". json_encode(array('user'=> Yii::app()->user->name,'userId'=>Yii::app()->user->id));
+						Yii::log($msg,'profile');
+						$workspace= new Workspaces;
+						$workspace->workspace_id=functions::new_id();
+						$workspace->workspace_name = $newUser->name." Books";
+						$workspace->creation_time=date('Y-n-d g:i:s',time());
+						if ($workspace->save()) {
+							$msg="SITE:LOGIN:CreateWorkspace:0:". json_encode(array('user'=> Yii::app()->user->name,'userId'=>Yii::app()->user->id,'message'=>"a workspace created for new user"));
+							Yii::log($msg,'info');
+							$workspaceUser=new WorkspacesUsers;
+							$workspaceUser->workspace_id=$workspace->workspace_id;
+							$workspaceUser->userid=$newUser->id;
+							$workspaceUser->added=date('Y-n-d g:i:s',time());
+							$workspaceUser->owner=$newUser->id;
+							if ($workspaceUser->save()) {
+								$msg="SITE:LOGIN:CreateWorkspaceUser:0:". json_encode(array('user'=> Yii::app()->user->name,'userId'=>Yii::app()->user->id,'message'=>"workspaceUser created for new user and new workspace"));
+								Yii::log($msg,'info');
+							}
+							else
+							{
+								$msg="SITE:LOGIN:CreateWorkspaceUser:1:". json_encode(array('user'=> Yii::app()->user->name,'userId'=>Yii::app()->user->id,'message'=>"workspaceUser could NOT created for new user and new workspace"));
+								Yii::log($msg,'info');
+							}
+						}
+						else
+						{
+							$msg="SITE:LOGIN:CreateWorkspace:1:". json_encode(array('user'=> Yii::app()->user->name,'userId'=>Yii::app()->user->id,'message'=>"a workspace could NOT created for new user"));
+							Yii::log($msg,'info');
+						}
+					}
+					else
+					{
+						$msg="SITE:LOGIN:SignUp:1:". json_encode(array('user'=> Yii::app()->user->name,'userId'=>Yii::app()->user->id));
+						Yii::log($msg,'profile');
+					}
+				}
+				else
+				{
+					$msg="SITE:LOGIN:SignUp:1:". json_encode(array('user'=> Yii::app()->user->name,'userId'=>Yii::app()->user->id,'message'=>'passwords not matching'));
+					Yii::log($msg,'profile');
+				}	
+			}
+			else
+			{
+				$msg="SITE:LOGIN:SignUp:1:". json_encode(array('user'=> Yii::app()->user->name,'userId'=>Yii::app()->user->id,'message'=>'Duplicate email address'));
+				Yii::log($msg,'profile');
+			}
+		}
 		// display the login form
-		$this->render('login',array('model'=>$model));
+		$this->render('login',array('model'=>$model,'newUser'=>$newUser));
 	}
 
 	/**

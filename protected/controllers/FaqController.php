@@ -101,6 +101,7 @@ class FaqController extends Controller
 					$keywords=explode(',', $_POST['FaqCreateForm']['faq_keywords']);
 					
 					foreach ($keywords as $key => $keyword) {
+						$keyword=ltrim($keyword," ");
 						//check if the keyword already exists
 						$isKey=Keywords::model()->findAll(array(
 							'condition'=>'keyword=:keyword',
