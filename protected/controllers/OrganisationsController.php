@@ -357,7 +357,7 @@ class OrganisationsController extends Controller
 				$criteria->select='max(id) AS maxColumn';
 				$row = $user->model()->find($criteria);
 				
-				$userId = functions::new_id();
+				$userId = $row['maxColumn'];//functions::new_id();
 				$user->id = $userId;
 				$user->email=$email;
 				$user->save();
