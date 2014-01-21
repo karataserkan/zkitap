@@ -369,23 +369,24 @@ $(document).ready(function(){
       
       if(typeof this.options.component.data.lock.username != "undefined"){
         that.options.resizableParams['disabled']=true;
-
+        /*
         $('#'+this.options.component.id).droppable({ disabled: true });
         //$('#'+this.options.component.id).selectable({ disabled: true });
         $('#'+this.options.component.id).sortable({ disabled: true });
         $('#'+this.options.component.id).resizable({ disabled: true });
         $('#'+this.options.component.id).attr('readonly','readonly');
+        */
         $('#delete-button-'+this.options.component.id).hide();
       }
       else{      
         that.options.resizableParams['disabled']=false;
-        
+        /*
         $('#'+this.options.component.id).droppable({ disabled: false });
         //$('#'+this.options.component.id).selectable({ disabled: false });
         $('#'+this.options.component.id).sortable({ disabled: false });
         $('#'+this.options.component.id).resizable({ disabled: false });
         $('#'+this.options.component.id).removeAttr('readonly');
-        
+        */
       };
        // this.element.draggable(that.options.resizableParams);
       
@@ -446,7 +447,7 @@ $(document).ready(function(){
 
       this.element.removeClass('unselected');
       this.element.addClass('selected');
-	  this.element.parent().addClass('selected');
+	    this.element.parent().addClass('selected');
       window.lindneo.toolbox.addComponentToSelection(this);
 
      
@@ -454,6 +455,7 @@ $(document).ready(function(){
       window.lindneo.tsimshian.emitSelectedComponent( this );
       
       return;
+      
       if($.type(this.options.component.data.lock.username) != "undefined"){
 
        // $('#'+this.options.component.id).parent().draggable({ disabled: true });

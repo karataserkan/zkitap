@@ -206,6 +206,10 @@ $this->pageTitle=Yii::app()->name;
 
 </div>
 
+<?php 
+	
+	//echo CDateFormatter::formatDateTime(time(),'medium');
+?>
 
 <script>
 //burada kullanıcıya hakları vermek için seçilmiş olan user | book | type il link oluşturup yönlendiriyorum
