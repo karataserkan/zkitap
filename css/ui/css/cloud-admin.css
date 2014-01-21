@@ -6435,14 +6435,14 @@ fieldset[disabled] .btn-yellow.active {
 
 }
 #content .page-header {
-  background: none repeat scroll 0 0 #FFFFFF;
-  border-bottom-color: #cdd2d2;
-  color: #000000;
-  margin: 0 -15px 30px;
-  min-height: 85px;
-  overflow: hidden;
-  padding: 0 20px;
-  position: relative;
+	background: none repeat scroll 0 0 #FFFFFF;
+	border-bottom-color: #cdd2d2;
+	color: #000000;
+	margin: 0 -15px 30px;
+	min-height: 50px;
+	overflow: hidden;
+	padding: 10px 20px;
+	position: relative;
 }
 #content .page-header .description {
   color: #888888;
