@@ -117,37 +117,52 @@ $this->breadcrumbs=array(
 							<div class="login-box">
 								<h2 class="bigintro">Register</h2>
 								<div class="divide-40"></div>
+								
 								<form role="form">
+								<?php $form=$this->beginWidget('CActiveForm', array(
+									'id'=>'user-form',
+									'enableAjaxValidation'=>false,
+								)); ?>
+
 								  <div class="form-group">
-									<label for="exampleInputName">Full Name</label>
+									<label for="exampleInputName"><?php echo $form->labelEx($newUser,'name'); ?></label>
 									<i class="fa fa-font"></i>
-									<input type="text" class="form-control" id="exampleInputName" >
+									<?php echo $form->textField($newUser,'name',array('size'=>60,'maxlength'=>255)); ?>
 								  </div>
+								
 								  <div class="form-group">
-									<label for="exampleInputUsername">Username</label>
+									<label for="exampleInputUsername"><?php echo $form->labelEx($newUser,'surname'); ?></label>
 									<i class="fa fa-user"></i>
-									<input type="text" class="form-control" id="exampleInputUsername" >
+									<?php echo $form->textField($newUser,'surname',array('size'=>60,'maxlength'=>255)); ?>
 								  </div>
+								
 								  <div class="form-group">
-									<label for="exampleInputEmail1">Email address</label>
+									<label for="exampleInputEmail1"><?php echo $form->labelEx($newUser,'email'); ?></label>
 									<i class="fa fa-envelope"></i>
-									<input type="email" class="form-control" id="exampleInputEmail1" >
+									<?php echo $form->textField($newUser,'email',array('size'=>60,'maxlength'=>255)); ?>
 								  </div>
+								
 								  <div class="form-group"> 
-									<label for="exampleInputPassword1">Password</label>
+									<label for="exampleInputPassword1"><?php echo $form->labelEx($newUser,'password'); ?></label>
 									<i class="fa fa-lock"></i>
-									<input type="password" class="form-control" id="exampleInputPassword1" >
+									<?php echo $form->passwordField($newUser,'password',array('size'=>60,'maxlength'=>255)); ?>
 								  </div>
+								
 								  <div class="form-group"> 
-									<label for="exampleInputPassword2">Repeat Password</label>
+									<label for="exampleInputPassword2"><?php _e("Şifreyi Tekrarla"); ?></label>
 									<i class="fa fa-check-square-o"></i>
-									<input type="password" class="form-control" id="exampleInputPassword2" >
+									<input size="60" maxlength="255" name="User[passwordR]" id="User_password_r" type="password">
 								  </div>
+								
 								  <div>
-									<label class="checkbox"> <input type="checkbox" class="uniform" value=""> I agree to the <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a></label>
-									<button type="submit" class="btn btn-success">Sign Up</button>
+									<!-- <label class="checkbox"> <input type="checkbox" class="uniform" value=""> I agree to the <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a></label> -->
+									<button type="submit" class="btn btn-success"><?php _e("Kaydet");?></button>
 								  </div>
+
+								<?php $this->endWidget(); ?>
 								</form>
+								
+
 								<!-- SOCIAL REGISTER -->
 								<div class="divide-20"></div>
 								<div class="center">
