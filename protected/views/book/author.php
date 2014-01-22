@@ -101,8 +101,8 @@ $current_user=User::model()->findByPk(Yii::app()->user->id);
 			   </li>
 			   <li class='has-sub'><a href='#'><span>Düzenle</span></a>
 			      <ul>
-			         <li><a href='#' id="undo"><i class="icon-undo size-10"></i><span>Geri Al</span></a></li>
-			         <li><a href='#' id="redo"><i class="icon-redo size-10"></i><span>İleri Al</span></a></li>
+			         <li><a href='#' id="undo"><i class="undo icon-undo size-10"></i><span>Geri Al</span></a></li>
+			         <li><a href='#' id="redo"><i class="redo icon-redo size-10"></i><span>İleri Al</span></a></li>
 			         <li><a href='#' id="generic-cut"><i class="generic-cut icon-cut size-20"></i><span>Kes</span></a></li>
 			         <li><a href='#' id="generic-copy"><i class="generic-copy icon-copy size-20"></i><span>Kopyala</span></a></li>
 			         <li><a href='#' id="generic-paste"><i class="generic-paste icon-paste size-20"></i><span>Yapıştır</span></a></li>
@@ -174,8 +174,8 @@ $current_user=User::model()->findByPk(Yii::app()->user->id);
 			<!-- <ul id="text-styles" ></ul> -->
                         <div class="generic-options float-left"  style="display:inline-block; margin-right:5px;">
 
-				<a id="undo" class="toolbox-items icon-undo dark-blue size-15"></a>
-				<a id="redo" class="toolbox-items icon-redo grey-8 size-15"></a>
+				<a id="undo" class="undo toolbox-items icon-undo dark-blue size-15"></a>
+				<a id="redo" class="redo toolbox-items icon-redo grey-8 size-15"></a>
 			</div>
 			<div class="vertical-line responsive_2"></div>
 						

@@ -3602,13 +3602,15 @@ $.ui.plugin.add("resizable", "alsoResize", {
 			},
 
 			_alsoResize = function (exp, c) {
-				//console.log($(exp));
+				console.log($(exp));
 				$(exp).each(function() {
 					//console.log($(this));
 					var el = $(this), start = $(this).data("ui-resizable-alsoresize"), style = {},
-						css = c && c.length ? c : el.parents(ui.originalElement[0]).length ? ["width", "height"] : ["width", "height", "top", "left"];
-
+						css = c && c.length ? c : el.parents(ui.originalElement).length ? ["width", "height"] : ["width", "height", "top", "left"];
+console.log($(el.parents(ui.originalElement)[0]));
 					$.each(css, function (i, prop) {
+						console.log(start[prop]);
+						console.log(delta[prop]);
 						var sum = (start[prop]||0) + (delta[prop]||0);
 						if (sum && sum >= 0) {
 							style[prop] = sum || null;

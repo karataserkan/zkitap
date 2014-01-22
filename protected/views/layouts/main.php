@@ -79,4 +79,5 @@
 
 </head>
 
-<body>
+<body class="editor_blue">
+
