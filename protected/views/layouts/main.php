@@ -139,4 +139,4 @@ switch ($controller) {
 
 </head>
 
-<body>
+<body class="editor_blue">
