@@ -16,7 +16,7 @@ msgstr  "Project-Id-Version: 0.1\n"
         "Content-Type: text/plain; charset=UTF-8\n"
         "Content-Transfer-Encoding: 8bit\n"
         "Plural-Forms:nplurals=2; plural=(n != 1);\n"
-        
+
 #: protected/views/site/index.php:88 protected/views/site/index.php:93
 #: protected/views/organisations/workspaces.php:20
 #: protected/views/book/library.php:4 protected/views/site/index.php:82
