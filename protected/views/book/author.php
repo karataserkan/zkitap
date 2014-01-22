@@ -386,7 +386,8 @@ $current_user=User::model()->findByPk(Yii::app()->user->id);
 			<div class="generic-options toolbox float-left"  style="display:inline-block;">
 			<!--	<a href="#" class="bck-dark-blue white toolbox-items radius" id="pop-align"><i class="icon-align-center size-20"></i></a> -->
 				<a href="#" class="bck-dark-blue white toolbox-items radius responsive_2" id="pop-arrange"><i class="icon-send-backward size-15"></i></a>
-			<!--	<a href="#" class="btn grey white radius">Grupla</a>    -->
+				<a href="#" id='group_btn' class="btn grey white radius"><?php _e("Grupla");?></a>    
+				<a href="#" id='ungroup_btn' class="btn grey white radius"><?php _e("Grubu Çöz");?></a>    
 			</div>
 			
 			<div class="generic-options responsive_1"  style="display:inline-block;">

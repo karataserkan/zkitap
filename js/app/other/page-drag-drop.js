@@ -12,6 +12,14 @@ $( document ).ready(function () {
     //$('#editor_view_pane').mousemove(function(event){event.stopImmediatePropagation();return false;});
   */
 
+    $('#group_btn').click(function(){
+      console.log($('.selected'));
+      $('.selected').trigger('group',window.lindneo.randomString()); 
+    });
+    $('#ungroup_btn').click(function(){
+      $('.selected').trigger('ungroup');
+      $('.selected').trigger('unselect');
+    });
     $('#searchn').autocomplete({
       appendTo: "#page" ,
       minLength: 3, 
