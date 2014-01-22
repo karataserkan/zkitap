@@ -36,7 +36,7 @@ class BookController extends Controller
 				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
-				'actions'=>array('create','update','selectTemplate','delete','view','author','newBook','selectData','uploadFile'),
+				'actions'=>array('create','update','selectTemplate','delete','view','author','newBook','selectData','uploadFile','copy'),
 				'users'=>array('@'),
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
@@ -374,6 +374,84 @@ class BookController extends Controller
 			
 	}
 
+
+
+	public function actionDuplicateBook(layout_id,$workspaceId=null){ 
+
+			$layout=Book::model()->findByPk($layout_id);
+			if (!$workspaceId) {
+				$workspaceId=$layout->workspace_id;
+			}
+			$book= new Book;
+			$bookId=functions::new_id();
+			$book->book_id=$bookId;
+			$book->workspace_id=$workspaceId;
+			$book->title=$layout->title." Copy";
+			$book->author=$layout->author;
+			$book->created=date("Y-m-d H:i:s");
+			$book->data=$layout->data;
+			//book->data'ya template_id eklendi
+			$book->setData('template_id',$layout_id);
+
+			$book->save();
+				
+			$chapters= Chapter::model()->findAll(array(
+				'condition' => 'book_id=:book_id',
+				'params' => array(':book_id' => $layout_id),
+			));
+			if ($chapters) {
+				foreach ($chapters as $key => $chapter) {
+					$newchapterid=functions::new_id();//functions::get_random_string();
+					$newChapter=new Chapter;
+					$newChapter->book_id=$bookId;
+					$newChapter->chapter_id=$newchapterid;
+					$newChapter->title=$chapter->title;
+					$newChapter->start_page=$chapter->start_page;
+					$newChapter->order=$chapter->order;
+					$newChapter->data=$chapter->data;
+					$newChapter->created=date("Y-m-d H:i:s");
+					$newChapter->save();
+
+					$pages = Page::model()->findAll(array(
+						'condition' => 'chapter_id=:chapter_id',
+						'params' => array(':chapter_id'=> $chapter->chapter_id)
+					));
+					if ($pages) {
+						foreach ($pages as $pkey => $page) {
+							$newpageid=functions::new_id();//functions::get_random_string();
+							$newPage= new Page;
+							$newPage->page_id=$newpageid;
+							$newPage->created=date("Y-m-d H:i:s");
+							$newPage->chapter_id=$newchapterid;
+							$newPage->data=$page->data;
+							$newPage->order=$page->order;
+							$newPage->save();
+
+							$components = Component::model()->findAll(array(
+								'condition' => 'page_id=:page_id',
+								'params' => array(':page_id'=> $page->page_id)
+								));
+
+							if ($components) {
+								foreach ($components as $ckey => $component) {
+									$newComponent = new Component;
+									$newComponent->id=functions::new_id();//functions::get_random_string();
+									$newComponent->type=$component->type;
+									$newComponent->data=$component->data;
+									$newComponent->created=date("Y-m-d H:i:s");
+									$newComponent->page_id=$newpageid;
+									$newComponent->save();
+								}
+							}
+
+						}
+					}
+			}
+		}
+		$this->redirect(array('author','bookId'=>$bookId));		
+	}
+
+
 	/**
 	 * display selectdata form and set data
 	 * @param  string $bookId id of the book
@@ -420,6 +498,12 @@ class BookController extends Controller
 			$page=$id2;
 		}
 		
+		// $meta=new UserMeta;
+		// $meta->user_id=$user[0]->id;
+		// $meta->meta_id=functions::new_id(40);
+		// $meta->meta_data="password_reset";
+		// $meta->created=time();
+		// $meta->save();
 
 		$model=$this->loadModel($bookId);
 		

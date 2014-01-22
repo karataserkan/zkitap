@@ -50,6 +50,12 @@ class SiteController extends Controller
 			'workspace'=>$workspace));
 	}
 
+	public function actionDashboard()
+	{
+
+		$this->render('dashboard');
+	}
+
 	public function actionRemoveUser($userId,$bookId)
 	{
 		$command = Yii::app()->db->createCommand();
