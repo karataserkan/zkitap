@@ -1,15 +1,9 @@
-<!--
-<?php
-/* @var $this SiteController */
-/* @var $model LoginForm */
-/* @var $form CActiveForm  */
 
-$this->pageTitle=Yii::app()->name . ' - Login';
-$this->breadcrumbs=array(
-	'Login',
-);
+<?php
+
+$this->pageTitle=Yii::app()->name." - ". __("Kontrol Paneli");
 ?>
--->
+
 <script>
 	jQuery(document).ready(function() {		
 		App.setPage("gallery");  //Set current page
@@ -106,7 +100,30 @@ $this->breadcrumbs=array(
 </div>
 <div class="separator"></div>
 <div class="row">
-
+<div class="col-md-12">
+	<div class="quick-pie panel panel-default">
+		<div class="panel-body">
+			<div class="col-md-4 text-center">
+				<div id="dash_pie_1" class="piechart" data-percent="59">
+					<span class="percent"></span>
+				</div>
+				<a href="#" class="title">New Visitors <i class="fa fa-angle-right"></i></a>
+			</div>
+			<div class="col-md-4 text-center">
+				<div id="dash_pie_2" class="piechart" data-percent="73">
+					<span class="percent"></span>
+				</div>
+				<a href="#" class="title">Bounce Rate <i class="fa fa-angle-right"></i></a>
+			</div>
+			<div class="col-md-4 text-center">
+				<div id="dash_pie_3" class="piechart" data-percent="90">
+					<span class="percent"></span>
+				</div>
+				<a href="#" class="title">Brand Popularity <i class="fa fa-angle-right"></i></a>
+			</div>
+		</div>
+	</div>
+</div>
 </div>
 <!--/PAGE -->
 

@@ -36,7 +36,7 @@ class BookController extends Controller
 				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
-				'actions'=>array('create','update','selectTemplate','delete','view','author','newBook','selectData','uploadFile','copy'),
+				'actions'=>array('create','update','selectTemplate','delete','view','author','newBook','selectData','uploadFile','duplicateBook'),
 				'users'=>array('@'),
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
@@ -376,7 +376,7 @@ class BookController extends Controller
 
 
 
-	public function actionDuplicateBook(layout_id,$workspaceId=null){ 
+	public function actionDuplicateBook($layout_id,$workspaceId=null){ 
 
 			$layout=Book::model()->findByPk($layout_id);
 			if (!$workspaceId) {
@@ -498,12 +498,12 @@ class BookController extends Controller
 			$page=$id2;
 		}
 		
-		// $meta=new UserMeta;
-		// $meta->user_id=$user[0]->id;
-		// $meta->meta_id=functions::new_id(40);
-		// $meta->meta_data="password_reset";
-		// $meta->created=time();
-		// $meta->save();
+		$meta=new UserMeta;
+		$meta->user_id=Yii::app()->user->id;
+		$meta->meta_id=functions::new_id(40);
+		$meta->meta_data=json_encode(array('type'=>'edit','bookId'=>$bookId));
+		$meta->created=time();
+		$meta->save();
 
 		$model=$this->loadModel($bookId);
 		
