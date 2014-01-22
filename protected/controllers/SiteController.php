@@ -52,7 +52,12 @@ class SiteController extends Controller
 
 	public function actionDashboard()
 	{
-
+		$res= Yii::app()->db->createCommand()
+    		->select('*')
+    		->from('user_meta')
+    		->order('created desc')
+    		->queryAll()
+    		;
 		$this->render('dashboard');
 	}
 
