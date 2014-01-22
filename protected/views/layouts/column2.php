@@ -69,7 +69,7 @@
 				<!--=== Navigation ===-->
 				<ul>
 					<li class="current">
-						<a href="index.html">
+						<a href="/site/dashboard">
 							<i class="fa fa-tachometer fa-fw"></i>
 							<span class="menu-text">Kontrol	Paneli</span>
 							</a>

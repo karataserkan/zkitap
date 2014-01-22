@@ -50,6 +50,17 @@ class SiteController extends Controller
 			'workspace'=>$workspace));
 	}
 
+	public function actionDashboard()
+	{
+		$res= Yii::app()->db->createCommand()
+    		->select('*')
+    		->from('user_meta')
+    		->order('created desc')
+    		->queryAll()
+    		;
+		$this->render('dashboard');
+	}
+
 	public function actionRemoveUser($userId,$bookId)
 	{
 		$command = Yii::app()->db->createCommand();
