@@ -115,8 +115,8 @@ var createImageComponent = function ( event, ui ,oldcomponent) {
 
       $("<div class='popup ui-draggable' id='pop-image-popup' style='display: block; top:" + top + "; left: " + left + ";'> \
         <div class='popup-header'> \
-        Görsel Ekle \
-        <div class='popup-close' id='image-add-dummy-close-button'>x</div> \
+        <i class='icon-m-image'></i> &nbsp;Görsel Ekle \
+        <i id='images-add-dummy-close-button' class='icon-close size-10 popup-close-button'></i> \
         </div> \
           <div class='gallery-inner-holder'> \
             <div style='clear:both'></div> \
@@ -129,7 +129,7 @@ var createImageComponent = function ( event, ui ,oldcomponent) {
           </div> \
         </div>").appendTo('body').draggable();
 
-        $('#image-add-dummy-close-button').click(function(){
+        $('#images-add-dummy-close-button').click(function(){
 
         $('#pop-image-popup').remove();  
 
@@ -185,7 +185,7 @@ var createImageComponent = function ( event, ui ,oldcomponent) {
         
         imageBinary = _file.target.result;      
         console.log(top);
-        //$("#image-add-dummy-close-button").trigger('click');
+        //$("#images-add-dummy-close-button").trigger('click');
 
         component = {
           'type' : 'image',
@@ -217,7 +217,7 @@ var createImageComponent = function ( event, ui ,oldcomponent) {
             }
           }
         };
-        $('#image-add-dummy-close-button').click();
+        $('#images-add-dummy-close-button').click();
         window.lindneo.tlingit.componentHasCreated( component );
       };
     };
@@ -289,7 +289,7 @@ var createImageComponent = function ( event, ui ,oldcomponent) {
         console.log(image_width);
         imageBinary = evt.target.result;      
         
-        $("#image-add-dummy-close-button").trigger('click');
+        $("#images-add-dummy-close-button").trigger('click');
 
         component = {
           'type' : 'image',

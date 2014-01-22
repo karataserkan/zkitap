@@ -376,7 +376,7 @@ class BookController extends Controller
 
 
 
-	public function actionDuplicateBook(layout_id,$workspaceId=null){ 
+	public function actionDuplicateBook($layout_id, $workspaceId=null){ 
 
 			$layout=Book::model()->findByPk($layout_id);
 			if (!$workspaceId) {

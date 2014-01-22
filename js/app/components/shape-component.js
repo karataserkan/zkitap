@@ -158,8 +158,8 @@ var createShapeComponent = function ( event, ui ) {
 
     $("<div class='popup ui-draggable' id='pop-image-popup' style='display: block; top:" + (ui.offset.top-$(event.target).offset().top ) + "px; left: " + ( ui.offset.left-$(event.target).offset().left ) + "px;'> \
       <div class='popup-header'> \
-Şekil Ekle \
-<div id ='image-add-dummy-close-button' class='popup-close'>x</div> \
+<i class='icon-m-galery'></i> &nbsp;Şekil Ekle \
+<i id='shape-add-dummy-close-button' class='icon-close size-10 popup-close-button'></i> \
 </div> \
 <!--  popup content --> \
 <br> \
@@ -172,7 +172,7 @@ var createShapeComponent = function ( event, ui ) {
 <!--  popup content --> \
 </div>").appendTo('body').draggable();
 
-    $('#image-add-dummy-close-button').click(function(){
+    $('#shape-add-dummy-close-button').click(function(){
 
       $('#pop-image-popup').remove();  
 
@@ -184,7 +184,7 @@ var createShapeComponent = function ( event, ui ) {
 
     $('.shape-select').click(function () {
        var type = $(this).attr('rel');
-       $("#image-add-dummy-close-button").trigger('click');
+       $("#shape-add-dummy-close-button").trigger('click');
 
         var component = {
           'type' : 'shape',
