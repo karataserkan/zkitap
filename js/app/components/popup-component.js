@@ -127,10 +127,11 @@ console.log(oldcomponent);
     
     
     add_button.click(function (){  
-    var width = pop_popup.width();
-    var height = pop_popup.height(); 
-    console.log(width);
-    console.log(height);      
+      
+      var width = pop_popup.width();
+      var height = pop_popup.height(); 
+      console.log(width);
+      console.log(height);      
       if(typeof oldcomponent == 'undefined'){
         console.log('dene');
         var top = (ui.offset.top-$(event.target).offset().top ) + 'px';
