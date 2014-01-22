@@ -2,23 +2,6 @@
 /* @var $this BookController */
 /* @var $model Book */
 /* @var $page page_id */
-/*
-$this->breadcrumbs=array(
-	'Books'=>array('index'),
-	$model->title,
-);
-*/ 
-/*
-$this->menu=array(
-	array('label'=>'List Book', 'url'=>array('index')),
-	array('label'=>'Create Book', 'url'=>array('create')),
-	array('label'=>'Update Book', 'url'=>array('update', 'id'=>$model->book_id)),
-	array('label'=>'Delete Book', 'url'=>'#', 'linkOptions'=>array('submit'=>array('delete','id'=>$model->book_id),'confirm'=>'Are you sure you want to delete this item?')),
-	array('label'=>'Manage Book', 'url'=>array('admin')),
-);
-*/
-
-
 
 $page=Page::model()->findByPk($page_id); 
 if($page==null) 
@@ -33,10 +16,6 @@ if($page==null)
  
 		} 
 
-
-
-
- 
 $current_chapter=Chapter::model()->findByPk($page->chapter_id);
 $current_page=Page::model()->findByPk($page->page_id);
 $current_user=User::model()->findByPk(Yii::app()->user->id);
@@ -62,7 +41,50 @@ $current_user=User::model()->findByPk(Yii::app()->user->id);
 
 </script>
 	
+	
+	
 		
+	
+
+	
+					<select id="general-options" class="radius">
+						<option selected value=''> Hiçbiri </option>
+						<option value='rehber'> Rehber</option>
+						<option value='cetvel'>Cetvel</option>
+						<option value='rehber+cetvel'>Rehber & Cetvel</option>
+						
+					</select>
+					<script type="text/javascript">
+
+					</script>
+				
+					<!--
+					<form action='' id='searchform' style="float:left;">
+
+					<input type="text" id="search" name='component' class="search radius" placeholder="Ara">
+					<input type="hidden" name='r' value='book/author'>
+					<input type="hidden" name='bookId' value='<?php echo $model->book_id; ?>'>
+					</form>
+					-->
+	
+	
+	
+
+					<select id="user-account" class="radius icon-users">
+						<option selected> Kullanıcı Adı </option>
+						<option>Seçenek 1</option>
+						<option>Seçenek 2</option>
+						<option>Seçenek 3</option>
+						<option>Seçenek 4</option>
+					</select>
+					
+					
+	<a href="<?php echo $this->createUrl("EditorActions/ExportPdfBook", array('bookId' => $model->book_id ));?>" class="btn bck-light-green white radius" > <i class="icon-publish"> PDF Yayınla</i></a>				
+	<a href="<?php echo $this->createUrl("EditorActions/ExportBook", array('bookId' => $model->book_id ));?>" class="btn bck-light-green white radius" id="header-buttons"><i class="icon-publish"> Yayınla</i></a>
+<!--	<a href="#" class="btn bck-light-green white radius" id="header-buttons"><i class="icon-save"> Kaydet</i></a>
+ -->
+	<div id='book_title'><?php echo $model->title; ?></div>
+	
 	</div> <!--Header -->
 	
 			<div id='headermenu'>
@@ -256,7 +278,7 @@ $current_user=User::model()->findByPk(Yii::app()->user->id);
 				-->
 				
 					<i class="icon-opacity grey-6"></i>
-							<select class='tool-select tool select' rel='opacitypop' rel='color' id="font-size" class="radius">
+							<select class='tool-select tool select' rel='opacity' rel='color' id="font-size" class="radius">
 								
 								<option value="0" >0</option>
 								<option value="0.10" >10</option>
