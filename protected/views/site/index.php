@@ -59,7 +59,7 @@ function sendRight(e){
 		foreach ($all_books as $key2 => $book) {
 			$userType = $this->userType($book->book_id); ?>
 				
-			<div class="col-md-3 <?php echo $userType; ?> item">
+			<div class="col-md-3 <?php echo ($userType=='owner')? 'owner editor':''; ?> <?php echo ($userType=='editor')? 'editor':''; ?> item">
 				<!-- BOX -->
 				<div class="box" style="opacity: 1; z-index: 0;">
 					<div class="box-title">
