@@ -1,21 +1,21 @@
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# Language File For English Translation of Squid Pacific
+# Copyright (C) 2104 Linden Digital Publishing
+# This file is distributed under the same license as the Squid Pacific package.
+# Squid Pacific <pacific@linden-tech>, 2014.
 #
 #, fuzzy
 msgid   ""
-msgstr  "Project-Id-Version: PACKAGE VERSION\n"
-        "Report-Msgid-Bugs-To: \n"
-        "POT-Creation-Date: 2014-01-18 06:00+0000\n"
-        "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-        "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-        "Language-Team: LANGUAGE <LL@li.org>\n"
-        "Language: \n"
+msgstr  "Project-Id-Version: 0.1\n"
+        "Report-Msgid-Bugs-To: pacific@linden-tech\n"
+        "POT-Creation-Date: 2014-01-15 06:00+0000\n"
+        "PO-Revision-Date: 2014-01-20 00:08+2000\n"
+        "Last-Translator: Squid Pacific\n"
+        "Language-Team: Squid Pacific <pacific@linden-tech>\n"
+        "Language: en\n"
         "MIME-Version: 1.0\n"
         "Content-Type: text/plain; charset=UTF-8\n"
         "Content-Transfer-Encoding: 8bit\n"
-        "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
+        "Plural-Forms:nplurals=2; plural=(n != 1);\n"
 
 #: protected/views/site/index.php:88 protected/views/site/index.php:93
 #: protected/views/organisations/workspaces.php:20
@@ -23,52 +23,56 @@ msgstr  "Project-Id-Version: PACKAGE VERSION\n"
 #: protected/views/site/index.php:87
 #: protected/views/organisations/workspaces.php:21
 #: protected/views/organisationHostings/index.php:18
-#: protected/views/site/index.php:82 protected/views/site/index.php:87
+#: protected/views/site/index.php:160 protected/views/site/index.php:188
 #: protected/views/organisations/workspaces.php:21
 #: protected/views/book/library.php:4
 #: protected/views/organisationHostings/index.php:18
 msgid   "Düzenle"
 msgstr  "Edit"
 
-#: protected/views/site/index.php:38 protected/views/site/index.php:38
+#: protected/views/site/index.php:38
 msgid   "Yeni Kitap"
 msgstr  "New Book"
 
-#: protected/views/site/index.php:59 protected/views/site/index.php:59
+#: protected/views/site/index.php:59
 msgid   "Kitabın Adı"
 msgstr  "Book Name"
 
-#: protected/views/site/index.php:63 protected/views/site/index.php:63
+#: protected/views/site/index.php:63
 msgid   "Yazar Adı"
 msgstr  "Author Name"
 
 #: protected/views/site/index.php:98 protected/views/site/index.php:92
-#: protected/views/site/index.php:92
+#: protected/views/site/index.php:161 protected/views/site/index.php:166
+#: protected/views/site/index.php:189 protected/views/site/index.php:194
 msgid   "İndir"
 msgstr  "Download"
 
 #: protected/views/site/index.php:103 protected/views/site/index.php:97
-#: protected/views/site/index.php:97
 msgid   "Kitap Editörleri"
 msgstr  "Book Editors"
 
-#: protected/views/site/index.php:70 protected/views/site/index.php:70
+#: protected/views/site/index.php:70
 msgid   "Editörler"
 msgstr  "Editors"
 
 #: protected/views/site/index.php:132 protected/views/site/index.php:162
 #: protected/views/site/index.php:126 protected/views/site/index.php:156
-#: protected/views/site/index.php:126 protected/views/site/index.php:156
+#: protected/views/site/index.php:90 protected/views/site/index.php:120
+#: protected/views/site/index.php:103 protected/views/site/index.php:148
 msgid   "Editör"
 msgstr  "Editor"
 
 #: protected/views/site/index.php:129 protected/views/site/index.php:163
 #: protected/views/site/index.php:123 protected/views/site/index.php:157
-#: protected/views/site/index.php:123 protected/views/site/index.php:157
+#: protected/views/site/index.php:87 protected/views/site/index.php:121
+#: protected/views/site/index.php:45 protected/views/site/index.php:51
+#: protected/views/site/index.php:100 protected/views/site/index.php:149
 msgid   "Sahibi"
 msgstr  "Owner"
 
-#: protected/views/site/index.php:26 protected/views/site/index.php:26
+#: protected/views/site/index.php:26 protected/views/layouts/column2.php:156
+#: protected/views/layouts/column2.php:156
 msgid   "Organizasyon"
 msgstr  "Organisation"
 
@@ -82,7 +86,7 @@ msgstr  "Organisation"
 #: protected/views/organisations/users.php:27
 #: protected/views/organisations/users.php:31
 #: protected/views/organisations/users.php:35
-#: protected/views/site/index.php:142
+#: protected/views/site/index.php:106 protected/views/site/index.php:134
 #: protected/views/organisations/workspaces.php:45
 #: protected/views/organisations/users.php:27
 #: protected/views/organisations/users.php:31
@@ -92,7 +96,9 @@ msgstr  "Add User"
 
 #: protected/views/organisations/index.php:5
 #: protected/views/organisations/index.php:6
+#: protected/views/layouts/column2.php:167
 #: protected/views/organisations/index.php:6
+#: protected/views/layouts/column2.php:167
 msgid   "Çalışma Alanı"
 msgstr  "Workspace"
 
@@ -100,8 +106,10 @@ msgstr  "Workspace"
 #: protected/views/organisations/workspaces.php:18
 #: protected/views/organisations/workspaces.php:19
 #: protected/views/organisations/index.php:8
+#: protected/views/layouts/column2.php:162
 #: protected/views/organisations/workspaces.php:19
 #: protected/views/organisations/index.php:8
+#: protected/views/layouts/column2.php:162
 msgid   "Kullanıcılar"
 msgstr  "Users"
 
@@ -130,28 +138,29 @@ msgid   "Çözünürlük"
 msgstr  "Resolution"
 
 #: protected/views/book/author.php:135 protected/views/book/author.php:134
-#: protected/views/book/author.php:134
+#: protected/views/book/author.php:91 protected/views/book/author.php:91
 msgid   "Görünüm"
 msgstr  "View"
 
 #: protected/views/book/author.php:137 protected/views/book/author.php:136
-#: protected/views/book/author.php:136
+#: protected/views/book/author.php:93 protected/views/book/author.php:93
 msgid   "Cetvel"
 msgstr  "Rulers"
 
 #: protected/views/book/author.php:138 protected/views/book/author.php:137
-#: protected/views/book/author.php:137
+#: protected/views/book/author.php:94 protected/views/book/author.php:94
 msgid   "Rehber"
 msgstr  "Guides"
 
 #: protected/views/book/author.php:139 protected/views/book/author.php:138
-#: protected/views/book/author.php:138
+#: protected/views/book/author.php:95 protected/views/book/author.php:95
 msgid   "Yorumlar"
 msgstr  "Comments"
 
 #: protected/views/book/author.php:161 protected/views/book/author.php:162
 #: protected/views/book/author.php:163 protected/views/book/author.php:167
-#: protected/views/book/author.php:167
+#: protected/views/book/author.php:124 protected/views/layouts/column2.php:55
+#: protected/views/book/author.php:124 protected/views/layouts/column2.php:55
 msgid   "Profil"
 msgstr  "Profile"
 
@@ -159,13 +168,15 @@ msgstr  "Profile"
 #: protected/views/book/author.php:163 protected/views/layouts/main.php:70
 #: protected/views/book/author.php:164 protected/views/book/author.php:168
 #: protected/views/layouts/main.php:72 protected/views/layouts/main.php:134
-#: protected/views/book/author.php:168 protected/views/layouts/main.php:134
+#: protected/views/layouts/main.php:138 protected/views/book/author.php:125
+#: protected/views/layouts/column2.php:56 protected/views/book/author.php:125
+#: protected/views/layouts/column2.php:56
 msgid   "Çıkış"
 msgstr  "Sign Out"
 
 #: protected/views/layouts/main.php:67 protected/views/layouts/main.php:68
 #: protected/views/layouts/main.php:70 protected/views/layouts/main.php:132
-#: protected/views/layouts/main.php:132
+#: protected/views/layouts/main.php:136
 msgid   "Giriş yap"
 msgstr  "Sign In"
 
@@ -202,7 +213,6 @@ msgstr  "Add Workspace"
 #: protected/views/site/index.php:78
 #: protected/views/organisations/workspaces.php:20
 #: protected/views/organisationHostings/index.php:19
-#: protected/views/site/index.php:78
 #: protected/views/organisations/workspaces.php:20
 #: protected/views/organisations/users.php:17
 #: protected/views/organisationHostings/index.php:19
@@ -223,7 +233,8 @@ msgstr  "Add"
 
 #: protected/views/book/select_data.php:39 protected/views/faq/create.php:38
 #: protected/views/faq/create.php:44 protected/views/faq/create.php:44
-#: protected/views/book/select_data.php:39
+#: protected/views/user/forget_password.php:54
+#: protected/views/site/login.php:159 protected/views/book/select_data.php:39
 msgid   "Kaydet"
 msgstr  "Save"
 
@@ -240,9 +251,11 @@ msgid   "Girdiğiniz e-posta adresi geçersiz."
 msgstr  ""
 
 #: protected/views/organisations/index.php:10
+#: protected/views/layouts/column2.php:172
 #: protected/views/organisations/index.php:10
+#: protected/views/layouts/column2.php:172
 msgid   "Sunucu"
-msgstr  ""
+msgstr  "Server"
 
 #: protected/views/organisationHostings/index.php:11
 #: protected/views/organisationHostings/index.php:11
@@ -297,6 +310,10 @@ msgstr  ""
 #: protected/controllers/BookController.php:255
 #: protected/controllers/BookController.php:193
 #: protected/controllers/BookController.php:252
+#: protected/controllers/BookController.php:195
+#: protected/controllers/BookController.php:256
+#: protected/controllers/BookController.php:195
+#: protected/controllers/BookController.php:256
 msgid   "Bölüm"
 msgstr  ""
 
@@ -329,6 +346,43 @@ msgstr  ""
 msgid   "PDF dosyası"
 msgstr  ""
 
-#: protected/views/book/author.php:887 protected/views/book/author.php:887
+#: protected/views/book/author.php:887 protected/views/book/author.php:844
+#: protected/views/book/author.php:844
 msgid   "Sayfalar"
+msgstr  ""
+
+#: protected/views/site/login.php:72 protected/views/site/login.php:72
+msgid   "Beni Hatırla"
+msgstr  ""
+
+#: protected/views/site/login.php:76 protected/views/site/login.php:76
+msgid   "Giriş"
+msgstr  ""
+
+#: protected/controllers/SiteController.php:295
+msgid   "Girilen email adresine ait kullnıcı bulunamadı."
+msgstr  ""
+
+#: protected/views/user/forget_password.php:40
+msgid   "Şifre Sıfırla"
+msgstr  ""
+
+#: protected/views/user/forget_password.php:44
+msgid   "Yeni Şifre"
+msgstr  ""
+
+#: protected/views/user/forget_password.php:49
+msgid   "Yeni Şifre Tekrarı"
+msgstr  ""
+
+#: protected/views/site/index.php:44 protected/views/site/index.php:50
+msgid   "Hepsi"
+msgstr  ""
+
+#: protected/views/site/index.php:46 protected/views/site/index.php:52
+msgid   "Editor"
+msgstr  ""
+
+#: protected/views/site/login.php:152
+msgid   "Şifreyi Tekrarla"
 msgstr  ""

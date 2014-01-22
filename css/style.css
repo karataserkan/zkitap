@@ -1498,6 +1498,28 @@ float:left;
 background:transparent; height:20px; width:100%;
 position: absolute; top: -23px; right: 0px;
 } 
+#current_page::selection
+{
+	color:#000;
+background-color:transparent!important;
+}
+#current_page::-moz-selection
+{
+	color:#000;
+background-color:transparent!important;
+}
+#current_page textarea::selection
+{
+	color:#000;
+background-color:#99CAFF!important;
+}
+#current_page textarea::-moz-selection
+{
+	color:#000;
+background-color:#99CAFF!important;
+}
+
+
  .selected{
 	margin:0;
 }

@@ -238,6 +238,7 @@ class SiteController extends Controller
 		$this->render('contact',array('model'=>$model));
 	}
 
+
 	/**
 	 * Displays the login page
 	 */
@@ -259,6 +260,41 @@ class SiteController extends Controller
 		{
 			echo CActiveForm::validate($model);
 			Yii::app()->end();
+		}
+
+		$passResetError="";
+		if (isset($_GET['Reset'])) {
+			$email=$_GET['Reset']['email'];
+			$user= User::model()->findAll('email=:email', 
+	    				array(':email' => $email) );
+			if (!empty($user)) {
+				$meta=new UserMeta;
+				$meta->user_id=$user[0]->id;
+				$meta->meta_id=functions::new_id(40);
+
+				$link=Yii::app()->getBaseUrl(true);
+				$link.='/user/forgetPassword?id=';
+				$link .= $meta->meta_id;
+				$meta->meta_data="password_reset";
+
+				$message="Şifre sıfırlama isteği gönderdiniz. <a href='".$link."'>Buraya tıklayarak</a> şifrenizi değiştirebilirsiniz. Şifre değiştirme isteğiniz 10 dakika sonra geçersiz olacaktır.<br>".$link;
+
+				$mail=Yii::app()->Smtpmail;
+		        $mail->SetFrom('edubox@linden-tech.com', "Linden Editor");
+		        $mail->Subject= "Password Reset";
+		        $mail->MsgHTML($message);
+		        $mail->AddAddress($email, "");
+		        $meta->created=time();
+		        
+		        if($mail->Send()) {
+		        	$meta->save();
+	        	}
+			}
+			else
+			{
+				$passResetError=__("Girilen email adresine ait kullnıcı bulunamadı.");
+			}
+
 		}
 
 		// collect user input data
@@ -310,6 +346,11 @@ class SiteController extends Controller
 							if ($workspaceUser->save()) {
 								$msg="SITE:LOGIN:CreateWorkspaceUser:0:". json_encode(array('user'=> Yii::app()->user->name,'userId'=>Yii::app()->user->id,'message'=>"workspaceUser created for new user and new workspace"));
 								Yii::log($msg,'info');
+								$model->password=$attributes['password'];
+								$model->email=$attributes['email'];
+								$model->validate();
+								$model->login();
+								$this->redirect(array('/site/index?id='.$workspace->workspace_id));
 							}
 							else
 							{

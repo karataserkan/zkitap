@@ -15,6 +15,13 @@ function sendRight(e){
     }
    
 </script>
+<script>
+		jQuery(document).ready(function() {		
+			App.setPage("gallery");  //Set current page
+			App.init(); //Initialise plugins and elements
+		});
+	</script>
+	<!-- /JAVASCRIPTS -->
 <div id="content" class="col-lg-12">
 						<!-- PAGE HEADER-->
 						<div class="row">
@@ -31,12 +38,28 @@ function sendRight(e){
 						</div>
 						<!-- /PAGE HEADER -->
 						<!-- FAQ -->
-			
+		<div class="row">
+			<div id="filter-controls" class="btn-group">
+			  <div class="hidden-xs">
+				  <a href="#" class="btn btn-default" data-filter="*"><?php _e("Hepsi"); ?></a>
+				  <a href="#" class="btn btn-info" data-filter=".owner"><?php _e("Sahibi"); ?></a>
+				  <a href="#" class="btn btn-danger" data-filter=".editor"><?php _e("Editor"); ?></a>
+			  </div>
+			  <div class="visible-xs">
+				   <select id="e1" class="form-control">
+						<option value="*"><?php _e("Hepsi"); ?></option>
+						<option value=".owner"><?php _e("Sahibi"); ?></option>
+						<option value=".editor"><?php _e("Editor"); ?></option>
+					</select>
+			  </div>
+		   </div>
+	</div>
+	<div id="filter-items" class="row">
 <?php
 		foreach ($all_books as $key2 => $book) {
 			$userType = $this->userType($book->book_id); ?>
 				
-			<div class="col-md-3 ">
+			<div class="col-md-3 <?php echo $userType; ?> item">
 				<!-- BOX -->
 				<div class="box" style="opacity: 1; z-index: 0;">
 					<div class="box-title">
