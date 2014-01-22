@@ -608,7 +608,7 @@ $(document).ready(function(){
   $("<div class='popup ui-draggable' id='pop-image-popup' style='display: block; top:" + (ui.offset.top-$(event.target).offset().top ) + "px; left: " + ( ui.offset.left-$(event.target).offset().left ) + "px;'> \
     <div class='popup-header'> \
     Tablo Ekle \
-    <div class='popup-close' id='table-add-dummy-close-button'>x</div> \
+    <i id='table-add-dummy-close-button' class='icon-close size-10 popup-close-button'></i> \
     </div> \
       <div class='gallery-inner-holder' id='componentTableSelector'> \
       </div> \

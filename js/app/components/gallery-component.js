@@ -62,8 +62,8 @@ var createGaleryComponent = function (event,ui){
 
     $("<div class='popup ui-draggable' id='pop-image-popup' style='display: block; top:" + (ui.offset.top-$(event.target).offset().top ) + "px; left: " + ( ui.offset.left-$(event.target).offset().left ) + "px;'> \
     <div class='popup-header'> \
-    Galeri Ekle \
-    <div class='popup-close' id='image-add-dummy-close-button'>x</div> \
+    <i class='icon-m-galery'></i> &nbsp;Galeri Ekle \
+    <i id='galery-add-dummy-close-button' class='icon-close size-10 popup-close-button'></i> \
     </div> \
       <div class='gallery-inner-holder'> \
         <div style='clear:both'></div> \
@@ -74,7 +74,7 @@ var createGaleryComponent = function (event,ui){
      <div style='clear:both' > </div> \
      <a id='pop-image-OK' class='btn white btn radius ' >Tamam</a>\
     </div> ").appendTo('body').draggable();
-    $('#image-add-dummy-close-button').click(function(){
+    $('#galery-add-dummy-close-button').click(function(){
 
       $('#pop-image-popup').remove();  
 
@@ -155,7 +155,7 @@ var createGaleryComponent = function (event,ui){
         };
 
          window.lindneo.tlingit.componentHasCreated( component );
-         $("#image-add-dummy-close-button").trigger('click');
+         $("#galery-add-dummy-close-button").trigger('click');
 
     });
 

@@ -93,8 +93,8 @@ var createVideoComponent = function( event, ui, oldcomponent ) {
 
       $("<div class='popup ui-draggable' id='pop-image-popup' style='display: block; top:" + top + "; left: " + left + ";'> \
         <div class='popup-header'> \
-        Video Ekle \
-        <div class='popup-close' id='image-add-dummy-close-button'>x</div> \
+        <i class='icon-m-video'></i> &nbsp;Video Ekle \
+        <i id='video-add-dummy-close-button' class='icon-close size-10 popup-close-button'></i> \
         </div> \
           <div class='gallery-inner-holder'> \
             <div style='clear:both'></div> \
@@ -112,7 +112,7 @@ var createVideoComponent = function( event, ui, oldcomponent ) {
         </div>").appendTo('body');
     if(video_type == 'popup') video_type_image();
 
-      $('#image-add-dummy-close-button').click(function() {
+      $('#video-add-dummy-close-button').click(function() {
 
           $('#pop-image-popup').remove();
 
@@ -271,7 +271,7 @@ var createVideoComponent = function( event, ui, oldcomponent ) {
             });
 
 
-          $("#image-add-dummy-close-button").trigger('click');
+          $("#video-add-dummy-close-button").trigger('click');
 
         };
 
@@ -346,7 +346,7 @@ var createVideoComponent = function( event, ui, oldcomponent ) {
 
         console.log(component);
         window.lindneo.tlingit.componentHasCreated(component);
-        $("#image-add-dummy-close-button").trigger('click');
+        $("#video-add-dummy-close-button").trigger('click');
 
       };
     });
@@ -504,7 +504,7 @@ var createVideoComponent = function( event, ui, oldcomponent ) {
           });
 
 
-        $("#image-add-dummy-close-button").trigger('click');
+        $("#video-add-dummy-close-button").trigger('click');
 
         };
         reader.readAsDataURL(e.dataTransfer.files[0]);
