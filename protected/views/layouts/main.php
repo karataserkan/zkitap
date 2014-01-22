@@ -79,8 +79,5 @@
 
 </head>
 
-<<<<<<< HEAD
 <body class="editor_blue">
-=======
-<body>
->>>>>>> 5335b09565b9bdfc522c299cd69c510869b8213f
+
