@@ -780,11 +780,11 @@ window.lindneo.toolbox = (function(window, $, undefined){
 
      $('.toolbox').hide();
      
-    $('#undo').click(function(){
+    $('.undo').click(function(){
       that.undoSelectedItemsClipboard();
     });
     
-    $('#redo').click(function(){
+    $('.redo').click(function(){
       that.redoSelectedItemsClipboard();
     });
     

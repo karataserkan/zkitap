@@ -69,6 +69,7 @@ $current_user=User::model()->findByPk(Yii::app()->user->id);
 	
 	
 	
+	
 
 					<select id="user-account" class="radius icon-users">
 						<option selected> Kullanıcı Adı </option>
@@ -387,8 +388,7 @@ $current_user=User::model()->findByPk(Yii::app()->user->id);
 			<div class="generic-options toolbox float-left"  style="display:inline-block;">
 			<!--	<a href="#" class="bck-dark-blue white toolbox-items radius" id="pop-align"><i class="icon-align-center size-20"></i></a> -->
 				<a href="#" class="bck-dark-blue white toolbox-items radius responsive_2" id="pop-arrange"><i class="icon-send-backward size-15"></i></a>
-				<a href="#" id='group_btn' class="btn grey white radius"><?php _e("Grupla");?></a>    
-				<a href="#" id='ungroup_btn' class="btn grey white radius"><?php _e("Grubu Çöz");?></a>    
+			<!--	<a href="#" class="btn grey white radius">Grupla</a>    -->
 			</div>
 			
 			<div class="generic-options responsive_1"  style="display:inline-block;">
@@ -449,13 +449,20 @@ $current_user=User::model()->findByPk(Yii::app()->user->id);
 		
 	</script>
 	
+
+
+
+
+
+
+
 	
 <!--  align popup -->	
 <div class="popup" id="pop-align-popup">
 <div class="popup-header">
-Hizala
-<div class="popup-close">x</div>
+<i class="icon-align-center"></i> Hizala <i id="image-add-dummy-close-button" class="icon-close size-10" style="float:right; margin-right:10px; margin-top:5px;"></i>
 </div>
+
 <!--  popup content -->
 <div class="popup-inner-title">Dikey</div>
         <div class="popup-even">
@@ -485,8 +492,9 @@ Hizala
 
 <div class="popup" id="pop-arrange-popup">
 <div class="popup-header">
-Katman
-<div class="popup-close">x</div>
+	<i class="icon-arrange"></i>
+		Katman
+	<i id="image-add-dummy-close-button" class="icon-close size-10" style="float:right; margin-right:10px; margin-top:5px;"></i>
 </div>
 <!-- popup content-->
 	<i rel='zindex' action='top' class="toolbox-btn icon-bring-front size-20 dark-blue"><a> En Üste Çıkart</a></i>
@@ -502,8 +510,9 @@ Katman
 <!--  add image popup -->	
 <div class="popup" id="pop-image-popup">
 <div class="popup-header">
-Görsel Ekle
-<div class="popup-close">x</div>
+	<i class="icon-m-image"></i>
+		Görsel Ekle
+	<i id="image-add-dummy-close-button" class="icon-close size-10" style="float:right; margin-right:10px; margin-top:5px;"></i>
 </div>
 <!-- popup content-->
 	<div class="gallery-inner-holder">
@@ -519,8 +528,9 @@ Görsel Ekle
 <!--  add sound popup -->	
 <div class="popup" id="pop-sound-popup">
 <div class="popup-header">
-Ses Ekle
-<div class="popup-close">x</div>
+	<i class="icon-m-sound"></i>
+		Ses Ekle
+	<i id="image-add-dummy-close-button" class="icon-close size-10" style="float:right; margin-right:10px; margin-top:5px;"></i>
 </div>
 <!-- popup content-->
 	<div class="gallery-inner-holder">
@@ -537,8 +547,9 @@ Ses Ekle
 <!--  add video popup -->	
 <div class="popup" id="pop-video-popup">
 <div class="popup-header">
-Video Ekle
-<div class="popup-close">x</div>
+	<i class="icon-m-video"></i>
+		Video Ekle
+	<i id='image-add-dummy-close-button' class='icon-close size-10 popup-close-button'></i>
 </div>
 
 <!-- popup content-->
@@ -558,8 +569,9 @@ Video Ekle
 <!--  add galery popup -->	
 <div class="popup" id="pop-galery-popup">
 <div class="popup-header">
-Galeri Ekle
-<div class="popup-close">x</div>
+	<i class="icon-m-galery"></i>
+		Galeri Ekle
+	<i id="image-add-dummy-close-button" class="icon-close size-10" style="float:right; margin-right:10px; margin-top:5px;"></i>
 </div>
 <!-- popup content-->
 	<div class="gallery-inner-holder">
@@ -593,8 +605,10 @@ Galeri Ekle
 <!--  add quiz popup -->	
 <div class="popup" id="pop-quiz-popup">
 <div class="popup-header">
-Quiz Ekle
-<div class="popup-close">x</div>
+	<i class="icon-m-quiz"></i>
+		Quiz Ekle
+	<i id="image-add-dummy-close-button" class="icon-close size-10" style="float:right; margin-right:10px; margin-top:5px;"></i>
+	
 </div>
 
 <!-- popup content-->
@@ -656,8 +670,9 @@ Quiz Ekle
 <!--  add popup popup -->	
 <div class="popup" id="pop-popup-popup">
 <div class="popup-header">
-Açılır Kutu Ekle
-<div class="popup-close">x</div>
+	<i class="icon-m-popup"></i>
+		Açılır Kutu Ekle
+	<i id="image-add-dummy-close-button" class="icon-close size-10" style="float:right; margin-right:10px; margin-top:5px;"></i>
 </div>
 <!-- popup content-->
 	<div class="gallery-inner-holder">
@@ -673,8 +688,9 @@ Açılır Kutu Ekle
 <!--  add chart popup -->	
 <div class="popup" id="pop-chart-popup">
 <div class="popup-header">
-Grafik Ekle
-<div class="popup-close">x</div>
+	<i class="icon-c-pie"></i>
+		Grafik Ekle
+	<i id="image-add-dummy-close-button" class="icon-close size-10" style="float:right; margin-right:10px; margin-top:5px;"></i>
 </div>
 <!-- popup content-->
 	<div class="gallery-inner-holder">
@@ -743,8 +759,9 @@ Grafik Ekle
 <!--  shape popup -->	
 <div class="popup" id="pop-shape-popup">
 <div class="popup-header">
-Şekil Ekle
-<div class="popup-close">x</div>
+	<i class="icon-s-square"></i>
+		Şekil Ekle
+	<i id="image-add-dummy-close-button" class="icon-close size-10" style="float:right; margin-right:10px; margin-top:5px;"></i>
 </div>
 <!--  popup content -->
 </br>

@@ -994,35 +994,42 @@ margin: 5px 0px;
 
 
 	div.popup{
-	position:fixed;
-	width:auto;
-	min-width:200px;
-	top:75px;
-	left:1000px;
-	text-align:center;
-	height:auto;
-	min-height:50px;
-	margin:10px;
-	padding-bottom:20px;
-	z-index:99999;
-	display:none;
+	position: fixed;
+	width: auto;
+	min-width: 200px;
+	top: 75px;
+	left: 1000px;
+	text-align: center;
+	height: auto;
+	min-height: 50px;
+	margin: 10px;
+	padding-bottom: 20px;
+	z-index: 99999;
+	display: none;
+	border-radius: 10px;
 	padding: 0px 0px 10px 0px;
-	background-color:#f4f4f4;
-	cursor:pointer;
+	background-color: #FAFAFA;
+	cursor: pointer;
 	border: 2px solid #d1d2d4;
-	-moz-box-shadow:    0px 1px 4px 0px #ccc;
+	-moz-box-shadow: 0px 1px 4px 0px #ccc;
 	-webkit-box-shadow: 0px 1px 4px 0px #ccc;
-	box-shadow:         0px 1px 4px 0px #ccc;
+	box-shadow: 0px 1px 4px 0px #ccc;
 	}
 
 	
 	.popup-header {
-	background-color:#939597;
-	color:#404041;
-	font-weight:bold;
-	padding:4px 0px;
-	width:100%;
+	color: #A0A0A0;
+	padding: 10px 0px;
+	border-bottom: 1px solid #CCCCCC;
+	font-weight: normal;
+	width: 100%;
 	
+	}
+	
+	.popup-close-button{
+	float:right; 
+	margin-right:10px; 
+	margin-top:5px;
 	}
 	
 	.popup-close {
@@ -1091,17 +1098,14 @@ margin: 5px 0px;
 }
 
 .add-image-drag-area{
-margin:0 auto 20px auto;
-width:100%; 
-height:200px;
-line-height:5em;
+margin: 0 auto 20px auto;
+width: 100%;
+height: 200px;
+line-height: 5em;
 background: url(drag-drop-default-image.png) center center no-repeat;
 background-size: contain;
-background-color:#E9E9E9;
--webkit-box-shadow: inset 0 0 10px #939597;
- -moz-box-shadow: inset 0 0 10px #939597;
-box-shadow: inset 0 0 10px #939597;
-border:3px dashed #4eb6a8;
+background-color: #FFFFFF;
+border: 1px dashed #B4B4B4;
 }
 .input-textbox {
 margin: 10px auto 20px auto;

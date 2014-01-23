@@ -90,8 +90,8 @@ var createLinkComponent = function ( event, ui, oldcomponent ) {
     console.log(left);
       $("<div class='popup ui-draggable' id='pop-image-link' style='display: block; top:" + top + "; left: " + left + ";'> \
           <div class='popup-header'> \
-          Link Ekle \
-          <div class='popup-close' id='image-add-dummy-close-button'>x</div> \
+          <i class='icon-m-link'></i> &nbsp;Link Ekle \
+          <i id='link-add-dummy-close-button' class='icon-close size-10 popup-close-button'></i> \
           </div> \
          \
         <!-- popup content--> \
@@ -105,7 +105,7 @@ var createLinkComponent = function ( event, ui, oldcomponent ) {
         <!-- popup content--> \
         </div>").appendTo('body').draggable();
 
-      $('#image-add-dummy-close-button').click(function(){
+      $('#link-add-dummy-close-button').click(function(){
 
         $('#pop-image-link').remove();  
 
@@ -172,7 +172,7 @@ var createLinkComponent = function ( event, ui, oldcomponent ) {
           window.lindneo.tlingit.componentHasCreated( component );
         else
           window.lindneo.tlingit.componentHasUpdated( oldcomponent );
-        $("#image-add-dummy-close-button").trigger('click');
+        $("#link-add-dummy-close-button").trigger('click');
 
     });
 

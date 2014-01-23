@@ -461,11 +461,12 @@ var textComponentBuilder = function( component ) {
     var element  = $('<div class="video-controllers"> </div>');
     var elementWrap=$('<div ></div>');
     elementWrap.appendTo( page_div_selector );
-
+console.log(component);
     element
     .appendTo( elementWrap )
     .videoComponent({
       'component': component,
+      'marker': component.data.marker  ,
       'update': function ( event, component ) {
         if(revision_value==0){
         var newObject = jQuery.extend(true, {}, component);

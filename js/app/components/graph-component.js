@@ -206,9 +206,9 @@ var createGraphComponent = function ( event, ui, oldcomponent ) {
 
     $("<div class='popup ui-draggable' id='pop-image-popup' style='display: block; top:" + top + "; left: " + left + ";'> \
         <div class='popup-header'> \
-        Görsel Ekle \
-        <div class='popup-close' id='image-add-dummy-close-button'>x</div> \
-        </div> \
+        <i class='icon-m-charts'></i> &nbsp;Grafik Ekle \
+        <i id='graph-add-dummy-close-button' class='icon-close size-10 popup-close-button'></i>\
+		</div> \
           <div class='gallery-inner-holder'> \
             <div class='gallery-inner-holder'> \
          \
@@ -246,7 +246,7 @@ var createGraphComponent = function ( event, ui, oldcomponent ) {
           </div> \
         </div>").appendTo('body').draggable();
 
-      $('#image-add-dummy-close-button').click(function(){
+      $('#graph-add-dummy-close-button').click(function(){
 
         $('#pop-image-popup').remove();  
 
@@ -412,7 +412,7 @@ var createGraphComponent = function ( event, ui, oldcomponent ) {
         
          window.lindneo.tlingit.componentHasCreated( component );
         
-        $("#image-add-dummy-close-button").trigger('click');
+        $("#graph-add-dummy-close-button").trigger('click');
 
     });
 
