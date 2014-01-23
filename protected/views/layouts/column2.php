@@ -74,45 +74,13 @@
 							<span class="menu-text">Kontrol	Paneli</span>
 							</a>
 					</li>
-					<?php function getUserWorkspaces()
-					{
-						$userid=Yii::app()->user->id;
-
-						$workspacesOfUser= Yii::app()->db->createCommand()
-					    ->select("*")
-					    ->from("workspaces_users x")
-					    ->join("workspaces w",'w.workspace_id=x.workspace_id')
-					    ->join("user u","x.userid=u.id")
-					    ->where("userid=:id", array(':id' => $userid ) )->queryAll();
-					    
-					    return $workspacesOfUser;	
-					}
-					$workspacesOfUser= getUserWorkspaces();
-					if (isset($workspacesOfUser) && !empty($workspacesOfUser)):
-					?>
-					
-					<li class="has-sub">
-						<a href="javascript:;" class="">
-							<i class="fa fa-book fa-fw"></i>
-							<span class="menu-text">Kitaplarım</span>
-								<span class="arrow"></span>
+					<li>
+						<a href="/site/index">
+							<i class="fa fa-book fa-fw"></i> <span class="menu-text">
+							<?php _e('Kitaplarım'); ?>
+						</span>
 						</a>
-						<ul class="sub">
-						<?php foreach ($workspacesOfUser as $key => $workspace): 
-						$workspace=(object)$workspace; ?>
-							<li>
-								<a href="/site/index?id=<?php echo $workspace->workspace_id; ?>">
-								<span class="sub-menu-text">
-								<?php echo $workspace->workspace_name; ?>
-								</span>
-								</a>
-							</li>
-						<?php endforeach; ?>
-						</ul>
-						
 					</li>
-					<?php endif; ?>
-					
 					<!--<li>
 						<a href="users.html">
 							<i class="icon-tasks"></i>

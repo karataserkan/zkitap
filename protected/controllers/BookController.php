@@ -500,6 +500,12 @@ class BookController extends Controller
 			$page=$id2;
 		}
 		
+		Yii::app()->db
+		    ->createCommand("DELETE FROM user_meta WHERE user_id=:user_id AND meta_data=:meta_data")
+		    ->bindValues(array(':user_id' => Yii::app()->user->id, ':meta_data' => json_encode(array('type'=>'edit','bookId'=>$bookId))))
+		    ->execute();
+
+
 		$meta=new UserMeta;
 		$meta->user_id=Yii::app()->user->id;
 		$meta->meta_id=functions::new_id(40);
