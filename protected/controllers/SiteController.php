@@ -27,38 +27,30 @@ class SiteController extends Controller
 	 * This is the default 'index' action that is invoked
 	 * when an action is not explicitly requested by users.
 	 */
-	public function actionIndex($id=null)
+	public function actionIndex()
 	{
 		// renders the view file 'protected/views/site/index.php'
 		// using the default layout 'protected/views/layouts/main.php'
 		if(Yii::app()->user->isGuest)
 			$this->redirect( array('site/login' ) );
 
-		if (isset($id) && $id) {
-			$all_books= $this->getWorkspaceBooks($id);
-			$workspace=Workspaces::model()->findByPk($id);
-		}
-		else
-		{
-			$workspacesOfUser= $this->getUserWorkspaces();
-			$workspace=(object)$workspacesOfUser[0];
-			//$workspace=Workspace::model()->findByPk($workspace->workspace_id);
-			$all_books= $this->getWorkspaceBooks($workspace->workspace_id);
-		}
-
-		$this->render('index',array('all_books'=>$all_books,
-			'workspace'=>$workspace));
+		$this->render('index',array());
 	}
 
 	public function actionDashboard()
 	{
-		$res= Yii::app()->db->createCommand()
-    		->select('*')
-    		->from('user_meta')
-    		->order('created desc')
-    		->queryAll()
-    		;
-		$this->render('dashboard');
+		$meta_books= Yii::app()->db
+		    ->createCommand("SELECT * FROM user_meta WHERE user_id=:user_id AND meta_data LIKE :meta_data ORDER BY created DESC LIMIT 4")
+		    ->bindValues(array(':user_id' => Yii::app()->user->id, ':meta_data' => '{"type":"edit","bookId":"%'))
+		    ->queryAll();
+
+		 foreach ($meta_books as $key => $book) {
+		 	$json=json_decode($book['meta_data'],true);
+		 	$books[]=Book::model()->findByPk($json['bookId']);
+		 }
+
+		
+		$this->render('dashboard',array('books'=>$books));
 	}
 
 	public function actionRemoveUser($userId,$bookId)

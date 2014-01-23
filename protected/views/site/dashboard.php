@@ -100,30 +100,43 @@ $this->pageTitle=Yii::app()->name." - ". __("Kontrol Paneli");
 </div>
 <div class="separator"></div>
 <div class="row">
-<div class="col-md-12">
-	<div class="quick-pie panel panel-default">
-		<div class="panel-body">
-			<div class="col-md-4 text-center">
-				<div id="dash_pie_1" class="piechart" data-percent="59">
-					<span class="percent"></span>
-				</div>
-				<a href="#" class="title">New Visitors <i class="fa fa-angle-right"></i></a>
+<?php
+foreach ($books as $key2 => $book) { $userType = $this->userType($book['book_id']); ?>
+<div class="col-md-3">
+	<!-- BOX -->
+	<div class="box" style="opacity: 1; z-index: 0;">
+		<div class="box-title">
+			<h4><i class="fa fa-book"></i><?php echo $book['title'] ?></h4>
+			<div class="tools">
+				<a href="javascript:;" class="collapse">
+					<i class="fa fa-chevron-up"></i>
+				</a>
 			</div>
-			<div class="col-md-4 text-center">
-				<div id="dash_pie_2" class="piechart" data-percent="73">
-					<span class="percent"></span>
+		</div>
+		<div class="box-body bg" style="display: block;">
+			<!-- beyaz içerik yeri -->
+			<div class="row">
+				<div class="col-md-4 ">
+					<img src="/css/images/default-cover.jpg" alt="Book Cover">
 				</div>
-				<a href="#" class="title">Bounce Rate <i class="fa fa-angle-right"></i></a>
-			</div>
-			<div class="col-md-4 text-center">
-				<div id="dash_pie_3" class="piechart" data-percent="90">
-					<span class="percent"></span>
+				<div class="col-md-8 form-vertical">
+					<div class="form-group">											
+						<input class="form-control" type="text" name="placeholder" readonly="" placeholder="<?php echo $book['title'] ?>" >
+					</div>
+					<div class="form-group">
+						<input class="form-control" type="text" name="placeholder" readonly="" placeholder="<?php echo $book['author'] ?>">
+					</div>
+					<p class="btn-toolbar text-right">
+						<a href="<?php echo '/book/author/'.$book['book_id'] ?>" class="btn btn-info"><?php echo __('Düzenle');?></a>
+						<a href="<?php echo '/EditorActions/ExportBook/'.$book['book_id']; ?>" class="btn btn-success"><?php echo __('İndir');?></a>
+					</p>
 				</div>
-				<a href="#" class="title">Brand Popularity <i class="fa fa-angle-right"></i></a>
 			</div>
 		</div>
 	</div>
+	<!-- /BOX -->
 </div>
+<?php } ?>
 </div>
 <!--/PAGE -->
 
