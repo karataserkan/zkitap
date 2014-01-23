@@ -171,6 +171,7 @@ $(document).ready(function(){
     
   });
 });
+
 var get_random_color = function () {
     var letters = '0123456789ABCDEF'.split('');
     var color = '#';
@@ -232,9 +233,9 @@ var createGraphComponent = function ( event, ui, oldcomponent ) {
             <div id='bar-chart-properties' class='chart_prop bar-chart' style='display:none;'> \
               <div class='bar-chart-slice-holder slice-holder'> \
                 Arkaplan Rengi:  \
-                <input type='color'  id='chart-bar-background' class='color-picker-box radius color' value='"+this.get_random_color()+"' placeholder='e.g. #bbbbbb'> \<br> \
+                <input type='color'  id='chart-bar-background' class='color-picker-box radius color' value='"+get_random_color()+"' placeholder='#bbbbbb'> <br> \
                 Çubuk Rengi:  \
-                 <input type='color' id='chart-bar-stroke' class='color-picker-box radius color' value='"+this.get_random_color()+"' placeholder='e.g. #bbbbbb'> \<br> \
+                 <input type='color' id='chart-bar-stroke' class='color-picker-box radius color' value='"+get_random_color()+"' placeholder='#bbbbbb'> <br> \
               </div> \
           </div> \
           <div id='pie-chart-properties' class='chart_prop pie-chart'> \
