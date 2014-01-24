@@ -4,6 +4,8 @@
 $this->pageTitle=Yii::app()->name." - ". __("Kontrol Paneli");
 ?>
 
+
+
 <script>
 	jQuery(document).ready(function() {		
 		App.setPage("gallery");  //Set current page
@@ -141,3 +143,5 @@ foreach ($books as $key2 => $book) { $userType = $this->userType($book['book_id'
 <!--/PAGE -->
 
 
+
+    
