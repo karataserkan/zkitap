@@ -79,18 +79,14 @@ $current_user=User::model()->findByPk(Yii::app()->user->id);
 						<option>Seçenek 4</option>
 					</select>
 					
-					
-	<a href="<?php echo $this->createUrl("EditorActions/ExportPdfBook", array('bookId' => $model->book_id ));?>" class="btn bck-light-green white radius" > <i class="icon-publish"> PDF Yayınla</i></a>				
-	<a href="<?php echo $this->createUrl("EditorActions/ExportBook", array('bookId' => $model->book_id ));?>" class="btn bck-light-green white radius" id="header-buttons"><i class="icon-publish"> Yayınla</i></a>
-<!--	<a href="#" class="btn bck-light-green white radius" id="header-buttons"><i class="icon-save"> Kaydet</i></a>
- -->
+
 	<div id='book_title'><?php echo $model->title; ?></div>
 	
 	</div> <!--Header -->
 	
 			<div id='headermenu'>
 			<ul>
-			   <li><a style="height:40px;" href="<?php echo $this->createUrl('site/index');  ?>"><img  src="/css/linden_logo.png" height="30px;" style="padding-top:5px;"></a></li>
+			   <li><a style="height:42px;" href="<?php echo $this->createUrl('site/index');  ?>"><img  src="/css/linden_logo.png" height="30px;" style="padding-top:5px;"></a></li>
 			   <li><a contenteditable="true"> <?php echo $model->title; ?></a></li>
 			   <li class='has-sub'><a href='#'><span>Dosya</span></a>
 					<ul>
@@ -98,6 +94,7 @@ $current_user=User::model()->findByPk(Yii::app()->user->id);
 			         <li><a href="<?php echo $this->createUrl('site/index');  ?>"><span><i class="icon-folder-open"></i>Pdf İçe Aktar </span></a></li>
 			         <li><a href="<?php echo $this->createUrl("EditorActions/ExportPdfBook", array('bookId' => $model->book_id ));?>"> <i class="icon-doc-inv"></i>PDF Yayınla</i></a></li>
 			         <li><a href="<?php echo $this->createUrl("EditorActions/ExportBook", array('bookId' => $model->book_id ));?>"><i class="icon-publish"></i>Yayınla</a></li>
+			         <li><a href="<?php echo $this->createUrl("EditorActions/publishBook", array('bookId' => $model->book_id ));?>"><i class="icon-publish"></i>Publish</a></li>
 					</ul>
 			   </li>
 			   <li class='has-sub'><a href='#'><span>Düzenle</span></a>
@@ -159,7 +156,7 @@ $current_user=User::model()->findByPk(Yii::app()->user->id);
 			      </ul>
 			   </li>
 			   
-			   <li class="left-border" style="float:right; height:37px; min-width:50px; text-align:center; padding-top: 5px; ">
+			   <li class="left-border" style="float:right; height: 42px; min-width:50px; text-align:center; padding-top: 5px; ">
 			  <i id="save_status" class="size-30"></i>
 			   </li>
 			</ul>
@@ -171,12 +168,19 @@ $current_user=User::model()->findByPk(Yii::app()->user->id);
 
 
 			</div>
-			<div class="styler_box">
+			<div class="styler_box dark-blue">
 			<!-- <ul id="text-styles" ></ul> -->
                         <div class="generic-options float-left"  style="display:inline-block; margin-right:5px;">
 
+<<<<<<< HEAD
 				<a id="undo" class="undo toolbox-items icon-undo dark-blue size-15"></a>
 				<a id="redo" class="redo toolbox-items icon-redo grey-8 size-15"></a>
+=======
+			<a class="btn " id="undo" ><i style="vertical-align: bottom;" class="icon-undo size-15 dark-blue"></i></a>
+			<a class="btn " id="redo" ><i style="vertical-align: bottom;" class="icon-redo size-15 dark-blue"></i></a>
+				
+			
+>>>>>>> f93cc758dbf823ea4091e09d544415f4ff73d94d
 			</div>
 			<div class="vertical-line responsive_2"></div>
 						
@@ -385,20 +389,26 @@ $current_user=User::model()->findByPk(Yii::app()->user->id);
 				
 			</div>
 			<div class="generic-options toolbox float-left"  style="display:inline-block;">
-			<!--	<a href="#" class="bck-dark-blue white toolbox-items radius" id="pop-align"><i class="icon-align-center size-20"></i></a> -->
-				<a href="#" class="bck-dark-blue white toolbox-items radius responsive_2" id="pop-arrange"><i class="icon-send-backward size-15"></i></a>
-			<!--	<a href="#" class="btn grey white radius">Grupla</a>    -->
+			<!--	<a href="#" class="bck-dark-blue white btn btn-default" id="pop-align"><i class="icon-align-center size-20"></i></a> -->
+			<a href="#" class="btn" id="pop-arrange" ><i style="vertical-align:bottom;" class="icon-send-backward size-15"></i></a>
+			<!--	<a href="#" class="btn btn-info">Grupla</a>    -->
 			</div>
 			
 			<div class="generic-options responsive_1"  style="display:inline-block;">
-				<a href="#" class="toolbox-items" id="pop-align"><i class="icon-align-center dark-blue size-20"></i></a>
+				<a href="#" class="btn " id="pop-align"><i class="icon-align-center size-20 dark-blue"></i></a>
 				<div class="vertical-line responsive_2"></div>
-				<a href="#" class="toolbox-items" id="generic-disable" ><i class="icon-lock size-25 dark-blue"></i></a>
-				<a href="#" class="toolbox-items" id="generic-undisable" ><i class="icon-lock-open-alt size-25 dark-blue"></i></a>
+				<a href="#" class="btn " id="generic-disable" ><i style="margin-top:2px;" class="fa fa-lock size-20 dark-blue"></i></a>
+				<a href="#" class="btn " id="generic-undisable" ><i style="margin-top:2px;" class="fa fa-unlock-alt size-20 dark-blue"></i></a>
 				<div class="vertical-line responsive_2"></div>
+<<<<<<< HEAD
 				<a href="#" class="toolbox-items" id="generic-cut"><i class="generic-cut icon-cut size-25 dark-blue"></i></a>
 				<a href="#" class="toolbox-items" id="generic-copy"><i class="generic-copy icon-copy size-25 dark-blue"></i></a>
 				<a href="#" class="toolbox-items" id="generic-paste"><i class="generic-paste icon-paste size-25 dark-blue"></i></a>
+=======
+				<a href="#" class="btn " id="generic-cut"><i class="icon-cut size-25 dark-blue"></i></a>
+				<a href="#" class="btn " id="generic-copy"><i class="icon-copy size-25 dark-blue"></i></a>
+				<a href="#" class="btn " id="generic-paste"><i class="icon-paste size-25 dark-blue"></i></a>
+>>>>>>> f93cc758dbf823ea4091e09d544415f4ff73d94d
 
 				
 			</div>
@@ -406,8 +416,8 @@ $current_user=User::model()->findByPk(Yii::app()->user->id);
 			
 			
 			
-			<span class="example btn white radius " data-dropdown="#dropdown-1">Diğer</span>
-			<span class="example second_dropdown btn white radius" data-dropdown="#dropdown-2">Diğer</span>
+			<span class="example btn btn-info " data-dropdown="#dropdown-1">Diğer</span>
+			<span class="example second_dropdown btn btn-info" data-dropdown="#dropdown-2">Diğer</span>
 			
 			
 			</div>
@@ -517,7 +527,7 @@ $current_user=User::model()->findByPk(Yii::app()->user->id);
 	<div class="gallery-inner-holder">
 		<div style="clear:both"></div>
 		<div class="add-image-drag-area"> </div>
-		<a href="#" class="btn bck-light-green white radius" id="add-image" style="padding: 5px 30px;">Ekle</a>
+		<a href="#" class="btn btn-info" id="add-image" style="padding: 5px 30px;">Ekle</a>
 	</div>
 <!-- popup content-->
 </div>	
@@ -536,7 +546,7 @@ $current_user=User::model()->findByPk(Yii::app()->user->id);
 		<div style="clear:both"></div>
 		<div class="add-image-drag-area"> </div>
 		<input class="input-textbox" type="url" value="sesin adını yazınız">
-		<a href="#" class="btn bck-light-green white radius" id="add-image" style="padding: 5px 30px;">Ekle</a>
+		<a href="#" class="btn btn-info" id="add-image" style="padding: 5px 30px;">Ekle</a>
 	</div>
 <!-- popup content-->
 </div>	
@@ -555,7 +565,7 @@ $current_user=User::model()->findByPk(Yii::app()->user->id);
 	<div class="gallery-inner-holder">
 		<form id="video-url">
 		<input class="input-textbox" type="url" value="URL Adresini Giriniz">
-		<a href="#" class="btn bck-light-green white radius" id="add-image" style="padding: 5px 30px;">Ekle</a>
+		<a href="#" class="btn btn-info" id="add-image" style="padding: 5px 30px;">Ekle</a>
 		</form>
 	</div>		
 	
@@ -594,7 +604,7 @@ $current_user=User::model()->findByPk(Yii::app()->user->id);
 					
 			</div>
 			<div class="add-image-drag-area"> </div>
-		<a href="#" class="btn bck-light-green white radius" id="add-image" style="padding: 5px 30px;">Ekle</a>
+		<a href="#" class="btn btn-info" id="add-image" style="padding: 5px 30px;">Ekle</a>
 	</div>
 <!-- popup content-->
 </div>	
@@ -655,7 +665,7 @@ $current_user=User::model()->findByPk(Yii::app()->user->id);
 			</textarea> </br>
 		</div>
 		
-		<a href="#" class="btn bck-light-green white radius" id="add-image" style="padding: 5px 30px;">Ekle</a>
+		<a href="#" class="btn btn-info" id="add-image" style="padding: 5px 30px;">Ekle</a>
 		</form>
 		
 		
@@ -677,7 +687,7 @@ $current_user=User::model()->findByPk(Yii::app()->user->id);
 	<div class="gallery-inner-holder">
 		<textarea class="popup-text-area">Açılır kutunun içeriğini yazınız.
 		</textarea> </br>
-		<a href="#" class="btn bck-light-green white radius" id="add-image" style="padding: 5px 30px;">Ekle</a>
+		<a href="#" class="btn btn-info" id="add-image" style="padding: 5px 30px;">Ekle</a>
 	</div>
 <!-- popup content-->
 </div>	
@@ -748,7 +758,7 @@ $current_user=User::model()->findByPk(Yii::app()->user->id);
 					
 			</div>
 					
-	<a href="#" class="btn bck-light-green white radius" id="add-image" style="padding: 5px 30px;">Ekle</a>
+	<a href="#" class="btn btn-info" id="add-image" style="padding: 5px 30px;">Ekle</a>
 	</div>		
 	
 <!-- popup content-->
@@ -792,7 +802,7 @@ $current_user=User::model()->findByPk(Yii::app()->user->id);
 			-->
 		<ul class="component_holder">
 		
-			<li class="left_bar_titles"></li>
+			
 			
 			<li ctype="image" class="component icon-m-image">&nbsp;&nbsp;&nbsp;&nbsp;Görsel</li>
 			<li ctype="sound" class="component icon-m-sound">&nbsp;&nbsp;&nbsp;&nbsp;Ses</li>
@@ -802,7 +812,7 @@ $current_user=User::model()->findByPk(Yii::app()->user->id);
 			
 			<li ctype="galery" class="component icon-m-galery">&nbsp;&nbsp;&nbsp;&nbsp;Galeri</li>
 			<li ctype="quiz"  class="component icon-m-quiz">&nbsp;&nbsp;&nbsp;&nbsp;Quiz</li>
-			<li ctype="side-text"  class="component icon-m-listbox">&nbsp;&nbsp;&nbsp;&nbsp;Yazı Kutusu</li>
+			<li ctype="side-text"  class="component icon-m-listbox">&nbsp;&nbsp;&nbsp;Yazı Kutusu</li>
 			<li ctype="link" class="component icon-m-link ui-draggable">&nbsp;&nbsp;&nbsp;&nbsp;Link</li>
 			<li ctype="popup" class="component icon-m-popup">&nbsp;&nbsp;&nbsp;&nbsp;Pop-up</li>
 			
@@ -825,7 +835,7 @@ $current_user=User::model()->findByPk(Yii::app()->user->id);
 			
 		
 <!-- chat  -->
-	<a class="chat_button"><i class="icon-chat-inv"></i><span class="text-visible">Yazışma</span></a>
+	<a class="chat_button"><i class="icon-chat-inv"></i><span class="text-visible">&nbsp;Yazışma</span></a>
 		<div class="chat_window">
 		
 	<div class="chat_inline_holder">
@@ -840,7 +850,7 @@ $current_user=User::model()->findByPk(Yii::app()->user->id);
 
 <div class="chat_text_box_holder">
 <textarea placeholder="Mesajınızı yazın."></textarea>
-<input type="submit" value="Gönder"> 
+<input type="submit"  value="gönder"> 
 </div>
 <!-- chat_text_box_holder SON -->
 </div>
@@ -875,7 +885,7 @@ $current_user=User::model()->findByPk(Yii::app()->user->id);
 		 $(".text-visible").toggleClass('text-hidden');
 		 $(".chat_window").toggleClass('chat_window_close');
 		 $(".left_bar_shrink").toggleClass('left_bar_shrink_close');
-		 
+		 $("ul.component_holder li").toggleClass('ul.component_holder_close');
 		});
 				
 		</script>
@@ -903,7 +913,7 @@ $current_user=User::model()->findByPk(Yii::app()->user->id);
 						?>
 	<div class='chapter' chapter_id='<?php echo $chapter->chapter_id; ?>'>
 	<input type="text" class="chapter-title" placeholder="chapter title" value="<?php echo $chapter->title; ?>">
-	<a class="btn red white size-15 radius icon-delete page-chapter-delete  delete-chapter hidden-delete" style="float: right; margin-top: -23px;"></a>
+	<a class="btn btn-info size-15 radius icon-delete page-chapter-delete  delete-chapter hidden-delete" style="float: right; margin-top: -23px;"></a>
 	 <!-- <?php echo $chapter->title; ?>  chapter title--> 
 						<ul class="pages" >
 								<?php
@@ -927,7 +937,7 @@ $current_user=User::model()->findByPk(Yii::app()->user->id);
 					?> 
 						
 						<li class='page <?php echo ( $current_page->page_id== $pages->page_id  ? "current_page": "" ); ?>' chapter_id='<?php echo $pages->chapter_id; ?>' page_id='<?php echo $pages->page_id; ?>' chapter_id='<?php echo $pages->page_id; ?>'   >
-							<a class="btn red white size-15 radius icon-delete page-chapter-delete delete-page hidden-delete "  style="top: 0px;right: 0px; position: absolute;"></a>
+							<a class="btn btn-info size-15 radius icon-delete page-chapter-delete delete-page hidden-delete "  style="top: 0px;right: 0px; position: absolute;"></a>
 							<!--<a href='<?php echo $this->createUrl("book/author", array('bookId' => $model->book_id, 'page'=>$pages->page_id ));?>' >-->
 								<a href='<?php echo "/book/author/".$model->book_id.'/'.$pages->page_id;?>'/>
 									
@@ -1110,7 +1120,7 @@ $background= (!empty($img)) ? "background-image:url('".$img."')" : "background:w
 	
 <div id="dropdown-2" class="dropdown dropdown-tip dropdown-anchor-right">
 		<ul class="dropdown-menu">
-			<a href="#" class="bck-dark-blue white toolbox-items radius" id="pop-arrange"><i class="icon-send-backward size-15"></i></a>
+			<a href="#"style="vertical-align: bottom;" class="toolbox-items " id="pop-arrange"><i class="icon-send-backward size-15"></i></a>
 
 <div class="generic-options" style="display:inline-block;">
 				<a href="#" class="toolbox-items" id="generic-cut"><i class="generic-cut icon-cut"></i></a>
