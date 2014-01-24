@@ -55,8 +55,9 @@ var createVideoComponent = function( event, ui, oldcomponent ) {
         if(video_type == 'popup'){
           $("<span id='type_image'>\
                 <input type='radio' id='video_type0' name='video_image_type' value='video_type0'><button id='button0' style='background-image:url(\"http://dev.lindneo.com/css/popupmarker.png\"); width:70px; height:70px;'></button>\
-                <input type='radio' id='video_type1' name='video_image_type' value='link'><button id='button1' style='background-image:url(\"http://dev.lindneo.com/css/video_play_trans.png\"); width:70px; height:70px;'></button><br><br>\
-                <input type='file' name='video_image_file' id='video_image_file' value='' >\
+                <input type='radio' id='video_type1' name='video_image_type' value='link'><button id='button1' style='background-image:url(\"http://dev.lindneo.com/css/video_play_trans.png\"); width:70px; height:70px;'></button>\
+                <a href='#' onclick='document.getElementById(\"video_image_file\").click(); return false;' class='icon-upload dark-blue size-40' style='padding-left:15px;'></a>\
+                <input type='file' name='video_image_file' id='video_image_file' value='' style='visibility: hidden;' >\
                 <div id='new_image'></div>\
               </span>").appendTo('.type');
           $( "button" ).button();
@@ -104,9 +105,20 @@ var createVideoComponent = function( event, ui, oldcomponent ) {
                 <input type='radio' id='repeat1' name='video_type' " + popup_check + " value='popup'><label for='repeat1'>Popup</label>\
               </span><br><br>\
             </div>\
-            <div class='add-image-drag-area' id='dummy-dropzone'> </div> \
-            <input type='file' name='video_file' id='video_file' value='' ><br><br>\
-            <input id='video-url-text' class='input-textbox' type='url' placeholder='URL Adresini Giriniz'   value=" + video_url + "> \
+            <ul class='nav nav-tabs'>\
+              <li><a href='#home' data-toggle='tab'>Drag Video</a></li>\
+              <li><a href='#profile' data-toggle='tab'>Video Upload</a></li>\
+              <li><a href='#messages' data-toggle='tab'>Vİdeo Link</a></li>\
+            </ul>\
+            <div class='tab-pane active' id='home'>\
+              <div class='add-image-drag-area' id='dummy-dropzone'> </div> \
+            </div>\
+            <div class='tab-pane active' id='profile'>\
+              <input type='file' name='video_file' id='video_file' value='' ><br><br>\
+            </div>\
+            <div class='tab-pane active' id='messages'>\
+              <input id='video-url-text' class='input-textbox' type='url' placeholder='URL Adresini Giriniz'   value=" + video_url + "> \
+            </div>\
             <a href='#' id='pop-image-OK' class='btn bck-light-green white radius' id='add-image' style='padding: 5px 30px;'>Ekle</a> \
           </div> \
         </div>").appendTo('body');
