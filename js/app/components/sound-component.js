@@ -62,7 +62,7 @@ $(document).ready(function(){
       </div> \
          <input type='text' class='input-textbox' id='pop-sound-name' placeholder='Ses Adı'  /> \
       <div style='clear:both' > </div> \
-     <a id='pop-image-OK' class='btn white btn radius ' >Tamam</a>\
+     <a id='pop-image-OK' class='btn btn-info' >Ekle</a>\
     </div>").appendTo('body').draggable();
 
     $('#sound-add-dummy-close-button').click(function(){

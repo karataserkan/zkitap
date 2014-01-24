@@ -98,7 +98,7 @@ var createLinkComponent = function ( event, ui, oldcomponent ) {
           <div class='gallery-inner-holder'> \
             <form id='video-url'> \
             <input id='link-url-text' class='input-textbox' type='url' placeholder='URL Adresini Giriniz'   value=" + link_value + "> \
-            <a href='#' id='pop-image-OK' class='btn bck-light-green white radius' id='add-image' style='padding: 5px 30px;'>Ekle</a> \
+            <a href='#' id='pop-image-OK' class='btn btn-info' id='add-image' >Ekle</a> \
             </form> \
           </div>     \
            \

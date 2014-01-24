@@ -240,7 +240,7 @@ var createGraphComponent = function ( event, ui, oldcomponent ) {
           <div id='pie-chart-properties' class='chart_prop pie-chart'> \
           </div> \
                \
-          <a href='#' class='btn bck-light-green white radius' id='pop-image-OK' style='padding: 5px 30px;'>Ekle</a> \
+          <a href='#' class='btn btn-info  ' id='pop-image-OK' style='padding: 5px 30px;'>Ekle</a> \
           </div> \
           </div> \
         </div>").appendTo('body').draggable();

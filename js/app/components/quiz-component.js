@@ -145,7 +145,7 @@ $(document).ready(function(){
             </div> \
           </form> \
         </div> \
-        <a href='#' class='btn bck-light-green white radius' id='add-quiz' style='padding: 5px 30px;'>Ekle</a> \
+        <a href='#' class='btn btn-info' id='add-quiz' >Ekle</a> \
       </div> \
       <!-- popup content--> \
     </div>").appendTo('body').draggable();

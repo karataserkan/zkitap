@@ -107,7 +107,7 @@ var createVideoComponent = function( event, ui, oldcomponent ) {
             <div class='add-image-drag-area' id='dummy-dropzone'> </div> \
             <input type='file' name='video_file' id='video_file' value='' ><br><br>\
             <input id='video-url-text' class='input-textbox' type='url' placeholder='URL Adresini Giriniz'   value=" + video_url + "> \
-            <a href='#' id='pop-image-OK' class='btn bck-light-green white radius' id='add-image' style='padding: 5px 30px;'>Ekle</a> \
+            <a href='#' id='pop-image-OK' class='btn btn-info' id='add-image' >Ekle</a> \
           </div> \
         </div>").appendTo('body');
     if(video_type == 'popup') video_type_image();
