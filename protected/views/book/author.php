@@ -79,7 +79,11 @@ $current_user=User::model()->findByPk(Yii::app()->user->id);
 						<option>Seçenek 4</option>
 					</select>
 					
-
+					
+	<a href="<?php echo $this->createUrl("EditorActions/ExportPdfBook", array('bookId' => $model->book_id ));?>" class="btn bck-light-green white radius" > <i class="icon-publish"> PDF Yayınla</i></a>				
+	<a href="<?php echo $this->createUrl("EditorActions/ExportBook", array('bookId' => $model->book_id ));?>" class="btn bck-light-green white radius" id="header-buttons"><i class="icon-publish"> Yayınla</i></a>
+<!--	<a href="#" class="btn bck-light-green white radius" id="header-buttons"><i class="icon-save"> Kaydet</i></a>
+ -->
 	<div id='book_title'><?php echo $model->title; ?></div>
 	
 	</div> <!--Header -->
@@ -94,13 +98,13 @@ $current_user=User::model()->findByPk(Yii::app()->user->id);
 			         <li><a href="<?php echo $this->createUrl('site/index');  ?>"><span><i class="icon-folder-open"></i>Pdf İçe Aktar </span></a></li>
 			         <li><a href="<?php echo $this->createUrl("EditorActions/ExportPdfBook", array('bookId' => $model->book_id ));?>"> <i class="icon-doc-inv"></i>PDF Yayınla</i></a></li>
 			         <li><a href="<?php echo $this->createUrl("EditorActions/ExportBook", array('bookId' => $model->book_id ));?>"><i class="icon-publish"></i>Yayınla</a></li>
-			         <li><a href="<?php echo $this->createUrl("EditorActions/publishBook", array('bookId' => $model->book_id ));?>"><i class="icon-publish"></i>Publish</a></li>
 					</ul>
 			   </li>
 			   <li class='has-sub'><a href='#'><span>Düzenle</span></a>
 			      <ul>
-			         <li><a href='#' id="undo"><i class="undo icon-undo size-10"></i><span>Geri Al</span></a></li>
-			         <li><a href='#' id="redo"><i class="redo icon-redo size-10"></i><span>İleri Al</span></a></li>
+			         <li><a href='#' id="undo"><i class="undo icon-undo size-10"></i><span>&nbsp;&nbsp;&nbsp;Geri Al</span></a></li>
+			         <li><a href='#' id="redo"><i class="redo icon-redo size-10"></i><span>&nbsp;&nbsp;&nbsp;İleri Al</span></a></li>
+
 			         <li><a href='#' id="generic-cut"><i class="generic-cut icon-cut size-20"></i><span>Kes</span></a></li>
 			         <li><a href='#' id="generic-copy"><i class="generic-copy icon-copy size-20"></i><span>Kopyala</span></a></li>
 			         <li><a href='#' id="generic-paste"><i class="generic-paste icon-paste size-20"></i><span>Yapıştır</span></a></li>
@@ -173,8 +177,11 @@ $current_user=User::model()->findByPk(Yii::app()->user->id);
                         <div class="generic-options float-left"  style="display:inline-block; margin-right:5px;">
 
 
-			<a class="btn " id="undo" ><i style="vertical-align: bottom;" class="undo icon-undo size-15 dark-blue"></i></a>
-			<a class="btn " id="redo" ><i style="vertical-align: bottom;" class="redo icon-redo size-15 dark-blue"></i></a>
+			<a class="optbtn " id="undo" ><i style="vertical-align: bottom;" class="undo icon-undo size-15 dark-blue"></i></a>
+			<a class="optbtn " id="redo" ><i style="vertical-align: bottom;" class="redo icon-redo size-15 dark-blue"></i></a>
+
+
+
 				
 			
 			</div>
@@ -386,29 +393,32 @@ $current_user=User::model()->findByPk(Yii::app()->user->id);
 			</div>
 			<div class="generic-options toolbox float-left"  style="display:inline-block;">
 			<!--	<a href="#" class="bck-dark-blue white btn btn-default" id="pop-align"><i class="icon-align-center size-20"></i></a> -->
-			<a href="#" class="btn" id="pop-arrange" ><i style="vertical-align:bottom;" class="icon-send-backward size-15"></i></a>
+			<a href="#" class="optbtn" id="pop-arrange" ><i style="vertical-align:bottom;" class="icon-send-backward size-15"></i></a>
 			<!--	<a href="#" class="btn btn-info">Grupla</a>    -->
 			</div>
 			
 			<div class="generic-options responsive_1"  style="display:inline-block;">
-				<a href="#" class="btn " id="pop-align"><i class="icon-align-center size-20 dark-blue"></i></a>
+				<a href="#" class="optbtn " id="pop-align"><i class="icon-align-center size-20 dark-blue"></i></a>
 				<div class="vertical-line responsive_2"></div>
-				<a href="#" class="btn " id="generic-disable" ><i style="margin-top:2px;" class="fa fa-lock size-20 dark-blue"></i></a>
-				<a href="#" class="btn " id="generic-undisable" ><i style="margin-top:2px;" class="fa fa-unlock-alt size-20 dark-blue"></i></a>
+				<a href="#" class="optbtn " id="generic-disable" ><i style="margin-top:2px;" class="fa fa-lock size-20 dark-blue"></i></a>
+				<a href="#" class="optbtn " id="generic-undisable" ><i style="margin-top:2px;" class="fa fa-unlock-alt size-20 dark-blue"></i></a>
 				<div class="vertical-line responsive_2"></div>
-				<a href="#" class="btn " id="generic-cut"><i class="generic-cut icon-cut size-25 dark-blue"></i></a>
-				<a href="#" class="btn " id="generic-copy"><i class="generic-copy icon-copy size-25 dark-blue"></i></a>
-				<a href="#" class="btn " id="generic-paste"><i class="generic-paste icon-paste size-25 dark-blue"></i></a>
+
+				<a href="#" class="optbtn " id="generic-cut"><i class="generic-cut icon-cut size-25 dark-blue"></i></a>
+				<a href="#" class="optbtn " id="generic-copy"><i class="generic-copy icon-copy size-25 dark-blue"></i></a>
+				<a href="#" class="optbtn " id="generic-paste"><i class="generic-paste icon-paste size-25 dark-blue"></i></a>
+
 
 				
-			</div>
 				
+			</div>
+			<a class="btn btn-info pull-right "id="pages"><i class="fa fa-files-o"></i> Sayfalar</a>
 			
-			
-			
-			<span class="example btn btn-info " data-dropdown="#dropdown-1">Diğer</span>
-			<span class="example second_dropdown btn btn-info" data-dropdown="#dropdown-2">Diğer</span>
-			
+			<script>
+			$( "#pages" ).click(function() {
+			$( "#chapters_pages_view" ).toggle( "drop",{direction: "up"}, 1000 );
+			});
+			</script>
 			
 			</div>
 		
@@ -880,17 +890,45 @@ $current_user=User::model()->findByPk(Yii::app()->user->id);
 				
 		</script>
 
-<div class='group'>
-	<h3><?php _e("Sayfalar"); ?> </h3>
+
 	<div id='chapters_pages_view' class="chapter-view" >
-
-
-
-
-
-
-
-
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		<div class="box-body">
+			<div class="panel-group" id="accordion">
+			  <div class="panel panel-default">
+				 <div class="panel-heading">
+					<h3 class="panel-title"> <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseOne">Kitap Kapağı</a> </h3>
+				 </div>
+				 <div id="collapseOne" class="panel-collapse collapse in">
+					<div class="panel-body"> </div>
+			  </div>
+			  <div class="panel panel-default">
+				 <div class="panel-heading">
+					<h3 class="panel-title"> <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">İçindekiler </a> </h3>
+				 </div>
+				 <div id="collapseTwo" class="panel-collapse collapse">
+					<div class="panel-body"></div>
+			  </div>
+			  <div class="panel panel-default">
+				 <div class="panel-heading">
+					<h3 class="panel-title"> <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseThree">Sayfalar </a> </h3>
+				 </div>
+				 <div id="collapseThree" class="panel-collapse collapse">
+					<div class="panel-body">
+					
+					
+					
+		
+		
+		
 		<?php 
 		$page_NUM=0;
 
@@ -943,8 +981,10 @@ $current_user=User::model()->findByPk(Yii::app()->user->id);
 				<?php
 
 		}
+		
 		//$this->current_chapter=null;
 		?>
+		
 		<div id="add-button" class="bck-dark-blue size-25 icon-add white" style="position: fixed; bottom: 0px; right: 0px; width: 140px; text-align: center;"></div>
 		
 		<script>
@@ -965,6 +1005,7 @@ $current_user=User::model()->findByPk(Yii::app()->user->id);
 		}
 
 		?>	
+		
 	$( "#add-button" ).hover(
 	  function() {
 
@@ -992,8 +1033,22 @@ $current_user=User::model()->findByPk(Yii::app()->user->id);
 
 
 	</script>
+		
+					
+					
+					
+					
+					
+					</div>
+				</div>
+				</div>
+		</div>
+		</div>
+		</div>
+		</div>
+		
 			
-	</div>
+	
 </div>
 
 <div id='author_pane_container' style=' width:100%'>
