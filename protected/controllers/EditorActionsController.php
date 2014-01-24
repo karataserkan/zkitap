@@ -24,10 +24,37 @@ class EditorActionsController extends Controller
 		$this->errors[]=$error; 
 		return $error;
 	}
-	public function actionDeneme()
+
+	public function actionPublishBook($bookId)
 	{
-		echo "deneme";
+		$this->layout="//layouts/column2";
+
+		$book=Book::model()->findByPk($bookId);
+		//$workspace=Workspaces::model()->findByPk($book->workspace_id);
+		$organisationWorkspace=OrganisationWorkspaces::model()->findAll(array(
+		    'condition'=>'workspace_id=:workspace_id',
+		    'params'=>array(':workspace_id'=>$book->workspace_id),
+		));
+
+		$organisation=Organisations::model()->findByPk($organisationWorkspace[0]->organisation_id);
+
+		$hosts=OrganisationHostings::model()->findAll(array(
+		    'condition'=>'organisation_id=:organisation_id',
+		    'params'=>array(':organisation_id'=>$organisation->organisation_id),
+		));
+
+		$model=new PublishBookForm;
+
+		$model->contentId=functions::new_id();
+		$model->created=date('Y-n-d g:i:s',time());
+		$model->contentTitle=$book->title;
+		$model->organisationId=$organisation->organisation_id;
+		$model->organisationName=$organisation->organisation_name;
+
+
+		$this->render('publishBook',array('model'=>$model,'hosts'=>$hosts));
 	}
+
 	public function actionGetFileURL($type=null){
 
 		/* 
