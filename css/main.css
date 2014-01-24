@@ -61,7 +61,7 @@ list-style:none;
 
 .styler_box
 {
-min-width:1700px;
+min-width:1300px;
 height: 42px;
 position: fixed;
 top: 42px;
@@ -87,10 +87,6 @@ z-index:9999999;
 {
 font-weight:normal;}
 
-.styler_box a
-{
-color:#084f5f;
-}
 .styler_box label
 {
 font-weight:normal;}
