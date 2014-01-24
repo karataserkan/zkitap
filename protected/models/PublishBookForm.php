@@ -9,11 +9,7 @@ class PublishBookForm extends CFormModel
 {
 	public $contentId;
 	public $contentType;
-	public $contentHostAddress;
-	public $contentHostPort;
 	public $contentHostId;
-	public $contentHostKey1;
-	public $contentHostKey2;
 	public $contentTitle;
 	public $contentExplanation;
 	public $contentIsForSale;
@@ -44,11 +40,7 @@ class PublishBookForm extends CFormModel
 		return array(
 			'contentId'=>'Content Id',
 			'contentType'=>'Content Type',
-			'contentHostAddress'=>'Host Address',
-			'contentHostPort'=>'Host Port',
 			'contentHostId'=>'Host Id',
-			'contentHostKey1'=>'Host Key 1',
-			'contentHostKey2'=>'Host Key 2',
 			'contentTitle'=>'Content Title',
 			'contentExplanation'=>'Content Explanation',
 			'contentIsForSale'=>'Is For Sale?',
