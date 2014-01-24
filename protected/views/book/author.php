@@ -102,8 +102,9 @@ $current_user=User::model()->findByPk(Yii::app()->user->id);
 			   </li>
 			   <li class='has-sub'><a href='#'><span>Düzenle</span></a>
 			      <ul>
-			         <li><a href='#' id="undo"><i class="icon-undo size-10"></i><span>&nbsp;&nbsp;&nbsp;Geri Al</span></a></li>
-			         <li><a href='#' id="redo"><i class="icon-redo size-10"></i><span>&nbsp;&nbsp;&nbsp;İleri Al</span></a></li>
+			         <li><a href='#' id="undo"><i class="undo icon-undo size-10"></i><span>&nbsp;&nbsp;&nbsp;Geri Al</span></a></li>
+			         <li><a href='#' id="redo"><i class="redo icon-redo size-10"></i><span>&nbsp;&nbsp;&nbsp;İleri Al</span></a></li>
+
 			         <li><a href='#' id="generic-cut"><i class="generic-cut icon-cut size-20"></i><span>Kes</span></a></li>
 			         <li><a href='#' id="generic-copy"><i class="generic-copy icon-copy size-20"></i><span>Kopyala</span></a></li>
 			         <li><a href='#' id="generic-paste"><i class="generic-paste icon-paste size-20"></i><span>Yapıştır</span></a></li>
@@ -175,8 +176,12 @@ $current_user=User::model()->findByPk(Yii::app()->user->id);
 			<!-- <ul id="text-styles" ></ul> -->
                         <div class="generic-options float-left"  style="display:inline-block; margin-right:5px;">
 
-			<a class="optbtn " id="undo" ><i style="vertical-align: bottom;" class="icon-undo size-15 dark-blue"></i></a>
-			<a class="optbtn " id="redo" ><i style="vertical-align: bottom;" class="icon-redo size-15 dark-blue"></i></a>
+
+			<a class="optbtn " id="undo" ><i style="vertical-align: bottom;" class="undo icon-undo size-15 dark-blue"></i></a>
+			<a class="optbtn " id="redo" ><i style="vertical-align: bottom;" class="redo icon-redo size-15 dark-blue"></i></a>
+
+
+
 				
 			
 			</div>
@@ -398,9 +403,11 @@ $current_user=User::model()->findByPk(Yii::app()->user->id);
 				<a href="#" class="optbtn " id="generic-disable" ><i style="margin-top:2px;" class="fa fa-lock size-20 dark-blue"></i></a>
 				<a href="#" class="optbtn " id="generic-undisable" ><i style="margin-top:2px;" class="fa fa-unlock-alt size-20 dark-blue"></i></a>
 				<div class="vertical-line responsive_2"></div>
-				<a href="#" class="optbtn " id="generic-cut"><i class="icon-cut size-25 dark-blue"></i></a>
-				<a href="#" class="optbtn " id="generic-copy"><i class="icon-copy size-25 dark-blue"></i></a>
-				<a href="#" class="optbtn " id="generic-paste"><i class="icon-paste size-25 dark-blue"></i></a>
+
+				<a href="#" class="optbtn " id="generic-cut"><i class="generic-cut icon-cut size-25 dark-blue"></i></a>
+				<a href="#" class="optbtn " id="generic-copy"><i class="generic-copy icon-copy size-25 dark-blue"></i></a>
+				<a href="#" class="optbtn " id="generic-paste"><i class="generic-paste icon-paste size-25 dark-blue"></i></a>
+
 
 				
 				

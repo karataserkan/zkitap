@@ -45,7 +45,7 @@ class EditorActionsController extends Controller
 
 		$model=new PublishBookForm;
 
-		$model->contentId=functions::new_id();
+		$model->contentId=$bookId;
 		$model->created=date('Y-n-d g:i:s',time());
 		$model->contentTitle=$book->title;
 		$model->organisationId=$organisation->organisation_id;
