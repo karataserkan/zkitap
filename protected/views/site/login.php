@@ -118,7 +118,7 @@ $this->breadcrumbs=array(
 								<h2 class="bigintro">Register</h2>
 								<div class="divide-40"></div>
 								
-								<form role="form">
+								
 								<?php $form=$this->beginWidget('CActiveForm', array(
 									'id'=>'user-form',
 									'enableAjaxValidation'=>false,
@@ -154,13 +154,54 @@ $this->breadcrumbs=array(
 									<input size="60" maxlength="255" name="User[passwordR]" id="User_password_r" type="password">
 								  </div>
 								
+									<div class="box-body">
+										<div class="panel-group" id="accordion">
+										  <div class="panel panel-default">
+											 <div class="panel-heading">
+												<h3 class="panel-title"> <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseOne"><span class="text-info">Fotograf Yükle</span> </a> </h3>
+											 </div>
+											 <div id="collapseOne" class="panel-collapse collapse in">
+												<div class="panel-body"> 
+													<div class="upload-preview" id="upload-preview">
+
+													</div>
+													<input class="file" name="logo" type="file"/>
+												</div>
+											 </div>
+										  </div>
+										  <div class="panel panel-default">
+											 <div class="panel-heading">
+												<h3 class="panel-title"> <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo"><span class="text-info">Fotograf Çek</span></a> </h3>
+											 </div>
+											 <div id="collapseTwo" class="panel-collapse collapse">
+												<div class="panel-body"> 
+													<video id="video" style="width:200px; height:200px"></video>
+											        <a id="button" class="btn btn-success">Fotograf Çek</a>
+
+												        <!-- target for the canvas-->
+												        <div id="canvasHolder"></div>
+
+												        <!--preview image captured from canvas-->
+												        <img id="preview" src="http://www.clker.com/cliparts/A/Y/O/m/o/N/placeholder-hi.png" width="160" height="120" />
+
+												        
+												        <input id="User_data" type="text" name="User[data]" style="display:none" />
+												</div>
+											 </div>
+										  </div>
+									   </div>
+									</div>
+
+								    
+
 								  <div>
+								  	<br>
 									<!-- <label class="checkbox"> <input type="checkbox" class="uniform" value=""> I agree to the <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a></label> -->
 									<button type="submit" class="btn btn-success"><?php _e("Kaydet");?></button>
 								  </div>
 
 								<?php $this->endWidget(); ?>
-								</form>
+							
 								
 
 								<!-- SOCIAL REGISTER -->
@@ -234,6 +275,66 @@ $this->breadcrumbs=array(
 	</script>
 	<!-- /JAVASCRIPTS -->
 
+<script>
+		var preview = $("#upload-preview");
 
+		$(".file").change(function(event){
+		   var input = $(event.currentTarget);
+		   var file = input[0].files[0];
+		   var reader = new FileReader();
+		   reader.onload = function(e){
+		       image_base64 = e.target.result;
+		       document.getElementById('User_data').value = image_base64;
+		       preview.html("<img src='"+image_base64+"'/><br/>");
+		   };
+		   reader.readAsDataURL(file);
+		  });
+		
 
+        var video;
+        var dataURL;
 
+        //http://coderthoughts.blogspot.co.uk/2013/03/html5-video-fun.html - thanks :)
+        function setup() {
+            navigator.myGetMedia = (navigator.getUserMedia ||
+            navigator.webkitGetUserMedia ||
+            navigator.mozGetUserMedia ||
+            navigator.msGetUserMedia);
+            navigator.myGetMedia({ video: true }, connect, error);
+        }
+
+        function connect(stream) {
+            video = document.getElementById("video");
+            video.src = window.URL ? window.URL.createObjectURL(stream) : stream;
+            video.play();
+        }
+
+        function error(e) { console.log(e); }
+
+        addEventListener("load", setup);
+
+        function captureImage() {
+            var canvas = document.createElement('canvas');
+            canvas.id = 'hiddenCanvas';
+            //$('#video').hide();
+            //add canvas to the body element
+           // document.body.appendChild(canvas);
+            //add canvas to #canvasHolder
+          //  document.getElementById('canvasHolder').value=canvas;
+            var ctx = canvas.getContext('2d');
+            canvas.width = video.videoWidth/4;
+            canvas.height = video.videoHeight/4;
+            ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+            //save canvas image as data url
+            dataURL = canvas.toDataURL();
+            //set preview image src to dataURL
+            document.getElementById('preview').src = dataURL;
+            // place the image value in the text box
+            document.getElementById('User_data').value = dataURL;
+        }
+
+        //Bind a click to a button to capture an image from the video stream
+        var el = document.getElementById("button");
+        el.addEventListener("click", captureImage, false);
+
+    </script>
