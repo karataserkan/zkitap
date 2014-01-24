@@ -120,8 +120,8 @@ var createImageComponent = function ( event, ui ,oldcomponent) {
       var image_type = $('input[name=image_type]:checked').val();
         if(image_type == 'popup'){
           $("<span id='type_image'>\
-                <input type='radio' id='image_type0' name='image_popup_type' value='image_type0'><button id='button0' style='background-image:url(\"http://dev.lindneo.com/css/popupmarker.png\"); width:70px; height:70px;'></button>\
-                <input type='radio' id='image_type1' name='image_popup_type' value='link'><button id='button1' style='background-image:url(\"http://dev.lindneo.com/css/video_play_trans.png\"); width:70px; height:70px;'></button>\
+                <input type='radio' id='image_type0' name='image_popup_type' value='image_type0'><button id='button0' style='background:url(\"http://dev.lindneo.com/css/popupmarker.png\") no-repeat center center;-moz-background-size: cover; -webkit-background-size: cover; -o-background-size: cover; background-size: cover; width:70px; height:70px;'></button>\
+                <input type='radio' id='image_type1' name='image_popup_type' value='image_type1'><button id='button1' style='background:url(\"http://dev.lindneo.com/css/video_play_trans.png\") no-repeat center center; -moz-background-size: cover; -webkit-background-size: cover; -o-background-size: cover; background-size: cover; width:70px; height:70px;'></button>\
                 <a href='#' onclick='document.getElementById(\"image_popup_file\").click(); return false;' class='icon-upload dark-blue size-40' style='padding-left:15px;'></a>\
                 <input type='file' name='image_popup_file' id='image_popup_file' value='' style='visibility: hidden;' >\
                 <div id='new_image'></div>\
@@ -148,10 +148,12 @@ var createImageComponent = function ( event, ui ,oldcomponent) {
       marker = oldcomponent.data.marker;
     };
     var link_check = '';
+    var link_check_active = '';
     var popup_check = '';
+    var popup_check_active = '';
 
-    if(image_type == 'link') link_check = "checked='checked'";
-    else popup_check = "checked='checked'";
+    if(image_type == 'link') { link_check = "checked='checked'"; link_check_active = 'active';}
+    else { popup_check = "checked='checked'"; popup_check_active = 'active'; }
 
     console.log(link_check);
     console.log(popup_check);
@@ -164,20 +166,28 @@ var createImageComponent = function ( event, ui ,oldcomponent) {
           <div class='gallery-inner-holder'> \
             <div style='clear:both'></div> \
             <div class='type' style='padding: 4px; display: inline-block;'>\
-              <span id='repeat'>\
-                <input type='radio' id='repeat0' name='image_type' " + link_check + " value='link'><label for='repeat0'>Link</label>\
-                <input type='radio' id='repeat1' name='image_type' " + popup_check + " value='popup'><label for='repeat1'>Popup</label>\
-              </span><br><br>\
+                <div class='btn-group' data-toggle='buttons'>\
+                  <label class='btn btn-primary " + link_check_active + "'>\
+                    <input type='radio' name='image_type' id='repeat0' " + link_check + " value='link'> Link\
+                  </label>\
+                  <label class='btn btn-primary " + popup_check_active + "'>\
+                    <input type='radio' name='image_type' id='repeat1' " + popup_check + " value='popup'> Popup\
+                  </label>\
+                </div><br><br>\
             </div>\
-            <ul class='nav nav-tabs'>\
-              <li><a href='#home' data-toggle='tab'>Drag File</a></li>\
-              <li><a href='#profile' data-toggle='tab'>İmage Upload</a></li>\
-            </ul>\
-            <div class='tab-pane active' id='home'>\
-              <div class='add-image-drag-area' id='dummy-dropzone'> </div> \
+            <div class='tabbable'>\
+              <ul class='nav nav-tabs' id='myTab'>\
+                <li><a href='#home' data-toggle='tab'>Drag Video</a></li>\
+                <li><a href='#profile' data-toggle='tab'>İmage Upload</a></li>\
+              </ul>\
             </div>\
-            <div class='tab-pane active' id='profile'>\
-              <input type='file' name='image_file' id='image_file' value='' ><br><br>\
+            <div class='tab-content'>\
+              <div class='tab-pane fade in active' id='home'><br>\
+                <div class='add-image-drag-area' id='dummy-dropzone'> </div> \
+              </div>\
+              <div class='tab-pane fade' id='profile'><br>\
+                <input type='file' name='image_file' id='image_file' value='' ><br><br>\
+              </div>\
             </div>\
             <input type='text' name='width' id='width' placeholder='Genişlik' value=''>\
             <input type='text' name='height' id='height' placeholder='Yükseklik' value=''>\
@@ -196,6 +206,7 @@ var createImageComponent = function ( event, ui ,oldcomponent) {
 
       });
         $( "#repeat" ).buttonset();
+        $('#myTab a:first').tab('show');
 
   var imagePopupBinary = '';
     $(document ).on('change','#image_popup_file' , function(){
@@ -215,8 +226,8 @@ var createImageComponent = function ( event, ui ,oldcomponent) {
       reader.onload = function(_file) {
         imagePopupBinary = _file.target.result;
         console.log(imageBinary);
-        $('#new_image').html();
-        $("<input type='radio' id='image_type2' name='image_popup_type' value='image_type2' checked='checked'><button id='button2' style='background-image:url(" + imagePopupBinary +"); width:70px; height:70px;'></button><br><br>").appendTo('#new_image');
+        $('#new_image').html('');
+        $("<input type='radio' id='image_type2' name='image_popup_type' value='image_type2' checked='checked'><button id='button2' style='background:url(" + imagePopupBinary +") no-repeat center center; no-repeat center center; -moz-background-size: cover; -webkit-background-size: cover; -o-background-size: cover; background-size: cover; width:70px; height:70px;'></button><br><br>").appendTo('#new_image');
         $( "button" ).button();
         marker = imagePopupBinary;
         console.log(marker);

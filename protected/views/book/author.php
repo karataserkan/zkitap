@@ -172,15 +172,11 @@ $current_user=User::model()->findByPk(Yii::app()->user->id);
 			<!-- <ul id="text-styles" ></ul> -->
                         <div class="generic-options float-left"  style="display:inline-block; margin-right:5px;">
 
-<<<<<<< HEAD
-				<a id="undo" class="undo toolbox-items icon-undo dark-blue size-15"></a>
-				<a id="redo" class="redo toolbox-items icon-redo grey-8 size-15"></a>
-=======
-			<a class="btn " id="undo" ><i style="vertical-align: bottom;" class="icon-undo size-15 dark-blue"></i></a>
-			<a class="btn " id="redo" ><i style="vertical-align: bottom;" class="icon-redo size-15 dark-blue"></i></a>
+
+			<a class="btn " id="undo" ><i style="vertical-align: bottom;" class="undo icon-undo size-15 dark-blue"></i></a>
+			<a class="btn " id="redo" ><i style="vertical-align: bottom;" class="redo icon-redo size-15 dark-blue"></i></a>
 				
 			
->>>>>>> f93cc758dbf823ea4091e09d544415f4ff73d94d
 			</div>
 			<div class="vertical-line responsive_2"></div>
 						
@@ -400,15 +396,9 @@ $current_user=User::model()->findByPk(Yii::app()->user->id);
 				<a href="#" class="btn " id="generic-disable" ><i style="margin-top:2px;" class="fa fa-lock size-20 dark-blue"></i></a>
 				<a href="#" class="btn " id="generic-undisable" ><i style="margin-top:2px;" class="fa fa-unlock-alt size-20 dark-blue"></i></a>
 				<div class="vertical-line responsive_2"></div>
-<<<<<<< HEAD
-				<a href="#" class="toolbox-items" id="generic-cut"><i class="generic-cut icon-cut size-25 dark-blue"></i></a>
-				<a href="#" class="toolbox-items" id="generic-copy"><i class="generic-copy icon-copy size-25 dark-blue"></i></a>
-				<a href="#" class="toolbox-items" id="generic-paste"><i class="generic-paste icon-paste size-25 dark-blue"></i></a>
-=======
-				<a href="#" class="btn " id="generic-cut"><i class="icon-cut size-25 dark-blue"></i></a>
-				<a href="#" class="btn " id="generic-copy"><i class="icon-copy size-25 dark-blue"></i></a>
-				<a href="#" class="btn " id="generic-paste"><i class="icon-paste size-25 dark-blue"></i></a>
->>>>>>> f93cc758dbf823ea4091e09d544415f4ff73d94d
+				<a href="#" class="btn " id="generic-cut"><i class="generic-cut icon-cut size-25 dark-blue"></i></a>
+				<a href="#" class="btn " id="generic-copy"><i class="generic-copy icon-copy size-25 dark-blue"></i></a>
+				<a href="#" class="btn " id="generic-paste"><i class="generic-paste icon-paste size-25 dark-blue"></i></a>
 
 				
 			</div>
