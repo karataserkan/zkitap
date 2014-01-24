@@ -827,7 +827,7 @@ $current_user=User::model()->findByPk(Yii::app()->user->id);
 			
 		
 <!-- chat  -->
-	<a class="chat_button"><i class="icon-chat-inv"></i><span class="text-visible">Yazışma</span></a>
+	<a class="chat_button"><i class="icon-chat-inv"></i><span class="text-visible">&nbsp;Yazışma</span></a>
 		<div class="chat_window">
 		
 	<div class="chat_inline_holder">
@@ -842,7 +842,7 @@ $current_user=User::model()->findByPk(Yii::app()->user->id);
 
 <div class="chat_text_box_holder">
 <textarea placeholder="Mesajınızı yazın."></textarea>
-<input type="submit" value="Gönder"> 
+<input type="submit"  value="gönder"> 
 </div>
 <!-- chat_text_box_holder SON -->
 </div>
