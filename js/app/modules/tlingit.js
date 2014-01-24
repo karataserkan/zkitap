@@ -17,16 +17,19 @@ window.lindneo.tlingit = (function(window, $, undefined){
     createComponent(component);
 
   };
-
-  var createComponent = function ( component ){
+  var oldcomponent_id = '';
+  var createComponent = function ( component, component_id ){
     // create component
     // server'a post et
     // co-worker'lara bildir
+    oldcomponent_id = component_id;
+
     window.lindneo.dataservice
       .send( 'AddComponent', 
         { 
           'pageId' : window.lindneo.currentPageId, 
-          'attributes' : componentToJson(component) 
+          'attributes' : componentToJson(component),
+          'oldcomponent_id' : oldcomponent_id 
         },
         newArrivalComponent,
         function(err){
@@ -36,13 +39,13 @@ window.lindneo.tlingit = (function(window, $, undefined){
 
   var newArrivalComponent = function (res) {
     var response = responseFromJson(res);
-
+    
     if( response.result === null ) {
       alert('hata'); 
       return;
     } 
     
-    window.lindneo.nisga.createComponent( response.result.component );
+    window.lindneo.nisga.createComponent( response.result.component, oldcomponent_id );
     window.lindneo.tsimshian.componentCreated( response.result.component );
     loadPagesPreviews(response.result.component.page_id);
   };

@@ -54,9 +54,10 @@ var createVideoComponent = function( event, ui, oldcomponent ) {
       var video_type = $('input[name=video_type]:checked').val();
         if(video_type == 'popup'){
           $("<span id='type_image'>\
-                <input type='radio' id='video_type0' name='video_image_type' value='video_type0'><button id='button0' style='background-image:url(\"http://dev.lindneo.com/css/popupmarker.png\"); width:70px; height:70px;'></button>\
-                <input type='radio' id='video_type1' name='video_image_type' value='link'><button id='button1' style='background-image:url(\"http://dev.lindneo.com/css/video_play_trans.png\"); width:70px; height:70px;'></button><br><br>\
-                <input type='file' name='video_image_file' id='video_image_file' value='' >\
+                <input type='radio' id='video_type0' name='video_image_type' value='video_type0'><button id='button0' style='background:url(\"http://dev.lindneo.com/css/popupmarker.png\") no-repeat center center;-moz-background-size: cover; -webkit-background-size: cover; -o-background-size: cover; background-size: cover; width:70px; height:70px;'></button>\
+                <input type='radio' id='video_type1' name='video_image_type' value='link'><button id='button1' style='background:url(\"http://dev.lindneo.com/css/video_play_trans.png\") no-repeat center center; -moz-background-size: cover; -webkit-background-size: cover; -o-background-size: cover; background-size: cover; width:70px; height:70px;'></button>\
+                <a href='#' onclick='document.getElementById(\"video_image_file\").click(); return false;' class='icon-upload dark-blue size-40' style='padding-left:15px;'></a>\
+                <input type='file' name='video_image_file' id='video_image_file' value='' style='visibility: hidden;' >\
                 <div id='new_image'></div>\
               </span>").appendTo('.type');
           $( "button" ).button();
@@ -83,31 +84,55 @@ var createVideoComponent = function( event, ui, oldcomponent ) {
       marker = oldcomponent.data.marker;
     };
     var link_check = '';
+    var link_check_active = '';
     var popup_check = '';
+    var popup_check_active = '';
 
-    if(video_type == 'link') link_check = "checked='checked'";
-    else popup_check = "checked='checked'";
+    if(video_type == 'link') { link_check = "checked='checked'"; link_check_active = 'active';}
+    else { popup_check = "checked='checked'"; popup_check_active = 'active'; }
 
     console.log(link_check);
     console.log(popup_check);
 
-      $("<div class='popup ui-draggable' id='pop-image-popup' style='display: block; top:" + top + "; left: " + left + ";'> \
+      $("<div class='popup ui-draggable' id='pop-image-popup' style='display: block; top:" + top + "; left: " + left + "; '> \
         <div class='popup-header'> \
         <i class='icon-m-video'></i> &nbsp;Video Ekle \
         <i id='video-add-dummy-close-button' class='icon-close size-10 popup-close-button'></i> \
         </div> \
-          <div class='gallery-inner-holder'> \
+          <div class='gallery-inner-holder' style='width:500px;'> \
             <div style='clear:both'></div> \
             <div class='type' style='padding: 4px; display: inline-block;'>\
-              <span id='repeat'>\
-                <input type='radio' id='repeat0' name='video_type' " + link_check + " value='link'><label for='repeat0'>Link</label>\
-                <input type='radio' id='repeat1' name='video_type' " + popup_check + " value='popup'><label for='repeat1'>Popup</label>\
-              </span><br><br>\
+                <div class='btn-group' data-toggle='buttons'>\
+                  <label class='btn btn-primary " + link_check_active + "'>\
+                    <input type='radio' name='video_type' id='repeat0' " + link_check + " value='link'> Link\
+                  </label>\
+                  <label class='btn btn-primary " + popup_check_active + "'>\
+                    <input type='radio' name='video_type' id='repeat1' " + popup_check + " value='popup'> Popup\
+                  </label>\
+                </div><br><br>\
             </div>\
-            <div class='add-image-drag-area' id='dummy-dropzone'> </div> \
-            <input type='file' name='video_file' id='video_file' value='' ><br><br>\
-            <input id='video-url-text' class='input-textbox' type='url' placeholder='URL Adresini Giriniz'   value=" + video_url + "> \
-            <a href='#' id='pop-image-OK' class='btn btn-info' id='add-image' >Ekle</a> \
+            <div class='tabbable'>\
+              <ul class='nav nav-tabs' id='myTab'>\
+                <li><a href='#home' data-toggle='tab'>Drag Video</a></li>\
+                <li><a href='#profile' data-toggle='tab'>Video Upload</a></li>\
+                <li><a href='#messages' data-toggle='tab'>Vİdeo Link</a></li>\
+              </ul>\
+            </div>\
+            <div class='tab-content'>\
+              <div class='tab-pane active' id='home'>\
+                <div class='divide-10'></div>\
+                <div class='add-image-drag-area' id='dummy-dropzone'> </div> \
+              </div>\
+              <div class='tab-pane ' id='profile'>\
+                <div class='divide-10'></div>\
+                <input type='file' name='video_file' id='video_file' value='' ><br><br>\
+              </div>\
+              <div class='tab-pane ' id='messages'>\
+                <div class='divide-10'></div>\
+                <input id='video-url-text' class='input-textbox' type='url' placeholder='URL Adresini Giriniz'   value='" + video_url + "'> \
+              </div>\
+            </div>\
+            <a href='#' id='pop-image-OK' class='btn bck-light-green white radius' id='add-image' style='padding: 5px 30px;'>Ekle</a> \
           </div> \
         </div>").appendTo('body');
     if(video_type == 'popup') video_type_image();
@@ -121,7 +146,8 @@ var createVideoComponent = function( event, ui, oldcomponent ) {
           }
 
       });
-      $( "#repeat" ).buttonset();
+     $('.btn').button();
+     $('#myTab a:first').tab('show');
     
    //$('#dialog').dialog();
    /*\
@@ -154,8 +180,8 @@ var createVideoComponent = function( event, ui, oldcomponent ) {
           reader.onload = function(_file) {
             imageBinary = _file.target.result;
             console.log(imageBinary);
-            $('#new_image').html();
-            $("<input type='radio' id='video_type2' name='video_image_type' value='video_type2' checked='checked'><button id='button2' style='background-image:url(" + imageBinary +"); width:70px; height:70px;'></button><br><br>").appendTo('#new_image');
+            $('#new_image').html('');
+            $("<input type='radio' id='video_type2' name='video_image_type' value='video_type2' checked='checked'><button id='button2' style='background:url(" + imageBinary +") no-repeat center center; no-repeat center center; -moz-background-size: cover; -webkit-background-size: cover; -o-background-size: cover; background-size: cover; width:70px; height:70px;'></button><br><br>").appendTo('#new_image');
             $( "button" ).button();
             marker = imageBinary;
             console.log(marker);
