@@ -4,8 +4,8 @@ $form=$this->beginWidget('CActiveForm', array(
 	'id'=>'publish-form',
 	'enableAjaxValidation'=>false,
 	'htmlOptions'=>array(
-                       'onsubmit'=>"return false;",/* Disable normal form submit */
-                       'onclick'=>"send();" /* Do ajax call when user presses enter key */
+                        'onsubmit'=>"return false;",/* Disable normal form submit */
+                       //'onkeypress'=>" if(event.keyCode == 13){ send(); } " /* Do ajax call when user presses enter key */
                      ),
 )); 
 ?>
@@ -16,6 +16,12 @@ foreach ($hosts as $key => $host) {
 }
 $contentHostIds['GIWwMdmQXL']='cloud.lindneo.com';
 ?>
+
+
+<?php echo $form->hiddenField($model,'contentId'); ?>
+<?php echo $form->hiddenField($model,'organisationId'); ?>
+<?php echo $form->hiddenField($model,'organisationName'); ?>
+<?php echo $form->hiddenField($model,'created'); ?>
 
 <div class="form-group">
 	<?php echo "Sunucu" ?>
@@ -81,7 +87,7 @@ function send()
 
   $.ajax({
    type: 'POST',
-    url: '<?php echo Yii::app()->createAbsoluteUrl("editorActions/deneme"); ?>',
+    url: '<?php echo Yii::app()->createAbsoluteUrl("editorActions/sendFileToCatalog"); ?>',
    data:data,
 success:function(data){
                 //alert(data); 
