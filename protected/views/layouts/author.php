@@ -12,13 +12,23 @@
 
 <!-- default styles and js -->
 
-
+		<link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/cloud-admin.css" > 
 <!-- Style Sheets Reset -->
+			
 		<link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/screen.css" media="screen, projection" />
 		<link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/print.css" media="print" />
 		<link href="<?php echo Yii::app()->request->baseUrl; ?>/css/ui/js/jquery-ui-1.10.3.custom/css/custom-theme/jquery-ui-1.10.3.custom.min.css" rel="stylesheet">
 		<link href="<?php echo Yii::app()->request->baseUrl; ?>/css/editor_blue/jquery.ui.rotatable.css" rel="stylesheet">
-
+		<link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/ui/js/bootstrap-daterangepicker/daterangepicker-bs3.css" />
+		<link href="<?php echo Yii::app()->request->baseUrl; ?>/css/ui/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+<<<<<<< HEAD
+=======
+		
+>>>>>>> a60ad62b5c26207a71cc7a7c1f852bacb9f5f770
+		
+		
+		
+		
 		<!-- Style Sheets -->
 		<link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/main.css" />
 		<link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/style.css" />
@@ -36,7 +46,16 @@
 		<script src="<?php echo Yii::app()->request->baseUrl; ?>/js/lib/jquery.ui.rotatable.js"></script>
 		<script src="<?php echo Yii::app()->request->baseUrl; ?>/js/lib/nprogress.js"></script>
 		<script src="<?php echo Yii::app()->request->hostInfo; ?>:1881/socket.io/socket.io.js"></script>
+<<<<<<< HEAD
+		<!-- BOOTSTRAP -->
+		<script src="<?php echo Yii::app()->request->baseUrl; ?>/css/bootstrap-dist/js/bootstrap.min.js"></script>
+		
+=======
 
+		<!-- BOOTSTRAP -->
+		<script src="<?php echo Yii::app()->request->baseUrl; ?>/css/bootstrap-dist/js/bootstrap.min.js"></script>
+
+>>>>>>> a60ad62b5c26207a71cc7a7c1f852bacb9f5f770
 		<!-- JS Modules -->
 		<script src="<?php echo Yii::app()->request->baseUrl; ?>/js/app/lindneo.js"></script>	
 		<script src="<?php echo Yii::app()->request->baseUrl; ?>/js/app/modules/dataservice.js"></script>	
@@ -67,7 +86,7 @@
 
 </head>
 
-<body>
+<body class="editor_blue">
 
 
 <?php echo $content; ?>

@@ -90,7 +90,7 @@ $current_user=User::model()->findByPk(Yii::app()->user->id);
 	
 			<div id='headermenu'>
 			<ul>
-			   <li><a style="height:40px;" href="<?php echo $this->createUrl('site/index');  ?>"><img  src="/css/linden_logo.png" height="30px;" style="padding-top:5px;"></a></li>
+			   <li><a style="height:42px;" href="<?php echo $this->createUrl('site/index');  ?>"><img  src="/css/linden_logo.png" height="30px;" style="padding-top:5px;"></a></li>
 			   <li><a contenteditable="true"> <?php echo $model->title; ?></a></li>
 			   <li class='has-sub'><a href='#'><span>Dosya</span></a>
 					<ul>
@@ -103,8 +103,9 @@ $current_user=User::model()->findByPk(Yii::app()->user->id);
 			   </li>
 			   <li class='has-sub'><a href='#'><span>Düzenle</span></a>
 			      <ul>
-			         <li><a href='#' id="undo"><i class="icon-undo size-10"></i><span>Geri Al</span></a></li>
-			         <li><a href='#' id="redo"><i class="icon-redo size-10"></i><span>İleri Al</span></a></li>
+			         <li><a href='#' id="undo"><i class="undo icon-undo size-10"></i><span>&nbsp;&nbsp;&nbsp;Geri Al</span></a></li>
+			         <li><a href='#' id="redo"><i class="redo icon-redo size-10"></i><span>&nbsp;&nbsp;&nbsp;İleri Al</span></a></li>
+
 			         <li><a href='#' id="generic-cut"><i class="generic-cut icon-cut size-20"></i><span>Kes</span></a></li>
 			         <li><a href='#' id="generic-copy"><i class="generic-copy icon-copy size-20"></i><span>Kopyala</span></a></li>
 			         <li><a href='#' id="generic-paste"><i class="generic-paste icon-paste size-20"></i><span>Yapıştır</span></a></li>
@@ -160,7 +161,7 @@ $current_user=User::model()->findByPk(Yii::app()->user->id);
 			      </ul>
 			   </li>
 			   
-			   <li class="left-border" style="float:right; height:37px; min-width:50px; text-align:center; padding-top: 5px; ">
+			   <li class="left-border" style="float:right; height: 42px; min-width:50px; text-align:center; padding-top: 5px; ">
 			  <i id="save_status" class="size-30"></i>
 			   </li>
 			</ul>
@@ -172,12 +173,18 @@ $current_user=User::model()->findByPk(Yii::app()->user->id);
 
 
 			</div>
-			<div class="styler_box">
+			<div class="styler_box dark-blue">
 			<!-- <ul id="text-styles" ></ul> -->
                         <div class="generic-options float-left"  style="display:inline-block; margin-right:5px;">
 
-				<a id="undo" class="toolbox-items icon-undo dark-blue size-15"></a>
-				<a id="redo" class="toolbox-items icon-redo grey-8 size-15"></a>
+
+			<a class="optbtn " id="undo" ><i style="vertical-align: bottom;" class="undo icon-undo size-15 dark-blue"></i></a>
+			<a class="optbtn " id="redo" ><i style="vertical-align: bottom;" class="redo icon-redo size-15 dark-blue"></i></a>
+
+
+
+				
+			
 			</div>
 			<div class="vertical-line responsive_2"></div>
 						
@@ -386,30 +393,33 @@ $current_user=User::model()->findByPk(Yii::app()->user->id);
 				
 			</div>
 			<div class="generic-options toolbox float-left"  style="display:inline-block;">
-			<!--	<a href="#" class="bck-dark-blue white toolbox-items radius" id="pop-align"><i class="icon-align-center size-20"></i></a> -->
-				<a href="#" class="bck-dark-blue white toolbox-items radius responsive_2" id="pop-arrange"><i class="icon-send-backward size-15"></i></a>
-			<!--	<a href="#" class="btn grey white radius">Grupla</a>    -->
+			<!--	<a href="#" class="bck-dark-blue white btn btn-default" id="pop-align"><i class="icon-align-center size-20"></i></a> -->
+			<a href="#" class="optbtn" id="pop-arrange" ><i style="vertical-align:bottom;" class="icon-send-backward size-15"></i></a>
+			<!--	<a href="#" class="btn btn-info">Grupla</a>    -->
 			</div>
 			
 			<div class="generic-options responsive_1"  style="display:inline-block;">
-				<a href="#" class="toolbox-items" id="pop-align"><i class="icon-align-center dark-blue size-20"></i></a>
+				<a href="#" class="optbtn " id="pop-align"><i class="icon-align-center size-20 dark-blue"></i></a>
 				<div class="vertical-line responsive_2"></div>
-				<a href="#" class="toolbox-items" id="generic-disable" ><i class="icon-lock size-25 dark-blue"></i></a>
-				<a href="#" class="toolbox-items" id="generic-undisable" ><i class="icon-lock-open-alt size-25 dark-blue"></i></a>
+				<a href="#" class="optbtn " id="generic-disable" ><i style="margin-top:2px;" class="fa fa-lock size-20 dark-blue"></i></a>
+				<a href="#" class="optbtn " id="generic-undisable" ><i style="margin-top:2px;" class="fa fa-unlock-alt size-20 dark-blue"></i></a>
 				<div class="vertical-line responsive_2"></div>
-				<a href="#" class="toolbox-items" id="generic-cut"><i class="icon-cut size-25 dark-blue"></i></a>
-				<a href="#" class="toolbox-items" id="generic-copy"><i class="icon-copy size-25 dark-blue"></i></a>
-				<a href="#" class="toolbox-items" id="generic-paste"><i class="icon-paste size-25 dark-blue"></i></a>
+
+				<a href="#" class="optbtn " id="generic-cut"><i class="generic-cut icon-cut size-25 dark-blue"></i></a>
+				<a href="#" class="optbtn " id="generic-copy"><i class="generic-copy icon-copy size-25 dark-blue"></i></a>
+				<a href="#" class="optbtn " id="generic-paste"><i class="generic-paste icon-paste size-25 dark-blue"></i></a>
+
 
 				
-			</div>
 				
+			</div>
+			<a class="btn btn-info pull-right "id="pages"><i class="fa fa-files-o"></i> Sayfalar</a>
 			
-			
-			
-			<span class="example btn white radius " data-dropdown="#dropdown-1">Diğer</span>
-			<span class="example second_dropdown btn white radius" data-dropdown="#dropdown-2">Diğer</span>
-			
+			<script>
+			$( "#pages" ).click(function() {
+			$( "#chapters_pages_view" ).toggle( "drop",{direction: "up"}, 1000 );
+			});
+			</script>
 			
 			</div>
 		
@@ -518,7 +528,7 @@ $current_user=User::model()->findByPk(Yii::app()->user->id);
 	<div class="gallery-inner-holder">
 		<div style="clear:both"></div>
 		<div class="add-image-drag-area"> </div>
-		<a href="#" class="btn bck-light-green white radius" id="add-image" style="padding: 5px 30px;">Ekle</a>
+		<a href="#" class="btn btn-info" id="add-image" style="padding: 5px 30px;">Ekle</a>
 	</div>
 <!-- popup content-->
 </div>	
@@ -537,7 +547,7 @@ $current_user=User::model()->findByPk(Yii::app()->user->id);
 		<div style="clear:both"></div>
 		<div class="add-image-drag-area"> </div>
 		<input class="input-textbox" type="url" value="sesin adını yazınız">
-		<a href="#" class="btn bck-light-green white radius" id="add-image" style="padding: 5px 30px;">Ekle</a>
+		<a href="#" class="btn btn-info" id="add-image" style="padding: 5px 30px;">Ekle</a>
 	</div>
 <!-- popup content-->
 </div>	
@@ -556,7 +566,7 @@ $current_user=User::model()->findByPk(Yii::app()->user->id);
 	<div class="gallery-inner-holder">
 		<form id="video-url">
 		<input class="input-textbox" type="url" value="URL Adresini Giriniz">
-		<a href="#" class="btn bck-light-green white radius" id="add-image" style="padding: 5px 30px;">Ekle</a>
+		<a href="#" class="btn btn-info" id="add-image" style="padding: 5px 30px;">Ekle</a>
 		</form>
 	</div>		
 	
@@ -595,7 +605,7 @@ $current_user=User::model()->findByPk(Yii::app()->user->id);
 					
 			</div>
 			<div class="add-image-drag-area"> </div>
-		<a href="#" class="btn bck-light-green white radius" id="add-image" style="padding: 5px 30px;">Ekle</a>
+		<a href="#" class="btn btn-info" id="add-image" style="padding: 5px 30px;">Ekle</a>
 	</div>
 <!-- popup content-->
 </div>	
@@ -656,7 +666,7 @@ $current_user=User::model()->findByPk(Yii::app()->user->id);
 			</textarea> </br>
 		</div>
 		
-		<a href="#" class="btn bck-light-green white radius" id="add-image" style="padding: 5px 30px;">Ekle</a>
+		<a href="#" class="btn btn-info" id="add-image" style="padding: 5px 30px;">Ekle</a>
 		</form>
 		
 		
@@ -678,7 +688,7 @@ $current_user=User::model()->findByPk(Yii::app()->user->id);
 	<div class="gallery-inner-holder">
 		<textarea class="popup-text-area">Açılır kutunun içeriğini yazınız.
 		</textarea> </br>
-		<a href="#" class="btn bck-light-green white radius" id="add-image" style="padding: 5px 30px;">Ekle</a>
+		<a href="#" class="btn btn-info" id="add-image" style="padding: 5px 30px;">Ekle</a>
 	</div>
 <!-- popup content-->
 </div>	
@@ -749,7 +759,7 @@ $current_user=User::model()->findByPk(Yii::app()->user->id);
 					
 			</div>
 					
-	<a href="#" class="btn bck-light-green white radius" id="add-image" style="padding: 5px 30px;">Ekle</a>
+	<a href="#" class="btn btn-info" id="add-image" style="padding: 5px 30px;">Ekle</a>
 	</div>		
 	
 <!-- popup content-->
@@ -793,7 +803,7 @@ $current_user=User::model()->findByPk(Yii::app()->user->id);
 			-->
 		<ul class="component_holder">
 		
-			<li class="left_bar_titles"></li>
+			
 			
 			<li ctype="image" class="component icon-m-image">&nbsp;&nbsp;&nbsp;&nbsp;Görsel</li>
 			<li ctype="sound" class="component icon-m-sound">&nbsp;&nbsp;&nbsp;&nbsp;Ses</li>
@@ -803,7 +813,7 @@ $current_user=User::model()->findByPk(Yii::app()->user->id);
 			
 			<li ctype="galery" class="component icon-m-galery">&nbsp;&nbsp;&nbsp;&nbsp;Galeri</li>
 			<li ctype="quiz"  class="component icon-m-quiz">&nbsp;&nbsp;&nbsp;&nbsp;Quiz</li>
-			<li ctype="side-text"  class="component icon-m-listbox">&nbsp;&nbsp;&nbsp;&nbsp;Yazı Kutusu</li>
+			<li ctype="side-text"  class="component icon-m-listbox">&nbsp;&nbsp;&nbsp;Yazı Kutusu</li>
 			<li ctype="link" class="component icon-m-link ui-draggable">&nbsp;&nbsp;&nbsp;&nbsp;Link</li>
 			<li ctype="popup" class="component icon-m-popup">&nbsp;&nbsp;&nbsp;&nbsp;Pop-up</li>
 			
@@ -826,7 +836,7 @@ $current_user=User::model()->findByPk(Yii::app()->user->id);
 			
 		
 <!-- chat  -->
-	<a class="chat_button"><i class="icon-chat-inv"></i><span class="text-visible">Yazışma</span></a>
+	<a class="chat_button"><i class="icon-chat-inv"></i><span class="text-visible">&nbsp;Yazışma</span></a>
 		<div class="chat_window">
 		
 	<div class="chat_inline_holder">
@@ -841,7 +851,7 @@ $current_user=User::model()->findByPk(Yii::app()->user->id);
 
 <div class="chat_text_box_holder">
 <textarea placeholder="Mesajınızı yazın."></textarea>
-<input type="submit" value="Gönder"> 
+<input type="submit"  value="gönder"> 
 </div>
 <!-- chat_text_box_holder SON -->
 </div>
@@ -876,22 +886,50 @@ $current_user=User::model()->findByPk(Yii::app()->user->id);
 		 $(".text-visible").toggleClass('text-hidden');
 		 $(".chat_window").toggleClass('chat_window_close');
 		 $(".left_bar_shrink").toggleClass('left_bar_shrink_close');
-		 
+		 $("ul.component_holder li").toggleClass('ul.component_holder_close');
 		});
 				
 		</script>
 
-<div class='group'>
-	<h3><?php _e("Sayfalar"); ?> </h3>
+
 	<div id='chapters_pages_view' class="chapter-view" >
-
-
-
-
-
-
-
-
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		<div class="box-body">
+			<div class="panel-group" id="accordion">
+			  <div class="panel panel-default">
+				 <div class="panel-heading">
+					<h3 class="panel-title"> <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseOne">Kitap Kapağı</a> </h3>
+				 </div>
+				 <div id="collapseOne" class="panel-collapse collapse in">
+					<div class="panel-body"> </div>
+			  </div>
+			  <div class="panel panel-default">
+				 <div class="panel-heading">
+					<h3 class="panel-title"> <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">İçindekiler </a> </h3>
+				 </div>
+				 <div id="collapseTwo" class="panel-collapse collapse">
+					<div class="panel-body"></div>
+			  </div>
+			  <div class="panel panel-default">
+				 <div class="panel-heading">
+					<h3 class="panel-title"> <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseThree">Sayfalar </a> </h3>
+				 </div>
+				 <div id="collapseThree" class="panel-collapse collapse">
+					<div class="panel-body">
+					
+					
+					
+		
+		
+		
 		<?php 
 		$page_NUM=0;
 
@@ -904,7 +942,7 @@ $current_user=User::model()->findByPk(Yii::app()->user->id);
 						?>
 	<div class='chapter' chapter_id='<?php echo $chapter->chapter_id; ?>'>
 	<input type="text" class="chapter-title" placeholder="chapter title" value="<?php echo $chapter->title; ?>">
-	<a class="btn red white size-15 radius icon-delete page-chapter-delete  delete-chapter hidden-delete" style="float: right; margin-top: -23px;"></a>
+	<a class="btn btn-info size-15 radius icon-delete page-chapter-delete  delete-chapter hidden-delete" style="float: right; margin-top: -23px;"></a>
 	 <!-- <?php echo $chapter->title; ?>  chapter title--> 
 						<ul class="pages" >
 								<?php
@@ -928,7 +966,7 @@ $current_user=User::model()->findByPk(Yii::app()->user->id);
 					?> 
 						
 						<li class='page <?php echo ( $current_page->page_id== $pages->page_id  ? "current_page": "" ); ?>' chapter_id='<?php echo $pages->chapter_id; ?>' page_id='<?php echo $pages->page_id; ?>' chapter_id='<?php echo $pages->page_id; ?>'   >
-							<a class="btn red white size-15 radius icon-delete page-chapter-delete delete-page hidden-delete "  style="top: 0px;right: 0px; position: absolute;"></a>
+							<a class="btn btn-info size-15 radius icon-delete page-chapter-delete delete-page hidden-delete "  style="top: 0px;right: 0px; position: absolute;"></a>
 							<!--<a href='<?php echo $this->createUrl("book/author", array('bookId' => $model->book_id, 'page'=>$pages->page_id ));?>' >-->
 								<a href='<?php echo "/book/author/".$model->book_id.'/'.$pages->page_id;?>'/>
 									
@@ -944,8 +982,10 @@ $current_user=User::model()->findByPk(Yii::app()->user->id);
 				<?php
 
 		}
+		
 		//$this->current_chapter=null;
 		?>
+		
 		<div id="add-button" class="bck-dark-blue size-25 icon-add white" style="position: fixed; bottom: 0px; right: 0px; width: 140px; text-align: center;"></div>
 		
 		<script>
@@ -966,6 +1006,7 @@ $current_user=User::model()->findByPk(Yii::app()->user->id);
 		}
 
 		?>	
+		
 	$( "#add-button" ).hover(
 	  function() {
 
@@ -993,8 +1034,22 @@ $current_user=User::model()->findByPk(Yii::app()->user->id);
 
 
 	</script>
+		
+					
+					
+					
+					
+					
+					</div>
+				</div>
+				</div>
+		</div>
+		</div>
+		</div>
+		</div>
+		
 			
-	</div>
+	
 </div>
 
 <div id='author_pane_container' style=' width:100%'>
@@ -1111,7 +1166,7 @@ $background= (!empty($img)) ? "background-image:url('".$img."')" : "background:w
 	
 <div id="dropdown-2" class="dropdown dropdown-tip dropdown-anchor-right">
 		<ul class="dropdown-menu">
-			<a href="#" class="bck-dark-blue white toolbox-items radius" id="pop-arrange"><i class="icon-send-backward size-15"></i></a>
+			<a href="#"style="vertical-align: bottom;" class="toolbox-items " id="pop-arrange"><i class="icon-send-backward size-15"></i></a>
 
 <div class="generic-options" style="display:inline-block;">
 				<a href="#" class="toolbox-items" id="generic-cut"><i class="generic-cut icon-cut"></i></a>

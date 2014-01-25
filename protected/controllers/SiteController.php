@@ -319,8 +319,9 @@ class SiteController extends Controller
 				
 		}
 
-		if (isset($_GET['User'])) {
-			$attributes=$_GET['User'];
+		if (isset($_POST['User'])) {
+			$attributes=$_POST['User'];
+			$newUser->data=$attributes['data'];
 			$newUser->name=$attributes['name'];
 			$newUser->surname=$attributes['surname'];
 			$newUser->email=$attributes['email'];
