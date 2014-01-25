@@ -673,7 +673,7 @@ right join book using (book_id) where book_id='$bookId' and type!='image';";
 
 	public function SendFileToCatalog($bookId){
 
-
+		ob_start();
 		$book=Book::model()->findByPk($bookId);
 		$ebook=new epub3($book);
 
@@ -717,7 +717,7 @@ right join book using (book_id) where book_id='$bookId' and type!='image';";
 		$msg = 'File uploaded successfully.';
 		curl_close ($ch);
 		$Return['msg'] = $msg;
-
+		ob_end_clean();
 		return $Return;
 
 	}
