@@ -66,7 +66,11 @@ class SiteController extends Controller
 
 		$this->redirect('index');
 	}
-
+	public function actionReader()
+	{
+		$this->layout = '//layouts/column1';
+		$this->render('reader');
+		}
 	//kullanıcı haklarını burada düzenliyorum
 	public function actionRight($userId,$bookId,$type)
 	{
