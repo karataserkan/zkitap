@@ -8,7 +8,14 @@ $(document).ready(function() {
 
             var that = this;
 
-
+            var componentvideoid='video'+this.options.component.id;
+            if(this.options.component.data.video_type == 'popup'){
+              if( this.options.marker ) {
+                var newimage=$('<img id="img_'+componentvideoid+'" src="' + this.options.marker +  '"/>');
+                newimage.appendTo(this.element);
+              }
+            }
+            else{
             if (this.options.component.data.source.attr.src) {
                 var source = $('<source src="' + this.options.component.data.source.attr.src + '" /> ');
                 var video = $('<video controls="controls"></video>');
@@ -19,6 +26,7 @@ $(document).ready(function() {
 
                 // this.element.attr('src', this.options.component.data.img.src);  
             }
+          }
 
 
             this._super();
@@ -38,36 +46,98 @@ $(document).ready(function() {
 var top = 0;
 var left = 0;
 
+
 var createVideoComponent = function( event, ui, oldcomponent ) {
+
+  var marker = 'http://dev.lindneo.com/css/popupmarker.png';
+  var video_type_image = function(){
+      var video_type = $('input[name=video_type]:checked').val();
+        if(video_type == 'popup'){
+          $("<span id='type_image'>\
+                <input type='radio' id='video_type0' name='video_image_type' value='video_type0'><button id='button0' style='background:url(\"http://dev.lindneo.com/css/popupmarker.png\") no-repeat center center;-moz-background-size: cover; -webkit-background-size: cover; -o-background-size: cover; background-size: cover; width:70px; height:70px;'></button>\
+                <input type='radio' id='video_type1' name='video_image_type' value='link'><button id='button1' style='background:url(\"http://dev.lindneo.com/css/video_play_trans.png\") no-repeat center center; -moz-background-size: cover; -webkit-background-size: cover; -o-background-size: cover; background-size: cover; width:70px; height:70px;'></button>\
+                <a href='#' onclick='document.getElementById(\"video_image_file\").click(); return false;' class='icon-upload dark-blue size-40' style='padding-left:15px;'></a>\
+                <input type='file' name='video_image_file' id='video_image_file' value='' style='visibility: hidden;' >\
+                <div id='new_image'></div>\
+              </span>").appendTo('.type');
+          $( "button" ).button();
+          $('#button0').click(function(){$("#video_type0").prop("checked", true); marker = 'http://dev.lindneo.com/css/popupmarker.png'; console.log(marker);});
+          $('#button1').click(function(){$("#video_type1").prop("checked", true); marker = 'http://dev.lindneo.com/css/video_play_trans.png'; console.log(marker);});
+        }
+        else{ 
+          $('#type_image').remove();
+        }
+    };
 
     if(typeof oldcomponent == 'undefined'){
       console.log('dene');
       var top = (ui.offset.top-$(event.target).offset().top ) + 'px';
       var left = ( ui.offset.left-$(event.target).offset().left ) + 'px';
       var video_url = "http://lindneo.com/5.mp4";
+      var video_type = 'link';
     }
     else{
       top = oldcomponent.data.self.css.top;
       left = oldcomponent.data.self.css.left;
       video_url = oldcomponent.data.source.attr.src;
+      video_type = oldcomponent.data.video_type;
+      marker = oldcomponent.data.marker;
     };
-    console.log(top);
-    console.log(left);
-      $("<div class='popup ui-draggable' id='pop-image-popup' style='display: block; top:" + top + "; left: " + left + ";'> \
+    var link_check = '';
+    var link_check_active = '';
+    var popup_check = '';
+    var popup_check_active = '';
+
+    if(video_type == 'link') { link_check = "checked='checked'"; link_check_active = 'active';}
+    else { popup_check = "checked='checked'"; popup_check_active = 'active'; }
+
+    console.log(link_check);
+    console.log(popup_check);
+
+      $("<div class='popup ui-draggable' id='pop-image-popup' style='display: block; top:" + top + "; left: " + left + "; '> \
         <div class='popup-header'> \
-        Video Ekle \
-        <div class='popup-close' id='image-add-dummy-close-button'>x</div> \
+        <i class='icon-m-video'></i> &nbsp;Video Ekle \
+        <i id='video-add-dummy-close-button' class='icon-close size-10 popup-close-button'></i> \
         </div> \
-          <div class='gallery-inner-holder'> \
+          <div class='gallery-inner-holder' style='width:500px;'> \
             <div style='clear:both'></div> \
-            <div class='add-image-drag-area' id='dummy-dropzone'> </div> \
-            <input type='file' name='video_file' id='video_file' value='' ><br><br>\
-            <input id='video-url-text' class='input-textbox' type='url' placeholder='URL Adresini Giriniz'   value=" + video_url + "> \
+            <div class='type' style='padding: 4px; display: inline-block;'>\
+                <div class='btn-group' data-toggle='buttons'>\
+                  <label class='btn btn-primary " + link_check_active + "'>\
+                    <input type='radio' name='video_type' id='repeat0' " + link_check + " value='link'> Link\
+                  </label>\
+                  <label class='btn btn-primary " + popup_check_active + "'>\
+                    <input type='radio' name='video_type' id='repeat1' " + popup_check + " value='popup'> Popup\
+                  </label>\
+                </div><br><br>\
+            </div>\
+            <div class='tabbable'>\
+              <ul class='nav nav-tabs' id='myTab'>\
+                <li><a href='#home' data-toggle='tab'>Drag Video</a></li>\
+                <li><a href='#profile' data-toggle='tab'>Video Upload</a></li>\
+                <li><a href='#messages' data-toggle='tab'>Vİdeo Link</a></li>\
+              </ul>\
+            </div>\
+            <div class='tab-content'>\
+              <div class='tab-pane active' id='home'>\
+                <div class='divide-10'></div>\
+                <div class='add-image-drag-area' id='dummy-dropzone'> </div> \
+              </div>\
+              <div class='tab-pane ' id='profile'>\
+                <div class='divide-10'></div>\
+                <input type='file' name='video_file' id='video_file' value='' ><br><br>\
+              </div>\
+              <div class='tab-pane ' id='messages'>\
+                <div class='divide-10'></div>\
+                <input id='video-url-text' class='input-textbox' type='url' placeholder='URL Adresini Giriniz'   value='" + video_url + "'> \
+              </div>\
+            </div>\
             <a href='#' id='pop-image-OK' class='btn bck-light-green white radius' id='add-image' style='padding: 5px 30px;'>Ekle</a> \
           </div> \
         </div>").appendTo('body');
+    if(video_type == 'popup') video_type_image();
 
-      $('#image-add-dummy-close-button').click(function() {
+      $('#video-add-dummy-close-button').click(function() {
 
           $('#pop-image-popup').remove();
 
@@ -76,17 +146,66 @@ var createVideoComponent = function( event, ui, oldcomponent ) {
           }
 
       });
-      
+     $('.btn').button();
+     $('#myTab a:first').tab('show');
+    
+   //$('#dialog').dialog();
+   /*\
+            <div id='dialog' title='Video'>\
+  <video controls='controls' style='width: 100%; height: 100%;''><source src='http://lindneo.com/5.mp4'></video>\
+</div>\*/
+    var changeimage = false;
     var change = false;
     var that = '';
     $('#video_file').change(function(){
           change = true;
           that = this;
         });
+    var imageBinary = '';
+    $(document ).on('change','#video_image_file' , function(){
+          changeimage = true;
+          that = this;
+          var file = that.files[0];
+          var name = file.name;
+          var size = file.size;
+          var type = file.type;
+          var token = '';
+          console.log('dene');
+          var reader = new FileReader();
+          console.log(reader);
+          var component = {};
+          var videoURL = '';
+          reader.readAsDataURL(file);
+          console.log(reader);
+          reader.onload = function(_file) {
+            imageBinary = _file.target.result;
+            console.log(imageBinary);
+            $('#new_image').html('');
+            $("<input type='radio' id='video_type2' name='video_image_type' value='video_type2' checked='checked'><button id='button2' style='background:url(" + imageBinary +") no-repeat center center; no-repeat center center; -moz-background-size: cover; -webkit-background-size: cover; -o-background-size: cover; background-size: cover; width:70px; height:70px;'></button><br><br>").appendTo('#new_image');
+            $( "button" ).button();
+            marker = imageBinary;
+            console.log(marker);
+          }
+          console.log(marker);
+        });
 
+    $("input[name=video_type]:radio").change(function () {
+        video_type_image();
+      });
+    
+    if(changeimage){
+          console.log(that);
+          var file = that.files[0];
+          var name = file.name;
+          var size = file.size;
+          var type = file.type;
+        };
 
     $('#pop-image-OK').click(function() {
 
+        var video_type = $('input[name=video_type]:checked').val();
+        console.log(video_type);
+        console.log(marker);
         if(typeof oldcomponent == 'undefined'){
           
           var top = (ui.offset.top-$(event.target).offset().top ) + 'px';
@@ -143,6 +262,8 @@ var createVideoComponent = function( event, ui, oldcomponent ) {
                                 },
                                 'contentType': contentType
                             },
+                            'video_type' : video_type,
+                            'marker' : marker,
                             'source': {
                                 'attr': {
                                     'src': videoURL
@@ -168,7 +289,7 @@ var createVideoComponent = function( event, ui, oldcomponent ) {
                         }
                     };
 
-                    console.log(oldcomponent);
+                    console.log(component);
                     window.lindneo.tlingit.componentHasCreated( component );
                   
                 });
@@ -176,14 +297,14 @@ var createVideoComponent = function( event, ui, oldcomponent ) {
             });
 
 
-          $("#image-add-dummy-close-button").trigger('click');
+          $("#video-add-dummy-close-button").trigger('click');
 
         };
 
       }
       else{
 
-
+        var video_type = $('input[name=video_type]:checked').val();
         var req = new XMLHttpRequest();
         var videoURL = $('#video-url-text').val();
 
@@ -221,6 +342,8 @@ var createVideoComponent = function( event, ui, oldcomponent ) {
                     },
                     'contentType': contentType
                 },
+                'video_type' : video_type,
+                'marker' : marker,
                 'source': {
                     'attr': {
                         'src': videoURL
@@ -247,9 +370,9 @@ var createVideoComponent = function( event, ui, oldcomponent ) {
             }
         };
 
-
+        console.log(component);
         window.lindneo.tlingit.componentHasCreated(component);
-        $("#image-add-dummy-close-button").trigger('click');
+        $("#video-add-dummy-close-button").trigger('click');
 
       };
     });
@@ -279,7 +402,7 @@ var createVideoComponent = function( event, ui, oldcomponent ) {
         e.preventDefault();
 
         var token = '';
-
+        var video_type = $('input[name=video_type]:checked').val();
         var reader = new FileReader();
         var component = {};
         var videoURL = '';
@@ -367,6 +490,8 @@ var createVideoComponent = function( event, ui, oldcomponent ) {
                               },
                               'contentType': contentType
                           },
+                          'video_type' : video_type,
+                          'marker' : marker,
                           'source': {
                               'attr': {
                                   'src': response.result.URL
@@ -405,7 +530,7 @@ var createVideoComponent = function( event, ui, oldcomponent ) {
           });
 
 
-        $("#image-add-dummy-close-button").trigger('click');
+        $("#video-add-dummy-close-button").trigger('click');
 
         };
         reader.readAsDataURL(e.dataTransfer.files[0]);

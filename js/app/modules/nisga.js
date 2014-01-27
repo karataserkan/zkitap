@@ -33,16 +33,25 @@ window.lindneo.nisga = (function(window, $, undefined){
  
 
 
-  var createComponent = function( component ){
+  var createComponent = function( component, oldcomponent_id ){
       //console.log(revision_value);
-//    console.log(component);
+    //console.log(oldcomponent_id);
+    //console.log(revision_array);
+    $.each(revision_array.revisions, function(index,value){ 
+        if (value.component_id == oldcomponent_id )
+            revision_array.revisions[index].component_id = component.id;
+            revision_array.revisions[index].component.id = component.id;
+    });
+    //console.log(revision_array);
     componentBuilder( component );  
     if(revision_value==0){
+      if(typeof oldcomponent_id == 'undefined')  {
         revision_array.revisions.push({component_id: component.id, component: component, revision_date: $.now(), even_type: 'CREATE'});
         revision_id++;
+      }
     }
     else revision_value=0;
-    
+    //if(typeof oldcomponent_id != 'undefined') revision_array.revisions.pop();
     //console.log(revision_array);
   };
 
@@ -70,6 +79,7 @@ window.lindneo.nisga = (function(window, $, undefined){
 
       case 'video':
         videoComponentBuilder( component );
+        console.log(component);
         break;
 
       case 'popup':
@@ -102,114 +112,71 @@ window.lindneo.nisga = (function(window, $, undefined){
   }; 
 
   var undoComponent = function() {
-        //console.log(revision_array[0].revisions[0].component_id);
+      if(revision_id > 0){
+        revision_id = revision_id - 1;
+        //console.log(revision_array.revisions);
         //console.log(revision_id);
-        if(revision_id!=0){ //console.log(revision_array[revision_id-1].revisions[0].component);
-            revision_id=revision_id-1;
-            console.log(revision_id);
-            console.log(revision_array.revisions.length);
-            console.log(revision_array.revisions[revision_id].even_type);
-            console.log(revision_array.revisions);
-            revision_value=1;
-           if(revision_array.revisions[revision_id].even_type=='CREATE'){
-                if(revision_array.revisions[revision_id].component.type=='image'){
-                    destroyComponent(revision_array.revisions[revision_id].component.id);
-                    window.lindneo.tlingit.componentHasCreated(revision_array.revisions[revision_id-1].component)
-                }
-                else{
-                destroyComponent(revision_array.revisions[revision_id].component.id);
-                }
-                //console.log(revision_array.revisions[revision_id].even_type);
-                //console.log(revision_array);
-                //console.log(revision_array);
-                //console.log(revision_id);
-            }
-            if(revision_array.revisions[revision_id].even_type=='UPDATE'){
-                //console.log(revision_array[revision_id-1].revisions[0].component);
-                //console.log(revision_array[revision_id-2].revisions[0].component);
-                var array_where = [];
-                $.each(revision_array.revisions, function(index,value){ 
-                    if (value.component_id == revision_array.revisions[revision_id].component.id && index<=revision_id)
-                        array_where.push(value);
-                }); 
+        //console.log(revision_array.revisions[revision_id].even_type);
+        //console.log(revision_array.revisions);
 
-                //var array_where = $.grep(revision_array.revisions, function(e){ return (e.component.id == revision_array.revisions[revision_id].component.id && e.indexOf('J')); }); 
-                array_where.pop();
-                console.log(array_where[array_where.length-1].component);
-                destroyComponent(array_where[array_where.length-1].component.id);
-                createComponent(array_where[array_where.length-1].component);
-                window.lindneo.tlingit.componentHasUpdated(array_where[array_where.length-1].component);
-                
-                
-                //revision_id--;
-                //console.log(revision_array.revisions[revision_id].even_type);
-                //console.log(revision_array);
-                //console.log(revision_id);
-                
-            }
-            if(revision_array.revisions[revision_id].even_type=='DELETE'){
-                //window.lindneo.tlingit.componentHasCreated(revision_array.revisions[revision_id].component);
-                createComponent(revision_array.revisions[revision_id].component);
-                //console.log(revision_array.revisions[revision_id].even_type);
-                //console.log(revision_array);
-            }
+        if(revision_array.revisions[revision_id].even_type=='CREATE'){
+          deleteComponent(revision_array.revisions[revision_id].component, revision_array.revisions[revision_id].component.id);
+          //window.lindneo.tlingit.componentHasCreated(revision_array.revisions[revision_id-1].component, revision_array.revisions[revision_id].component);
         }
+        else if(revision_array.revisions[revision_id].even_type=='UPDATE'){
+          var array_where = [];
+          $.each(revision_array.revisions, function(index,value){ 
+              if (value.component_id == revision_array.revisions[revision_id].component_id && index<=revision_id){
+                  //console.log(revision_array.revisions[revision_id].component.id);
+                  //console.log(revision_array.revisions[revision_id].component_id);
+                  //console.log(value.component.id);
+                  array_where.push(value);
+                }
+          });
+          array_where.pop();
+          console.log(revision_id);
+          //console.log(revision_array.revisions);
+          //console.log(revision_array.revisions[revision_id]);
+          //console.log(array_where[array_where.length-1].component.data.textarea.val);
+          //console.log(array_where[array_where.length-1].component.id);
+          destroyComponent(array_where[array_where.length-1].component.id);
+          revision_id--;
+          createComponent(array_where[array_where.length-1].component, array_where[array_where.length-1].component.id);
+        }
+        else if(revision_array.revisions[revision_id].even_type=='DELETE'){
+          window.lindneo.tlingit.createComponent(revision_array.revisions[revision_id].component, revision_array.revisions[revision_id-1].component.id);
+        }
+        //revision_id--;
+      }
     }
     
     var redoComponent = function() {
-        //console.log(revision_array.revisions[revision_id].component_id);
+      if(revision_id < revision_array.revisions.length){
+        revision_id = revision_id + 1;
+        console.log(revision_array.revisions);
         console.log(revision_id);
-        console.log(revision_id+' '+revision_array.revisions.length);
         console.log(revision_array.revisions[revision_id].even_type);
-        console.log(revision_array);
-        if(revision_id<revision_array.revisions.length){ //console.log(revision_array[revision_id-1].revisions[0].component);
-            //revision_id=revision_id-1;
-            //console.log(revision_id);
-            //console.log(revision_array.revisions[revision_id].even_type);
-            revision_value=1;
-           if(revision_array.revisions[revision_id].even_type=='CREATE'){
-               if(revision_array.revisions[revision_id].component.type=='image'){
-                    destroyComponent(revision_array.revisions[revision_id].component.id);
-                    window.lindneo.tlingit.componentHasCreated(revision_array.revisions[revision_id+1].component);
-                }
-                else{
-                    createComponent(revision_array.revisions[revision_id].component);
-                }
-                //console.log(revision_array.revisions[revision_id].even_type);
-                //console.log(revision_array);
-                revision_array.revisions.pop();
-                
-            }
-            if(revision_array.revisions[revision_id].even_type=='UPDATE'){
-                //console.log(revision_value);
-                //console.log(revision_array[revision_id-2].revisions[0].component);
-                destroyComponent(revision_array.revisions[revision_id].component.id);
-                createComponent(revision_array.revisions[revision_id].component);
-                window.lindneo.tlingit.componentHasUpdated(revision_array.revisions[revision_id].component);
-                
-                //revision_id--;
-                //console.log(revision_array.revisions[revision_id].even_type);
-                //console.log(revision_array);
-            }
-            if(revision_array.revisions[revision_id].even_type=='DELETE'){
-                destroyComponent(revision_array.revisions[revision_id].component.id);
-                //console.log(revision_array.revisions[revision_id].even_type);
-                //console.log(revision_array);
-            }
-          
-          revision_id++;
-        }
-   }
-   
-   var updateRevisions = function() {
-    if(revision_value==0){
-        var newObject = jQuery.extend(true, {}, component);
-        revision_array.revisions.push({component_id: component.id, component: newObject, revision_date: $.now(), even_type: 'UPDATE'});
-                revision_id++;
+        console.log(revision_array.revisions);
 
+        if(revision_array.revisions[revision_id].even_type=='CREATE'){
+          window.lindneo.tlingit.componentHasCreated(revision_array.revisions[revision_id].component, revision_array.revisions[revision_id-1].component.id);
+        }
+        else if(revision_array.revisions[revision_id].even_type=='UPDATE'){
+          var array_where = [];
+          $.each(revision_array.revisions, function(index,value){ 
+              if (value.component_id == revision_array.revisions[revision_id].component.id && index<=revision_id)
+                  array_where.push(value);
+          });
+          array_where.pop();
+          deleteComponent(array_where[array_where.length-1].component, array_where[array_where.length-1].component.id);
+          console.log(array_where[array_where.length-1].component.data.textarea.val);
+          window.lindneo.tlingit.createComponent(array_where[array_where.length-1].component, array_where[array_where.length-1].component.id);
+        }
+        else if(revision_array.revisions[revision_id].even_type=='DELETE'){
+          deleteComponent(revision_array.revisions[revision_id].component, revision_array.revisions[revision_id].component.id);
+        }
+        //revision_id--;
       }
-      else revision_value=0;
-      //console.log(revision_array);
    }
 
   var destroyComponent = function ( componentId ) {
@@ -229,10 +196,12 @@ window.lindneo.nisga = (function(window, $, undefined){
     $('[id="'+component.id+'"]').remove();
   };
 
-  var deleteComponent = function ( component ) {
+  var deleteComponent = function ( component, oldcomponent_id ) {
       if(revision_value==0){
-        revision_array.revisions.push({component_id: component.id, component: component, revision_date: $.now(), even_type: 'DELETE'});
-        revision_id++;
+        if(typeof oldcomponent_id == 'undefined')  {
+          revision_array.revisions.push({component_id: component.id, component: component, revision_date: $.now(), even_type: 'DELETE'});
+          revision_id++;
+        }
       }
       else revision_value=0;
 //        console.log(revision_array);
@@ -340,7 +309,7 @@ var textComponentBuilder = function( component ) {
       'update': function ( event, component ) {  
         if(revision_value==0){
         var newObject = jQuery.extend(true, {}, component);
-        revision_array.revisions.push({component_id: component.id, component: component, revision_date: $.now(), even_type: 'UPDATE'});
+        revision_array.revisions.push({component_id: component.id, component: newObject, revision_date: $.now(), even_type: 'UPDATE'});
                 revision_id++;
 
       }
@@ -431,12 +400,17 @@ var textComponentBuilder = function( component ) {
   
   var imageComponentBuilder = function ( component ) {
     
-    var element = $('<img></img>');
+    //var element = $('<img></img>');
 
+    var element  = $('<div class="video-controllers"> </div>');
+    var elementWrap=$('<div ></div>');
+    elementWrap.appendTo( page_div_selector );
+console.log(component);
     element
-    .appendTo( page_div_selector )
+    .appendTo( elementWrap )
     .imageComponent({
       'component': component,
+      'marker': component.data.marker  ,
       'update': function ( event, component ) {
         if(revision_value==0){
         var newObject = jQuery.extend(true, {}, component);
@@ -461,11 +435,12 @@ var textComponentBuilder = function( component ) {
     var element  = $('<div class="video-controllers"> </div>');
     var elementWrap=$('<div ></div>');
     elementWrap.appendTo( page_div_selector );
-
+console.log(component);
     element
     .appendTo( elementWrap )
     .videoComponent({
       'component': component,
+      'marker': component.data.marker  ,
       'update': function ( event, component ) {
         if(revision_value==0){
         var newObject = jQuery.extend(true, {}, component);

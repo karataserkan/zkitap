@@ -171,6 +171,7 @@ $(document).ready(function(){
     
   });
 });
+
 var get_random_color = function () {
     var letters = '0123456789ABCDEF'.split('');
     var color = '#';
@@ -205,9 +206,9 @@ var createGraphComponent = function ( event, ui, oldcomponent ) {
 
     $("<div class='popup ui-draggable' id='pop-image-popup' style='display: block; top:" + top + "; left: " + left + ";'> \
         <div class='popup-header'> \
-        Görsel Ekle \
-        <div class='popup-close' id='image-add-dummy-close-button'>x</div> \
-        </div> \
+        <i class='icon-m-charts'></i> &nbsp;Grafik Ekle \
+        <i id='graph-add-dummy-close-button' class='icon-close size-10 popup-close-button'></i>\
+		</div> \
           <div class='gallery-inner-holder'> \
             <div class='gallery-inner-holder'> \
          \
@@ -232,20 +233,20 @@ var createGraphComponent = function ( event, ui, oldcomponent ) {
             <div id='bar-chart-properties' class='chart_prop bar-chart' style='display:none;'> \
               <div class='bar-chart-slice-holder slice-holder'> \
                 Arkaplan Rengi:  \
-                <input type='color'  id='chart-bar-background' class='color-picker-box radius color' value='"+this.get_random_color()+"' placeholder='e.g. #bbbbbb'> \<br> \
+                <input type='color'  id='chart-bar-background' class='color-picker-box radius color' value='"+get_random_color()+"' placeholder='#bbbbbb'> <br> \
                 Çubuk Rengi:  \
-                 <input type='color' id='chart-bar-stroke' class='color-picker-box radius color' value='"+this.get_random_color()+"' placeholder='e.g. #bbbbbb'> \<br> \
+                 <input type='color' id='chart-bar-stroke' class='color-picker-box radius color' value='"+get_random_color()+"' placeholder='#bbbbbb'> <br> \
               </div> \
           </div> \
           <div id='pie-chart-properties' class='chart_prop pie-chart'> \
           </div> \
                \
-          <a href='#' class='btn bck-light-green white radius' id='pop-image-OK' style='padding: 5px 30px;'>Ekle</a> \
+          <a href='#' class='btn btn-info  ' id='pop-image-OK' style='padding: 5px 30px;'>Ekle</a> \
           </div> \
           </div> \
         </div>").appendTo('body').draggable();
 
-      $('#image-add-dummy-close-button').click(function(){
+      $('#graph-add-dummy-close-button').click(function(){
 
         $('#pop-image-popup').remove();  
 
@@ -411,7 +412,7 @@ var createGraphComponent = function ( event, ui, oldcomponent ) {
         
          window.lindneo.tlingit.componentHasCreated( component );
         
-        $("#image-add-dummy-close-button").trigger('click');
+        $("#graph-add-dummy-close-button").trigger('click');
 
     });
 

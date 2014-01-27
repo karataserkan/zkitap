@@ -115,8 +115,8 @@ $(document).ready(function(){
 
       $("<div class='popup ui-draggable' id='pop-quiz-popup' style='display: block; top:" + top  + "; left: " + left  + ";'> \
       <div class='popup-header'> \
-        Quiz Ekle \
-        <div class='popup-close' id='create-quiz-close-button'>x</div> \
+        <i class='icon-m-quiz'></i> &nbsp;Quiz Ekle \
+        <i id='create-quiz-close-button' class='icon-close size-10 popup-close-button'></i> \
       </div> \
       <!-- popup content --> \
       <div class='gallery-inner-holder'> \
@@ -145,7 +145,7 @@ $(document).ready(function(){
             </div> \
           </form> \
         </div> \
-        <a href='#' class='btn bck-light-green white radius' id='add-quiz' style='padding: 5px 30px;'>Ekle</a> \
+        <a href='#' class='btn btn-info' id='add-quiz' >Ekle</a> \
       </div> \
       <!-- popup content--> \
     </div>").appendTo('body').draggable();

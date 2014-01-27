@@ -32,6 +32,7 @@ window.lindneo.dataservice = (function( $ ) {
   var video_popup = function(event, ui, component){
       createVideoComponent( event, ui, component );
     };
+    
   var newComponentDropPage = function(e, reader, file){
     var that =this;
     var component = {};

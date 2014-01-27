@@ -70,8 +70,14 @@ $(document).ready(function(){
             'alsoDrag':'.selected',
             'stop': function(event, ui){
             //console.log();
+
               $( "#guide-v, #guide-h" ).hide(); 
               that._resizeDraggable( event, ui );
+              if ($('.selected').length > 1) {
+                console.log($('.selected'));
+                console.log($('.selected').not($(this)));
+                $('.selected').not(this).trigger('alsoDragStopped');
+              }
             },
 
             drag: function( event, ui ){
@@ -235,8 +241,26 @@ $(document).ready(function(){
 
       })
       
-      .on('unselect', function(){
-        that.unselect();
+      .on('unselect', function(event){
+        that.unselect(event);
+      })
+      .on('select', function(event){
+        event.groupSelection=true;
+        that._selected(event);
+      })
+      .on('group', function(event,group_id){
+        that.group(event,group_id);
+      })
+      .on('ungroup', function(event){
+        that.ungroup(event);
+      })
+      .on('alsoDragStopped', function(event){
+          var ui={};
+          ui.position={
+            'left':parseInt($(this).css('left')),
+            'top':parseInt($(this).css('top')),
+          };
+          that._resizeDraggable(event,ui);
       })
       .rotatable({
         
@@ -249,6 +273,9 @@ $(document).ready(function(){
 
       this.setFromData();
       this.listCommentsFromData();
+      if (typeof this.options.component.data.group_id != "undefined"){
+        that.group(null,this.options.component.data.group_id);
+      }
     $(".ui-resizable-se.ui-icon.ui-icon-gripsmall-diagonal-se").removeClass("ui-icon").removeClass("ui-icon-gripsmall-diagonal-se");
     },
 
@@ -300,6 +327,19 @@ $(document).ready(function(){
       
       that.comment_box.appendTo(that.element.parent());
 
+    },
+
+    group:function (event,group_id) {
+      this.options.component.data.group_id=group_id;
+      this.element.attr('group_id',group_id);
+      if(event!=null)
+        this._trigger('update', null, this.options.component );
+    },
+
+    ungroup:function(){
+      delete this.options.component.data['group_id'];
+      this.element.removeAttr('group_id');
+      this._trigger('update', null, this.options.component );
     },
 
     listCommentsFromData : function () {
@@ -455,20 +495,25 @@ $(document).ready(function(){
     },
 
     _selected: function( event, ui ) {
-      
+      console.log(event);
+      console.log(event.originalEvent);
      
-      if (typeof event.originalEvent != "undefined")
+     if (typeof event.originalEvent != "undefined")
+      if (typeof event.originalEvent != "null")
         if (typeof event.originalEvent.originalEvent != "undefined")
           if (typeof event.originalEvent.originalEvent.type != "undefined")
             if ( event.originalEvent.originalEvent.type == "mouseup")
               if (!$(this).has($(event.toElement)).lenght)
                 var false_out_selection=true;
 
-      if( false_out_selection  || event.ctrlKey || event.metaKey || $(event.toElement).hasClass('ui-resizable-handle') || $(event.toElement).hasClass('dragging_holder')  )
+      if( event.groupSelection || false_out_selection  || event.ctrlKey || event.metaKey || $(event.toElement).hasClass('ui-resizable-handle') || $(event.toElement).hasClass('dragging_holder')  )
         window.lindneo.toolbox.makeMultiSelectionBox();
       else
         $('.selected').trigger('unselect');
 
+      if (typeof this.options.component.data.group_id != "undefined" && !event.groupSelection){
+       $("[group_id~='"+this.options.component.data.group_id+"']").trigger('select');
+      }
 
       this.element.removeClass('unselected');
       this.element.addClass('selected');

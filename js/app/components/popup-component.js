@@ -80,7 +80,7 @@ console.log(oldcomponent);
    /* $("<div class='popup ui-draggable' id='pop-image-popup' style='display: block; top:" + top + "; left: " + left + ";'> \
       <div class='popup-header'> \
       Görsel/Video Ekle \
-      <div class='popup-close' id='image-add-dummy-close-button'>x</div> \
+      <i id='popup-add-dummy-close-button' class='icon-close size-10 popup-close-button'></i> \
       </div> \
         <div class='gallery-inner-holder' style='width: " + width + "px; height: " + height + "px;'> \
         <div style='clear:both'></div> \
@@ -96,15 +96,15 @@ console.log(oldcomponent);
     var pop_popup = $("<div class='popup ui-draggable' id='pop-popup' style='display: block; top:" + top + "; left: " + left + ";'> \
       </div>");
     pop_popup.appendTo('body').draggable({cancel:'.drag-cancel'}).resizable();
-    var poup_header = $("<div class='popup-header'> Görsel/Video Ekle </div> ");
-    var close_button = $("<div class='popup-close' id='image-add-dummy-close-button'>x</div> ");
+    var poup_header = $("<div class='popup-header'><i class='icon-m-link'></i> &nbsp;Pop-up Ekle </div> ");
+    var close_button = $("<i id='popup-add-dummy-close-button' class='icon-close size-10 popup-close-button'></i> ");
     var drag_file = $("<div class='add-image-drag-area' id='dummy-dropzone'> </div> ");
     var galery_inner = $("<div class='gallery-inner-holder' style='width: " + width + "px; height: " + height + "px;'> \
         <div style='clear:both'></div> \
       </div> ");
     var popup_wrapper = $("<div class ='popup_wrapper drag-cancel' style='border: 1px #ccc solid; ' ></div> <br>");
     var popup_detail = $("<div  id='popup-explanation' contenteditable='true' class='drag-cancel'>" + popup_value + "</div>");
-    var add_button = $("<a href='#' id='pop-image-OK' class='btn bck-light-green white radius' style='padding: 5px 30px;'>Ekle</a> ");
+    var add_button = $("<a href='#' id='pop-image-OK' class='btn btn-info' style='padding: 5px 30px;'>Ekle</a> ");
     poup_header.appendTo(pop_popup);
     close_button.appendTo(poup_header);
     galery_inner.appendTo(pop_popup);
@@ -127,10 +127,11 @@ console.log(oldcomponent);
     
     
     add_button.click(function (){  
-    var width = pop_popup.width();
-    var height = pop_popup.height(); 
-    console.log(width);
-    console.log(height);      
+      
+      var width = pop_popup.width();
+      var height = pop_popup.height(); 
+      console.log(width);
+      console.log(height);      
       if(typeof oldcomponent == 'undefined'){
         console.log('dene');
         var top = (ui.offset.top-$(event.target).offset().top ) + 'px';

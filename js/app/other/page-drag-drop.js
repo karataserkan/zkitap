@@ -12,6 +12,14 @@ $( document ).ready(function () {
     //$('#editor_view_pane').mousemove(function(event){event.stopImmediatePropagation();return false;});
   */
 
+    $('#group_btn').click(function(){
+      console.log($('.selected'));
+      $('.selected').trigger('group',window.lindneo.randomString()); 
+    });
+    $('#ungroup_btn').click(function(){
+      $('.selected').trigger('ungroup');
+      $('.selected').trigger('unselect');
+    });
     $('#searchn').autocomplete({
       appendTo: "#page" ,
       minLength: 3, 
@@ -48,37 +56,11 @@ $( document ).ready(function () {
 
 
                   );
-              /*$.ajax({
-                url: "http://dev.lindneo.com/index.php?r=EditorActions/SearchOnBook",
-                dataType: "json",
-                data: {
-                  currentPageId: window.lindneo.currentPageId,
-                  searchTerm:request.term 
-                },
-                success: function( data ) {
-                  if (data.result==null) return;
-                 
-                  response( $.map( 
-                    data.result.components, function( item ) {
-                      // console.log(item.search);
-                      var result={
-                        label: item.search.similar_result,
-                        value: item.id
-                      };
-                      
-                      return result;
-                    })
-                  );
-                }
-              });*/
-              //console.log(response);
             },
       select: function( event, ui ) {
-          //console.log('event       ');
+
           console.log(event);
           if (ui.item) {
-              //console.log(ui.item);
-              //window.location.href=event.currentTarget.baseURI;
             $('#searchform').submit();
           }
 
@@ -86,8 +68,7 @@ $( document ).ready(function () {
         },   
 
         open: function(e,ui) {
-            var
-                acData = $(this).data('uiAutocomplete');
+            var acData = $(this).data('uiAutocomplete');
     
             acData
                 .menu
@@ -100,9 +81,7 @@ $( document ).ready(function () {
 
                     var result = str.match(patt1);
                     var styledTerm = termTemplate.replace('%s', result);
-                    //console.log(result);
-                    //console.log(str);
-                    //console.log(acData.term);
+
                     console.log(me.html( me.text().replace(result, styledTerm) ));
                     me.html( me.text().replace(result, styledTerm) );
                 });
@@ -122,27 +101,18 @@ $( document ).ready(function () {
     
     
     $( ".component" ).draggable({
-      //helper: "clone",
       revert: true, 
-
       snap: true
     });
 
 
-                $('#current_page').droppable({
+    $('#current_page').droppable({
       tolerance: 'fit',
       drop: function (event, ui) {
-                          //create a component object from dom object
-                          //pass it to tlingit        
-
-        /*
-        //Dont add if on to other component
-        if( $(event.toElement).attr('component-instance') ){
-          return;
-        }
-        */
-        console.log(ui);
-        switch( $(event.toElement).attr('ctype') ) {
+        //create a component object from dom object
+        //pass it to tlingit 
+              
+        switch( $(ui.helper).attr('ctype') ) {
           
           case 'text':
             createTextComponent( event, ui , $(event.toElement).attr('ctype'));

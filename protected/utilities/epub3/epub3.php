@@ -644,7 +644,8 @@ class epub3 {
 			readfile($this->ebookFile);
 			die;
 		}
-		echo "file not exists".$this->ebookFile;die();
+		
+		die();
 	}
 	public function getEbookFile()
 	{

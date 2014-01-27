@@ -1,15 +1,11 @@
-<!--
-<?php
-/* @var $this SiteController */
-/* @var $model LoginForm */
-/* @var $form CActiveForm  */
 
-$this->pageTitle=Yii::app()->name . ' - Login';
-$this->breadcrumbs=array(
-	'Login',
-);
+<?php
+
+$this->pageTitle=Yii::app()->name." - ". __("Kontrol Paneli");
 ?>
--->
+
+
+
 <script>
 	jQuery(document).ready(function() {		
 		App.setPage("gallery");  //Set current page
@@ -106,8 +102,46 @@ $this->breadcrumbs=array(
 </div>
 <div class="separator"></div>
 <div class="row">
-
+<?php
+foreach ($books as $key2 => $book) { $userType = $this->userType($book['book_id']); ?>
+<div class="col-md-3">
+	<!-- BOX -->
+	<div class="box" style="opacity: 1; z-index: 0;">
+		<div class="box-title">
+			<h4><i class="fa fa-book"></i><?php echo $book['title'] ?></h4>
+			<div class="tools">
+				<a href="javascript:;" class="collapse">
+					<i class="fa fa-chevron-up"></i>
+				</a>
+			</div>
+		</div>
+		<div class="box-body bg" style="display: block;">
+			<!-- beyaz içerik yeri -->
+			<div class="row">
+				<div class="col-md-4 ">
+					<img src="/css/images/default-cover.jpg" alt="Book Cover">
+				</div>
+				<div class="col-md-8 form-vertical">
+					<div class="form-group">											
+						<input class="form-control" type="text" name="placeholder" readonly="" placeholder="<?php echo $book['title'] ?>" >
+					</div>
+					<div class="form-group">
+						<input class="form-control" type="text" name="placeholder" readonly="" placeholder="<?php echo $book['author'] ?>">
+					</div>
+					<p class="btn-toolbar text-right">
+						<a href="<?php echo '/book/author/'.$book['book_id'] ?>" class="btn btn-info"><?php echo __('Düzenle');?></a>
+						<a href="<?php echo '/EditorActions/ExportBook/'.$book['book_id']; ?>" class="btn btn-success"><?php echo __('İndir');?></a>
+					</p>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- /BOX -->
+</div>
+<?php } ?>
 </div>
 <!--/PAGE -->
 
 
+
+    
