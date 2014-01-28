@@ -25,8 +25,10 @@ class EditorActionsController extends Controller
 		return $error;
 	}
 
-	public function actionPublishBook($bookId)
-	{
+	public function actionPublishBook($bookId=null,$id=null){
+		if($bookId==null){
+			$bookId=$id;
+		}
 		$this->layout="//layouts/column2";
 
 		$book=Book::model()->findByPk($bookId);
@@ -50,9 +52,13 @@ class EditorActionsController extends Controller
 		$model->contentTitle=$book->title;
 		$model->organisationId=$organisation->organisation_id;
 		$model->organisationName=$organisation->organisation_name;
+		$model->contentType='epub';
+		$model->contentIsForSale="Yes";
+		$model->contentPriceCurrencyCode="949";
+		$model->contentPrice="0";
 
 
-		$this->render('publishBook',array('model'=>$model,'hosts'=>$hosts));
+		$this->render('publishBook',array('model'=>$model,'hosts'=>$hosts,'bookId'=>$bookId));
 	}
 
 	public function actionGetFileURL($type=null){
