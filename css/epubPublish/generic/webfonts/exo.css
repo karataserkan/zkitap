@@ -1,0 +1,40 @@
+@font-face {
+    font-family: 'Exo';
+    src: url('exo-bold.eot');
+    src: url('exo-bold.eot') format('embedded-opentype'),
+         url('exo-bold.woff') format('woff'),
+         url('exo-bold.ttf') format('truetype'),
+         url('exo-bold.svg#ExoBold') format('svg');
+  	font-weight: bold;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'Exo';
+    src: url('exo-bolditalic.eot');
+    src: url('exo-bolditalic.eot') format('embedded-opentype'),
+         url('exo-bolditalic.woff') format('woff'),
+         url('exo-bolditalic.ttf') format('truetype'),
+         url('exo-bolditalic.svg#ExoBoldItalic') format('svg');
+    font-weight: bold;
+    font-style: italic, oblique;
+}
+@font-face {
+    font-family: 'Exo';
+    src: url('exo-italic.eot');
+    src: url('exo-italic.eot') format('embedded-opentype'),
+         url('exo-italic.woff') format('woff'),
+         url('exo-italic.ttf') format('truetype'),
+         url('exo-italic.svg#ExoItalic') format('svg');
+    font-style: italic, oblique;
+}
+@font-face {
+    font-family: 'Exo';
+    src: url('exo-regular.eot');
+    src: url('exo-regular.eot') format('embedded-opentype'),
+         url('exo-regular.woff') format('woff'),
+         url('exo-regular.ttf') format('truetype'),
+         url('exo-regular.svg#ExoRegular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
+}
