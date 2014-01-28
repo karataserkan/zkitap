@@ -69,7 +69,7 @@
 													foreach ($hosts as $key => $host) {
 														$contentHostIds[$host->hosting_client_id]=$host->hosting_client_IP.' : '.$host->hosting_client_port;
 													}
-													//$contentHostIds['GIWwMdmQXL']='cloud.lindneo.com';
+													$contentHostIds['GIWwMdmQXL']='cloud.lindneo.com : 2222';
 													?>
 
 
@@ -81,16 +81,16 @@
 
 													<div class="form-group">
 														<label  class="col-md-3 control-label">
-														<?php _e("Sunucular"); ?><span class="required">*</span>
+														<?php _e("Sunucular"); ?><!-- <span class="required">*</span> -->
 														</label>
 														<div class="col-md-9">
-															<div class="checker" id="uniform-PublishBookForm_contentHostId_2">
+															<!-- <div class="checker" id="uniform-PublishBookForm_contentHostId_2">
 																<span class="checked">
-																	<input class="uniform" id="PublishBookForm_contentHostId_2" checked="checked" value="GIWwMdmQXL" type="checkbox" name="host[]">
+																	<input class="uniform" id="host_2" checked="checked" value="GIWwMdmQXL" type="checkbox" name="host[]">
 																</span>
 															</div>
-															<label for="PublishBookForm_contentHostId_2">cloud.lindneo.com : 2222</label>
-															<br>
+															<label for="host_2">cloud.lindneo.com : 2222</label>
+															<br> -->
 														<?php echo $form->checkBoxList($model,'contentHostId',$contentHostIds,array('class'=>'uniform','name'=>'host')); ?>
 														</div>
 													</div>
@@ -245,4 +245,7 @@
 
 <script type="text/javascript">
  	$('form').addClass('form-horizontal');
+
+ 	var bookId="<?php echo $bookId; ?>";
+
 </script>
