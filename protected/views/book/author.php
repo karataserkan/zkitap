@@ -175,15 +175,10 @@ $current_user=User::model()->findByPk(Yii::app()->user->id);
 			</div>
 			<div class="styler_box dark-blue">
 			<!-- <ul id="text-styles" ></ul> -->
-                        <div class="generic-options float-left"  style="display:inline-block; margin-right:5px;">
+            <div class="generic-options float-left"  style="display:inline-block; margin-right:5px;">
 
-
-			<a class="optbtn " id="undo" ><i style="vertical-align: bottom;" class="undo icon-undo size-15 dark-blue"></i></a>
-			<a class="optbtn " id="redo" ><i style="vertical-align: bottom;" class="redo icon-redo size-15 dark-blue"></i></a>
-
-
-
-				
+				<a class="optbtn " id="undo" ><i style="vertical-align: bottom;" class="undo icon-undo size-15 dark-blue"></i></a>
+				<a class="optbtn " id="redo" ><i style="vertical-align: bottom;" class="redo icon-redo size-15 dark-blue"></i></a>
 			
 			</div>
 			<div class="vertical-line responsive_2"></div>
@@ -394,11 +389,11 @@ $current_user=User::model()->findByPk(Yii::app()->user->id);
 			</div>
 			<div class="generic-options toolbox float-left"  style="display:inline-block;">
 			<!--	<a href="#" class="bck-dark-blue white btn btn-default" id="pop-align"><i class="icon-align-center size-20"></i></a> -->
-			<a href="#" class="optbtn" id="pop-arrange" ><i style="vertical-align:bottom;" class="icon-send-backward size-15"></i></a>
+				<a href="#" class="optbtn" id="pop-arrange" ><i style="vertical-align:bottom;" class="icon-send-backward size-15"></i></a>
 			<!--	<a href="#" class="btn btn-info">Grupla</a>    -->
 			</div>
 			
-			<div class="generic-options responsive_1"  style="display:inline-block;">
+			<div class="generic-options toolbox responsive_1"  style="display:inline-block;">
 				<a href="#" class="optbtn " id="pop-align"><i class="icon-align-center size-20 dark-blue"></i></a>
 				<div class="vertical-line responsive_2"></div>
 				<a href="#" class="optbtn " id="generic-disable" ><i style="margin-top:2px;" class="fa fa-lock size-20 dark-blue"></i></a>
@@ -407,11 +402,13 @@ $current_user=User::model()->findByPk(Yii::app()->user->id);
 
 				<a href="#" class="optbtn " id="generic-cut"><i class="generic-cut icon-cut size-25 dark-blue"></i></a>
 				<a href="#" class="optbtn " id="generic-copy"><i class="generic-copy icon-copy size-25 dark-blue"></i></a>
+
+
+				
+				
+			</div>
+			<div class="generic-options copy-paste responsive_1"  style="display:none;">
 				<a href="#" class="optbtn " id="generic-paste"><i class="generic-paste icon-paste size-25 dark-blue"></i></a>
-
-
-				
-				
 			</div>
 			<a class="btn btn-info pull-right "id="pages"><i class="fa fa-files-o"></i> Sayfalar</a>
 			
