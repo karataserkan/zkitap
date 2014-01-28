@@ -74,8 +74,8 @@ $(document).ready(function(){
               $( "#guide-v, #guide-h" ).hide(); 
               that._resizeDraggable( event, ui );
               if ($('.selected').length > 1) {
-                console.log($('.selected'));
-                console.log($('.selected').not($(this)));
+                //console.log($('.selected'));
+                //console.log($('.selected').not($(this)));
                 $('.selected').not(this).trigger('alsoDragStopped');
               }
             },
@@ -495,8 +495,8 @@ $(document).ready(function(){
     },
 
     _selected: function( event, ui ) {
-      console.log(event);
-      console.log(event.originalEvent);
+      //console.log(event);
+      //console.log(event.originalEvent);
      
      if (typeof event.originalEvent != "undefined")
       if (typeof event.originalEvent != "null")

@@ -412,10 +412,10 @@ var textComponentBuilder = function( component ) {
     
     //var element = $('<img></img>');
 
-    var element  = $('<div class="video-controllers"> </div>');
+    var element  = $('<div class="image-controllers"> </div>');
     var elementWrap=$('<div ></div>');
     elementWrap.appendTo( page_div_selector );
-console.log(component);
+    //console.log(component);
     element
     .appendTo( elementWrap )
     .imageComponent({
