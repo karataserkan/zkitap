@@ -1947,6 +1947,7 @@ fieldset[disabled] .btn {
   background-color: #ffffff;
   border-color: #cccccc;
 }
+
 .btn-default:hover,
 .btn-default:focus,
 .btn-default:active,
@@ -4775,8 +4776,9 @@ border-radius:0px;
   margin-top: 0;
   margin-bottom: 0;
   font-size: 16px;
-  color: inherit;
+  color: #056380;
 }
+
 .panel-title > a {
   color: inherit;
 }
@@ -4814,6 +4816,7 @@ border-radius:0px;
   color: #333333;
   background-color: #f5f5f5;
   border-color: #dddddd;
+  border-bottom: 1px solid #ddd;
 }
 .panel-default > .panel-heading + .panel-collapse .panel-body {
   border-top-color: #dddddd;
