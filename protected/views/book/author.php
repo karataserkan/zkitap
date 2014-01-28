@@ -196,6 +196,14 @@ $current_user=User::model()->findByPk(Yii::app()->user->id);
 						<option value="p"  >Paragraf</option>
 						<option value="blockqoute" >Alıntı</option>
 					</select>
+
+					<select class='tool select' rel='line-height' id="line-height" class="radius">
+						<option value="100%">100</option>
+						<option value="125%" >125</option>
+						<option value="150%" >150</option>
+						<option value="175%" >175</option>
+						<option value="200%" >200</option>
+					</select>
 					
 					<select class='tool select' rel='font-family' id="font-family" class="radius">
 						<option selected="" value="Arial"> Arial </option>
