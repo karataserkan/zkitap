@@ -236,7 +236,7 @@ div.col-none-rw { width: 50%; float: left; margin: 0; padding-right: 40px; }
 #pan3 .frame-rw{ bottom: 20px; top: 120px; left: 20px; right: 20px; }
 .title-bar-rw { position: relative; height: 50px; background-color: rgba(0, 100, 150, 0); padding: 5px 5px 5px 5px; margin: 0 20px 0 20px; z-index: 100; }
 div.panel-rw .title-bar-rw h2 { font-size: 22px; font-weight: bold; color:rgba(0, 100, 150, 1); border-bottom: 0px; margin: 5px 0 6px 0; padding: 0; }
-.frame-rw { position: absolute; top: 100px; left: 50px; right: 50px; bottom: 0px; overflow: hidden; margin: 0 auto 0 auto; background-color: white; }
+.frame-rw { position: absolute; top: 100px; left: 50px; right: 50px; bottom: 0px; overflow: hidden; margin: 0 auto 0 auto; background-color: transparent; }
 .frame-body-rw { position: absolute; top: 0; right: 0; bottom: 50px; left: 0; }
 .frame-body-rw img { border: 1px solid black; }
 div.frame-body-rw h4 { height: 20px; margin: 0px; padding-top: 5px; }
@@ -431,7 +431,7 @@ button { font-size: 22px; }
 .panel-scrolling-rw { width: 700px; height:600px; background-color: white; overflow: hidden; position: relative; margin: 0; }
 .panel-scrolling-rw .frame-rw { position: absolute; padding: 20px; border-radius: 0; margin: 0; }
 .scroll-horizontal-rw { padding: 0; height:600px; background-color: white; }
-.scroll-horizontal-rw .frame-rw { position: relative; overflow: inherit; width: 3250px;  padding: 20px; background-color: white; }
+.scroll-horizontal-rw .frame-rw { position: relative; overflow: inherit; width: 3250px;  padding: 20px; background-color: transparent; }
 .scroll-both-rw { height: 600px; background-color: black; }
 .scroll-both-rw .frame-rw { width: 1365px; height: 850px; background-color: black; }
 .panel-locked-rw { width: 500px; height:600px; background-color: white; overflow: hidden; position: relative; border: 1px solid gray; margin: 0 auto 0 auto; padding: 0; }
