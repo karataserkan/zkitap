@@ -718,13 +718,39 @@ right join book using (book_id) where book_id='$bookId' and type!='image';";
 			return;
 		}
 
+		if (!empty($_POST)) {
+			$data['organisationId']=$_POST['PublishBookForm']['organisationId'];
+			$data['organisationName']=$_POST['PublishBookForm']['organisationName'];
+			$data['created']=$_POST['PublishBookForm']['created'];
+			$data['contentTitle']=$_POST['contentTitle'];
+			$data['contentType']=$_POST['contentType'];
+			$data['contentExplanation']=$_POST['contentExplanation'];
+			$data['contentIsForSale']=$_POST['contentIsForSale'];
+			$data['contentCurrencyCode']=$_POST['contentCurrency'];
+			$data['contentPrice']=$_POST['contentPrice'];
+			$data['contentReaderGroup']=$_POST['contentReaderGroup'];
+			
+			if (isset($_POST['host'])) {
+				$hosts=$_POST['host'];
+				foreach ($hosts as $key => $hostId) {
+					$host=OrganisationHostings::model()->findByPk($hostId);
+					$data['hosts'][$key]['host']=$host->hosting_client_IP;
+					$data['hosts'][$key]['port']=$host->hosting_client_port;
+				}
+
+			}
+			
+		}
+
 		$data['contentId']=$bookId;
 		$data['contentFile']='@'.$ebook->ebookFile;
 		$data['checksum']=md5_file($ebook->ebookFile);
 		$data['contentTrustSecret']=sha1($data['checksum']."ONLYUPLOAD".$bookId."31.210.53.80");
 
-		$data['host']="cloud.lindneo.com";
-		$data['port']="2222";
+		if (empty($data['hosts'])) {
+			$data['hosts'][0]['host']="cloud.lindneo.com";
+			$data['hosts'][0]['port']="2222";
+		}
 
 
 		$localFile = $ebook->ebookFile; // This is the entire file that was uploaded to a temp location.
