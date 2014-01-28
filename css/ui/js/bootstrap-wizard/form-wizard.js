@@ -45,6 +45,9 @@ var FormWizard = function () {
                     contentReaderGroup:{
                         required: true
                     },
+                    host:{
+                        required: true
+                    },
 
                     
 					
@@ -216,12 +219,12 @@ var FormWizard = function () {
             $('#formWizard .submitBtn').click(function () {
                 
                 if ($("#rights").is(':checked')) {
-
+                    
                     wizform.ajaxSubmit({
-                        url:'/editorActions/sendFileToCatalog',
+                        url:'/editorActions/sendFileToCatalog/'+bookId,
                         success:function() { 
                             bootbox.alert("Kitap yayınlama başarılı.",function(){
-                                window.location.href = '/site/index';
+                                //window.location.href = '/site/index';
                             });
                         },
                         error:function() { 
