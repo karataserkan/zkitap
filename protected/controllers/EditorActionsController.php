@@ -25,8 +25,10 @@ class EditorActionsController extends Controller
 		return $error;
 	}
 
-	public function actionPublishBook($bookId)
-	{
+	public function actionPublishBook($bookId=null,$id=null){
+		if($bookId==null){
+			$bookId=$id;
+		}
 		$this->layout="//layouts/column2";
 
 		$book=Book::model()->findByPk($bookId);
@@ -50,9 +52,13 @@ class EditorActionsController extends Controller
 		$model->contentTitle=$book->title;
 		$model->organisationId=$organisation->organisation_id;
 		$model->organisationName=$organisation->organisation_name;
+		$model->contentType='epub';
+		$model->contentIsForSale="Yes";
+		$model->contentPriceCurrencyCode="949";
+		$model->contentPrice="0";
 
 
-		$this->render('publishBook',array('model'=>$model,'hosts'=>$hosts));
+		$this->render('publishBook',array('model'=>$model,'hosts'=>$hosts,'bookId'=>$bookId));
 	}
 
 	public function actionGetFileURL($type=null){
@@ -696,6 +702,76 @@ right join book using (book_id) where book_id='$bookId' and type!='image';";
 
 		return $this->response($response);
 		
+	}
+
+	public function SendFileToCatalog($bookId){
+
+		ob_start();
+		$book=Book::model()->findByPk($bookId);
+		$ebook=new epub3($book);
+
+
+		if (!file_exists($ebook->ebookFile)) {
+			$this->error('SendFileToCatalog','File does not exists!');
+			$msg="EDITOR_ACTIONS:SendFileToCatalog:0:Could Not Found the created Ebook File". json_encode(array(array('user'=>Yii::app()->user->id),array('bookId'=>$bookId)));
+			Yii::log($msg,'error');
+			return;
+		}
+
+		$data['contentId']=$bookId;
+		$data['contentFile']='@'.$ebook->ebookFile;
+		$data['checksum']=md5_file($ebook->ebookFile);
+		$data['contentTrustSecret']=sha1($data['checksum']."ONLYUPLOAD".$bookId."31.210.53.80");
+
+		$data['host']="cloud.lindneo.com";
+		$data['port']="2222";
+
+
+		$localFile = $ebook->ebookFile; // This is the entire file that was uploaded to a temp location.
+		$fp = fopen($localFile, 'r');
+
+		//Connecting to website.
+
+		$ch = curl_init();
+		curl_setopt($ch, CURLOPT_URL, Yii::app()->params['catalogExportURL'] );
+		curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
+		curl_setopt($ch, CURLOPT_FOLLOWLOCATION, TRUE);
+		curl_setopt($ch, CURLOPT_POST, TRUE);
+		curl_setopt($ch, CURLOPT_POSTFIELDS, $data); 
+		$Return['response']=unserialize(curl_exec($ch));
+
+		if (curl_errno($ch)){  
+			$this->error('SendFileToCatalog','CURL_ERROR:'.curl_error($ch));
+		    $msg="EDITOR_ACTIONS:SendFileToCatalog:0:CURL_ERROR:".curl_error($ch). json_encode(array(array('user'=>Yii::app()->user->id),array('bookId'=>$bookId)));
+			Yii::log($msg,'error');
+			return;
+		}
+
+		$msg = 'File uploaded successfully.';
+		curl_close ($ch);
+		$Return['msg'] = $msg;
+		ob_end_clean();
+		return $Return;
+
+	}
+
+	public function actionSendFileToCatalog($bookId=null,$id=null){
+
+		if($bookId==null){
+			$bookId=$id;
+		}
+		
+
+		$response=false;
+
+		if($return=$this->SendFileToCatalog($bookId) ){
+			$response['sendFileInfo']=$return; 
+			$response['sendFile']=true;
+		}else{
+			$response['sendFile']=false;
+		}	
+
+		return $this->response($response);
 	}
 
 

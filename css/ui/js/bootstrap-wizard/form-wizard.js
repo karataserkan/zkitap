@@ -23,49 +23,38 @@ var FormWizard = function () {
 				errorClass: 'error-span',
                 errorElement: 'span',
                 rules: {
-                    /* Create Account */
-					email: {
-                        required: true,
-                        email: true
-                    },
-                    password: {
-                        minlength: 3,
+                    contentTitle:{
                         required: true
                     },
-                    name: {
+                    contentType:{
                         required: true
                     },
-                    gender: {
+                    contentExplanation:{
                         required: true
                     },
-                    location: {
+                    contentIsForSale:{
                         required: true
                     },
-                    country: {
+                    contentCurrency:{
                         required: true
                     },
-					phone: {
+                    contentPrice:{
+                        number: true,
+                       // required: true
+                    },
+                    contentReaderGroup:{
                         required: true
                     },
+
+                    
 					
-                    /* Payment Details */                  
-                    card_number: {
-						required: true,
-                        minlength: 16,
-                        maxlength: 16
-                    },
                     card_cvc: {
 						required: true,
                         digits: true,
                         minlength: 3,
                         maxlength: 3
                     },
-                    card_expirydate: {
-                        required: true
-                    },
-					 card_holder_name: {
-                        required: true
-                    }
+                    
                 },
 
                 invalidHandler: function (event, validator) { 
@@ -93,6 +82,43 @@ var FormWizard = function () {
                     }
                 }
             });
+            
+
+            
+            var formDisplay = function(){
+                $("p[data-display='contentTitle']").text($("[name='contentTitle']").val());
+                $("p[data-display='contentExplanation']").text($("[name='contentExplanation']").val());
+                var currency;
+                var currencyCode= $("span.checked [name='contentCurrency']").val();
+                if (currencyCode=='949') {
+                    currency='TL';
+                };
+                if (currencyCode=='998') {
+                    currency='Dollar';
+                };
+                if (currencyCode=='978') {
+                    currency='Euro';
+                };
+                
+                $("p[data-display='contentPrice']").text($("[name='contentPrice']").val()+' '+currency);
+                $("p[data-display='contentReaderGroup']").text($("[name='contentReaderGroup']").val());
+                
+                $("p[data-display='contentType']").text($("span.checked [name='contentType']").val());
+                $("p[data-display='contentIsForSale']").text($("span.checked [name='contentIsForSale']").val());
+                
+                var hosts=$("span.checked [name='host[]']");
+                var hostText= '';
+                for (var i = 0; i < hosts.length; i++) {
+                
+                
+                hostText +=$("label[for='"+$("span.checked [name='host[]']")[i].id+"']").html()+'<br>';
+                //hostText += $("span.checked [name='host[]']")[i].value+'<br>';
+                   
+                };
+
+                $("p[data-display='host']").html(hostText);
+
+            };
 
             /*-----------------------------------------------------------------------------------*/
 			/*	Initialize Bootstrap Wizard
@@ -106,6 +132,9 @@ var FormWizard = function () {
                     if (wizform.valid() == false) {
                         return false;
                     }
+
+                    
+
                     var total = navigation.find('li').length;
                     var current = index + 1;
                     $('.stepHeader', $('#formWizard')).text('Step ' + (index + 1) + ' of ' + total);
@@ -122,6 +151,7 @@ var FormWizard = function () {
                     if (current >= total) {
                         $('#formWizard').find('.nextBtn').hide();
                         $('#formWizard').find('.submitBtn').show();
+                        formDisplay();
                     } else {
                         $('#formWizard').find('.nextBtn').show();
                         $('#formWizard').find('.submitBtn').hide();
@@ -164,10 +194,47 @@ var FormWizard = function () {
                     });
                 }
             });
+            $('#contentIsForSale_1').click(function(){
+                if ($("span.checked [name='contentIsForSale']").val() == 'Free' ) {
+                            $("[name='contentPrice']").parent().parent().hide();
+                            $("[name='contentCurrency']").parent().parent().hide();
+
+                        };
+            });
+            $('#contentIsForSale_0').click(function(){
+                if ($("span.checked [name='contentIsForSale']").val() == 'Yes' ) {
+                            $("[name='contentPrice']").parent().parent().show();
+                            $("[name='contentCurrency']").parent().parent().show();
+
+                        };
+            });
+            
+
 
             $('#formWizard').find('.prevBtn').hide();
+            
             $('#formWizard .submitBtn').click(function () {
-                bootbox.alert("Form submitted successfully.");
+                
+                if ($("#rights").is(':checked')) {
+
+                    wizform.ajaxSubmit({
+                        url:'/editorActions/sendFileToCatalog',
+                        success:function() { 
+                            bootbox.alert("Kitap yayınlama başarılı.",function(){
+                                window.location.href = '/site/index';
+                            });
+                        },
+                        error:function() { 
+                            bootbox.alert("Beklenmedik bir hata oluştu. Lütfen tekrar deneyin.");
+                        },
+
+                    });
+                    
+                }else
+                {
+                    bootbox.alert("Kitap yayınlamadan önce Kullanıcı Sözleşmesini Kabul Ediyor olmanız gerekmektedir.");
+
+                };
             }).hide();
         }
     };

@@ -73,6 +73,7 @@ window.lindneo.tlingit = (function(window, $, undefined){
   };
 
   var componentHasDeleted = function ( componentId ) {
+    oldcomponent_id = componentId;
     window.lindneo.dataservice
     .send( 'DeleteComponent', 
       { 
@@ -87,7 +88,7 @@ window.lindneo.tlingit = (function(window, $, undefined){
   var deleteArrivalResult = function ( res ) {
     var response = responseFromJson(res);
 
-    window.lindneo.nisga.destroyComponent(response.result.delete);
+    window.lindneo.nisga.destroyComponent(response.result.delete, oldcomponent_id);
     window.lindneo.tsimshian.componentDestroyed(response.result.delete);
   };
 

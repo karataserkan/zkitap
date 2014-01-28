@@ -94,7 +94,7 @@ var createVideoComponent = function( event, ui, oldcomponent ) {
     console.log(link_check);
     console.log(popup_check);
 
-      $("<div class='popup ui-draggable' id='pop-image-popup' style='display: block; top:" + top + "; left: " + left + "; '> \
+      $("<div class='popup ui-draggable' id='pop-video-popup' style='display: block; top:" + top + "; left: " + left + "; '> \
         <div class='popup-header'> \
         <i class='icon-m-video'></i> &nbsp;Video Ekle \
         <i id='video-add-dummy-close-button' class='icon-close size-10 popup-close-button'></i> \
@@ -104,7 +104,7 @@ var createVideoComponent = function( event, ui, oldcomponent ) {
             <div class='type' style='padding: 4px; display: inline-block;'>\
                 <div class='btn-group' data-toggle='buttons'>\
                   <label class='btn btn-primary " + link_check_active + "'>\
-                    <input type='radio' name='video_type' id='repeat0' " + link_check + " value='link'> Link\
+                    <input type='radio' name='video_type' id='repeat0' " + link_check + " value='link'> İnline\
                   </label>\
                   <label class='btn btn-primary " + popup_check_active + "'>\
                     <input type='radio' name='video_type' id='repeat1' " + popup_check + " value='popup'> Popup\
@@ -134,15 +134,15 @@ var createVideoComponent = function( event, ui, oldcomponent ) {
             </div>\
             <a href='#' id='pop-image-OK' class='btn bck-light-green white radius' id='add-image' style='padding: 5px 30px;'>Ekle</a> \
           </div> \
-        </div>").appendTo('body');
+        </div>").appendTo('body').draggable();
     if(video_type == 'popup') video_type_image();
 
       $('#video-add-dummy-close-button').click(function() {
 
-          $('#pop-image-popup').remove();
+          $('#pop-video-popup').remove();
 
-          if ($('#pop-image-popup').length) {
-              $('#pop-image-popup').remove();
+          if ($('#pop-video-popup').length) {
+              $('#pop-video-popup').remove();
           }
 
       });
