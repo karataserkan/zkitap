@@ -157,24 +157,28 @@ msgstr  "Resolution"
 #: protected/views/book/author.php:135 protected/views/book/author.php:134
 #: protected/views/book/author.php:91 protected/views/book/author.php:114
 #: protected/views/book/author.php:115 protected/views/book/author.php:116
+#: protected/views/book/author.php:116
 msgid   "Görünüm"
 msgstr  "View"
 
 #: protected/views/book/author.php:137 protected/views/book/author.php:136
 #: protected/views/book/author.php:93 protected/views/book/author.php:116
 #: protected/views/book/author.php:117 protected/views/book/author.php:118
+#: protected/views/book/author.php:118
 msgid   "Cetvel"
 msgstr  "Rulers"
 
 #: protected/views/book/author.php:138 protected/views/book/author.php:137
 #: protected/views/book/author.php:94 protected/views/book/author.php:117
 #: protected/views/book/author.php:118 protected/views/book/author.php:119
+#: protected/views/book/author.php:119
 msgid   "Rehber"
 msgstr  "Guides"
 
 #: protected/views/book/author.php:139 protected/views/book/author.php:138
 #: protected/views/book/author.php:95 protected/views/book/author.php:118
 #: protected/views/book/author.php:119 protected/views/book/author.php:120
+#: protected/views/book/author.php:120
 msgid   "Yorumlar"
 msgstr  "Comments"
 
@@ -182,7 +186,8 @@ msgstr  "Comments"
 #: protected/views/book/author.php:163 protected/views/book/author.php:167
 #: protected/views/book/author.php:124 protected/views/layouts/column2.php:55
 #: protected/views/book/author.php:147 protected/views/book/author.php:148
-#: protected/views/book/author.php:149 protected/views/layouts/column2.php:55
+#: protected/views/book/author.php:149 protected/views/book/author.php:149
+#: protected/views/layouts/column2.php:55
 msgid   "Profil"
 msgstr  "Profile"
 
@@ -193,7 +198,7 @@ msgstr  "Profile"
 #: protected/views/layouts/main.php:138 protected/views/book/author.php:125
 #: protected/views/layouts/column2.php:56 protected/views/book/author.php:148
 #: protected/views/book/author.php:149 protected/views/book/author.php:150
-#: protected/views/layouts/column2.php:56
+#: protected/views/book/author.php:150 protected/views/layouts/column2.php:56
 msgid   "Çıkış"
 msgstr  "Sign Out"
 
@@ -447,6 +452,6 @@ msgstr  ""
 msgid   "Hayır"
 msgstr  ""
 
-#: protected/views/book/author.php:100
+#: protected/views/book/author.php:100 protected/views/book/author.php:100
 msgid   "Hızlı Yayınla"
 msgstr  ""
