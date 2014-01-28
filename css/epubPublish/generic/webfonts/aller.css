@@ -1,0 +1,39 @@
+@font-face {
+    font-family: 'Aller';
+    src: url('aller_bd.eot');
+    src: url('aller_bd.eot') format('embedded-opentype'),
+         url('aller_bd.woff') format('woff'),
+         url('aller_bd.ttf') format('truetype'),
+         url('aller_bd.svg#AllerBold') format('svg');
+   	font-weight: bold;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'Aller';
+    src: url('aller_bdit.eot');
+    src: url('aller_bdit.eot') format('embedded-opentype'),
+         url('aller_bdit.woff') format('woff'),
+         url('aller_bdit.ttf') format('truetype'),
+         url('aller_bdit.svg#AllerBoldItalic') format('svg');
+	font-weight: bold;
+    font-style: italic, oblique;
+}
+@font-face {
+    font-family: 'Aller';
+    src: url('aller_it.eot');
+    src: url('aller_it.eot') format('embedded-opentype'),
+         url('aller_it.woff') format('woff'),
+         url('aller_it.ttf') format('truetype'),
+         url('aller_it.svg#AllerItalic') format('svg');
+	font-style: italic, oblique;
+}
+@font-face {
+    font-family: 'Aller';
+    src: url('aller_rg.eot');
+    src: url('aller_rg.eot') format('embedded-opentype'),
+         url('aller_rg.woff') format('woff'),
+         url('aller_rg.ttf') format('truetype'),
+         url('aller_rg.svg#AllerRegular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
