@@ -139,6 +139,7 @@ msgstr  "Book Type"
 #: protected/views/book/_form.php:13 protected/controllers/newBookSteps.php:8
 #: protected/views/book/newBookSteps.php:8
 #: protected/views/book/newBookSteps.php:8
+#: protected/views/editorActions/publishBook.php:33
 msgid   "Kitap Bilgileri"
 msgstr  "Book Information"
 
@@ -267,7 +268,6 @@ msgstr  "Add"
 #: protected/views/faq/create.php:44
 #: protected/views/user/forget_password.php:54
 #: protected/views/site/login.php:200 protected/views/book/select_data.php:39
-#: protected/views/editorActions/publishBook.php:70
 msgid   "Kaydet"
 msgstr  "Save"
 
@@ -287,6 +287,7 @@ msgstr  ""
 #: protected/views/layouts/column2.php:172
 #: protected/views/layouts/column2.php:140
 #: protected/views/organisations/index.php:10
+#: protected/views/editorActions/publishBook.php:156
 #: protected/views/layouts/column2.php:140
 msgid   "Sunucu"
 msgstr  "Server"
@@ -443,15 +444,97 @@ msgid   "Kitaplarım"
 msgstr  ""
 
 #: protected/views/editorActions/publishBook.php:51
-#: protected/views/editorActions/publishBook.php:51
+#: protected/views/editorActions/publishBook.php:128
 msgid   "Evet"
 msgstr  ""
 
 #: protected/views/editorActions/publishBook.php:51
-#: protected/views/editorActions/publishBook.php:51
+#: protected/views/editorActions/publishBook.php:128
 msgid   "Hayır"
 msgstr  ""
 
 #: protected/views/book/author.php:100 protected/views/book/author.php:100
 msgid   "Hızlı Yayınla"
+msgstr  ""
+
+#: protected/views/editorActions/publishBook.php:7
+msgid   "Yayınlama"
+msgstr  ""
+
+#: protected/views/editorActions/publishBook.php:7
+msgid   "Aşama"
+msgstr  ""
+
+#: protected/views/editorActions/publishBook.php:27
+msgid   "Sunucu Bilgileri"
+msgstr  ""
+
+#: protected/views/editorActions/publishBook.php:39
+msgid   "Fiyat Bilgileri"
+msgstr  ""
+
+#: protected/views/editorActions/publishBook.php:45
+msgid   "Onay"
+msgstr  ""
+
+#: protected/views/editorActions/publishBook.php:84
+msgid   "Sunucular"
+msgstr  ""
+
+#: protected/views/editorActions/publishBook.php:100
+#: protected/views/editorActions/publishBook.php:162
+msgid   "Kitap İsmi"
+msgstr  ""
+
+#: protected/views/editorActions/publishBook.php:103
+msgid   "Lütfen bir isim girin!"
+msgstr  ""
+
+#: protected/views/editorActions/publishBook.php:109
+#: protected/views/editorActions/publishBook.php:168
+msgid   "Kitap Tipi"
+msgstr  ""
+
+#: protected/views/editorActions/publishBook.php:116
+#: protected/views/editorActions/publishBook.php:174
+msgid   "Kitap Açıklaması"
+msgstr  ""
+
+#: protected/views/editorActions/publishBook.php:118
+msgid   "Lütfen bir açıklama girin!"
+msgstr  ""
+
+#: protected/views/editorActions/publishBook.php:126
+#: protected/views/editorActions/publishBook.php:181
+msgid   "Is For Sale?"
+msgstr  ""
+
+#: protected/views/editorActions/publishBook.php:133
+msgid   "Para Birimi"
+msgstr  ""
+
+#: protected/views/editorActions/publishBook.php:139
+#: protected/views/editorActions/publishBook.php:188
+msgid   "Kitap Fiyatı"
+msgstr  ""
+
+#: protected/views/editorActions/publishBook.php:141
+msgid   "Lütfen bir fiyat girin!"
+msgstr  ""
+
+#: protected/views/editorActions/publishBook.php:146
+#: protected/views/editorActions/publishBook.php:194
+msgid   "Reader Group"
+msgstr  ""
+
+#: protected/views/editorActions/publishBook.php:217
+msgid   "Geri"
+msgstr  ""
+
+#: protected/views/editorActions/publishBook.php:220
+msgid   "Devam"
+msgstr  ""
+
+#: protected/views/editorActions/publishBook.php:223
+msgid   "Yayınla"
 msgstr  ""
