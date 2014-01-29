@@ -4,7 +4,7 @@
 								<!-- BOX -->
 								<div class="box border red" id="formWizard">
 									<div class="box-title">
-										<h4><i class="fa fa-bars"></i><?php _e('Yayınlama'); ?> - <span class="stepHeader"><?php _e('Aşama'); ?> 1 / 3</h4>
+										<h4><i class="fa fa-bars"></i><?php _e('Yayınlama'); ?> - <span class="stepHeader"><?php _e('Aşama'); ?> 1 / 5</h4>
 									</div>
 									<div class="box-body form">
 										<!-- <form id="wizForm" action="#" class="form-horizontal" > -->
@@ -34,14 +34,20 @@
 													</a> 
 												 </li>
 												 <li>
-													<a href="#money" data-toggle="tab" class="wiz-step">
+													<a href="#category" data-toggle="tab" class="wiz-step">
 													<span class="step-number">3</span>
+													<span class="step-name"><i class="fa fa-check"></i> <?php _e('Kategori Bilgileri'); ?> </span>   
+													</a> 
+												 </li>
+												 <li>
+													<a href="#money" data-toggle="tab" class="wiz-step">
+													<span class="step-number">4</span>
 													<span class="step-name"><i class="fa fa-check"></i> <?php _e('Fiyat Bilgileri'); ?> </span>   
 													</a> 
 												 </li>
 												 <li>
 													<a href="#confirm" data-toggle="tab" class="wiz-step">
-													<span class="step-number">4</span>
+													<span class="step-number">5</span>
 													<span class="step-name"><i class="fa fa-check"></i> <?php _e('Onay'); ?> </span>   
 													</a> 
 												 </li>
@@ -120,6 +126,23 @@
 													   </div>
 													</div>
 												</div>
+												<div class="tab-pane active" id="category">
+													
+													<?php
+													foreach ($categories as $key => $category) {
+														$categoryIds[$category->category_id]=$category->category_name;
+													}
+													?>
+
+													<div class="form-group">
+														<label  class="col-md-3 control-label">
+														<?php _e("Kategoriler"); ?>
+														</label>
+														<div class="col-md-9">
+														<?php echo $form->checkBoxList($model,'categories',$categoryIds,array('class'=>'uniform','name'=>'categories')); ?>
+														</div>
+													</div>
+												</div>
 												<div class="tab-pane" id="money">
 
 													<div class="form-group">
@@ -176,7 +199,12 @@
 															  <p class="form-control-static" data-display="contentExplanation"></p>
 														   </div>
 														</div>
-														
+														<div class="form-group">
+														   <label class="control-label col-md-3"><?php _e('Kategoriler'); ?>:</label>
+														   <div class="col-md-4">
+															  <p class="form-control-static" data-display="categories"></p>
+														   </div>
+														</div>
 														<div class="form-group">
 														   <label class="control-label col-md-3"><?php _e('Is For Sale?'); ?>:</label>
 														   <div class="col-md-4">
