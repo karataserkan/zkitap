@@ -8,12 +8,18 @@ $(document).ready(function() {
 
             var that = this;
 
-            var componentvideoid='video'+this.options.component.id;
+            var componentvideoid='popup'+this.options.component.id;
             if(this.options.component.data.video_type == 'popup'){
               if( this.options.marker ) {
                 var newimage=$('<img id="img_'+componentvideoid+'" src="' + this.options.marker +  '"/>');
                 newimage.appendTo(this.element);
-              }
+              };
+
+              this.options.component.data.html_inner = '<video controls="controls" style="width:'+this.options.component.data.video.css.width+';height:'+this.options.component.data.video.css.height+'"><source src="' + this.options.component.data.source.attr.src + '" /></video>';
+              var popupmessage=$('<div  id="message_'+componentvideoid+'" style="display:none" >'+this.options.component.data.html_inner+'</div>');
+               popupmessage.appendTo(this.element);
+              console.log(this.options.component.data.video.css);
+              
             }
             else{
             if (this.options.component.data.source.attr.src) {
@@ -50,6 +56,7 @@ var left = 0;
 var createVideoComponent = function( event, ui, oldcomponent ) {
 
   var marker = 'http://dev.lindneo.com/css/popupmarker.png';
+  var video_width_height = '';
   var video_type_image = function(){
       var video_type = $('input[name=video_type]:checked').val();
         if(video_type == 'popup'){
@@ -249,6 +256,10 @@ var createVideoComponent = function( event, ui, oldcomponent ) {
               window.lindneo.dataservice.send( 'UploadFile',{'token': response.result.token, 'file' : videoBinary} , function(data) {
                 videoURL = response.result.URL;
                 console.log(videoURL);
+                
+                if(video_type == 'popup') video_width_height = '80%';
+                else video_width_height = '100%';
+
                     var component = {
                         'type': 'video',
                         'data': {
@@ -257,8 +268,8 @@ var createVideoComponent = function( event, ui, oldcomponent ) {
                                     'controls': 'controls'
                                 },
                                 'css': {
-                                    'width': '100%',
-                                    'height': '100%',
+                                    'width': video_width_height,
+                                    'height': video_width_height,
                                 },
                                 'contentType': contentType
                             },
@@ -328,6 +339,8 @@ var createVideoComponent = function( event, ui, oldcomponent ) {
          
          */
 
+        if(video_type == 'popup') video_width_height = '80%';
+        else video_width_height = '100%';
         console.log(contentType);
         var component = {
             'type': 'video',
@@ -337,8 +350,8 @@ var createVideoComponent = function( event, ui, oldcomponent ) {
                         'controls': 'controls'
                     },
                     'css': {
-                        'width': '100%',
-                        'height': '100%',
+                        'width': video_width_height,
+                        'height': video_width_height,
                     },
                     'contentType': contentType
                 },
