@@ -411,7 +411,7 @@ var textComponentBuilder = function( component ) {
     
     //var element = $('<img></img>');
 
-    var element  = $('<div class="image-controllers"> </div>');
+    var element  = $('<div class="popup-controllers"> </div>');
     var elementWrap=$('<div ></div>');
     elementWrap.appendTo( page_div_selector );
     //console.log(component);
@@ -419,7 +419,7 @@ var textComponentBuilder = function( component ) {
     .appendTo( elementWrap )
     .imageComponent({
       'component': component,
-      'marker': component.data.marker  ,
+      'marker': component.data.img.marker  ,
       'update': function ( event, component ) {
         if(revision_value==0){
         var newObject = jQuery.extend(true, {}, component);
@@ -441,7 +441,7 @@ var textComponentBuilder = function( component ) {
 
   var videoComponentBuilder = function ( component ) {
     
-    var element  = $('<div class="video-controllers"> </div>');
+    var element  = $('<div class="popup-controllers"> </div>');
     var elementWrap=$('<div ></div>');
     elementWrap.appendTo( page_div_selector );
     //console.log(component);
