@@ -428,76 +428,129 @@ class componentHTML {
 
 
 	public function videoInner($component){ 
-		
-		$file_contents= file_get_contents($component->data->source->attr->src);
+		if($component->data->video_type != 'popup'){
+			$file_contents= file_get_contents($component->data->source->attr->src);
 
-		$URL=parse_url($component->data->source->attr->src);
-		$URL=pathinfo($URL[path]);
-		$ext=$URL['extension'];
-
-
-
-		$file=new file( $component->id.'.'.$ext , $this->epub->get_tmp_file() );
-		$file->writeLine($file_contents);
-		$file->closeFile();
-
-
-		//$file = functions::save_base64_file ( $component->data->source->attr->src , $component->id , $this->epub->get_tmp_file());
-		$this->epub->files->others[] = $file;
-		$component->data->source->attr->src=$file->filename;
-		//new dBug($component); die;
+			$URL=parse_url($component->data->source->attr->src);
+			$URL=pathinfo($URL[path]);
+			$ext=$URL['extension'];
 
 
 
+			$file=new file( $component->id.'.'.$ext , $this->epub->get_tmp_file() );
+			$file->writeLine($file_contents);
+			$file->closeFile();
 
 
-		$data=$component->data; 
+			//$file = functions::save_base64_file ( $component->data->source->attr->src , $component->id , $this->epub->get_tmp_file());
+			$this->epub->files->others[] = $file;
+			$component->data->source->attr->src=$file->filename;
+			//new dBug($component); die;
 
-		
-		$container ="<video  class='video' ";
-		if(isset($data->video->attr))
-			foreach ($data->video->attr as $attr_name => $attr_val ) {
-				$container.=" $attr_name='$attr_val' ";
+
+
+
+
+			$data=$component->data; 
+
+			
+			$container ="<video  class='video' ";
+			if(isset($data->video->attr))
+				foreach ($data->video->attr as $attr_name => $attr_val ) {
+					$container.=" $attr_name='$attr_val' ";
+				}
+
+			if(isset($data->video->css)){
+				$container.=" style=' ";
+				foreach ($data->video->css as $css_name => $css_val ) {
+					$container.="$css_name:$css_val;";
+				}
+				$container.="' "; 
 			}
 
-		if(isset($data->video->css)){
-			$container.=" style=' ";
-			foreach ($data->video->css as $css_name => $css_val ) {
-				$container.="$css_name:$css_val;";
+			$container.=" >";
+			
+			
+
+
+
+			$source ="
+			<source  class='video'  ";
+			if(isset($data->source->attr))
+				foreach ($data->source->attr as $attr_name => $attr_val ) {
+					$source.=" $attr_name='$attr_val' ";
+				}
+
+			if(isset($data->source->css)){
+				$source.=" style=' ";
+				foreach ($data->source->css as $css_name => $css_val ) {
+					$source.="$css_name:$css_val;";
+				}
+				$source.="' ";
 			}
-			$container.="' "; 
+
+
+			$source.=" />";
+
+			$container.= "$source</video>";
+
+
+
+			$this->html=str_replace('%component_inner%' ,$container, $this->html);
 		}
+		else{
+			$data=$component->data;
+			
+			$video_id= "video".functions::get_random_string();
+			$video_container ="<video  class='video' ";
+			if(isset($data->video->attr))
+				foreach ($data->video->attr as $attr_name => $attr_val ) {
+					$video_container.=" $attr_name='$attr_val' ";
+				}
 
-		$container.=" >";
-		
-		
-
-
-
-		$source ="
-		<source  class='video'  ";
-		if(isset($data->source->attr))
-			foreach ($data->source->attr as $attr_name => $attr_val ) {
-				$source.=" $attr_name='$attr_val' ";
+			if(isset($data->video->css)){
+				$video_container.=" style=' ";
+				foreach ($data->video->css as $css_name => $css_val ) {
+					$video_container.="$css_name:$css_val;";
+				}
+				$video_container.="' "; 
 			}
 
-		if(isset($data->source->css)){
-			$source.=" style=' ";
-			foreach ($data->source->css as $css_name => $css_val ) {
-				$source.="$css_name:$css_val;";
+			$video_container.=" >";
+
+			$video_source ="
+			<source  class='video'  ";
+			if(isset($data->source->attr))
+				foreach ($data->source->attr as $attr_name => $attr_val ) {
+					$video_source.=" $attr_name='$attr_val' ";
+				}
+
+			if(isset($data->source->css)){
+				$video_source.=" style=' ";
+				foreach ($data->source->css as $css_name => $css_val ) {
+					$video_source.="$css_name:$css_val;";
+				}
+				$video_source.="' ";
 			}
-			$source.="' ";
+
+
+			$video_source.=" />";
+
+			$video_container.= "$video_source</video>";
+
+
+			$container.=" 
+				
+				<img  class='popup ref-popup-rw' data-popup-target='$video_id' src='".$component->data->marker."' />
+				
+				<div class='widgets-rw popup-text-rw exclude-auto-rw' id='$video_id' style='width:300px; height:300px'>
+					 <button xmlns='http://www.w3.org/1999/xhtml' onclick='$(this).parent().remove();' class='ppclose' style='float:right;'>X</button>
+					 ".$video_container."
+				</div>
+			";
+
+			$this->html=str_replace('%component_inner%' ,$container, $this->html);
 		}
-
-
-		$source.=" />";
-
-		$container.= "$source</video>";
-
-
-
-		$this->html=str_replace('%component_inner%' ,$container, $this->html);
-		
 
 	}
 
@@ -668,33 +721,72 @@ class componentHTML {
 	}
 
 	public function imageInner($component){
+		if($component->data->img->image_type != 'popup'){
+			$file = functions::save_base64_file ( $component->data->img->src , $component->id , $this->epub->get_tmp_file());
+			$this->epub->files->others[] = $file;
+			$component->data->img->attr->src=$file->filename;
+			//new dBug($component); die;
+			$data=$component->data;
+			$container ="
+			<img  class='image' ";
+			if(isset($data->img->attr))
+				foreach ($data->img->attr as $attr_name => $attr_val ) {
+					$container.=" $attr_name='$attr_val' ";
+				}
 
-		$file = functions::save_base64_file ( $component->data->img->src , $component->id , $this->epub->get_tmp_file());
-		$this->epub->files->others[] = $file;
-		$component->data->img->attr->src=$file->filename;
-		//new dBug($component); die;
-		$data=$component->data;
-		$container ="
-		<img  class='image' ";
-		if(isset($data->img->attr))
-			foreach ($data->img->attr as $attr_name => $attr_val ) {
-				$container.=" $attr_name='$attr_val' ";
+			if(isset($data->img->css)){
+				$container.=" style=' ";
+				foreach ($data->img->css as $css_name => $css_val ) {
+					$container.="$css_name:$css_val;";
+				}
+				$container.="' ";
 			}
 
-		if(isset($data->img->css)){
-			$container.=" style=' ";
-			foreach ($data->img->css as $css_name => $css_val ) {
-				$container.="$css_name:$css_val;";
-			}
-			$container.="' ";
+
+			$container.=" 
+				/>
+			";
+
+			$this->html=str_replace('%component_inner%' ,$container, $this->html);
 		}
+		else{
+			$file = functions::save_base64_file ( $component->data->img->src , $component->id , $this->epub->get_tmp_file());
+			$this->epub->files->others[] = $file;
+			$component->data->img->attr->src=$file->filename;
+
+			$data=$component->data;
+			//var_dump($data->img->src);
+			//exit();
+			$image_id= "popup".functions::get_random_string();
+			$image_container ="
+			<img  class='image' src='".$data->img->src."'";
+
+			if(isset($data->img->css)){
+				$image_container.=" style=' ";
+				foreach ($data->img->css as $css_name => $css_val ) {
+					$image_container.="$css_name:$css_val;";
+				}
+				$image_container.="' ";
+			}
 
 
-		$container.=" 
-			/>
-		";
+			$image_container.=" 
+				/>
+			";
 
-		$this->html=str_replace('%component_inner%' ,$container, $this->html);
+
+			$container.=" 
+				
+				<img  class='popup ref-popup-rw' data-popup-target='$image_id' src='".$component->data->img->marker."' />
+				
+				<div class='widgets-rw popup-text-rw exclude-auto-rw' id='$image_id' style='width:300px; height:300px'>
+					 <button xmlns='http://www.w3.org/1999/xhtml' onclick='$(this).parent().remove();' class='ppclose' style='float:right;'>X</button>
+					 ".$image_container."
+				</div>
+			";
+
+			$this->html=str_replace('%component_inner%' ,$container, $this->html);
+		}
 		
 
 	}

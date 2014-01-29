@@ -11,14 +11,17 @@ $(document).ready(function(){
 
       var that = this;
       
-
+console.log(this.options.component);
       var componentimageid='image'+this.options.component.id;
-        if(this.options.component.data.image_type == 'popup'){
+        if(this.options.component.data.img.image_type == 'popup'){
           if( this.options.marker ) {
             var newimage=$('<img id="img_'+componentimageid+'" src="' + this.options.marker +  '"/>');
             //console.log(this.options);
             newimage.appendTo(this.element);
           }
+          this.options.component.data.html_inner = '<img src="' + this.options.component.data.img.src + '" ></img> ';
+          var popupmessage=$('<div  id="message_'+componentimageid+'" style="display:none" >'+this.options.component.data.html_inner+'</div>');
+          popupmessage.appendTo(this.element);
         }
       else{
         if( this.options.component.data.img ) {
@@ -116,6 +119,7 @@ $(document).ready(function(){
 var createImageComponent = function ( event, ui ,oldcomponent) {
 
   var marker = 'http://dev.lindneo.com/css/popupmarker.png';
+  var image_width_height = '';
   var image_type_image = function(){
       var image_type = $('input[name=image_type]:checked').val();
         if(image_type == 'popup'){
@@ -144,7 +148,7 @@ var createImageComponent = function ( event, ui ,oldcomponent) {
     else{
       top = oldcomponent.data.self.css.top;
       left = oldcomponent.data.self.css.left;
-      image_type = oldcomponent.data.image_type;
+      image_type = oldcomponent.data.img.image_type;
       marker = oldcomponent.data.marker;
     };
     var link_check = '';
@@ -288,24 +292,26 @@ var createImageComponent = function ( event, ui ,oldcomponent) {
         imageBinary = _file.target.result;      
         //console.log(top);
         //$("#images-add-dummy-close-button").trigger('click');
+        if(image_type == 'popup') image_width_height = '80%';
+        else image_width_height = '100%';
 
         component = {
           'type' : 'image',
           'data': {
             'img':{
               'css' : {
-                'width':'100%',
-                'height':'100%',
+                'width':image_width_height,
+                'height':image_width_height,
                 'margin': '0',
                 'padding': '0px',
                 'border': 'none 0px',
                 'outline': 'none',
                 'background-color': 'transparent'
               } , 
+              'image_type' : image_type,
+              'marker' : marker,
               'src': imageBinary
             },
-            'image_type' : image_type,
-            'marker' : marker,
             'lock':'',
             'self': {
               'css': {
@@ -395,24 +401,27 @@ var createImageComponent = function ( event, ui ,oldcomponent) {
         imageBinary = evt.target.result;      
         
         $("#images-add-dummy-close-button").trigger('click');
+        
+        if(image_type == 'popup') image_width_height = '80%';
+        else image_width_height = '100%';
 
         component = {
           'type' : 'image',
           'data': {
             'img':{
               'css' : {
-                'width':'100%',
-                'height':'100%',
+                'width':image_width_height,
+                'height':image_width_height,
                 'margin': '0',
                 'padding': '0px',
                 'border': 'none 0px',
                 'outline': 'none',
                 'background-color': 'transparent'
               } , 
+              'image_type' : image_type,
+              'marker' : marker,
               'src': imageBinary
             },
-            'image_type' : image_type,
-            'marker' : marker,
             'lock':'',
             'self': {
               'css': {
