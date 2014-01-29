@@ -23,6 +23,7 @@ class PublishBookForm extends CFormModel
 	public $contentHostId;
 	public $contentHostKey1;
 	public $contentHostKey2;
+	public $categories;
 
 	/**
 	 * Declares the validation rules.
@@ -57,7 +58,8 @@ class PublishBookForm extends CFormModel
 			'contentReaderGroup'=>'Reader Group',
 			'created'=>'Date',
 			'organisationId'=>'organisation Id',
-			'organisationName'=>'Organisation Name'
+			'organisationName'=>'Organisation Name',
+			'categories'=>'Kategoriler'
 		);
 	}
 }

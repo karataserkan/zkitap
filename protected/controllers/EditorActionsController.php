@@ -45,6 +45,8 @@ class EditorActionsController extends Controller
 		    'params'=>array(':organisation_id'=>$organisation->organisation_id),
 		));
 
+		$categories=BookCategories::model()->findAll();
+
 		$model=new PublishBookForm;
 
 		$model->contentId=$bookId;
@@ -56,9 +58,10 @@ class EditorActionsController extends Controller
 		$model->contentIsForSale="Yes";
 		$model->contentPriceCurrencyCode="949";
 		$model->contentPrice="0";
+		$model->categories="1122";
 
 
-		$this->render('publishBook',array('model'=>$model,'hosts'=>$hosts,'bookId'=>$bookId));
+		$this->render('publishBook',array('model'=>$model,'hosts'=>$hosts,'categories'=>$categories,'bookId'=>$bookId));
 	}
 
 	public function actionGetFileURL($type=null){
@@ -734,10 +737,37 @@ right join book using (book_id) where book_id='$bookId' and type!='image';";
 				$hosts=$_POST['host'];
 				foreach ($hosts as $key => $hostId) {
 					$host=OrganisationHostings::model()->findByPk($hostId);
-					$data['hosts'][$key]['host']=$host->hosting_client_IP;
-					$data['hosts'][$key]['port']=$host->hosting_client_port;
+					$data['hosts'][$hostId]['host']=$host->hosting_client_IP;
+					$data['hosts'][$hostId]['port']=$host->hosting_client_port;
+					$data['hosts'][$hostId]['key1']=$host->hosting_client_key1;
+					$data['hosts'][$hostId]['key2']=$host->hosting_client_key2;
+					$data['hosts'][$hostId]['id']=$host->hosting_client_id;
 				}
 
+			}
+			else
+			{
+				$host=OrganisationHostings::model()->findByPk('GIWwMdmQXL');
+				$data['hosts']['GIWwMdmQXL']['host']=$host->hosting_client_IP;
+				$data['hosts']['GIWwMdmQXL']['port']=$host->hosting_client_port;
+				$data['hosts']['GIWwMdmQXL']['key1']=$host->hosting_client_key1;
+				$data['hosts']['GIWwMdmQXL']['key2']=$host->hosting_client_key2;
+				$data['hosts']['GIWwMdmQXL']['id']=$host->hosting_client_id;
+			}
+
+			if (isset($_POST['categories'])) {
+				$categories=$_POST['categories'];
+				foreach ($categories as $key => $categoryId) {
+					$category=BookCategories::model()->findByPk($categoryId);
+					$data['categories'][$categoryId]['category_id']=$category->category_id;
+					$data['categories'][$categoryId]['category_name']=$category->category_name;
+				}
+			}
+			else
+			{
+				$category=BookCategories::model()->findByPk('1122');
+				$data['categories'][$categoryId]['category_id']=$category->category_id;
+				$data['categories'][$categoryId]['category_name']=$category->category_name;
 			}
 			
 		}
@@ -747,12 +777,10 @@ right join book using (book_id) where book_id='$bookId' and type!='image';";
 		$data['checksum']=md5_file($ebook->ebookFile);
 		$data['contentTrustSecret']=sha1($data['checksum']."ONLYUPLOAD".$bookId."31.210.53.80");
 
-		if (empty($data['hosts'])) {
-			$data['hosts'][0]['host']="cloud.lindneo.com";
-			$data['hosts'][0]['port']="2222";
-		}
+		
 
-
+		$data['hosts']=json_encode($data['hosts']);
+		$data['categories']=json_encode($data['categories']);
 		$localFile = $ebook->ebookFile; // This is the entire file that was uploaded to a temp location.
 		$fp = fopen($localFile, 'r');
 
@@ -763,8 +791,9 @@ right join book using (book_id) where book_id='$bookId' and type!='image';";
 		curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
 		curl_setopt($ch, CURLOPT_FOLLOWLOCATION, TRUE);
 		curl_setopt($ch, CURLOPT_POST, TRUE);
+		
 		curl_setopt($ch, CURLOPT_POSTFIELDS, $data); 
-		$Return['response']=unserialize(curl_exec($ch));
+		$Return['response']=json_decode(curl_exec($ch));
 
 		if (curl_errno($ch)){  
 			$this->error('SendFileToCatalog','CURL_ERROR:'.curl_error($ch));
