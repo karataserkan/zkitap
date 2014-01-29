@@ -112,14 +112,18 @@ var FormWizard = function () {
                 var hosts=$("span.checked [name='host[]']");
                 var hostText= '';
                 for (var i = 0; i < hosts.length; i++) {
-                
-                
                 hostText +=$("label[for='"+$("span.checked [name='host[]']")[i].id+"']").html()+'<br>';
-                //hostText += $("span.checked [name='host[]']")[i].value+'<br>';
-                   
                 };
 
+                var categoriess=$("span.checked [name='categories[]']");
+                var categoriesText= '';
+                for (var i = 0; i < categoriess.length; i++) {
+                categoriesText +=$("label[for='"+$("span.checked [name='categories[]']")[i].id+"']").html()+'<br>';
+                };
+
+
                 $("p[data-display='host']").html(hostText);
+                $("p[data-display='categories']").html(categoriesText);
 
             };
 

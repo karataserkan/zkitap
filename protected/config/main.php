@@ -134,7 +134,8 @@ return array(
      		'tr_TR' => 'Türkçe',
      		'en_US' => 'English'
      		),
-     	'catalogExportURL' => "http://catalog.lindneo.com/index_2.php"
+     	//'catalogExportURL' => "http://catalog.lindneo.com/index_2.php"
+     	'catalogExportURL' => "http://catalog.lindneo.com/site/import"
 	)
 
 );
