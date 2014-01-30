@@ -116,7 +116,7 @@ $(document).ready(function(){
                    $.each( styles , function(i,v) {
                         that.setProperty(v.name , v.val);
                     });
-
+                   that.setProperty('contentEditable' , true);
 
                 return this.getProperty(propertyName) ;
                 
@@ -241,7 +241,8 @@ $(document).ready(function(){
              'overflow': (type == 'text' ? 'visible' : 'hidden' )
           } , 
           'attr': {
-            'placeholder':'Metin Kutusu'
+            'placeholder':'Metin Kutusu',
+            'contentEditable':'true' 
           },
           'val': ''
         },
