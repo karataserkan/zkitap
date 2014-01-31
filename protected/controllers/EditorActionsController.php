@@ -711,6 +711,8 @@ right join book using (book_id) where book_id='$bookId' and type!='image';";
 
 		ob_start();
 		$book=Book::model()->findByPk($bookId);
+		$bookData=json_decode($book->data,true);
+
 		$ebook=new epub3($book);
 
 
@@ -732,6 +734,8 @@ right join book using (book_id) where book_id='$bookId' and type!='image';";
 			$data['contentCurrencyCode']=$_POST['contentCurrency'];
 			$data['contentPrice']=$_POST['contentPrice'];
 			$data['contentReaderGroup']=$_POST['contentReaderGroup'];
+			$data['contentCover']=$bookData['cover'];
+			$data['contentThumbnail']=$bookData['thumbnail'];
 			
 			if (isset($_POST['host'])) {
 				$hosts=$_POST['host'];

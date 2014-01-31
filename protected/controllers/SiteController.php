@@ -40,13 +40,13 @@ class SiteController extends Controller
 	public function actionDashboard()
 	{
 		$meta_books= Yii::app()->db
-		    ->createCommand("SELECT * FROM user_meta WHERE user_id=:user_id AND meta_data LIKE :meta_data ORDER BY created DESC LIMIT 4")
-		    ->bindValues(array(':user_id' => Yii::app()->user->id, ':meta_data' => '{"type":"edit","bookId":"%'))
+		    ->createCommand("SELECT * FROM user_meta WHERE user_id=:user_id AND meta_key=:meta_key ORDER BY created DESC LIMIT 4")
+		    ->bindValues(array(':user_id' => Yii::app()->user->id, ':meta_key' => 'lastEditedBook'))
 		    ->queryAll();
-
-		 foreach ($meta_books as $key => $book) {
-		 	$json=json_decode($book['meta_data'],true);
-		 	$books[]=Book::model()->findByPk($json['bookId']);
+		 if ($meta_books) {
+			 foreach ($meta_books as $key => $book) {
+			 	$books[]=Book::model()->findByPk($book['meta_value']);
+			 }		 	
 		 }
 
 		
