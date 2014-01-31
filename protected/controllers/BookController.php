@@ -36,7 +36,7 @@ class BookController extends Controller
 				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
-				'actions'=>array('create','update','selectTemplate','delete','view','author','newBook','selectData','uploadFile','duplicateBook'),
+				'actions'=>array('create','update','selectTemplate','delete','view','author','newBook','selectData','uploadFile','duplicateBook','updateThumbnail','updateCover'),
 				'users'=>array('@'),
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
@@ -556,6 +556,34 @@ class BookController extends Controller
 		$this->render('update',array(
 			'model'=>$model,
 		));
+	}
+
+	public function actionUpdateThumbnail($id,$bookId=null)
+	{
+		$bookId = ($id) ? $id : $bookId ;
+
+		$book=Book::model()->findByPk($bookId);
+
+		if (isset($_POST['img'])) {
+			$bookData=json_decode($book->data,true);
+			$bookData['thumbnail']=$_POST['img'];
+			$book->data=json_encode($bookData);
+			$book->save();
+		}
+	}
+
+	public function actionUpdateCover($id,$bookId=null)
+	{
+		$bookId = ($id) ? $id : $bookId ;
+
+		$book=Book::model()->findByPk($bookId);
+
+		if (isset($_POST['img'])) {
+			$bookData=json_decode($book->data,true);
+			$bookData['cover']=$_POST['img'];
+			$book->data=json_encode($bookData);
+			$book->save();
+		}
 	}
 
 	/**

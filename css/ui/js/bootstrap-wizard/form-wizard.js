@@ -228,7 +228,7 @@ var FormWizard = function () {
                         url:'/editorActions/sendFileToCatalog/'+bookId,
                         success:function() { 
                             bootbox.alert("Kitap yayınlama başarılı.",function(){
-                                //window.location.href = '/site/index';
+                                window.location.href = '/site/index';
                             });
                         },
                         error:function() { 
