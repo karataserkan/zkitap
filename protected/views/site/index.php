@@ -217,7 +217,15 @@ $all_books= $this->getWorkspaceBooks($workspace->workspace_id);
 						<div class="row">
 								
 								<div class="col-md-4 ">
-									<img src="/css/images/default-cover.jpg" alt="Book Cover">
+									<?php 
+										$thumbnailSrc="/css/images/default-cover.jpg";
+										$bookData=json_decode($book->data,true);
+										 if (isset($bookData['thumbnail'])) {
+										 	$thumbnailSrc=$bookData['thumbnail'];
+										 }
+
+									?>
+									<img src="<?php echo $thumbnailSrc; ?>" alt="Book Cover" style="width:110px; height:170px">
 								</div>
 								
 								<div class="col-md-8 form-vertical">
