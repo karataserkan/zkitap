@@ -47,7 +47,14 @@
 				<!-- User Login Dropdown -->
 				<li class="dropdown user" id="header-user">
 					<a href="#" class="dropdown-toggle" data-toggle="dropdown">
-						<img alt="" src="<?php echo Yii::app()->request->baseUrl; ?>/css/ui/img/avatars/at.png" />
+						<?php
+							$avatarSrc=Yii::app()->request->baseUrl."/css/ui/img/avatars/at.png";
+							$userProfileMeta=UserMeta::model()->find('user_id=:user_id AND meta_key=:meta_key',array('user_id'=>Yii::app()->user->id,'meta_key'=>'profilePicture'));
+							if ($userProfileMeta->meta_value) {
+								$avatarSrc=$userProfileMeta->meta_value;
+							}
+						?>
+						<img alt="" src="<?php echo $avatarSrc; ?>" />
 						<span class="username"><?php echo Yii::app()->user->name; ?></span>
 						<i class="fa fa-angle-down"></i>
 					</a>

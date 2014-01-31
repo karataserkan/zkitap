@@ -273,12 +273,12 @@ class SiteController extends Controller
 			if (!empty($user)) {
 				$meta=new UserMeta;
 				$meta->user_id=$user[0]->id;
-				$meta->meta_id=functions::new_id(40);
+				$meta->meta_key='passwordReset';
 
 				$link=Yii::app()->getBaseUrl(true);
 				$link.='/user/forgetPassword?id=';
 				$link .= $meta->meta_id;
-				$meta->meta_data="password_reset";
+				$meta->meta_value=$email;
 
 				$message="Şifre sıfırlama isteği gönderdiniz. <a href='".$link."'>Buraya tıklayarak</a> şifrenizi değiştirebilirsiniz. Şifre değiştirme isteğiniz 10 dakika sonra geçersiz olacaktır.<br>".$link;
 
@@ -321,7 +321,14 @@ class SiteController extends Controller
 
 		if (isset($_POST['User'])) {
 			$attributes=$_POST['User'];
-			$newUser->data=$attributes['data'];
+			
+			$meta=new UserMeta;
+			$meta->user_id=$newUser->id;
+			$meta->meta_key='profilePicture';
+			$meta->meta_value=$attributes['data'];
+			$meta->created=time();
+			$meta->save();
+			
 			$newUser->name=$attributes['name'];
 			$newUser->surname=$attributes['surname'];
 			$newUser->email=$attributes['email'];
