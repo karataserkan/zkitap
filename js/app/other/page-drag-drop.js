@@ -160,6 +160,10 @@ $( document ).ready(function () {
             createTableComponent( event, ui  );
             break;
 
+          case 'html':
+            createHtmlComponent( event, ui  );
+            break;
+
           default:
             break; 
         }

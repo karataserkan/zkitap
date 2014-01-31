@@ -147,18 +147,10 @@ $(document).ready(function(){
       setProperty : function (propertyName,propertyValue){
         console.log(propertyName);
         console.log(propertyValue);
-        if($('#'+this.options.component.id).selection() == ''){
-          this._setProperty(propertyName,propertyValue);
-          this.autoResize();
-        }
-        else{
-          var selection_text = $('#'+this.options.component.id).selection();
-          if(propertyValue == 'bold')
-          $('#'+this.options.component.id).selection('replace', {
-              text: selection_text.setProperty(propertyName , propertyValue),
-              caret: 'before'
-          });
-        }
+        
+        this._setProperty(propertyName,propertyValue);
+        this.autoResize();
+        
       },
 
       getProperty : function (propertyName){

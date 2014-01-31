@@ -29,6 +29,10 @@ window.lindneo.dataservice = (function( $ ) {
       createPopupComponent( event, ui, component );
     };
 
+  var html_popup = function(event, ui, component){
+      createHtmlComponent( event, ui, component );
+    };
+
   var video_popup = function(event, ui, component){
       createVideoComponent( event, ui, component );
     };
