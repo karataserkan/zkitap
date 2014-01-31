@@ -32,7 +32,7 @@ class UserController extends Controller
 				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
-				'actions'=>array('create','update','profile'),
+				'actions'=>array('create','update','profile','updatePhoto'),
 				'users'=>array('@'),
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
@@ -179,7 +179,10 @@ class UserController extends Controller
 
 	public function actionProfile()
 	{
-		echo Yii::app()->user->name;
+		//echo Yii::app()->user->id;
+		$user=User::model()->findByPk(Yii::app()->user->id);
+		$userProfileMeta=UserMeta::model()->find('user_id=:user_id AND meta_key=:meta_key',array('user_id'=>Yii::app()->user->id,'meta_key'=>'profilePicture'));
+		$this->render('profile',array('user'=>$user,'userProfileMeta'=>$userProfileMeta));
 	}
 	/**
 	 * Creates a new model.
@@ -226,6 +229,24 @@ class UserController extends Controller
 		$this->render('update',array(
 			'model'=>$model,
 		));
+	}
+
+	public function actionUpdatePhoto()
+	{
+
+		$meta=UserMeta::model()->find('user_id=:user_id AND meta_key=:meta_key',array('user_id'=>Yii::app()->user->id,'meta_key'=>'profilePicture'));
+
+		if (!$meta) {
+			$meta=new UserMeta;
+		}
+		if (isset($_POST['img'])) {
+			$meta->user_id=Yii::app()->user->id;
+			$meta->meta_key='profilePicture';
+			$meta->meta_value=$_POST['img'];
+			$meta->created=time();
+			$meta->save();
+			
+		}
 	}
 
 	/**
