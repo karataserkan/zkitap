@@ -23,7 +23,7 @@
 		<div class="navbar-brand">
 					<!-- COMPANY LOGO -->
 					<a href="<?php echo $this->createUrl('site/index');  ?>">
-						<img src="<?php echo Yii::app()->request->baseUrl; ?>/css/logo.png" alt="Linden" class="img-responsive" height="30" width="120">
+						<img src="<?php echo Yii::app()->request->baseUrl; ?>/css/logo.png" alt="Linden" class="img-responsive" >
 					</a>
 					<!-- /COMPANY LOGO -->
 					<!-- TEAM STATUS FOR MOBILE -->
@@ -47,7 +47,7 @@
 				<!-- User Login Dropdown -->
 				<li class="dropdown user" id="header-user">
 					<a href="#" class="dropdown-toggle" data-toggle="dropdown">
-						<img alt="" src="img/avatars/avatar3.jpg" />
+						<img alt="" src="<?php echo Yii::app()->request->baseUrl; ?>/css/ui/img/avatars/at.png" />
 						<span class="username"><?php echo Yii::app()->user->name; ?></span>
 						<i class="fa fa-angle-down"></i>
 					</a>

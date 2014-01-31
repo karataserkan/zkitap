@@ -25,7 +25,7 @@ $(document).ready(function(){
         })
 
 
-        if (this.options.component.data.self.attr.componentType != 'side-text' )this.element.autogrow({element:this});
+        //if (this.options.component.data.self.attr.componentType != 'side-text' )this.element.autogrow({element:this});
 
         this._super();
           
@@ -48,6 +48,7 @@ $(document).ready(function(){
 
       setPropertyofObject : function (propertyName,propertyValue){
         var that = this;
+        console.log('dasd');
         switch (propertyName){
             case 'fast-style': 
                 this.getSettable().attr[propertyName]=propertyValue;
@@ -113,6 +114,7 @@ $(document).ready(function(){
 
 
                   }
+                  console.log(that);
                    $.each( styles , function(i,v) {
                         that.setProperty(v.name , v.val);
                     });
@@ -143,8 +145,20 @@ $(document).ready(function(){
           }
       },
       setProperty : function (propertyName,propertyValue){
-        this._setProperty(propertyName,propertyValue);
-        this.autoResize();
+        console.log(propertyName);
+        console.log(propertyValue);
+        if($('#'+this.options.component.id).selection() == ''){
+          this._setProperty(propertyName,propertyValue);
+          this.autoResize();
+        }
+        else{
+          var selection_text = $('#'+this.options.component.id).selection();
+          if(propertyValue == 'bold')
+          $('#'+this.options.component.id).selection('replace', {
+              text: selection_text.setProperty(propertyName , propertyValue),
+              caret: 'before'
+          });
+        }
       },
 
       getProperty : function (propertyName){

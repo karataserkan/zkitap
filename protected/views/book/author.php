@@ -90,7 +90,7 @@ $current_user=User::model()->findByPk(Yii::app()->user->id);
 	
 			<div id='headermenu'>
 			<ul>
-			   <li><a style="height:42px;" href="<?php echo $this->createUrl('site/index');  ?>"><img  src="/css/linden_logo.png" height="30px;" style="padding-top:5px;"></a></li>
+			   <li><a style="height:42px;" href="<?php echo $this->createUrl('site/index');  ?>"><img  src="/css/linden_logo.png" ></a></li>
 			   <li><a contenteditable="true"> <?php echo $model->title; ?></a></li>
 			   <li class='has-sub'><a href='#'><span>Dosya</span></a>
 					<ul>
@@ -397,7 +397,9 @@ $current_user=User::model()->findByPk(Yii::app()->user->id);
 			</div>
 			<div class="generic-options toolbox float-left"  style="display:inline-block;">
 			<!--	<a href="#" class="bck-dark-blue white btn btn-default" id="pop-align"><i class="icon-align-center size-20"></i></a> -->
-				<a href="#" class="optbtn" id="pop-arrange" ><i style="vertical-align:bottom;" class="icon-send-backward size-15" title="Sırasını Değiştir"></i></a>
+
+				<a href="#" class="optbtn" id="pop-arrange" ><i style="vertical-align:bottom; color:#2C6185;" class="icon-send-backward size-15" title="Sırasını Değiştir"></i></a>
+
 			<!--	<a href="#" class="btn btn-info">Grupla</a>    -->
 			</div>
 			
@@ -1030,7 +1032,7 @@ $current_user=User::model()->findByPk(Yii::app()->user->id);
 					<div class='chapter' chapter_id='<?php echo $chapter->chapter_id; ?>'>
 					<input type="text" class="chapter-title" placeholder="chapter title" value="<?php echo $chapter->title; ?>">
 					
-					<a class="btn btn-warning page-chapter-delete delete-chapter hidden-delete" style="float: right; margin-top: -23px;"><i class="icon-delete"></i></a> 
+					<a class="btn btn-danger  page-chapter-delete delete-chapter hidden-delete" style="float: right; margin-top: -23px;"><i class="icon-delete"></i></a> 
 					
 					<!-- <?php echo $chapter->title; ?>  chapter title--> 
 										<ul class="pages" >
@@ -1055,7 +1057,7 @@ $current_user=User::model()->findByPk(Yii::app()->user->id);
 									?> 
 										
 										<li class='page <?php echo ( $current_page->page_id== $pages->page_id  ? "current_page": "" ); ?>' chapter_id='<?php echo $pages->chapter_id; ?>' page_id='<?php echo $pages->page_id; ?>' chapter_id='<?php echo $pages->page_id; ?>'   >
-											<a class="btn btn-info size-15 radius icon-delete page-chapter-delete delete-page hidden-delete "  style="top: 0px;right: 0px; position: absolute;"></a>
+											<a class="btn btn-danger page-chapter-delete delete-chapter hidden-delete "  style="top: 0px;right: 0px; position: absolute;"><i class="icon-delete"></i></a>
 											<!--<a href='<?php echo $this->createUrl("book/author", array('bookId' => $model->book_id, 'page'=>$pages->page_id ));?>' >-->
 												<a href='<?php echo "/book/author/".$model->book_id.'/'.$pages->page_id;?>'/>
 													
@@ -1075,7 +1077,8 @@ $current_user=User::model()->findByPk(Yii::app()->user->id);
 						//$this->current_chapter=null;
 						?>
 						
-						<div id="add-button" class="bck-dark-blue size-25 icon-add white" style="position: fixed; bottom: 0px; right: 0px; width: 140px; text-align: center;"></div>
+						<!-- yeni butonlar gelmeden önce en altta olan zımbırtı -->
+						<!--  <div id="add-button" class="bck-dark-blue size-25 icon-add white" style="position: fixed; bottom: 0px; right: 0px; width: 140px; text-align: center;"></div -->
 						
 						<script>
 
@@ -1125,12 +1128,12 @@ $current_user=User::model()->findByPk(Yii::app()->user->id);
 					</script>
 					
 					
-					<a class="add-page-list-button">
+					<a class="add-page-list-button" href='?r=page/create&chapter_id=<?php echo $current_chapter->chapter_id; ?>'>
 					<div class="add-page-list-inside">
 					Sayfa Ekle </div>
 					</a>
 
-					<a class="add-page-list-button">
+					<a class="add-page-list-button" href='?r=chapter/create&book_id=<?php echo $model->book_id; ?>'>
 					<div class="add-page-list-inside">
 					Bölüm Ekle </div>
 					</a>	
@@ -1231,7 +1234,10 @@ if ($book_type=="pdf") {
 $background= (!empty($img)) ? "background-image:url('".$img."')" : "background:white";
 ?>
 
-					<div id='current_page' page_id='<?php echo $page->page_id ;?>' style="<?php echo $background; ?>;border:thin solid black;zoom:1; background-size:<?php echo $bookWidth; ?>px <?php echo $bookHeight; ?>px; height:<?php echo $bookHeight; ?>px;width:<?php echo $bookWidth; ?>px;position:relative"  >
+					<div id='current_page' page_id='<?php echo $page->page_id ;?>' style="<?php echo $background; ?>;border:thin solid rgb(146, 146, 146);zoom:1;
+					-webkit-box-shadow: 1px 1px 5px 2px rgba(6, 34, 63, 0.63);
+					-moz-box-shadow: 1px 1px 5px 2px rgba(6, 34, 63, 0.63);
+					box-shadow: 1px 1px 5px 2px rgba(6, 34, 63, 0.63); background-size:<?php echo $bookWidth; ?>px <?php echo $bookHeight; ?>px; height:<?php echo $bookHeight; ?>px;width:<?php echo $bookWidth; ?>px;position:relative"  >
 						<div id="guide-h" class="guide"></div>
 						<div id="guide-v" class="guide"></div>
 					</div>

@@ -156,7 +156,7 @@ background-color:#f7f7f7;
 }
 .dark-blue
 {
-	color:#084f5f;
+	color:#2C6185;
 }
 
 .light-red
@@ -235,7 +235,7 @@ background-color:#f7f7f7;
 }
 .bck-dark-blue
 {
-	background-color:#084f5f;
+	background-color:#3375A1;
 	padding:8px 5px 0px 5px;
 }
 
@@ -613,7 +613,7 @@ margin: 0 0 10px;
 	padding: 5px 0px;
 	left:0;
 	bottom:0;
-	background-color:#084F5F;
+	background-color:#3375A1;
 	color:white;
 	text-align:center;
 	font-weight:bold;
@@ -642,7 +642,7 @@ display:none;
 left:127px;
 bottom:0px;
 padding-top:5px;
-background-color:#084F5F;
+background-color:#3375A1;
 width:300px;
 height:auto;
 min-height:100px;
@@ -917,9 +917,9 @@ display: -webkit-box;
 
 
 .right_bar_shrink_button{
-position:absolute;
+position:fixed;
 right: 249px;
-top: 10px;
+top: 93px;
 z-index:999999;
 border-bottom-right-radius: 0;
 border-bottom-left-radius: 4px;
@@ -942,7 +942,7 @@ line-height: 1.428571429;
 -ms-user-select: none;
 -o-user-select: none;
 user-select: none;
-color: #084f5f;
+color: #3375A1;
 background-color: #ffffff;
 border-color: #cccccc;
 }
@@ -1009,7 +1009,7 @@ ul.component_holder li {
  display:block;
  padding: 5px 5px 5px 5px;
  margin:0px 5px 0px 5px;
- color:#404041;
+ color:#224761;
  cursor:pointer;
 }
 
@@ -1242,8 +1242,8 @@ width: 250px;
 border-left: 2px solid #d1d2d4;
 right: 0px;
 background: #f4f4f4;
-padding: 0px 0px 60px 0px;
 z-index: 999999;
+overflow-y:scroll;
 
 }
 
@@ -1320,7 +1320,7 @@ border:0;
 list-style: none;
 background-color: #FFF;
 border: 1px dashed #bbb;
-width: 98px;
+width: 91px;
 color: rgb(135, 158, 180);
 float:left;
 margin:5px;
@@ -1361,7 +1361,7 @@ bottom: 33px;
 width: 150px;
 text-align:center;
 
-background-color: #084f5f;
+background-color: #3375A1;
 }
 
 .add-button-page-template{
@@ -1374,7 +1374,7 @@ max-height:600px;
 min-height:300px;
 width: 250px;
 text-align:center;
-background-color: #084f5f;
+background-color: #3375A1;
 font-size:15px;
 overflow-y:scroll;
 text-align:center;
@@ -1417,7 +1417,7 @@ margin-top: 50%;
 
 .add-page-modal p{
 font-weight:bold;
-color:#084f5f;
+color:#3375A1;
 }
 		
 .add-page-modal .panel-body{
@@ -1605,7 +1605,7 @@ padding: 20px;
 
 width:460px; 
 height: 550px; 
-background-color:#084f5f; 
+background-color:#3375A1; 
 color:#fff; 
 margin-top:10%;
  text-align:left;
@@ -1866,7 +1866,7 @@ font-weight:normal;
 
 .quiz-component #question-text  {
 font-weight:bold;
-color:#084f5f;
+color:#3375A1;
 }
 
 
