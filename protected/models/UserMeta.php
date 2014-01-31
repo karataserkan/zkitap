@@ -5,9 +5,9 @@
  *
  * The followings are the available columns in table 'user_meta':
  * @property integer $user_id
- * @property string $meta_id
- * @property string $meta_data
- * @property string $created
+ * @property string $meta_key
+ * @property string $meta_value
+ * @property integer $created
  */
 class UserMeta extends CActiveRecord
 {
@@ -37,12 +37,12 @@ class UserMeta extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('user_id, meta_id, meta_data, created', 'required'),
-			array('user_id', 'numerical', 'integerOnly'=>true),
-			array('meta_id', 'length', 'max'=>40),
+			array('user_id, meta_key, meta_value', 'required'),
+			array('user_id, created', 'numerical', 'integerOnly'=>true),
+			array('meta_key', 'length', 'max'=>200),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('user_id, meta_id, meta_data, created', 'safe', 'on'=>'search'),
+			array('user_id, meta_key, meta_value, created', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -64,8 +64,8 @@ class UserMeta extends CActiveRecord
 	{
 		return array(
 			'user_id' => 'User',
-			'meta_id' => 'Meta',
-			'meta_data' => 'Meta Data',
+			'meta_key' => 'Meta Key',
+			'meta_value' => 'Meta Value',
 			'created' => 'Created',
 		);
 	}
@@ -82,9 +82,9 @@ class UserMeta extends CActiveRecord
 		$criteria=new CDbCriteria;
 
 		$criteria->compare('user_id',$this->user_id);
-		$criteria->compare('meta_id',$this->meta_id,true);
-		$criteria->compare('meta_data',$this->meta_data,true);
-		$criteria->compare('created',$this->created,true);
+		$criteria->compare('meta_key',$this->meta_key,true);
+		$criteria->compare('meta_value',$this->meta_value,true);
+		$criteria->compare('created',$this->created);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,

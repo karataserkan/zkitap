@@ -103,6 +103,7 @@ $this->pageTitle=Yii::app()->name." - ". __("Kontrol Paneli");
 <div class="separator"></div>
 <div class="row">
 <?php
+if (!empty($books)&&$books) {
 foreach ($books as $key2 => $book) { $userType = $this->userType($book['book_id']); ?>
 <div class="col-md-3">
 	<!-- BOX -->
@@ -138,7 +139,7 @@ foreach ($books as $key2 => $book) { $userType = $this->userType($book['book_id'
 	</div>
 	<!-- /BOX -->
 </div>
-<?php } ?>
+<?php } }?>
 </div>
 <!--/PAGE -->
 
