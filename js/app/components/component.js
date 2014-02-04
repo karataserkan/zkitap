@@ -67,7 +67,7 @@ $(document).ready(function(){
             snap: '.ui-wrapper',
             handle: '.dragging_holder, img',
             snapMode: 'outer',
-            'alsoDrag':'.selected',
+            'alsoDrag':'.ui-draggable.selected',
             'stop': function(event, ui){
             //console.log();
 
