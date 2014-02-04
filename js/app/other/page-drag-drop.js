@@ -205,7 +205,19 @@ $( document ).ready(function () {
     };
 
     if(document.getElementById("current_page")!= null){
-      var el = document.getElementById("current_page");
+      drop_image("current_page");
+    };
+
+    if(document.getElementById("collapseOne")!= null){
+      drop_image("collapseOne");
+    };
+
+    if(document.getElementById("collapseThum")!= null){
+      drop_image("collapseThum");
+    };
+
+    function drop_image(div_id){
+      var el = document.getElementById(div_id);
       var FileBinary = '';
 
       el.addEventListener("dragenter", function(e){
@@ -228,8 +240,8 @@ $( document ).ready(function () {
         var file = e.dataTransfer.files[0];
         var reader = new FileReader();
         var component = {};
-        console.log(e);
-        window.lindneo.dataservice.newComponentDropPage(e, reader, file);
+        console.log(reader);
+        window.lindneo.dataservice.newComponentDropPage(div_id, e, reader, file);
       });
     };
     

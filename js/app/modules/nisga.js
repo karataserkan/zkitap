@@ -57,7 +57,7 @@ window.lindneo.nisga = (function(window, $, undefined){
   };
 
   var componentBuilder = function( component ){
-     
+     console.log(component.type);
     switch( component.type ) {
       case 'text':
         textComponentBuilder( component );
@@ -404,15 +404,14 @@ var textComponentBuilder = function( component ) {
 
   var htmlComponentBuilder = function( component ) {
 
-    var element  = $('<div class="popup-controllers"> </div>');
+    var element  = $('<div class="html-controllers"> </div>');
     var elementWrap=$('<div ></div>');
     elementWrap.appendTo( page_div_selector );
 
     element
     .appendTo( elementWrap )
-    .popupComponent({
+    .htmlComponent({
       'component': component,
-      'marker': 'http://dev.lindneo.com/css/popupmarker.png'  ,
       'update': function ( event, component ) {
         if(revision_value==0){
         var newObject = jQuery.extend(true, {}, component);
