@@ -734,7 +734,7 @@ right join book using (book_id) where book_id='$bookId' and type!='image';";
 			$data['contentCurrencyCode']=$_POST['contentCurrency'];
 			$data['contentPrice']=$_POST['contentPrice'];
 			$data['contentReaderGroup']=$_POST['contentReaderGroup'];
-			$data['contentCover']=$bookData['cover'];
+			//$data['contentCover']=$bookData['cover'];
 			$data['contentThumbnail']=$bookData['thumbnail'];
 			
 			if (isset($_POST['host'])) {
