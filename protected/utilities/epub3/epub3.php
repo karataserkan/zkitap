@@ -180,9 +180,24 @@ class epub3 {
 	}
 
 	public function copyCoverImage(){
-		$this->coverImage->URL=Yii::app()->request->hostInfo . '/css/cover.jpg';
 
-		$this->coverImage->filename='cover.jpg';
+		$cover64=$this->book->getData('cover');
+
+		if ($cover64) {
+			$ext1=explode(';', $cover64);
+			$ext2=explode('/', $ext1[0]);
+			$extension = '.'.$ext2[1];
+			
+			$this->coverImage = functions::save_base64_file ( $cover64 , "cover" , $this->get_tmp_file());
+			$this->coverImage->URL=$this->get_tmp_file(). '/cover'.$extension;
+			$this->coverImage->filename='cover'.$extension;
+		}
+		else
+		{
+			$this->coverImage->URL=Yii::app()->request->hostInfo . '/css/cover.jpg';
+			$this->coverImage->filename='cover.jpg';
+		}
+
 
 		$image_file_contents=file_get_contents($this->coverImage ->URL);
 
