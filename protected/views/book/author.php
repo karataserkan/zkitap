@@ -177,18 +177,18 @@ $current_user=User::model()->findByPk(Yii::app()->user->id);
 			<!-- <ul id="text-styles" ></ul> -->
             <div class="generic-options float-left"  style="display:inline-block; margin-right:5px;">
 
-				<a class="optbtn " id="undo" ><i style="vertical-align: bottom;" class="undo icon-undo size-15 dark-blue"></i></a>
-				<a class="optbtn " id="redo" ><i style="vertical-align: bottom;" class="redo icon-redo size-15 dark-blue"></i></a>
+				<a class="optbtn " id="undo" ><i style="vertical-align: bottom;" class="undo icon-undo size-15 dark-blue" title="İleri" ></i></a>
+				<a class="optbtn " id="redo" ><i style="vertical-align: bottom;" class="redo icon-redo size-15 dark-blue" title="Geri" ></i></a>
 			
 			</div>
 			<div class="vertical-line responsive_2"></div>
 						
-			<div class="text-options table-options toolbox" style="display:inline-block;">
+			<div class="text-options html-options table-options toolbox" style="display:inline-block;">
 					
 					
-					<input class='tool color' rel='color' type="color" class="color-picker-box radius " placeholder="e.g. #bbbbbb" />
+					<input class='tool color' rel='color' type="color" class="color-picker-box radius " placeholder="e.g. #bbbbbb" title="Yazı Rengi" />
 				
-					<select class='tool select' rel='fast-style' id="fast-style" class="radius">
+					<select class='tool select' rel='fast-style' id="fast-style" class="radius" title="Başlık Tipi">
 						<option value="">Serbest</option>
 						<option value="h1" >Başlık</option>
 						<option value="h2" >Alt Başlık</option>
@@ -197,7 +197,7 @@ $current_user=User::model()->findByPk(Yii::app()->user->id);
 						<option value="blockqoute" >Alıntı</option>
 					</select>
 
-					<select class='tool select' rel='line-height' id="line-height" class="radius">
+					<select class='tool select' rel='line-height' id="line-height" class="radius" title="Satır Boşluğu">
 						<option value="100%">100</option>
 						<option value="125%" >125</option>
 						<option value="150%" >150</option>
@@ -205,7 +205,7 @@ $current_user=User::model()->findByPk(Yii::app()->user->id);
 						<option value="200%" >200</option>
 					</select>
 					
-					<select class='tool select' rel='font-family' id="font-family" class="radius">
+					<select class='tool select' rel='font-family' id="font-family" class="radius" title="Font Tipi">
 						<option selected="" value="Arial"> Arial </option>
 						<option value="SourceSansPro" >Source Sans Pro</option>
 						<option value="AlexBrushRegular" >Alex Brush Regular</option>
@@ -222,7 +222,7 @@ $current_user=User::model()->findByPk(Yii::app()->user->id);
 				
 					
 					
-						<select class='tool select' rel='font-size' id="font-size" class="radius">
+						<select class='tool select' rel='font-size' id="font-size" class="radius" title="Yazı Boyutu">
 						<option selected="" value="8px"> 8 </option>
 						<?php for ($font_size_counter=10; $font_size_counter<=250;$font_size_counter+=2){
 							echo "<option value='{$font_size_counter}px' >{$font_size_counter}</option>";
@@ -234,18 +234,18 @@ $current_user=User::model()->findByPk(Yii::app()->user->id);
 				<div class="vertical-line"></div>
 				<div id="checkbox-container" style="display:inline-block">
 					<input type="checkbox" id="font-bold" rel='font-weight' activeVal='bold' passiveVal='normal'  class="dark-blue radius toolbox-items btn-checkbox tool checkbox"> 
-					<label class="icon-font-bold  size-15" for="font-bold"></label>
-					<input type="checkbox" id="font-italic" rel='font-style' activeVal='italic' passiveVal='normal'  class="dark-blue radius toolbox-items btn-checkbox tool checkbox"> 
-					<label class="icon-font-italic size-15" for="font-italic"></label>
-					<input type="checkbox" id="font-underline" rel='text-decoration' activeVal='underline' passiveVal='none'  class="dark-blue radius toolbox-items btn-checkbox tool checkbox">
-					<label class="icon-font-underline size-15" for="font-underline"></label>				</div>
+					<label class="icon-font-bold  size-15" for="font-bold" title="Yazı Kalınlaştırma"></label>
+					<input type="checkbox" id="font-italic" rel='font-style' activeVal='italic' passiveVal='normal'  class="dark-blue radius toolbox-items btn-checkbox tool checkbox" > 
+					<label class="icon-font-italic size-15" for="font-italic" title="İtalik Yazı"></label>
+					<input type="checkbox" id="font-underline" rel='text-decoration' activeVal='underline' passiveVal='none'  class="dark-blue radius toolbox-items btn-checkbox tool checkbox" >
+					<label class="icon-font-underline size-15" for="font-underline" title="Altı Çizili Yazı"></label>				</div>
  
 				
 				<div class="vertical-line"></div>
 
-				<input type='radio' rel='text-align' name='text-align' activeVal='left' id="text-align-left"  href="#" class="dark-blue radius toolbox-items radio tool"><label for='text-align-left' class="icon-text-align-left size-15"></label>
-				<input type='radio' rel='text-align' name='text-align' activeVal='center' id="text-align-center"  href="#" class="dark-blue radius toolbox-items  radio tool"><label for='text-align-center' class="icon-text-align-center  size-15"></label>
-				<input type='radio' rel='text-align' name='text-align' activeVal='right' id="text-align-right"  href="#" class="dark-blue radius toolbox-items  radio tool"><label for='text-align-right' class="icon-text-align-right  size-15"></label>
+				<input type='radio' rel='text-align' name='text-align' activeVal='left' id="text-align-left"  href="#" class="dark-blue radius toolbox-items radio tool" ><label for='text-align-left' class="icon-text-align-left size-15" title="Sola Yasla"></label>
+				<input type='radio' rel='text-align' name='text-align' activeVal='center' id="text-align-center"  href="#" class="dark-blue radius toolbox-items  radio tool" ><label for='text-align-center' class="icon-text-align-center  size-15" title="Ortala"></label>
+				<input type='radio' rel='text-align' name='text-align' activeVal='right' id="text-align-right"  href="#" class="dark-blue radius toolbox-items  radio tool" ><label for='text-align-right' class="icon-text-align-right  size-15" title="Sağa Yasla"></label>
 
 				<div class="vertical-line"></div>
 				<!--
@@ -290,7 +290,7 @@ $current_user=User::model()->findByPk(Yii::app()->user->id);
 				-->
 				
 					<i class="icon-opacity grey-6"></i>
-							<select class='tool-select tool select' rel='opacity' rel='color' id="font-size" class="radius">
+							<select class='tool-select tool select' rel='opacity' rel='color' id="font-size" class="radius" title="Yazının Şeffaflık Ayarı">
 								
 								<option value="0" >0</option>
 								<option value="0.10" >10</option>
@@ -313,7 +313,7 @@ $current_user=User::model()->findByPk(Yii::app()->user->id);
 				<div class="vertical-line"></div>
 				
 						<i class="icon-opacity grey-6"></i>
-							<select class='tool-select tool select' rel='opacity' rel='color' id="font-size" class="radius">
+							<select class='tool-select tool select' rel='opacity' rel='color' id="font-size" class="radius" title="Resmin Şeffaflık Ayarı">
 								
 								<option value="0" >0</option>
 								<option value="0.10" >10</option>
@@ -334,7 +334,7 @@ $current_user=User::model()->findByPk(Yii::app()->user->id);
 				<div class="vertical-line"></div>
 				
 						<i class="icon-opacity grey-6"></i>
-							<select class='tool-select tool select' rel='opacity' rel='color' id="font-size" class="radius">
+							<select class='tool-select tool select' rel='opacity' rel='color' id="font-size" class="radius" title="Şeffaflık" title="Açılır Pencerenin Şeffaflık Ayarı">
 								
 								<option value="0" >0</option>
 								<option value="0.10" >10</option>
@@ -355,7 +355,7 @@ $current_user=User::model()->findByPk(Yii::app()->user->id);
 				<div class="vertical-line"></div>
 				
 						<i class="icon-opacity grey-6"></i>
-							<select class='tool-select tool select' rel='opacity' rel='color' id="font-size" class="radius">
+							<select class='tool-select tool select' rel='opacity' rel='color' id="font-size" class="radius" title="Bağlantının Şeffaflık Ayarı">
 								
 								<option value="0" >0</option>
 								<option value="0.10" >10</option>
@@ -374,11 +374,11 @@ $current_user=User::model()->findByPk(Yii::app()->user->id);
 			
 			<div class="shape-options toolbox"  style="display:inline-block;">
 				<div class="vertical-line"></div>
-				<input class='tool-color tool color' rel='fillStyle' type="color" class="color-picker-box radius " placeholder="e.g. #bbbbbb" />
+				<input class='tool-color tool color' rel='fillStyle' type="color" class="color-picker-box radius " placeholder="e.g. #bbbbbb" title="Şeklin Rengi" />
 				<div class="vertical-line"></div>
 				
 						<i class="icon-opacity grey-6"></i>
-								<select class='tool-select tool select' rel='opacity' rel='color' id="font-size" class="radius">
+								<select class='tool-select tool select' rel='opacity' rel='color' id="font-size" class="radius" title="Şeklin Şeffaflık Ayarı">
 								
 								<option value="0" >0</option>
 								<option value="0.10" >10</option>
@@ -397,30 +397,32 @@ $current_user=User::model()->findByPk(Yii::app()->user->id);
 			</div>
 			<div class="generic-options toolbox float-left"  style="display:inline-block;">
 			<!--	<a href="#" class="bck-dark-blue white btn btn-default" id="pop-align"><i class="icon-align-center size-20"></i></a> -->
-				<a href="#" class="optbtn" id="pop-arrange" ><i style="vertical-align:bottom; color:#2C6185;" class="icon-send-backward size-15"></i></a>
+
+				<a href="#" class="optbtn" id="pop-arrange" ><i style="vertical-align:bottom; color:#2C6185;" class="icon-send-backward size-15" title="Sırasını Değiştir"></i></a>
+
 			<!--	<a href="#" class="btn btn-info">Grupla</a>    -->
 			</div>
 			
 			<div class="generic-options toolbox responsive_1"  style="display:inline-block;">
-				<a href="#" class="optbtn " id="pop-align"><i class="icon-align-center size-20 dark-blue"></i></a>
+				<a href="#" class="optbtn " id="pop-align"><i class="icon-align-center size-20 dark-blue" title="Hizalama"></i></a>
 				<div class="vertical-line responsive_2"></div>
-				<a href="#" class="optbtn " id="generic-disable" ><i style="margin-top:2px;" class="fa fa-lock size-20 dark-blue"></i></a>
-				<a href="#" class="optbtn " id="generic-undisable" ><i style="margin-top:2px;" class="fa fa-unlock-alt size-20 dark-blue"></i></a>
+				<a href="#" class="optbtn " id="generic-disable" ><i style="margin-top:2px;" class="fa fa-lock size-20 dark-blue" title="Kilitle"></i></a>
+				<a href="#" class="optbtn " id="generic-undisable" ><i style="margin-top:2px;" class="fa fa-unlock-alt size-20 dark-blue" title="Kilidi Aç"></i></a>
 				<div class="vertical-line responsive_2"></div>
 
-				<a href="#" class="optbtn " id="generic-cut"><i class="generic-cut icon-cut size-25 dark-blue"></i></a>
-				<a href="#" class="optbtn " id="generic-copy"><i class="generic-copy icon-copy size-25 dark-blue"></i></a>
+				<a href="#" class="optbtn " id="generic-cut"><i class="generic-cut icon-cut size-25 dark-blue" title="Kes"></i></a>
+				<a href="#" class="optbtn " id="generic-copy"><i class="generic-copy icon-copy size-25 dark-blue" title="Kopyala"></i></a>
 
 
 				
 				
 			</div>
-<!--
+
 			<div class="generic-options copy-paste responsive_1"  style="display:none;">
-				<a href="#" class="optbtn " id="generic-paste"><i class="generic-paste icon-paste size-25 dark-blue"></i></a>
+				<a href="#" class="optbtn " id="generic-paste"><i class="generic-paste icon-paste size-25 dark-blue" title="Yapıştır"></i></a>
 			</div>
-			<a class="btn btn-info pull-right "id="pages"><i class="fa fa-files-o"></i> Sayfalar</a>
--->
+			<!--<a class="btn btn-info pull-right "id="pages"><i class="fa fa-files-o"></i> Sayfalar</a>-->
+
 			
 			
 			
@@ -682,6 +684,23 @@ $current_user=User::model()->findByPk(Yii::app()->user->id);
 	
 	
 <!--  add popup popup -->	
+<div class="popup" id="pop-html-popup">
+<div class="popup-header">
+	<i class="icon-m-popup"></i>
+		Açılır Kutu Ekle
+	<i id="image-add-dummy-close-button" class="icon-close size-10" style="float:right; margin-right:10px; margin-top:5px;"></i>
+</div>
+<!-- popup content-->
+	<div class="gallery-inner-holder">
+		<textarea class="popup-text-area">Açılır kutunun içeriğini yazınız.
+		</textarea> </br>
+		<a href="#" class="btn btn-info" id="add-image" style="padding: 5px 30px;">Ekle</a>
+	</div>
+<!-- popup content-->
+</div>	
+<!--  end add popup popup -->	
+
+<!--  add popup popup -->	
 <div class="popup" id="pop-popup-popup">
 <div class="popup-header">
 	<i class="icon-m-popup"></i>
@@ -827,6 +846,7 @@ $current_user=User::model()->findByPk(Yii::app()->user->id);
 			<li ctype="grafik" class="component icon-m-charts">&nbsp;&nbsp;&nbsp;&nbsp;Grafik</li>
 			<li ctype="shape" class="component icon-m-shape">&nbsp;&nbsp;&nbsp;&nbsp;Şekil</li>
 			<li ctype="table" class="component icon-t-merge">&nbsp;&nbsp;&nbsp;&nbsp;Tablo</li>
+			<li ctype="html" class="component icon-t-merge">&nbsp;&nbsp;&nbsp;&nbsp;HTML</li>
 			
 			
 			<li class="left_bar_titles"></li>
