@@ -160,13 +160,10 @@ $(document).ready(function(){
       setProperty : function (propertyName,propertyValue){
         console.log(propertyName);
         console.log(propertyValue);
-        if($('#'+this.options.component.id).selection()){
-          console.log($('#'+this.options.component.id).selection());
-        }
-        else{
-          this._setProperty(propertyName,propertyValue);
-          this.autoResize();
-          }
+      
+        this._setProperty(propertyName,propertyValue);
+        this.autoResize();
+      
       },
 
       getProperty : function (propertyName){
