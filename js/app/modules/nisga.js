@@ -57,7 +57,7 @@ window.lindneo.nisga = (function(window, $, undefined){
   };
 
   var componentBuilder = function( component ){
-     
+     console.log(component.type);
     switch( component.type ) {
       case 'text':
         textComponentBuilder( component );
@@ -102,6 +102,9 @@ window.lindneo.nisga = (function(window, $, undefined){
         tableComponentBuilder( component );
         break;
 
+      case 'html':
+        htmlComponentBuilder( component );
+        break;
 
 
       default:
@@ -396,6 +399,36 @@ var textComponentBuilder = function( component ) {
         window.lindneo.toolbox.refresh( element );
       }
     });
+
+  };
+
+  var htmlComponentBuilder = function( component ) {
+
+    var element  = $('<div class="html-controllers"> </div>');
+    var elementWrap=$('<div ></div>');
+    elementWrap.appendTo( page_div_selector );
+
+    element
+    .appendTo( elementWrap )
+    .htmlComponent({
+      'component': component,
+      'update': function ( event, component ) {
+        if(revision_value==0){
+        var newObject = jQuery.extend(true, {}, component);
+        revision_array.revisions.push({component_id: component.id, component: newObject, revision_date: $.now(), even_type: 'UPDATE'});
+                revision_id++;
+
+      }
+      else revision_value=0;
+      //console.log(revision_array);
+        window.lindneo.tlingit.componentHasUpdated( component );
+      },
+      'selected': function (event, element) {
+        window.lindneo.currentComponentWidget = element;
+        window.lindneo.toolbox.refresh( element );
+      }
+    });
+
 
   };
 

@@ -29,15 +29,38 @@ window.lindneo.dataservice = (function( $ ) {
       createPopupComponent( event, ui, component );
     };
 
+  var html_popup = function(event, ui, component){
+      createHtmlComponent( event, ui, component );
+    };
+
   var video_popup = function(event, ui, component){
       createVideoComponent( event, ui, component );
     };
     
-  var newComponentDropPage = function(e, reader, file){
+  var newComponentDropPage = function(div_id, e, reader, file){
     var that =this;
     var component = {};
     reader.onload = function (evt) { 
         var FileBinary = evt.target.result;
+        console.log(FileBinary);
+        if(div_id != 'current_page'){
+          //$('#coverRel').attr("src",FileBinary);
+          var ajax_url = '';
+          if(div_id == 'collapseOne') ajax_url = '/book/updateCover/'+window.lindneo.currentBookId;
+          else ajax_url = '/book/updateThumbnail/'+window.lindneo.currentBookId;
+          
+          $.ajax({
+            type: "POST",
+            data: { img: FileBinary},
+            url:ajax_url,
+          }).done(function(hmtl){
+            var child_div_id = '';
+            if(div_id == 'collapseOne') child_div_id = '#coverRel';
+            else child_div_id = '#thumbRel';
+            $(child_div_id).attr('src',FileBinary);
+          });
+          return;
+        }
         var contentType = FileBinary.substr(5, FileBinary.indexOf('/')-5);
         //console.log(contentType);
         if(contentType == 'image'){

@@ -25,7 +25,7 @@ $(document).ready(function(){
         })
 
 
-        if (this.options.component.data.self.attr.componentType != 'side-text' )this.element.autogrow({element:this});
+        //if (this.options.component.data.self.attr.componentType != 'side-text' )this.element.autogrow({element:this});
 
         this._super();
           
@@ -48,6 +48,7 @@ $(document).ready(function(){
 
       setPropertyofObject : function (propertyName,propertyValue){
         var that = this;
+        
         switch (propertyName){
             case 'fast-style': 
                 this.getSettable().attr[propertyName]=propertyValue;
@@ -113,10 +114,24 @@ $(document).ready(function(){
 
 
                   }
+                  console.log(that);
+                  if($('#'+this.options.component.id).selection() == ''){
+                      $.each( styles , function(i,v) {
+                        that.setProperty(v.name , v.val);
+                      });
+                    }
+                    else{
+                      var selection_text = $('#'+this.options.component.id).selection();
+                      if(propertyValue == 'bold')
+                      $('#'+this.options.component.id).selection('replace', {
+                          text: selection_text,
+                          caret: 'before'
+                      });
+                    }
                    $.each( styles , function(i,v) {
                         that.setProperty(v.name , v.val);
                     });
-
+                   that.setProperty('contentEditable' , true);
 
                 return this.getProperty(propertyName) ;
                 
@@ -143,8 +158,15 @@ $(document).ready(function(){
           }
       },
       setProperty : function (propertyName,propertyValue){
-        this._setProperty(propertyName,propertyValue);
-        this.autoResize();
+        console.log(propertyName);
+        console.log(propertyValue);
+        if($('#'+this.options.component.id).selection()){
+          console.log($('#'+this.options.component.id).selection());
+        }
+        else{
+          this._setProperty(propertyName,propertyValue);
+          this.autoResize();
+          }
       },
 
       getProperty : function (propertyName){
@@ -241,7 +263,8 @@ $(document).ready(function(){
              'overflow': (type == 'text' ? 'visible' : 'hidden' )
           } , 
           'attr': {
-            'placeholder':'Metin Kutusu'
+            'placeholder':'Metin Kutusu',
+            'contentEditable':'true' 
           },
           'val': ''
         },
