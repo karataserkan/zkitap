@@ -44,6 +44,9 @@
 		<!-- BOOTSTRAP -->
 		<script src="<?php echo Yii::app()->request->baseUrl; ?>/css/bootstrap-dist/js/bootstrap.min.js"></script>
 
+		<!-- Jquery Selection -->
+		<script src="<?php echo Yii::app()->request->baseUrl; ?>/js/lib/jquery.selection.js"></script>
+
 		<!-- JS Modules -->
 		<script src="<?php echo Yii::app()->request->baseUrl; ?>/js/app/lindneo.js"></script>	
 		<script src="<?php echo Yii::app()->request->baseUrl; ?>/js/app/modules/dataservice.js"></script>	
@@ -66,6 +69,7 @@
 		<script src="<?php echo Yii::app()->request->baseUrl; ?>/js/app/components/link-component.js"></script>	
 		<script src="<?php echo Yii::app()->request->baseUrl; ?>/js/app/components/sidebar-component.js"></script>	
 		<script src="<?php echo Yii::app()->request->baseUrl; ?>/js/app/components/table-component.js"></script>	
+		<script src="<?php echo Yii::app()->request->baseUrl; ?>/js/app/components/html-component.js"></script>	
 
 		<!-- Page JS Codes -->
 		<script src="<?php echo Yii::app()->request->baseUrl; ?>/js/app/other/page-drag-drop.js"></script>
