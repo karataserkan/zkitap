@@ -15,7 +15,13 @@ $(document).ready(function() {
                 newimage.appendTo(this.element);
               };
 
-              this.options.component.data.html_inner = '<video controls="controls" style="width:'+this.options.component.data.video.css.width+';height:'+this.options.component.data.video.css.height+'"><source src="' + this.options.component.data.source.attr.src + '" /></video>';
+              var auto_start = '';
+              var control = 'controls="controls"';
+              console.log(this.options.component.data.control_type);
+              if(this.options.component.data.auto_type == 'Y') auto_start = 'autoplay';
+              if(this.options.component.data.control_type == 'N') control = '';
+
+              this.options.component.data.html_inner = '<video ' + control + ' ' + auto_start + ' style="width:'+this.options.component.data.video.css.width+';height:'+this.options.component.data.video.css.height+'"><source src="' + this.options.component.data.source.attr.src + '" /></video>';
               var popupmessage=$('<div  id="message_'+componentvideoid+'" style="display:none" >'+this.options.component.data.html_inner+'</div>');
                popupmessage.appendTo(this.element);
               console.log(this.options.component.data.video.css);
@@ -23,8 +29,14 @@ $(document).ready(function() {
             }
             else{
             if (this.options.component.data.source.attr.src) {
+              var auto_start = '';
+              var control = 'controls="controls"';
+              console.log(this.options.component.data.control_type);
+              if(this.options.component.data.auto_type == 'Y') auto_start = 'autoplay';
+              if(this.options.component.data.control_type == 'N') control = '';
+              console.log(control);
                 var source = $('<source src="' + this.options.component.data.source.attr.src + '" /> ');
-                var video = $('<video controls="controls"></video>');
+                var video = $('<video ' + control + ' ' + auto_start + '></video>');
 
                 source.appendTo(video);
                 video.appendTo(this.element);
@@ -82,12 +94,16 @@ var createVideoComponent = function( event, ui, oldcomponent ) {
       var left = ( ui.offset.left-$(event.target).offset().left ) + 'px';
       var video_url = "http://lindneo.com/5.mp4";
       var video_type = 'link';
+      var auto_type = 'N';
+      var control_type = 'Y';
     }
     else{
       top = oldcomponent.data.self.css.top;
       left = oldcomponent.data.self.css.left;
       video_url = oldcomponent.data.source.attr.src;
       video_type = oldcomponent.data.video_type;
+      auto_type = oldcomponent.data.auto_type;
+      control_type = oldcomponent.data.control_type;
       marker = oldcomponent.data.marker;
     };
     var link_check = '';
@@ -95,8 +111,24 @@ var createVideoComponent = function( event, ui, oldcomponent ) {
     var popup_check = '';
     var popup_check_active = '';
 
+    var auto_y_check = '';
+    var auto_y_check_active = '';
+    var auto_n_check = '';
+    var auto_n_check_active = '';
+
+    var control_y_check = '';
+    var control_y_check_active = '';
+    var control_n_check = '';
+    var control_n_check_active = '';
+
     if(video_type == 'link') { link_check = "checked='checked'"; link_check_active = 'active';}
     else { popup_check = "checked='checked'"; popup_check_active = 'active'; }
+
+    if(auto_type == 'Y') { auto_y_check = "checked='checked'"; auto_y_check_active = 'active';}
+    else { auto_n_check = "checked='checked'"; auto_n_check_active = 'active'; }
+
+    if(control_type == 'Y') { control_y_check = "checked='checked'"; control_y_check_active = 'active';}
+    else { control_n_check = "checked='checked'"; control_n_check_active = 'active'; }
 
     console.log(link_check);
     console.log(popup_check);
@@ -137,6 +169,29 @@ var createVideoComponent = function( event, ui, oldcomponent ) {
               <div class='tab-pane ' id='messages'>\
                 <div class='divide-10'></div>\
                 <input id='video-url-text' class='input-textbox' type='url' placeholder='URL Adresini Giriniz'   value='" + video_url + "'> \
+              </div>\
+            </div>\
+            <div class='gallery-inner-holder' style='width:500px;'> \
+              <div style='clear:both'></div> \
+              <div class='type' style='padding: 4px; display: inline-block;'>\
+                  <div class='btn-group' data-toggle='buttons'>Auto Start<br>\
+                    <label class='btn btn-primary " + auto_y_check_active + "'>\
+                      <input type='radio' name='auto_type' id='repeat0' " + auto_y_check + " value='Y'> Evet\
+                    </label>\
+                    <label class='btn btn-primary " + auto_n_check_active + "'>\
+                      <input type='radio' name='auto_type' id='repeat1' " + auto_n_check + " value='N'> Hayır\
+                    </label>\
+                  </div>\
+                </div>\
+                <div class='type' style='padding: 4px; display: inline-block;'>\
+                  <div class='btn-group' data-toggle='buttons'>Control Show<br>\
+                    <label class='btn btn-primary " + control_y_check_active + "'>\
+                      <input type='radio' name='control_type' id='repeat0' " + control_y_check + " value='Y'> Evet\
+                    </label>\
+                    <label class='btn btn-primary " + control_n_check_active + "'>\
+                      <input type='radio' name='control_type' id='repeat1' " + control_n_check + " value='N'> Hayır\
+                    </label>\
+                  </div>\
               </div>\
             </div>\
             <a href='#' id='pop-image-OK' class='btn bck-light-green white radius' id='add-image' style='padding: 5px 30px;'>Ekle</a> \
@@ -211,8 +266,11 @@ var createVideoComponent = function( event, ui, oldcomponent ) {
     $('#pop-image-OK').click(function() {
 
         var video_type = $('input[name=video_type]:checked').val();
-        console.log(video_type);
-        console.log(marker);
+        var auto_type = $('input[name=auto_type]:checked').val();
+        var control_type = $('input[name=control_type]:checked').val();
+        console.log(auto_type);
+        console.log(control_type);
+        
         if(typeof oldcomponent == 'undefined'){
           
           var top = (ui.offset.top-$(event.target).offset().top ) + 'px';
@@ -264,9 +322,6 @@ var createVideoComponent = function( event, ui, oldcomponent ) {
                         'type': 'video',
                         'data': {
                             'video': {
-                                'attr': {
-                                    'controls': 'controls'
-                                },
                                 'css': {
                                     'width': video_width_height,
                                     'height': video_width_height,
@@ -274,6 +329,8 @@ var createVideoComponent = function( event, ui, oldcomponent ) {
                                 'contentType': contentType
                             },
                             'video_type' : video_type,
+                            'auto_type' : auto_type,
+                            'control_type' : control_type,
                             'marker' : marker,
                             'source': {
                                 'attr': {
@@ -346,9 +403,6 @@ var createVideoComponent = function( event, ui, oldcomponent ) {
             'type': 'video',
             'data': {
                 'video': {
-                    'attr': {
-                        'controls': 'controls'
-                    },
                     'css': {
                         'width': video_width_height,
                         'height': video_width_height,
@@ -356,6 +410,8 @@ var createVideoComponent = function( event, ui, oldcomponent ) {
                     'contentType': contentType
                 },
                 'video_type' : video_type,
+                'auto_type' : auto_type,
+                'control_type' : control_type,
                 'marker' : marker,
                 'source': {
                     'attr': {
@@ -494,9 +550,6 @@ var createVideoComponent = function( event, ui, oldcomponent ) {
                       'type': 'video',
                       'data': {
                           'video': {
-                              'attr': {
-                                  'controls': 'controls'
-                              },
                               'css': {
                                   'width': '100%',
                                   'height': '100%',
@@ -504,6 +557,8 @@ var createVideoComponent = function( event, ui, oldcomponent ) {
                               'contentType': contentType
                           },
                           'video_type' : video_type,
+                          'auto_type' : auto_type,
+                          'control_type' : control_type,
                           'marker' : marker,
                           'source': {
                               'attr': {
