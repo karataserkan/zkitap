@@ -2,6 +2,28 @@
 
 class PageController extends Controller
 {
+	public $response=null; 
+	public $errors=null; 
+
+	public function response($response_avoition=null){
+
+		$response['result']=$response_avoition ? $response_avoition : $this->response;
+		if ($this->errors) $response['errors']=$this->errors;
+
+		$response_string=json_encode($response);
+
+
+		header('Content-type: plain/text');
+		header("Content-length: " . strlen($response_string) ); // tells file size
+		echo $response_string;
+	}
+ 
+	public function error($domain='PageActions',$explanation='Error', $arguments=null,$debug_vars=null ){
+		$error=new error($domain,$explanation, $arguments,$debug_vars);
+		$this->errors[]=$error; 
+		return $error;
+	}
+
 	/**
 	 * @var string the default layout for the views. Defaults to '//layouts/column2', meaning
 	 * using two-column layout. See 'protected/views/layouts/column2.php'.
@@ -136,13 +158,14 @@ class PageController extends Controller
 
 	public function actionGetPdfData($pageId)
 	{
-		$page=Page::model()->findByPk($bookId);
+
+		$page=Page::model()->findByPk($pageId);
 
 		$page_data=json_decode($page->pdf_data,true);
 
 		$img=$page_data['image']['data'];
 
-		print_r($img);
+		$this->response($img);
 
 	}
 
