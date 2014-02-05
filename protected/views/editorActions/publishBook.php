@@ -139,7 +139,7 @@
 													<div class="form-group">
 														<label for="" class="control-label col-md-3"><?php _e('Dil'); ?></label>
 														<div class="col-md-4">
-															<?php echo $form->textField($model,'language',array('class'=>'form-control','name'=>'language')); ?>
+															<?php echo $form->radioButtonList($model,'language',array('Türkçe'=>'Türkçe','English'=>'English','Arabic'=>'العربية','Asturian'=>'Asturianu','German'=>'Deutsch','Russian'=>'Русский язык','Spanish'=>'Español'),array('class'=>'uniform','name'=>'language')); ?>
 															<span class="error-span"></span>
 														</div>
 													</div>

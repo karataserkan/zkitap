@@ -25,7 +25,6 @@ class PublishBookForm extends CFormModel
 	public $contentHostKey2;
 	public $categories;
 	public $abstract;
-	public $identifier;
 	public $language;
 	public $subject;
 	public $edition;

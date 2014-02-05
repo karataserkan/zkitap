@@ -126,8 +126,8 @@ var FormWizard = function () {
                 $("p[data-display='categories']").html(categoriesText);
 
                 //
+                $("p[data-display='language']").text($("span.checked [name='language']").val());
                 $("p[data-display='abstract']").text($("[name='abstract']").val());
-                $("p[data-display='language']").text($("[name='language']").val());
                 $("p[data-display='subject']").text($("[name='subject']").val());
                 $("p[data-display='edition']").text($("[name='edition']").val());
                 $("p[data-display='author']").text($("[name='author']").val());

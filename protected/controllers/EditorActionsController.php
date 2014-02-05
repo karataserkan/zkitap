@@ -737,6 +737,17 @@ right join book using (book_id) where book_id='$bookId' and type!='image';";
 			//$data['contentCover']=$bookData['cover'];
 			$data['contentThumbnail']=$bookData['thumbnail'];
 			
+			//book detail
+			$data['abstract']=$_POST['abstract'];
+			$data['language']=$_POST['language'];
+			$data['subject']=$_POST['subject'];
+			$data['edition']=$_POST['edition'];
+			$data['author']=$_POST['author'];
+			$data['translator']=$_POST['translator'];
+			$data['issn']=$_POST['issn'];
+			
+
+
 			if (isset($_POST['host'])) {
 				$hosts=$_POST['host'];
 				foreach ($hosts as $key => $hostId) {
