@@ -60,15 +60,22 @@ class PageController extends Controller
 	 * Creates a new model.
 	 * If creation is successful, the browser will be redirected to the 'view' page.
 	 */
-	public function actionCreate($chapter_id,$pageTeplateId=null)
+	public function actionCreate($book_id,$chapter_id=null,$pageTeplateId=null)
 	{
 		$model=new Page;
 		$new_id=functions::new_id();
 		$model->page_id=$new_id;
-		$model->chapter_id=$chapter_id;
-
-		$chapter=Chapter::model()->findByPk($chapter_id)
-		;
+		if ($chapter_id) {
+			$chapter=Chapter::model()->findByPk($chapter_id);
+		}
+		else
+		{
+			$chapter= new Chapter;
+			$chapter->chapter_id=functions::new_id();
+			$chapter->book_id=$book_id;
+			$chapter->save();
+		}
+		$model->chapter_id=$chapter->chapter_id;
 
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);

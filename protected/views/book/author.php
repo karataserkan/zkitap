@@ -1105,7 +1105,7 @@ $current_user=User::model()->findByPk(Yii::app()->user->id);
 									?> 
 										
 										<li class='page <?php echo ( $current_page->page_id== $pages->page_id  ? "current_page": "" ); ?>' chapter_id='<?php echo $pages->chapter_id; ?>' page_id='<?php echo $pages->page_id; ?>' chapter_id='<?php echo $pages->page_id; ?>'   >
-											<a class="btn btn-danger page-chapter-delete delete-chapter hidden-delete "  style="top: 0px;right: 0px; position: absolute;"><i class="icon-delete"></i></a>
+											<a class="btn btn-danger page-chapter-delete delete-page hidden-delete "  style="top: 0px;right: 0px; position: absolute;"><i class="icon-delete"></i></a>
 											<!--<a href='<?php echo $this->createUrl("book/author", array('bookId' => $model->book_id, 'page'=>$pages->page_id ));?>' >-->
 												<a href='<?php echo "/book/author/".$model->book_id.'/'.$pages->page_id;?>'/>
 													
@@ -1152,7 +1152,7 @@ $current_user=User::model()->findByPk(Yii::app()->user->id);
 
 
 						$( this ).append( $(  "<span id='add-buttons' class='add-button-container'>\
-						<a id='add-page' class='add-button-cp white' href='?r=page/create&chapter_id=<?php echo $current_chapter->chapter_id; ?>'> Sayfa ekle </a>\
+						<a id='add-page' class='add-button-cp white' href='/page/create?book_id=<?php echo $model->book_id?>&chapter_id=<?php echo $current_chapter->chapter_id; ?>'> Sayfa ekle </a>\
 						\
 						<a class='add-button-cp white' href='?r=chapter/create&book_id=<?php echo $model->book_id; ?>'> Bölüm ekle </a> \
 						<div class='add-button-page-template white' > <span>Sayfa Şablonları</span>  \
@@ -1176,12 +1176,12 @@ $current_user=User::model()->findByPk(Yii::app()->user->id);
 					</script>
 					
 					
-					<a class="add-page-list-button" href='?r=page/create&chapter_id=<?php echo $current_chapter->chapter_id; ?>'>
+					<a class="add-page-list-button" href='/page/create?book_id=<?php echo $model->book_id; ?>&chapter_id=<?php echo $current_chapter->chapter_id; ?>'>
 					<div class="add-page-list-inside">
 					Sayfa Ekle </div>
 					</a>
 
-					<a class="add-page-list-button" href='?r=chapter/create&book_id=<?php echo $model->book_id; ?>'>
+					<a class="add-page-list-button" href='/chapter/create?book_id=<?php echo $model->book_id; ?>'>
 					<div class="add-page-list-inside">
 					Bölüm Ekle </div>
 					</a>	
