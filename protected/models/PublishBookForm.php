@@ -24,6 +24,14 @@ class PublishBookForm extends CFormModel
 	public $contentHostKey1;
 	public $contentHostKey2;
 	public $categories;
+	public $abstract;
+	public $identifier;
+	public $language;
+	public $subject;
+	public $edition;
+	public $author;
+	public $translator;
+	public $issn;
 
 	/**
 	 * Declares the validation rules.

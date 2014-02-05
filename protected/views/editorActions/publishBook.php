@@ -30,7 +30,7 @@
 												 <li>
 													<a href="#book" data-toggle="tab" class="wiz-step">
 													<span class="step-number">2</span>
-													<span class="step-name"><i class="fa fa-check"></i> <?php _e('Kitap Bilgileri'); ?> </span>   
+													<span class="step-name"><i class="fa fa-check"></i> <?php _e('Kaynak Bilgileri'); ?> </span>   
 													</a> 
 												 </li>
 												 <li>
@@ -102,8 +102,10 @@
 													</div>
 												</div>
 												<div class="tab-pane" id="book">
+																
+
 													<div class="form-group">
-														<label class="control-label col-md-3" for="PublishBookForm_contentTitle"><?php _e('Kitap İsmi') ?><span class="required">*</span></label>
+														<label class="control-label col-md-3" for="PublishBookForm_contentTitle"><?php _e('Eser Adı') ?><span class="required">*</span></label>
 														
 														<div class="col-md-4">
 															<?php echo $form->textField($model,'contentTitle',array('class'=>'form-control','name'=>'contentTitle','placeholder'=>__("Lütfen bir isim girin!"))); ?>
@@ -112,18 +114,78 @@
 													</div>
 
 													<div class="form-group">
-														<label class="control-label col-md-3" for="PublishBookForm_contentType"><?php _e('Kitap Tipi') ?><span class="required">*</span></label>
+														<label class="control-label col-md-3" for="PublishBookForm_contentType"><?php _e('Eser Tipi') ?><span class="required">*</span></label>
 														<div class="col-md-4">
 															<?php echo $form->radioButtonList($model,'contentType',array('epub'=>'Epub','epdf'=>'Epdf','pdf'=>'pdf'),array('class'=>'uniform','name'=>'contentType')); ?>
 														</div>
 													</div>
 
 													<div class="form-group">
-														<label class="control-label col-md-3"><?php _e('Kitap Açıklaması'); ?><span class="required">*</span></label>
+														<label class="control-label col-md-3"><?php _e('Eser Açıklaması'); ?><span class="required">*</span></label>
 														<div class="col-md-4">
 															<?php echo $form->textArea($model,'contentExplanation',array('class'=>'form-control','name'=>'contentExplanation','placeholder'=>__('Lütfen bir açıklama girin!'))); ?>
 														  <span class="error-span"></span>
 													   </div>
+													</div>
+
+													<div id="detailed">
+													<div class="form-group">
+														<label for="" class="control-label col-md-3"><?php _e('Özet'); ?></label>
+														<div class="col-md-4">
+															<?php echo $form->textArea($model,'abstract',array('class'=>'form-control','name'=>'abstract')); ?>
+															<span class="error-span"></span>
+														</div>
+													</div>
+													<div class="form-group">
+														<label for="" class="control-label col-md-3"><?php _e('Dil'); ?></label>
+														<div class="col-md-4">
+															<?php echo $form->textField($model,'language',array('class'=>'form-control','name'=>'language')); ?>
+															<span class="error-span"></span>
+														</div>
+													</div>
+													<div class="form-group">
+														<label for="" class="control-label col-md-3"><?php _e('Konu'); ?></label>
+														<div class="col-md-4">
+															<?php echo $form->textArea($model,'subject',array('class'=>'form-control','name'=>'subject')); ?>
+															<span class="error-span"></span>
+														</div>
+													</div>
+													<div class="form-group">
+														<label for="" class="control-label col-md-3"><?php _e('Edition'); ?></label>
+														<div class="col-md-4">
+															<?php echo $form->textField($model,'edition',array('class'=>'form-control','name'=>'edition')); ?>
+															<span class="error-span"></span>
+														</div>
+													</div>
+													<div class="form-group">
+														<label for="" class="control-label col-md-3"><?php _e('Yazar'); ?></label>
+														<div class="col-md-4">
+															<?php echo $form->textField($model,'author',array('class'=>'form-control','name'=>'author')); ?>
+															<span class="error-span"></span>
+														</div>
+													</div>
+													<div class="form-group">
+														<label for="" class="control-label col-md-3"><?php _e('Çeviren'); ?></label>
+														<div class="col-md-4">
+															<?php echo $form->textField($model,'translator',array('class'=>'form-control','name'=>'translator')); ?>
+															<span class="error-span"></span>
+														</div>
+													</div>
+													<div class="form-group">
+														<label for="" class="control-label col-md-3"><?php _e('ISSN/ISBN'); ?></label>
+														<div class="col-md-4">
+															<?php echo $form->textField($model,'issn',array('class'=>'form-control','name'=>'issn')); ?>
+															<span class="error-span"></span>
+														</div>
+													</div>
+													</div>
+													<div class="form-group">
+														<div class="col-md-3"></div>
+														<div class="col-md-4">
+															<a href="javascript:;" class="btn btn-primary detailBtn">
+																<?php _e('Detay'); ?> <i class="fa fa-arrow-circle-down"></i>
+														   </a>
+														</div>
 													</div>
 												</div>
 												<div class="tab-pane active" id="category">
@@ -159,7 +221,7 @@
 													</div></div>
 
 													<div class="form-group">
-														<label for="PublishBookForm_contentPrice" class="control-label col-md-3"><?php _e('Kitap Fiyatı') ?><span class="required">*</span></label>
+														<label for="PublishBookForm_contentPrice" class="control-label col-md-3"><?php _e('Eser Fiyatı') ?><span class="required">*</span></label>
 														<div class="col-md-4">
 														<?php echo $form->textField($model,'contentPrice',array('class'=>'form-control','name'=>'contentPrice','placeholder'=>__('Lütfen bir fiyat girin!'))); ?>
 													</div>
@@ -173,6 +235,54 @@
 													</div>
 												 </div>
 												 <div class="tab-pane" id="confirm">
+												 	<h3 class="block">Detay Özeti <a href="javascript:;" class="btn btn-primary detayRevBtn">
+																<i class="fa fa-arrow-circle-down"></i>
+														   </a></h3>
+													<div class="well" id="detayRev">
+														<div class="form-group">
+														   <label class="control-label col-md-3"><?php _e("Özet"); ?>:</label>
+														   <div class="col-md-4">
+															  <p class="form-control-static" data-display="abstract"></p>
+														   </div>
+														</div>
+														<div class="form-group">
+														   <label class="control-label col-md-3"><?php _e('Dil') ?>:</label>
+														   <div class="col-md-4">
+															  <p class="form-control-static" data-display="language"></p>
+														   </div>
+														</div>
+														<div class="form-group">
+														   <label class="control-label col-md-3"><?php _e('Konu') ?>:</label>
+														   <div class="col-md-4">
+															  <p class="form-control-static" data-display="subject"></p>
+														   </div>
+														</div>
+														<div class="form-group">
+														   <label class="control-label col-md-3"><?php _e('Edition'); ?>:</label>
+														   <div class="col-md-4">
+															  <p class="form-control-static" data-display="edition"></p>
+														   </div>
+														</div>
+														<div class="form-group">
+														   <label class="control-label col-md-3"><?php _e('Yazar'); ?>:</label>
+														   <div class="col-md-4">
+															  <p class="form-control-static" data-display="author"></p>
+														   </div>
+														</div>
+														<div class="form-group">
+														   <label class="control-label col-md-3"><?php _e('Çeviren'); ?>:</label>
+														   <div class="col-md-4">
+															  <p class="form-control-static" data-display="translator"></p>
+														   </div>
+														</div>
+														
+														<div class="form-group">
+														   <label class="control-label col-md-3"><?php _e('ISSN/ISBN') ?>:</label>
+														   <div class="col-md-4">
+															  <p class="form-control-static" data-display="issn"></p>
+														   </div>
+														</div>
+													</div>
 													<h3 class="block">Yayınlama Özeti</h3>
 													<div class="well">
 														<div class="form-group">
@@ -182,19 +292,19 @@
 														   </div>
 														</div>
 														<div class="form-group">
-														   <label class="control-label col-md-3"><?php _e('Kitap İsmi') ?>:</label>
+														   <label class="control-label col-md-3"><?php _e('Eser Adı') ?>:</label>
 														   <div class="col-md-4">
 															  <p class="form-control-static" data-display="contentTitle"></p>
 														   </div>
 														</div>
 														<div class="form-group">
-														   <label class="control-label col-md-3"><?php _e('Kitap Tipi') ?>:</label>
+														   <label class="control-label col-md-3"><?php _e('Eser Tipi') ?>:</label>
 														   <div class="col-md-4">
 															  <p class="form-control-static" data-display="contentType"></p>
 														   </div>
 														</div>
 														<div class="form-group">
-														   <label class="control-label col-md-3"><?php _e('Kitap Açıklaması'); ?>:</label>
+														   <label class="control-label col-md-3"><?php _e('Eser Açıklaması'); ?>:</label>
 														   <div class="col-md-4">
 															  <p class="form-control-static" data-display="contentExplanation"></p>
 														   </div>
@@ -213,7 +323,7 @@
 														</div>
 														
 														<div class="form-group">
-														   <label class="control-label col-md-3"><?php _e('Kitap Fiyatı') ?>:</label>
+														   <label class="control-label col-md-3"><?php _e('Eser Fiyatı') ?>:</label>
 														   <div class="col-md-4">
 															  <p class="form-control-static" data-display="contentPrice"></p>
 														   </div>
@@ -234,6 +344,7 @@
 														   <label class="control-label col-md-3" style="text-align:left"> Kullanıcı Sözleşmesini Kabul Ediyorum.</label>
 														</div>
 													</div>
+													
 												 </div>
 											  </div>
 										   </div>

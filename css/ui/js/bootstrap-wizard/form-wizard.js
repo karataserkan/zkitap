@@ -125,6 +125,15 @@ var FormWizard = function () {
                 $("p[data-display='host']").html(hostText);
                 $("p[data-display='categories']").html(categoriesText);
 
+                //
+                $("p[data-display='abstract']").text($("[name='abstract']").val());
+                $("p[data-display='language']").text($("[name='language']").val());
+                $("p[data-display='subject']").text($("[name='subject']").val());
+                $("p[data-display='edition']").text($("[name='edition']").val());
+                $("p[data-display='author']").text($("[name='author']").val());
+                $("p[data-display='translator']").text($("[name='translator']").val());
+                $("p[data-display='issn']").text($("[name='issn']").val());
+
             };
 
             /*-----------------------------------------------------------------------------------*/
@@ -216,7 +225,37 @@ var FormWizard = function () {
                         };
             });
             
+            $('#detayRev').hide();
+            var dr=0;
+            $('.detayRevBtn').click(function(){
+                dr++;
+                $('.detayRevBtn>i').toggleClass('fa-arrow-circle-up',dr % 2 === 1);
+                $('.detayRevBtn>i').toggleClass('fa-arrow-circle-down',dr % 2 === 0);
+                if ((dr%2)==1) {
+                    $('#detayRev').show("slow");
+                }else
+                {
+                    $('#detayRev').hide("slow");
+                }
+                ;
 
+            });
+
+            $('#detailed').hide();
+            var di=0;
+            $('.detailBtn').click(function(){
+                di++;
+                $('.detailBtn>i').toggleClass('fa-arrow-circle-up',di % 2 === 1);
+                $('.detailBtn>i').toggleClass('fa-arrow-circle-down',di % 2 === 0);
+                if ((di%2)==1) {
+                    $('#detailed').show("slow");
+                }else
+                {
+                    $('#detailed').hide("slow");
+                }
+                ;
+
+            });
 
             $('#formWizard').find('.prevBtn').hide();
             

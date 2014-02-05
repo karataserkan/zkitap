@@ -32,7 +32,7 @@ class PageController extends Controller
 				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
-				'actions'=>array('create','update'),
+				'actions'=>array('create','update','getPdfData'),
 				'users'=>array('@'),
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
@@ -132,6 +132,18 @@ class PageController extends Controller
 		$this->render('update',array(
 			'model'=>$model,
 		));
+	}
+
+	public function actionGetPdfData($pageId)
+	{
+		$page=Page::model()->findByPk($bookId);
+
+		$page_data=json_decode($page->pdf_data,true);
+
+		$img=$page_data['image']['data'];
+
+		print_r($img);
+
 	}
 
 	/**
