@@ -277,7 +277,7 @@ msgstr  "Add"
 #: protected/views/user/profile.php:46
 #: protected/views/user/forget_password.php:54
 #: protected/views/site/login.php:200 protected/views/book/select_data.php:39
-#: protected/views/book/author.php:1399 protected/views/book/author.php:1422
+#: protected/views/book/author.php:1419 protected/views/book/author.php:1442
 msgid   "Kaydet"
 msgstr  "Save"
 
@@ -620,14 +620,14 @@ msgstr  ""
 
 #: protected/views/user/profile.php:45 protected/views/book/author.php:1398
 #: protected/views/book/author.php:1421 protected/views/user/profile.php:45
-#: protected/views/book/author.php:1398 protected/views/book/author.php:1421
+#: protected/views/book/author.php:1418 protected/views/book/author.php:1441
 msgid   "Kapat"
 msgstr  ""
 
-#: protected/views/book/author.php:1389 protected/views/book/author.php:1389
+#: protected/views/book/author.php:1389 protected/views/book/author.php:1409
 msgid   "Thumbnail Image"
 msgstr  ""
 
-#: protected/views/book/author.php:1412 protected/views/book/author.php:1412
+#: protected/views/book/author.php:1412 protected/views/book/author.php:1432
 msgid   "Kapak Resmi"
 msgstr  ""
