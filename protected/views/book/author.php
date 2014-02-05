@@ -1273,11 +1273,14 @@ $current_user=User::model()->findByPk(Yii::app()->user->id);
 <?php
 $book_data=json_decode($model->data,true);
 $book_type=$book_data['book_type'];
+
 if ($book_type=="pdf") {
-	
+	//echo $page->pdf_data;
 	$page_data=json_decode($page->pdf_data,true);
 
 	$img=$page_data['image']['data'];
+	//$img=$page->pdf_data;
+	
 }
 $background= (!empty($img)) ? "background-image:url('".$img."')" : "background:white";
 ?>

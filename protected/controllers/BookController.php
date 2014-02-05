@@ -243,7 +243,22 @@ class BookController extends Controller
 								$imgData= 'data: '.mime_content_type($imgPath).';base64,'.$imgData;
 								$page=new Page();
 								$page->chapter_id=$newChapter->chapter_id;
-								$page->pdf_data=$imgData;
+								//ekaratas edited -begin
+								$data=array();
+								$data['image']['data']=$imgData;
+								$data['thumnail']['data']=$thumbnailData;
+
+								list($image_width, $image_height, $type, $attr) = getimagesize($imgPath);
+								$data['image']['size']['width']=$image_width;
+								$data['image']['size']['height']=$image_height;
+
+								list($image_width, $image_height, $type, $attr) = getimagesize($imgThumbnailPath);
+								$data['thumnail']['size']['width']=$image_width;
+								$data['thumnail']['size']['height']=$image_height;	
+								$page->pdf_data=json_encode($data);
+								// ekaratas -end
+
+								//$page->pdf_data=$imgData;
 								$page->order=$i;
 								$page->page_id=functions::new_id();
 								$page->save();
@@ -262,7 +277,24 @@ class BookController extends Controller
 									$imgData= 'data: '.mime_content_type($imgPath).';base64,'.$imgData;
 									$page=new Page();
 									$page->chapter_id=$newChapter->chapter_id;
-									$page->pdf_data=$imgData;
+
+									//ekaratas edited -begin
+									$data=array();
+									$data['image']['data']=$imgData;
+									$data['thumnail']['data']=$thumbnailData;
+
+									list($image_width, $image_height, $type, $attr) = getimagesize($imgPath);
+									$data['image']['size']['width']=$image_width;
+									$data['image']['size']['height']=$image_height;
+
+									list($image_width, $image_height, $type, $attr) = getimagesize($imgThumbnailPath);
+									$data['thumnail']['size']['width']=$image_width;
+									$data['thumnail']['size']['height']=$image_height;	
+									$page->pdf_data=json_encode($data);
+									// ekaratas -end
+
+
+									//$page->pdf_data=$imgData;
 									$page->order=$i;
 									$page->page_id=functions::new_id();
 									$page->save();
@@ -272,6 +304,7 @@ class BookController extends Controller
 						}
 						$msg="BOOK:UPLOAD_FILE:0:". json_encode(array(array('user'=>Yii::app()->user->id),array('BookId'=>$bookId)));
 						Yii::log($msg,'info');
+
 						$this->setBookData($filePath,$bookId);
 						$this->redirect('/book/author/'.$bookId);
 
@@ -585,6 +618,7 @@ class BookController extends Controller
 			$book->save();
 		}
 	}
+
 
 	/**
 	 * Deletes a particular model.
