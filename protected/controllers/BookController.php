@@ -228,7 +228,7 @@ class BookController extends Controller
 								$toc_title=$belongs_to_chapter['toc_title'];
 								$start_page=$belongs_to_chapter['start_page'];
 								$end_page=$belongs_to_chapter['end_page'];		
-								$newChapter=Chapter::model()->find('title=:title',array('title'=>$toc_title));	
+								$newChapter=Chapter::model()->find('title=:title AND book_id=:book_id',array('title'=>$toc_title,'book_id'=>$bookId));	
 								if($newChapter==null){
 									$newChapter=new Chapter();
 									$newChapter->chapter_id=functions::new_id();
