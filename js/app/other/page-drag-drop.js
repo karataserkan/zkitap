@@ -277,6 +277,18 @@ $( document ).ready(function () {
 
       //Add Red Current Page
       $(this).parent().addClass('current_page');
+      $.ajax({
+        type: "POST",
+        url:'/page/getPdfData?pageId='+page_id,
+      }).done(function(page_data){
+        
+        var page_background = JSON.parse(page_data);
+        //console.log(page_background.result);
+
+        $('#current_page').css('background-image', 'url()');
+        $('#current_page').css('background-image', 'url("'+page_background.result+'")');
+      });
+      
 
     });
 
