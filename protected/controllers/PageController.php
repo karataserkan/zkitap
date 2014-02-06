@@ -54,7 +54,7 @@ class PageController extends Controller
 				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
-				'actions'=>array('create','update','getPdfData'),
+				'actions'=>array('create','update','getPdfData','getPdfThumbnail'),
 				'users'=>array('@'),
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
@@ -164,6 +164,19 @@ class PageController extends Controller
 		$page_data=json_decode($page->pdf_data,true);
 
 		$img=$page_data['image']['data'];
+
+		$this->response($img);
+
+	}
+
+	public function actionGetPdfThumbnail($pageId)
+	{
+
+		$page=Page::model()->findByPk($pageId);
+
+		$page_data=json_decode($page->pdf_data,true);
+
+		$img=$page_data['thumnail']['data'];
 
 		$this->response($img);
 
