@@ -244,21 +244,12 @@ class BookController extends Controller
 								$page=new Page();
 								$page->chapter_id=$newChapter->chapter_id;
 								//ekaratas edited -begin
-								$data=array();
-								$data['image']['data']=$imgData;
-								$data['thumnail']['data']=$thumbnailData;
+								$imgData=$this->getPDFData($filePath,$i,'');
 
-								list($image_width, $image_height, $type, $attr) = getimagesize($imgPath);
-								$data['image']['size']['width']=$image_width;
-								$data['image']['size']['height']=$image_height;
-
-								list($image_width, $image_height, $type, $attr) = getimagesize($imgThumbnailPath);
-								$data['thumnail']['size']['width']=$image_width;
-								$data['thumnail']['size']['height']=$image_height;	
-								$page->pdf_data=json_encode($data);
+							
 								// ekaratas -end
 
-								//$page->pdf_data=$imgData;
+								$page->pdf_data=$imgData;
 								$page->order=$i;
 								$page->page_id=functions::new_id();
 								$page->save();
@@ -279,22 +270,12 @@ class BookController extends Controller
 									$page->chapter_id=$newChapter->chapter_id;
 
 									//ekaratas edited -begin
-									$data=array();
-									$data['image']['data']=$imgData;
-									$data['thumnail']['data']=$thumbnailData;
+									$imgData=$this->getPDFData($filePath,$i,'');
 
-									list($image_width, $image_height, $type, $attr) = getimagesize($imgPath);
-									$data['image']['size']['width']=$image_width;
-									$data['image']['size']['height']=$image_height;
-
-									list($image_width, $image_height, $type, $attr) = getimagesize($imgThumbnailPath);
-									$data['thumnail']['size']['width']=$image_width;
-									$data['thumnail']['size']['height']=$image_height;	
-									$page->pdf_data=json_encode($data);
 									// ekaratas -end
 
 
-									//$page->pdf_data=$imgData;
+									$page->pdf_data=$imgData;
 									$page->order=$i;
 									$page->page_id=functions::new_id();
 									$page->save();
