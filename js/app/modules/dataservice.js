@@ -52,12 +52,16 @@ window.lindneo.dataservice = (function( $ ) {
           $.ajax({
             type: "POST",
             data: { img: FileBinary},
-            url:ajax_url,
+            url:'/book/updateCover/'+window.lindneo.currentBookId,
           }).done(function(hmtl){
-            var child_div_id = '';
-            if(div_id == 'collapseOne') child_div_id = '#coverRel';
-            else child_div_id = '#thumbRel';
-            $(child_div_id).attr('src',FileBinary);
+            $('#coverRel').attr('src',FileBinary);
+          });
+          $.ajax({
+            type: "POST",
+            data: { img: FileBinary},
+            url:'/book/updateThumbnail/'+window.lindneo.currentBookId,
+          }).done(function(hmtl){
+            $('#thumbRel').attr('src',FileBinary);
           });
           return;
         }
