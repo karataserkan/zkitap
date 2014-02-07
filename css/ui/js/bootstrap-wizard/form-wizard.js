@@ -265,7 +265,7 @@ var FormWizard = function () {
                     
                     wizform.ajaxSubmit({
                         url:'/editorActions/sendFileToCatalog/'+bookId,
-                        success:function() { 
+                        success:function(response) { 
                             bootbox.alert("Kitap yayınlama başarılı.",function(){
                                 window.location.href = '/site/index';
                             });

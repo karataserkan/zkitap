@@ -722,6 +722,7 @@ right join book using (book_id) where book_id='$bookId' and type!='image';";
 			Yii::log($msg,'error');
 			return;
 		}
+		
 
 		if (!empty($_POST)) {
 			$data['organisationId']=$_POST['PublishBookForm']['organisationId'];
@@ -757,6 +758,9 @@ right join book using (book_id) where book_id='$bookId' and type!='image';";
 					$data['hosts'][$hostId]['key1']=$host->hosting_client_key1;
 					$data['hosts'][$hostId]['key2']=$host->hosting_client_key2;
 					$data['hosts'][$hostId]['id']=$host->hosting_client_id;
+					
+					$hosting_client_IP=$host->hosting_client_IP;
+					$hosting_client_id=$host->hosting_client_id;
 				}
 
 			}
@@ -768,6 +772,9 @@ right join book using (book_id) where book_id='$bookId' and type!='image';";
 				$data['hosts']['GIWwMdmQXL']['key1']=$host->hosting_client_key1;
 				$data['hosts']['GIWwMdmQXL']['key2']=$host->hosting_client_key2;
 				$data['hosts']['GIWwMdmQXL']['id']=$host->hosting_client_id;
+
+				$hosting_client_IP=$host->hosting_client_IP;
+				$hosting_client_id=$host->hosting_client_id;
 			}
 
 			if (isset($_POST['categories'])) {
@@ -821,6 +828,84 @@ right join book using (book_id) where book_id='$bookId' and type!='image';";
 		curl_close ($ch);
 		$Return['msg'] = $msg;
 		ob_end_clean();
+
+
+		$res=$Return;
+		$res_res=$res['response'];
+		$ip = $_SERVER['REMOTE_ADDR'];
+        if($ip){
+            if (!empty($_SERVER['HTTP_CLIENT_IP'])) {
+                $ip = $_SERVER['HTTP_CLIENT_IP'];
+            } elseif (!empty($_SERVER['HTTP_X_FORWARDED_FOR'])) {
+                $ip = $_SERVER['HTTP_X_FORWARDED_FOR'];
+            }
+        }
+        else
+        	$ip ='0';
+		
+		$attr=array();
+		$attr['transaction_book_id']=$bookId;
+		$attr['transaction_user_id']=Yii::app()->user->id;
+		$attr['transaction_organisation_id']=$data['organisationId'];
+		$attr['transaction_start_date']=date('Y-n-d g:i:s',time());
+		$attr['transaction_type']='publishing';
+		$attr['transaction_method']='withdrawal';
+		$attr['transaction_amount']=0;
+		$attr['transaction_unit_price']=0;
+		$attr['transaction_amount_equvalent']=0;
+		$attr['transaction_currency_code']=0;
+		$attr['transaction_host_ip']=$hosting_client_IP;
+		$attr['transaction_host_id']=$hosting_client_id;
+		$attr['transaction_remote_ip']=$ip;
+
+		$transaction=new Transactions;
+		$transaction['attributes']=$attr;
+		$transaction->transaction_id=functions::new_id();
+		if ($res_res->catalog===0) {
+			$transaction->transaction_result=0;
+			$transaction->transaction_explanation="Catalog Created";
+		}
+		else
+		{
+			$transaction->transaction_result=1;
+			$transaction->transaction_explanation="Catalog Could NOT Created";
+		}
+		$transaction->save();
+		unset($transaction);
+		
+		$transaction=new Transactions;
+		$transaction['attributes']=$attr;
+		$transaction->transaction_id=functions::new_id();
+		if ($res_res->cc) {
+			$transaction->transaction_result=0;
+			$transaction->transaction_explanation="File Created";
+		}
+		else
+		{
+			$transaction->transaction_result=$res_res->cc;
+			$transaction->transaction_explanation="File Could NOT Created";
+		}
+		$transaction->save();
+		unset($transaction);
+
+		
+
+		$transaction=new Transactions;
+		$transaction['attributes']=$attr;
+		$transaction->transaction_id=functions::new_id();
+		if ($res_res->shell_signal===0) {
+			$transaction->transaction_result=0;
+			$transaction->transaction_explanation="File Uploaded to Cloud";
+		}
+		else
+		{
+			$transaction->transaction_result=$res_res->shell_signal;
+			$transaction->transaction_explanation="File Could NOT Uploaded to Cloud";
+		}
+		$transaction->save();
+		unset($transaction);
+
+
 		return $Return;
 
 	}
@@ -836,10 +921,11 @@ right join book using (book_id) where book_id='$bookId' and type!='image';";
 
 		if($return=$this->SendFileToCatalog($bookId) ){
 			$response['sendFileInfo']=$return; 
-			$response['sendFile']=true;
+			$response['sendFile']=true;		
 		}else{
 			$response['sendFile']=false;
 		}	
+		
 
 		return $this->response($response);
 	}
