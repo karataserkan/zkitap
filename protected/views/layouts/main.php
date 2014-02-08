@@ -111,20 +111,6 @@
 		<script type="text/javascript" src="<?php echo Yii::app()->request->baseUrl; ?>/css/ui/js/hubspot-messenger/js/messenger.min.js"></script>
 		<script type="text/javascript" src="<?php echo Yii::app()->request->baseUrl; ?>/css/ui/js/hubspot-messenger/js/messenger-theme-flat.js"></script>
 		<script type="text/javascript" src="<?php echo Yii::app()->request->baseUrl; ?>/css/ui/js/hubspot-messenger/js/messenger-theme-future.js"></script>
-		<script type="text/javascript">
-		 var mytheme = 'future';
-            var mypos = 'messenger-on-top';
-            //Set theme
-            Messenger.options = {
-                extraClasses: 'messenger-fixed '+mypos,
-                theme: mytheme
-            }
-            //Call
-            Messenger().post({
-                message:"This is a normal notification!",
-                showCloseButton: true
-            });
-		</script>
 </head>
 
 <body class="editor_blue">
