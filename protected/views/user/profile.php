@@ -4,8 +4,6 @@
 		App.init(); //Initialise plugins and elements
 	});
 </script>
-
-
 <!-- PAGE -->
 <div id="content" class="col-lg-12">
 <!-- PAGE HEADER-->
