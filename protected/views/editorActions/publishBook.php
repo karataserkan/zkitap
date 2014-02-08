@@ -382,9 +382,12 @@
 		});
 	</script>
 
+
 <script type="text/javascript">
  	$('form').addClass('form-horizontal');
 
  	var bookId="<?php echo $bookId; ?>";
 
+
+ 	
 </script>
