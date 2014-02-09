@@ -164,6 +164,10 @@ $( document ).ready(function () {
             createHtmlComponent( event, ui  );
             break;
 
+          case 'wrap':
+            window.lindneo.dataservice.wrap_popup(event, ui);
+            break;
+
           default:
             break; 
         }
