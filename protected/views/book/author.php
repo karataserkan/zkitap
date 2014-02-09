@@ -700,6 +700,23 @@ $current_user=User::model()->findByPk(Yii::app()->user->id);
 </div>	
 <!--  end add popup popup -->	
 
+<!--  add textwrap popup -->	
+<div class="popup" id="pop-wrap-popup">
+<div class="popup-header">
+	<i class="icon-m-popup"></i>
+		Açılır Kutu Ekle
+	<i id="image-add-dummy-close-button" class="icon-close size-10" style="float:right; margin-right:10px; margin-top:5px;"></i>
+</div>
+<!-- popup content-->
+	<div class="gallery-inner-holder">
+		<textarea class="popup-text-area">Açılır kutunun içeriğini yazınız.
+		</textarea> </br>
+		<a href="#" class="btn btn-info" id="add-image" style="padding: 5px 30px;">Ekle</a>
+	</div>
+<!-- popup content-->
+</div>	
+<!--  end add popup popup -->	
+
 <!--  add popup popup -->	
 <div class="popup" id="pop-popup-popup">
 <div class="popup-header">
@@ -847,6 +864,7 @@ $current_user=User::model()->findByPk(Yii::app()->user->id);
 			<li ctype="shape" class="component icon-m-shape">&nbsp;&nbsp;&nbsp;&nbsp;Şekil</li>
 			<li ctype="table" class="component icon-t-merge">&nbsp;&nbsp;&nbsp;&nbsp;Tablo</li>
 			<li ctype="html" class="component icon-t-merge">&nbsp;&nbsp;&nbsp;&nbsp;HTML</li>
+			<li ctype="wrap" class="component icon-t-merge">&nbsp;&nbsp;&nbsp;&nbsp;Text Wrap</li>
 			
 			
 			<li class="left_bar_titles"></li>
