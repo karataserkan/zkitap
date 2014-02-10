@@ -274,10 +274,10 @@ msgstr  "Add"
 #: protected/views/user/profile.php:46 protected/views/book/author.php:1399
 #: protected/views/book/author.php:1422 protected/views/book/author.php:1419
 #: protected/views/book/author.php:1442 protected/views/book/author.php:1445
-#: protected/views/faq/create.php:44 protected/views/user/profile.php:46
+#: protected/views/faq/create.php:44 protected/views/user/profile.php:44
 #: protected/views/user/forget_password.php:54
 #: protected/views/site/login.php:200 protected/views/book/select_data.php:39
-#: protected/views/book/author.php:1422 protected/views/book/author.php:1445
+#: protected/views/book/author.php:1440 protected/views/book/author.php:1463
 msgid   "Kaydet"
 msgstr  "Save"
 
@@ -629,25 +629,25 @@ msgstr  "Publish"
 msgid   "Kategori Bilgileri"
 msgstr  "Category Details"
 
-#: protected/views/user/profile.php:33 protected/views/user/profile.php:33
+#: protected/views/user/profile.php:33 protected/views/user/profile.php:31
 msgid   "Profil Resmi"
 msgstr  "Profile Picture"
 
 #: protected/views/user/profile.php:45 protected/views/book/author.php:1398
 #: protected/views/book/author.php:1421 protected/views/book/author.php:1418
 #: protected/views/book/author.php:1441 protected/views/book/author.php:1444
-#: protected/views/user/profile.php:45 protected/views/book/author.php:1421
-#: protected/views/book/author.php:1444
+#: protected/views/user/profile.php:43 protected/views/book/author.php:1439
+#: protected/views/book/author.php:1462
 msgid   "Kapat"
 msgstr  "Close"
 
 #: protected/views/book/author.php:1389 protected/views/book/author.php:1409
-#: protected/views/book/author.php:1412 protected/views/book/author.php:1412
+#: protected/views/book/author.php:1412 protected/views/book/author.php:1430
 msgid   "Thumbnail Image"
 msgstr  "Thumbnail Image"
 
 #: protected/views/book/author.php:1412 protected/views/book/author.php:1432
-#: protected/views/book/author.php:1435 protected/views/book/author.php:1435
+#: protected/views/book/author.php:1435 protected/views/book/author.php:1453
 msgid   "Kapak Resmi"
 msgstr  "Cover Image"
 
