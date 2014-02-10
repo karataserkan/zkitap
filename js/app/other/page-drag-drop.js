@@ -287,10 +287,16 @@ $( document ).ready(function () {
       }).done(function(page_data){
         
         var page_background = JSON.parse(page_data);
-        //console.log(page_background.result);
-
-        $('#current_page').css('background-image', 'url()');
-        $('#current_page').css('background-image', 'url("'+page_background.result+'")');
+        console.log(page_background.result);
+        if(page_background.result){
+                $('#current_page').css('background-image', 'url()');
+                $('#current_page').css('background-image', 'url("'+page_background.result+'")');
+        }
+        else{
+          console.log('bu ne');
+          $('#current_page').css('background-image', 'url()');
+          $('#current_page').css('background-color', 'white');
+        }
       });
       
 

@@ -1067,14 +1067,65 @@ $current_user=User::model()->findByPk(Yii::app()->user->id);
 				
 				
 				<script>
-				$('.pages').hover(
+				$(document).ready(function() {
+					var last_timeout;
+					$('.pages .page').hover(
+						function(){
+							console.log('hover started');
+							var timeout;
+							var page_thumb_item = $(this);
+
+							//$(this).find('.page-chapter-delete').hide();
+							timeout = setTimeout(function(){ 
+								page_thumb_item.find('.page-chapter-delete').show();
+								console.log('hover-timeout');
+								clearTimeout(timeout);
+							},1000);
+
+							setTimeout(function(){
+								clearTimeout(timeout);
+							},2000); 
+
+							last_timeout = timeout;
+							console.log('hover-out');
+							//setTimeout(function(){alert("OK");}, 3000);
+
+					},	
 					function(){
-						$(this).find('.page-chapter-delete').show();
-					},
-					function(){
-						 $(this).find('.page-chapter-delete').hide();
+						//clearTimeout(my_timer);
+						$(this).find('.page-chapter-delete').hide();
+						if (last_timeout) clearTimeout(last_timeout);
+
 					});
-				
+					$('.chapter-detail').hover(
+						function(){
+							console.log('hover started');
+							var timeout;
+							var page_thumb_item = $(this);
+
+							//$(this).find('.page-chapter-delete').hide();
+							timeout = setTimeout(function(){ 
+								page_thumb_item.find('.page-chapter-delete').eq(0).show();
+								console.log('hover-timeout');
+								clearTimeout(timeout);
+							},1000);
+
+							setTimeout(function(){
+								clearTimeout(timeout);
+							},2000); 
+
+							last_timeout = timeout;
+							console.log('hover-out');
+							//setTimeout(function(){alert("OK");}, 3000);
+
+					},	
+					function(){
+						//clearTimeout(my_timer);
+						$(this).find('.page-chapter-delete').hide();
+						if (last_timeout) clearTimeout(last_timeout);
+
+					});
+				});
 				</script>
 			  <div class="panel panel-default">
 				 <div class="panel-heading">
@@ -1095,11 +1146,12 @@ $current_user=User::model()->findByPk(Yii::app()->user->id);
 								$pagesOfChapter=Page::model()->findAll(array('order'=>  '`order` asc ,  created asc', "condition"=>'chapter_id=:chapter_id', "params" =>array(':chapter_id' => $chapter->chapter_id )) );
 										$chapter_page=0;
 										?>
-					<div class='chapter' chapter_id='<?php echo $chapter->chapter_id; ?>'>
+					<div class='chapter'  chapter_id='<?php echo $chapter->chapter_id; ?>'>
+					<div class="chapter-detail">
 					<input type="text" class="chapter-title" placeholder="chapter title" value="<?php echo $chapter->title; ?>">
 					
 					<a class="btn btn-danger  page-chapter-delete delete-chapter hidden-delete" style="float: right; margin-top: -23px;"><i class="icon-delete"></i></a> 
-					
+					</div>
 					<!-- <?php echo $chapter->title; ?>  chapter title--> 
 										<ul class="pages" >
 												<?php
