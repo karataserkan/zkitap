@@ -239,7 +239,7 @@ var createHtmlComponent = function ( event, ui, oldcomponent ) {
       else{
         top = oldcomponent.data.self.css.top;
         left = oldcomponent.data.self.css.left;
-        //window.lindneo.tlingit.componentHasDeleted( oldcomponent.id );
+        window.lindneo.tlingit.componentHasDeleted( oldcomponent.id );
         oldcomponent.data.html_inner = $("#popup-explanation").html();
 
       };
@@ -266,10 +266,9 @@ var createHtmlComponent = function ( event, ui, oldcomponent ) {
             }
           }
         };
-        if(typeof oldcomponent == 'undefined')
-          window.lindneo.tlingit.componentHasCreated( component );
-        else 
-          window.lindneo.tlingit.componentHasUpdated( oldcomponent );
+       
+        window.lindneo.tlingit.componentHasCreated( component );
+        
         close_button.trigger('click');
 
     });
