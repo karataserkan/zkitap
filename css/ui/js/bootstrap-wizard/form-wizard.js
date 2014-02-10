@@ -263,7 +263,7 @@ var FormWizard = function () {
             $('#formWizard').find('.prevBtn').hide();
             
             $('#formWizard .submitBtn').click(function () {
-                
+                $('#formWizard').find('.submitBtn').hide();
                 
                if ($("#rights").is(':checked')) {
                     
@@ -274,11 +274,23 @@ var FormWizard = function () {
                 });
                 wizform.ajaxSubmit({
                     url:'/editorActions/sendFileToCatalog/'+bookId,
-                    success:function(response) { 
-                        msg.update({
-                            message: 'Eser yayınlama başarılı.',
-                            type: 'success'
-                        })
+                    success:function(response) {
+                        var budgetError = response.search('budgetError');
+                        console.log(budgetError);
+                        if (budgetError==(-1)) {
+                            msg.update({
+                                message: 'Eser yayınlama başarılı.',
+                                type: 'success'
+                            })
+
+                        }else
+                        {
+                            msg.update({
+                                message: 'Hesabınızda yeterli bakiye bulunmamaktadır.',
+                                type: 'error'
+                            })
+                            
+                        }
                         // bootbox.alert("Eser yayınlama başarılı.",function(){
                         //     window.location.href = '/site/index';
                         // });
