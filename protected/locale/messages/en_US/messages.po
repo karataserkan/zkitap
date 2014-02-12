@@ -90,6 +90,7 @@ msgstr  "Owner"
 #: protected/views/layouts/column2.php:124
 #: protected/views/layouts/column2.php:131
 #: protected/views/layouts/column2.php:132
+#: protected/views/layouts/column2.php:132
 msgid   "Organizasyon"
 msgstr  "Organisation"
 
@@ -117,6 +118,7 @@ msgstr  "Add User"
 #: protected/views/layouts/column2.php:167
 #: protected/views/layouts/column2.php:135
 #: protected/views/layouts/column2.php:142
+#: protected/views/layouts/column2.php:143
 #: protected/views/organisations/index.php:6
 #: protected/views/layouts/column2.php:143
 msgid   "Çalışma Alanı"
@@ -129,6 +131,7 @@ msgstr  "Workspace"
 #: protected/views/layouts/column2.php:162
 #: protected/views/layouts/column2.php:130
 #: protected/views/layouts/column2.php:137
+#: protected/views/layouts/column2.php:138
 #: protected/views/organisations/workspaces.php:19
 #: protected/views/organisations/index.php:8
 #: protected/views/layouts/column2.php:138
@@ -225,6 +228,7 @@ msgstr[1]       "%s Users Found"
 #: protected/controllers/OrganisationsController.php:366
 #: protected/controllers/OrganisationsController.php:389
 #: protected/controllers/OrganisationsController.php:420
+#: protected/controllers/OrganisationsController.php:420
 msgid   "Kullanıcı davet edildi."
 msgstr  "Invitation is sent to user."
 
@@ -275,7 +279,8 @@ msgstr  "Add"
 #: protected/views/book/author.php:1422 protected/views/book/author.php:1419
 #: protected/views/book/author.php:1442 protected/views/book/author.php:1445
 #: protected/views/user/profile.php:44 protected/views/book/author.php:1440
-#: protected/views/book/author.php:1463 protected/views/faq/create.php:44
+#: protected/views/book/author.php:1463 protected/views/book/author.php:1492
+#: protected/views/book/author.php:1515 protected/views/faq/create.php:44
 #: protected/views/user/profile.php:44
 #: protected/views/user/forget_password.php:54
 #: protected/views/site/login.php:200 protected/views/book/select_data.php:39
@@ -292,6 +297,7 @@ msgstr  "Workspace Users"
 #: protected/controllers/OrganisationsController.php:373
 #: protected/controllers/OrganisationsController.php:395
 #: protected/controllers/OrganisationsController.php:426
+#: protected/controllers/OrganisationsController.php:426
 msgid   "Girdiğiniz e-posta adresi geçersiz."
 msgstr  "E-mail you provide is invalid."
 
@@ -302,6 +308,7 @@ msgstr  "E-mail you provide is invalid."
 #: protected/views/editorActions/publishBook.php:179
 #: protected/views/layouts/column2.php:147
 #: protected/views/editorActions/publishBook.php:289
+#: protected/views/layouts/column2.php:148
 #: protected/views/organisations/index.php:10
 #: protected/views/editorActions/publishBook.php:289
 #: protected/views/layouts/column2.php:148
@@ -640,20 +647,21 @@ msgstr  "Profile Picture"
 #: protected/views/book/author.php:1421 protected/views/book/author.php:1418
 #: protected/views/book/author.php:1441 protected/views/book/author.php:1444
 #: protected/views/user/profile.php:43 protected/views/book/author.php:1439
-#: protected/views/book/author.php:1462 protected/views/user/profile.php:43
+#: protected/views/book/author.php:1462 protected/views/book/author.php:1491
+#: protected/views/book/author.php:1514 protected/views/user/profile.php:43
 #: protected/views/book/author.php:1491 protected/views/book/author.php:1514
 msgid   "Kapat"
 msgstr  "Close"
 
 #: protected/views/book/author.php:1389 protected/views/book/author.php:1409
 #: protected/views/book/author.php:1412 protected/views/book/author.php:1430
-#: protected/views/book/author.php:1482
+#: protected/views/book/author.php:1482 protected/views/book/author.php:1482
 msgid   "Thumbnail Image"
 msgstr  "Thumbnail Image"
 
 #: protected/views/book/author.php:1412 protected/views/book/author.php:1432
 #: protected/views/book/author.php:1435 protected/views/book/author.php:1453
-#: protected/views/book/author.php:1505
+#: protected/views/book/author.php:1505 protected/views/book/author.php:1505
 msgid   "Kapak Resmi"
 msgstr  "Cover Image"
 
@@ -737,6 +745,7 @@ msgstr  ""
 msgid   "Eser Fiyatı"
 msgstr  ""
 
+#: protected/views/organisations/account.php:16
 #: protected/views/organisations/account.php:16
 msgid   "Hesabım"
 msgstr  ""
