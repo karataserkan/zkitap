@@ -10,7 +10,6 @@ class epub3 {
 	public $coverImage ;
 	public $nicename;
 	public $ebookFile ;
-	public $title='Canim Kitabim';
 	public $uuid;
 	public $coverType;
 
@@ -241,7 +240,7 @@ class epub3 {
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:epub="http://www.idpf.org/2007/ops" lang="en">
   <head>
     <meta http-equiv="default-style" content="text/html; charset=utf-8"/>
-    	<title>'.$this->title.'</title>
+    	<title>'.$this->book->title.'</title>
     	<link rel="stylesheet" href="stylesheet.css" type="text/css"/>
 		<link rel="stylesheet" href="page_styles.css" type="text/css"/>
 		<link rel="stylesheet" href="widgets.css" type="text/css"/>
@@ -254,7 +253,7 @@ class epub3 {
 	<body>
 		<div>
 			<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="100%" height="100%" viewBox="0 0 425 616" preserveAspectRatio="none">
-				<image width="425" height="616" xlink:href="' . $this->coverImage->filename . '"/>
+				<image width="'.$pageSize['width'].'" height="'.$pageSize['height'].'" xlink:href="' . $this->coverImage->filename . '"/>
 			</svg>
 		</div>
 	</body>
@@ -560,7 +559,7 @@ class epub3 {
 <package xmlns="http://www.idpf.org/2007/opf" version="3.0" xml:lang="en" unique-identifier="pub-id" prefix="rendition: http://www.idpf.org/vocab/rendition/#">
 	<metadata xmlns:dc="http://purl.org/dc/elements/1.1/">
 		<dc:language>tr</dc:language>
-		<dc:title id="title" >'.$this->title.'</dc:title>
+		<dc:title id="title" >'.$this->book->title.'</dc:title>
 		<dc:creator id="creator" >'.$this->book->author.'</dc:creator>
 		<meta property="dcterms:modified">'. date('Y-m-d\TH:i:s', strtotime( $this->book->created)).'Z</meta>
 		<dc:date>'. date('Y', strtotime( $this->book->created)).'</dc:date>
@@ -879,7 +878,7 @@ class epub3 {
 
 	public function getTitle()
 	{
-		return $this->title;
+		return $this->book->title;
 	}
 
 	public function getSanitizedFilename()
@@ -905,7 +904,7 @@ class epub3 {
 		if($this->book){
 			$this->title=$this->book->title;
 			//$this->nicename=$this->tempdirParent.'/'.file::sanitize($this->title);
-			$this->sanitized_filename=file::sanitize($this->title);
+			$this->sanitized_filename=file::sanitize($this->book->title);
 			$this->nicename=$this->tempdirParent.'/'.$this->sanitized_filename;
 		}
 
