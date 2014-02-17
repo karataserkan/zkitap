@@ -62,7 +62,7 @@ class OrganisationsController extends Controller
 
 
 		$budget=$this->getOrganisationBudget($id);
-		print_r($budget);
+
 		$this->render("account");
 	}
 
