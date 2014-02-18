@@ -45,7 +45,7 @@ class EditorActionsController extends Controller
 		    'params'=>array(':organisation_id'=>$organisation->organisation_id),
 		));
 
-		$categories=BookCategories::model()->findAll();
+		$categories=BookCategories::model()->findAll('organisation_id=:organisation_id OR organisation_id=:none',array('organisation_id'=>$organisation->organisation_id, 'none'=>''));
 
 		$model=new PublishBookForm;
 
@@ -775,6 +775,18 @@ right join book using (book_id) where book_id='$bookId' and type!='image';";
 			$data['author']=$_POST['author'];
 			$data['translator']=$_POST['translator'];
 			$data['issn']=$_POST['issn'];
+			
+			if ($_POST['categoriesSirali']) {
+				$siraliCategory=BookCategories::model()->findByPk($_POST['categoriesSirali']);
+				$data['siraliCategoryName']=$siraliCategory->category_name;
+			}
+			else
+			{
+				$data['siraliCategoryName']=false;
+			}
+			$data['siraliCategory']=$_POST['categoriesSirali'];
+			$data['siraNo']=$_POST['contentSiraliSiraNo'];
+			$data['ciltNo']=$_POST['contentSiraliCiltNo'];
 			
 
 
