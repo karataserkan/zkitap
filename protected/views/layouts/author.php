@@ -49,6 +49,17 @@
 		<!-- Jquery Selection -->
 		<script src="<?php echo Yii::app()->request->baseUrl; ?>/js/lib/jquery.selection.js"></script>
 
+		<!-- MathJax -->
+		<script type="text/x-mathjax-config">
+	      MathJax.Hub.Config({
+	        tex2jax: {
+	          inlineMath: [["$","$"],["\\(","\\)"]]
+	        }
+	      });
+	    </script>
+		<script src="<?php echo Yii::app()->request->baseUrl; ?>/js/lib/mathjax/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+		
+
 		<!-- JS Modules -->
 		<script src="<?php echo Yii::app()->request->baseUrl; ?>/js/app/lindneo.js"></script>	
 		<script src="<?php echo Yii::app()->request->baseUrl; ?>/js/app/modules/dataservice.js"></script>	
@@ -73,6 +84,7 @@
 		<script src="<?php echo Yii::app()->request->baseUrl; ?>/js/app/components/table-component.js"></script>	
 		<script src="<?php echo Yii::app()->request->baseUrl; ?>/js/app/components/html-component.js"></script>	
 		<script src="<?php echo Yii::app()->request->baseUrl; ?>/js/app/components/wrap-component.js"></script>	
+		<script src="<?php echo Yii::app()->request->baseUrl; ?>/js/app/components/latex-component.js"></script>	
 
 		<!-- Page JS Codes -->
 		<script src="<?php echo Yii::app()->request->baseUrl; ?>/js/app/other/page-drag-drop.js"></script>
