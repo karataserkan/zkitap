@@ -34,7 +34,7 @@ $(document).ready(function(){
 
       
       $('.wrapReady.withSourceImage').slickWrap({
-                    sourceImage: true
+                    sourceImage: true,cutoff:180
                 });
       this._super(); 
 /*
@@ -186,12 +186,16 @@ console.log(oldcomponent);
         console.log('dene');
         var top = (ui.offset.top-$(event.target).offset().top ) + 'px';
         var left = ( ui.offset.left-$(event.target).offset().left ) + 'px';
+        var self_width = 'auto';
+        var self_height = 'auto';
       }
       else{
         top = oldcomponent.data.self.css.top;
         left = oldcomponent.data.self.css.left;
         window.lindneo.tlingit.componentHasDeleted( oldcomponent.id );
         oldcomponent.data.html_inner = $("#popup-explanation").html();
+        var self_width = oldcomponent.data.width ;
+        var self_height = oldcomponent.data.height;
 
       };
       
@@ -207,8 +211,8 @@ console.log(oldcomponent);
                 'position':'absolute',
                 'top': top ,
                 'left':  left ,
-                'width':'128px',
-                'height':'128px',
+                'width': self_width,
+                'height': self_height,
                 'background-color': 'transparent',
                 'overflow': 'visible',
                 'z-index': '99998'
@@ -260,7 +264,7 @@ console.log(oldcomponent);
         //console.log(contentType);
         if(contentType == 'image'){
           var imageBinary = FileBinary;
-          var newImage = $("<img class='wrapReady withSourceImage left' style='float:left;padding:30px;' src='"+imageBinary+"' >");
+          var newImage = $("<img class='wrapReady withSourceImage right' style='float:right;padding:30px;' src='"+imageBinary+"' >");
 
           $('#popup-explanation').append(newImage);
           return;

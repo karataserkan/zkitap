@@ -168,6 +168,10 @@ $( document ).ready(function () {
             window.lindneo.dataservice.wrap_popup(event, ui);
             break;
 
+          case 'latex':
+            window.lindneo.dataservice.latex_popup(event, ui);
+            break;
+
           default:
             break; 
         }
@@ -303,6 +307,7 @@ $( document ).ready(function () {
     });
 
     $('.delete-page').click(function(){
+      var delete_buttons = $('<i class="icon-delete"></i><i class="icon-delete"></i>');
       var page_id=$(this).parent().attr('page_id');
 
       window.lindneo.tlingit.PageHasDeleted( page_id );

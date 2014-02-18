@@ -371,6 +371,26 @@ $current_user=User::model()->findByPk(Yii::app()->user->id);
 							</select>	
 							
 			</div>
+
+			<div class="wrap-options toolbox" style="display:inline-block;">
+				<div class="vertical-line"></div>
+				
+						<i class="icon-opacity grey-6"></i>
+							<select class='tool-select tool select' rel='cutoff' rel='color' id="font-size" class="radius" title="Bağlantının Şeffaflık Ayarı">
+								
+								<option selected="selected" value="" >0</option>
+								<option value="10" >10</option>
+								<option value="30" >30</option>
+								<option value="50" >50</option>
+								<option value="70" >70</option>
+								<option value="100" >100</option>
+								<option value="120" >120</option>
+								<option value="150" >150</option>
+								<option value="180" >180</option>
+								<option value="200" >200</option>
+							</select>	
+							
+			</div>
 			
 			<div class="shape-options toolbox"  style="display:inline-block;">
 				<div class="vertical-line"></div>
@@ -699,6 +719,22 @@ $current_user=User::model()->findByPk(Yii::app()->user->id);
 <!-- popup content-->
 </div>	
 <!--  end add popup popup -->	
+<!--  add latex popup -->	
+<div class="popup" id="pop-latex-popup">
+<div class="popup-header">
+	<i class="icon-m-popup"></i>
+		Açılır Kutu Ekle
+	<i id="image-add-dummy-close-button" class="icon-close size-10" style="float:right; margin-right:10px; margin-top:5px;"></i>
+</div>
+<!-- popup content-->
+	<div class="gallery-inner-holder">
+		<textarea class="popup-text-area">Açılır kutunun içeriğini yazınız.
+		</textarea> </br>
+		<a href="#" class="btn btn-info" id="add-image" style="padding: 5px 30px;">Ekle</a>
+	</div>
+<!-- popup content-->
+</div>	
+<!--  end add popup popup -->	
 
 <!--  add textwrap popup -->	
 <div class="popup" id="pop-wrap-popup">
@@ -864,6 +900,7 @@ $current_user=User::model()->findByPk(Yii::app()->user->id);
 			<li ctype="shape" class="component icon-m-shape">&nbsp;&nbsp;&nbsp;&nbsp;Şekil</li>
 			<li ctype="table" class="component icon-t-merge">&nbsp;&nbsp;&nbsp;&nbsp;Tablo</li>
 			<li ctype="html" class="component icon-t-merge">&nbsp;&nbsp;&nbsp;&nbsp;HTML</li>
+			<li ctype="latex" class="component icon-t-merge">&nbsp;&nbsp;&nbsp;&nbsp;Latex</li>
 			<li ctype="wrap" class="component icon-t-merge">&nbsp;&nbsp;&nbsp;&nbsp;Text Wrap</li>
 			
 			

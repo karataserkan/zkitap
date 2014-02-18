@@ -37,6 +37,10 @@ window.lindneo.dataservice = (function( $ ) {
       createWrapComponent( event, ui, component );
     };
 
+  var latex_popup = function(event, ui, component){
+      createLatexComponent( event, ui, component );
+    };
+
   var video_popup = function(event, ui, component){
       createVideoComponent( event, ui, component );
     };
@@ -332,6 +336,7 @@ window.lindneo.dataservice = (function( $ ) {
     quiz_popup: quiz_popup,
     html_popup: html_popup,
     wrap_popup: wrap_popup,
+    latex_popup: latex_popup,
     send: send
   };
 
