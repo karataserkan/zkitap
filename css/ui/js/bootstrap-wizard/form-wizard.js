@@ -89,6 +89,7 @@ var FormWizard = function () {
 
             
             var data;
+            $(".siraliDisplay").hide();
             var formDisplay = function(){
                 $("p[data-display='contentTitle']").text($("[name='contentTitle']").val());
                 $("p[data-display='contentExplanation']").text($("[name='contentExplanation']").val());
@@ -136,7 +137,14 @@ var FormWizard = function () {
                 $("p[data-display='translator']").text($("[name='translator']").val());
                 $("p[data-display='issn']").text($("[name='issn']").val());
 
+                var siraliNo=$(".siraliCheckbox").val();
 
+                if (siraliNo!=0) {
+                    $(".siraliDisplay").show();
+                    $("p[data-display='categoriesSirali']").text(siraliNo);
+                    $("p[data-display='siraNo']").text($("[name='contentSiraliSiraNo']").val());
+                    $("p[data-display='ciltNo']").text($("[name='contentSiraliCiltNo']").val());
+                };
             };
 
             /*-----------------------------------------------------------------------------------*/
@@ -226,6 +234,21 @@ var FormWizard = function () {
                             $("[name='contentCurrency']").parent().parent().show();
 
                         };
+            });
+
+            $('#siraliSiraNo').hide();
+            $('#siraliCiltNo').hide();
+
+            $('.siraliCheckbox').click(function(){
+                if ($(".siraliCheckbox").val()!=0) {
+                    $('#siraliSiraNo').show();
+                    $('#siraliCiltNo').show();
+                }
+                else
+                {
+                    $('#siraliSiraNo').hide();
+                    $('#siraliCiltNo').hide();                    
+                }
             });
             
             $('#detayRev').hide();

@@ -191,8 +191,15 @@
 												<div class="tab-pane active" id="category">
 													
 													<?php
+													$categorySiraliIds[0]=__('Lütfen Seçiniz');
 													foreach ($categories as $key => $category) {
-														$categoryIds[$category->category_id]=$category->category_name;
+														if ($category->organisation_id) {
+															$categorySiraliIds[$category->category_id]=$category->category_name;
+														}
+														else
+														{
+															$categoryIds[$category->category_id]=$category->category_name;
+														}
 													}
 													?>
 
@@ -202,8 +209,30 @@
 														</label>
 														<div class="col-md-9">
 														<?php echo $form->checkBoxList($model,'categories',$categoryIds,array('class'=>'uniform','name'=>'categories')); ?>
+														<br>
+														<b><?php _e('Süreli Yayın');?>:</b>
+														<br>
+														<?php echo $form->dropDownList($model,'categories',$categorySiraliIds,array('class'=>'uniform siraliCheckbox','name'=>'categoriesSirali')); ?>
 														</div>
 													</div>
+													
+													<div class="form-group" id="siraliSiraNo">
+														<label  class="col-md-3 control-label">
+														<?php _e("Sıra No"); ?>
+														</label>
+														<div class="col-md-4">
+															<input class="form-control" name="contentSiraliSiraNo" id="contentSiraliSiraNo" type="text">
+														</div>
+													</div>
+													<div class="form-group" id="siraliCiltNo">
+														<label  class="col-md-3 control-label">
+														<?php _e("Cilt No"); ?>
+														</label>
+														<div class="col-md-4">
+															<input class="form-control" name="contentSiraliCiltNo" id="contentSiraliCiltNo" type="text">
+														</div>
+													</div>
+													
 												</div>
 												<div class="tab-pane" id="money">
 
@@ -275,6 +304,7 @@
 															  <p class="form-control-static" data-display="translator"></p>
 														   </div>
 														</div>
+
 														
 														<div class="form-group">
 														   <label class="control-label col-md-3"><?php _e('ISSN/ISBN') ?>:</label>
@@ -282,6 +312,30 @@
 															  <p class="form-control-static" data-display="issn"></p>
 														   </div>
 														</div>
+
+														<div class="siraliDisplay">
+														<div class="form-group">
+														   <label class="control-label col-md-3"><?php _e('Süreli Yayın') ?>:</label>
+														   <div class="col-md-4">
+															  <p class="form-control-static" data-display="categoriesSirali"></p>
+														   </div>
+														</div>
+														
+														<div class="form-group">
+														   <label class="control-label col-md-3"><?php _e('Sıra No'); ?>:</label>
+														   <div class="col-md-4">
+															  <p class="form-control-static" data-display="siraNo"></p>
+														   </div>
+														</div>
+														
+														<div class="form-group">
+														   <label class="control-label col-md-3"><?php _e('Cilt No') ?>:</label>
+														   <div class="col-md-4">
+															  <p class="form-control-static" data-display="ciltNo"></p>
+														   </div>
+														</div>
+													</div>
+
 													</div>
 													<h3 class="block">Yayınlama Özeti</h3>
 													<div class="well">
