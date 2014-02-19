@@ -789,6 +789,9 @@ right join book using (book_id) where book_id='$bookId' and type!='image';";
 			$data['ciltNo']=$_POST['contentSiraliCiltNo'];
 			
 
+			$ebook->totalPageCount;
+			$ebook->TOC_Titles;
+
 
 			if (isset($_POST['host'])) {
 				$hosts=$_POST['host'];
