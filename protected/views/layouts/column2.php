@@ -103,13 +103,7 @@
 						</a>
 					</li>
 					
-					<li>
-						<a href="#">
-							<i class="fa fa-money fa-fw"></i> <span class="menu-text">
-							Hesabım
-						</span>
-						</a>
-					</li>
+					
 					
 					<?php 
 					function organisation()
@@ -125,6 +119,13 @@
 					if($organisation)
 					{
 					?>
+					<li>
+						<a href="/organisations/account/<?php echo $organisation["organisation_id"]; ?>">
+							<i class="fa fa-money fa-fw"></i> <span class="menu-text">
+							Hesabım
+						</span>
+						</a>
+					</li>
 					<li class="has-sub">
 						<a href="javascript:;" class="">
 							<i class="fa fa-briefcase fa-fw"></i>
@@ -145,6 +146,11 @@
 							<li>
 								<a href="/organisationHostings/index?organisationId=<?php echo $organisation["organisation_id"]; ?>">
 								<?php _e('Sunucu'); ?>
+								</a>
+							</li>
+							<li>
+								<a href="/organisations/bookCategories/<?php echo $organisation["organisation_id"]; ?>">
+								<?php _e('Yayın Kategorileri'); ?>
 								</a>
 							</li>
 						</ul>

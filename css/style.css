@@ -1346,11 +1346,11 @@ word-wrap: break-word;
 
 
 .hidden-delete{
-opacity: 0.01;
+display: none;
 font-weight: normal;
 }
 .hidden-delete:hover{
-opacity: 1;
+
 }
 
 .add-button-container{

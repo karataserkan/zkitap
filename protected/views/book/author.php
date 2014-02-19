@@ -371,6 +371,26 @@ $current_user=User::model()->findByPk(Yii::app()->user->id);
 							</select>	
 							
 			</div>
+
+			<div class="wrap-options toolbox" style="display:inline-block;">
+				<div class="vertical-line"></div>
+				
+						<i class="icon-opacity grey-6"></i>
+							<select class='tool-select tool select' rel='cutoff' rel='color' id="font-size" class="radius" title="Bağlantının Şeffaflık Ayarı">
+								
+								<option selected="selected" value="" >0</option>
+								<option value="10" >10</option>
+								<option value="30" >30</option>
+								<option value="50" >50</option>
+								<option value="70" >70</option>
+								<option value="100" >100</option>
+								<option value="120" >120</option>
+								<option value="150" >150</option>
+								<option value="180" >180</option>
+								<option value="200" >200</option>
+							</select>	
+							
+			</div>
 			
 			<div class="shape-options toolbox"  style="display:inline-block;">
 				<div class="vertical-line"></div>
@@ -699,6 +719,39 @@ $current_user=User::model()->findByPk(Yii::app()->user->id);
 <!-- popup content-->
 </div>	
 <!--  end add popup popup -->	
+<!--  add latex popup -->	
+<div class="popup" id="pop-latex-popup">
+<div class="popup-header">
+	<i class="icon-m-popup"></i>
+		Açılır Kutu Ekle
+	<i id="image-add-dummy-close-button" class="icon-close size-10" style="float:right; margin-right:10px; margin-top:5px;"></i>
+</div>
+<!-- popup content-->
+	<div class="gallery-inner-holder">
+		<textarea class="popup-text-area">Açılır kutunun içeriğini yazınız.
+		</textarea> </br>
+		<a href="#" class="btn btn-info" id="add-image" style="padding: 5px 30px;">Ekle</a>
+	</div>
+<!-- popup content-->
+</div>	
+<!--  end add popup popup -->	
+
+<!--  add textwrap popup -->	
+<div class="popup" id="pop-wrap-popup">
+<div class="popup-header">
+	<i class="icon-m-popup"></i>
+		Açılır Kutu Ekle
+	<i id="image-add-dummy-close-button" class="icon-close size-10" style="float:right; margin-right:10px; margin-top:5px;"></i>
+</div>
+<!-- popup content-->
+	<div class="gallery-inner-holder">
+		<textarea class="popup-text-area">Açılır kutunun içeriğini yazınız.
+		</textarea> </br>
+		<a href="#" class="btn btn-info" id="add-image" style="padding: 5px 30px;">Ekle</a>
+	</div>
+<!-- popup content-->
+</div>	
+<!--  end add popup popup -->	
 
 <!--  add popup popup -->	
 <div class="popup" id="pop-popup-popup">
@@ -847,6 +900,8 @@ $current_user=User::model()->findByPk(Yii::app()->user->id);
 			<li ctype="shape" class="component icon-m-shape">&nbsp;&nbsp;&nbsp;&nbsp;Şekil</li>
 			<li ctype="table" class="component icon-t-merge">&nbsp;&nbsp;&nbsp;&nbsp;Tablo</li>
 			<li ctype="html" class="component icon-t-merge">&nbsp;&nbsp;&nbsp;&nbsp;HTML</li>
+			<li ctype="latex" class="component icon-t-merge">&nbsp;&nbsp;&nbsp;&nbsp;Latex</li>
+			<li ctype="wrap" class="component icon-t-merge">&nbsp;&nbsp;&nbsp;&nbsp;Text Wrap</li>
 			
 			
 			<li class="left_bar_titles"></li>
@@ -1049,14 +1104,65 @@ $current_user=User::model()->findByPk(Yii::app()->user->id);
 				
 				
 				<script>
-				$('.pages').hover(
+				$(document).ready(function() {
+					var last_timeout;
+					$('.pages .page').hover(
+						function(){
+							console.log('hover started');
+							var timeout;
+							var page_thumb_item = $(this);
+
+							//$(this).find('.page-chapter-delete').hide();
+							timeout = setTimeout(function(){ 
+								page_thumb_item.find('.page-chapter-delete').show();
+								console.log('hover-timeout');
+								clearTimeout(timeout);
+							},1000);
+
+							setTimeout(function(){
+								clearTimeout(timeout);
+							},2000); 
+
+							last_timeout = timeout;
+							console.log('hover-out');
+							//setTimeout(function(){alert("OK");}, 3000);
+
+					},	
 					function(){
-						$(this).find('.page-chapter-delete').show();
-					},
-					function(){
-						 $(this).find('.page-chapter-delete').hide();
+						//clearTimeout(my_timer);
+						$(this).find('.page-chapter-delete').hide();
+						if (last_timeout) clearTimeout(last_timeout);
+
 					});
-				
+					$('.chapter-detail').hover(
+						function(){
+							console.log('hover started');
+							var timeout;
+							var page_thumb_item = $(this);
+
+							//$(this).find('.page-chapter-delete').hide();
+							timeout = setTimeout(function(){ 
+								page_thumb_item.find('.page-chapter-delete').eq(0).show();
+								console.log('hover-timeout');
+								clearTimeout(timeout);
+							},1000);
+
+							setTimeout(function(){
+								clearTimeout(timeout);
+							},2000); 
+
+							last_timeout = timeout;
+							console.log('hover-out');
+							//setTimeout(function(){alert("OK");}, 3000);
+
+					},	
+					function(){
+						//clearTimeout(my_timer);
+						$(this).find('.page-chapter-delete').hide();
+						if (last_timeout) clearTimeout(last_timeout);
+
+					});
+				});
 				</script>
 			  <div class="panel panel-default">
 				 <div class="panel-heading">
@@ -1077,11 +1183,12 @@ $current_user=User::model()->findByPk(Yii::app()->user->id);
 								$pagesOfChapter=Page::model()->findAll(array('order'=>  '`order` asc ,  created asc', "condition"=>'chapter_id=:chapter_id', "params" =>array(':chapter_id' => $chapter->chapter_id )) );
 										$chapter_page=0;
 										?>
-					<div class='chapter' chapter_id='<?php echo $chapter->chapter_id; ?>'>
+					<div class='chapter'  chapter_id='<?php echo $chapter->chapter_id; ?>'>
+					<div class="chapter-detail">
 					<input type="text" class="chapter-title" placeholder="chapter title" value="<?php echo $chapter->title; ?>">
 					
 					<a class="btn btn-danger  page-chapter-delete delete-chapter hidden-delete" style="float: right; margin-top: -23px;"><i class="icon-delete"></i></a> 
-					
+					</div>
 					<!-- <?php echo $chapter->title; ?>  chapter title--> 
 										<ul class="pages" >
 												<?php

@@ -164,6 +164,14 @@ $( document ).ready(function () {
             createHtmlComponent( event, ui  );
             break;
 
+          case 'wrap':
+            window.lindneo.dataservice.wrap_popup(event, ui);
+            break;
+
+          case 'latex':
+            window.lindneo.dataservice.latex_popup(event, ui);
+            break;
+
           default:
             break; 
         }
@@ -283,16 +291,23 @@ $( document ).ready(function () {
       }).done(function(page_data){
         
         var page_background = JSON.parse(page_data);
-        //console.log(page_background.result);
-
-        $('#current_page').css('background-image', 'url()');
-        $('#current_page').css('background-image', 'url("'+page_background.result+'")');
+        console.log(page_background.result);
+        if(page_background.result){
+                $('#current_page').css('background-image', 'url()');
+                $('#current_page').css('background-image', 'url("'+page_background.result+'")');
+        }
+        else{
+          console.log('bu ne');
+          $('#current_page').css('background-image', 'url()');
+          $('#current_page').css('background-color', 'white');
+        }
       });
       
 
     });
 
     $('.delete-page').click(function(){
+      var delete_buttons = $('<i class="icon-delete"></i><i class="icon-delete"></i>');
       var page_id=$(this).parent().attr('page_id');
 
       window.lindneo.tlingit.PageHasDeleted( page_id );

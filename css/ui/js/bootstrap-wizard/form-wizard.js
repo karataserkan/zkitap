@@ -50,7 +50,7 @@ var FormWizard = function () {
                     },
 
                     
-					
+
                     card_cvc: {
 						required: true,
                         digits: true,
@@ -88,9 +88,12 @@ var FormWizard = function () {
             
 
             
+            var data;
+            $(".siraliDisplay").hide();
             var formDisplay = function(){
                 $("p[data-display='contentTitle']").text($("[name='contentTitle']").val());
                 $("p[data-display='contentExplanation']").text($("[name='contentExplanation']").val());
+                
                 var currency;
                 var currencyCode= $("span.checked [name='contentCurrency']").val();
                 if (currencyCode=='949') {
@@ -134,11 +137,19 @@ var FormWizard = function () {
                 $("p[data-display='translator']").text($("[name='translator']").val());
                 $("p[data-display='issn']").text($("[name='issn']").val());
 
+                var siraliNo=$(".siraliCheckbox").val();
+
+                if (siraliNo!=0) {
+                    $(".siraliDisplay").show();
+                    $("p[data-display='categoriesSirali']").text(siraliNo);
+                    $("p[data-display='siraNo']").text($("[name='contentSiraliSiraNo']").val());
+                    $("p[data-display='ciltNo']").text($("[name='contentSiraliCiltNo']").val());
+                };
             };
 
             /*-----------------------------------------------------------------------------------*/
-			/*	Initialize Bootstrap Wizard
-			/*-----------------------------------------------------------------------------------*/
+            /*  Initialize Bootstrap Wizard
+            /*-----------------------------------------------------------------------------------*/
             $('#formWizard').bootstrapWizard({
                 'nextSelector': '.nextBtn',
                 'previousSelector': '.prevBtn',
@@ -224,6 +235,21 @@ var FormWizard = function () {
 
                         };
             });
+
+            $('#siraliSiraNo').hide();
+            $('#siraliCiltNo').hide();
+
+            $('.siraliCheckbox').click(function(){
+                if ($(".siraliCheckbox").val()!=0) {
+                    $('#siraliSiraNo').show();
+                    $('#siraliCiltNo').show();
+                }
+                else
+                {
+                    $('#siraliSiraNo').hide();
+                    $('#siraliCiltNo').hide();                    
+                }
+            });
             
             $('#detayRev').hide();
             var dr=0;
@@ -260,25 +286,55 @@ var FormWizard = function () {
             $('#formWizard').find('.prevBtn').hide();
             
             $('#formWizard .submitBtn').click(function () {
+                $('#formWizard').find('.submitBtn').hide();
                 
-                if ($("#rights").is(':checked')) {
+               if ($("#rights").is(':checked')) {
                     
-                    wizform.ajaxSubmit({
-                        url:'/editorActions/sendFileToCatalog/'+bookId,
-                        success:function(response) { 
-                            bootbox.alert("Kitap yayınlama başarılı.",function(){
-                                window.location.href = '/site/index';
-                            });
-                        },
-                        error:function() { 
-                            bootbox.alert("Beklenmedik bir hata oluştu. Lütfen tekrar deneyin.");
-                        },
+                msg = Messenger().post({
+                    message:"Eser yayınlanıyor. Lütfen Bekleyiniz",
+                    type:"info",
+                    showCloseButton: true,
+                });
+                wizform.ajaxSubmit({
+                    url:'/editorActions/sendFileToCatalog/'+bookId,
+                    success:function(response) {
+                        var budgetError = response.search('budgetError');
+                        console.log(budgetError);
+                        if (budgetError==(-1)) {
+                            msg.update({
+                                message: 'Eser yayınlama başarılı.',
+                                type: 'success'
+                            })
 
-                    });
-                    
+                        }else
+                        {
+                            msg.update({
+                                message: 'Hesabınızda yeterli bakiye bulunmamaktadır.',
+                                type: 'error'
+                            })
+                            
+                        }
+                        // bootbox.alert("Eser yayınlama başarılı.",function(){
+                        //     window.location.href = '/site/index';
+                        // });
+                    },
+                    error:function() { 
+                        msg.update({
+                            message: 'Beklenmedik bir hata oluştu. Lütfen tekrar deneyin.',
+                            type: 'error'
+                        })
+                        // bootbox.alert("Beklenmedik bir hata oluştu. Lütfen tekrar deneyin.");
+                    },
+
+                });
                 }else
                 {
-                    bootbox.alert("Kitap yayınlamadan önce Kullanıcı Sözleşmesini Kabul Ediyor olmanız gerekmektedir.");
+                    Messenger().post({
+                        message:"Eser yayınlamadan önce Kullanıcı Sözleşmesini Kabul Ediyor olmanız gerekmektedir.",
+                        type:"error",
+                        showCloseButton: true
+                    });
+                    //bootbox.alert("Eser yayınlamadan önce Kullanıcı Sözleşmesini Kabul Ediyor olmanız gerekmektedir.");
 
                 };
             }).hide();

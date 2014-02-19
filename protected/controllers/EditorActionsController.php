@@ -45,7 +45,7 @@ class EditorActionsController extends Controller
 		    'params'=>array(':organisation_id'=>$organisation->organisation_id),
 		));
 
-		$categories=BookCategories::model()->findAll();
+		$categories=BookCategories::model()->findAll('organisation_id=:organisation_id OR organisation_id=:none',array('organisation_id'=>$organisation->organisation_id, 'none'=>''));
 
 		$model=new PublishBookForm;
 
@@ -59,7 +59,6 @@ class EditorActionsController extends Controller
 		$model->contentPriceCurrencyCode="949";
 		$model->contentPrice="0";
 		$model->categories="1122";
-
 
 		$this->render('publishBook',array('model'=>$model,'hosts'=>$hosts,'categories'=>$categories,'bookId'=>$bookId));
 	}
@@ -707,6 +706,27 @@ right join book using (book_id) where book_id='$bookId' and type!='image';";
 		
 	}
 
+	public function getOrganisationBudget($id)
+	{
+		$budget = Yii::app()->db->createCommand("select transaction_type, transaction_organisation_id,  SUM(amount)  as amount 
+			from ( select transaction_type, transaction_organisation_id, transaction_currency_code, SUM(transaction_amount) as amount , SUM(transaction_amount_equvalent) as amount_equvalent  
+		from transactions 
+		where transaction_result = 0 and transaction_method = 'deposit'  
+		group by transaction_type, transaction_organisation_id  
+		Union select transaction_type, transaction_organisation_id, transaction_currency_code,  -1 * SUM(transaction_amount) as amount , -1 * SUM(transaction_amount_equvalent) as amount_equvalent  
+		from transactions where transaction_result = 0 and transaction_method = 'withdrawal'  group by transaction_type, transaction_organisation_id, transaction_currency_code ) as tables 
+		group by transaction_type, transaction_organisation_id")->queryAll();
+
+		foreach ($budget as $key => $tr) {
+			if ($tr['transaction_organisation_id']!=$id)
+				{
+					unset($budget[$key]);
+				}
+		}
+
+		return $budget;
+	}
+
 	public function SendFileToCatalog($bookId){
 
 		ob_start();
@@ -725,6 +745,15 @@ right join book using (book_id) where book_id='$bookId' and type!='image';";
 		
 
 		if (!empty($_POST)) {
+			$budget=$this->getOrganisationBudget($_POST['PublishBookForm']['organisationId']);
+			foreach ($budget as $key => $item) {
+				if ($item['transaction_type']==$_POST['contentType']) {
+					if ($item['amount']<=0) {
+						return "budgetError";
+					}
+				}
+			}
+
 			$data['organisationId']=$_POST['PublishBookForm']['organisationId'];
 			$data['organisationName']=$_POST['PublishBookForm']['organisationName'];
 			$data['created']=$_POST['PublishBookForm']['created'];
@@ -746,6 +775,18 @@ right join book using (book_id) where book_id='$bookId' and type!='image';";
 			$data['author']=$_POST['author'];
 			$data['translator']=$_POST['translator'];
 			$data['issn']=$_POST['issn'];
+			
+			if ($_POST['categoriesSirali']) {
+				$siraliCategory=BookCategories::model()->findByPk($_POST['categoriesSirali']);
+				$data['siraliCategoryName']=$siraliCategory->category_name;
+			}
+			else
+			{
+				$data['siraliCategoryName']=false;
+			}
+			$data['siraliCategory']=$_POST['categoriesSirali'];
+			$data['siraNo']=$_POST['contentSiraliSiraNo'];
+			$data['ciltNo']=$_POST['contentSiraliCiltNo'];
 			
 
 			$ebook->totalPageCount;
@@ -851,22 +892,25 @@ right join book using (book_id) where book_id='$bookId' and type!='image';";
 		$attr['transaction_user_id']=Yii::app()->user->id;
 		$attr['transaction_organisation_id']=$data['organisationId'];
 		$attr['transaction_start_date']=date('Y-n-d g:i:s',time());
-		$attr['transaction_type']='publishing';
 		$attr['transaction_method']='withdrawal';
-		$attr['transaction_amount']=0;
 		$attr['transaction_unit_price']=0;
 		$attr['transaction_amount_equvalent']=0;
 		$attr['transaction_currency_code']=0;
 		$attr['transaction_host_ip']=$hosting_client_IP;
 		$attr['transaction_host_id']=$hosting_client_id;
 		$attr['transaction_remote_ip']=$ip;
+		$attr['transaction_type']=$data['contentType'];
+
+		$success=0;
 
 		$transaction=new Transactions;
 		$transaction['attributes']=$attr;
+		$transaction->transaction_amount=0;
 		$transaction->transaction_id=functions::new_id();
 		if ($res_res->catalog===0) {
 			$transaction->transaction_result=0;
 			$transaction->transaction_explanation="Catalog Created";
+			$success++;
 		}
 		else
 		{
@@ -878,10 +922,12 @@ right join book using (book_id) where book_id='$bookId' and type!='image';";
 		
 		$transaction=new Transactions;
 		$transaction['attributes']=$attr;
+		$transaction->transaction_amount=0;
 		$transaction->transaction_id=functions::new_id();
 		if ($res_res->cc) {
 			$transaction->transaction_result=0;
 			$transaction->transaction_explanation="File Created";
+			$success++;
 		}
 		else
 		{
@@ -895,10 +941,12 @@ right join book using (book_id) where book_id='$bookId' and type!='image';";
 
 		$transaction=new Transactions;
 		$transaction['attributes']=$attr;
+		$transaction->transaction_amount=0;
 		$transaction->transaction_id=functions::new_id();
 		if ($res_res->shell_signal===0) {
 			$transaction->transaction_result=0;
 			$transaction->transaction_explanation="File Uploaded to Cloud";
+			$success++;
 		}
 		else
 		{
@@ -907,6 +955,16 @@ right join book using (book_id) where book_id='$bookId' and type!='image';";
 		}
 		$transaction->save();
 		unset($transaction);
+
+		if ($success==3) {
+			$transaction=new Transactions;
+			$transaction['attributes']=$attr;
+			$transaction->transaction_id=functions::new_id();
+			$transaction->transaction_result=0;
+			$transaction->transaction_explanation="File Published";
+			$transaction->transaction_amount=1;
+			$transaction->save();
+		}
 
 
 		return $Return;
@@ -923,8 +981,14 @@ right join book using (book_id) where book_id='$bookId' and type!='image';";
 		$response=false;
 
 		if($return=$this->SendFileToCatalog($bookId) ){
-			$response['sendFileInfo']=$return; 
-			$response['sendFile']=true;		
+			if ($return=="budgetError") {
+				$response="budgetError";
+			}
+			else
+			{
+				$response['sendFileInfo']=$return; 
+				$response['sendFile']=true;		
+			}
 		}else{
 			$response['sendFile']=false;
 		}	

@@ -33,6 +33,14 @@ window.lindneo.dataservice = (function( $ ) {
       createHtmlComponent( event, ui, component );
     };
 
+  var wrap_popup = function(event, ui, component){
+      createWrapComponent( event, ui, component );
+    };
+
+  var latex_popup = function(event, ui, component){
+      createLatexComponent( event, ui, component );
+    };
+
   var video_popup = function(event, ui, component){
       createVideoComponent( event, ui, component );
     };
@@ -326,6 +334,9 @@ window.lindneo.dataservice = (function( $ ) {
     popup_popup: popup_popup,
     graph_popup: graph_popup,
     quiz_popup: quiz_popup,
+    html_popup: html_popup,
+    wrap_popup: wrap_popup,
+    latex_popup: latex_popup,
     send: send
   };
 
