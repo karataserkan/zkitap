@@ -11,7 +11,8 @@ class epub3 {
 	public $nicename;
 	public $ebookFile ;
 	public $title='Canim Kitabim';
-
+	public $totalPageCount;
+	public $TOC_Titles;
 	public $errors=null;
 	public $book ;
 
@@ -278,6 +279,9 @@ class epub3 {
 			array('order'=>  '`order` asc ,  created asc', 
 				"condition"=>'book_id=:book_id', "params" => array(':book_id' => $this->book->book_id )
 				));
+
+		$this->totalPageCount=0;
+
 		foreach ($chapterModels as $key => $chapter) {
 
 			$chapter_page_counts=0;
@@ -316,6 +320,8 @@ class epub3 {
 					$new_chapter->pages[]=$new_page;
 
 					unset($new_page);
+					$this->totalPageCount++;
+
 					$chapter_page_counts++;
 				}
 
@@ -391,6 +397,7 @@ class epub3 {
 </html>';
 
 		foreach ($page->components as $component){
+			set_time_limit(100);
 			$component=(object)$component;
 			$component->html=new componentHTML($component,$this);
 			$components_html.=$component->html->html;
@@ -421,8 +428,8 @@ class epub3 {
 		<meta content="0c159d12-f5fe-4323-8194-f5c652b89f5c" name="dtb:uid"/>
 		<meta content="2" name="dtb:depth"/>
 		<meta content="calibre (0.8.68)" name="dtb:generator"/>
-		<meta content="0" name="dtb:totalPageCount"/>
-		<meta content="0" name="dtb:maxPageNumber"/>
+		<meta content="'.$this->totalPageCount.'" name="dtb:totalPageCount"/>
+		<meta content="'.$this->totalPageCount.'" name="dtb:maxPageNumber"/>
 	</head>
 	<docTitle>
 		<text>'.$this->book->title.'</text>
@@ -437,7 +444,7 @@ class epub3 {
 				$toc_items="";
 				$index_referance=0;
 				foreach ($this->toc as $key => $toc) {
-
+					$this->TOC_Titles[$toc->anchor]=$toc->title;
 					$toc_items.=
 '		<navPoint id="a'. ($index_referance+1) .'" playOrder="'. $index_referance .'">
 			<navLabel>
@@ -597,18 +604,20 @@ class epub3 {
 
 	}
 
-	public function zipfolder(){
+	public function zipfolder($encyrptFiles=true){
 		$zip = new ZipArchive;
 		
 
 		$this->ebookFile=$this->getNiceName('epub');
 
 		$zip->open($this->ebookFile, ZipArchive::CREATE);
-
-
-
-
 		$source = str_replace('\\', '/', realpath($this->get_tmp_file()));
+		
+		if ($encyrptFiles) Encryption::encryptFolder($source);
+
+
+
+
 
 	    if (is_dir($source) === true)
 	    {

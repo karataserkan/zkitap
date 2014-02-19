@@ -748,6 +748,9 @@ right join book using (book_id) where book_id='$bookId' and type!='image';";
 			$data['issn']=$_POST['issn'];
 			
 
+			$ebook->totalPageCount;
+			$ebook->TOC_Titles;
+
 
 			if (isset($_POST['host'])) {
 				$hosts=$_POST['host'];
