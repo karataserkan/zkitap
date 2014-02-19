@@ -776,6 +776,26 @@ right join book using (book_id) where book_id='$bookId' and type!='image';";
 			$data['author']=$_POST['author'];
 			$data['translator']=$_POST['translator'];
 			$data['issn']=$_POST['issn'];
+<<<<<<< HEAD
+=======
+			
+			if ($_POST['categoriesSirali']) {
+				$siraliCategory=BookCategories::model()->findByPk($_POST['categoriesSirali']);
+				$data['siraliCategoryName']=$siraliCategory->category_name;
+			}
+			else
+			{
+				$data['siraliCategoryName']=false;
+			}
+			$data['siraliCategory']=$_POST['categoriesSirali'];
+			$data['siraNo']=$_POST['contentSiraliSiraNo'];
+			$data['ciltNo']=$_POST['contentSiraliCiltNo'];
+			
+
+			$ebook->totalPageCount;
+			$ebook->TOC_Titles;
+
+>>>>>>> 7dee62063e27df24f53564b95dfde65e51a77810
 
 			if (isset($_POST['host'])) {
 				$hosts=$_POST['host'];
