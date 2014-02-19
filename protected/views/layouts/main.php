@@ -35,7 +35,10 @@
 		<link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/ui/js/hubspot-messenger/css/messenger.min.css" />
 		<link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/ui/js/hubspot-messenger/css/messenger-theme-future.min.css" />
 		<link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/ui/js/hubspot-messenger/css/messenger-spinner.min.css" />
-		
+		<!-- DATE PICKER -->
+		<link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/ui/js/datepicker/themes/default.min.css" />
+		<link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/ui/js/datepicker/themes/default.date.min.css" />
+		<link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/ui/js/datepicker/themes/default.time.min.css" />
 			
 		<!-- JAVASCRIPTS -->
 		<!-- Placed at the end of the document so the pages load faster -->
@@ -112,6 +115,10 @@
 		<script type="text/javascript" src="<?php echo Yii::app()->request->baseUrl; ?>/css/ui/js/hubspot-messenger/js/messenger.min.js"></script>
 		<script type="text/javascript" src="<?php echo Yii::app()->request->baseUrl; ?>/css/ui/js/hubspot-messenger/js/messenger-theme-flat.js"></script>
 		<script type="text/javascript" src="<?php echo Yii::app()->request->baseUrl; ?>/css/ui/js/hubspot-messenger/js/messenger-theme-future.js"></script>
+		<!-- DATE PICKER -->
+		<script type="text/javascript" src="<?php echo Yii::app()->request->baseUrl; ?>/css/ui/js/datepicker/picker.js"></script>
+		<script type="text/javascript" src="<?php echo Yii::app()->request->baseUrl; ?>/css/ui/js/datepicker/picker.date.js"></script>
+		<script type="text/javascript" src="<?php echo Yii::app()->request->baseUrl; ?>/css/ui/js/datepicker/picker.time.js"></script>
 </head>
 
 <body class="editor_blue">
