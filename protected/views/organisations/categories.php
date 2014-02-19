@@ -17,7 +17,7 @@ foreach ($modalCategories as $key => $modal) {?>
 		<div class="modal-content">
 			<div class="modal-header">
 			  <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-			  <h4 class="modal-title"><?php _e('Süreli yayın kategorisi düzenle'); ?></h4>
+			  <h4 class="modal-title"><?php _e('Yayın kategorisi düzenle'); ?></h4>
 			</div>
 			<div class="modal-body">
 				<form action="/organisations/updateBookCategory" method="post">
@@ -45,7 +45,7 @@ foreach ($modalCategories as $key => $modal) {?>
 		<div class="modal-content">
 			<div class="modal-header">
 			  <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-			  <h4 class="modal-title"><?php _e('Süreli yayın kategorisi ekle'); ?></h4>
+			  <h4 class="modal-title"><?php _e('Yayın kategorisi ekle'); ?></h4>
 			</div>
 			<div class="modal-body">
 				<form action="/organisations/createBookCategory" method="post">
@@ -54,6 +54,13 @@ foreach ($modalCategories as $key => $modal) {?>
 						<div class="col-md-6">
 							<input class="form-control" name="category" id="category" type="text">
 							<input class="form-control" name="organisation" id="organisation" type="text" value="<?php echo $organisationId; ?>" style="display:none">
+						</div>
+					</div>
+					<br><br>
+					<div class="form-group">
+						<label for="category" class="control-label col-md-2"><?php _e("süreli"); ?></label>
+						<div class="col-md-6">
+							<input class="uniform" id="periodical" type="checkbox" name="periodical">
 						</div>
 					</div>
 					<div class="form-group">

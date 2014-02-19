@@ -64,6 +64,7 @@ class OrganisationsController extends Controller
 			$category->category_id=functions::new_id(10);
 			$category->category_name=$_POST['category'];
 			$category->organisation_id=$_POST['organisation'];
+			$category->periodical=($_POST['periodical']) ? 1 : 0 ;
 			$category->save();
 		}
 

@@ -128,6 +128,16 @@
 													   </div>
 													</div>
 
+													<div class="form-group">
+														<label class="control-label col-md-3"><?php _e('Eser Yayınlama Tarihi'); ?><span class="required">*</span></label>
+														<div class="col-md-4">
+															<div class="col-md-8">
+																<input type="text" name="date" class="form-control datepicker-fullscreen">
+															</div>
+														  <span class="error-span"></span>
+													   </div>
+													</div>
+
 													<div id="detailed">
 													<div class="form-group">
 														<label for="" class="control-label col-md-3"><?php _e('Özet'); ?></label>
@@ -191,9 +201,9 @@
 												<div class="tab-pane active" id="category">
 													
 													<?php
-													$categorySiraliIds[0]=__('Lütfen Seçiniz');
+												if ($categories) {
 													foreach ($categories as $key => $category) {
-														if ($category->organisation_id) {
+														if ($category->periodical) {
 															$categorySiraliIds[$category->category_id]=$category->category_name;
 														}
 														else
@@ -208,11 +218,11 @@
 														<?php _e("Kategoriler"); ?>
 														</label>
 														<div class="col-md-9">
-														<?php echo $form->checkBoxList($model,'categories',$categoryIds,array('class'=>'uniform','name'=>'categories')); ?>
-														<br>
-														<b><?php _e('Süreli Yayın');?>:</b>
-														<br>
-														<?php echo $form->dropDownList($model,'categories',$categorySiraliIds,array('class'=>'uniform siraliCheckbox','name'=>'categoriesSirali')); ?>
+															<?php echo $form->checkBoxList($model,'categories',$categoryIds,array('class'=>'uniform','name'=>'categories')); ?>
+														<?php if (!empty($categorySiraliIds)&&$categorySiraliIds) { ?>	
+															<br>
+															<?php echo $form->checkBoxList($model,'categories',$categorySiraliIds,array('class'=>'uniform siraliCheckbox','name'=>'categoriesSirali')); ?>
+														<?php }?>
 														</div>
 													</div>
 													
@@ -232,7 +242,12 @@
 															<input class="form-control" name="contentSiraliCiltNo" id="contentSiraliCiltNo" type="text">
 														</div>
 													</div>
-													
+												<!-- end if -->
+												<?php }
+												else
+												{ ?>
+												<p><?php _e("Eser kategorisi bulunamadı. Eser yayınlamadan önce lütfen bir kategori oluşturunuz ve seçiniz."); ?></p>
+												<?php } ?>	
 												</div>
 												<div class="tab-pane" id="money">
 
@@ -386,6 +401,12 @@
 														   <label class="control-label col-md-3"><?php _e('Reader Group'); ?>:</label>
 														   <div class="col-md-4">
 															  <p class="form-control-static" data-display="contentReaderGroup"></p>
+														   </div>
+														</div>
+														<div class="form-group">
+														   <label class="control-label col-md-3"><?php _e('Yayın Tarihi'); ?>:</label>
+														   <div class="col-md-4">
+															  <p class="form-control-static" data-display="date"></p>
 														   </div>
 														</div>
 														<div class="form-group">
