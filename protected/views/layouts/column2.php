@@ -148,6 +148,11 @@
 								<?php _e('Sunucu'); ?>
 								</a>
 							</li>
+							<li>
+								<a href="/organisations/bookCategories/<?php echo $organisation["organisation_id"]; ?>">
+								<?php _e('Yayın Kategorileri'); ?>
+								</a>
+							</li>
 						</ul>
 						
 						
