@@ -7,6 +7,7 @@
  * @property string $category_id
  * @property string $category_name
  * @property string $organisation_id
+ * @property integer $periodical
  */
 class BookCategories extends CActiveRecord
 {
@@ -37,12 +38,13 @@ class BookCategories extends CActiveRecord
 		// will receive user inputs.
 		return array(
 			array('category_id, category_name', 'required'),
+			array('periodical', 'numerical', 'integerOnly'=>true),
 			array('category_id', 'length', 'max'=>10),
 			array('category_name', 'length', 'max'=>100),
 			array('organisation_id', 'length', 'max'=>44),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('category_id, category_name, organisation_id', 'safe', 'on'=>'search'),
+			array('category_id, category_name, organisation_id, periodical', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -66,6 +68,7 @@ class BookCategories extends CActiveRecord
 			'category_id' => 'Category',
 			'category_name' => 'Category Name',
 			'organisation_id' => 'Organisation',
+			'periodical' => 'Periodical',
 		);
 	}
 
@@ -83,6 +86,7 @@ class BookCategories extends CActiveRecord
 		$criteria->compare('category_id',$this->category_id,true);
 		$criteria->compare('category_name',$this->category_name,true);
 		$criteria->compare('organisation_id',$this->organisation_id,true);
+		$criteria->compare('periodical',$this->periodical);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
