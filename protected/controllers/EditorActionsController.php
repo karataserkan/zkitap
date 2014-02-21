@@ -733,7 +733,7 @@ right join book using (book_id) where book_id='$bookId' and type!='image';";
 		$book=Book::model()->findByPk($bookId);
 		$bookData=json_decode($book->data,true);
 
-		$ebook=new epub3($book);
+		$ebook=new epub3($book,null,true);
 
 
 		if (!file_exists($ebook->ebookFile)) {
@@ -777,8 +777,8 @@ right join book using (book_id) where book_id='$bookId' and type!='image';";
 			$data['translator']=$_POST['translator'];
 			$data['issn']=$_POST['issn'];
 
-			$ebook->totalPageCount;
-			$ebook->TOC_Titles;
+			$data['totalPage']=$ebook->totalPageCount;
+			$data['toc']=json_encode($ebook->TOC_Titles);
 
 			if (isset($_POST['host'])) {
 				$hosts=$_POST['host'];

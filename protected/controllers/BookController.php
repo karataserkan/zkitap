@@ -60,7 +60,6 @@ class BookController extends Controller
 		));
 	}
 
-
 	/**
 	 * Selection of book type.
 	 * @param $bookType 'epub' || 'pdf'
@@ -402,7 +401,7 @@ class BookController extends Controller
 			$bookId=functions::new_id();
 			$book->book_id=$bookId;
 			$book->workspace_id=$workspaceId;
-			$book->title=$layout->title." Copy";
+			$book->title="Copy of ".$layout->title;
 			$book->author=$layout->author;
 			$book->created=date("Y-m-d H:i:s");
 			$book->data=$layout->data;
