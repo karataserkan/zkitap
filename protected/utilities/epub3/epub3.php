@@ -896,7 +896,7 @@ class epub3 {
 		return $this->sanitized_filename;
 	}
 
-	public function __construct($book_model=null, $download=true){ 
+	public function __construct($book_model=null, $download=true, $encyrptFiles=false){ 
 		
 		$this->book=$book_model;
 		$this->uuid=functions::uuid();
@@ -983,7 +983,7 @@ class epub3 {
 		}
 
 		//Create Zip.
-		if( ! $this->zipfolder()  ) {
+		if( ! $this->zipfolder($encyrptFiles)  ) {
 			$this->errors[]=new error('Epub3-Construction','Problem with Zip');
 			return false;
 		}
