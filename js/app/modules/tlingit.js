@@ -361,6 +361,7 @@ window.lindneo.tlingit = (function(window, $, undefined){
   };
 
   var ChapterUpdated = function (chapterId, title, order){
+    console.log(chapterId);
     window.lindneo.dataservice
     .send( 'UpdateChapter', 
       { 
