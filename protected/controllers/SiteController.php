@@ -69,6 +69,24 @@ class SiteController extends Controller
 	{
 		if(Yii::app()->user->isGuest)
 			$this->redirect( array('site/login' ) );
+		
+		$detectSQLinjection=new detectSQLinjection($userId);
+		if (!$detectSQLinjection->ok()) {
+			error_log("detectSQLinjection SC:R:".$Yii::app()->user->id." userId: ".$userId);
+			$this->redirect('index');	
+		}
+
+		$detectSQLinjection=new detectSQLinjection($bookId);
+		if (!$detectSQLinjection->ok()) {
+			error_log("detectSQLinjection SC:R:".$Yii::app()->user->id." bookId: ".$bookId);
+			$this->redirect('index');	
+		}
+
+		$detectSQLinjection=new detectSQLinjection($type);
+		if (!$detectSQLinjection->ok()) {
+			error_log("detectSQLinjection SC:R:".$Yii::app()->user->id." bookId: ".$type);
+			$this->redirect('index');	
+		}
 
 		$hasRight=Yii::app()->db
 		    ->createCommand("SELECT * FROM book_users WHERE user_id=:user_id AND book_id=:book_id")
@@ -268,6 +286,12 @@ class SiteController extends Controller
 		$passResetError="";
 		if (isset($_GET['Reset'])) {
 			$email=$_GET['Reset']['email'];
+
+		$detectSQLinjection=new detectSQLinjection($email);
+		if (!$detectSQLinjection->ok()) {
+			error_log("detectSQLinjection SC:L:".$Yii::app()->user->id." email: ".$email);
+			$this->redirect('index');	
+		}
 			$user= User::model()->findAll('email=:email', 
 	    				array(':email' => $email) );
 			if (!empty($user)) {
@@ -329,6 +353,25 @@ class SiteController extends Controller
 			$meta->created=time();
 			$meta->save();
 			
+			$detectSQLinjection=new detectSQLinjection($attributes['name']);
+			if (!$detectSQLinjection->ok()) {
+				error_log("detectSQLinjection SC:L:".$Yii::app()->user->id." attributes['name']: ".$attributes['name']);
+				$this->redirect('index');	
+			}
+
+			$detectSQLinjection=new detectSQLinjection($attributes['surname']);
+			if (!$detectSQLinjection->ok()) {
+				error_log("detectSQLinjection SC:L:".$Yii::app()->user->id." attributes['surname']: ".$attributes['surname']);
+				$this->redirect('index');	
+			}
+
+			$detectSQLinjection=new detectSQLinjection($attributes['email']);
+			if (!$detectSQLinjection->ok()) {
+				error_log("detectSQLinjection SC:L:".$Yii::app()->user->id." attributes['email']: ".$attributes['email']);
+				$this->redirect('index');	
+			}
+
+
 			$newUser->name=$attributes['name'];
 			$newUser->surname=$attributes['surname'];
 			$newUser->email=$attributes['email'];
