@@ -397,8 +397,8 @@ msgstr  "Keywords"
 #: protected/controllers/BookController.php:256
 #: protected/controllers/BookController.php:271
 #: protected/controllers/BookController.php:262
-#: protected/controllers/BookController.php:195
-#: protected/controllers/BookController.php:262
+#: protected/controllers/BookController.php:194
+#: protected/controllers/BookController.php:261
 msgid   "Bölüm"
 msgstr  "Chapter"
 
