@@ -171,7 +171,7 @@ $all_books= $this->getWorkspaceBooks($workspace->workspace_id);
 			  <div class="hidden-xs">
 				  <a href="#" class="btn btn-default" data-filter="*"><?php _e("Hepsi"); ?></a>
 <?php 
-$buttons=array('info','primary','success', 'warning', 'error', 'inverse');
+$buttons=array('info','primary','success', 'warning', 'danger', 'inverse', 'primary', 'success', 'warning', 'danger', 'inverse');
 $workspaces= $this->getUserWorkspaces();
 foreach ($workspaces as $key => $workspace) { ?>
 		<a href="#" class="btn btn-<?php echo $buttons[$key]; ?>" data-filter=".<?php echo $workspace['workspace_id']; ?>"><?php echo $workspace['workspace_name']; ?></a>		  

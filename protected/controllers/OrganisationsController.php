@@ -32,7 +32,7 @@ class OrganisationsController extends Controller
 				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
-				'actions'=>array('create','update','workspaces','delWorkspaceUser','addWorkspaceUser','users','addUser','deleteOrganisationUser','account'),
+				'actions'=>array('create','update','workspaces','delWorkspaceUser','addWorkspaceUser','users','addUser','deleteOrganisationUser','account','bookCategories','deleteCategory','createBookCategory','updateBookCategory'),
 				'users'=>array('@'),
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
@@ -56,6 +56,50 @@ class OrganisationsController extends Controller
 		));
 	}
 
+	public function actionCreateBookCategory()
+	{
+		if(isset($_POST['category'])&&isset($_POST['organisation']))
+		{
+			$category=new BookCategories;
+			$category->category_id=functions::new_id(10);
+			$category->category_name=$_POST['category'];
+			$category->organisation_id=$_POST['organisation'];
+			$category->periodical=($_POST['periodical']) ? 1 : 0 ;
+			$category->save();
+		}
+
+		$this->redirect(array('bookCategories','id'=>$_POST['organisation']));
+	}
+
+	public function actionUpdateBookCategory()
+	{
+		if(isset($_POST['categoryId'])&& isset($_POST['categoryName'])&&isset($_POST['organisation']))
+		{
+			$category=BookCategories::model()->findByPk($_POST['categoryId']);
+			$category->category_name=$_POST['categoryName'];
+			$category->save();
+		}
+
+		$this->redirect(array('bookCategories','id'=>$_POST['organisation']));
+	}
+
+	public function actionBookCategories($id=0)
+	{
+		$categories=false;
+		if ($id) {
+			$categories=BookCategories::model()->findAll('organisation_id=:organisation_id',array('organisation_id'=>$id));
+		}
+		$this->render('categories',array(
+			'categories'=>$categories,
+			'organisationId'=>$id
+		));
+	}
+
+	public function actionDeleteCategory($category_id,$organisationId)
+	{
+		$category=BookCategories::model()->findByPk($category_id)->delete();
+		$this->redirect(array('bookCategories','id'=>$organisationId));
+	}
 
 	public function actionAccount($id)
 	{

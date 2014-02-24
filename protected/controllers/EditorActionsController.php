@@ -45,7 +45,7 @@ class EditorActionsController extends Controller
 		    'params'=>array(':organisation_id'=>$organisation->organisation_id),
 		));
 
-		$categories=BookCategories::model()->findAll();
+		$categories=BookCategories::model()->findAll('organisation_id=:organisation_id',array('organisation_id'=>$organisation->organisation_id));
 
 		$model=new PublishBookForm;
 
@@ -733,7 +733,7 @@ right join book using (book_id) where book_id='$bookId' and type!='image';";
 		$book=Book::model()->findByPk($bookId);
 		$bookData=json_decode($book->data,true);
 
-		$ebook=new epub3($book);
+		$ebook=new epub3($book,null,true);
 
 
 		if (!file_exists($ebook->ebookFile)) {
@@ -763,6 +763,7 @@ right join book using (book_id) where book_id='$bookId' and type!='image';";
 			$data['contentIsForSale']=$_POST['contentIsForSale'];
 			$data['contentCurrencyCode']=$_POST['contentCurrency'];
 			$data['contentPrice']=$_POST['contentPrice'];
+			$data['date']=$_POST['date'];
 			$data['contentReaderGroup']=$_POST['contentReaderGroup'];
 			//$data['contentCover']=$bookData['cover'];
 			$data['contentThumbnail']=$bookData['thumbnail'];
@@ -775,8 +776,9 @@ right join book using (book_id) where book_id='$bookId' and type!='image';";
 			$data['author']=$_POST['author'];
 			$data['translator']=$_POST['translator'];
 			$data['issn']=$_POST['issn'];
-			
 
+			$data['totalPage']=$ebook->totalPageCount;
+			$data['toc']=json_encode($ebook->TOC_Titles);
 
 			if (isset($_POST['host'])) {
 				$hosts=$_POST['host'];
@@ -806,7 +808,21 @@ right join book using (book_id) where book_id='$bookId' and type!='image';";
 				$hosting_client_id=$host->hosting_client_id;
 			}
 
-			if (isset($_POST['categories'])) {
+
+			if ($_POST['categoriesSirali']) {
+				$categories=$_POST['categoriesSirali'];
+				foreach ($categories as $key => $categoryId) {
+					$siraliCategory=BookCategories::model()->findByPk($categoryId);
+					$data['siraliCategory'][$categoryId]['category_id']=$siraliCategory->category_id;
+					$data['siraliCategory'][$categoryId]['category_name']=$siraliCategory->category_name;
+				}
+			}
+			$data['siraNo']=$_POST['contentSiraliSiraNo'];
+			$data['ciltNo']=$_POST['contentSiraliCiltNo'];
+
+
+
+			if (isset($_POST['categories'])&& !empty($_POST['categories'])) {
 				$categories=$_POST['categories'];
 				foreach ($categories as $key => $categoryId) {
 					$category=BookCategories::model()->findByPk($categoryId);
@@ -832,6 +848,7 @@ right join book using (book_id) where book_id='$bookId' and type!='image';";
 
 		$data['hosts']=json_encode($data['hosts']);
 		$data['categories']=json_encode($data['categories']);
+		$data['siraliCategory']=json_encode($data['siraliCategory']);
 		$localFile = $ebook->ebookFile; // This is the entire file that was uploaded to a temp location.
 		$fp = fopen($localFile, 'r');
 

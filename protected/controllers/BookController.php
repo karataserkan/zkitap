@@ -60,7 +60,6 @@ class BookController extends Controller
 		));
 	}
 
-
 	/**
 	 * Selection of book type.
 	 * @param $bookType 'epub' || 'pdf'
@@ -97,7 +96,6 @@ class BookController extends Controller
 		if(isset($_POST['Book']))
 		{
 			$model->attributes=$_POST['Book'];
-
 			//$model->pdf_file=CUploadedFile::getInstance($model,'pdf_file');
 			//print($model->pdf_file);die();
 			if($model->save())
@@ -402,7 +400,7 @@ class BookController extends Controller
 			$bookId=functions::new_id();
 			$book->book_id=$bookId;
 			$book->workspace_id=$workspaceId;
-			$book->title=$layout->title." Copy";
+			$book->title="Copy of ".$layout->title;
 			$book->author=$layout->author;
 			$book->created=date("Y-m-d H:i:s");
 			$book->data=$layout->data;
@@ -514,6 +512,18 @@ class BookController extends Controller
 			$page=$id2;
 		}
 		
+		$detectSQLinjection=new detectSQLinjection($page);
+		if (!$detectSQLinjection->ok()) {
+			error_log("detectSQLinjection BC:A: ".$Yii::app()->user->id." page: ".$page);
+			$this->redirect('index');	
+		}
+
+		$detectSQLinjection=new detectSQLinjection($bookId);
+		if (!$detectSQLinjection->ok()) {
+			error_log("detectSQLinjection BC:A:".$Yii::app()->user->id." bookId: ".$bookId);
+			$this->redirect('index');	
+		}
+
 		Yii::app()->db
 		    ->createCommand("DELETE FROM user_meta WHERE user_id=:user_id AND meta_value=:meta_value AND meta_key=:meta_key")
 		    ->bindValues(array(':user_id' => Yii::app()->user->id, ':meta_value' => $bookId,':meta_key'=>'lastEditedBook'))

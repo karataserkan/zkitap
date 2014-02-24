@@ -87,8 +87,9 @@ var FormWizard = function () {
             });
             
 
-            
             var data;
+            $(".datepicker-fullscreen").pickadate({format:'dd/mm/yyyy'});
+            $(".siraliDisplay").hide();
             var formDisplay = function(){
                 $("p[data-display='contentTitle']").text($("[name='contentTitle']").val());
                 $("p[data-display='contentExplanation']").text($("[name='contentExplanation']").val());
@@ -117,26 +118,41 @@ var FormWizard = function () {
                 hostText +=$("label[for='"+$("span.checked [name='host[]']")[i].id+"']").html()+'<br>';
                 };
 
+                var categoriess2=$("span.checked [name='categoriesSirali[]']");
+                var categoriesText2= '';
+                $(".siraliDisplay").show();
+                for (var i = 0; i < categoriess2.length; i++) {
+                categoriesText2 +=$("label[for='"+$("span.checked [name='categoriesSirali[]']")[i].id+"']").html()+'<br>';
+                };
+
                 var categoriess=$("span.checked [name='categories[]']");
                 var categoriesText= '';
                 for (var i = 0; i < categoriess.length; i++) {
                 categoriesText +=$("label[for='"+$("span.checked [name='categories[]']")[i].id+"']").html()+'<br>';
                 };
 
-
                 $("p[data-display='host']").html(hostText);
                 $("p[data-display='categories']").html(categoriesText);
+                $("p[data-display='categoriesSirali']").html(categoriesText2);
 
                 //
                 $("p[data-display='language']").text($("span.checked [name='language']").val());
                 $("p[data-display='abstract']").text($("[name='abstract']").val());
                 $("p[data-display='subject']").text($("[name='subject']").val());
                 $("p[data-display='edition']").text($("[name='edition']").val());
+                $("p[data-display='date']").text($("[name='date']").val());
                 $("p[data-display='author']").text($("[name='author']").val());
                 $("p[data-display='translator']").text($("[name='translator']").val());
                 $("p[data-display='issn']").text($("[name='issn']").val());
 
+                //var siraliNo=$(".siraliCheckbox").val();
 
+                // if (siraliNo!=0) {
+                //     $(".siraliDisplay").show();
+                //     $("p[data-display='categoriesSirali']").text(siraliNo);
+                // };
+                    $("p[data-display='siraNo']").text($("[name='contentSiraliSiraNo']").val());
+                    $("p[data-display='ciltNo']").text($("[name='contentSiraliCiltNo']").val());
             };
 
             /*-----------------------------------------------------------------------------------*/
@@ -226,6 +242,20 @@ var FormWizard = function () {
                             $("[name='contentCurrency']").parent().parent().show();
 
                         };
+            });
+
+            $('#siraliSiraNo').hide();
+            $('#siraliCiltNo').hide();
+            $('.siraliCheckbox').click(function(){
+                if ($(".siraliCheckbox").is(':checked')) {
+                    $('#siraliSiraNo').show();
+                    $('#siraliCiltNo').show();
+                }
+                else
+                {
+                    $('#siraliSiraNo').hide();
+                    $('#siraliCiltNo').hide();                    
+                }
             });
             
             $('#detayRev').hide();

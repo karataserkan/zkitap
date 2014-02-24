@@ -128,6 +128,16 @@
 													   </div>
 													</div>
 
+													<div class="form-group">
+														<label class="control-label col-md-3"><?php _e('Eser Yayınlama Tarihi'); ?><span class="required">*</span></label>
+														<div class="col-md-4">
+															<div class="col-md-8">
+																<input type="text" name="date" class="form-control datepicker-fullscreen">
+															</div>
+														  <span class="error-span"></span>
+													   </div>
+													</div>
+
 													<div id="detailed">
 													<div class="form-group">
 														<label for="" class="control-label col-md-3"><?php _e('Özet'); ?></label>
@@ -191,8 +201,15 @@
 												<div class="tab-pane active" id="category">
 													
 													<?php
+												if ($categories) {
 													foreach ($categories as $key => $category) {
-														$categoryIds[$category->category_id]=$category->category_name;
+														if ($category->periodical) {
+															$categorySiraliIds[$category->category_id]=$category->category_name;
+														}
+														else
+														{
+															$categoryIds[$category->category_id]=$category->category_name;
+														}
 													}
 													?>
 
@@ -201,9 +218,36 @@
 														<?php _e("Kategoriler"); ?>
 														</label>
 														<div class="col-md-9">
-														<?php echo $form->checkBoxList($model,'categories',$categoryIds,array('class'=>'uniform','name'=>'categories')); ?>
+															<?php echo $form->checkBoxList($model,'categories',$categoryIds,array('class'=>'uniform','name'=>'categories')); ?>
+														<?php if (!empty($categorySiraliIds)&&$categorySiraliIds) { ?>	
+															<br>
+															<?php echo $form->checkBoxList($model,'categories',$categorySiraliIds,array('class'=>'uniform siraliCheckbox','name'=>'categoriesSirali')); ?>
+														<?php }?>
 														</div>
 													</div>
+													
+													<div class="form-group" id="siraliSiraNo">
+														<label  class="col-md-3 control-label">
+														<?php _e("Sıra No"); ?>
+														</label>
+														<div class="col-md-4">
+															<input class="form-control" name="contentSiraliSiraNo" id="contentSiraliSiraNo" type="text">
+														</div>
+													</div>
+													<div class="form-group" id="siraliCiltNo">
+														<label  class="col-md-3 control-label">
+														<?php _e("Cilt No"); ?>
+														</label>
+														<div class="col-md-4">
+															<input class="form-control" name="contentSiraliCiltNo" id="contentSiraliCiltNo" type="text">
+														</div>
+													</div>
+												<!-- end if -->
+												<?php }
+												else
+												{ ?>
+												<p><?php _e("Eser kategorisi bulunamadı. Eser yayınlamadan önce lütfen bir kategori oluşturunuz ve seçiniz."); ?></p>
+												<?php } ?>	
 												</div>
 												<div class="tab-pane" id="money">
 
@@ -275,6 +319,7 @@
 															  <p class="form-control-static" data-display="translator"></p>
 														   </div>
 														</div>
+
 														
 														<div class="form-group">
 														   <label class="control-label col-md-3"><?php _e('ISSN/ISBN') ?>:</label>
@@ -282,6 +327,30 @@
 															  <p class="form-control-static" data-display="issn"></p>
 														   </div>
 														</div>
+
+														<div class="siraliDisplay">
+														<div class="form-group">
+														   <label class="control-label col-md-3"><?php _e('Süreli Yayın') ?>:</label>
+														   <div class="col-md-4">
+															  <p class="form-control-static" data-display="categoriesSirali"></p>
+														   </div>
+														</div>
+														
+														<div class="form-group">
+														   <label class="control-label col-md-3"><?php _e('Sıra No'); ?>:</label>
+														   <div class="col-md-4">
+															  <p class="form-control-static" data-display="siraNo"></p>
+														   </div>
+														</div>
+														
+														<div class="form-group">
+														   <label class="control-label col-md-3"><?php _e('Cilt No') ?>:</label>
+														   <div class="col-md-4">
+															  <p class="form-control-static" data-display="ciltNo"></p>
+														   </div>
+														</div>
+													</div>
+
 													</div>
 													<h3 class="block">Yayınlama Özeti</h3>
 													<div class="well">
@@ -332,6 +401,12 @@
 														   <label class="control-label col-md-3"><?php _e('Reader Group'); ?>:</label>
 														   <div class="col-md-4">
 															  <p class="form-control-static" data-display="contentReaderGroup"></p>
+														   </div>
+														</div>
+														<div class="form-group">
+														   <label class="control-label col-md-3"><?php _e('Yayın Tarihi'); ?>:</label>
+														   <div class="col-md-4">
+															  <p class="form-control-static" data-display="date"></p>
 														   </div>
 														</div>
 														<div class="form-group">

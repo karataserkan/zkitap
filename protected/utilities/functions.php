@@ -9,6 +9,16 @@ class functions {
         return $text;
     }
 
+    public static function lang_code(){
+        $locale=Yii::app()->language;
+        $res=explode('_',$locale);
+        if ($res[0]) return $res[0];
+        return $locale ;
+    }
+
+    public static function _lang_code(){
+        echo functions::lang_code();
+    }
 
     public static function save_base64_file($file_content,$filename,$folder,$extension=null){
          $parts=explode(',',$file_content);
