@@ -36,7 +36,7 @@ class BookController extends Controller
 				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
-				'actions'=>array('create','update','selectTemplate','delete','view','author','newBook','selectData','uploadFile','duplicateBook','updateThumbnail','updateCover'),
+				'actions'=>array('create','update','selectTemplate','delete','view','author','newBook','selectData','uploadFile','duplicateBook','updateThumbnail','updateCover',"copyBook"),
 				'users'=>array('@'),
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
@@ -387,9 +387,18 @@ class BookController extends Controller
 	}
 
 
+	public function actionCopyBook($bookId,$workspaceId,$title=null)
+	{
+		if ($bookId & $workspaceId) {
+			$newId=$this->duplicateBook($bookId,$workspaceId,$title);
+			if ($newId) {
+				$this->redirect(array('author','bookId'=>$newId));
+			}
+		}
+		$this->redirect("site/index");
+	}
 
-
-	public function actionDuplicateBook($layout_id, $workspaceId=null){ 
+	public function duplicateBook($layout_id, $workspaceId=null,$title=null){ 
 
 
 			$layout=Book::model()->findByPk($layout_id);
@@ -401,6 +410,9 @@ class BookController extends Controller
 			$book->book_id=$bookId;
 			$book->workspace_id=$workspaceId;
 			$book->title="Copy of ".$layout->title;
+			if ($title) {
+				$book->title=$title;
+			}
 			$book->author=$layout->author;
 			$book->created=date("Y-m-d H:i:s");
 			$book->data=$layout->data;
@@ -408,6 +420,23 @@ class BookController extends Controller
 			$book->setData('template_id',$layout_id);
 
 			$book->save();
+			$userId=Yii::app()->user->id;
+			$addUser = Yii::app()->db->createCommand();
+			$type="owner";
+			if($addUser->insert('book_users', array(
+			    'user_id'=>$userId,
+			    'book_id'=>$bookId,
+			    'type'   =>$type
+			)))
+			{
+				$msg="SITE:RIGHT:0:". json_encode(array(array('user'=>Yii::app()->user->id),array('userId'=>$userId,'bookId'=>$bookId,'type'=>$type)));
+				Yii::log($msg,'info');
+			}
+			else
+			{
+				$msg="SITE:RIGHT:1:". json_encode(array(array('user'=>Yii::app()->user->id),array('userId'=>$userId,'bookId'=>$bookId,'type'=>$type)));
+				Yii::log($msg,'info');
+			}
 				
 			$chapters= Chapter::model()->findAll(array(
 				'condition' => 'book_id=:book_id',
