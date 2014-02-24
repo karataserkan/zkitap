@@ -308,11 +308,7 @@ $( document ).ready(function () {
 
     $('.delete-page').click(function(){
       var delete_buttons = $('<i class="icon-delete"></i><i class="icon-delete"></i>');
-      
-      /*$(this).remove();
-      $(".page-chapter-delete_control").show();
-      control_buttons.appendTo($(this).parent());
-      return;*/
+
       var page_id=$(this).parent().attr('page_id');
 
       window.lindneo.tlingit.PageHasDeleted( page_id );
