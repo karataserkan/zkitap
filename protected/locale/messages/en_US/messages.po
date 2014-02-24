@@ -399,6 +399,8 @@ msgstr  "Keywords"
 #: protected/controllers/BookController.php:262
 #: protected/controllers/BookController.php:194
 #: protected/controllers/BookController.php:261
+#: protected/controllers/BookController.php:193
+#: protected/controllers/BookController.php:260
 msgid   "Bölüm"
 msgstr  "Chapter"
 
@@ -458,7 +460,7 @@ msgstr  "Login"
 #: protected/controllers/SiteController.php:295
 #: protected/controllers/SiteController.php:306
 #: protected/controllers/SiteController.php:298
-#: protected/controllers/SiteController.php:298
+#: protected/controllers/SiteController.php:322
 msgid   "Girilen email adresine ait kullnıcı bulunamadı."
 msgstr  "The e-mail address you provide does not match any user."
 
