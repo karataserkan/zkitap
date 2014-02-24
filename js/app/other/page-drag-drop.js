@@ -13,7 +13,7 @@ $( document ).ready(function () {
   */
 
     $('#group_btn').click(function(){
-      console.log($('.selected'));
+      //console.log($('.selected'));
       $('.selected').trigger('group',window.lindneo.randomString()); 
     });
     $('#ungroup_btn').click(function(){
@@ -25,8 +25,8 @@ $( document ).ready(function () {
       minLength: 3, 
       autoFocus: true,
       source: function( request, response ) {
-                console.log('request:'+request);
-                console.log('response:'+response);
+                //console.log('request:'+request);
+                //console.log('response:'+response);
                 var data= {
                   'currentPageId': window.lindneo.currentPageId,
                   'searchTerm':request.term 
@@ -36,18 +36,18 @@ $( document ).ready(function () {
                   function( data ) {
                     data=window.lindneo.tlingit.responseFromJson(data);
 
-                    console.log(data);
+                    //console.log(data);
                     
                   if (data.result==null) return;
                  
                   response( $.map( 
                     data.result.components, function( item ) {
-                      // console.log(item.search);
+                      //console.log(item.search);
                       var result={
                         'label': item.search.similar_result,
                         'value': item.id
                       };
-                      console.log('REsult'+result);
+                      //console.log('REsult'+result);
                       return result;
                     })
                   );
@@ -59,7 +59,7 @@ $( document ).ready(function () {
             },
       select: function( event, ui ) {
 
-          console.log(event);
+          //console.log(event);
           if (ui.item) {
             $('#searchform').submit();
           }
@@ -82,7 +82,7 @@ $( document ).ready(function () {
                     var result = str.match(patt1);
                     var styledTerm = termTemplate.replace('%s', result);
 
-                    console.log(me.html( me.text().replace(result, styledTerm) ));
+                    //console.log(me.html( me.text().replace(result, styledTerm) ));
                     me.html( me.text().replace(result, styledTerm) );
                 });
         }
@@ -207,7 +207,7 @@ $( document ).ready(function () {
         }
 
       });
-      console.log(component);
+      //console.log(component);
       createImageComponent( event, ui, component );
 
     };
@@ -248,7 +248,7 @@ $( document ).ready(function () {
         var file = e.dataTransfer.files[0];
         var reader = new FileReader();
         var component = {};
-        console.log(reader);
+        //console.log(reader);
         window.lindneo.dataservice.newComponentDropPage(div_id, e, reader, file);
       });
     };
@@ -262,8 +262,8 @@ $( document ).ready(function () {
     });
 
     $('.delete-chapter').click(function(){
+
       var chapter_id=$(this).parent().parent().attr('chapter_id');
-      console.log(chapter_id);
       
       $('.chapter[chapter_id="'+chapter_id+'"]').hide('slow', function(){  $('.chapter[chapter_id="'+chapter_id+'"]').remove();});
       window.lindneo.tlingit.ChapterHasDeleted( chapter_id );
@@ -291,13 +291,13 @@ $( document ).ready(function () {
       }).done(function(page_data){
         
         var page_background = JSON.parse(page_data);
-        console.log(page_background.result);
+        //console.log(page_background.result);
         if(page_background.result){
                 $('#current_page').css('background-image', 'url()');
                 $('#current_page').css('background-image', 'url("'+page_background.result+'")');
         }
         else{
-          console.log('bu ne');
+          //console.log('bu ne');
           $('#current_page').css('background-image', 'url()');
           $('#current_page').css('background-color', 'white');
         }
@@ -308,6 +308,7 @@ $( document ).ready(function () {
 
     $('.delete-page').click(function(){
       var delete_buttons = $('<i class="icon-delete"></i><i class="icon-delete"></i>');
+
       var page_id=$(this).parent().attr('page_id');
 
       window.lindneo.tlingit.PageHasDeleted( page_id );
@@ -373,7 +374,7 @@ $( document ).ready(function () {
     $(".chat_text_box_holder input").click(function(){
         e = jQuery.Event("keypress")
         e.keyCode = 13; //choose the one you want
-        console.log (e);
+        //console.log (e);
 
         $(".chat_text_box_holder textarea").trigger(e);
 
@@ -386,7 +387,7 @@ $( document ).ready(function () {
           } else {
             evt.preventDefault();
             var text= $(evt.target);
-            console.log(text);
+            //console.log(text);
             var line = text.val();
             if (line != '' ) {
             window.lindneo.tsimshian.chatSendMessage(line);
@@ -459,7 +460,7 @@ $( document ).ready(function () {
   window.lindneo.toolbox.load();
   $('#current_page')
 	.click(function(e){
-		//console.log(e);
+		////console.log(e);
 		if($(e.target).attr('id')=="current_page")
 			$('.selected').trigger('unselect');	
 	})
