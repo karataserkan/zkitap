@@ -50,7 +50,7 @@ window.lindneo.dataservice = (function( $ ) {
     var component = {};
     reader.onload = function (evt) { 
         var FileBinary = evt.target.result;
-        console.log(FileBinary);
+        //console.log(FileBinary);
         if(div_id != 'current_page'){
           //$('#coverRel').attr("src",FileBinary);
           var ajax_url = '';

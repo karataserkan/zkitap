@@ -1,3 +1,27 @@
+<script type="text/javascript">
+	$(document).ready(function() {
+var data_id = '';
+  $('a[data-toggle=modal], button[data-toggle=modal]').click(function () {
+
+    
+
+    if (typeof $(this).data('id') !== 'undefined') {
+
+      data_id = $(this).data('id');
+    }
+
+    $('#book_id').val(data_id);
+  });
+  $("#delete_book").click(function(){
+  	href="<?php echo '/book/delete/'.$book->book_id ?>"
+  	$.ajax({
+	  url: "/book/delete/"+data_id,
+	}).done(function() {
+	  $('#myModal').modal('hide');
+	});
+  });
+});
+</script>
 <?php
 /* @var $this SiteController */
 
@@ -13,6 +37,8 @@ function sendRight(e){
     var link ='/site/right?userId='+userId+'&bookId='+bookId+'&type='+type;
     window.location.assign(link);
     }
+
+ 
    
 </script>
 <script>
@@ -200,10 +226,10 @@ $all_books= $this->getWorkspaceBooks($workspace->workspace_id);
 							<a href="#box-config<?php echo $book->book_id; ?>" data-toggle="modal" class="config">
 								<i class="fa fa-group"></i>
 							</a>
-							<a href="<?php echo '/book/delete/'.$book->book_id ?>" class="remove">
+							<?php $remove_book_id = ''; ?>
+							<a class="remove_book btn btn-primary btn-lg" data-id="<?php echo $book->book_id; ?>" data-toggle="modal" data-target="#myModal">
 								<i class="fa fa-times"></i>
 							</a>
-
 
 
 							<?php } ?>
@@ -257,4 +283,23 @@ $all_books= $this->getWorkspaceBooks($workspace->workspace_id);
 			</div>	
 				
 				<!-- /Page Content -->
+</div>
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+      </div>
+      <div class="modal-body">
+        Silmek istediğinizden emin misiniz?
+      </div>
+      <input type="hidden" name="book_id" id="book_id" value="">
+      <div class="modal-footer">
+      	<button type="button" class="btn btn-primary" id="delete_book">Evet</a>
+        <button type="button" class="btn btn-default" data-dismiss="modal">Hayır</button>      
+      </div>
+    </div>
+  </div>
 </div>

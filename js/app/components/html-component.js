@@ -18,7 +18,31 @@ $(document).ready(function(){
       
 
       var html_data = html_tag_replace(this.options.component.data.html_inner);
-      //console.log(html_data);
+      console.log(html_data);
+      while( html_data.indexOf('&lt;') > -1)
+      {
+        html_data = html_data.replace('&lt;', '<');
+      }
+
+    while( html_data.indexOf('&gt;') > -1)
+      {
+        html_data = html_data.replace('&gt;', '>');
+      }
+
+    while( html_data.indexOf('&amp;') > -1)
+      {
+        html_data = html_data.replace('&amp;', '&');
+      }
+
+    while( html_data.indexOf('<div>') > -1)
+      {
+        html_data = html_data.replace('<div>', '');
+      }
+
+    while( html_data.indexOf('</div>') > -1)
+      {
+        html_data = html_data.replace('</div>', '');
+      }
       if(this.options.component.data.html_inner){
         var popupmessage=$('<div  id="message_'+componenthtmlid+'"  ></div>');
         popupmessage.appendTo(this.element);
@@ -58,44 +82,6 @@ $(document).ready(function(){
           }
         }*/
     },
-    setProperty : function (propertyName,propertyValue){
-      //console.log(this.options.component.id);
-      $('#'+ this.options.component.id).on("focus",function(){
-           var s = window.getSelection();
-           //console.log(s);
-           var t = 'savedRange'+$(this).attr('id');
-           if (window[t] != null && s.rangeCount > 0)
-               s.removeAllRanges();
-           s.addRange(window[t]);
-        }).bind("mouseup keyup",function(){
-           var t = 'savedRange'+$(this).attr('id');
-           window[t] = window.getSelection().getRangeAt(0);
-        }).on("mousedown click",function(e){
-           if(!$(this).is(":focus")){
-               e.stopPropagation();
-               e.preventDefault();
-               $(this).focus();
-           }
-        });
-        //console.log(propertyName);
-        //console.log(propertyValue);
-        //console.log(this.options.component);
-        //var sel = window.getSelection();
-        //var range = sel.getRangeAt(0);
-        //console.log(sel);  
-        //var selection_text = getSelectionHtml();
-        //console.log(selection_text);
-        /*if($('#'+this.options.component.id).selection()){
-          console.log($('#'+this.options.component.id).selection());
-        }
-        else{
-          console.log('xxxxxxxxxxxxxx');
-          //this._setProperty(propertyName,propertyValue);
-          //this.autoResize();
-          }
-          */
-      },
-
     field: function(key, value){
       
       this._super();
@@ -138,24 +124,11 @@ var html_tag_replace = function (str){
       }
       
       
-   //console.log(str);
+   console.log(str);
    return str;
 };
 
-var getSelectionHtml = function () {
-  var sel = '';
-  var range = '';
-  var div = '';
-    
-  sel = window.getSelection();
-  range = sel.getRangeAt(0);
-  //console.log(sel);  
-  div = document.createElement('div');
-  div.appendChild(range.cloneContents());
-  //console.log(div.innerHTML);
-  return div.innerHTML;
 
-}
 
 var createHtmlComponent = function ( event, ui, oldcomponent ) {  
 //console.log(oldcomponent);  
@@ -245,10 +218,11 @@ var createHtmlComponent = function ( event, ui, oldcomponent ) {
       };
       //console.log($("#popup-explanation").text());
       //return;
+      var html_data = html_tag_replace($("#popup-explanation").html());
        var  component = {
           'type' : 'html',
           'data': {
-            'html_inner':  $("#popup-explanation").html(),
+            'html_inner': html_data ,
             'width': width,
             'height': height,
             'lock':'',

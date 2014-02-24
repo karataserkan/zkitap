@@ -18,10 +18,10 @@ $(document).ready(function(){
       
 
       // = '<p>\\[\\pi r^3\\]</p>';
-      console.log(this.options.component.data.html_inner);
+      //console.log(this.options.component.data.html_inner);
       var latex_data = html_tag_replace(this.options.component.data.html_inner);
 
-      console.log(html_tag_replace(this.options.component.data.html_inner));
+      //console.log(html_tag_replace(this.options.component.data.html_inner));
       if(this.options.component.data.html_inner){
         var pop_message=$('<div class="box" id="'+this.options.component.id+'_box"></div>');
         //var popupmessage=$('<div></div>');
@@ -67,7 +67,7 @@ var latex_to_html = function(tex, component_id){
   tex = "$" + (tex || "") + "$";
   tex.replace('\\','\\\\');
   var componentSelector = '#'+component_id;
-  console.log(tex);
+  //console.log(tex);
   //$(componentSelector).find('.box').attr('id', component_id + "_box");
 
   $("#"+component_id + "_box").html(tex);
@@ -84,7 +84,7 @@ var html_tag_replace = function (str){
    //                 .replace('&gt;','>')
    //                 .replace('<div>','')
    //                 .replace('</div>','');
-   console.log(str);
+   //console.log(str);
    while( str.indexOf('<pre style="color: rgb(0, 0, 0); line-height: normal; text-align: start;">') > -1)
       {
         str = str.replace('<pre style="color: rgb(0, 0, 0); line-height: normal; text-align: start;">', '');
@@ -108,8 +108,8 @@ var HIDEBOX = function () {box.style.visibility = "hidden"}
 var SHOWBOX = function () {box.style.visibility = "visible"}
 
   var UpdateMath = function (TeX) {
-    console.log(TeX);
-    console.log($('#MathOutput'));
+    //console.log(TeX);
+    //console.log($('#MathOutput'));
     
     QUEUE.Push(function(){
       box = document.getElementById("box");
@@ -133,7 +133,7 @@ var SHOWBOX = function () {box.style.visibility = "visible"}
   var LatexOutput = function (TeX, component_id) {
     QUEUE.Push(HIDEBOX,["Text",math,"\\displaystyle{"+TeX+"}"],SHOWBOX);
     $( ".box" ).css( "visibility", "visible" );
-    console.log(math);
+    //console.log(math);
   }
 
 
@@ -207,7 +207,7 @@ var createLatexComponent = function ( event, ui, oldcomponent ) {
     });
 
     $('.MathInput').change(function(){
-      console.log(this.value);
+      //console.log(this.value);
       UpdateMath(this.value);
     });
 
@@ -236,7 +236,7 @@ var createLatexComponent = function ( event, ui, oldcomponent ) {
         oldcomponent.data.html_inner = $(".MathInput").html();
 
       };
-      console.log($(".MathInput").val());
+      //console.log($(".MathInput").val());
       //return;
        var  component = {
           'type' : 'latex',
@@ -260,7 +260,7 @@ var createLatexComponent = function ( event, ui, oldcomponent ) {
           }
         };
        
-        console.log(component);
+        //console.log(component);
         window.lindneo.tlingit.componentHasCreated( component );
         
         close_button.trigger('click');

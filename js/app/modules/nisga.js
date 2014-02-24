@@ -34,16 +34,16 @@ window.lindneo.nisga = (function(window, $, undefined){
 
 
   var createComponent = function( component, oldcomponent_id ){
-      //console.log(revision_value);
-    //console.log(oldcomponent_id);
-    //console.log(revision_array);
+      ////console.log(revision_value);
+    ////console.log(oldcomponent_id);
+    ////console.log(revision_array);
     $.each(revision_array.revisions, function(index,value){ 
         if (value.component_id == oldcomponent_id ){
             revision_array.revisions[index].component_id = component.id;
             revision_array.revisions[index].component.id = component.id;
           }
     });
-    //console.log(revision_array);
+    ////console.log(revision_array);
     componentBuilder( component );  
     if(revision_value==0){
       if(typeof oldcomponent_id == 'undefined')  {
@@ -53,11 +53,11 @@ window.lindneo.nisga = (function(window, $, undefined){
     }
     else revision_value=0;
     //if(typeof oldcomponent_id != 'undefined') revision_array.revisions.pop();
-    //console.log(revision_array);
+    ////console.log(revision_array);
   };
 
   var componentBuilder = function( component ){
-     console.log(component.type);
+     //console.log(component.type);
     switch( component.type ) {
       case 'text':
         textComponentBuilder( component );
@@ -123,18 +123,18 @@ window.lindneo.nisga = (function(window, $, undefined){
   }; 
 
   var undoComponent = function() {
-    //console.log(revision_array.revisions);
+    ////console.log(revision_array.revisions);
     //return;
       if(revision_id > 0){
         revision_id = revision_id - 1;
-        //console.log(revision_array.revisions);
-        //console.log(revision_id);
-        //console.log(revision_array.revisions[revision_id].even_type);
-        //console.log(revision_array.revisions);
+        ////console.log(revision_array.revisions);
+        ////console.log(revision_id);
+        ////console.log(revision_array.revisions[revision_id].even_type);
+        ////console.log(revision_array.revisions);
 
         if(revision_array.revisions[revision_id].even_type=='CREATE'){
           if(revision_array.revisions[revision_id].component.type=='image'){
-            //console.log(revision_id);
+            ////console.log(revision_id);
             window.lindneo.tlingit.componentHasDeleted(revision_array.revisions[revision_id].component.id, revision_array.revisions[revision_id].component.id);
             window.lindneo.tlingit.componentHasCreated(revision_array.revisions[revision_id-1].component, revision_array.revisions[revision_id-1].component.id);
           }
@@ -144,17 +144,17 @@ window.lindneo.nisga = (function(window, $, undefined){
           
         }
         else if(revision_array.revisions[revision_id].even_type=='UPDATE'){
-          //console.log(revision_array.revisions[revision_id].component.data.textarea.val);
+          ////console.log(revision_array.revisions[revision_id].component.data.textarea.val);
           var array_where = [];
           $.each(revision_array.revisions, function(index,value){ 
-            //console.log(value.component_id + ' ----- ' +revision_array.revisions[revision_id].component_id);
+            ////console.log(value.component_id + ' ----- ' +revision_array.revisions[revision_id].component_id);
               if (value.component_id == revision_array.revisions[revision_id].component_id && index<=revision_id)
                   array_where.push(value);
           });
 
          array_where.pop();
-         //console.log(array_where);
-         //console.log(array_where[array_where.length-1].component);
+         ////console.log(array_where);
+         ////console.log(array_where[array_where.length-1].component);
          window.lindneo.tlingit.componentHasDeleted(array_where[array_where.length-1].component_id, array_where[array_where.length-1].component.id);
          window.lindneo.tlingit.createComponent(array_where[array_where.length-1].component, array_where[array_where.length-1].component.id);
 
@@ -167,27 +167,27 @@ window.lindneo.nisga = (function(window, $, undefined){
     
     var redoComponent = function() {
       if(revision_id < revision_array.revisions.length){
-        //console.log(revision_array.revisions);
-        //console.log(revision_id);
-        //console.log(revision_array.revisions[revision_id].even_type);
-        //console.log(revision_array.revisions);
+        ////console.log(revision_array.revisions);
+        ////console.log(revision_id);
+        ////console.log(revision_array.revisions[revision_id].even_type);
+        ////console.log(revision_array.revisions);
 
         if(revision_array.revisions[revision_id].even_type == 'CREATE'){
-          //console.log(revision_id);
+          ////console.log(revision_id);
           window.lindneo.tlingit.createComponent(revision_array.revisions[revision_id].component, revision_array.revisions[revision_id].component.id);
         }
         else if(revision_array.revisions[revision_id].even_type=='UPDATE'){
 
           var array_where = [];
           $.each(revision_array.revisions, function(index,value){ 
-            //console.log(value.component_id + ' ----- ' +revision_array.revisions[revision_id].component_id);
+            ////console.log(value.component_id + ' ----- ' +revision_array.revisions[revision_id].component_id);
               if (value.component_id == revision_array.revisions[revision_id].component_id && index>=revision_id)
                   array_where.push(value);
           });
 
          //array_where.pop();
-         //console.log(array_where);
-         //console.log(array_where[0].component);
+         ////console.log(array_where);
+         ////console.log(array_where[0].component);
          window.lindneo.tlingit.componentHasDeleted(array_where[0].component_id, array_where[0].component.id);
          window.lindneo.tlingit.createComponent(array_where[0].component, array_where[0].component.id);
           
@@ -200,7 +200,7 @@ window.lindneo.nisga = (function(window, $, undefined){
    }
 
   var destroyComponent = function ( componentId ) {
-    //  console.log(componentId);
+    //console.log(componentId);
     $('[id="'+componentId+'"]').parent().not('#current_page').remove();
     $('[id="'+componentId+'"]').remove();
   };
@@ -211,7 +211,7 @@ window.lindneo.nisga = (function(window, $, undefined){
         revision_id++;
       }
       else revision_value=0;
-    //  console.log(componentId);
+    //console.log(componentId);
     $('[id="'+component.id+'"]').parent().not('#current_page').remove();
     $('[id="'+component.id+'"]').remove();
   };
@@ -224,7 +224,7 @@ window.lindneo.nisga = (function(window, $, undefined){
         }
       }
       else revision_value=0;
-//        console.log(revision_array);
+//        //console.log(revision_array);
     window.lindneo.toolbox.removeComponentFromSelection( $('#'+ component.id) );
     window.lindneo.tlingit.componentHasDeleted( component.id );
 
@@ -249,7 +249,7 @@ window.lindneo.nisga = (function(window, $, undefined){
 
       }
       else revision_value=0;
-      //console.log(revision_array);
+      ////console.log(revision_array);
         window.lindneo.tlingit.componentHasUpdated( component );        
       },
       'selected': function (event, element) {
@@ -279,7 +279,7 @@ window.lindneo.nisga = (function(window, $, undefined){
 
       }
       else revision_value=0;
-      //console.log(revision_array);
+      ////console.log(revision_array);
         window.lindneo.tlingit.componentHasUpdated( component );
       },
       'selected': function (event, element) {
@@ -307,7 +307,7 @@ window.lindneo.nisga = (function(window, $, undefined){
 
       }
       else revision_value=0;
-      //console.log(revision_array);
+      ////console.log(revision_array);
         window.lindneo.tlingit.componentHasUpdated( component );
       },
       'selected': function (event, element) {
@@ -334,8 +334,8 @@ var textComponentBuilder = function( component ) {
 
       }
       else revision_value=0;
-      //console.log(event);
-      //console.log(revision_array);
+      ////console.log(event);
+      ////console.log(revision_array);
         window.lindneo.tlingit.componentHasUpdated( component );
         
       },
@@ -367,7 +367,7 @@ var textComponentBuilder = function( component ) {
 
       }
       else revision_value=0;
-      //console.log(revision_array);
+      ////console.log(revision_array);
         window.lindneo.tlingit.componentHasUpdated( component );
       },
       'selected': function (event, element) {
@@ -399,7 +399,7 @@ var textComponentBuilder = function( component ) {
 
       }
       else revision_value=0;
-      //console.log(revision_array);
+      ////console.log(revision_array);
         window.lindneo.tlingit.componentHasUpdated( component );
       },
       'selected': function (event, element) {
@@ -430,7 +430,7 @@ var textComponentBuilder = function( component ) {
 
       }
       else revision_value=0;
-      //console.log(revision_array);
+      ////console.log(revision_array);
         window.lindneo.tlingit.componentHasUpdated( component );
       },
       'selected': function (event, element) {
@@ -459,7 +459,7 @@ var textComponentBuilder = function( component ) {
 
       }
       else revision_value=0;
-      //console.log(revision_array);
+      ////console.log(revision_array);
         window.lindneo.tlingit.componentHasUpdated( component );
       },
       'selected': function (event, element) {
@@ -489,7 +489,7 @@ var textComponentBuilder = function( component ) {
 
       }
       else revision_value=0;
-      //console.log(revision_array);
+      ////console.log(revision_array);
         window.lindneo.tlingit.componentHasUpdated( component );
       },
       'selected': function (event, element) {
@@ -516,7 +516,7 @@ var textComponentBuilder = function( component ) {
     var element  = $('<div class="popup-controllers"> </div>');
     var elementWrap=$('<div ></div>');
     elementWrap.appendTo( page_div_selector );
-    //console.log(component);
+    ////console.log(component);
     element
     .appendTo( elementWrap )
     .imageComponent({
@@ -530,7 +530,7 @@ var textComponentBuilder = function( component ) {
 
       }
       else revision_value=0;
-      //console.log(revision_array);
+      ////console.log(revision_array);
         window.lindneo.tlingit.componentHasUpdated( component );
       },
       'selected': function (event, element) {
@@ -546,7 +546,7 @@ var textComponentBuilder = function( component ) {
     var element  = $('<div class="popup-controllers"> </div>');
     var elementWrap=$('<div ></div>');
     elementWrap.appendTo( page_div_selector );
-    //console.log(component);
+    ////console.log(component);
     element
     .appendTo( elementWrap )
     .videoComponent({
@@ -560,7 +560,7 @@ var textComponentBuilder = function( component ) {
 
       }
       else revision_value=0;
-      //console.log(revision_array);
+      ////console.log(revision_array);
         window.lindneo.tlingit.componentHasUpdated( component );
       },
       'selected': function (event, element) {
@@ -592,7 +592,7 @@ var textComponentBuilder = function( component ) {
 
       }
       else revision_value=0;
-      //console.log(revision_array);
+      ////console.log(revision_array);
         window.lindneo.tlingit.componentHasUpdated( component );
       },
       'selected': function (event, element) {
@@ -623,7 +623,7 @@ var textComponentBuilder = function( component ) {
 
       }
       else revision_value=0;
-      //console.log(revision_array);
+      ////console.log(revision_array);
         window.lindneo.tlingit.componentHasUpdated( component );
       },
       'selected': function (event, element) {
@@ -652,7 +652,7 @@ var textComponentBuilder = function( component ) {
 
       }
       else revision_value=0;
-      //console.log(revision_array);
+      ////console.log(revision_array);
         window.lindneo.tlingit.componentHasUpdated( component );
       }, 
       'selected': function ( event, element_ ){
@@ -667,7 +667,7 @@ var textComponentBuilder = function( component ) {
       'border': '1px solid #ccc',
       'border-color': activeUser.color
     });
-//    console.log(activeUser.color);
+//    //console.log(activeUser.color);
 
     $('[color="' +activeUser.color+ '"]').parent().find('[component-instance="true"]').css( {'border': 'none'});
     $('[color="' +activeUser.color+ '"]').parent().children('.activeUser').remove();

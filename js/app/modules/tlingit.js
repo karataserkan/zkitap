@@ -33,7 +33,7 @@ window.lindneo.tlingit = (function(window, $, undefined){
         },
         newArrivalComponent,
         function(err){
-          console.log('error:' + err);
+          //console.log('error:' + err);
       });
   };
 
@@ -60,7 +60,7 @@ window.lindneo.tlingit = (function(window, $, undefined){
         },
         updateArrivalComponent,
         function(err){
-          console.log('error:' + err);
+          //console.log('error:' + err);
       });
     
   };
@@ -81,7 +81,7 @@ window.lindneo.tlingit = (function(window, $, undefined){
       },
       deleteArrivalResult,
       function(err){
-        console.log('error:' + err);
+        //console.log('error:' + err);
     });
   };
 
@@ -137,7 +137,7 @@ window.lindneo.tlingit = (function(window, $, undefined){
         },
         loadComponents,
         function(err){
-          console.log('error:' + err);
+          //console.log('error:' + err);
       });
 
       
@@ -156,7 +156,7 @@ window.lindneo.tlingit = (function(window, $, undefined){
       var context=canvas.getContext("2d");
      context.fillStyle = '#FFF';
       context.fillRect(0,0,canvas.width,canvas.height);
-      console.log('ddedededede');
+      //console.log('ddedededede');
       //$('.chapter .page').each(function(){
       //console.log($(this).attr('page_id'));
       
@@ -184,7 +184,7 @@ window.lindneo.tlingit = (function(window, $, undefined){
       //});
     });
    $('.chapter .page').each(function(){
-    console.log($(this).attr('page_id'));
+    //console.log($(this).attr('page_id'));
     loadPagesPreviews($(this).attr('page_id'));
     });
   };
@@ -361,6 +361,9 @@ window.lindneo.tlingit = (function(window, $, undefined){
   };
 
   var ChapterUpdated = function (chapterId, title, order){
+//console.log(chapterId);
+//console.log(title);
+//console.log(order);
     window.lindneo.dataservice
     .send( 'UpdateChapter', 
       { 
@@ -376,7 +379,7 @@ window.lindneo.tlingit = (function(window, $, undefined){
   };
 
   var UpdateChapter =function(response){
-    var response = responseFromJson(response);
+    responseFromJson(response);
     //pass to nisga new chapter
     //console.log(response);
 
