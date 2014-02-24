@@ -264,8 +264,6 @@ $( document ).ready(function () {
     $('.delete-chapter').click(function(){
 
       var chapter_id=$(this).parent().parent().attr('chapter_id');
-      console.log(chapter_id);
-
       
       $('.chapter[chapter_id="'+chapter_id+'"]').hide('slow', function(){  $('.chapter[chapter_id="'+chapter_id+'"]').remove();});
       window.lindneo.tlingit.ChapterHasDeleted( chapter_id );
