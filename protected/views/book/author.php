@@ -1108,14 +1108,14 @@ $current_user=User::model()->findByPk(Yii::app()->user->id);
 					var last_timeout;
 					$('.pages .page').hover(
 						function(){
-							console.log('hover started');
+							//console.log('hover started');
 							var timeout;
 							var page_thumb_item = $(this);
 
 							//$(this).find('.page-chapter-delete').hide();
 							timeout = setTimeout(function(){ 
 								page_thumb_item.find('.page-chapter-delete').show();
-								console.log('hover-timeout');
+								//console.log('hover-timeout');
 								clearTimeout(timeout);
 							},1000);
 
@@ -1124,7 +1124,7 @@ $current_user=User::model()->findByPk(Yii::app()->user->id);
 							},2000); 
 
 							last_timeout = timeout;
-							console.log('hover-out');
+							//console.log('hover-out');
 							//setTimeout(function(){alert("OK");}, 3000);
 
 					},	
@@ -1187,7 +1187,8 @@ $current_user=User::model()->findByPk(Yii::app()->user->id);
 					<div class="chapter-detail">
 					<input type="text" class="chapter-title" placeholder="chapter title" value="<?php echo $chapter->title; ?>">
 					
-					<a class="btn btn-danger  page-chapter-delete delete-chapter hidden-delete" style="float: right; margin-top: -23px;"><i class="icon-delete"></i></a> 
+					<a class="btn btn-danger  page-chapter-delete delete-chapter hidden-delete" style="float: right; margin-top: -23px;"><i class="icon-ok"></i></a> 
+					<a class="page-chapter-delete_control hidden-delete" style="float: right; margin-top: -23px;"><i class="icon-delete"></i><i class="icon-delete"></i></a> 
 					</div>
 					<!-- <?php echo $chapter->title; ?>  chapter title--> 
 										<ul class="pages" >
