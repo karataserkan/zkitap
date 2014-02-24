@@ -25,7 +25,7 @@ class UserBook extends CActiveRecord
 	 */
 	public function tableName()
 	{
-		return 'user_book';
+		return 'book_users';
 	}
 
 	/**

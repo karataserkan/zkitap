@@ -34,7 +34,9 @@ class SiteController extends Controller
 		if(Yii::app()->user->isGuest)
 			$this->redirect( array('site/login' ) );
 
-		$this->render('index',array());
+		$workspaces=$this->getUserWorkspaces();
+
+		$this->render('index',array('workspaces'=>$workspaces));
 	}
 
 	public function actionDashboard()
@@ -194,6 +196,7 @@ class SiteController extends Controller
 
 		return $workspaceUsers;
 	}
+
 
 	/**
 	 * getUserWorkspaces

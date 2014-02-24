@@ -1,7 +1,7 @@
 <script type="text/javascript">
 	$(document).ready(function() {
 var data_id = '';
-  $('a[data-toggle=modal], button[data-toggle=modal]').click(function () {
+  $('.remove_book').click(function () {
 
     
 
@@ -37,10 +37,9 @@ function sendRight(e){
     var link ='/site/right?userId='+userId+'&bookId='+bookId+'&type='+type;
     window.location.assign(link);
     }
-
- 
-   
 </script>
+
+
 <script>
 		jQuery(document).ready(function() {		
 			App.setPage("gallery");  //Set current page
@@ -49,6 +48,53 @@ function sendRight(e){
 	</script>
 	<!-- /JAVASCRIPTS -->
 
+<!-- POPUP EDITORS -->
+<div class="modal fade" id="copyBook" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+	  <div class="modal-content">
+		<div class="modal-header">
+		  <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+		  <h4 class="modal-title"><?php _e("Kitabı Kopyala"); ?></h4>
+		</div>
+		<div class="modal-body">
+		 	<form id="copy" method="post" class="form-horizontal">
+		 		<div class="form-group">
+					<label  class="col-md-3 control-label">
+					<?php _e("Çalışma Alanları"); ?>
+					</label>
+					<div class="col-md-9">
+			 			<span id="workspaces">
+						 	<?php 
+						 	foreach ($workspaces as $key => $workspace) { ?>
+				 				<div class="radio SelectWorkspace" id="uniform-<?php echo $workspace["workspace_id"]; ?>">
+				 					<span>
+				 						<input class="uniform" id="<?php echo $workspace["workspace_id"]; ?>" value="<?php echo $workspace["workspace_id"]; ?>" type="radio" name="CopyBook">
+				 					</span>
+				 				</div>
+				 				<label for="<?php echo $workspace["workspace_id"]; ?>"><?php echo $workspace["workspace_name"]; ?></label>
+				 				<br>
+						 	<?php }
+						 	?>
+						</span>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label col-md-3" for="PublishBookForm_contentTitle">Eser Adı<span class="required">*</span></label>
+					<div class="col-md-4">
+						<input class="form-control" name="contentTitle" placeholder="Lütfen bir isim girin!" id="newContentTitle" type="text">															
+					</div>
+				</div>	
+		 	</form>
+		</div>
+	      <div class="modal-footer">
+	      	<button type="button" class="btn btn-primary" id="copy_book"><?php _e("Kopyala"); ?></a>
+	        <button type="button" class="btn btn-default" data-dismiss="modal"><?php _e("Vazgeç"); ?></button>
+	      </div>
+		</div>
+	  </div>
+	</div>
+ 
+<!-- POPUP END -->
 
 
 <?php
@@ -227,11 +273,10 @@ $all_books= $this->getWorkspaceBooks($workspace->workspace_id);
 								<i class="fa fa-group"></i>
 							</a>
 							<?php $remove_book_id = ''; ?>
-							<a class="remove_book btn btn-primary btn-lg" data-id="<?php echo $book->book_id; ?>" data-toggle="modal" data-target="#myModal">
+							<a class="remove_book" data-id="<?php echo $book->book_id; ?>" data-toggle="modal" data-target="#myModal">
 								<i class="fa fa-times"></i>
 							</a>
-
-
+							<a class="copyThisBook" data-id="copyBook" data-toggle="modal" data-target="#copyBook" book-id="<?php echo $book->book_id; ?>"><i class="fa fa-copy"></i></a>
 							<?php } ?>
 							<a href="javascript:;" class="collapse">
 								<i class="fa fa-chevron-up"></i>
@@ -303,3 +348,23 @@ $all_books= $this->getWorkspaceBooks($workspace->workspace_id);
     </div>
   </div>
 </div>
+
+<script type="text/javascript">
+var bookId="";
+$(document).on("click",".copyThisBook",function(e){
+	bookId = $(this).attr('book-id');
+});
+
+var workspaceId="";
+$(document).on("click",".SelectWorkspace",function(e){
+	$(".SelectWorkspace span").removeClass("checked");
+	$(this).children("span").addClass("checked");
+	workspaceId=$(this).children("span").children("input").val();
+});
+
+$("#copy_book").click(function(){
+	var title=$("#newContentTitle").val();
+	var link ="/book/copyBook?bookId="+bookId+"&workspaceId="+workspaceId+'&title='+title;
+    window.location.assign(link);
+});
+</script>
