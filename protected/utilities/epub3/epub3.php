@@ -8,6 +8,7 @@ class epub3 {
 	public $toc;
 	public $chapters ;
 	public $coverImage ;
+	public $thumImage ;
 	public $nicename;
 	public $ebookFile ;
 	public $title='';
@@ -15,6 +16,7 @@ class epub3 {
 	public $TOC_Titles;
 	public $uuid;
 	public $coverType;
+	public $thumType;
 	public $errors=null;
 	public $book ;
 
@@ -223,6 +225,47 @@ class epub3 {
 
 	}	
 
+	public function copyThumImage(){
+
+		$thum64=$this->book->getData('thumbnail');
+
+		if ($thum64) {
+			$ext1=explode(';', $thum64);
+			$ext2=explode('/', $ext1[0]);
+			$extension = '.'.$ext2[1];
+			$this->thumType=$ext2[1];
+			$this->thumImage = functions::save_base64_file ( $thum64 , "thumbnail" , $this->get_tmp_file());
+			$this->thumImage->URL=$this->get_tmp_file(). '/thumbnail'.$extension;
+			$this->thumImage->filename='thumbnail'.$extension;
+		}
+		else
+		{
+			$this->thumType='jpeg';
+			$this->thumImage->URL=Yii::app()->request->hostInfo . '/css/cover.jpg';
+			$this->thumImage->filename='cover.jpg';
+		}
+
+
+		$image_file_contents=file_get_contents($this->thumImage ->URL);
+
+		$this->files->thumImage= new file( $this->thumImage->filename, $this->get_tmp_file() );
+		
+		$this->files->thumImage->writeLine($image_file_contents);
+
+		$this->files->thumImage->closeFile();
+
+
+		
+		
+
+		if(! $res[]=  $this->thumImage ){
+			$this->errors[]=new error('Epub3-copythumImage','File could not be copied',__DIR__ . '/' . $this->thumImage,$this->get_tmp_file_path($this->thumImage));
+		}
+
+		return $res;
+
+	}
+
 
 	public function create_title_page(){
 
@@ -254,9 +297,7 @@ class epub3 {
 	</head>
 	<body>
 		<div>
-			<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="100%" height="100%" viewBox="0 0 425 616" preserveAspectRatio="none">
-				<image width="'.$pageSize['width'].'" height="'.$pageSize['height'].'" xlink:href="' . $this->coverImage->filename . '"/>
-			</svg>
+			<img width="'.$pageSize['width'].'" height="'.$pageSize['height'].'" src="' . $this->coverImage->filename . '"/>
 		</div>
 	</body>
 </html>';
@@ -577,7 +618,7 @@ class epub3 {
 		<dc:publisher>Linden digital</dc:publisher>
 		<dc:rights>2005-13 Linden Digital. All rights reserved</dc:rights>
 		<dc:description>by linden</dc:description>
-		<meta name="covers" content="cover"/>
+		<meta name="covers" content="thumbnail"/>
 		<meta property="rendition:layout">pre-paginated</meta>
 		<meta property="rendition:orientation">landscape</meta>
 		<meta property="rendition:spread">none</meta>
@@ -587,6 +628,7 @@ class epub3 {
 	</metadata>
 	<manifest>
 		<item href="'.$this->coverImage->filename.'" id="cover" media-type="image/'.$this->coverType.'" />
+		<item href="'.$this->thumImage->filename.'" id="thumbnail" media-type="image/'.$this->thumType.'" />
 		<item href="linkmarker.png" id="linkmarker" media-type="image/png" />
 		<item href="popupmarker.png" id="popupmarker" media-type="image/png" />
 %pages_manifest%
@@ -933,6 +975,12 @@ class epub3 {
 		//Copy cover image.
 		if( in_array(false,$this->copyCoverImage() ) ) {
 			$this->errors[]=new error('Epub3-Construction','Problem with Cover Image file');
+			return false;
+		}
+
+		//Copy thumbnail image.
+		if( in_array(false,$this->copyThumImage() ) ) {
+			$this->errors[]=new error('Epub3-Construction','Problem with thumbnail Image file');
 			return false;
 		}
 
