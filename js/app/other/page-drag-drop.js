@@ -172,6 +172,10 @@ $( document ).ready(function () {
             window.lindneo.dataservice.latex_popup(event, ui);
             break;
 
+          case 'slider':
+            createSliderComponent( event, ui );
+            break;
+
           default:
             break; 
         }
