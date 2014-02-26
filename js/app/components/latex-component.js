@@ -33,9 +33,7 @@ $(document).ready(function(){
         latex_to_html(latex_data, this.options.component.id);
       }
        
-      
-      this.element.autogrow({element:this});
-      
+
       
       this._super(); 
 /*
@@ -250,8 +248,6 @@ var createLatexComponent = function ( event, ui, oldcomponent ) {
                 'position':'absolute',
                 'top': top ,
                 'left':  left ,
-                'width':'400px',
-                'height':'100px',
                 'overflow': 'visible',
                 'opacity': '1',
                 'z-index': '1000'

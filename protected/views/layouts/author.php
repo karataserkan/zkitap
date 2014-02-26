@@ -56,9 +56,27 @@
 	          inlineMath: [["$","$"],["\\(","\\)"]]
 	        }
 	      });
+	      MathJax.Hub.Register.StartupHook("HTML-CSS Jax Ready",function () {
+			  var VARIANT = MathJax.OutputJax["HTML-CSS"].FONTDATA.VARIANT;
+			  VARIANT["normal"].fonts.unshift("MathJax_Arial");
+			  VARIANT["bold"].fonts.unshift("MathJax_Arial-bold");
+			  VARIANT["italic"].fonts.unshift("MathJax_Arial-italic");
+			  VARIANT["-tex-mathit"].fonts.unshift("MathJax_Arial-italic");
+			});
+			MathJax.Hub.Register.StartupHook("SVG Jax Ready",function () {
+			  var VARIANT = MathJax.OutputJax.SVG.FONTDATA.VARIANT;
+			  VARIANT["normal"].fonts.unshift("MathJax_SansSerif");
+			  VARIANT["bold"].fonts.unshift("MathJax_SansSerif-bold");
+			  VARIANT["italic"].fonts.unshift("MathJax_SansSerif-italic");
+			  VARIANT["-tex-mathit"].fonts.unshift("MathJax_SansSerif-italic");
+			});
 	    </script>
 		<script src="<?php echo Yii::app()->request->baseUrl; ?>/js/lib/mathjax/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 		
+		<!-- JS Slider -->
+		<script type="text/javascript" src="<?php echo Yii::app()->request->baseUrl; ?>/js/lib/jssor.core.js"></script>
+	    <script type="text/javascript" src="<?php echo Yii::app()->request->baseUrl; ?>/js/lib/jssor.utils.js"></script>
+	    <script type="text/javascript" src="<?php echo Yii::app()->request->baseUrl; ?>/js/lib/jssor.slider.js"></script>
 
 		<!-- JS Modules -->
 		<script src="<?php echo Yii::app()->request->baseUrl; ?>/js/app/lindneo.js"></script>	
@@ -84,7 +102,8 @@
 		<script src="<?php echo Yii::app()->request->baseUrl; ?>/js/app/components/table-component.js"></script>	
 		<script src="<?php echo Yii::app()->request->baseUrl; ?>/js/app/components/html-component.js"></script>	
 		<script src="<?php echo Yii::app()->request->baseUrl; ?>/js/app/components/wrap-component.js"></script>	
-		<script src="<?php echo Yii::app()->request->baseUrl; ?>/js/app/components/latex-component.js"></script>	
+		<script src="<?php echo Yii::app()->request->baseUrl; ?>/js/app/components/latex-component.js"></script>
+		<script src="<?php echo Yii::app()->request->baseUrl; ?>/js/app/components/slider-component.js"></script>	
 
 		<!-- Page JS Codes -->
 		<script src="<?php echo Yii::app()->request->baseUrl; ?>/js/app/other/page-drag-drop.js"></script>
