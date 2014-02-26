@@ -49,17 +49,7 @@ $(document).ready(function(){
         popupmessage.html(html_data);
       }
        
-      var sel = window.getSelection();
-      $( "#"+this.options.component.id ).selectable({
-        selecting: function( event, ui ) {
-          console.log('xcxcxcxcxc');
-        }
-      });
-      if(sel.type == 'Range'){
-        //console.log(sel);  
-      }
-
-      this.element.autogrow({element:this});
+      
       
       
       this._super(); 
@@ -225,14 +215,13 @@ var createHtmlComponent = function ( event, ui, oldcomponent ) {
             'html_inner': html_data ,
             'width': width,
             'height': height,
+            'overflow': 'visible',
             'lock':'',
             'self': {
               'css': {
                 'position':'absolute',
                 'top': top ,
                 'left':  left ,
-                'width':'400px',
-                'height':'100px',
                 'overflow': 'visible',
                 'opacity': '1',
                 'z-index': '1000'
