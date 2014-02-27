@@ -174,28 +174,28 @@ msgstr  "Resolution"
 #: protected/views/book/author.php:135 protected/views/book/author.php:134
 #: protected/views/book/author.php:91 protected/views/book/author.php:114
 #: protected/views/book/author.php:115 protected/views/book/author.php:116
-#: protected/views/book/author.php:116
+#: protected/views/book/author.php:114
 msgid   "Görünüm"
 msgstr  "View"
 
 #: protected/views/book/author.php:137 protected/views/book/author.php:136
 #: protected/views/book/author.php:93 protected/views/book/author.php:116
 #: protected/views/book/author.php:117 protected/views/book/author.php:118
-#: protected/views/book/author.php:118
+#: protected/views/book/author.php:116
 msgid   "Cetvel"
 msgstr  "Rulers"
 
 #: protected/views/book/author.php:138 protected/views/book/author.php:137
 #: protected/views/book/author.php:94 protected/views/book/author.php:117
 #: protected/views/book/author.php:118 protected/views/book/author.php:119
-#: protected/views/book/author.php:119
+#: protected/views/book/author.php:117
 msgid   "Rehber"
 msgstr  "Guides"
 
 #: protected/views/book/author.php:139 protected/views/book/author.php:138
 #: protected/views/book/author.php:95 protected/views/book/author.php:118
 #: protected/views/book/author.php:119 protected/views/book/author.php:120
-#: protected/views/book/author.php:120
+#: protected/views/book/author.php:118
 msgid   "Yorumlar"
 msgstr  "Comments"
 
@@ -204,7 +204,7 @@ msgstr  "Comments"
 #: protected/views/book/author.php:124 protected/views/layouts/column2.php:55
 #: protected/views/book/author.php:147 protected/views/book/author.php:148
 #: protected/views/book/author.php:149 protected/views/layouts/column2.php:62
-#: protected/views/book/author.php:149 protected/views/layouts/column2.php:62
+#: protected/views/book/author.php:147 protected/views/layouts/column2.php:62
 msgid   "Profil"
 msgstr  "Profile"
 
@@ -215,7 +215,7 @@ msgstr  "Profile"
 #: protected/views/layouts/main.php:138 protected/views/book/author.php:125
 #: protected/views/layouts/column2.php:56 protected/views/book/author.php:148
 #: protected/views/book/author.php:149 protected/views/book/author.php:150
-#: protected/views/layouts/column2.php:63 protected/views/book/author.php:150
+#: protected/views/layouts/column2.php:63 protected/views/book/author.php:148
 #: protected/views/layouts/column2.php:63
 msgid   "Çıkış"
 msgstr  "Sign Out"
@@ -305,7 +305,7 @@ msgstr  "Add"
 #: protected/views/organisations/categories.php:33
 #: protected/views/organisations/categories.php:67
 #: protected/views/book/select_data.php:39
-#: protected/views/book/author.php:1530 protected/views/book/author.php:1553
+#: protected/views/book/author.php:1564 protected/views/book/author.php:1587
 msgid   "Kaydet"
 msgstr  "Save"
 
@@ -540,7 +540,7 @@ msgstr  "Yes"
 msgid   "Hayır"
 msgstr  "No"
 
-#: protected/views/book/author.php:100 protected/views/book/author.php:100
+#: protected/views/book/author.php:100 protected/views/book/author.php:98
 msgid   "Hızlı Yayınla"
 msgstr  "Quick Publish"
 
@@ -712,21 +712,21 @@ msgstr  "Profile Picture"
 #: protected/views/book/author.php:1514 protected/views/book/author.php:1528
 #: protected/views/book/author.php:1551 protected/views/book/author.php:1529
 #: protected/views/book/author.php:1552 protected/views/user/profile.php:43
-#: protected/views/book/author.php:1529 protected/views/book/author.php:1552
+#: protected/views/book/author.php:1563 protected/views/book/author.php:1586
 msgid   "Kapat"
 msgstr  "Close"
 
 #: protected/views/book/author.php:1389 protected/views/book/author.php:1409
 #: protected/views/book/author.php:1412 protected/views/book/author.php:1430
 #: protected/views/book/author.php:1482 protected/views/book/author.php:1519
-#: protected/views/book/author.php:1520 protected/views/book/author.php:1520
+#: protected/views/book/author.php:1520 protected/views/book/author.php:1554
 msgid   "Thumbnail Image"
 msgstr  "Thumbnail Image"
 
 #: protected/views/book/author.php:1412 protected/views/book/author.php:1432
 #: protected/views/book/author.php:1435 protected/views/book/author.php:1453
 #: protected/views/book/author.php:1505 protected/views/book/author.php:1542
-#: protected/views/book/author.php:1543 protected/views/book/author.php:1543
+#: protected/views/book/author.php:1543 protected/views/book/author.php:1577
 msgid   "Kapak Resmi"
 msgstr  "Cover Image"
 
