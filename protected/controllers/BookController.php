@@ -36,7 +36,7 @@ class BookController extends Controller
 				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
-				'actions'=>array('create','update','selectTemplate','delete','view','author','newBook','selectData','uploadFile','duplicateBook','updateThumbnail','updateCover',"copyBook"),
+				'actions'=>array('create','update','selectTemplate','delete','view','author','newBook','selectData','uploadFile','duplicateBook','updateThumbnail','updateCover',"copyBook","updateBookTitle"),
 				'users'=>array('@'),
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
@@ -409,9 +409,9 @@ class BookController extends Controller
 			$bookId=functions::new_id();
 			$book->book_id=$bookId;
 			$book->workspace_id=$workspaceId;
-			$book->title="Copy of ".$layout->title;
-			if ($title) {
-				$book->title=$title;
+			$book->title=$title;
+			if (!$title) {
+				$book->title="Copy of ".$layout->title;
 			}
 			$book->author=$layout->author;
 			$book->created=date("Y-m-d H:i:s");
@@ -639,6 +639,13 @@ class BookController extends Controller
 		}
 	}
 
+	public function actionUpdateBookTitle($bookId,$title)
+	{
+		$book=$this->loadModel($bookId);
+		$book->title=$title;
+		$book->save();
+		$this->redirect(array('site/index'));
+	}
 
 	/**
 	 * Deletes a particular model.

@@ -49,6 +49,34 @@ function sendRight(e){
 	<!-- /JAVASCRIPTS -->
 
 <!-- POPUP EDITORS -->
+<div class="modal fade" id="updateBookTitle" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+	  <div class="modal-content">
+		<div class="modal-header">
+		  <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+		  <h4 class="modal-title"><?php _e("Eseri Güncelle"); ?></h4>
+		</div>
+		<div class="modal-body">
+		 	<form id="copy" method="post" class="form-horizontal">
+				<div class="form-group">
+					<label class="control-label col-md-3" for="contentTitle">Eser Adı<span class="required">*</span></label>
+					<div class="col-md-4">
+						<input class="form-control" name="contentTitle" placeholder="Lütfen bir isim girin!" id="updateContentTitle" type="text">															
+					</div>
+				</div>	
+		 	</form>
+		</div>
+	      <div class="modal-footer">
+	      	<button type="button" class="btn btn-primary" id="update_book_title"><?php _e("Güncelle"); ?></a>
+	        <button type="button" class="btn btn-default" data-dismiss="modal"><?php _e("Vazgeç"); ?></button>
+	      </div>
+		</div>
+	  </div>
+	</div>
+ 
+<!-- POPUP END -->
+
+<!-- POPUP EDITORS -->
 <div class="modal fade" id="copyBook" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 	<div class="modal-dialog">
 	  <div class="modal-content">
@@ -277,6 +305,7 @@ $all_books= $this->getWorkspaceBooks($workspace->workspace_id);
 								<i class="fa fa-times"></i>
 							</a>
 							<a class="copyThisBook" data-id="copyBook" data-toggle="modal" data-target="#copyBook" book-id="<?php echo $book->book_id; ?>"><i class="fa fa-copy"></i></a>
+							<a class="updateThisBookTitle" data-id="updateBookTitle" data-toggle="modal" data-target="#updateBookTitle" book-id="<?php echo $book->book_id; ?>"><i class="fa fa-edit"></i></a>
 							<?php } ?>
 							<a href="javascript:;" class="collapse">
 								<i class="fa fa-chevron-up"></i>
@@ -355,6 +384,10 @@ $(document).on("click",".copyThisBook",function(e){
 	bookId = $(this).attr('book-id');
 });
 
+$(document).on("click",".updateThisBookTitle",function(e){
+	bookId = $(this).attr('book-id');
+});
+
 var workspaceId="";
 $(document).on("click",".SelectWorkspace",function(e){
 	$(".SelectWorkspace span").removeClass("checked");
@@ -365,6 +398,12 @@ $(document).on("click",".SelectWorkspace",function(e){
 $("#copy_book").click(function(){
 	var title=$("#newContentTitle").val();
 	var link ="/book/copyBook?bookId="+bookId+"&workspaceId="+workspaceId+'&title='+title;
+    window.location.assign(link);
+});
+
+$("#update_book_title").click(function(){
+	var title=$("#updateContentTitle").val();
+	var link ="/book/updateBookTitle?bookId="+bookId+'&title='+title;
     window.location.assign(link);
 });
 </script>
