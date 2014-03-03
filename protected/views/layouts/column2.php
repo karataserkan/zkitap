@@ -111,7 +111,7 @@
 							$organisation = Yii::app()->db->createCommand()
 						    ->select("*")
 						    ->from("organisation_users")
-						    ->where("user_id=:user_id", array(':user_id' => Yii::app()->user->id))
+						    ->where("user_id=:user_id AND role=:role", array(':user_id' => Yii::app()->user->id,'role'=>'owner'))
 						    ->queryRow();
 						    return  ($organisation) ? $organisation : null ;
 						}

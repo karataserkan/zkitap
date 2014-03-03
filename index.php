@@ -17,7 +17,7 @@ require_once($floodblocker);
 require_once($detectinjection);
 $flb = new FloodBlocker ( '../../' );
 //70 requests in 10 seconds
-  $flb->rules = array ( 10=>70 );
+  $flb->rules = array ( 10=>700 );
   $res = $flb->CheckFlood ( );
   if ( $res )
     {
