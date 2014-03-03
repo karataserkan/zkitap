@@ -872,6 +872,7 @@ class epub3 {
 
 	        foreach ($files as $file)
 	        {
+	        	set_time_limit(30);
 	            $file = str_replace('\\', '/', $file);
 
 	            // Ignore "." and ".." folders
