@@ -413,22 +413,49 @@ class epub3 {
 		<link rel="stylesheet" href="page_styles.css" type="text/css"/>
 		<link rel="stylesheet" href="widgets.css" type="text/css"/>
 		<script type="text/javascript" src="jquery-1.4.4.min.js"></script>
-	    <script type="text/javascript" src="aie_core.js"></script>
-	    <script type="text/javascript" src="aie_events.js"></script>
-	    <script type="text/javascript" src="aie_explore.js"></script>
-	    <script type="text/javascript" src="aie_gameutils.js"></script>
-	    <script type="text/javascript" src="aie_qaa.js"></script>
-	    <script type="text/javascript" src="aie_storyline.js"></script>
-	    <script type="text/javascript" src="aie_textsound.js"></script>
-	    <script type="text/javascript" src="igp_audio.js"></script>
-	    <script type="text/javascript" src="iscroll.js"></script>
-	    <script type="text/javascript" src="jquery.min.js"></script>
-	    <script type="text/javascript" src="jquery-ui.min.js"></script>
-	    <script type="text/javascript" src="LAB.min.js"></script>
-	    <script type="text/javascript" src="panelnav.js"></script>
-	    <script type="text/javascript" src="popup.js"></script>
-	    <script type="text/javascript" src="pubsub.js"></script>
-	    <script type="text/javascript" src="Chart.js"></script>
+	    	<script type="text/javascript" src="aie_core.js"></script>
+	    	<script type="text/javascript" src="aie_events.js"></script>
+	    	<script type="text/javascript" src="aie_explore.js"></script>
+	    	<script type="text/javascript" src="aie_gameutils.js"></script>
+	    	<script type="text/javascript" src="aie_qaa.js"></script>
+	    	<script type="text/javascript" src="aie_storyline.js"></script>
+	    	<script type="text/javascript" src="aie_textsound.js"></script>
+	    	<script type="text/javascript" src="igp_audio.js"></script>
+	    	<script type="text/javascript" src="iscroll.js"></script>
+	    	<script type="text/javascript" src="jquery.min.js"></script>
+	    	<script type="text/javascript" src="jquery-ui.min.js"></script>
+	    	<script type="text/javascript" src="LAB.min.js"></script>
+	    	<script type="text/javascript" src="panelnav.js"></script>
+	    	<script type="text/javascript" src="popup.js"></script>
+	    	<script type="text/javascript" src="pubsub.js"></script>
+	    	<script type="text/javascript" src="Chart.js"></script>
+		<script type="text/javascript" src="jquery.slickwrap.js"></script>
+		<script type="text/javascript" src="jquery.lazyloadxt.js"></script>
+		<script type="text/javascript" src="jssor.slider.js"></script>
+		<script type="text/javascript" src="jssor.core.js"></script>
+		<script type="text/javascript" src="jssor.utils.js"></script>
+	    	<script type="text/x-mathjax-config">
+		      MathJax.Hub.Config({
+			tex2jax: {
+			  inlineMath: [["$","$"],["\\(","\\)"]]
+			}
+		      });
+		      MathJax.Hub.Register.StartupHook("HTML-CSS Jax Ready",function () {
+			  var VARIANT = MathJax.OutputJax["HTML-CSS"].FONTDATA.VARIANT;
+			  VARIANT["normal"].fonts.unshift("MathJax_Arial");
+			  VARIANT["bold"].fonts.unshift("MathJax_Arial-bold");
+			  VARIANT["italic"].fonts.unshift("MathJax_Arial-italic");
+			  VARIANT["-tex-mathit"].fonts.unshift("MathJax_Arial-italic");
+			});
+			MathJax.Hub.Register.StartupHook("SVG Jax Ready",function () {
+			  var VARIANT = MathJax.OutputJax.SVG.FONTDATA.VARIANT;
+			  VARIANT["normal"].fonts.unshift("MathJax_SansSerif");
+			  VARIANT["bold"].fonts.unshift("MathJax_SansSerif-bold");
+			  VARIANT["italic"].fonts.unshift("MathJax_SansSerif-italic");
+			  VARIANT["-tex-mathit"].fonts.unshift("MathJax_SansSerif-italic");
+			});
+	    	</script>
+		<script src="mathjax/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 
 
 	</head>

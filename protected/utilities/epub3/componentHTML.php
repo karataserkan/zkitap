@@ -38,6 +38,28 @@ class componentHTML {
 			case 'quiz':
 				$this->quizInner($component);			
 				break;
+			/*case 'table':
+			    $this->tableInner($component);
+			    break;
+			*/
+			  case 'html':
+			    $this->htmlInner($component);
+			    break;
+			  //case 'wrap':
+			    //$this->wrapInner($component);
+			    //break;
+			  case 'latex':
+			    $this->latexInner($component);
+			    break;
+			  /*
+			  case 'slider':
+			    $this->sliderInner($component);
+			    break;
+
+			  case 'tag':
+			    $this->tagInner($component);
+			    break;
+			    */
 			default:
 				$this->someOther_inner($component->data);			
 
@@ -697,6 +719,42 @@ class componentHTML {
 		$this->html=str_replace('%component_inner%' ,$container, $this->html);
 		
 
+	}
+
+	public function htmlInner($component){
+
+		$data=$component->data;
+
+		$html_id= "html".functions::get_random_string();
+
+		$container.=" 
+			<div id='$html_id'>
+				%component_inner%
+			</div>
+	
+		
+		";
+
+		$this->html=str_replace('%component_inner%' ,$container, $component->data->html_inner);
+		
+	}
+
+	public function latexInner($component){
+
+		$data=$component->data;
+
+		$latex_id= "latex".functions::get_random_string();
+
+		$container.=" 
+			<div id='$latex_id'>
+				%component_inner%
+			</div>
+	
+		
+		";
+
+		$this->html=str_replace('%component_inner%' ,$container, $component->data->html_inner);
+		
 	}
 
 	public function linkInner($component){
