@@ -836,9 +836,12 @@ right join book using (book_id) where book_id='$bookId' and type!='image';";
 			}
 			else
 			{
+				//hard-coded bookcategory
+				/*
 				$category=BookCategories::model()->findByPk('1122');
 				$data['categories'][$categoryId]['category_id']=$category->category_id;
 				$data['categories'][$categoryId]['category_name']=$category->category_name;
+				*/
 			}
 			
 		}
@@ -846,7 +849,9 @@ right join book using (book_id) where book_id='$bookId' and type!='image';";
 		$data['contentId']=$bookId;
 		$data['contentFile']='@'.$ebook->ebookFile;
 		$data['checksum']=md5_file($ebook->ebookFile);
-		$data['contentTrustSecret']=sha1($data['checksum']."ONLYUPLOAD".$bookId."31.210.53.80");
+		$host_ip=trim(shell_exec("/sbin/ifconfig eth0 | awk '/inet / { print $2 }' | sed -e s/addr://"));
+		//$host_ip="31.210.53.80";
+		$data['contentTrustSecret']=sha1($data['checksum']."ONLYUPLOAD".$bookId.$host_ip);
 
 		
 
