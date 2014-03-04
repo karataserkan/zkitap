@@ -767,7 +767,7 @@ right join book using (book_id) where book_id='$bookId' and type!='image';";
 			$data['contentPrice']=$_POST['contentPrice'];
 			$data['date']=$_POST['date'];
 			$data['contentReaderGroup']=$_POST['contentReaderGroup'];
-			//$data['contentCover']=$bookData['cover'];
+			$data['contentCover']=$bookData['cover'];
 			$data['contentThumbnail']=$bookData['thumbnail'];
 			
 			//book detail
