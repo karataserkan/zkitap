@@ -729,6 +729,8 @@ right join book using (book_id) where book_id='$bookId' and type!='image';";
 
 	public function SendFileToCatalog($bookId){
 
+
+
 		ob_start();
 		$book=Book::model()->findByPk($bookId);
 		$bookData=json_decode($book->data,true);
@@ -797,6 +799,8 @@ right join book using (book_id) where book_id='$bookId' and type!='image';";
 			}
 			else
 			{
+				//hard-coded host id!
+				/*
 				$host=OrganisationHostings::model()->findByPk('GIWwMdmQXL');
 				$data['hosts']['GIWwMdmQXL']['host']=$host->hosting_client_IP;
 				$data['hosts']['GIWwMdmQXL']['port']=$host->hosting_client_port;
@@ -805,7 +809,7 @@ right join book using (book_id) where book_id='$bookId' and type!='image';";
 				$data['hosts']['GIWwMdmQXL']['id']=$host->hosting_client_id;
 
 				$hosting_client_IP=$host->hosting_client_IP;
-				$hosting_client_id=$host->hosting_client_id;
+				$hosting_client_id=$host->hosting_client_id;*/
 			}
 
 
