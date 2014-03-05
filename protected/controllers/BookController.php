@@ -36,7 +36,7 @@ class BookController extends Controller
 				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
-				'actions'=>array('create','update','selectTemplate','delete','view','author','newBook','selectData','uploadFile','duplicateBook','updateThumbnail','updateCover',"copyBook","updateBookTitle"),
+				'actions'=>array('create','update','selectTemplate','delete','view','author','newBook','selectData','uploadFile','duplicateBook','updateThumbnail','updateCover',"copyBook","updateBookTitle","getBookPages"),
 				'users'=>array('@'),
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
@@ -73,6 +73,22 @@ class BookController extends Controller
 		$this->render('new_book', array());
 	}
 
+	public function actionGetBookPages($id)
+	{
+		if (!$id) {
+			return null;
+		}
+		$data=array();
+		$chapters=Chapter::model()->findAll(array('order'=>  '`order` asc ,  created asc', "condition"=>'book_id=:book_id', "params" => array(':book_id' => $id )));
+		foreach ($chapters as $key => $chapter) {
+				$data[$key]=$chapter->attributes;
+				$pages=Page::model()->findAll(array('order'=>  '`order` asc ,  created asc', "condition"=>'chapter_id=:chapter_id', "params" =>array(':chapter_id' => $chapter->chapter_id )) );
+				foreach ($pages as $key => $page) {
+					$data[$key]['pages'][]=$page->attributes;
+				}
+			}
+		echo json_encode($data);
+	}
 
 	/**
 	 * Creates a new model.
