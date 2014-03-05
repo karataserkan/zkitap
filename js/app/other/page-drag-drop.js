@@ -176,6 +176,10 @@ $( document ).ready(function () {
             createSliderComponent( event, ui );
             break;
 
+          case 'tag':
+            createTagComponent( event, ui );
+            break;
+
           default:
             break; 
         }
