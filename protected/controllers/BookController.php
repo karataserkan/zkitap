@@ -83,8 +83,13 @@ class BookController extends Controller
 		foreach ($chapters as $key => $chapter) {
 				$data[$key]=$chapter->attributes;
 				$pages=Page::model()->findAll(array('order'=>  '`order` asc ,  created asc', "condition"=>'chapter_id=:chapter_id', "params" =>array(':chapter_id' => $chapter->chapter_id )) );
-				foreach ($pages as $key => $page) {
-					$data[$key]['pages'][]=$page->attributes;
+				if ($pages) {
+					foreach ($pages as $key2 => $page) {
+						$data[$key]['pages'][$key2]=$page->attributes;
+					}
+				}
+				else{
+					$data[$key]['pages'][]=null;
 				}
 			}
 		echo json_encode($data);
