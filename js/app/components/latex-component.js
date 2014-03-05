@@ -61,9 +61,9 @@ $(document).ready(function(){
 });
 
 var latex_to_html = function(tex, component_id){
-  component_id = component_id || "MathOutput";
-  tex = "$" + (tex || "") + "$";
-  tex.replace('\\','\\\\');
+  component_id = component_id;
+  tex = "$" + tex + "$";
+  //tex.replace('\\','\\\\');
   var componentSelector = '#'+component_id;
   //console.log(tex);
   //$(componentSelector).find('.box').attr('id', component_id + "_box");

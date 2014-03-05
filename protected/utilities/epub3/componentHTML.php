@@ -729,31 +729,43 @@ class componentHTML {
 
 		$container.=" 
 			<div id='$html_id'>
-				%component_inner%
+				".$component->data->html_inner."
 			</div>
 	
 		
 		";
 
-		$this->html=str_replace('%component_inner%' ,$container, $component->data->html_inner);
+		$this->html=$container;
 		
 	}
 
 	public function latexInner($component){
 
+
 		$data=$component->data;
 
-		$latex_id= "latex".functions::get_random_string();
+		$latex_id= "latex".$component->id;
 
-		$container.=" 
+		$component->data->html_inner = htmlentities($component->data->html_inner,null,"UTF-8");
+		$container.="
+			
 			<div id='$latex_id'>
-				%component_inner%
+				\$".$component->data->html_inner."\$
 			</div>
-	
-		
-		";
+			<script type='text/javascript'>
+		       	
+					MathJax.Hub.Typeset('$latex_id');
+				
+			</script>
 
-		$this->html=str_replace('%component_inner%' ,$container, $component->data->html_inner);
+			";
+
+
+
+
+
+		$this->html = str_replace('%component_inner%' ,$container, $this->html);
+	
 		
 	}
 
@@ -761,7 +773,7 @@ class componentHTML {
 
 		$data=$component->data;
 		$container ="
-		<a  ";
+		<a  	";
 		if(isset($data->self->attr))
 			foreach ($data->self->attr as $attr_name => $attr_val ) {
 				$container.=" $attr_name='$attr_val' ";
@@ -856,7 +868,8 @@ class componentHTML {
 
 		if(isset($data->textarea->attr))
 			foreach ($data->textarea->attr as $attr_name => $attr_val ) {
-				$container.=" $attr_name='$attr_val' ";
+				if (trim(strtolower($attr_name))!='contenteditable')	
+					$container.=" $attr_name='$attr_val' ";
 			}
 
 		if(isset($data->textarea->css)){
@@ -886,7 +899,7 @@ class componentHTML {
 
 		$this->html=str_replace(
 			array('%component_inner%', '%component_text%') , 
-			array($container, str_replace("\n", "<br/>", $this->textSanitize($data->textarea->val) ) )
+			array($container, str_replace("\n", "<br/>",   htmlspecialchars($this->textSanitize($data->textarea->val),null,"UTF-8")  ) )
 			, $this->html);
 
 
@@ -904,7 +917,8 @@ class componentHTML {
 		<div id='".$component->id."' class='{$component->type}' ";
 		if(isset($component->data->self->attr))
 			foreach ($component->data->self->attr as $attr_name => $attr_val ) {
-				$container.=" $attr_name='$attr_val' ";
+				if (trim(strtolower($attr_name))!='contenteditable')
+					$container.=" $attr_name='$attr_val' ";
 			}
 
 		if(isset($component->data->self->css)){

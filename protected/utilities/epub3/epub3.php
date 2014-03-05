@@ -434,6 +434,7 @@ class epub3 {
 		<script type="text/javascript" src="jssor.slider.js"></script>
 		<script type="text/javascript" src="jssor.core.js"></script>
 		<script type="text/javascript" src="jssor.utils.js"></script>
+		<script type="text/javascript" src="runtime.js"></script>
 	    	<script type="text/x-mathjax-config">
 		      MathJax.Hub.Config({
 			tex2jax: {

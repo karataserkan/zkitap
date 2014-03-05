@@ -49,6 +49,9 @@
 		<!-- Jquery Selection -->
 		<script src="<?php echo Yii::app()->request->baseUrl; ?>/js/lib/jquery.selection.js"></script>
 
+		<!-- HTML5 VİDEO -->
+		<script src="<?php echo Yii::app()->request->baseUrl; ?>/js/lib/runtime.js"></script>
+
 		<!-- MathJax -->
 		<script type="text/x-mathjax-config">
 	      MathJax.Hub.Config({
