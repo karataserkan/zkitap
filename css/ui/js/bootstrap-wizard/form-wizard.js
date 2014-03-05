@@ -301,6 +301,7 @@ var FormWizard = function () {
                     message:"Eser yayınlanıyor. Lütfen Bekleyiniz",
                     type:"info",
                     showCloseButton: true,
+                    hideAfter: 100
                 });
                 wizform.ajaxSubmit({
                     url:'/editorActions/sendFileToCatalog/'+bookId,
@@ -310,14 +311,16 @@ var FormWizard = function () {
                         if (budgetError==(-1)) {
                             msg.update({
                                 message: 'Eser yayınlama başarılı.',
-                                type: 'success'
+                                type: 'success',
+                                hideAfter: 5
                             })
 
                         }else
                         {
                             msg.update({
                                 message: 'Hesabınızda yeterli bakiye bulunmamaktadır.',
-                                type: 'error'
+                                type: 'error',
+                                hideAfter: 5
                             })
                             
                         }
@@ -328,7 +331,8 @@ var FormWizard = function () {
                     error:function() { 
                         msg.update({
                             message: 'Beklenmedik bir hata oluştu. Lütfen tekrar deneyin.',
-                            type: 'error'
+                            type: 'error',
+                            hideAfter: 5
                         })
                         // bootbox.alert("Beklenmedik bir hata oluştu. Lütfen tekrar deneyin.");
                     },
