@@ -966,7 +966,31 @@ class epub3 {
 	{
 		return $this->sanitized_filename;
 	}
+	public function createThumbnails(){
+		error_log("Thumbnail\n");
+		error_log($this->get_tmp_file());
+		//error_log(print_r(scandir($this->get_tmp_file()),1));
+		$files=scandir($this->get_tmp_file());
+		$file_list="";
+		foreach ($files as $file) {
+			if(preg_match("/.+\.html/", $file))
+			{
+				$file=str_replace(".html", "", $file);
+				error_log($file);
+				error_log("\n");
+				$file_list.=" ".$file;
+			}
+			# code...
+		}
+		error_log("file list:".$file_list);
+		error_log("sh ".Yii::app()->params['pdftojpg']." ".$this->get_tmp_file().$file_list);
+		$result=shell_exec("sh ".Yii::app()->params['htmltojpg']." ".$this->get_tmp_file().$file_list);
+		if($result==null){
+			return false;
+		}
+		return true;
 
+	}
 	public function __construct($book_model=null, $download=true, $encyrptFiles=false){ 
 		
 		$this->book=$book_model;
@@ -1059,6 +1083,11 @@ class epub3 {
 			return false;
 		}
 
+		//Create thumbnails
+		if(!$this->createThumbnails()){
+			$this->errors[]=new error('Thumbnail production','Problem with thumbnails');
+			return false;
+		}
 		//Create Zip.
 		if( ! $this->zipfolder($encyrptFiles)  ) {
 			$this->errors[]=new error('Epub3-Construction','Problem with Zip');
