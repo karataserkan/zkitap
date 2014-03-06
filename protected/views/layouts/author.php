@@ -107,7 +107,8 @@
 		<script src="<?php echo Yii::app()->request->baseUrl; ?>/js/app/components/wrap-component.js"></script>	
 		<script src="<?php echo Yii::app()->request->baseUrl; ?>/js/app/components/latex-component.js"></script>
 		<script src="<?php echo Yii::app()->request->baseUrl; ?>/js/app/components/slider-component.js"></script>
-		<script src="<?php echo Yii::app()->request->baseUrl; ?>/js/app/components/tag-component.js"></script>	
+		<script src="<?php echo Yii::app()->request->baseUrl; ?>/js/app/components/tag-component.js"></script>
+		<script src="<?php echo Yii::app()->request->baseUrl; ?>/js/app/components/plink-component.js"></script>	
 
 		<!-- Page JS Codes -->
 		<script src="<?php echo Yii::app()->request->baseUrl; ?>/js/app/other/page-drag-drop.js"></script>
