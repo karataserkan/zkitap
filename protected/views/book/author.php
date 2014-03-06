@@ -181,7 +181,7 @@ $current_user=User::model()->findByPk(Yii::app()->user->id);
 			</div>
 			<div class="vertical-line responsive_2"></div>
 						
-			<div class="text-options html-options table-options toolbox" style="display:inline-block;">
+			<div class="text-options table-options toolbox" style="display:inline-block;">
 					
 					
 					<input class='tool color' rel='color' type="color" class="color-picker-box radius " placeholder="e.g. #bbbbbb" title="Yazı Rengi" />
@@ -970,6 +970,7 @@ $current_user=User::model()->findByPk(Yii::app()->user->id);
 			<li ctype="shape" class="component icon-m-shape">&nbsp;&nbsp;&nbsp;&nbsp;Şekil</li>
 			<li ctype="table" class="component icon-t-merge">&nbsp;&nbsp;&nbsp;&nbsp;Tablo</li>
 			<li ctype="html" class="component icon-t-merge">&nbsp;&nbsp;&nbsp;&nbsp;HTML</li>
+			<li ctype="plink" class="component icon-t-merge">&nbsp;&nbsp;&nbsp;&nbsp;Page Link</li>
 			<li ctype="latex" class="component icon-t-merge">&nbsp;&nbsp;&nbsp;&nbsp;Latex</li>
 			<li ctype="wrap" class="component icon-t-merge">&nbsp;&nbsp;&nbsp;&nbsp;Text Wrap</li>
 			

@@ -118,6 +118,10 @@ window.lindneo.nisga = (function(window, $, undefined){
         sliderComponentBuilder( component );
         break;
 
+      case 'plink':
+        plinkComponentBuilder( component );
+        break;
+
 
       default:
          // what can I do sometimes
@@ -454,6 +458,36 @@ var textComponentBuilder = function( component ) {
     element
     .appendTo( elementWrap )
     .htmlComponent({
+      'component': component,
+      'update': function ( event, component ) {
+        if(revision_value==0){
+        var newObject = jQuery.extend(true, {}, component);
+        revision_array.revisions.push({component_id: component.id, component: newObject, revision_date: $.now(), even_type: 'UPDATE'});
+                revision_id++;
+
+      }
+      else revision_value=0;
+      ////console.log(revision_array);
+        window.lindneo.tlingit.componentHasUpdated( component );
+      },
+      'selected': function (event, element) {
+        window.lindneo.currentComponentWidget = element;
+        window.lindneo.toolbox.refresh( element );
+      }
+    });
+
+
+  };
+
+  var plinkComponentBuilder = function( component ) {
+
+    var element  = $('<div class="plink-controllers"> </div>');
+    var elementWrap=$('<div ></div>');
+    elementWrap.appendTo( page_div_selector );
+    console.log(component);
+    element
+    .appendTo( elementWrap )
+    .plinkComponent({
       'component': component,
       'update': function ( event, component ) {
         if(revision_value==0){
