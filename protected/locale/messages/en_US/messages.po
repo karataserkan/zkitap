@@ -310,7 +310,7 @@ msgstr  "Add"
 #: protected/views/organisations/categories.php:33
 #: protected/views/organisations/categories.php:67
 #: protected/views/book/select_data.php:39
-#: protected/views/book/author.php:1564 protected/views/book/author.php:1587
+#: protected/views/book/author.php:1600 protected/views/book/author.php:1623
 msgid   "Kaydet"
 msgstr  "Save"
 
@@ -412,8 +412,8 @@ msgstr  "Keywords"
 #: protected/controllers/BookController.php:194
 #: protected/controllers/BookController.php:261
 #: protected/controllers/BookController.php:260
-#: protected/controllers/BookController.php:193
-#: protected/controllers/BookController.php:260
+#: protected/controllers/BookController.php:214
+#: protected/controllers/BookController.php:281
 msgid   "Bölüm"
 msgstr  "Chapter"
 
@@ -723,7 +723,7 @@ msgstr  "Profile Picture"
 #: protected/views/book/author.php:1551 protected/views/book/author.php:1529
 #: protected/views/book/author.php:1552 protected/views/book/author.php:1563
 #: protected/views/book/author.php:1586 protected/views/user/profile.php:43
-#: protected/views/book/author.php:1563 protected/views/book/author.php:1586
+#: protected/views/book/author.php:1599 protected/views/book/author.php:1622
 msgid   "Kapat"
 msgstr  "Close"
 
@@ -731,7 +731,7 @@ msgstr  "Close"
 #: protected/views/book/author.php:1412 protected/views/book/author.php:1430
 #: protected/views/book/author.php:1482 protected/views/book/author.php:1519
 #: protected/views/book/author.php:1520 protected/views/book/author.php:1554
-#: protected/views/book/author.php:1554
+#: protected/views/book/author.php:1590
 msgid   "Thumbnail Image"
 msgstr  "Thumbnail Image"
 
@@ -739,7 +739,7 @@ msgstr  "Thumbnail Image"
 #: protected/views/book/author.php:1435 protected/views/book/author.php:1453
 #: protected/views/book/author.php:1505 protected/views/book/author.php:1542
 #: protected/views/book/author.php:1543 protected/views/book/author.php:1577
-#: protected/views/book/author.php:1577
+#: protected/views/book/author.php:1613
 msgid   "Kapak Resmi"
 msgstr  "Cover Image"
 
