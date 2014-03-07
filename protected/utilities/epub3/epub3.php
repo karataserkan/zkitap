@@ -967,11 +967,11 @@ class epub3 {
 		return $this->sanitized_filename;
 	}
 	public function createThumbnails(){
+		set_time_limit(0);
 		error_log("Thumbnail\n");
 		error_log($this->get_tmp_file());
 		//error_log(print_r(scandir($this->get_tmp_file()),1));
 		$files=scandir($this->get_tmp_file());
-		$file_list="";
 		foreach ($files as $file) {
 			if(preg_match("/.+\.html/", $file))
 			{
