@@ -134,7 +134,7 @@ class epub3 {
 					font-family: Arial;
 					font-size: 14px;
 					line-height: normal;
-					width:1024px;
+					width:1204px;
 					height:768px;
 					}
 ";
@@ -437,14 +437,10 @@ class epub3 {
 		<script type="text/javascript" src="runtime.js"></script>
 	    	<script type="text/x-mathjax-config">
 		      MathJax.Hub.Config({
-			tex2jax: {
-<<<<<<< HEAD
-			  inlineMath: [["$","$"],["\\\\(","\\\\)"]],
-			  "HTML-CSS": { scale: 100} 
-=======
-			  inlineMath: [["$","$"],["\\(","\\)"]]
->>>>>>> d43fcf99e640db4e539dec7fd5daf15eb47ab402
-			}
+				tex2jax: {
+				  inlineMath: [["$","$"],["\\\\(","\\\\)"]],
+				  "HTML-CSS": { scale: 100} 
+				}
 		      });
 		      MathJax.Hub.Register.StartupHook("HTML-CSS Jax Ready",function () {
 			  var VARIANT = MathJax.OutputJax["HTML-CSS"].FONTDATA.VARIANT;
@@ -462,8 +458,6 @@ class epub3 {
 			});
 	    	</script>
 		<script src="mathjax/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-
-
 	</head>
 	<body style="background-repeat:no-repeat; width:'.$width.'px; height:'.$height.'px;'.$background.';'.$background_size.';">
 	<section epub:type="frontmatter titlepage">
@@ -972,11 +966,11 @@ class epub3 {
 		return $this->sanitized_filename;
 	}
 	public function createThumbnails(){
-		set_time_limit(0);
 		error_log("Thumbnail\n");
 		error_log($this->get_tmp_file());
 		//error_log(print_r(scandir($this->get_tmp_file()),1));
 		$files=scandir($this->get_tmp_file());
+		$file_list="";
 		foreach ($files as $file) {
 			if(preg_match("/.+\.html/", $file))
 			{
