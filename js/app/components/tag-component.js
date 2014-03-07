@@ -27,8 +27,9 @@ $(document).ready(function(){
         source.appendTo(this.element);
         source_image.appendTo(source);
         $.each( that.options.component.data.tags, function( key, value ) {
-          $('<a data-toggle="modal" data-target="#myModal"><img src="/css/images/t01.png" style="position:absolute; margin-top:'+value[0]+';margin-left:'+value[1]+'"></a> ').appendTo(source);
-          $('<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">\
+          console.log(that.options.component.data.tagDetails[key]);
+          $('<a data-toggle="modal" data-target="#myModal'+key+'"><img src="/css/images/t01.png" style="position:absolute; margin-top:'+value[0]+';margin-left:'+value[1]+'"></a> ').appendTo(source);
+          $('<div class="modal fade" id="myModal'+key+'" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="top:100px;">\
               <div class="modal-dialog">\
                 <div class="modal-content">\
                   <div class="modal-header">\

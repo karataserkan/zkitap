@@ -181,7 +181,7 @@ $current_user=User::model()->findByPk(Yii::app()->user->id);
 			</div>
 			<div class="vertical-line responsive_2"></div>
 						
-			<div class="text-options table-options toolbox" style="display:inline-block;">
+			<div class="text-options latex-options table-options toolbox" style="display:inline-block;">
 					
 					
 					<input class='tool color' rel='color' type="color" class="color-picker-box radius " placeholder="e.g. #bbbbbb" title="Yazı Rengi" />
