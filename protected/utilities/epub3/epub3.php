@@ -493,19 +493,19 @@ class epub3 {
 			 }
 
 		 $TOC_Html=
-'<?xml version="1.0" encoding="UTF-8"?>
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en" xmlns:epub="http://www.idpf.org/2007/ops">
-    <head>
-            <meta charset="utf-8"></meta>
-    </head>
-	<body>
-        <nav epub:type="toc" id="toc">                  
-            <ol>
-        		%navPoints%
-    		</ol>
-		</nav>
-	</body>
-</html>';
+				'<?xml version="1.0" encoding="UTF-8"?>
+				<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en" xmlns:epub="http://www.idpf.org/2007/ops">
+				    <head>
+				            <meta charset="utf-8"></meta>
+				    </head>
+					<body>
+				        <nav epub:type="toc" id="toc">                  
+				            <ol>
+				        		%navPoints%
+				    		</ol>
+						</nav>
+					</body>
+				</html>';
 
 
 				$toc_items="";
@@ -538,23 +538,22 @@ class epub3 {
 			 }
 
 				$TOC_Html=
-'<?xml version="1.0" encoding="utf-8"?>
-<ncx xmlns="http://www.daisy.org/z3986/2005/ncx/" version="2005-1" xml:lang="eng">
-	<head>
-		<meta content="urn:'.$this->uuid.'" name="dtb:uid"/>
-		<meta content="2" name="dtb:depth"/>
-		<meta content="calibre (0.8.68)" name="dtb:generator"/>
-		<meta content="'.$this->totalPageCount.'" name="dtb:totalPageCount"/>
-		<meta content="'.$this->totalPageCount.'" name="dtb:maxPageNumber"/>
-	</head>
-	<docTitle>
-		<text>'.$this->book->title.'</text>
-	</docTitle>
-	<navMap>
-%navPoints%
-	</navMap>
-</ncx>
-				';
+					'<?xml version="1.0" encoding="utf-8"?>
+					<ncx xmlns="http://www.daisy.org/z3986/2005/ncx/" version="2005-1" xml:lang="eng">
+						<head>
+							<meta content="urn:'.$this->uuid.'" name="dtb:uid"/>
+							<meta content="2" name="dtb:depth"/>
+							<meta content="calibre (0.8.68)" name="dtb:generator"/>
+							<meta content="'.$this->totalPageCount.'" name="dtb:totalPageCount"/>
+							<meta content="'.$this->totalPageCount.'" name="dtb:maxPageNumber"/>
+						</head>
+						<docTitle>
+							<text>'.$this->book->title.'</text>
+						</docTitle>
+						<navMap>
+					%navPoints%
+						</navMap>
+					</ncx>';
 
 
 				$toc_items="";
@@ -562,13 +561,13 @@ class epub3 {
 				foreach ($this->toc as $key => $toc) {
 					$this->TOC_Titles[$toc->anchor]=$toc->title;
 					$toc_items.=
-'		<navPoint id="a'. ($index_referance+1) .'" playOrder="'. $index_referance .'">
-			<navLabel>
-				<text>'.$toc->title.'</text>
-			</navLabel>
-			<content src="'. $toc->page . ( $toc->anchor!="" ? '#'. $toc->anchor : "" ) .'" />
-		</navPoint>
-';
+						'		<navPoint id="a'. ($index_referance+1) .'" playOrder="'. $index_referance .'">
+									<navLabel>
+										<text>'.$toc->title.'</text>
+									</navLabel>
+									<content src="'. $toc->page . ( $toc->anchor!="" ? '#'. $toc->anchor : "" ) .'" />
+								</navPoint>
+						';
 					$index_referance++;
 
 				}
