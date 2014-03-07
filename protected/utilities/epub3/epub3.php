@@ -134,7 +134,7 @@ class epub3 {
 					font-family: Arial;
 					font-size: 14px;
 					line-height: normal;
-					width:1204px;
+					width:1024px;
 					height:768px;
 					}
 ";
@@ -438,8 +438,12 @@ class epub3 {
 	    	<script type="text/x-mathjax-config">
 		      MathJax.Hub.Config({
 			tex2jax: {
+<<<<<<< HEAD
 			  inlineMath: [["$","$"],["\\\\(","\\\\)"]],
 			  "HTML-CSS": { scale: 100} 
+=======
+			  inlineMath: [["$","$"],["\\(","\\)"]]
+>>>>>>> d43fcf99e640db4e539dec7fd5daf15eb47ab402
 			}
 		      });
 		      MathJax.Hub.Register.StartupHook("HTML-CSS Jax Ready",function () {
@@ -968,11 +972,11 @@ class epub3 {
 		return $this->sanitized_filename;
 	}
 	public function createThumbnails(){
+		set_time_limit(0);
 		error_log("Thumbnail\n");
 		error_log($this->get_tmp_file());
 		//error_log(print_r(scandir($this->get_tmp_file()),1));
 		$files=scandir($this->get_tmp_file());
-		$file_list="";
 		foreach ($files as $file) {
 			if(preg_match("/.+\.html/", $file))
 			{
