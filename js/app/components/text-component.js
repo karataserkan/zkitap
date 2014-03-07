@@ -261,7 +261,6 @@ $(document).ready(function(){
           } , 
           'attr': {
             'placeholder':'Metin Kutusu',
-            'contentEditable':'true' 
           },
           'val': ''
         },

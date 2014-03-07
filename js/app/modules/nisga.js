@@ -122,6 +122,10 @@ window.lindneo.nisga = (function(window, $, undefined){
         plinkComponentBuilder( component );
         break;
 
+      case 'tag':
+        tagComponentBuilder( component );
+        break;
+
 
       default:
          // what can I do sometimes
