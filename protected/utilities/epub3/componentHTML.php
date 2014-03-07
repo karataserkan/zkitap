@@ -731,7 +731,7 @@ class componentHTML {
 		$html_id= "html".functions::get_random_string();
 		$component->data->html_inner = html_entity_decode($component->data->html_inner,null,"UTF-8");
 		$container.=" 
-			<div id='$html_id'>
+			<div id='$html_id' style='position:absolute; top:".$component->data->self->css->top.";left:".$component->data->self->css->left."'>
 				".$component->data->html_inner."
 			</div>
 	
@@ -956,7 +956,7 @@ class componentHTML {
 
 		
 
-
+		$data->textarea->val = html_entity_decode(str_replace(" ", "&nbsp; ",$data->textarea->val),null,"UTF-8");
 	
 
 		$this->html=str_replace(
