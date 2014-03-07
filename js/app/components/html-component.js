@@ -18,7 +18,7 @@ $(document).ready(function(){
       
 
       var html_data = html_tag_replace(this.options.component.data.html_inner);
-      console.log(html_data);
+      console.log(this.options.component);
       while( html_data.indexOf('&lt;') > -1)
       {
         html_data = html_data.replace('&lt;', '<');
