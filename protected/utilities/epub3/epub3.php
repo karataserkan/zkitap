@@ -438,7 +438,8 @@ class epub3 {
 	    	<script type="text/x-mathjax-config">
 		      MathJax.Hub.Config({
 			tex2jax: {
-			  inlineMath: [["$","$"],["\\\\(","\\\\)"]]
+			  inlineMath: [["$","$"],["\\\\(","\\\\)"]],
+			  "HTML-CSS": { scale: 100} 
 			}
 		      });
 		      MathJax.Hub.Register.StartupHook("HTML-CSS Jax Ready",function () {
