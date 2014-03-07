@@ -3,6 +3,6 @@ output=$1;
 output_with_extension=$3;
 xvfb-run -a -s "-screen 0 1024x768x24" wkhtmltopdf $output"/"$output_with_extension $output"/"temp_$2.pdf;
 pdfcrop $output"/"temp_$2.pdf $output"/"$2.pdf;
-pdftoppm -f 1 -l 1 -jpeg -r 18 $output"/"$2.pdf > $output"/"$2".jpg";
+pdftoppm -f 1 -l 1 -jpeg -r 50 $output"/"$2.pdf | convert - -resize 'x100' $output"/"$2".jpg";
 rm -f $output"/"$2.pdf;
 rm -f $output"/"temp_$2.pdf

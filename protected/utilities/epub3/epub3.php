@@ -134,7 +134,7 @@ class epub3 {
 					font-family: Arial;
 					font-size: 14px;
 					line-height: normal;
-					width:1204px;
+					width:1024px;
 					height:768px;
 					}
 ";
@@ -438,7 +438,7 @@ class epub3 {
 	    	<script type="text/x-mathjax-config">
 		      MathJax.Hub.Config({
 			tex2jax: {
-			  inlineMath: [["$","$"],["\\\\(","\\\\)"]]
+			  inlineMath: [["$","$"],["\\(","\\)"]]
 			}
 		      });
 		      MathJax.Hub.Register.StartupHook("HTML-CSS Jax Ready",function () {
