@@ -32,7 +32,7 @@ class OrganisationsController extends Controller
 				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
-				'actions'=>array('create','update','workspaces','delWorkspaceUser','addWorkspaceUser','users','addUser','deleteOrganisationUser','account','bookCategories','deleteCategory','createBookCategory','updateBookCategory'),
+				'actions'=>array('create','update','workspaces','delWorkspaceUser','addWorkspaceUser','users','addUser','deleteOrganisationUser','account','bookCategories','deleteCategory','createBookCategory','updateBookCategory','templates'),
 				'users'=>array('@'),
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
@@ -110,6 +110,14 @@ class OrganisationsController extends Controller
 		$this->render("account");
 	}
 
+	public function actionTemplates($id)
+	{
+		$templates=Book::model()->findAll('workspace_id=:workspace_id',array('workspace_id'=>$id));
+		$this->render('templates',array(
+			'templates'=>$templates,
+			));
+	}
+
 	public function getOrganisationBudget($id)
 	{
 		$budget = Yii::app()->db->createCommand("select transaction_type, transaction_organisation_id,  SUM(amount)  as amount 
@@ -146,12 +154,56 @@ class OrganisationsController extends Controller
 		{
 			$model->attributes=$_POST['Organisations'];
 			if($model->save())
+				$this->createTemplateWorkspace($model->organisation_id);
 				$this->redirect(array('view','id'=>$model->organisation_id));
 		}
 
 		$this->render('create',array(
 			'model'=>$model,
 		));
+	}
+
+	public function createTemplateWorkspace($organisationId)
+	{
+		$model=new Workspaces;
+		$model->workspace_id=functions::new_id();
+		$model->workspace_name='Templates';
+		$model->creation_time=date('Y-n-d g:i:s',time());
+			if($model->save())
+			{
+				$addWorkspaceOrganization = Yii::app()->db->createCommand();
+				if($addWorkspaceOrganization->insert('organisation_workspaces', array(
+				    'organisation_id'=>$organisationId,
+				    'workspace_id'=>$model->workspace_id,
+				)))
+				{
+					$msg="WORKSPACE:CREATE:0:". json_encode(array(array('user'=>Yii::app()->user->id),array('workspaceId'=>$model->workspace_id,'organisationId'=>$organisationId)));
+					Yii::log($msg,'info');
+				}
+				else
+				{
+					$msg="WORKSPACE:CREATE:1:". json_encode(array(array('user'=>Yii::app()->user->id),array('workspaceId'=>$model->workspace_id,'organisationId'=>$organisationId)));
+					Yii::log($msg,'info');
+					return false;
+				}
+
+				$addWorkspaceOwner = Yii::app()->db->createCommand();
+				$addWorkspaceOwner->insert('workspaces_users', array(
+				    'workspace_id'=>$model->workspace_id,
+				    'userid'=>Yii::app()->user->id,
+				    'owner'=>'1',
+				));
+
+				$addorganisationMeta = Yii::app()->db->createCommand();
+				if($addorganisationMeta->insert('organisations_meta', array(
+				    'organisation_id'=>$organisationId,
+				    'meta'=>'template',
+				    'value'=>$model->workspace_id,
+				)))
+					return true;
+			}
+
+			return false;
 	}
 
 	/**
