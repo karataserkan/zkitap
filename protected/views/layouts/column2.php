@@ -118,6 +118,12 @@
 						$organisation = organisation();
 					if($organisation)
 					{
+						$templateDb=Yii::app()->db->createCommand()
+						    ->select("value")
+						    ->from("organisations_meta")
+						    ->where("organisation_id=:organisation_id AND meta=:meta", array(':organisation_id' => $organisation["organisation_id"],'meta'=>'template'))
+						    ->queryRow();
+						    $template=$templateDb['value'];
 					?>
 					<li>
 						<a href="/organisations/account/<?php echo $organisation["organisation_id"]; ?>">
@@ -126,6 +132,15 @@
 						</span>
 						</a>
 					</li>
+					<?php if($template) { ?>
+					<li>
+						<a href="/organisations/templates/<?php echo $template; ?>">
+							<i class="fa fa-clipboard fa-fw"></i> <span class="menu-text">
+							<?php _e('Templates'); ?>
+						</span>
+						</a>
+					</li>
+					<?php } ?>
 					<li class="has-sub">
 						<a href="javascript:;" class="">
 							<i class="fa fa-briefcase fa-fw"></i>
