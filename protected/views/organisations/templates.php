@@ -27,18 +27,6 @@ var data_id = '';
 
 $this->pageTitle=Yii::app()->name;
 ?>
-<script>
-//burada kullanıcıya hakları vermek için seçilmiş olan user | book | type il link oluşturup yönlendiriyorum											
-function sendRight(e){
-    var b = e.id;
-    var userId=$('#' + b + '> #user').val();
-    var type=$('#' + b + '> #type').val();
-    var bookId=$('#' + b + ' > #book').val();
-    var link ='/site/right?userId='+userId+'&bookId='+bookId+'&type='+type;
-    window.location.assign(link);
-    }
-</script>
-
 
 <script>
 		jQuery(document).ready(function() {		
@@ -82,7 +70,7 @@ function sendRight(e){
 							<div class="col-sm-12">
 								<div class="page-header">
 										<h3 class="content-title pull-left"><?php _e('Templates') ?></h3>
-										<a class="btn pull-right btn-primary" href="/book/newBook">
+										<a class="btn pull-right btn-primary" href="/book/createTemplate/<?php echo $workspace_id;?>">
 							<i class="fa fa-plus-circle"></i>
 							<span>Template Ekle</span>
 						</a>
@@ -174,9 +162,6 @@ $userid=Yii::app()->user->id;
 
 <script type="text/javascript">
 var bookId="";
-$(document).on("click",".copyThisBook",function(e){
-	bookId = $(this).attr('book-id');
-});
 
 $(document).on("click",".updateThisBookTitle",function(e){
 	bookId = $(this).attr('book-id');
@@ -189,11 +174,6 @@ $(document).on("click",".SelectWorkspace",function(e){
 	workspaceId=$(this).children("span").children("input").val();
 });
 
-$("#copy_book").click(function(){
-	var title=$("#newContentTitle").val();
-	var link ="/book/copyBook?bookId="+bookId+"&workspaceId="+workspaceId+'&title='+title;
-    window.location.assign(link);
-});
 
 $("#update_book_title").click(function(){
 	var title=$("#updateContentTitle").val();

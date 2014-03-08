@@ -115,6 +115,7 @@ class OrganisationsController extends Controller
 		$templates=Book::model()->findAll('workspace_id=:workspace_id',array('workspace_id'=>$id));
 		$this->render('templates',array(
 			'templates'=>$templates,
+			'workspace_id'=>$id
 			));
 	}
 
