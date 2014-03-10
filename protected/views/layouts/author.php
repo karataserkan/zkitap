@@ -52,6 +52,18 @@
 		<!-- HTML5 VİDEO -->
 		<script src="<?php echo Yii::app()->request->baseUrl; ?>/js/lib/runtime.js"></script>
 
+		<!-- MULTİPLE CHOİCE -->
+		<script src="<?php echo Yii::app()->request->baseUrl; ?>/js/lib/multiplechoice/sources/js/MultipleChoiceDataJSON.js"></script>
+		<script src="<?php echo Yii::app()->request->baseUrl; ?>/js/lib/multiplechoice/sources/js/multiplechoice_min.js"></script>
+		<link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/js/lib/multiplechoice/sources/css/MultipleChoice.css" />
+
+		<!-- DROPDOWN -->
+		<script src="<?php echo Yii::app()->request->baseUrl; ?>/js/lib/dropdown/sources/js/DropDownDataJSON.js"></script>
+		<script src="<?php echo Yii::app()->request->baseUrl; ?>/js/lib/dropdown/sources/js/dropdown-mini.js"></script>
+		<link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/js/lib/dropdown/sources/css/DropDown.css" />
+
+		
+
 		<!-- MathJax -->
 		<script type="text/x-mathjax-config">
 	      MathJax.Hub.Config({

@@ -430,11 +430,20 @@ class epub3 {
 	    	<script type="text/javascript" src="pubsub.js"></script>
 	    	<script type="text/javascript" src="Chart.js"></script>
 		<script type="text/javascript" src="jquery.slickwrap.js"></script>
-		<script type="text/javascript" src="jquery.lazyloadxt.js"></script>
 		<script type="text/javascript" src="jssor.slider.js"></script>
 		<script type="text/javascript" src="jssor.core.js"></script>
 		<script type="text/javascript" src="jssor.utils.js"></script>
 		<script type="text/javascript" src="runtime.js"></script>
+		<!-- MULTİPLE CHOİCE -->
+		<script src="multiplechoice/sources/js/MultipleChoiceDataJSON.js"></script>
+		<script src="multiplechoice/sources/js/multiplechoice_min.js"></script>
+		<link rel="stylesheet" type="text/css" href="multiplechoice/sources/css/MultipleChoice.css" />
+
+		<!-- DROPDOWN -->
+		<script src="dropdown/sources/js/DropDownDataJSON.js"></script>
+		<script src="dropdown/sources/js/dropdown-mini.js"></script>
+		<link rel="stylesheet" type="text/css" href="dropdown/sources/css/DropDown.css" />
+
 	    	<script type="text/x-mathjax-config">
 		      MathJax.Hub.Config({
 				tex2jax: {
@@ -455,6 +464,10 @@ class epub3 {
 			  VARIANT["bold"].fonts.unshift("MathJax_SansSerif-bold");
 			  VARIANT["italic"].fonts.unshift("MathJax_SansSerif-italic");
 			  VARIANT["-tex-mathit"].fonts.unshift("MathJax_SansSerif-italic");
+			});
+			MathJax.Hub.Register.StartupHook("End",function () {
+			  $(".MathJax").css("font-size","93%");
+			  $(".textarea .MathJax").css("font-size","80%");
 			});
 	    	</script>
 		<script src="mathjax/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
