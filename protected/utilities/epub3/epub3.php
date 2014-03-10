@@ -134,7 +134,7 @@ class epub3 {
 					font-family: Arial;
 					font-size: 14px;
 					line-height: normal;
-					width:1024px;
+					width:1204px;
 					height:768px;
 					}
 ";
@@ -430,16 +430,25 @@ class epub3 {
 	    	<script type="text/javascript" src="pubsub.js"></script>
 	    	<script type="text/javascript" src="Chart.js"></script>
 		<script type="text/javascript" src="jquery.slickwrap.js"></script>
-		<script type="text/javascript" src="jquery.lazyloadxt.js"></script>
 		<script type="text/javascript" src="jssor.slider.js"></script>
 		<script type="text/javascript" src="jssor.core.js"></script>
 		<script type="text/javascript" src="jssor.utils.js"></script>
 		<script type="text/javascript" src="runtime.js"></script>
+		<!-- MULTİPLE CHOİCE -->
+		<script src="multiplechoice/sources/js/MultipleChoiceDataJSON.js"></script>
+		<script src="multiplechoice/sources/js/multiplechoice_min.js"></script>
+		<link rel="stylesheet" type="text/css" href="multiplechoice/sources/css/MultipleChoice.css" />
+
+		<!-- DROPDOWN -->
+		<script src="dropdown/sources/js/DropDownDataJSON.js"></script>
+		<script src="dropdown/sources/js/dropdown-mini.js"></script>
+		<link rel="stylesheet" type="text/css" href="dropdown/sources/css/DropDown.css" />
 	    	<script type="text/x-mathjax-config">
 		      MathJax.Hub.Config({
-			tex2jax: {
-			  inlineMath: [["$","$"],["\\(","\\)"]]
-			}
+				tex2jax: {
+				  inlineMath: [["$","$"],["\\\\(","\\\\)"]],
+				  "HTML-CSS": { scale: 100} 
+				}
 		      });
 		      MathJax.Hub.Register.StartupHook("HTML-CSS Jax Ready",function () {
 			  var VARIANT = MathJax.OutputJax["HTML-CSS"].FONTDATA.VARIANT;
@@ -455,10 +464,12 @@ class epub3 {
 			  VARIANT["italic"].fonts.unshift("MathJax_SansSerif-italic");
 			  VARIANT["-tex-mathit"].fonts.unshift("MathJax_SansSerif-italic");
 			});
+			MathJax.Hub.Register.StartupHook("End",function () {
+			  $(".MathJax").css("font-size","93%");
+			  $(".textarea .MathJax").css("font-size","80%");
+			});
 	    	</script>
 		<script src="mathjax/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-
-
 	</head>
 	<body style="background-repeat:no-repeat; width:'.$width.'px; height:'.$height.'px;'.$background.';'.$background_size.';">
 	<section epub:type="frontmatter titlepage">
@@ -478,10 +489,7 @@ class epub3 {
 			'%components%','%style%'
 			), array($components_html,$page_styles), $page_structure);
 
-
-
 		return $page_file_inside;
-
 
 	}
 
@@ -494,19 +502,19 @@ class epub3 {
 			 }
 
 		 $TOC_Html=
-'<?xml version="1.0" encoding="UTF-8"?>
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en" xmlns:epub="http://www.idpf.org/2007/ops">
-    <head>
-            <meta charset="utf-8"></meta>
-    </head>
-	<body>
-        <nav epub:type="toc" id="toc">                  
-            <ol>
-        		%navPoints%
-    		</ol>
-		</nav>
-	</body>
-</html>';
+				'<?xml version="1.0" encoding="UTF-8"?>
+				<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en" xmlns:epub="http://www.idpf.org/2007/ops">
+				    <head>
+				            <meta charset="utf-8"></meta>
+				    </head>
+					<body>
+				        <nav epub:type="toc" id="toc">                  
+				            <ol>
+				        		%navPoints%
+				    		</ol>
+						</nav>
+					</body>
+				</html>';
 
 
 				$toc_items="";
@@ -539,23 +547,22 @@ class epub3 {
 			 }
 
 				$TOC_Html=
-'<?xml version="1.0" encoding="utf-8"?>
-<ncx xmlns="http://www.daisy.org/z3986/2005/ncx/" version="2005-1" xml:lang="eng">
-	<head>
-		<meta content="urn:'.$this->uuid.'" name="dtb:uid"/>
-		<meta content="2" name="dtb:depth"/>
-		<meta content="calibre (0.8.68)" name="dtb:generator"/>
-		<meta content="'.$this->totalPageCount.'" name="dtb:totalPageCount"/>
-		<meta content="'.$this->totalPageCount.'" name="dtb:maxPageNumber"/>
-	</head>
-	<docTitle>
-		<text>'.$this->book->title.'</text>
-	</docTitle>
-	<navMap>
-%navPoints%
-	</navMap>
-</ncx>
-				';
+					'<?xml version="1.0" encoding="utf-8"?>
+					<ncx xmlns="http://www.daisy.org/z3986/2005/ncx/" version="2005-1" xml:lang="eng">
+						<head>
+							<meta content="urn:'.$this->uuid.'" name="dtb:uid"/>
+							<meta content="2" name="dtb:depth"/>
+							<meta content="calibre (0.8.68)" name="dtb:generator"/>
+							<meta content="'.$this->totalPageCount.'" name="dtb:totalPageCount"/>
+							<meta content="'.$this->totalPageCount.'" name="dtb:maxPageNumber"/>
+						</head>
+						<docTitle>
+							<text>'.$this->book->title.'</text>
+						</docTitle>
+						<navMap>
+					%navPoints%
+						</navMap>
+					</ncx>';
 
 
 				$toc_items="";
@@ -563,13 +570,13 @@ class epub3 {
 				foreach ($this->toc as $key => $toc) {
 					$this->TOC_Titles[$toc->anchor]=$toc->title;
 					$toc_items.=
-'		<navPoint id="a'. ($index_referance+1) .'" playOrder="'. $index_referance .'">
-			<navLabel>
-				<text>'.$toc->title.'</text>
-			</navLabel>
-			<content src="'. $toc->page . ( $toc->anchor!="" ? '#'. $toc->anchor : "" ) .'" />
-		</navPoint>
-';
+						'		<navPoint id="a'. ($index_referance+1) .'" playOrder="'. $index_referance .'">
+									<navLabel>
+										<text>'.$toc->title.'</text>
+									</navLabel>
+									<content src="'. $toc->page . ( $toc->anchor!="" ? '#'. $toc->anchor : "" ) .'" />
+								</navPoint>
+						';
 					$index_referance++;
 
 				}
@@ -967,11 +974,11 @@ class epub3 {
 		return $this->sanitized_filename;
 	}
 	public function createThumbnails(){
-		set_time_limit(0);
 		error_log("Thumbnail\n");
 		error_log($this->get_tmp_file());
 		//error_log(print_r(scandir($this->get_tmp_file()),1));
 		$files=scandir($this->get_tmp_file());
+		$file_list="";
 		foreach ($files as $file) {
 			if(preg_match("/.+\.html/", $file))
 			{
