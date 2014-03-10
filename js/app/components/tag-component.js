@@ -15,33 +15,38 @@ $(document).ready(function(){
       var that = this;
       var image_width = 0;
       //if( that.options.component.type=='galery')
+      var componenttagid='tag'+this.options.component.id;
+      if( that.options.component.data.tagDetails ) {
+        console.log(that.options.component.data.tagDetails[0]);
+        console.log(that.options.component.data.tags[0][0]);
+        console.log(that.options.component.data.imageBinary);
+        //return;
+        var source = $('<div  id="message_'+componenttagid+'" style="width:560px;" ></div>');
+        var source_image = $('<img src="' + this.options.component.data.imageBinary + '" style="width:560px; padding-left:5px; position:relative;" >');
 
-      if( that.options.component.data.ul.imgs ) {
-        var counter=0;
-        var ul=$('<ul></ul>');
-        ul.css(that.options.component.data.ul.css);
-        this.element.parent().find('.some-gallery').css(that.options.component.data['some-gallery'].css);
-        
-    
-
-        console.log(that);  
-        $.each (that.options.component.data.ul.imgs , function (index,value) {
-          if(  value.src ) {
-            counter++;
-            var image= $('<img class="galery_component_image" style="display: block; margin: auto; min-width: 50%; min-height: 50%; " src="'+value.src+ '" />'); 
-            var container=$('<li class="galery_component_li" style="float:left; position: absolute; width: 200%; height: 200%; left: -50%;'+ (counter==1 ? ''  : 'display:none;')+ '" ></li>');
-            image.appendTo(container);        
-            container.appendTo(ul);
-          }       
+        source.appendTo(this.element);
+        source_image.appendTo(source);
+        $.each( that.options.component.data.tags, function( key, value ) {
+          console.log(that.options.component.data.tagDetails[key]);
+          $('<a data-toggle="modal" data-target="#myModal'+key+'"><img src="/css/images/t01.png" style="position:absolute; margin-top:'+value[0]+';margin-left:'+value[1]+'"></a> ').appendTo(source);
+          $('<div class="modal fade" id="myModal'+key+'" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="top:100px;">\
+              <div class="modal-dialog">\
+                <div class="modal-content">\
+                  <div class="modal-header">\
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>\
+                    <h4 class="modal-title" id="myModalLabel">Modal title</h4>\
+                  </div>\
+                  <div class="modal-body">\
+                    '+that.options.component.data.tagDetails[key]+'\
+                  </div>\
+                  <div class="modal-footer">\
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>\
+                    <button type="button" class="btn btn-primary">Save changes</button>\
+                  </div>\
+                </div>\
+              </div>\
+            </div>').appendTo(source);
         });
-
-        ul.addClass('galery_component_ul');
-        that.element.parent().addClass('galery_component_wrap');
-        ul.appendTo(that.element);
-        that.element.first().show();
-
-        $('<div style="clear:both"></div>').appendTo(that.element);
-
       }
     },
 
@@ -56,38 +61,15 @@ $(document).ready(function(){
     
   });
 });
- 
-$.fn.getStyleObject = function(){
-        var dom = this.get(0);
-        var style;
-        var returns = {};
-        if(window.getComputedStyle){
-            var camelize = function(a,b){
-                return b.toUpperCase();
-            };
-            style = window.getComputedStyle(dom, null);
-            for(var i = 0, l = style.length; i < l; i++){
-                var prop = style[i];
-                var camel = prop.replace(/\-([a-z])/g, camelize);
-                var val = style.getPropertyValue(prop);
-                returns[camel] = val;
-            };
-            return returns;
-        };
-        if(style = dom.currentStyle){
-            for(var prop in style){
-                returns[prop] = style[prop];
-            };
-            return returns;
-        };
-        return this.css();
-    }
+
 var createTagComponent = function (event,ui){
+
+  var imageBinary = '';
 
     $("<div class='popup ui-draggable' id='pop-image-popup' style='display: block; top:" + (ui.offset.top-$(event.target).offset().top ) + "px; left: " + ( ui.offset.left-$(event.target).offset().left ) + "px; width800x;'> \
     <div class='popup-header'> \
     <i class='icon-m-galery'></i> &nbsp;Galeri Ekle \
-    <i id='galery-add-dummy-close-button' class='icon-close size-10 popup-close-button' style='width: 800px; height:50px;'></i> \
+    <i id='tag-close-button' class='icon-close size-10 popup-close-button' style='width: 800px; height:50px;'></i> \
     </div> \
       <div class='gallery-inner-holder' style='width:800px;'> \
         <div style='clear:both'></div> \
@@ -101,7 +83,7 @@ var createTagComponent = function (event,ui){
      <div style='clear:both' > </div> \
      <a id='pop-image-OK' class='btn btn-info' >Tamam</a>\
     </div> ").appendTo('body').draggable();
-    $('#galery-add-dummy-close-button').click(function(){
+    $('#tag-close-button').click(function(){
 
       $('#pop-image-popup').remove();  
 
@@ -143,78 +125,31 @@ var createTagComponent = function (event,ui){
       
       for ( var i = 0; i < count; i++ ) {
           tagDetails.push($('#tag_detail_'+i).val());
-          tags.push($('#tag_0'));
+          var tag_position = [$('#tag_'+i).css('margin-top'), $('#tag_'+i).css('margin-left')];
+          tags.push(tag_position);
        }
-      console.log($('#tag_0').getStyleObject());
-      return;
-      var imgs=[];
-        $('#galery-popup-images img').each(function( index ) {
-          var img={
-              'css' : {
-
-                'height':'100%',
-                'margin': '0',
-                
-                'border': 'none 0px',
-                'outline': 'none',
-                'background-color': 'transparent'
-              } , 
-              'src': $( this ).attr('src')
-            }
-            imgs.push(img);
-
-          console.log( index + ": " + $( this ).text() );
-        });
-
+      console.log(tags);
         
       var component = {
-          'type' : 'galery',
+          'type' : 'tag',
           'data': {
-            'some-gallery':{
-              'css': {
-                'width': '100%',
-                'height': '100%',
-                'min-height':'100px',
-                'min-width':'100px',
-              }
-            },
-            'ul':{
-              'css': {
-                'overflow':'hidden',
-                'margin': '0',
-                'padding': '0',
-                'position': 'relative',
-                'min-height':'100px',
-                'min-width':'100px',
-
-                'width': image_width,
-                'height': image_height,
-
-
-              },
-            'imgs':imgs
-            
-         
-            },
+            'tagDetails':tagDetails,
+            'tags':tags,
+            'imageBinary':imageBinary,
             'lock':'',
             'self': {
               'css': {
                 'position':'absolute',
                 'top': (ui.offset.top-$(event.target).offset().top ) + 'px',
                 'left':  ( ui.offset.left-$(event.target).offset().left ) + 'px',
-
-          
-
                 'background-color': 'transparent',
-                
-
               }
             }
           }
         };
 
          window.lindneo.tlingit.componentHasCreated( component );
-         $("#galery-add-dummy-close-button").trigger('click');
+         $("#tag-close-button").trigger('click');
 
     });
 
@@ -222,7 +157,7 @@ var createTagComponent = function (event,ui){
     var image_width = 0;
     var image_height = 0;
     var el = document.getElementById("dummy-dropzone");
-    var imageBinary = '';
+    
 
     el.addEventListener("dragenter", function(e){
       e.stopPropagation();

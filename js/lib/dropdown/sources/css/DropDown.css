@@ -1,0 +1,139 @@
+
+@charset "utf-8";
+
+#linden_MainContainer{
+    background: gainsboro;
+    width:780px;
+    height:400px;
+    position:absolute;
+    left:0;
+    top:0;
+    font-family:Arial, Helvetica, sans-serif;
+    font-size:14px;
+    overflow: hidden;
+}
+
+#questionText {
+    width: 700px;
+    position: absolute;
+    top: 30px;
+    left: 20px;
+}
+.dropDownMenus {
+    position: absolute;
+    left: 20px;
+    top: 100px;
+}
+#dropDownMenu_2 {
+    top: 240px;
+}
+
+#textBoxContainer_1 {
+    width: 80px;
+    height: 24px;
+    position: absolute;
+    top: 97px;
+    right: 100px;
+}
+#textBoxContainer_2 {
+    width: 80px;
+    height: 24px;
+    position: absolute;
+    top: 237px;
+    right: 100px;
+}
+
+.dictionaryTextInput {
+    font-size: 16px;
+    width: 80px;
+    height: 24px;
+    position: static;
+    text-align: center;
+}
+
+/*Navigation..................................*/
+
+#linden_QuestionNavigationContainer {
+    position:absolute;
+    bottom: 15px;
+    border-top: dashed 1px rgb(110, 123, 143);
+    width: 100%;
+    height: 35px;
+}
+
+#linden_QuestionNavigationContainer > input {
+    user-select: none;
+    -ms-user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -o-user-select: none;
+}
+
+.linden_QuestionNavigationButton {
+    margin-top: 2px;
+    margin-left: 20px;
+    width:30px;
+    height:30px;
+    float: left;
+    color: white;
+    font-weight: bolder;
+    background: rgb(110, 123, 143) !important;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+}
+.linden_QuestionNavigationButton:focus {
+    border: none;
+    border-radius: 20px;
+}
+.linden_QuestionNavigationButton:disabled {
+    background: rgb(138, 143, 143) !important;
+    cursor: default;
+}
+
+#questionNavigationText {
+    color: rgb(110, 123, 143) !important;
+    margin-top: 2px;
+    margin-left: 20px;
+    width:100px;
+    height:30px;
+    text-align: center;
+    float: left;
+    line-height: 30px;
+    font-weight: bold;
+}
+
+#linden_TryAgainButton {
+    border-radius: 3px;
+    width:100px;
+    margin-left: 350px;
+}
+#linden_ShowAnswerButton {
+    border-radius: 3px;
+    width:100px;
+    margin-left: 20px;
+}
+#linden_CheckButton {
+    border-radius: 3px;
+    width:100px;
+    margin-left: 20px;
+}
+#linden_QuestionTitle{  position:relative;
+    line-height: 30px;
+    background-color: rgb(110, 123, 143);
+    text-align: left;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    width: 100%;
+    height: 15px;
+}
+
+#linden_QuestionFooter{
+    position:absolute;
+    bottom: 0;
+    background-color: rgb(110, 123, 143);
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    width: 100%;
+    height: 15px;
+}

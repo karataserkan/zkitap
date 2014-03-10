@@ -180,6 +180,10 @@ $( document ).ready(function () {
             createTagComponent( event, ui );
             break;
 
+          case 'plink':
+            createPlinkComponent( event, ui );
+            break;
+
           default:
             break; 
         }

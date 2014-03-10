@@ -42,14 +42,17 @@ class componentHTML {
 			    $this->tableInner($component);
 			    break;
 			*/
-			  case 'html':
+			 case 'html':
 			    $this->htmlInner($component);
 			    break;
-			  //case 'wrap':
-			    //$this->wrapInner($component);
-			    //break;
-			  case 'latex':
+			 case 'wrap':
+			    $this->wrapInner($component);
+			    break;
+			 case 'latex':
 			    $this->latexInner($component);
+			    break;
+			 case 'plink':
+			    $this->plinkInner($component);
 			    break;
 			  /*
 			  case 'slider':
@@ -726,10 +729,28 @@ class componentHTML {
 		$data=$component->data;
 
 		$html_id= "html".functions::get_random_string();
-
+		$component->data->html_inner = html_entity_decode($component->data->html_inner,null,"UTF-8");
 		$container.=" 
-			<div id='$html_id'>
+			<div id='$html_id' style='position:absolute; top:".$component->data->self->css->top.";left:".$component->data->self->css->left."'>
 				".$component->data->html_inner."
+			</div>
+	
+		
+		";
+
+		$this->html=$container;
+		
+	}
+
+	public function plinkInner($component){
+
+		$data=$component->data;
+
+		$plink_id= "plink".functions::get_random_string();
+		
+		$container.=" 
+			<div id='$plink_id'>
+				<a href='".$component->data->page_link.".html'>".$component->data->plink_data."</a>
 			</div>
 	
 		
@@ -765,6 +786,47 @@ class componentHTML {
 
 
 		$this->html = str_replace('%component_inner%' ,$container, $this->html);
+	
+		
+	}
+
+	public function wrapInner($component){
+
+
+		$data=$component->data;
+
+		$wrap_id= "wrap".$component->id;
+
+		/*$component->data->html_inner = str_replace('&lt;', '<', $component->data->html_inner);
+		$component->data->html_inner = str_replace('&gt;', '>', $component->data->html_inner);
+		$component->data->html_inner = str_replace('&amp;', '&', $component->data->html_inner);*/
+		$component->data->html_inner = str_replace('<div>', '', $component->data->html_inner);
+		$component->data->html_inner = str_replace('</div>', '', $component->data->html_inner);
+		$component->data->html_inner = str_replace('<span>', '', $component->data->html_inner);
+		$component->data->html_inner = str_replace('</span>', '', $component->data->html_inner);
+		$component->data->html_inner = str_replace('<span style="line-height: 1.428571429;">', '', $component->data->html_inner);
+
+		$component->data->html_inner = html_entity_decode($component->data->html_inner,null,"UTF-8");
+		$container.="
+
+			<div id='".$wrap_id."'>
+				".$component->data->html_inner."
+			</div>
+			<script type='text/javascript'>
+		       	
+				$('.wrapReady.withSourceImage').slickWrap({
+                    sourceImage: true,cutoff: 180
+                });
+				
+			</script>
+
+			";
+
+
+
+
+
+		$this->html=$container;
 	
 		
 	}
@@ -894,7 +956,7 @@ class componentHTML {
 
 		
 
-
+		$data->textarea->val = html_entity_decode(str_replace(" ", "&nbsp; ",$data->textarea->val),null,"UTF-8");
 	
 
 		$this->html=str_replace(

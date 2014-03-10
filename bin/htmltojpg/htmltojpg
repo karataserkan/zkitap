@@ -1,0 +1,18 @@
+#!/bin/bash
+BASEDIR=$(dirname $0)
+
+BASEDIR=`( cd "$BASEDIR" && pwd )`
+count=1;
+while [ "$1" ]
+do
+	if [ "$count" -eq "1" ]; then
+		output=$1
+	else
+		echo $BASEDIR"/"htmltojpg_unit;
+		sh $BASEDIR"/"htmltojpg_unit $output $1 $1".html"&
+	fi
+shift
+	count=$((count+1))
+	echo $count
+done
+sh $BASEDIR"/"htmltojpg_unit $output "titlepage" "titlepage.xhtml"
