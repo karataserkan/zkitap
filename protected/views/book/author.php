@@ -30,12 +30,10 @@ $current_user=User::model()->findByPk(Yii::app()->user->id);
 	window.lindneo.user={};
 	window.lindneo.user.username='<?php echo Yii::app()->user->name; ?>';
 	window.lindneo.user.name='<?php echo $current_user->name . " ". $current_user->surname; ?>';
+	window.lindneo.tsimshian.connect();
 
-
-	window.lindneo.tsimshian.init(); 
-
-	window.lindneo.tsimshian.changePage(window.lindneo.currentPageId); 
 	window.lindneo.highlightComponent='<?php echo $highlight_component->id; ?>';
+
 
 </script>
 	
