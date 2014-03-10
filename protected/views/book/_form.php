@@ -31,8 +31,13 @@ include 'newBookSteps.php';
 		<?php echo $form->labelEx($model,'workspace_id'); ?>
 
 		<?php // echo $form->textField($model,'workspace_id',array('size'=>44,'maxlength'=>44)); 
+		
 		$userid=Yii::app()->user->id;
-		//$workspacesOfUser= new WorkspacesUsers();
+		$templates=Yii::app()->db->createCommand()
+		->select ("*")
+		->from("organisations_meta")
+		->where("meta=:meta", array(':meta' => 'template'))
+		->queryAll();
 
 		$workspacesOfUser= Yii::app()->db->createCommand()
 	    ->select("*")
@@ -40,6 +45,14 @@ include 'newBookSteps.php';
 	    ->join("workspaces w",'w.workspace_id=x.workspace_id')
 	    ->join("user u","x.userid=u.id")
 	    ->where("userid=:id", array(':id' => $userid ) )->queryAll();
+	    
+	    foreach ($templates as $key => $template) {
+	    	foreach ($workspacesOfUser as $key => $workspace) {
+		    	if ($template['value']===$workspace['workspace_id']) {
+		    		unset($workspacesOfUser[$key]);
+		    	}
+	    	}
+	    }
 		
 		$workspace_id_value = CHtml::listData($workspacesOfUser, 
                 'workspace_id', 'workspace_name');    

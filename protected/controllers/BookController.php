@@ -36,7 +36,7 @@ class BookController extends Controller
 				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
-				'actions'=>array('create','update','selectTemplate','delete','view','author','newBook','selectData','uploadFile','duplicateBook','updateThumbnail','updateCover',"copyBook","updateBookTitle","getBookPages"),
+				'actions'=>array('create','update','selectTemplate','delete','view','author','newBook','selectData','uploadFile','duplicateBook','updateThumbnail','updateCover',"copyBook","createTemplate","updateBookTitle","getBookPages"),
 				'users'=>array('@'),
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
@@ -58,6 +58,11 @@ class BookController extends Controller
 		$this->render('view',array(
 			'model'=>$this->loadModel($id),
 		));
+	}
+
+	public function actionCreateTemplate($id)
+	{
+		$this->render('create_template',array('workspace_id'=>$id));
 	}
 
 	/**

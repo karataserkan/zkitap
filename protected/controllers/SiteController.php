@@ -197,6 +197,16 @@ class SiteController extends Controller
 		return $workspaceUsers;
 	}
 
+	public function getTemplateWorkspaces()
+	{
+		$workspace = Yii::app()->db->createCommand()
+		->select ("*")
+		->from("organisations_meta")
+		->where("meta=:meta", array(':meta' => 'template'))
+		->queryAll();
+
+		return $workspace;
+	}
 
 	/**
 	 * getUserWorkspaces
@@ -205,6 +215,7 @@ class SiteController extends Controller
 	public function getUserWorkspaces()
 	{
 		$userid=Yii::app()->user->id;
+		$templates=$this->getTemplateWorkspaces();
 
 		$workspacesOfUser= Yii::app()->db->createCommand()
 	    ->select("*")
@@ -213,6 +224,14 @@ class SiteController extends Controller
 	    ->join("user u","x.userid=u.id")
 	    ->where("userid=:id", array(':id' => $userid ) )->queryAll();
 	    
+	    foreach ($templates as $key => $template) {
+	    	foreach ($workspacesOfUser as $key => $workspace) {
+		    	if ($template['value']===$workspace['workspace_id']) {
+		    		unset($workspacesOfUser[$key]);
+		    	}
+	    	}
+	    }
+
 	    return $workspacesOfUser;	
 	}
 
