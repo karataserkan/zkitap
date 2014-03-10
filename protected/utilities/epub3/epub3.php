@@ -443,7 +443,6 @@ class epub3 {
 		<script src="dropdown/sources/js/DropDownDataJSON.js"></script>
 		<script src="dropdown/sources/js/dropdown-mini.js"></script>
 		<link rel="stylesheet" type="text/css" href="dropdown/sources/css/DropDown.css" />
-
 	    	<script type="text/x-mathjax-config">
 		      MathJax.Hub.Config({
 				tex2jax: {
@@ -490,10 +489,7 @@ class epub3 {
 			'%components%','%style%'
 			), array($components_html,$page_styles), $page_structure);
 
-
-
 		return $page_file_inside;
-
 
 	}
 
