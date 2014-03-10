@@ -32,6 +32,7 @@ msgstr  "Project-Id-Version: 0.1\n"
 #: protected/views/site/dashboard.php:133 protected/views/site/index.php:340
 #: protected/views/organisations/workspaces.php:21
 #: protected/views/organisations/categories.php:92
+#: protected/views/organisations/templates.php:128
 #: protected/views/book/library.php:4
 #: protected/views/organisationHostings/index.php:18
 msgid   "Düzenle"
@@ -59,6 +60,7 @@ msgstr  "Author Name"
 #: protected/views/site/index.php:317 protected/views/site/index.php:341
 #: protected/views/site/index.php:346 protected/views/site/dashboard.php:134
 #: protected/views/site/index.php:341 protected/views/site/index.php:346
+#: protected/views/organisations/templates.php:129
 msgid   "İndir"
 msgstr  "Download"
 
@@ -101,7 +103,7 @@ msgstr  "Owner"
 #: protected/views/layouts/column2.php:124
 #: protected/views/layouts/column2.php:131
 #: protected/views/layouts/column2.php:132
-#: protected/views/layouts/column2.php:132
+#: protected/views/layouts/column2.php:147
 msgid   "Organizasyon"
 msgstr  "Organisation"
 
@@ -132,7 +134,7 @@ msgstr  "Add User"
 #: protected/views/layouts/column2.php:142
 #: protected/views/layouts/column2.php:143
 #: protected/views/organisations/index.php:6
-#: protected/views/layouts/column2.php:143
+#: protected/views/layouts/column2.php:158
 msgid   "Çalışma Alanı"
 msgstr  "Workspace"
 
@@ -146,7 +148,7 @@ msgstr  "Workspace"
 #: protected/views/layouts/column2.php:138
 #: protected/views/organisations/workspaces.php:19
 #: protected/views/organisations/index.php:8
-#: protected/views/layouts/column2.php:138
+#: protected/views/layouts/column2.php:153
 msgid   "Kullanıcılar"
 msgstr  "Users"
 
@@ -241,7 +243,7 @@ msgstr[1]       "%s Users Found"
 #: protected/controllers/OrganisationsController.php:389
 #: protected/controllers/OrganisationsController.php:420
 #: protected/controllers/OrganisationsController.php:464
-#: protected/controllers/OrganisationsController.php:464
+#: protected/controllers/OrganisationsController.php:517
 msgid   "Kullanıcı davet edildi."
 msgstr  "Invitation is sent to user."
 
@@ -326,7 +328,7 @@ msgstr  "Workspace Users"
 #: protected/controllers/OrganisationsController.php:395
 #: protected/controllers/OrganisationsController.php:426
 #: protected/controllers/OrganisationsController.php:470
-#: protected/controllers/OrganisationsController.php:470
+#: protected/controllers/OrganisationsController.php:523
 msgid   "Girdiğiniz e-posta adresi geçersiz."
 msgstr  "E-mail you provide is invalid."
 
@@ -342,7 +344,7 @@ msgstr  "E-mail you provide is invalid."
 #: protected/views/editorActions/publishBook.php:358
 #: protected/views/organisations/index.php:10
 #: protected/views/editorActions/publishBook.php:358
-#: protected/views/layouts/column2.php:148
+#: protected/views/layouts/column2.php:163
 msgid   "Sunucu"
 msgstr  "Server"
 
@@ -416,8 +418,8 @@ msgstr  "Keywords"
 #: protected/controllers/BookController.php:260
 #: protected/controllers/BookController.php:214
 #: protected/controllers/BookController.php:281
-#: protected/controllers/BookController.php:214
-#: protected/controllers/BookController.php:281
+#: protected/controllers/BookController.php:219
+#: protected/controllers/BookController.php:286
 msgid   "Bölüm"
 msgstr  "Chapter"
 
@@ -479,7 +481,7 @@ msgstr  "Login"
 #: protected/controllers/SiteController.php:298
 #: protected/controllers/SiteController.php:322
 #: protected/controllers/SiteController.php:325
-#: protected/controllers/SiteController.php:325
+#: protected/controllers/SiteController.php:344
 msgid   "Girilen email adresine ait kullnıcı bulunamadı."
 msgstr  "The e-mail address you provide does not match any user."
 
@@ -564,6 +566,7 @@ msgid   "Yayınlama"
 msgstr  "Publish"
 
 #: protected/views/editorActions/publishBook.php:7
+#: protected/views/book/create_template.php:7
 #: protected/views/editorActions/publishBook.php:7
 msgid   "Aşama"
 msgstr  "Step"
@@ -686,6 +689,7 @@ msgstr  "Reader Group"
 #: protected/views/editorActions/publishBook.php:356
 #: protected/views/editorActions/publishBook.php:410
 #: protected/views/editorActions/publishBook.php:431
+#: protected/views/book/create_template.php:109
 #: protected/views/editorActions/publishBook.php:431
 msgid   "Geri"
 msgstr  "Back"
@@ -695,6 +699,7 @@ msgstr  "Back"
 #: protected/views/editorActions/publishBook.php:359
 #: protected/views/editorActions/publishBook.php:413
 #: protected/views/editorActions/publishBook.php:434
+#: protected/views/book/create_template.php:112
 #: protected/views/editorActions/publishBook.php:434
 msgid   "Devam"
 msgstr  "Continue"
@@ -818,6 +823,7 @@ msgstr  ""
 #: protected/views/editorActions/publishBook.php:296
 #: protected/views/editorActions/publishBook.php:171
 #: protected/views/editorActions/publishBook.php:311
+#: protected/views/book/create_template.php:66
 #: protected/views/editorActions/publishBook.php:171
 #: protected/views/editorActions/publishBook.php:311
 msgid   "Yazar"
@@ -903,6 +909,7 @@ msgstr  ""
 #: protected/views/organisations/categories.php:53
 #: protected/views/organisations/categories.php:25
 #: protected/views/organisations/categories.php:53
+#: protected/views/book/create_template.php:58
 msgid   "İsim"
 msgstr  ""
 
@@ -919,7 +926,7 @@ msgstr  ""
 #: protected/views/organisations/categories.php:80
 #: protected/views/layouts/column2.php:153
 #: protected/views/organisations/categories.php:80
-#: protected/views/layouts/column2.php:153
+#: protected/views/layouts/column2.php:168
 msgid   "Yayın Kategorileri"
 msgstr  ""
 
@@ -962,13 +969,42 @@ msgstr  ""
 #: protected/views/site/index.php:91 protected/views/site/index.php:71
 #: protected/views/site/index.php:119 protected/views/site/index.php:71
 #: protected/views/site/index.php:119
+#: protected/views/organisations/templates.php:59
 msgid   "Vazgeç"
 msgstr  ""
 
 #: protected/views/site/index.php:57 protected/views/site/index.php:57
+#: protected/views/organisations/templates.php:45
 msgid   "Eseri Güncelle"
 msgstr  ""
 
 #: protected/views/site/index.php:70 protected/views/site/index.php:70
+#: protected/views/organisations/templates.php:58
 msgid   "Güncelle"
+msgstr  ""
+
+#: protected/views/organisations/templates.php:72
+#: protected/views/layouts/column2.php:139
+msgid   "Templates"
+msgstr  ""
+
+#: protected/views/book/create_template.php:7
+msgid   "Şablon "
+msgstr  ""
+
+#: protected/views/book/create_template.php:27
+msgid   "Şablon Bilgileri"
+msgstr  ""
+
+#: protected/views/book/create_template.php:33
+msgid   "Sayfa Boyutları"
+msgstr  ""
+
+#: protected/views/book/create_template.php:39
+#: protected/views/book/create_template.php:115
+msgid   "Oluştur"
+msgstr  ""
+
+#: protected/views/book/create_template.php:75
+msgid   "Boyutlar"
 msgstr  ""
