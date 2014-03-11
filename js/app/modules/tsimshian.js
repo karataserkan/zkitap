@@ -147,7 +147,14 @@ window.lindneo.tsimshian = (function(window, $, undefined){
        });
 
        this.socket.on('userListUpdate', function(userList){
-          //console.log(userList) ;
+         console.log(userList) ;
+         
+       });
+
+       this.socket.on('userBookListUpdate', function(bookUserList){
+        console.log('dasdasd');
+        window.lindneo.book_users = bookUserList;
+          console.log(bookUserList) ;
          
        });
  
