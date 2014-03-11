@@ -9,10 +9,19 @@ window.lindneo.tsimshian = (function(window, $, undefined){
 
   var socket;
   var myComponent='';
+  var hereACounter = 0;
+
+  var connect = function () {
+
+    window.lindneo.tsimshian.init(); 
+    window.lindneo.tsimshian.changePage(window.lindneo.currentPageId); 
+
+  };
  
   var serverName = function (){ 
     return "http://dev.lindneo.com:1881";
   }; 
+
 
 
   var componentUpdated = function (component) {    
@@ -63,6 +72,13 @@ window.lindneo.tsimshian = (function(window, $, undefined){
 
   var init = function (serverName){
 
+    if ( typeof io == 'undefined' ){
+      alert ('Co-working System Error');
+      location.reload();
+      return;
+
+    }
+
     this.socket = io.connect("http://dev.lindneo.com:1881");
     this.socket.on('connection', function (data) {
       var user=window.lindneo.tsimshian.getCurrentUser();
@@ -112,6 +128,17 @@ window.lindneo.tsimshian = (function(window, $, undefined){
         
       });
 
+      this.socket.on('disconnect', function() {   
+        console.log('disconnected');
+        if (this.hereACounter++ < 3){
+                  console.log('retrying');
+                  window.lindneo.tsimshian.connect();
+                }else {
+                          console.log('refreshing');
+                          location.reload(); 
+                }
+      });
+
        
 
        this.socket.on('pagePreviewUpdate', function(pageid){
@@ -120,7 +147,14 @@ window.lindneo.tsimshian = (function(window, $, undefined){
        });
 
        this.socket.on('userListUpdate', function(userList){
-          //console.log(userList) ;
+         console.log(userList) ;
+         
+       });
+
+       this.socket.on('userBookListUpdate', function(bookUserList){
+        console.log('dasdasd');
+        window.lindneo.book_users = bookUserList;
+          console.log(bookUserList) ;
          
        });
  
@@ -129,6 +163,7 @@ window.lindneo.tsimshian = (function(window, $, undefined){
 
   return {
     
+    connect:connect,
     chatSendMessage:chatSendMessage,
     componentUpdated: componentUpdated,
     changePage: changePage,

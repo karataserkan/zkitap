@@ -291,7 +291,6 @@ class epub3 {
 		<link rel="stylesheet" href="widgets.css" type="text/css"/>
 
 		<meta name="viewport" content="width='.$pageSize['width'].', height='.$pageSize['height'].'"/>
-	
 
 		
 	</head>
@@ -299,6 +298,18 @@ class epub3 {
 		<div>
 			<img width="'.$pageSize['width'].'" height="'.$pageSize['height'].'" src="' . $this->coverImage->filename . '"/>
 		</div>
+
+		<script>
+		  (function(i,s,o,g,r,a,m){i["GoogleAnalyticsObject"]=r;i[r]=i[r]||function(){
+		  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+		  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+		  })(window,document,"script","//www.google-analytics.com/analytics.js","ga");
+
+		  ga("create", "UA-16931314-17", "lindneo.com");
+		  ga("send", "pageview");
+
+		</script>
+
 	</body>
 </html>';
 
@@ -409,6 +420,9 @@ class epub3 {
 
 		<meta name="viewport" content="width='.$width.', height='.$height.'"/>
 
+
+
+
 		<link rel="stylesheet" href="stylesheet.css" type="text/css"/>
 		<link rel="stylesheet" href="page_styles.css" type="text/css"/>
 		<link rel="stylesheet" href="widgets.css" type="text/css"/>
@@ -475,6 +489,17 @@ class epub3 {
 	<section epub:type="frontmatter titlepage">
 %components%
 	</section>
+
+		<script>
+		  (function(i,s,o,g,r,a,m){i["GoogleAnalyticsObject"]=r;i[r]=i[r]||function(){
+		  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+		  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+		  })(window,document,"script","//www.google-analytics.com/analytics.js","ga");
+
+		  ga("create", "UA-16931314-17", "lindneo.com");
+		  ga("send", "pageview");
+
+		</script>
 
 	</body>
 </html>';
