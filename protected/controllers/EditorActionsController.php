@@ -24,7 +24,18 @@ class EditorActionsController extends Controller
 		$this->errors[]=$error; 
 		return $error;
 	}
+	public function actionProfilePhoto($userId){
+		$userMeta=UserMeta::model()->find("user_id=:user_id AND meta_key=:meta_key",array('user_id'=>$userId,'meta_key'=>'profilePicture'));
+		if($userMeta){
+			echo $userMeta->meta_value;
+		}
+		else
+		{
+			echo null;
+		}
 
+
+	}
 	public function actionPublishBook($bookId=null,$id=null){
 		if($bookId==null){
 			$bookId=$id;
