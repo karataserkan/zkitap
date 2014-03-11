@@ -52,7 +52,7 @@
 													<a class="close" aria-hidden="true" href="#" data-dismiss="alert">×</a>
 													Your form validation is successful!
 												 </div>
-												<div class="tab-pane active">
+												<div class="tab-pane active" id="template">
 													<div class="form-group">
 														<label  class="col-md-3 control-label">
 														<?php _e("İsim"); ?>
@@ -111,7 +111,7 @@
 													   <a href="javascript:;" class="btn btn-primary nextBtn">
 														<?php _e('Devam'); ?> <i class="fa fa-arrow-circle-right"></i>
 													   </a>
-													   <a href="javascript:;" class="btn btn-success createBtn">
+													   <a href="javascript:;" class="btn btn-success submitBtn" id="templateCreate">
 														<?php _e('Oluştur'); ?> <i class="fa fa-arrow-circle-right"></i>
 													   </a>                            
 													</div>
@@ -129,6 +129,7 @@
 </section>
 <script>
 		jQuery(document).ready(function() {		
+			$('#templateCreate').hide();
 			App.setPage("wizards_validations");  //Set current page
 			App.init(); //Initialise plugins and elements
 			FormWizard.init();
@@ -141,7 +142,10 @@
 </script>
 <script type="text/javascript">
 var wizform = $('#wizForm');
-	 $('#formWizard .createBtn').click(function () {
+	 $('#templateCreate').click(function () {
+                var isim=$('[name="isim"]').val();
+                var yazar=$('[name="yazar"]').val();
+                if (isim.length & yazar.length) {
                 msg = Messenger().post({
                     message:"Şablon oluşturuluyor. Lütfen Bekleyiniz",
                     type:"info",
@@ -157,7 +161,7 @@ var wizform = $('#wizForm');
                                 hideAfter: 5
                             })
                         // bootbox.alert("Eser yayÄ±nlama baÅŸarÄ±lÄ±.",function(){
-                        //     window.location.href = '/site/index';
+                             window.location.href = '/organisations/templates/<?php echo $workspace_id; ?>';
                         // });
                     },
                     error:function() { 
@@ -170,5 +174,13 @@ var wizform = $('#wizForm');
                     },
 
                 });
+            }else{
+            	msg = Messenger().post({
+                    message:"Lütfen Gerekli Alanlarını Doldurunuz",
+                    type:"info",
+                    showCloseButton: true,
+                    hideAfter: 100
+                });
+            };
             })
 </script>
