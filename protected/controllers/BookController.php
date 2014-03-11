@@ -62,6 +62,26 @@ class BookController extends Controller
 
 	public function actionCreateTemplate($id)
 	{
+		if (isset($_POST['isim'])&isset($_POST['yazar'])) {
+				$model=new Book;
+				$model->book_id=functions::new_id();
+				$model->workspace_id=$id;
+				$model->title=$_POST['isim'];
+				$model->author=$_POST['yazar'];
+				$model->created=date("Y-m-d H:i:s");
+				if (isset($_POST['size'])) {
+					$bookSize=explode('x', $_POST['size']);
+				}
+				else
+				{
+					$bookSize=array('1024','768');
+				}
+				$model->setPageSize($bookSize[0],$bookSize[1]);
+				if ($model->save()) {
+					$this->redirect('/book/author/'.$model->book_id);
+				}				
+				//{"book_type":"pdf","size":{"width":1275,"height":1650}}
+		}
 		$this->render('create_template',array('workspace_id'=>$id));
 	}
 
