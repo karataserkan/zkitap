@@ -126,8 +126,7 @@ $current_user=User::model()->findByPk(Yii::app()->user->id);
 			   <input type="text" id="searchn" name="component" style="display:none;" class="search radius ui-autocomplete-input" placeholder="Ara" autocomplete="on">
 			   -->
 			   <span id="search_btn">&nbsp;&nbsp;&nbsp;<i class="icon-zoom size-15"></i></span></a></li>
-			  
-			 
+			  	
 			   <li style="float:right; " class='has-sub'>
 			  
 					<a id='login_area' style='float:right;'>
@@ -160,11 +159,15 @@ $current_user=User::model()->findByPk(Yii::app()->user->id);
 			   <li class="left-border" style="float:right; height: 42px; min-width:50px; text-align:center; padding-top: 5px; ">
 			  <i id="save_status" class="size-30"></i>
 			   </li>
+			   <li style="float:right; ">	
+
+			  		<img data-src="holder.js/140x140" class="img-rounded" alt="140x140" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNDAiIGhlaWdodD0iMTQwIj48cmVjdCB3aWR0aD0iMTQwIiBoZWlnaHQ9IjE0MCIgZmlsbD0iI2VlZSI+PC9yZWN0Pjx0ZXh0IHRleHQtYW5jaG9yPSJtaWRkbGUiIHg9IjcwIiB5PSI3MCIgc3R5bGU9ImZpbGw6I2FhYTtmb250LXdlaWdodDpib2xkO2ZvbnQtc2l6ZToxMnB4O2ZvbnQtZmFtaWx5OkFyaWFsLEhlbHZldGljYSxzYW5zLXNlcmlmO2RvbWluYW50LWJhc2VsaW5lOmNlbnRyYWwiPjE0MHgxNDA8L3RleHQ+PC9zdmc+" style="width: 40px; height: 40px;">
+			 	</li>
 			</ul>
 			<script>
 			$("#search_btn").click(function(){
 			$("#searchn").toggle();
-			})
+			});
 			</script>
 
 
