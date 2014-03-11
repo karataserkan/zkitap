@@ -5,6 +5,7 @@ window.lindneo = (function(window){
   var url = '/';
   var currentPageId ;
   var currentComponent = {};
+  var online_users = [];
   var  randomString = function (length, chars) {
     length = typeof length !== 'undefined' ? length : 21;
     chars = typeof chars !== 'undefined' ? chars : '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
@@ -109,7 +110,8 @@ window.lindneo = (function(window){
     randomString:randomString,
     url: url,
     currentPageId: currentPageId,
-    currentComponent: currentComponent
+    currentComponent: currentComponent,
+    online_users: online_users
   }; 
 
 })( window );
