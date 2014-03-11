@@ -95,6 +95,76 @@
 						</a>
 					</li>
 					-->
+					<?php 
+						$templates=array();
+
+						$allTemplates=Yii::app()->db->createCommand()
+						    ->select("*")
+						    ->from("organisations_meta")
+						    ->where("meta=:meta", array('meta'=>'template'))
+						    ->queryAll();
+
+						 $userWorkspaces=Yii::app()->db->createCommand()
+						    ->select("*")
+						    ->from("workspaces_users")
+						    ->where("userid=:userid", array('userid'=>Yii::app()->user->id))
+						    ->queryAll();
+
+					    foreach ($allTemplates as $key => $template) {
+					    	foreach ($userWorkspaces as $key2 => $workspace) {
+					    		if ($workspace['workspace_id']===$template['value']) {
+					    			$templates[]=$workspace['workspace_id'];
+					    		}
+					    	}
+					    }
+					?>
+					<?php if(!empty($templates)) { 
+							if (count($templates)==1) {
+								?>
+								<li>
+									<a href="/organisations/templates/<?php echo $templates[0]; ?>">
+										<i class="fa fa-clipboard fa-fw"></i> <span class="menu-text">
+										<?php _e('Templates'); ?>
+									</span>
+									</a>
+								</li>
+								<?php
+							}
+							else
+							{
+								?>
+							<li class="has-sub">
+								<a href="javascript:;" class="">
+									<i class="fa fa-clipboard fa-fw"></i>
+									<span class="menu-text"><?php echo __('Templates');?></span>
+									<span class="arrow"></span>
+								</a>
+								<ul class="sub">
+									<?php 
+										foreach ($templates as $a => $tem) {
+									?>
+									<li>
+										<a href="/organisations/templates/<?php echo $tem ?>">
+										<?php 
+										$organisation=Yii::app()->db->createCommand()
+												    ->select("o.organisation_name")
+												    ->from("organisations o")
+												    ->join("organisation_workspaces w",'o.organisation_id=w.organisation_id')
+												    ->where("workspace_id=:id", array(':id' => $tem ) )->queryRow();
+										echo $organisation['organisation_name'];
+										?>	
+										</a>
+									</li>
+									<?php } ?>
+								</ul>
+								
+								
+							</li>
+
+								<?php
+							}
+						?>
+					<?php } ?>
 					<li>
 						<a href="#">
 							<i class="fa fa-medkit fa-fw"></i> <span class="menu-text">
@@ -118,12 +188,6 @@
 						$organisation = organisation();
 					if($organisation)
 					{
-						$templateDb=Yii::app()->db->createCommand()
-						    ->select("value")
-						    ->from("organisations_meta")
-						    ->where("organisation_id=:organisation_id AND meta=:meta", array(':organisation_id' => $organisation["organisation_id"],'meta'=>'template'))
-						    ->queryRow();
-						    $template=$templateDb['value'];
 					?>
 					<li>
 						<a href="/organisations/account/<?php echo $organisation["organisation_id"]; ?>">
@@ -132,15 +196,6 @@
 						</span>
 						</a>
 					</li>
-					<?php if($template) { ?>
-					<li>
-						<a href="/organisations/templates/<?php echo $template; ?>">
-							<i class="fa fa-clipboard fa-fw"></i> <span class="menu-text">
-							<?php _e('Templates'); ?>
-						</span>
-						</a>
-					</li>
-					<?php } ?>
 					<li class="has-sub">
 						<a href="javascript:;" class="">
 							<i class="fa fa-briefcase fa-fw"></i>

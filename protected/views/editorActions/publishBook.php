@@ -433,7 +433,7 @@
 													   <a href="javascript:;" class="btn btn-primary nextBtn">
 														<?php _e('Devam'); ?> <i class="fa fa-arrow-circle-right"></i>
 													   </a>
-													   <a href="javascript:;" class="btn btn-success submitBtn">
+													   <a href="javascript:;" class="btn btn-success submitBtn" id="publishBk">
 														<?php _e('Yayınla'); ?> <i class="fa fa-arrow-circle-right"></i>
 													   </a>                            
 													</div>

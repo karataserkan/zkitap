@@ -292,7 +292,7 @@ var FormWizard = function () {
 
             $('#formWizard').find('.prevBtn').hide();
             
-            $('#formWizard .submitBtn').click(function () {
+            $('#formWizard #publishBk').click(function () {
                 $('#formWizard').find('.submitBtn').hide();
                 
                if ($("#rights").is(':checked')) {
