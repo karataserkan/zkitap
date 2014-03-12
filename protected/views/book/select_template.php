@@ -16,5 +16,20 @@ foreach ($layouts as $layout)
     
 <?=CHtml::link($tum,array('book/selectTemplate',"layout"=>$layout->book_id,'book_id'=>$book_id))?>
 <?php }?>
+<?php
+if (isset($templates) & !empty($templates)) {
+foreach ($templates as $template)
+{
+	?>
+	<?php $tum='<div class="template_box"> 
+	    <div class="template_title">'.$template->title.'</div>
+	    <div class="template_thumbnail" ><img src="'.Yii::app()->request->baseUrl.'/css/images/layouts/'.$template->book_id.'.png" /></div>
+    </div>'; ?>
+    
+<?=CHtml::link($tum,array('book/selectTemplate',"layout"=>$template->book_id,'book_id'=>$book_id))?>
+<?php }
+}
+?>
+
 
 </div>

@@ -407,6 +407,18 @@ class SiteController extends Controller
 					if ($newUser->save()) {
 						$msg="SITE:LOGIN:SignUp:0:". json_encode(array('user'=> Yii::app()->user->name,'userId'=>Yii::app()->user->id));
 						Yii::log($msg,'profile');
+
+						$organisation= new Organisations;
+						$organisation->organisation_id=functions::new_id();
+						$organisation->organisation_name=$newUser->name;
+						$organisation->organisation_admin=$newUser->id;
+						$organisation->save();
+						$organisation_user=new OrganisationUsers;
+						$organisation_user->user_id=$newUser->id;
+						$organisation_user->organisation_id=$organisation->organisation_id;
+						$organisation_user->role='owner';
+						$organisation_user->save();
+
 						$workspace= new Workspaces;
 						$workspace->workspace_id=functions::new_id();
 						$workspace->workspace_name = $newUser->name." Books";
