@@ -182,27 +182,35 @@
 						    ->select("*")
 						    ->from("organisation_users")
 						    ->where("user_id=:user_id AND role=:role", array(':user_id' => Yii::app()->user->id,'role'=>'owner'))
-						    ->queryRow();
+						    ->queryAll();
 						    return  ($organisation) ? $organisation : null ;
 						}
-						$organisation = organisation();
-					if($organisation)
+						$organisations = organisation();
+					if($organisations)
 					{
+						foreach ($organisations as $key => $organisation) {
 					?>
-					<li>
-						<a href="/organisations/account/<?php echo $organisation["organisation_id"]; ?>">
-							<i class="fa fa-money fa-fw"></i> <span class="menu-text">
-							Hesabım
-						</span>
-						</a>
-					</li>
+					
 					<li class="has-sub">
 						<a href="javascript:;" class="">
 							<i class="fa fa-briefcase fa-fw"></i>
-							<span class="menu-text"><?php echo __('Organizasyon');?></span>
+							<span class="menu-text"><?php 
+							$organisation_name=Yii::app()->db->createCommand()
+						    ->select("*")
+						    ->from("organisations")
+						    ->where("organisation_id=:organisation_id", array(':organisation_id' => $organisation["organisation_id"]))
+						    ->queryRow();
+
+							echo $organisation_name["organisation_name"]; 
+							?></span>
 							<span class="arrow"></span>
 						</a>
 						<ul class="sub">
+							<li>
+								<a href="/organisations/account/<?php echo $organisation["organisation_id"]; ?>">
+									Hesabım
+								</a>
+							</li>
 							<li>
 								<a href="/organisations/users?organisationId=<?php echo $organisation["organisation_id"]; ?>">
 								<?php _e('Kullanıcılar'); ?>	
@@ -227,7 +235,9 @@
 						
 						
 					</li>
-					<?php } ?>
+					<?php } 
+				}
+				?>
 					
 				</ul>
 				<!-- /Navigation -->
