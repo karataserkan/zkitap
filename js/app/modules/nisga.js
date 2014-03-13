@@ -17,6 +17,8 @@ window.lindneo.nisga = (function(window, $, undefined){
   var revision_id=0;
   var revision_value = 0;
 
+  
+
   var ChatNewLine = function ( line,activeUser,show ){
     if (show !== false)
       $(".chat_window" ).show();
