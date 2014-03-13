@@ -79,3 +79,9 @@ pdf2htmlex
 add-apt-repository ppa:coolwanglu/pdf2htmlex
 apt-get update
 apt-get install pdf2htmlex
+
+
+Co-Working
+-----------------------------------------------------------------
+apt-get install node npm
+npm install socket.io
