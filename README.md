@@ -84,4 +84,5 @@ apt-get install pdf2htmlex
 Co-Working
 -----------------------------------------------------------------
 apt-get install node npm
+npm config set registry http://registry.npmjs.org/
 npm install socket.io
