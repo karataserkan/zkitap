@@ -28,6 +28,7 @@ apt-get install php5-curl
 apt-get install php5-gd
 apt-get install php5-json
 apt-get install php5-mysql
+apt-get install php5-mcrypt 
 
 Git Installation
 -----------------------------------------------------------------
