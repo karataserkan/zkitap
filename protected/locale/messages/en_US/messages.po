@@ -139,6 +139,7 @@ msgstr  "Add User"
 #: protected/views/layouts/column2.php:143
 #: protected/views/layouts/column2.php:158
 #: protected/views/layouts/column2.php:213
+#: protected/views/layouts/column2.php:221
 #: protected/views/organisations/index.php:6
 #: protected/views/layouts/column2.php:221
 msgid   "Çalışma Alanı"
@@ -154,6 +155,7 @@ msgstr  "Workspace"
 #: protected/views/layouts/column2.php:138
 #: protected/views/layouts/column2.php:153
 #: protected/views/layouts/column2.php:208
+#: protected/views/layouts/column2.php:216
 #: protected/views/organisations/workspaces.php:19
 #: protected/views/organisations/index.php:8
 #: protected/views/layouts/column2.php:216
@@ -327,7 +329,7 @@ msgstr  "Add"
 #: protected/views/organisations/categories.php:33
 #: protected/views/organisations/categories.php:67
 #: protected/views/book/select_data.php:39
-#: protected/views/book/author.php:1602 protected/views/book/author.php:1625
+#: protected/views/book/author.php:1604 protected/views/book/author.php:1627
 msgid   "Kaydet"
 msgstr  "Save"
 
@@ -358,6 +360,7 @@ msgstr  "E-mail you provide is invalid."
 #: protected/views/editorActions/publishBook.php:358
 #: protected/views/layouts/column2.php:163
 #: protected/views/layouts/column2.php:218
+#: protected/views/layouts/column2.php:226
 #: protected/views/organisations/index.php:10
 #: protected/views/editorActions/publishBook.php:358
 #: protected/views/layouts/column2.php:226
@@ -760,7 +763,7 @@ msgstr  "Profile Picture"
 #: protected/views/book/author.php:1623 protected/views/book/author.php:1598
 #: protected/views/book/author.php:1621 protected/views/book/author.php:1601
 #: protected/views/book/author.php:1624 protected/views/user/profile.php:43
-#: protected/views/book/author.php:1601 protected/views/book/author.php:1624
+#: protected/views/book/author.php:1603 protected/views/book/author.php:1626
 msgid   "Kapat"
 msgstr  "Close"
 
@@ -770,7 +773,7 @@ msgstr  "Close"
 #: protected/views/book/author.php:1520 protected/views/book/author.php:1554
 #: protected/views/book/author.php:1590 protected/views/book/author.php:1591
 #: protected/views/book/author.php:1589 protected/views/book/author.php:1592
-#: protected/views/book/author.php:1592
+#: protected/views/book/author.php:1594
 msgid   "Thumbnail Image"
 msgstr  "Thumbnail Image"
 
@@ -780,7 +783,7 @@ msgstr  "Thumbnail Image"
 #: protected/views/book/author.php:1543 protected/views/book/author.php:1577
 #: protected/views/book/author.php:1613 protected/views/book/author.php:1614
 #: protected/views/book/author.php:1612 protected/views/book/author.php:1615
-#: protected/views/book/author.php:1615
+#: protected/views/book/author.php:1617
 msgid   "Kapak Resmi"
 msgstr  "Cover Image"
 
@@ -957,6 +960,7 @@ msgstr  ""
 #: protected/views/layouts/column2.php:153
 #: protected/views/layouts/column2.php:168
 #: protected/views/layouts/column2.php:223
+#: protected/views/layouts/column2.php:231
 #: protected/views/organisations/categories.php:80
 #: protected/views/layouts/column2.php:231
 msgid   "Yayın Kategorileri"
