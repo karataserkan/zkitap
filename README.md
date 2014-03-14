@@ -29,6 +29,10 @@ apt-get install php5-gd
 apt-get install php5-json
 apt-get install php5-mysql
 
+Git Installation
+-----------------------------------------------------------------
+apt-get install git-core
+
 mysql 5.5.34 Installation
 -----------------------------------------------------------------
 apt-get install mysql-server mysql-client
