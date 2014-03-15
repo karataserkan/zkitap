@@ -323,6 +323,7 @@ msgstr  "Add"
 #: protected/views/book/author.php:1601 protected/views/book/author.php:1624
 #: protected/views/book/author.php:1599 protected/views/book/author.php:1622
 #: protected/views/book/author.php:1602 protected/views/book/author.php:1625
+#: protected/views/book/author.php:1604 protected/views/book/author.php:1627
 #: protected/views/faq/create.php:44 protected/views/user/profile.php:44
 #: protected/views/user/forget_password.php:54
 #: protected/views/site/login.php:200
@@ -762,7 +763,8 @@ msgstr  "Profile Picture"
 #: protected/views/book/author.php:1622 protected/views/book/author.php:1600
 #: protected/views/book/author.php:1623 protected/views/book/author.php:1598
 #: protected/views/book/author.php:1621 protected/views/book/author.php:1601
-#: protected/views/book/author.php:1624 protected/views/user/profile.php:43
+#: protected/views/book/author.php:1624 protected/views/book/author.php:1603
+#: protected/views/book/author.php:1626 protected/views/user/profile.php:43
 #: protected/views/book/author.php:1603 protected/views/book/author.php:1626
 msgid   "Kapat"
 msgstr  "Close"
@@ -773,7 +775,7 @@ msgstr  "Close"
 #: protected/views/book/author.php:1520 protected/views/book/author.php:1554
 #: protected/views/book/author.php:1590 protected/views/book/author.php:1591
 #: protected/views/book/author.php:1589 protected/views/book/author.php:1592
-#: protected/views/book/author.php:1594
+#: protected/views/book/author.php:1594 protected/views/book/author.php:1594
 msgid   "Thumbnail Image"
 msgstr  "Thumbnail Image"
 
@@ -783,7 +785,7 @@ msgstr  "Thumbnail Image"
 #: protected/views/book/author.php:1543 protected/views/book/author.php:1577
 #: protected/views/book/author.php:1613 protected/views/book/author.php:1614
 #: protected/views/book/author.php:1612 protected/views/book/author.php:1615
-#: protected/views/book/author.php:1617
+#: protected/views/book/author.php:1617 protected/views/book/author.php:1617
 msgid   "Kapak Resmi"
 msgstr  "Cover Image"
 
