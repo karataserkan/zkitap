@@ -36,7 +36,7 @@ class BookController extends Controller
 				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
-				'actions'=>array('create','update','selectTemplate','delete','view','author','newBook','selectData','uploadFile','duplicateBook','updateThumbnail','updateCover',"copyBook","createTemplate","updateBookTitle","getBookPages"),
+				'actions'=>array('create','update','selectTemplate','delete','view','author','newBook','selectData','uploadFile','duplicateBook','updateThumbnail','updateCover',"copyBook","createTemplate","updateBookTitle","getBookPages",'bookCreate','getTemplates'),
 				'users'=>array('@'),
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
@@ -47,6 +47,60 @@ class BookController extends Controller
 				'users'=>array('*'),
 			),
 		);
+	}
+
+	public function actionBookCreate()
+	{
+		$userid=Yii::app()->user->id;
+		
+		$main_templates= Book::model()->findAll(array(
+		    'condition'=>'workspace_id=:workspace_id',
+		    'params'=>array(':workspace_id'=>'layouts'),
+		));
+
+		$templates=Yii::app()->db->createCommand()
+		->select ("*")
+		->from("organisations_meta")
+		->where("meta=:meta", array(':meta' => 'template'))
+		->queryAll();
+
+		$workspacesOfUser= Yii::app()->db->createCommand()
+	    ->select("*")
+	    ->from("workspaces_users x")
+	    ->join("workspaces w",'w.workspace_id=x.workspace_id')
+	    ->join("user u","x.userid=u.id")
+	    ->where("userid=:id", array(':id' => $userid ) )->queryAll();
+	    $templateWorkspaces=array();
+	    foreach ($templates as $key => $template) {
+	    	foreach ($workspacesOfUser as $key => $workspace) {
+		    	if ($template['value']===$workspace['workspace_id']) {
+		    		$templateWorkspaces[]=$workspace;
+		    		unset($workspacesOfUser[$key]);
+		    	}
+	    	}
+	    }
+
+	    $templateBooks=array();
+		foreach ($templateWorkspaces as $key => $templateWorkspace) {
+			$templateBooks[]= Book::model()->findAll(array(
+		    'condition'=>'workspace_id=:workspace_id',
+		    'params'=>array(':workspace_id'=>$templateWorkspace['workspace_id']),
+			));
+		}
+
+		$workspace_id_value = CHtml::listData($workspacesOfUser, 
+                'workspace_id', 'workspace_name');
+
+		$this->render('book_create',array('workspaces'=>$workspace_id_value,
+										'main_templates'=>$main_templates,
+										'user_templates'=>$templateBooks
+										));
+	}
+
+	public function actionGetTemplates($id)
+	{
+		$size=$id;
+		print_r(json_encode(array('a'=>'b','c'=>'d')));
 	}
 
 	/**
@@ -350,6 +404,8 @@ class BookController extends Controller
 		    'condition'=>'workspace_id=:workspace_id',
 		    'params'=>array(':workspace_id'=>'layouts'),
 		));
+
+		
 
 		if(isset($_GET['layout']))
 		{
