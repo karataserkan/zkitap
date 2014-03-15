@@ -131,8 +131,8 @@
 																<label for="book_size_1">800 X 600</label><br>
 																</div>
 																<div class="" id="uniform-book_size_1">
-																	<span class="checked">
-																		<input class="uniform" id="book_size_0" value="1024x768" checked="checked" type="radio" name="book_size">
+																	<span class="">
+																		<input class="uniform" id="book_size_0" value="1024x768" type="radio" name="book_size">
 																	</span>
 																<label for="book_size_0">1024 X 768</label><br>
 																</div>
@@ -150,33 +150,9 @@
 													<div class="form-group">
 														<label for="radio" class="control-label col-md-3"><?php _e('Şablonlar'); ?></label>
 														<div class="col-md-4">
-														<input id="ytsize" type="hidden" value="" name="templates">
+															<input id="ytsize" type="hidden" value="" name="templates">
 															<span id="templates">
-																<?php 
-																$j=0;
-																foreach ($main_templates as $key => $template): ?>
-																<div class="" id="uniform-templates_<?php echo $j; ?>">
-																	<span class="checked">
-																		<input class="uniform" id="templates_<?php echo $j; ?>" value="<?php echo $template->book_id; ?>" checked="checked" type="radio" name="templates">
-																	</span>
-																<label for="templates_<?php echo $j; ?>"><img src="<?php echo $template->getData('thumbnail'); ?>" width="150px" height="150px"><?php echo $template->title; ?></label><br>
-																</div>
-																<?php 
-																$j++;
-																endforeach; 
-																foreach ($user_templates as $key => $workspaces): 
-																	foreach ($workspaces as $key => $template):
-																	?>
-																		<div class="" id="uniform-templates_<?php echo $j; ?>">
-																			<span class="checked">
-																				<input class="uniform" id="templates_<?php echo $j; ?>" value="<?php echo $template->book_id; ?>" checked="checked" type="radio" name="templates">
-																			</span>
-																		<label for="templates_<?php echo $j; ?>"><img src="<?php echo $template->getData('thumbnail'); ?>" width="150px" height="150px"><?php echo $template->title; ?></label><br>
-																		</div>
-																		<?php 
-																		$j++;
-																	endforeach;
-																endforeach; ?>
+
 															</span>
 														</div>
 													</div>
@@ -224,18 +200,18 @@
 <script type="text/javascript">
 	$('span div span').on('click','[name="book_size"]',function(){
 		var sizes=$(this).val();
-		console.log(sizes);
 		$.getJSON( "/book/getTemplates/"+sizes, function( data ) {
 		console.log(data);
-		//   var items = [];
-		//   $.each( data, function( key, val ) {
-		//     items.push( "<li id='" + key + "'>" + val + "</li>" );
-		//   });
-		 
-		//   $( "<ul/>", {
-		//     "class": "my-new-list",
-		//     html: items.join( "" )
-		//   }).appendTo( "body" );
+		   var items = [];
+		   $.each( data, function( key, val ) {
+		     items.push('<div class="" id="uniform-templates_'+key+'"><span class=""><input class="uniform" id="templates_'+key+'" value="'+val.id+'" type="radio" name="templates"></span><label for="templates_'+key+'"><img src="'+val.thumbnail+'" width="150px" height="150px">'+val.title+'</label><br></div>');
+		     
+		   });
+		$('#templates').html(items);		 
+		  // $( "<ul/>", {
+		  //   "class": "my-new-list",
+		  //   html: items.join( "" )
+		  // }).appendTo( "body" );
 		 });
 	});
 </script>
@@ -411,15 +387,26 @@
                     hideAfter: 100
                 });
                 wizform.ajaxSubmit({
-                    url:'/book/createTemplate/<?php echo $workspace_id; ?>',
+                    url:'/book/createNewBook/',
                     success:function(response) {
-                            msg.update({
-                                message: 'Şablon oluşturma başarılı.',
-                                type: 'success',
-                                hideAfter: 5
-                            })
+                    		if (response) {
+	                            msg.update({
+	                                message: 'Şablon oluşturma başarılı.',
+	                                type: 'success',
+	                                hideAfter: 5
+	                            })
+	                            console.log(response);
+                             	window.location.href = '/book/author/'+response;
+                    		}
+                    		else{
+                    			msg.update({
+	                            message: 'Beklenmedik bir hata oluştu. Lütfen tekrar deneyin..',
+	                            type: 'error',
+	                            hideAfter: 5
+	                        	})
+                    		};
+                    		
                         // bootbox.alert("Eser yayÄ±nlama baÅŸarÄ±lÄ±.",function(){
-                             window.location.href = '/organisations/templates/<?php echo $workspace_id; ?>';
                         // });
                     },
                     error:function() { 
