@@ -28,6 +28,11 @@ apt-get install php5-curl
 apt-get install php5-gd
 apt-get install php5-json
 apt-get install php5-mysql
+apt-get install php5-mcrypt 
+
+Git Installation
+-----------------------------------------------------------------
+apt-get install git-core
 
 mysql 5.5.34 Installation
 -----------------------------------------------------------------
@@ -79,3 +84,10 @@ pdf2htmlex
 add-apt-repository ppa:coolwanglu/pdf2htmlex
 apt-get update
 apt-get install pdf2htmlex
+
+
+Co-Working
+-----------------------------------------------------------------
+apt-get install node npm
+npm config set registry http://registry.npmjs.org/
+npm install socket.io
