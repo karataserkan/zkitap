@@ -164,26 +164,25 @@ msgstr  "Users"
 
 #: protected/views/book/_form.php:12 protected/controllers/newBookSteps.php:7
 #: protected/views/book/newBookSteps.php:7
-#: protected/views/book/newBookSteps.php:7
 msgid   "Kitap Türü"
 msgstr  "Book Type"
 
 #: protected/views/book/_form.php:13 protected/controllers/newBookSteps.php:8
 #: protected/views/book/newBookSteps.php:8
 #: protected/views/editorActions/publishBook.php:33
-#: protected/views/book/newBookSteps.php:8
 msgid   "Kitap Bilgileri"
 msgstr  "Book Details"
 
 #: protected/controllers/newBookSteps.php:9
 #: protected/views/book/newBookSteps.php:9
-#: protected/views/book/newBookSteps.php:9
+#: protected/views/book/book_create.php:45
+#: protected/views/book/book_create.php:151
 msgid   "Şablonlar"
 msgstr  "Templates"
 
 #: protected/controllers/newBookSteps.php:10
 #: protected/views/book/newBookSteps.php:10
-#: protected/views/book/newBookSteps.php:10
+#: protected/views/book/book_create.php:39
 msgid   "Çözünürlük"
 msgstr  "Resolution"
 
@@ -329,7 +328,6 @@ msgstr  "Add"
 #: protected/views/site/login.php:200
 #: protected/views/organisations/categories.php:33
 #: protected/views/organisations/categories.php:67
-#: protected/views/book/select_data.php:39
 #: protected/views/book/author.php:1604 protected/views/book/author.php:1627
 msgid   "Kaydet"
 msgstr  "Save"
@@ -442,8 +440,8 @@ msgstr  "Keywords"
 #: protected/controllers/BookController.php:286
 #: protected/controllers/BookController.php:239
 #: protected/controllers/BookController.php:306
-#: protected/controllers/BookController.php:239
-#: protected/controllers/BookController.php:306
+#: protected/controllers/BookController.php:372
+#: protected/controllers/BookController.php:439
 msgid   "Bölüm"
 msgstr  "Chapter"
 
@@ -593,6 +591,7 @@ msgstr  "Publish"
 #: protected/views/editorActions/publishBook.php:7
 #: protected/views/book/create_template.php:7
 #: protected/views/book/create_template.php:7
+#: protected/views/book/book_create.php:7
 #: protected/views/editorActions/publishBook.php:7
 msgid   "Aşama"
 msgstr  "Step"
@@ -717,6 +716,7 @@ msgstr  "Reader Group"
 #: protected/views/editorActions/publishBook.php:431
 #: protected/views/book/create_template.php:109
 #: protected/views/book/create_template.php:109
+#: protected/views/book/book_create.php:166
 #: protected/views/editorActions/publishBook.php:431
 msgid   "Geri"
 msgstr  "Back"
@@ -728,6 +728,7 @@ msgstr  "Back"
 #: protected/views/editorActions/publishBook.php:434
 #: protected/views/book/create_template.php:112
 #: protected/views/book/create_template.php:112
+#: protected/views/book/book_create.php:169
 #: protected/views/editorActions/publishBook.php:434
 msgid   "Devam"
 msgstr  "Continue"
@@ -798,6 +799,7 @@ msgstr  ""
 #: protected/views/editorActions/publishBook.php:295
 #: protected/views/editorActions/publishBook.php:349
 #: protected/views/editorActions/publishBook.php:364
+#: protected/views/book/book_create.php:106
 #: protected/views/editorActions/publishBook.php:108
 #: protected/views/editorActions/publishBook.php:364
 msgid   "Eser Adı"
@@ -858,6 +860,7 @@ msgstr  ""
 #: protected/views/editorActions/publishBook.php:311
 #: protected/views/book/create_template.php:66
 #: protected/views/book/create_template.php:66
+#: protected/views/book/book_create.php:114
 #: protected/views/editorActions/publishBook.php:171
 #: protected/views/editorActions/publishBook.php:311
 msgid   "Yazar"
@@ -1054,10 +1057,29 @@ msgstr  ""
 #: protected/views/book/create_template.php:115
 #: protected/views/book/create_template.php:39
 #: protected/views/book/create_template.php:115
+#: protected/views/book/book_create.php:172
 msgid   "Oluştur"
 msgstr  ""
 
 #: protected/views/book/create_template.php:75
 #: protected/views/book/create_template.php:75
+#: protected/views/book/book_create.php:123
 msgid   "Boyutlar"
+msgstr  ""
+
+#: protected/views/book/book_create.php:7
+msgid   "Eser Oluşturma "
+msgstr  ""
+
+#: protected/views/book/book_create.php:27
+#: protected/views/book/book_create.php:63
+msgid   "Eser Türü"
+msgstr  ""
+
+#: protected/views/book/book_create.php:33
+msgid   "Eser Bilgileri"
+msgstr  ""
+
+#: protected/views/book/book_create.php:85
+msgid   "Çalışma Grubu"
 msgstr  ""
