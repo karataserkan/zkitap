@@ -10,9 +10,10 @@
 										<!-- <form id="wizForm" action="#" class="form-horizontal" > -->
 									<?php 
 										$form=$this->beginWidget('CActiveForm', array(
-											'id'=>'formWizard',
+											'id'=>'FileForm',
 											'enableAjaxValidation'=>false,
 											'htmlOptions'=>array(
+												'enctype'=>"multipart/form-data",
 										                     //   'onsubmit'=>"return false;",/* Disable normal form submit */
 										                       //'onkeypress'=>" if(event.keyCode == 13){ send(); } " /* Do ajax call when user presses enter key */
 										                     ),
@@ -27,22 +28,28 @@
 													<span class="step-name"><i class="fa fa-check"></i> <?php _e('Eser Türü'); ?> </span>   
 													</a>
 												 </li>
-												 <li>
+												 <li class="epub_select pdf_select">
 													<a href="#book_information" data-toggle="tab" class="wiz-step">
 													<span class="step-number">2</span>
 													<span class="step-name"><i class="fa fa-check"></i> <?php _e('Eser Bilgileri'); ?> </span>   
 													</a> 
 												 </li>
-												 <li>
+												 <li class="epub_select">
 													<a href="#book_res" data-toggle="tab" class="wiz-step">
 													<span class="step-number">3</span>
 													<span class="step-name"><i class="fa fa-check"></i> <?php _e('Çözünürlük'); ?> </span>   
 													</a> 
 												 </li>
-												 <li>
+												 <li class="epub_select">
 													<a href="#book_templates" data-toggle="tab" class="wiz-step">
 													<span class="step-number">4</span>
 													<span class="step-name"><i class="fa fa-check"></i> <?php _e('Şablonlar'); ?> </span>   
+													</a> 
+												 </li>
+												 <li class="pdf_select">
+													<a href="#pdf_upload" data-toggle="tab" class="wiz-step">
+													<span class="step-number">3</span>
+													<span class="step-name"><i class="fa fa-check"></i> <?php _e('Pdf Yükle'); ?> </span>   
 													</a> 
 												 </li>
 											  </ul>
@@ -52,7 +59,7 @@
 											  <div class="tab-content">
 												 <div class="alert alert-danger display-none">
 													<a class="close" aria-hidden="true" href="#" data-dismiss="alert">×</a>
-													Your form has errors. Please correct them to proceed.
+													<?php _e('Lütfen gerekli alanları doldurup tekrar deneyiniz.'); ?>
 												 </div>
 												 <div class="alert alert-success display-none">
 													<a class="close" aria-hidden="true" href="#" data-dismiss="alert">×</a>
@@ -60,13 +67,13 @@
 												 </div>
 												<div class="tab-pane active" id="book_type">
 													<div class="form-group">
-														<label for="radio" class="control-label col-md-3"><?php _e('Eser Türü'); ?></label>
+														<label for="radio" class="control-label col-md-3"><?php _e('Eser Türü'); ?><span class="required">*</span></label>
 														<div class="col-md-4">
 														<input id="ytsize" type="hidden" value="" name="book_type">
 															<span id="book_type">
 																<div class="" id="uniform-book_type_0">
-																	<span class="checked">
-																		<input class="uniform" id="book_type_0" value="epub" checked="checked" type="radio" name="book_type">
+																	<span class="">
+																		<input class="uniform" id="book_type_0" value="epub" type="radio" name="book_type">
 																	</span>
 																<label for="book_type_0">Epub</label><br>
 																</div>
@@ -82,7 +89,7 @@
 												</div>
 												<div class="tab-pane" id="book_information">
 												<div class="form-group">
-														<label for="radio" class="control-label col-md-3"><?php _e('Çalışma Grubu'); ?></label>
+														<label for="radio" class="control-label col-md-3"><?php _e('Çalışma Grubu'); ?><span class="required">*</span></label>
 														<div class="col-md-4">
 														<input id="ytsize" type="hidden" value="" name="workspaces">
 															<span id="workspaces">
@@ -103,7 +110,7 @@
 													</div>
 												<div class="form-group">
 														<label  class="col-md-3 control-label">
-														<?php _e("Eser Adı"); ?>
+														<?php _e("Eser Adı"); ?><span class="required">*</span>
 														</label>
 														<div class="col-md-4">
 															<input class="form-control" name="book_name" type="text">
@@ -111,7 +118,7 @@
 													</div>
 													<div class="form-group">
 														<label  class="col-md-3 control-label">
-														<?php _e("Yazar"); ?>
+														<?php _e("Yazar"); ?><span class="required">*</span>
 														</label>
 														<div class="col-md-4">
 															<input class="form-control" name="book_author" type="text">
@@ -120,7 +127,7 @@
 												</div>
 												<div class="tab-pane" id="book_res">
 													<div class="form-group">
-														<label for="radio" class="control-label col-md-3"><?php _e('Boyutlar'); ?></label>
+														<label for="radio" class="control-label col-md-3"><?php _e('Boyutlar'); ?><span class="required">*</span></label>
 														<div class="col-md-4">
 														<input id="ytsize" type="hidden" value="" name="book_size">
 															<span id="book_size">
@@ -157,6 +164,16 @@
 														</div>
 													</div>
 												</div>
+												<div class="tab-pane" id="pdf_upload">
+													<div class="form-group">
+														<label for="pdf" class="control-label col-md-3"><?php _e('Pdf Yükle'); ?></label>
+														<div class="col-md-4">
+															<!-- <input name="pdf" type="file" multiple="" /> -->
+															<?php echo $form->fileField($model, 'pdf_file'); ?>
+															<?php echo $form->error($model,'pdf_file'); ?>
+														</div>
+													</div>
+												</div>
 										   </div>
 										   <div class="wizard-buttons">
 											  <div class="row">
@@ -184,244 +201,3 @@
 							</div>
 						</div>
 </section>
-<script>
-		jQuery(document).ready(function() {		
-			$('#templateCreate').hide();
-			App.setPage("wizards_validations");  //Set current page
-			App.init(); //Initialise plugins and elements
-			BookCreateWizard.init();
-		});
-	</script>
-
-
-<script type="text/javascript">
- 	$('form').addClass('form-horizontal');
-</script>
-<script type="text/javascript">
-	$('span div span').on('click','[name="book_size"]',function(){
-		var sizes=$(this).val();
-		$.getJSON( "/book/getTemplates/"+sizes, function( data ) {
-		console.log(data);
-		   var items = [];
-		   $.each( data, function( key, val ) {
-		     items.push('<div class="" id="uniform-templates_'+key+'"><span class=""><input class="uniform" id="templates_'+key+'" value="'+val.id+'" type="radio" name="templates"></span><label for="templates_'+key+'"><img src="'+val.thumbnail+'" width="150px" height="150px">'+val.title+'</label><br></div>');
-		     
-		   });
-		$('#templates').html(items);		 
-		  // $( "<ul/>", {
-		  //   "class": "my-new-list",
-		  //   html: items.join( "" )
-		  // }).appendTo( "body" );
-		 });
-	});
-</script>
-<script type="text/javascript">
-	var BookCreateWizard = function () {
-    return {
-        init: function () {
-            if (!jQuery().bootstrapWizard) {
-                return;
-            }
-
-            var wizform = $('#formWizard');
-			var alert_success = $('.alert-success', wizform);
-            var alert_error = $('.alert-danger', wizform);
-            
-			/*-----------------------------------------------------------------------------------*/
-			/*	Validate the form elements
-			/*-----------------------------------------------------------------------------------*/
-            wizform.validate({
-                doNotHideMessage: true,
-				errorClass: 'error-span',
-                errorElement: 'span',
-                rules: {
-                    contentTitle:{
-                        required: true
-                    },
-                    contentType:{
-                        required: true
-                    },
-                    contentExplanation:{
-                        required: true
-                    },
-                    contentIsForSale:{
-                        required: true
-                    },
-                    contentCurrency:{
-                        required: true
-                    },
-                    contentPrice:{
-                        number: true,
-                       // required: true
-                    },
-                    contentReaderGroup:{
-                        required: true
-                    },
-                    host:{
-                        required: true
-                    },
-
-                    
-
-                    card_cvc: {
-						required: true,
-                        digits: true,
-                        minlength: 3,
-                        maxlength: 3
-                    },
-                    
-                },
-
-                invalidHandler: function (event, validator) { 
-                    alert_success.hide();
-                    alert_error.show();
-                },
-
-                highlight: function (element) { 
-                    $(element)
-                        .closest('.form-group').removeClass('has-success').addClass('has-error'); 
-                },
-
-                unhighlight: function (element) { 
-                    $(element)
-                        .closest('.form-group').removeClass('has-error'); 
-                },
-
-                success: function (label) {
-                    if (label.attr("for") == "gender") { 
-                        label.closest('.form-group').removeClass('has-error').addClass('has-success');
-                        label.remove(); 
-                    } else { 
-                        label.addClass('valid') 
-                        .closest('.form-group').removeClass('has-error').addClass('has-success'); 
-                    }
-                }
-            });
-            
-            var data;
-            $(".datepicker-fullscreen").pickadate({format:'dd/mm/yyyy'});
-            $(".siraliDisplay").hide();
-            var formDisplay = function(){
-            };
-
-            /*-----------------------------------------------------------------------------------*/
-            /*  Initialize Bootstrap Wizard
-            /*-----------------------------------------------------------------------------------*/
-            $('#bookCreateWizard').bootstrapWizard({
-                'nextSelector': '.nextBtn',
-                'previousSelector': '.prevBtn',
-                onNext: function (tab, navigation, index) {
-                    alert_success.hide();
-                    alert_error.hide();
-                    if (wizform.valid() == false) {
-                        return false;
-                    }
-
-                    var total = navigation.find('li').length;
-                    var current = index + 1;
-                    $('.stepHeader', $('#bookCreateWizard')).text('Step ' + (index + 1) + ' of ' + total);
-                    jQuery('li', $('#bookCreateWizard')).removeClass("done");
-                    var li_list = navigation.find('li');
-                    for (var i = 0; i < index; i++) {
-                        jQuery(li_list[i]).addClass("done");
-                    }
-                    if (current == 1) {
-                        $('#bookCreateWizard').find('.prevBtn').hide();
-                    } else {
-                        $('#bookCreateWizard').find('.prevBtn').show();
-                    }
-                    if (current >= total) {
-                        $('#bookCreateWizard').find('.nextBtn').hide();
-                        $('#bookCreateWizard').find('.submitBtn').show();
-                        formDisplay();
-                    } else {
-                        $('#bookCreateWizard').find('.nextBtn').show();
-                        $('#bookCreateWizard').find('.submitBtn').hide();
-                    }
-                },
-                onPrevious: function (tab, navigation, index) {
-                    alert_success.hide();
-                    alert_error.hide();
-                    var total = navigation.find('li').length;
-                    var current = index + 1;
-                    $('.stepHeader', $('#bookCreateWizard')).text('Step ' + (index + 1) + ' of ' + total);
-                    jQuery('li', $('#bookCreateWizard')).removeClass("done");
-                    var li_list = navigation.find('li');
-                    for (var i = 0; i < index; i++) {
-                        jQuery(li_list[i]).addClass("done");
-                    }
-                    if (current == 1) {
-                        $('#bookCreateWizard').find('.prevBtn').hide();
-                    } else {
-                        $('#bookCreateWizard').find('.prevBtn').show();
-                    }
-                    if (current >= total) {
-                        $('#bookCreateWizard').find('.nextBtn').hide();
-                        $('#bookCreateWizard').find('.submitBtn').show();
-                    } else {
-                        $('#bookCreateWizard').find('.nextBtn').show();
-                        $('#bookCreateWizard').find('.submitBtn').hide();
-                    }
-                },
-				onTabClick: function (tab, navigation, index) {
-                    bootbox.alert('On Tab click is disabled');
-                    return false;
-                },
-                onTabShow: function (tab, navigation, index) {
-                    var total = navigation.find('li').length;
-                    var current = index + 1;
-                    var $percent = (current / total) * 100;
-                    $('#bookCreateWizard').find('.progress-bar').css({
-                        width: $percent + '%'
-                    });
-                }
-            });
-
-
-            $('#bookCreateWizard').find('.prevBtn').hide();
-            $('#templateCreate').click(function () {
-                msg = Messenger().post({
-                    message:"Şablon oluşturuluyor. Lütfen Bekleyiniz",
-                    type:"info",
-                    showCloseButton: true,
-                    hideAfter: 100
-                });
-                wizform.ajaxSubmit({
-                    url:'/book/createNewBook/',
-                    success:function(response) {
-                    		if (response) {
-	                            msg.update({
-	                                message: 'Şablon oluşturma başarılı.',
-	                                type: 'success',
-	                                hideAfter: 5
-	                            })
-	                            console.log(response);
-                             	window.location.href = '/book/author/'+response;
-                    		}
-                    		else{
-                    			msg.update({
-	                            message: 'Beklenmedik bir hata oluştu. Lütfen tekrar deneyin..',
-	                            type: 'error',
-	                            hideAfter: 5
-	                        	})
-                    		};
-                    		
-                        // bootbox.alert("Eser yayÄ±nlama baÅŸarÄ±lÄ±.",function(){
-                        // });
-                    },
-                    error:function() { 
-                        msg.update({
-                            message: 'Beklenmedik bir hata oluştu. Lütfen tekrar deneyin.',
-                            type: 'error',
-                            hideAfter: 5
-                        })
-                        // bootbox.alert("Beklenmedik bir hata oluÅŸtu. LÃ¼tfen tekrar deneyin.");
-                    },
-
-                });
-            }).hide();
-            
-        }
-    };
-}();
-</script>

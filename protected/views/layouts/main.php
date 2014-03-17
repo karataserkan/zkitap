@@ -119,6 +119,9 @@
 		<script type="text/javascript" src="<?php echo Yii::app()->request->baseUrl; ?>/css/ui/js/datepicker/picker.js"></script>
 		<script type="text/javascript" src="<?php echo Yii::app()->request->baseUrl; ?>/css/ui/js/datepicker/picker.date.js"></script>
 		<script type="text/javascript" src="<?php echo Yii::app()->request->baseUrl; ?>/css/ui/js/datepicker/picker.time.js"></script>
+		<?php if (Yii::app()->controller->action->id=="bookCreate"):?>
+		<script type="text/javascript" src="<?php echo Yii::app()->request->baseUrl; ?>/css/ui/js/book_create.js"></script>
+		<?php endif; ?>
 </head>
 
 <body class="editor_blue">
