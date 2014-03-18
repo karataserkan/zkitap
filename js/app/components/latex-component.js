@@ -92,6 +92,20 @@ var html_tag_replace = function (str){
       {
         str = str.replace('</pre>', '>');
       }
+    while( str.indexOf('&lt;') > -1)
+      {
+        str = str.replace('&lt;', '<');
+      }
+
+    while( str.indexOf('&gt;') > -1)
+      {
+        str = str.replace('&gt;', '>');
+      }
+
+    while( str.indexOf('&amp;') > -1)
+      {
+        str = str.replace('&amp;', '&');
+      }
 
       
    //console.log(str);
