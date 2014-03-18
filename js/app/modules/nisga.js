@@ -578,6 +578,33 @@ var textComponentBuilder = function( component ) {
         window.lindneo.tlingit.componentHasUpdated( component );
       },
       'selected': function (event, element) {
+        console.log($("#"+element.options.component.id).on('keydown', function(e) {}));
+        
+
+        $(document).keydown(function(e) {
+          switch (e.which) {
+          case 37:
+              $("#"+element.options.component.id).stop().animate({
+                  left: '-=10'
+              }); //left arrow key
+              break;
+          case 38:
+              $("#"+element.options.component.id).stop().animate({
+                  top: '-=10'
+              }); //up arrow key
+              break;
+          case 39:
+              $("#"+element.options.component.id).stop().animate({
+                  left: '+=10'
+              }); //right arrow key
+              break;
+          case 40:
+              $("#"+element.options.component.id).stop().animate({
+                  top: '+=10'
+              }); //bottom arrow key
+              break;
+          }
+      });
         window.lindneo.currentComponentWidget = element;
         window.lindneo.toolbox.refresh( element );
       }

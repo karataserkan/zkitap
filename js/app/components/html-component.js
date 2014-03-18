@@ -43,6 +43,7 @@ $(document).ready(function(){
       {
         html_data = html_data.replace('</div>', '');
       }
+
       if(this.options.component.data.html_inner){
         var popupmessage=$('<div  id="message_'+componenthtmlid+'"  ></div>');
         popupmessage.appendTo(this.element);
@@ -165,7 +166,7 @@ var createHtmlComponent = function ( event, ui, oldcomponent ) {
         <div style='clear:both'></div> \
       </div> ");
     var popup_wrapper = $("<div class ='popup_wrapper drag-cancel' style='border: 1px #ccc solid; ' ></div> <br>");
-    var popup_detail = $("<div  id='popup-explanation' contenteditable='true' class='drag-cancel'>" + popup_value + "</div>");
+    var popup_detail = $("<textarea  id='popup-explanation' contenteditable='true' class='drag-cancel' rows='4' cols='40'>" + popup_value + "</textarea>");
     var add_button = $("<a href='#' id='pop-image-OK' class='btn btn-info' style='padding: 5px 30px;'>Ekle</a> ");
     poup_header.appendTo(html_popup);
     close_button.appendTo(poup_header);
@@ -206,9 +207,9 @@ var createHtmlComponent = function ( event, ui, oldcomponent ) {
         oldcomponent.data.html_inner = $("#popup-explanation").html();
 
       };
-      //console.log($("#popup-explanation").text());
+      //console.log($("#popup-explanation").val());
       //return;
-      var html_data = html_tag_replace($("#popup-explanation").html());
+      var html_data = html_tag_replace($("#popup-explanation").val());
        var  component = {
           'type' : 'html',
           'data': {
