@@ -195,7 +195,7 @@ $(document).ready(function(){
             else if(that.options.component.type == 'latex')
               window.lindneo.dataservice.latex_popup(event, ui, that.options.component);
           })
-  
+          
           .mouseenter(function(event){
             
              
@@ -246,11 +246,11 @@ $(document).ready(function(){
         commentButton.remove();
 
       })
-      
       .on('unselect', function(event){
         that.unselect(event);
       })
       .on('select', function(event){
+        console.log(that.options.component.id);
         event.groupSelection=true;
         that._selected(event);
       })
@@ -503,8 +503,9 @@ $(document).ready(function(){
     _selected: function( event, ui ) {
       //console.log(event);
       //console.log(event.originalEvent);
-     
-     if (typeof event.originalEvent != "undefined")
+     console.log(this.options.component.id);
+
+    if (typeof event.originalEvent != "undefined")
       if (typeof event.originalEvent != "null")
         if (typeof event.originalEvent.originalEvent != "undefined")
           if (typeof event.originalEvent.originalEvent.type != "undefined")
