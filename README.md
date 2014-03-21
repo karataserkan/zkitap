@@ -85,6 +85,9 @@ add-apt-repository ppa:coolwanglu/pdf2htmlex
 apt-get update
 apt-get install pdf2htmlex
 
+xvfb
+-----------------------------------------------------------------
+apt-get install xvfb
 
 Co-Working
 -----------------------------------------------------------------
