@@ -453,7 +453,6 @@ class componentHTML {
 
 
 	public function videoInner($component){ 
-		if($component->data->video_type != 'popup'){
 			$file_contents= file_get_contents($component->data->source->attr->src);
 
 			$URL=parse_url($component->data->source->attr->src);
@@ -471,12 +470,13 @@ class componentHTML {
 			$this->epub->files->others[] = $file;
 			$component->data->source->attr->src=$file->filename;
 			//new dBug($component); die;
-
-
-
-
-
 			$data=$component->data; 
+		if($component->data->video_type != 'popup'){
+
+
+
+
+
 
 			
 			$container ="<video  class='video' ";
@@ -524,10 +524,9 @@ class componentHTML {
 			$this->html=str_replace('%component_inner%' ,$container, $this->html);
 		}
 		else{
-			$data=$component->data;
 			
 			$video_id= "video".functions::get_random_string();
-			$video_container ="<video  class='video' ";
+			$video_container ="<video controls class='video' ";
 			if(isset($data->video->attr))
 				foreach ($data->video->attr as $attr_name => $attr_val ) {
 					$video_container.=" $attr_name='$attr_val' ";
@@ -538,7 +537,7 @@ class componentHTML {
 				foreach ($data->video->css as $css_name => $css_val ) {
 					$video_container.="$css_name:$css_val;";
 				}
-				$video_container.="' "; 
+				$video_container.="width:100%;height:auto;' "; 
 			}
 
 			$video_container.=" >";
@@ -568,7 +567,7 @@ class componentHTML {
 				
 				<img  class='popup ref-popup-rw' data-popup-target='$video_id' src='".$component->data->marker."' />
 				
-				<div class='widgets-rw popup-text-rw exclude-auto-rw' id='$video_id' style='width:300px; height:300px'>
+				<div class='widgets-rw popup-text-rw exclude-auto-rw' id='$video_id' style='width:500px; height:auto'>
 					 <button xmlns='http://www.w3.org/1999/xhtml' onclick='$(this).parent().remove();' class='ppclose' style='float:right;'>X</button>
 					 ".$video_container."
 				</div>
