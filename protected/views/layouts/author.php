@@ -53,6 +53,11 @@
 		<script src="<?php echo Yii::app()->request->baseUrl; ?>/js/lib/dropdown/sources/js/DropDownDataJSON.js"></script>
 		<script src="<?php echo Yii::app()->request->baseUrl; ?>/js/lib/dropdown/sources/js/dropdown-mini.js"></script>
 		<link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/js/lib/dropdown/sources/css/DropDown.css" />
+		<!-- DRAGDROP-->
+		<script type="text/javascript" src="<?php echo Yii::app()->request->baseUrl; ?>/js/lib/dragdrop/sources/js/jquery-ui.min.js"></script>
+	    <script type="text/javascript" src="<?php echo Yii::app()->request->baseUrl; ?>/js/lib/dragdrop/sources/js/jquery.ui.touch-punch.min.js"></script>
+	    <script type="text/javascript" src="<?php echo Yii::app()->request->baseUrl; ?>/js/lib/dragdrop/sources/js/DragDrop.js"></script>
+	    <link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/js/lib/dragdrop/sources/css/DragDrop.css" />
 		<!-- MathJax -->
 		<script type="text/x-mathjax-config">
 	      MathJax.Hub.Config({

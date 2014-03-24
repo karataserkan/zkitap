@@ -36,7 +36,7 @@ class BookController extends Controller
 				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
-				'actions'=>array('create','update','selectTemplate','delete','view','author','newBook','selectData','uploadFile','duplicateBook','updateThumbnail','updateCover',"copyBook","createTemplate","updateBookTitle","getBookPages"),
+				'actions'=>array('create','update','selectTemplate','delete','view','author','newBook','selectData','uploadFile','duplicateBook','updateThumbnail','updateCover',"copyBook","createTemplate","updateBookTitle","getBookPages",'bookCreate','getTemplates','createNewBook'),
 				'users'=>array('@'),
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
@@ -47,6 +47,351 @@ class BookController extends Controller
 				'users'=>array('*'),
 			),
 		);
+	}
+
+	public function actionBookCreate()
+	{
+		$file_form=new FileForm();
+		$userid=Yii::app()->user->id;
+		$workspacesOfUser= Yii::app()->db->createCommand()
+	    ->select("*")
+	    ->from("workspaces_users x")
+	    ->join("workspaces w",'w.workspace_id=x.workspace_id')
+	    ->join("user u","x.userid=u.id")
+	    ->where("userid=:id", array(':id' => $userid ) )->queryAll();
+	    
+	    $templates=Yii::app()->db->createCommand()
+		->select ("*")
+		->from("organisations_meta")
+		->where("meta=:meta", array(':meta' => 'template'))
+		->queryAll();
+
+	    foreach ($templates as $key => $template) {
+	    	foreach ($workspacesOfUser as $key => $workspace) {
+		    	if ($template['value']===$workspace['workspace_id']) {
+		    		$templateWorkspaces[]=$workspace;
+		    		unset($workspacesOfUser[$key]);
+		    	}
+	    	}
+	    }
+
+		$workspace_id_value = CHtml::listData($workspacesOfUser, 
+                'workspace_id', 'workspace_name');
+
+		$this->render('book_create',array('workspaces'=>$workspace_id_value,
+										'model'=>$file_form));
+	}
+
+	public function actionCreateNewBook()
+	{
+		$this->layout=false;
+		$userid=Yii::app()->user->id;
+		$book["book_type"] = ( isset( $_POST['book_type'] ) ) ? $_POST['book_type'] : false ;
+		$book["book_name"] = ( isset( $_POST['book_name'] ) ) ? $_POST['book_name'] : false ;
+		$book["book_author"] = ( isset( $_POST['book_author'] ) ) ? $_POST['book_author'] : false ;
+		$book["workspaces"] = ( isset( $_POST['workspaces'] ) ) ? $_POST['workspaces'] : false ;
+		$book["book_size"] = ( isset( $_POST['book_size'] ) ) ? $_POST['book_size'] : false ;
+		$book["templates"] = ( isset( $_POST['templates'] ) ) ? $_POST['templates'] : false ;
+		$book["pdf"] = ( isset( $_FILES['pdf'] ) ) ? $_FILES['pdf'] : false ;
+		
+		if ($book["book_type"] & $book["book_name"] & $book["book_author"] & $book["workspaces"]) {
+			if ($book["book_type"]=='epub') {  
+				$this->layout=false;
+				$newBook=new Book;
+				$newBook->book_id=functions::new_id();
+				$newBook->workspace_id=$book['workspaces'];
+				$newBook->title=$book['book_name'];
+				$newBook->author=$book['book_author'];
+				$newBook->created=date("Y-m-d H:i:s");
+				$newBook->setData('book_type',$book['book_type']);
+				$bookSize=explode('x', $book['book_size']);
+				$newBook->setPageSize($bookSize[0],$bookSize[1]);
+				$newBook->setData('template_id',$book['templates']);
+
+				if ($newBook->save()) {
+					$msg="BOOK:CREATE:0:". json_encode(array(array('user'=>$userid),array('BookId'=>$newBook->book_id,'workspaceId'=>$newBook->workspace_id,'bookType'=>$book['book_type'])));
+					Yii::log($msg,'info');
+					$addOwner = Yii::app()->db->createCommand();
+					$addOwner->insert('book_users', array(
+					    'user_id'=>$userid,
+					    'book_id'=>$newBook->book_id,
+					    'type'   =>'owner'
+					));
+					$this->copy($newBook->book_id,$book['templates']);
+					echo $newBook->book_id;
+				}
+			}
+			elseif ($book["book_type"]=='pdf') { 
+				// print_r($book);
+				// die();
+				$this->layout=false;
+				$newBook=new Book;
+				$newBook->book_id=functions::new_id();
+				$newBook->workspace_id=$book['workspaces'];
+				$newBook->title=$book['book_name'];
+				$newBook->author=$book['book_author'];
+				$newBook->created=date("Y-m-d H:i:s");
+				$newBook->setData('book_type',$book['book_type']);
+				$newBook->save();
+				$addOwner = Yii::app()->db->createCommand();
+					$addOwner->insert('book_users', array(
+					    'user_id'=>$userid,
+					    'book_id'=>$newBook->book_id,
+					    'type'   =>'owner'
+					));
+				$bookId=$newBook->book_id;
+				
+				$file_form=new FileForm();
+				$file_form->attributes=$_POST['FileForm'];
+				$file_form->pdf_file=CUploadedFile::getInstance($file_form,'pdf_file');
+				//echo $file_form->pdf_file;
+				$filePath=Yii::app()->basePath.'/../uploads/files/'.$bookId;
+				if(!is_dir($filePath))
+					mkdir($filePath);
+				$file_form->pdf_file->saveAs($filePath.'/'.$bookId.'.pdf');
+				$pdfUtil=new PdfUtil($filePath,$bookId);
+				$pdfUtil->extractImages();
+				$pdfUtil->extractSearchIndex();
+				$tocs=$pdfUtil->extractTableofContents();
+				$nop=$pdfUtil->getNumberofPages();
+				if($tocs==null){
+					for($i=1;$i<=$nop;$i++){
+						$imgPath=$filePath.'/page-'.$i.'.jpg';
+						$imgThumbnailPath=$filePath.'/thumbnailpage-'.$i.'.jpg';
+						$imgData=base64_encode(file_get_contents($imgPath));
+						$imgData= 'data: '.mime_content_type($imgPath).';base64,'.$imgData;
+						$imgData=$this->getPDFData($filePath,$i,'');
+						if($i==1){
+							$chapter=new Chapter();
+							$chapter->chapter_id=functions::new_id();
+							$chapter->book_id=$bookId;
+							$chapter->order=$i;
+							$chapter->title=__("Bölüm")."-".$i;
+							$chapter->save();
+						}
+						$page=new Page();
+						$page->chapter_id=$chapter->chapter_id;
+						$page->pdf_data=$imgData;
+						$page->order=$i;
+						$page->page_id=functions::new_id();
+						$page->save();
+						//print $i;
+
+					}
+					$msg="BOOK:UPLOAD_FILE:0:". json_encode(array(array('user'=>Yii::app()->user->id),array('BookId'=>$bookId)));
+					Yii::log($msg,'info');
+					$this->setBookData($filePath,$bookId);
+					//$this->redirect('/book/author/'.$bookId);
+				}
+				else{
+						// print_r($tocs);
+						for($i=1;$i<=$nop;$i++){
+							$belongs_to_chapter=null;
+							foreach($tocs as $toc){
+								//list($toc_title,$start_page,$end_page)=$toc;
+								$toc_title=$toc['toc_title'];
+								$start_page=$toc['start_page'];
+								$end_page=$toc['end_page'];
+								if((int)$start_page<=$i && $i<=(int)$end_page){
+										$belongs_to_chapter=$toc;
+									}
+								
+								}
+							
+							if($belongs_to_chapter!=null){
+									$toc_title=$belongs_to_chapter['toc_title'];
+									$start_page=$belongs_to_chapter['start_page'];
+									$end_page=$belongs_to_chapter['end_page'];		
+									$newChapter=Chapter::model()->find('title=:title AND book_id=:book_id',array('title'=>$toc_title,'book_id'=>$bookId));	
+									if($newChapter==null){
+										$newChapter=new Chapter();
+										$newChapter->chapter_id=functions::new_id();
+										$newChapter->book_id=$bookId;
+										$newChapter->order=$i;
+										$newChapter->title=$toc_title;
+										$newChapter->save();
+									}
+									$imgPath=$filePath.'/page-'.$i.'.jpg';
+									$imgThumbnailPath=$filePath.'/thumbnailpage-'.$i.'.jpg';
+									$imgData=base64_encode(file_get_contents($imgPath));
+									$imgData= 'data: '.mime_content_type($imgPath).';base64,'.$imgData;
+									$page=new Page();
+									$page->chapter_id=$newChapter->chapter_id;
+									//ekaratas edited -begin
+									$imgData=$this->getPDFData($filePath,$i,'');
+
+								
+									// ekaratas -end
+
+									$page->pdf_data=$imgData;
+									$page->order=$i;
+									$page->page_id=functions::new_id();
+									$page->save();
+								}
+								else{
+										
+										$newChapter=new Chapter();
+										$newChapter->chapter_id=functions::new_id();
+										$newChapter->book_id=$bookId;
+										$newChapter->title=__("Bölüm")."-".$i;
+										$newChapter->order=$i;
+										$newChapter->save();
+										$imgPath=$filePath.'/page-'.$i.'.jpg';
+										$imgThumbnailPath=$filePath.'/thumbnailpage-'.$i.'.jpg';
+										$imgData=base64_encode(file_get_contents($imgPath));
+										$imgData= 'data: '.mime_content_type($imgPath).';base64,'.$imgData;
+										$page=new Page();
+										$page->chapter_id=$newChapter->chapter_id;
+
+										//ekaratas edited -begin
+										$imgData=$this->getPDFData($filePath,$i,'');
+
+										// ekaratas -end
+
+
+										$page->pdf_data=$imgData;
+										$page->order=$i;
+										$page->page_id=functions::new_id();
+										$page->save();
+
+								}
+
+							}
+							$msg="BOOK:UPLOAD_FILE:0:". json_encode(array(array('user'=>Yii::app()->user->id),array('BookId'=>$bookId)));
+							Yii::log($msg,'info');
+
+							$this->setBookData($filePath,$bookId);
+							// $this->redirect('/book/author/'.$bookId);
+
+					}
+				
+					echo $bookId;
+				}
+		}
+	}
+
+	public function actionGetTemplates($id)
+	{
+		$sizes=$bookSize=explode('x', $id);
+		$width=$sizes[0];
+		$height=$sizes[1];
+
+		$userid=Yii::app()->user->id;
+		$templateWorkspaces=array();
+
+		$workspacesOfUser= Yii::app()->db->createCommand()
+	    ->select("*")
+	    ->from("workspaces_users x")
+	    ->join("workspaces w",'w.workspace_id=x.workspace_id')
+	    ->join("user u","x.userid=u.id")
+	    ->where("userid=:id", array(':id' => $userid ) )->queryAll();
+		
+		$templates=Yii::app()->db->createCommand()
+		->select ("*")
+		->from("organisations_meta")
+		->where("meta=:meta", array(':meta' => 'template'))
+		->queryAll();
+
+	    foreach ($templates as $key => $template) {
+	    	foreach ($workspacesOfUser as $key => $workspace) {
+		    	if ($template['value']===$workspace['workspace_id']) {
+		    		$templateWorkspaces[]=$workspace;
+		    		unset($workspacesOfUser[$key]);
+		    	}
+	    	}
+	    }
+
+	    $templateBooks=array();
+		foreach ($templateWorkspaces as $key => $templateWorkspace) {
+			$temp = Book::model()->findAll(array(
+		    'condition'=>'workspace_id=:workspace_id',
+		    'params'=>array(':workspace_id'=>$templateWorkspace['workspace_id']),
+			));
+
+			foreach ($temp as $key2 => $tem) {
+				$pageSize=$tem->getPageSize();
+				if ($pageSize['width']==$width & $pageSize['height']==$height) {
+					$templateBooks[]=$tem;
+				}
+			}
+		}
+
+		$main_templates= Book::model()->findAll(array(
+		    'condition'=>'workspace_id=:workspace_id',
+		    'params'=>array(':workspace_id'=>'layouts'),
+		));
+		foreach ($main_templates as $key2 => $tem) {
+				$pageSize=$tem->getPageSize();
+				if ($pageSize['width']==$width & $pageSize['height']==$height) {
+					$templateBooks[]=$tem;
+				}
+		}
+		$book_templates=array();
+		foreach ($templateBooks as $key3 => $book) {
+			$book_templates[$key3]['id']=$book->book_id;
+			$book_templates[$key3]['title']=$book->title;
+			$book_templates[$key3]['thumbnail']=($book->getData('thumbnail'))?$book->getData('thumbnail'):'';
+		}
+		print_r(json_encode($book_templates));
+	}
+
+	public function copy($book_id,$template_id)
+	{
+		$chapters= Chapter::model()->findAll(array(
+				'condition' => 'book_id=:book_id',
+				'params' => array(':book_id' => $template_id),
+			));
+			if ($chapters) {
+				foreach ($chapters as $key => $chapter) {
+					$newchapterid=functions::new_id();//functions::get_random_string();
+					$newChapter=new Chapter;
+					$newChapter->book_id=$book_id;
+					$newChapter->chapter_id=$newchapterid;
+					$newChapter->title=$chapter->title;
+					$newChapter->start_page=$chapter->start_page;
+					$newChapter->order=$chapter->order;
+					$newChapter->data=$chapter->data;
+					$newChapter->created=date("Y-m-d H:i:s");
+					$newChapter->save();
+
+					$pages = Page::model()->findAll(array(
+						'condition' => 'chapter_id=:chapter_id',
+						'params' => array(':chapter_id'=> $chapter->chapter_id)
+					));
+					if ($pages) {
+						foreach ($pages as $pkey => $page) {
+							$newpageid=functions::new_id();//functions::get_random_string();
+							$newPage= new Page;
+							$newPage->page_id=$newpageid;
+							$newPage->created=date("Y-m-d H:i:s");
+							$newPage->chapter_id=$newchapterid;
+							$newPage->data=$page->data;
+							$newPage->order=$page->order;
+							$newPage->save();
+
+							$components = Component::model()->findAll(array(
+								'condition' => 'page_id=:page_id',
+								'params' => array(':page_id'=> $page->page_id)
+								));
+
+							if ($components) {
+								foreach ($components as $ckey => $component) {
+									$newComponent = new Component;
+									$newComponent->id=functions::new_id();//functions::get_random_string();
+									$newComponent->type=$component->type;
+									$newComponent->data=$component->data;
+									$newComponent->created=date("Y-m-d H:i:s");
+									$newComponent->page_id=$newpageid;
+									$newComponent->save();
+								}
+							}
+
+						}
+					}
+					
+				}
+
+			}
 	}
 
 	/**
@@ -62,20 +407,27 @@ class BookController extends Controller
 
 	public function actionCreateTemplate($id)
 	{
-		$this->render('create_template',array('workspace_id'=>$id));
-	}
-
-	/**
-	 * Selection of book type.
-	 * @param $bookType 'epub' || 'pdf'
-	 */
-	public function actionNewBook($bookType=null)
-	{
-
-		if ($bookType=='epub' || $bookType=='pdf') {
-			$this->redirect(array('create','bookType'=>$bookType));
+		if (isset($_POST['isim'])&isset($_POST['yazar'])) {
+				$model=new Book;
+				$model->book_id=functions::new_id();
+				$model->workspace_id=$id;
+				$model->title=$_POST['isim'];
+				$model->author=$_POST['yazar'];
+				$model->created=date("Y-m-d H:i:s");
+				if (isset($_POST['size'])) {
+					$bookSize=explode('x', $_POST['size']);
+				}
+				else
+				{
+					$bookSize=array('1024','768');
+				}
+				$model->setPageSize($bookSize[0],$bookSize[1]);
+				if ($model->save()) {
+					$this->redirect('/book/author/'.$model->book_id);
+				}				
+				//{"book_type":"pdf","size":{"width":1275,"height":1650}}
 		}
-		$this->render('new_book', array());
+		$this->render('create_template',array('workspace_id'=>$id));
 	}
 
 	public function actionGetBookPages($id)
@@ -100,56 +452,7 @@ class BookController extends Controller
 		echo json_encode($data);
 	}
 
-	/**
-	 * Creates a new model.
-	 * If creation is successful, the browser will be redirected to the 'view' page.
-	 */
-	public function actionCreate($workspace=null,$book_id=null,$bookType='epub')
-	{
-		$model=new Book;
-		$model->book_id=functions::new_id();//functions::get_random_string();
-		
-		$model->setData('book_type',$bookType);
 
-		//seçilen bookType eklendi
-		
-		$model->created=date("Y-m-d");
-
-
-		// Uncomment the following line if AJAX validation is needed
-		// $this->performAjaxValidation($model);
-
-		if(isset($_POST['Book']))
-		{
-			$model->attributes=$_POST['Book'];
-			//$model->pdf_file=CUploadedFile::getInstance($model,'pdf_file');
-			//print($model->pdf_file);die();
-			if($model->save())
-				$msg="BOOK:CREATE:0:". json_encode(array(array('user'=>Yii::app()->user->id),array('BookId'=>$model->book_id,'workspaceId'=>$workspace,'bookType'=>$bookType)));
-				Yii::log($msg,'info');
-				$userid=Yii::app()->user->id;
-				$addOwner = Yii::app()->db->createCommand();
-				$addOwner->insert('book_users', array(
-				    'user_id'=>$userid,
-				    'book_id'=>$model->book_id,
-				    'type'   =>'owner'
-				));
-				if($bookType=='epub'){
-					$this->redirect(array('selectTemplate','bookId'=>$model->book_id));
-				}
-				else
-				{
-					$this->redirect(array('uploadFile','bookId'=>$model->book_id));
-				}
-		}
-
-
-		$model->workspace_id=$workspace;
-		$this->render('create',array(
-			'model'=>$model,
-		));
-
-	}
 	private function getPDFData($filePath,$pageNumber,$pageJSON){
 		$data=array();
 		$imgPath=$filePath.'/page-'.$pageNumber.'.jpg';
@@ -324,95 +627,7 @@ class BookController extends Controller
 			'model'=>$file_form));
 
 	}
-	public function actionSelectTemplate($bookId=null,$layout_id=null){ 
-
-		$layouts= Book::model()->findAll(array(
-		    'condition'=>'workspace_id=:workspace_id',
-		    'params'=>array(':workspace_id'=>'layouts'),
-		));
-
-		if(isset($_GET['layout']))
-		{
-			
-
-			$layout_id = $_GET['layout'];
-			$bookId=$_GET['book_id'];
-
-			$book=$this->loadModel($bookId);
-			//book->data'ya template_id eklendi
-			$book->setData('template_id',$layout_id);
-
-			$book->save();
-
-
-				
-			$chapters= Chapter::model()->findAll(array(
-				'condition' => 'book_id=:book_id',
-				'params' => array(':book_id' => $layout_id),
-			));
-			if ($chapters) {
-				foreach ($chapters as $key => $chapter) {
-					$newchapterid=functions::new_id();//functions::get_random_string();
-					$newChapter=new Chapter;
-					$newChapter->book_id=$bookId;
-					$newChapter->chapter_id=$newchapterid;
-					$newChapter->title=$chapter->title;
-					$newChapter->start_page=$chapter->start_page;
-					$newChapter->order=$chapter->order;
-					$newChapter->data=$chapter->data;
-					$newChapter->created=date("Y-m-d H:i:s");
-					$newChapter->save();
-
-					$pages = Page::model()->findAll(array(
-						'condition' => 'chapter_id=:chapter_id',
-						'params' => array(':chapter_id'=> $chapter->chapter_id)
-					));
-					if ($pages) {
-						foreach ($pages as $pkey => $page) {
-							$newpageid=functions::new_id();//functions::get_random_string();
-							$newPage= new Page;
-							$newPage->page_id=$newpageid;
-							$newPage->created=date("Y-m-d H:i:s");
-							$newPage->chapter_id=$newchapterid;
-							$newPage->data=$page->data;
-							$newPage->order=$page->order;
-							$newPage->save();
-
-							$components = Component::model()->findAll(array(
-								'condition' => 'page_id=:page_id',
-								'params' => array(':page_id'=> $page->page_id)
-								));
-
-							if ($components) {
-								foreach ($components as $ckey => $component) {
-									$newComponent = new Component;
-									$newComponent->id=functions::new_id();//functions::get_random_string();
-									$newComponent->type=$component->type;
-									$newComponent->data=$component->data;
-									$newComponent->created=date("Y-m-d H:i:s");
-									$newComponent->page_id=$newpageid;
-									$newComponent->save();
-								}
-							}
-
-						}
-					}
-					
-				}
-
-			}
-		$this->redirect(array('selectData','bookId'=>$bookId));	
-		}
-
-		$this->render('select_template',array(
-			'layouts'=>$layouts,
-			'book_id'=>$bookId,
-		));
-
-			
-	}
-
-
+	
 	public function actionCopyBook($bookId,$workspaceId,$title=null)
 	{
 		if ($bookId & $workspaceId) {
@@ -463,61 +678,9 @@ class BookController extends Controller
 				$msg="SITE:RIGHT:1:". json_encode(array(array('user'=>Yii::app()->user->id),array('userId'=>$userId,'bookId'=>$bookId,'type'=>$type)));
 				Yii::log($msg,'info');
 			}
-				
-			$chapters= Chapter::model()->findAll(array(
-				'condition' => 'book_id=:book_id',
-				'params' => array(':book_id' => $layout_id),
-			));
-			if ($chapters) {
-				foreach ($chapters as $key => $chapter) {
-					$newchapterid=functions::new_id();//functions::get_random_string();
-					$newChapter=new Chapter;
-					$newChapter->book_id=$bookId;
-					$newChapter->chapter_id=$newchapterid;
-					$newChapter->title=$chapter->title;
-					$newChapter->start_page=$chapter->start_page;
-					$newChapter->order=$chapter->order;
-					$newChapter->data=$chapter->data;
-					$newChapter->created=date("Y-m-d H:i:s");
-					$newChapter->save();
+			$this->copy($bookId, $layout_id);
 
-					$pages = Page::model()->findAll(array(
-						'condition' => 'chapter_id=:chapter_id',
-						'params' => array(':chapter_id'=> $chapter->chapter_id)
-					));
-					if ($pages) {
-						foreach ($pages as $pkey => $page) {
-							$newpageid=functions::new_id();//functions::get_random_string();
-							$newPage= new Page;
-							$newPage->page_id=$newpageid;
-							$newPage->created=date("Y-m-d H:i:s");
-							$newPage->chapter_id=$newchapterid;
-							$newPage->data=$page->data;
-							$newPage->order=$page->order;
-							$newPage->save();
-
-							$components = Component::model()->findAll(array(
-								'condition' => 'page_id=:page_id',
-								'params' => array(':page_id'=> $page->page_id)
-								));
-
-							if ($components) {
-								foreach ($components as $ckey => $component) {
-									$newComponent = new Component;
-									$newComponent->id=functions::new_id();//functions::get_random_string();
-									$newComponent->type=$component->type;
-									$newComponent->data=$component->data;
-									$newComponent->created=date("Y-m-d H:i:s");
-									$newComponent->page_id=$newpageid;
-									$newComponent->save();
-								}
-							}
-
-						}
-					}
-			}
-		}
-		$this->redirect(array('author','bookId'=>$bookId));		
+		$this->redirect(array('author','bookId'=>$bookId));
 	}
 
 

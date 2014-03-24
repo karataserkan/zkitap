@@ -15,10 +15,10 @@ defined('YII_TRACE_LEVEL') or define('YII_TRACE_LEVEL',3);
 require_once($yii);
 require_once($floodblocker);
 require_once($detectinjection);
-$flb = new FloodBlocker ( '../../' );
+$flb = new FloodBlocker ("/tmp/");
 //70 requests in 10 seconds
-  $flb->rules = array ( 10=>700 );
-  $res = $flb->CheckFlood ( );
+  $flb->rules = array ( 10=>500 );
+  $res = $flb->CheckFlood ();
   if ( $res )
     {
 		Yii::createWebApplication($config)->run();

@@ -457,6 +457,13 @@ class epub3 {
 		<script src="dropdown/sources/js/DropDownDataJSON.js"></script>
 		<script src="dropdown/sources/js/dropdown-mini.js"></script>
 		<link rel="stylesheet" type="text/css" href="dropdown/sources/css/DropDown.css" />
+
+		<!-- DRAGDROP-->
+		<script type="text/javascript" src="dragdrop/sources/js/jquery-ui.min.js"></script>
+	    <script type="text/javascript" src="dragdrop/sources/js/jquery.ui.touch-punch.min.js"></script>
+	    <script type="text/javascript" src="dragdrop/sources/js/DragDrop.js"></script>
+	    <link rel="stylesheet" type="text/css" href="dragdrop/sources/css/DragDrop.css" />
+
 	    	<script type="text/x-mathjax-config">
 		      MathJax.Hub.Config({
 				tex2jax: {

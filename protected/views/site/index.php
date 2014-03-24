@@ -230,7 +230,7 @@ $all_books= $this->getWorkspaceBooks($workspace->workspace_id);
 							<div class="col-sm-12">
 								<div class="page-header">
 										<h3 class="content-title pull-left"><?php _e('Kitaplarım') ?></h3>
-										<a class="btn pull-right btn-primary" href="/book/newBook">
+										<a class="btn pull-right btn-primary" href="/book/bookCreate">
 							<i class="fa fa-plus-circle"></i>
 							<span>Kitap Ekle</span>
 						</a>

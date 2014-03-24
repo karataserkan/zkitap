@@ -479,7 +479,7 @@ class componentHTML {
 
 
 			
-			$container ="<video  class='video' ";
+			$container ="<video controls='controls'  class='video' ";
 			if(isset($data->video->attr))
 				foreach ($data->video->attr as $attr_name => $attr_val ) {
 					$container.=" $attr_name='$attr_val' ";
