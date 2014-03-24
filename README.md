@@ -85,6 +85,13 @@ add-apt-repository ppa:coolwanglu/pdf2htmlex
 apt-get update
 apt-get install pdf2htmlex
 
+xvfb
+-----------------------------------------------------------------
+apt-get install xvfb
+
+pdfcrop
+-----------------------------------------------------------------
+apt-get install texlive-extra-utils
 
 Co-Working
 -----------------------------------------------------------------

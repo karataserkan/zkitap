@@ -452,7 +452,8 @@ class componentHTML {
 
 
 
-public function videoInner($component){ 
+
+	public function videoInner($component){ 
 			$file_contents= file_get_contents($component->data->source->attr->src);
 
 			$URL=parse_url($component->data->source->attr->src);
@@ -526,6 +527,7 @@ public function videoInner($component){
 		else{
 			
 			$video_id= "video".functions::get_random_string();
+
 			$video_container ="<video controls = 'controls' class='video' ";
 			if(isset($data->video->attr))
 				foreach ($data->video->attr as $attr_name => $attr_val ) {
