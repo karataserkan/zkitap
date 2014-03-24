@@ -153,4 +153,17 @@ class Book extends CActiveRecord
 		$this->data=json_encode($book_data);
 	}
 
+	public function setFastStyle($style,$type,$value)
+	{
+		$book_data=json_decode($this->data,true);
+		$book_data['fastStyles'][$style][$type]=$value;
+		$this->data=json_encode($book_data);
+	}
+
+	public function getFastStyle($style)
+	{
+		$book_data=json_decode($this->data,true);
+		return json_encode($book_data['fastStyles'][$style]);
+	}
+
 }
