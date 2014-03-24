@@ -31,8 +31,9 @@ $(document).ready(function(){
 
 
 
-      
-      
+      console.log('Popup......');
+      console.log(that.options.component);
+      console.log('----------');
       this._super(); 
 /*
       this.element.resizable("option",'maxHeight', 128 );
