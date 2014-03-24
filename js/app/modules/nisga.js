@@ -128,6 +128,10 @@ window.lindneo.nisga = (function(window, $, undefined){
         tagComponentBuilder( component );
         break;
 
+      case 'thumb':
+        thumbComponentBuilder( component );
+        break;
+
 
       default:
          // what can I do sometimes
@@ -747,6 +751,37 @@ var textComponentBuilder = function( component ) {
     element
     .appendTo( elementWrap )
     .sliderComponent({
+      'component': component,
+      'update': function ( event, component ) {
+        if(revision_value==0){
+        var newObject = jQuery.extend(true, {}, component);
+        revision_array.revisions.push({component_id: component.id, component: newObject, revision_date: $.now(), even_type: 'UPDATE'});
+                revision_id++;
+
+      }
+      else revision_value=0;
+      ////console.log(revision_array);
+        window.lindneo.tlingit.componentHasUpdated( component );
+      },
+      'selected': function (event, element) {
+        window.lindneo.currentComponentWidget = element;
+        window.lindneo.toolbox.refresh( element );
+      }
+    });
+
+  };
+
+  var thumbComponentBuilder = function ( component ) {
+    
+
+    var element  = $('<div id="thumb_container" style="position: relative; top: 0px; left: 0px; width: 800px; height: 456px; background: #24262e; overflow: hidden;">');
+    var elementWrap=$('<div ></div>');
+
+    elementWrap.appendTo( page_div_selector );
+
+    element
+    .appendTo( elementWrap )
+    .thumbComponent({
       'component': component,
       'update': function ( event, component ) {
         if(revision_value==0){

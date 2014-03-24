@@ -184,6 +184,10 @@ $( document ).ready(function () {
             createPlinkComponent( event, ui );
             break;
 
+          case 'thumb':
+            createThumbComponent( event, ui );
+            break;
+
           default:
             break; 
         }
