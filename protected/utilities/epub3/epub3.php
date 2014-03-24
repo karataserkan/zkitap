@@ -134,8 +134,6 @@ class epub3 {
 					font-family: Arial;
 					font-size: 14px;
 					line-height: normal;
-					width:1204px;
-					height:768px;
 					}
 ";
 
@@ -268,8 +266,10 @@ class epub3 {
 
 
 	public function create_title_page(){
-
-
+		$bookSize=$this->book->getPageSize();
+		$width=$bookSize['width']?$bookSize['width']:"1024";
+		$height=$bookSize['height']?$bookSize['height']:"768";
+		
 	
 
 			//create_title_page
@@ -394,9 +394,11 @@ class epub3 {
 		$bookSize=$this->book->getPageSize();
 		if (isset($page_data['image']['data'])&& !empty($page_data['image']['data'])) {
 			$img=$page_data['image']['data'];
+			$backgroundfile = functions::save_base64_file ( $img , 'bg'.$page->page_id , $this->get_tmp_file());
+
 			//$bookSize=$page_data['image']['size'];
 		}
-		$background= (isset($img)&&!empty($img)) ? "background-image:url('".$img."')" : "background:white";
+		$background= (isset($img)&&!empty($img)) ? "background-image:url('".$backgroundfile->filename."')" : "background:transparent";
 		$background_size=(isset($bookSize)&&!empty($bookSize)) ? "background-size:".$bookSize['width']."px ".$bookSize['height']."px":"";
 		
 		$width="1024";
@@ -416,7 +418,7 @@ class epub3 {
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:epub="http://www.idpf.org/2007/ops" lang="en">
   <head>
     <meta http-equiv="default-style" content="text/html; charset=utf-8"/>
-    <title>My first book</title>
+    <title></title>
 
 		<meta name="viewport" content="width='.$width.', height='.$height.'"/>
 
@@ -1094,7 +1096,7 @@ class epub3 {
 
 		//Title Page.
 		if( in_array(false,$this->create_title_page() ) ) {
-			$this->errors[]=new error('Epub3-Construction','Problem with Title Page');
+			$this->errors[]=new error('Epub3-Construction','Problem with Title Page'); 
 			return false;
 		}
 
@@ -1123,10 +1125,10 @@ class epub3 {
 		}
 
 		//Create thumbnails
-		if(!$this->createThumbnails()){
+		/*if(!$this->createThumbnails()){
 			$this->errors[]=new error('Thumbnail production','Problem with thumbnails');
 			return false;
-		}
+		}*/
 		//Create Zip.
 		if( ! $this->zipfolder($encyrptFiles)  ) {
 			$this->errors[]=new error('Epub3-Construction','Problem with Zip');
