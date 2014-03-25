@@ -54,6 +54,9 @@ class componentHTML {
 			 case 'plink':
 			    $this->plinkInner($component);
 			    break;
+			 case 'thumb':
+			    $this->thumbInner($component);
+			    break;
 			  /*
 			  case 'slider':
 			    $this->sliderInner($component);
@@ -962,6 +965,58 @@ class componentHTML {
 			array('%component_inner%', '%component_text%') , 
 			array($container, str_replace("\n", "<br/>",   htmlspecialchars($this->textSanitize($data->textarea->val),null,"UTF-8")  ) )
 			, $this->html);
+
+
+
+	}
+
+	public function thumbInner($component){ 
+	
+		
+		$container ='
+		<script type="text/javascript">
+			$( document ).ready(function() {
+			  myScroll = new iScroll("wrapper", { scrollbarClass: "myScrollbar" });
+			});
+		</script>
+		<div id="container'.$component->id.'" class="widgets-rw panel-sliding-rw exclude-auto-rw" style="height:'.$component->data->somegallery->css->height.'; width:'.$component->data->somegallery->css->width.';"  >
+			<div id="wrapper"><div id="scroller">';
+		$container.=' <ul class="ul2" epub:type="list">
+		';
+		
+		if($component->data->slides->imgs)
+		foreach ($component->data->slides->imgs as $images_key => &$images_value) {
+			$new_file= functions::save_base64_file ( $images_value->src , $component->id .$images_key, $this->epub->get_tmp_file() );
+			$images_value->attr->src =  $new_file->filename;
+
+			$container .=' <li id="li-'.$component->id.$images_key.'" '.$size_style_attr.'><img ';
+			if(isset($images_value->attr))
+				foreach ($images_value->attr as $attr_name => $attr_val ) {
+					$container.=" $attr_name='$attr_val' ";
+				}
+
+			if(isset($images_value->css)){
+				$container.=" style=' " .$size_style;
+				foreach ($images_value->css as $css_name => $css_val ) {
+					$container.="$css_name:$css_val;";
+				}
+				$container.="' ";
+			}
+
+			$container .='/>
+			</li>';
+			$this->epub->files->others[] = $new_file;
+			unset($new_file);
+
+		}
+
+
+		$container .='  
+		</ul>
+               
+               </div></div>
+         </div>';
+         $this->html=str_replace('%component_inner%' ,$container, $this->html);
 
 
 

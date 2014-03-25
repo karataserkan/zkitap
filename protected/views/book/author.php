@@ -186,7 +186,7 @@ $current_user=User::model()->findByPk(Yii::app()->user->id);
 			</div>
 			<div class="vertical-line responsive_2"></div>
 						
-			<div class="text-options latex-options table-options toolbox" style="display:inline-block;">
+			<div class="text-options wrap-options rtext-options latex-options table-options toolbox" style="display:inline-block;">
 					
 					
 					<input class='tool color' rel='color' type="color" class="color-picker-box radius " placeholder="e.g. #bbbbbb" title="Yazı Rengi" />
@@ -710,6 +710,41 @@ $current_user=User::model()->findByPk(Yii::app()->user->id);
 </div>	
 <!--  end add slider popup -->
 
+<!--  add thumb popup -->	
+<div class="popup" id="pop-galery-popup">
+<div class="popup-header">
+	<i class="icon-m-galery"></i>
+		Galeri Ekle
+	<i id="image-add-dummy-close-button" class="icon-close size-10" style="float:right; margin-right:10px; margin-top:5px;"></i>
+</div>
+<!-- popup content-->
+	<div class="gallery-inner-holder">
+		<div style="clear:both"></div>
+			<div style="margin-bottom:20px;">
+				<label class="dropdown-label" id="leading">
+						Görsel Adedi:
+							<select id="leading" class="radius">
+								<option selected="" value="8"> 1 </option>
+								<option value="0" >2</option>
+								<option value="10" >3</option>
+								<option value="20" >4</option>
+								<option value="30" >5</option>
+								<option value="40" >6</option>
+								<option value="50" >7</option>
+								<option value="60" >8</option>
+								<option value="70" >9</option>
+								<option value="80" >10</option>
+							</select>	
+					</label>
+					
+			</div>
+			<div class="add-image-drag-area"> </div>
+		<a href="#" class="btn btn-info" id="add-image" style="padding: 5px 30px;">Ekle</a>
+	</div>
+<!-- popup content-->
+</div>	
+<!--  end add thumb popup -->
+
 	
 <!--  add quiz popup -->	
 <div class="popup" id="pop-quiz-popup">
@@ -962,6 +997,7 @@ $current_user=User::model()->findByPk(Yii::app()->user->id);
 			
 			<li ctype="galery" class="component icon-m-galery">&nbsp;&nbsp;&nbsp;&nbsp;Galeri</li>
 			<li ctype="slider" class="component icon-m-galery">&nbsp;&nbsp;&nbsp;&nbsp;Slider</li>
+			<li ctype="thumb" class="component icon-m-galery">&nbsp;&nbsp;&nbsp;&nbsp;Slide Tumb</li>
 			<li ctype="tag" class="component icon-m-galery">&nbsp;&nbsp;&nbsp;&nbsp;Tag</li>
 			<li ctype="quiz"  class="component icon-m-quiz">&nbsp;&nbsp;&nbsp;&nbsp;Quiz</li>
 			<li ctype="side-text"  class="component icon-m-listbox">&nbsp;&nbsp;&nbsp;Yazı Kutusu</li>
@@ -971,6 +1007,7 @@ $current_user=User::model()->findByPk(Yii::app()->user->id);
 			<li class="left_bar_titles"></li>
 
 			<li ctype="text" class="component icon-m-text">&nbsp;&nbsp;&nbsp;&nbsp;Yazı</li>
+			<li ctype="rtext" class="component icon-m-text">&nbsp;&nbsp;&nbsp;&nbsp;Rich Text</li>
 			<li ctype="grafik" class="component icon-m-charts">&nbsp;&nbsp;&nbsp;&nbsp;Grafik</li>
 			<li ctype="shape" class="component icon-m-shape">&nbsp;&nbsp;&nbsp;&nbsp;Şekil</li>
 			<li ctype="table" class="component icon-t-merge">&nbsp;&nbsp;&nbsp;&nbsp;Tablo</li>
