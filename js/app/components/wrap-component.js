@@ -13,7 +13,7 @@ $(document).ready(function(){
       var that = this;
       var html_data = html_tag_replace(this.options.component.data.html_inner);
       var wrap_cutoff = this.options.component.data.cutoff;
-      html_data = html_data + '<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc justo massa, mattis in imperdiet in, pellentesque sit amet elit. Fusce vitae pulvinar nisi. Ut sed justo nec est congue cursus vestibulum eu dolor. Donec at mauris felis, sit amet ultrices odio. Aliquam erat volutpat. Nullam faucibus metus eu elit luctus sed malesuada risus molestie. Mauris nulla quam, tristique at lobortis at, fringilla quis nibh. Ut sapien mauris, imperdiet eget tincidunt semper, consectetur a augue. Donec vitae nibh augue, ut rhoncus elit. Nullam volutpat lorem sed odio lacinia non aliquet erat consequat. In ac libero turpis. In commodo nisl id diam dapibus varius. Sed lobortis ultricies ligula, quis auctor arcu imperdiet eget. Donec vel ipsum dui. In justo purus, molestie sit amet mattis sed, cursus non orci. Nullam ac massa vel tortor scelerisque blandit quis a sapien.</p><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc justo massa, mattis in imperdiet in, pellentesque sit amet elit. Fusce vitae pulvinar nisi. Ut sed justo nec est congue cursus vestibulum eu dolor. Donec at mauris felis, sit amet ultrices odio. Aliquam erat volutpat. Nullam faucibus metus eu elit luctus sed malesuada risus molestie. Mauris nulla quam, tristique at lobortis at, fringilla quis nibh. Ut sapien mauris, imperdiet eget tincidunt semper, consectetur a augue. Donec vitae nibh augue, ut rhoncus elit. Nullam volutpat lorem sed odio lacinia non aliquet erat consequat. In ac libero turpis. In commodo nisl id diam dapibus varius. Sed lobortis ultricies ligula, quis auctor arcu imperdiet eget. Donec vel ipsum dui. In justo purus, molestie sit amet mattis sed, cursus non orci. Nullam ac massa vel tortor scelerisque blandit quis a sapien.</p>'
+      //html_data = html_data + '<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc justo massa, mattis in imperdiet in, pellentesque sit amet elit. Fusce vitae pulvinar nisi. Ut sed justo nec est congue cursus vestibulum eu dolor. Donec at mauris felis, sit amet ultrices odio. Aliquam erat volutpat. Nullam faucibus metus eu elit luctus sed malesuada risus molestie. Mauris nulla quam, tristique at lobortis at, fringilla quis nibh. Ut sapien mauris, imperdiet eget tincidunt semper, consectetur a augue. Donec vitae nibh augue, ut rhoncus elit. Nullam volutpat lorem sed odio lacinia non aliquet erat consequat. In ac libero turpis. In commodo nisl id diam dapibus varius. Sed lobortis ultricies ligula, quis auctor arcu imperdiet eget. Donec vel ipsum dui. In justo purus, molestie sit amet mattis sed, cursus non orci. Nullam ac massa vel tortor scelerisque blandit quis a sapien.</p><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc justo massa, mattis in imperdiet in, pellentesque sit amet elit. Fusce vitae pulvinar nisi. Ut sed justo nec est congue cursus vestibulum eu dolor. Donec at mauris felis, sit amet ultrices odio. Aliquam erat volutpat. Nullam faucibus metus eu elit luctus sed malesuada risus molestie. Mauris nulla quam, tristique at lobortis at, fringilla quis nibh. Ut sapien mauris, imperdiet eget tincidunt semper, consectetur a augue. Donec vitae nibh augue, ut rhoncus elit. Nullam volutpat lorem sed odio lacinia non aliquet erat consequat. In ac libero turpis. In commodo nisl id diam dapibus varius. Sed lobortis ultricies ligula, quis auctor arcu imperdiet eget. Donec vel ipsum dui. In justo purus, molestie sit amet mattis sed, cursus non orci. Nullam ac massa vel tortor scelerisque blandit quis a sapien.</p>'
       //console.log(wrap_cutoff);
 
       var componentpopupid='popup'+this.options.component.id;
@@ -122,7 +122,7 @@ var createWrapComponent = function ( event, ui, oldcomponent ) {
       var old_cutoff = '';
       width = 'auto';
       height = 'auto';
-      wrap_align = 'right';
+      wrap_align = 'left';
     }
     else{
       top = oldcomponent.data.self.css.top;
@@ -167,7 +167,7 @@ var createWrapComponent = function ( event, ui, oldcomponent ) {
     var galery_inner = $("<div class='gallery-inner-holder' style='width: " + width + "px; height: " + height + "px;'> \
         <div style='clear:both'></div> \
         <div class='type' style='padding: 4px; display: inline-block;'>\
-                <div class='btn-group' data-toggle='buttons'>\
+                <div class='btn-group'>\
                   <label class='btn btn-primary " + wrap_right_active + "'>\
                     <input type='radio' name='wrap_align' id='repeat0' " + wrap_right + " value='right'> Sağ\
                   </label>\
@@ -177,7 +177,7 @@ var createWrapComponent = function ( event, ui, oldcomponent ) {
                 </div><br><br>\
             </div>\
       </div> ");
-    var popup_wrapper = $("<div class ='popup_wrapper drag-cancel' style='border: 1px #ccc solid; ' ><input type='text' name='cutoff' id='cutoff' value='"+old_cutoff+"'></div> <br>");
+    var popup_wrapper = $("<div class ='popup_wrapper drag-cancel' style='border: 1px #ccc solid; ' ><input type='text' name='cutoff' id='cutoff' value='"+old_cutoff+"' placeholder='Çözünürlik Toleransı giriniz....'></div> <br>");
     var popup_detail = $("<div  id='popup-explanation' contenteditable='true' class='drag-cancel'>" + popup_value + "</div>");
     var add_button = $("<a href='#' id='pop-image-OK' class='btn btn-info' style='padding: 5px 30px;'>Ekle</a> ");
     poup_header.appendTo(pop_popup);
@@ -188,6 +188,12 @@ var createWrapComponent = function ( event, ui, oldcomponent ) {
     popup_detail.appendTo(popup_wrapper);
     add_button.appendTo(galery_inner);
     popup_detail.resizable({alsoResize: galery_inner});
+
+    $("input[name=wrap_align]:radio").change(function () {
+        wrap_align=$('input[name=wrap_align]:checked').val();
+        console.log(wrap_align);
+      });
+
     close_button.click(function(){
 
       pop_popup.remove();  
@@ -206,7 +212,9 @@ var createWrapComponent = function ( event, ui, oldcomponent ) {
       //var width = pop_popup.width();
       //var height = pop_popup.height(); 
       //console.log(width);
-      //console.log(height);      
+      //console.log(height);  
+      wrap_align=$('input[name=wrap_align]:checked').val();
+      console.log(wrap_align);    
       if(typeof oldcomponent == 'undefined'){
         //console.log('dene');
         var top = (ui.offset.top-$(event.target).offset().top ) + 'px';

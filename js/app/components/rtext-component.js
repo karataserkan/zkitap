@@ -6,7 +6,7 @@ $(document).ready(function(){
 
   (function(window, $, undefined){
 
-    $.widget( "lindneo.textComponent", $.lindneo.component, {
+    $.widget( "lindneo.rtextComponent", $.lindneo.component, {
 
       options: {
 
@@ -14,8 +14,8 @@ $(document).ready(function(){
       
       _create: function() {
 
-        if( this.options.component.data.textarea.val === '' ){
-          this.options.component.data.textarea.val = '';
+        if( this.options.component.data.rtextdiv.val === '' ){
+          this.options.component.data.rtextdiv.val = '';
         }
 
         var that = this;
@@ -25,8 +25,7 @@ $(document).ready(function(){
         })
 
 
-        if (this.options.component.data.self.attr.componentType != 'side-text' )this.element.autogrow({element:this});
-
+        
         this._super();
           
       },
@@ -234,12 +233,13 @@ $(document).ready(function(){
 
 
 
-  var createTextComponent = function ( event, ui ,type) {
+  var createRtextComponent = function ( event, ui) {
+console.log('eklendi');
 
     var component = {
-      'type' : 'text',
+      'type' : 'rtext',
       'data': {
-        'textarea':{
+        'rtextdiv':{
           'css' : {
             'width':'100%',
             'height':'100%',
@@ -253,8 +253,7 @@ $(document).ready(function(){
             'font-weight' : 'normal',
             'font-style' : 'normal',
             'text-decoration' : 'none',
-            'background-color' : 'transparent',
-             'overflow': (type == 'text' ? 'visible' : 'hidden' )
+            'background-color' : 'transparent'
           } , 
           'attr': {
             'placeholder':'Metin Kutusu',
@@ -275,8 +274,7 @@ $(document).ready(function(){
 
           },
           'attr' : {
-            'fast-style':'',
-            'componentType': type
+            'fast-style':''
           }
         }
       }
