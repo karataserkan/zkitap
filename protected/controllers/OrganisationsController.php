@@ -32,7 +32,7 @@ class OrganisationsController extends Controller
 				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
-				'actions'=>array('create','update','workspaces','delWorkspaceUser','addWorkspaceUser','users','addUser','deleteOrganisationUser','account','bookCategories','deleteCategory','createBookCategory','updateBookCategory','templates'),
+				'actions'=>array('create','update','workspaces','delWorkspaceUser','addWorkspaceUser','users','addUser','deleteOrganisationUser','account','bookCategories','deleteCategory','createBookCategory','updateBookCategory','templates','aCL','addACL'),
 				'users'=>array('@'),
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
@@ -43,6 +43,65 @@ class OrganisationsController extends Controller
 				'users'=>array('*'),
 			),
 		);
+	}
+
+
+	public function actionACL($id)
+	{
+		$ACLs=$this->getACL($id);
+
+		 $this->render('organisationACL',array('acls'=>$ACLs,'organisation_id'=>$id));
+	}
+
+	public function actionAddACL($id)
+	{
+		if (isset($_POST['name']) & isset($_POST['val1']) & isset($_POST['val2']) & isset($_POST['type'])) {
+			$this->addACL($id,$_POST['name'],$_POST['val1'],$_POST['val2'],$_POST['type']);
+		}
+		
+	}
+
+	public function getACL($id){
+		$acls = Yii::app()->db->createCommand()
+		    ->select("*")
+		    ->from("organisations_meta")
+		    ->where("organisation_id=:organisation_id AND meta=:meta", array(':organisation_id' => $id,':meta'=>'ACL'))
+		    ->queryRow();
+		 return $acls['value'];
+	}
+
+	public function addACL($id,$name,$val1,$val2,$type){
+		
+		$Acl=$this->getACL($id);
+		if ($Acl) {
+			$ACLs=json_decode($Acl);
+		}
+		else
+		{
+		$addorganisationMeta = Yii::app()->db->createCommand();
+			$addorganisationMeta->insert('organisations_meta', array(
+			    'organisation_id'=>$id,
+			    'meta'=>'ACL',
+			    'value'=>''
+,			));
+			$ACLs=array();
+		}
+
+		$ACLs[]['name']=$name;
+		$ACLs[]['type']=$type;
+		$ACLs[]['val1']=$val1;
+		$ACLs[]['val2']=$val2;
+
+		$lastACLs=json_encode($ACLs);
+
+		$updateOrganisationMeta = Yii::app()->db->createCommand();
+		$updateOrganisationMeta->update('organisations_meta',
+										array('value'=>$lastACLs), 
+										'organisation_id=:organisation_id AND meta=:meta',
+										array(':organisation_id'=>$id,':meta'=>'ACL'));
+
+
+		
 	}
 
 	/**
