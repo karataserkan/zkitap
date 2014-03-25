@@ -37,7 +37,9 @@ $current_user=User::model()->findByPk(Yii::app()->user->id);
 
 </script>
 	
-	
+<?php 
+//echo $model->getFastStyle('p');
+?>	
 	
 		
 	
@@ -1163,7 +1165,261 @@ $current_user=User::model()->findByPk(Yii::app()->user->id);
 				</div>
 				</div>
 			
+
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<h3 class="panel-title"> <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseStyle"><i class="fa fa-bars light-blue"></i>&nbsp;&nbsp;&nbsp;<?php _e('Hızlı Stiller'); ?> </a> </h3>
+				</div>
+					<div id="collapseStyle" class="panel-collapse collapse">
+						<div class="panel-body">
+							<div id="fast_styles_main">
+								<a class="btn component" href="#" id="fast_style2" component="h1" ><?php _e("Başlık"); ?></a><br>
+								<a class="btn component" href="#" id="fast_style3" component="h2" ><?php _e("Alt Başlık"); ?></a><br>
+								<a class="btn component" href="#" id="fast_style4" component="h3" ><?php _e("Küçük Başlık"); ?></a><br>
+								<a class="btn component" href="#" id="fast_style5" component="p" ><?php _e("Paragraf"); ?></a><br>
+								<a class="btn component" href="#" id="fast_style6" component="blockqoute" ><?php _e("Alıntı"); ?></a>
+							</div>
+							<div id="fast_styles_edit">
+								<h3 class="form-title" id="fast_styles_form_name">Styles</h3>
+								<form class="form-horizontal" role="form">
+									<div class="form-group">
+									<label class="col-sm-3 control-label"><?php _e("Satır Yüksekliği"); ?>:</label>
+										<div class="col-sm-9">
+											<select class="form-control" id="fast_styles_line_height">
+											  <option name="fast_styles_line_height" value="100">100</option>
+											  <option name="fast_styles_line_height" value="125">125</option>
+											  <option selected="" name="fast_styles_line_height" value="150">150</option>
+											  <option name="fast_styles_line_height" value="175">175</option>
+											  <option name="fast_styles_line_height" value="200">200</option>
+											</select>
+										</div>
+								  </div>
+
+								  <div class="form-group">
+									<label class="col-sm-3 control-label"><?php _e("Yazı Tipi"); ?>:</label>
+										<div class="col-sm-9">
+											<select class="form-control" id="fast_styles_font_type">
+											  	<option name="fast_styles_font_type" value="Arial"> Arial </option>
+												<option name="fast_styles_font_type" value="SourceSansPro" >Source Sans Pro</option>
+												<option name="fast_styles_font_type" value="AlexBrushRegular" >Alex Brush Regular</option>
+												<option name="fast_styles_font_type" value="ChunkFiveRoman" >ChunkFive Roman</option>
+												<option name="fast_styles_font_type" value="Aller" >Aller</option>
+												<option name="fast_styles_font_type" value="Cantarell" >Cantarell</option>
+												<option name="fast_styles_font_type" value="Exo" >Exo</option>
+												<option name="fast_styles_font_type" value="helvetica" >Helvetica</option>
+												<option name="fast_styles_font_type" value="Open Sans" >Open Sans</option>
+												<option name="fast_styles_font_type" value="Times New Roman" >Times New Roman</option>
+												<option name="fast_styles_font_type" value="georgia" >Georgia</option>
+												<option name="fast_styles_font_type" value="Courier New" >Courier New</option>
+											</select>
+										</div>
+								  </div>
+
+								  <div class="form-group">
+									<label class="col-sm-3 control-label"><?php _e("Yazı Boyutu"); ?>:</label>
+										<div class="col-sm-9">
+											<select class="form-control" id="fast_styles_font_size">
+											  	<?php for ($font_size_counter=10; $font_size_counter<=250;$font_size_counter+=2){
+													echo "<option name='fast_styles_font_size' value='{$font_size_counter}px' >{$font_size_counter}</option>";
+												} ?>
+											</select>
+										</div>
+								  </div>
+									<div class="form-group">
+										<div class="col-sm-12">
+											<input type="checkbox" name="fast_styles_font_weight"  value="bold" class="dark-blue radius toolbox-items btn-checkbox tool checkbox"> <label class="icon-font-bold  size-15" for="font-bold" title="Yazı Kalınlaştırma"></label>
+											<input type="checkbox" name="fast_styles_font_italic" value="italic" class="dark-blue radius toolbox-items btn-checkbox tool checkbox" > <label class="icon-font-italic size-15" for="font-italic" title="İtalik Yazı"></label>
+											<input type="checkbox" name="fast_styles_text_decoration"  value="underline" class="dark-blue radius toolbox-items btn-checkbox tool checkbox" ><label class="icon-font-underline size-15" for="font-underline" title="Altı Çizili Yazı"></label>
+ 											<br><br>
+										  	<input type='radio' name='fast_styles_text_align' value="left"  href="#" class="dark-blue radius toolbox-items radio tool" ><label for='text-align-left' class="icon-text-align-left size-15" title="Sola Yasla"></label>
+											<input type='radio' name='fast_styles_text_align' value="center"  href="#" class="dark-blue radius toolbox-items  radio tool" ><label for='text-align-center' class="icon-text-align-center  size-15" title="Ortala"></label>
+											<input type='radio' name='fast_styles_text_align' value="right"  href="#" class="dark-blue radius toolbox-items  radio tool" ><label for='text-align-right' class="icon-text-align-right  size-15" title="Sağa Yasla"></label>
+										</div>
+									</div>
+
+
+
+								</form>
+							</div>
+							<div id="fast_styles_buttons">
+								<a href="#" class="btn btn-inverse component" id="fast_style_back_button"><?php _e("Geri"); ?></a>
+								<a href="#" class="btn btn-success component" id="fast_style_save_button"><?php _e("Kaydet"); ?></a>
+							</div>
+						</div>
+					</div>
+			</div>
 			
+			<script type="text/javascript">
+				var main=$('#fast_styles_main');
+				var edit=$('#fast_styles_edit');
+				var buttons=$('#fast_styles_buttons');
+			    var font_size='';
+			    var font_family='';
+			    var text_decoration='';
+			    var font_weight='normal';
+				var line_height='';
+			    var text_align='';
+			    var font_italic='';
+			    var style='';
+				edit.hide();
+				buttons.hide();
+
+				$("#fast_styles_main .btn").on("click",function() {
+				    main.hide();
+				    edit.show();
+				    buttons.show();
+				    var baslik=$(this).text();
+				    style=$(this).attr('component');
+				    $('#fast_styles_form_name').html(baslik);
+
+				    $.ajax({
+					  type: "POST",
+					  data: {book_id: window.lindneo.currentBookId,component:style},
+					  url: '/book/getFastStyle',
+					}).done(function(res){
+				    	var inDb=jQuery.parseJSON(res);
+				    	console.log(inDb.font_size);
+
+				    	font_size='';
+						font_family='';
+						text_decoration='';
+						font_weight='';
+						font_italic='';
+						line_height='';
+						text_align='';
+
+				    	font_size=inDb.font_size;
+						font_family=inDb.font_family;
+						text_decoration=inDb.text_decoration;
+						font_weight=inDb.font_weight;
+						font_italic=inDb.font_italic;
+						line_height=inDb.line_height;
+						text_align=inDb.text_align;
+
+				    	$("[name='fast_styles_font_size'][value='"+font_size+"']").attr("selected","selected");
+						$("[name='fast_styles_font_type'][value='"+font_family+"']").attr("selected","selected");
+						$("[name='fast_styles_line_height'][value='"+line_height+"']").attr("selected","selected");
+						
+						$("[name='fast_styles_text_decoration'][value='"+text_decoration+"']").attr("checked","checked");
+						$("[name='fast_styles_font_weight'][value='"+font_weight+"']").attr("checked","checked");
+						$("[name='fast_styles_font_italic'][value='"+font_italic+"']").attr("checked","checked")	
+						$("[name='fast_styles_text_align'][value='"+text_align+"']").attr("checked","checked");
+					});
+
+
+
+				});
+
+
+
+
+				// $('#fast_styles_line_height option').on("click",function(){
+				// 	line_height=this.val();
+				// 	console.log(this);
+				// 	//$("[name='fast_styles_line_height']:")
+				// });
+
+				$('#fast_style_save_button').on("click",function(){
+					font_size=$("[name='fast_styles_font_size']:checked").val();
+					font_family=$("[name='fast_styles_font_type']:checked").val();
+					text_decoration=$("[name='fast_styles_text_decoration']:checked").val();
+					font_weight=$("[name='fast_styles_font_weight']:checked").val();
+					font_italic=$("[name='fast_styles_font_italic']:checked").val();					
+					line_height=$("[name='fast_styles_line_height']:checked").val();
+					text_align=$("[name='fast_styles_text_align']:checked").val();
+					
+					var data=[];
+					var name='';
+					var value='';
+					var item={};
+
+
+					item['name']='book_id';
+					item['value'] = window.lindneo.currentBookId;
+					data.push(item);
+
+					item={};
+					item['name']='component_style';
+					item['value'] = style;
+					data.push(item);
+
+					item={};
+					item['name']='font_size';
+					item['value'] = font_size;
+					data.push(item);
+
+					item={};
+					item['name']='font_family';
+					item['value'] = font_family;
+					data.push(item);
+
+					item={};
+					item['name']='text_decoration';
+					item['value'] = text_decoration;
+					data.push(item);
+
+					item={};
+					item['name']='font_weight';
+					item['value'] = font_weight;
+					data.push(item);
+
+					item={};
+					item['name']='font_italic';
+					item['value'] = font_italic;
+					data.push(item);
+
+					item={};
+					item['name']='line_height';
+					item['value'] = line_height;
+					data.push(item);
+
+					item={};
+					item['name']='text_align';
+					item['value'] = text_align;
+					data.push(item);
+
+					data=JSON.stringify(data);
+					
+
+					$.ajax({
+					  type: "POST",
+					  data: {styles: data},
+					  url: '/book/fastStyle',
+					}).done(function(res){
+						
+					});
+
+					edit.hide();
+					buttons.hide();
+					main.show();
+					font_size='';
+				    font_family='';
+				    text_decoration='';
+				    font_weight='normal';
+					line_height='';
+				    text_align='';
+				    font_italic='';
+				    style='';
+					
+				});
+
+				$('#fast_style_back_button').on("click",function(){
+					edit.hide();
+					buttons.hide();
+					main.show();
+					font_size='';
+				    font_family='';
+				    text_decoration='';
+				    font_weight='normal';
+					line_height='';
+				    text_align='';
+				    font_italic='';
+				    style='';
+				});
+
+
+			</script>
+
 			 <div class="panel panel-default">
 				<div class="panel-heading">
 					<h3 class="panel-title"> <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo"><i class="fa fa-bars light-blue"></i>&nbsp;&nbsp;&nbsp;İçindekiler </a> </h3>
