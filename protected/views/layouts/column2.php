@@ -231,6 +231,11 @@
 								<?php _e('Yayın Kategorileri'); ?>
 								</a>
 							</li>
+							<li>
+								<a href="/organisations/publishedBooks/<?php echo $organisation["organisation_id"]; ?>">
+								<?php _e('Yayınlanan Eserler'); ?>
+								</a>
+							</li>
 						</ul>
 						
 						
