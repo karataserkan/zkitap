@@ -17,15 +17,11 @@
 
 <?php $this->endContent(); ?>
 <!-- Header -->
-	<header class="navbar clearfix" id="header">
+	<header class="navbar clearfix navbar-fixed-top read_page_navbar navbar_blue" id="header">
 		<!-- Top Navigation Bar -->
 		<div class="container">
 		<div class="navbar-brand">
-					<!-- COMPANY LOGO -->
-					<a href="<?php echo $this->createUrl('site/index');  ?>">
-						<img src="<?php echo Yii::app()->request->baseUrl; ?>/css/logo.png" alt="Linden" class="img-responsive" height="30" width="120">
-					</a>
-					<!-- /COMPANY LOGO -->
+					
 					<!-- TEAM STATUS FOR MOBILE -->
 					<div class="visible-xs">
 						<a href="#" class="team-status-toggle switcher btn dropdown-toggle">
@@ -34,24 +30,31 @@
 					</div>
 					<!-- /TEAM STATUS FOR MOBILE -->
 					<!-- SIDEBAR COLLAPSE -->
-					<div id="sidebar-collapse" class="sidebar-collapse btn">
-						<i class="fa fa-bars" 
-							data-icon1="fa fa-bars" 
-							data-icon2="fa fa-bars" ></i>
+					<div id="sidebar-collapse" class="sidebar-collapse brand_hover_color_for_navbar_components">
+						<i class="fa fa-bars" data-icon1="fa fa-bars" data-icon2="fa fa-bars" ></i>
 					</div>
 					<!-- /SIDEBAR COLLAPSE -->
+                    <div class="expanding-searchbox">
+						<div id="sb-search" class="sb-search">
+							<form>
+								<input class="sb-search-input" placeholder="Ne aramak istiyorsunuz?" type="text" value="" name="search" id="search">
+								<input class="sb-search-submit" type="submit" value="">
+								<span class="sb-icon-search brand_hover_color_for_navbar_components"></span>
+							</form>
+						</div>
+					</div>
+                    
 				</div>
 
 			<!-- Top Right Menu -->
 			<ul class="nav navbar-nav navbar-right">
 				<!-- User Login Dropdown -->
 				<li class="dropdown user" id="header-user">
-					<a href="#" class="dropdown-toggle" data-toggle="dropdown">
-						<img alt="" src="img/avatars/avatar3.jpg" />
-						<span class="username"><?php echo Yii::app()->user->name; ?></span>
-						<i class="fa fa-angle-down"></i>
+					<a href="#" class="dropdown-toggle read_page_user" data-toggle="dropdown">
+						<img alt="" src="img/avatars/avatar3.jpg" />						
 					</a>
 					<ul class="dropdown-menu">
+                    	<li><span class="username"><?php echo Yii::app()->user->name; ?></span></li>
 						<li><a href="/user/profile"><i class="fa fa-user"></i> <?php _e('Profil') ?></a></li>
 						<li><a href="/site/logout"><i class="fa fa-power-off"></i> <?php _e('Çıkış') ?></a></li>
 					</ul>
@@ -59,18 +62,23 @@
 				<!-- /user login dropdown -->
 			</ul>
 			<!-- /Top Right Menu -->
+            
+            
+            <div class="navbar_logo"></div>
+            
+            
 		</div>
 		<!-- /top navigation bar -->
 	</header> <!-- /.header -->
 
-	<section id="page">
-		<div id="sidebar" class="sidebar">
+	<div class="mybooks_page_container">
+		<div id="sidebar" class="sidebar sidebar-fixed">
 			<div class="sidebar-menu nav-collapse">
 				<!--=== Navigation ===-->
 				<ul>
 					<li class="current">
 						<a href="/site/dashboard">
-							<i class="fa fa-tachometer fa-fw"></i>
+							<i class="fa fa-gear fa-fw"></i>
 							<span class="menu-text">Kontrol	Paneli</span>
 							</a>
 					</li>
@@ -98,7 +106,7 @@
 					
 					<li>
 						<a href="#">
-							<i class="fa fa-money fa-fw"></i> <span class="menu-text">
+							<i class="fa fa-user fa-fw"></i> <span class="menu-text">
 							Hesabım
 						</span>
 						</a>
@@ -120,7 +128,7 @@
 					?>
 					<li class="has-sub">
 						<a href="javascript:;" class="">
-							<i class="fa fa-briefcase fa-fw"></i>
+							<i class="fa fa-sitemap fa-fw"></i>
 							<span class="menu-text"><?php echo __('Organizasyon');?></span>
 							<span class="arrow"></span>
 						</a>
@@ -161,8 +169,8 @@
 
 		</div>
 	</div>
-</section>
-
+   </div>
+<!-- END OF MYBOOKS PAGE CONTAINER -->
 
 
 </body>

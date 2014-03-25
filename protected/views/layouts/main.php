@@ -15,6 +15,7 @@
 			<!-- CSS -->
 
 		<link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/ui/css/cloud-admin.css" >
+        <link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/brands/linden/linden.css" >
         <link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/ui/css/themes/default.css" >
 
 		<link rel="stylesheet" type="text/css"  href="<?php echo Yii::app()->request->baseUrl; ?>/css/ui/css/responsive.css" >
@@ -31,7 +32,8 @@
 		<!-- ANIMATE -->
 		<link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/ui/css/animatecss/animate.min.css" />
 
-		
+		<!-- Expand Search box -->
+		<link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/js/lib/ExpandingSearchBar/css/component.css" />
 			
 		<!-- JAVASCRIPTS -->
 		<!-- Placed at the end of the document so the pages load faster -->
@@ -48,6 +50,13 @@
 		<script type="text/javascript" src="<?php echo Yii::app()->request->baseUrl; ?>/css/ui/js/isotope/imagesloaded.pkgd.min.js"></script>
 		<!-- COLORBOX -->
 		<script type="text/javascript" src="<?php echo Yii::app()->request->baseUrl; ?>/css/ui/js/colorbox/jquery.colorbox.min.js"></script>
+        
+        
+        <!-- Expand Search box -->
+		<script type="text/javascript" src="<?php echo Yii::app()->request->baseUrl; ?>/js/lib/ExpandingSearchBar/js/classie.js"></script>
+		<script type="text/javascript" src="<?php echo Yii::app()->request->baseUrl; ?>/js/lib/ExpandingSearchBar/js/modernizr.custom.js"></script>
+		<script type="text/javascript" src="<?php echo Yii::app()->request->baseUrl; ?>/js/lib/ExpandingSearchBar/js/uisearch.js"></script> 
+        
 			
 		<!-- DATE RANGE PICKER -->
 		<script src="<?php echo Yii::app()->request->baseUrl; ?>/css/ui/js/bootstrap-daterangepicker/moment.min.js"></script>
