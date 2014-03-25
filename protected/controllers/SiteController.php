@@ -237,7 +237,7 @@ class SiteController extends Controller
 
 	public function getWorkspaceBooks($workspace_id)
 	{
-		$all_books= Book::model()->findAll('workspace_id=:workspace_id', 
+		$all_books= Book::model()->findAll('workspace_id=:workspace_id AND publish_time IS NULL OR publish_time=0', 
 	    				array(':workspace_id' => $workspace_id) );
 		return $all_books; 
 	}
