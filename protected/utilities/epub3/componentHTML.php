@@ -979,7 +979,7 @@ class componentHTML {
 			  myScroll = new iScroll("wrapper", { scrollbarClass: "myScrollbar" });
 			});
 		</script>
-		<div id="container'.$component->id.'" class="widgets-rw panel-sliding-rw exclude-auto-rw"  >
+		<div id="container'.$component->id.'" class="widgets-rw panel-sliding-rw exclude-auto-rw" style="height:'.$component->data->somegallery->css->height.'; width:'.$component->data->somegallery->css->width.';"  >
 			<div id="wrapper"><div id="scroller">';
 		$container.=' <ul class="ul2" epub:type="list">
 		';
@@ -1004,7 +1004,6 @@ class componentHTML {
 			}
 
 			$container .='/>
-			<p class="caption-rw" id="caption-'.$component->id.$images_key.'" >Galeri</p>
 			</li>';
 			$this->epub->files->others[] = $new_file;
 			unset($new_file);

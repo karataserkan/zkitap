@@ -188,6 +188,10 @@ $( document ).ready(function () {
             createThumbComponent( event, ui );
             break;
 
+          case 'rtext':
+            createRtextComponent( event, ui );
+            break;
+
           default:
             break; 
         }
