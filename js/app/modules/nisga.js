@@ -17,6 +17,8 @@ window.lindneo.nisga = (function(window, $, undefined){
   var revision_id=0;
   var revision_value = 0;
 
+  
+
   var ChatNewLine = function ( line,activeUser,show ){
     if (show !== false)
       $(".chat_window" ).show();
@@ -34,15 +36,16 @@ window.lindneo.nisga = (function(window, $, undefined){
 
 
   var createComponent = function( component, oldcomponent_id ){
-      //console.log(revision_value);
-    //console.log(oldcomponent_id);
-    //console.log(revision_array);
+      ////console.log(revision_value);
+    ////console.log(oldcomponent_id);
+    ////console.log(revision_array);
     $.each(revision_array.revisions, function(index,value){ 
-        if (value.component_id == oldcomponent_id )
+        if (value.component_id == oldcomponent_id ){
             revision_array.revisions[index].component_id = component.id;
             revision_array.revisions[index].component.id = component.id;
+          }
     });
-    //console.log(revision_array);
+    ////console.log(revision_array);
     componentBuilder( component );  
     if(revision_value==0){
       if(typeof oldcomponent_id == 'undefined')  {
@@ -52,11 +55,11 @@ window.lindneo.nisga = (function(window, $, undefined){
     }
     else revision_value=0;
     //if(typeof oldcomponent_id != 'undefined') revision_array.revisions.pop();
-    //console.log(revision_array);
+    ////console.log(revision_array);
   };
 
   var componentBuilder = function( component ){
-     
+     //console.log(component.type);
     switch( component.type ) {
       case 'text':
         textComponentBuilder( component );
@@ -79,7 +82,6 @@ window.lindneo.nisga = (function(window, $, undefined){
 
       case 'video':
         videoComponentBuilder( component );
-        console.log(component);
         break;
 
       case 'popup':
@@ -102,6 +104,37 @@ window.lindneo.nisga = (function(window, $, undefined){
         tableComponentBuilder( component );
         break;
 
+      case 'html':
+        htmlComponentBuilder( component );
+        break;
+
+      case 'wrap':
+        wrapComponentBuilder( component );
+        break;
+
+      case 'latex':
+        latexComponentBuilder( component );
+        break;
+
+      case 'slider':
+        sliderComponentBuilder( component );
+        break;
+
+      case 'plink':
+        plinkComponentBuilder( component );
+        break;
+
+      case 'tag':
+        tagComponentBuilder( component );
+        break;
+
+      case 'thumb':
+        thumbComponentBuilder( component );
+        break;
+
+      case 'rtext':
+        rtextComponentBuilder( component );
+        break;
 
 
       default:
@@ -112,75 +145,84 @@ window.lindneo.nisga = (function(window, $, undefined){
   }; 
 
   var undoComponent = function() {
+    ////console.log(revision_array.revisions);
+    //return;
       if(revision_id > 0){
         revision_id = revision_id - 1;
-        //console.log(revision_array.revisions);
-        //console.log(revision_id);
-        //console.log(revision_array.revisions[revision_id].even_type);
-        //console.log(revision_array.revisions);
+        ////console.log(revision_array.revisions);
+        ////console.log(revision_id);
+        ////console.log(revision_array.revisions[revision_id].even_type);
+        ////console.log(revision_array.revisions);
 
         if(revision_array.revisions[revision_id].even_type=='CREATE'){
-          deleteComponent(revision_array.revisions[revision_id].component, revision_array.revisions[revision_id].component.id);
-          //window.lindneo.tlingit.componentHasCreated(revision_array.revisions[revision_id-1].component, revision_array.revisions[revision_id].component);
+          if(revision_array.revisions[revision_id].component.type=='image'){
+            ////console.log(revision_id);
+            window.lindneo.tlingit.componentHasDeleted(revision_array.revisions[revision_id].component.id, revision_array.revisions[revision_id].component.id);
+            window.lindneo.tlingit.componentHasCreated(revision_array.revisions[revision_id-1].component, revision_array.revisions[revision_id-1].component.id);
+          }
+          else{
+          window.lindneo.tlingit.componentHasDeleted(revision_array.revisions[revision_id].component.id, revision_array.revisions[revision_id].component.id);
+          }
+          
         }
         else if(revision_array.revisions[revision_id].even_type=='UPDATE'){
+          ////console.log(revision_array.revisions[revision_id].component.data.textarea.val);
           var array_where = [];
           $.each(revision_array.revisions, function(index,value){ 
-              if (value.component_id == revision_array.revisions[revision_id].component_id && index<=revision_id){
-                  //console.log(revision_array.revisions[revision_id].component.id);
-                  //console.log(revision_array.revisions[revision_id].component_id);
-                  //console.log(value.component.id);
+            ////console.log(value.component_id + ' ----- ' +revision_array.revisions[revision_id].component_id);
+              if (value.component_id == revision_array.revisions[revision_id].component_id && index<=revision_id)
                   array_where.push(value);
-                }
           });
-          array_where.pop();
-          console.log(revision_id);
-          //console.log(revision_array.revisions);
-          //console.log(revision_array.revisions[revision_id]);
-          //console.log(array_where[array_where.length-1].component.data.textarea.val);
-          //console.log(array_where[array_where.length-1].component.id);
-          destroyComponent(array_where[array_where.length-1].component.id);
-          revision_id--;
-          createComponent(array_where[array_where.length-1].component, array_where[array_where.length-1].component.id);
+
+         array_where.pop();
+         ////console.log(array_where);
+         ////console.log(array_where[array_where.length-1].component);
+         window.lindneo.tlingit.componentHasDeleted(array_where[array_where.length-1].component_id, array_where[array_where.length-1].component.id);
+         window.lindneo.tlingit.createComponent(array_where[array_where.length-1].component, array_where[array_where.length-1].component.id);
+
         }
         else if(revision_array.revisions[revision_id].even_type=='DELETE'){
-          window.lindneo.tlingit.createComponent(revision_array.revisions[revision_id].component, revision_array.revisions[revision_id-1].component.id);
+         window.lindneo.tlingit.createComponent(revision_array.revisions[revision_id].component, revision_array.revisions[revision_id].component.id);
         }
-        //revision_id--;
       }
     }
     
     var redoComponent = function() {
       if(revision_id < revision_array.revisions.length){
-        revision_id = revision_id + 1;
-        console.log(revision_array.revisions);
-        console.log(revision_id);
-        console.log(revision_array.revisions[revision_id].even_type);
-        console.log(revision_array.revisions);
+        ////console.log(revision_array.revisions);
+        ////console.log(revision_id);
+        ////console.log(revision_array.revisions[revision_id].even_type);
+        ////console.log(revision_array.revisions);
 
-        if(revision_array.revisions[revision_id].even_type=='CREATE'){
-          window.lindneo.tlingit.componentHasCreated(revision_array.revisions[revision_id].component, revision_array.revisions[revision_id-1].component.id);
+        if(revision_array.revisions[revision_id].even_type == 'CREATE'){
+          ////console.log(revision_id);
+          window.lindneo.tlingit.createComponent(revision_array.revisions[revision_id].component, revision_array.revisions[revision_id].component.id);
         }
         else if(revision_array.revisions[revision_id].even_type=='UPDATE'){
+
           var array_where = [];
           $.each(revision_array.revisions, function(index,value){ 
-              if (value.component_id == revision_array.revisions[revision_id].component.id && index<=revision_id)
+            ////console.log(value.component_id + ' ----- ' +revision_array.revisions[revision_id].component_id);
+              if (value.component_id == revision_array.revisions[revision_id].component_id && index>=revision_id)
                   array_where.push(value);
           });
-          array_where.pop();
-          deleteComponent(array_where[array_where.length-1].component, array_where[array_where.length-1].component.id);
-          console.log(array_where[array_where.length-1].component.data.textarea.val);
-          window.lindneo.tlingit.createComponent(array_where[array_where.length-1].component, array_where[array_where.length-1].component.id);
+
+         //array_where.pop();
+         ////console.log(array_where);
+         ////console.log(array_where[0].component);
+         window.lindneo.tlingit.componentHasDeleted(array_where[0].component_id, array_where[0].component.id);
+         window.lindneo.tlingit.createComponent(array_where[0].component, array_where[0].component.id);
+          
         }
         else if(revision_array.revisions[revision_id].even_type=='DELETE'){
-          deleteComponent(revision_array.revisions[revision_id].component, revision_array.revisions[revision_id].component.id);
+          window.lindneo.tlingit.componentHasDeleted(revision_array.revisions[revision_id].component.id, revision_array.revisions[revision_id].component.id);
         }
-        //revision_id--;
+        revision_id++;
       }
    }
 
   var destroyComponent = function ( componentId ) {
-    //  console.log(componentId);
+    //console.log(componentId);
     $('[id="'+componentId+'"]').parent().not('#current_page').remove();
     $('[id="'+componentId+'"]').remove();
   };
@@ -191,7 +233,7 @@ window.lindneo.nisga = (function(window, $, undefined){
         revision_id++;
       }
       else revision_value=0;
-    //  console.log(componentId);
+    //console.log(componentId);
     $('[id="'+component.id+'"]').parent().not('#current_page').remove();
     $('[id="'+component.id+'"]').remove();
   };
@@ -204,7 +246,7 @@ window.lindneo.nisga = (function(window, $, undefined){
         }
       }
       else revision_value=0;
-//        console.log(revision_array);
+//        //console.log(revision_array);
     window.lindneo.toolbox.removeComponentFromSelection( $('#'+ component.id) );
     window.lindneo.tlingit.componentHasDeleted( component.id );
 
@@ -229,7 +271,7 @@ window.lindneo.nisga = (function(window, $, undefined){
 
       }
       else revision_value=0;
-      //console.log(revision_array);
+      ////console.log(revision_array);
         window.lindneo.tlingit.componentHasUpdated( component );        
       },
       'selected': function (event, element) {
@@ -259,7 +301,7 @@ window.lindneo.nisga = (function(window, $, undefined){
 
       }
       else revision_value=0;
-      //console.log(revision_array);
+      ////console.log(revision_array);
         window.lindneo.tlingit.componentHasUpdated( component );
       },
       'selected': function (event, element) {
@@ -287,7 +329,7 @@ window.lindneo.nisga = (function(window, $, undefined){
 
       }
       else revision_value=0;
-      //console.log(revision_array);
+      ////console.log(revision_array);
         window.lindneo.tlingit.componentHasUpdated( component );
       },
       'selected': function (event, element) {
@@ -314,8 +356,8 @@ var textComponentBuilder = function( component ) {
 
       }
       else revision_value=0;
-      //console.log(event);
-      console.log(revision_array);
+      ////console.log(event);
+      ////console.log(revision_array);
         window.lindneo.tlingit.componentHasUpdated( component );
         
       },
@@ -347,7 +389,7 @@ var textComponentBuilder = function( component ) {
 
       }
       else revision_value=0;
-      //console.log(revision_array);
+      ////console.log(revision_array);
         window.lindneo.tlingit.componentHasUpdated( component );
       },
       'selected': function (event, element) {
@@ -379,7 +421,7 @@ var textComponentBuilder = function( component ) {
 
       }
       else revision_value=0;
-      //console.log(revision_array);
+      ////console.log(revision_array);
         window.lindneo.tlingit.componentHasUpdated( component );
       },
       'selected': function (event, element) {
@@ -387,6 +429,157 @@ var textComponentBuilder = function( component ) {
         window.lindneo.toolbox.refresh( element );
       }
     });
+
+  };
+
+  var wrapComponentBuilder = function ( component ) {
+    
+    
+    var element  = $('<div class="wrap-controllers"> </div>');
+    var elementWrap=$('<div ></div>');
+    elementWrap.appendTo( page_div_selector );
+
+    element
+    .appendTo( elementWrap )
+    .wrapComponent({
+      'component': component,
+      'marker': 'http://dev.lindneo.com/css/popupmarker.png'  ,
+      'update': function ( event, component ) {
+        if(revision_value==0){
+        var newObject = jQuery.extend(true, {}, component);
+        revision_array.revisions.push({component_id: component.id, component: newObject, revision_date: $.now(), even_type: 'UPDATE'});
+                revision_id++;
+
+      }
+      else revision_value=0;
+      ////console.log(revision_array);
+        window.lindneo.tlingit.componentHasUpdated( component );
+      },
+      'selected': function (event, element) {
+        window.lindneo.currentComponentWidget = element;
+        window.lindneo.toolbox.refresh( element );
+      }
+    });
+
+  };
+
+  var htmlComponentBuilder = function( component ) {
+
+    var element  = $('<div class="html-controllers"> </div>');
+    var elementWrap=$('<div ></div>');
+    elementWrap.appendTo( page_div_selector );
+    console.log(component);
+    element
+    .appendTo( elementWrap )
+    .htmlComponent({
+      'component': component,
+      'update': function ( event, component ) {
+        if(revision_value==0){
+        var newObject = jQuery.extend(true, {}, component);
+        revision_array.revisions.push({component_id: component.id, component: newObject, revision_date: $.now(), even_type: 'UPDATE'});
+                revision_id++;
+
+      }
+      else revision_value=0;
+      ////console.log(revision_array);
+        window.lindneo.tlingit.componentHasUpdated( component );
+      },
+      'selected': function (event, element) {
+        window.lindneo.currentComponentWidget = element;
+        window.lindneo.toolbox.refresh( element );
+      }
+    });
+
+
+  };
+
+  var rtextComponentBuilder = function( component ) {
+
+    var element  = $('<div class="rtext-controllers"> </div>');
+    var elementWrap=$('<div ></div>');
+    elementWrap.appendTo( page_div_selector );
+    console.log(component);
+    element
+    .appendTo( elementWrap )
+    .rtextComponent({
+      'component': component,
+      'update': function ( event, component ) {
+        if(revision_value==0){
+        var newObject = jQuery.extend(true, {}, component);
+        revision_array.revisions.push({component_id: component.id, component: newObject, revision_date: $.now(), even_type: 'UPDATE'});
+                revision_id++;
+
+      }
+      else revision_value=0;
+      ////console.log(revision_array);
+        window.lindneo.tlingit.componentHasUpdated( component );
+      },
+      'selected': function (event, element) {
+        window.lindneo.currentComponentWidget = element;
+        window.lindneo.toolbox.refresh( element );
+      }
+    });
+
+
+  };
+
+  var plinkComponentBuilder = function( component ) {
+
+    var element  = $('<div class="plink-controllers"> </div>');
+    var elementWrap=$('<div ></div>');
+    elementWrap.appendTo( page_div_selector );
+    console.log(component);
+    element
+    .appendTo( elementWrap )
+    .plinkComponent({
+      'component': component,
+      'update': function ( event, component ) {
+        if(revision_value==0){
+        var newObject = jQuery.extend(true, {}, component);
+        revision_array.revisions.push({component_id: component.id, component: newObject, revision_date: $.now(), even_type: 'UPDATE'});
+                revision_id++;
+
+      }
+      else revision_value=0;
+      ////console.log(revision_array);
+        window.lindneo.tlingit.componentHasUpdated( component );
+      },
+      'selected': function (event, element) {
+        window.lindneo.currentComponentWidget = element;
+        window.lindneo.toolbox.refresh( element );
+      }
+    });
+
+
+  };
+
+  var latexComponentBuilder = function( component ) {
+
+    var element  = $('<div class="latex-controllers"> </div>');
+    var elementWrap=$('<div ></div>');
+    elementWrap.appendTo( page_div_selector );
+
+    element
+    .appendTo( elementWrap )
+    .latexComponent({
+      'component': component,
+      'update': function ( event, component ) {
+        if(revision_value==0){
+        var newObject = jQuery.extend(true, {}, component);
+        revision_array.revisions.push({component_id: component.id, component: newObject, revision_date: $.now(), even_type: 'UPDATE'});
+                revision_id++;
+
+      }
+      else revision_value=0;
+      ////console.log(revision_array);
+        window.lindneo.tlingit.componentHasUpdated( component );
+      },
+      'selected': function (event, element) {
+        window.lindneo.currentComponentWidget = element;
+        window.lindneo.toolbox.refresh( element );
+      }
+    });
+
 
   };
 
@@ -402,15 +595,15 @@ var textComponentBuilder = function( component ) {
     
     //var element = $('<img></img>');
 
-    var element  = $('<div class="video-controllers"> </div>');
+    var element  = $('<div class="popup-controllers"> </div>');
     var elementWrap=$('<div ></div>');
     elementWrap.appendTo( page_div_selector );
-console.log(component);
+    ////console.log(component);
     element
     .appendTo( elementWrap )
     .imageComponent({
       'component': component,
-      'marker': component.data.marker  ,
+      'marker': component.data.img.marker  ,
       'update': function ( event, component ) {
         if(revision_value==0){
         var newObject = jQuery.extend(true, {}, component);
@@ -419,7 +612,65 @@ console.log(component);
 
       }
       else revision_value=0;
-      //console.log(revision_array);
+      ////console.log(revision_array);
+        window.lindneo.tlingit.componentHasUpdated( component );
+      },
+      'selected': function (event, element) {
+        console.log($("#"+element.options.component.id).on('keydown', function(e) {}));
+        
+
+        $(document).keydown(function(e) {
+          switch (e.which) {
+          case 37:
+              $("#"+element.options.component.id).stop().animate({
+                  left: '-=10'
+              }); //left arrow key
+              break;
+          case 38:
+              $("#"+element.options.component.id).stop().animate({
+                  top: '-=10'
+              }); //up arrow key
+              break;
+          case 39:
+              $("#"+element.options.component.id).stop().animate({
+                  left: '+=10'
+              }); //right arrow key
+              break;
+          case 40:
+              $("#"+element.options.component.id).stop().animate({
+                  top: '+=10'
+              }); //bottom arrow key
+              break;
+          }
+      });
+        window.lindneo.currentComponentWidget = element;
+        window.lindneo.toolbox.refresh( element );
+      }
+    });
+
+  };
+
+  var tagComponentBuilder = function ( component ) {
+    
+    //var element = $('<img></img>');
+
+    var element  = $('<div class="popup-controllers"> </div>');
+    var elementWrap=$('<div ></div>');
+    elementWrap.appendTo( page_div_selector );
+    ////console.log(component);
+    element
+    .appendTo( elementWrap )
+    .tagComponent({
+      'component': component,
+      'update': function ( event, component ) {
+        if(revision_value==0){
+        var newObject = jQuery.extend(true, {}, component);
+        revision_array.revisions.push({component_id: component.id, component: newObject, revision_date: $.now(), even_type: 'UPDATE'});
+                revision_id++;
+
+      }
+      else revision_value=0;
+      ////console.log(revision_array);
         window.lindneo.tlingit.componentHasUpdated( component );
       },
       'selected': function (event, element) {
@@ -432,10 +683,10 @@ console.log(component);
 
   var videoComponentBuilder = function ( component ) {
     
-    var element  = $('<div class="video-controllers"> </div>');
+    var element  = $('<div class="popup-controllers"> </div>');
     var elementWrap=$('<div ></div>');
     elementWrap.appendTo( page_div_selector );
-console.log(component);
+    ////console.log(component);
     element
     .appendTo( elementWrap )
     .videoComponent({
@@ -449,7 +700,7 @@ console.log(component);
 
       }
       else revision_value=0;
-      //console.log(revision_array);
+      ////console.log(revision_array);
         window.lindneo.tlingit.componentHasUpdated( component );
       },
       'selected': function (event, element) {
@@ -481,7 +732,7 @@ console.log(component);
 
       }
       else revision_value=0;
-      //console.log(revision_array);
+      ////console.log(revision_array);
         window.lindneo.tlingit.componentHasUpdated( component );
       },
       'selected': function (event, element) {
@@ -512,7 +763,69 @@ console.log(component);
 
       }
       else revision_value=0;
-      //console.log(revision_array);
+      ////console.log(revision_array);
+        window.lindneo.tlingit.componentHasUpdated( component );
+      },
+      'selected': function (event, element) {
+        window.lindneo.currentComponentWidget = element;
+        window.lindneo.toolbox.refresh( element );
+      }
+    });
+
+  };
+
+  var sliderComponentBuilder = function ( component ) {
+    
+
+    var element  = $('<div id="slider1_container" style="position: relative; top: 0px; left: 0px; width: 800px; height: 456px; background: #24262e; overflow: hidden;">');
+    var elementWrap=$('<div ></div>');
+
+    elementWrap.appendTo( page_div_selector );
+
+    element
+    .appendTo( elementWrap )
+    .sliderComponent({
+      'component': component,
+      'update': function ( event, component ) {
+        if(revision_value==0){
+        var newObject = jQuery.extend(true, {}, component);
+        revision_array.revisions.push({component_id: component.id, component: newObject, revision_date: $.now(), even_type: 'UPDATE'});
+                revision_id++;
+
+      }
+      else revision_value=0;
+      ////console.log(revision_array);
+        window.lindneo.tlingit.componentHasUpdated( component );
+      },
+      'selected': function (event, element) {
+        window.lindneo.currentComponentWidget = element;
+        window.lindneo.toolbox.refresh( element );
+      }
+    });
+
+  };
+
+  var thumbComponentBuilder = function ( component ) {
+    
+
+    var element  = $('<div id="thumb_container" style="position: relative; top: 0px; left: 0px; min-width: '+component.data.somegallery.css.width+'px; min-height: '+component.data.somegallery.css.height+'px; background: #24262e; overflow: hidden;">');
+    var elementWrap=$('<div ></div>');
+
+    elementWrap.appendTo( page_div_selector );
+
+    element
+    .appendTo( elementWrap )
+    .thumbComponent({
+      'component': component,
+      'update': function ( event, component ) {
+        if(revision_value==0){
+        var newObject = jQuery.extend(true, {}, component);
+        revision_array.revisions.push({component_id: component.id, component: newObject, revision_date: $.now(), even_type: 'UPDATE'});
+                revision_id++;
+
+      }
+      else revision_value=0;
+      ////console.log(revision_array);
         window.lindneo.tlingit.componentHasUpdated( component );
       },
       'selected': function (event, element) {
@@ -541,7 +854,7 @@ console.log(component);
 
       }
       else revision_value=0;
-      //console.log(revision_array);
+      ////console.log(revision_array);
         window.lindneo.tlingit.componentHasUpdated( component );
       }, 
       'selected': function ( event, element_ ){
@@ -556,7 +869,7 @@ console.log(component);
       'border': '1px solid #ccc',
       'border-color': activeUser.color
     });
-//    console.log(activeUser.color);
+//    //console.log(activeUser.color);
 
     $('[color="' +activeUser.color+ '"]').parent().find('[component-instance="true"]').css( {'border': 'none'});
     $('[color="' +activeUser.color+ '"]').parent().children('.activeUser').remove();

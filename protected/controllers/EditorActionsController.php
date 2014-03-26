@@ -24,9 +24,28 @@ class EditorActionsController extends Controller
 		$this->errors[]=$error; 
 		return $error;
 	}
+	public function actionProfilePhoto($email){
+		$user=User::model()->find("email=:email",array('email'=>$email));
+		if($user){
+			$userMeta=UserMeta::model()->find("user_id=:user_id AND meta_key=:meta_key",array('user_id'=>$user->id,'meta_key'=>'profilePicture'));
+			if($userMeta){
+				echo $userMeta->meta_value;
+			}
+			else
+			{
+				echo null;
+			}
+		}
+		else
+		{
+			echo null;
+		}
 
-	public function actionPublishBook($bookId)
-	{
+	}
+	public function actionPublishBook($bookId=null,$id=null){
+		if($bookId==null){
+			$bookId=$id;
+		}
 		$this->layout="//layouts/column2";
 
 		$book=Book::model()->findByPk($bookId);
@@ -43,6 +62,8 @@ class EditorActionsController extends Controller
 		    'params'=>array(':organisation_id'=>$organisation->organisation_id),
 		));
 
+		$categories=BookCategories::model()->findAll('organisation_id=:organisation_id',array('organisation_id'=>$organisation->organisation_id));
+
 		$model=new PublishBookForm;
 
 		$model->contentId=$bookId;
@@ -50,9 +71,13 @@ class EditorActionsController extends Controller
 		$model->contentTitle=$book->title;
 		$model->organisationId=$organisation->organisation_id;
 		$model->organisationName=$organisation->organisation_name;
+		$model->contentType='epub';
+		$model->contentIsForSale="Yes";
+		$model->contentPriceCurrencyCode="949";
+		$model->contentPrice="0";
+		$model->categories="1122";
 
-
-		$this->render('publishBook',array('model'=>$model,'hosts'=>$hosts));
+		$this->render('publishBook',array('model'=>$model,'hosts'=>$hosts,'categories'=>$categories,'bookId'=>$bookId));
 	}
 
 	public function actionGetFileURL($type=null){
@@ -698,53 +723,321 @@ right join book using (book_id) where book_id='$bookId' and type!='image';";
 		
 	}
 
-	public function SendFileToCatalog($bookId){
+	public function getOrganisationBudget($id)
+	{
+		$budget = Yii::app()->db->createCommand("select transaction_type, transaction_organisation_id,  SUM(amount)  as amount 
+			from ( select transaction_type, transaction_organisation_id, transaction_currency_code, SUM(transaction_amount) as amount , SUM(transaction_amount_equvalent) as amount_equvalent  
+		from transactions 
+		where transaction_result = 0 and transaction_method = 'deposit'  
+		group by transaction_type, transaction_organisation_id  
+		Union select transaction_type, transaction_organisation_id, transaction_currency_code,  -1 * SUM(transaction_amount) as amount , -1 * SUM(transaction_amount_equvalent) as amount_equvalent  
+		from transactions where transaction_result = 0 and transaction_method = 'withdrawal'  group by transaction_type, transaction_organisation_id, transaction_currency_code ) as tables 
+		group by transaction_type, transaction_organisation_id")->queryAll();
 
+		foreach ($budget as $key => $tr) {
+			if ($tr['transaction_organisation_id']!=$id)
+				{
+					unset($budget[$key]);
+				}
+		}
+
+		return $budget;
+	}
+
+	public function SendFileToQueue($bookId)
+	{
 		ob_start();
 		$book=Book::model()->findByPk($bookId);
-		$ebook=new epub3($book);
+		$bookData=json_decode($book->data,true);
+
+		
+		
+
+		if (!empty($_POST)) {
+			$budget=$this->getOrganisationBudget($_POST['PublishBookForm']['organisationId']);
+			foreach ($budget as $key => $item) {
+				if ($item['transaction_type']==$_POST['contentType']) {
+					if ($item['amount']<=0) {
+						return "budgetError";
+					}
+				}
+			}
+
+			$data['organisationId']=$_POST['PublishBookForm']['organisationId'];
+			$data['organisationName']=$_POST['PublishBookForm']['organisationName'];
+			$data['created']=$_POST['PublishBookForm']['created'];
+			$data['contentTitle']=$_POST['contentTitle'];
+			$data['contentType']=$_POST['contentType'];
+			$data['contentExplanation']=$_POST['contentExplanation'];
+			$data['contentIsForSale']=$_POST['contentIsForSale'];
+			$data['contentCurrencyCode']=$_POST['contentCurrency'];
+			$data['contentPrice']=$_POST['contentPrice'];
+			$data['date']=$_POST['date'];
+			$data['contentReaderGroup']=$_POST['contentReaderGroup'];
+			$data['contentCover']=$bookData['cover'];
+			$data['contentThumbnail']=$bookData['thumbnail'];
+			
+			//book detail
+			$data['abstract']=$_POST['abstract'];
+			$data['language']=$_POST['language'];
+			$data['subject']=$_POST['subject'];
+			$data['edition']=$_POST['edition'];
+			$data['author']=$_POST['author'];
+			$data['translator']=$_POST['translator'];
+			$data['issn']=$_POST['issn'];
+
+			$data['totalPage']=$ebook->totalPageCount;
+			$data['toc']=json_encode($ebook->TOC_Titles);
+
+			if (isset($_POST['host'])) {
+				$hosts=$_POST['host'];
+				foreach ($hosts as $key => $hostId) {
+					$host=OrganisationHostings::model()->findByPk($hostId);
+					$data['hosts'][$hostId]['host']=$host->hosting_client_IP;
+					$data['hosts'][$hostId]['port']=$host->hosting_client_port;
+					$data['hosts'][$hostId]['key1']=$host->hosting_client_key1;
+					$data['hosts'][$hostId]['key2']=$host->hosting_client_key2;
+					$data['hosts'][$hostId]['id']=$host->hosting_client_id;
+					
+					$data['hosting_client_IP']=$host->hosting_client_IP;
+					$data['hosting_client_id']=$host->hosting_client_id;
+				}
+
+			}
+			else
+			{
+				//hard-coded host id!
+				/*
+				$host=OrganisationHostings::model()->findByPk('GIWwMdmQXL');
+				$data['hosts']['GIWwMdmQXL']['host']=$host->hosting_client_IP;
+				$data['hosts']['GIWwMdmQXL']['port']=$host->hosting_client_port;
+				$data['hosts']['GIWwMdmQXL']['key1']=$host->hosting_client_key1;
+				$data['hosts']['GIWwMdmQXL']['key2']=$host->hosting_client_key2;
+				$data['hosts']['GIWwMdmQXL']['id']=$host->hosting_client_id;
+
+				$hosting_client_IP=$host->hosting_client_IP;
+				$hosting_client_id=$host->hosting_client_id;*/
+			}
 
 
-		if (!file_exists($ebook->ebookFile)) {
-			$this->error('SendFileToCatalog','File does not exists!');
-			$msg="EDITOR_ACTIONS:SendFileToCatalog:0:Could Not Found the created Ebook File". json_encode(array(array('user'=>Yii::app()->user->id),array('bookId'=>$bookId)));
-			Yii::log($msg,'error');
-			return;
+			if ($_POST['categoriesSirali']) {
+				$categories=$_POST['categoriesSirali'];
+				foreach ($categories as $key => $categoryId) {
+					$siraliCategory=BookCategories::model()->findByPk($categoryId);
+					$data['siraliCategory'][$categoryId]['category_id']=$siraliCategory->category_id;
+					$data['siraliCategory'][$categoryId]['category_name']=$siraliCategory->category_name;
+				}
+			}
+			$data['siraNo']=$_POST['contentSiraliSiraNo'];
+			$data['ciltNo']=$_POST['contentSiraliCiltNo'];
+
+
+
+			if (isset($_POST['categories'])&& !empty($_POST['categories'])) {
+				$categories=$_POST['categories'];
+				foreach ($categories as $key => $categoryId) {
+					$category=BookCategories::model()->findByPk($categoryId);
+					$data['categories'][$categoryId]['category_id']=$category->category_id;
+					$data['categories'][$categoryId]['category_name']=$category->category_name;
+				}
+			}
+			else
+			{
+				//hard-coded bookcategory
+				/*
+				$category=BookCategories::model()->findByPk('1122');
+				$data['categories'][$categoryId]['category_id']=$category->category_id;
+				$data['categories'][$categoryId]['category_name']=$category->category_name;
+				*/
+			}
+			
 		}
 
-		$data['contentId']=$bookId;
-		$data['contentFile']='@'.$ebook->ebookFile;
-		$data['checksum']=md5_file($ebook->ebookFile);
-		$data['contentTrustSecret']=sha1($data['checksum']."ONLYUPLOAD".$bookId."31.210.53.80");
+		
+		$host_ip=trim(shell_exec("/sbin/ifconfig eth0 | awk '/inet / { print $2 }' | sed -e s/addr://"));
+		//$host_ip="31.210.53.80";
+		$data['contentTrustSecret']=sha1($data['checksum']."ONLYUPLOAD".$bookId.$host_ip);
 
-		$data['host']="cloud.lindneo.com";
-		$data['port']="2222";
+		
+
+		$data['hosts']=json_encode($data['hosts']);
+		$data['categories']=json_encode($data['categories']);
+		$data['siraliCategory']=json_encode($data['siraliCategory']);
 
 
-		$localFile = $ebook->ebookFile; // This is the entire file that was uploaded to a temp location.
-		$fp = fopen($localFile, 'r');
 
-		//Connecting to website.
+		$queue= new PublishQueue();
+		$queue->book_id=$bookId;
+		$queue->publish_data=json_encode($data);
+		$queue->save();
 
-		$ch = curl_init();
-		curl_setopt($ch, CURLOPT_URL, Yii::app()->params['catalogExportURL'] );
-		curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
-		curl_setopt($ch, CURLOPT_FOLLOWLOCATION, TRUE);
-		curl_setopt($ch, CURLOPT_POST, TRUE);
-		curl_setopt($ch, CURLOPT_POSTFIELDS, $data); 
-		$Return['response']=unserialize(curl_exec($ch));
+		$book->publish_time=date('Y-n-d g:i:s',time());
+		$book->save();
+	}
 
-		if (curl_errno($ch)){  
-			$this->error('SendFileToCatalog','CURL_ERROR:'.curl_error($ch));
-		    $msg="EDITOR_ACTIONS:SendFileToCatalog:0:CURL_ERROR:".curl_error($ch). json_encode(array(array('user'=>Yii::app()->user->id),array('bookId'=>$bookId)));
-			Yii::log($msg,'error');
-			return;
+	public function actionStartPublishing()
+	{
+		$this->SendFileToCatalog();
+	}	
+
+	public function SendFileToCatalog(){
+		ob_start();
+		$QueueBooks=PublishQueue::model()->findAll('is_in_progress=:is_in_progress',array('is_in_progress'=>0));
+		$booksInQueue=array();
+		foreach ($QueueBooks as $QueueBookKey0 => $Queue) {
+			$queueInProgress=PublishQueue::model()->findByPk($Queue->book_id);
+			$queueInProgress->is_in_progress=1;
+			$queueInProgress->save();
+			$booksInQueue[]=$queueInProgress;
+
+		}		
+
+		foreach ($booksInQueue as $QueueBookKey => $QueueBook) {
+			$bookId=$QueueBook->book_id;
+
+			$data=json_decode($QueueBook->publish_data,true);
+		
+			$book=Book::model()->findByPk($bookId);
+			$bookData=json_decode($book->data,true);
+			$ebook=new epub3($book,null,true);
+
+
+			if (!file_exists($ebook->ebookFile)) {
+				$this->error('SendFileToCatalog','File does not exists!');
+				$msg="EDITOR_ACTIONS:SendFileToCatalog:0:Could Not Found the created Ebook File". json_encode(array(array('user'=>Yii::app()->user->id),array('bookId'=>$bookId)));
+				Yii::log($msg,'error');
+				return;
+			}
+
+			$localFile = $ebook->ebookFile; // This is the entire file that was uploaded to a temp location.
+			$fp = fopen($localFile, 'r');
+
+			$data['contentId']=$bookId;
+			$data['contentFile']='@'.$ebook->ebookFile;
+			$data['checksum']=md5_file($ebook->ebookFile);
+			//Connecting to website.
+
+			$ch = curl_init();
+			curl_setopt($ch, CURLOPT_URL, Yii::app()->params['catalogExportURL'] );
+			curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
+			curl_setopt($ch, CURLOPT_FOLLOWLOCATION, TRUE);
+			curl_setopt($ch, CURLOPT_POST, TRUE);
+			
+			curl_setopt($ch, CURLOPT_POSTFIELDS, $data); 
+			$Return['response']=json_decode(curl_exec($ch));
+
+			if (curl_errno($ch)){  
+				$this->error('SendFileToCatalog','CURL_ERROR:'.curl_error($ch));
+			    $msg="EDITOR_ACTIONS:SendFileToCatalog:0:CURL_ERROR:".curl_error($ch). json_encode(array(array('user'=>Yii::app()->user->id),array('bookId'=>$bookId)));
+				Yii::log($msg,'error');
+				return;
+			}
+
+			$msg = 'File uploaded successfully.';
+			curl_close ($ch);
+			$Return['msg'] = $msg;
+			ob_end_clean();
+
+
+			$res=$Return;
+			$res_res=$res['response'];
+			$ip = $_SERVER['REMOTE_ADDR'];
+	        if($ip){
+	            if (!empty($_SERVER['HTTP_CLIENT_IP'])) {
+	                $ip = $_SERVER['HTTP_CLIENT_IP'];
+	            } elseif (!empty($_SERVER['HTTP_X_FORWARDED_FOR'])) {
+	                $ip = $_SERVER['HTTP_X_FORWARDED_FOR'];
+	            }
+	        }
+	        else
+	        	$ip ='0';
+			
+			$attr=array();
+			$attr['transaction_book_id']=$bookId;
+			$attr['transaction_user_id']=Yii::app()->user->id;
+			$attr['transaction_organisation_id']=$data['organisationId'];
+			$attr['transaction_start_date']=date('Y-n-d g:i:s',time());
+			$attr['transaction_method']='withdrawal';
+			$attr['transaction_unit_price']=0;
+			$attr['transaction_amount_equvalent']=0;
+			$attr['transaction_currency_code']=0;
+			$attr['transaction_host_ip']=$data['hosting_client_IP'];
+			$attr['transaction_host_id']=$data['hosting_client_id'];
+			$attr['transaction_remote_ip']=$ip;
+			$attr['transaction_type']=$data['contentType'];
+
+			$success=0;
+
+			$transaction=new Transactions;
+			$transaction['attributes']=$attr;
+			$transaction->transaction_amount=0;
+			$transaction->transaction_id=functions::new_id();
+			if ($res_res->catalog===0) {
+				$transaction->transaction_result=0;
+				$transaction->transaction_explanation="Catalog Created";
+				$success++;
+			}
+			else
+			{
+				$transaction->transaction_result=1;
+				$transaction->transaction_explanation="Catalog Could NOT Created";
+			}
+			$transaction->save();
+			unset($transaction);
+			
+			$transaction=new Transactions;
+			$transaction['attributes']=$attr;
+			$transaction->transaction_amount=0;
+			$transaction->transaction_id=functions::new_id();
+			if ($res_res->cc) {
+				$transaction->transaction_result=0;
+				$transaction->transaction_explanation="File Created";
+				$success++;
+			}
+			else
+			{
+				$transaction->transaction_result=$res_res->cc;
+				$transaction->transaction_explanation="File Could NOT Created";
+			}
+			$transaction->save();
+			unset($transaction);
+
+			
+
+			$transaction=new Transactions;
+			$transaction['attributes']=$attr;
+			$transaction->transaction_amount=0;
+			$transaction->transaction_id=functions::new_id();
+			if ($res_res->shell_signal===0) {
+				$transaction->transaction_result=0;
+				$transaction->transaction_explanation="File Uploaded to Cloud";
+				$success++;
+			}
+			else
+			{
+				$transaction->transaction_result=$res_res->shell_signal;
+				$transaction->transaction_explanation="File Could NOT Uploaded to Cloud";
+			}
+			$transaction->save();
+			unset($transaction);
+
+			if ($success==3) {
+				$transaction=new Transactions;
+				$transaction['attributes']=$attr;
+				$transaction->transaction_id=functions::new_id();
+				$transaction->transaction_result=0;
+				$transaction->transaction_explanation="File Published";
+				$transaction->transaction_amount=1;
+				$transaction->save();
+
+
+
+				$deleteFromQueue=PublishQueue::model()->findByPk($bookId);
+				$deleteFromQueue->delete();
+			}
+
 		}
 
-		$msg = 'File uploaded successfully.';
-		curl_close ($ch);
-		$Return['msg'] = $msg;
-		ob_end_clean();
 		return $Return;
 
 	}
@@ -758,12 +1051,19 @@ right join book using (book_id) where book_id='$bookId' and type!='image';";
 
 		$response=false;
 
-		if($return=$this->SendFileToCatalog($bookId) ){
-			$response['sendFileInfo']=$return; 
-			$response['sendFile']=true;
+		if($return=$this->SendFileToQueue($bookId) ){
+			if ($return=="budgetError") {
+				$response="budgetError";
+			}
+			else
+			{
+				$response['sendFileInfo']=$return; 
+				$response['sendFile']=true;		
+			}
 		}else{
 			$response['sendFile']=false;
 		}	
+		
 
 		return $this->response($response);
 	}

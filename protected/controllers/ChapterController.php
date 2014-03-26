@@ -60,7 +60,7 @@ class ChapterController extends Controller
 	 * Creates a new model.
 	 * If creation is successful, the browser will be redirected to the 'view' page.
 	 */
-	public function actionCreate($book_id=null)
+	public function actionCreate($book_id)
 	{
 		$model=new Chapter;
 		
@@ -72,7 +72,7 @@ class ChapterController extends Controller
 		
 			
 			if($model->save())
-				$this->redirect(array('page/create','chapter_id'=>$model->chapter_id));
+				$this->redirect(array('page/create','book_id'=>$book_id,'chapter_id'=>$model->chapter_id));
 		
 	}
 

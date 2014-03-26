@@ -1,3 +1,27 @@
+<script type="text/javascript">
+	$(document).ready(function() {
+var data_id = '';
+  $('.remove_book').click(function () {
+
+    
+
+    if (typeof $(this).data('id') !== 'undefined') {
+
+      data_id = $(this).data('id');
+    }
+
+    $('#book_id').val(data_id);
+  });
+  $("#delete_book").click(function(){
+  	href="<?php echo '/book/delete/'.$book->book_id ?>"
+  	$.ajax({
+	  url: "/book/delete/"+data_id,
+	}).done(function() {
+	  $('#myModal').modal('hide');
+	});
+  });
+});
+</script>
 <?php
 /* @var $this SiteController */
 
@@ -13,8 +37,9 @@ function sendRight(e){
     var link ='/site/right?userId='+userId+'&bookId='+bookId+'&type='+type;
     window.location.assign(link);
     }
-   
 </script>
+
+
 <script>
 		jQuery(document).ready(function() {		
 			App.setPage("gallery");  //Set current page
@@ -23,6 +48,81 @@ function sendRight(e){
 	</script>
 	<!-- /JAVASCRIPTS -->
 
+<!-- POPUP EDITORS -->
+<div class="modal fade" id="updateBookTitle" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+	  <div class="modal-content">
+		<div class="modal-header">
+		  <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+		  <h4 class="modal-title"><?php _e("Eseri Güncelle"); ?></h4>
+		</div>
+		<div class="modal-body">
+		 	<form id="copy" method="post" class="form-horizontal">
+				<div class="form-group">
+					<label class="control-label col-md-3" for="contentTitle">Eser Adı<span class="required">*</span></label>
+					<div class="col-md-4">
+						<input class="form-control" name="contentTitle" placeholder="Lütfen bir isim girin!" id="updateContentTitle" type="text">															
+					</div>
+				</div>	
+		 	</form>
+		</div>
+	      <div class="modal-footer">
+	      	<button type="button" class="btn btn-primary" id="update_book_title"><?php _e("Güncelle"); ?></a>
+	        <button type="button" class="btn btn-default" data-dismiss="modal"><?php _e("Vazgeç"); ?></button>
+	      </div>
+		</div>
+	  </div>
+	</div>
+ 
+<!-- POPUP END -->
+
+<!-- POPUP EDITORS -->
+<div class="modal fade" id="copyBook" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+	  <div class="modal-content">
+		<div class="modal-header">
+		  <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+		  <h4 class="modal-title"><?php _e("Kitabı Kopyala"); ?></h4>
+		</div>
+		<div class="modal-body">
+		 	<form id="copy" method="post" class="form-horizontal">
+		 		<div class="form-group">
+					<label  class="col-md-3 control-label">
+					<?php _e("Çalışma Alanları"); ?>
+					</label>
+					<div class="col-md-9">
+			 			<span id="workspaces">
+						 	<?php 
+						 	foreach ($workspaces as $key => $workspace) { ?>
+				 				<div class="radio SelectWorkspace" id="uniform-<?php echo $workspace["workspace_id"]; ?>">
+				 					<span>
+				 						<input class="uniform" id="<?php echo $workspace["workspace_id"]; ?>" value="<?php echo $workspace["workspace_id"]; ?>" type="radio" name="CopyBook">
+				 					</span>
+				 				</div>
+				 				<label for="<?php echo $workspace["workspace_id"]; ?>"><?php echo $workspace["workspace_name"]; ?></label>
+				 				<br>
+						 	<?php }
+						 	?>
+						</span>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label col-md-3" for="PublishBookForm_contentTitle">Eser Adı<span class="required">*</span></label>
+					<div class="col-md-4">
+						<input class="form-control" name="contentTitle" placeholder="Lütfen bir isim girin!" id="newContentTitle" type="text">															
+					</div>
+				</div>	
+		 	</form>
+		</div>
+	      <div class="modal-footer">
+	      	<button type="button" class="btn btn-primary" id="copy_book"><?php _e("Kopyala"); ?></a>
+	        <button type="button" class="btn btn-default" data-dismiss="modal"><?php _e("Vazgeç"); ?></button>
+	      </div>
+		</div>
+	  </div>
+	</div>
+ 
+<!-- POPUP END -->
 
 
 <?php
@@ -130,7 +230,7 @@ $all_books= $this->getWorkspaceBooks($workspace->workspace_id);
 							<div class="col-sm-12">
 								<div class="page-header">
 										<h3 class="content-title pull-left"><?php _e('Kitaplarım') ?></h3>
-										<a class="btn pull-right btn-primary" href="/book/newBook">
+										<a class="btn pull-right btn-primary" href="/book/bookCreate">
 							<i class="fa fa-plus-circle"></i>
 							<span>Kitap Ekle</span>
 						</a>
@@ -145,7 +245,7 @@ $all_books= $this->getWorkspaceBooks($workspace->workspace_id);
 			  <div class="hidden-xs">
 				  <a href="#" class="btn btn-default" data-filter="*"><?php _e("Hepsi"); ?></a>
 <?php 
-$buttons=array('info','primary','success', 'warning', 'error', 'inverse');
+$buttons=array('info','primary','success', 'warning', 'danger', 'inverse', 'primary', 'success', 'warning', 'danger', 'inverse');
 $workspaces= $this->getUserWorkspaces();
 foreach ($workspaces as $key => $workspace) { ?>
 		<a href="#" class="btn btn-<?php echo $buttons[$key]; ?>" data-filter=".<?php echo $workspace['workspace_id']; ?>"><?php echo $workspace['workspace_name']; ?></a>		  
@@ -200,12 +300,12 @@ $all_books= $this->getWorkspaceBooks($workspace->workspace_id);
 							<a href="#box-config<?php echo $book->book_id; ?>" data-toggle="modal" class="config">
 								<i class="fa fa-group"></i>
 							</a>
-							<a href="<?php echo '/book/delete/'.$book->book_id ?>" class="remove">
+							<?php $remove_book_id = ''; ?>
+							<a class="remove_book" data-id="<?php echo $book->book_id; ?>" data-toggle="modal" data-target="#myModal">
 								<i class="fa fa-times"></i>
 							</a>
-
-
-
+							<a class="copyThisBook" data-id="copyBook" data-toggle="modal" data-target="#copyBook" book-id="<?php echo $book->book_id; ?>"><i class="fa fa-copy"></i></a>
+							<a class="updateThisBookTitle" data-id="updateBookTitle" data-toggle="modal" data-target="#updateBookTitle" book-id="<?php echo $book->book_id; ?>"><i class="fa fa-edit"></i></a>
 							<?php } ?>
 							<a href="javascript:;" class="collapse">
 								<i class="fa fa-chevron-up"></i>
@@ -217,7 +317,15 @@ $all_books= $this->getWorkspaceBooks($workspace->workspace_id);
 						<div class="row">
 								
 								<div class="col-md-4 ">
-									<img src="/css/images/default-cover.jpg" alt="Book Cover">
+									<?php 
+										$thumbnailSrc="/css/images/default-cover.jpg";
+										$bookData=json_decode($book->data,true);
+										 if (isset($bookData['thumbnail'])) {
+										 	$thumbnailSrc=$bookData['thumbnail'];
+										 }
+
+									?>
+									<img src="<?php echo $thumbnailSrc; ?>" alt="Book Cover" style="width:110px; height:170px">
 								</div>
 								
 								<div class="col-md-8 form-vertical">
@@ -250,3 +358,52 @@ $all_books= $this->getWorkspaceBooks($workspace->workspace_id);
 				
 				<!-- /Page Content -->
 </div>
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+      </div>
+      <div class="modal-body">
+        Silmek istediğinizden emin misiniz?
+      </div>
+      <input type="hidden" name="book_id" id="book_id" value="">
+      <div class="modal-footer">
+      	<button type="button" class="btn btn-primary" id="delete_book">Evet</a>
+        <button type="button" class="btn btn-default" data-dismiss="modal">Hayır</button>      
+      </div>
+    </div>
+  </div>
+</div>
+
+<script type="text/javascript">
+var bookId="";
+$(document).on("click",".copyThisBook",function(e){
+	bookId = $(this).attr('book-id');
+});
+
+$(document).on("click",".updateThisBookTitle",function(e){
+	bookId = $(this).attr('book-id');
+});
+
+var workspaceId="";
+$(document).on("click",".SelectWorkspace",function(e){
+	$(".SelectWorkspace span").removeClass("checked");
+	$(this).children("span").addClass("checked");
+	workspaceId=$(this).children("span").children("input").val();
+});
+
+$("#copy_book").click(function(){
+	var title=$("#newContentTitle").val();
+	var link ="/book/copyBook?bookId="+bookId+"&workspaceId="+workspaceId+'&title='+title;
+    window.location.assign(link);
+});
+
+$("#update_book_title").click(function(){
+	var title=$("#updateContentTitle").val();
+	var link ="/book/updateBookTitle?bookId="+bookId+'&title='+title;
+    window.location.assign(link);
+});
+</script>

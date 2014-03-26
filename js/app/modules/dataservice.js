@@ -29,15 +29,50 @@ window.lindneo.dataservice = (function( $ ) {
       createPopupComponent( event, ui, component );
     };
 
+  var html_popup = function(event, ui, component){
+      createHtmlComponent( event, ui, component );
+    };
+
+  var wrap_popup = function(event, ui, component){
+      createWrapComponent( event, ui, component );
+    };
+
+  var latex_popup = function(event, ui, component){
+      createLatexComponent( event, ui, component );
+    };
+
   var video_popup = function(event, ui, component){
       createVideoComponent( event, ui, component );
     };
     
-  var newComponentDropPage = function(e, reader, file){
+  var newComponentDropPage = function(div_id, e, reader, file){
     var that =this;
     var component = {};
     reader.onload = function (evt) { 
         var FileBinary = evt.target.result;
+        //console.log(FileBinary);
+        if(div_id != 'current_page'){
+          //$('#coverRel').attr("src",FileBinary);
+          var ajax_url = '';
+          if(div_id == 'collapseOne') ajax_url = '/book/updateCover/'+window.lindneo.currentBookId;
+          else ajax_url = '/book/updateThumbnail/'+window.lindneo.currentBookId;
+          
+          $.ajax({
+            type: "POST",
+            data: { img: FileBinary},
+            url:'/book/updateCover/'+window.lindneo.currentBookId,
+          }).done(function(hmtl){
+            $('#coverRel').attr('src',FileBinary);
+          });
+          $.ajax({
+            type: "POST",
+            data: { img: FileBinary},
+            url:'/book/updateThumbnail/'+window.lindneo.currentBookId,
+          }).done(function(hmtl){
+            $('#thumbRel').attr('src',FileBinary);
+          });
+          return;
+        }
         var contentType = FileBinary.substr(5, FileBinary.indexOf('/')-5);
         //console.log(contentType);
         if(contentType == 'image'){
@@ -299,6 +334,9 @@ window.lindneo.dataservice = (function( $ ) {
     popup_popup: popup_popup,
     graph_popup: graph_popup,
     quiz_popup: quiz_popup,
+    html_popup: html_popup,
+    wrap_popup: wrap_popup,
+    latex_popup: latex_popup,
     send: send
   };
 

@@ -88,10 +88,10 @@ return array(
 		// uncomment the following to use a MySQL database
 
 		'db'=>array(
-			'connectionString' => 'mysql:host=localhost;dbname=squid_pacific',
+			'connectionString' => 'mysql:host=lindneo.com;dbname=squid_pacific',
 			'emulatePrepare' => true,
-			'username' => 'root',
-			'password' => '12548442',
+			'username' => 'db_squid_pacific',
+			'password' => '7GqA3Pqcy38QnfPQ',
 			'charset' => 'utf8',
 		),
 
@@ -130,11 +130,12 @@ return array(
      	'epubtopdf'=>dirname(__FILE__).DIRECTORY_SEPARATOR.'../../'.'bin/epubtopdf/epubtopdf ',
      	'pdftojpg'=>dirname(__FILE__).DIRECTORY_SEPARATOR.'../../'.'bin/pdftojpg/pdftojpg ',
      	'tocextractor'=>dirname(__FILE__).DIRECTORY_SEPARATOR.'../../'.'bin/jpdfbookmarks-2.5.2/jpdfbookmarks --dump ',
+     	'htmltojpg'=>dirname(__FILE__).DIRECTORY_SEPARATOR.'../../'.'bin/htmltojpg/htmltojpg ',
      	'availableLanguages' => array(
      		'tr_TR' => 'Türkçe',
      		'en_US' => 'English'
      		),
-     	'catalogExportURL' => "http://catalog.lindneo.com/index_2.php"
+     	'catalogExportURL' => "http://catalog.lindneo.com/site/import"
 	)
 
 );

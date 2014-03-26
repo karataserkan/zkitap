@@ -2,6 +2,28 @@
 
 class PageController extends Controller
 {
+	public $response=null; 
+	public $errors=null; 
+
+	public function response($response_avoition=null){
+
+		$response['result']=$response_avoition ? $response_avoition : $this->response;
+		if ($this->errors) $response['errors']=$this->errors;
+
+		$response_string=json_encode($response);
+
+
+		header('Content-type: plain/text');
+		header("Content-length: " . strlen($response_string) ); // tells file size
+		echo $response_string;
+	}
+ 
+	public function error($domain='PageActions',$explanation='Error', $arguments=null,$debug_vars=null ){
+		$error=new error($domain,$explanation, $arguments,$debug_vars);
+		$this->errors[]=$error; 
+		return $error;
+	}
+
 	/**
 	 * @var string the default layout for the views. Defaults to '//layouts/column2', meaning
 	 * using two-column layout. See 'protected/views/layouts/column2.php'.
@@ -32,7 +54,7 @@ class PageController extends Controller
 				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
-				'actions'=>array('create','update'),
+				'actions'=>array('create','update','getPdfData','getPdfThumbnail'),
 				'users'=>array('@'),
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
@@ -60,15 +82,22 @@ class PageController extends Controller
 	 * Creates a new model.
 	 * If creation is successful, the browser will be redirected to the 'view' page.
 	 */
-	public function actionCreate($chapter_id,$pageTeplateId=null)
+	public function actionCreate($book_id,$chapter_id=null,$pageTeplateId=null)
 	{
 		$model=new Page;
 		$new_id=functions::new_id();
 		$model->page_id=$new_id;
-		$model->chapter_id=$chapter_id;
-
-		$chapter=Chapter::model()->findByPk($chapter_id)
-		;
+		if ($chapter_id) {
+			$chapter=Chapter::model()->findByPk($chapter_id);
+		}
+		else
+		{
+			$chapter= new Chapter;
+			$chapter->chapter_id=functions::new_id();
+			$chapter->book_id=$book_id;
+			$chapter->save();
+		}
+		$model->chapter_id=$chapter->chapter_id;
 
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
@@ -125,6 +154,32 @@ class PageController extends Controller
 		$this->render('update',array(
 			'model'=>$model,
 		));
+	}
+
+	public function actionGetPdfData($pageId)
+	{
+
+		$page=Page::model()->findByPk($pageId);
+
+		$page_data=json_decode($page->pdf_data,true);
+
+		$img=$page_data['image']['data'];
+
+		$this->response($img);
+
+	}
+
+	public function actionGetPdfThumbnail($pageId)
+	{
+
+		$page=Page::model()->findByPk($pageId);
+
+		$page_data=json_decode($page->pdf_data,true);
+
+		$img=$page_data['thumnail']['data'];
+
+		$this->response($img);
+
 	}
 
 	/**

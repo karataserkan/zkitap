@@ -367,9 +367,9 @@ window.lindneo.toolbox = (function(window, $, undefined){
           }
         }
       });
-    console.log(component_values);
-    console.log(component_spaces);
-    console.log(value);
+    //console.log(component_values);
+    //console.log(component_spaces);
+    //console.log(value);
     }
     else if(position == 'horizontal'){
       var component_spaces = [];
@@ -429,9 +429,9 @@ window.lindneo.toolbox = (function(window, $, undefined){
           }
         }
       });
-    console.log(component_values);
-    console.log(component_spaces);
-    console.log(value);
+    //console.log(component_values);
+    //console.log(component_spaces);
+    //console.log(value);
     }
     return value;
   }
@@ -556,8 +556,10 @@ window.lindneo.toolbox = (function(window, $, undefined){
       $('.toolbox').hide();
 
       $.each(this.selectedComponents, function( key, component ) {
-        if($.type(component.options.component.data.lock.username) == "undefined")
+        if($.type(component.options.component.data.lock.username) == "undefined"){
           $('.toolbox.'+component.options.component.type+'-options, .toolbox.generic-options').show();
+
+        }
 
         $('.toolbox .tool').unbind( "change" );
         $('.toolbox-btn').unbind( "click" );
@@ -742,8 +744,8 @@ window.lindneo.toolbox = (function(window, $, undefined){
           //console.log(component.options.component);
           if(cut==true) window.lindneo.nisga.deleteComponent( component.options.component );
           
-          console.log(newComponent);
-          
+          //console.log(newComponent);
+          $('.copy-paste').css('display','inline-block');
           newComponent.id= '';
           newComponent.page_id= '';
           
@@ -751,6 +753,7 @@ window.lindneo.toolbox = (function(window, $, undefined){
           
          
         });
+
         //console.log(newClipboard);
         return this.setClipboardItems(newClipboard);
  
@@ -766,7 +769,7 @@ window.lindneo.toolbox = (function(window, $, undefined){
         component.data.self.css.left = (parseInt(component.data.self.css.left)+25 ) +"px";
 
         newClipboard.push(component);
-        
+        $('.copy-paste').css('display','none');
         window.lindneo.tlingit.componentHasCreated( component );
       });
       return this.setClipboardItems(newClipboard);

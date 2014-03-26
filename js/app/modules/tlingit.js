@@ -33,7 +33,7 @@ window.lindneo.tlingit = (function(window, $, undefined){
         },
         newArrivalComponent,
         function(err){
-          console.log('error:' + err);
+          //console.log('error:' + err);
       });
   };
 
@@ -60,7 +60,7 @@ window.lindneo.tlingit = (function(window, $, undefined){
         },
         updateArrivalComponent,
         function(err){
-          console.log('error:' + err);
+          //console.log('error:' + err);
       });
     
   };
@@ -73,6 +73,7 @@ window.lindneo.tlingit = (function(window, $, undefined){
   };
 
   var componentHasDeleted = function ( componentId ) {
+    oldcomponent_id = componentId;
     window.lindneo.dataservice
     .send( 'DeleteComponent', 
       { 
@@ -80,14 +81,14 @@ window.lindneo.tlingit = (function(window, $, undefined){
       },
       deleteArrivalResult,
       function(err){
-        console.log('error:' + err);
+        //console.log('error:' + err);
     });
   };
 
   var deleteArrivalResult = function ( res ) {
     var response = responseFromJson(res);
 
-    window.lindneo.nisga.destroyComponent(response.result.delete);
+    window.lindneo.nisga.destroyComponent(response.result.delete, oldcomponent_id);
     window.lindneo.tsimshian.componentDestroyed(response.result.delete);
   };
 
@@ -136,8 +137,9 @@ window.lindneo.tlingit = (function(window, $, undefined){
         },
         loadComponents,
         function(err){
-          console.log('error:' + err);
+          //console.log('error:' + err);
       });
+
       
 
   };
@@ -146,19 +148,45 @@ window.lindneo.tlingit = (function(window, $, undefined){
     $("li.page").each(function(index, pageSlice){
       //console.log(pageSlice);
 
-      var pagePreview = $('<canvas class="preview" height="90" width="120"> </canvas>');
+      var pagePreview = $('<canvas class="preview"  height="90"  width="120"> </canvas>');
     
       $(pageSlice).children('.preview').remove();
       $(pageSlice).prepend(pagePreview);
       var canvas=$(pageSlice).children('.preview')[0];
       var context=canvas.getContext("2d");
-       context.fillStyle = '#FFF';
-        context.fillRect(0,0,canvas.width,canvas.height);
-        
+     context.fillStyle = '#FFF';
+      context.fillRect(0,0,canvas.width,canvas.height);
+      //console.log('ddedededede');
+      //$('.chapter .page').each(function(){
+      //console.log($(this).attr('page_id'));
+      
+
+      $.ajax({
+          type: "POST",
+          url:'/page/getPdfThumbnail?pageId='+$(this).attr('page_id'),
+        }).done(function(page_data){
+          
+          var page_background = JSON.parse(page_data);
+          //console.log(page_background.result);
+          if(page_background.result){
+            /*var background_img = '<img src="'+page_background.result+'" id="canvas_'+$(this).attr('page_id')+'"  height="90" width="120" style="display:none"/>';
+            $(pageSlice).prepend(background_img);
+            var background = document.getElementById('canvas_'+$(this).attr('page_id'));
+            context.drawImage(background, 120,90);*/
+            var img = new Image();
+            img.src = page_background.result;
+            img.onload = function(){
+              context.drawImage(img, 0, 0);
+            };
+
+          }
+        });
+      //});
     });
    $('.chapter .page').each(function(){
+    //console.log($(this).attr('page_id'));
     loadPagesPreviews($(this).attr('page_id'));
-   })
+    });
   };
 
   var loadPagesPreviews = function (pageId) {
@@ -178,8 +206,7 @@ window.lindneo.tlingit = (function(window, $, undefined){
   };
 
   var PreviewOfPage = function (response) {
-
-
+//console.log(response);
     if ($.isEmptyObject(responseFromJson(response).result)) return false;
 
     var components= responseFromJson(response).result.components;
@@ -334,6 +361,11 @@ window.lindneo.tlingit = (function(window, $, undefined){
   };
 
   var ChapterUpdated = function (chapterId, title, order){
+
+//console.log(chapterId);
+//console.log(title);
+//console.log(order);
+
     window.lindneo.dataservice
     .send( 'UpdateChapter', 
       { 
@@ -349,7 +381,7 @@ window.lindneo.tlingit = (function(window, $, undefined){
   };
 
   var UpdateChapter =function(response){
-    var response = responseFromJson(response);
+    responseFromJson(response);
     //pass to nisga new chapter
     //console.log(response);
 

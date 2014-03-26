@@ -38,7 +38,7 @@ class Organisations extends CActiveRecord
 		return array(
 			array('organisation_id, organisation_name, organisation_admin', 'required'),
 			array('organisation_id', 'length', 'max'=>44),
-			array('organisation_admin', 'length', 'max'=>4),
+			array('organisation_admin', 'length', 'max'=>11),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
 			array('organisation_id, organisation_name, organisation_admin', 'safe', 'on'=>'search'),

@@ -67,15 +67,15 @@ $(document).ready(function(){
             snap: '.ui-wrapper',
             handle: '.dragging_holder, img',
             snapMode: 'outer',
-            'alsoDrag':'.selected',
+            'alsoDrag':'.ui-draggable.selected',
             'stop': function(event, ui){
             //console.log();
 
               $( "#guide-v, #guide-h" ).hide(); 
               that._resizeDraggable( event, ui );
               if ($('.selected').length > 1) {
-                console.log($('.selected'));
-                console.log($('.selected').not($(this)));
+                //console.log($('.selected'));
+                //console.log($('.selected').not($(this)));
                 $('.selected').not(this).trigger('alsoDragStopped');
               }
             },
@@ -188,8 +188,14 @@ $(document).ready(function(){
               window.lindneo.dataservice.graph_popup(event, ui, that.options.component);
             else if(that.options.component.type == 'quiz')
               window.lindneo.dataservice.quiz_popup(event, ui, that.options.component);
+            else if(that.options.component.type == 'html')
+              window.lindneo.dataservice.html_popup(event, ui, that.options.component);
+            else if(that.options.component.type == 'wrap')
+              window.lindneo.dataservice.wrap_popup(event, ui, that.options.component);
+            else if(that.options.component.type == 'latex')
+              window.lindneo.dataservice.latex_popup(event, ui, that.options.component);
           })
-  
+          
           .mouseenter(function(event){
             
              
@@ -240,11 +246,11 @@ $(document).ready(function(){
         commentButton.remove();
 
       })
-      
       .on('unselect', function(event){
         that.unselect(event);
       })
       .on('select', function(event){
+        console.log(that.options.component.id);
         event.groupSelection=true;
         that._selected(event);
       })
@@ -495,10 +501,11 @@ $(document).ready(function(){
     },
 
     _selected: function( event, ui ) {
-      console.log(event);
-      console.log(event.originalEvent);
-     
-     if (typeof event.originalEvent != "undefined")
+      //console.log(event);
+      //console.log(event.originalEvent);
+     console.log(this.options.component.id);
+
+    if (typeof event.originalEvent != "undefined")
       if (typeof event.originalEvent != "null")
         if (typeof event.originalEvent.originalEvent != "undefined")
           if (typeof event.originalEvent.originalEvent.type != "undefined")
@@ -587,8 +594,10 @@ $(document).ready(function(){
       return this._setPropertyofObject(propertyName,propertyValue) ;
     },
     _setPropertyofObject : function (propertyName,propertyValue){
-    
-      switch(propertyName){
+    console.log($('#'+this.options.component.id).slickWrap({ cutoff:propertyValue }));
+      switch(propertyName){ 
+        case 'cutoff':
+          $('#'+this.options.component.id).slickWrap({ cutoff:propertyValue });
         case 'zindex':
 
             switch (propertyValue){

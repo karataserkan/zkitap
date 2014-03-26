@@ -38,6 +38,34 @@ class componentHTML {
 			case 'quiz':
 				$this->quizInner($component);			
 				break;
+			/*case 'table':
+			    $this->tableInner($component);
+			    break;
+			*/
+			 case 'html':
+			    $this->htmlInner($component);
+			    break;
+			 case 'wrap':
+			    $this->wrapInner($component);
+			    break;
+			 case 'latex':
+			    $this->latexInner($component);
+			    break;
+			 case 'plink':
+			    $this->plinkInner($component);
+			    break;
+			 case 'thumb':
+			    $this->thumbInner($component);
+			    break;
+			  /*
+			  case 'slider':
+			    $this->sliderInner($component);
+			    break;
+
+			  case 'tag':
+			    $this->tagInner($component);
+			    break;
+			    */
 			default:
 				$this->someOther_inner($component->data);			
 
@@ -428,76 +456,128 @@ class componentHTML {
 
 
 	public function videoInner($component){ 
-		
-		$file_contents= file_get_contents($component->data->source->attr->src);
+			$file_contents= file_get_contents($component->data->source->attr->src);
 
-		$URL=parse_url($component->data->source->attr->src);
-		$URL=pathinfo($URL[path]);
-		$ext=$URL['extension'];
-
-
-
-		$file=new file( $component->id.'.'.$ext , $this->epub->get_tmp_file() );
-		$file->writeLine($file_contents);
-		$file->closeFile();
-
-
-		//$file = functions::save_base64_file ( $component->data->source->attr->src , $component->id , $this->epub->get_tmp_file());
-		$this->epub->files->others[] = $file;
-		$component->data->source->attr->src=$file->filename;
-		//new dBug($component); die;
+			$URL=parse_url($component->data->source->attr->src);
+			$URL=pathinfo($URL[path]);
+			$ext=$URL['extension'];
 
 
 
+			$file=new file( $component->id.'.'.$ext , $this->epub->get_tmp_file() );
+			$file->writeLine($file_contents);
+			$file->closeFile();
 
 
-		$data=$component->data; 
+			//$file = functions::save_base64_file ( $component->data->source->attr->src , $component->id , $this->epub->get_tmp_file());
+			$this->epub->files->others[] = $file;
+			$component->data->source->attr->src=$file->filename;
+			//new dBug($component); die;
+			$data=$component->data; 
+		if($component->data->video_type != 'popup'){
 
-		
-		$container ="<video  class='video' ";
-		if(isset($data->video->attr))
-			foreach ($data->video->attr as $attr_name => $attr_val ) {
-				$container.=" $attr_name='$attr_val' ";
+
+
+
+
+
+			
+			$container ="<video controls='controls'  class='video' ";
+			if(isset($data->video->attr))
+				foreach ($data->video->attr as $attr_name => $attr_val ) {
+					$container.=" $attr_name='$attr_val' ";
+				}
+
+			if(isset($data->video->css)){
+				$container.=" style=' ";
+				foreach ($data->video->css as $css_name => $css_val ) {
+					$container.="$css_name:$css_val;";
+				}
+				$container.="' "; 
 			}
 
-		if(isset($data->video->css)){
-			$container.=" style=' ";
-			foreach ($data->video->css as $css_name => $css_val ) {
-				$container.="$css_name:$css_val;";
+			$container.=" >";
+			
+			
+
+
+
+			$source ="
+			<source  class='video'  ";
+			if(isset($data->source->attr))
+				foreach ($data->source->attr as $attr_name => $attr_val ) {
+					$source.=" $attr_name='$attr_val' ";
+				}
+
+			if(isset($data->source->css)){
+				$source.=" style=' ";
+				foreach ($data->source->css as $css_name => $css_val ) {
+					$source.="$css_name:$css_val;";
+				}
+				$source.="' ";
 			}
-			$container.="' "; 
+
+
+			$source.=" />";
+
+			$container.= "$source</video>";
+
+
+
+			$this->html=str_replace('%component_inner%' ,$container, $this->html);
 		}
+		else{
+			
+			$video_id= "video".functions::get_random_string();
+			$video_container ="<video controls class='video' ";
+			if(isset($data->video->attr))
+				foreach ($data->video->attr as $attr_name => $attr_val ) {
+					$video_container.=" $attr_name='$attr_val' ";
+				}
 
-		$container.=" >";
-		
-		
-
-
-
-		$source ="
-		<source  class='video'  ";
-		if(isset($data->source->attr))
-			foreach ($data->source->attr as $attr_name => $attr_val ) {
-				$source.=" $attr_name='$attr_val' ";
+			if(isset($data->video->css)){
+				$video_container.=" style=' ";
+				foreach ($data->video->css as $css_name => $css_val ) {
+					$video_container.="$css_name:$css_val;";
+				}
+				$video_container.="width:100%;height:auto;' "; 
 			}
 
-		if(isset($data->source->css)){
-			$source.=" style=' ";
-			foreach ($data->source->css as $css_name => $css_val ) {
-				$source.="$css_name:$css_val;";
+			$video_container.=" >";
+
+			$video_source ="
+			<source  class='video'  ";
+			if(isset($data->source->attr))
+				foreach ($data->source->attr as $attr_name => $attr_val ) {
+					$video_source.=" $attr_name='$attr_val' ";
+				}
+
+			if(isset($data->source->css)){
+				$video_source.=" style=' ";
+				foreach ($data->source->css as $css_name => $css_val ) {
+					$video_source.="$css_name:$css_val;";
+				}
+				$video_source.="' ";
 			}
-			$source.="' ";
+
+
+			$video_source.=" />";
+
+			$video_container.= "$video_source</video>";
+
+
+			$container.=" 
+				
+				<img  class='popup ref-popup-rw' data-popup-target='$video_id' src='".$component->data->marker."' />
+				
+				<div class='widgets-rw popup-text-rw exclude-auto-rw' id='$video_id' style='width:500px; height:auto'>
+					 <button xmlns='http://www.w3.org/1999/xhtml' onclick='$(this).parent().remove();' class='ppclose' style='float:right;'>X</button>
+					 ".$video_container."
+				</div>
+			";
+
+			$this->html=str_replace('%component_inner%' ,$container, $this->html);
 		}
-
-
-		$source.=" />";
-
-		$container.= "$source</video>";
-
-
-
-		$this->html=str_replace('%component_inner%' ,$container, $this->html);
-		
 
 	}
 
@@ -646,11 +726,118 @@ class componentHTML {
 
 	}
 
+	public function htmlInner($component){
+
+		$data=$component->data;
+
+		$html_id= "html".functions::get_random_string();
+		$component->data->html_inner = html_entity_decode($component->data->html_inner,null,"UTF-8");
+		$container.=" 
+			<div id='$html_id' style='position:absolute; top:".$component->data->self->css->top.";left:".$component->data->self->css->left."'>
+				".$component->data->html_inner."
+			</div>
+	
+		
+		";
+
+		$this->html=$container;
+		
+	}
+
+	public function plinkInner($component){
+
+		$data=$component->data;
+
+		$plink_id= "plink".functions::get_random_string();
+		
+		$container.=" 
+			<div id='$plink_id'>
+				<a href='".$component->data->page_link.".html'>".$component->data->plink_data."</a>
+			</div>
+	
+		
+		";
+
+		$this->html=$container;
+		
+	}
+
+	public function latexInner($component){
+
+
+		$data=$component->data;
+
+		$latex_id= "latex".$component->id;
+
+		$component->data->html_inner = htmlentities($component->data->html_inner,null,"UTF-8");
+		$container.="
+			
+			<div id='$latex_id'>
+				\$".$component->data->html_inner."\$
+			</div>
+			<script type='text/javascript'>
+		       	
+					MathJax.Hub.Typeset('$latex_id');
+				
+			</script>
+
+			";
+
+
+
+
+
+		$this->html = str_replace('%component_inner%' ,$container, $this->html);
+	
+		
+	}
+
+	public function wrapInner($component){
+
+
+		$data=$component->data;
+
+		$wrap_id= "wrap".$component->id;
+
+		/*$component->data->html_inner = str_replace('&lt;', '<', $component->data->html_inner);
+		$component->data->html_inner = str_replace('&gt;', '>', $component->data->html_inner);
+		$component->data->html_inner = str_replace('&amp;', '&', $component->data->html_inner);*/
+		$component->data->html_inner = str_replace('<div>', '', $component->data->html_inner);
+		$component->data->html_inner = str_replace('</div>', '', $component->data->html_inner);
+		$component->data->html_inner = str_replace('<span>', '', $component->data->html_inner);
+		$component->data->html_inner = str_replace('</span>', '', $component->data->html_inner);
+		$component->data->html_inner = str_replace('<span style="line-height: 1.428571429;">', '', $component->data->html_inner);
+
+		$component->data->html_inner = html_entity_decode($component->data->html_inner,null,"UTF-8");
+		$container.="
+
+			<div id='".$wrap_id."'>
+				".$component->data->html_inner."
+			</div>
+			<script type='text/javascript'>
+		       	
+				$('.wrapReady.withSourceImage').slickWrap({
+                    sourceImage: true,cutoff: 180
+                });
+				
+			</script>
+
+			";
+
+
+
+
+
+		$this->html=$container;
+	
+		
+	}
+
 	public function linkInner($component){
 
 		$data=$component->data;
 		$container ="
-		<a  ";
+		<a  	";
 		if(isset($data->self->attr))
 			foreach ($data->self->attr as $attr_name => $attr_val ) {
 				$container.=" $attr_name='$attr_val' ";
@@ -668,33 +855,72 @@ class componentHTML {
 	}
 
 	public function imageInner($component){
+		if($component->data->img->image_type != 'popup'){
+			$file = functions::save_base64_file ( $component->data->img->src , $component->id , $this->epub->get_tmp_file());
+			$this->epub->files->others[] = $file;
+			$component->data->img->attr->src=$file->filename;
+			//new dBug($component); die;
+			$data=$component->data;
+			$container ="
+			<img  class='image' ";
+			if(isset($data->img->attr))
+				foreach ($data->img->attr as $attr_name => $attr_val ) {
+					$container.=" $attr_name='$attr_val' ";
+				}
 
-		$file = functions::save_base64_file ( $component->data->img->src , $component->id , $this->epub->get_tmp_file());
-		$this->epub->files->others[] = $file;
-		$component->data->img->attr->src=$file->filename;
-		//new dBug($component); die;
-		$data=$component->data;
-		$container ="
-		<img  class='image' ";
-		if(isset($data->img->attr))
-			foreach ($data->img->attr as $attr_name => $attr_val ) {
-				$container.=" $attr_name='$attr_val' ";
+			if(isset($data->img->css)){
+				$container.=" style=' ";
+				foreach ($data->img->css as $css_name => $css_val ) {
+					$container.="$css_name:$css_val;";
+				}
+				$container.="' ";
 			}
 
-		if(isset($data->img->css)){
-			$container.=" style=' ";
-			foreach ($data->img->css as $css_name => $css_val ) {
-				$container.="$css_name:$css_val;";
-			}
-			$container.="' ";
+
+			$container.=" 
+				/>
+			";
+
+			$this->html=str_replace('%component_inner%' ,$container, $this->html);
 		}
+		else{
+			$file = functions::save_base64_file ( $component->data->img->src , $component->id , $this->epub->get_tmp_file());
+			$this->epub->files->others[] = $file;
+			$component->data->img->attr->src=$file->filename;
+
+			$data=$component->data;
+			//var_dump($data->img->src);
+			//exit();
+			$image_id= "popup".functions::get_random_string();
+			$image_container ="
+			<img  class='image' src='".$data->img->src."'";
+
+			if(isset($data->img->css)){
+				$image_container.=" style=' ";
+				foreach ($data->img->css as $css_name => $css_val ) {
+					$image_container.="$css_name:$css_val;";
+				}
+				$image_container.="' ";
+			}
 
 
-		$container.=" 
-			/>
-		";
+			$image_container.=" 
+				/>
+			";
 
-		$this->html=str_replace('%component_inner%' ,$container, $this->html);
+
+			$container.=" 
+				
+				<img  class='popup ref-popup-rw' data-popup-target='$image_id' src='".$component->data->img->marker."' />
+				
+				<div class='widgets-rw popup-text-rw exclude-auto-rw' id='$image_id' style='width:300px; height:300px'>
+					 <button xmlns='http://www.w3.org/1999/xhtml' onclick='$(this).parent().remove();' class='ppclose' style='float:right;'>X</button>
+					 ".$image_container."
+				</div>
+			";
+
+			$this->html=str_replace('%component_inner%' ,$container, $this->html);
+		}
 		
 
 	}
@@ -706,7 +932,8 @@ class componentHTML {
 
 		if(isset($data->textarea->attr))
 			foreach ($data->textarea->attr as $attr_name => $attr_val ) {
-				$container.=" $attr_name='$attr_val' ";
+				if (trim(strtolower($attr_name))!='contenteditable')	
+					$container.=" $attr_name='$attr_val' ";
 			}
 
 		if(isset($data->textarea->css)){
@@ -731,13 +958,65 @@ class componentHTML {
 
 		
 
-
+		$data->textarea->val = html_entity_decode(str_replace(" ", "&nbsp; ",$data->textarea->val),null,"UTF-8");
 	
 
 		$this->html=str_replace(
 			array('%component_inner%', '%component_text%') , 
-			array($container, str_replace("\n", "<br/>", $this->textSanitize($data->textarea->val) ) )
+			array($container, str_replace("\n", "<br/>",   htmlspecialchars($this->textSanitize($data->textarea->val),null,"UTF-8")  ) )
 			, $this->html);
+
+
+
+	}
+
+	public function thumbInner($component){ 
+	
+		
+		$container ='
+		<script type="text/javascript">
+			$( document ).ready(function() {
+			  myScroll = new iScroll("wrapper", { scrollbarClass: "myScrollbar" });
+			});
+		</script>
+		<div id="container'.$component->id.'" class="widgets-rw panel-sliding-rw exclude-auto-rw" style="height:'.$component->data->somegallery->css->height.'; width:'.$component->data->somegallery->css->width.';"  >
+			<div id="wrapper"><div id="scroller">';
+		$container.=' <ul class="ul2" epub:type="list">
+		';
+		
+		if($component->data->slides->imgs)
+		foreach ($component->data->slides->imgs as $images_key => &$images_value) {
+			$new_file= functions::save_base64_file ( $images_value->src , $component->id .$images_key, $this->epub->get_tmp_file() );
+			$images_value->attr->src =  $new_file->filename;
+
+			$container .=' <li id="li-'.$component->id.$images_key.'" '.$size_style_attr.'><img ';
+			if(isset($images_value->attr))
+				foreach ($images_value->attr as $attr_name => $attr_val ) {
+					$container.=" $attr_name='$attr_val' ";
+				}
+
+			if(isset($images_value->css)){
+				$container.=" style=' " .$size_style;
+				foreach ($images_value->css as $css_name => $css_val ) {
+					$container.="$css_name:$css_val;";
+				}
+				$container.="' ";
+			}
+
+			$container .='/>
+			</li>';
+			$this->epub->files->others[] = $new_file;
+			unset($new_file);
+
+		}
+
+
+		$container .='  
+		</ul>
+               
+               </div></div>
+         </div>';
+         $this->html=str_replace('%component_inner%' ,$container, $this->html);
 
 
 
@@ -754,7 +1033,8 @@ class componentHTML {
 		<div id='".$component->id."' class='{$component->type}' ";
 		if(isset($component->data->self->attr))
 			foreach ($component->data->self->attr as $attr_name => $attr_val ) {
-				$container.=" $attr_name='$attr_val' ";
+				if (trim(strtolower($attr_name))!='contenteditable')
+					$container.=" $attr_name='$attr_val' ";
 			}
 
 		if(isset($component->data->self->css)){
