@@ -279,7 +279,7 @@ li.dropdown.user > ul.dropdown-menu li:first-child:hover {
   border-top: none;
 }
 .dropdown.user img {
-  margin-right: 5px;
+  margin-right: 0px;
   border-radius: 99px;
   height: 29px;
   width: 29px;

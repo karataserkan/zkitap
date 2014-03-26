@@ -230,10 +230,19 @@ $all_books= $this->getWorkspaceBooks($workspace->workspace_id);
 							<div class="col-sm-12">
 								<div class="page-header">
 										<h3 class="content-title pull-left"><?php _e('Kitaplarım') ?></h3>
+                                        
+										<div class="select2-container col-md-1 select2-allowclear pull-left" id="s2id_e3" style="margin-left:10px; margin-top:8px;">
+                                            <a href="javascript:void(0)" onclick="return false;" class="select2-choice" tabindex="-1">   
+                                             <span class="select2-chosen">Hepsi</span>
+                                             <span class="select2-arrow"><b></b></span>
+                                            </a>
+                                            <input class="select2-focusser select2-offscreen" type="text" id="s2id_autogen3">
+                                        </div>
+                                        
 										<a class="btn pull-right btn-primary" href="/book/bookCreate">
-							<i class="fa fa-plus-circle"></i>
-							<span>Kitap Ekle</span>
-						</a>
+											<i class="fa fa-plus-circle"></i>
+											<span>Kitap Ekle</span>
+										</a>
 									
 								</div>
 							</div>
@@ -245,11 +254,14 @@ $all_books= $this->getWorkspaceBooks($workspace->workspace_id);
 			  <div class="hidden-xs">
 				  <a href="#" class="btn btn-default" data-filter="*"><?php _e("Hepsi"); ?></a>
 <?php 
-$buttons=array('info','primary','success', 'warning', 'danger', 'inverse', 'primary', 'success', 'warning', 'danger', 'inverse');
+$buttons=array('default','primary','success', 'warning', 'danger', 'inverse', 'primary', 'success', 'warning', 'danger', 'inverse');
 $workspaces= $this->getUserWorkspaces();
 foreach ($workspaces as $key => $workspace) { ?>
 		<a href="#" class="btn btn-<?php echo $buttons[$key]; ?>" data-filter=".<?php echo $workspace['workspace_id']; ?>"><?php echo $workspace['workspace_name']; ?></a>		  
 <?php } ?>
+					<!-- <a href="#" class="btn btn-default" data-filter="*"><?php _e("Hepsi"); ?></a> -->
+				  <a href="#" class="btn btn-info" data-filter=".owner"><?php _e("Sahibi"); ?></a>
+				  <a href="#" class="btn btn-danger" data-filter=".editor"><?php _e("Editor"); ?></a>
 			  </div>
 			  <div class="visible-xs">
 				   <select id="e1" class="form-control">
@@ -259,19 +271,7 @@ foreach ($workspaces as $key => $workspace) { ?>
 						<option value=".<?php echo $workspace['workspace_id']; ?>"><?php echo $workspace['workspace_name']; ?></option>
 					<?php } ?>
 					</select>
-			  </div>
-		   </div>
-	</div>
-
-		<div class="row">
-			<div id="filter-controls" class="btn-group">
-			  <div class="hidden-xs">
-				  <!-- <a href="#" class="btn btn-default" data-filter="*"><?php _e("Hepsi"); ?></a> -->
-				  <a href="#" class="btn btn-info" data-filter=".owner"><?php _e("Sahibi"); ?></a>
-				  <a href="#" class="btn btn-danger" data-filter=".editor"><?php _e("Editor"); ?></a>
-			  </div>
-			  <div class="visible-xs">
-				   <select id="e1" class="form-control">
+                    <select id="e1" class="form-control">
 						<!-- <option value="*"><?php _e("Hepsi"); ?></option> -->
 						<option value=".owner"><?php _e("Sahibi"); ?></option>
 						<option value=".editor"><?php _e("Editor"); ?></option>
@@ -279,6 +279,8 @@ foreach ($workspaces as $key => $workspace) { ?>
 			  </div>
 		   </div>
 	</div>
+
+
 	<div class="separator"></div>
 	<div id="filter-items" class="row">
 <?php
