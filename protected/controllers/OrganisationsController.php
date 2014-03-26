@@ -32,7 +32,7 @@ class OrganisationsController extends Controller
 				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
-				'actions'=>array('create','update','workspaces','delWorkspaceUser','addWorkspaceUser','users','addUser','deleteOrganisationUser','account','bookCategories','deleteCategory','createBookCategory','updateBookCategory','templates','aCL','addACL'),
+				'actions'=>array('create','update','workspaces','delWorkspaceUser','addWorkspaceUser','users','addUser','deleteOrganisationUser','account','bookCategories','deleteCategory','createBookCategory','updateBookCategory','templates','aCL','addACL','publishedBooks'),
 				'users'=>array('@'),
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
@@ -175,6 +175,54 @@ class OrganisationsController extends Controller
 		$this->render('templates',array(
 			'templates'=>$templates,
 			'workspace_id'=>$id
+			));
+	}
+
+	public function getTemplateWorkspaces()
+	{
+		$workspace = Yii::app()->db->createCommand()
+		->select ("*")
+		->from("organisations_meta")
+		->where("meta=:meta", array(':meta' => 'template'))
+		->queryAll();
+
+		return $workspace;
+	}
+
+	public function getUserWorkspaces()
+	{
+		$userid=Yii::app()->user->id;
+		$templates=$this->getTemplateWorkspaces();
+
+		$workspacesOfUser= Yii::app()->db->createCommand()
+	    ->select("*")
+	    ->from("workspaces_users x")
+	    ->join("workspaces w",'w.workspace_id=x.workspace_id')
+	    ->join("user u","x.userid=u.id")
+	    ->where("userid=:id", array(':id' => $userid ) )->queryAll();
+	    
+	    foreach ($templates as $key => $template) {
+	    	foreach ($workspacesOfUser as $key => $workspace) {
+		    	if ($template['value']===$workspace['workspace_id']) {
+		    		unset($workspacesOfUser[$key]);
+		    	}
+	    	}
+	    }
+
+	    return $workspacesOfUser;	
+	}
+
+	public function actionPublishedBooks($id)
+	{
+		$workspaces=OrganisationWorkspaces::model()->findAll('organisation_id=:organisation_id',array('organisation_id'=>$id));
+		$qu='';
+		foreach ($workspaces as $key => $workspace) {
+			$qu.='workspace_id="'.$workspace->workspace_id.'" OR ';
+		}
+		$qu=substr($qu, 0, -3);
+			$books= Book::model()->findAll(' ('.$qu.') AND publish_time IS NOT NULL AND publish_time!=0');
+		$this->render('published_books',array(
+			'books'=>$books,
 			));
 	}
 

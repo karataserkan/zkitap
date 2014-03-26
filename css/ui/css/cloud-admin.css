@@ -3391,7 +3391,6 @@ textarea.input-group-sm > .input-group-btn > .btn {
 .nav > li > a:hover,
 .nav > li > a:focus {
   text-decoration: none;
-  background-color: #eeeeee;
 }
 .nav > li.disabled > a {
   color: #999999;
@@ -3406,7 +3405,6 @@ textarea.input-group-sm > .input-group-btn > .btn {
 .nav .open > a,
 .nav .open > a:hover,
 .nav .open > a:focus {
-  background-color: #eeeeee;
   border-color: #5e87b0;
 }
 .nav .nav-divider {
@@ -6379,7 +6377,6 @@ fieldset[disabled] .btn-yellow.active {
   margin-left: 50px !important;
 }
 .margin-top-50 {
-  margin-top: 50px !important;
 }
 .margin-top-100 {
   margin-top: 100px !important;
@@ -6421,6 +6418,10 @@ fieldset[disabled] .btn-yellow.active {
 /* Content */
 #main-content {
   margin-left: 250px;
+  -webkit-transition: margin 0.3s;
+  -moz-transition: margin 0.3s;
+  -o-transition: margin 0.3s;
+  transition: margin 0.3s;
 }
 /* Content */
 #content {
@@ -8183,13 +8184,15 @@ div[data-role="editor-toolbar"] {
   text-align: center;
 }
 .login-box {
-  background: url("../img/lockscreen.png") repeat scroll 0 0 rgba(0, 0, 0, 0);
-  color: #FFFFFF;
-  border-radius: 7px 7px 7px 7px;
-  margin: 50px auto;
-  padding: 55px 60px 60px;
-  position: relative;
-  min-height: 300px;
+	background: rgba(255, 255, 255, 0.1);
+	color: #FFFFFF;
+	border-radius: 10px;
+	padding-left: 20px;
+	padding-right: 20px;
+	padding-top: 30px;
+	padding-bottom: 30px;
+	position: relative;
+	min-height: 300px;
 }
 .login-box input,
 .login-box textarea {
@@ -8997,3 +9000,1160 @@ ul.stats li small {
 .well.well-bottom {
   border-radius: 0 0 4px 4px;
 }
+
+
+
+
+
+
+/* ADDITIONAL PART ************************************************************************************************/
+
+
+/** EDITOR LOGIN PAGE **/
+
+
+.login_page_container {
+  width:100%;
+  height:100%;
+  min-width:1100px;
+/**  background-image:url(../../../css/ui/img/login_background.jpg);
+  background-attachment:fixed;
+  background-size:cover; **/
+  display: -webkit-box;
+  -webkit-box-pack: start;
+  -webkit-box-align: center;
+  position:fixed;
+}
+
+.login_page_container a{
+	text-decoration:none !important;
+}
+
+.login_overlay {
+	background-color:rgba(0, 0, 0, 1); 
+	position:fixed; 
+	z-index:-10; 
+	width:100%; 
+	height:100%;
+	background-image:url(../../../css/brands/linden/login_overlay.png);	
+	opacity:0.5;
+  	filter:alpha(opacity=50);
+}
+
+.register_link {
+	text-align:center;
+	margin-bottom:15px;	
+}
+
+.register_link a {
+	color:#59BEFF !important;	
+}
+
+.login_page_slogan_part_container {
+	height:482px; 
+	float:left; 
+	opacity:0.99;	
+}
+
+
+
+.login_submit {
+	font-size:18px;
+	font-weight:bold;
+}
+
+.login_contact {
+	position: fixed;
+	width: 600px;
+	margin-left: auto;
+	margin-right: auto;
+	left: 0;
+	right: 0;
+	height: 100px;
+	text-align: center;
+	color: #fff;
+	font-size: 15px;
+	padding-top: 30px;
+	z-index: 0;
+	bottom: 0;
+	text-shadow: 1px 1px 10px #000;
+}
+
+.login_contact a {
+	color:#59BEFF;	
+}
+
+.login-helpers a {
+	color:#59BEFF !important;	
+}
+
+
+/** END OF EDITOR LOGIN PAGE **/
+
+
+
+/** END OF EDITOR MYBOOKS PAGE **/
+
+.mybooks_page_container {
+  width:100%;
+  height:100%;
+  min-width:1100px;
+  background-image:url(../../../css/ui/img/market_page_container_background.png);
+  background-repeat:repeat;
+  position:absolute;
+  margin-top:50px;
+}
+
+/** END OF EDITOR MYBOOKS PAGE **/
+
+
+
+/** READER MARKET PAGE **/
+
+
+
+.reader_market_page_row {
+	border-bottom: 1px solid #D6D6D6;
+	border-top: 1px solid #FFFFFF;
+	margin-left:25px;
+	margin-right:25px;
+	padding:10px;
+}
+
+
+.container > .row > .reader_market_page_row:first-child {
+	border-top:none;	
+}
+
+.container > .row > .reader_market_page_row:last-child {
+	border-bottom:none;	
+}
+
+
+li.reader_book_category {
+	text-shadow: 0px 1px 1px #FFFFFF;
+	color: #918F8F;
+	font-size: 30px;
+	margin-right:20px;
+}
+
+div.reader_book_category {
+	text-shadow: 0px 1px 1px #FFFFFF;
+	color: #918F8F;
+	font-size: 30px;
+	margin-right: 10px;
+	float:left;
+}
+
+.reader_book_card {
+	width:198px;
+	height:330px;
+	background-color:#fff;
+	-webkit-box-shadow: 0 1px 2px 0 #AAAAAA;
+	box-shadow: 0 1px 2px 0 #AAAAAA;
+	border-radius:5px;
+	float:left;
+	margin-right:20px;
+	margin-bottom:20px;
+}
+
+.reader_book_card_book_cover {
+	width:198px;
+	height:264px;
+	border-top-right-radius:5px;
+	border-top-left-radius:5px;
+}
+
+.reader_book_card_book_cover img{
+	border-top-left-radius:5px;
+	border-top-right-radius:5px;
+}
+
+.reader_book_card_info_container {
+	width:198px;
+	height:68px;
+	position:absolute;
+}
+
+.reader_market_book_name {
+	width:175px;
+	height:30px;
+	float:left;
+	padding-top:5px;
+	padding-left:5px;
+	font-size:16px;
+	color:#58585b;
+	font-style:normal;
+	white-space:nowrap;
+	overflow:hidden;
+	text-overflow:ellipsis;
+}
+
+.reader_market_page_row .nav-tabs {
+	border-bottom:none;	
+}
+
+
+
+
+.reader_market_page_row .nav-tabs > li > a {
+	text-shadow: 0px 1px 1px #FFFFFF;
+	color:#2880b9;
+}
+
+.reader_market_page_row .nav-tabs > li.active > a {
+	background-color: #2880b9;
+	border: none;
+	border-radius: 4px;
+	color: #fff;
+	text-shadow:none;
+}
+
+.reader_market_page_row .nav-tabs > li > a:hover {
+	background-color:#fff;
+	border-radius:4px;
+}
+
+.reader_market_page_row .nav-tabs > li.active > a:hover {
+	background-color: #2880b9;
+	color: #fff;
+}
+
+.reader_book_card_options_button {
+	width:23px;
+	height:25px;
+	float:right;
+    background-image:url(../../../css/ui/img/reader_book_card_options_button.png);
+	background-size:5px;
+	background-repeat:no-repeat;
+	background-position:center;
+	padding-top:20px;
+	padding-bottom:12px;
+	background-color:transparent;
+	border:none;
+	cursor:pointer;
+	display:none;
+}
+
+
+.reader_book_card_options_button:hover {
+	background-color:#f9f9f9;
+}
+
+.reader_book_card_writer_name {
+	width:130px;
+	height:30px;
+	float:left;
+	padding-bottom:-5px;
+	padding-left:5px;
+	font-size:13px;
+	color:#939597;
+	font-style:normal;
+	white-space:nowrap;
+	overflow:hidden;
+	text-overflow:ellipsis;
+	bottom: 0;
+	position: inherit;
+	line-height: 2.3em;
+}
+
+.reader_book_price {
+	border-left: 1px solid #e6e7e8;
+	float: right;
+	font-size: 15px;
+	bottom: 0;
+	right: 0;
+	position: inherit;
+	padding-right: 5px;
+	padding-left: 5px;
+	margin-bottom: 5px;	
+}
+
+.reader_market_page_row .panel {
+	margin:0;
+	background-color:transparent;
+	box-shadow:none;
+	-webkit-box-shadow:none;
+	border: 1px solid transparent;
+	border-radius: 4px;	
+}
+
+
+.reader_market_page_row .panel-body {
+	padding:0;
+}
+
+
+
+.reader_market_page_row .box-body .btn-group .hidden-xs a.btn {
+	float:left;
+	margin-right:10px;
+}
+
+
+.reader_market_page_row div#filter-items {
+	margin-left:5px;	
+}
+
+
+
+.market_page_book_filter {
+	overflow:inherit !important;	
+}
+
+
+/** END OF READER MARKET PAGE **/
+
+/** READER BOOK INFO PAGE **/
+
+.book_info_details_container {
+	border-bottom:1px solid #D6D6D6;	
+}
+
+.book_info_page_container {
+  width:100%;
+  height:100%;
+  min-width:1100px;
+  background-image:url(../../../css/ui/img/market_page_container_background.png);
+  background-repeat:repeat;
+  position:absolute;
+  margin-top:50px;
+}
+
+.reader_book_info_container {
+	width:1000px;
+	margin-left:auto;
+	margin-right:auto;
+	margin-top:30px;
+}
+
+.book_info_book_cover_container {
+	width:206px;
+	height:320px;
+	float:left;	
+}
+
+.book_info_book_cover {
+	width:206px;
+	height:272px;
+	margin-bottom:5px;
+	background-image:url(../../../css/ui/img/book_info_sample_book_cover.png);
+	background-size: cover;
+	background-position: center;
+	border: 4px solid #fff;
+	border-radius: 5px;
+	-webkit-box-shadow: 0 0 7px 0 #A6A6A6;
+	box-shadow: 0 0 7px 0 #A6A6A6;
+}
+
+.stars_rating_of_the_book {
+	float:left;
+}
+
+.number_rating_of_the_book {
+	float: left;
+	font-size: 16px;
+	color: #C2C2C2;
+	text-shadow: 0px 1px 1px #FFFFFF;
+	margin-left:10px;
+}
+
+
+.book_info_details_right_part {
+	width:774px;
+	float:left;
+	margin-left:20px;
+}
+
+.book_info_details_row {
+	border-top:1px solid #fff;
+	border-bottom:1px solid #D6D6D6;
+	padding-bottom:20px;	
+}
+
+
+.book_info_details_right_part > .book_info_details_row:first-child {
+	border-top:none;	
+}
+
+.book_info_details_right_part > .book_info_details_row:nth-child(2) {
+	border-bottom:none;	
+}
+
+
+h1.book_info_the_name_of_the_book {
+	color:#58585b;
+	margin:0;
+	text-shadow: 0px 1px 1px #FFFFFF;
+	float:left;
+}
+
+.book_info_date {
+	float:right;
+	color:#939597;
+	border-right:1px solid #BABCBE;
+	padding-right:10px;
+	font-size:15px;
+	text-shadow: 0px 1px 1px #FFFFFF;
+}
+
+.book_info_page {
+	float:right;
+	color:#939597;
+	padding-left:10px;
+	font-size:15px;
+	text-shadow: 0px 1px 1px #FFFFFF;
+}
+
+
+
+h3.book_info_the_name_of_the_writer {
+	color:#939597;
+	margin:0;
+	text-shadow: 0px 1px 1px #FFFFFF;
+	float:left;
+	margin-top:10px;
+}
+
+
+button.book_info_add_to_library_button {
+	margin-left:10px;	
+}
+
+
+.book_info_description {
+	width:78%;
+	height:145px;
+	float:left;
+	margin-top:20px;
+	color: #808284;
+	font-size:16px;
+	border-right:1px solid #D6D6D6;
+	text-shadow: 0px 1px 1px #FFFFFF;
+	overflow-y: auto;
+	overflow-x: hidden;
+}
+
+
+span.book_info_titles {
+	font-size:18px;	
+	text-shadow: 0px 1px 1px #FFFFFF;
+}
+
+.book_info_rate_the_book {
+	width: 22%;
+	height: 145px;
+	float: right;
+	margin-top: 20px;
+	border-left: 1px solid #FFF;
+}
+
+
+.book_rater_stars {
+	text-align: center;
+	margin-top: 40px;
+}
+
+.book_info_comments_container {
+	width:1000px;
+	padding-top:20px;
+}
+
+
+.user_comment_container {
+	width:1000px;
+	border-bottom:1px solid #E4E4E4;
+	margin-top:15px;
+	padding-bottom:15px;
+	
+}
+
+
+.user_comment_container:last-child {
+	border-bottom:none;
+}
+
+
+.user_comment_avatar {
+	float:left;
+}
+
+.user_comment_avatar img{
+	width:75px;
+	height:75px;
+	border:5px solid #fff;
+	border-radius:100%;
+	-webkit-box-shadow:0 2px 6px 0 #C2C2C2;
+	box-shadow:0 2px 6px 0 #C2C2C2;
+}
+
+.user_comment_details {
+	float:left;
+	margin-left:10px;
+}
+
+.user_comment_username {
+	color:#808284;
+	text-shadow: 0px 1px 1px #FFFFFF;
+}
+
+.user_comment_user_rating {
+	float:left;
+	padding-right:10px;
+}
+
+
+.user_comment_date {
+	float:left;
+	padding-left:10px;
+	border-left:1px solid #A7A7A7;
+	text-shadow: 0px 1px 1px #FFFFFF;
+	color: #808284;
+}
+
+
+.user_comment_content {
+	width:915px;
+	margin-top:15px;
+	color:#808284;
+	font-size:15px;
+	text-shadow: 0px 1px 1px #FFFFFF;
+}
+
+
+.book_info_comment_box {
+	padding-top: 20px;
+	border-top: 1px solid #fff;	
+}
+
+
+.book_info_comment_box textarea{
+	max-height: 150px;
+	max-width: 1000px;
+	margin:10px 0;
+	-webkit-box-shadow: 0 1px 0 0 #FFFFFF;
+	box-shadow: 0 1px 0 0 #FFFFFF;
+
+}
+
+/** END OF READER BOOK INFO PAGE **/
+
+
+/** READER BOOK MY LIBRARY PAGE **/
+
+.library_page_container {
+  width:100%;
+  height:100%;
+  min-width:1100px;
+  position:absolute;
+  margin-top:50px;
+}
+
+.reader_library_page_row {
+	border-bottom: 1px solid #D6D6D6;
+	border-top: 1px solid #FFFFFF;
+	margin-left:25px;
+	margin-right:25px;
+	padding:10px;
+}
+
+
+.reader_book_fav {
+	border-left: 1px solid #e6e7e8;
+	float: right;
+	font-size: 17px;
+	color: #FFAD00;
+	bottom: 0;
+	right: 0;
+	position: inherit;
+	padding-right: 5px;
+	padding-left: 5px;
+	margin-bottom: 5px;
+	cursor:pointer;	
+}
+
+.reader_library_page_row .reader_book_card_writer_name {
+	width:170px !important;	
+}
+
+
+.navbar_search {
+	height: 100%;
+	color: #fff;
+	float: left;
+	margin-left: 10px;
+	font-size: 20px;
+	top: 0;
+	position: absolute;
+	padding: 14px 10px 10px 10px;
+	cursor:pointer;
+}
+
+.navbar_search:hover {
+	background-color:#005F9B;	
+}
+
+
+
+/** END OF READER BOOK MY LIBRARY PAGE **/
+
+
+
+
+
+/**  READ PAGE ***********************************/
+
+
+
+.reader_book_name {
+	float:left;
+	line-height:2.6em;
+	color:#666;
+	margin-left:8px;
+}
+
+
+.reader_info_header {
+	min-height: 40px !important;
+	position: fixed !important;
+	left: 0;
+	right: 0;
+	z-index: 1;
+}
+
+
+.reader_info_header .btn-group {
+	float:right;	
+}
+
+.reder_book_name_data {
+	font-style:italic;	
+}
+
+
+
+
+
+.page_next_previous_buttons a:first-child {
+	border-right:0 !important;
+
+}
+
+.page_next_previous_buttons a:nth-child(2) {
+	border-left:0 !important;
+}
+
+.page_next_previous_buttons i {
+	font-size:22px !important;
+}
+
+
+
+.reader_page_container {
+	width:100%;
+	left:0;
+	right:0;
+	bottom:0;
+	top:0;
+	position:fixed;
+	margin-top:50px;
+	background-color:#0B0D0C;
+}
+
+.reader_page {
+	width:1024px;
+	height:768px;
+	background-color:#FFF;
+	border:1px solid #DADADA;
+	margin-left:auto;
+	margin-right:auto;
+	margin-bottom:20px;
+}
+
+
+.book_info_container {
+	width:225px;
+	margin-left:auto;
+	margin-right:auto;
+	margin-top:13px;
+	position:relative;
+}
+
+
+.reader_book_cover_thumbnail {
+	width:200px;
+	height:150px;
+	border:1px solid #cdd2d2;	
+	text-align:center;
+	color:#cdd2d2;
+	font-size:30px;
+		
+	background: #fff;
+
+
+}
+	
+
+
+
+.reader_book_info {
+	width:200px;
+	color:#cdd0d8;
+}
+
+.reader_book_info li{
+	margin-top:10px;
+	margin-bottom:10px;
+
+}
+
+.book_info_container ul {
+	padding-left:0;
+}
+
+
+
+li.reader_book_info_detail {
+	overflow-x: hidden;
+	overflow-y: visible;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	color:#999;
+	font-weight:800;
+}
+
+
+.reader_book_info_detail_data {
+	font-weight:normal;	
+}
+
+
+.vertical-divider{
+	width:200px;
+	height:1px;
+	background-color:#cdd2d2;
+ }
+
+ 
+ 
+.linden_logo {
+	width:100px;
+	height:50px;
+	background-image:url(../../img/logo/linden.png);
+	background-position:center;
+	background-size:inherit;
+	background-repeat:no-repeat;
+	margin-left:auto;
+	margin-right:auto;	
+}
+
+
+li.user {
+	height: 50px;
+	float: right;
+	line-height: 3.5em;
+	list-style: none;
+}
+
+#header-user {
+	right:0;
+	position:absolute;
+}
+
+#header-user:hover {
+	background-color:#005F9B;
+	text-decoration:none;
+}
+
+
+.reader_toc_button {
+	font-size: 15px;
+	padding-top: 2px;
+	padding-bottom: 3px;
+	border-top-right-radius:0;	
+	border-bottom-right-radius:0;
+	border-right:0;
+}
+
+.reader_toc_dropdown {
+	max-width: 400px !important;
+	border:0 !important;
+	border-top-right-radius:0;
+	margin-right:68px;
+}
+
+.reader_toc_dropdown li a {
+	text-overflow: ellipsis;
+	overflow:hidden;
+	background-color:#fff;
+	border-bottom:0;
+}
+
+
+
+.reader_toc_dropdown li:first-child a{
+	border-top:0;
+}
+
+
+span.reader_toc_dropdown_page_numbers {
+	display: inline-block;
+	left: 0;
+	width: 50px;
+	text-align: center;
+	color: #525252;
+	margin-left: -10px;
+	font-weight: bold;
+}
+
+
+
+.no_margin {
+	margin-left:0 !important;
+	margin-top:0 !important;	
+}
+
+
+.main_slider_container {
+	height:100% !important;
+	overflow:hidden;	
+}
+
+
+
+.navbar-right {
+	position: absolute;
+	color: #FFFFFF;
+	height: 100%;
+	top: 0;
+	cursor: pointer;
+	right: 0;
+}
+
+.navbar-right > li{
+	color: #fff;
+	cursor: pointer;
+	display: block;
+	padding: 0 10px;
+	position: relative;
+	float: right;
+	font-size: 26px;
+	height: 100%;
+	padding-top: 12px;
+}
+
+
+
+
+
+.read_page_user {
+	padding:0 !important;
+	margin:0 !important;	
+}
+
+
+
+.reader_info_dropdown li:first-child {
+	background-color:#fcfcfc;
+	color:#666;
+	padding:10px;
+	font-weight:bold;	
+}
+
+
+.reader_toc_dropdown li:first-child {
+	background-color:#fcfcfc;
+	color:#666;
+	padding:10px;
+	font-weight:bold;
+}
+
+.reader_info_dropdown li:hover {
+	border:none !important;	
+}
+
+.reader_toc_dropdown li:first-child:hover {
+	border:none;
+}
+
+span.okutus_info_linden {
+	height: 200px;
+	width: 300px;
+	position: relative;
+	display: block;
+	background-image: url(../../../css/ui/img/okutus_info_linden.png);
+	background-repeat: no-repeat;
+	background-size: 200px;
+	background-position: center;
+}
+
+
+.read_page_thumbnails {
+	width: 150px;
+	height: 40px;
+	background-color: #363636;
+	position: absolute;
+	bottom: 0;
+	z-index: 9999;
+	margin-left: auto;
+	margin-right: auto;
+	left: 0;
+	right: 0;
+	text-align: center;
+	line-height: 2.1em;
+	font-size: 20px;
+	color: #fff;
+	-webkit-transition: all 0.3s;
+	-moz-transition: all 0.3s;
+	-o-transition: all 0.3s;
+	transition: all 0.3s;
+	display:none;
+}
+
+header.read_page_navbar i.fa, span.sb-icon-search {
+	opacity:0.8;	
+}
+
+.navbar_page_numbers {
+	font-size:16px !important;	
+}
+
+
+/**  END OF READ PAGE ***********************************/
+
+
+
+
+/**  NOBOOK PAGE ***********************************/
+
+.reader_nobook_page_row {
+	margin-left:25px;
+	margin-right:25px;
+	padding:10px;
+	text-align:center;
+}
+
+
+.reader_nobook_page_row button {
+	margin-left: auto;
+	margin-right: auto;
+	float: none !important;
+	font-size:25px;
+}
+
+.nobook_smiley {
+	height:224px;
+	background-image: url(../../../css/ui/img/nobook_smiley.png);
+	background-repeat:no-repeat;
+	background-position:center;
+	margin-top: 100px;
+}
+
+.nobook_text {
+	text-align:center;
+	font-size:30px;	
+	text-shadow: 0px 1px 1px #FFFFFF;
+	color: #939597;
+	margin:25px auto;
+}
+
+
+
+
+/**  END OF NOBOOK PAGE ***********************************/
+
+
+
+
+
+
+/**  MY PROFILE PAGE ***********************************/
+
+
+.reader_myprofile_page_row {
+	margin-left:25px;
+	margin-right:25px;
+	padding:10px;
+}
+
+.myprofile_information_container {
+	width: 875px;
+	margin: 30px auto;
+}
+
+.myprofile_picture_container {
+	float:left;
+}
+
+.change_profile_picture{
+	width: 250px;
+	height: 250px;
+	border-radius: 100%;
+	background: rgba(0, 0, 0, 0);
+	position: absolute;
+	z-index: 9999;
+	-webkit-transition: all 0.3s;
+	-moz-transition: all 0.3s;
+	-o-transition: all 0.3s;
+	transition: all 0.3s;
+	text-align: center;
+	font-size: 50px;
+	color: #fff;
+	padding-top: 100px;
+	opacity:0;
+	border: 5px solid #fff;
+}
+
+.change_profile_picture a{
+	color:#fff;
+}
+
+.change_profile_picture:hover {
+	background: rgba(0, 0, 0, 0.5);
+	opacity:1;
+}
+
+.myprofile_picture_container img {
+	width: 250px;
+	height: 250px;
+	border: 5px solid #fff;
+	border-radius: 100%;
+	-webkit-box-shadow: 0 2px 6px 0 #C2C2C2;
+	box-shadow: 0 2px 6px 0 #C2C2C2;	
+}
+
+
+.myprofile_information_part {
+	float:left;
+	margin-left:20px;
+	width: 605px;
+}
+
+.myprofile_information_components {
+	width:100%;
+	text-shadow: 0px 1px #FFFFFF;
+	color: #918F8F;
+	font-size: 18px;
+	float:left;
+	border-top: 1px solid #fff;
+	border-bottom: 1px solid #D6D6D6;
+	padding-top:10px;
+}
+
+.myprofile_information_part > .myprofile_information_components:first-child {
+	border-top:none;
+	padding-bottom:10px;
+}
+
+.myprofile_information_part > .myprofile_information_components:first-child > button {
+	float:right !important;
+}
+
+.myprofile_information_part > .myprofile_information_components:last-child {
+	border-bottom:none;
+}
+
+.myprofile_information_components > div[contenteditable] {
+	float: left;
+	white-space: nowrap;
+	width: 300px;
+	border-radius: 3px;
+	padding-left: 7px;
+	overflow: hidden;	
+}
+
+.myprofile_information_components > div[contenteditable]:hover {
+	display:block;
+}
+
+
+.myprofile_info_edit i {
+	float:left;
+	margin-right:5px;
+	margin-top:5px;
+	opacity:0;
+	-webkit-transition: all 0.3s;
+	-moz-transition: all 0.3s;
+	-o-transition: all 0.3s;
+	transition: all 0.3s;
+}
+
+.myprofile_info_edit:hover i {
+	opacity:1;
+}
+
+
+
+
+.myprofile_information_components p > i {
+	float: right;
+	line-height: 1.4em;
+	margin-right: 5px;	
+	color:#918F8F;
+}
+
+.myprofile_information_components p {
+	float:left;
+	width: 200px;
+	color: #333;	
+}
+
+.myprofile_information_part > .myprofile_information_components:last-child > button {
+	float:left !important;
+}
+
+.myprofile_information_components a.accordion-toggle {
+	text-align:center;
+	color:#918F8F;
+	font-size:18px !important;	
+}
+
+
+.myprofile_books {
+	border-top: 1px solid #D6D6D6;
+	padding-top:20px;
+	margin-top:30px;
+}
+
+
+.myprofile_books p {
+	text-shadow: 0px 1px 1px #FFFFFF;
+	color: #918F8F;
+	font-size: 20px;
+}
+
+
+.myprofile_information_components input {
+	border:1px solid #D6D6D6 !important;	
+}
+
+
+form#myprofile_info_edit > input {
+	border:0;
+	background-color:transparent;
+	width:380px;
+	padding-left:10px;
+	border:none !important;
+	border-radius:3px;
+	color:#333;	
+}
+
+
+
+/**  END OF MY PROFILE PAGE ***********************************/
+
+video#bgvid {
+	position: fixed; 
+	right: 0; 
+	bottom: 0;
+	top:0;
+	min-width: 100%; 
+	min-height: 100%;
+	width: auto; 
+	height: auto; 
+	z-index: -100;
+	background: url(../../../js/login_back.png)  no-repeat;
+	background-size: cover;
+}
+
+/* END OF ADDITIONAL PART ************************************************************************************************/
