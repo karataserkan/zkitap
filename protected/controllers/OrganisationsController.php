@@ -55,8 +55,10 @@ class OrganisationsController extends Controller
 
 	public function actionAddACL($id)
 	{
-		if (isset($_POST['name']) & isset($_POST['val1']) & isset($_POST['val2']) & isset($_POST['type'])) {
-			$this->addACL($id,$_POST['name'],$_POST['val1'],$_POST['val2'],$_POST['type']);
+		if (isset($_POST['acl'])) {
+			$data=json_decode($_POST['acl'],true);
+
+			$this->addACL($id,$data[0]['value'],$data[2]['value'],$data[3]['value'],$data[1]['value'],$data[4]['value']);
 		}
 		
 	}
@@ -70,8 +72,7 @@ class OrganisationsController extends Controller
 		 return $acls['value'];
 	}
 
-	public function addACL($id,$name,$val1,$val2,$type){
-		
+	public function addACL($id,$name,$val1,$val2,$type,$comment){
 		$Acl=$this->getACL($id);
 		if ($Acl) {
 			$ACLs=json_decode($Acl);
@@ -86,11 +87,15 @@ class OrganisationsController extends Controller
 ,			));
 			$ACLs=array();
 		}
+		$acl_id=functions::new_id(10);
+		$newAcl['id']=$acl_id;
+		$newAcl['name']=$name;
+		$newAcl['type']=$type;
+		$newAcl['val1']=$val1;
+		$newAcl['val2']=$val2;
+		$newAcl['comment']=$comment;
 
-		$ACLs[]['name']=$name;
-		$ACLs[]['type']=$type;
-		$ACLs[]['val1']=$val1;
-		$ACLs[]['val2']=$val2;
+		$ACLs[]=$newAcl;
 
 		$lastACLs=json_encode($ACLs);
 
@@ -100,8 +105,6 @@ class OrganisationsController extends Controller
 										'organisation_id=:organisation_id AND meta=:meta',
 										array(':organisation_id'=>$id,':meta'=>'ACL'));
 
-
-		
 	}
 
 	/**
