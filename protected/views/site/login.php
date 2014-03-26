@@ -13,28 +13,30 @@ $this->breadcrumbs=array(
 
 
 
-<!-- PAGE -->
-	<section>
-			<!-- HEADER -->
-			<header>
-				<!-- NAV-BAR -->
-				<div class="container">
-					<div class="row">
-						<div class="col-md-4 col-md-offset-4">
-							<div id="logo">
-								<a href="index.html"><img src="<?php echo Yii::app()->request->baseUrl; ?>/css/ui/img/logo/logo.png" height="40" alt="logo name" /></a>
-							</div>
-						</div>
-					</div>
-				</div>
-				<!--/NAV-BAR -->
-			</header>
-			<!--/HEADER -->
-			<!-- LOGIN -->
-			<section id="login_bg" class="visible">
-				<div class="container">
-					<div class="row">
-						<div class="col-md-4 col-md-offset-4">
+<div class="login_page_container">    
+
+
+<video autoplay loop poster="../../../css/brands/linden/login_back.png" id="bgvid">
+<source src="../css/brands/linden/back.webm" type="video/webm">
+<source src="../css/brands/linden/back.mp4" type="video/mp4">
+</video>
+
+   <div class="login_overlay"></div>     
+
+<div class="col-lg-12">
+<div class="row">
+<div class="col-md-1"></div>
+
+
+<div class="col-md-7" style="height:725px;">
+        <div class="login_page_reader_logo"></div>
+        <div class="login_page_slogan"></div>
+</div>
+
+
+<div class="col-md-3">
+
+						<section id="login_bg" class="visible">
 							<div class="login-box">
 								
 							<?php $form=$this->beginWidget('CActiveForm', array(
@@ -44,40 +46,32 @@ $this->breadcrumbs=array(
 									'validateOnSubmit'=>true,
 								),
 							)); ?>
-	
-									<h2 class="bigintro">Sign In</h2>
-									<div class="divide-40"></div>
+
 									<form role="form">
-
-									
-
-									
 									  <div class="form-group">
 										<label for="exampleInputEmail1"><?php echo $form->labelEx($model,'email'); ?></label>
 										<i class="fa fa-envelope"></i>
-										<?php echo $form->textField($model,'email'); ?>
-										
+										<?php echo $form->textField($model,'email'); ?>										
 									  </div>
 									  
 									  <div class="form-group"> 
 										<label for="exampleInputPassword1"><?php echo $form->labelEx($model,'password'); ?></label>
 										<i class="fa fa-lock"></i>
-										<?php echo $form->passwordField($model,'password'); ?>
-										
+										<?php echo $form->passwordField($model,'password'); ?>										
 									  </div>
 									  
 									  <div class="form-group">
-									  	
-									  	
-									  	<label for="ytLoginForm_rememberMe"><input id="ytLoginForm_rememberMe" type="checkbox"  class="uniform"  value="0" name="LoginForm[rememberMe]"><?php _e("Beni Hatırla"); ?></label>
+									  <label for="ytLoginForm_rememberMe"><input id="ytLoginForm_rememberMe" type="checkbox"  class="uniform"  value="0" name="LoginForm[rememberMe]"><?php _e("Beni Hatırla"); ?></label>
 									  </div>
 
 									  <div class="form-group">
-										<button type="submit" class="btn btn-danger"><?php _e("Giriş"); ?></button>
-										
+										<button type="submit" class="btn btn-danger"><?php _e("Giriş"); ?></button>										
 									  </div>
-									
 									</form>
+                                    
+                                    
+                                    
+                                    
 									<!-- SOCIAL LOGIN -->
 									<div class="divide-20"></div>
 									<div class="center">
@@ -96,6 +90,8 @@ $this->breadcrumbs=array(
 										</a>
 									</div>
 									<!-- /SOCIAL LOGIN -->
+                                    
+                                    
 									<div class="login-helpers">
 										<a href="#" onclick="swapScreen('forgot_bg');return false;">Forgot Password?</a> <br>
 										Don't have an account with us? <a href="#" onclick="swapScreen('register_bg');return false;">Register
@@ -103,21 +99,18 @@ $this->breadcrumbs=array(
 									</div>
 								<?php $this->endWidget(); ?>
 
-							</div>
-						</div>
-					</div>
-				</div>
-			</section>
+							</div>						
+						</section>
 			<!--/LOGIN -->
+            
+            
+            
 			<!-- REGISTER -->
 			<section id="register_bg" class="font-400">
 				<div class="container">
 					<div class="row">
-						<div class="col-md-4 col-md-offset-4">
+						<div class="">
 							<div class="login-box">
-								<h2 class="bigintro">Register</h2>
-								<div class="divide-40"></div>
-								
 								
 								<?php $form=$this->beginWidget('CActiveForm', array(
 									'id'=>'user-form',
@@ -204,7 +197,7 @@ $this->breadcrumbs=array(
 							
 								
 
-								<!-- SOCIAL REGISTER -->
+								<!-- SOCIAL REGISTER 
 								<div class="divide-20"></div>
 								<div class="center">
 									<strong>Or register using your social account</strong>
@@ -221,7 +214,9 @@ $this->breadcrumbs=array(
 										<i class="fa fa-google-plus"></i>
 									</a>
 								</div>
-								<!-- /SOCIAL REGISTER -->
+								/SOCIAL REGISTER -->
+                                 
+                                 
 								<div class="login-helpers">
 									<a href="#" onclick="swapScreen('login_bg');return false;"> Back to Login</a> <br>
 								</div>
@@ -231,14 +226,14 @@ $this->breadcrumbs=array(
 				</div>
 			</section>
 			<!--/REGISTER -->
+            
+            
 			<!-- FORGOT PASSWORD -->
 			<section id="forgot_bg">
 				<div class="container">
 					<div class="row">
-						<div class="col-md-4 col-md-offset-4">
+						<div class="">
 							<div class="login-box">
-								<h2 class="bigintro">Reset Password</h2>
-								<div class="divide-40"></div>
 								<form role="form">
 								  <div class="form-group">
 									<label for="exampleInputEmail1">Enter your Email address</label>
@@ -258,9 +253,44 @@ $this->breadcrumbs=array(
 				</div>
 			</section>
 			<!-- FORGOT PASSWORD -->
-	</section>
-	<!--/PAGE -->
 	
+</div>
+<!-- END OF COL-MD-3 -->
+
+
+<div class="col-md-1"></div>
+
+</div>
+<!-- END OF ROW -->
+</div>
+<!-- END OF COL-LG-12 -->
+</div>
+<!-- END OF LOGIN_PAGE_CONTAINER -->
+
+
+<div class="login_contact">
+<p>Seviye Dijital Linden Dijital Yayıncılık A.Ş. Tarafından Hazırlanmıştır.</p>
+<p>Bizi daha yakından tanıyın. <a target="_blank" href="http://www.linden-tech.com/">www.linden-tech.com</a></p>
+</div>
+
+
+
+	<script>
+		jQuery(document).ready(function() {		
+			App.setPage("login_bg");  //Set current page
+			App.init(); //Initialise plugins and elements
+		});
+	</script>
+	<script type="text/javascript">
+		function swapScreen(id) {
+			jQuery('.visible').removeClass('visible animated fadeInUp');
+			jQuery('#'+id).addClass('visible animated fadeInUp');
+		}
+	</script>
+	<!-- /JAVASCRIPTS -->
+
+
+
 	<script>
 		jQuery(document).ready(function() {		
 			App.setPage("login_bg");  //Set current page

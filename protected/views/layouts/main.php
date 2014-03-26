@@ -13,8 +13,16 @@
 
 
 			<!-- CSS -->
+<<<<<<< HEAD
+
+		<link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/ui/css/cloud-admin.css" >
+        <link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/brands/linden/linden.css" >
+        <link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/ui/css/themes/default.css" >
+
+=======
 		<link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/ui/css/cloud-admin.css" > 
 		<link rel="stylesheet" type="text/css"  href="<?php echo Yii::app()->request->baseUrl; ?>/css/default.css" >
+>>>>>>> 0f7bea05e1544d9e00a8a3e92d9b32c340f6a35f
 		<link rel="stylesheet" type="text/css"  href="<?php echo Yii::app()->request->baseUrl; ?>/css/ui/css/responsive.css" >
 		
 		<link href="<?php echo Yii::app()->request->baseUrl; ?>/css/ui/font-awesome/css/font-awesome.min.css" rel="stylesheet">
@@ -29,6 +37,10 @@
 		<!-- ANIMATE -->
 		<link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/ui/css/animatecss/animate.min.css" />
 
+<<<<<<< HEAD
+		<!-- Expand Search box -->
+		<link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/js/lib/ExpandingSearchBar/css/component.css" />
+=======
 		<link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/ui/js/bootstrap-wizard/wizard.css" />
 
 		<!-- HUBSPOT MESSENGER -->
@@ -39,6 +51,7 @@
 		<link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/ui/js/datepicker/themes/default.min.css" />
 		<link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/ui/js/datepicker/themes/default.date.min.css" />
 		<link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/ui/js/datepicker/themes/default.time.min.css" />
+>>>>>>> 0f7bea05e1544d9e00a8a3e92d9b32c340f6a35f
 			
 		<!-- JAVASCRIPTS -->
 		<!-- Placed at the end of the document so the pages load faster -->
@@ -55,7 +68,17 @@
 		<script type="text/javascript" src="<?php echo Yii::app()->request->baseUrl; ?>/css/ui/js/isotope/imagesloaded.pkgd.min.js"></script>
 		<!-- COLORBOX -->
 		<script type="text/javascript" src="<?php echo Yii::app()->request->baseUrl; ?>/css/ui/js/colorbox/jquery.colorbox.min.js"></script>
+<<<<<<< HEAD
+        
+        
+        <!-- Expand Search box -->
+		<script type="text/javascript" src="<?php echo Yii::app()->request->baseUrl; ?>/js/lib/ExpandingSearchBar/js/classie.js"></script>
+		<script type="text/javascript" src="<?php echo Yii::app()->request->baseUrl; ?>/js/lib/ExpandingSearchBar/js/modernizr.custom.js"></script>
+		<script type="text/javascript" src="<?php echo Yii::app()->request->baseUrl; ?>/js/lib/ExpandingSearchBar/js/uisearch.js"></script> 
+        
+=======
 		
+>>>>>>> 0f7bea05e1544d9e00a8a3e92d9b32c340f6a35f
 			
 		<!-- DATE RANGE PICKER -->
 		<script src="<?php echo Yii::app()->request->baseUrl; ?>/css/ui/js/bootstrap-daterangepicker/moment.min.js"></script>

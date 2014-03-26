@@ -34,21 +34,19 @@ class SiteController extends Controller
 		if(Yii::app()->user->isGuest)
 			$this->redirect( array('site/login' ) );
 
-		$workspaces=$this->getUserWorkspaces();
-
-		$this->render('index',array('workspaces'=>$workspaces));
+		$this->render('index',array());
 	}
 
 	public function actionDashboard()
 	{
 		$meta_books= Yii::app()->db
-		    ->createCommand("SELECT * FROM user_meta WHERE user_id=:user_id AND meta_key=:meta_key ORDER BY created DESC LIMIT 4")
-		    ->bindValues(array(':user_id' => Yii::app()->user->id, ':meta_key' => 'lastEditedBook'))
+		    ->createCommand("SELECT * FROM user_meta WHERE user_id=:user_id AND meta_data LIKE :meta_data ORDER BY created DESC LIMIT 4")
+		    ->bindValues(array(':user_id' => Yii::app()->user->id, ':meta_data' => '{"type":"edit","bookId":"%'))
 		    ->queryAll();
-		 if ($meta_books) {
-			 foreach ($meta_books as $key => $book) {
-			 	$books[]=Book::model()->findByPk($book['meta_value']);
-			 }		 	
+
+		 foreach ($meta_books as $key => $book) {
+		 	$json=json_decode($book['meta_data'],true);
+		 	$books[]=Book::model()->findByPk($json['bookId']);
 		 }
 
 		
@@ -71,24 +69,6 @@ class SiteController extends Controller
 	{
 		if(Yii::app()->user->isGuest)
 			$this->redirect( array('site/login' ) );
-		
-		$detectSQLinjection=new detectSQLinjection($userId);
-		if (!$detectSQLinjection->ok()) {
-			error_log("detectSQLinjection SC:R:".$Yii::app()->user->id." userId: ".$userId);
-			$this->redirect('index');	
-		}
-
-		$detectSQLinjection=new detectSQLinjection($bookId);
-		if (!$detectSQLinjection->ok()) {
-			error_log("detectSQLinjection SC:R:".$Yii::app()->user->id." bookId: ".$bookId);
-			$this->redirect('index');	
-		}
-
-		$detectSQLinjection=new detectSQLinjection($type);
-		if (!$detectSQLinjection->ok()) {
-			error_log("detectSQLinjection SC:R:".$Yii::app()->user->id." bookId: ".$type);
-			$this->redirect('index');	
-		}
 
 		$hasRight=Yii::app()->db
 		    ->createCommand("SELECT * FROM book_users WHERE user_id=:user_id AND book_id=:book_id")
@@ -197,17 +177,6 @@ class SiteController extends Controller
 		return $workspaceUsers;
 	}
 
-	public function getTemplateWorkspaces()
-	{
-		$workspace = Yii::app()->db->createCommand()
-		->select ("*")
-		->from("organisations_meta")
-		->where("meta=:meta", array(':meta' => 'template'))
-		->queryAll();
-
-		return $workspace;
-	}
-
 	/**
 	 * getUserWorkspaces
 	 * @return array user workspaces
@@ -215,7 +184,6 @@ class SiteController extends Controller
 	public function getUserWorkspaces()
 	{
 		$userid=Yii::app()->user->id;
-		$templates=$this->getTemplateWorkspaces();
 
 		$workspacesOfUser= Yii::app()->db->createCommand()
 	    ->select("*")
@@ -224,20 +192,12 @@ class SiteController extends Controller
 	    ->join("user u","x.userid=u.id")
 	    ->where("userid=:id", array(':id' => $userid ) )->queryAll();
 	    
-	    foreach ($templates as $key => $template) {
-	    	foreach ($workspacesOfUser as $key => $workspace) {
-		    	if ($template['value']===$workspace['workspace_id']) {
-		    		unset($workspacesOfUser[$key]);
-		    	}
-	    	}
-	    }
-
 	    return $workspacesOfUser;	
 	}
 
 	public function getWorkspaceBooks($workspace_id)
 	{
-		$all_books= Book::model()->findAll('workspace_id=:workspace_id AND publish_time IS NULL OR publish_time=0', 
+		$all_books= Book::model()->findAll('workspace_id=:workspace_id', 
 	    				array(':workspace_id' => $workspace_id) );
 		return $all_books; 
 	}
@@ -308,23 +268,17 @@ class SiteController extends Controller
 		$passResetError="";
 		if (isset($_GET['Reset'])) {
 			$email=$_GET['Reset']['email'];
-
-		$detectSQLinjection=new detectSQLinjection($email);
-		if (!$detectSQLinjection->ok()) {
-			error_log("detectSQLinjection SC:L:".$Yii::app()->user->id." email: ".$email);
-			$this->redirect('index');	
-		}
 			$user= User::model()->findAll('email=:email', 
 	    				array(':email' => $email) );
 			if (!empty($user)) {
 				$meta=new UserMeta;
 				$meta->user_id=$user[0]->id;
-				$meta->meta_key='passwordReset';
+				$meta->meta_id=functions::new_id(40);
 
 				$link=Yii::app()->getBaseUrl(true);
 				$link.='/user/forgetPassword?id=';
 				$link .= $meta->meta_id;
-				$meta->meta_value=$email;
+				$meta->meta_data="password_reset";
 
 				$message="Şifre sıfırlama isteği gönderdiniz. <a href='".$link."'>Buraya tıklayarak</a> şifrenizi değiştirebilirsiniz. Şifre değiştirme isteğiniz 10 dakika sonra geçersiz olacaktır.<br>".$link;
 
@@ -367,33 +321,7 @@ class SiteController extends Controller
 
 		if (isset($_POST['User'])) {
 			$attributes=$_POST['User'];
-			
-			$meta=new UserMeta;
-			$meta->user_id=$newUser->id;
-			$meta->meta_key='profilePicture';
-			$meta->meta_value=$attributes['data'];
-			$meta->created=time();
-			$meta->save();
-			
-			$detectSQLinjection=new detectSQLinjection($attributes['name']);
-			if (!$detectSQLinjection->ok()) {
-				error_log("detectSQLinjection SC:L:".$Yii::app()->user->id." attributes['name']: ".$attributes['name']);
-				$this->redirect('index');	
-			}
-
-			$detectSQLinjection=new detectSQLinjection($attributes['surname']);
-			if (!$detectSQLinjection->ok()) {
-				error_log("detectSQLinjection SC:L:".$Yii::app()->user->id." attributes['surname']: ".$attributes['surname']);
-				$this->redirect('index');	
-			}
-
-			$detectSQLinjection=new detectSQLinjection($attributes['email']);
-			if (!$detectSQLinjection->ok()) {
-				error_log("detectSQLinjection SC:L:".$Yii::app()->user->id." attributes['email']: ".$attributes['email']);
-				$this->redirect('index');	
-			}
-
-
+			$newUser->data=$attributes['data'];
 			$newUser->name=$attributes['name'];
 			$newUser->surname=$attributes['surname'];
 			$newUser->email=$attributes['email'];
@@ -407,18 +335,6 @@ class SiteController extends Controller
 					if ($newUser->save()) {
 						$msg="SITE:LOGIN:SignUp:0:". json_encode(array('user'=> Yii::app()->user->name,'userId'=>Yii::app()->user->id));
 						Yii::log($msg,'profile');
-
-						$organisation= new Organisations;
-						$organisation->organisation_id=functions::new_id();
-						$organisation->organisation_name=$newUser->name;
-						$organisation->organisation_admin=$newUser->id;
-						$organisation->save();
-						$organisation_user=new OrganisationUsers;
-						$organisation_user->user_id=$newUser->id;
-						$organisation_user->organisation_id=$organisation->organisation_id;
-						$organisation_user->role='owner';
-						$organisation_user->save();
-
 						$workspace= new Workspaces;
 						$workspace->workspace_id=functions::new_id();
 						$workspace->workspace_name = $newUser->name." Books";
