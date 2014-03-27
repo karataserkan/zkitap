@@ -56,7 +56,8 @@ $(document).ready(function(){
 
       setPropertyofObject : function (propertyName,propertyValue){
         var that = this;
-        
+        console.log(propertyName);
+        console.log(propertyValue);
         switch (propertyName){
             case 'fast-style': 
                 this.getSettable().attr[propertyName]=propertyValue;

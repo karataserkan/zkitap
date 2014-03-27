@@ -978,7 +978,7 @@ class componentHTML {
 			  myScroll = new iScroll("wrapper", { scrollbarClass: "myScrollbar" });
 			});
 		</script>
-		<div id="container'.$component->id.'" class="widgets-rw panel-sliding-rw exclude-auto-rw" style="height:'.$component->data->somegallery->css->height.'; width:'.$component->data->somegallery->css->width.';"  >
+		<div id="container'.$component->id.'" class="widgets-rw panel-sliding-rw exclude-auto-rw" style="background-color:transparent; height:'.$component->data->somegallery->css->height.'; width:'.$component->data->somegallery->css->width.';"  >
 			<div id="wrapper"><div id="scroller">';
 		$container.=' <ul class="ul2" epub:type="list">
 		';
