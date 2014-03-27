@@ -32,7 +32,7 @@ $(document).ready(function(){
 
         var slides_bottom = $('<div u="slides" style="cursor: move; position: absolute; left: 0px; top: 0px; width: 800px; height: 356px; overflow: hidden;">');
         var slides_left = $('<div u="slides" style="cursor: move; position: absolute; left: 120px; top: 0px; width: 720px; height: 480px; overflow: hidden;">');
-        var slides_right = $('<div u="slides" style="cursor: move; position: absolute; left: 0px; top: 0px; width: 720px; height: 480px; overflow: hidden;">');
+        var slides_right = $('<div u="slides" style="cursor: move; position: absolute; left: 0px; top: 0px; width: 680px; height: 480px; overflow: hidden;">');
         //slides.css(that.options.component.data.slides.css);
         this.element.parent().find('.some-gallery').css(that.options.component.data['some-gallery'].css);
         var thumbnail_bottom_css = $('<style>\
@@ -156,7 +156,7 @@ $(document).ready(function(){
         var thumbnail_bottom = $('<div u="thumbnavigator" class="jssort01" style="position: absolute; width: 800px; height: 100px; left:0px; bottom: 0px;">\
             <div u="slides" style="cursor: move;">\
                 <div u="prototype" class="p" style="position: absolute; width: 74px; height: 74px; top: 0; left: 0;">\
-                    <div class=w><thumbnailtemplate style=" width: 100%; height: 100%; border: none;position:absolute; top: 0; left: 0;"></thumbnailtemplate></div>\
+                    <div class=w><thumbnailtemplate style=" width: 100%; height: 100%; border: none;position:relative; top: 0; left: 0;"></thumbnailtemplate></div>\
                     <div class=c>\
                     </div>\
                 </div>\
@@ -166,18 +166,18 @@ $(document).ready(function(){
         var thumbnail_left = $('<div u="thumbnavigator" class="jssort02" style="position: absolute; width: 120px; height: 480px; left:0px; bottom: 0px;">\
             <div u="slides" style="cursor: move;">\
                 <div u="prototype" class="p" style="position: absolute; width: 101px; height: 68px; top: 0; left: 0;">\
-                    <div class=w><thumbnailtemplate style=" width: 100%; height: 100%; border: none;position:absolute; top: 0; left: 0;"></thumbnailtemplate></div>\
+                    <div class=w><thumbnailtemplate style=" width: 100%; height: 100%; border: none;position:relative; top: 0; left: 0;"></thumbnailtemplate></div>\
                     <div class=c>\
                     </div>\
                 </div>\
             </div>\
         </div>');
 
-        var thumbnail_right = $('<div u="thumbnavigator" class="jssort06" style="position: absolute; width: 120px; height: 480px; right:0px; bottom: 0px;">\
+        var thumbnail_right = $('<div u="thumbnavigator" class="jssort06" style="position: absolute; width: 120px; height: 480px; right:160px; bottom: 0px;">\
             <div u="slides" style="cursor: move;">\
                 <div u="prototype" class="p" style="position: absolute; width: 101px; height: 68px; top: 0; left: 0;">\
                     <div class="o" style="position:absolute;top:1px;left:1px;width:101px;height:68px;overflow:hidden;">\
-                        <thumbnailtemplate class="b" style="width:101px;height:68px; border: none;position:absolute; top: 0; left: 0;"></thumbnailtemplate>\
+                        <thumbnailtemplate class="b" style="width:101px;height:68px; border: none;position:relative; top: 0; left: 0;"></thumbnailtemplate>\
                         <div class="i"></div>\
                         <thumbnailtemplate class="f" style="width:101px;height:68px;border: none;position:absolute; top: 0; left: 0;"></thumbnailtemplate>\
                     </div>\
@@ -328,7 +328,7 @@ var createSliderComponent = function (event,ui){
       <div class='gallery-inner-holder'> \
         <div style='clear:both'></div> \
         <div class='type' style='padding: 4px; display: inline-block;'>\
-            <div class='btn-group' data-toggle='buttons'>\
+            <div class='btn-group' >\
               <label class='btn btn-primary active'>\
                 <input type='radio' name='slider_align' checked='checked' id='repeat0' value='left'> Sol\
               </label>\

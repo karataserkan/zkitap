@@ -101,7 +101,7 @@ var createThumbComponent = function (event,ui){
           var img={
               'css' : {
 
-                'margin': '30%',
+                'margin': '0px',
                 
                 'border': 'none 0px',
                 'outline': 'none',
@@ -110,7 +110,7 @@ var createThumbComponent = function (event,ui){
               'src': $( this ).attr('src')
             }
             imgs.push(img);
-
+            console.log('imgs');
           console.log( index + ": " + $( this ).text() );
         });
 
@@ -207,7 +207,7 @@ var createThumbComponent = function (event,ui){
         console.log(image_width);
         console.log(control_val);
         imageBinary = evt.target.result;
-        $('#galery-popup-images').append('<li style="height:60px; width:60px; margin:10px; border : 1px dashed #ccc; float:left;"><img src='+imageBinary+' /> \
+        $('#galery-popup-images').append('<li style="height:60px; width:60px; margin:10px; border : 1px dashed #ccc; float:left;"><img style="width:100%" src='+imageBinary+' /> \
           <a class="btn btn-info size-15 icon-delete galey-image-delete hidden-delete " style="margin-left: 38px;"></a> \
           </li>');
         $('#galery-popup-images').sortable({

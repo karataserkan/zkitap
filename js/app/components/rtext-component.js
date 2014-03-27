@@ -17,14 +17,25 @@ $(document).ready(function(){
         if( this.options.component.data.rtextdiv.val === '' ){
           this.options.component.data.rtextdiv.val = '';
         }
-
+        var componentrtextid='rtext'+this.options.component.id;
         var that = this;
+        console.log(this.element);
+
         
-        this.element.change(function ( ui ){
-          that._change( ui );
+        
+        this.element.focusout(function ( event, ui ){
+          console.log('deneme');
+
+          var el = event.target;
+          // save
+          
+
+          that._change( el,  ui);
         })
 
-
+        var popupmessage=$('<div  id="message_'+componentrtextid+'" contenteditable="true">'+this.options.component.data.rtextdiv.val+'</div>');
+        popupmessage.appendTo(this.element);
+        
         
         this._super();
           
@@ -39,12 +50,14 @@ $(document).ready(function(){
       },
 
       getSettable : function (){
-        return this.options.component.data.textarea;
+        //console.log(this.options.component.data.rtextdiv);
+        return this.options.component.data.rtextdiv;
       },
 
       setPropertyofObject : function (propertyName,propertyValue){
         var that = this;
-        
+        console.log(propertyName);
+        console.log(propertyValue);
         switch (propertyName){
             case 'fast-style': 
                 this.getSettable().attr[propertyName]=propertyValue;
@@ -217,9 +230,12 @@ $(document).ready(function(){
 
       },
 
-      _change: function ( ui ) {
-
-        this.options.component.data.textarea.val = $(ui.target).val();
+      _change: function ( el , ui) {
+        
+        console.log(el);
+        console.log(ui);
+        console.log(el.innerHTML);
+        this.options.component.data.rtextdiv.val = el.innerHTML;
 
         this._super();
       }
@@ -258,7 +274,7 @@ console.log('eklendi');
           'attr': {
             'placeholder':'Metin Kutusu',
           },
-          'val': ''
+          'val': 'deneme yazıdır....'
         },
         'lock':'',
         'self': {

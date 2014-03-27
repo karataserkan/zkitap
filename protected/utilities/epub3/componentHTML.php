@@ -971,15 +971,14 @@ class componentHTML {
 	}
 
 	public function thumbInner($component){ 
-	
-		
+
 		$container ='
 		<script type="text/javascript">
 			$( document ).ready(function() {
 			  myScroll = new iScroll("wrapper", { scrollbarClass: "myScrollbar" });
 			});
 		</script>
-		<div id="container'.$component->id.'" class="widgets-rw panel-sliding-rw exclude-auto-rw" style="height:'.$component->data->somegallery->css->height.'; width:'.$component->data->somegallery->css->width.';"  >
+		<div id="container'.$component->id.'" class="widgets-rw panel-sliding-rw exclude-auto-rw" style="background-color:transparent; height:'.$component->data->somegallery->css->height.'; width:'.$component->data->somegallery->css->width.';"  >
 			<div id="wrapper"><div id="scroller">';
 		$container.=' <ul class="ul2" epub:type="list">
 		';
@@ -989,7 +988,7 @@ class componentHTML {
 			$new_file= functions::save_base64_file ( $images_value->src , $component->id .$images_key, $this->epub->get_tmp_file() );
 			$images_value->attr->src =  $new_file->filename;
 
-			$container .=' <li id="li-'.$component->id.$images_key.'" '.$size_style_attr.'><img ';
+			$container .=' <li style="list-style:none;" id="li-'.$component->id.$images_key.'" '.$size_style_attr.'><img ';
 			if(isset($images_value->attr))
 				foreach ($images_value->attr as $attr_name => $attr_val ) {
 					$container.=" $attr_name='$attr_val' ";
