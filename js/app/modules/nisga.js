@@ -495,7 +495,7 @@ var textComponentBuilder = function( component ) {
 
   var rtextComponentBuilder = function( component ) {
 
-    var element  = $('<div class="rtext-controllers"> </div>');
+    var element  = $('<div class="rtext-controllers" > </div>');
     var elementWrap=$('<div ></div>');
     elementWrap.appendTo( page_div_selector );
     console.log(component);
