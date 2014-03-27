@@ -231,14 +231,6 @@ $all_books= $this->getWorkspaceBooks($workspace->workspace_id);
 								<div class="page-header">
 										<h3 class="content-title pull-left"><?php _e('Kitaplarım') ?></h3>
                                         
-										<div class="select2-container col-md-1 select2-allowclear pull-left" id="s2id_e3" style="margin-left:10px; margin-top:8px;">
-                                            <a href="javascript:void(0)" onclick="return false;" class="select2-choice" tabindex="-1">   
-                                             <span class="select2-chosen">Hepsi</span>
-                                             <span class="select2-arrow"><b></b></span>
-                                            </a>
-                                            <input class="select2-focusser select2-offscreen" type="text" id="s2id_autogen3">
-                                        </div>
-                                        
 										<a class="btn pull-right btn-primary" href="/book/bookCreate">
 											<i class="fa fa-plus-circle"></i>
 											<span>Kitap Ekle</span>
@@ -251,17 +243,22 @@ $all_books= $this->getWorkspaceBooks($workspace->workspace_id);
 						<!-- FAQ -->
 		<div class="row">
 			<div id="filter-controls" class="btn-group">
+            
+            
+            
+            
+            
+            
 			  <div class="hidden-xs">
-				  <a href="#" class="btn btn-default" data-filter="*"><?php _e("Hepsi"); ?></a>
+				  <a href="#" data-filter="*"><?php _e("Hepsi"); ?></a>
 <?php 
-$buttons=array('default','primary','success', 'warning', 'danger', 'inverse', 'primary', 'success', 'warning', 'danger', 'inverse');
 $workspaces= $this->getUserWorkspaces();
 foreach ($workspaces as $key => $workspace) { ?>
-		<a href="#" class="btn btn-<?php echo $buttons[$key]; ?>" data-filter=".<?php echo $workspace['workspace_id']; ?>"><?php echo $workspace['workspace_name']; ?></a>		  
+		<a href="#" class="btn-<?php echo $buttons[$key]; ?>" data-filter=".<?php echo $workspace['workspace_id']; ?>"><?php echo $workspace['workspace_name']; ?></a>		  
 <?php } ?>
 					<!-- <a href="#" class="btn btn-default" data-filter="*"><?php _e("Hepsi"); ?></a> -->
-				  <a href="#" class="btn btn-info" data-filter=".owner"><?php _e("Sahibi"); ?></a>
-				  <a href="#" class="btn btn-danger" data-filter=".editor"><?php _e("Editor"); ?></a>
+				  <a href="#" data-filter=".owner"><?php _e("Sahibi"); ?></a>
+				  <a href="#" data-filter=".editor"><?php _e("Editor"); ?></a>
 			  </div>
 			  <div class="visible-xs">
 				   <select id="e1" class="form-control">
@@ -283,6 +280,144 @@ foreach ($workspaces as $key => $workspace) { ?>
 
 	<div class="separator"></div>
 	<div id="filter-items" class="row">
+        <div class="reader_book_card">
+            <div class="reader_book_card_book_cover">					
+                <div class="editor_mybooks_book_settings">
+                    <i class="fa fa-users tip" data-original-title="Editörler"></i>
+                    <i class="fa fa-trash-o tip" data-original-title="Sil"></i>
+                    <i class="fa fa-copy tip" data-original-title="Çoğalt"></i>
+                    <i class="fa fa-edit tip" data-original-title="Düzenle"></i>
+                </div>
+                <img src="../../../css/images/deneme_cover.jpg" />
+            </div>					
+            <div class="reader_book_card_info_container">
+                <div class="editor_mybooks_book_type tip" data-original-title="The Book Type is Here">The Book Type is Here</div>						
+                <div class="clearfix"></div>			
+                <div class="reader_market_book_name tip" data-original-title="The Book Name is Here">The Book Name is Here</div>						
+                <div class="clearfix"></div>						
+                <div class="reader_book_card_writer_name tip" data-original-title="The Writer Name is Here">The Writer Name is Here</div>											
+            </div>				
+        </div>
+    
+        <div class="reader_book_card">
+            <div class="reader_book_card_book_cover">					
+                <div class="editor_mybooks_book_settings">
+                    <i class="fa fa-users tip" data-original-title="Editörler"></i>
+                    <i class="fa fa-trash-o tip" data-original-title="Sil"></i>
+                    <i class="fa fa-copy tip" data-original-title="Çoğalt"></i>
+                    <i class="fa fa-edit tip" data-original-title="Düzenle"></i>
+                </div>
+                <img src="../../../css/images/deneme_cover.jpg" />
+            </div>					
+            <div class="reader_book_card_info_container">
+                <div class="editor_mybooks_book_type tip" data-original-title="The Book Type is Here">The Book Type is Here</div>						
+                <div class="clearfix"></div>			
+                <div class="reader_market_book_name tip" data-original-title="The Book Name is Here">The Book Name is Here</div>						
+                <div class="clearfix"></div>						
+                <div class="reader_book_card_writer_name tip" data-original-title="The Writer Name is Here">The Writer Name is Here</div>											
+            </div>				
+        </div>
+    
+        <div class="reader_book_card">
+            <div class="reader_book_card_book_cover">					
+                <div class="editor_mybooks_book_settings">
+                    <i class="fa fa-users tip" data-original-title="Editörler"></i>
+                    <i class="fa fa-trash-o tip" data-original-title="Sil"></i>
+                    <i class="fa fa-copy tip" data-original-title="Çoğalt"></i>
+                    <i class="fa fa-edit tip" data-original-title="Düzenle"></i>
+                </div>
+                <img src="../../../css/images/deneme_cover.jpg" />
+            </div>					
+            <div class="reader_book_card_info_container">
+                <div class="editor_mybooks_book_type tip" data-original-title="The Book Type is Here">The Book Type is Here</div>						
+                <div class="clearfix"></div>			
+                <div class="reader_market_book_name tip" data-original-title="The Book Name is Here">The Book Name is Here</div>						
+                <div class="clearfix"></div>						
+                <div class="reader_book_card_writer_name tip" data-original-title="The Writer Name is Here">The Writer Name is Here</div>											
+            </div>				
+        </div>
+    
+        <div class="reader_book_card">
+            <div class="reader_book_card_book_cover">					
+                <div class="editor_mybooks_book_settings">
+                    <i class="fa fa-users tip" data-original-title="Editörler"></i>
+                    <i class="fa fa-trash-o tip" data-original-title="Sil"></i>
+                    <i class="fa fa-copy tip" data-original-title="Çoğalt"></i>
+                    <i class="fa fa-edit tip" data-original-title="Düzenle"></i>
+                </div>
+                <img src="../../../css/images/deneme_cover.jpg" />
+            </div>					
+            <div class="reader_book_card_info_container">
+                <div class="editor_mybooks_book_type tip" data-original-title="The Book Type is Here">The Book Type is Here</div>						
+                <div class="clearfix"></div>			
+                <div class="reader_market_book_name tip" data-original-title="The Book Name is Here">The Book Name is Here</div>						
+                <div class="clearfix"></div>						
+                <div class="reader_book_card_writer_name tip" data-original-title="The Writer Name is Here">The Writer Name is Here</div>											
+            </div>				
+        </div>
+    
+        <div class="reader_book_card">
+            <div class="reader_book_card_book_cover">					
+                <div class="editor_mybooks_book_settings">
+                    <i class="fa fa-users tip" data-original-title="Editörler"></i>
+                    <i class="fa fa-trash-o tip" data-original-title="Sil"></i>
+                    <i class="fa fa-copy tip" data-original-title="Çoğalt"></i>
+                    <i class="fa fa-edit tip" data-original-title="Düzenle"></i>
+                </div>
+                <img src="../../../css/images/deneme_cover.jpg" />
+            </div>					
+            <div class="reader_book_card_info_container">
+                <div class="editor_mybooks_book_type tip" data-original-title="The Book Type is Here">The Book Type is Here</div>						
+                <div class="clearfix"></div>			
+                <div class="reader_market_book_name tip" data-original-title="The Book Name is Here">The Book Name is Here</div>						
+                <div class="clearfix"></div>						
+                <div class="reader_book_card_writer_name tip" data-original-title="The Writer Name is Here">The Writer Name is Here</div>											
+            </div>				
+        </div>
+    
+        <div class="reader_book_card">
+            <div class="reader_book_card_book_cover">					
+                <div class="editor_mybooks_book_settings">
+                    <i class="fa fa-users tip" data-original-title="Editörler"></i>
+                    <i class="fa fa-trash-o tip" data-original-title="Sil"></i>
+                    <i class="fa fa-copy tip" data-original-title="Çoğalt"></i>
+                    <i class="fa fa-edit tip" data-original-title="Düzenle"></i>
+                </div>
+                <img src="../../../css/images/deneme_cover.jpg" />
+            </div>					
+            <div class="reader_book_card_info_container">
+                <div class="editor_mybooks_book_type tip" data-original-title="The Book Type is Here">The Book Type is Here</div>						
+                <div class="clearfix"></div>			
+                <div class="reader_market_book_name tip" data-original-title="The Book Name is Here">The Book Name is Here</div>						
+                <div class="clearfix"></div>						
+                <div class="reader_book_card_writer_name tip" data-original-title="The Writer Name is Here">The Writer Name is Here</div>											
+            </div>				
+        </div>
+
+        <div class="reader_book_card">
+            <div class="reader_book_card_book_cover">					
+                <div class="editor_mybooks_book_settings">
+                    <i class="fa fa-users tip" data-original-title="Editörler"></i>
+                    <i class="fa fa-trash-o tip" data-original-title="Sil"></i>
+                    <i class="fa fa-copy tip" data-original-title="Çoğalt"></i>
+                    <i class="fa fa-edit tip" data-original-title="Düzenle"></i>
+                </div>
+                <img src="../../../css/images/deneme_cover.jpg" />
+            </div>					
+            <div class="reader_book_card_info_container">
+                <div class="editor_mybooks_book_type tip" data-original-title="The Book Type is Here">The Book Type is Here</div>						
+                <div class="clearfix"></div>			
+                <div class="reader_market_book_name tip" data-original-title="The Book Name is Here">The Book Name is Here</div>						
+                <div class="clearfix"></div>						
+                <div class="reader_book_card_writer_name tip" data-original-title="The Writer Name is Here">The Writer Name is Here</div>											
+            </div>				
+        </div>
+
+
+    
+    <div class="clearfix"></div>
+    
+    
 <?php
 $userid=Yii::app()->user->id;
 $workspacesOfUser= $this->getUserWorkspaces();
@@ -310,7 +445,7 @@ $all_books= $this->getWorkspaceBooks($workspace->workspace_id);
 							<a class="updateThisBookTitle" data-id="updateBookTitle" data-toggle="modal" data-target="#updateBookTitle" book-id="<?php echo $book->book_id; ?>"><i class="fa fa-edit"></i></a>
 							<?php } ?>
 							<a href="javascript:;" class="collapse">
-								<i class="fa fa-chevron-up"></i>
+								
 							</a>
 						</div>
 					</div>
@@ -408,4 +543,6 @@ $("#update_book_title").click(function(){
 	var link ="/book/updateBookTitle?bookId="+bookId+'&title='+title;
     window.location.assign(link);
 });
+
+
 </script>
