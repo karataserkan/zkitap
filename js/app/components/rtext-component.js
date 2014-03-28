@@ -58,6 +58,9 @@ $(document).ready(function(){
         var that = this;
         console.log(propertyName);
         console.log(propertyValue);
+        ShowSelection(that.options.component.id);
+              
+        return;
         switch (propertyName){
             case 'fast-style': 
                 this.getSettable().attr[propertyName]=propertyValue;
@@ -246,7 +249,31 @@ $(document).ready(function(){
   
 });
 
-
+var ShowSelection = function(component_id)
+{
+  console.log(component_id);
+  console.log(document.selection);
+  console.log(textComponent.selectionStart);
+  var textComponent = document.getElementById(component_id);
+  var selectedText;
+  // IE version
+  if (document.selection != undefined)
+  {
+    textComponent.focus();
+    var sel = document.selection.createRange();
+    selectedText = sel.text;
+    console.log(selectedText);
+  }
+  // Mozilla version
+  else if (textComponent.selectionStart != undefined)
+  {
+    var startPos = textComponent.selectionStart;
+    var endPos = textComponent.selectionEnd;
+    selectedText = textComponent.value.substring(startPos, endPos)
+    console.log(selectedText);
+  }
+  console.log(selectedText);
+}
 
 
   var createRtextComponent = function ( event, ui) {

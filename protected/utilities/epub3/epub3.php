@@ -491,6 +491,31 @@ class epub3 {
 			});
 	    	</script>
 		<script src="mathjax/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+		<script type="text/javascript" src="fancy/lib/jquery.mousewheel-3.0.6.pack.js"></script>
+		<script type="text/javascript" src="fancy/source/jquery.fancybox.js?v=2.1.5"></script>
+		<link rel="stylesheet" type="text/css" href="fancy/source/jquery.fancybox.css?v=2.1.5" media="screen" />
+		<link rel="stylesheet" type="text/css" href="fancy/source/helpers/jquery.fancybox-buttons.css?v=1.0.5" />
+		<script type="text/javascript" src="fancy/source/helpers/jquery.fancybox-buttons.js?v=1.0.5"></script>
+		<link rel="stylesheet" type="text/css" href="fancy/source/helpers/jquery.fancybox-thumbs.css?v=1.0.7" />
+		<script type="text/javascript" src="fancy/source/helpers/jquery.fancybox-thumbs.js?v=1.0.7"></script>
+		<script type="text/javascript" src="fancy/source/helpers/jquery.fancybox-media.js?v=1.0.6"></script>
+		<script type="text/javascript">
+		$(document).ready(function() {
+
+			$(".fancybox").fancybox();
+
+		});
+	</script>
+	<style type="text/css">
+		.fancybox-custom .fancybox-skin {
+			box-shadow: 0 0 50px #222;
+		}
+		body {
+			max-width: 700px;
+			margin: 0 auto;
+		}
+	</style>
 	</head>
 	<body style="background-repeat:no-repeat; width:'.$width.'px; height:'.$height.'px;'.$background.';'.$background_size.';">
 	<section epub:type="frontmatter titlepage">

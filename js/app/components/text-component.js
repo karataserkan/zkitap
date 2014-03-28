@@ -134,24 +134,12 @@ $(document).ready(function(){
                 
               break;
 
-            case 'font-size': 
-              ShowSelection(this.component.id);
-              break;
+            case 'font-size':           
             case 'text-align':           
-              ShowSelection(this.component.id);
-              break;
             case 'font-family':         
-              ShowSelection(this.component.id);
-              break;
             case 'color':
-              ShowSelection(this.component.id);
-              break;
             case 'font-weight':           
-              ShowSelection(this.component.id);
-              break;
             case 'font-style':         
-              ShowSelection(this.component.id);
-              break;
             case 'text-decoration':   
 
                 this.getSettable().css[propertyName]=propertyValue;
@@ -169,7 +157,7 @@ $(document).ready(function(){
       setProperty : function (propertyName,propertyValue){
         console.log(propertyName);
         console.log(propertyValue);
-        ShowSelection(this.component.id);
+      
         this._setProperty(propertyName,propertyValue);
         this.autoResize();
       
@@ -243,28 +231,6 @@ $(document).ready(function(){
   
 });
 
-
-var ShowSelection = function(componen_id){
-
-  var textComponent = document.getElementById(componen_id);
-  var selectedText;
-  // IE version
-  if (document.selection != undefined)
-  {
-    textComponent.focus();
-    var sel = document.selection.createRange();
-    selectedText = sel.text;
-  }
-  // Mozilla version
-  else if (textComponent.selectionStart != undefined)
-  {
-    var startPos = textComponent.selectionStart;
-    var endPos = textComponent.selectionEnd;
-    selectedText = textComponent.value.substring(startPos, endPos)
-  }
-  console.log(selectedText);
-
-}
 
   var createTextComponent = function ( event, ui ,type) {
 
