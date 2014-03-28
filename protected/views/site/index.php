@@ -40,13 +40,7 @@ function sendRight(e){
 </script>
 
 
-<script>
-		jQuery(document).ready(function() {		
-			App.setPage("gallery");  //Set current page
-			App.init(); //Initialise plugins and elements
-		});
-	</script>
-	<!-- /JAVASCRIPTS -->
+
 
 <!-- POPUP EDITORS -->
 <div class="modal fade" id="updateBookTitle" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -279,7 +273,7 @@ foreach ($workspaces as $key => $workspace) { ?>
 
 
 	<div class="separator"></div>
-	<div id="filter-items" class="row">
+	<div id="filter-items" class="mybooks_page_book_filter row">
         
 
 
@@ -404,3 +398,11 @@ $("#update_book_title").click(function(){
 
 
 </script>
+
+<script>
+		jQuery(document).ready(function() {		
+			App.setPage("gallery");  //Set current page
+			App.init(); //Initialise plugins and elements
+		});
+	</script>
+	<!-- /JAVASCRIPTS -->
