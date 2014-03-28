@@ -280,7 +280,10 @@ foreach ($workspaces as $key => $workspace) { ?>
     
     <div class="clearfix"></div>
     <div class="reader_book_card">
-         <div class="reader_book_card_book_cover">					
+         <div class="reader_book_card_book_cover">
+         
+      
+         					
              <div class="editor_mybooks_book_settings">
                  <i class="fa fa-users tip" data-original-title="Editörler"></i>
                  <i class="fa fa-trash-o tip" data-original-title="Sil"></i>
@@ -297,6 +300,13 @@ foreach ($workspaces as $key => $workspace) { ?>
              <div class="reader_book_card_writer_name tip" data-original-title="The Writer Name is Here">The Writer Name is Here</div>											
          </div>				
      </div>
+     
+     
+     
+     
+     
+     
+     
     
 <?php
 $userid=Yii::app()->user->id;
