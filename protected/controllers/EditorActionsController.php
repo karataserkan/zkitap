@@ -942,13 +942,13 @@ right join book using (book_id) where book_id='$bookId' and type!='image';";
 
 		foreach ($booksInQueue as $QueueBookKey => $QueueBook) {
 			$bookId=$QueueBook->book_id;
-
+			error_log("book_id: ".$bookId);
 			$data=json_decode($QueueBook->publish_data,true);
 		
 			$book=Book::model()->findByPk($bookId);
 			$bookData=json_decode($book->data,true);
 			$ebook=new epub3($book,null,true);
-
+			error_log("book ebook epub3");
 
 			if (!file_exists($ebook->ebookFile)) {
 				$this->error('SendFileToCatalog','File does not exists!');
@@ -956,6 +956,7 @@ right join book using (book_id) where book_id='$bookId' and type!='image';";
 				Yii::log($msg,'error');
 				return;
 			}
+			error_log("created Ebook File");
 
 			$localFile = $ebook->ebookFile; // This is the entire file that was uploaded to a temp location.
 			$fp = fopen($localFile, 'r');
@@ -971,8 +972,10 @@ right join book using (book_id) where book_id='$bookId' and type!='image';";
 			curl_setopt($ch, CURLOPT_FOLLOWLOCATION, TRUE);
 			curl_setopt($ch, CURLOPT_POST, TRUE);
 			
+			error_log("curl will executed");
 			curl_setopt($ch, CURLOPT_POSTFIELDS, $data); 
 			$Return['response']=json_decode(curl_exec($ch));
+			error_log("curl executed");
 
 			if (curl_errno($ch)){  
 				$this->error('SendFileToCatalog','CURL_ERROR:'.curl_error($ch));
@@ -1085,7 +1088,7 @@ right join book using (book_id) where book_id='$bookId' and type!='image';";
 			}
 
 		}
-
+		error_log("oldu hacii");
 		return $Return;
 
 	}

@@ -285,7 +285,24 @@ foreach ($workspaces as $key => $workspace) { ?>
 
     
     <div class="clearfix"></div>
-    
+    <div class="reader_book_card">
+         <div class="reader_book_card_book_cover">					
+             <div class="editor_mybooks_book_settings">
+                 <i class="fa fa-users tip" data-original-title="Editörler"></i>
+                 <i class="fa fa-trash-o tip" data-original-title="Sil"></i>
+                 <i class="fa fa-copy tip" data-original-title="Çoğalt"></i>
+                 <i class="fa fa-edit tip" data-original-title="Düzenle"></i>
+             </div>
+             <img src="../../../css/images/deneme_cover.jpg" />
+         </div>					
+         <div class="reader_book_card_info_container">
+             <div class="editor_mybooks_book_type tip" data-original-title="The Book Type is Here">The Book Type is Here</div>						
+             <div class="clearfix"></div>			
+             <div class="reader_market_book_name tip" data-original-title="The Book Name is Here">The Book Name is Here</div>						
+             <div class="clearfix"></div>						
+             <div class="reader_book_card_writer_name tip" data-original-title="The Writer Name is Here">The Writer Name is Here</div>											
+         </div>				
+     </div>
     
 <?php
 $userid=Yii::app()->user->id;
@@ -299,7 +316,7 @@ $all_books= $this->getWorkspaceBooks($workspace->workspace_id);
 				<!-- book card -->
 				<div class="reader_book_card <?php echo $workspace->workspace_id; ?> <?php echo ($userType=='owner')? 'owner editor':''; ?> <?php echo ($userType=='editor')? 'editor':''; ?>">
 		            <div class="reader_book_card_book_cover">					
-		                <div class="editor_mybooks_book_settings">
+		                <div class="<?php echo ($userType==='owner' || $userType==='editor' || $userType==='user') ? 'editor_mybooks_book_settings' : '' ; ?>">
 		                    <?php if ($userType==='owner') { ?>
 		                    <a href="#box-config<?php echo $book->book_id; ?>" data-toggle="modal" class="config"><i class="fa fa-users tip" data-original-title="Editörler"></i></a>
 		                    <a class="remove_book" data-id="<?php echo $book->book_id; ?>" data-toggle="modal" data-target="#myModal"><i class="fa fa-trash-o tip" data-original-title="Sil"></i></a>
