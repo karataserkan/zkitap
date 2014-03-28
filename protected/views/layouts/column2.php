@@ -79,7 +79,7 @@
 		<!-- /top navigation bar -->
 	</header> <!-- /.header -->
 
-	<div class="mybooks_page_container">
+	<div class="mybooks_page_container clearfix">
 		<div id="sidebar" class="sidebar sidebar-fixed">
 			<div class="sidebar-menu nav-collapse">
 				<!--=== Navigation ===-->
