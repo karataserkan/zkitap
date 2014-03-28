@@ -77,7 +77,14 @@ class EditorActionsController extends Controller
 		$model->contentPrice="0";
 		$model->categories="1122";
 
-		$this->render('publishBook',array('model'=>$model,'hosts'=>$hosts,'categories'=>$categories,'bookId'=>$bookId));
+		$acl = Yii::app()->db->createCommand()
+		    ->select("*")
+		    ->from("organisations_meta")
+		    ->where("organisation_id=:organisation_id AND meta=:meta", array(':organisation_id' => $organisation->organisation_id,':meta'=>'ACL'))
+		    ->queryRow();
+		$acls=$acl['value'];
+
+		$this->render('publishBook',array('model'=>$model,'hosts'=>$hosts,'categories'=>$categories,'bookId'=>$bookId,'acls'=>$acls));
 	}
 
 	public function actionGetFileURL($type=null){
@@ -773,7 +780,7 @@ right join book using (book_id) where book_id='$bookId' and type!='image';";
 			$data['contentCurrencyCode']=$_POST['contentCurrency'];
 			$data['contentPrice']=$_POST['contentPrice'];
 			$data['date']=$_POST['date'];
-			$data['contentReaderGroup']=$_POST['contentReaderGroup'];
+			//$data['contentReaderGroup']=$_POST['contentReaderGroup'];
 			$data['contentCover']=$bookData['cover'];
 			$data['contentThumbnail']=$bookData['thumbnail'];
 			
@@ -788,6 +795,46 @@ right join book using (book_id) where book_id='$bookId' and type!='image';";
 
 			$data['totalPage']=$ebook->totalPageCount;
 			$data['toc']=json_encode($ebook->TOC_Titles);
+
+			if (isset($_POST['acl'])) {
+				$acls=$_POST['acl'];
+				$allAclsRow=Yii::app()->db->createCommand()
+				    ->select("*")
+				    ->from("organisations_meta")
+				    ->where("organisation_id=:organisation_id AND meta=:meta", array(':organisation_id' => $id,':meta'=>'ACL'))
+				    ->queryRow();
+				 $allAcls=$allAclsRow['value'];
+
+				 $aclTot=0;
+				 foreach ($acls as $key => $aclId) {
+				 	if ($aclId=='all') {
+				 		$aclTot++;
+				 		foreach ($allAcls as $key => $acl) {
+							$data['acls'][$acl->id]['id']=$acl->id;
+							$data['acls'][$acl->id]['name']=$acl->name;
+							$data['acls'][$acl->id]['type']=$acl->type;
+							$data['acls'][$acl->id]['val1']=$acl->val1;
+							$data['acls'][$acl->id]['val2']=$acl->val2;
+							$data['acls'][$acl->id]['comment']=$acl->comment;
+						}
+				 	}
+				 }
+				 if ($aclTot) {
+					foreach ($allAcls as $key => $acl) {
+						foreach ($acls as $key => $aclId) {
+							if ($acl->id==$aclId) {
+								$data['acls'][$acl->id]['id']=$acl->id;
+								$data['acls'][$acl->id]['name']=$acl->name;
+								$data['acls'][$acl->id]['type']=$acl->type;
+								$data['acls'][$acl->id]['val1']=$acl->val1;
+								$data['acls'][$acl->id]['val2']=$acl->val2;
+								$data['acls'][$acl->id]['comment']=$acl->comment;
+							}
+						}
+					}
+				 }
+
+			}
 
 			if (isset($_POST['host'])) {
 				$hosts=$_POST['host'];
@@ -861,6 +908,7 @@ right join book using (book_id) where book_id='$bookId' and type!='image';";
 		
 
 		$data['hosts']=json_encode($data['hosts']);
+		$data['acls']=json_encode($data['acls']);
 		$data['categories']=json_encode($data['categories']);
 		$data['siraliCategory']=json_encode($data['siraliCategory']);
 

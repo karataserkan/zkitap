@@ -32,7 +32,7 @@ class OrganisationsController extends Controller
 				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
-				'actions'=>array('create','update','workspaces','delWorkspaceUser','addWorkspaceUser','users','addUser','deleteOrganisationUser','account','bookCategories','deleteCategory','createBookCategory','updateBookCategory','templates','aCL','addACL','publishedBooks'),
+				'actions'=>array('create','update','workspaces','delWorkspaceUser','addWorkspaceUser','users','addUser','deleteOrganisationUser','account','bookCategories','deleteCategory','createBookCategory','updateBookCategory','templates','aCL','addACL','publishedBooks','deleteACL'),
 				'users'=>array('@'),
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
@@ -61,6 +61,26 @@ class OrganisationsController extends Controller
 			$this->addACL($id,$data[0]['value'],$data[2]['value'],$data[3]['value'],$data[1]['value'],$data[4]['value']);
 		}
 		
+	}
+
+	public function actionDeleteACl($id,$acl_id)
+	{
+		$acls=$this->getACL($id);
+		$acls=json_decode($acls);
+		$new=array();
+		foreach ($acls as $key => $acl) {
+			if ($acl->id!=$acl_id) {
+				$new[$key]=$acl;	
+			}
+		}
+		$lastACLs=json_encode($new);
+		$updateOrganisationMeta = Yii::app()->db->createCommand();
+		$updateOrganisationMeta->update('organisations_meta',
+										array('value'=>$lastACLs), 
+										'organisation_id=:organisation_id AND meta=:meta',
+										array(':organisation_id'=>$id,':meta'=>'ACL'));
+
+		$this->redirect(array('organisations/aCL/'.$id));
 	}
 
 	public function getACL($id){
