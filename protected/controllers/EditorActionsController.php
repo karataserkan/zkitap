@@ -798,17 +798,19 @@ right join book using (book_id) where book_id='$bookId' and type!='image';";
 
 			if (isset($_POST['acl'])) {
 				$acls=$_POST['acl'];
+
 				$allAclsRow=Yii::app()->db->createCommand()
 				    ->select("*")
 				    ->from("organisations_meta")
-				    ->where("organisation_id=:organisation_id AND meta=:meta", array(':organisation_id' => $id,':meta'=>'ACL'))
+				    ->where("organisation_id=:organisation_id AND meta=:meta", array(':organisation_id' => $data['organisationId'],':meta'=>'ACL'))
 				    ->queryRow();
-				 $allAcls=$allAclsRow['value'];
-
-				 $aclTot=0;
-				 foreach ($acls as $key => $aclId) {
-				 	if ($aclId=='all') {
-				 		$aclTot++;
+				 $allAcls=json_decode($allAclsRow['value']);
+				 
+				 if (in_array('all', $acls)) {
+				 	foreach ($acls as $key => $aclId) {
+				 		if ($aclId=='all') {
+				 			continue;
+				 		}
 				 		foreach ($allAcls as $key => $acl) {
 							$data['acls'][$acl->id]['id']=$acl->id;
 							$data['acls'][$acl->id]['name']=$acl->name;
@@ -819,9 +821,10 @@ right join book using (book_id) where book_id='$bookId' and type!='image';";
 						}
 				 	}
 				 }
-				 if ($aclTot) {
-					foreach ($allAcls as $key => $acl) {
-						foreach ($acls as $key => $aclId) {
+				 else
+				 {
+				 	foreach ($acls as $key => $aclId) {
+				 		foreach ($allAcls as $key => $acl) {
 							if ($acl->id==$aclId) {
 								$data['acls'][$acl->id]['id']=$acl->id;
 								$data['acls'][$acl->id]['name']=$acl->name;
@@ -831,10 +834,9 @@ right join book using (book_id) where book_id='$bookId' and type!='image';";
 								$data['acls'][$acl->id]['comment']=$acl->comment;
 							}
 						}
-					}
+				 	}
 				 }
-
-			}
+			 }
 
 			if (isset($_POST['host'])) {
 				$hosts=$_POST['host'];
@@ -913,7 +915,6 @@ right join book using (book_id) where book_id='$bookId' and type!='image';";
 		$data['siraliCategory']=json_encode($data['siraliCategory']);
 
 
-
 		$queue= new PublishQueue();
 		$queue->book_id=$bookId;
 		$queue->publish_data=json_encode($data);
@@ -942,13 +943,13 @@ right join book using (book_id) where book_id='$bookId' and type!='image';";
 
 		foreach ($booksInQueue as $QueueBookKey => $QueueBook) {
 			$bookId=$QueueBook->book_id;
-			error_log("book_id: ".$bookId);
+			
 			$data=json_decode($QueueBook->publish_data,true);
 		
 			$book=Book::model()->findByPk($bookId);
 			$bookData=json_decode($book->data,true);
 			$ebook=new epub3($book,null,true);
-			error_log("book ebook epub3");
+			
 
 			if (!file_exists($ebook->ebookFile)) {
 				$this->error('SendFileToCatalog','File does not exists!');
@@ -956,7 +957,6 @@ right join book using (book_id) where book_id='$bookId' and type!='image';";
 				Yii::log($msg,'error');
 				return;
 			}
-			error_log("created Ebook File");
 
 			$localFile = $ebook->ebookFile; // This is the entire file that was uploaded to a temp location.
 			$fp = fopen($localFile, 'r');
@@ -972,21 +972,22 @@ right join book using (book_id) where book_id='$bookId' and type!='image';";
 			curl_setopt($ch, CURLOPT_FOLLOWLOCATION, TRUE);
 			curl_setopt($ch, CURLOPT_POST, TRUE);
 			
-			error_log("curl will executed");
 			curl_setopt($ch, CURLOPT_POSTFIELDS, $data); 
 			$Return['response']=json_decode(curl_exec($ch));
-			error_log("curl executed");
+			
 
 			if (curl_errno($ch)){  
 				$this->error('SendFileToCatalog','CURL_ERROR:'.curl_error($ch));
 			    $msg="EDITOR_ACTIONS:SendFileToCatalog:0:CURL_ERROR:".curl_error($ch). json_encode(array(array('user'=>Yii::app()->user->id),array('bookId'=>$bookId)));
 				Yii::log($msg,'error');
+				
 				return;
 			}
 
 			$msg = 'File uploaded successfully.';
 			curl_close ($ch);
 			$Return['msg'] = $msg;
+			
 			ob_end_clean();
 
 
@@ -1018,7 +1019,7 @@ right join book using (book_id) where book_id='$bookId' and type!='image';";
 			$attr['transaction_type']=$data['contentType'];
 
 			$success=0;
-
+			
 			$transaction=new Transactions;
 			$transaction['attributes']=$attr;
 			$transaction->transaction_amount=0;
@@ -1088,7 +1089,7 @@ right join book using (book_id) where book_id='$bookId' and type!='image';";
 			}
 
 		}
-		error_log("oldu hacii");
+
 		return $Return;
 
 	}
