@@ -271,12 +271,36 @@
 													</div>
 													</div>
 
-													<div class="form-group">
+													<!-- <div class="form-group">
 														<label for="PublishBookForm_contentReaderGroup" class="control-label col-md-3"><?php _e('Reader Group'); ?><span class="required">*</span></label>
 														<div class="col-md-4">
-															<?php echo $form->textField($model,'contentReaderGroup',array('class'=>'form-control','name'=>'contentReaderGroup')); ?>
+															<?php //echo $form->textField($model,'contentReaderGroup',array('class'=>'form-control','name'=>'contentReaderGroup')); ?>
+														</div>
+													</div> -->
+
+
+													<?php
+													$acls=json_decode($acls);
+													
+													$aclIds['all']=__('Hepsi');
+												if ($acls) {
+													foreach ($acls as $key => $acl) {
+															$aclIds[$acl->id]=$acl->name;
+													}
+
+													?>
+												<?php } ?>	
+
+													<div class="form-group">
+														<label  class="col-md-3 control-label">
+														<?php _e("Access Control List"); ?>
+														</label>
+														<div class="col-md-9">
+															<?php echo $form->checkBoxList($model,'acl',$aclIds,array('class'=>'uniform acl','name'=>'acl')); ?>
 														</div>
 													</div>
+
+
 												 </div>
 												 <div class="tab-pane" id="confirm">
 												 	<h3 class="block">Detay Özeti <a href="javascript:;" class="btn btn-primary detayRevBtn">
@@ -397,10 +421,16 @@
 															  <p class="form-control-static" data-display="contentPrice"></p>
 														   </div>
 														</div>
-														<div class="form-group">
+														<!-- <div class="form-group">
 														   <label class="control-label col-md-3"><?php _e('Reader Group'); ?>:</label>
 														   <div class="col-md-4">
 															  <p class="form-control-static" data-display="contentReaderGroup"></p>
+														   </div>
+														</div> -->
+														<div class="form-group">
+														   <label class="control-label col-md-3"><?php _e('Access Control List'); ?>:</label>
+														   <div class="col-md-4">
+															  <p class="form-control-static" data-display="contentAcl"></p>
 														   </div>
 														</div>
 														<div class="form-group">

@@ -87,22 +87,25 @@
 	</div>
 </div>
 <div class="row">
-<?php 
-	$acls=json_decode($acls,true);
-	foreach ($acls as $key => $acl) {
-		?>
-		<div class="col-lg-12">
-			<?php echo $acl['name']; ?><br>
-			<?php echo $acl['type']; ?><br>
-			<?php echo $acl['val1']; ?><br>
-			<?php echo $acl['val2']; ?><br>
-			<?php echo $acl['comment']; ?><br>
-			<a href="/organisations/deleteACL/<?php echo $acl['id']; ?>"><?php _e('Sil'); ?></a>
-		</div>
-		<br>
-		<br><hr>
-		<?php
-	}
+<?php
+	if ($acls) {
+		 
+		$acls=json_decode($acls,true);
+		foreach ($acls as $key => $acl) {
+			?>
+			<div class="col-lg-12">
+				<?php echo $acl['name']; ?><br>
+				<?php echo $acl['type']; ?><br>
+				<?php echo $acl['val1']; ?><br>
+				<?php echo $acl['val2']; ?><br>
+				<?php echo $acl['comment']; ?><br>
+				<a href="/organisations/deleteACL/<?php echo $organisation_id; ?>?acl_id=<?php echo $acl['id']; ?>"><?php _e('Sil'); ?></a>
+			</div>
+			<br>
+			<br><hr>
+			<?php
+		}
+	} 
 ?>
 </div>
 <!-- /PAGE HEADER -->
