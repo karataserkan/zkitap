@@ -42,9 +42,9 @@ var FormWizard = function () {
                         number: true,
                        // required: true
                     },
-                    contentReaderGroup:{
-                        required: true
-                    },
+                    // contentReaderGroup:{
+                    //     required: true
+                    // },
                     host:{
                         required: true
                     },
@@ -107,7 +107,7 @@ var FormWizard = function () {
                 };
                 
                 $("p[data-display='contentPrice']").text($("[name='contentPrice']").val()+' '+currency);
-                $("p[data-display='contentReaderGroup']").text($("[name='contentReaderGroup']").val());
+                // $("p[data-display='contentReaderGroup']").text($("[name='contentReaderGroup']").val());
                 
                 $("p[data-display='contentType']").text($("span.checked [name='contentType']").val());
                 $("p[data-display='contentIsForSale']").text($("span.checked [name='contentIsForSale']").val());
@@ -117,6 +117,13 @@ var FormWizard = function () {
                 for (var i = 0; i < hosts.length; i++) {
                 hostText +=$("label[for='"+$("span.checked [name='host[]']")[i].id+"']").html()+'<br>';
                 };
+
+                var acls=$("span.checked [name='acl[]']");
+                var aclsText= '';
+                for (var i = 0; i < acls.length; i++) {
+                aclsText +=$("label[for='"+$("span.checked [name='acl[]']")[i].id+"']").html()+'<br>';
+                };
+
 
                 var categoriess2=$("span.checked [name='categoriesSirali[]']");
                 var categoriesText2= '';
@@ -132,6 +139,7 @@ var FormWizard = function () {
                 };
 
                 $("p[data-display='host']").html(hostText);
+                $("p[data-display='contentAcl']").html(aclsText);
                 $("p[data-display='categories']").html(categoriesText);
                 $("p[data-display='categoriesSirali']").html(categoriesText2);
 
