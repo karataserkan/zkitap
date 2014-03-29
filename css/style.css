@@ -1010,7 +1010,7 @@ ul.component_holder li {
  padding: 5px 5px 5px 5px;
  margin:0px 5px 0px 5px;
  color:#224761;
- cursor:pointer;
+cursor: move;
 }
 
 ul.component_holder_close {
