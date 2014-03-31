@@ -343,7 +343,7 @@ $all_books= $this->getWorkspaceBooks($workspace->workspace_id);
 		            <div class="reader_book_card_info_container">
 		                <div class="editor_mybooks_book_type tip" data-original-title="The Workspace Name is Here"><?php echo $workspace->workspace_name; ?></div>						
 		                <div class="clearfix"></div>			
-		                <div class="reader_market_book_name tip" data-original-title="The Book Name is Here"></i><?php echo $book->title ?></div>						
+		                <div class="reader_market_book_name tip" data-original-title="The Book Name is Here"></i><a href="/book/author/<?php echo $book->book_id; ?>"><?php echo $book->title ?></a></div>						
 		                <div class="clearfix"></div>						
 		                <div class="reader_book_card_writer_name tip" data-original-title="The Writer Name is Here"><?php echo $book->author ?></div>											
 		            </div>				
