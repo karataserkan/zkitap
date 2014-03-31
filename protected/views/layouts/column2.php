@@ -188,71 +188,84 @@
 								<?php
 							}
 						?>
-					<?php } ?>
-					
-					
-					<?php 
-					function organisation()
-						{
-							$organisation = Yii::app()->db->createCommand()
-						    ->select("*")
-						    ->from("organisation_users")
-						    ->where("user_id=:user_id", array(':user_id' => Yii::app()->user->id))
-						    ->queryRow();
-						    return  ($organisation) ? $organisation : null ;
-						}
-						$organisation = organisation();
-					if($organisation)
-					{
-					?>
-					<li class="has-sub">
-						<a href="javascript:;" class="">
-							<i class="fa fa-sitemap fa-fw"></i>
-							<span class="menu-text"><?php echo __('Organizasyon');?></span>
-							<span class="arrow"></span>
-						</a>
-						<ul class="sub">
-							<li>
-								<a href="/organisations/account/<?php echo $organisation["organisation_id"]; ?>">
-									Hesabım
+							<?php }
+							
+							
+							function organisation()
+								{
+									$organisation = Yii::app()->db->createCommand()
+								    ->select("*")
+								    ->from("organisation_users")
+								    ->where("user_id=:user_id", array(':user_id' => Yii::app()->user->id))
+								    ->queryAll();
+								    return  ($organisation) ? $organisation : null ;
+								}
+								$organisations = organisation();
+							if($organisations)
+							{
+								foreach ($organisations as $key => $organisation) {
+							?>
+							
+							<li class="has-sub">
+								<a href="javascript:;" class="">
+									<i class="fa fa-briefcase fa-fw"></i>
+									<span class="menu-text"><?php 
+									$organisation_name=Yii::app()->db->createCommand()
+								    ->select("*")
+								    ->from("organisations")
+								    ->where("organisation_id=:organisation_id", array(':organisation_id' => $organisation["organisation_id"]))
+								    ->queryRow();
+
+									echo $organisation_name["organisation_name"]; 
+									?></span>
+									<span class="arrow"></span>
 								</a>
+								<ul class="sub">
+									<?php if ($organisation['role']=='owner' || $organisation['role']=='manager') { ?>
+									<li>
+										<a href="/organisations/account/<?php echo $organisation["organisation_id"]; ?>">
+											Hesabım
+										</a>
+									</li>
+									<li>
+										<a href="/organisations/users?organisationId=<?php echo $organisation["organisation_id"]; ?>">
+										<?php _e('Kullanıcılar'); ?>	
+										</a>
+									</li>
+									<li>
+										<a href="/organisations/workspaces?organizationId=<?php echo $organisation["organisation_id"]; ?>">
+										<?php _e('Çalışma Alanı'); ?>
+										</a>
+									</li>
+									<li>
+										<a href="/organisationHostings/index?organisationId=<?php echo $organisation["organisation_id"]; ?>">
+										<?php _e('Sunucu'); ?>
+										</a>
+									</li>
+									<li>
+										<a href="/organisations/bookCategories/<?php echo $organisation["organisation_id"]; ?>">
+										<?php _e('Yayın Kategorileri'); ?>
+										</a>
+									</li>
+									<li>
+										<a href="/organisations/aCL/<?php echo $organisation["organisation_id"]; ?>">
+										<?php _e('ACL'); ?>
+										</a>
+									</li>
+									<?php }; ?>
+									<li>
+										<a href="/organisations/publishedBooks/<?php echo $organisation["organisation_id"]; ?>">
+										<?php _e('Yayınlanan Eserler'); ?>
+										</a>
+									</li>
+								</ul>
+								
+								
 							</li>
-							<li>
-								<a href="/organisations/users?organisationId=<?php echo $organisation["organisation_id"]; ?>">
-								<?php _e('Kullanıcılar'); ?>	
-								</a>
-							</li>
-							<li>
-								<a href="/organisations/workspaces?organizationId=<?php echo $organisation["organisation_id"]; ?>">
-								<?php _e('Çalışma Alanı'); ?>
-								</a>
-							</li>
-							<li>
-								<a href="/organisationHostings/index?organisationId=<?php echo $organisation["organisation_id"]; ?>">
-								<?php _e('Sunucu'); ?>
-								</a>
-							</li>
-							<li>
-								<a href="/organisations/bookCategories/<?php echo $organisation["organisation_id"]; ?>">
-								<?php _e('Yayın Kategorileri'); ?>
-								</a>
-							</li>
-							<li>
-								<a href="/organisations/publishedBooks/<?php echo $organisation["organisation_id"]; ?>">
-								<?php _e('Yayınlanan Eserler'); ?>
-								</a>
-							</li>
-							<li>
-								<a href="/organisations/aCL/<?php echo $organisation["organisation_id"]; ?>">
-								<?php _e('ACL'); ?>
-								</a>
-							</li>
-						</ul>
-						
-						
-					</li>
-					<?php } ?>
-					
+							<?php } ;
+						};
+						?>
+							
 				</ul>
 				<!-- /Navigation -->
 				
