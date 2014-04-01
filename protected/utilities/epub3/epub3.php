@@ -76,11 +76,22 @@ class epub3 {
 
 	public function createGenericFiles(){
 
+			$latexComponents = Yii::app()->db->createCommand('SELECT COUNT( * ) as count FROM component LEFT JOIN page USING ( page_id )  LEFT JOIN chapter USING ( chapter_id ) LEFT JOIN book USING ( book_id ) WHERE TYPE =  "latex" AND book_id ="'.$this->book->book_id.'"')->queryRow();
+
 			$genericFiles = new stdClass;
+			error_log("count: ".$count);
+			if($latexComponents['count']) { 
+				$zip_url='/css/epubPublish/generic_latex.zip';
+				$zip_file='generic_latex.zip';
+			}
+			else {
+				$zip_url='/css/epubPublish/generic.zip';
+				$zip_file='generic.zip';
+			}
 
-			$genericFiles->URL=Yii::app()->request->hostInfo . '/css/epubPublish/generic.zip';
+			$genericFiles->URL=Yii::app()->request->hostInfo . $zip_url;
 
-			$genericFiles->filename='generic.zip';
+			$genericFiles->filename=$zip_file;
 
 			$genericFiles->contents=file_get_contents($genericFiles->URL);
 
@@ -491,6 +502,31 @@ class epub3 {
 			});
 	    	</script>
 		<script src="mathjax/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+		<script type="text/javascript" src="fancy/lib/jquery.mousewheel-3.0.6.pack.js"></script>
+		<script type="text/javascript" src="fancy/source/jquery.fancybox.js?v=2.1.5"></script>
+		<link rel="stylesheet" type="text/css" href="fancy/source/jquery.fancybox.css?v=2.1.5" media="screen" />
+		<link rel="stylesheet" type="text/css" href="fancy/source/helpers/jquery.fancybox-buttons.css?v=1.0.5" />
+		<script type="text/javascript" src="fancy/source/helpers/jquery.fancybox-buttons.js?v=1.0.5"></script>
+		<link rel="stylesheet" type="text/css" href="fancy/source/helpers/jquery.fancybox-thumbs.css?v=1.0.7" />
+		<script type="text/javascript" src="fancy/source/helpers/jquery.fancybox-thumbs.js?v=1.0.7"></script>
+		<script type="text/javascript" src="fancy/source/helpers/jquery.fancybox-media.js?v=1.0.6"></script>
+		<script type="text/javascript">
+		$(document).ready(function() {
+
+			$(".fancybox").fancybox();
+
+		});
+	</script>
+	<style type="text/css">
+		.fancybox-custom .fancybox-skin {
+			box-shadow: 0 0 50px #222;
+		}
+		body {
+			max-width: 700px;
+			margin: 0 auto;
+		}
+	</style>
 	</head>
 	<body style="background-repeat:no-repeat; width:'.$width.'px; height:'.$height.'px;'.$background.';'.$background_size.';">
 	<section epub:type="frontmatter titlepage">
