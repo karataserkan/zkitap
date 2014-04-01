@@ -113,9 +113,9 @@ $current_user=User::model()->findByPk(Yii::app()->user->id);
 
 			   <li class='has-sub'><a href='#'><span><?php _e('Görünüm') ?> </span></a>
 					<ul>
-				     <li class="onoff"><a href='#' ><input type="checkbox" name="cetvel" id="cetvelcheck" class="css-checkbox" /><label for="cetvelcheck" class="css-label"><?php _e('Cetvel') ?></label></a></li>
-			         <li class="onoff"><a href='#' ><input type="checkbox" name="rehber" id="rehbercheck" class="css-checkbox" /><label for="rehbercheck" class="css-label"><?php _e('Rehber') ?></label></a></li>
-			         <li class="onoff"><a href='#' ><input type="checkbox" name="yorumlar" id="yorumlarcheck" class="css-checkbox" /><label for="yorumlarcheck" class="css-label"><?php _e('Yorumlar') ?></label></a></li>
+				     <li class="onoff"><a href='#' id="cetvelcheck" ><input type="checkbox" name="cetvel" id="cetvelcheck" class="css-checkbox" /><label for="cetvelcheck" class="css-label"><?php _e('Cetvel') ?></label></a></li>
+			         <li class="onoff"><a href='#' id="rehbercheck" ><input type="checkbox" name="rehber" id="rehbercheck" class="css-checkbox" /><label for="rehbercheck" class="css-label"><?php _e('Rehber') ?></label></a></li>
+			         <li class="onoff"><a href='#' id="yorumlarcheck" ><input type="checkbox" name="yorumlar" id="yorumlarcheck" class="css-checkbox" /><label for="yorumlarcheck" class="css-label"><?php _e('Yorumlar') ?></label></a></li>
 			        </ul>
 			   </li>
 				
@@ -157,7 +157,9 @@ $current_user=User::model()->findByPk(Yii::app()->user->id);
 			         <?php } ?>
 			      </ul>
 			   </li>
-			   
+			   <li>
+			   	<a href="#preview_page" class="fancybox">Preview</a>
+			   </li>
 			   <li class="left-border" style="float:right; height: 42px; min-width:50px; text-align:center; padding-top: 5px; ">
 			  <i id="save_status" class="size-30"></i>
 			   </li>
@@ -1923,6 +1925,10 @@ $background= (!empty($img)) ? "background-image:url('".$img."')" : "background:w
 	</div>
   </div>
 <!-- /COVER BOX CONFIGURATION MODAL FORM-->
+
+<div id="preview_page">
+	Preview Sayfası buraya gelecek....
+</div>
 
 <script type="text/javascript">
 	var preview = $("#upload-thmn-preview");

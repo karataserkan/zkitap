@@ -17,8 +17,6 @@ $(document).ready(function(){
       html_data = html_data.replace('font-family: Arial, Helvetica, sans;', 'font-family: Helvetica;');
       html_data = html_data.replace('font-size: 11px;', 'font-size: 16px;');
 
-      //console.log(html_data);
-
       var componentpopupid='popup'+this.options.component.id;
 
       if(this.options.component.data.html_inner){
@@ -97,6 +95,7 @@ while( str.indexOf('<span style="line-height: 1.428571429;">') > -1)
 var width='';
 var height='';
 var wrap_align='';
+
 var createWrapComponent = function ( event, ui, oldcomponent ) {  
 //console.log(oldcomponent); 
  
@@ -119,9 +118,7 @@ var createWrapComponent = function ( event, ui, oldcomponent ) {
       height = oldcomponent.data.height;
       wrap_align = oldcomponent.data.wrap_align;
     };
-    //console.log(oldcomponent.data);
-    //return;
-    //console.log(height);
+    
     var wrap_right = '';
     var wrap_right_active = '';
     var wrap_left = '';
@@ -290,7 +287,7 @@ var createWrapComponent = function ( event, ui, oldcomponent ) {
           var imageBinary = FileBinary;
           var newImage = $("<img class='wrapReady withSourceImage "+wrap_align+"' style='float:"+wrap_align+";padding:30px;' src='"+imageBinary+"' >");
 
-          $('#popup_wrapper').append(newImage);
+          $('#popup-explanation').append(newImage);
           return;
           
         }
