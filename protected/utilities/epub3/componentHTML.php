@@ -812,7 +812,7 @@ class componentHTML {
 		$component->data->html_inner = html_entity_decode($component->data->html_inner,null,"UTF-8");
 		$container.="
 
-			<div id='".$wrap_id."'>
+			<div id='".$wrap_id."' style='font-family: Helvetica; font-size: 16px;'>
 				".$component->data->html_inner."
 			</div>
 			<script type='text/javascript'>
