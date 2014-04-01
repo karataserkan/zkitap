@@ -76,11 +76,22 @@ class epub3 {
 
 	public function createGenericFiles(){
 
+			$latexComponents = Yii::app()->db->createCommand('SELECT COUNT( * ) as count FROM component LEFT JOIN page USING ( page_id )  LEFT JOIN chapter USING ( chapter_id ) LEFT JOIN book USING ( book_id ) WHERE TYPE =  "latex" AND book_id ="'.$this->book->book_id.'"')->queryRow();
+
 			$genericFiles = new stdClass;
+			error_log("count: ".$count);
+			if($latexComponents['count']) { 
+				$zip_url='/css/epubPublish/generic_latex.zip';
+				$zip_file='generic_latex.zip';
+			}
+			else {
+				$zip_url='/css/epubPublish/generic.zip';
+				$zip_file='generic.zip';
+			}
 
-			$genericFiles->URL=Yii::app()->request->hostInfo . '/css/epubPublish/generic.zip';
+			$genericFiles->URL=Yii::app()->request->hostInfo . $zip_url;
 
-			$genericFiles->filename='generic.zip';
+			$genericFiles->filename=$zip_file;
 
 			$genericFiles->contents=file_get_contents($genericFiles->URL);
 
