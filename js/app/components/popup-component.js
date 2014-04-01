@@ -173,7 +173,7 @@ console.log(oldcomponent);
                 'height':'128px',
                 'background-color': 'transparent',
                 'overflow': 'visible',
-                'z-index': '99998'
+                'z-index': '999'
               }
             }
           }
