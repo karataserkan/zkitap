@@ -974,6 +974,8 @@ right join book using (book_id) where book_id='$bookId' and type!='image';";
 
 	public function SendFileToCatalog(){
 		ob_start();
+		$QueueBooks=PublishQueue::model()->findAll('is_in_progress=:is_in_progress',array('is_in_progress'=>1));
+		if(count($QueueBooks)>0){echo "Already in progress!";die();}
 		$QueueBooks=PublishQueue::model()->findAll('is_in_progress=:is_in_progress',array('is_in_progress'=>0));
 		$booksInQueue=array();
 		foreach ($QueueBooks as $QueueBookKey0 => $Queue) {
