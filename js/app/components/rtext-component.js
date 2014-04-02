@@ -17,14 +17,25 @@ $(document).ready(function(){
         if( this.options.component.data.rtextdiv.val === '' ){
           this.options.component.data.rtextdiv.val = '';
         }
-
+        var componentrtextid='rtext'+this.options.component.id;
         var that = this;
+        console.log(this.element);
+
         
-        this.element.change(function ( ui ){
-          that._change( ui );
+        
+        this.element.focusout(function ( event, ui ){
+          console.log('deneme');
+
+          var el = event.target;
+          // save
+          
+
+          that._change( el,  ui);
         })
 
-
+        var popupmessage=$('<div  id="message_'+componentrtextid+'" contenteditable="true">'+this.options.component.data.rtextdiv.val+'</div>');
+        popupmessage.appendTo(this.element);
+        
         
         this._super();
           
@@ -39,12 +50,17 @@ $(document).ready(function(){
       },
 
       getSettable : function (){
-        return this.options.component.data.textarea;
+        //console.log(this.options.component.data.rtextdiv);
+        return this.options.component.data.rtextdiv;
       },
 
       setPropertyofObject : function (propertyName,propertyValue){
         var that = this;
-        
+        console.log(propertyName);
+        console.log(propertyValue);
+        ShowSelection(document.getElementById(that.options.component.id));
+              
+        return;
         switch (propertyName){
             case 'fast-style': 
                 this.getSettable().attr[propertyName]=propertyValue;
@@ -217,9 +233,12 @@ $(document).ready(function(){
 
       },
 
-      _change: function ( ui ) {
-
-        this.options.component.data.textarea.val = $(ui.target).val();
+      _change: function ( el , ui) {
+        
+        console.log(el);
+        console.log(ui);
+        console.log(el.innerHTML);
+        this.options.component.data.rtextdiv.val = el.innerHTML;
 
         this._super();
       }
@@ -230,7 +249,30 @@ $(document).ready(function(){
   
 });
 
+var ShowSelection = function()
+{
+  
+  var textComponent = document.getElementById('18nYbB5vJlHd3R0VYnzHvTSFvllfAcDESmp4hS5qJ183');
+  var selectedText;
+  // IE version
+  if (document.selection != undefined)
+  {
+    textComponent.focus();
+    var sel = document.selection.createRange();
+    selectedText = sel.text;
+  }
+  // Mozilla version
+  else if (textComponent.selectionStart != undefined)
+  {
+    var startPos = textComponent.selectionStart;
+    var endPos = textComponent.selectionEnd;
+    selectedText = textComponent.value.substring(startPos, endPos)
+  }
+  alert("You selected: " + selectedText);
+    console.log(selectedText);
+    return selectedText;
 
+}
 
 
   var createRtextComponent = function ( event, ui) {
@@ -258,7 +300,7 @@ console.log('eklendi');
           'attr': {
             'placeholder':'Metin Kutusu',
           },
-          'val': ''
+          'val': 'deneme yazıdır....'
         },
         'lock':'',
         'self': {

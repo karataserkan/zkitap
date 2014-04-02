@@ -232,8 +232,6 @@ $(document).ready(function(){
 });
 
 
-
-
   var createTextComponent = function ( event, ui ,type) {
 
     var component = {

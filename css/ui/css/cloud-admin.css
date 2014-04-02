@@ -6374,7 +6374,7 @@ fieldset[disabled] .btn-yellow.active {
   margin-left: 0px !important;
 }
 .margin-left-50 {
-  margin-left: 50px !important;
+  margin-left: 0px !important;
 }
 .margin-top-50 {
 }
@@ -6425,7 +6425,8 @@ fieldset[disabled] .btn-yellow.active {
 }
 /* Content */
 #content {
-  background-color: #f5f6f6;
+  background-image: url(../../../css/images/ui_background.png);
+  background-repeat: repeat;
   margin-top: 0;
   min-height: 800px;
   border-left: 1px solid #cdd2d2;
@@ -6537,6 +6538,8 @@ fieldset[disabled] .btn-yellow.active {
   margin-bottom: 15px;
   border-bottom: 1px solid #c4c4c4;
   min-height: 30px;
+  color: #808284;
+  text-shadow: 0px 1px 1px #FFFFFF;
 }
 .box .box-title h4 {
   font-family: 'Open Sans';
@@ -6546,7 +6549,6 @@ fieldset[disabled] .btn-yellow.active {
   margin: 0;
   padding: 0;
   margin-bottom: 7px;
-  color: #555555;
 }
 .box .box-title h4 i {
   margin-right: 10px;
@@ -9092,17 +9094,179 @@ ul.stats li small {
 
 
 
-/** END OF EDITOR MYBOOKS PAGE **/
+/** EDITOR MYBOOKS PAGE **/
 
 .mybooks_page_container {
   width:100%;
   height:100%;
-  min-width:1100px;
   background-image:url(../../../css/ui/img/market_page_container_background.png);
   background-repeat:repeat;
   position:absolute;
   margin-top:50px;
+  overflow-y:scroll;
 }
+
+.mybooks_page_book_filter {
+	overflow:inherit !important;	
+}
+
+#filter-items {
+	margin-left:5px;	
+}
+
+#filter-controls {
+	margin-left:20px;	
+}
+
+.hidden-xs a {
+	text-decoration: none;
+	color: #808284;
+	text-shadow: 0px 1px 1px #FFFFFF;
+	font-size: 16px;
+	border-left: 1px solid #ccc;
+	padding-left: 12px;
+	padding-right: 12px;	
+}
+
+.hidden-xs a:first-child {
+	border-left: 0;
+	
+}
+
+.hidden-xs a:hover {
+	border-bottom:3px solid #2880b9;	
+}
+
+.reader_book_card {
+	width:198px;
+	height:400px;
+	background-color:#fff;
+	-webkit-box-shadow: 0 1px 2px 0 #AAAAAA;
+	box-shadow: 0 1px 2px 0 #AAAAAA;
+	border-radius:5px;
+	float:left;
+	margin-right:20px;
+	margin-bottom:20px;
+	margin-left:1px;
+}
+
+
+.reader_book_card_book_cover img{
+	width:198px;
+	border-top-left-radius:5px;
+	border-top-right-radius:5px;
+}
+
+.reader_book_card_info_container {
+	width:198px;
+	height:108px;
+	position:absolute;
+	bottom:0;
+}
+
+
+.editor_mybooks_book_type {
+	width:198px;
+	height:30px;
+	float:left;
+	padding-top:5px;
+	padding-left:5px;
+	font-size:16px;
+	color:#58585b;
+	font-style:normal;
+	white-space:nowrap;
+	overflow:hidden;
+	text-overflow:ellipsis;
+	border-left: 5px solid #2880b9;
+	margin-top: 3px;
+}
+
+
+.reader_market_book_name {
+	width:198px;
+	height:30px;
+	float:left;
+	padding-top:5px;
+	padding-left:5px;
+	font-size:16px;
+	color:#58585b;
+	font-style:normal;
+	white-space:nowrap;
+	overflow:hidden;
+	text-overflow:ellipsis;
+	margin-top:9px;
+}
+
+.reader_book_card_writer_name {
+	width:198px;
+	height:30px;
+	float:left;
+	padding-bottom:-5px;
+	padding-left:5px;
+	font-size:13px;
+	color:#939597;
+	font-style:normal;
+	white-space:nowrap;
+	overflow:hidden;
+	text-overflow:ellipsis;
+	bottom: 0;
+	position: inherit;
+	line-height: 2.3em;
+}
+
+
+.editor_mybooks_book_settings{
+	width: 198px;
+	height: 292px;
+	background: rgba(0, 0, 0, 0);
+	position: absolute;
+	z-index: 9999;
+	-webkit-transition: all 0.3s;
+	-moz-transition: all 0.3s;
+	-o-transition: all 0.3s;
+	transition: all 0.3s;
+	text-align: center;
+	font-size: 25px;
+	color: #fff;
+	opacity:0;
+	border-top-left-radius:5px;
+	border-top-right-radius:5px;
+}
+
+.editor_mybooks_book_settings:hover {
+	background: rgba(0, 0, 0, 0.8);
+	opacity:1;
+}
+
+.editor_mybooks_book_settings i {
+	margin-left:10px;
+	margin-top:145px;
+	cursor:pointer;
+	-webkit-transition: all 0.3s;
+	-moz-transition: all 0.3s;
+	-o-transition: all 0.3s;
+	transition: all 0.3s;
+}
+
+.editor_mybooks_book_settings a i {
+	color:#fff !important;
+}
+
+.editor_mybooks_book_settings i:hover {
+	text-shadow: 0px 1px 10px #FFFFFF;
+}
+
+.editor_mybooks_book_settings a:first-child {
+	margin-left:0px;
+}
+
+.editor_mybooks_book_settings a:first-child i{
+	margin-left:0px;
+}
+
+
+
+
 
 /** END OF EDITOR MYBOOKS PAGE **/
 
@@ -9145,48 +9309,11 @@ div.reader_book_category {
 	float:left;
 }
 
-.reader_book_card {
-	width:198px;
-	height:330px;
-	background-color:#fff;
-	-webkit-box-shadow: 0 1px 2px 0 #AAAAAA;
-	box-shadow: 0 1px 2px 0 #AAAAAA;
-	border-radius:5px;
-	float:left;
-	margin-right:20px;
-	margin-bottom:20px;
-}
-
 .reader_book_card_book_cover {
 	width:198px;
 	height:264px;
 	border-top-right-radius:5px;
 	border-top-left-radius:5px;
-}
-
-.reader_book_card_book_cover img{
-	border-top-left-radius:5px;
-	border-top-right-radius:5px;
-}
-
-.reader_book_card_info_container {
-	width:198px;
-	height:68px;
-	position:absolute;
-}
-
-.reader_market_book_name {
-	width:175px;
-	height:30px;
-	float:left;
-	padding-top:5px;
-	padding-left:5px;
-	font-size:16px;
-	color:#58585b;
-	font-style:normal;
-	white-space:nowrap;
-	overflow:hidden;
-	text-overflow:ellipsis;
 }
 
 .reader_market_page_row .nav-tabs {
@@ -9240,22 +9367,7 @@ div.reader_book_category {
 	background-color:#f9f9f9;
 }
 
-.reader_book_card_writer_name {
-	width:130px;
-	height:30px;
-	float:left;
-	padding-bottom:-5px;
-	padding-left:5px;
-	font-size:13px;
-	color:#939597;
-	font-style:normal;
-	white-space:nowrap;
-	overflow:hidden;
-	text-overflow:ellipsis;
-	bottom: 0;
-	position: inherit;
-	line-height: 2.3em;
-}
+
 
 .reader_book_price {
 	border-left: 1px solid #e6e7e8;

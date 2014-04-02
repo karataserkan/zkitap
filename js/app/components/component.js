@@ -501,23 +501,24 @@ $(document).ready(function(){
     },
 
     _selected: function( event, ui ) {
-      //console.log(event);
+      console.log(event);
       //console.log(event.originalEvent);
-     console.log(this.options.component.id);
-
-    if (typeof event.originalEvent != "undefined")
-      if (typeof event.originalEvent != "null")
-        if (typeof event.originalEvent.originalEvent != "undefined")
-          if (typeof event.originalEvent.originalEvent.type != "undefined")
-            if ( event.originalEvent.originalEvent.type == "mouseup")
-              if (!$(this).has($(event.toElement)).lenght)
-                var false_out_selection=true;
-
-      if( event.groupSelection || false_out_selection  || event.ctrlKey || event.metaKey || $(event.toElement).hasClass('ui-resizable-handle') || $(event.toElement).hasClass('dragging_holder')  )
-        window.lindneo.toolbox.makeMultiSelectionBox();
-      else
-        $('.selected').trigger('unselect');
-
+      
+      console.log(this.options.component.id);
+    if(event)
+      if (typeof event.originalEvent != "undefined")
+        if (typeof event.originalEvent != "null")
+          if (typeof event.originalEvent.originalEvent != "undefined")
+            if (typeof event.originalEvent.originalEvent.type != "undefined")
+              if ( event.originalEvent.originalEvent.type == "mouseup")
+                if (!$(this).has($(event.toElement)).lenght)
+                  var false_out_selection=true;
+      if(event)
+        if( event.groupSelection || false_out_selection  || event.ctrlKey || event.metaKey || $(event.toElement).hasClass('ui-resizable-handle') || $(event.toElement).hasClass('dragging_holder')  )
+          window.lindneo.toolbox.makeMultiSelectionBox();
+        else
+          $('.selected').trigger('unselect');
+        
       if (typeof this.options.component.data.group_id != "undefined" && !event.groupSelection){
        $("[group_id~='"+this.options.component.data.group_id+"']").trigger('select');
       }

@@ -77,7 +77,14 @@ class EditorActionsController extends Controller
 		$model->contentPrice="0";
 		$model->categories="1122";
 
-		$this->render('publishBook',array('model'=>$model,'hosts'=>$hosts,'categories'=>$categories,'bookId'=>$bookId));
+		$acl = Yii::app()->db->createCommand()
+		    ->select("*")
+		    ->from("organisations_meta")
+		    ->where("organisation_id=:organisation_id AND meta=:meta", array(':organisation_id' => $organisation->organisation_id,':meta'=>'ACL'))
+		    ->queryRow();
+		$acls=$acl['value'];
+
+		$this->render('publishBook',array('model'=>$model,'hosts'=>$hosts,'categories'=>$categories,'bookId'=>$bookId,'acls'=>$acls));
 	}
 
 	public function actionGetFileURL($type=null){
@@ -773,7 +780,7 @@ right join book using (book_id) where book_id='$bookId' and type!='image';";
 			$data['contentCurrencyCode']=$_POST['contentCurrency'];
 			$data['contentPrice']=$_POST['contentPrice'];
 			$data['date']=$_POST['date'];
-			$data['contentReaderGroup']=$_POST['contentReaderGroup'];
+			//$data['contentReaderGroup']=$_POST['contentReaderGroup'];
 			$data['contentCover']=$bookData['cover'];
 			$data['contentThumbnail']=$bookData['thumbnail'];
 			
@@ -788,6 +795,48 @@ right join book using (book_id) where book_id='$bookId' and type!='image';";
 
 			$data['totalPage']=$ebook->totalPageCount;
 			$data['toc']=json_encode($ebook->TOC_Titles);
+
+			if (isset($_POST['acl'])) {
+				$acls=$_POST['acl'];
+
+				$allAclsRow=Yii::app()->db->createCommand()
+				    ->select("*")
+				    ->from("organisations_meta")
+				    ->where("organisation_id=:organisation_id AND meta=:meta", array(':organisation_id' => $data['organisationId'],':meta'=>'ACL'))
+				    ->queryRow();
+				 $allAcls=json_decode($allAclsRow['value']);
+				 
+				 if (in_array('all', $acls)) {
+				 	foreach ($acls as $key => $aclId) {
+				 		if ($aclId=='all') {
+				 			continue;
+				 		}
+				 		foreach ($allAcls as $key => $acl) {
+							$data['acls'][$acl->id]['id']=$acl->id;
+							$data['acls'][$acl->id]['name']=$acl->name;
+							$data['acls'][$acl->id]['type']=$acl->type;
+							$data['acls'][$acl->id]['val1']=$acl->val1;
+							$data['acls'][$acl->id]['val2']=$acl->val2;
+							$data['acls'][$acl->id]['comment']=$acl->comment;
+						}
+				 	}
+				 }
+				 else
+				 {
+				 	foreach ($acls as $key => $aclId) {
+				 		foreach ($allAcls as $key => $acl) {
+							if ($acl->id==$aclId) {
+								$data['acls'][$acl->id]['id']=$acl->id;
+								$data['acls'][$acl->id]['name']=$acl->name;
+								$data['acls'][$acl->id]['type']=$acl->type;
+								$data['acls'][$acl->id]['val1']=$acl->val1;
+								$data['acls'][$acl->id]['val2']=$acl->val2;
+								$data['acls'][$acl->id]['comment']=$acl->comment;
+							}
+						}
+				 	}
+				 }
+			 }
 
 			if (isset($_POST['host'])) {
 				$hosts=$_POST['host'];
@@ -861,9 +910,9 @@ right join book using (book_id) where book_id='$bookId' and type!='image';";
 		
 
 		$data['hosts']=json_encode($data['hosts']);
+		$data['acls']=json_encode($data['acls']);
 		$data['categories']=json_encode($data['categories']);
 		$data['siraliCategory']=json_encode($data['siraliCategory']);
-
 
 
 		$queue= new PublishQueue();
@@ -894,13 +943,13 @@ right join book using (book_id) where book_id='$bookId' and type!='image';";
 
 		foreach ($booksInQueue as $QueueBookKey => $QueueBook) {
 			$bookId=$QueueBook->book_id;
-
+			
 			$data=json_decode($QueueBook->publish_data,true);
 		
 			$book=Book::model()->findByPk($bookId);
 			$bookData=json_decode($book->data,true);
 			$ebook=new epub3($book,null,true);
-
+			
 
 			if (!file_exists($ebook->ebookFile)) {
 				$this->error('SendFileToCatalog','File does not exists!');
@@ -925,17 +974,20 @@ right join book using (book_id) where book_id='$bookId' and type!='image';";
 			
 			curl_setopt($ch, CURLOPT_POSTFIELDS, $data); 
 			$Return['response']=json_decode(curl_exec($ch));
+			
 
 			if (curl_errno($ch)){  
 				$this->error('SendFileToCatalog','CURL_ERROR:'.curl_error($ch));
 			    $msg="EDITOR_ACTIONS:SendFileToCatalog:0:CURL_ERROR:".curl_error($ch). json_encode(array(array('user'=>Yii::app()->user->id),array('bookId'=>$bookId)));
 				Yii::log($msg,'error');
+				
 				return;
 			}
 
 			$msg = 'File uploaded successfully.';
 			curl_close ($ch);
 			$Return['msg'] = $msg;
+			
 			ob_end_clean();
 
 
@@ -967,7 +1019,7 @@ right join book using (book_id) where book_id='$bookId' and type!='image';";
 			$attr['transaction_type']=$data['contentType'];
 
 			$success=0;
-
+			
 			$transaction=new Transactions;
 			$transaction['attributes']=$attr;
 			$transaction->transaction_amount=0;

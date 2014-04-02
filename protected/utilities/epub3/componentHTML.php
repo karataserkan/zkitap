@@ -711,11 +711,10 @@ class componentHTML {
 
 		$container.=" 
 			
-			<img  class='popup ref-popup-rw' data-popup-target='$popup_id' src='popupmarker.png' />
+			<a href='#".$popup_id."' class='fancybox'><img src='popupmarker.png' /></a>
 			
-			<div class='widgets-rw popup-text-rw exclude-auto-rw' id='$popup_id' style='width:300px; height:300px'>
+			<div id='$popup_id' style='display:none; z-index:9999999;'>
 				".$component->data->html_inner."
-				 <button xmlns='http://www.w3.org/1999/xhtml' onclick='$(this).parent().remove();' class='ppclose' style='float:right;'>X</button>
 			</div>
 	
 		
@@ -807,11 +806,13 @@ class componentHTML {
 		$component->data->html_inner = str_replace('<span>', '', $component->data->html_inner);
 		$component->data->html_inner = str_replace('</span>', '', $component->data->html_inner);
 		$component->data->html_inner = str_replace('<span style="line-height: 1.428571429;">', '', $component->data->html_inner);
+		$component->data->html_inner = str_replace('font-family: Arial, Helvetica, sans;', 'font-family: Helvetica;', $component->data->html_inner);
+		$component->data->html_inner = str_replace('font-size: 11px;', 'font-size: 16px;', $component->data->html_inner);
 
 		$component->data->html_inner = html_entity_decode($component->data->html_inner,null,"UTF-8");
 		$container.="
 
-			<div id='".$wrap_id."'>
+			<div id='".$wrap_id."' style='font-family: Helvetica; font-size: 16px;'>
 				".$component->data->html_inner."
 			</div>
 			<script type='text/javascript'>
@@ -971,15 +972,14 @@ class componentHTML {
 	}
 
 	public function thumbInner($component){ 
-	
-		
+
 		$container ='
 		<script type="text/javascript">
 			$( document ).ready(function() {
 			  myScroll = new iScroll("wrapper", { scrollbarClass: "myScrollbar" });
 			});
 		</script>
-		<div id="container'.$component->id.'" class="widgets-rw panel-sliding-rw exclude-auto-rw" style="height:'.$component->data->somegallery->css->height.'; width:'.$component->data->somegallery->css->width.';"  >
+		<div id="container'.$component->id.'" class="widgets-rw panel-sliding-rw exclude-auto-rw" style="background-color:transparent; height:'.$component->data->somegallery->css->height.'; width:'.$component->data->somegallery->css->width.';"  >
 			<div id="wrapper"><div id="scroller">';
 		$container.=' <ul class="ul2" epub:type="list">
 		';
@@ -989,7 +989,7 @@ class componentHTML {
 			$new_file= functions::save_base64_file ( $images_value->src , $component->id .$images_key, $this->outputFolder );
 			$images_value->attr->src =  $new_file->filename;
 
-			$container .=' <li id="li-'.$component->id.$images_key.'" '.$size_style_attr.'><img ';
+			$container .=' <li style="list-style:none;" id="li-'.$component->id.$images_key.'" '.$size_style_attr.'><img ';
 			if(isset($images_value->attr))
 				foreach ($images_value->attr as $attr_name => $attr_val ) {
 					$container.=" $attr_name='$attr_val' ";

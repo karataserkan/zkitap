@@ -76,11 +76,22 @@ class epub3 {
 
 	public function createGenericFiles(){
 
+			$latexComponents = Yii::app()->db->createCommand('SELECT COUNT( * ) as count FROM component LEFT JOIN page USING ( page_id )  LEFT JOIN chapter USING ( chapter_id ) LEFT JOIN book USING ( book_id ) WHERE TYPE =  "latex" AND book_id ="'.$this->book->book_id.'"')->queryRow();
+
 			$genericFiles = new stdClass;
+			error_log("count: ".$count);
+			if($latexComponents['count']) { 
+				$zip_url='/css/epubPublish/generic_latex.zip';
+				$zip_file='generic_latex.zip';
+			}
+			else {
+				$zip_url='/css/epubPublish/generic.zip';
+				$zip_file='generic.zip';
+			}
 
-			$genericFiles->URL=Yii::app()->request->hostInfo . '/css/epubPublish/generic.zip';
+			$genericFiles->URL=Yii::app()->request->hostInfo . $zip_url;
 
-			$genericFiles->filename='generic.zip';
+			$genericFiles->filename=$zip_file;
 
 			$genericFiles->contents=file_get_contents($genericFiles->URL);
 
@@ -415,76 +426,105 @@ class epub3 {
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:epub="http://www.idpf.org/2007/ops" lang="en">
   <head>
     <meta http-equiv="default-style" content="text/html; charset=utf-8"/>
-    <title>Linden</title>
-	<meta name="viewport" content="width='.$width.', height='.$height.'"/>
-	<link rel="stylesheet" href="stylesheet.css" type="text/css"/>
-	<link rel="stylesheet" href="page_styles.css" type="text/css"/>
-	<link rel="stylesheet" href="widgets.css" type="text/css"/>
-	<script type="text/javascript" src="jquery-1.4.4.min.js"></script>
-	<script type="text/javascript" src="aie_core.js"></script>
-	<script type="text/javascript" src="aie_events.js"></script>
-	<script type="text/javascript" src="aie_explore.js"></script>
-	<script type="text/javascript" src="aie_gameutils.js"></script>
-	<script type="text/javascript" src="aie_qaa.js"></script>
-	<script type="text/javascript" src="aie_storyline.js"></script>
-	<script type="text/javascript" src="aie_textsound.js"></script>
-	<script type="text/javascript" src="igp_audio.js"></script>
-	<script type="text/javascript" src="iscroll.js"></script>
-	<script type="text/javascript" src="jquery.min.js"></script>
-	<script type="text/javascript" src="jquery-ui.min.js"></script>
-	<script type="text/javascript" src="LAB.min.js"></script>
-	<script type="text/javascript" src="panelnav.js"></script>
-	<script type="text/javascript" src="popup.js"></script>
-	<script type="text/javascript" src="pubsub.js"></script>
-	<script type="text/javascript" src="Chart.js"></script>
-	<script type="text/javascript" src="jquery.slickwrap.js"></script>
-	<script type="text/javascript" src="jssor.slider.js"></script>
-	<script type="text/javascript" src="jssor.core.js"></script>
-	<script type="text/javascript" src="jssor.utils.js"></script>
-	<script type="text/javascript" src="runtime.js"></script>
-	<!-- MULTİPLE CHOİCE -->
-	<script src="multiplechoice/sources/js/MultipleChoiceDataJSON.js"></script>
-	<script src="multiplechoice/sources/js/multiplechoice_min.js"></script>
-	<link rel="stylesheet" type="text/css" href="multiplechoice/sources/css/MultipleChoice.css" />
+		<meta name="viewport" content="width='.$width.', height='.$height.'"/>
 
-	<!-- DROPDOWN -->
-	<script src="dropdown/sources/js/DropDownDataJSON.js"></script>
-	<script src="dropdown/sources/js/dropdown-mini.js"></script>
-	<link rel="stylesheet" type="text/css" href="dropdown/sources/css/DropDown.css" />
 
-	<!-- DRAGDROP-->
-	<script type="text/javascript" src="dragdrop/sources/js/jquery-ui.min.js"></script>
-	<script type="text/javascript" src="dragdrop/sources/js/jquery.ui.touch-punch.min.js"></script>
-	<script type="text/javascript" src="dragdrop/sources/js/DragDrop.js"></script>
-	<link rel="stylesheet" type="text/css" href="dragdrop/sources/css/DragDrop.css" />
 
-	<script type="text/x-mathjax-config">
-	  MathJax.Hub.Config({
-		tex2jax: {
-		  inlineMath: [["$","$"],["\\\\(","\\\\)"]],
-		  "HTML-CSS": { scale: 100} 
+
+		<link rel="stylesheet" href="stylesheet.css" type="text/css"/>
+		<link rel="stylesheet" href="page_styles.css" type="text/css"/>
+		<link rel="stylesheet" href="widgets.css" type="text/css"/>
+		<script type="text/javascript" src="jquery-1.4.4.min.js"></script>
+		<script type="text/javascript" src="aie_core.js"></script>
+		<script type="text/javascript" src="aie_events.js"></script>
+		<script type="text/javascript" src="aie_explore.js"></script>
+		<script type="text/javascript" src="aie_gameutils.js"></script>
+		<script type="text/javascript" src="aie_qaa.js"></script>
+		<script type="text/javascript" src="aie_storyline.js"></script>
+		<script type="text/javascript" src="aie_textsound.js"></script>
+		<script type="text/javascript" src="igp_audio.js"></script>
+		<script type="text/javascript" src="iscroll.js"></script>
+		<script type="text/javascript" src="jquery.min.js"></script>
+		<script type="text/javascript" src="jquery-ui.min.js"></script>
+		<script type="text/javascript" src="LAB.min.js"></script>
+		<script type="text/javascript" src="panelnav.js"></script>
+		<script type="text/javascript" src="popup.js"></script>
+		<script type="text/javascript" src="pubsub.js"></script>
+		<script type="text/javascript" src="Chart.js"></script>
+		<script type="text/javascript" src="jquery.slickwrap.js"></script>
+		<script type="text/javascript" src="jssor.slider.js"></script>
+		<script type="text/javascript" src="jssor.core.js"></script>
+		<script type="text/javascript" src="jssor.utils.js"></script>
+		<script type="text/javascript" src="runtime.js"></script>
+		<!-- MULTİPLE CHOİCE -->
+		<script src="multiplechoice/sources/js/MultipleChoiceDataJSON.js"></script>
+		<script src="multiplechoice/sources/js/multiplechoice_min.js"></script>
+		<link rel="stylesheet" type="text/css" href="multiplechoice/sources/css/MultipleChoice.css" />
+
+		<!-- DROPDOWN -->
+		<script src="dropdown/sources/js/DropDownDataJSON.js"></script>
+		<script src="dropdown/sources/js/dropdown-mini.js"></script>
+		<link rel="stylesheet" type="text/css" href="dropdown/sources/css/DropDown.css" />
+
+		<!-- DRAGDROP-->
+		<script type="text/javascript" src="dragdrop/sources/js/jquery-ui.min.js"></script>
+		<script type="text/javascript" src="dragdrop/sources/js/jquery.ui.touch-punch.min.js"></script>
+		<script type="text/javascript" src="dragdrop/sources/js/DragDrop.js"></script>
+		<link rel="stylesheet" type="text/css" href="dragdrop/sources/css/DragDrop.css" />
+
+		<script type="text/x-mathjax-config">
+		  MathJax.Hub.Config({
+			tex2jax: {
+			  inlineMath: [["$","$"],["\\\\(","\\\\)"]],
+			  "HTML-CSS": { scale: 100} 
+			}
+		  });
+		  MathJax.Hub.Register.StartupHook("HTML-CSS Jax Ready",function () {
+		  var VARIANT = MathJax.OutputJax["HTML-CSS"].FONTDATA.VARIANT;
+		  VARIANT["normal"].fonts.unshift("MathJax_Arial");
+		  VARIANT["bold"].fonts.unshift("MathJax_Arial-bold");
+		  VARIANT["italic"].fonts.unshift("MathJax_Arial-italic");
+		  VARIANT["-tex-mathit"].fonts.unshift("MathJax_Arial-italic");
+		});
+		MathJax.Hub.Register.StartupHook("SVG Jax Ready",function () {
+		  var VARIANT = MathJax.OutputJax.SVG.FONTDATA.VARIANT;
+		  VARIANT["normal"].fonts.unshift("MathJax_SansSerif");
+		  VARIANT["bold"].fonts.unshift("MathJax_SansSerif-bold");
+		  VARIANT["italic"].fonts.unshift("MathJax_SansSerif-italic");
+		  VARIANT["-tex-mathit"].fonts.unshift("MathJax_SansSerif-italic");
+		});
+		MathJax.Hub.Register.StartupHook("End",function () {
+		  $(".MathJax").css("font-size","93%");
+		  $(".textarea .MathJax").css("font-size","80%");
+		});
+		</script>
+		<script src="mathjax/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+		<script type="text/javascript" src="fancy/lib/jquery.mousewheel-3.0.6.pack.js"></script>
+		<script type="text/javascript" src="fancy/source/jquery.fancybox.js?v=2.1.5"></script>
+		<link rel="stylesheet" type="text/css" href="fancy/source/jquery.fancybox.css?v=2.1.5" media="screen" />
+		<link rel="stylesheet" type="text/css" href="fancy/source/helpers/jquery.fancybox-buttons.css?v=1.0.5" />
+		<script type="text/javascript" src="fancy/source/helpers/jquery.fancybox-buttons.js?v=1.0.5"></script>
+		<link rel="stylesheet" type="text/css" href="fancy/source/helpers/jquery.fancybox-thumbs.css?v=1.0.7" />
+		<script type="text/javascript" src="fancy/source/helpers/jquery.fancybox-thumbs.js?v=1.0.7"></script>
+		<script type="text/javascript" src="fancy/source/helpers/jquery.fancybox-media.js?v=1.0.6"></script>
+		<script type="text/javascript">
+		$(document).ready(function() {
+
+		$(".fancybox").fancybox();
+
+		});
+		</script>
+		<style type="text/css">
+		.fancybox-custom .fancybox-skin {
+		box-shadow: 0 0 50px #222;
 		}
-	  });
-	  MathJax.Hub.Register.StartupHook("HTML-CSS Jax Ready",function () {
-	  var VARIANT = MathJax.OutputJax["HTML-CSS"].FONTDATA.VARIANT;
-	  VARIANT["normal"].fonts.unshift("MathJax_Arial");
-	  VARIANT["bold"].fonts.unshift("MathJax_Arial-bold");
-	  VARIANT["italic"].fonts.unshift("MathJax_Arial-italic");
-	  VARIANT["-tex-mathit"].fonts.unshift("MathJax_Arial-italic");
-	});
-	MathJax.Hub.Register.StartupHook("SVG Jax Ready",function () {
-	  var VARIANT = MathJax.OutputJax.SVG.FONTDATA.VARIANT;
-	  VARIANT["normal"].fonts.unshift("MathJax_SansSerif");
-	  VARIANT["bold"].fonts.unshift("MathJax_SansSerif-bold");
-	  VARIANT["italic"].fonts.unshift("MathJax_SansSerif-italic");
-	  VARIANT["-tex-mathit"].fonts.unshift("MathJax_SansSerif-italic");
-	});
-	MathJax.Hub.Register.StartupHook("End",function () {
-	  $(".MathJax").css("font-size","93%");
-	  $(".textarea .MathJax").css("font-size","80%");
-	});
-	</script>
-	<script src="mathjax/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+		body {
+		max-width: 700px;
+		margin: 0 auto;
+		}
+		</style>
+
 	</head>
 	<body style="background-repeat:no-repeat; width:'.$width.'px; height:'.$height.'px;'.$background.';'.$background_size.';">
 	<section epub:type="frontmatter titlepage">
