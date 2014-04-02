@@ -465,12 +465,12 @@ class componentHTML {
 
 
 
-			$file=new file( $component->id.'.'.$ext , $this->epub->get_tmp_file() );
+			$file=new file( $component->id.'.'.$ext , $this->outputFolder );
 			$file->writeLine($file_contents);
 			$file->closeFile();
 
 
-			//$file = functions::save_base64_file ( $component->data->source->attr->src , $component->id , $this->epub->get_tmp_file());
+			//$file = functions::save_base64_file ( $component->data->source->attr->src , $component->id , $this->outputFolder);
 			$this->epub->files->others[] = $file;
 			$component->data->source->attr->src=$file->filename;
 			//new dBug($component); die;
@@ -589,7 +589,7 @@ class componentHTML {
 	public function soundInner($component){ 
 		
 
-		$file = functions::save_base64_file ( $component->data->source->attr->src , $component->id , $this->epub->get_tmp_file());
+		$file = functions::save_base64_file ( $component->data->source->attr->src , $component->id , $this->outputFolder);
 		$this->epub->files->others[] = $file;
 		$component->data->source->attr->src=$file->filename;
 		//new dBug($component); die;
@@ -665,7 +665,7 @@ class componentHTML {
 		
 		if($component->data->ul->imgs)
 		foreach ($component->data->ul->imgs as $images_key => &$images_value) {
-			$new_file= functions::save_base64_file ( $images_value->src , $component->id .$images_key, $this->epub->get_tmp_file() );
+			$new_file= functions::save_base64_file ( $images_value->src , $component->id .$images_key, $this->outputFolder );
 			$images_value->attr->src =  $new_file->filename;
 
 			$container .=' <li id="li-'.$component->id.$images_key.'" '.$size_style_attr.'><img ';
@@ -713,11 +713,10 @@ class componentHTML {
 
 		$container.=" 
 			
-			<img  class='popup ref-popup-rw' data-popup-target='$popup_id' src='popupmarker.png' />
+			<a href='#".$popup_id."' class='fancybox'><img src='popupmarker.png' /></a>
 			
-			<div class='widgets-rw popup-text-rw exclude-auto-rw' id='$popup_id' style='width:300px; height:300px'>
+			<div id='$popup_id' style='display:none; z-index:9999999;'>
 				".$component->data->html_inner."
-				 <button xmlns='http://www.w3.org/1999/xhtml' onclick='$(this).parent().remove();' class='ppclose' style='float:right;'>X</button>
 			</div>
 	
 		
@@ -809,11 +808,13 @@ class componentHTML {
 		$component->data->html_inner = str_replace('<span>', '', $component->data->html_inner);
 		$component->data->html_inner = str_replace('</span>', '', $component->data->html_inner);
 		$component->data->html_inner = str_replace('<span style="line-height: 1.428571429;">', '', $component->data->html_inner);
+		$component->data->html_inner = str_replace('font-family: Arial, Helvetica, sans;', 'font-family: Helvetica;', $component->data->html_inner);
+		$component->data->html_inner = str_replace('font-size: 11px;', 'font-size: 16px;', $component->data->html_inner);
 
 		$component->data->html_inner = html_entity_decode($component->data->html_inner,null,"UTF-8");
 		$container.="
 
-			<div id='".$wrap_id."'>
+			<div id='".$wrap_id."' style='font-family: Helvetica; font-size: 16px;'>
 				".$component->data->html_inner."
 			</div>
 			<script type='text/javascript'>
@@ -858,7 +859,7 @@ class componentHTML {
 
 	public function imageInner($component){
 		if($component->data->img->image_type != 'popup'){
-			$file = functions::save_base64_file ( $component->data->img->src , $component->id , $this->epub->get_tmp_file());
+			$file = functions::save_base64_file ( $component->data->img->src , $component->id , $this->outputFolder);
 			$this->epub->files->others[] = $file;
 			$component->data->img->attr->src=$file->filename;
 			//new dBug($component); die;
@@ -886,7 +887,7 @@ class componentHTML {
 			$this->html=str_replace('%component_inner%' ,$container, $this->html);
 		}
 		else{
-			$file = functions::save_base64_file ( $component->data->img->src , $component->id , $this->epub->get_tmp_file());
+			$file = functions::save_base64_file ( $component->data->img->src , $component->id , $this->outputFolder);
 			$this->epub->files->others[] = $file;
 			$component->data->img->attr->src=$file->filename;
 
@@ -987,7 +988,7 @@ class componentHTML {
 		
 		if($component->data->slides->imgs)
 		foreach ($component->data->slides->imgs as $images_key => &$images_value) {
-			$new_file= functions::save_base64_file ( $images_value->src , $component->id .$images_key, $this->epub->get_tmp_file() );
+			$new_file= functions::save_base64_file ( $images_value->src , $component->id .$images_key, $this->outputFolder );
 			$images_value->attr->src =  $new_file->filename;
 
 			$container .=' <li style="list-style:none;" id="li-'.$component->id.$images_key.'" '.$size_style_attr.'><img ';
@@ -1054,9 +1055,12 @@ class componentHTML {
 		$this->html=$container;
 	}
 
-	public function __construct($component,$epub){
+	public function __construct($component,$epub,$folder = null){
 		$this->epub=$epub;
-
+		if($folder) 
+			$this->outputFolder = $folder;
+		else
+			$this->outputFolder = $this->epub->get_tmp_file();
 		//if(!$component) return "";
 		
 		$this->create_container($component);

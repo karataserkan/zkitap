@@ -24,6 +24,49 @@ class EditorActionsController extends Controller
 		$this->errors[]=$error; 
 		return $error;
 	}
+
+	public function actionPreviewPage($id=null){
+		
+
+		$page=Page::model()->findByPk($id);
+		
+		
+		if(!$page){
+			$this->render('pageNotFound');
+			return;
+		}
+		$chapter = Chapter::model()->findByPk($page->chapter_id);
+		$book = Book::model()->findByPk($chapter->book_id);
+		if(!$book){
+			$this->render('pageNotFound');
+			return;
+		}
+		$new_page=(object)$page->attributes;
+
+		$components=(object)EditorActionsController::get_page_components($page->page_id);
+		if($components){
+			$new_page->components=$components;
+		}
+		$folder= "preview_files/".$id . "/";
+
+		
+		if(is_dir($folder))
+			functions::deltree($folder);
+
+		mkdir($folder);
+		$new_page->file=new file($new_page->page_id . '.html', $folder  );
+
+		
+		
+		 
+		$new_page->file->writeLine(epub3::prepare_PageHtml($new_page,$book->getPageSize(),$folder  ));
+		
+		Yii::app()->request->redirect("/".$folder.$new_page->page_id . '.html');
+		return;
+		
+	}
+
+
 	public function actionProfilePhoto($email){
 		$user=User::model()->find("email=:email",array('email'=>$email));
 		if($user){
@@ -931,6 +974,8 @@ right join book using (book_id) where book_id='$bookId' and type!='image';";
 
 	public function SendFileToCatalog(){
 		ob_start();
+		$QueueBooks=PublishQueue::model()->findAll('is_in_progress=:is_in_progress',array('is_in_progress'=>1));
+		if(count($QueueBooks)>0){echo "Already in progress!";die();}
 		$QueueBooks=PublishQueue::model()->findAll('is_in_progress=:is_in_progress',array('is_in_progress'=>0));
 		$booksInQueue=array();
 		foreach ($QueueBooks as $QueueBookKey0 => $Queue) {

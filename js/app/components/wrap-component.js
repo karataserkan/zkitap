@@ -14,13 +14,14 @@ $(document).ready(function(){
       var html_data = html_tag_replace(this.options.component.data.html_inner);
       var wrap_cutoff = this.options.component.data.cutoff;
       //html_data = html_data + '<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc justo massa, mattis in imperdiet in, pellentesque sit amet elit. Fusce vitae pulvinar nisi. Ut sed justo nec est congue cursus vestibulum eu dolor. Donec at mauris felis, sit amet ultrices odio. Aliquam erat volutpat. Nullam faucibus metus eu elit luctus sed malesuada risus molestie. Mauris nulla quam, tristique at lobortis at, fringilla quis nibh. Ut sapien mauris, imperdiet eget tincidunt semper, consectetur a augue. Donec vitae nibh augue, ut rhoncus elit. Nullam volutpat lorem sed odio lacinia non aliquet erat consequat. In ac libero turpis. In commodo nisl id diam dapibus varius. Sed lobortis ultricies ligula, quis auctor arcu imperdiet eget. Donec vel ipsum dui. In justo purus, molestie sit amet mattis sed, cursus non orci. Nullam ac massa vel tortor scelerisque blandit quis a sapien.</p><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc justo massa, mattis in imperdiet in, pellentesque sit amet elit. Fusce vitae pulvinar nisi. Ut sed justo nec est congue cursus vestibulum eu dolor. Donec at mauris felis, sit amet ultrices odio. Aliquam erat volutpat. Nullam faucibus metus eu elit luctus sed malesuada risus molestie. Mauris nulla quam, tristique at lobortis at, fringilla quis nibh. Ut sapien mauris, imperdiet eget tincidunt semper, consectetur a augue. Donec vitae nibh augue, ut rhoncus elit. Nullam volutpat lorem sed odio lacinia non aliquet erat consequat. In ac libero turpis. In commodo nisl id diam dapibus varius. Sed lobortis ultricies ligula, quis auctor arcu imperdiet eget. Donec vel ipsum dui. In justo purus, molestie sit amet mattis sed, cursus non orci. Nullam ac massa vel tortor scelerisque blandit quis a sapien.</p>'
+      console.log(html_data);
       html_data = html_data.replace('font-family: Arial, Helvetica, sans;', 'font-family: Helvetica;');
-      //console.log(html_data);
-
+      html_data = html_data.replace('font-size: 11px;', 'font-size: 16px;');
+console.log(html_data);
       var componentpopupid='popup'+this.options.component.id;
 
       if(this.options.component.data.html_inner){
-        var popupmessage=$('<div  id="message_'+componentpopupid+'" style="display:block" >'+html_data+'</div>');
+        var popupmessage=$('<div  id="message_'+componentpopupid+'" style="display:block; font-family: Helvetica; font-size: 16px;" >'+html_data+'</div>');
         popupmessage.appendTo(this.element);
       }
 
@@ -95,6 +96,7 @@ while( str.indexOf('<span style="line-height: 1.428571429;">') > -1)
 var width='';
 var height='';
 var wrap_align='';
+
 var createWrapComponent = function ( event, ui, oldcomponent ) {  
 //console.log(oldcomponent); 
  
@@ -117,9 +119,7 @@ var createWrapComponent = function ( event, ui, oldcomponent ) {
       height = oldcomponent.data.height;
       wrap_align = oldcomponent.data.wrap_align;
     };
-    //console.log(oldcomponent.data);
-    //return;
-    //console.log(height);
+
     var wrap_right = '';
     var wrap_right_active = '';
     var wrap_left = '';
@@ -288,7 +288,7 @@ var createWrapComponent = function ( event, ui, oldcomponent ) {
           var imageBinary = FileBinary;
           var newImage = $("<img class='wrapReady withSourceImage "+wrap_align+"' style='float:"+wrap_align+";padding:30px;' src='"+imageBinary+"' >");
 
-          $('#popup_wrapper').append(newImage);
+          $('#popup-explanation').append(newImage);
           return;
           
         }

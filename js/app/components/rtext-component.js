@@ -58,6 +58,9 @@ $(document).ready(function(){
         var that = this;
         console.log(propertyName);
         console.log(propertyValue);
+        ShowSelection(document.getElementById(that.options.component.id));
+              
+        return;
         switch (propertyName){
             case 'fast-style': 
                 this.getSettable().attr[propertyName]=propertyValue;
@@ -246,7 +249,30 @@ $(document).ready(function(){
   
 });
 
+var ShowSelection = function()
+{
+  
+  var textComponent = document.getElementById('18nYbB5vJlHd3R0VYnzHvTSFvllfAcDESmp4hS5qJ183');
+  var selectedText;
+  // IE version
+  if (document.selection != undefined)
+  {
+    textComponent.focus();
+    var sel = document.selection.createRange();
+    selectedText = sel.text;
+  }
+  // Mozilla version
+  else if (textComponent.selectionStart != undefined)
+  {
+    var startPos = textComponent.selectionStart;
+    var endPos = textComponent.selectionEnd;
+    selectedText = textComponent.value.substring(startPos, endPos)
+  }
+  alert("You selected: " + selectedText);
+    console.log(selectedText);
+    return selectedText;
 
+}
 
 
   var createRtextComponent = function ( event, ui) {
