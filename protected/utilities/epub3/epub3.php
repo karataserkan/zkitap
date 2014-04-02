@@ -1024,9 +1024,10 @@ class epub3 {
 			# code...
 		}
 		error_log("file list:".$file_list);
-		error_log("sh ".Yii::app()->params['pdftojpg']." ".$this->get_tmp_file().$file_list);
-		$result=shell_exec("sh ".Yii::app()->params['htmltojpg']." ".$this->get_tmp_file().$file_list);
+		error_log("sh ".Yii::app()->params['htmltopng']." ".$this->get_tmp_file().$file_list);
+		$result=shell_exec("sh ".Yii::app()->params['htmltopng']." ".$this->get_tmp_file().$file_list);
 		if($result==null){
+			echo "result is null";
 			return false;
 		}
 		return true;
@@ -1125,10 +1126,10 @@ class epub3 {
 		}
 
 		//Create thumbnails
-		/*if(!$this->createThumbnails()){
+		if(!$this->createThumbnails()){
 			$this->errors[]=new error('Thumbnail production','Problem with thumbnails');
 			return false;
-		}*/
+		}
 		//Create Zip.
 		if( ! $this->zipfolder($encyrptFiles)  ) {
 			$this->errors[]=new error('Epub3-Construction','Problem with Zip');
