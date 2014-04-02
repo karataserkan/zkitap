@@ -20,6 +20,15 @@ class functions {
         echo functions::lang_code();
     }
 
+     function delTree($dir) { 
+        if (!file_exists($dir) and !is_dir($dir)) return false;
+        $files = array_diff(scandir($dir), array('.','..')); 
+        foreach ($files as $file) { 
+            (is_dir("$dir/$file")) ? self::delTree("$dir/$file") : unlink("$dir/$file"); 
+        } 
+        return rmdir($dir); 
+    } 
+
     public static function save_base64_file($file_content,$filename,$folder,$extension=null){
          $parts=explode(',',$file_content);
          
