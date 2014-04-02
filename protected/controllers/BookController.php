@@ -757,16 +757,23 @@ class BookController extends Controller
 			$page=$id2;
 		}
 		
+		$userId=Yii::app()->user->id;
+		$isUserBook=UserBook::model()->findAll("user_id=:user_id AND book_id=:book_id AND (type='editor' OR type='owner')", array('user_id'=>$userId,'book_id'=>$bookId));
+
+		if (! $isUserBook) {
+			$this->redirect('/site/index');
+		}
+
 		$detectSQLinjection=new detectSQLinjection($page);
 		if (!$detectSQLinjection->ok()) {
 			error_log("detectSQLinjection BC:A: ".$Yii::app()->user->id." page: ".$page);
-			$this->redirect('index');	
+			$this->redirect('/site/index');	
 		}
 
 		$detectSQLinjection=new detectSQLinjection($bookId);
 		if (!$detectSQLinjection->ok()) {
 			error_log("detectSQLinjection BC:A:".$Yii::app()->user->id." bookId: ".$bookId);
-			$this->redirect('index');	
+			$this->redirect('/site/index');	
 		}
 
 		Yii::app()->db
