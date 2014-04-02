@@ -295,6 +295,8 @@ class BookController extends Controller
 		}
 	}
 
+	
+
 	public function actionGetTemplates($id)
 	{
 		$sizes=$bookSize=explode('x', $id);
