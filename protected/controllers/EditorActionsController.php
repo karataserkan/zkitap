@@ -1004,7 +1004,7 @@ right join book using (book_id) where book_id='$bookId' and type!='image';";
 		
 			$book=Book::model()->findByPk($bookId);
 			$bookData=json_decode($book->data,true);
-			$ebook=new epub3($book,null,true);
+			$ebook=new epub3($book,false,true);
 			
 
 			if (!file_exists($ebook->ebookFile)) {
