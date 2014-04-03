@@ -1,0 +1,20 @@
+#!/bin/bash
+BASEDIR=$(dirname $0)
+BASEDIR=`( cd "$BASEDIR" && pwd )`
+echo Please, enter your name
+/usr/bin/python $BASEDIR"/"webkit2png.py  /tmp/LnrXSq/book/0uHyOIvPZQS2EhP5Pn9INXpRnVFYKs21Ow1KEv602pWs.html > /tmp/LnrXSq/book/0uHyOIvPZQS2EhP5Pn9INXpRnVFYKs21Ow1KEv602pWs.png&
+: '
+
+count=1;
+while [ "$1" ]
+do
+	if [ "$count" -eq "1" ]; then
+		output=$1
+	else
+		/usr/bin/python $BASEDIR"/"webkit2png.py  $output"/"$1".html"| convert - -thumbnail x200 $output"/"$1".png" &
+	fi
+shift
+	count=$((count+1))
+	echo $count
+done
+'
