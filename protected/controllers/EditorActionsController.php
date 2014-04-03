@@ -1,3 +1,4 @@
+
 <?php
 
 class EditorActionsController extends Controller
@@ -976,19 +977,20 @@ right join book using (book_id) where book_id='$bookId' and type!='image';";
 		ob_start();
 		$QueueBooks=PublishQueue::model()->findAll('is_in_progress=:is_in_progress',array('is_in_progress'=>1));
 		if(count($QueueBooks)>0){echo "Already in progress!";die();}
-		$QueueBooks=PublishQueue::model()->findAll('is_in_progress=:is_in_progress',array('is_in_progress'=>0));
+		$Queue=PublishQueue::model()->find('is_in_progress=:is_in_progress',array('is_in_progress'=>0));
+		if(count($Queue)==0){echo "Nothing to do!";die();}
 		$booksInQueue=array();
-		foreach ($QueueBooks as $QueueBookKey0 => $Queue) {
+		//foreach ($QueueBooks as $QueueBookKey0 => $Queue) {
 			$queueInProgress=PublishQueue::model()->findByPk($Queue->book_id);
 			$queueInProgress->is_in_progress=1;
 			$queueInProgress->save();
 			$booksInQueue[]=$queueInProgress;
 
-		}		
+		//}		
 
 		foreach ($booksInQueue as $QueueBookKey => $QueueBook) {
 			$bookId=$QueueBook->book_id;
-			
+			echo $bookId;
 			$data=json_decode($QueueBook->publish_data,true);
 		
 			$book=Book::model()->findByPk($bookId);
@@ -1000,6 +1002,10 @@ right join book using (book_id) where book_id='$bookId' and type!='image';";
 				$this->error('SendFileToCatalog','File does not exists!');
 				$msg="EDITOR_ACTIONS:SendFileToCatalog:0:Could Not Found the created Ebook File". json_encode(array(array('user'=>Yii::app()->user->id),array('bookId'=>$bookId)));
 				Yii::log($msg,'error');
+				$updateQueue=PublishQueue::model()->findByPk($bookId);
+				$updateQueue->is_in_progress=-1;
+				$updateQueue->success=-1;
+				$updateQueue->save();
 				return;
 			}
 
@@ -1016,10 +1022,11 @@ right join book using (book_id) where book_id='$bookId' and type!='image';";
 			curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
 			curl_setopt($ch, CURLOPT_FOLLOWLOCATION, TRUE);
 			curl_setopt($ch, CURLOPT_POST, TRUE);
-			
+			ini_set('max_execution_time',100);	
 			curl_setopt($ch, CURLOPT_POSTFIELDS, $data); 
+
+
 			$Return['response']=json_decode(curl_exec($ch));
-			
 
 			if (curl_errno($ch)){  
 				$this->error('SendFileToCatalog','CURL_ERROR:'.curl_error($ch));
@@ -1032,8 +1039,10 @@ right join book using (book_id) where book_id='$bookId' and type!='image';";
 			$msg = 'File uploaded successfully.';
 			curl_close ($ch);
 			$Return['msg'] = $msg;
+
 			
 			ob_end_clean();
+			echo json_encode( $Return );
 
 
 			$res=$Return;
@@ -1086,7 +1095,7 @@ right join book using (book_id) where book_id='$bookId' and type!='image';";
 			$transaction['attributes']=$attr;
 			$transaction->transaction_amount=0;
 			$transaction->transaction_id=functions::new_id();
-			if ($res_res->cc) {
+			if ($res_res->shell_output[0]=='100') {
 				$transaction->transaction_result=0;
 				$transaction->transaction_explanation="File Created";
 				$success++;
@@ -1131,6 +1140,14 @@ right join book using (book_id) where book_id='$bookId' and type!='image';";
 
 				$deleteFromQueue=PublishQueue::model()->findByPk($bookId);
 				$deleteFromQueue->delete();
+				functions::delTree($ebook->tempdirParent);
+			}
+			else
+			{
+				$updateQueue=PublishQueue::model()->findByPk($bookId);
+				$updateQueue->is_in_progress=-1;
+				$updateQueue->success=-1;
+				$updateQueue->save();
 			}
 
 		}
