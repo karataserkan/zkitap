@@ -1153,13 +1153,6 @@ right join book using (book_id) where book_id='$bookId' and type!='image';";
 			}
 			else
 			{
-				$updateQueue=PublishQueue::model()->findByPk($bookId);
-				$updateQueue->is_in_progress=-1;
-				$updateQueue->success=-1;
-				$updateQueue->save();
-			}
-			else
-			{
 				$this->errorQueue($bookId);
 			}
 
