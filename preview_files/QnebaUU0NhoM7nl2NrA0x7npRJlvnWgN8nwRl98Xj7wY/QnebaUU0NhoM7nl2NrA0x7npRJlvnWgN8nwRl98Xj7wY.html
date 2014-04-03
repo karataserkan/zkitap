@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:epub="http://www.idpf.org/2007/ops" lang="en">
+  <head>
+    <meta http-equiv="default-style" content="text/html; charset=utf-8"/>
+		<meta name="viewport" content="width=1024, height=768"/>
+
+
+
+
+		<link rel="stylesheet" href="stylesheet.css" type="text/css"/>
+		<link rel="stylesheet" href="page_styles.css" type="text/css"/>
+		<link rel="stylesheet" href="widgets.css" type="text/css"/>
+		<script type="text/javascript" src="jquery-1.4.4.min.js"></script>
+		<script type="text/javascript" src="aie_core.js"></script>
+		<script type="text/javascript" src="aie_events.js"></script>
+		<script type="text/javascript" src="aie_explore.js"></script>
+		<script type="text/javascript" src="aie_gameutils.js"></script>
+		<script type="text/javascript" src="aie_qaa.js"></script>
+		<script type="text/javascript" src="aie_storyline.js"></script>
+		<script type="text/javascript" src="aie_textsound.js"></script>
+		<script type="text/javascript" src="igp_audio.js"></script>
+		<script type="text/javascript" src="iscroll.js"></script>
+		<script type="text/javascript" src="jquery.min.js"></script>
+		<script type="text/javascript" src="jquery-ui.min.js"></script>
+		<script type="text/javascript" src="LAB.min.js"></script>
+		<script type="text/javascript" src="panelnav.js"></script>
+		<script type="text/javascript" src="popup.js"></script>
+		<script type="text/javascript" src="pubsub.js"></script>
+		<script type="text/javascript" src="Chart.js"></script>
+		<script type="text/javascript" src="jquery.slickwrap.js"></script>
+		<script type="text/javascript" src="jssor.slider.js"></script>
+		<script type="text/javascript" src="jssor.core.js"></script>
+		<script type="text/javascript" src="jssor.utils.js"></script>
+		<script type="text/javascript" src="runtime.js"></script>
+		<!-- MULTİPLE CHOİCE -->
+		<script src="multiplechoice/sources/js/MultipleChoiceDataJSON.js"></script>
+		<script src="multiplechoice/sources/js/multiplechoice_min.js"></script>
+		<link rel="stylesheet" type="text/css" href="multiplechoice/sources/css/MultipleChoice.css" />
+
+		<!-- DROPDOWN -->
+		<script src="dropdown/sources/js/DropDownDataJSON.js"></script>
+		<script src="dropdown/sources/js/dropdown-mini.js"></script>
+		<link rel="stylesheet" type="text/css" href="dropdown/sources/css/DropDown.css" />
+
+		<!-- DRAGDROP-->
+		<script type="text/javascript" src="dragdrop/sources/js/jquery-ui.min.js"></script>
+		<script type="text/javascript" src="dragdrop/sources/js/jquery.ui.touch-punch.min.js"></script>
+		<script type="text/javascript" src="dragdrop/sources/js/DragDrop.js"></script>
+		<link rel="stylesheet" type="text/css" href="dragdrop/sources/css/DragDrop.css" />
+
+		<script type="text/x-mathjax-config">
+		  MathJax.Hub.Config({
+			tex2jax: {
+			  inlineMath: [["$","$"],["\\(","\\)"]],
+			  "HTML-CSS": { scale: 100} 
+			}
+		  });
+		  MathJax.Hub.Register.StartupHook("HTML-CSS Jax Ready",function () {
+		  var VARIANT = MathJax.OutputJax["HTML-CSS"].FONTDATA.VARIANT;
+		  VARIANT["normal"].fonts.unshift("MathJax_Arial");
+		  VARIANT["bold"].fonts.unshift("MathJax_Arial-bold");
+		  VARIANT["italic"].fonts.unshift("MathJax_Arial-italic");
+		  VARIANT["-tex-mathit"].fonts.unshift("MathJax_Arial-italic");
+		});
+		MathJax.Hub.Register.StartupHook("SVG Jax Ready",function () {
+		  var VARIANT = MathJax.OutputJax.SVG.FONTDATA.VARIANT;
+		  VARIANT["normal"].fonts.unshift("MathJax_SansSerif");
+		  VARIANT["bold"].fonts.unshift("MathJax_SansSerif-bold");
+		  VARIANT["italic"].fonts.unshift("MathJax_SansSerif-italic");
+		  VARIANT["-tex-mathit"].fonts.unshift("MathJax_SansSerif-italic");
+		});
+		MathJax.Hub.Register.StartupHook("End",function () {
+		  $(".MathJax").css("font-size","93%");
+		  $(".textarea .MathJax").css("font-size","80%");
+		});
+		</script>
+		<script src="mathjax/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+		<script type="text/javascript" src="fancy/lib/jquery.mousewheel-3.0.6.pack.js"></script>
+		<script type="text/javascript" src="fancy/source/jquery.fancybox.js?v=2.1.5"></script>
+		<link rel="stylesheet" type="text/css" href="fancy/source/jquery.fancybox.css?v=2.1.5" media="screen" />
+		<link rel="stylesheet" type="text/css" href="fancy/source/helpers/jquery.fancybox-buttons.css?v=1.0.5" />
+		<script type="text/javascript" src="fancy/source/helpers/jquery.fancybox-buttons.js?v=1.0.5"></script>
+		<link rel="stylesheet" type="text/css" href="fancy/source/helpers/jquery.fancybox-thumbs.css?v=1.0.7" />
+		<script type="text/javascript" src="fancy/source/helpers/jquery.fancybox-thumbs.js?v=1.0.7"></script>
+		<script type="text/javascript" src="fancy/source/helpers/jquery.fancybox-media.js?v=1.0.6"></script>
+		<script type="text/javascript">
+		$(document).ready(function() {
+
+		$(".fancybox").fancybox();
+
+		});
+		</script>
+		<style type="text/css">
+		.fancybox-custom .fancybox-skin {
+		box-shadow: 0 0 50px #222;
+		}
+		body {
+		max-width: 700px;
+		margin: 0 auto;
+		}
+		</style>
+
+	</head>
+	<body style="background-repeat:no-repeat; width:1024px; height:768px;background:white;background-size:1024px 768px;">
+	<section epub:type="frontmatter titlepage">
+	
+		<div id='18nYbB5vJlHd3R0VYnzHvTSFvllfAcDESmp4hS5qJ183' class='rtext'  fast-style=''  style=' overflow:visible;position:absolute;top:23px;left:48px;width:400px;height:100px;opacity:1;z-index:1000;-webkit-transform:rotate(0.002940546354929463rad);'  >
+			
+		</div>
+		
+
+			<div id='wrapQkXuIlkpz6f3BLn1oAwG8UatZWfk5g3dwEeJ9FoVBfT6' style='font-family: Helvetica; font-size: 16px;'>
+				denedeme demdendeded wfqewfw faewfaewf aefaefaef aewfaefawefawef awefwefawefae fef
+			</div>
+			<script type='text/javascript'>
+		       	
+				$('.wrapReady.withSourceImage').slickWrap({
+                    sourceImage: true,cutoff: 180
+                });
+				
+			</script>
+
+			
+		<div id='fy9eP1EuXzg9x9Wz0vDV3bUIQIKE1WlCes9N2175JEdR' class='popup'  style=' position:absolute;top:43px;left:602px;width:128px;height:128px;background-color:transparent;overflow:visible;z-index:999;opacity:0.30;'  >
+			 
+			
+			<a href='#popupBzt30IhvxzjFR2DB6x4QayKbbPWCPCfJj0HW3VgIGo8U' class='fancybox'><img src='popupmarker.png' /></a>
+			
+			<div id='popupBzt30IhvxzjFR2DB6x4QayKbbPWCPCfJj0HW3VgIGo8U' style='display:none; z-index:9999999;'>
+				<p style="text-align: justify; font-size: 11px; line-height: 14px; margin-bottom: 14px; padding: 0px; color: rgb(0, 0, 0); font-family: Arial, Helvetica, sans; font-weight: normal;">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam aliquam hendrerit risus. Vivamus vestibulum ullamcorper leo a fringilla. Duis augue tortor, sollicitudin a vehicula id, imperdiet quis nunc. Integer in scelerisque sem. Vestibulum vitae purus pellentesque, ultricies felis at, auctor lectus. Proin egestas, arcu vitae aliquet facilisis, dolor est dapibus leo, vel condimentum turpis libero in eros. Nam augue augue, sagittis in suscipit vitae, cursus aliquet enim. Proin lacinia dolor eu nulla ultrices convallis. Duis vitae eleifend lacus, sed varius ligula. Pellentesque placerat dui vitae nunc imperdiet, sit amet condimentum augue bibendum. Aliquam erat volutpat. Fusce tempus turpis ipsum, id lacinia erat vestibulum at. Duis lorem dolor, facilisis vitae nisi euismod, rhoncus rhoncus dui.</p><p style="text-align: justify; font-size: 11px; line-height: 14px; margin-bottom: 14px; padding: 0px; color: rgb(0, 0, 0); font-family: Arial, Helvetica, sans; font-weight: normal;">Nunc congue mattis sapien, a euismod ipsum semper nec. Nulla lobortis sem quis ante pulvinar, ac lobortis lectus tempus. Sed vel dui viverra, molestie lacus non, mattis mauris. Morbi dolor metus, vestibulum tempor blandit ut, convallis vel dui. Nam ut elementum augue. Morbi vestibulum eros at massa mollis tristique. Quisque viverra, justo id mattis placerat, est diam aliquam augue, quis accumsan nibh diam a tortor. Duis rhoncus, metus in sollicitudin vestibulum, tellus erat accumsan augue, vel adipiscing lacus diam vel mi. Sed posuere dictum tincidunt. Etiam a semper nisi. Phasellus tincidunt consectetur massa a mollis.</p><p style="text-align: justify; font-size: 11px; line-height: 14px; margin-bottom: 14px; padding: 0px; color: rgb(0, 0, 0); font-family: Arial, Helvetica, sans; font-weight: normal;">Morbi ac fermentum neque. Vivamus vitae volutpat nulla, vel congue arcu. Donec venenatis iaculis ipsum, eu fringilla eros viverra vel. Phasellus volutpat elit ipsum, at consectetur elit accumsan sed. Pellentesque euismod dignissim odio nec convallis. Vivamus velit diam, scelerisque id nibh ut, condimentum imperdiet sem. Proin ac felis vestibulum odio venenatis congue. Integer ligula nunc, scelerisque egestas metus sed, vehicula pulvinar nunc. Morbi ac commodo enim. In facilisis diam a rutrum auctor.</p><p style="text-align: justify; font-size: 11px; line-height: 14px; margin-bottom: 14px; padding: 0px; color: rgb(0, 0, 0); font-family: Arial, Helvetica, sans; font-weight: normal;">Nulla vel tempus diam, at ultricies ipsum. Cras tristique mollis magna a tristique. Mauris non viverra ipsum, vel mollis eros. Aliquam suscipit egestas euismod. Mauris sagittis, purus sit amet venenatis ullamcorper, erat purus commodo sem, pulvinar pellentesque lorem tortor id tellus. Quisque ultrices magna vitae orci aliquam placerat sit amet id ipsum. Quisque congue porta ante, et tincidunt lectus mollis vitae. In rutrum nisl eu sem aliquet, id pellentesque nibh ornare. Praesent dictum dui justo, eget feugiat urna mollis et. Pellentesque sit amet viverra velit. Nam mauris diam, aliquam quis mauris non, iaculis dapibus tellus. Sed non nibh urna.</p><p style="text-align: justify; font-size: 11px; line-height: 14px; margin-bottom: 14px; padding: 0px; color: rgb(0, 0, 0); font-family: Arial, Helvetica, sans; font-weight: normal;">Donec eu sem metus. Nullam mi ligula, vestibulum eu scelerisque in, iaculis vitae diam. Interdum et malesuada fames ac ante ipsum primis in faucibus. Curabitur tincidunt, felis eget porta condimentum, nibh quam adipiscing dolor, at feugiat mauris magna nec tellus. Vivamus blandit, magna imperdiet luctus placerat, tortor massa vulputate lectus, quis auctor nunc turpis vel est. Donec auctor condimentum est. Nullam et erat et erat tempus pulvinar et ut dolor. Vestibulum ornare ultrices mattis. Proin et nunc nec erat interdum semper vitae in magna. Morbi auctor eget nibh eu varius. Curabitur tempor, orci non dignissim tincidunt, odio enim aliquam mi, non volutpat libero urna a elit. Fusce vel turpis quis elit lobortis mattis quis eget tortor. In mollis diam vitae pretium vulputate. Aenean quis quam sed ante adipiscing pellentesque ac at metus</p>
+			</div>
+	
+		
+		
+		</div>
+		
+	</section>
+		<script>
+		  (function(i,s,o,g,r,a,m){i["GoogleAnalyticsObject"]=r;i[r]=i[r]||function(){
+		  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+		  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+		  })(window,document,"script","//www.google-analytics.com/analytics.js","ga");
+		  ga("create", "UA-16931314-17", "lindneo.com");
+		  ga("send", "pageview");
+		</script>
+	</body>
+</html>
