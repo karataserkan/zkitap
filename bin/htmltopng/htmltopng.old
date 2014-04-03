@@ -1,0 +1,28 @@
+#!/bin/bash
+BASEDIR=$(dirname $0)
+executable_list=''
+BASEDIR=`( cd "$BASEDIR" && pwd )`
+count=1;
+while [ "$1" ]
+do
+	if [ "$count" -eq "1" ]; then
+		output=$1
+	else
+		#xvfb-run -a -s "-screen 0 1024x768x24" /usr/bin/python $BASEDIR"/"webkit2png.py  $output"/"$1".html"| convert - -thumbnail x200 $output"/"$1".png" &
+		executable_list="$executable_list $1"
+		if [ $(($count % 10)) -eq 0 ]
+        then
+        	echo $executable_list
+
+        	xvfb-run -a -s "-screen 0 1024x768x24" $BASEDIR"/"htmltopng_unit $output $executable_list
+        	executable_list=''
+        	wait
+    	fi
+#		echo $BASEDIR"/"htmltojpg_unit;
+#		sh $BASEDIR"/"htmltojpg_unit $output $1 $1".html"&
+	fi
+shift
+	count=$((count+1))
+	#echo $count
+done
+#sh $BASEDIR"/"htmltojpg_unit $output "titlepage" "titlepage.xhtml"

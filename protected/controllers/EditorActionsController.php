@@ -1024,13 +1024,13 @@ right join book using (book_id) where book_id='$bookId' and type!='image';";
 			$data['checksum']=md5_file($ebook->ebookFile);
 			//Connecting to website.
 
-			ini_set('max_execution_time', 100);
+			ini_set('max_execution_time', 0);
 			$ch = curl_init();
 			curl_setopt($ch, CURLOPT_URL, Yii::app()->params['catalogExportURL'] );
 			curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
 			curl_setopt($ch, CURLOPT_FOLLOWLOCATION, TRUE);
 			curl_setopt($ch, CURLOPT_POST, TRUE);
-			ini_set('max_execution_time',100);	
+			ini_set('max_execution_time',0);	
 
 			curl_setopt($ch, CURLOPT_POSTFIELDS, $data); 
 
