@@ -428,11 +428,9 @@ class epub3 {
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:epub="http://www.idpf.org/2007/ops" lang="en">
   <head>
     <meta http-equiv="default-style" content="text/html; charset=utf-8"/>
-<<<<<<< HEAD
     <title></title>
 
-=======
->>>>>>> adcd895ca68fea3bfa065fd4ea323c3718d1838d
+
 		<meta name="viewport" content="width='.$width.', height='.$height.'"/>
 
 
@@ -999,14 +997,13 @@ class epub3 {
 	    {
 	        $zip->addFromString(basename($source), file_get_contents($source));
 	    }
-		ini_set('max_execution_time', 100);
+
 	    return $zip->close();
 
 		
 	}
 
 	public function download(){
-ini_set('max_execution_time', 100);
 		if (file_exists($this->ebookFile)) {	
 			header('Content-Description: File Transfer');
 			header('Content-Type: application/epub+zip');
