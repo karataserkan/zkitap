@@ -968,11 +968,12 @@ right join book using (book_id) where book_id='$bookId' and type!='image';";
 		$book->save();
 	}
 
-	private function errorQueue($bookId)
+	private function errorQueue($bookId,$message)
 	{
 		$updateQueue=PublishQueue::model()->findByPk($bookId);
 		$updateQueue->is_in_progress=-1;
 		$updateQueue->success=-1;
+		$updateQueue->message=$message;
 		$updateQueue->save();
 	}
 
@@ -1010,7 +1011,7 @@ right join book using (book_id) where book_id='$bookId' and type!='image';";
 				$this->error('SendFileToCatalog','File does not exists!');
 				$msg="EDITOR_ACTIONS:SendFileToCatalog:0:Could Not Found the created Ebook File". json_encode(array(array('user'=>Yii::app()->user->id),array('bookId'=>$bookId)));
 				Yii::log($msg,'error');
-				$this->errorQueue($bookId);
+				$this->errorQueue($bookId,$msg);
 
 				return;
 			}
@@ -1040,7 +1041,7 @@ right join book using (book_id) where book_id='$bookId' and type!='image';";
 				$this->error('SendFileToCatalog','CURL_ERROR:'.curl_error($ch));
 			    $msg="EDITOR_ACTIONS:SendFileToCatalog:0:CURL_ERROR:".curl_error($ch). json_encode(array(array('user'=>Yii::app()->user->id),array('bookId'=>$bookId)));
 				Yii::log($msg,'error');
-				$this->errorQueue($bookId);
+				$this->errorQueue($bookId,$msg);
 				
 				return;
 			}
@@ -1153,7 +1154,7 @@ right join book using (book_id) where book_id='$bookId' and type!='image';";
 			}
 			else
 			{
-				$this->errorQueue($bookId);
+				$this->errorQueue($bookId,'success != 3');
 			}
 
 		}
