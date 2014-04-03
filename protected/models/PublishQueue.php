@@ -8,6 +8,7 @@
  * @property string $publish_data
  * @property integer $is_in_progress
  * @property integer $success
+ * @property string $message
  */
 class PublishQueue extends CActiveRecord
 {
@@ -40,9 +41,10 @@ class PublishQueue extends CActiveRecord
 			array('book_id, publish_data', 'required'),
 			array('is_in_progress, success', 'numerical', 'integerOnly'=>true),
 			array('book_id', 'length', 'max'=>44),
+			array('message', 'safe'),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('book_id, publish_data, is_in_progress, success', 'safe', 'on'=>'search'),
+			array('book_id, publish_data, is_in_progress, success, message', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -67,6 +69,7 @@ class PublishQueue extends CActiveRecord
 			'publish_data' => 'Publish Data',
 			'is_in_progress' => 'Is In Progress',
 			'success' => 'Success',
+			'message' => 'Message',
 		);
 	}
 
@@ -85,6 +88,7 @@ class PublishQueue extends CActiveRecord
 		$criteria->compare('publish_data',$this->publish_data,true);
 		$criteria->compare('is_in_progress',$this->is_in_progress);
 		$criteria->compare('success',$this->success);
+		$criteria->compare('message',$this->message,true);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
