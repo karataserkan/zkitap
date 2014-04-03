@@ -24,18 +24,19 @@ $(document).ready(function(){
         
         
         this.element.focusout(function ( event, ui ){
-          console.log('deneme');
 
           var el = event.target;
           // save
-          
-
-          that._change( el,  ui);
+          that._change( el.innerHTML);
         })
 
-        var popupmessage=$('<div  id="message_'+componentrtextid+'" contenteditable="true">'+this.options.component.data.rtextdiv.val+'</div>');
-        popupmessage.appendTo(this.element);
-        
+        var rtextmessage=$('<div  id="message_'+componentrtextid+'" contenteditable="true">'+this.options.component.data.rtextdiv.val+'</div>');
+        rtextmessage.appendTo(this.element);
+        var capture_selection= function(){
+          localStorage.setItem("selection_text", window.getSelection().toString());
+          console.log(localStorage.getItem("selection_text"));
+        }
+        that.element.mouseup(capture_selection).keyup(capture_selection);
         
         this._super();
           
@@ -56,14 +57,78 @@ $(document).ready(function(){
 
       setPropertyofObject : function (propertyName,propertyValue){
         var that = this;
+        
         console.log(propertyName);
         console.log(propertyValue);
-        ShowSelection(document.getElementById(that.options.component.id));
-              
+        /*
+        //console.log(localStorage.getItem("selection_text"));
+        var content_text = '<b>'+localStorage.getItem("selection_text")+'</b>';
+        
+        $('#message_rtext'+this.options.component.id).html(this.options.component.data.rtextdiv.val.replace(localStorage.getItem("selection_text"), content_text));   
+        console.log(this.options.component.data.rtextdiv.val);
+
+        that._change( $('#message_rtext'+this.options.component.id).html());
+        //
         return;
+        //$( ".rtext-controllers div:contains('asdasdsa')" ).css( "text-decoration", "" );
+
+        */
+
         switch (propertyName){
-            case 'fast-style': 
-                this.getSettable().attr[propertyName]=propertyValue;
+          case 'font-weight':
+
+            var content_text = '<span style="font-weight: '+propertyValue+';">'+localStorage.getItem("selection_text")+'</span>';
+            $('#message_rtext'+this.options.component.id).html(this.options.component.data.rtextdiv.val.replace(localStorage.getItem("selection_text"), content_text));  
+            that._change( $('#message_rtext'+this.options.component.id).html());
+            localStorage.setItem("selection_text", '');
+
+          break;
+
+          case 'font-style':
+
+            var content_text = '<span style="font-style: '+propertyValue+';">'+localStorage.getItem("selection_text")+'</span>';
+            $('#message_rtext'+this.options.component.id).html(this.options.component.data.rtextdiv.val.replace(localStorage.getItem("selection_text"), content_text));  
+             
+          break;
+
+          case 'text-decoration':
+
+            var content_text = '<span style="text-decoration: '+propertyValue+';">'+localStorage.getItem("selection_text")+'</span>';
+            $('#message_rtext'+this.options.component.id).html(this.options.component.data.rtextdiv.val.replace(localStorage.getItem("selection_text"), content_text));  
+            that._change( $('#message_rtext'+this.options.component.id).html());
+            //localStorage.setItem("selection_text", '');
+             
+          break;
+
+          case 'font-size':
+            
+            var content_text = '<span style="font-size: '+propertyValue+';">'+localStorage.getItem("selection_text")+'</span>';
+            $('#message_rtext'+this.options.component.id).html(this.options.component.data.rtextdiv.val.replace(localStorage.getItem("selection_text"), content_text));  
+            that._change( $('#message_rtext'+this.options.component.id).html());
+            localStorage.setItem("selection_text", '');
+             
+          break;
+
+          case 'font-family':
+            console.log('deneme');
+            var content_text = '<span style="font-family: '+propertyValue+';">'+localStorage.getItem("selection_text")+'</span>';
+            $('#message_rtext'+this.options.component.id).html(this.options.component.data.rtextdiv.val.replace(localStorage.getItem("selection_text"), content_text));  
+            that._change( $('#message_rtext'+this.options.component.id).html());
+            localStorage.setItem("selection_text", '');
+             
+          break;
+
+          case 'line-height':
+            console.log('deneme');
+            var content_text = '<span style="line-height: '+propertyValue+';">'+localStorage.getItem("selection_text")+'</span>';
+            $('#message_rtext'+this.options.component.id).html(this.options.component.data.rtextdiv.val.replace(localStorage.getItem("selection_text"), content_text));  
+            that._change( $('#message_rtext'+this.options.component.id).html());
+            localStorage.setItem("selection_text", '');
+             
+          break;
+
+          case 'fast-style': 
+                //this.getSettable().attr[propertyName]=propertyValue;
 
                   var styles=[];
 
@@ -126,48 +191,27 @@ $(document).ready(function(){
 
 
                   }
-                  console.log(that);
-                  if($('#'+this.options.component.id).selection() == ''){
-                      $.each( styles , function(i,v) {
-                        that.setProperty(v.name , v.val);
+                  var style = "";
+                  if(styles.length > 0)
+                    $.each( styles , function(i,v) {
+                          style = style + v.name +' : '+ v.val + '; ';
                       });
-                    }
-                    else{
-                      var selection_text = $('#'+this.options.component.id).selection();
-                      if(propertyValue == 'bold')
-                      $('#'+this.options.component.id).selection('replace', {
-                          text: selection_text,
-                          caret: 'before'
-                      });
-                    }
-                   $.each( styles , function(i,v) {
-                        that.setProperty(v.name , v.val);
-                    });
-                   that.setProperty('contentEditable' , true);
-
-                return this.getProperty(propertyName) ;
+                  console.log(style);
+                  var content_text = '<span style="'+style+'">'+localStorage.getItem("selection_text")+'</span>';
+                  $('#message_rtext'+this.options.component.id).html(this.options.component.data.rtextdiv.val.replace(localStorage.getItem("selection_text"), content_text));  
+                  that._change( $('#message_rtext'+this.options.component.id).html());
+                  localStorage.setItem("selection_text", '');
                 
               break;
 
-            case 'font-size':           
-            case 'text-align':           
-            case 'font-family':         
-            case 'color':
-            case 'font-weight':           
-            case 'font-style':         
-            case 'text-decoration':   
+              default:
 
-                this.getSettable().css[propertyName]=propertyValue;
-                console.log(this.getSettable());
-                var return_val;
-                return this.getProperty(propertyName) ;
-              
+                return this._super(propertyName);
+
               break;
-            
-            default:
-              return this._super(propertyName,propertyValue);
-              break;
-          }
+
+        }
+                    
       },
       setProperty : function (propertyName,propertyValue){
         console.log(propertyName);
@@ -233,12 +277,9 @@ $(document).ready(function(){
 
       },
 
-      _change: function ( el , ui) {
+      _change: function ( content) {
         
-        console.log(el);
-        console.log(ui);
-        console.log(el.innerHTML);
-        this.options.component.data.rtextdiv.val = el.innerHTML;
+        this.options.component.data.rtextdiv.val = content;
 
         this._super();
       }
@@ -249,30 +290,41 @@ $(document).ready(function(){
   
 });
 
-var ShowSelection = function()
-{
-  
-  var textComponent = document.getElementById('18nYbB5vJlHd3R0VYnzHvTSFvllfAcDESmp4hS5qJ183');
-  var selectedText;
-  // IE version
-  if (document.selection != undefined)
-  {
-    textComponent.focus();
-    var sel = document.selection.createRange();
-    selectedText = sel.text;
-  }
-  // Mozilla version
-  else if (textComponent.selectionStart != undefined)
-  {
-    var startPos = textComponent.selectionStart;
-    var endPos = textComponent.selectionEnd;
-    selectedText = textComponent.value.substring(startPos, endPos)
-  }
-  alert("You selected: " + selectedText);
-    console.log(selectedText);
-    return selectedText;
+var html_tag_replace = function (str){
+   //var content = str.replace('&lt;','<')
+   //                 .replace('&gt;','>')
+   //                 .replace('<div>','')
+   //                 .replace('</div>','');
+   while( str.indexOf('&lt;') > -1)
+      {
+        str = str.replace('&lt;', '<');
+      }
 
-}
+    while( str.indexOf('&gt;') > -1)
+      {
+        str = str.replace('&gt;', '>');
+      }
+
+    while( str.indexOf('&amp;') > -1)
+      {
+        str = str.replace('&amp;', '&');
+      }
+
+    while( str.indexOf('<div>') > -1)
+      {
+        str = str.replace('<div>', '');
+      }
+
+    while( str.indexOf('</div>') > -1)
+      {
+        str = str.replace('</div>', '');
+      }
+      
+      
+   console.log(str);
+   return str;
+};
+
 
 
   var createRtextComponent = function ( event, ui) {
