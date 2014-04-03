@@ -967,6 +967,14 @@ right join book using (book_id) where book_id='$bookId' and type!='image';";
 		$book->save();
 	}
 
+	private function errorQueue($bookId)
+	{
+		$updateQueue=PublishQueue::model()->findByPk($bookId);
+		$updateQueue->is_in_progress=-1;
+		$updateQueue->success=-1;
+		$updateQueue->save();
+	}
+
 	public function actionStartPublishing()
 	{
 		$this->SendFileToCatalog();
@@ -1000,6 +1008,7 @@ right join book using (book_id) where book_id='$bookId' and type!='image';";
 				$this->error('SendFileToCatalog','File does not exists!');
 				$msg="EDITOR_ACTIONS:SendFileToCatalog:0:Could Not Found the created Ebook File". json_encode(array(array('user'=>Yii::app()->user->id),array('bookId'=>$bookId)));
 				Yii::log($msg,'error');
+				$this->errorQueue($bookId);
 				return;
 			}
 
@@ -1011,12 +1020,12 @@ right join book using (book_id) where book_id='$bookId' and type!='image';";
 			$data['checksum']=md5_file($ebook->ebookFile);
 			//Connecting to website.
 
+			ini_set('max_execution_time', 100);
 			$ch = curl_init();
 			curl_setopt($ch, CURLOPT_URL, Yii::app()->params['catalogExportURL'] );
 			curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
 			curl_setopt($ch, CURLOPT_FOLLOWLOCATION, TRUE);
 			curl_setopt($ch, CURLOPT_POST, TRUE);
-			
 			curl_setopt($ch, CURLOPT_POSTFIELDS, $data); 
 			$Return['response']=json_decode(curl_exec($ch));
 			
@@ -1025,6 +1034,7 @@ right join book using (book_id) where book_id='$bookId' and type!='image';";
 				$this->error('SendFileToCatalog','CURL_ERROR:'.curl_error($ch));
 			    $msg="EDITOR_ACTIONS:SendFileToCatalog:0:CURL_ERROR:".curl_error($ch). json_encode(array(array('user'=>Yii::app()->user->id),array('bookId'=>$bookId)));
 				Yii::log($msg,'error');
+				$this->errorQueue($bookId);
 				
 				return;
 			}

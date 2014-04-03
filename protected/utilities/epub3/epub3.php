@@ -993,12 +993,14 @@ class epub3 {
 	        $zip->addFromString(basename($source), file_get_contents($source));
 	    }
 
+		ini_set('max_execution_time', 100);
 	    return $zip->close();
 
 		
 	}
 
 	public function download(){
+		ini_set('max_execution_time', 100);
 		if (file_exists($this->ebookFile)) {	
 			header('Content-Description: File Transfer');
 			header('Content-Type: application/epub+zip');
