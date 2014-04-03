@@ -145,8 +145,6 @@ class epub3 {
 					font-family: Arial;
 					font-size: 14px;
 					line-height: normal;
-					width:1204px;
-					height:768px;
 					}
 ";
 
@@ -279,8 +277,10 @@ class epub3 {
 
 
 	public function create_title_page(){
-
-
+		$bookSize=$this->book->getPageSize();
+		$width=$bookSize['width']?$bookSize['width']:"1024";
+		$height=$bookSize['height']?$bookSize['height']:"768";
+		
 	
 
 			//create_title_page
@@ -404,9 +404,11 @@ class epub3 {
 		$page_data=json_decode($page->pdf_data,true);
 		if (isset($page_data['image']['data'])&& !empty($page_data['image']['data'])) {
 			$img=$page_data['image']['data'];
+			$backgroundfile = functions::save_base64_file ( $img , 'bg'.$page->page_id , $this->get_tmp_file());
+
 			//$bookSize=$page_data['image']['size'];
 		}
-		$background= (isset($img)&&!empty($img)) ? "background-image:url('".$img."')" : "background:white";
+		$background= (isset($img)&&!empty($img)) ? "background-image:url('".$backgroundfile->filename."')" : "background:transparent";
 		$background_size=(isset($bookSize)&&!empty($bookSize)) ? "background-size:".$bookSize['width']."px ".$bookSize['height']."px":"";
 		
 		$width="1024";
@@ -426,6 +428,9 @@ class epub3 {
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:epub="http://www.idpf.org/2007/ops" lang="en">
   <head>
     <meta http-equiv="default-style" content="text/html; charset=utf-8"/>
+    <title></title>
+
+
 		<meta name="viewport" content="width='.$width.', height='.$height.'"/>
 
 
@@ -993,14 +998,12 @@ class epub3 {
 	        $zip->addFromString(basename($source), file_get_contents($source));
 	    }
 
-		ini_set('max_execution_time', 100);
 	    return $zip->close();
 
 		
 	}
 
 	public function download(){
-		ini_set('max_execution_time', 100);
 		if (file_exists($this->ebookFile)) {	
 			header('Content-Description: File Transfer');
 			header('Content-Type: application/epub+zip');
@@ -1013,6 +1016,7 @@ class epub3 {
 			ob_clean();
 			flush();
 			readfile($this->ebookFile);
+			functions::delTree($this->tempdirParent);
 			die;
 		}
 		
@@ -1054,9 +1058,10 @@ class epub3 {
 			# code...
 		}
 		error_log("file list:".$file_list);
-		error_log("sh ".Yii::app()->params['pdftojpg']." ".$this->get_tmp_file().$file_list);
-		$result=shell_exec("sh ".Yii::app()->params['htmltojpg']." ".$this->get_tmp_file().$file_list);
+		error_log("sh ".Yii::app()->params['htmltopng']." ".$this->get_tmp_file().$file_list);
+		$result=shell_exec("sh ".Yii::app()->params['htmltopng']." ".$this->get_tmp_file().$file_list);
 		if($result==null){
+			echo "result is null";
 			return false;
 		}
 		return true;
@@ -1126,7 +1131,7 @@ class epub3 {
 
 		//Title Page.
 		if( in_array(false,$this->create_title_page() ) ) {
-			$this->errors[]=new error('Epub3-Construction','Problem with Title Page');
+			$this->errors[]=new error('Epub3-Construction','Problem with Title Page'); 
 			return false;
 		}
 
