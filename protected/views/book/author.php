@@ -158,7 +158,7 @@ $current_user=User::model()->findByPk(Yii::app()->user->id);
 			      </ul>
 			   </li>
 			   <li>
-			   	<a href="#preview_page" class="fancybox">Preview</a>
+			   	<a href="http://bekir.dev.lindneo.com/EditorActions/PreviewPage/<?php echo $current_page->page_id; ?> " class="fancybox">Preview</a>
 			   </li>
 			   <li class="left-border" style="float:right; height: 42px; min-width:50px; text-align:center; padding-top: 5px; ">
 			  <i id="save_status" class="size-30"></i>
