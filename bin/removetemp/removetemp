@@ -1,0 +1,2 @@
+#!/bin/bash 
+find /tmp/ -mmin +60 -name '*' -delete
