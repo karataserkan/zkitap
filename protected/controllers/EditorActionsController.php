@@ -980,7 +980,7 @@ right join book using (book_id) where book_id='$bookId' and type!='image';";
 		$this->SendFileToCatalog();
 	}	
 
-	public function SendFileToCatalog(){
+	private function SendFileToCatalog(){
 		ob_start();
 		$QueueBooks=PublishQueue::model()->findAll('is_in_progress=:is_in_progress',array('is_in_progress'=>1));
 		if(count($QueueBooks)>0){echo "Already in progress!";die();}
@@ -1144,10 +1144,7 @@ right join book using (book_id) where book_id='$bookId' and type!='image';";
 			}
 			else
 			{
-				$updateQueue=PublishQueue::model()->findByPk($bookId);
-				$updateQueue->is_in_progress=-1;
-				$updateQueue->success=-1;
-				$updateQueue->save();
+				$this->errorQueue($bookId);
 			}
 
 		}
