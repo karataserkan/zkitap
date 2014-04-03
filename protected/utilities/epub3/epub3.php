@@ -1159,12 +1159,14 @@ class epub3 {
 			return false;
 		}
 
+		error_log("Thumbnail processing...");
 		//Create thumbnails
 		if(!$this->createThumbnails()){
 			$this->errors[]=new error('Thumbnail production','Problem with thumbnails');
 			return false;
 		}
 		//Create Zip.
+		error_log("Zip processing...");
 		if( ! $this->zipfolder($encyrptFiles)  ) {
 			$this->errors[]=new error('Epub3-Construction','Problem with Zip');
 			return false;
