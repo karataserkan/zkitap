@@ -88,10 +88,10 @@ return array(
 		// uncomment the following to use a MySQL database
 
 		'db'=>array(
-			'connectionString' => 'mysql:host=pufferfish.private.services.okutus.com;port=3306;dbname=squid_pacific',
+			'connectionString' => 'mysql:host=lindneo.com;port=3306;dbname=squid_pacific',
 			'emulatePrepare' => true,
-			'username' => 'barracuda',
-			'password' => 'hWqG49pCYnGSsaXU',
+			'username' => 'db_squid_pacific',
+			'password' => '7GqA3Pqcy38QnfPQ',
 			'charset' => 'utf8',
 		),
 
@@ -135,7 +135,7 @@ return array(
      		'tr_TR' => 'Türkçe',
      		'en_US' => 'English'
      		),
-     	'catalogExportURL' => "http://bigcat.okutus.com/site/import"
+     	'catalogExportURL' => "http://catalog.lindneo.com/site/import"
 	)
 
 );
