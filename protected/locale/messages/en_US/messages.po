@@ -489,6 +489,8 @@ msgstr  "Keywords"
 #: protected/controllers/BookController.php:589
 #: protected/controllers/BookController.php:547
 #: protected/controllers/BookController.php:614
+#: protected/controllers/BookController.php:549
+#: protected/controllers/BookController.php:616
 #: protected/controllers/BookController.php:194
 #: protected/controllers/BookController.php:261
 #: protected/controllers/BookController.php:549
@@ -1338,6 +1340,7 @@ msgstr  ""
 msgid   "Access Control List"
 msgstr  ""
 
+#: protected/views/editorActions/pageNotFound.php:3
 #: protected/views/editorActions/pageNotFound.php:3
 msgid   "Sayfa Bulunamadı"
 msgstr  ""
