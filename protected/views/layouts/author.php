@@ -100,6 +100,9 @@
 		<script type="text/javascript" src="<?php echo Yii::app()->request->baseUrl; ?>/js/lib/jssor.core.js"></script>
 	    <script type="text/javascript" src="<?php echo Yii::app()->request->baseUrl; ?>/js/lib/jssor.utils.js"></script>
 	    <script type="text/javascript" src="<?php echo Yii::app()->request->baseUrl; ?>/js/lib/jssor.slider.js"></script>
+
+	    <!-- İSCROLL-->
+	    <script type="text/javascript" src="<?php echo Yii::app()->request->baseUrl; ?>/js/lib/iscroll.js"></script>
 		<!-- JS Modules -->
 		<script src="<?php echo Yii::app()->request->baseUrl; ?>/js/app/lindneo.js"></script>	
 		<script src="<?php echo Yii::app()->request->baseUrl; ?>/js/app/modules/dataservice.js"></script>	

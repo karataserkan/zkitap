@@ -30,7 +30,7 @@ $(document).ready(function(){
           that._change( el.innerHTML);
         })
 
-        var rtextmessage=$('<div  id="message_'+componentrtextid+'" contenteditable="true">'+this.options.component.data.rtextdiv.val+'</div>');
+        var rtextmessage=$('<div  id="message_'+componentrtextid+'" contenteditable="true" style="overflow:hidden; width:100%; height:100%;">'+this.options.component.data.rtextdiv.val+'</div>');
         rtextmessage.appendTo(this.element);
         var capture_selection= function(){
           localStorage.setItem("selection_text", window.getSelection().toString());
@@ -39,7 +39,7 @@ $(document).ready(function(){
         that.element.mouseup(capture_selection).keyup(capture_selection);
         
         this._super();
-          
+        this.element.css({'width':'100%','height':'100%'});
       },
 
       autoResize: function(){
@@ -96,7 +96,7 @@ $(document).ready(function(){
             var content_text = '<span style="text-decoration: '+propertyValue+';">'+localStorage.getItem("selection_text")+'</span>';
             $('#message_rtext'+this.options.component.id).html(this.options.component.data.rtextdiv.val.replace(localStorage.getItem("selection_text"), content_text));  
             that._change( $('#message_rtext'+this.options.component.id).html());
-            //localStorage.setItem("selection_text", '');
+            localStorage.setItem("selection_text", '');
              
           break;
 
