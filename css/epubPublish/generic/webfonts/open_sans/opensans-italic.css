@@ -1,8 +1,0 @@
-@font-face {
-    font-family: 'OpenSansItalic';
-    src: url('opensans-italic.eot');
-    src: url('opensans-italic.eot') format('embedded-opentype'),
-         url('opensans-italic.woff') format('woff'),
-         url('opensans-italic.ttf') format('truetype'),
-         url('opensans-italic.svg') format('svg');
-}
