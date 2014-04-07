@@ -139,7 +139,6 @@ class epub3 {
 
 				$page_styles="
 				body {
-					border: 1px solid black;
 					zoom: 1;
 					color: #000;
 					font-family: Arial;

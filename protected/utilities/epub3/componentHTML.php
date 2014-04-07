@@ -57,6 +57,9 @@ class componentHTML {
 			 case 'thumb':
 			    $this->thumbInner($component);
 			    break;
+			 case 'rtext':
+			    $this->rtextInner($component);
+			    break;
 			  /*
 			  case 'slider':
 			    $this->sliderInner($component);
@@ -455,7 +458,6 @@ class componentHTML {
 
 
 
-
 	public function videoInner($component){ 
 			$file_contents= file_get_contents($component->data->source->attr->src);
 
@@ -483,7 +485,7 @@ class componentHTML {
 
 
 			
-			$container ="<video  class='video' ";
+			$container ="<video controls='controls'  class='video' ";
 			if(isset($data->video->attr))
 				foreach ($data->video->attr as $attr_name => $attr_val ) {
 					$container.=" $attr_name='$attr_val' ";
@@ -530,8 +532,7 @@ class componentHTML {
 		else{
 			
 			$video_id= "video".functions::get_random_string();
-
-			$video_container ="<video controls = 'controls' class='video' ";
+			$video_container ="<video controls class='video' ";
 			if(isset($data->video->attr))
 				foreach ($data->video->attr as $attr_name => $attr_val ) {
 					$video_container.=" $attr_name='$attr_val' ";
@@ -970,6 +971,61 @@ class componentHTML {
 			, $this->html);
 
 
+
+	}
+
+	public function rtextInner($data){
+
+		$data=$component->data;
+
+		$rtext_id= "rtext".functions::get_random_string();
+		$data->rtextdiv->val = html_entity_decode($data->rtextdiv->val,null,"UTF-8");
+		$container.=" 
+			<div id='$html_id' style='position:absolute; top:".$data->self->css->top.";left:".$data->self->css->left."'>
+				".$data->rtextdiv->val."
+			</div>
+	
+		
+		";
+
+		$this->html=$container;
+
+		/*$container='';
+
+		if(isset($data->rtextdiv->attr))
+			foreach ($data->rtextdiv->attr as $attr_name => $attr_val ) {
+				if (trim(strtolower($attr_name))!='contenteditable')	
+					$container.=" $attr_name='$attr_val' ";
+			}
+
+		if(isset($data->rtextdiv->css)){
+			$container.=" style=' ";
+			foreach ($data->rtextdiv->css as $css_name => $css_val ) {
+				$container.="$css_name:$css_val;";
+			}
+			$container.="' ";
+		}
+
+
+			$container = "<div id='". functions::get_random_string()  ."' $container  class='widgets-rw panel-scrolling-rw scroll-horizontal-rw exclude-auto-rw' >";
+			$container .= "<div class='rtext-controllers frame-rw' style='width:".$data->rtextdiv->css->width."'> %component_text% </div> </div>";
+		
+	
+	
+
+
+
+		
+
+		$data->rtextdiv->val = html_entity_decode(str_replace(" ", "&nbsp; ",$data->rtextdiv->val),null,"UTF-8");
+	
+
+		$this->html=str_replace(
+			array('%component_inner%', '%component_text%') , 
+			array($container, str_replace("\n", "<br/>",   htmlspecialchars($this->textSanitize($data->rtextdiv->val),null,"UTF-8")  ) )
+			, $this->html);
+
+		*/
 
 	}
 
