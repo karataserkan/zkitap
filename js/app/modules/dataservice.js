@@ -298,7 +298,7 @@ window.lindneo.dataservice = (function( $ ) {
       'success': function(data) {
         that.ProgressOfTop();
          //that.removeProgressBar(progressbar.container);
-         console.log(data);
+         //console.log(data);
          return successCallback(data); 
       },
       //'error': failCallback,

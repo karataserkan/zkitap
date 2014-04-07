@@ -459,22 +459,34 @@ class componentHTML {
 
 
 	public function videoInner($component){ 
-			$file_contents= file_get_contents($component->data->source->attr->src);
+			$file_contents = file_get_contents($component->data->source->attr->src);
 
 			$URL=parse_url($component->data->source->attr->src);
 			$URL=pathinfo($URL[path]);
 			$ext=$URL['extension'];
 
-
-
 			$file=new file( $component->id.'.'.$ext , $this->outputFolder );
 			$file->writeLine($file_contents);
 			$file->closeFile();
 
-
-			//$file = functions::save_base64_file ( $component->data->source->attr->src , $component->id , $this->outputFolder);
 			$this->epub->files->others[] = $file;
 			$component->data->source->attr->src=$file->filename;
+
+			$file_contents_marker = file_get_contents($component->data->marker);
+
+			$URL_marker = parse_url($component->data->marker);
+			$URL_marker = pathinfo($URL_marker[path]);
+			$ext_marker = $URL_marker['extension'];
+
+			$file_marker = new file( $component->id.'.'.$ext_marker , $this->outputFolder );
+			$file_marker->writeLine($file_contents_marker);
+			$file_marker->closeFile();
+
+			$this->epub->files->others[] = $file_marker;
+			$component->data->marker = $file_marker->filename;
+
+			//$file = functions::save_base64_file ( $component->data->source->attr->src , $component->id , $this->outputFolder);
+			
 			//new dBug($component); die;
 			$data=$component->data; 
 		if($component->data->video_type != 'popup'){
