@@ -18,7 +18,7 @@ $(document).ready(function(){
         var audio_name=$('<span class="audio-name" >'+this.options.component.data.audio.name+'</span>');
  
         source.appendTo(audio);
-
+        console.log('deneme');
         audio_name.appendTo(this.element);
         audio.appendTo(this.element);
         audio.css(this.options.component.data.audio.css);
@@ -50,6 +50,7 @@ $(document).ready(function(){
 
 
  var createSoundComponent = function (event,ui){
+  var imageBinary = '';
 
   $("<div class='popup ui-draggable' id='pop-image-popup' style='display: block; top:" + (ui.offset.top-$(event.target).offset().top ) + "px; left: " + ( ui.offset.left-$(event.target).offset().left ) + "px;'> \
     <div class='popup-header'> \
@@ -118,7 +119,8 @@ $(document).ready(function(){
             
           }
         };
-        
+        console.log(imageBinary);
+        return;
 
         window.lindneo.tlingit.componentHasCreated( component );
         $("#sound-add-dummy-close-button").trigger('click');
@@ -127,7 +129,7 @@ $(document).ready(function(){
     });
 
     var el = document.getElementById("dummy-dropzone");
-    var imageBinary = '';
+    
 
     el.addEventListener("dragenter", function(e){
       e.stopPropagation();
@@ -154,7 +156,8 @@ $(document).ready(function(){
 
       reader.onload = function (evt) {
 
-         imageBinary = evt.target.result;        
+         imageBinary = evt.target.result;  
+         console.log(imageBinary);      
         
         
       };
