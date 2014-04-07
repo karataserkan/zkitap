@@ -31,8 +31,9 @@ $(document).ready(function(){
 
 
 
-      
-      
+      console.log('Popup......');
+      console.log(that.options.component);
+      console.log('----------');
       this._super(); 
 /*
       this.element.resizable("option",'maxHeight', 128 );
@@ -172,7 +173,7 @@ console.log(oldcomponent);
                 'height':'128px',
                 'background-color': 'transparent',
                 'overflow': 'visible',
-                'z-index': '99998'
+                'z-index': '999'
               }
             }
           }

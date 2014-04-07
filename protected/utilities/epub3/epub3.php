@@ -76,11 +76,22 @@ class epub3 {
 
 	public function createGenericFiles(){
 
+			$latexComponents = Yii::app()->db->createCommand('SELECT COUNT( * ) as count FROM component LEFT JOIN page USING ( page_id )  LEFT JOIN chapter USING ( chapter_id ) LEFT JOIN book USING ( book_id ) WHERE TYPE =  "latex" AND book_id ="'.$this->book->book_id.'"')->queryRow();
+
 			$genericFiles = new stdClass;
+			error_log("count: ".$count);
+			if($latexComponents['count']) { 
+				$zip_url='/css/epubPublish/generic_latex.zip';
+				$zip_file='generic_latex.zip';
+			}
+			else {
+				$zip_url='/css/epubPublish/generic.zip';
+				$zip_file='generic.zip';
+			}
 
-			$genericFiles->URL=Yii::app()->request->hostInfo . '/css/epubPublish/generic.zip';
+			$genericFiles->URL=Yii::app()->request->hostInfo . $zip_url;
 
-			$genericFiles->filename='generic.zip';
+			$genericFiles->filename=$zip_file;
 
 			$genericFiles->contents=file_get_contents($genericFiles->URL);
 
@@ -128,14 +139,11 @@ class epub3 {
 
 				$page_styles="
 				body {
-					border: 1px solid black;
 					zoom: 1;
 					color: #000;
 					font-family: Arial;
 					font-size: 14px;
 					line-height: normal;
-					width:1204px;
-					height:768px;
 					}
 ";
 
@@ -268,8 +276,10 @@ class epub3 {
 
 
 	public function create_title_page(){
-
-
+		$bookSize=$this->book->getPageSize();
+		$width=$bookSize['width']?$bookSize['width']:"1024";
+		$height=$bookSize['height']?$bookSize['height']:"768";
+		
 	
 
 			//create_title_page
@@ -370,7 +380,7 @@ class epub3 {
 						$new_page->components=$components;
 					}
 					//print_r(EditorActionsController::get_page_components($page->page_id));
-					$new_page->file->writeLine($this->prepare_PageHtml($new_page));
+					$new_page->file->writeLine($this->prepare_PageHtml($new_page,$this->book->getPageSize(),$this->get_tmp_file()  ));
 
 					$new_chapter->pages[]=$new_page;
 
@@ -389,14 +399,15 @@ class epub3 {
 
 	}
 
-	public function prepare_PageHtml(&$page){
+	public function prepare_PageHtml(&$page,$bookSize,$folder){
 		$page_data=json_decode($page->pdf_data,true);
-		$bookSize=$this->book->getPageSize();
 		if (isset($page_data['image']['data'])&& !empty($page_data['image']['data'])) {
 			$img=$page_data['image']['data'];
+			$backgroundfile = functions::save_base64_file ( $img , 'bg'.$page->page_id , $this->get_tmp_file());
+
 			//$bookSize=$page_data['image']['size'];
 		}
-		$background= (isset($img)&&!empty($img)) ? "background-image:url('".$img."')" : "background:white";
+		$background= (isset($img)&&!empty($img)) ? "background-image:url('".$backgroundfile->filename."')" : "background:transparent";
 		$background_size=(isset($bookSize)&&!empty($bookSize)) ? "background-size:".$bookSize['width']."px ".$bookSize['height']."px":"";
 		
 		$width="1024";
@@ -416,7 +427,8 @@ class epub3 {
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:epub="http://www.idpf.org/2007/ops" lang="en">
   <head>
     <meta http-equiv="default-style" content="text/html; charset=utf-8"/>
-    <title>My first book</title>
+    <title></title>
+
 
 		<meta name="viewport" content="width='.$width.', height='.$height.'"/>
 
@@ -427,22 +439,22 @@ class epub3 {
 		<link rel="stylesheet" href="page_styles.css" type="text/css"/>
 		<link rel="stylesheet" href="widgets.css" type="text/css"/>
 		<script type="text/javascript" src="jquery-1.4.4.min.js"></script>
-	    	<script type="text/javascript" src="aie_core.js"></script>
-	    	<script type="text/javascript" src="aie_events.js"></script>
-	    	<script type="text/javascript" src="aie_explore.js"></script>
-	    	<script type="text/javascript" src="aie_gameutils.js"></script>
-	    	<script type="text/javascript" src="aie_qaa.js"></script>
-	    	<script type="text/javascript" src="aie_storyline.js"></script>
-	    	<script type="text/javascript" src="aie_textsound.js"></script>
-	    	<script type="text/javascript" src="igp_audio.js"></script>
-	    	<script type="text/javascript" src="iscroll.js"></script>
-	    	<script type="text/javascript" src="jquery.min.js"></script>
-	    	<script type="text/javascript" src="jquery-ui.min.js"></script>
-	    	<script type="text/javascript" src="LAB.min.js"></script>
-	    	<script type="text/javascript" src="panelnav.js"></script>
-	    	<script type="text/javascript" src="popup.js"></script>
-	    	<script type="text/javascript" src="pubsub.js"></script>
-	    	<script type="text/javascript" src="Chart.js"></script>
+		<script type="text/javascript" src="aie_core.js"></script>
+		<script type="text/javascript" src="aie_events.js"></script>
+		<script type="text/javascript" src="aie_explore.js"></script>
+		<script type="text/javascript" src="aie_gameutils.js"></script>
+		<script type="text/javascript" src="aie_qaa.js"></script>
+		<script type="text/javascript" src="aie_storyline.js"></script>
+		<script type="text/javascript" src="aie_textsound.js"></script>
+		<script type="text/javascript" src="igp_audio.js"></script>
+		<script type="text/javascript" src="iscroll.js"></script>
+		<script type="text/javascript" src="jquery.min.js"></script>
+		<script type="text/javascript" src="jquery-ui.min.js"></script>
+		<script type="text/javascript" src="LAB.min.js"></script>
+		<script type="text/javascript" src="panelnav.js"></script>
+		<script type="text/javascript" src="popup.js"></script>
+		<script type="text/javascript" src="pubsub.js"></script>
+		<script type="text/javascript" src="Chart.js"></script>
 		<script type="text/javascript" src="jquery.slickwrap.js"></script>
 		<script type="text/javascript" src="jssor.slider.js"></script>
 		<script type="text/javascript" src="jssor.core.js"></script>
@@ -460,61 +472,83 @@ class epub3 {
 
 		<!-- DRAGDROP-->
 		<script type="text/javascript" src="dragdrop/sources/js/jquery-ui.min.js"></script>
-	    <script type="text/javascript" src="dragdrop/sources/js/jquery.ui.touch-punch.min.js"></script>
-	    <script type="text/javascript" src="dragdrop/sources/js/DragDrop.js"></script>
-	    <link rel="stylesheet" type="text/css" href="dragdrop/sources/css/DragDrop.css" />
+		<script type="text/javascript" src="dragdrop/sources/js/jquery.ui.touch-punch.min.js"></script>
+		<script type="text/javascript" src="dragdrop/sources/js/DragDrop.js"></script>
+		<link rel="stylesheet" type="text/css" href="dragdrop/sources/css/DragDrop.css" />
 
-	    	<script type="text/x-mathjax-config">
-		      MathJax.Hub.Config({
-				tex2jax: {
-				  inlineMath: [["$","$"],["\\\\(","\\\\)"]],
-				  "HTML-CSS": { scale: 100} 
-				}
-		      });
-		      MathJax.Hub.Register.StartupHook("HTML-CSS Jax Ready",function () {
-			  var VARIANT = MathJax.OutputJax["HTML-CSS"].FONTDATA.VARIANT;
-			  VARIANT["normal"].fonts.unshift("MathJax_Arial");
-			  VARIANT["bold"].fonts.unshift("MathJax_Arial-bold");
-			  VARIANT["italic"].fonts.unshift("MathJax_Arial-italic");
-			  VARIANT["-tex-mathit"].fonts.unshift("MathJax_Arial-italic");
-			});
-			MathJax.Hub.Register.StartupHook("SVG Jax Ready",function () {
-			  var VARIANT = MathJax.OutputJax.SVG.FONTDATA.VARIANT;
-			  VARIANT["normal"].fonts.unshift("MathJax_SansSerif");
-			  VARIANT["bold"].fonts.unshift("MathJax_SansSerif-bold");
-			  VARIANT["italic"].fonts.unshift("MathJax_SansSerif-italic");
-			  VARIANT["-tex-mathit"].fonts.unshift("MathJax_SansSerif-italic");
-			});
-			MathJax.Hub.Register.StartupHook("End",function () {
-			  $(".MathJax").css("font-size","93%");
-			  $(".textarea .MathJax").css("font-size","80%");
-			});
-	    	</script>
+		<script type="text/x-mathjax-config">
+		  MathJax.Hub.Config({
+			tex2jax: {
+			  inlineMath: [["$","$"],["\\\\(","\\\\)"]],
+			  "HTML-CSS": { scale: 100} 
+			}
+		  });
+		  MathJax.Hub.Register.StartupHook("HTML-CSS Jax Ready",function () {
+		  var VARIANT = MathJax.OutputJax["HTML-CSS"].FONTDATA.VARIANT;
+		  VARIANT["normal"].fonts.unshift("MathJax_Arial");
+		  VARIANT["bold"].fonts.unshift("MathJax_Arial-bold");
+		  VARIANT["italic"].fonts.unshift("MathJax_Arial-italic");
+		  VARIANT["-tex-mathit"].fonts.unshift("MathJax_Arial-italic");
+		});
+		MathJax.Hub.Register.StartupHook("SVG Jax Ready",function () {
+		  var VARIANT = MathJax.OutputJax.SVG.FONTDATA.VARIANT;
+		  VARIANT["normal"].fonts.unshift("MathJax_SansSerif");
+		  VARIANT["bold"].fonts.unshift("MathJax_SansSerif-bold");
+		  VARIANT["italic"].fonts.unshift("MathJax_SansSerif-italic");
+		  VARIANT["-tex-mathit"].fonts.unshift("MathJax_SansSerif-italic");
+		});
+		MathJax.Hub.Register.StartupHook("End",function () {
+		  $(".MathJax").css("font-size","93%");
+		  $(".textarea .MathJax").css("font-size","80%");
+		});
+		</script>
 		<script src="mathjax/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+		<script type="text/javascript" src="fancy/lib/jquery.mousewheel-3.0.6.pack.js"></script>
+		<script type="text/javascript" src="fancy/source/jquery.fancybox.js?v=2.1.5"></script>
+		<link rel="stylesheet" type="text/css" href="fancy/source/jquery.fancybox.css?v=2.1.5" media="screen" />
+		<link rel="stylesheet" type="text/css" href="fancy/source/helpers/jquery.fancybox-buttons.css?v=1.0.5" />
+		<script type="text/javascript" src="fancy/source/helpers/jquery.fancybox-buttons.js?v=1.0.5"></script>
+		<link rel="stylesheet" type="text/css" href="fancy/source/helpers/jquery.fancybox-thumbs.css?v=1.0.7" />
+		<script type="text/javascript" src="fancy/source/helpers/jquery.fancybox-thumbs.js?v=1.0.7"></script>
+		<script type="text/javascript" src="fancy/source/helpers/jquery.fancybox-media.js?v=1.0.6"></script>
+		<script type="text/javascript">
+		$(document).ready(function() {
+
+		$(".fancybox").fancybox();
+
+		});
+		</script>
+		<style type="text/css">
+		.fancybox-custom .fancybox-skin {
+		box-shadow: 0 0 50px #222;
+		}
+		body {
+		max-width: 700px;
+		margin: 0 auto;
+		}
+		</style>
+
 	</head>
 	<body style="background-repeat:no-repeat; width:'.$width.'px; height:'.$height.'px;'.$background.';'.$background_size.';">
 	<section epub:type="frontmatter titlepage">
-%components%
+	%components%
 	</section>
-
 		<script>
 		  (function(i,s,o,g,r,a,m){i["GoogleAnalyticsObject"]=r;i[r]=i[r]||function(){
 		  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
 		  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
 		  })(window,document,"script","//www.google-analytics.com/analytics.js","ga");
-
 		  ga("create", "UA-16931314-17", "lindneo.com");
 		  ga("send", "pageview");
-
 		</script>
-
 	</body>
 </html>';
 
 		foreach ($page->components as $component){
 			set_time_limit(100);
 			$component=(object)$component;
-			$component->html=new componentHTML($component,$this);
+			$component->html=new componentHTML($component, $this, $folder);
 			$components_html.=$component->html->html;
 		}
 		$page_file_inside=str_replace(array(
@@ -981,6 +1015,7 @@ class epub3 {
 			ob_clean();
 			flush();
 			readfile($this->ebookFile);
+			functions::delTree($this->tempdirParent);
 			die;
 		}
 		
@@ -1022,9 +1057,10 @@ class epub3 {
 			# code...
 		}
 		error_log("file list:".$file_list);
-		error_log("sh ".Yii::app()->params['pdftojpg']." ".$this->get_tmp_file().$file_list);
-		$result=shell_exec("sh ".Yii::app()->params['htmltojpg']." ".$this->get_tmp_file().$file_list);
+		error_log("sh ".Yii::app()->params['htmltopng']." ".$this->get_tmp_file().$file_list);
+		$result=shell_exec("sh ".Yii::app()->params['htmltopng']." ".$this->get_tmp_file().$file_list);
 		if($result==null){
+			echo "result is null";
 			return false;
 		}
 		return true;
@@ -1094,7 +1130,7 @@ class epub3 {
 
 		//Title Page.
 		if( in_array(false,$this->create_title_page() ) ) {
-			$this->errors[]=new error('Epub3-Construction','Problem with Title Page');
+			$this->errors[]=new error('Epub3-Construction','Problem with Title Page'); 
 			return false;
 		}
 
@@ -1122,12 +1158,14 @@ class epub3 {
 			return false;
 		}
 
+		error_log("Thumbnail processing...");
 		//Create thumbnails
 		if(!$this->createThumbnails()){
 			$this->errors[]=new error('Thumbnail production','Problem with thumbnails');
 			return false;
 		}
 		//Create Zip.
+		error_log("Zip processing...");
 		if( ! $this->zipfolder($encyrptFiles)  ) {
 			$this->errors[]=new error('Epub3-Construction','Problem with Zip');
 			return false;

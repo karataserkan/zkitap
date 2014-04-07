@@ -128,6 +128,14 @@ window.lindneo.nisga = (function(window, $, undefined){
         tagComponentBuilder( component );
         break;
 
+      case 'thumb':
+        thumbComponentBuilder( component );
+        break;
+
+      case 'rtext':
+        rtextComponentBuilder( component );
+        break;
+
 
       default:
          // what can I do sometimes
@@ -137,13 +145,14 @@ window.lindneo.nisga = (function(window, $, undefined){
   }; 
 
   var undoComponent = function() {
-    ////console.log(revision_array.revisions);
+    console.log(revision_array.revisions);
+    console.log(revision_id);
     //return;
       if(revision_id > 0){
         revision_id = revision_id - 1;
         ////console.log(revision_array.revisions);
-        ////console.log(revision_id);
-        ////console.log(revision_array.revisions[revision_id].even_type);
+        console.log(revision_id);
+        console.log(revision_array.revisions[revision_id].even_type);
         ////console.log(revision_array.revisions);
 
         if(revision_array.revisions[revision_id].even_type=='CREATE'){
@@ -158,7 +167,8 @@ window.lindneo.nisga = (function(window, $, undefined){
           
         }
         else if(revision_array.revisions[revision_id].even_type=='UPDATE'){
-          ////console.log(revision_array.revisions[revision_id].component.data.textarea.val);
+          console.log(revision_array.revisions[revision_id].component.data.textarea.val);
+          
           var array_where = [];
           $.each(revision_array.revisions, function(index,value){ 
             ////console.log(value.component_id + ' ----- ' +revision_array.revisions[revision_id].component_id);
@@ -220,12 +230,13 @@ window.lindneo.nisga = (function(window, $, undefined){
   };
   
   var ComponentDelete = function ( component ) {
+    console.log('ComponentDelete');
     if(revision_value==0){
         revision_array.revisions.push({component_id: component.id, component: component, revision_date: $.now(), even_type: 'DELETE'});
         revision_id++;
       }
       else revision_value=0;
-    //console.log(componentId);
+    console.log(component);
     $('[id="'+component.id+'"]').parent().not('#current_page').remove();
     $('[id="'+component.id+'"]').remove();
   };
@@ -238,7 +249,7 @@ window.lindneo.nisga = (function(window, $, undefined){
         }
       }
       else revision_value=0;
-//        //console.log(revision_array);
+    console.log(revision_array);
     window.lindneo.toolbox.removeComponentFromSelection( $('#'+ component.id) );
     window.lindneo.tlingit.componentHasDeleted( component.id );
 
@@ -363,12 +374,13 @@ var textComponentBuilder = function( component ) {
 
   var linkComponentBuilder = function ( component ) {
     
-    
+    var link_element  = $('<div class="link-controllers" style="width:100%; height:100%;"></div>');
     var element  = $('<a class="link-component"></a>');
     var elementWrap=$('<div ></div>');
     elementWrap.appendTo( page_div_selector );
+    element.appendTo( link_element );
 
-    element
+    link_element
     .appendTo( elementWrap )
     .popupComponent({
       'component': component,
@@ -464,6 +476,36 @@ var textComponentBuilder = function( component ) {
     element
     .appendTo( elementWrap )
     .htmlComponent({
+      'component': component,
+      'update': function ( event, component ) {
+        if(revision_value==0){
+        var newObject = jQuery.extend(true, {}, component);
+        revision_array.revisions.push({component_id: component.id, component: newObject, revision_date: $.now(), even_type: 'UPDATE'});
+                revision_id++;
+
+      }
+      else revision_value=0;
+      ////console.log(revision_array);
+        window.lindneo.tlingit.componentHasUpdated( component );
+      },
+      'selected': function (event, element) {
+        window.lindneo.currentComponentWidget = element;
+        window.lindneo.toolbox.refresh( element );
+      }
+    });
+
+
+  };
+
+  var rtextComponentBuilder = function( component ) {
+
+    var element  = $('<div class="rtext-controllers"> </div>');
+     var elementWrap=$('<div ></div>');
+    elementWrap.appendTo( page_div_selector );
+    console.log(component);
+    element
+    .appendTo( elementWrap )
+    .rtextComponent({
       'component': component,
       'update': function ( event, component ) {
         if(revision_value==0){
@@ -747,6 +789,37 @@ var textComponentBuilder = function( component ) {
     element
     .appendTo( elementWrap )
     .sliderComponent({
+      'component': component,
+      'update': function ( event, component ) {
+        if(revision_value==0){
+        var newObject = jQuery.extend(true, {}, component);
+        revision_array.revisions.push({component_id: component.id, component: newObject, revision_date: $.now(), even_type: 'UPDATE'});
+                revision_id++;
+
+      }
+      else revision_value=0;
+      ////console.log(revision_array);
+        window.lindneo.tlingit.componentHasUpdated( component );
+      },
+      'selected': function (event, element) {
+        window.lindneo.currentComponentWidget = element;
+        window.lindneo.toolbox.refresh( element );
+      }
+    });
+
+  };
+
+  var thumbComponentBuilder = function ( component ) {
+    
+
+    var element  = $('<div id="thumb_container" style="position: relative; top: 0px; left: 0px; min-width: '+component.data.somegallery.css.width+'px; min-height: '+component.data.somegallery.css.height+'px; background: #24262e; overflow: hidden;">');
+    var elementWrap=$('<div ></div>');
+
+    elementWrap.appendTo( page_div_selector );
+
+    element
+    .appendTo( elementWrap )
+    .thumbComponent({
       'component': component,
       'update': function ( event, component ) {
         if(revision_value==0){

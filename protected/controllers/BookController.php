@@ -36,7 +36,7 @@ class BookController extends Controller
 				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
-				'actions'=>array('create','update','selectTemplate','delete','view','author','newBook','selectData','uploadFile','duplicateBook','updateThumbnail','updateCover',"copyBook","createTemplate","updateBookTitle","getBookPages",'bookCreate','getTemplates','createNewBook'),
+				'actions'=>array('create','update','selectTemplate','delete','view','author','newBook','selectData','uploadFile','duplicateBook','updateThumbnail','updateCover',"copyBook","createTemplate","updateBookTitle","getBookPages",'bookCreate','getTemplates','createNewBook','fastStyle','getFastStyle'),
 				'users'=>array('@'),
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
@@ -47,6 +47,31 @@ class BookController extends Controller
 				'users'=>array('*'),
 			),
 		);
+	}
+
+	public function actionFastStyle()
+	{
+			if (isset($_POST['styles'])) {
+				$styles=json_decode($_POST['styles']);
+				$book=$this->loadModel($styles[0]->value);
+				$component=$styles[1]->value;
+				unset($styles[0]);
+				unset($styles[1]);
+				foreach ($styles as $type => $style) {
+					$book->setFastStyle($component,$style->name,$style->value);
+				}
+				$book->save();
+			}
+		
+	}
+
+	public function actionGetFastStyle()
+	{
+		if (isset($_POST['book_id']) & isset($_POST['component'])) {
+			$book=$this->loadModel($_POST['book_id']);
+			echo $book->getFastStyle($_POST['component']);
+
+		}
 	}
 
 	public function actionBookCreate()
@@ -269,6 +294,8 @@ class BookController extends Controller
 				}
 		}
 	}
+
+	
 
 	public function actionGetTemplates($id)
 	{
@@ -730,16 +757,23 @@ class BookController extends Controller
 			$page=$id2;
 		}
 		
+		$userId=Yii::app()->user->id;
+		$isUserBook=UserBook::model()->findAll("user_id=:user_id AND book_id=:book_id AND (type='editor' OR type='owner')", array('user_id'=>$userId,'book_id'=>$bookId));
+
+		if (! $isUserBook) {
+			$this->redirect('/site/index');
+		}
+
 		$detectSQLinjection=new detectSQLinjection($page);
 		if (!$detectSQLinjection->ok()) {
 			error_log("detectSQLinjection BC:A: ".$Yii::app()->user->id." page: ".$page);
-			$this->redirect('index');	
+			$this->redirect('/site/index');	
 		}
 
 		$detectSQLinjection=new detectSQLinjection($bookId);
 		if (!$detectSQLinjection->ok()) {
 			error_log("detectSQLinjection BC:A:".$Yii::app()->user->id." bookId: ".$bookId);
-			$this->redirect('index');	
+			$this->redirect('/site/index');	
 		}
 
 		Yii::app()->db

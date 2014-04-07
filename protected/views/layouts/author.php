@@ -81,10 +81,28 @@
 			});
 	    </script>
 		<script src="<?php echo Yii::app()->request->baseUrl; ?>/js/lib/mathjax/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+		<script type="text/javascript" src="<?php echo Yii::app()->request->baseUrl; ?>/js/lib/fancy/lib/jquery.mousewheel-3.0.6.pack.js"></script>
+		<script type="text/javascript" src="<?php echo Yii::app()->request->baseUrl; ?>/js/lib/fancy/source/jquery.fancybox.js?v=2.1.5"></script>
+		<link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/js/lib/fancy/source/jquery.fancybox.css?v=2.1.5" media="screen" />
+		<link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/js/lib/fancy/source/helpers/jquery.fancybox-buttons.css?v=1.0.5" />
+		<script type="text/javascript" src="<?php echo Yii::app()->request->baseUrl; ?>/js/lib/fancy/source/helpers/jquery.fancybox-buttons.js?v=1.0.5"></script>
+		<link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/js/lib/fancy/source/helpers/jquery.fancybox-thumbs.css?v=1.0.7" />
+		<script type="text/javascript" src="<?php echo Yii::app()->request->baseUrl; ?>/js/lib/fancy/source/helpers/jquery.fancybox-thumbs.js?v=1.0.7"></script>
+		<script type="text/javascript" src="<?php echo Yii::app()->request->baseUrl; ?>/js/lib/fancy/source/helpers/jquery.fancybox-media.js?v=1.0.6"></script>
+		<script type="text/javascript">
+		$(document).ready(function() {
+			$('.fancybox').fancybox();
+		});
+		</script>
+
 		<!-- JS Slider -->
 		<script type="text/javascript" src="<?php echo Yii::app()->request->baseUrl; ?>/js/lib/jssor.core.js"></script>
 	    <script type="text/javascript" src="<?php echo Yii::app()->request->baseUrl; ?>/js/lib/jssor.utils.js"></script>
 	    <script type="text/javascript" src="<?php echo Yii::app()->request->baseUrl; ?>/js/lib/jssor.slider.js"></script>
+
+	    <!-- İSCROLL-->
+	    <script type="text/javascript" src="<?php echo Yii::app()->request->baseUrl; ?>/js/lib/iscroll.js"></script>
 		<!-- JS Modules -->
 		<script src="<?php echo Yii::app()->request->baseUrl; ?>/js/app/lindneo.js"></script>	
 		<script src="<?php echo Yii::app()->request->baseUrl; ?>/js/app/modules/dataservice.js"></script>	
@@ -111,7 +129,9 @@
 		<script src="<?php echo Yii::app()->request->baseUrl; ?>/js/app/components/latex-component.js"></script>
 		<script src="<?php echo Yii::app()->request->baseUrl; ?>/js/app/components/slider-component.js"></script>
 		<script src="<?php echo Yii::app()->request->baseUrl; ?>/js/app/components/tag-component.js"></script>
-		<script src="<?php echo Yii::app()->request->baseUrl; ?>/js/app/components/plink-component.js"></script>	
+		<script src="<?php echo Yii::app()->request->baseUrl; ?>/js/app/components/plink-component.js"></script>
+		<script src="<?php echo Yii::app()->request->baseUrl; ?>/js/app/components/thumb-component.js"></script>
+		<script src="<?php echo Yii::app()->request->baseUrl; ?>/js/app/components/rtext-component.js"></script>	
 		<!-- Page JS Codes -->
 		<script src="<?php echo Yii::app()->request->baseUrl; ?>/js/app/other/page-drag-drop.js"></script>
 		<script src="<?php echo Yii::app()->request->baseUrl; ?>/js/app/other/page-load.js"></script>

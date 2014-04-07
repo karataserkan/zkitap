@@ -43,9 +43,6 @@ $(document).ready(function(){
         return this.options.component.data.textarea;
       },
 
-
-
-
       setPropertyofObject : function (propertyName,propertyValue){
         var that = this;
         
@@ -233,8 +230,6 @@ $(document).ready(function(){
   }) (window, jQuery);
   
 });
-
-
 
 
   var createTextComponent = function ( event, ui ,type) {

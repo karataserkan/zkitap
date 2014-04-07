@@ -88,12 +88,13 @@ return array(
 		// uncomment the following to use a MySQL database
 
 		'db'=>array(
-			'connectionString' => 'mysql:host=lindneo.com;dbname=squid_pacific',
+			'connectionString' => 'mysql:host=lindneo.com;port=3306;dbname=squid_pacific',
 			'emulatePrepare' => true,
 			'username' => 'db_squid_pacific',
 			'password' => '7GqA3Pqcy38QnfPQ',
 			'charset' => 'utf8',
 		),
+
 
 		'errorHandler'=>array(
 			// use 'site/error' action to display errors
@@ -130,7 +131,7 @@ return array(
      	'epubtopdf'=>dirname(__FILE__).DIRECTORY_SEPARATOR.'../../'.'bin/epubtopdf/epubtopdf ',
      	'pdftojpg'=>dirname(__FILE__).DIRECTORY_SEPARATOR.'../../'.'bin/pdftojpg/pdftojpg ',
      	'tocextractor'=>dirname(__FILE__).DIRECTORY_SEPARATOR.'../../'.'bin/jpdfbookmarks-2.5.2/jpdfbookmarks --dump ',
-     	'htmltojpg'=>dirname(__FILE__).DIRECTORY_SEPARATOR.'../../'.'bin/htmltojpg/htmltojpg ',
+     	'htmltopng'=>dirname(__FILE__).DIRECTORY_SEPARATOR.'../../'.'bin/htmltopng/htmltopng ',
      	'availableLanguages' => array(
      		'tr_TR' => 'Türkçe',
      		'en_US' => 'English'

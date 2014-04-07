@@ -65,8 +65,9 @@ var createPlinkComponent = function ( event, ui, oldcomponent ) {
     };
 var page_count = 1;
 $.ajax({
-  url: "getBookPages/"+lindneo.currentBookId,
+  url: "/book/getBookPages/"+lindneo.currentBookId,
 }).done(function(result) {
+  console.log(result);
   book_data = JSON.parse(result);
   console.log(book_data.length);
 

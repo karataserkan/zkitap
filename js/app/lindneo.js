@@ -6,6 +6,7 @@ window.lindneo = (function(window){
   var currentPageId ;
   var currentComponent = {};
   var online_users = [];
+  var selection_text = "";
   var  randomString = function (length, chars) {
     length = typeof length !== 'undefined' ? length : 21;
     chars = typeof chars !== 'undefined' ? chars : '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
@@ -109,6 +110,7 @@ window.lindneo = (function(window){
     findBestSize:findBestSize,
     randomString:randomString,
     url: url,
+    selection_text: selection_text,
     currentPageId: currentPageId,
     currentComponent: currentComponent,
     online_users: online_users

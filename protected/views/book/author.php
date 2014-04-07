@@ -37,7 +37,9 @@ $current_user=User::model()->findByPk(Yii::app()->user->id);
 
 </script>
 	
-	
+<?php 
+//echo $model->getFastStyle('p');
+?>	
 	
 		
 	
@@ -111,9 +113,9 @@ $current_user=User::model()->findByPk(Yii::app()->user->id);
 
 			   <li class='has-sub'><a href='#'><span><?php _e('Görünüm') ?> </span></a>
 					<ul>
-				     <li class="onoff"><a href='#' ><input type="checkbox" name="cetvel" id="cetvelcheck" class="css-checkbox" /><label for="cetvelcheck" class="css-label"><?php _e('Cetvel') ?></label></a></li>
-			         <li class="onoff"><a href='#' ><input type="checkbox" name="rehber" id="rehbercheck" class="css-checkbox" /><label for="rehbercheck" class="css-label"><?php _e('Rehber') ?></label></a></li>
-			         <li class="onoff"><a href='#' ><input type="checkbox" name="yorumlar" id="yorumlarcheck" class="css-checkbox" /><label for="yorumlarcheck" class="css-label"><?php _e('Yorumlar') ?></label></a></li>
+				     <li class="onoff"><a href='#' id="cetvelcheck" ><input type="checkbox" name="cetvel" id="cetvelcheck" class="css-checkbox" /><label for="cetvelcheck" class="css-label"><?php _e('Cetvel') ?></label></a></li>
+			         <li class="onoff"><a href='#' id="rehbercheck" ><input type="checkbox" name="rehber" id="rehbercheck" class="css-checkbox" /><label for="rehbercheck" class="css-label"><?php _e('Rehber') ?></label></a></li>
+			         <li class="onoff"><a href='#' id="yorumlarcheck" ><input type="checkbox" name="yorumlar" id="yorumlarcheck" class="css-checkbox" /><label for="yorumlarcheck" class="css-label"><?php _e('Yorumlar') ?></label></a></li>
 			        </ul>
 			   </li>
 				
@@ -155,7 +157,9 @@ $current_user=User::model()->findByPk(Yii::app()->user->id);
 			         <?php } ?>
 			      </ul>
 			   </li>
-			   
+			   <li>
+			   	<a href="http://bekir.dev.lindneo.com/EditorActions/PreviewPage/<?php echo $current_page->page_id; ?> " class="fancybox">Preview</a>
+			   </li>
 			   <li class="left-border" style="float:right; height: 42px; min-width:50px; text-align:center; padding-top: 5px; ">
 			  <i id="save_status" class="size-30"></i>
 			   </li>
@@ -184,7 +188,7 @@ $current_user=User::model()->findByPk(Yii::app()->user->id);
 			</div>
 			<div class="vertical-line responsive_2"></div>
 						
-			<div class="text-options latex-options table-options toolbox" style="display:inline-block;">
+			<div class="text-options wrap-options rtext-options latex-options table-options toolbox" style="display:inline-block;">
 					
 					
 					<input class='tool color' rel='color' type="color" class="color-picker-box radius " placeholder="e.g. #bbbbbb" title="Yazı Rengi" />
@@ -708,6 +712,41 @@ $current_user=User::model()->findByPk(Yii::app()->user->id);
 </div>	
 <!--  end add slider popup -->
 
+<!--  add thumb popup -->	
+<div class="popup" id="pop-galery-popup">
+<div class="popup-header">
+	<i class="icon-m-galery"></i>
+		Galeri Ekle
+	<i id="image-add-dummy-close-button" class="icon-close size-10" style="float:right; margin-right:10px; margin-top:5px;"></i>
+</div>
+<!-- popup content-->
+	<div class="gallery-inner-holder">
+		<div style="clear:both"></div>
+			<div style="margin-bottom:20px;">
+				<label class="dropdown-label" id="leading">
+						Görsel Adedi:
+							<select id="leading" class="radius">
+								<option selected="" value="8"> 1 </option>
+								<option value="0" >2</option>
+								<option value="10" >3</option>
+								<option value="20" >4</option>
+								<option value="30" >5</option>
+								<option value="40" >6</option>
+								<option value="50" >7</option>
+								<option value="60" >8</option>
+								<option value="70" >9</option>
+								<option value="80" >10</option>
+							</select>	
+					</label>
+					
+			</div>
+			<div class="add-image-drag-area"> </div>
+		<a href="#" class="btn btn-info" id="add-image" style="padding: 5px 30px;">Ekle</a>
+	</div>
+<!-- popup content-->
+</div>	
+<!--  end add thumb popup -->
+
 	
 <!--  add quiz popup -->	
 <div class="popup" id="pop-quiz-popup">
@@ -960,6 +999,7 @@ $current_user=User::model()->findByPk(Yii::app()->user->id);
 			
 			<li ctype="galery" class="component icon-m-galery">&nbsp;&nbsp;&nbsp;&nbsp;Galeri</li>
 			<li ctype="slider" class="component icon-m-galery">&nbsp;&nbsp;&nbsp;&nbsp;Slider</li>
+			<li ctype="thumb" class="component icon-m-galery">&nbsp;&nbsp;&nbsp;&nbsp;Slide Tumb</li>
 			<li ctype="tag" class="component icon-m-galery">&nbsp;&nbsp;&nbsp;&nbsp;Tag</li>
 			<li ctype="quiz"  class="component icon-m-quiz">&nbsp;&nbsp;&nbsp;&nbsp;Quiz</li>
 			<li ctype="side-text"  class="component icon-m-listbox">&nbsp;&nbsp;&nbsp;Yazı Kutusu</li>
@@ -969,6 +1009,7 @@ $current_user=User::model()->findByPk(Yii::app()->user->id);
 			<li class="left_bar_titles"></li>
 
 			<li ctype="text" class="component icon-m-text">&nbsp;&nbsp;&nbsp;&nbsp;Yazı</li>
+			<li ctype="rtext" class="component icon-m-text">&nbsp;&nbsp;&nbsp;&nbsp;Rich Text</li>
 			<li ctype="grafik" class="component icon-m-charts">&nbsp;&nbsp;&nbsp;&nbsp;Grafik</li>
 			<li ctype="shape" class="component icon-m-shape">&nbsp;&nbsp;&nbsp;&nbsp;Şekil</li>
 			<li ctype="table" class="component icon-t-merge">&nbsp;&nbsp;&nbsp;&nbsp;Tablo</li>
@@ -1163,7 +1204,261 @@ $current_user=User::model()->findByPk(Yii::app()->user->id);
 				</div>
 				</div>
 			
+
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<h3 class="panel-title"> <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseStyle"><i class="fa fa-bars light-blue"></i>&nbsp;&nbsp;&nbsp;<?php _e('Hızlı Stiller'); ?> </a> </h3>
+				</div>
+					<div id="collapseStyle" class="panel-collapse collapse">
+						<div class="panel-body">
+							<div id="fast_styles_main">
+								<a class="btn component" href="#" id="fast_style2" component="h1" ><?php _e("Başlık"); ?></a><br>
+								<a class="btn component" href="#" id="fast_style3" component="h2" ><?php _e("Alt Başlık"); ?></a><br>
+								<a class="btn component" href="#" id="fast_style4" component="h3" ><?php _e("Küçük Başlık"); ?></a><br>
+								<a class="btn component" href="#" id="fast_style5" component="p" ><?php _e("Paragraf"); ?></a><br>
+								<a class="btn component" href="#" id="fast_style6" component="blockqoute" ><?php _e("Alıntı"); ?></a>
+							</div>
+							<div id="fast_styles_edit">
+								<h3 class="form-title" id="fast_styles_form_name">Styles</h3>
+								<form class="form-horizontal" role="form">
+									<div class="form-group">
+									<label class="col-sm-3 control-label"><?php _e("Satır Yüksekliği"); ?>:</label>
+										<div class="col-sm-9">
+											<select class="form-control" id="fast_styles_line_height">
+											  <option name="fast_styles_line_height" value="100">100</option>
+											  <option name="fast_styles_line_height" value="125">125</option>
+											  <option selected="" name="fast_styles_line_height" value="150">150</option>
+											  <option name="fast_styles_line_height" value="175">175</option>
+											  <option name="fast_styles_line_height" value="200">200</option>
+											</select>
+										</div>
+								  </div>
+
+								  <div class="form-group">
+									<label class="col-sm-3 control-label"><?php _e("Yazı Tipi"); ?>:</label>
+										<div class="col-sm-9">
+											<select class="form-control" id="fast_styles_font_type">
+											  	<option name="fast_styles_font_type" value="Arial"> Arial </option>
+												<option name="fast_styles_font_type" value="SourceSansPro" >Source Sans Pro</option>
+												<option name="fast_styles_font_type" value="AlexBrushRegular" >Alex Brush Regular</option>
+												<option name="fast_styles_font_type" value="ChunkFiveRoman" >ChunkFive Roman</option>
+												<option name="fast_styles_font_type" value="Aller" >Aller</option>
+												<option name="fast_styles_font_type" value="Cantarell" >Cantarell</option>
+												<option name="fast_styles_font_type" value="Exo" >Exo</option>
+												<option name="fast_styles_font_type" value="helvetica" >Helvetica</option>
+												<option name="fast_styles_font_type" value="Open Sans" >Open Sans</option>
+												<option name="fast_styles_font_type" value="Times New Roman" >Times New Roman</option>
+												<option name="fast_styles_font_type" value="georgia" >Georgia</option>
+												<option name="fast_styles_font_type" value="Courier New" >Courier New</option>
+											</select>
+										</div>
+								  </div>
+
+								  <div class="form-group">
+									<label class="col-sm-3 control-label"><?php _e("Yazı Boyutu"); ?>:</label>
+										<div class="col-sm-9">
+											<select class="form-control" id="fast_styles_font_size">
+											  	<?php for ($font_size_counter=10; $font_size_counter<=250;$font_size_counter+=2){
+													echo "<option name='fast_styles_font_size' value='{$font_size_counter}px' >{$font_size_counter}</option>";
+												} ?>
+											</select>
+										</div>
+								  </div>
+									<div class="form-group">
+										<div class="col-sm-12">
+											<input type="checkbox" name="fast_styles_font_weight"  value="bold" class="dark-blue radius toolbox-items btn-checkbox tool checkbox"> <label class="icon-font-bold  size-15" for="font-bold" title="Yazı Kalınlaştırma"></label>
+											<input type="checkbox" name="fast_styles_font_italic" value="italic" class="dark-blue radius toolbox-items btn-checkbox tool checkbox" > <label class="icon-font-italic size-15" for="font-italic" title="İtalik Yazı"></label>
+											<input type="checkbox" name="fast_styles_text_decoration"  value="underline" class="dark-blue radius toolbox-items btn-checkbox tool checkbox" ><label class="icon-font-underline size-15" for="font-underline" title="Altı Çizili Yazı"></label>
+ 											<br><br>
+										  	<input type='radio' name='fast_styles_text_align' value="left"  href="#" class="dark-blue radius toolbox-items radio tool" ><label for='text-align-left' class="icon-text-align-left size-15" title="Sola Yasla"></label>
+											<input type='radio' name='fast_styles_text_align' value="center"  href="#" class="dark-blue radius toolbox-items  radio tool" ><label for='text-align-center' class="icon-text-align-center  size-15" title="Ortala"></label>
+											<input type='radio' name='fast_styles_text_align' value="right"  href="#" class="dark-blue radius toolbox-items  radio tool" ><label for='text-align-right' class="icon-text-align-right  size-15" title="Sağa Yasla"></label>
+										</div>
+									</div>
+
+
+
+								</form>
+							</div>
+							<div id="fast_styles_buttons">
+								<a href="#" class="btn btn-inverse component" id="fast_style_back_button"><?php _e("Geri"); ?></a>
+								<a href="#" class="btn btn-success component" id="fast_style_save_button"><?php _e("Kaydet"); ?></a>
+							</div>
+						</div>
+					</div>
+			</div>
 			
+			<script type="text/javascript">
+				var main=$('#fast_styles_main');
+				var edit=$('#fast_styles_edit');
+				var buttons=$('#fast_styles_buttons');
+			    var font_size='';
+			    var font_family='';
+			    var text_decoration='';
+			    var font_weight='normal';
+				var line_height='';
+			    var text_align='';
+			    var font_italic='';
+			    var style='';
+				edit.hide();
+				buttons.hide();
+
+				$("#fast_styles_main .btn").on("click",function() {
+				    main.hide();
+				    edit.show();
+				    buttons.show();
+				    var baslik=$(this).text();
+				    style=$(this).attr('component');
+				    $('#fast_styles_form_name').html(baslik);
+
+				    $.ajax({
+					  type: "POST",
+					  data: {book_id: window.lindneo.currentBookId,component:style},
+					  url: '/book/getFastStyle',
+					}).done(function(res){
+				    	var inDb=jQuery.parseJSON(res);
+				    	console.log(inDb.font_size);
+
+				    	font_size='';
+						font_family='';
+						text_decoration='';
+						font_weight='';
+						font_italic='';
+						line_height='';
+						text_align='';
+
+				    	font_size=inDb.font_size;
+						font_family=inDb.font_family;
+						text_decoration=inDb.text_decoration;
+						font_weight=inDb.font_weight;
+						font_italic=inDb.font_italic;
+						line_height=inDb.line_height;
+						text_align=inDb.text_align;
+
+				    	$("[name='fast_styles_font_size'][value='"+font_size+"']").attr("selected","selected");
+						$("[name='fast_styles_font_type'][value='"+font_family+"']").attr("selected","selected");
+						$("[name='fast_styles_line_height'][value='"+line_height+"']").attr("selected","selected");
+						
+						$("[name='fast_styles_text_decoration'][value='"+text_decoration+"']").attr("checked","checked");
+						$("[name='fast_styles_font_weight'][value='"+font_weight+"']").attr("checked","checked");
+						$("[name='fast_styles_font_italic'][value='"+font_italic+"']").attr("checked","checked")	
+						$("[name='fast_styles_text_align'][value='"+text_align+"']").attr("checked","checked");
+					});
+
+
+
+				});
+
+
+
+
+				// $('#fast_styles_line_height option').on("click",function(){
+				// 	line_height=this.val();
+				// 	console.log(this);
+				// 	//$("[name='fast_styles_line_height']:")
+				// });
+
+				$('#fast_style_save_button').on("click",function(){
+					font_size=$("[name='fast_styles_font_size']:checked").val();
+					font_family=$("[name='fast_styles_font_type']:checked").val();
+					text_decoration=$("[name='fast_styles_text_decoration']:checked").val();
+					font_weight=$("[name='fast_styles_font_weight']:checked").val();
+					font_italic=$("[name='fast_styles_font_italic']:checked").val();					
+					line_height=$("[name='fast_styles_line_height']:checked").val();
+					text_align=$("[name='fast_styles_text_align']:checked").val();
+					
+					var data=[];
+					var name='';
+					var value='';
+					var item={};
+
+
+					item['name']='book_id';
+					item['value'] = window.lindneo.currentBookId;
+					data.push(item);
+
+					item={};
+					item['name']='component_style';
+					item['value'] = style;
+					data.push(item);
+
+					item={};
+					item['name']='font_size';
+					item['value'] = font_size;
+					data.push(item);
+
+					item={};
+					item['name']='font_family';
+					item['value'] = font_family;
+					data.push(item);
+
+					item={};
+					item['name']='text_decoration';
+					item['value'] = text_decoration;
+					data.push(item);
+
+					item={};
+					item['name']='font_weight';
+					item['value'] = font_weight;
+					data.push(item);
+
+					item={};
+					item['name']='font_italic';
+					item['value'] = font_italic;
+					data.push(item);
+
+					item={};
+					item['name']='line_height';
+					item['value'] = line_height;
+					data.push(item);
+
+					item={};
+					item['name']='text_align';
+					item['value'] = text_align;
+					data.push(item);
+
+					data=JSON.stringify(data);
+					
+
+					$.ajax({
+					  type: "POST",
+					  data: {styles: data},
+					  url: '/book/fastStyle',
+					}).done(function(res){
+						
+					});
+
+					edit.hide();
+					buttons.hide();
+					main.show();
+					font_size='';
+				    font_family='';
+				    text_decoration='';
+				    font_weight='normal';
+					line_height='';
+				    text_align='';
+				    font_italic='';
+				    style='';
+					
+				});
+
+				$('#fast_style_back_button').on("click",function(){
+					edit.hide();
+					buttons.hide();
+					main.show();
+					font_size='';
+				    font_family='';
+				    text_decoration='';
+				    font_weight='normal';
+					line_height='';
+				    text_align='';
+				    font_italic='';
+				    style='';
+				});
+
+
+			</script>
+
 			 <div class="panel panel-default">
 				<div class="panel-heading">
 					<h3 class="panel-title"> <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo"><i class="fa fa-bars light-blue"></i>&nbsp;&nbsp;&nbsp;İçindekiler </a> </h3>
@@ -1630,6 +1925,10 @@ $background= (!empty($img)) ? "background-image:url('".$img."')" : "background:w
 	</div>
   </div>
 <!-- /COVER BOX CONFIGURATION MODAL FORM-->
+
+<div id="preview_page">
+	Preview Sayfası buraya gelecek....
+</div>
 
 <script type="text/javascript">
 	var preview = $("#upload-thmn-preview");
