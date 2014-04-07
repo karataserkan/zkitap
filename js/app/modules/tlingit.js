@@ -89,8 +89,9 @@ window.lindneo.tlingit = (function(window, $, undefined){
   var deleteArrivalResult = function ( res ) {
     console.log('deleteArrivalResult');
     var response = responseFromJson(res);
-
-    window.lindneo.nisga.ComponentDelete(response.result.delete, oldcomponent_id);
+    console.log(response.result);
+    return;
+    window.lindneo.nisga.destroyComponent(response.result.delete, oldcomponent_id);
     //window.lindneo.tsimshian.componentDestroyed(response.result.delete);
   };
 

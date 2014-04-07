@@ -230,12 +230,13 @@ window.lindneo.nisga = (function(window, $, undefined){
   };
   
   var ComponentDelete = function ( component ) {
+    console.log('ComponentDelete');
     if(revision_value==0){
         revision_array.revisions.push({component_id: component.id, component: component, revision_date: $.now(), even_type: 'DELETE'});
         revision_id++;
       }
       else revision_value=0;
-    console.log(componentId);
+    console.log(component);
     $('[id="'+component.id+'"]').parent().not('#current_page').remove();
     $('[id="'+component.id+'"]').remove();
   };
