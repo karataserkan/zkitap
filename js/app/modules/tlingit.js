@@ -18,11 +18,13 @@ window.lindneo.tlingit = (function(window, $, undefined){
 
   };
   var oldcomponent_id = '';
+  var oldcomponent = '';
   var createComponent = function ( component, component_id ){
     // create component
     // server'a post et
     // co-worker'lara bildir
     oldcomponent_id = component_id;
+    oldcomponent = component;
 
     window.lindneo.dataservice
       .send( 'AddComponent', 
@@ -72,13 +74,16 @@ window.lindneo.tlingit = (function(window, $, undefined){
 
   };
 
-  var componentHasDeleted = function ( componentId ) {
+  var componentHasDeleted = function ( component ) {
     console.log('componentHasDeleted');
-    oldcomponent_id = componentId;
+    oldcomponent_id = component.id;
+    oldcomponent = component;
+    console.log(component);
+
     window.lindneo.dataservice
     .send( 'DeleteComponent', 
       { 
-        'componentId' : componentId
+        'component' : component
       },
       deleteArrivalResult,
       function(err){
@@ -88,8 +93,8 @@ window.lindneo.tlingit = (function(window, $, undefined){
 
   var deleteArrivalResult = function ( res ) {
     console.log('deleteArrivalResult');
-    var response = responseFromJson(res);
-    console.log(response.result);
+    //var response = responseFromJson(res);
+    console.log(res);
     
     window.lindneo.nisga.destroyComponent(response.result.delete, oldcomponent_id);
     window.lindneo.tsimshian.componentDestroyed(response.result.delete);
