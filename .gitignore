@@ -7,3 +7,4 @@ protected/config/*
 *.po
 *.mp4
 uploads/files/*
+protected/config/main.php

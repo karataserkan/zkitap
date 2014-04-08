@@ -16,7 +16,7 @@ class EditorActionsController extends Controller
 
 
 		header('Content-type: plain/text');
-		header("Content-length: " . strlen($response_string) ); // tells file size
+		header("Content-length: " . strlen($response_string)); // tells file size
 		echo $response_string;
 	}
  
@@ -261,6 +261,7 @@ class EditorActionsController extends Controller
 
 	public function getPageComponents($page_id=null){
 		$pages=Page::model()->findAll(array("condition"=>"page_id=:page_id","order"=>'`order` asc ,  created asc',"params"=> array('page_id' => $page_id )));
+
 	}
 	public function addTemplate(){
 		
@@ -301,6 +302,7 @@ class EditorActionsController extends Controller
 		if($return=$this->get_page_components($pageId)){
 			$response['components']=$return;
 		} 
+		echo $this->response($response);
 		return $this->response($response);
 	}
 
