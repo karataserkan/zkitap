@@ -74,16 +74,14 @@ window.lindneo.tlingit = (function(window, $, undefined){
 
   };
 
-  var componentHasDeleted = function ( component ) {
-    console.log('componentHasDeleted');
-    oldcomponent_id = component.id;
+  var componentHasDeleted = function ( component, componentId ) {
+    if(typeof componentId == 'undefined')
+      oldcomponent_id = componentId;
     oldcomponent = component;
-    console.log(component);
-
     window.lindneo.dataservice
     .send( 'DeleteComponent', 
       { 
-        'component' : component
+        'componentId' : component.id
       },
       deleteArrivalResult,
       function(err){
@@ -94,10 +92,10 @@ window.lindneo.tlingit = (function(window, $, undefined){
   var deleteArrivalResult = function ( res ) {
     console.log('deleteArrivalResult');
     //var response = responseFromJson(res);
-    console.log(res);
+    console.log(oldcomponent);
     
-    window.lindneo.nisga.destroyComponent(response.result.delete, oldcomponent_id);
-    window.lindneo.tsimshian.componentDestroyed(response.result.delete);
+    window.lindneo.nisga.destroyComponent(oldcomponent, oldcomponent_id);
+    window.lindneo.tsimshian.componentDestroyed(oldcomponent.id);
   };
 
   var loadComponents = function( res ) {
