@@ -139,7 +139,6 @@ class epub3 {
 
 				$page_styles="
 				body {
-					border: 1px solid black;
 					zoom: 1;
 					color: #000;
 					font-family: Arial;
@@ -461,50 +460,7 @@ class epub3 {
 		<script type="text/javascript" src="jssor.core.js"></script>
 		<script type="text/javascript" src="jssor.utils.js"></script>
 		<script type="text/javascript" src="runtime.js"></script>
-		<!-- MULTİPLE CHOİCE -->
-		<script src="multiplechoice/sources/js/MultipleChoiceDataJSON.js"></script>
-		<script src="multiplechoice/sources/js/multiplechoice_min.js"></script>
-		<link rel="stylesheet" type="text/css" href="multiplechoice/sources/css/MultipleChoice.css" />
-
-		<!-- DROPDOWN -->
-		<script src="dropdown/sources/js/DropDownDataJSON.js"></script>
-		<script src="dropdown/sources/js/dropdown-mini.js"></script>
-		<link rel="stylesheet" type="text/css" href="dropdown/sources/css/DropDown.css" />
-
-		<!-- DRAGDROP-->
-		<script type="text/javascript" src="dragdrop/sources/js/jquery-ui.min.js"></script>
-		<script type="text/javascript" src="dragdrop/sources/js/jquery.ui.touch-punch.min.js"></script>
-		<script type="text/javascript" src="dragdrop/sources/js/DragDrop.js"></script>
-		<link rel="stylesheet" type="text/css" href="dragdrop/sources/css/DragDrop.css" />
-
-		<script type="text/x-mathjax-config">
-		  MathJax.Hub.Config({
-			tex2jax: {
-			  inlineMath: [["$","$"],["\\\\(","\\\\)"]],
-			  "HTML-CSS": { scale: 100} 
-			}
-		  });
-		  MathJax.Hub.Register.StartupHook("HTML-CSS Jax Ready",function () {
-		  var VARIANT = MathJax.OutputJax["HTML-CSS"].FONTDATA.VARIANT;
-		  VARIANT["normal"].fonts.unshift("MathJax_Arial");
-		  VARIANT["bold"].fonts.unshift("MathJax_Arial-bold");
-		  VARIANT["italic"].fonts.unshift("MathJax_Arial-italic");
-		  VARIANT["-tex-mathit"].fonts.unshift("MathJax_Arial-italic");
-		});
-		MathJax.Hub.Register.StartupHook("SVG Jax Ready",function () {
-		  var VARIANT = MathJax.OutputJax.SVG.FONTDATA.VARIANT;
-		  VARIANT["normal"].fonts.unshift("MathJax_SansSerif");
-		  VARIANT["bold"].fonts.unshift("MathJax_SansSerif-bold");
-		  VARIANT["italic"].fonts.unshift("MathJax_SansSerif-italic");
-		  VARIANT["-tex-mathit"].fonts.unshift("MathJax_SansSerif-italic");
-		});
-		MathJax.Hub.Register.StartupHook("End",function () {
-		  $(".MathJax").css("font-size","93%");
-		  $(".textarea .MathJax").css("font-size","80%");
-		});
-		</script>
-		<script src="mathjax/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-
+		
 		<script type="text/javascript" src="fancy/lib/jquery.mousewheel-3.0.6.pack.js"></script>
 		<script type="text/javascript" src="fancy/source/jquery.fancybox.js?v=2.1.5"></script>
 		<link rel="stylesheet" type="text/css" href="fancy/source/jquery.fancybox.css?v=2.1.5" media="screen" />
@@ -523,10 +479,6 @@ class epub3 {
 		<style type="text/css">
 		.fancybox-custom .fancybox-skin {
 		box-shadow: 0 0 50px #222;
-		}
-		body {
-		max-width: 700px;
-		margin: 0 auto;
 		}
 		</style>
 

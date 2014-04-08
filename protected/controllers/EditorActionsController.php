@@ -1,4 +1,3 @@
-
 <?php
 
 class EditorActionsController extends Controller
@@ -11,13 +10,20 @@ class EditorActionsController extends Controller
 
 		$response['result']=$response_avoition ? $response_avoition : $this->response;
 		if ($this->errors) $response['errors']=$this->errors;
-
-		$response_string=json_encode($response);
-
-
+		$response_string=trim(json_encode($response));
+		
+		ob_start();
 		header('Content-type: plain/text');
+<<<<<<< HEAD
 		header("Content-length: " . strlen($response_string)); // tells file size
 		echo $response_string;
+=======
+		header("Content-length: " . strlen($response_string) ); // tells file size
+
+		ob_end_clean();
+		echo trim($response_string);
+	//	session_start();
+>>>>>>> 6e217600609d7f44c2bc59c753d474f8fd6e066c
 	}
  
 	public function error($domain='EditorActions',$explanation='Error', $arguments=null,$debug_vars=null ){

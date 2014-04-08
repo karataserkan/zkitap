@@ -145,13 +145,14 @@ window.lindneo.nisga = (function(window, $, undefined){
   }; 
 
   var undoComponent = function() {
-    ////console.log(revision_array.revisions);
+    console.log(revision_array.revisions);
+    console.log(revision_id);
     //return;
       if(revision_id > 0){
         revision_id = revision_id - 1;
         ////console.log(revision_array.revisions);
-        ////console.log(revision_id);
-        ////console.log(revision_array.revisions[revision_id].even_type);
+        console.log(revision_id);
+        console.log(revision_array.revisions[revision_id].even_type);
         ////console.log(revision_array.revisions);
 
         if(revision_array.revisions[revision_id].even_type=='CREATE'){
@@ -166,7 +167,8 @@ window.lindneo.nisga = (function(window, $, undefined){
           
         }
         else if(revision_array.revisions[revision_id].even_type=='UPDATE'){
-          ////console.log(revision_array.revisions[revision_id].component.data.textarea.val);
+          console.log(revision_array.revisions[revision_id].component.data.textarea.val);
+          
           var array_where = [];
           $.each(revision_array.revisions, function(index,value){ 
             ////console.log(value.component_id + ' ----- ' +revision_array.revisions[revision_id].component_id);
@@ -371,12 +373,13 @@ var textComponentBuilder = function( component ) {
 
   var linkComponentBuilder = function ( component ) {
     
-    
+    var link_element  = $('<div class="link-controllers" style="width:100%; height:100%;"></div>');
     var element  = $('<a class="link-component"></a>');
     var elementWrap=$('<div ></div>');
     elementWrap.appendTo( page_div_selector );
+    element.appendTo( link_element );
 
-    element
+    link_element
     .appendTo( elementWrap )
     .popupComponent({
       'component': component,
@@ -495,8 +498,8 @@ var textComponentBuilder = function( component ) {
 
   var rtextComponentBuilder = function( component ) {
 
-    var element  = $('<div class="rtext-controllers" > </div>');
-    var elementWrap=$('<div ></div>');
+    var element  = $('<div class="rtext-controllers"> </div>');
+     var elementWrap=$('<div ></div>');
     elementWrap.appendTo( page_div_selector );
     console.log(component);
     element

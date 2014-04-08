@@ -45,19 +45,6 @@
 		<script src="<?php echo Yii::app()->request->baseUrl; ?>/js/lib/jquery.selection.js"></script>
 		<!-- HTML5 VİDEO -->
 		<script src="<?php echo Yii::app()->request->baseUrl; ?>/js/lib/runtime.js"></script>
-		<!-- MULTİPLE CHOİCE -->
-		<script src="<?php echo Yii::app()->request->baseUrl; ?>/js/lib/multiplechoice/sources/js/MultipleChoiceDataJSON.js"></script>
-		<script src="<?php echo Yii::app()->request->baseUrl; ?>/js/lib/multiplechoice/sources/js/multiplechoice_min.js"></script>
-		<link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/js/lib/multiplechoice/sources/css/MultipleChoice.css" />
-		<!-- DROPDOWN -->
-		<script src="<?php echo Yii::app()->request->baseUrl; ?>/js/lib/dropdown/sources/js/DropDownDataJSON.js"></script>
-		<script src="<?php echo Yii::app()->request->baseUrl; ?>/js/lib/dropdown/sources/js/dropdown-mini.js"></script>
-		<link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/js/lib/dropdown/sources/css/DropDown.css" />
-		<!-- DRAGDROP-->
-		<script type="text/javascript" src="<?php echo Yii::app()->request->baseUrl; ?>/js/lib/dragdrop/sources/js/jquery-ui.min.js"></script>
-	    <script type="text/javascript" src="<?php echo Yii::app()->request->baseUrl; ?>/js/lib/dragdrop/sources/js/jquery.ui.touch-punch.min.js"></script>
-	    <script type="text/javascript" src="<?php echo Yii::app()->request->baseUrl; ?>/js/lib/dragdrop/sources/js/DragDrop.js"></script>
-	    <link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/js/lib/dragdrop/sources/css/DragDrop.css" />
 		<!-- MathJax -->
 		<script type="text/x-mathjax-config">
 	      MathJax.Hub.Config({
@@ -100,6 +87,9 @@
 		<script type="text/javascript" src="<?php echo Yii::app()->request->baseUrl; ?>/js/lib/jssor.core.js"></script>
 	    <script type="text/javascript" src="<?php echo Yii::app()->request->baseUrl; ?>/js/lib/jssor.utils.js"></script>
 	    <script type="text/javascript" src="<?php echo Yii::app()->request->baseUrl; ?>/js/lib/jssor.slider.js"></script>
+
+	    <!-- İSCROLL-->
+	    <script type="text/javascript" src="<?php echo Yii::app()->request->baseUrl; ?>/js/lib/iscroll.js"></script>
 		<!-- JS Modules -->
 		<script src="<?php echo Yii::app()->request->baseUrl; ?>/js/app/lindneo.js"></script>	
 		<script src="<?php echo Yii::app()->request->baseUrl; ?>/js/app/modules/dataservice.js"></script>	
