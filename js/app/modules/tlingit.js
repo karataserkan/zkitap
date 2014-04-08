@@ -90,9 +90,9 @@ window.lindneo.tlingit = (function(window, $, undefined){
     console.log('deleteArrivalResult');
     var response = responseFromJson(res);
     console.log(response.result);
-    return;
+    
     window.lindneo.nisga.destroyComponent(response.result.delete, oldcomponent_id);
-    //window.lindneo.tsimshian.componentDestroyed(response.result.delete);
+    window.lindneo.tsimshian.componentDestroyed(response.result.delete);
   };
 
   var loadComponents = function( res ) {

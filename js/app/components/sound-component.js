@@ -11,11 +11,16 @@ $(document).ready(function(){
 
       var that = this;
 
+      var auto_start = '';
+      if(this.options.component.data.auto_type == 'Y') auto_start = 'autoplay';
+      if(this.options.component.data.control_type == 'N') control = '';
     
       if(this.options.component.data.source.attr.src ) {
         var source=$('<source src="'+this.options.component.data.source.attr.src+'" /> ');
-        var audio=$('<audio controls="controls"></audio>');
-        var audio_name=$('<span class="audio-name" >'+this.options.component.data.audio.name+'</span>');
+        var audio=$('<audio controls="controls" '+auto_start+'></audio>');
+        var audioName = "";
+        if(this.options.component.data.audio.name) audioName = this.options.component.data.audio.name;
+        var audio_name=$('<span class="audio-name" >'+audioName+'</span>');
  
         source.appendTo(audio);
         console.log('deneme');
@@ -51,14 +56,42 @@ $(document).ready(function(){
 
  var createSoundComponent = function (event,ui){
   var imageBinary = '';
+  var auto_y_check = '';
+  var auto_y_check_active = '';
+  var auto_n_check = '';
+  var auto_n_check_active = '';
 
-  $("<div class='popup ui-draggable' id='pop-image-popup' style='display: block; top:" + (ui.offset.top-$(event.target).offset().top ) + "px; left: " + ( ui.offset.left-$(event.target).offset().left ) + "px;'> \
+  if(typeof oldcomponent == 'undefined'){
+    var top = (ui.offset.top-$(event.target).offset().top ) + 'px';
+    var left = ( ui.offset.left-$(event.target).offset().left ) + 'px';
+    var auto_type = 'N';
+  }
+  else{
+    top = oldcomponent.data.self.css.top;
+    left = oldcomponent.data.self.css.left;
+    auto_type = oldcomponent.data.auto_type;
+  };
+
+  if(auto_type == 'Y') { auto_y_check = "checked='checked'"; auto_y_check_active = 'active';}
+    else { auto_n_check = "checked='checked'"; auto_n_check_active = 'active'; }
+
+  $("<div class='popup ui-draggable' id='pop-image-popup' style='display: block; top:" + top + "px; left: " + left + "px;'> \
     <div class='popup-header'> \
     <i class='icon-m-sound'></i> &nbsp;Ses Ekle \
     <i id='sound-add-dummy-close-button' class='icon-close size-10 popup-close-button'></i> \
     </div> \
       <div class='gallery-inner-holder'> \
         <div style='clear:both'></div> \
+        <div class='type' style='padding: 4px; display: inline-block;'>\
+            <div class='btn-group' data-toggle='buttons'>Auto Start<br>\
+                <label class='btn btn-primary " + auto_y_check_active + "'>\
+                  <input type='radio' name='auto_type' id='repeat0' " + auto_y_check + " value='Y'> Evet\
+                </label>\
+                <label class='btn btn-primary " + auto_n_check_active + "'>\
+                  <input type='radio' name='auto_type' id='repeat1' " + auto_n_check + " value='N'> Hayır\
+                </label>\
+              </div>\
+            </div>\
         <div class='add-image-drag-area' id='dummy-dropzone'> </div> \
       </div> \
          <input type='text' class='input-textbox' id='pop-sound-name' placeholder='Ses Adı'  /> \
@@ -79,6 +112,7 @@ $(document).ready(function(){
 
     $('#pop-image-OK').click(function (){
 
+      var auto_type = $('input[name=auto_type]:checked').val();
       
 
       var component = {
@@ -94,6 +128,7 @@ $(document).ready(function(){
                 },
                 'name': $('#pop-sound-name').val()
               },
+              'auto_type' : auto_type,
               'source': {
                 'attr': {
                   'src':imageBinary
@@ -110,7 +145,7 @@ $(document).ready(function(){
                   'position':'absolute',
                   'top': (ui.offset.top-$(event.target).offset().top ) + 'px',
                   'left':  ( ui.offset.left-$(event.target).offset().left ) + 'px',
-                  'width': 'auto',
+                  'width': '60px',
                   'height': '60px',
                   'background-color': 'transparent',
                   'overflow': 'visible'
@@ -119,8 +154,8 @@ $(document).ready(function(){
             
           }
         };
-        console.log(imageBinary);
-        return;
+        //console.log(component);
+        //return;
 
         window.lindneo.tlingit.componentHasCreated( component );
         $("#sound-add-dummy-close-button").trigger('click');
