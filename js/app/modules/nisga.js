@@ -230,13 +230,12 @@ window.lindneo.nisga = (function(window, $, undefined){
   };
   
   var ComponentDelete = function ( component ) {
-    console.log('ComponentDelete');
     if(revision_value==0){
         revision_array.revisions.push({component_id: component.id, component: component, revision_date: $.now(), even_type: 'DELETE'});
         revision_id++;
       }
       else revision_value=0;
-    console.log(component);
+    //console.log(componentId);
     $('[id="'+component.id+'"]').parent().not('#current_page').remove();
     $('[id="'+component.id+'"]').remove();
   };
@@ -249,7 +248,7 @@ window.lindneo.nisga = (function(window, $, undefined){
         }
       }
       else revision_value=0;
-    console.log(revision_array);
+//        //console.log(revision_array);
     window.lindneo.toolbox.removeComponentFromSelection( $('#'+ component.id) );
     window.lindneo.tlingit.componentHasDeleted( component.id );
 
