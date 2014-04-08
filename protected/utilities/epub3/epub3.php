@@ -866,6 +866,23 @@ class epub3 {
 	    <item id="js016" href="pubsub.js" media-type="text/javascript" />
 	    <item id="js017" href="Chart.js" media-type="text/javascript" />
 	    <item id="js018" href="kinetic-v4.5.3.min.js" media-type="text/javascript" />
+
+	    <item id="js019" href="jquery.slickwrap.js" media-type="text/javascript" />
+	    <item id="js020" href="jssor.slider.js" media-type="text/javascript" />
+	    <item id="js021" href="jssor.core.js" media-type="text/javascript" />
+	    <item id="js022" href="jssor.utils.js" media-type="text/javascript" />
+	    <item id="js023" href="runtime.js" media-type="text/javascript" />
+
+	    <item id="js024" href="fancy/lib/jquery.mousewheel-3.0.6.pack.js" media-type="text/javascript" />
+	    <item id="js025" href="fancy/source/jquery.fancybox.js" media-type="text/javascript" />
+	    <item id="js026" href="fancy/source/helpers/jquery.fancybox-buttons.js" media-type="text/javascript" />
+	    <item id="js027" href="fancy/source/helpers/jquery.fancybox-buttons.js" media-type="text/javascript" />
+	    <item id="js028" href="fancy/source/helpers/jquery.fancybox-media.js" media-type="text/javascript" />
+	    <item id="js029" href="fancy/source/jquery.fancybox.css" media-type="text/css" />
+	    <item id="js030" href="fancy/source/helpers/jquery.fancybox-buttons.css" media-type="text/css" />
+	    <item id="js031" href="fancy/source/helpers/jquery.fancybox-thumbs.css" media-type="text/css" />
+
+
 	</manifest>
 	<spine toc="ncx" page-progression-direction="ltr">
 		<itemref idref="titlepage" />
