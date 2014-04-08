@@ -460,6 +460,7 @@ class epub3 {
 		<script type="text/javascript" src="jssor.core.js"></script>
 		<script type="text/javascript" src="jssor.utils.js"></script>
 		<script type="text/javascript" src="runtime.js"></script>
+		
 		<script type="text/javascript" src="fancy/lib/jquery.mousewheel-3.0.6.pack.js"></script>
 		<script type="text/javascript" src="fancy/source/jquery.fancybox.js?v=2.1.5"></script>
 		<link rel="stylesheet" type="text/css" href="fancy/source/jquery.fancybox.css?v=2.1.5" media="screen" />
