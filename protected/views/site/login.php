@@ -49,13 +49,13 @@ $this->breadcrumbs=array(
 
 									<form role="form">
 									  <div class="form-group">
-										<label for="exampleInputEmail1"><?php echo $form->labelEx($model,'email'); ?></label>
+										<label for="exampleInputEmail1"><?php _e("E-Posta"); ?></label>
 										<i class="fa fa-envelope"></i>
 										<?php echo $form->textField($model,'email'); ?>										
 									  </div>
 									  
 									  <div class="form-group"> 
-										<label for="exampleInputPassword1"><?php echo $form->labelEx($model,'password'); ?></label>
+										<label for="exampleInputPassword1"><?php _e("Şifre"); ?></label>
 										<i class="fa fa-lock"></i>
 										<?php echo $form->passwordField($model,'password'); ?>										
 									  </div>
@@ -75,7 +75,7 @@ $this->breadcrumbs=array(
 									<!-- SOCIAL LOGIN -->
 									<div class="divide-20"></div>
 									<div class="center">
-										<strong>Or login using your social account</strong>
+										<strong><?php _e("Ya da sosyal hesabınızı kullanarak giriş yapın")?></strong>
 									</div>
 									<div class="divide-20"></div>
 									<div class="social-login center">
@@ -93,9 +93,8 @@ $this->breadcrumbs=array(
                                     
                                     
 									<div class="login-helpers">
-										<a href="#" onclick="swapScreen('forgot_bg');return false;">Forgot Password?</a> <br>
-										Don't have an account with us? <a href="#" onclick="swapScreen('register_bg');return false;">Register
-											now!</a>
+										<a href="#" onclick="swapScreen('forgot_bg');return false;"><?php _e("Şifremi Unuttum"); ?></a> <br>
+										<?php _e("Hala bizde hesabınız yok mu?"); ?> <a href="#" onclick="swapScreen('register_bg');return false;"><?php _e("Hemen kaydolun!"); ?></a>
 									</div>
 								<?php $this->endWidget(); ?>
 
@@ -118,25 +117,25 @@ $this->breadcrumbs=array(
 								)); ?>
 
 								  <div class="form-group">
-									<label for="exampleInputName"><?php echo $form->labelEx($newUser,'name'); ?></label>
+									<label for="exampleInputName"><?php _e("Adınız"); ?></label>
 									<i class="fa fa-font"></i>
 									<?php echo $form->textField($newUser,'name',array('size'=>60,'maxlength'=>255)); ?>
 								  </div>
 								
 								  <div class="form-group">
-									<label for="exampleInputUsername"><?php echo $form->labelEx($newUser,'surname'); ?></label>
+									<label for="exampleInputUsername"><?php _e("Soyadınız"); ?></label>
 									<i class="fa fa-user"></i>
 									<?php echo $form->textField($newUser,'surname',array('size'=>60,'maxlength'=>255)); ?>
 								  </div>
 								
 								  <div class="form-group">
-									<label for="exampleInputEmail1"><?php echo $form->labelEx($newUser,'email'); ?></label>
+									<label for="exampleInputEmail1"><?php _e("E-Posta"); ?></label>
 									<i class="fa fa-envelope"></i>
 									<?php echo $form->textField($newUser,'email',array('size'=>60,'maxlength'=>255)); ?>
 								  </div>
 								
 								  <div class="form-group"> 
-									<label for="exampleInputPassword1"><?php echo $form->labelEx($newUser,'password'); ?></label>
+									<label for="exampleInputPassword1"><?php _e("Şifre"); ?></label>
 									<i class="fa fa-lock"></i>
 									<?php echo $form->passwordField($newUser,'password',array('size'=>60,'maxlength'=>255)); ?>
 								  </div>
@@ -218,7 +217,7 @@ $this->breadcrumbs=array(
                                  
                                  
 								<div class="login-helpers">
-									<a href="#" onclick="swapScreen('login_bg');return false;"> Back to Login</a> <br>
+									<a href="#" onclick="swapScreen('login_bg');return false;"> <?php _e("Giriş ekranına dön"); ?></a> <br>
 								</div>
 							</div>
 						</div>
@@ -236,16 +235,16 @@ $this->breadcrumbs=array(
 							<div class="login-box">
 								<form role="form">
 								  <div class="form-group">
-									<label for="exampleInputEmail1">Enter your Email address</label>
+									<label for="exampleInputEmail1"><?php _e("E-Posta adresinizi giriniz"); ?></label>
 									<i class="fa fa-envelope"></i>
 									<input name="Reset[email]" id="Reset_email" type="text">
 								  </div>
 								  <div>
-									<button type="submit" class="btn btn-info">Send Me Reset Instructions</button>
+									<button type="submit" class="btn btn-info"><?php _e("Şifremi Yenile"); ?></button>
 								  </div>
 								</form>
 								<div class="login-helpers">
-									<a href="#" onclick="swapScreen('login_bg');return false;">Back to Login</a> <br>
+									<a href="#" onclick="swapScreen('login_bg');return false;"><?php _e("Giriş ekranına dön"); ?></a> <br>
 								</div>
 							</div>
 						</div>
