@@ -464,11 +464,6 @@ class epub3 {
 		<script type="text/javascript" src="fancy/lib/jquery.mousewheel-3.0.6.pack.js"></script>
 		<script type="text/javascript" src="fancy/source/jquery.fancybox.js?v=2.1.5"></script>
 		<link rel="stylesheet" type="text/css" href="fancy/source/jquery.fancybox.css?v=2.1.5" media="screen" />
-		<link rel="stylesheet" type="text/css" href="fancy/source/helpers/jquery.fancybox-buttons.css?v=1.0.5" />
-		<script type="text/javascript" src="fancy/source/helpers/jquery.fancybox-buttons.js?v=1.0.5"></script>
-		<link rel="stylesheet" type="text/css" href="fancy/source/helpers/jquery.fancybox-thumbs.css?v=1.0.7" />
-		<script type="text/javascript" src="fancy/source/helpers/jquery.fancybox-thumbs.js?v=1.0.7"></script>
-		<script type="text/javascript" src="fancy/source/helpers/jquery.fancybox-media.js?v=1.0.6"></script>
 		<script type="text/javascript">
 		$(document).ready(function() {
 
@@ -845,7 +840,7 @@ class epub3 {
 
 
 
-		<item href="titlepage.xhtml" id="titlepage" media-type="application/xhtml+xml" properties="svg" />
+		<item href="titlepage.xhtml" id="titlepage" media-type="application/xhtml+xml" properties="scripted" />
 		<item href="toc.ncx" media-type="application/x-dtbncx+xml" id="ncx" />
 		<item id="nav" href="toc.xhtml" properties="nav" media-type="application/xhtml+xml" />
 		<item id="js001" href="jquery-1.4.4.min.js" media-type="text/javascript" />
@@ -875,12 +870,7 @@ class epub3 {
 
 	    <item id="js024" href="fancy/lib/jquery.mousewheel-3.0.6.pack.js" media-type="text/javascript" />
 	    <item id="js025" href="fancy/source/jquery.fancybox.js" media-type="text/javascript" />
-	    <item id="js026" href="fancy/source/helpers/jquery.fancybox-buttons.js" media-type="text/javascript" />
-	    <item id="js027" href="fancy/source/helpers/jquery.fancybox-buttons.js" media-type="text/javascript" />
-	    <item id="js028" href="fancy/source/helpers/jquery.fancybox-media.js" media-type="text/javascript" />
 	    <item id="js029" href="fancy/source/jquery.fancybox.css" media-type="text/css" />
-	    <item id="js030" href="fancy/source/helpers/jquery.fancybox-buttons.css" media-type="text/css" />
-	    <item id="js031" href="fancy/source/helpers/jquery.fancybox-thumbs.css" media-type="text/css" />
 
 
 	</manifest>
