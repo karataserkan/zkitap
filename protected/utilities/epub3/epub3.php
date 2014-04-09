@@ -249,8 +249,8 @@ class epub3 {
 		else
 		{
 			$this->thumType='jpeg';
-			$this->thumImage->URL=Yii::app()->request->hostInfo . '/css/cover.jpg';
-			$this->thumImage->filename='cover.jpg';
+			$this->thumImage->URL=Yii::app()->request->hostInfo . '/css/thumbnail.jpg';
+			$this->thumImage->filename='thumbnail.jpg';
 		}
 
 
@@ -464,11 +464,6 @@ class epub3 {
 		<script type="text/javascript" src="fancy/lib/jquery.mousewheel-3.0.6.pack.js"></script>
 		<script type="text/javascript" src="fancy/source/jquery.fancybox.js?v=2.1.5"></script>
 		<link rel="stylesheet" type="text/css" href="fancy/source/jquery.fancybox.css?v=2.1.5" media="screen" />
-		<link rel="stylesheet" type="text/css" href="fancy/source/helpers/jquery.fancybox-buttons.css?v=1.0.5" />
-		<script type="text/javascript" src="fancy/source/helpers/jquery.fancybox-buttons.js?v=1.0.5"></script>
-		<link rel="stylesheet" type="text/css" href="fancy/source/helpers/jquery.fancybox-thumbs.css?v=1.0.7" />
-		<script type="text/javascript" src="fancy/source/helpers/jquery.fancybox-thumbs.js?v=1.0.7"></script>
-		<script type="text/javascript" src="fancy/source/helpers/jquery.fancybox-media.js?v=1.0.6"></script>
 		<script type="text/javascript">
 		$(document).ready(function() {
 
@@ -845,7 +840,7 @@ class epub3 {
 
 
 
-		<item href="titlepage.xhtml" id="titlepage" media-type="application/xhtml+xml" properties="svg" />
+		<item href="titlepage.xhtml" id="titlepage" media-type="application/xhtml+xml" properties="scripted" />
 		<item href="toc.ncx" media-type="application/x-dtbncx+xml" id="ncx" />
 		<item id="nav" href="toc.xhtml" properties="nav" media-type="application/xhtml+xml" />
 		<item id="js001" href="jquery-1.4.4.min.js" media-type="text/javascript" />
@@ -866,6 +861,24 @@ class epub3 {
 	    <item id="js016" href="pubsub.js" media-type="text/javascript" />
 	    <item id="js017" href="Chart.js" media-type="text/javascript" />
 	    <item id="js018" href="kinetic-v4.5.3.min.js" media-type="text/javascript" />
+
+	    <item id="js019" href="jquery.slickwrap.js" media-type="text/javascript" />
+	    <item id="js020" href="jssor.slider.js" media-type="text/javascript" />
+	    <item id="js021" href="jssor.core.js" media-type="text/javascript" />
+	    <item id="js022" href="jssor.utils.js" media-type="text/javascript" />
+	    <item id="js023" href="runtime.js" media-type="text/javascript" />
+
+	    <item id="js024" href="fancy/lib/jquery.mousewheel-3.0.6.pack.js" media-type="text/javascript" />
+	    <item id="js025" href="fancy/source/jquery.fancybox.js" media-type="text/javascript" />
+	    <item id="js026" href="fancy/source/jquery.fancybox.css" media-type="text/css" />
+	    <item id="js027" href="fancy/source/fancybox_sprite.png"  media-type="image/png" />
+	    <item id="js028" href="fancy/source/fancybox_loading.gif"  media-type="image/gif" />
+	    <item id="js029" href="fancy/source/blank.gif"  media-type="image/gif" />
+	    <item id="js030" href="fancy/source/fancybox_overlay.png"  media-type="image/png" />
+	    <item id="js031" href="fancy/source/fancybox_sprite@2x.png"  media-type="image/png" />
+	    <item id="js032" href="fancy/source/fancybox_loading@2x.gif"  media-type="image/gif" />
+
+
 	</manifest>
 	<spine toc="ncx" page-progression-direction="ltr">
 		<itemref idref="titlepage" />
@@ -917,6 +930,7 @@ class epub3 {
 		if ($encyrptFiles) Encryption::encryptFolder($source);
 
 
+		$zip->addFile('mimetype');
 
 
 
@@ -939,7 +953,7 @@ class epub3 {
 	            {
 	                $zip->addEmptyDir(str_replace($source . '/', '', $file . '/'));
 	            }
-	            else if (is_file($file) === true)
+	            else if (is_file($file) === true && $file!= "mimetype" )
 	            {
 	                $zip->addFromString(str_replace($source . '/', '', $file), file_get_contents($file));
 	            }

@@ -14,11 +14,20 @@ class EditorActionsController extends Controller
 		
 		ob_start();
 		header('Content-type: plain/text');
+<<<<<<< HEAD
 		header("Content-length: " . strlen($response_string) ); // tells file size
 
 		ob_end_clean();
 		echo trim($response_string);
 	//	session_start();
+=======
+		header("Content-length: " . strlen($response_string)); // tells file size
+		//echo $response_string;
+
+		ob_end_clean();
+		echo trim($response_string);
+		session_start();
+>>>>>>> 1f7ab86233d275934fbd43871db6d427d0727b8c
 	}
  
 	public function error($domain='EditorActions',$explanation='Error', $arguments=null,$debug_vars=null ){
@@ -304,7 +313,7 @@ class EditorActionsController extends Controller
 			$response['components']=$return;
 		} 
 		echo $this->response($response);
-		return $this->response($response);
+		//return $this->response($response);
 	}
 
 	public function actionGetTemplatePages($template_book_id){

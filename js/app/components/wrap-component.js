@@ -146,7 +146,7 @@ var createWrapComponent = function ( event, ui, oldcomponent ) {
     var pop_popup = $("<div class='popup ui-draggable' id='pop-popup' style='display: block; top:" + top + "; left: " + left + "; width:700px;'> \
       </div>");
     pop_popup.appendTo('body').draggable({cancel:'.drag-cancel'}).resizable();
-    var poup_header = $("<div class='popup-header'><i class='icon-m-link'></i> &nbsp;Pop-up Ekle </div> ");
+    var poup_header = $("<div class='popup-header'><i class='icon-m-link'></i> &nbsp;Metin Sarma Ekle </div> ");
     var close_button = $("<i id='popup-add-dummy-close-button' class='icon-close size-10 popup-close-button'></i> ");
     var drag_file = $("<div class='add-image-drag-area' id='dummy-dropzone'> </div> ");
     var galery_inner = $("<div class='gallery-inner-holder' style='width: 700px; height: " + height + "px;'> \

@@ -71,11 +71,11 @@ $.ajax({
   book_data = JSON.parse(result);
   console.log(book_data.length);
 
-  var html_popup = $("<div class='popup ui-draggable' id='pop-popup' style='display: block; top:" + top + "; left: " + left + ";'> \
+  var html_popup = $("<div class='popup ui-draggable' id='pop-plink-popup' style='display: block; top:" + top + "; left: " + left + ";'> \
       </div>");
   html_popup.appendTo('body').draggable({cancel:'.drag-cancel'}).resizable();
-  var poup_header = $("<div class='popup-header'><i class='icon-m-link'></i> &nbsp;Html Ekle </div> ");
-  var close_button = $("<i id='html-add-dummy-close-button' class='icon-close size-10 popup-close-button'></i> ");
+  var poup_header = $("<div class='popup-header'><i class='icon-m-link'></i> &nbsp;Sayfa Bağlantısı Ekle </div> ");
+  var close_button = $("<i id='plink-add-dummy-close-button' class='icon-close size-10 popup-close-button'></i> ");
   
   var galery_inner = $("<div class='gallery-inner-holder' style='width: " + width + "px; height: " + height + "px;'> \
       <div style='clear:both'></div> \
@@ -114,15 +114,16 @@ $.ajax({
   popup_detail.appendTo(popup_wrapper);
   add_button.appendTo(galery_inner);
   popup_detail.resizable({alsoResize: galery_inner});
+
   close_button.click(function(){
-
-    html_popup.remove();  
-
-    if ( html_popup.length ){
+    console.log('deneme');
       html_popup.remove();  
-    }
 
-  });
+      if ( html_popup.length ){
+        html_popup.remove();  
+      }
+
+    });
 
   
   add_button.click(function (){  
