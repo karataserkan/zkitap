@@ -249,8 +249,8 @@ class epub3 {
 		else
 		{
 			$this->thumType='jpeg';
-			$this->thumImage->URL=Yii::app()->request->hostInfo . '/css/cover.jpg';
-			$this->thumImage->filename='cover.jpg';
+			$this->thumImage->URL=Yii::app()->request->hostInfo . '/css/thumbnail.jpg';
+			$this->thumImage->filename='thumbnail.jpg';
 		}
 
 
@@ -870,7 +870,13 @@ class epub3 {
 
 	    <item id="js024" href="fancy/lib/jquery.mousewheel-3.0.6.pack.js" media-type="text/javascript" />
 	    <item id="js025" href="fancy/source/jquery.fancybox.js" media-type="text/javascript" />
-	    <item id="js029" href="fancy/source/jquery.fancybox.css" media-type="text/css" />
+	    <item id="js026" href="fancy/source/jquery.fancybox.css" media-type="text/css" />
+	    <item id="js027" href="fancy/source/fancybox_sprite.png"  media-type="image/png" />
+	    <item id="js028" href="fancy/source/fancybox_loading.gif"  media-type="image/gif" />
+	    <item id="js029" href="fancy/source/blank.gif"  media-type="image/gif" />
+	    <item id="js030" href="fancy/source/fancybox_overlay.png"  media-type="image/png" />
+	    <item id="js031" href="fancy/source/fancybox_sprite@2x.png"  media-type="image/png" />
+	    <item id="js032" href="fancy/source/fancybox_loading@2x.gif"  media-type="image/gif" />
 
 
 	</manifest>
@@ -924,6 +930,7 @@ class epub3 {
 		if ($encyrptFiles) Encryption::encryptFolder($source);
 
 
+		$zip->addFile('mimetype');
 
 
 
@@ -946,7 +953,7 @@ class epub3 {
 	            {
 	                $zip->addEmptyDir(str_replace($source . '/', '', $file . '/'));
 	            }
-	            else if (is_file($file) === true)
+	            else if (is_file($file) === true && $file!= "mimetype" )
 	            {
 	                $zip->addFromString(str_replace($source . '/', '', $file), file_get_contents($file));
 	            }

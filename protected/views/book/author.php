@@ -503,7 +503,7 @@ $current_user=User::model()->findByPk(Yii::app()->user->id);
 <!--  align popup -->	
 <div class="popup" id="pop-align-popup">
 <div class="popup-header">
-<i class="icon-align-center"></i> Hizala <i id="image-add-dummy-close-button" class="icon-close size-10" style="float:right; margin-right:10px; margin-top:5px;"></i>
+<i class="icon-align-center"></i> Hizala <i id="align-add-dummy-close-button" class="icon-close size-10" style="float:right; margin-right:10px; margin-top:5px;"></i>
 </div>
 
 <!--  popup content -->
@@ -537,7 +537,7 @@ $current_user=User::model()->findByPk(Yii::app()->user->id);
 <div class="popup-header">
 	<i class="icon-arrange"></i>
 		Katman
-	<i id="image-add-dummy-close-button" class="icon-close size-10" style="float:right; margin-right:10px; margin-top:5px;"></i>
+	<i id="arrange-add-dummy-close-button" class="icon-close size-10" style="float:right; margin-right:10px; margin-top:5px;"></i>
 </div>
 <!-- popup content-->
 	<i rel='zindex' action='top' class="toolbox-btn icon-bring-front size-20 dark-blue"><a> En Üste Çıkart</a></i>
@@ -1475,7 +1475,27 @@ $current_user=User::model()->findByPk(Yii::app()->user->id);
 				
 				
 				<script>
-				$(document).ready(function() {
+					$(document).ready(function() {
+						$('#align-add-dummy-close-button').click(function() {
+
+				          $('#pop-align-popup').remove();
+
+				          if ($('#pop-align-popup').length) {
+				              $('#pop-align-popup').remove();
+				          }
+
+				      });
+
+					$('#arrange-add-dummy-close-button').click(function() {
+
+				          $('#pop-arrange-popup').remove();
+
+				          if ($('#pop-arrange-popup').length) {
+				              $('#pop-arrange-popup').remove();
+				          }
+
+				      });
+					
 					var last_timeout;
 					$('.pages .page').hover(
 						function(){
