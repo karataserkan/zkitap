@@ -83,7 +83,7 @@ $(document).ready(function(){
       <div class='gallery-inner-holder'> \
         <div style='clear:both'></div> \
         <div class='type' style='padding: 4px; display: inline-block;'>\
-            <div class='btn-group' data-toggle='buttons'>Auto Start<br>\
+            <div class='btn-group' data-toggle='buttons'>Otomatik Başlama<br>\
                 <label class='btn btn-primary " + auto_y_check_active + "'>\
                   <input type='radio' name='auto_type' id='repeat0' " + auto_y_check + " value='Y'> Evet\
                 </label>\

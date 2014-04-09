@@ -173,7 +173,7 @@ var createVideoComponent = function( event, ui, oldcomponent ) {
             </div>\
             <div class='gallery-inner-holder' style='width:500px;'> \
               <div style='clear:both'></div> \
-              <div class='type' style='padding: 4px; display: inline-block;'>\
+              <div class='type1' style='padding: 4px; display: inline-block;'>\
                   <div class='btn-group' data-toggle='buttons'>Otomatik Başlama<br>\
                     <label class='btn btn-primary " + auto_y_check_active + "'>\
                       <input type='radio' name='auto_type' id='repeat0' " + auto_y_check + " value='Y'> Evet\
@@ -183,7 +183,7 @@ var createVideoComponent = function( event, ui, oldcomponent ) {
                     </label>\
                   </div>\
                 </div>\
-                <div class='type' style='padding: 4px; display: inline-block;'>\
+                <div class='type1' style='padding: 4px; display: inline-block;'>\
                   <div class='btn-group' data-toggle='buttons'>Kontrol Panel Görünümü<br>\
                     <label class='btn btn-primary " + control_y_check_active + "'>\
                       <input type='radio' name='control_type' id='repeat0' " + control_y_check + " value='Y'> Evet\
