@@ -40,6 +40,13 @@
 			 					</span>
 			 				</div>
 			 				<label for="2"><?php _e("Network"); ?></label>
+			 				<br>
+			 				<div class="radio SelectType" id="uniform-3">
+			 					<span>
+			 						<input class="uniform" id="3" value="SingleIp" type="radio" name="type">
+			 					</span>
+			 				</div>
+			 				<label for="3"><?php _e("Tek IP"); ?></label>
 						</span>
 					</div>
 				</div>
@@ -47,7 +54,7 @@
 				<div class="form-group">
 					<label class="control-label col-md-3" for="val1"><?php _e('Ip 1: '); ?><span class="required">*</span></label>
 					<div class="col-md-4">
-						<input class="form-control" name="val1" type="text" data-mask="999.999.999.999">															
+						<input class="form-control" name="val1" type="text">															
 					</div>
 				</div>
 				<div class="form-group">
@@ -116,6 +123,11 @@ var val1;
 var val2;
 var comment;
 $(document).on("click",".SelectType",function(e){
+	if ($(this).attr("id")=="uniform-3") {
+		val2=0;
+		$('[name="val2"]').hide();
+		$('[for="val2"]').hide();
+	};
 	$(".SelectType span").removeClass("checked");
 	$(this).children("span").addClass("checked");
 	type=$(this).children("span").children("input").val();
