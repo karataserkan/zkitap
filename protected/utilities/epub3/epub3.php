@@ -924,24 +924,28 @@ class epub3 {
 
 		$this->ebookFile=$this->getNiceName('epub');
 
-		$zip->open($this->ebookFile, ZipArchive::CREATE);
+		$h=fopen($this->ebookFile,'w');
+		fwrite($h, base64_decode("UEsDBAoAAAAAAJlrTkRvYassFAAAABQAAAAIAAAAbWltZXR5cGVhcHBsaWNhdGlvbi9lcHViK3ppcFBLAQIeAwoAAAAAAJlrTkRvYassFAAAABQAAAAIAAAAAAAAAAAAAACkgQAAAABtaW1ldHlwZVBLBQYAAAAAAQABADYAAAA6AAAAAAA="));
+		fclose($h);
+
+		$zip->open($this->ebookFile);
 		$source = str_replace('\\', '/', realpath($this->get_tmp_file()));
 		
 		if ($encyrptFiles) Encryption::encryptFolder($source);
 
 
-		$zip->addFile('mimetype');
+		//$zip->addFromString('mimetype',"application/epub+zip");
 
 
 
 	    if (is_dir($source) === true)
 	    {
 	        $files = new RecursiveIteratorIterator(new RecursiveDirectoryIterator($source), RecursiveIteratorIterator::SELF_FIRST);
-
 	        foreach ($files as $file)
 	        {
 	        	set_time_limit(30);
 	            $file = str_replace('\\', '/', $file);
+	       // print_r($file);
 
 	            // Ignore "." and ".." folders
 	            if( in_array(substr($file, strrpos($file, '/')+1), array('.', '..')) )
@@ -953,17 +957,17 @@ class epub3 {
 	            {
 	                $zip->addEmptyDir(str_replace($source . '/', '', $file . '/'));
 	            }
-	            else if (is_file($file) === true && $file!= "mimetype" )
+	            else if (is_file($file) === true)
 	            {
 	                $zip->addFromString(str_replace($source . '/', '', $file), file_get_contents($file));
 	            }
+	           
 	        }
 	    }
 	    else if (is_file($source) === true)
 	    {
 	        $zip->addFromString(basename($source), file_get_contents($source));
 	    }
-
 	    return $zip->close();
 
 		
@@ -1059,11 +1063,11 @@ class epub3 {
 		$this->prepareBookStructure();
 
 
-		//Create Mimetype file and write into it.
-		if( in_array(false,$this->create_MIMETYPE_File() ) ) {
-			$this->errors[]=new error('Epub3-Construction','Problem with MIMETYPE file');
-			return false;
-		}
+		// //Create Mimetype file and write into it.
+		// if( in_array(false,$this->create_MIMETYPE_File() ) ) {
+		//  	$this->errors[]=new error('Epub3-Construction','Problem with MIMETYPE file');
+		//  	return false;
+		// }
 
 
 
