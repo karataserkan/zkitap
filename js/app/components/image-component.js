@@ -172,17 +172,17 @@ var createImageComponent = function ( event, ui ,oldcomponent) {
             <div class='type' style='padding: 4px; display: inline-block;'>\
                 <div class='btn-group' data-toggle='buttons'>\
                   <label class='btn btn-primary " + link_check_active + "'>\
-                    <input type='radio' name='image_type' id='repeat0' " + link_check + " value='link'> İnline\
+                    <input type='radio' name='image_type' id='repeat0' " + link_check + " value='link'> Sayfada\
                   </label>\
                   <label class='btn btn-primary " + popup_check_active + "'>\
-                    <input type='radio' name='image_type' id='repeat1' " + popup_check + " value='popup'> Popup\
+                    <input type='radio' name='image_type' id='repeat1' " + popup_check + " value='popup'> Açılır Pencerede\
                   </label>\
                 </div><br><br>\
             </div>\
             <div class='tabbable'>\
               <ul class='nav nav-tabs' id='myTab'>\
-                <li><a href='#home' data-toggle='tab'>Drag Video</a></li>\
-                <li><a href='#profile' data-toggle='tab'>İmage Upload</a></li>\
+                <li><a href='#home' data-toggle='tab'>Resim Sürükle</a></li>\
+                <li><a href='#profile' data-toggle='tab'>Resim Yükle</a></li>\
               </ul>\
             </div>\
             <div class='tab-content'>\

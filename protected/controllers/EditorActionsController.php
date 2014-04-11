@@ -19,6 +19,8 @@ class EditorActionsController extends Controller
 		ob_end_clean();
 		echo trim($response_string);
 	//	session_start();
+		//echo $response_string;
+		session_start();
 	}
  
 	public function error($domain='EditorActions',$explanation='Error', $arguments=null,$debug_vars=null ){
@@ -262,6 +264,7 @@ class EditorActionsController extends Controller
 
 	public function getPageComponents($page_id=null){
 		$pages=Page::model()->findAll(array("condition"=>"page_id=:page_id","order"=>'`order` asc ,  created asc',"params"=> array('page_id' => $page_id )));
+
 	}
 	public function addTemplate(){
 		
@@ -302,7 +305,8 @@ class EditorActionsController extends Controller
 		if($return=$this->get_page_components($pageId)){
 			$response['components']=$return;
 		} 
-		return $this->response($response);
+		echo $this->response($response);
+		//return $this->response($response);
 	}
 
 	public function actionGetTemplatePages($template_book_id){
@@ -1179,7 +1183,7 @@ right join book using (book_id) where book_id='$bookId' and type!='image';";
 			}
 			else
 			{
-				$this->errorQueue($bookId,"success != $success");
+				$this->errorQueue($bookId,'ERROR!, success='.$success);
 			}
 
 		}

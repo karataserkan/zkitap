@@ -948,7 +948,7 @@ class componentHTML {
 
 		if(isset($data->textarea->attr))
 			foreach ($data->textarea->attr as $attr_name => $attr_val ) {
-				if (trim(strtolower($attr_name))!='contenteditable')	
+				if (trim(strtolower($attr_name))!='contenteditable' && trim($attr_name)!='componentType' && $attr_name!='placeholder' && $attr_name!='fast-style')	
 					$container.=" $attr_name='$attr_val' ";
 			}
 
@@ -1100,10 +1100,10 @@ class componentHTML {
 	public function create_container($component){
 		//print_r($component);die;
 				$container ="
-		<div id='".$component->id."' class='{$component->type}' ";
+		<div id='a".$component->id."' class='{$component->type}' ";
 		if(isset($component->data->self->attr))
 			foreach ($component->data->self->attr as $attr_name => $attr_val ) {
-				if (trim(strtolower($attr_name))!='contenteditable')
+				if (trim(strtolower($attr_name))!='contenteditable' && trim($attr_name)!='componentType' && $attr_name!='placeholder' && $attr_name!='fast-style')
 					$container.=" $attr_name='$attr_val' ";
 			}
 

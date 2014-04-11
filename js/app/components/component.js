@@ -209,7 +209,7 @@ $(document).ready(function(){
              e.preventDefault();
               that._deleting();
               //window.lindneo.nisga.ComponentDelete( that.options.component );
-              window.lindneo.tlingit.componentHasDeleted( that.options.component);
+              window.lindneo.tlingit.componentHasDeleted( that.options.component );
 
             }).appendTo(event.currentTarget);
         

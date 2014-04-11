@@ -107,7 +107,7 @@ $current_user=User::model()->findByPk(Yii::app()->user->id);
 			         <li><a href='#' id="generic-cut"><i class="generic-cut icon-cut size-20"></i><span>Kes</span></a></li>
 			         <li><a href='#' id="generic-copy"><i class="generic-copy icon-copy size-20"></i><span>Kopyala</span></a></li>
 			         <li><a href='#' id="generic-paste"><i class="generic-paste icon-paste size-20"></i><span>Yapıştır</span></a></li>
-			         <li class='last'><a href='#'><span>Location</span></a></li>
+			         <!--<li class='last'><a href='#'><span>Location</span></a></li>-->
 			      </ul>
 			   </li>
 
@@ -157,9 +157,11 @@ $current_user=User::model()->findByPk(Yii::app()->user->id);
 			         <?php } ?>
 			      </ul>
 			   </li>
+			   <!--
 			   <li>
 			   	<a href="http://bekir.dev.lindneo.com/EditorActions/PreviewPage/<?php echo $current_page->page_id; ?> " class="fancybox">Preview</a>
 			   </li>
+			   -->
 			   <li class="left-border" style="float:right; height: 42px; min-width:50px; text-align:center; padding-top: 5px; ">
 			  <i id="save_status" class="size-30"></i>
 			   </li>
@@ -501,7 +503,7 @@ $current_user=User::model()->findByPk(Yii::app()->user->id);
 <!--  align popup -->	
 <div class="popup" id="pop-align-popup">
 <div class="popup-header">
-<i class="icon-align-center"></i> Hizala <i id="image-add-dummy-close-button" class="icon-close size-10" style="float:right; margin-right:10px; margin-top:5px;"></i>
+<i class="icon-align-center"></i> Hizala <i id="align-add-dummy-close-button" class="icon-close size-10" style="float:right; margin-right:10px; margin-top:5px;"></i>
 </div>
 
 <!--  popup content -->
@@ -535,7 +537,7 @@ $current_user=User::model()->findByPk(Yii::app()->user->id);
 <div class="popup-header">
 	<i class="icon-arrange"></i>
 		Katman
-	<i id="image-add-dummy-close-button" class="icon-close size-10" style="float:right; margin-right:10px; margin-top:5px;"></i>
+	<i id="arrange-add-dummy-close-button" class="icon-close size-10" style="float:right; margin-right:10px; margin-top:5px;"></i>
 </div>
 <!-- popup content-->
 	<i rel='zindex' action='top' class="toolbox-btn icon-bring-front size-20 dark-blue"><a> En Üste Çıkart</a></i>
@@ -991,32 +993,32 @@ $current_user=User::model()->findByPk(Yii::app()->user->id);
 		
 			
 			
-			<li ctype="image" class="component icon-m-image">&nbsp;&nbsp;&nbsp;&nbsp;Görsel</li>
-			<li ctype="sound" class="component icon-m-sound">&nbsp;&nbsp;&nbsp;&nbsp;Ses</li>
-			<li ctype="video" class="component icon-m-video">&nbsp;&nbsp;&nbsp;&nbsp;Video</li>
+			<li ctype="image" class="component icon-m-image">&nbsp;&nbsp;&nbsp;&nbsp;<?php _e('Görsel'); ?></li>
+			<li ctype="sound" class="component icon-m-sound">&nbsp;&nbsp;&nbsp;&nbsp;<?php _e('Ses'); ?></li>
+			<li ctype="video" class="component icon-m-video">&nbsp;&nbsp;&nbsp;&nbsp;<?php _e('Video'); ?></li>
 			
 			<li class="left_bar_titles"></li>
 			
-			<li ctype="galery" class="component icon-m-galery">&nbsp;&nbsp;&nbsp;&nbsp;Galeri</li>
-			<li ctype="slider" class="component icon-m-galery">&nbsp;&nbsp;&nbsp;&nbsp;Slider</li>
-			<li ctype="thumb" class="component icon-m-galery">&nbsp;&nbsp;&nbsp;&nbsp;Slide Tumb</li>
-			<li ctype="tag" class="component icon-m-galery">&nbsp;&nbsp;&nbsp;&nbsp;Tag</li>
-			<li ctype="quiz"  class="component icon-m-quiz">&nbsp;&nbsp;&nbsp;&nbsp;Quiz</li>
-			<li ctype="side-text"  class="component icon-m-listbox">&nbsp;&nbsp;&nbsp;Yazı Kutusu</li>
-			<li ctype="link" class="component icon-m-link ui-draggable">&nbsp;&nbsp;&nbsp;&nbsp;Link</li>
-			<li ctype="popup" class="component icon-m-popup">&nbsp;&nbsp;&nbsp;&nbsp;Pop-up</li>
+			<li ctype="galery" class="component icon-m-galery">&nbsp;&nbsp;&nbsp;&nbsp;<?php _e('Galeri'); ?></li>
+			<li ctype="slider" class="component icon-m-galery">&nbsp;&nbsp;&nbsp;&nbsp;<?php _e('Slider'); ?></li>
+			<li ctype="thumb" class="component icon-m-galery">&nbsp;&nbsp;&nbsp;&nbsp;<?php _e('Öngörüntü Slider'); ?></li>
+			<li ctype="tag" class="component icon-m-galery">&nbsp;&nbsp;&nbsp;&nbsp;<?php _e('Etiket'); ?></li>
+			<li ctype="quiz"  class="component icon-m-quiz">&nbsp;&nbsp;&nbsp;&nbsp;<?php _e('Quiz'); ?></li>
+			<li ctype="side-text"  class="component icon-m-listbox">&nbsp;&nbsp;&nbsp;<?php _e('Yazı Kutusu'); ?></li>
+			<li ctype="link" class="component icon-m-link ui-draggable">&nbsp;&nbsp;&nbsp;&nbsp;<?php _e('Bağlantı'); ?></li>
+			<li ctype="popup" class="component icon-m-popup">&nbsp;&nbsp;&nbsp;&nbsp;<?php _e('Açılır Pencere'); ?></li>
 			
 			<li class="left_bar_titles"></li>
 
-			<li ctype="text" class="component icon-m-text">&nbsp;&nbsp;&nbsp;&nbsp;Yazı</li>
-			<li ctype="rtext" class="component icon-m-text">&nbsp;&nbsp;&nbsp;&nbsp;Rich Text</li>
-			<li ctype="grafik" class="component icon-m-charts">&nbsp;&nbsp;&nbsp;&nbsp;Grafik</li>
-			<li ctype="shape" class="component icon-m-shape">&nbsp;&nbsp;&nbsp;&nbsp;Şekil</li>
-			<li ctype="table" class="component icon-t-merge">&nbsp;&nbsp;&nbsp;&nbsp;Tablo</li>
-			<li ctype="html" class="component icon-t-merge">&nbsp;&nbsp;&nbsp;&nbsp;HTML</li>
-			<li ctype="plink" class="component icon-t-merge">&nbsp;&nbsp;&nbsp;&nbsp;Page Link</li>
-			<li ctype="latex" class="component icon-t-merge">&nbsp;&nbsp;&nbsp;&nbsp;Latex</li>
-			<li ctype="wrap" class="component icon-t-merge">&nbsp;&nbsp;&nbsp;&nbsp;Text Wrap</li>
+			<li ctype="text" class="component icon-m-text">&nbsp;&nbsp;&nbsp;&nbsp;<?php _e('Yazı'); ?></li>
+			<li ctype="rtext" class="component icon-m-text">&nbsp;&nbsp;&nbsp;&nbsp;<?php _e('Zengin Metin'); ?></li>
+			<li ctype="grafik" class="component icon-m-charts">&nbsp;&nbsp;&nbsp;&nbsp;<?php _e('Grafik'); ?></li>
+			<li ctype="shape" class="component icon-m-shape">&nbsp;&nbsp;&nbsp;&nbsp;<?php _e('Şekil'); ?></li>
+			<li ctype="table" class="component icon-t-merge">&nbsp;&nbsp;&nbsp;&nbsp;<?php _e('Tablo'); ?></li>
+			<li ctype="html" class="component icon-t-merge">&nbsp;&nbsp;&nbsp;&nbsp;<?php _e('Html'); ?></li>
+			<li ctype="plink" class="component icon-t-merge">&nbsp;&nbsp;&nbsp;&nbsp;<?php _e('Sayfa Bağlantısı'); ?></li>
+			<li ctype="latex" class="component icon-t-merge">&nbsp;&nbsp;&nbsp;&nbsp;<?php _e('Latex'); ?></li>
+			<li ctype="wrap" class="component icon-t-merge">&nbsp;&nbsp;&nbsp;&nbsp;<?php _e('Metin Sarma'); ?></li>
 			
 			
 			<li class="left_bar_titles"></li>
@@ -1179,7 +1181,7 @@ $current_user=User::model()->findByPk(Yii::app()->user->id);
 				</div>
 				<div class="panel panel-default">
 				 <div class="panel-heading">
-					<h3 class="panel-title"> <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseThum"><i class="fa fa-edit light-blue"></i>&nbsp;&nbsp;&nbsp;Thumbnail </a> </h3>
+					<h3 class="panel-title"> <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseThum"><i class="fa fa-edit light-blue"></i>&nbsp;&nbsp;&nbsp;<?php _e('Öngörüntü'); ?> </a> </h3>
 				
 				</div>
 				 <div id="collapseThum" class="panel-collapse collapse">
@@ -1473,7 +1475,27 @@ $current_user=User::model()->findByPk(Yii::app()->user->id);
 				
 				
 				<script>
-				$(document).ready(function() {
+					$(document).ready(function() {
+						$('#align-add-dummy-close-button').click(function() {
+
+				          $('#pop-align-popup').remove();
+
+				          if ($('#pop-align-popup').length) {
+				              $('#pop-align-popup').remove();
+				          }
+
+				      });
+
+					$('#arrange-add-dummy-close-button').click(function() {
+
+				          $('#pop-arrange-popup').remove();
+
+				          if ($('#pop-arrange-popup').length) {
+				              $('#pop-arrange-popup').remove();
+				          }
+
+				      });
+					
 					var last_timeout;
 					$('.pages .page').hover(
 						function(){
@@ -1554,7 +1576,7 @@ $current_user=User::model()->findByPk(Yii::app()->user->id);
 										?>
 					<div class='chapter'  chapter_id='<?php echo $chapter->chapter_id; ?>'>
 					<div class="chapter-detail">
-					<input type="text" class="chapter-title" placeholder="chapter title" value="<?php echo $chapter->title; ?>">
+					<input type="text" class="chapter-title" placeholder="<?php _e('Bölüm adı') ?>" value="<?php echo $chapter->title; ?>">
 					
 					<a class="btn btn-danger  page-chapter-delete delete-chapter hidden-delete" style="float: right; margin-top: -23px;"><i class="icon-ok"></i></a> 
 					<a class="page-chapter-delete_control hidden-delete" style="float: right; margin-top: -23px;"><i class="icon-delete"></i><i class="icon-delete"></i></a> 
@@ -1886,7 +1908,7 @@ $background= (!empty($img)) ? "background-image:url('".$img."')" : "background:w
 	  <div class="modal-content">
 		<div class="modal-header">
 		  <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-		  <h4 class="modal-title"><?php _e('Thumbnail Image') ?></h4>
+		  <h4 class="modal-title"><?php _e('Öngörüntü resmi') ?></h4>
 		</div>
 		<div class="modal-body">
 			  <div class="upload-thmn-preview" id="upload-thmn-preview">
@@ -1925,10 +1947,11 @@ $background= (!empty($img)) ? "background-image:url('".$img."')" : "background:w
 	</div>
   </div>
 <!-- /COVER BOX CONFIGURATION MODAL FORM-->
-
+<!--
 <div id="preview_page">
 	Preview Sayfası buraya gelecek....
 </div>
+-->
 
 <script type="text/javascript">
 	var preview = $("#upload-thmn-preview");

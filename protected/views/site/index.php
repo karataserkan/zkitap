@@ -252,7 +252,7 @@ foreach ($workspaces as $key => $workspace) { ?>
 <?php } ?>
 					<!-- <a href="#" class="btn btn-default" data-filter="*"><?php _e("Hepsi"); ?></a> -->
 				  <a href="#" data-filter=".owner"><?php _e("Sahibi"); ?></a>
-				  <a href="#" data-filter=".editor"><?php _e("Editor"); ?></a>
+				  <a href="#" data-filter=".editor"><?php _e("Editör"); ?></a>
 			  </div>
 			  <div class="visible-xs">
 				   <select id="e1" class="form-control">
@@ -341,11 +341,11 @@ $all_books= $this->getWorkspaceBooks($workspace->workspace_id);
 		                <img src="<?php echo $thumbnailSrc; ?>" />
 		            </div>					
 		            <div class="reader_book_card_info_container">
-		                <div class="editor_mybooks_book_type tip" data-original-title="The Workspace Name is Here"><?php echo $workspace->workspace_name; ?></div>						
+		                <div class="editor_mybooks_book_type tip" data-original-title="<?php _e('Çalışma alanının adı') ?>"><?php echo $workspace->workspace_name; ?></div>						
 		                <div class="clearfix"></div>			
-		                <div class="reader_market_book_name tip" data-original-title="The Book Name is Here"></i><a href="/book/author/<?php echo $book->book_id; ?>"><?php echo $book->title ?></a></div>						
+		                <div class="reader_market_book_name tip" data-original-title="<?php _e('Kitabın adı') ?>"></i><a href="/book/author/<?php echo $book->book_id; ?>"><?php echo $book->title ?></a></div>						
 		                <div class="clearfix"></div>						
-		                <div class="reader_book_card_writer_name tip" data-original-title="The Writer Name is Here"><?php echo $book->author ?></div>											
+		                <div class="reader_book_card_writer_name tip" data-original-title="<?php _e('Yazarın adı') ?>"><?php echo $book->author ?></div>											
 		            </div>				
 		        </div>
 		        <!-- book card -->

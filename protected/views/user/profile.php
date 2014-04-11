@@ -17,7 +17,7 @@
 <div class="row">
 	<div class="col-sm-4">
 		<img src="<?php echo $userProfileMeta->meta_value; ?>" height="100px" id="userImage" />
-		<a class="btn" href="#box-cover" data-toggle="modal">Edit</a>
+		<a class="btn" href="#box-cover" data-toggle="modal"><?php _e('Değiştir') ?></a>
 	</div>
 </div>
 <!-- /PAGE HEADER -->

@@ -71,8 +71,8 @@ var createThumbComponent = function (event,ui){
     </div> \
       <div class='gallery-inner-holder'> \
         <div style='clear:both'></div> \
-        <input type='text' class='form-control' id='thumb_width' placeholder='Width' style='width:45%; float:left;'>\
-        <input type='text' class='form-control' id='thumb_height' placeholder='Height' style='width:45%; float:right;'><br><br>\
+        <input type='text' class='form-control' id='thumb_width' placeholder='Genişlik' style='width:45%; float:left;'>\
+        <input type='text' class='form-control' id='thumb_height' placeholder='Yükseklik' style='width:45%; float:right;'><br><br>\
         <div class='add-image-drag-area' id='dummy-dropzone'> </div> \
       </div> \
       <ul id='galery-popup-images' style='width: 250px;'> \

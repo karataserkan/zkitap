@@ -86,7 +86,6 @@ return array(
 		
 
 		// uncomment the following to use a MySQL database
-
 		'db'=>array(
 			'connectionString' => 'mysql:host=pufferfish.private.services.okutus.com;port=3306;dbname=squid_pacific',
 			'emulatePrepare' => true,

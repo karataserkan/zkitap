@@ -252,7 +252,7 @@
 												<div class="tab-pane" id="money">
 
 													<div class="form-group">
-														<label for="PublishBookForm_contentIsForSale" class="control-label col-md-3"><?php _e('Is For Sale?'); ?><span class="required">*</span></label>
+														<label for="PublishBookForm_contentIsForSale" class="control-label col-md-3"><?php _e('Satılık mı?'); ?><span class="required">*</span></label>
 														<div class="col-md-4">
 														<?php echo $form->radioButtonList($model,'contentIsForSale',array('Yes'=>__('Evet'),'Free'=>__('Hayır')),array('class'=>'uniform','name'=>'contentIsForSale')); ?>
 														</div>
@@ -293,7 +293,7 @@
 
 													<div class="form-group">
 														<label  class="col-md-3 control-label">
-														<?php _e("Access Control List"); ?>
+														<?php _e("Erişim Kontrol Listesi"); ?>
 														</label>
 														<div class="col-md-9">
 															<?php echo $form->checkBoxList($model,'acl',$aclIds,array('class'=>'uniform acl','name'=>'acl')); ?>
@@ -409,7 +409,7 @@
 														   </div>
 														</div>
 														<div class="form-group">
-														   <label class="control-label col-md-3"><?php _e('Is For Sale?'); ?>:</label>
+														   <label class="control-label col-md-3"><?php _e('Satılık mı?'); ?>:</label>
 														   <div class="col-md-4">
 															  <p class="form-control-static" data-display="contentIsForSale"></p>
 														   </div>
@@ -428,7 +428,7 @@
 														   </div>
 														</div> -->
 														<div class="form-group">
-														   <label class="control-label col-md-3"><?php _e('Access Control List'); ?>:</label>
+														   <label class="control-label col-md-3"><?php _e('Erişim Kontrol Listesi'); ?>:</label>
 														   <div class="col-md-4">
 															  <p class="form-control-static" data-display="contentAcl"></p>
 														   </div>

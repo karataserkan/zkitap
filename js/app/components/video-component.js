@@ -143,18 +143,18 @@ var createVideoComponent = function( event, ui, oldcomponent ) {
             <div class='type' style='padding: 4px; display: inline-block;'>\
                 <div class='btn-group' data-toggle='buttons'>\
                   <label class='btn btn-primary " + link_check_active + "'>\
-                    <input type='radio' name='video_type' id='repeat0' " + link_check + " value='link'> İnline\
+                    <input type='radio' name='video_type' id='repeat0' " + link_check + " value='link'> Sayfada\
                   </label>\
                   <label class='btn btn-primary " + popup_check_active + "'>\
-                    <input type='radio' name='video_type' id='repeat1' " + popup_check + " value='popup'> Popup\
+                    <input type='radio' name='video_type' id='repeat1' " + popup_check + " value='popup'> Açılır Pencerede\
                   </label>\
                 </div><br><br>\
             </div>\
             <div class='tabbable'>\
               <ul class='nav nav-tabs' id='myTab'>\
-                <li><a href='#home' data-toggle='tab'>Drag Video</a></li>\
-                <li><a href='#profile' data-toggle='tab'>Video Upload</a></li>\
-                <li><a href='#messages' data-toggle='tab'>Vİdeo Link</a></li>\
+                <li><a href='#home' data-toggle='tab'>Video Sürükle</a></li>\
+                <li><a href='#profile' data-toggle='tab'>Video Yükle</a></li>\
+                <li><a href='#messages' data-toggle='tab'>Vİdeo Bağlantı</a></li>\
               </ul>\
             </div>\
             <div class='tab-content'>\
@@ -173,8 +173,8 @@ var createVideoComponent = function( event, ui, oldcomponent ) {
             </div>\
             <div class='gallery-inner-holder' style='width:500px;'> \
               <div style='clear:both'></div> \
-              <div class='type' style='padding: 4px; display: inline-block;'>\
-                  <div class='btn-group' data-toggle='buttons'>Auto Start<br>\
+              <div class='type1' style='padding: 4px; display: inline-block;'>\
+                  <div class='btn-group' data-toggle='buttons'>Otomatik Başlama<br>\
                     <label class='btn btn-primary " + auto_y_check_active + "'>\
                       <input type='radio' name='auto_type' id='repeat0' " + auto_y_check + " value='Y'> Evet\
                     </label>\
@@ -183,8 +183,8 @@ var createVideoComponent = function( event, ui, oldcomponent ) {
                     </label>\
                   </div>\
                 </div>\
-                <div class='type' style='padding: 4px; display: inline-block;'>\
-                  <div class='btn-group' data-toggle='buttons'>Control Show<br>\
+                <div class='type1' style='padding: 4px; display: inline-block;'>\
+                  <div class='btn-group' data-toggle='buttons'>Kontrol Panel Görünümü<br>\
                     <label class='btn btn-primary " + control_y_check_active + "'>\
                       <input type='radio' name='control_type' id='repeat0' " + control_y_check + " value='Y'> Evet\
                     </label>\
