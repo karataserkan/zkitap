@@ -69,12 +69,15 @@
 	    </script>
 		<script src="<?php echo Yii::app()->request->baseUrl; ?>/js/lib/mathjax/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 
-		<script type="text/javascript" src="<?php echo Yii::app()->request->baseUrl; ?>/js/lib/fancy/lib/jquery.mousewheel-3.0.6.pack.js"></script>
-		<script type="text/javascript" src="<?php echo Yii::app()->request->baseUrl; ?>/js/lib/fancy/source/jquery.fancybox.js?v=2.1.5"></script>
-		<link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/js/lib/fancy/source/jquery.fancybox.css?v=2.1.5" media="screen" />
+		<script type="text/javascript" src="<?php echo Yii::app()->request->baseUrl; ?>/js/lib/facybox/facybox.js"></script>
+		<link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/js/lib/facybox/facybox.css" media="screen" />
 		<script type="text/javascript">
 		$(document).ready(function() {
-			$('.fancybox').fancybox();
+
+		$("a[rel*=facybox]").facybox({
+	        // noAutoload: true
+	      });
+		$('#facybox').css('z-index','9999');
 		});
 		</script>
 

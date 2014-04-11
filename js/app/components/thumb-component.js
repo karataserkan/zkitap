@@ -136,11 +136,8 @@ var createThumbComponent = function (event,ui){
                 'position':'absolute',
                 'top': (ui.offset.top-$(event.target).offset().top ) + 'px',
                 'left':  ( ui.offset.left-$(event.target).offset().left ) + 'px',
-
-          
-
                 'background-color': 'transparent',
-                
+                'z-index': '1000'
 
               }
             }
