@@ -7,32 +7,23 @@
 // CWebApplication properties can be configured here.
 
 require_once(dirname(__FILE__).'/../includes/localization.php');
-$db_config=array();
-if(gethostname()=="baracuda")
-{
-	$db_config=array(
-                        'connectionString' => 'mysql:host=pufferfish.private.services.okutus.com;port=3306;dbname=squid_pacific',
-                        'emulatePrepare' => true,
-                        'username' => 'barracuda',
-                        'password' => 'hWqG49pCYnGSsaXU',
-                        'charset' => 'utf8',
-                );
-}
-else if(gethostname()=="lindneo")
-{
-	$db_config=array(
-                        'connectionString' => 'mysql:host=lindneo.com;port=3306;dbname=squid_pacific',
-                        'emulatePrepare' => true,
-                        'username' => 'db_squid_pacific',
-                        'password' => '7GqA3Pqcy38QnfPQ',
-                        'charset' => 'utf8',
-                );
-}
-else
-{
-	echo "Enter db config for ".gethostname();
-	die();
-}
+
+$db_config_list=array(
+			"baracuda"=>array(
+                        			'connectionString' => 'mysql:host=pufferfish.private.services.okutus.com;port=3306;dbname=squid_pacific',
+                        			'emulatePrepare' => true,
+                        			'username' => 'barracuda',
+                        			'password' => 'hWqG49pCYnGSsaXU',
+                        			'charset' => 'utf8',
+                			),
+			"lindneo"=>array(
+                        			'connectionString' => 'mysql:host=lindneo.com;port=3306;dbname=squid_pacific',
+                        			'emulatePrepare' => true,
+                        			'username' => 'db_squid_pacific',
+                        			'password' => '7GqA3Pqcy38QnfPQ',
+                        			'charset' => 'utf8',
+                			)
+);      
 
 return array(
 	'basePath'=>dirname(__FILE__).DIRECTORY_SEPARATOR.'..',
@@ -121,7 +112,7 @@ return array(
 		),
 		*/
 		
-		'db'=>$db_config,		
+		'db'=>$db_config_list[gethostname()],		
 
 
 		'errorHandler'=>array(
