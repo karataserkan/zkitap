@@ -497,7 +497,7 @@ class componentHTML {
 
 
 			
-			$container ="<video controls='controls'  class='video' ";
+			$container ="<video poster='cover.jpg' controls='controls'  class='video' ";
 			if(isset($data->video->attr))
 				foreach ($data->video->attr as $attr_name => $attr_val ) {
 					$container.=" $attr_name='$attr_val' ";
@@ -544,7 +544,7 @@ class componentHTML {
 		else{
 			
 			$video_id= "video".functions::get_random_string();
-			$video_container ="<video controls class='video' ";
+			$video_container ="<video poster='cover.jpg' controls='controls' class='video' ";
 			if(isset($data->video->attr))
 				foreach ($data->video->attr as $attr_name => $attr_val ) {
 					$video_container.=" $attr_name='$attr_val' ";
@@ -583,7 +583,7 @@ class componentHTML {
 
 			$container.=" 
 				
-				<img  class='popup ref-popup-rw' data-popup-target='$video_id' src='".$component->data->marker."' />
+				<img  class='popup ref-popup-rw' style='z-index:99999; position:relative;' data-popup-target='$video_id' src='".$component->data->marker."' />
 				
 				<div class='widgets-rw popup-text-rw exclude-auto-rw' id='$video_id' style='width:500px; height:auto'>
 					 <button xmlns='http://www.w3.org/1999/xhtml' onclick='$(this).parent().remove();' class='ppclose' style='float:right;'>X</button>
@@ -722,13 +722,14 @@ class componentHTML {
 		$popup_id= "popup".functions::get_random_string();
 
 
-		
+		$component->data->html_inner= str_replace('">', '"/>', $component->data->html_inner);
+		$component->data->html_inner= str_replace('<br>', '</br>', $component->data->html_inner);
 
 		$container.=" 
 			
-			<a href='#".$popup_id."' class='fancybox'><img src='popupmarker.png' /></a>
+			<a href='#".$popup_id."' rel='facybox'><img src='popupmarker.png' /></a>
 			
-			<div id='$popup_id' style='display:none; z-index:9999999;'>
+			<div id='$popup_id' style='display:none; z-index:9999999; position:relative;'>
 				".$component->data->html_inner."
 			</div>
 	
@@ -1110,6 +1111,7 @@ class componentHTML {
 		if(isset($component->data->self->css)){
 			$container.=" style=' ";
 			foreach ($component->data->self->css as $css_name => $css_val ) {
+				if($css_name == 'z-index' && !$css_val) $css_val = '1000';
 				$container.="$css_name:$css_val;";
 			}
 			$container.="' ";

@@ -461,13 +461,15 @@ class epub3 {
 		<script type="text/javascript" src="jssor.utils.js"></script>
 		<script type="text/javascript" src="runtime.js"></script>
 		
-		<script type="text/javascript" src="fancy/lib/jquery.mousewheel-3.0.6.pack.js"></script>
-		<script type="text/javascript" src="fancy/source/jquery.fancybox.js?v=2.1.5"></script>
-		<link rel="stylesheet" type="text/css" href="fancy/source/jquery.fancybox.css?v=2.1.5" media="screen" />
+		<script type="text/javascript" src="facybox/facybox.js"></script>
+		<link rel="stylesheet" type="text/css" href="facybox/facybox.css" media="screen" />
+		<link rel="stylesheet" type="text/css" href="facybox/facybox_urls.css" media="screen" />
 		<script type="text/javascript">
 		$(document).ready(function() {
 
-		$(".fancybox").fancybox();
+		$("a[rel*=facybox]").facybox({
+	        // noAutoload: true
+	      });
 
 		});
 		</script>
@@ -869,15 +871,27 @@ class epub3 {
 	    <item id="js022" href="jssor.utils.js" media-type="text/javascript" />
 	    <item id="js023" href="runtime.js" media-type="text/javascript" />
 
-	    <item id="js024" href="fancy/lib/jquery.mousewheel-3.0.6.pack.js" media-type="text/javascript" />
-	    <item id="js025" href="fancy/source/jquery.fancybox.js" media-type="text/javascript" />
-	    <item id="js026" href="fancy/source/jquery.fancybox.css" media-type="text/css" />
-	    <item id="js027" href="fancy/source/fancybox_sprite.png"  media-type="image/png" />
-	    <item id="js028" href="fancy/source/fancybox_loading.gif"  media-type="image/gif" />
-	    <item id="js029" href="fancy/source/blank.gif"  media-type="image/gif" />
-	    <item id="js030" href="fancy/source/fancybox_overlay.png"  media-type="image/png" />
-	    <item id="js031" href="fancy/source/fancybox_sprite@2x.png"  media-type="image/png" />
-	    <item id="js032" href="fancy/source/fancybox_loading@2x.gif"  media-type="image/gif" />
+	    <item id="js024" href="facybox/facybox.js" media-type="text/javascript" />
+	    <item id="js025" href="facybox/facybox.css" media-type="text/css" />
+	    <item id="js026" href="facybox/facybox_urls.css" media-type="text/css" />
+
+	    <item id="js027" href="facybox/images/fancy_shadow_n.png" media-type="image/png" />
+	    <item id="js028" href="facybox/images/fancy_shadow_s.png" media-type="image/png" />
+	    <item id="js029" href="facybox/images/fancy_shadow_w.png" media-type="image/png" />
+	    <item id="js030" href="facybox/images/fancy_shadow_e.png" media-type="image/png" />
+	    <item id="js031" href="facybox/images/fancy_shadow_nw.png" media-type="image/png" />
+	    <item id="js032" href="facybox/images/fancy_shadow_ne.png" media-type="image/png" />
+	    <item id="js033" href="facybox/images/fancy_shadow_sw.png" media-type="image/png" />
+	    <item id="js034" href="facybox/images/fancy_shadow_se.png" media-type="image/png" />
+	    <item id="js035" href="facybox/images/fancy_right.png" media-type="image/png" />
+	    <item id="js036" href="facybox/images/fancy_left.png" media-type="image/png" />
+	    <item id="js037" href="facybox/images/fancy_closebox.png" media-type="image/png" />
+	    <item id="js038" href="facybox/images/loading.gif" media-type="image/gif" />
+	    <item id="js039" href="facybox/images/fancy_title_left.png" media-type="image/png" />
+	    <item id="js040" href="facybox/images/coffee_48x48.png" media-type="image/png" />
+	    <item id="js041" href="facybox/images/fancy_title_right.png" media-type="image/png" />
+	    <item id="js042" href="facybox/images/fancy_title_main.png" media-type="image/png" />
+	    <item id="js044" href="jquery.lazyloadxt.js" media-type="text/javascript" />
 
 
 	</manifest>
