@@ -23,17 +23,12 @@ $(document).ready(function(){
       }
       
 
-
+      console.log(this.options.component.data.html_inner);
       if(this.options.component.data.html_inner){
         var popupmessage=$('<div  id="message_'+componentpopupid+'" style="display:none" >'+this.options.component.data.html_inner+'</div>');
         popupmessage.appendTo(this.element);
       }
 
-
-
-      console.log('Popup......');
-      console.log(that.options.component);
-      console.log('----------');
       this._super(); 
 /*
       this.element.resizable("option",'maxHeight', 128 );
@@ -223,7 +218,7 @@ console.log(oldcomponent);
         //console.log(contentType);
         if(contentType == 'image'){
           var imageBinary = FileBinary;
-          var newImage = $("<img style='width:80%' src='"+imageBinary+"' ></img>");
+          var newImage = $("<img style='width:80%' src='"+imageBinary+"' />");
 
           $('#popup-explanation').append(newImage);
           return;
