@@ -16,6 +16,19 @@ $this->breadcrumbs=array(
 <div class="login_page_container">    
 
 
+<div class="login_linden_information">
+<a href="http://www.linden-tech.com/" target="_blank">
+<div class="login_page_ribbon">
+<div class="ribbon_rectangle"></div>
+<div class="ribbon_arrow_down"></div>
+</div>
+<div class="login_linden_information_text">Seviye Dijital <font style="color:#FFC">Linden Dijital Yayıncılık A.Ş.</font> Tarafından Hazırlanmıştır. <br /> Bizi daha yakından tanımak için logomuza tıklayın.</div>
+</a>
+</div>
+<!--- END OF login_linden_information ----->
+
+
+
 <video autoplay loop poster="../../../css/brands/linden/login_back.png" id="bgvid">
 <source src="../css/brands/linden/back.webm" type="video/webm">
 <source src="../css/brands/linden/back.mp4" type="video/mp4">
@@ -265,12 +278,6 @@ $this->breadcrumbs=array(
 <!-- END OF COL-LG-12 -->
 </div>
 <!-- END OF LOGIN_PAGE_CONTAINER -->
-
-
-<div class="login_contact">
-<p>Seviye Dijital Linden Dijital Yayıncılık A.Ş. Tarafından Hazırlanmıştır.</p>
-<p>Bizi daha yakından tanıyın. <a target="_blank" href="http://www.linden-tech.com/">www.linden-tech.com</a></p>
-</div>
 
 
 
