@@ -19,9 +19,10 @@ $flb = new FloodBlocker ("/tmp/");
 //70 requests in 10 seconds
   $flb->rules = array ( 10=>500 );
   $res = $flb->CheckFlood ();
-  if ( $res )
+Yii::createWebApplication($config)->run();
+
+  if ( 1==1 )
     {
-		Yii::createWebApplication($config)->run();
     }
   else
     die ( 'Too many requests! Please try later.' );

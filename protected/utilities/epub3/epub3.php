@@ -537,7 +537,7 @@ class epub3 {
 
 
 				$toc_items="";
-
+				if (!empty($this->toc))
 				foreach ($this->toc as $key => $toc) {
 					$toc_items.='<li><a href="'. $toc->page . ( $toc->anchor!="" ? '#'. $toc->anchor : "" ) .'">'.$toc->title.'</a></li>';
 				}
@@ -586,6 +586,7 @@ class epub3 {
 
 				$toc_items="";
 				$index_referance=1;
+				if (!empty($this->toc))
 				foreach ($this->toc as $key => $toc) {
 					$this->TOC_Titles[$toc->anchor]=$toc->title;
 					$toc_items.=
@@ -874,6 +875,7 @@ class epub3 {
 </package>';
 			$pages_manifest="";
 			$page_spine="";
+			if($this->files->pages)
 			foreach ($this->files->pages as $key => $page) {
 				$pages_manifest.="\t\t". '<item href="'.$page->filename.'" id="id'.$key.'" properties="scripted" media-type="application/xhtml+xml"/>'. "\n";
 				$page_spine.="\t\t".'<itemref idref="id'.$key.'" linear="yes" />' . "\n";
@@ -923,6 +925,7 @@ class epub3 {
 	    if (is_dir($source) === true)
 	    {
 	        $files = new RecursiveIteratorIterator(new RecursiveDirectoryIterator($source), RecursiveIteratorIterator::SELF_FIRST);
+	        $files_count = 0;
 
 	        foreach ($files as $file)
 	        {
@@ -942,6 +945,13 @@ class epub3 {
 	            else if (is_file($file) === true)
 	            {
 	                $zip->addFromString(str_replace($source . '/', '', $file), file_get_contents($file));
+	            }
+
+	            if($files_count++ > 100){
+	            	$zip->close();
+	            	$zip = new ZipArchive;
+	            	$zip->open($this->ebookFile);
+    	            $files_count = 0;
 	            }
 	        }
 	    }
