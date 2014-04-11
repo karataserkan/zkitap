@@ -87,12 +87,22 @@ return array(
 
 		// uncomment the following to use a MySQL database
 		'db'=>array(
+			'connectionString' => 'mysql:host=lindneo.com;port=3306;dbname=squid_pacific',
+			'emulatePrepare' => true,
+			'username' => 'db_squid_pacific',
+			'password' => '7GqA3Pqcy38QnfPQ',
+			'charset' => 'utf8',
+		),
+
+		/*
+		'db'=>array(
 			'connectionString' => 'mysql:host=pufferfish.private.services.okutus.com;port=3306;dbname=squid_pacific',
 			'emulatePrepare' => true,
 			'username' => 'barracuda',
 			'password' => 'hWqG49pCYnGSsaXU',
 			'charset' => 'utf8',
 		),
+		*/
 
 
 		'errorHandler'=>array(
