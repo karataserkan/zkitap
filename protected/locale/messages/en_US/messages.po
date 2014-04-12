@@ -305,6 +305,7 @@ msgstr  "Add Workspace"
 #: protected/views/organisations/categories.php:91
 #: protected/views/organisations/organisationACL.php:100
 #: protected/views/organisations/organisationACL.php:102
+#: protected/views/organisations/organisationACL.php:109
 #: protected/views/organisations/workspaces.php:20
 #: protected/views/organisations/organisationACL.php:109
 #: protected/views/organisations/categories.php:91
@@ -321,6 +322,7 @@ msgstr  "Delete"
 #: protected/views/faq/index.php:49
 #: protected/views/organisations/categories.php:106
 #: protected/views/organisations/organisationACL.php:68
+#: protected/views/organisations/organisationACL.php:75
 #: protected/views/faq/index.php:49
 #: protected/views/organisations/workspaces.php:60
 #: protected/views/organisations/organisationACL.php:75
@@ -360,7 +362,7 @@ msgstr  "Add"
 #: protected/views/book/author.php:1921 protected/views/book/author.php:1944
 #: protected/views/faq/create.php:44 protected/views/user/profile.php:44
 #: protected/views/user/forget_password.php:54
-#: protected/views/site/login.php:192
+#: protected/views/site/login.php:205
 #: protected/views/organisations/categories.php:33
 #: protected/views/organisations/categories.php:67
 #: protected/views/book/author.php:1287 protected/views/book/author.php:1921
@@ -548,12 +550,12 @@ msgid   "Sayfalar"
 msgstr  "Pages"
 
 #: protected/views/site/login.php:72 protected/views/site/login.php:64
-#: protected/views/site/login.php:64
+#: protected/views/site/login.php:77
 msgid   "Beni Hatırla"
 msgstr  "Rememmber Me"
 
 #: protected/views/site/login.php:76 protected/views/site/login.php:68
-#: protected/views/site/login.php:68
+#: protected/views/site/login.php:81
 msgid   "Giriş"
 msgstr  "Login"
 
@@ -609,7 +611,7 @@ msgid   "Editor"
 msgstr  "Editor"
 
 #: protected/views/site/login.php:152 protected/views/site/login.php:145
-#: protected/views/site/login.php:144 protected/views/site/login.php:144
+#: protected/views/site/login.php:144 protected/views/site/login.php:157
 msgid   "Şifreyi Tekrarla"
 msgstr  "Password Again"
 
@@ -1127,6 +1129,7 @@ msgstr  ""
 #: protected/views/organisations/published_books.php:58
 #: protected/views/organisations/organisationACL.php:69
 #: protected/views/site/index.php:65 protected/views/site/index.php:113
+#: protected/views/organisations/organisationACL.php:76
 #: protected/views/site/index.php:65 protected/views/site/index.php:113
 #: protected/views/organisations/published_books.php:58
 #: protected/views/organisations/organisationACL.php:76
@@ -1235,6 +1238,7 @@ msgstr  ""
 #: protected/views/organisations/organisationACL.php:40
 #: protected/views/organisations/organisationACL.php:82
 #: protected/views/organisations/organisationACL.php:89
+#: protected/views/organisations/organisationACL.php:89
 msgid   "Access Control List (ACL)"
 msgstr  ""
 
@@ -1323,15 +1327,18 @@ msgstr  ""
 
 #: protected/views/organisations/organisationACL.php:48
 #: protected/views/organisations/organisationACL.php:55
+#: protected/views/organisations/organisationACL.php:55
 msgid   "Ip 1: "
 msgstr  ""
 
 #: protected/views/organisations/organisationACL.php:54
 #: protected/views/organisations/organisationACL.php:61
+#: protected/views/organisations/organisationACL.php:61
 msgid   "Ip 2/Mask"
 msgstr  ""
 
 #: protected/views/organisations/organisationACL.php:60
+#: protected/views/organisations/organisationACL.php:67
 #: protected/views/organisations/organisationACL.php:67
 msgid   "Yorum"
 msgstr  ""
@@ -1369,49 +1376,49 @@ msgid   "Yazarın adı"
 msgstr  ""
 
 #: protected/views/site/login.php:52 protected/views/site/login.php:132
-#: protected/views/site/login.php:52 protected/views/site/login.php:132
+#: protected/views/site/login.php:65 protected/views/site/login.php:145
 msgid   "E-Posta"
 msgstr  ""
 
 #: protected/views/site/login.php:58 protected/views/site/login.php:138
-#: protected/views/site/login.php:58 protected/views/site/login.php:138
+#: protected/views/site/login.php:71 protected/views/site/login.php:151
 msgid   "Şifre"
 msgstr  ""
 
-#: protected/views/site/login.php:78 protected/views/site/login.php:78
+#: protected/views/site/login.php:78 protected/views/site/login.php:91
 msgid   "Ya da sosyal hesabınızı kullanarak giriş yapın"
 msgstr  ""
 
-#: protected/views/site/login.php:96 protected/views/site/login.php:96
+#: protected/views/site/login.php:96 protected/views/site/login.php:109
 msgid   "Şifremi Unuttum"
 msgstr  ""
 
-#: protected/views/site/login.php:97 protected/views/site/login.php:97
+#: protected/views/site/login.php:97 protected/views/site/login.php:110
 msgid   "Hala bizde hesabınız yok mu?"
 msgstr  ""
 
-#: protected/views/site/login.php:97 protected/views/site/login.php:97
+#: protected/views/site/login.php:97 protected/views/site/login.php:110
 msgid   "Hemen kaydolun!"
 msgstr  ""
 
-#: protected/views/site/login.php:120 protected/views/site/login.php:120
+#: protected/views/site/login.php:120 protected/views/site/login.php:133
 msgid   "Adınız"
 msgstr  ""
 
-#: protected/views/site/login.php:126 protected/views/site/login.php:126
+#: protected/views/site/login.php:126 protected/views/site/login.php:139
 msgid   "Soyadınız"
 msgstr  ""
 
 #: protected/views/site/login.php:220 protected/views/site/login.php:247
-#: protected/views/site/login.php:220 protected/views/site/login.php:247
+#: protected/views/site/login.php:233 protected/views/site/login.php:260
 msgid   "Giriş ekranına dön"
 msgstr  ""
 
-#: protected/views/site/login.php:238 protected/views/site/login.php:238
+#: protected/views/site/login.php:238 protected/views/site/login.php:251
 msgid   "E-Posta adresinizi giriniz"
 msgstr  ""
 
-#: protected/views/site/login.php:243 protected/views/site/login.php:243
+#: protected/views/site/login.php:243 protected/views/site/login.php:256
 msgid   "Şifremi Yenile"
 msgstr  ""
 
@@ -1521,6 +1528,7 @@ msgstr  ""
 msgid   "Erişim Kontrol Listesi"
 msgstr  ""
 
+#: protected/views/organisations/organisationACL.php:49
 #: protected/views/organisations/organisationACL.php:49
 msgid   "Tek IP"
 msgstr  ""
