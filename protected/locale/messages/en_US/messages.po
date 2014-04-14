@@ -360,7 +360,8 @@ msgstr  "Add"
 #: protected/views/book/author.php:1899 protected/views/book/author.php:1922
 #: protected/views/site/login.php:192 protected/views/book/author.php:1287
 #: protected/views/book/author.php:1921 protected/views/book/author.php:1944
-#: protected/views/faq/create.php:44 protected/views/user/profile.php:44
+#: protected/views/site/login.php:205 protected/views/faq/create.php:44
+#: protected/views/user/profile.php:44
 #: protected/views/user/forget_password.php:54
 #: protected/views/site/login.php:205
 #: protected/views/organisations/categories.php:33
@@ -550,12 +551,12 @@ msgid   "Sayfalar"
 msgstr  "Pages"
 
 #: protected/views/site/login.php:72 protected/views/site/login.php:64
-#: protected/views/site/login.php:77
+#: protected/views/site/login.php:77 protected/views/site/login.php:77
 msgid   "Beni Hatırla"
 msgstr  "Rememmber Me"
 
 #: protected/views/site/login.php:76 protected/views/site/login.php:68
-#: protected/views/site/login.php:81
+#: protected/views/site/login.php:81 protected/views/site/login.php:81
 msgid   "Giriş"
 msgstr  "Login"
 
@@ -612,6 +613,7 @@ msgstr  "Editor"
 
 #: protected/views/site/login.php:152 protected/views/site/login.php:145
 #: protected/views/site/login.php:144 protected/views/site/login.php:157
+#: protected/views/site/login.php:157
 msgid   "Şifreyi Tekrarla"
 msgstr  "Password Again"
 
@@ -1377,48 +1379,59 @@ msgstr  ""
 
 #: protected/views/site/login.php:52 protected/views/site/login.php:132
 #: protected/views/site/login.php:65 protected/views/site/login.php:145
+#: protected/views/site/login.php:65 protected/views/site/login.php:145
 msgid   "E-Posta"
 msgstr  ""
 
 #: protected/views/site/login.php:58 protected/views/site/login.php:138
 #: protected/views/site/login.php:71 protected/views/site/login.php:151
+#: protected/views/site/login.php:71 protected/views/site/login.php:151
 msgid   "Şifre"
 msgstr  ""
 
 #: protected/views/site/login.php:78 protected/views/site/login.php:91
+#: protected/views/site/login.php:91
 msgid   "Ya da sosyal hesabınızı kullanarak giriş yapın"
 msgstr  ""
 
 #: protected/views/site/login.php:96 protected/views/site/login.php:109
+#: protected/views/site/login.php:109
 msgid   "Şifremi Unuttum"
 msgstr  ""
 
 #: protected/views/site/login.php:97 protected/views/site/login.php:110
+#: protected/views/site/login.php:110
 msgid   "Hala bizde hesabınız yok mu?"
 msgstr  ""
 
 #: protected/views/site/login.php:97 protected/views/site/login.php:110
+#: protected/views/site/login.php:110
 msgid   "Hemen kaydolun!"
 msgstr  ""
 
 #: protected/views/site/login.php:120 protected/views/site/login.php:133
+#: protected/views/site/login.php:133
 msgid   "Adınız"
 msgstr  ""
 
 #: protected/views/site/login.php:126 protected/views/site/login.php:139
+#: protected/views/site/login.php:139
 msgid   "Soyadınız"
 msgstr  ""
 
 #: protected/views/site/login.php:220 protected/views/site/login.php:247
 #: protected/views/site/login.php:233 protected/views/site/login.php:260
+#: protected/views/site/login.php:233 protected/views/site/login.php:260
 msgid   "Giriş ekranına dön"
 msgstr  ""
 
 #: protected/views/site/login.php:238 protected/views/site/login.php:251
+#: protected/views/site/login.php:251
 msgid   "E-Posta adresinizi giriniz"
 msgstr  ""
 
 #: protected/views/site/login.php:243 protected/views/site/login.php:256
+#: protected/views/site/login.php:256
 msgid   "Şifremi Yenile"
 msgstr  ""
 
