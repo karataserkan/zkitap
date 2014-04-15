@@ -32,6 +32,7 @@ class PublishBookForm extends CFormModel
 	public $translator;
 	public $issn;
 	public $acl;
+	public $tracking;
 
 	/**
 	 * Declares the validation rules.
@@ -68,7 +69,9 @@ class PublishBookForm extends CFormModel
 			'organisationId'=>'organisation Id',
 			'organisationName'=>'Organisation Name',
 			'categories'=>'Kategoriler',
-			'acl'=>'Access Control List'
+			'acl'=>'Access Control List',
+			'tracking'=>'Analytics Code',
+
 		);
 	}
 }

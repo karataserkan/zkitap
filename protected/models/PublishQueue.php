@@ -9,6 +9,8 @@
  * @property integer $is_in_progress
  * @property integer $success
  * @property string $message
+ * @property string $timestamp
+ * @property integer $trial
  */
 class PublishQueue extends CActiveRecord
 {
@@ -39,12 +41,12 @@ class PublishQueue extends CActiveRecord
 		// will receive user inputs.
 		return array(
 			array('book_id, publish_data', 'required'),
-			array('is_in_progress, success', 'numerical', 'integerOnly'=>true),
+			array('is_in_progress, success, trial', 'numerical', 'integerOnly'=>true),
 			array('book_id', 'length', 'max'=>44),
 			array('message', 'safe'),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('book_id, publish_data, is_in_progress, success, message', 'safe', 'on'=>'search'),
+			array('book_id, publish_data, is_in_progress, success, message, timestamp, trial', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -70,6 +72,8 @@ class PublishQueue extends CActiveRecord
 			'is_in_progress' => 'Is In Progress',
 			'success' => 'Success',
 			'message' => 'Message',
+			'timestamp' => 'Timestamp',
+			'trial' => 'Trial',
 		);
 	}
 
@@ -89,6 +93,8 @@ class PublishQueue extends CActiveRecord
 		$criteria->compare('is_in_progress',$this->is_in_progress);
 		$criteria->compare('success',$this->success);
 		$criteria->compare('message',$this->message,true);
+		$criteria->compare('timestamp',$this->timestamp,true);
+		$criteria->compare('trial',$this->trial);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
