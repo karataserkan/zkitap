@@ -380,7 +380,7 @@ class epub3 {
 						$new_page->components=$components;
 					}
 					//print_r(EditorActionsController::get_page_components($page->page_id));
-					$new_page->file->writeLine($this->prepare_PageHtml($new_page,$this->book->getPageSize(),$this->get_tmp_file()  ));
+					$new_page->file->writeLine($this->prepare_PageHtml($new_page,$this->book->getPageSize(),$this->get_tmp_file(),$chapter->title));
 
 					$new_chapter->pages[]=$new_page;
 
@@ -399,7 +399,7 @@ class epub3 {
 
 	}
 
-	public function prepare_PageHtml(&$page,$bookSize,$folder){
+	public function prepare_PageHtml(&$page,$bookSize,$folder,$chapterTitle){
 		$page_data=json_decode($page->pdf_data,true);
 		if (isset($page_data['image']['data'])&& !empty($page_data['image']['data'])) {
 			$img=$page_data['image']['data'];
@@ -427,7 +427,7 @@ class epub3 {
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:epub="http://www.idpf.org/2007/ops" lang="en">
   <head>
     <meta http-equiv="default-style" content="text/html; charset=utf-8"/>
-    <title></title>
+    <title>'.$this->book->title.' - '.$chapterTitle.' - '.$page->order.'</title>
 
 
 		<meta name="viewport" content="width='.$width.', height='.$height.'"/>

@@ -140,6 +140,13 @@
 
 													<div id="detailed">
 													<div class="form-group">
+														<label for="" class="control-label col-md-3"><?php _e('Google Analytics Code'); ?></label>
+														<div class="col-md-4">
+															<?php //echo $form->textArea($model,'tracking',array('class'=>'form-control','name'=>'tracking')); ?>
+															<span class="error-span"></span>
+														</div>
+													</div>
+													<div class="form-group">
 														<label for="" class="control-label col-md-3"><?php _e('Özet'); ?></label>
 														<div class="col-md-4">
 															<?php echo $form->textArea($model,'abstract',array('class'=>'form-control','name'=>'abstract')); ?>
@@ -307,6 +314,12 @@
 																<i class="fa fa-arrow-circle-down"></i>
 														   </a></h3>
 													<div class="well" id="detayRev">
+														<div class="form-group">
+														   <label class="control-label col-md-3"><?php _e("Google Analytics Code"); ?>:</label>
+														   <div class="col-md-4">
+															  <p class="form-control-static" data-display="tracking"></p>
+														   </div>
+														</div>
 														<div class="form-group">
 														   <label class="control-label col-md-3"><?php _e("Özet"); ?>:</label>
 														   <div class="col-md-4">
