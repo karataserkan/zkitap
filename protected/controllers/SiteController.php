@@ -220,8 +220,8 @@ class SiteController extends Controller
 		$workspacesOfUser= Yii::app()->db->createCommand()
 	    ->select("*")
 	    ->from("workspaces_users x")
-	    ->join("workspaces w",'w.workspace_id=x.workspace_id')
 	    ->join("user u","x.userid=u.id")
+	    ->join("workspaces w",'w.workspace_id=x.workspace_id')
 	    ->where("userid=:id", array(':id' => $userid ) )->queryAll();
 	    
 	    foreach ($templates as $key => $template) {
@@ -237,7 +237,7 @@ class SiteController extends Controller
 
 	public function getWorkspaceBooks($workspace_id)
 	{
-		$all_books= Book::model()->findAll('workspace_id=:workspace_id AND publish_time IS NULL OR publish_time=0', 
+		$all_books= Book::model()->findAll('workspace_id=:workspace_id AND (publish_time IS NULL OR publish_time=0)', 
 	    				array(':workspace_id' => $workspace_id) );
 		return $all_books; 
 	}
