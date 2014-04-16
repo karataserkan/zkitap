@@ -751,7 +751,7 @@ $(document).ready(function(){
                     'columns':Math.max(selection.start.columns,selection.end.columns )
           }
       }
-      //console.log(TableSelection);
+      console.log(TableSelection);
       that.TableSelection=TableSelection;
       that.cellEditFinished();
 
@@ -765,7 +765,7 @@ $(document).ready(function(){
         .removeClass('top');
             
               var selections_rows=that.tbody.children('tr').slice(TableSelection.start.rows,TableSelection.end.rows+1);
-              //console.log(selections_rows);
+              console.log(selections_rows);
            
 
             $.each (selections_rows, function(row_index,row_element){
@@ -800,7 +800,8 @@ $(document).ready(function(){
             
             this.excelCursor.remove();
             //this.excelCursor.dblclick(function(){$(this).parent().dblclick();});
-
+            console.log(this.cells);
+            console.log(this.cells[0][0]);
             this.cells[TableSelection.end.rows][TableSelection.end.columns].prepend( this.excelCursor );
 
 

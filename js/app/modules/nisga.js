@@ -349,7 +349,7 @@ window.lindneo.nisga = (function(window, $, undefined){
         window.lindneo.toolbox.refresh( element );
       }
     });
-    
+
   };
 //
 var textComponentBuilder = function( component ) {
@@ -608,7 +608,7 @@ var textComponentBuilder = function( component ) {
     
     //var element = $('<img></img>');
 
-    var element  = $('<div class="popup-controllers"> </div>');
+    var element  = $('<div class="popup-controllers" style="width:100%; height:100%;"> </div>');
     var elementWrap=$('<div ></div>');
     elementWrap.appendTo( page_div_selector );
     ////console.log(component);
