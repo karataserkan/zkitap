@@ -959,7 +959,7 @@ class epub3 {
 	        $files = new RecursiveIteratorIterator(new RecursiveDirectoryIterator($source), RecursiveIteratorIterator::SELF_FIRST);
 	        foreach ($files as $file)
 	        {
-	        	set_time_limit(30);
+	        	set_time_limit(0);
 	            $file = str_replace('\\', '/', $file);
 	       // print_r($file);
 
