@@ -1167,7 +1167,7 @@ $current_user=User::model()->findByPk(Yii::app()->user->id);
 			<li ctype="html" class="component icon-t-merge">&nbsp;&nbsp;&nbsp;&nbsp;<?php _e('Html'); ?></li>
 			<li ctype="plink" class="component icon-t-merge">&nbsp;&nbsp;&nbsp;&nbsp;<?php _e('Sayfa Bağlantısı'); ?></li>
 			<li ctype="latex" class="component icon-t-merge">&nbsp;&nbsp;&nbsp;&nbsp;<?php _e('Latex'); ?></li>
-			<li ctype="wrap" class="component icon-t-merge">&nbsp;&nbsp;&nbsp;&nbsp;<?php _e('Metin Sarma'); ?></li>
+			<!--<li ctype="wrap" class="component icon-t-merge">&nbsp;&nbsp;&nbsp;&nbsp;<?php _e('Metin Sarma'); ?></li>-->
 			
 			
 			<li class="left_bar_titles"></li>
