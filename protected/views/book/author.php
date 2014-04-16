@@ -1147,9 +1147,11 @@ $current_user=User::model()->findByPk(Yii::app()->user->id);
 			<li class="left_bar_titles"></li>
 			
 			<li ctype="galery" class="component icon-m-galery">&nbsp;&nbsp;&nbsp;&nbsp;<?php _e('Galeri'); ?></li>
+			<!--
 			<li ctype="slider" class="component icon-m-galery">&nbsp;&nbsp;&nbsp;&nbsp;<?php _e('Slider'); ?></li>
 			<li ctype="thumb" class="component icon-m-galery">&nbsp;&nbsp;&nbsp;&nbsp;<?php _e('Öngörüntü Slider'); ?></li>
 			<li ctype="tag" class="component icon-m-galery">&nbsp;&nbsp;&nbsp;&nbsp;<?php _e('Etiket'); ?></li>
+			-->
 			<li ctype="quiz"  class="component icon-m-quiz">&nbsp;&nbsp;&nbsp;&nbsp;<?php _e('Quiz'); ?></li>
 			<li ctype="side-text"  class="component icon-m-listbox">&nbsp;&nbsp;&nbsp;<?php _e('Yazı Kutusu'); ?></li>
 			<li ctype="link" class="component icon-m-link ui-draggable">&nbsp;&nbsp;&nbsp;&nbsp;<?php _e('Bağlantı'); ?></li>
