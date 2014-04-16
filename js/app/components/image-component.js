@@ -87,7 +87,8 @@ console.log(this.options.component);
 
             
             window.lindneo.tlingit.componentHasCreated(component);
-            window.lindneo.tlingit.componentHasDeleted(that.options.component.id);
+            window.lindneo.tlingit.componentHasDeleted(that.options.component, that.options.component.id);
+            
           };
         };
       };
@@ -103,6 +104,8 @@ console.log(this.options.component);
     },
 
     field: function(key, value){
+      console.log(key);
+      console.log(value);
       
       this._super();
 
@@ -253,7 +256,8 @@ var createImageComponent = function ( event, ui ,oldcomponent) {
     else{
       top = oldcomponent.data.self.css.top;
       left = oldcomponent.data.self.css.left;
-      window.lindneo.tlingit.componentHasDeleted( oldcomponent.id );
+      window.lindneo.tlingit.componentHasDeleted( oldcomponent, oldcomponent.id );
+
     };
     var image_type = $('input[name=image_type]:checked').val();
     //console.log(image_type);
@@ -363,7 +367,8 @@ var createImageComponent = function ( event, ui ,oldcomponent) {
     else{
       top = oldcomponent.data.self.css.top;
       left = oldcomponent.data.self.css.left;
-      window.lindneo.tlingit.componentHasDeleted( oldcomponent.id );
+      window.lindneo.tlingit.componentHasDeleted( oldcomponent, oldcomponent.id );
+      console.log(oldcomponent);
     };
 
     var image_type = $('input[name=image_type]:checked').val();

@@ -22,6 +22,7 @@ $(document).ready(function(){
             //$(ui.element.get(0)).resizable("option", "alsoResize",".selected");
             $(this).resizable("option", "alsoResize",".selected");
             //ui.element.resizable("option", "alsoResize",".selected");
+            $(".selected").resizable();
             $(".selected").trigger("resize");
           },
           'stop': function( event, ui ){
@@ -501,10 +502,10 @@ $(document).ready(function(){
     },
 
     _selected: function( event, ui ) {
-      console.log(event);
+      //console.log(event);
       //console.log(event.originalEvent);
       
-      console.log(this.options.component.id);
+      //console.log(this.options.component.id);
     if(event)
       if (typeof event.originalEvent != "undefined")
         if (typeof event.originalEvent != "null")
