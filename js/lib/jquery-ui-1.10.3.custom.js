@@ -3592,7 +3592,6 @@ $.ui.plugin.add("resizable", "alsoResize", {
 	},
 
 	resize: function (event, ui) {
-		console.log(ui);
 		var that = $(this).data("ui-resizable"),
 			o = that.options,
 			os = that.originalSize,
@@ -3603,25 +3602,15 @@ $.ui.plugin.add("resizable", "alsoResize", {
 			},
 
 			_alsoResize = function (exp, c) {
-				//console.log($(exp));
-				var left="";
-				var top="";
+				console.log($(exp));
 				$(exp).each(function() {
-					console.log($(this).data("ui-resizable-alsoresize"));
-					if(!isNaN($(this).data("ui-resizable-alsoresize").left)){
-						left=$(this).data("ui-resizable-alsoresize").left;
-						top=$(this).data("ui-resizable-alsoresize").top;
-					}
-					console.log(left);
-					$(this).data("ui-resizable-alsoresize").left = left;
-					$(this).data("ui-resizable-alsoresize").top = top;
+					//console.log($(this));
 					var el = $(this), start = $(this).data("ui-resizable-alsoresize"), style = {},
 						css = c && c.length ? c : el.parents(ui.originalElement).length ? ["width", "height"] : ["width", "height", "top", "left"];
 console.log($(el.parents(ui.originalElement)[0]));
 					$.each(css, function (i, prop) {
-						//console.log(prop);
-						//console.log(start[prop]);
-						//console.log(delta[prop]);
+						console.log(start[prop]);
+						console.log(delta[prop]);
 						var sum = (start[prop]||0) + (delta[prop]||0);
 						if (sum && sum >= 0) {
 							style[prop] = sum || null;

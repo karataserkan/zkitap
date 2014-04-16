@@ -25,6 +25,18 @@ $(document).ready(function(){
         case 'pie-chart':
           
           var pieData = [];
+          /*
+           var pieData = [
+            {
+                value : 30,
+                color : "#F38630",
+                label : 'Sleep',
+                labelColor : 'white',
+                labelFontSize : '16'
+            },
+            ...
+        ];
+          */
           var labels= [];
           $.each(this.options.component.data.series, function(p,value){
 
@@ -37,7 +49,8 @@ $(document).ready(function(){
               'color' : value.color
             }
             labels.push(aLabel);
-           
+           console.log(aLabel);
+           console.log(aRow);
 
             pieData.push(aRow);
 
