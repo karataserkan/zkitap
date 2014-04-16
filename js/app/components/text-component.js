@@ -69,7 +69,7 @@ $(document).ready(function(){
                     })
                     .done(function( result ) {
                         result=window.lindneo.tlingit.responseFromJson(result);
-                        //console.log(result);
+                        console.log(result);
                         
                         if(result){
                           //console.log('1');
@@ -77,11 +77,10 @@ $(document).ready(function(){
                           styles=[
                           {name:'font-size', val:(typeof result.font_size != "undefined") ? result.font_size : '46px'},
                           {name:'font-family', val:(typeof result.font_family != "undefined") ? result.font_family : 'Arial'},
-                          {name:'text-decoration', val:(typeof result.font_decoration != "undefined") ? result.font_decoration:'normal'},
+                          {name:'text-decoration', val:(typeof result.text_decoration != "undefined") ? result.text_decoration:'normal'},
                           {name:'font-weight', val:(typeof result.font_weight != "undefined") ? result.font_weight:'bold'},
-                          {name:'text-align', val:(typeof result.font_align != "undefined") ? result.font_align:'left'},
-                          {name:'text-transform', val:(typeof result.font_transform != "undefined") ? result.font_transform :'capitalize'}
-
+                          {name:'text-align', val:(typeof result.text_align != "undefined") ? result.text_align:'left'},
+                          {name:'text-transform', val:(typeof result.text_transform != "undefined") ? result.text_transform :'capitalize'}
                            ];
 
                            
@@ -124,10 +123,10 @@ $(document).ready(function(){
                             styles=[
                             {name:'font-size', val:(typeof result.font_size != "undefined") ? result.font_size : '30px'},
                             {name:'font-family', val:(typeof result.font_family != "undefined") ? result.font_family : 'Arial'},
-                            {name:'text-decoration', val:(typeof result.font_decoration != "undefined") ? result.font_decoration:'normal'},
+                            {name:'text-decoration', val:(typeof result.text_decoration != "undefined") ? result.text_decoration:'normal'},
                             {name:'font-weight', val:(typeof result.font_weight != "undefined") ? result.font_weight:'normal'},
-                            {name:'text-align', val:(typeof result.font_align != "undefined") ? result.font_align:'left'},
-                            {name:'text-transform', val:(typeof result.font_transform != "undefined") ? result.font_transform :'none'}
+                            {name:'text-align', val:(typeof result.text_align != "undefined") ? result.text_align:'left'},
+                            {name:'text-transform', val:(typeof result.text_transform != "undefined") ? result.text_transform :'none'}
 
                              ];
 
@@ -171,10 +170,10 @@ $(document).ready(function(){
                             styles=[
                             {name:'font-size', val:(typeof result.font_size != "undefined") ? result.font_size : '14px'},
                             {name:'font-family', val:(typeof result.font_family != "undefined") ? result.font_family : 'Arial'},
-                            {name:'text-decoration', val:(typeof result.font_decoration != "undefined") ? result.font_decoration:'normal'},
+                            {name:'text-decoration', val:(typeof result.text_decoration != "undefined") ? result.text_decoration:'normal'},
                             {name:'font-weight', val:(typeof result.font_weight != "undefined") ? result.font_weight:'bold'},
-                            {name:'text-align', val:(typeof result.font_align != "undefined") ? result.font_align:'left'},
-                            {name:'text-transform', val:(typeof result.font_transform != "undefined") ? result.font_transform :'none'}
+                            {name:'text-align', val:(typeof result.text_align != "undefined") ? result.text_align:'left'},
+                            {name:'text-transform', val:(typeof result.text_transform != "undefined") ? result.text_transform :'none'}
 
                              ];
 
@@ -219,10 +218,10 @@ $(document).ready(function(){
                             styles=[
                             {name:'font-size', val:(typeof result.font_size != "undefined") ? result.font_size : '14px'},
                             {name:'font-family', val:(typeof result.font_family != "undefined") ? result.font_family : 'Arial'},
-                            {name:'text-decoration', val:(typeof result.font_decoration != "undefined") ? result.font_decoration:'normal'},
+                            {name:'text-decoration', val:(typeof result.text_decoration != "undefined") ? result.text_decoration:'normal'},
                             {name:'font-weight', val:(typeof result.font_weight != "undefined") ? result.font_weight:'normal'},
-                            {name:'text-align', val:(typeof result.font_align != "undefined") ? result.font_align:'left'},
-                            {name:'text-transform', val:(typeof result.font_transform != "undefined") ? result.font_transform :'none'}
+                            {name:'text-align', val:(typeof result.text_align != "undefined") ? result.text_align:'left'},
+                            {name:'text-transform', val:(typeof result.text_transform != "undefined") ? result.text_transform :'none'}
 
                              ];
 
@@ -267,10 +266,10 @@ $(document).ready(function(){
                             styles=[
                             {name:'font-size', val:(typeof result.font_size != "undefined") ? result.font_size : '12px'},
                             {name:'font-family', val:(typeof result.font_family != "undefined") ? result.font_family : 'Arial'},
-                            {name:'text-decoration', val:(typeof result.font_decoration != "undefined") ? result.font_decoration:'italic'},
+                            {name:'text-decoration', val:(typeof result.text_decoration != "undefined") ? result.text_decoration:'italic'},
                             {name:'font-weight', val:(typeof result.font_weight != "undefined") ? result.font_weight:'normal'},
-                            {name:'text-align', val:(typeof result.font_align != "undefined") ? result.font_align:'left'},
-                            {name:'text-transform', val:(typeof result.font_transform != "undefined") ? result.font_transform :'none'}
+                            {name:'text-align', val:(typeof result.text_align != "undefined") ? result.text_align:'left'},
+                            {name:'text-transform', val:(typeof result.text_transform != "undefined") ? result.text_transform :'none'}
 
                              ];
 
