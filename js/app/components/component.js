@@ -22,7 +22,7 @@ $(document).ready(function(){
             //$(ui.element.get(0)).resizable("option", "alsoResize",".selected");
             $(this).resizable("option", "alsoResize",".selected");
             //ui.element.resizable("option", "alsoResize",".selected");
-            $(".selected").resizable();
+            //$(".selected").resizable();
             $(".selected").trigger("resize");
           },
           'stop': function( event, ui ){
@@ -33,7 +33,7 @@ $(document).ready(function(){
           }
         };
 
-      var MIN_DISTANCE = 10; // minimum distance to "snap" to a guide
+      var MIN_DISTANCE = 20; // minimum distance to "snap" to a guide
       var guides = []; // no guides available ... 
       var innerOffsetX, innerOffsetY; // we'll use those during drag ... 
       this.element
@@ -108,8 +108,11 @@ $(document).ready(function(){
 
 
 
-              if( $('#general-options').val().indexOf("rehber")===-1 ) return ;
-
+              if( $('#rehbercheck:checked').length==0 ) return ;
+              if($('.guide').length==0){
+                $('<div id="guide-h" class="guide" style="z-index:9999999999999999" ></div>').appendTo('#current_page');
+                $('<div id="guide-v" class="guide" style="z-index:9999999999999999" ></div>').appendTo('#current_page');
+              }
               // iterate all guides, remember the closest h and v guides
               var guideV, guideH, distV = MIN_DISTANCE+1, distH = MIN_DISTANCE+1, offsetV, offsetH; 
               var chosenGuides = { top: { dist: MIN_DISTANCE+1 }, left: { dist: MIN_DISTANCE+1 } }; 
@@ -153,6 +156,7 @@ $(document).ready(function(){
               
               if( chosenGuides.left.dist <= MIN_DISTANCE ){
                   $( "#guide-v" ).css( "left", chosenGuides.left.guide.left- $('#current_page').offset().left ).show(); 
+                 
                   ui.position.left = chosenGuides.left.guide.left - chosenGuides.left.offset- $('#current_page').offset().left; 
               }
               else{
@@ -541,7 +545,7 @@ $(document).ready(function(){
         $('#'+this.options.component.id).droppable({ disabled: true });
        // $('#'+this.options.component.id).selectable({ disabled: true });
         $('#'+this.options.component.id).sortable({ disabled: true });
-        $('#'+this.options.component.id).resizable({ disabled: true });
+        //$('#'+this.options.component.id).resizable({ disabled: true });
         $('#'+this.options.component.id).attr('readonly','readonly');
         $('#delete-button-'+this.options.component.id).hide();
       }
