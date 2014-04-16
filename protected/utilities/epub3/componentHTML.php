@@ -987,21 +987,22 @@ class componentHTML {
 
 	}
 
-	public function rtextInner($data){
+	public function rtextInner($component){
 
 		$data=$component->data;
 
-		$rtext_id= "rtext".functions::get_random_string();
-		$data->rtextdiv->val = html_entity_decode($data->rtextdiv->val,null,"UTF-8");
+		$html_id= "rtext".functions::get_random_string();
+		$component->data->rtextdiv->val = html_entity_decode($component->data->rtextdiv->val,null,"UTF-8");
 		$container.=" 
-			<div id='$html_id' style='position:absolute; top:".$data->self->css->top.";left:".$data->self->css->left."'>
-				".$data->rtextdiv->val."
+			<div id='$html_id' style='position:absolute; top:".$component->data->self->css->top.";left:".$component->data->self->css->left."'>
+				".$component->data->rtextdiv->val."
 			</div>
 	
 		
 		";
 
 		$this->html=$container;
+
 
 		/*$container='';
 

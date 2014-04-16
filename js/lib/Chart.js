@@ -148,14 +148,15 @@ window.Chart = function(context){
 	};
 
 	//Variables global to the chart
+	console.log(context.canvas.width);
 	var width = context.canvas.width;
 	var height = context.canvas.height;
 
 
 	//High pixel density displays - multiply the size of the canvas height/width by the device pixel ratio, then scale.
 	if (window.devicePixelRatio) {
-		context.canvas.style.width = width + "px";
-		context.canvas.style.height = height + "px";
+		context.canvas.style.width = "100%";
+		context.canvas.style.height =  "100%";
 		context.canvas.height = height * window.devicePixelRatio;
 		context.canvas.width = width * window.devicePixelRatio;
 		context.scale(window.devicePixelRatio, window.devicePixelRatio);
@@ -209,7 +210,7 @@ window.Chart = function(context){
 			scaleShowLine : true,
 			scaleLineColor : "rgba(0,0,0,.1)",
 			scaleLineWidth : 1,
-			scaleShowLabels : false,
+			scaleShowLabels : true,
 			scaleLabel : "<%=value%>",
 			scaleFontFamily : "'Arial'",
 			scaleFontSize : 12,
