@@ -1717,12 +1717,12 @@ background-color:#99CAFF!important;
 }
 
 #guide-h{
-    border-top: 1px dashed #55f; 
+    border-top: 2px solid rgba(6, 34, 63, 0.63); 
     width: 100%; 
 }
 
 #guide-v{
-    border-left: 1px dashed #55f; 
+    border-left: 2px solid rgba(6, 34, 63, 0.63); 
     height: 100%; 
 }
 
