@@ -190,7 +190,7 @@ $current_user=User::model()->findByPk(Yii::app()->user->id);
 			</div>
 			<div class="vertical-line responsive_2"></div>
 						
-			<div class="text-options wrap-options rtext-options latex-options table-options toolbox" style="display:inline-block;">
+			<div class="text-options wrap-options latex-options table-options toolbox" style="display:inline-block;">
 					
 					
 					<input class='tool color' rel='color' type="color" class="color-picker-box radius " placeholder="e.g. #bbbbbb" title="Yazı Rengi" />
@@ -313,6 +313,153 @@ $current_user=User::model()->findByPk(Yii::app()->user->id);
 							</select>	
 				
 					<div class="vertical-line"></div>
+			</div>
+
+			<div class="table-options toolbox" style="display:inline-block;">
+
+				<div id="checkbox-container" style="display:inline-block">
+
+					<input type="checkbox" id="delete_row" rel="delete_row" class="dark-blue radius toolbox-items btn-checkbox tool checkbox"> 
+					<label for="delete_row" title="Satır Sil">Satır Sil</label>
+					<input type="checkbox" id="delete_column" rel="delete_column" class="dark-blue radius toolbox-items btn-checkbox tool checkbox"> 
+					<label for="delete_column" title="Satır Sil">Sütun Sil</label>
+
+					<input type="checkbox" id="add_row" rel="add_row" class="dark-blue radius toolbox-items btn-checkbox tool checkbox"> 
+					<label for="add_row" title="Satır Ekle">Satır Ekle</label>
+					<input type="checkbox" id="add_column" rel="add_column" class="dark-blue radius toolbox-items btn-checkbox tool checkbox"> 
+					<label for="add_column" title="Satır Ekle">Sütun Ekle</label>
+					
+				</div>
+ 
+				
+				<div class="vertical-line"></div>
+
+			</div>
+
+			<div class="rtext-options toolbox" style="display:inline-block;">
+					
+					
+					<input class='tool color' rel='color' type="color" class="color-picker-box radius " placeholder="e.g. #bbbbbb" title="Yazı Rengi" />
+				
+					<select class='tool select' rel='fast-style' id="fast-style" class="radius" title="Başlık Tipi">
+						<option value="">Serbest</option>
+						<option value="h1" >Başlık</option>
+						<option value="h2" >Alt Başlık</option>
+						<option value="h3" >Kucuk Başlık</option>
+						<option value="p"  >Paragraf</option>
+						<option value="blockqoute" >Alıntı</option>
+					</select>
+
+					<select class='tool select' rel='line-height' id="line-height" class="radius" title="Satır Boşluğu">
+						<option value="100%">100</option>
+						<option value="125%" >125</option>
+						<option value="150%" >150</option>
+						<option value="175%" >175</option>
+						<option value="200%" >200</option>
+					</select>
+					
+					<select class='tool select' rel='font-family' id="font-family" class="radius" title="Font Tipi">
+						<option selected="" value="Arial"> Arial </option>
+						<option value="SourceSansPro" >Source Sans Pro</option>
+						<option value="AlexBrushRegular" >Alex Brush Regular</option>
+						<option value="ChunkFiveRoman" >ChunkFive Roman</option>
+						<option value="Aller" >Aller</option>
+						<option value="Cantarell" >Cantarell</option>
+						<option value="Exo" >Exo</option>
+						<option value="helvetica" >Helvetica</option>
+						<option value="Open Sans" >Open Sans</option>
+						<option value="Times New Roman" >Times New Roman</option>
+						<option value="georgia" >Georgia</option>
+						<option value="Courier New" >Courier New</option>
+					</select>
+				
+					
+					
+						<select class='tool select' rel='font-size' id="font-size" class="radius" title="Yazı Boyutu">
+						<option selected="" value="8px"> 8 </option>
+						<?php for ($font_size_counter=10; $font_size_counter<=250;$font_size_counter+=2){
+							echo "<option value='{$font_size_counter}px' >{$font_size_counter}</option>";
+						} ?>
+
+
+					</select>	
+								
+				<div class="vertical-line"></div>
+				<div id="checkbox-container" style="display:inline-block">
+					<input type="checkbox" id="font-bold" rel='font-weight' activeVal='bold' passiveVal='normal'  class="dark-blue radius toolbox-items btn-checkbox tool checkbox"> 
+					<label class="icon-font-bold  size-15" for="font-bold" title="Yazı Kalınlaştırma"></label>
+					<input type="checkbox" id="font-italic" rel='font-style' activeVal='italic' passiveVal='normal'  class="dark-blue radius toolbox-items btn-checkbox tool checkbox" > 
+					<label class="icon-font-italic size-15" for="font-italic" title="İtalik Yazı"></label>
+					<input type="checkbox" id="font-underline" rel='text-decoration' activeVal='underline' passiveVal='none'  class="dark-blue radius toolbox-items btn-checkbox tool checkbox" >
+					<label class="icon-font-underline size-15" for="font-underline" title="Altı Çizili Yazı"></label>				</div>
+ 
+				
+				<div class="vertical-line"></div>
+				<!--
+				<input type='radio' rel='text-align' name='text-align' activeVal='left' id="text-align-left"  href="#" class="dark-blue radius toolbox-items radio tool" ><label for='text-align-left' class="icon-text-align-left size-15" title="Sola Yasla"></label>
+				<input type='radio' rel='text-align' name='text-align' activeVal='center' id="text-align-center"  href="#" class="dark-blue radius toolbox-items  radio tool" ><label for='text-align-center' class="icon-text-align-center  size-15" title="Ortala"></label>
+				<input type='radio' rel='text-align' name='text-align' activeVal='right' id="text-align-right"  href="#" class="dark-blue radius toolbox-items  radio tool" ><label for='text-align-right' class="icon-text-align-right  size-15" title="Sağa Yasla"></label>
+
+				<div class="vertical-line"></div>
+				<!--
+				<input type='checkbox' rel='text-listing' name='listing' activeVal='bullet' id="make-list-bullet"   class="dark-blue radius toolbox-items tool checkbox"><label for='make-list-bullet' class="icon-list-bullet size-15" ></label>
+				<input type='checkbox' rel='text-listing' name='listing' activeVal='number' id="make-list-number"   class="dark-blue radius toolbox-items tool checkbox" ><label for='make-list-number' class="icon-list-number size-15"></label>
+
+				<script type="text/javascript">
+				$('#make-list-bullet').change(function(){ if( $(this).is(':checked')==true  ) $('#make-list-number').prop('checked',false);   });
+				$('#make-list-number').change(function(){ if( $(this).is(':checked')==true ) $('#make-list-bullet').prop('checked',false);   });
+
+				
+				</script>
+
+				<div class="vertical-line"></div>
+				
+				<!-- indent sonra eklenecek -->
+				<!--
+				<a id="text-left-indent"  href="#" class="dark-blue radius toolbox-items "><i class="icon-left-indent size-15"></i></a>
+				<a id="text-right-indent"  href="#" class="dark-blue radius toolbox-items "><i class="icon-right-indent size-15"></i></a>
+				
+				<div class="vertical-line"></div>
+				-->
+				<!-- leading sonra eklenecek -->
+				<!-- 
+						<i class="icon-leading grey-6"></i>
+							<select id="leading" class="radius">
+								<option selected="" value="8"> 100 </option>
+								<option value="0" >0</option>
+								<option value="10" >10</option>
+								<option value="20" >20</option>
+								<option value="30" >30</option>
+								<option value="40" >40</option>
+								<option value="50" >50</option>
+								<option value="60" >60</option>
+								<option value="70" >70</option>
+								<option value="80" >80</option>
+								<option value="90" >90</option>
+								<option value="100" >100</option>
+							</select>	
+				
+				<div class="vertical-line"></div>
+				
+				
+					<i class="icon-opacity grey-6"></i>
+							<select class='tool-select tool select' rel='opacity' rel='color' id="font-size" class="radius" title="Yazının Şeffaflık Ayarı">
+								
+								<option value="0" >0</option>
+								<option value="0.10" >10</option>
+								<option value="0.20" >20</option>
+								<option value="0.30" >30</option>
+								<option value="0.40" >40</option>
+								<option value="0.50" >50</option>
+								<option value="0.60" >60</option>
+								<option value="0.70" >70</option>
+								<option value="0.80" >80</option>
+								<option value="0.90" >90</option>
+								<option selected="selected"  value="1" >100</option>
+							</select>	
+				
+					<div class="vertical-line"></div>
+					-->
 			</div>
 			
 			

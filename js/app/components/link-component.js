@@ -133,7 +133,7 @@ var createLinkComponent = function ( event, ui, oldcomponent ) {
         top = oldcomponent.data.self.css.top;
         left = oldcomponent.data.self.css.left;
         link_value = oldcomponent.data.self.attr.href;
-        //window.lindneo.tlingit.componentHasDeleted( oldcomponent.id );
+        //window.lindneo.tlingit.componentHasDeleted( oldcomponent, oldcomponent.id );
         oldcomponent.data.self.attr.href = targetURL;
       };
        var  component = {

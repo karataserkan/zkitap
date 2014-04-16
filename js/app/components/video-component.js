@@ -87,12 +87,12 @@ var createVideoComponent = function( event, ui, oldcomponent ) {
           $('#type_image').remove();
         }
     };
-
+    var video_url = "http://lindneo.com/5.mp4";
     if(typeof oldcomponent == 'undefined'){
       console.log('dene');
       var top = (ui.offset.top-$(event.target).offset().top ) + 'px';
       var left = ( ui.offset.left-$(event.target).offset().left ) + 'px';
-      var video_url = "http://lindneo.com/5.mp4";
+      
       var video_type = 'link';
       var auto_type = 'N';
       var control_type = 'Y';
@@ -100,7 +100,7 @@ var createVideoComponent = function( event, ui, oldcomponent ) {
     else{
       top = oldcomponent.data.self.css.top;
       left = oldcomponent.data.self.css.left;
-      video_url = oldcomponent.data.source.attr.src;
+      //video_url = oldcomponent.data.source.attr.src;
       video_type = oldcomponent.data.video_type;
       auto_type = oldcomponent.data.auto_type;
       control_type = oldcomponent.data.control_type;
@@ -280,7 +280,7 @@ var createVideoComponent = function( event, ui, oldcomponent ) {
         else{
           top = oldcomponent.data.self.css.top;
           left = oldcomponent.data.self.css.left;
-          window.lindneo.tlingit.componentHasDeleted( oldcomponent.id );
+          window.lindneo.tlingit.componentHasDeleted( oldcomponent, oldcomponent.id );
         };
         
 
@@ -531,7 +531,7 @@ var createVideoComponent = function( event, ui, oldcomponent ) {
 
           });
 */
-          //window.lindneo.tlingit.componentHasDeleted( oldcomponent.id );
+          //window.lindneo.tlingit.componentHasDeleted( oldcomponent, oldcomponent.id );
           var videoBinary = evt.target.result;
           var contentType = videoBinary.substr(0, videoBinary.indexOf(';'));
           var videoType = contentType.substr(contentType.indexOf('/')+1);

@@ -230,10 +230,13 @@ window.lindneo.nisga = (function(window, $, undefined){
         }
       }
       else revision_value=0;
-    //console.log(componentId);
-    $('[id="'+component.id+'"]').parent().not('#current_page').remove();
-    $('[id="'+component.id+'"]').remove();
-    window.lindneo.toolbox.removeComponentFromSelection( $('#'+ component.id) );
+      var delete_component_id = "";
+    if(component.id) delete_component_id = component.id;
+    else delete_component_id = oldcomponent_id;
+    console.log(delete_component_id);
+    $('[id="'+delete_component_id+'"]').parent().not('#current_page').remove();
+    $('[id="'+delete_component_id+'"]').remove();
+    window.lindneo.toolbox.removeComponentFromSelection( $('#'+ delete_component_id) );
   };
   
   var ComponentDelete = function ( component ) {
@@ -445,7 +448,7 @@ var textComponentBuilder = function( component ) {
   var wrapComponentBuilder = function ( component ) {
     
     
-    var element  = $('<div class="wrap-controllers"> </div>');
+    var element  = $('<div class="wrap-controllers" style="width:100%; height:100%;"> </div>');
     var elementWrap=$('<div ></div>');
     elementWrap.appendTo( page_div_selector );
 
@@ -565,7 +568,7 @@ var textComponentBuilder = function( component ) {
 
   var latexComponentBuilder = function( component ) {
 
-    var element  = $('<div class="latex-controllers"> </div>');
+    var element  = $('<div class="latex-controllers" style="width:100%; height:100%;"> </div>');
     var elementWrap=$('<div ></div>');
     elementWrap.appendTo( page_div_selector );
 
@@ -605,7 +608,7 @@ var textComponentBuilder = function( component ) {
     
     //var element = $('<img></img>');
 
-    var element  = $('<div class="popup-controllers"> </div>');
+    var element  = $('<div class="popup-controllers" style="width:100%; height:100%; "> </div>');
     var elementWrap=$('<div ></div>');
     elementWrap.appendTo( page_div_selector );
     ////console.log(component);

@@ -78,6 +78,7 @@ window.lindneo.tlingit = (function(window, $, undefined){
     if(typeof componentId == 'undefined')
       oldcomponent_id = componentId;
     oldcomponent = component;
+    console.log(oldcomponent);
     window.lindneo.dataservice
     .send( 'DeleteComponent', 
       { 
@@ -91,11 +92,12 @@ window.lindneo.tlingit = (function(window, $, undefined){
 
   var deleteArrivalResult = function ( res ) {
     console.log('deleteArrivalResult');
-    //var response = responseFromJson(res);
+    var response = responseFromJson(res);
     console.log(oldcomponent);
+    console.log(response.result);
     
-    window.lindneo.nisga.destroyComponent(oldcomponent, oldcomponent_id);
-    window.lindneo.tsimshian.componentDestroyed(oldcomponent.id);
+    window.lindneo.nisga.destroyComponent(oldcomponent, response.result.delete);
+    window.lindneo.tsimshian.componentDestroyed(response.result.delete);
   };
 
   var loadComponents = function( res ) {
@@ -124,6 +126,7 @@ window.lindneo.tlingit = (function(window, $, undefined){
   };
 
   var responseFromJson = function (response){
+    //console.log(response);
     return JSON.parse(response);
   };
 

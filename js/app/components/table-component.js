@@ -49,7 +49,7 @@ $(document).ready(function(){
 
         for ( var k = 0; k< tableData[i].length; k++ ) { 
           
-          var newColumn = $("<td class='ExcelTableFormationCol' rel ='"+i+","+k+"'></td>");
+          var newColumn = $("<td class='ExcelTableFormationCol col_"+i+"_"+k+"' rel ='"+i+","+k+"'></td>");
           
           
           newColumn
@@ -70,6 +70,7 @@ $(document).ready(function(){
             })
             .dblclick(function(e){
               e.stopPropagation();
+              console.log(this);
               that.editableCell(this);
 
           })
@@ -287,6 +288,7 @@ $(document).ready(function(){
           [that.TableSelection.start.columns]
           [node]
           [propertyName];
+        /*
         console.log(
           that.TableSelection.start.rows + " - " +
            that.TableSelection.start.columns + " - " +
@@ -294,6 +296,7 @@ $(document).ready(function(){
           propertyName + " : " + 
           propertyValue
           );
+        */
         if ( typeof propertyValue == "undefined") return null;
         return propertyValue;
 
@@ -399,8 +402,224 @@ $(document).ready(function(){
           }
       },
       setProperty : function (propertyName,propertyValue){
-        this._setProperty(propertyName,propertyValue);
+        /*
+        console.log(propertyName);
+        console.log(this.options.component);
+        console.log(this.TableSelection.end);
+        console.log(this);
+        return;
+        */
+        if(propertyName == 'delete_row')
+          this.row_delete(this.options.component, this.TableSelection.end);
+        else if(propertyName == 'delete_column')
+          this.column_delete(this.options.component, this.TableSelection.end);
+        else if(propertyName == 'add_row')
+          this.row_add(this, this.TableSelection.end);
+        else if(propertyName == 'add_column')
+          this.column_add(this.options.component, this.TableSelection.end);
+        else
+          this._setProperty(propertyName,propertyValue);
         
+      },
+
+      row_add: function(this_val, location){
+        console.log(location.rows);
+        //console.log(component.data.table.length);
+        //window.lindneo.tlingit.componentHasDeleted( component);
+        var newCellData = {
+          'attr': {
+            'val': '',
+            'class' : 'tableComponentCell'
+          },
+         'css' : {
+            'width':'100px',
+            'height': '30px',            
+            'color' : '#000',
+            'font-size' : '14px',
+            'font-family' : 'Arial',
+            'font-weight' : 'normal',
+            'font-style' : 'normal',
+            'text-decoration' : 'none'
+          },
+          'format':'standart',
+          'function':''
+        };
+        var component = this_val.options.component;
+        var that = this_val;
+        var column_count = component.data.table[0].length;
+        var array_last = component.data.table.splice((location.rows +1), (component.data.table.length - location.rows -1)) ;
+        console.log(array_last);
+        console.log(component.data.table);
+        var row = $('<tr class="ExcelTableFormationRow"></tr>');
+       
+        var new_row = [];
+        var rel_row_value=location.rows+1;
+        var onlyoneselected;
+        
+        var isMouseDown=false;
+        that.excelCursor = $("<div class='ExcelCursor'></div>");
+
+        var TableSelectionDisplay = $("<div class='selections_display'></div>");
+        var TableSelection = null;
+        var isHighlighted;
+        for ( var i = 0; i < column_count; i++ ) {
+          new_row.push(newCellData);
+          console.log(rel_row_value);
+          var new_val = $('<td class="ExcelTableFormationCol col_'+rel_row_value+'_'+i+'" rel ="'+rel_row_value+","+i+'"></td>');
+          new_val
+            .appendTo(row)
+            .text('')
+            .css(newCellData.css)
+            .resizable({
+              'handles': " e, s",
+              'start': function (event,ui){
+              },
+              'stop': function( event, ui ){
+                console.log($(this));
+                that._cellResize(event, ui,$(this));
+              },
+              'resize':function(event,ui){
+                window.lindneo.toolbox.makeMultiSelectionBox();
+              }
+            })
+            .dblclick(function(e){
+              e.stopPropagation();
+              console.log(this);
+              that.editableCell(this);
+
+          })
+          .mousedown(function (e) {
+                that._selected(e,null);
+                if (e.target.localName == "textarea") return;
+                
+                isMouseDown=true;
+                onlyoneselected = true;
+                TableSelection = {
+                  'start':{
+                    'rows':$(this).parent().prevAll().length,
+                    'columns':$(this).prevAll().length
+                  },
+                  'end':{
+                    'rows':$(this).parent().prevAll().length,
+                    'columns':$(this).prevAll().length
+                  }
+                };
+                console.log($(this));
+                that.selectionUpdated(TableSelection);
+
+                return false; // prevent text selection
+
+
+
+              })
+              .mouseover(function () {
+          
+
+
+                if (isMouseDown) {
+                  onlyoneselected = false;
+                  console.log($(this));
+                  TableSelection.end={
+                    'rows':$(this).parent().prevAll().length,
+                    'columns':$(this).prevAll().length
+                  };
+                  that.selectionUpdated(TableSelection);
+                  
+                  $(this).toggleClass("highlighted", isHighlighted);
+                }
+              })
+              .bind("selectstart", function () {
+                return false;
+              });
+        }
+        component.data.table.push(new_row);
+        for ( var i = array_last.length; i > 0 ; i-- ) {
+          var rel_val= location.rows+i;
+          var new_rel_val = location.rows+i+1;
+          console.log('rel_Val '+rel_val);
+          console.log('new_rel_val '+new_rel_val);
+         // for ( var j = 0; j < column_count; j++ ) {
+          for ( var j = 0; j < column_count; j++ ) {
+            $('.col_'+rel_val+'_'+j).attr('rel',new_rel_val+','+j);
+            $('.col_'+rel_val+'_'+j).addClass( 'col_'+new_rel_val+'_'+j );
+            $('.col_'+new_rel_val+'_'+j).removeClass( 'col_'+rel_val+'_'+j );
+          }
+        }
+        $.each( array_last, function( key, value ) {
+          component.data.table.push(value);
+        });
+        
+        console.log(row);
+        $('.active').parent().after(row);
+        console.log(component.data.table);
+        //window.lindneo.tlingit.componentHasCreated( component );
+        window.lindneo.tlingit.componentHasUpdated( component );
+
+      },
+
+      column_add: function(component, location){
+        console.log(location.columns);
+        console.log(component.data.table[0][0].css);
+        console.log(component);
+        //window.lindneo.tlingit.componentHasDeleted( component);
+        var newCellData = {
+          'attr': {
+            'val': '',
+            'class' : 'tableComponentCell'
+          },
+          'css' : '',
+          'format':'standart',
+          'function':''
+        };
+
+        var column_count = component.data.table[0].length;
+        $.each( component.data.table, function( key, value ) {
+          console.log(value);
+          var new_row = [];
+          var array_last = component.data.table[key].splice((location.columns +1), (column_count - location.columns -1)) ;
+          newCellData.css = component.data.table[key][location.columns].css;
+          component.data.table[key].push(newCellData);
+          $('.col_'+key+'_'+location.columns).after('<td class="ExcelTableFormationCol ui-resizable active"  style="width: 100px; height: 30px; color: rgb(0, 0, 0); font-size: 14px; font-family: Arial; font-weight: normal; font-style: normal; text-decoration: none;">\
+                        <div class="ui-resizable-handle ui-resizable-e" style="z-index: 90; display: block;"></div>\
+                        <div class="ui-resizable-handle ui-resizable-s" style="z-index: 90; display: block;"></div>\
+                      </td>');
+          $.each( array_last, function( key1, value1 ) {
+          component.data.table[key].push(value1);
+          });
+        });
+        console.log(component.data.table);
+        //window.lindneo.tlingit.componentHasCreated( component );
+        window.lindneo.tlingit.componentHasUpdated( component );
+      },
+
+      row_delete: function(component, location){
+        console.log(location);
+        console.log(component.data.table[location.rows]);
+        window.lindneo.tlingit.componentHasDeleted( component);
+        var remove_row = component.data.table[location.rows];
+
+        component.data.table = $.grep(component.data.table, function(value) {
+          return value != remove_row;
+        });
+        console.log(component.data.table);
+        window.lindneo.tlingit.componentHasCreated( component );
+      },
+
+      column_delete: function(component, location){
+        console.log(location);
+        console.log(component.data.table);
+        window.lindneo.tlingit.componentHasDeleted( component);
+        $.each( component.data.table, function( key, value ) {
+          console.log(key);
+          console.log(value);
+          var remove_column = value[location.columns];
+          component.data.table[key] = $.grep(component.data.table[key], function(value) {
+          return value != remove_column;
+          });
+          console.log(value);
+        });
+        console.log(component.data.table);
+        window.lindneo.tlingit.componentHasCreated( component );
       },
 
       getProperty : function (propertyName){
@@ -461,7 +680,8 @@ $(document).ready(function(){
 
       var that=this;
       that.cellEditing=true;
-
+      console.log(cell);
+      console.log(that);
       var cell=$(cell);
       var value=that.options.component.data.table[$(cell).parent().prevAll().length][$(cell).prevAll().length].attr.val;
 
@@ -520,7 +740,7 @@ $(document).ready(function(){
 
     selectionUpdated: function(selection){
       var that = this;
-      
+      //console.log(that);
       var TableSelection = {
           'start':{
                     'rows':Math.min(selection.start.rows,selection.end.rows ),
@@ -531,6 +751,7 @@ $(document).ready(function(){
                     'columns':Math.max(selection.start.columns,selection.end.columns )
           }
       }
+      //console.log(TableSelection);
       that.TableSelection=TableSelection;
       that.cellEditFinished();
 
@@ -544,7 +765,7 @@ $(document).ready(function(){
         .removeClass('top');
             
               var selections_rows=that.tbody.children('tr').slice(TableSelection.start.rows,TableSelection.end.rows+1);
-
+              //console.log(selections_rows);
            
 
             $.each (selections_rows, function(row_index,row_element){
@@ -684,7 +905,7 @@ $(document).ready(function(){
               }
             };
             
-
+            console.log(component);
             window.lindneo.tlingit.componentHasCreated( component );
             $("#table-add-dummy-close-button").trigger('click');
 

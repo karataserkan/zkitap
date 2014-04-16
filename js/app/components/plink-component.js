@@ -24,7 +24,7 @@ $(document).ready(function(){
       if(this.options.component.data.plink_data){
         var popupmessage=$('<div  id="message_'+componentplinkid+'"  ></div>');
         popupmessage.appendTo(this.element);
-        $('<a href="'+page_link+'.html">'+plink_data+'</a>').appendTo(popupmessage);
+        popupmessage.html(plink_data);
       }
        
       this._super(); 
@@ -87,13 +87,13 @@ $.ajax({
   close_button.appendTo(poup_header);
   galery_inner.appendTo(html_popup);
   popup_wrapper.appendTo(galery_inner).resizable({alsoResize: galery_inner});
-  var chapter= $('<div class="panel-group" id="accordion"></div>');
+  var chapter= $('<div class="panel-group" id="accordion1"></div>');
   chapter.appendTo(galery_inner);
   
   $.each( book_data, function( key, value ) {
     console.log(value.title);
     var chapter_title = $('<div class="panel panel-default">\
-    <a data-toggle="collapse" data-parent="#accordion" href="#collapse'+value.title+'"><div class="panel-heading">\
+    <a data-toggle="collapse" data-parent="#accordion1" href="#collapse'+value.title+'"><div class="panel-heading">\
       <h4 class="panel-title">\
         '+value.title+'\
       </h4>\
@@ -140,7 +140,7 @@ $.ajax({
       else{
         top = oldcomponent.data.self.css.top;
         left = oldcomponent.data.self.css.left;
-        window.lindneo.tlingit.componentHasDeleted( oldcomponent.id );
+        window.lindneo.tlingit.componentHasDeleted( oldcomponent, oldcomponent.id );
         oldcomponent.data.html_inner = $("#popup-explanation").html();
 
       };
