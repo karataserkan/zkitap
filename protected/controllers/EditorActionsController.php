@@ -20,7 +20,7 @@ class EditorActionsController extends Controller
 		echo trim($response_string);
 	//	session_start();
 		//echo $response_string;
-		session_start();
+		//session_start();
 	}
  
 	public function error($domain='EditorActions',$explanation='Error', $arguments=null,$debug_vars=null ){

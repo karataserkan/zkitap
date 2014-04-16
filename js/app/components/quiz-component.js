@@ -200,7 +200,7 @@ $(document).ready(function(){
       else{
         top = oldcomponent.data.self.css.top;
         left = oldcomponent.data.self.css.left;
-        window.lindneo.tlingit.componentHasDeleted( oldcomponent.id );
+        window.lindneo.tlingit.componentHasDeleted( oldcomponent, oldcomponent.id );
       };
         
       var component = {
