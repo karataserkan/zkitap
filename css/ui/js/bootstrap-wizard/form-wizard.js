@@ -153,6 +153,15 @@ var FormWizard = function () {
                 $("p[data-display='translator']").text($("[name='translator']").val());
                 $("p[data-display='issn']").text($("[name='issn']").val());
 
+                if ($("[name='tracking']").val()) {
+                    $("p[data-display='tracking']").text('Girildi');
+                }
+                else
+                {
+                    $("p[data-display='tracking']").text('Girilmedi');
+                }
+                ;
+
                 //var siraliNo=$(".siraliCheckbox").val();
 
                 // if (siraliNo!=0) {
@@ -274,6 +283,7 @@ var FormWizard = function () {
                 $('.detayRevBtn>i').toggleClass('fa-arrow-circle-down',dr % 2 === 0);
                 if ((dr%2)==1) {
                     $('#detayRev').show("slow");
+                    console.log($("[name='tracking']").val());
                 }else
                 {
                     $('#detayRev').hide("slow");

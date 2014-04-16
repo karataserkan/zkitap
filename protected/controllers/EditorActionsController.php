@@ -832,6 +832,7 @@ right join book using (book_id) where book_id='$bookId' and type!='image';";
 			//$data['contentReaderGroup']=$_POST['contentReaderGroup'];
 			$data['contentCover']=$bookData['cover'];
 			$data['contentThumbnail']=$bookData['thumbnail'];
+			$data['tracking']=$_POST['tracking'];
 			
 			//book detail
 			$data['abstract']=$_POST['abstract'];
@@ -954,7 +955,7 @@ right join book using (book_id) where book_id='$bookId' and type!='image';";
 		
 		$host_ip=trim(shell_exec("/sbin/ifconfig eth0 | awk '/inet / { print $2 }' | sed -e s/addr://"));
 		//$host_ip="31.210.53.80";
-		$data['contentTrustSecret']=sha1($data['checksum']."ONLYUPLOAD".$bookId.$host_ip);
+		//$data['contentTrustSecret']=sha1($data['checksum']."ONLYUPLOAD".$bookId.$host_ip);
 
 		
 
@@ -963,10 +964,10 @@ right join book using (book_id) where book_id='$bookId' and type!='image';";
 		$data['categories']=json_encode($data['categories']);
 		$data['siraliCategory']=json_encode($data['siraliCategory']);
 
-
 		$queue= new PublishQueue();
 		$queue->book_id=$bookId;
 		$queue->publish_data=json_encode($data);
+		print_r($queue);
 		$queue->save();
 
 		$book->publish_time=date('Y-n-d g:i:s',time());
