@@ -996,7 +996,7 @@ right join book using (book_id) where book_id='$bookId' and type!='image';";
 					$queue->book_id=$book->book_id;
 					$queue->publish_data=json_encode($as);
 					$queue->save();
-					# code...
+					// code...
 				}
 				die;
 
