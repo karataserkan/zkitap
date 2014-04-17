@@ -45,7 +45,7 @@ class OrganisationHostings extends CActiveRecord
 			array('hosting_client_port', 'numerical', 'integerOnly'=>true),
 			array('organisation_id', 'length', 'max'=>44),
 			array('hosting_client_IP', 'length', 'max'=>120),
-			array('hosting_client_id', 'length', 'max'=>10),
+			array('hosting_client_id', 'length', 'max'=>20),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
 			array('organisation_id, hosting_client_IP, hosting_client_port, hosting_client_id, hosting_client_key1, hosting_client_key2', 'safe', 'on'=>'search'),
