@@ -101,18 +101,19 @@ class EditorActionsController extends Controller
 
 		$book=Book::model()->findByPk($bookId);
 		//$workspace=Workspaces::model()->findByPk($book->workspace_id);
-		$organisationWorkspace=OrganisationWorkspaces::model()->findAll(array(
-		    'condition'=>'workspace_id=:workspace_id',
-		    'params'=>array(':workspace_id'=>$book->workspace_id),
-		));
+		// $organisationWorkspace=OrganisationWorkspaces::model()->findAll(array(
+		//     'condition'=>'workspace_id=:workspace_id',
+		//     'params'=>array(':workspace_id'=>$book->workspace_id),
+		// ));
 
-		$organisation=Organisations::model()->findByPk($organisationWorkspace[0]->organisation_id);
-
+		$organisationWorkspace=Yii::app()->db->createCommand('select * from organisation_workspaces where workspace_id="'.$book->workspace_id.'"')->queryRow();
+	
+		$organisation=Organisations::model()->findByPk($organisationWorkspace['organisation_id']);
 		$hosts=OrganisationHostings::model()->findAll(array(
 		    'condition'=>'organisation_id=:organisation_id',
 		    'params'=>array(':organisation_id'=>$organisation->organisation_id),
 		));
-
+		var_dump($hosts);
 		$categories=BookCategories::model()->findAll('organisation_id=:organisation_id',array('organisation_id'=>$organisation->organisation_id));
 
 		$model=new PublishBookForm;
@@ -1019,7 +1020,7 @@ right join book using (book_id) where book_id='$bookId' and type!='image';";
 					$queue->book_id=$book->book_id;
 					$queue->publish_data=json_encode($as);
 					$queue->save();
-					# code...
+					// code...
 				}
 				die;
 

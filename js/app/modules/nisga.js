@@ -759,7 +759,7 @@ var textComponentBuilder = function( component ) {
   var galeryComponentBuilder = function ( component ) {
     
 
-    var element  = $('<div class="some-gallery"> </div>');
+    var element  = $('<div class="some-gallery" style="width:100%;height:100%;"> </div>');
     var elementWrap=$('<div ></div>');
 
     elementWrap.appendTo( page_div_selector );

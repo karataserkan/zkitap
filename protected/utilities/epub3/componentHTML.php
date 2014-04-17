@@ -663,15 +663,21 @@ class componentHTML {
 
 	
 	public function galeryInner($component){ 
-	
-		if($component->data->self->css){
-			$size_style="width:" .$component->data->self->css->width. ";height:".$component->data->self->css->height.";";
-			$size_style_attr="style='$size_style'";
 
+		if($component->data->self->css->width)
+			$css = $component->data->self->css;
+		else {
+			$css = $component->data->ul->css;
+
+		}
+
+		if($css){
+			$size_style="width:" .$css->width. ";height:".$css->height.";";
+			$size_style_attr="style='$size_style'";
 
 		}
 		$container ='<div id="container'.$component->id.'" class="widgets-rw panel-sliding-rw exclude-auto-rw"  '.$size_style_attr.'>
-			<div class="frame-rw"  style="width:' .( $component->data->self->css->width * count($component->data->ul->imgs)). 'px;height:'.$component->data->self->css->height.';" >
+			<div class="frame-rw"  style="width:' .( $css->width * count($component->data->ul->imgs)). 'px;height:'.$css->height.';" >
 			';
 		$container.=' <ul class="ul2" epub:type="list">
 		';
