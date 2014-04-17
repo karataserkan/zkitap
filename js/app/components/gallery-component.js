@@ -15,12 +15,12 @@ $(document).ready(function(){
       var that = this;
       var image_width = 0;
       //if( that.options.component.type=='galery')
-
+      console.log(that.options.component.data);
       if( that.options.component.data.ul.imgs ) {
         var counter=0;
         var ul=$('<ul></ul>');
         ul.css(that.options.component.data.ul.css);
-        this.element.parent().find('.some-gallery').css(that.options.component.data['some-gallery'].css);
+        this.element.parent().find('.some-gallery').css(that.options.component.data['some_gallery'].css);
         
     
 
@@ -111,7 +111,7 @@ var createGaleryComponent = function (event,ui){
       var component = {
           'type' : 'galery',
           'data': {
-            'some-gallery':{
+            'some_gallery':{
               'css': {
                 'width': '100%',
                 'height': '100%',
@@ -143,10 +143,7 @@ var createGaleryComponent = function (event,ui){
                 'position':'absolute',
                 'top': (ui.offset.top-$(event.target).offset().top ) + 'px',
                 'left':  ( ui.offset.left-$(event.target).offset().left ) + 'px',
-
-          
-
-                'background-color': 'transparent',
+                'background-color': 'transparent'
                 
 
               }
