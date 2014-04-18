@@ -111,7 +111,7 @@ class componentHTML {
 	<script type='text/javascript'>
        	$( document ).ready(function(){
 			var component= JSON.parse('".json_encode($component)."');
-			var that = $('#'+component.id)
+			var that = $('#a'+component.id)
 			
 			that.find('.send').click(function(evt){
 			evt.preventDefault();

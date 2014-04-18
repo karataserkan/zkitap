@@ -113,7 +113,7 @@ class EditorActionsController extends Controller
 		    'condition'=>'organisation_id=:organisation_id',
 		    'params'=>array(':organisation_id'=>$organisation->organisation_id),
 		));
-		var_dump($hosts);
+		//var_dump($hosts);
 		$categories=BookCategories::model()->findAll('organisation_id=:organisation_id',array('organisation_id'=>$organisation->organisation_id));
 
 		$model=new PublishBookForm;
