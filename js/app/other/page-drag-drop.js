@@ -22,15 +22,16 @@ $( document ).ready(function () {
     }
   });
   */
-  var is_checked = $('input:checkbox[name=cetvel]:checked').val();
-  console.log(is_checked);
-  if($('#checkbox').is(':checked')){
-    console.log('deneme dene denem');
-    $('.ruler, .vruler').show();
-  }
-  else 
-    $('.ruler, .vruler').hide();
-
+  $(':checkbox').change(function() {
+    var is_checked = $('input:checkbox[name=cetvel]:checked').val();
+    console.log(is_checked);
+    if(is_checked == "on"){
+      console.log('deneme dene denem');
+      $('.ruler, .vruler').show();
+    }
+    else 
+      $('.ruler, .vruler').hide();
+  });
   var termTemplate = "<span class='ui-autocomplete-term' style='display:inline-block'>%s</span>";
         
   function first_time(){
