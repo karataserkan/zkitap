@@ -535,8 +535,8 @@ left: 118px;
     white-space: nowrap;
 }
 .ruler li {
-    padding-left: 0.99cm;
-    width: 2em;
+    padding-left: 1.139cm;
+    /*width: 2em;*/
     margin: .54em -2em -.40em;
     text-align: center;
     position: relative;

@@ -1853,11 +1853,11 @@ $current_user=User::model()->findByPk(Yii::app()->user->id);
 	<div id='author_pane' style='position:relative;width:1240px; margin: 0 auto; '> <!-- Outhor Pane -->
 		
 			<div class="hruler">
-			<ul class="ruler" data-items="50"></ul>
+			<ul class="ruler" data-items="54"></ul>
 			</div>
 			
 			<div class="vbruler">
-			<ul class="vruler" data-items="38"></ul>
+			<ul class="vruler" data-items="34"></ul>
 			</div>
 			
 			
