@@ -1,5 +1,36 @@
 $( document ).ready(function () {
 
+  $('.ruler, .vruler').hide(); 
+/*
+  $('#general-options').change(function(){
+    var value=$(this).val();
+    
+    $('.ruler, .vruler').hide();
+    if( value.indexOf("cetvel") !== -1) {
+      $('.ruler, .vruler').show();
+    }
+  });
+
+  
+ $('#cetvelcheck').click(function () {
+    console.log(this);
+    var value=$(this).val();
+    console.log(value);
+    $('.ruler, .vruler').hide();
+    if( value.indexOf("cetvel") !== -1) {
+      $('.ruler, .vruler').show();
+    }
+  });
+  */
+  var is_checked = $('input:checkbox[name=cetvel]:checked').val();
+  console.log(is_checked);
+  if($('#checkbox').is(':checked')){
+    console.log('deneme dene denem');
+    $('.ruler, .vruler').show();
+  }
+  else 
+    $('.ruler, .vruler').hide();
+
   var termTemplate = "<span class='ui-autocomplete-term' style='display:inline-block'>%s</span>";
         
   function first_time(){
@@ -456,21 +487,7 @@ $( document ).ready(function () {
         }
 
 
-  $('.ruler, .vruler').hide(); 
 
-  $('#general-options').change(function(){
-    var value=$(this).val();
-    
-    $('.ruler, .vruler').hide();
-    if( value.indexOf("cetvel") !== -1) {
-      $('.ruler, .vruler').show();
-    }
-
-
-
-    
-
-  });
 
   window.lindneo.tlingit.loadPage(window.lindneo.currentPageId);
   
