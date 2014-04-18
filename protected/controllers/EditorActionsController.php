@@ -6,6 +6,10 @@ class EditorActionsController extends Controller
 	public $response=null; 
 	public $errors=null; 
 
+	public static function isJson($string) {
+ 		json_decode($string);
+ 		return (json_last_error() == JSON_ERROR_NONE);
+	}
 	public function response($response_avoition=null){
 
 		$response['result']=$response_avoition ? $response_avoition : $this->response;
@@ -384,74 +388,86 @@ class EditorActionsController extends Controller
 
 
 
+		
 
 	public function addComponent($pageId,$attributes=null){
+
 		
-		$page=Page::model()->findByPk($pageId);
+			$page=Page::model()->findByPk($pageId);
 
-		if (!$page) {
-			$this->error("EA-ACom","Page Not Found",func_get_args(),$page);
-			return false;
-		}
-
-		$new_component= new Component;
-		$new_id=functions::new_id();
-		
-		$new_component->id=$new_id;
-		$new_component->page_id=$page->page_id;
-
-
-
-		$component_attribs=json_decode($attributes);
-
-                //var_dump($component_attribs);
-                //exit();
-
-		if($component_attribs->data->img->src  ) {
-			$component_attribs->data->img->src =$component_attribs->data->img->src;
-		}
-
-		if($component_attribs->data->imgs)
-			foreach ($component_attribs->data->imgs as $gallery_key => &$gallery_image) {
-				if($gallery_image->src)
-					$gallery_image->src=functions::compressBase64Image($gallery_image->src);
+			if (!$page) {
+				$this->error("EA-ACom","Page Not Found",func_get_args(),$page);
+				return false;
 			}
-		//know bug : component type validation
+
+			$new_component= new Component;
+			$new_id=functions::new_id();
+			
+			$new_component->id=$new_id;
+			$new_component->page_id=$page->page_id;
 
 
-		$new_component->type=$component_attribs->type;
-		$new_component->set_data($component_attribs->data);
-		//new dBug($component_attribs);
-		
-		if(!$new_component->save()){
-			$this->error("EA-ACom","Component Not Saved",func_get_args(),$new_component);
-			return false;
-		} 
-		$result= Component::model()->findByPk($new_id);
 
-		
-		$result->data=$result->get_data();
+			$component_attribs=json_decode($attributes);
 
-		
+	                //var_dump($component_attribs);
+	                //exit();
 
-		if(!$result)  {
-			$this->error("EA-ACom","Component Not Found",func_get_args(),$new_component);
-			return false;
-		}
+			if($component_attribs->data->img->src  ) {
+				$component_attribs->data->img->src =$component_attribs->data->img->src;
+			}
+
+			if($component_attribs->data->imgs)
+				foreach ($component_attribs->data->imgs as $gallery_key => &$gallery_image) {
+					if($gallery_image->src)
+						$gallery_image->src=functions::compressBase64Image($gallery_image->src);
+				}
+			//know bug : component type validation
 
 
-		return $result->attributes;
+			$new_component->type=$component_attribs->type;
+			$new_component->set_data($component_attribs->data);
+			//new dBug($component_attribs);
+			
+			if(!$new_component->save()){
+				$this->error("EA-ACom","Component Not Saved",func_get_args(),$new_component);
+				return false;
+			} 
+			$result= Component::model()->findByPk($new_id);
+
+			
+			$result->data=$result->get_data();
+
+			
+
+			if(!$result)  {
+				$this->error("EA-ACom","Component Not Found",func_get_args(),$new_component);
+				return false;
+			}
+
+
+			return $result->attributes;
 
 	}
 
+
 	public function actionAddComponent($pageId,$attributes=null)
 	{
-		$response=false;
+		if(EditorActionsController::isJson($attributes))
+		{
+			$response=false;
 
-		if($return=$this->addComponent($pageId,$attributes)){
-				$response['component']=$return; 
+			if($return=$this->addComponent($pageId,$attributes)){
+					$response['component']=$return; 
+			}
+			return $this->response($response);
 		}
-		return $this->response($response);
+		else
+		{
+			return $this->response(json_encode(array("success"=>false,"message"=>"you should wait while the component is being saved!")));
+
+		}
+
 	}
 
 
@@ -650,14 +666,21 @@ class EditorActionsController extends Controller
 
 	public function actionUpdateWholeComponentData($componentId,$jsonProperties)
 	{
-		$response=false;
+		if(EditorActionsController::isJson($jsonProperties))
+		{
+			$response=false;
 
-		if($return=$this->updateComponent($componentId,$jsonProperties) ){
-				$response['component']=$return; 
+			if($return=$this->updateComponent($componentId,$jsonProperties) ){
+					$response['component']=$return; 
+			}
+
+			return $this->response($response);
 		}
+		else
+		{
+			return $this->response(json_encode(array("success"=>false,"message"=>"you should wait while the component is being saved!")));
 
-		return $this->response($response);
-
+		}
 	}
 
 	public function UpdatePage($pageId,$chapterId,$order){
