@@ -3592,6 +3592,7 @@ $.ui.plugin.add("resizable", "alsoResize", {
 	},
 
 	resize: function (event, ui) {
+		//console.log($(this).data("ui-resizable"));
 		var that = $(this).data("ui-resizable"),
 			o = that.options,
 			os = that.originalSize,
@@ -3602,12 +3603,30 @@ $.ui.plugin.add("resizable", "alsoResize", {
 			},
 
 			_alsoResize = function (exp, c) {
-				console.log($(exp));
+				//console.log($(exp));
 				$(exp).each(function() {
+					var var_also_resize
+					//Object {width: 382, height: 40, left: NaN, top: NaN}
+					if(typeof $(this).data("ui-resizable-alsoresize") =='undefined'){
+						var_also_resize={'width':os.width,'height':os.height,'left':NaN,'top':NaN};
+
+					}
+					else{
+						var_also_resize=$(this).data("ui-resizable-alsoresize");
+
+					}
+					if(isNaN(var_also_resize.top)||isNaN(var_also_resize.left))
+					{
+						var_also_resize.top=that.offset.top;
+						var_also_resize.left=that.offset.left;
+
+					}
+
 					//console.log($(this));
-					var el = $(this), start = $(this).data("ui-resizable-alsoresize"), style = {},
+					//console.log($(this).data("ui-resizable-alsoresize"));
+					var el = $(this), start = var_also_resize, style = {},
 						css = c && c.length ? c : el.parents(ui.originalElement).length ? ["width", "height"] : ["width", "height", "top", "left"];
-console.log($(el.parents(ui.originalElement)[0]));
+						//console.log($(el.parents(ui.originalElement)[0]));
 					$.each(css, function (i, prop) {
 						console.log(start[prop]);
 						console.log(delta[prop]);
