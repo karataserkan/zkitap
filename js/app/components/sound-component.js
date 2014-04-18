@@ -145,7 +145,7 @@ $(document).ready(function(){
                   'position':'absolute',
                   'top': (ui.offset.top-$(event.target).offset().top ) + 'px',
                   'left':  ( ui.offset.left-$(event.target).offset().left ) + 'px',
-                  'width': '60px',
+                  'width': '250px',
                   'height': '60px',
                   'background-color': 'transparent',
                   'overflow': 'visible'

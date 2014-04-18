@@ -11,7 +11,7 @@ $(document).ready(function(){
     _create: function(){
 
       var that = this;
-
+      
       
 
       var componenthtmlid='html'+this.options.component.id;
@@ -45,15 +45,16 @@ $(document).ready(function(){
       }
 
       if(this.options.component.data.html_inner){
-        var popupmessage=$('<div  id="message_'+componenthtmlid+'"  ></div>');
-        popupmessage.appendTo(this.element);
-        popupmessage.html(html_data);
+        //var popupmessage=$('<div  id="message_'+componenthtmlid+'"  ></div>');
+        //popupmessage.appendTo(this.element);
+        //popupmessage.html(html_data);
+        this.element.html(html_data);
       }
        
       
       
       
-      this._super(); 
+      this._super({resizableParams:{handles:"e, s, se"}}); 
 /*
       this.element.resizable("option",'maxHeight', 128 );
       this.element.resizable("option",'minHeight', 128 );

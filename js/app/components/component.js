@@ -8,8 +8,22 @@ $(document).ready(function(){
       
 
     },
+    extend: function (a, b){
 
-    _create: function () {
+
+    for(var key in b)
+        if(b.hasOwnProperty(key))
+          console.log(b[key]);
+          if (typeof b[key] === 'object') {
+            a.key=this.extend(a[key],b[key]);
+          } else {
+            a[key] = b[key];
+
+          }
+    return a;
+    },
+
+    _create: function (params) {
 
       var that = this;
 
@@ -32,7 +46,15 @@ $(document).ready(function(){
             window.lindneo.toolbox.makeMultiSelectionBox();
           }
         };
+      if(typeof params!='undefined'){
 
+        console.log(that.options);
+        that.options = this.extend ( that.options,params  ) ;
+        console.log(that.options);
+         //if(typeof params.resizableParams!='undefined') {
+         //   that.options.resizableParams=that.extend(that.options.resizableParams,params.resizableParams);
+         //}
+      }
       var MIN_DISTANCE = 20; // minimum distance to "snap" to a guide
       var guides = []; // no guides available ... 
       var innerOffsetX, innerOffsetY; // we'll use those during drag ... 
