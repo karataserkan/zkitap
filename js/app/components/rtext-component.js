@@ -38,7 +38,7 @@ $(document).ready(function(){
         }
         that.element.mouseup(capture_selection).keyup(capture_selection);
         
-        this._super();
+        this._super({resizableParams:{handles:"e, s, se"}});
           
       },
 

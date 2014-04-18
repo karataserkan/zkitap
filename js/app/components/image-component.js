@@ -15,20 +15,21 @@ console.log(this.options.component);
       var componentimageid='image'+this.options.component.id;
         if(this.options.component.data.img.image_type == 'popup'){
           if( this.options.marker ) {
-            var newimage=$('<img id="img_'+componentimageid+'" src="' + this.options.marker +  '"/>');
+            //var newimage=$('<img id="img_'+componentimageid+'" src="' + this.options.marker +  '"/>');
             //console.log(this.options);
-            newimage.appendTo(this.element);
+            //newimage.appendTo(this.element);
+            this.element.attr('src', this.options.marker);
           }
           this.options.component.data.html_inner = '<img src="' + this.options.component.data.img.src + '" ></img> ';
           var popupmessage=$('<div  id="message_'+componentimageid+'" style="display:none" >'+this.options.component.data.html_inner+'</div>');
-          popupmessage.appendTo(this.element);
+          popupmessage.appendTo(this.element.parent());
         }
       else{
         if( this.options.component.data.img ) {
-          var source = $('<img src="' + this.options.component.data.img.src + '" ></img> ');
+          //var source = $('<img src="' + this.options.component.data.img.src + '" ></img> ');
 
-          source.appendTo(this.element);
-          //this.element.attr('src', this.options.component.data.img.src);  
+          //source.appendTo(this.element);
+          this.element.attr('src', this.options.component.data.img.src);  
         }
       }
       //console.log(this.options.component);
