@@ -619,9 +619,8 @@ class componentHTML {
 		$data=$component->data; 
 		$repeat_type="";
 		$auto_type="";
-		if($data->audio->repeat_type=='Y'){$repeat_type="loop";}
-		if($data->audio->auto_type=='Y'){$auto_type="autoplay";}
-
+		if($data->repeat_type=='Y'){$repeat_type="loop";}
+		if($data->auto_type=='Y'){$auto_type="autoplay";}
 		$container ="<span style='display:block' class='audio_name'>" . $data->audio->name . "</span><br/>"."<audio  class='audio'  ";
 		if(isset($data->audio->attr))
 			foreach ($data->audio->attr as $attr_name => $attr_val ) {
