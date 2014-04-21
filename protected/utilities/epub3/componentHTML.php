@@ -620,7 +620,6 @@ class componentHTML {
 		$repeat_type="";
 		$auto_type="";
 		if($data->audio->repeat_type=='Y'){$repeat_type="loop";}
-		print_r($data->audio);die();
 		if($data->audio->auto_type=='Y'){$auto_type="autoplay";}
 
 		$container ="<span style='display:block' class='audio_name'>" . $data->audio->name . "</span><br/>"."<audio  class='audio'  ";
