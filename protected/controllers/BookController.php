@@ -32,11 +32,11 @@ class BookController extends Controller
 	{
 		return array(
 			array('allow',  // allow all users to perform 'index' and 'view' actions
-				'actions'=>array('mybooks,updateThumbnail'),
+				'actions'=>array('mybooks'),
 				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
-				'actions'=>array('create','update','selectTemplate','delete','view','author','newBook','selectData','uploadFile','duplicateBook','updateCover',"copyBook","createTemplate","updateBookTitle","getBookPages",'bookCreate','getTemplates','createNewBook','fastStyle','getFastStyle'),
+				'actions'=>array('create','update','selectTemplate','delete','view','author','newBook','selectData','uploadFile','duplicateBook','updateCover',"copyBook","createTemplate","updateBookTitle","getBookPages",'bookCreate','getTemplates','createNewBook','fastStyle','getFastStyle','updateThumbnail'),
 				'users'=>array('@'),
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
@@ -888,8 +888,8 @@ class BookController extends Controller
 		}
 
 		// if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
-		if(!isset($_GET['ajax']))
-			$this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('site/index'));
+		/*if(!isset($_GET['ajax']))
+			$this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('site/index'));*/
 	}
 
 	/**

@@ -407,7 +407,7 @@ class epub3 {
 
 			//$bookSize=$page_data['image']['size'];
 		}
-		$background= (isset($img)&&!empty($img)) ? "background-image:url('".$backgroundfile->filename."')" : "background:transparent";
+		$background= (isset($img)&&!empty($img)) ? "background-image:url('".$backgroundfile->filename."')" : "background-color:white;background:white";
 		$background_size=(isset($bookSize)&&!empty($bookSize)) ? "background-size:".$bookSize['width']."px ".$bookSize['height']."px":"";
 		
 		$width="1024";

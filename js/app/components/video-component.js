@@ -8,44 +8,40 @@ $(document).ready(function() {
 
             var that = this;
 
-            var componentvideoid='popup'+this.options.component.id;
+            this.videoTag=this.element;
+
             if(this.options.component.data.video_type == 'popup'){
-              if( this.options.marker ) {
-                var newimage=$('<img id="img_'+componentvideoid+'" src="' + this.options.marker +  '"/>');
-                newimage.appendTo(this.element);
-              };
-
-              var auto_start = '';
-              var control = 'controls="controls"';
-              console.log(this.options.component.data.control_type);
-              if(this.options.component.data.auto_type == 'Y') auto_start = 'autoplay';
-              if(this.options.component.data.control_type == 'N') control = '';
-
-              this.options.component.data.html_inner = '<video ' + control + ' ' + auto_start + ' style="width:'+this.options.component.data.video.css.width+';height:'+this.options.component.data.video.css.height+'"><source src="' + this.options.component.data.source.attr.src + '" /></video>';
-              var popupmessage=$('<div  id="message_'+componentvideoid+'" style="display:none" >'+this.options.component.data.html_inner+'</div>');
-               popupmessage.appendTo(this.element);
-              console.log(this.options.component.data.video.css);
               
+              if(typeof this.options.marker ==="undefined" ) {
+                this.options.marker = "http://" + window.location.hostname + "/css/video_play_trans.png";
+              }
+
+              var componentvideoid='popup'+this.options.component.id;
+              var newimage=$('<img id="img_'+componentvideoid+'" src="' + this.options.marker +  '"/>');
+              this.element.replaceWith(newimage);
+              this.element=newimage;
+              this.videoTag=$('<video></video>');
+
             }
-            else{
-            if (this.options.component.data.source.attr.src) {
-              var auto_start = '';
-              var control = 'controls="controls"';
-              console.log(this.options.component.data.control_type);
-              if(this.options.component.data.auto_type == 'Y') auto_start = 'autoplay';
-              if(this.options.component.data.control_type == 'N') control = '';
-              console.log(control);
-                var source = $('<source src="' + this.options.component.data.source.attr.src + '" /> ');
-                var video = $('<video ' + control + ' ' + auto_start + '></video>');
 
-                source.appendTo(video);
-                video.appendTo(this.element);
-                video.css(this.options.component.data.video.css);
 
-                // this.element.attr('src', this.options.component.data.img.src);  
-            }
-          }
+              if(this.options.component.data.control_type == 'N') 
+                this.videoTag.attr("control","true");
 
+              if(this.options.component.data.auto_type == 'Y')
+                this.videoTag.attr("autoplay","");
+
+              var source = $('<source/> ');
+              source.attr("src", this.options.component.data.source.attr.src );
+
+              source.appendTo(this.videoTag);
+
+
+            if(this.options.component.data.video_type == 'popup'){
+              var popupmessage=$('<div  id="message_'+componentvideoid+'" style="display:none" ></div>');
+              popupmessage.append(this.videoTag);
+              popupmessage.appendTo(this.element);
+            } 
 
             this._super();
         },
