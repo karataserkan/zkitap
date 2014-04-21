@@ -140,10 +140,10 @@ class componentHTML {
 					if (ind==i) {
 						if(component.data.correctAnswerIndex==ind){
 							$(this).css({\"text-decoration\":\"underline\",\"font-weight\":\"bold\"});
-						    /*$(this).prepend('+');*/
+						    //$(this).prepend('+');
 				      	} else if (component.data.correctAnswerIndex!=ind){
 				      		$(this).css({\"text-decoration\":\"underline\",\"font-weight\":\"bold\"});
-				        	/*$(this).prepend('x');*/
+				        	//$(this).prepend('x');
 				      	}
 				  	}
 
