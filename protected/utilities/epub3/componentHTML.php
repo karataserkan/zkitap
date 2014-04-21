@@ -106,20 +106,22 @@ class componentHTML {
               <a class='btn bck-light-green white radius send' > Yanıtla </a> 
             </div> 
         </div>";
-
+        $component=json_encode($component);
+        $component=str_replace("'", "\'", $component);
         $container.="
 	<script type='text/javascript'>
        	$( document ).ready(function(){
-			var component= JSON.parse('".json_encode($component)."');
-			var that = $('#'+component.id)
+			var component= JSON.parse('".$component."');
+			var that = $('#a'+component.id)
 			
 			that.find('.send').click(function(evt){
 			evt.preventDefault();
-			var ind = $('input[type=radio]:checked').val();
+			var ind = that.find('input[type=radio]:checked').val();
 			  
 			if( ind === undefined ){
-			    alert('secilmemis');
+			    alert('Lütfen bir şık seçiniz!');
 			} else {
+				that.find('.send').hide();
 			    var answer = {
 			      'selected-index': ind,
 			      'selected-option': component.data.options[ind]
@@ -127,6 +129,7 @@ class componentHTML {
 
 			    
 			    that.find('.question-options-container div').each(function(i,element){
+
 				    var color = 'red';
 				    
 				    if (i==component.data.correctAnswerIndex) color ='green';
@@ -136,9 +139,11 @@ class componentHTML {
 					
 					if (ind==i) {
 						if(component.data.correctAnswerIndex==ind){
-						    $(this).prepend('+');
+							$(this).css({\"text-decoration\":\"underline\",\"font-weight\":\"bold\"});
+						    //$(this).prepend('+');
 				      	} else if (component.data.correctAnswerIndex!=ind){
-				        	$(this).prepend('x');
+				      		$(this).css({\"text-decoration\":\"underline\",\"font-weight\":\"bold\"});
+				        	//$(this).prepend('x');
 				      	}
 				  	}
 
@@ -860,7 +865,7 @@ class componentHTML {
 
 		$data=$component->data;
 		$container ="
-		<a  	";
+		<a target='_blank' ";
 		if(isset($data->self->attr))
 			foreach ($data->self->attr as $attr_name => $attr_val ) {
 				$container.=" $attr_name='$attr_val' ";
@@ -869,7 +874,7 @@ class componentHTML {
 		
 
 		$container.=" 
-			><img  class='image' src='linkmarker.png' /></a>
+			><img  class='image' src='linkmarker.png' style='width:100%;height:100%;' /></a>
 		";
 
 		$this->html=str_replace('%component_inner%' ,$container, $this->html);

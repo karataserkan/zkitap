@@ -142,7 +142,7 @@
 													<div class="form-group">
 														<label for="" class="control-label col-md-3"><?php _e('Google Analytics Code'); ?></label>
 														<div class="col-md-4">
-															<?php //echo $form->textArea($model,'tracking',array('class'=>'form-control','name'=>'tracking')); ?>
+															<?php echo $form->textArea($model,'tracking',array('class'=>'form-control','name'=>'tracking')); ?>
 															<span class="error-span"></span>
 														</div>
 													</div>

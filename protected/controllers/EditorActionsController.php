@@ -113,7 +113,7 @@ class EditorActionsController extends Controller
 		    'condition'=>'organisation_id=:organisation_id',
 		    'params'=>array(':organisation_id'=>$organisation->organisation_id),
 		));
-		var_dump($hosts);
+		//var_dump($hosts);
 		$categories=BookCategories::model()->findAll('organisation_id=:organisation_id',array('organisation_id'=>$organisation->organisation_id));
 
 		$model=new PublishBookForm;
@@ -856,7 +856,7 @@ right join book using (book_id) where book_id='$bookId' and type!='image';";
 			//$data['contentReaderGroup']=$_POST['contentReaderGroup'];
 			$data['contentCover']=$bookData['cover'];
 			$data['contentThumbnail']=$bookData['thumbnail'];
-			$data['tracking']=$_POST['tracking'];
+			$data['tracking']=htmlspecialchars($_POST['tracking']);
 			
 			//book detail
 			$data['abstract']=$_POST['abstract'];
