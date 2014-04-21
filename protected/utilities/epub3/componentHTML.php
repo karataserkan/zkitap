@@ -865,7 +865,7 @@ class componentHTML {
 
 		$data=$component->data;
 		$container ="
-		<a  	";
+		<a target='_blank' ";
 		if(isset($data->self->attr))
 			foreach ($data->self->attr as $attr_name => $attr_val ) {
 				$container.=" $attr_name='$attr_val' ";
@@ -874,7 +874,7 @@ class componentHTML {
 		
 
 		$container.=" 
-			><img  class='image' src='linkmarker.png' /></a>
+			><img  class='image' src='linkmarker.png' style='width:100%;height:100%;' /></a>
 		";
 
 		$this->html=str_replace('%component_inner%' ,$container, $this->html);
