@@ -32,11 +32,13 @@ $(document).ready(function(){
       }
       
 
-      this._super();
+      this._super({resizableParams:{
+        "handles":"e",
+        "maxHeight":60,
+        "minHeight":60,
+      }});
       this.element.height(60);
-      
-      this.element.resizable("option",'maxHeight', 60 );
-      this.element.resizable("option",'minHeight', 60 );
+
 
     },
 

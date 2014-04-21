@@ -5,21 +5,24 @@ $(document).ready(function(){
   $.widget('lindneo.component', {
 
     options : {
-      
+       
 
     },
-    extend: function (a, b){
 
+    extend: function (a, b,parentKey){
 
     for(var key in b)
-        if(b.hasOwnProperty(key))
-          console.log(b[key]);
+        if(b.hasOwnProperty(key)){
+          console.log(parentKey );
           if (typeof b[key] === 'object') {
-            a.key=this.extend(a[key],b[key]);
+            parentKey = typeof parentKey ==="undefined" ? key: parentKey + "." + key
+            a[key]=this.extend(a[key],b[key],parentKey);
           } else {
             a[key] = b[key];
 
           }
+        }
+    console.log(a);
     return a;
     },
 
@@ -27,7 +30,12 @@ $(document).ready(function(){
 
       var that = this;
 
+      that.overwriteParams = params;
+
+
       that.options.resizableParams = {
+        "maxHeight":null,
+        "minHeight":null,
         "handles":"n, e, w, s, nw, se, sw, ne",
           'start': function (event,ui){
             that._selected(event,ui);

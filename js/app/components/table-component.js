@@ -125,7 +125,7 @@ $(document).ready(function(){
       }
 
       
-
+      console.log(this.cells);
       
      newTable.appendTo(this.element);
     
@@ -278,6 +278,10 @@ $(document).ready(function(){
       getPropertyOfCells: function (propertyName,node){
         var that = this;
         if (typeof that.TableSelection == "undefined") return false;
+        console.log(that.TableSelection.start);
+        console.log(that.options.component.data.table);
+        console.log(that.options.component.data.table[that.TableSelection.start.rows]);
+        console.log(that.options.component.data.table[that.TableSelection.start.rows][that.TableSelection.start.columns]);
         if (typeof that.options.component.data.table
           [that.TableSelection.start.rows]
           [that.TableSelection.start.columns]
@@ -424,6 +428,8 @@ $(document).ready(function(){
 
       row_add: function(this_val, location){
         console.log(location.rows);
+        console.log(this.cells);
+        
         //console.log(component.data.table.length);
         //window.lindneo.tlingit.componentHasDeleted( component);
         var newCellData = {
@@ -446,10 +452,13 @@ $(document).ready(function(){
         };
         var component = this_val.options.component;
         var that = this_val;
+        var old_cells = this.cells.splice((location.rows +1), (this.cells.length - location.rows -1));
+        //return;
         var column_count = component.data.table[0].length;
         var array_last = component.data.table.splice((location.rows +1), (component.data.table.length - location.rows -1)) ;
         console.log(array_last);
         console.log(component.data.table);
+        console.log(column_count);
         var row = $('<tr class="ExcelTableFormationRow"></tr>');
        
         var new_row = [];
@@ -462,10 +471,18 @@ $(document).ready(function(){
         var TableSelectionDisplay = $("<div class='selections_display'></div>");
         var TableSelection = null;
         var isHighlighted;
+        var new_cell;
         for ( var i = 0; i < column_count; i++ ) {
+
           new_row.push(newCellData);
-          console.log(rel_row_value);
+          console.log(i);
           var new_val = $('<td class="ExcelTableFormationCol col_'+rel_row_value+'_'+i+'" rel ="'+rel_row_value+","+i+'"></td>');
+          console.log(this.cells);
+          this.cells[rel_row_value]=[];
+          this.cells[rel_row_value][i]=new_val;
+          console.log(new_cell);
+          console.log(this.cells);
+          
           new_val
             .appendTo(row)
             .text('')
@@ -518,7 +535,7 @@ $(document).ready(function(){
 
                 if (isMouseDown) {
                   onlyoneselected = false;
-                  console.log($(this));
+                  //console.log($(this));
                   TableSelection.end={
                     'rows':$(this).parent().prevAll().length,
                     'columns':$(this).prevAll().length
@@ -532,6 +549,7 @@ $(document).ready(function(){
                 return false;
               });
         }
+        //return;
         component.data.table.push(new_row);
         for ( var i = array_last.length; i > 0 ; i-- ) {
           var rel_val= location.rows+i;
@@ -593,6 +611,7 @@ $(document).ready(function(){
       },
 
       row_delete: function(component, location){
+        /*
         console.log(location);
         console.log(component.data.table[location.rows]);
         window.lindneo.tlingit.componentHasDeleted( component);
@@ -603,9 +622,44 @@ $(document).ready(function(){
         });
         console.log(component.data.table);
         window.lindneo.tlingit.componentHasCreated( component );
+        */
+        var that = component;
+        var old_cells = this.cells.splice((location.rows +1), (this.cells.length - location.rows -1));
+        //return;
+        var column_count = component.data.table[0].length;
+        var array_last = component.data.table.splice((location.rows +1), (component.data.table.length - location.rows -1)) ;
+        console.log(array_last);
+        var rel_row_value=location.rows+1;
+
+        var remove_row = component.data.table[location.rows];
+
+        component.data.table = $.grep(component.data.table, function(value) {
+          return value != remove_row;
+        });
+        console.log(component.data.table);
+        $( '.col_'+ location.rows+'_0').parent().remove();
+
+        for ( var i = 0; i < array_last.length ; i++ ) {
+          var rel_val= location.rows+i+1;
+          var new_rel_val = location.rows+i;
+          console.log('rel_Val '+rel_val);
+          console.log('new_rel_val '+new_rel_val);
+         // for ( var j = 0; j < column_count; j++ ) {
+          for ( var j = 0; j < column_count; j++ ) {
+            $('.col_'+rel_val+'_'+j).attr('rel',new_rel_val+','+j);
+            $('.col_'+rel_val+'_'+j).addClass( 'col_'+new_rel_val+'_'+j );
+            $('.col_'+new_rel_val+'_'+j).removeClass( 'col_'+rel_val+'_'+j );
+          }
+        }
+        $.each( array_last, function( key, value ) {
+          component.data.table.push(value);
+        });
+        window.lindneo.tlingit.componentHasUpdated( component );
+
       },
 
       column_delete: function(component, location){
+        /*
         console.log(location);
         console.log(component.data.table);
         window.lindneo.tlingit.componentHasDeleted( component);
@@ -620,6 +674,37 @@ $(document).ready(function(){
         });
         console.log(component.data.table);
         window.lindneo.tlingit.componentHasCreated( component );
+        */
+        //var array_last = []
+        var column_count = component.data.table[0].length;
+        $.each( component.data.table, function( key, value ) {
+          console.log(value);
+          $( '.col_'+ key+'_'+location.columns).remove();
+          var array_last = component.data.table[key].splice((location.columns +1), (column_count - location.columns -1)) ;
+          console.log(component.data.table[key]);
+          var remove_column = value[location.columns];
+          component.data.table[key] = $.grep(component.data.table[key], function(value) {
+          return value != remove_column;
+          });
+          console.log(component.data.table[key]);
+          for ( var i = 0; i < array_last.length ; i++ ) {
+            var rel_val= location.columns+i+1;
+            var new_rel_val = location.columns+i;
+            console.log('rel_Val '+rel_val);
+            console.log('new_rel_val '+new_rel_val);
+           // for ( var j = 0; j < column_count; j++ ) {
+            
+              $('.col_'+key+'_'+rel_val).attr('rel',key+','+new_rel_val);
+              $('.col_'+key+'_'+rel_val).addClass( 'col_'+key+'_'+new_rel_val );
+              $('.col_'+key+'_'+new_rel_val).removeClass( 'col_'+key+'_'+rel_val );
+            
+          }
+          $.each( array_last, function( key1, value1 ) {
+            component.data.table[key].push(value1);
+          });
+            
+          });
+        window.lindneo.tlingit.componentHasUpdated( component );
       },
 
       getProperty : function (propertyName){
@@ -751,7 +836,7 @@ $(document).ready(function(){
                     'columns':Math.max(selection.start.columns,selection.end.columns )
           }
       }
-      console.log(TableSelection);
+      //console.log(TableSelection);
       that.TableSelection=TableSelection;
       that.cellEditFinished();
 
@@ -801,7 +886,7 @@ $(document).ready(function(){
             this.excelCursor.remove();
             //this.excelCursor.dblclick(function(){$(this).parent().dblclick();});
             console.log(this.cells);
-            console.log(this.cells[0][0]);
+            console.log(this.cells[TableSelection.end.rows][TableSelection.end.columns]);
             this.cells[TableSelection.end.rows][TableSelection.end.columns].prepend( this.excelCursor );
 
 
