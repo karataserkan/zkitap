@@ -83,8 +83,8 @@ msgstr  "Editors"
 #: protected/views/site/index.php:137 protected/views/site/index.php:182
 #: protected/views/site/index.php:165 protected/views/site/index.php:210
 #: protected/views/site/index.php:159 protected/views/site/index.php:204
-#: protected/views/site/index.php:255 protected/views/site/index.php:159
-#: protected/views/site/index.php:204 protected/views/site/index.php:255
+#: protected/views/site/index.php:255 protected/views/site/index.php:160
+#: protected/views/site/index.php:205 protected/views/site/index.php:256
 msgid   "Editör"
 msgstr  "Editor"
 
@@ -101,9 +101,9 @@ msgstr  "Editor"
 #: protected/views/site/index.php:270 protected/views/site/index.php:276
 #: protected/views/site/index.php:263 protected/views/site/index.php:156
 #: protected/views/site/index.php:205 protected/views/site/index.php:254
-#: protected/views/site/index.php:267 protected/views/site/index.php:156
-#: protected/views/site/index.php:205 protected/views/site/index.php:254
-#: protected/views/site/index.php:267
+#: protected/views/site/index.php:267 protected/views/site/index.php:157
+#: protected/views/site/index.php:206 protected/views/site/index.php:255
+#: protected/views/site/index.php:268
 msgid   "Sahibi"
 msgstr  "Owner"
 
@@ -130,7 +130,7 @@ msgstr  "Organisation"
 #: protected/views/site/index.php:106 protected/views/site/index.php:134
 #: protected/views/site/index.php:96 protected/views/site/index.php:168
 #: protected/views/site/index.php:196 protected/views/site/index.php:190
-#: protected/views/site/index.php:190
+#: protected/views/site/index.php:191
 #: protected/views/organisations/workspaces.php:45
 #: protected/views/organisations/users.php:27
 #: protected/views/organisations/users.php:31
@@ -603,8 +603,8 @@ msgstr  "New Password Repeat"
 #: protected/views/site/index.php:259 protected/views/site/index.php:266
 #: protected/views/editorActions/publishBook.php:285
 #: protected/views/editorActions/publishBook.php:292
-#: protected/views/site/index.php:247 protected/views/site/index.php:253
-#: protected/views/site/index.php:259 protected/views/site/index.php:266
+#: protected/views/site/index.php:248 protected/views/site/index.php:254
+#: protected/views/site/index.php:260 protected/views/site/index.php:267
 #: protected/views/editorActions/publishBook.php:292
 msgid   "Hepsi"
 msgstr  "All"
@@ -614,7 +614,7 @@ msgstr  "All"
 #: protected/views/site/index.php:243 protected/views/site/index.php:249
 #: protected/views/site/index.php:271 protected/views/site/index.php:277
 #: protected/views/site/index.php:264 protected/views/site/index.php:255
-#: protected/views/site/index.php:268 protected/views/site/index.php:268
+#: protected/views/site/index.php:268 protected/views/site/index.php:269
 msgid   "Editor"
 msgstr  "Editor"
 
@@ -631,7 +631,7 @@ msgstr  "Control Panel"
 #: protected/views/site/index.php:132 protected/views/layouts/column2.php:80
 #: protected/views/layouts/column2.php:87 protected/views/site/index.php:204
 #: protected/views/site/index.php:232 protected/views/layouts/column2.php:96
-#: protected/views/site/index.php:226 protected/views/site/index.php:226
+#: protected/views/site/index.php:226 protected/views/site/index.php:227
 #: protected/views/layouts/column2.php:96
 msgid   "Kitaplarım"
 msgstr  "My Books"
@@ -1149,21 +1149,21 @@ msgstr  ""
 
 #: protected/views/site/index.php:57 protected/views/site/index.php:85
 #: protected/views/organisations/published_books.php:24
-#: protected/views/site/index.php:79 protected/views/site/index.php:79
+#: protected/views/site/index.php:79 protected/views/site/index.php:80
 #: protected/views/organisations/published_books.php:24
 msgid   "Kitabı Kopyala"
 msgstr  ""
 
 #: protected/views/site/index.php:63 protected/views/site/index.php:91
 #: protected/views/organisations/published_books.php:30
-#: protected/views/site/index.php:85 protected/views/site/index.php:85
+#: protected/views/site/index.php:85 protected/views/site/index.php:86
 #: protected/views/organisations/published_books.php:30
 msgid   "Çalışma Alanları"
 msgstr  ""
 
 #: protected/views/site/index.php:90 protected/views/site/index.php:118
 #: protected/views/organisations/published_books.php:57
-#: protected/views/site/index.php:112 protected/views/site/index.php:112
+#: protected/views/site/index.php:112 protected/views/site/index.php:113
 #: protected/views/organisations/published_books.php:57
 msgid   "Kopyala"
 msgstr  ""
@@ -1176,7 +1176,7 @@ msgstr  ""
 #: protected/views/organisations/organisationACL.php:69
 #: protected/views/site/index.php:65 protected/views/site/index.php:113
 #: protected/views/organisations/organisationACL.php:76
-#: protected/views/site/index.php:65 protected/views/site/index.php:113
+#: protected/views/site/index.php:66 protected/views/site/index.php:114
 #: protected/views/organisations/published_books.php:58
 #: protected/views/organisations/organisationACL.php:76
 #: protected/views/organisations/templates.php:59
@@ -1186,7 +1186,7 @@ msgstr  ""
 #: protected/views/site/index.php:57
 #: protected/views/organisations/templates.php:45
 #: protected/views/organisations/organisationACL.php:13
-#: protected/views/site/index.php:51 protected/views/site/index.php:51
+#: protected/views/site/index.php:51 protected/views/site/index.php:52
 #: protected/views/organisations/templates.php:45
 msgid   "Eseri Güncelle"
 msgstr  ""
@@ -1194,7 +1194,7 @@ msgstr  ""
 #: protected/views/site/index.php:70
 #: protected/views/organisations/templates.php:58
 #: protected/views/organisations/organisationACL.php:26
-#: protected/views/site/index.php:64 protected/views/site/index.php:64
+#: protected/views/site/index.php:64 protected/views/site/index.php:65
 #: protected/views/organisations/templates.php:58
 msgid   "Güncelle"
 msgstr  ""
@@ -1409,15 +1409,15 @@ msgstr  ""
 msgid   "Değiştir"
 msgstr  ""
 
-#: protected/views/site/index.php:344 protected/views/site/index.php:344
+#: protected/views/site/index.php:344 protected/views/site/index.php:345
 msgid   "Çalışma alanının adı"
 msgstr  ""
 
-#: protected/views/site/index.php:346 protected/views/site/index.php:346
+#: protected/views/site/index.php:346 protected/views/site/index.php:347
 msgid   "Kitabın adı"
 msgstr  ""
 
-#: protected/views/site/index.php:348 protected/views/site/index.php:348
+#: protected/views/site/index.php:348 protected/views/site/index.php:349
 msgid   "Yazarın adı"
 msgstr  ""
 
