@@ -137,8 +137,8 @@ return array(
 		'Smtpmail'=>array(
             'class'=>'application.extension.smtpmail.PHPMailer',
             'Host'=>"tls://smtp.gmail.com",
-            'Username'=>'edubox@linden-tech.com',
-            'Password'=>'12548442',
+            'Username'=>'ekaratas@linden-tech.com',
+            'Password'=>'SSfUfZ20',
             'Mailer'=>'smtp',
             'Port'=>465,
             'SMTPAuth'=>true, 

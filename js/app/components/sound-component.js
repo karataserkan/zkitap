@@ -12,12 +12,16 @@ $(document).ready(function(){
       var that = this;
 
       var auto_start = '';
+      var repeat_type= '';
+       console.log('sound component');
+      console.log(this.options.component.data);
       if(this.options.component.data.auto_type == 'Y') auto_start = 'autoplay';
       if(this.options.component.data.control_type == 'N') control = '';
-    
+      if(this.options.component.data.repeat_type == 'Y') repeat_type='loop';
+      console.log(repeat_type);
       if(this.options.component.data.source.attr.src ) {
         var source=$('<source src="'+this.options.component.data.source.attr.src+'" /> ');
-        var audio=$('<audio controls="controls" '+auto_start+'></audio>');
+        var audio=$('<audio controls="controls" '+auto_start+' '+repeat_type+'></audio>');
         var audioName = "";
         if(this.options.component.data.audio.name) audioName = this.options.component.data.audio.name;
         var audio_name=$('<span class="audio-name" >'+audioName+'</span>');
@@ -32,11 +36,13 @@ $(document).ready(function(){
       }
       
 
-      this._super();
+      this._super({resizableParams:{
+        "handles":"e",
+        "maxHeight":60,
+        "minHeight":60,
+      }});
       this.element.height(60);
-      
-      this.element.resizable("option",'maxHeight', 60 );
-      this.element.resizable("option",'minHeight', 60 );
+
 
     },
 
@@ -82,8 +88,8 @@ $(document).ready(function(){
     </div> \
       <div class='gallery-inner-holder'> \
         <div style='clear:both'></div> \
-        <div class='type' style='padding: 4px; display: inline-block;'>\
-            <div class='btn-group' data-toggle='buttons'>Otomatik Başlama<br>\
+          <div class='type' style='padding: 4px; display: inline-block;'>\
+              <div class='btn-group' data-toggle='buttons'>Otomatik Başlama<br>\
                 <label class='btn btn-primary " + auto_y_check_active + "'>\
                   <input type='radio' name='auto_type' id='repeat0' " + auto_y_check + " value='Y'> Evet\
                 </label>\
@@ -91,7 +97,15 @@ $(document).ready(function(){
                   <input type='radio' name='auto_type' id='repeat1' " + auto_n_check + " value='N'> Hayır\
                 </label>\
               </div>\
-            </div>\
+              <div class='btn-group' data-toggle='buttons'>Tekrar et<br>\
+                <label class='btn btn-primary " + auto_y_check_active + "'>\
+                  <input type='radio' name='repeat_type' id='repeat0' " + auto_y_check + " value='Y'> Evet\
+                </label>\
+                <label class='btn btn-primary " + auto_n_check_active + "'>\
+                  <input type='radio' name='repeat_type' id='repeat1' " + auto_n_check + " value='N'> Hayır\
+                </label>\
+              </div>\
+          </div>\
         <div class='add-image-drag-area' id='dummy-dropzone'> </div> \
       </div> \
          <input type='text' class='input-textbox' id='pop-sound-name' placeholder='Ses Adı'  /> \
@@ -113,7 +127,7 @@ $(document).ready(function(){
     $('#pop-image-OK').click(function (){
 
       var auto_type = $('input[name=auto_type]:checked').val();
-      
+      var repeat_type = $('input[name=repeat_type]:checked').val();
 
       var component = {
           'type' : 'sound',
@@ -129,6 +143,7 @@ $(document).ready(function(){
                 'name': $('#pop-sound-name').val()
               },
               'auto_type' : auto_type,
+              'repeat_type': repeat_type,
               'source': {
                 'attr': {
                   'src':imageBinary

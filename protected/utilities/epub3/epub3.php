@@ -80,7 +80,7 @@ class epub3 {
 			$latexComponents = Yii::app()->db->createCommand('SELECT COUNT( * ) as count FROM component LEFT JOIN page USING ( page_id )  LEFT JOIN chapter USING ( chapter_id ) LEFT JOIN book USING ( book_id ) WHERE TYPE =  "latex" AND book_id ="'.$this->book->book_id.'"')->queryRow();
 
 			$genericFiles = new stdClass;
-			error_log("count: ".$count);
+			//error_log("count: ".$count);
 			if($latexComponents['count']) { 
 				$zip_url='/css/epubPublish/generic_latex.zip';
 				$zip_file='generic_latex.zip';
@@ -305,7 +305,7 @@ class epub3 {
 
 		
 	</head>
-	<body>
+	<body width:'.$pageSize['width'].'px; height:'.$pageSize['height'].'px;">
 		<div>
 			<img width="'.$pageSize['width'].'" height="'.$pageSize['height'].'" src="' . $this->coverImage->filename . '"/>
 		</div>
@@ -423,6 +423,47 @@ class epub3 {
 
 		$components_html='';
 		$page_styles='';
+		$page_extra_scripts='';
+
+		foreach ($page->components as $component){
+			set_time_limit(100);
+			$component=(object)$component;
+			//error_log($component->type);
+			switch ($component->type) {
+				case 'latex':
+					$page_extra_scripts.='<script type="text/x-mathjax-config">
+					      MathJax.Hub.Config({
+					        tex2jax: {
+					          inlineMath: [["$","$"],["\\(","\\)"]]
+					        }
+					      });
+					      MathJax.Hub.Register.StartupHook("HTML-CSS Jax Ready",function () {
+							  var VARIANT = MathJax.OutputJax["HTML-CSS"].FONTDATA.VARIANT;
+							  VARIANT["normal"].fonts.unshift("MathJax_Arial");
+							  VARIANT["bold"].fonts.unshift("MathJax_Arial-bold");
+							  VARIANT["italic"].fonts.unshift("MathJax_Arial-italic");
+							  VARIANT["-tex-mathit"].fonts.unshift("MathJax_Arial-italic");
+							});
+							MathJax.Hub.Register.StartupHook("SVG Jax Ready",function () {
+							  var VARIANT = MathJax.OutputJax.SVG.FONTDATA.VARIANT;
+							  VARIANT["normal"].fonts.unshift("MathJax_SansSerif");
+							  VARIANT["bold"].fonts.unshift("MathJax_SansSerif-bold");
+							  VARIANT["italic"].fonts.unshift("MathJax_SansSerif-italic");
+							  VARIANT["-tex-mathit"].fonts.unshift("MathJax_SansSerif-italic");
+							});
+					    </script>
+						<script src="mathjax/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>';
+					break;
+				
+				default:
+					# code...
+					break;
+			}
+			
+			$component->html=new componentHTML($component, $this, $folder);
+			$components_html.=$component->html->html;
+		}
+
 		$page_structure=
 '<?xml version="1.0" encoding="UTF-8"?>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:epub="http://www.idpf.org/2007/ops" lang="en">
@@ -461,12 +502,42 @@ class epub3 {
 		<script type="text/javascript" src="jssor.core.js"></script>
 		<script type="text/javascript" src="jssor.utils.js"></script>
 		<script type="text/javascript" src="runtime.js"></script>
-		
+		'.$page_extra_scripts.'
 		<script type="text/javascript" src="facybox/facybox.js"></script>
 		<link rel="stylesheet" type="text/css" href="facybox/facybox.css" media="screen" />
 		<link rel="stylesheet" type="text/css" href="facybox/facybox_urls.css" media="screen" />
 		<script type="text/javascript">
+		function okutus_play(){
+			
+				$("audio.reader_base_paused").each(function(){
+					console.log(this);
+				this.play();
+				});
+
+			
+			
+			}
+		function okutus_stop(){
+			
+				$("audio,video").each( function () {
+					if (this.paused == false) {
+	    				this.pause();
+	    				$(this).addClass("reader_base_paused");
+    				}
+					
+				});
+
+		}
+
 		$(document).ready(function() {
+			$(window).focus(function(){
+				okutus_play();
+			});
+			$(window).blur(function()
+			{
+				okutus_stop();
+			});
+			okutus_stop();
 
 		$("a[rel*=facybox]").facybox({
 	        // noAutoload: true
@@ -496,12 +567,7 @@ class epub3 {
 	</body>
 </html>';
 
-		foreach ($page->components as $component){
-			set_time_limit(100);
-			$component=(object)$component;
-			$component->html=new componentHTML($component, $this, $folder);
-			$components_html.=$component->html->html;
-		}
+
 		$page_file_inside=str_replace(array(
 			'%components%','%style%'
 			), array($components_html,$page_styles), $page_structure);
@@ -1024,8 +1090,8 @@ class epub3 {
 		return $this->sanitized_filename;
 	}
 	public function createThumbnails(){
-		error_log("Thumbnail\n");
-		error_log($this->get_tmp_file());
+		//error_log("Thumbnail\n");
+		//error_log($this->get_tmp_file());
 		//error_log(print_r(scandir($this->get_tmp_file()),1));
 		$files=scandir($this->get_tmp_file());
 		$file_list="";
@@ -1033,14 +1099,14 @@ class epub3 {
 			if(preg_match("/.+\.html/", $file))
 			{
 				$file=str_replace(".html", "", $file);
-				error_log($file);
-				error_log("\n");
+				//error_log($file);
+				//error_log("\n");
 				$file_list.=" ".$file;
 			}
 			# code...
 		}
-		error_log("file list:".$file_list);
-		error_log("sh ".Yii::app()->params['htmltopng']." ".$this->get_tmp_file().$file_list);
+		//error_log("file list:".$file_list);
+		//error_log("sh ".Yii::app()->params['htmltopng']." ".$this->get_tmp_file().$file_list);
 		$result=shell_exec("sh ".Yii::app()->params['htmltopng']." ".$this->get_tmp_file().$file_list);
 		if($result==null){
 			echo "result is null";
@@ -1141,14 +1207,14 @@ class epub3 {
 			return false;
 		}
 
-		error_log("Thumbnail processing...");
+		//error_log("Thumbnail processing...");
 		//Create thumbnails
 		if(!$this->createThumbnails()){
 			$this->errors[]=new error('Thumbnail production','Problem with thumbnails');
 			return false;
 		}
 		//Create Zip.
-		error_log("Zip processing...");
+		//error_log("Zip processing...");
 		if( ! $this->zipfolder($encyrptFiles)  ) {
 			$this->errors[]=new error('Epub3-Construction','Problem with Zip');
 			return false;
