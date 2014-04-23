@@ -769,7 +769,7 @@ class componentHTML {
 
 		$container.=" 
 			
-			<a href='#".$popup_id."' rel='facybox'><img src='popupmarker.png' /></a>
+			<a href='#".$popup_id."' rel='facybox'><img style='width:100%;height:100%;' src='popupmarker.png' /></a>
 			
 			<div id='$popup_id' style='display:none; z-index:9999999; position:relative;'>
 				".$component->data->html_inner."
