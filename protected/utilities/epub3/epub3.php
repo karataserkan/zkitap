@@ -304,7 +304,7 @@ class epub3 {
 
 		
 	</head>
-	<body>
+	<body width:'.$pageSize['width'].'px; height:'.$pageSize['height'].'px;">
 		<div>
 			<img width="'.$pageSize['width'].'" height="'.$pageSize['height'].'" src="' . $this->coverImage->filename . '"/>
 		</div>
@@ -506,7 +506,37 @@ class epub3 {
 		<link rel="stylesheet" type="text/css" href="facybox/facybox.css" media="screen" />
 		<link rel="stylesheet" type="text/css" href="facybox/facybox_urls.css" media="screen" />
 		<script type="text/javascript">
+		function okutus_play(){
+			
+				$("audio.reader_base_paused").each(function(){
+					console.log(this);
+				this.play();
+				});
+
+			
+			
+			}
+		function okutus_stop(){
+			
+				$("audio,video").each( function () {
+					if (this.paused == false) {
+	    				this.pause();
+	    				$(this).addClass("reader_base_paused");
+    				}
+					
+				});
+
+		}
+
 		$(document).ready(function() {
+			$(window).focus(function(){
+				okutus_play();
+			});
+			$(window).blur(function()
+			{
+				okutus_stop();
+			});
+			okutus_stop();
 
 		$("a[rel*=facybox]").facybox({
 	        // noAutoload: true
