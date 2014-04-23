@@ -8,7 +8,8 @@ $(document).ready(function() {
 
             var that = this;
 
-            this.videoTag=this.element;
+            
+            this.videoTag=$('<video></video>');
 
             if(this.options.component.data.video_type == 'popup'){
               
@@ -18,9 +19,8 @@ $(document).ready(function() {
 
               var componentvideoid='popup'+this.options.component.id;
               var newimage=$('<img id="img_'+componentvideoid+'" src="' + this.options.marker +  '"/>');
-              this.element.replaceWith(newimage);
-              this.element=newimage;
-              this.videoTag=$('<video></video>');
+              this.element.append(newimage);
+
 
             }
 
@@ -41,9 +41,11 @@ $(document).ready(function() {
               var popupmessage=$('<div  id="message_'+componentvideoid+'" style="display:none" ></div>');
               popupmessage.append(this.videoTag);
               popupmessage.appendTo(this.element);
-            } 
+            } else {
+              this.element.append(this.videoTag);
+            }
 
-            this._super();
+            this._super({resizableParams:{handles:"e, s, se"}});
         },
         field: function(key, value) {
 

@@ -26,7 +26,7 @@ $(document).ready(function(){
 
 
         if (this.options.component.data.self.attr.componentType != 'side-text' )this.element.autogrow({element:this});
-
+        
         this._super();
           
       },

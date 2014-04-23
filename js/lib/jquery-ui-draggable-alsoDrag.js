@@ -31,7 +31,24 @@ $.ui.plugin.add("draggable", "alsoDrag", {
 
 			_alsoDrag = function (exp, c) {
 				$(exp).each(function() {
-					var el = $(this), start = $(this).data("ui-draggable-alsoDrag"), style = {},
+					var var_also_drag
+					//Object {width: 382, height: 40, left: NaN, top: NaN}
+					if(typeof $(this).data("ui-draggable-alsoDrag") =='undefined'){
+						var_also_drag={'width':os.width,'height':os.height,'left':NaN,'top':NaN};
+
+					}
+					else{
+						var_also_drag=$(this).data("ui-draggable-alsoDrag");
+
+					}
+					if(isNaN(var_also_drag.top)||isNaN(var_also_drag.left))
+					{
+						var_also_drag.top=that.offset.top;
+						var_also_drag.left=that.offset.left;
+
+					}
+
+					var el = $(this), start = var_also_drag, style = {},
 						css = ["top", "left"];
 
 					$.each(css, function (i, prop) {

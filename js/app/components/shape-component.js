@@ -109,7 +109,7 @@ $(document).ready(function(){
               break;
             
             default:
-              this._super(propertyName,propertyValue);
+              this._super();
               break;
           }
     },
