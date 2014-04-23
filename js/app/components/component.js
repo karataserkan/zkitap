@@ -56,9 +56,9 @@ $(document).ready(function(){
         };
       if(typeof params!='undefined'){
 
-        console.log(that.options);
+        //console.log(that.options);
         that.options = this.extend ( that.options,params  ) ;
-        console.log(that.options);
+        //console.log(that.options);
          //if(typeof params.resizableParams!='undefined') {
          //   that.options.resizableParams=that.extend(that.options.resizableParams,params.resizableParams);
          //}
@@ -66,13 +66,15 @@ $(document).ready(function(){
       var MIN_DISTANCE = 20; // minimum distance to "snap" to a guide
       var guides = []; // no guides available ... 
       var innerOffsetX, innerOffsetY; // we'll use those during drag ... 
+      //console.log(this.element.parent());
+      //this.element.parent().attr('id','c_'+this.options.component.id);
       this.element
       .attr('id', this.options.component.id)
       .attr('component-instance', 'true')
       .click(function (e) {
         that._selected(e,null);
       })
-      
+    
       .resizable(that.options.resizableParams)
 
       .focus(function( event, ui ){
@@ -91,8 +93,9 @@ $(document).ready(function(){
         <div class="dragging_holder left "></div> \
         <div class="dragging_holder right"></div> \
         ' )
+          .attr('id', 'c_'+this.options.component.id)
+          .addClass('obstacle')
           .attr('component-instance', 'true')
-        
           .draggable({
             containment: "#current_page",
             snap: '.ui-wrapper',
@@ -112,9 +115,16 @@ $(document).ready(function(){
             },
 
             drag: function( event, ui ){
-
-              window.lindneo.toolbox.makeMultiSelectionBox();
-
+              
+              window.lindneo.toolbox.makeMultiSelectionBox(); 
+              if(event.shiftKey){
+                $('#current_page').children().addClass('obstacle');
+                //console.log($('#'+event.target.firstChild.id).parent());
+                //$('#'+event.target.firstChild.id).parent().attr('id','c_'+event.target.firstChild.id);
+                
+                that.showOverlap(event,ui);
+              }
+              else $('#current_page').children().removeClass('obstacle');
               var zoom = $('#author_pane').css('zoom');
               var canvasHeight = $('#current_page').height() * zoom;
               var canvasWidth = $('#current_page').width() * zoom;
@@ -369,6 +379,147 @@ $(document).ready(function(){
       that.comment_box.appendTo(that.element.parent());
 
     },
+
+    showOverlap : function (event,ui)
+      {
+        //console.log(event);
+        //console.log(ui);
+        //return;
+        //console.log(event.target.firstChild.id);
+        $("#collisions").children().remove();
+        var collisions = $("#"+event.target.firstChild.id).parent().collision( ".obstacle", { relative: "collider", obstacleData: "odata", colliderData: "cdata", directionData: "ddata", as: "<div/>" } );
+        for( var i=0; i<collisions.length; i++ )
+        {
+          var o = $(collisions[i]).data("odata");
+          var c = $(collisions[i]).data("cdata");
+          var d = $(collisions[i]).data("ddata");
+          //console.log(o);
+          var cwith = $(o).get(0).id;
+          var cside = d;
+          var snap  = $(c).clone(false,false).removeClass().addClass("wireframe");
+          
+          snap.get(0).id = null;
+          snap.get(0).innerHTML = null;
+          snap.children().remove();
+          var olap  = $(collisions[i]).addClass("overlap").appendTo(snap);
+          //console.log(olap);
+          var tr    = $("<tr />");
+          $("<td>"+cwith+"</td>").appendTo(tr);
+          $("<td>"+cside+"</td>").appendTo(tr);
+          snap.appendTo($("<td />")).appendTo(tr);
+          tr.appendTo( $("#collisions") );
+          //console.log(cside);
+          //console.log($('#'+cwith).get(0).lastChild.offsetParent);
+          //console.log($('#'+cwith));
+          //console.log($('#current_page').parent().);
+          //if(cwith == "Obstacle2"){
+            if(cside == 'SW'){
+              var position = $('#'+cwith).position();
+              var left= position.left - 10;
+              var top = position.top +10;
+              if(left <= 0){
+                left = $("#"+event.target.firstChild.id).parent().position().left + $("#"+event.target.firstChild.id).width();
+              }
+              var max_top = top + $('#'+cwith).height();
+              if(max_top >= $('#current_page').height()){
+                top = $("#"+event.target.firstChild.id).parent().position().top - $('#'+cwith).height();
+              }
+              $('#'+cwith).css({'left':left+'px', 'top':top+'px'});
+              //console.log(left);
+            }
+            else if(cside == 'S'){
+              var position = $('#'+cwith).position();
+              var left= position.left ;
+              var top = position.top +10;
+              var max_top = top + $('#'+cwith).height();
+              if(max_top >= $('#current_page').height()){
+                console.log($('#'+cwith).height());
+                console.log($("#"+event.target.firstChild.id));
+                top = $("#"+event.target.firstChild.id).parent().position().top - $('#'+cwith).height();
+              }
+              $('#'+cwith).css({'left':left+'px', 'top':top+'px'});
+              //console.log(top);
+            }
+            else   if(cside == 'SE'){
+              var position = $('#'+cwith).position();
+              var left= position.left +10;
+              var top = position.top +10;
+              var max_top = top + $('#'+cwith).height();
+              if(max_top >= $('#current_page').height()){
+                top = $("#"+event.target.firstChild.id).parent().position().top - $('#'+cwith).height();
+              }
+              var max_left = left + $('#'+cwith).width();
+              if(max_left >= $('#current_page').width()){
+                left = $("#"+event.target.firstChild.id).parent().position().left - $('#'+cwith).width();
+              }
+              $('#'+cwith).css({'left':left+'px', 'top':top+'px'});
+              //console.log(left);
+            }
+            else if(cside == 'W'){
+              var position = $('#'+cwith).position();
+              var left= position.left - 10;
+              var top = position.top ;
+              if(left <= 0){
+                left = $("#"+event.target.firstChild.id).parent().position().left + $("#"+event.target.firstChild.id).width();
+              }
+              $('#'+cwith).css({'left':left+'px', 'top':top+'px'});
+              //console.log(left);
+            }
+            else if(cside == 'E'){
+              var position = $('#'+cwith).position();
+              var left= position.left +10;
+              var top = position.top ;
+              
+              var max_left = left + $('#'+cwith).width();
+              if(max_left >= $('#current_page').width()){
+                console.log($("#"+event.target.firstChild.id).parent().position().left);
+                console.log($('#'+cwith).width());
+                left = $("#"+event.target.firstChild.id).parent().position().left - $('#'+cwith).width();
+                console.log(left);
+              }
+              $('#'+cwith).css({'left':left+'px', 'top':top+'px'});
+              //console.log(left);
+            }
+            else if(cside == 'NW'){
+              var position = $('#'+cwith).position();
+              var left= position.left - 10;
+              var top = position.top - 10;
+              if(top <= 0){
+                top = $("#"+event.target.firstChild.id).parent().position().top + $("#"+event.target.firstChild.id).height();
+              }
+              if(left <= 0){
+                left = $("#"+event.target.firstChild.id).parent().position().left + $("#"+event.target.firstChild.id).width();
+              }
+              $('#'+cwith).css({'left':left+'px', 'top':top+'px'});
+              //console.log(left);
+            }
+            else if(cside == 'NE'){
+              var position = $('#'+cwith).position();
+              var left= position.left +10;
+              var top = position.top - 10;
+              var max_left = left + $('#'+cwith).width();
+              if(max_left >= $('#current_page').width()){
+                left = $("#"+event.target.firstChild.id).parent().position().left - $('#'+cwith).width();
+              }
+              if(top <= 0){
+                top = $("#"+event.target.firstChild.id).parent().position().top + $("#"+event.target.firstChild.id).height();
+              }
+              $('#'+cwith).css({'left':left+'px', 'top':top+'px'});
+              //console.log(left);
+            }
+            else if(cside == 'N'){
+              var position = $('#'+cwith).position();
+              var left= position.left ;
+              var top = position.top - 10;
+              if(top <= 0){
+                top = $("#"+event.target.firstChild.id).parent().position().top + $("#"+event.target.firstChild.id).height();
+              }
+              $('#'+cwith).css({'left':left+'px', 'top':top+'px'});
+              //console.log(top);
+            }
+          //}
+        }
+      },
 
     group:function (event,group_id) {
       this.options.component.data.group_id=group_id;

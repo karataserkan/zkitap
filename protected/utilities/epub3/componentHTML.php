@@ -619,7 +619,7 @@ class componentHTML {
 		$data=$component->data; 
 
 		
-		$container ="<span style='display:block' class='audio_name'>" . $data->audio->name . "</span><br/>"."<audio  class='audio' ";
+		$container ="<span style='display:block; z-index:1000;' class='audio_name'>" . $data->audio->name . "</span><br/>"."<audio  class='audio' ";
 		if(isset($data->audio->attr))
 			foreach ($data->audio->attr as $attr_name => $attr_val ) {
 				$container.=" $attr_name='$attr_val' ";

@@ -3628,8 +3628,8 @@ $.ui.plugin.add("resizable", "alsoResize", {
 						css = c && c.length ? c : el.parents(ui.originalElement).length ? ["width", "height"] : ["width", "height", "top", "left"];
 						//console.log($(el.parents(ui.originalElement)[0]));
 					$.each(css, function (i, prop) {
-						console.log(start[prop]);
-						console.log(delta[prop]);
+						//console.log(start[prop]);
+						//console.log(delta[prop]);
 						var sum = (start[prop]||0) + (delta[prop]||0);
 						if (sum && sum >= 0) {
 							style[prop] = sum || null;
@@ -3670,7 +3670,7 @@ $.ui.plugin.add("resizable", "ghost", {
 
 	resize: function(){
 		var that = $(this).data("ui-resizable");
-		console.log(that);
+		//console.log(that);
 		if (that.ghost) {
 			that.ghost.css({ position: "relative", height: that.size.height, width: that.size.width });
 		}

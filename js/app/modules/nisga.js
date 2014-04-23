@@ -629,7 +629,7 @@ var textComponentBuilder = function( component ) {
         window.lindneo.tlingit.componentHasUpdated( component );
       },
       'selected': function (event, element) {
-        console.log($("#"+element.options.component.id).on('keydown', function(e) {}));
+        //console.log($("#"+element.options.component.id).on('keydown', function(e) {}));
         
 
         $(document).keydown(function(e) {
