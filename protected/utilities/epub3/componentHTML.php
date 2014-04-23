@@ -612,18 +612,18 @@ class componentHTML {
 		$component->data->source->attr->src=$file->filename;
 		//new dBug($component); die;
 
-
-
-
-
 		$data=$component->data; 
+		$repeat_type="";
+		$auto_type="";
+		if($data->repeat_type=='Y'){$repeat_type="loop";}
+		if($data->auto_type=='Y'){$auto_type="autoplay";}
+		$container ="<span style='display:block' class='audio_name'>" . $data->audio->name . "</span><br/>"."<audio  class='audio'  ";
 
-		
-		$container ="<span style='display:block; z-index:1000;' class='audio_name'>" . $data->audio->name . "</span><br/>"."<audio  class='audio' ";
 		if(isset($data->audio->attr))
 			foreach ($data->audio->attr as $attr_name => $attr_val ) {
 				$container.=" $attr_name='$attr_val' ";
 			}
+		$container.=$repeat_type.' '.$auto_type;
 
 		if(isset($data->audio->css)){
 			$container.=" style=' ";

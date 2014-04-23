@@ -25,6 +25,11 @@ $db_config_list=array(
                 			)
 );      
 
+$catalogURL=array(
+	"baracuda"=>"http://bigcat.okutus.com/site/import",
+	"lindneo"=>"http://catalog.lindneo.com/site/import"
+	);
+
 return array(
 	'basePath'=>dirname(__FILE__).DIRECTORY_SEPARATOR.'..',
 	'name'=>'Squid Pacific',
@@ -132,8 +137,8 @@ return array(
 		'Smtpmail'=>array(
             'class'=>'application.extension.smtpmail.PHPMailer',
             'Host'=>"tls://smtp.gmail.com",
-            'Username'=>'edubox@linden-tech.com',
-            'Password'=>'12548442',
+            'Username'=>'ekaratas@linden-tech.com',
+            'Password'=>'SSfUfZ20',
             'Mailer'=>'smtp',
             'Port'=>465,
             'SMTPAuth'=>true, 
@@ -155,7 +160,7 @@ return array(
      		'tr_TR' => 'Türkçe',
      		'en_US' => 'English'
      		),
-     	'catalogExportURL' => "http://bigcat.okutus.com/site/import"
+     	'catalogExportURL' => $catalogURL[gethostname()],
 	)
 
 );
