@@ -741,7 +741,7 @@ class epub3 {
 	            else if (is_file($file) === true)
 	            {
 	            	$mime_type=mime_content_type($file);
-	            	if (strpos($file, 'webfonts')==false AND strpos($file, '.html')==false AND strpos($file, 'cover')==false AND strpos($file, 'thumbnail')==false) {
+	            	if (strpos($file, 'webfonts')==false AND strpos($file, '.html')==false AND strpos($file, 'cover')==false AND strpos($file, 'thumbnail')==false AND strpos($file, 'titlepage.xhtml')==false AND strpos($file, 'toc.ncx')==false AND strpos($file, 'toc.xhtml')==false) {
 		            	$sourceFile=explode('book/', $file);
 		            	if (strpos($file, '.css')!==false) {
 		            		$mime_type='text/css';
@@ -750,8 +750,7 @@ class epub3 {
 		            	if (strpos($file, '.js')!==false) {
 		            		$mime_type='text/javascript';
 		            	}
-
-		                $this->extraOpf .= '<item id="extra'.$i.'" href="'.$sourceFile[1].'" media-type="'..'" />'."\n";
+		                $this->extraOpf .= '<item id="extra'.$i.'" href="'.$sourceFile[1].'" media-type="'.$mime_type.'" />'."\n";
 	            	}
 	            }
 	        }
@@ -1201,18 +1200,19 @@ class epub3 {
 			return false;
 		}
 
-		//contentOPF.
-		if( in_array(false,$this->contentOPF() ) ) {
-			$this->errors[]=new error('Epub3-Construction','Problem with contentOPF');
-			return false;
-		}
-
 		//error_log("Thumbnail processing...");
 		//Create thumbnails
 		if(!$this->createThumbnails()){
 			$this->errors[]=new error('Thumbnail production','Problem with thumbnails');
 			return false;
 		}
+		
+		//contentOPF.
+		if( in_array(false,$this->contentOPF() ) ) {
+			$this->errors[]=new error('Epub3-Construction','Problem with contentOPF');
+			return false;
+		}
+
 		//Create Zip.
 		//error_log("Zip processing...");
 		if( ! $this->zipfolder($encyrptFiles)  ) {
