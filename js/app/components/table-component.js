@@ -16,7 +16,7 @@ $(document).ready(function(){
       $(this.element).resizable('destroy');
 
       var TableSelection = {};
-
+      console.log(this.options.component);
       var newTable = $("<table class='table-component-table'></table>");
       var newTbody = $("<tbody></tbody>");
       
@@ -278,10 +278,10 @@ $(document).ready(function(){
       getPropertyOfCells: function (propertyName,node){
         var that = this;
         if (typeof that.TableSelection == "undefined") return false;
-        console.log(that.TableSelection.start);
-        console.log(that.options.component.data.table);
-        console.log(that.options.component.data.table[that.TableSelection.start.rows]);
-        console.log(that.options.component.data.table[that.TableSelection.start.rows][that.TableSelection.start.columns]);
+        //console.log(that.TableSelection.start);
+        //console.log(that.options.component.data.table);
+        //console.log(that.options.component.data.table[that.TableSelection.start.rows]);
+        //console.log(that.options.component.data.table[that.TableSelection.start.rows][that.TableSelection.start.columns]);
         if (typeof that.options.component.data.table
           [that.TableSelection.start.rows]
           [that.TableSelection.start.columns]
@@ -850,7 +850,7 @@ $(document).ready(function(){
         .removeClass('top');
             
               var selections_rows=that.tbody.children('tr').slice(TableSelection.start.rows,TableSelection.end.rows+1);
-              console.log(selections_rows);
+              //console.log(selections_rows);
            
 
             $.each (selections_rows, function(row_index,row_element){
@@ -885,8 +885,8 @@ $(document).ready(function(){
             
             this.excelCursor.remove();
             //this.excelCursor.dblclick(function(){$(this).parent().dblclick();});
-            console.log(this.cells);
-            console.log(this.cells[TableSelection.end.rows][TableSelection.end.columns]);
+            //console.log(this.cells);
+            //console.log(this.cells[TableSelection.end.rows][TableSelection.end.columns]);
             this.cells[TableSelection.end.rows][TableSelection.end.columns].prepend( this.excelCursor );
 
 

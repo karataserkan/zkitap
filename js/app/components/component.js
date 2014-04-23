@@ -13,7 +13,7 @@ $(document).ready(function(){
 
     for(var key in b)
         if(b.hasOwnProperty(key)){
-          console.log(parentKey );
+          //console.log(parentKey );
           if (typeof b[key] === 'object') {
             parentKey = typeof parentKey ==="undefined" ? key: parentKey + "." + key
             a[key]=this.extend(a[key],b[key],parentKey);
@@ -22,7 +22,7 @@ $(document).ready(function(){
 
           }
         }
-    console.log(a);
+    //console.log(a);
     return a;
     },
 
@@ -295,7 +295,7 @@ $(document).ready(function(){
         that.unselect(event);
       })
       .on('select', function(event){
-        console.log(that.options.component.id);
+        //console.log(that.options.component.id);
         event.groupSelection=true;
         that._selected(event);
       })
@@ -433,8 +433,8 @@ $(document).ready(function(){
               var top = position.top +10;
               var max_top = top + $('#'+cwith).height();
               if(max_top >= $('#current_page').height()){
-                console.log($('#'+cwith).height());
-                console.log($("#"+event.target.firstChild.id));
+                //console.log($('#'+cwith).height());
+                //console.log($("#"+event.target.firstChild.id));
                 top = $("#"+event.target.firstChild.id).parent().position().top - $('#'+cwith).height();
               }
               $('#'+cwith).css({'left':left+'px', 'top':top+'px'});
@@ -472,10 +472,10 @@ $(document).ready(function(){
               
               var max_left = left + $('#'+cwith).width();
               if(max_left >= $('#current_page').width()){
-                console.log($("#"+event.target.firstChild.id).parent().position().left);
-                console.log($('#'+cwith).width());
+                //console.log($("#"+event.target.firstChild.id).parent().position().left);
+                //console.log($('#'+cwith).width());
                 left = $("#"+event.target.firstChild.id).parent().position().left - $('#'+cwith).width();
-                console.log(left);
+                //console.log(left);
               }
               $('#'+cwith).css({'left':left+'px', 'top':top+'px'});
               //console.log(left);
@@ -781,15 +781,17 @@ $(document).ready(function(){
       return this._setPropertyofObject(propertyName,propertyValue) ;
     },
     _setPropertyofObject : function (propertyName,propertyValue){
-    console.log($('#'+this.options.component.id).slickWrap({ cutoff:propertyValue }));
+    //console.log($('#'+this.options.component.id).slickWrap({ cutoff:propertyValue }));
+    console.log(propertyName);
+    console.log(propertyValue);
       switch(propertyName){ 
         case 'cutoff':
           $('#'+this.options.component.id).slickWrap({ cutoff:propertyValue });
         case 'zindex':
-
             switch (propertyValue){
               case 'top':
                 this.setProperty ('z-index',  window.lindneo.toolbox.findHighestZIndexToSet('[component-instance="true"]',this.options.component.id ));
+
               break;
               case 'higher':
                 this.setProperty ('z-index',window.lindneo.toolbox.findHigherZIndexToSet('[component-instance="true"]',this.options.component.id ) );
@@ -834,6 +836,8 @@ $(document).ready(function(){
           break;
         case 'z-index':
           this.options.component.data.self.css[propertyName]=propertyValue;
+          this.options.component.data.self.css['width']="auto";
+          this.options.component.data.self.css['height']="auto";
         break;
         default:
           

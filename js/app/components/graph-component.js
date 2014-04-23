@@ -10,7 +10,7 @@ $(document).ready(function(){
     _create: function(){
 
       var that = this;
-      this._super(this.options.component.data.series);
+      this._super();
       
       this.element.resizable( "option", "aspectRatio", true );
       

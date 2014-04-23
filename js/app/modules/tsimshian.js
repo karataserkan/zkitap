@@ -90,8 +90,8 @@ window.lindneo.tsimshian = (function(window, $, undefined){
         
   
        this.socket.on('newComponent', function(component){
-          console.log(component.id) ;
-          console.log(window.lindneo.tsimshian.myComponent) ;
+          //console.log(component.id) ;
+          //console.log(window.lindneo.tsimshian.myComponent) ;
           window.lindneo.nisga.createComponent(component); 
        } );
 
@@ -130,12 +130,12 @@ window.lindneo.tsimshian = (function(window, $, undefined){
       });
 
       this.socket.on('disconnect', function() { 
-        console.log('disconnected');
+        //console.log('disconnected');
         if (this.hereACounter++ < 3){
-                  console.log('retrying');
+                  //console.log('retrying');
                   window.lindneo.tsimshian.connect();
                 }else {
-                          console.log('refreshing');
+                          //console.log('refreshing');
                           location.reload(); 
                 }
                 
@@ -149,27 +149,27 @@ window.lindneo.tsimshian = (function(window, $, undefined){
        });
 
        this.socket.on('userListUpdate', function(userList){
-         console.log(userList) ;
+         //console.log(userList) ;
          
        });
 
        this.socket.on('userBookListUpdate', function(bookUserList){
-        console.log('dasdasd');
+        //console.log('dasdasd');
         var users = "";
         
         $('#onlineUsers').html('');
         if(bookUserList!=""){
                   book_user_list = {book_id: window.lindneo.currentBookId, users: bookUserList};
                 }
-                console.log(bookUserList) ;
+                //console.log(bookUserList) ;
         window.lindneo.book_users = bookUserList;
          
         $.each( bookUserList, function( key, value ) {
-          console.log(value.username);
+          //console.log(value.username);
           
           window.lindneo.dataservice.send('ProfilePhoto', {'email': value.username}, function( response ) {
                     
-                    console.log(response);
+                    //console.log(response);
                     var img_src = "";
                     if(response=="") img_src = "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNDAiIGhlaWdodD0iMTQwIj48cmVjdCB3aWR0aD0iMTQwIiBoZWlnaHQ9IjE0MCIgZmlsbD0iI2VlZSI+PC9yZWN0Pjx0ZXh0IHRleHQtYW5jaG9yPSJtaWRkbGUiIHg9IjcwIiB5PSI3MCIgc3R5bGU9ImZpbGw6I2FhYTtmb250LXdlaWdodDpib2xkO2ZvbnQtc2l6ZToxMnB4O2ZvbnQtZmFtaWx5OkFyaWFsLEhlbHZldGljYSxzYW5zLXNlcmlmO2RvbWluYW50LWJhc2VsaW5lOmNlbnRyYWwiPjE0MHgxNDA8L3RleHQ+PC9zdmc+";
                     else img_src =response;
