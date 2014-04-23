@@ -19,9 +19,9 @@ $(document).ready(function(){
         }
         var componentrtextid='rtext'+this.options.component.id;
         var that = this;
-        console.log(this.element);
+        //console.log(this.element);
 
-        
+        console.log(this.options.component);
         
         this.element.focusout(function ( event, ui ){
 
@@ -34,7 +34,7 @@ $(document).ready(function(){
         rtextmessage.appendTo(this.element);
         var capture_selection= function(){
           localStorage.setItem("selection_text", window.getSelection().toString());
-          console.log(localStorage.getItem("selection_text"));
+          //console.log(localStorage.getItem("selection_text"));
         }
         that.element.mouseup(capture_selection).keyup(capture_selection);
         
@@ -45,7 +45,7 @@ $(document).ready(function(){
       autoResize: function(){
 
           this.element.trigger('focus');
-          console.log("AutoResize");
+          //console.log("AutoResize");
 
 
       },
@@ -58,8 +58,8 @@ $(document).ready(function(){
       setPropertyofObject : function (propertyName,propertyValue){
         var that = this;
         
-        console.log(propertyName);
-        console.log(propertyValue);
+        //console.log(propertyName);
+        //console.log(propertyValue);
         /*
         //console.log(localStorage.getItem("selection_text"));
         var content_text = '<b>'+localStorage.getItem("selection_text")+'</b>';
@@ -110,7 +110,7 @@ $(document).ready(function(){
           break;
 
           case 'font-family':
-            console.log('deneme');
+            //console.log('deneme');
             var content_text = '<span style="font-family: '+propertyValue+';">'+localStorage.getItem("selection_text")+'</span>';
             $('#message_rtext'+this.options.component.id).html(this.options.component.data.rtextdiv.val.replace(localStorage.getItem("selection_text"), content_text));  
             that._change( $('#message_rtext'+this.options.component.id).html());
@@ -119,7 +119,7 @@ $(document).ready(function(){
           break;
 
           case 'line-height':
-            console.log('deneme');
+            //console.log('deneme');
             var content_text = '<span style="line-height: '+propertyValue+';">'+localStorage.getItem("selection_text")+'</span>';
             $('#message_rtext'+this.options.component.id).html(this.options.component.data.rtextdiv.val.replace(localStorage.getItem("selection_text"), content_text));  
             that._change( $('#message_rtext'+this.options.component.id).html());
@@ -196,7 +196,7 @@ $(document).ready(function(){
                     $.each( styles , function(i,v) {
                           style = style + v.name +' : '+ v.val + '; ';
                       });
-                  console.log(style);
+                  //console.log(style);
                   var content_text = '<span style="'+style+'">'+localStorage.getItem("selection_text")+'</span>';
                   $('#message_rtext'+this.options.component.id).html(this.options.component.data.rtextdiv.val.replace(localStorage.getItem("selection_text"), content_text));  
                   that._change( $('#message_rtext'+this.options.component.id).html());
@@ -214,8 +214,8 @@ $(document).ready(function(){
                     
       },
       setProperty : function (propertyName,propertyValue){
-        console.log(propertyName);
-        console.log(propertyValue);
+        //console.log(propertyName);
+        //console.log(propertyValue);
       
         this._setProperty(propertyName,propertyValue);
         this.autoResize();
@@ -321,14 +321,14 @@ var html_tag_replace = function (str){
       }
       
       
-   console.log(str);
+   //console.log(str);
    return str;
 };
 
 
 
   var createRtextComponent = function ( event, ui) {
-console.log('eklendi');
+//console.log('eklendi');
 
     var component = {
       'type' : 'rtext',

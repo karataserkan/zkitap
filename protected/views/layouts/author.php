@@ -36,6 +36,7 @@
 		<script src="<?php echo Yii::app()->request->baseUrl; ?>/js/lib/jquery-ui-draggable-alsoDrag.js"></script>
 		<script src="<?php echo Yii::app()->request->baseUrl; ?>/js/lib/jquery.ui.rotatable.js"></script>
 		<script src="<?php echo Yii::app()->request->baseUrl; ?>/js/lib/nprogress.js"></script>
+		<script src="<?php echo Yii::app()->request->baseUrl; ?>/js/lib/jquery-collision.min.js"></script>
 		<!-- Wrap TEXT -->
 		<script type="text/javascript" src="<?php echo Yii::app()->request->baseUrl; ?>/js/lib/jquery.slickwrap.js"></script>
 		<script src="<?php echo Yii::app()->request->hostInfo; ?>:1881/socket.io/socket.io.js"></script>

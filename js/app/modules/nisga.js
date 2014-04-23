@@ -629,7 +629,7 @@ var textComponentBuilder = function( component ) {
         window.lindneo.tlingit.componentHasUpdated( component );
       },
       'selected': function (event, element) {
-        console.log($("#"+element.options.component.id).on('keydown', function(e) {}));
+        //console.log($("#"+element.options.component.id).on('keydown', function(e) {}));
         
 
         $(document).keydown(function(e) {
@@ -696,7 +696,7 @@ var textComponentBuilder = function( component ) {
 
   var videoComponentBuilder = function ( component ) {
     
-    var element  = $('<video class="popup-controllers" style="width:100%;height:100%;"></video>');
+    var element  = $('<div class="popup-controllers" style="width:100%; height:100%;"> </div>');
     var elementWrap=$('<div ></div>');
     elementWrap.appendTo( page_div_selector );
     ////console.log(component);

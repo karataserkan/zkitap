@@ -440,6 +440,9 @@ window.lindneo.toolbox = (function(window, $, undefined){
   {
     var elems = $(elem);
     var highest = 0;
+
+    console.log(elem);
+    console.log(elems);
     
     for (var i = 0; i < elems.length; i++)
     {
@@ -453,7 +456,7 @@ window.lindneo.toolbox = (function(window, $, undefined){
         
       }
     }
-    //console.log(highest);
+    console.log(highest);
     return parseInt(highest)+1;
   };
 
@@ -742,7 +745,7 @@ window.lindneo.toolbox = (function(window, $, undefined){
           
           var newComponent =JSON.parse(JSON.stringify(component.options.component)); 
           //console.log(component.options.component);
-          if(cut==true) window.lindneo.nisga.deleteComponent( component.options.component );
+          if(cut==true) window.lindneo.tlingit.componentHasDeleted( component.options.component, component.options.component.id );
           
           //console.log(newComponent);
           $('.copy-paste').css('display','inline-block');
