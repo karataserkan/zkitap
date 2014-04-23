@@ -78,7 +78,7 @@ window.lindneo.tlingit = (function(window, $, undefined){
     if(typeof componentId == 'undefined')
       oldcomponent_id = componentId;
     oldcomponent = component;
-    console.log(oldcomponent);
+    //console.log(oldcomponent);
     window.lindneo.dataservice
     .send( 'DeleteComponent', 
       { 
@@ -91,10 +91,10 @@ window.lindneo.tlingit = (function(window, $, undefined){
   };
 
   var deleteArrivalResult = function ( res ) {
-    console.log('deleteArrivalResult');
+    //console.log('deleteArrivalResult');
     var response = responseFromJson(res);
-    console.log(oldcomponent);
-    console.log(response.result);
+    //console.log(oldcomponent);
+    //console.log(response.result);
     
     window.lindneo.nisga.destroyComponent(oldcomponent, response.result.delete);
     window.lindneo.tsimshian.componentDestroyed(response.result.delete);

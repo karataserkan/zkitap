@@ -182,7 +182,7 @@ class componentHTML {
 
 
 		$container.=" >
-			
+			<img src='cover.jpg' />
 		</canvas>
 		";
 		$container.="<script type='text/javascript'>
@@ -294,7 +294,7 @@ class componentHTML {
 
 
 		$container.=" >
-			
+			<img src='cover.jpg' />
 		</canvas>
 		";
 		$container.="
