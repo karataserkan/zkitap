@@ -233,7 +233,7 @@ window.lindneo.nisga = (function(window, $, undefined){
       var delete_component_id = "";
     if(component.id) delete_component_id = component.id;
     else delete_component_id = oldcomponent_id;
-    console.log(delete_component_id);
+    //console.log(delete_component_id);
     $('[id="'+delete_component_id+'"]').parent().not('#current_page').remove();
     $('[id="'+delete_component_id+'"]').remove();
     window.lindneo.toolbox.removeComponentFromSelection( $('#'+ delete_component_id) );
@@ -481,7 +481,7 @@ var textComponentBuilder = function( component ) {
     var element  = $('<div style="width:100%; height:100%;"></div>');
     var elementWrap=$('<div ></div>');
     elementWrap.appendTo( page_div_selector );
-    console.log(component);
+    //console.log(component);
     element
     .appendTo( elementWrap )
     .htmlComponent({
@@ -511,7 +511,7 @@ var textComponentBuilder = function( component ) {
     var element  = $('<div class="rtext-controllers" style="width:100%; height:100%;" > </div>');
     var elementWrap=$('<div ></div>');
     elementWrap.appendTo( page_div_selector );
-    console.log(component);
+    //console.log(component);
     element
     .appendTo( elementWrap )
     .rtextComponent({
@@ -541,7 +541,7 @@ var textComponentBuilder = function( component ) {
     var element  = $('<div class="plink-controllers"> </div>');
     var elementWrap=$('<div ></div>');
     elementWrap.appendTo( page_div_selector );
-    console.log(component);
+    //console.log(component);
     element
     .appendTo( elementWrap )
     .plinkComponent({
