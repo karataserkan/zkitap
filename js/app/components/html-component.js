@@ -17,9 +17,10 @@ $(document).ready(function(){
       var componenthtmlid='html'+this.options.component.id;
       
 
-      var html_data = html_tag_replace(this.options.component.data.html_inner);
+    var html_data = window.decodeURI(this.options.component.data.html_inner);
+
       console.log(this.options.component);
-      while( html_data.indexOf('&lt;') > -1)
+     /* while( html_data.indexOf('&lt;') > -1)
       {
         html_data = html_data.replace('&lt;', '<');
       }
@@ -43,7 +44,7 @@ $(document).ready(function(){
       {
         html_data = html_data.replace('</div>', '');
       }
-
+  */
       if(this.options.component.data.html_inner){
         //var popupmessage=$('<div  id="message_'+componenthtmlid+'"  ></div>');
         //popupmessage.appendTo(this.element);
@@ -84,42 +85,6 @@ $(document).ready(function(){
     
   });
 });
-
-var html_tag_replace = function (str){
-   //var content = str.replace('&lt;','<')
-   //                 .replace('&gt;','>')
-   //                 .replace('<div>','')
-   //                 .replace('</div>','');
-   while( str.indexOf('&lt;') > -1)
-      {
-        str = str.replace('&lt;', '<');
-      }
-
-    while( str.indexOf('&gt;') > -1)
-      {
-        str = str.replace('&gt;', '>');
-      }
-
-    while( str.indexOf('&amp;') > -1)
-      {
-        str = str.replace('&amp;', '&');
-      }
-
-    while( str.indexOf('<div>') > -1)
-      {
-        str = str.replace('<div>', '');
-      }
-
-    while( str.indexOf('</div>') > -1)
-      {
-        str = str.replace('</div>', '');
-      }
-      
-      
-   console.log(str);
-   return str;
-};
-
 
 
 var createHtmlComponent = function ( event, ui, oldcomponent ) {  
@@ -208,9 +173,10 @@ var createHtmlComponent = function ( event, ui, oldcomponent ) {
         oldcomponent.data.html_inner = $("#popup-explanation").html();
 
       };
-      //console.log($("#popup-explanation").val());
+      console.log($("#popup-explanation").val());
       //return;
-      var html_data = html_tag_replace($("#popup-explanation").val());
+      var html_data = window.encodeURI($("#popup-explanation").val());
+      console.log(html_data);
        var  component = {
           'type' : 'html',
           'data': {

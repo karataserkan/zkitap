@@ -136,13 +136,12 @@ class componentHTML {
 
 					$(this).find(\"input[type='radio']\").remove();
 					if (i==component.data.correctAnswerIndex){
-						var correct=$('<div></div>').css({'border-radius':'50%','width':'10px','height':'10px','display':'inline','background-color':'green'});
-						/*var correct= $('<div style=\"border-radius: 50%; width:10px; height:10px; display: inline-block; background-color:#008000; \"> </div>' );*/
-						$(this).prepend( correct );
+						$(this).css({'background-color':'green'});
+						
 					}
 					else{
-						var error= $('<div style=\"border-radius: 50%; width:10px; height:10px; display: inline-block; background-color:#FF0000; \"> </div>' );
-						$(this).prepend( error );
+						$(this).css({'background-color':'red'});
+						
 					}
 					if (ind==i) {
 						if(component.data.correctAnswerIndex==ind){
@@ -154,7 +153,7 @@ class componentHTML {
 				      	}
 				  	}
 
-				    $(this).css('color',color);
+				    //$(this).css('color',color);
 				}); 
 
 			}
@@ -772,7 +771,7 @@ class componentHTML {
 		}
 
 		$html_id= "html".functions::get_random_string();
-		$component->data->html_inner = html_entity_decode($component->data->html_inner,null,"UTF-8");
+		$component->data->html_inner = urldecode($component->data->html_inner);
 		$container.=" 
 			<div id='$html_id' ".$css.">
 				".$component->data->html_inner."
@@ -898,9 +897,7 @@ class componentHTML {
 
 		
 
-		$container.=" 
-			><img  class='image' src='linkmarker.png' style='width:100%;height:100%;' /></a>
-		";
+		$container.="><img  class='image' src='linkmarker.png' style='width:100%;height:100%;' /></a>";
 
 		$this->html=str_replace('%component_inner%' ,$container, $this->html);
 		
@@ -1149,7 +1146,7 @@ class componentHTML {
 		<div id='a".$component->id."' class='{$component->type}' ";
 		if(isset($component->data->self->attr))
 			foreach ($component->data->self->attr as $attr_name => $attr_val ) {
-				if (trim(strtolower($attr_name))!='contenteditable' && trim($attr_name)!='componentType' && $attr_name!='placeholder' && $attr_name!='fast-style')
+				if (trim(strtolower($attr_name))!='contenteditable' && trim($attr_name)!='componentType' && $attr_name!='placeholder' && $attr_name!='fast-style' && $attr_name!='href')
 					$container.=" $attr_name='$attr_val' ";
 			}
 
