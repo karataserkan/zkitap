@@ -84,7 +84,7 @@ class componentHTML {
     				$encapsulater_css.=$enc_attr.":".$enc_value.";";
 				}
 		$encapsulater_css="style=\"".$encapsulater_css."\"";		
-		$container="<div ".$encapsulater_css.">";
+		//$container="<div ".$encapsulater_css.">";
 		$container.="<table class='table-component-table'>";
 
 		$table=$component->data->table;
@@ -107,7 +107,7 @@ class componentHTML {
 			}
 			$container.="</tr>";
 		}
-		$container.="</table></div>";
+		$container.="</table>";
 
 		$this->html=str_replace('%component_inner%' ,$container, $this->html);
 	}
@@ -542,7 +542,7 @@ class componentHTML {
 
 
 			
-			$container ="<video poster='cover.jpg' controls='controls'  class='video' ";
+			$container ="<video poster='video_play.png' controls='controls'  class='video' ";
 			if(isset($data->video->attr))
 				foreach ($data->video->attr as $attr_name => $attr_val ) {
 					$container.=" $attr_name='$attr_val' ";
@@ -589,7 +589,7 @@ class componentHTML {
 		else{
 			
 			$video_id= "video".functions::get_random_string();
-			$video_container ="<video poster='cover.jpg' controls='controls' class='video' ";
+			$video_container ="<video poster='video_play.png' controls='controls' class='video' ";
 			if(isset($data->video->attr))
 				foreach ($data->video->attr as $attr_name => $attr_val ) {
 					$video_container.=" $attr_name='$attr_val' ";
