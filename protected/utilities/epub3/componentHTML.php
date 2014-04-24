@@ -112,7 +112,7 @@ class componentHTML {
 		$this->html=str_replace('%component_inner%' ,$container, $this->html);
 	}
 
-	
+
 	public function quizInner($component){
 
 
@@ -222,7 +222,7 @@ class componentHTML {
 
 
 		$container.=" >
-			
+			<img src='cover.jpg' />
 		</canvas>
 		";
 		$container.="<script type='text/javascript'>
@@ -334,7 +334,7 @@ class componentHTML {
 
 
 		$container.=" >
-			
+			<img src='cover.jpg' />
 		</canvas>
 		";
 		$container.="
