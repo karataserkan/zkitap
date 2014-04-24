@@ -19,6 +19,7 @@ class epub3 {
 	public $thumType;
 	public $errors=null;
 	public $book ;
+	public $extraOpf='';
 
 	public function error($domain='EditorActions',$explanation='Error', $arguments=null,$debug_vars=null ){
 			$error=new error($domain,$explanation, $arguments,$debug_vars);
@@ -715,6 +716,52 @@ class epub3 {
 	public function contentOPF(){
 		
 		//contentOPF
+		//
+		
+
+		$zip = new ZipArchive;
+		$this->ebookFile=$this->getNiceName('epub');
+		$zip->open($this->ebookFile);
+		$source = str_replace('\\', '/', realpath($this->get_tmp_file()));
+	    if (is_dir($source) === true)
+	    {
+	    	$i=0;
+	        $files = new RecursiveIteratorIterator(new RecursiveDirectoryIterator($source), RecursiveIteratorIterator::SELF_FIRST);
+	        foreach ($files as $file)
+	        {
+	        	$i++;
+	        	set_time_limit(0);
+	            $file = str_replace('\\', '/', $file);
+	            if( in_array(substr($file, strrpos($file, '/')+1), array('.', '..')) )
+	                continue;
+	            $file = realpath($file);
+	            if (is_dir($file) === true)
+	            {
+	            }
+	            else if (is_file($file) === true)
+	            {
+	            	$mime_type=mime_content_type($file);
+	            	if (strpos($file, 'webfonts')==false AND strpos($file, '.html')==false AND strpos($file, 'cover')==false AND strpos($file, 'thumbnail')==false AND strpos($file, 'titlepage.xhtml')==false AND strpos($file, 'toc.ncx')==false AND strpos($file, 'toc.xhtml')==false) {
+		            	$sourceFile=explode('book/', $file);
+		            	if (strpos($file, '.css')!==false) {
+		            		$mime_type='text/css';
+		            	}
+
+		            	if (strpos($file, '.js')!==false) {
+		            		$mime_type='text/javascript';
+		            	}
+		                $this->extraOpf .= '<item id="extra'.$i.'" href="'.$sourceFile[1].'" media-type="'.$mime_type.'" />'."\n";
+	            	}
+	            }
+	        }
+	    }
+
+
+
+
+
+
+
 
 		if(! $res[]=$this->files->content=new file('package.opf',$this->get_tmp_file()) )
 		 {
@@ -747,12 +794,7 @@ class epub3 {
 	<manifest>
 		<item href="'.$this->coverImage->filename.'" id="cover" media-type="image/'.$this->coverType.'" />
 		<item href="'.$this->thumImage->filename.'" id="thumbnail" media-type="image/'.$this->thumType.'" />
-		<item href="linkmarker.png" id="linkmarker" media-type="image/png" />
-		<item href="popupmarker.png" id="popupmarker" media-type="image/png" />
 %pages_manifest%
-		<item href="page_styles.css" id="page_css" media-type="text/css" />
-		<item href="stylesheet.css" id="stylesheet_css" media-type="text/css" />
-		<item id="widgets_css" href="widgets.css" media-type="text/css" />
 		<item id="sourcesanspro_css" href="webfonts/sourcesanspro.css" media-type="text/css" />
 		<item id="alexbrush_css" href="webfonts/alexbrush-regular.css" media-type="text/css" />
 		<item id="chunkfive_css" href="webfonts/chunkfive.css" media-type="text/css" />
@@ -912,53 +954,7 @@ class epub3 {
 		<item href="titlepage.xhtml" id="titlepage" media-type="application/xhtml+xml" properties="scripted" />
 		<item href="toc.ncx" media-type="application/x-dtbncx+xml" id="ncx" />
 		<item id="nav" href="toc.xhtml" properties="nav" media-type="application/xhtml+xml" />
-		<item id="js001" href="jquery-1.4.4.min.js" media-type="text/javascript" />
-	    <item id="js002" href="aie_core.js" media-type="text/javascript" />
-	    <item id="js003" href="aie_events.js" media-type="text/javascript" />
-	    <item id="js004" href="aie_explore.js" media-type="text/javascript" />
-	    <item id="js005" href="aie_gameutils.js" media-type="text/javascript" />
-	    <item id="js006" href="aie_qaa.js" media-type="text/javascript" />
-	    <item id="js007" href="aie_storyline.js" media-type="text/javascript" />
-	    <item id="js008" href="aie_textsound.js" media-type="text/javascript" />
-	    <item id="js009" href="igp_audio.js" media-type="text/javascript" />
-	    <item id="js010" href="iscroll.js" media-type="text/javascript" />
-	    <item id="js011" href="jquery.min.js" media-type="text/javascript" />
-	    <item id="js012" href="jquery-ui.min.js" media-type="text/javascript" />
-	    <item id="js013" href="LAB.min.js" media-type="text/javascript" />
-	    <item id="js014" href="panelnav.js" media-type="text/javascript" />
-	    <item id="js015" href="popup.js" media-type="text/javascript" />
-	    <item id="js016" href="pubsub.js" media-type="text/javascript" />
-	    <item id="js017" href="Chart.js" media-type="text/javascript" />
-	    <item id="js018" href="kinetic-v4.5.3.min.js" media-type="text/javascript" />
-
-	    <item id="js019" href="jquery.slickwrap.js" media-type="text/javascript" />
-	    <item id="js020" href="jssor.slider.js" media-type="text/javascript" />
-	    <item id="js021" href="jssor.core.js" media-type="text/javascript" />
-	    <item id="js022" href="jssor.utils.js" media-type="text/javascript" />
-	    <item id="js023" href="runtime.js" media-type="text/javascript" />
-
-	    <item id="js024" href="facybox/facybox.js" media-type="text/javascript" />
-	    <item id="js025" href="facybox/facybox.css" media-type="text/css" />
-	    <item id="js026" href="facybox/facybox_urls.css" media-type="text/css" />
-
-	    <item id="js027" href="facybox/images/fancy_shadow_n.png" media-type="image/png" />
-	    <item id="js028" href="facybox/images/fancy_shadow_s.png" media-type="image/png" />
-	    <item id="js029" href="facybox/images/fancy_shadow_w.png" media-type="image/png" />
-	    <item id="js030" href="facybox/images/fancy_shadow_e.png" media-type="image/png" />
-	    <item id="js031" href="facybox/images/fancy_shadow_nw.png" media-type="image/png" />
-	    <item id="js032" href="facybox/images/fancy_shadow_ne.png" media-type="image/png" />
-	    <item id="js033" href="facybox/images/fancy_shadow_sw.png" media-type="image/png" />
-	    <item id="js034" href="facybox/images/fancy_shadow_se.png" media-type="image/png" />
-	    <item id="js035" href="facybox/images/fancy_right.png" media-type="image/png" />
-	    <item id="js036" href="facybox/images/fancy_left.png" media-type="image/png" />
-	    <item id="js037" href="facybox/images/fancy_closebox.png" media-type="image/png" />
-	    <item id="js038" href="facybox/images/loading.gif" media-type="image/gif" />
-	    <item id="js039" href="facybox/images/fancy_title_left.png" media-type="image/png" />
-	    <item id="js040" href="facybox/images/coffee_48x48.png" media-type="image/png" />
-	    <item id="js041" href="facybox/images/fancy_title_right.png" media-type="image/png" />
-	    <item id="js042" href="facybox/images/fancy_title_main.png" media-type="image/png" />
-	    <item id="js044" href="jquery.lazyloadxt.js" media-type="text/javascript" />
-
+'.$this->extraOpf.'
 
 	</manifest>
 	<spine toc="ncx" page-progression-direction="ltr">
@@ -975,10 +971,10 @@ class epub3 {
 
 			}
 
-			if($this->files->others)
-			foreach ($this->files->others as $assets_key => $asset) {
-				$pages_manifest.="\t\t". '<item href="'.$asset->filename.'" id="asset'.$assets_key.'"  media-type="'. substr(system(' file -i '.$asset->filepath." | awk '{ print $2}'" ),0,-1). '"/>'. "\n";
-			}
+			// if($this->files->others)
+			// foreach ($this->files->others as $assets_key => $asset) {
+			// 	$pages_manifest.="\t\t". '<item href="'.$asset->filename.'" id="asset'.$assets_key.'"  media-type="'. substr(system(' file -i '.$asset->filepath." | awk '{ print $2}'" ),0,-1). '"/>'. "\n";
+			// }
 
 
 			$content_inside=str_replace(array(
@@ -1204,18 +1200,19 @@ class epub3 {
 			return false;
 		}
 
-		//contentOPF.
-		if( in_array(false,$this->contentOPF() ) ) {
-			$this->errors[]=new error('Epub3-Construction','Problem with contentOPF');
-			return false;
-		}
-
 		//error_log("Thumbnail processing...");
 		//Create thumbnails
 		if(!$this->createThumbnails()){
 			$this->errors[]=new error('Thumbnail production','Problem with thumbnails');
 			return false;
 		}
+		
+		//contentOPF.
+		if( in_array(false,$this->contentOPF() ) ) {
+			$this->errors[]=new error('Epub3-Construction','Problem with contentOPF');
+			return false;
+		}
+
 		//Create Zip.
 		//error_log("Zip processing...");
 		if( ! $this->zipfolder($encyrptFiles)  ) {
