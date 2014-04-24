@@ -1626,23 +1626,25 @@ $current_user=User::model()->findByPk(Yii::app()->user->id);
 				<script>
 					$(document).ready(function() {
 						$('#align-add-dummy-close-button').click(function() {
-
+						/*	
 				          $('#pop-align-popup').remove();
 
 				          if ($('#pop-align-popup').length) {
 				              $('#pop-align-popup').remove();
 				          }
-
+						*/
+						$('#pop-align').click();
 				      });
 
 					$('#arrange-add-dummy-close-button').click(function() {
-
+						/*
 				          $('#pop-arrange-popup').remove();
 
 				          if ($('#pop-arrange-popup').length) {
 				              $('#pop-arrange-popup').remove();
 				          }
-
+						*/
+						$('#pop-arrange').click();
 				      });
 					
 					var last_timeout;

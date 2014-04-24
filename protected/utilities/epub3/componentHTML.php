@@ -38,10 +38,10 @@ class componentHTML {
 			case 'quiz':
 				$this->quizInner($component);			
 				break;
-			case 'table':
+			/*case 'table':
 			    $this->tableInner($component);
 			    break;
-			
+			*/
 			 case 'html':
 			    $this->htmlInner($component);
 			    break;
@@ -78,38 +78,7 @@ class componentHTML {
 
 
 	}
-	public function tableInner($component){
-		$encapsulater_css="";
-		foreach ($component->data->self->css as $enc_attr => $enc_value) {
-    				$encapsulater_css.=$enc_attr.":".$enc_value.";";
-				}
-		$encapsulater_css="style=\"".$encapsulater_css."\"";		
-		$container="<div ".$encapsulater_css.">";
-		$container.="<table class='table-component-table'>";
 
-		$table=$component->data->table;
-		foreach($table as $row)
-		{
-			$container.="<tr class=\"ExcelTableFormationRow\">";
-
-			foreach($row as $column )
-			{
-				$class="class=\"ExcelTableFormationCol ".$column->attr->class."\"";
-				$val=$column->attr->val;
-				$css="";
-				foreach ($column->css as $css_attr => $css_value) {
-    				$css.=$css_attr.":".$css_value.";";
-				}
-				$css="style=\"".$css."\"";
-
-				//print_r($css);
-				$container.="<td ".$class." ".$css.">".$val."</td>";
-			}
-			$container.="</tr>";
-		}
-		$container.="</table></div>";
-		$this->html=str_replace('%component_inner%' ,$container, $this->html);
-	}
 	public function quizInner($component){
 
 
@@ -163,11 +132,17 @@ class componentHTML {
 
 				    var color = 'red';
 				    
-				    if (i==component.data.correctAnswerIndex) color ='green';
+				    //if (i==component.data.correctAnswerIndex) color ='green';
 
 					$(this).find(\"input[type='radio']\").remove();
-					$(this).prepend( $('<div style=\"border-radius: 50%; width:10px; height:10px; display: inline-block; background:' + color + '; \"> </div>' ) );
-					
+					if (i==component.data.correctAnswerIndex){
+						$(this).css({'background-color':'green'});
+						
+					}
+					else{
+						$(this).css({'background-color':'red'});
+						
+					}
 					if (ind==i) {
 						if(component.data.correctAnswerIndex==ind){
 							$(this).css({\"text-decoration\":\"underline\",\"font-weight\":\"bold\"});
@@ -178,7 +153,7 @@ class componentHTML {
 				      	}
 				  	}
 
-				    $(this).css('color',color);
+				    //$(this).css('color',color);
 				}); 
 
 			}
@@ -213,7 +188,7 @@ class componentHTML {
 
 
 		$container.=" >
-			
+			<img src='cover.jpg' />
 		</canvas>
 		";
 		$container.="<script type='text/javascript'>
@@ -325,7 +300,7 @@ class componentHTML {
 
 
 		$container.=" >
-			
+			<img src='cover.jpg' />
 		</canvas>
 		";
 		$container.="
@@ -769,7 +744,7 @@ class componentHTML {
 
 		$container.=" 
 			
-			<a href='#".$popup_id."' rel='facybox'><img style='width:100%;height:100%;' src='popupmarker.png' /></a>
+			<a href='#".$popup_id."' rel='facybox'><img src='popupmarker.png' /></a>
 			
 			<div id='$popup_id' style='display:none; z-index:9999999; position:relative;'>
 				".$component->data->html_inner."
@@ -796,7 +771,7 @@ class componentHTML {
 		}
 
 		$html_id= "html".functions::get_random_string();
-		$component->data->html_inner = html_entity_decode($component->data->html_inner,null,"UTF-8");
+		$component->data->html_inner = urldecode($component->data->html_inner);
 		$container.=" 
 			<div id='$html_id' ".$css.">
 				".$component->data->html_inner."
@@ -922,9 +897,7 @@ class componentHTML {
 
 		
 
-		$container.=" 
-			><img  class='image' src='linkmarker.png' style='width:100%;height:100%;' /></a>
-		";
+		$container.="><img  class='image' src='linkmarker.png' style='width:100%;height:100%;' /></a>";
 
 		$this->html=str_replace('%component_inner%' ,$container, $this->html);
 		
@@ -1173,7 +1146,7 @@ class componentHTML {
 		<div id='a".$component->id."' class='{$component->type}' ";
 		if(isset($component->data->self->attr))
 			foreach ($component->data->self->attr as $attr_name => $attr_val ) {
-				if (trim(strtolower($attr_name))!='contenteditable' && trim($attr_name)!='componentType' && $attr_name!='placeholder' && $attr_name!='fast-style')
+				if (trim(strtolower($attr_name))!='contenteditable' && trim($attr_name)!='componentType' && $attr_name!='placeholder' && $attr_name!='fast-style' && $attr_name!='href')
 					$container.=" $attr_name='$attr_val' ";
 			}
 

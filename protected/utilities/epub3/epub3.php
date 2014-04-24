@@ -305,7 +305,7 @@ class epub3 {
 
 		
 	</head>
-	<body width:'.$pageSize['width'].'px; height:'.$pageSize['height'].'px;">
+	<body style="width:'.$pageSize['width'].'px; height:'.$pageSize['height'].'px;">
 		<div>
 			<img width="'.$pageSize['width'].'" height="'.$pageSize['height'].'" src="' . $this->coverImage->filename . '"/>
 		</div>
