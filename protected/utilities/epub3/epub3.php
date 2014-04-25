@@ -202,7 +202,7 @@ class epub3 {
 			$ext2=explode('/', $ext1[0]);
 			$extension = '.'.$ext2[1];
 			$this->coverType=$ext2[1];
-			echo $extension; die;
+			//echo $extension; die;
 			$this->coverImage = functions::save_base64_file ( $cover64 , "cover" , $this->get_tmp_file());
 			$this->coverImage->URL=$this->get_tmp_file(). '/cover'.$extension;
 			$this->coverImage->filename='cover'.$extension;
@@ -225,7 +225,7 @@ class epub3 {
 
 
 		
-		echo $extension; die;
+		//echo $extension; die;
 
 		if(! $res[]=  $this->coverImage ){
 			$this->errors[]=new error('Epub3-copyCoverImage','File could not be copied',__DIR__ . '/' . $this->coverImage,$this->get_tmp_file_path($this->coverImage));
