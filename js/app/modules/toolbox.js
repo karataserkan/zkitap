@@ -468,11 +468,13 @@ window.lindneo.toolbox = (function(window, $, undefined){
     var eleman= $('#'+id).parent();
 
     var zindexCompare= parseInt( $(eleman).css('z-index') );
-    
-
+    if(zindexCompare==9999) zindexCompare =999;
+    console.log(zindexCompare);
+    console.log(eleman);
     for (var i = 0; i < elems.length; i++)
     {
       var zindex=document.defaultView.getComputedStyle(elems[i],null).getPropertyValue("z-index");
+      console.log(zindex);
       if (zindex != 'auto' && !(eleman[0] === elems[i]) ){
 
         zindex=parseInt(zindex);
