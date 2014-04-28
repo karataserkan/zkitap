@@ -197,13 +197,25 @@ class epub3 {
 
 		$cover64=$this->book->getData('cover');
 
+
+
 		if ($cover64) {
-			$ext1=explode(';', $cover64);
-			$ext2=explode('/', $ext1[0]);
-			$extension = '.'.$ext2[1];
-			$this->coverType=$ext2[1];
+			// $ext1=explode(';', $cover64);
+			// $ext2=explode('/', $ext1[0]);
+			// $extension = '.'.$ext2[1];
+			// $this->coverType=$ext2[1];
 			//echo $extension; die;
 			$this->coverImage = functions::save_base64_file ( $cover64 , "cover" , $this->get_tmp_file());
+			
+			$fi = new finfo(FILEINFO_MIME,'');
+			$mime_type = $fi->buffer(file_get_contents($cover64));
+
+			$ext1=explode(';', $mime_type);
+			$ext2=explode('/', $ext1[0]);
+			$this->coverType= $ext2[1];
+			
+			$extension='.'.$ext2[1];
+
 			$this->coverImage->URL=$this->get_tmp_file(). '/cover'.$extension;
 			$this->coverImage->filename='cover'.$extension;
 		}
@@ -240,10 +252,15 @@ class epub3 {
 		$thum64=$this->book->getData('thumbnail');
 
 		if ($thum64) {
-			$ext1=explode(';', $thum64);
+			$fi = new finfo(FILEINFO_MIME,'');
+			$mime_type = $fi->buffer(file_get_contents($thum64));
+
+			$ext1=explode(';', $mime_type);
 			$ext2=explode('/', $ext1[0]);
-			$extension = '.'.$ext2[1];
-			$this->thumType=$ext2[1];
+			$this->thumType= $ext2[1];
+			
+			$extension='.'.$ext2[1];
+			
 			$this->thumImage = functions::save_base64_file ( $thum64 , "thumbnail" , $this->get_tmp_file());
 			$this->thumImage->URL=$this->get_tmp_file(). '/thumbnail'.$extension;
 			$this->thumImage->filename='thumbnail'.$extension;
