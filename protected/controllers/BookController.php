@@ -367,7 +367,9 @@ class BookController extends Controller
 		$chapters= Chapter::model()->findAll(array(
 				'condition' => 'book_id=:book_id',
 				'params' => array(':book_id' => $template_id),
-			));
+				'order' => 'created'
+			)
+		);
 			if ($chapters) {
 				foreach ($chapters as $key => $chapter) {
 					$newchapterid=functions::new_id();//functions::get_random_string();
@@ -379,11 +381,13 @@ class BookController extends Controller
 					$newChapter->order=$chapter->order;
 					$newChapter->data=$chapter->data;
 					$newChapter->created=date("Y-m-d H:i:s");
+					error_log('n:'.$newChapter->order.'-o:'.$chapter->order);
 					$newChapter->save();
+					error_log('n:'.$newChapter->order.'-o:'.$chapter->order);
 
 					$pages = Page::model()->findAll(array(
 						'condition' => 'chapter_id=:chapter_id',
-						'params' => array(':chapter_id'=> $chapter->chapter_id)
+						'params' => array(':chapter_id'=> $chapter->chapter_id),
 					));
 					if ($pages) {
 						foreach ($pages as $pkey => $page) {
