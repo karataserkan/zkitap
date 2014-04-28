@@ -791,7 +791,6 @@ $(document).ready(function(){
             switch (propertyValue){
               case 'top':
                 this.setProperty ('z-index',  window.lindneo.toolbox.findHighestZIndexToSet('[component-instance="true"]',this.options.component.id ));
-
               break;
               case 'higher':
                 this.setProperty ('z-index',window.lindneo.toolbox.findHigherZIndexToSet('[component-instance="true"]',this.options.component.id ) );
@@ -836,8 +835,8 @@ $(document).ready(function(){
           break;
         case 'z-index':
           this.options.component.data.self.css[propertyName]=propertyValue;
-          this.options.component.data.self.css['width']="auto";
-          this.options.component.data.self.css['height']="auto";
+          //this.options.component.data.self.css['width']="auto";
+          //this.options.component.data.self.css['height']="auto";
         break;
         default:
           
