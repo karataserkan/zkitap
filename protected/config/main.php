@@ -27,7 +27,8 @@ $db_config_list=array(
 
 $catalogURL=array(
 	"baracuda"=>"http://bigcat.okutus.com/site/import",
-	"lindneo"=>"http://catalog.lindneo.com/site/import"
+	"lindneo"=>"http://bigcat.okutus.com/site/import",
+	//"lindneo"=>"http://catalog.lindneo.com/site/import"
 	);
 
 return array(
@@ -137,8 +138,8 @@ return array(
 		'Smtpmail'=>array(
             'class'=>'application.extension.smtpmail.PHPMailer',
             'Host'=>"tls://smtp.gmail.com",
-            'Username'=>'ekaratas@linden-tech.com',
-            'Password'=>'SSfUfZ20',
+            'Username'=>'edubox@linden-tech.com',
+            'Password'=>'12548442',
             'Mailer'=>'smtp',
             'Port'=>465,
             'SMTPAuth'=>true, 
