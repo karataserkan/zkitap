@@ -507,8 +507,8 @@ msgstr  "Keywords"
 #: protected/controllers/BookController.php:616
 #: protected/controllers/BookController.php:194
 #: protected/controllers/BookController.php:261
-#: protected/controllers/BookController.php:549
-#: protected/controllers/BookController.php:616
+#: protected/controllers/BookController.php:553
+#: protected/controllers/BookController.php:620
 msgid   "Bölüm"
 msgstr  "Chapter"
 
