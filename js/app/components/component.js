@@ -778,6 +778,8 @@ $(document).ready(function(){
       return this._getProperty(propertyName);
     },
     setPropertyofObject : function (propertyName,propertyValue){
+      console.log(propertyName);
+      console.log(propertyValue);
       return this._setPropertyofObject(propertyName,propertyValue) ;
     },
     _setPropertyofObject : function (propertyName,propertyValue){
@@ -800,6 +802,24 @@ $(document).ready(function(){
               break;
               case 'bottom':
                 this.setProperty ('z-index', window.lindneo.toolbox.findlowestZIndexToSet('[component-instance="true"]',this.options.component.id ) );
+              break;
+
+            }
+
+          break;
+          case 'zindex-table':
+            switch (propertyValue){
+              case 'top':
+                this.setProperty ('z-index-table',  window.lindneo.toolbox.findHighestZIndexToSet('[component-instance="true"]',this.options.component.id ));
+              break;
+              case 'higher':
+                this.setProperty ('z-index-table',window.lindneo.toolbox.findHigherZIndexToSet('[component-instance="true"]',this.options.component.id ) );
+              break;
+              case 'lower':
+                this.setProperty ('z-index-table', window.lindneo.toolbox.findlowerZIndexToSet('[component-instance="true"]',this.options.component.id ) );
+              break;
+              case 'bottom':
+                this.setProperty ('z-index-table', window.lindneo.toolbox.findlowestZIndexToSet('[component-instance="true"]',this.options.component.id ) );
               break;
 
             }
@@ -838,6 +858,11 @@ $(document).ready(function(){
           //this.options.component.data.self.css['width']="auto";
           //this.options.component.data.self.css['height']="auto";
         break;
+        case 'z-index-table':
+          this.options.component.data.self.css['z-index']=propertyValue;
+          this.options.component.data.self.css['width']="auto";
+          this.options.component.data.self.css['height']="auto";
+        break;
         default:
           
           this.getSettable().css[propertyName]=propertyValue;
@@ -849,6 +874,8 @@ $(document).ready(function(){
       this._setProperty(propertyName,propertyValue);
     },
     _setProperty : function (propertyName,propertyValue){
+        console.log(propertyName);
+        console.log(propertyValue);
         this.setPropertyofObject(propertyName,propertyValue);
         this.setFromData();
         this._trigger('update', null, this.options.component );

@@ -30,7 +30,7 @@ $(document).ready(function(){
           that._change( el.innerHTML);
         })
 
-        var rtextmessage=$('<div  id="message_'+componentrtextid+'" contenteditable="true">'+this.options.component.data.rtextdiv.val+'</div>');
+        var rtextmessage=$('<div  id="message_'+componentrtextid+'" contenteditable="true" style="width100%; height:100%; overflow:hidden;">'+this.options.component.data.rtextdiv.val+'</div>');
         rtextmessage.appendTo(this.element);
         var capture_selection= function(){
           localStorage.setItem("selection_text", window.getSelection().toString());
@@ -58,8 +58,9 @@ $(document).ready(function(){
       setPropertyofObject : function (propertyName,propertyValue){
         var that = this;
         
-        //console.log(propertyName);
-        //console.log(propertyValue);
+        console.log(propertyName);
+        console.log(propertyValue);
+        //return;
         /*
         //console.log(localStorage.getItem("selection_text"));
         var content_text = '<b>'+localStorage.getItem("selection_text")+'</b>';
@@ -75,6 +76,17 @@ $(document).ready(function(){
         */
 
         switch (propertyName){
+          case 'zindex':
+            return this._setPropertyofObject(propertyName,propertyValue) ;
+          break;
+          case 'color':
+
+            var content_text = '<span style="color: '+propertyValue+';">'+localStorage.getItem("selection_text")+'</span>';
+            $('#message_rtext'+this.options.component.id).html(this.options.component.data.rtextdiv.val.replace(localStorage.getItem("selection_text"), content_text));  
+            that._change( $('#message_rtext'+this.options.component.id).html());
+            localStorage.setItem("selection_text", '');
+
+          break;
           case 'font-weight':
 
             var content_text = '<span style="font-weight: '+propertyValue+';">'+localStorage.getItem("selection_text")+'</span>';
@@ -214,8 +226,8 @@ $(document).ready(function(){
                     
       },
       setProperty : function (propertyName,propertyValue){
-        //console.log(propertyName);
-        //console.log(propertyValue);
+        console.log(propertyName);
+        console.log(propertyValue);
       
         this._setProperty(propertyName,propertyValue);
         this.autoResize();

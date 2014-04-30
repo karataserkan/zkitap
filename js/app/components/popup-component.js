@@ -60,7 +60,7 @@ console.log(oldcomponent);
       console.log('dene');
       var top = (ui.offset.top-$(event.target).offset().top ) + 'px';
       var left = ( ui.offset.left-$(event.target).offset().left ) + 'px';
-      var popup_value = 'http://linden-tech.com';
+      var popup_value = '';
       var width = 'auto';
       var height = 'auto';
     }
@@ -136,11 +136,11 @@ console.log(oldcomponent);
       else{
         top = oldcomponent.data.self.css.top;
         left = oldcomponent.data.self.css.left;
-        //window.lindneo.tlingit.componentHasDeleted( oldcomponent, oldcomponent.id );
+        window.lindneo.tlingit.componentHasDeleted( oldcomponent, oldcomponent.id );
         oldcomponent.data.html_inner = $("#popup-explanation").html();
 
       };
-      
+      console.log($("#popup-explanation").val());
        var  component = {
           'type' : 'popup',
           'data': {
@@ -155,7 +155,7 @@ console.log(oldcomponent);
                 'background-color': 'transparent'
               } 
             },
-            'html_inner':  $("#popup-explanation").html(),
+            'html_inner':  $("#popup-explanation").val(),
             'width': width,
             'height': height,
             'lock':'',
@@ -173,10 +173,11 @@ console.log(oldcomponent);
             }
           }
         };
-        if(typeof oldcomponent == 'undefined')
+       // if(typeof oldcomponent == 'undefined')
           window.lindneo.tlingit.componentHasCreated( component );
-        else 
+       /* else 
           window.lindneo.tlingit.componentHasUpdated( oldcomponent );
+          */
         close_button.trigger('click');
 
     });
@@ -220,7 +221,7 @@ console.log(oldcomponent);
           var imageBinary = FileBinary;
           var newImage = $("<img style='width:80%' src='"+imageBinary+"' />");
 
-          $('#popup-explanation').append(newImage);
+          $('.popup_wrapper').append(newImage);
           return;
           
         }
@@ -241,7 +242,7 @@ console.log(oldcomponent);
               videoURL = response.result.URL;
               var newVideo = $("<video controls='controls' style='width:80%'><source src='"+videoURL+"'></video>");
 
-              $('#popup-explanation').append(newVideo);
+              $('.popup_wrapper').append(newVideo);
               return;
               
                 
