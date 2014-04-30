@@ -132,6 +132,208 @@
 		<script type="text/javascript" src="<?php echo Yii::app()->request->baseUrl; ?>/css/ui/js/datepicker/picker.js"></script>
 		<script type="text/javascript" src="<?php echo Yii::app()->request->baseUrl; ?>/css/ui/js/datepicker/picker.date.js"></script>
 		<script type="text/javascript" src="<?php echo Yii::app()->request->baseUrl; ?>/css/ui/js/datepicker/picker.time.js"></script>
+
+  		<!-- Trip.js Tutorial-->
+		<script type="text/javascript" src="<?php echo Yii::app()->request->baseUrl; ?>/js/lib/trip.min.js"></script>
+		<link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/js/lib/trip.min.css" />
+		<script type="text/javascript">
+		var trip,tripData;
+		var options={
+			    tripTheme : "white",
+			    onTripStart : function() {
+			      console.log("onTripStart");
+			    },
+			    onTripEnd : function() {
+			      console.log("onTripEnd");
+			    },
+			    onTripStop : function() {
+			      console.log("onTripStop");
+			    },
+			    onTripChange : function(index, tripBlock) {
+			      console.log("onTripChange");
+			    },
+			    backToTopWhenEnded : true,
+			    delay : 3000,
+			    prevLabel: 'Geri',
+			    nextLabel: 'İleri',
+			    finishLabel: 'İptal',
+			    showNavigation: true
+			    //overlayZindex:9999999999999999999
+			  };
+
+		var Key =
+			{
+			    BACKSPACE: 8,
+			    TAB: 9,
+			    ENTER: 13,
+			    ESC: 27,
+			    PAGEUP: 33,
+			    PAGEDOWN: 34,
+			    END: 35,
+			    HOME: 36,
+			    LEFT: 37,
+			    UP: 38,
+			    RIGHT: 39,
+			    DOWN: 40,
+			    HELP: 47,
+			    H: 72,
+			    K: 75,
+			    N: 78,
+			    R: 82,
+			    NUMERIC_PLUS: 107,
+			    F1: 112,
+			    F2: 113,
+			    F3: 114,
+			    F4: 115,
+			    F5: 116,
+			    F6: 117,
+			    F7: 118,
+			    F8: 119,
+			    F9: 120,
+			    F10: 121,
+			    F11: 122,
+			    F12: 123,
+			    PLUS: 187,
+			    MINUS: 189,
+			    V: 86
+			}
+
+			 function tripStart(){
+				trip= new Trip(tripData, options);
+			    trip.start();
+			}
+			$(document).ready(function(){
+				
+
+				$(document).bind('keypress', function(event) {
+			      switch(event.keyCode) {
+			      	
+			        case Key.BACKSPACE:
+			         if (event.ctrlKey && event.shiftKey){
+			         	console.log('Help is on the way!' + event.keyCode);
+						tripStart();
+
+			         }
+			        break;
+			      }
+			    });
+			    
+			});
+		</script>
+		<script type="text/javascript">
+
+		$(document).ready(function(){
+			tripData=[
+
+			/* Header */
+			   { 
+			       sel : $('#sidebar-collapse i'),
+			       content : 'Menuyü açıp kapatabilirsiniz.',
+			       position:'e',
+			       callback:function () {$('#header-user img').click();}
+			       //expose: true
+			   },
+			   { 
+			       sel : $('#header-user'),
+			       content : 'Profil Ayarları ve Çıkış',
+			       position:'w',
+			       callback:function () {$('#header-user img').click();}
+			       //expose: true
+			   },
+
+			 /* Left Menu */
+			   { 
+			       sel : $('#sidebar'),
+			       content : 'Tüm Seçenekler',
+			       position:'e',
+			       expose: true
+			   },
+
+			   { 
+			       sel : $($('#sidebar ul li')[0]),
+			       content : 'Başlangıç Ekranı',
+			       position:'e',
+			       //expose: true
+			   },
+			   { 
+			       sel : $($('#sidebar ul li')[1]),
+			       content : 'Kitaplarınız',
+			       position:'e',
+			       //expose: true
+			   },
+			   { 
+			       sel : $($('#sidebar ul li')[2]),
+			       content : 'Tüm yardımcı kaynaklar ve Destek Talebi için',
+			       position:'e',
+			       //expose: true
+			   },
+			   { 
+			       sel : $($('#sidebar ul li')[3]),
+			       content : 'Hesap Ayarlarınızı Yapabilirisiniz',
+			       position:'e',
+			       //expose: true,
+			        callback:function(){$($('#sidebar >div> ul>li')[4]).find('a').click();}
+			   },
+			   { 
+			       sel : $($('#sidebar ul li')[4]),
+			       content : 'Şablonlarınıza erişip, değiştirebilir ve yenilerini oluşturabilirsiniz.',
+			       position:'e',
+			       //expose: true,
+			       callback:function(){$($('#sidebar >div> ul>li')[5]).find('a').click();}
+			   },
+			   { 
+			       sel : $($('#sidebar ul li a')[5]),
+			       content : 'Organizasyonunuzu Yönetebilirsiniz.',
+			       position:'e',
+			       //expose: true,
+			       callback:function(){$($('#sidebar >div> ul>li')[5]).find('a').click();}
+			   },
+
+			 /* Content */
+			   { 
+			       sel : $('#filter-controls'),
+			       content : 'Çalışma Alanı Hızlı Filtrelerini kullanarak kitaplarınıza hızlı erişebilirsiniz.',
+			       position:'s',
+			       expose: true,
+			       callback:function(){$('a[data-filter=".owner"]').click();}
+			   },
+			   { 
+			       sel : $('a[data-filter=".owner"]'),
+			       content : 'Sahibi Olduklarınıza',
+			       position:'s',
+			       callback:function(){$('a[data-filter=".editor"]').click();}
+			   },
+			   { 
+			       sel : $('a[data-filter=".editor"]'),
+			       content : 'Editörü Olduklarınıza',
+			       position:'s',
+			       //expose: true,
+			       callback:function(){$('a[data-filter="*"]').click();}
+			   },
+			   { 
+			       sel : $('a[data-filter="*"]'),
+			       content : 'ya da kısaca Hepsine',
+			       position:'s',
+			       //expose: true
+			   },
+   			   { 
+			       sel : $('#addNewBookBtn'),
+			       content : 'Şimdi Yeni Bir Kitap Ekleyiniz',
+			       position:'w',
+			       //expose: true,
+			       delay: -1
+			   },
+
+
+
+
+
+			];
+			tripStart();
+		});
+		</script>
+
+
 		<?php if (Yii::app()->controller->action->id=="bookCreate"):?>
 		<script type="text/javascript" src="<?php echo Yii::app()->request->baseUrl; ?>/css/ui/js/book_create.js"></script>
 		<?php endif; ?>
