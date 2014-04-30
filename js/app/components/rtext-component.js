@@ -58,8 +58,8 @@ $(document).ready(function(){
       setPropertyofObject : function (propertyName,propertyValue){
         var that = this;
         
-        console.log(propertyName);
-        console.log(propertyValue);
+        //console.log(propertyName);
+        //console.log(propertyValue);
         //return;
         /*
         //console.log(localStorage.getItem("selection_text"));
@@ -76,9 +76,6 @@ $(document).ready(function(){
         */
 
         switch (propertyName){
-          case 'zindex':
-            return this._setPropertyofObject(propertyName,propertyValue) ;
-          break;
           case 'color':
 
             var content_text = '<span style="color: '+propertyValue+';">'+localStorage.getItem("selection_text")+'</span>';
@@ -218,7 +215,7 @@ $(document).ready(function(){
 
               default:
 
-                return this._super(propertyName);
+                return this._super(propertyName,propertyValue);
 
               break;
 
