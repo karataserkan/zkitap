@@ -100,7 +100,7 @@ var createHtmlComponent = function ( event, ui, oldcomponent ) {
     else{
       top = oldcomponent.data.self.css.top;
       left = oldcomponent.data.self.css.left;
-      popup_value = oldcomponent.data.html_inner;
+      popup_value = window.decodeURI(oldcomponent.data.html_inner);
       var width = oldcomponent.data.width ;
       var height = oldcomponent.data.height;
     };
