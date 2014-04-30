@@ -417,7 +417,7 @@ var textComponentBuilder = function( component ) {
   var popupComponentBuilder = function ( component ) {
     
     
-    var element  = $('<div class="popup-controllers"> </div>');
+    var element  = $('<div class="popup-controllers" style="width:100%; height:100%;"> </div>');
     var elementWrap=$('<div ></div>');
     elementWrap.appendTo( page_div_selector );
 
@@ -696,7 +696,7 @@ var textComponentBuilder = function( component ) {
 
   var videoComponentBuilder = function ( component ) {
     
-    var element  = $('<div class="popup-controllers" style="width:100%; height:100%;"> </div>');
+    var element  = $('<div class="video-controllers" style="width:100%; height:100%;"> </div>');
     var elementWrap=$('<div ></div>');
     elementWrap.appendTo( page_div_selector );
     ////console.log(component);
