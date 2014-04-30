@@ -505,6 +505,8 @@ msgstr  "Keywords"
 #: protected/controllers/BookController.php:614
 #: protected/controllers/BookController.php:549
 #: protected/controllers/BookController.php:616
+#: protected/controllers/BookController.php:553
+#: protected/controllers/BookController.php:620
 #: protected/controllers/BookController.php:194
 #: protected/controllers/BookController.php:261
 #: protected/controllers/BookController.php:553
@@ -1424,17 +1426,17 @@ msgid   "Değiştir"
 msgstr  ""
 
 #: protected/views/site/index.php:344 protected/views/site/index.php:345
-#: protected/views/site/index.php:345
+#: protected/views/site/index.php:325
 msgid   "Çalışma alanının adı"
 msgstr  ""
 
 #: protected/views/site/index.php:346 protected/views/site/index.php:347
-#: protected/views/site/index.php:347
+#: protected/views/site/index.php:327
 msgid   "Kitabın adı"
 msgstr  ""
 
 #: protected/views/site/index.php:348 protected/views/site/index.php:349
-#: protected/views/site/index.php:349
+#: protected/views/site/index.php:329
 msgid   "Yazarın adı"
 msgstr  ""
 
