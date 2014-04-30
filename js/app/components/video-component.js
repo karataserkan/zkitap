@@ -18,7 +18,7 @@ $(document).ready(function() {
               }
 
               var componentvideoid='popup'+this.options.component.id;
-              var newimage=$('<img id="img_'+componentvideoid+'" src="' + this.options.marker +  '"/>');
+              var newimage=$('<img id="img_'+componentvideoid+'" src="' + this.options.marker +  '" style="width:100%; height:100%;"/>');
               this.element.append(newimage);
 
 

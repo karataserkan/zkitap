@@ -222,7 +222,7 @@ class componentHTML {
 
 
 		$container.=" >
-			<img src='cover.jpg' />
+			<img src='video-play.png' />
 		</canvas>
 		";
 		$container.="<script type='text/javascript'>
@@ -334,7 +334,7 @@ class componentHTML {
 
 
 		$container.=" >
-			<img src='cover.jpg' />
+			<img src='video-play.png' />
 		</canvas>
 		";
 		$container.="
@@ -556,14 +556,14 @@ class componentHTML {
 				$container.="' "; 
 			}
 
-			$container.=" >";
+			$container.=" >
+			";
 			
 			
 
 
 
-			$source ="
-			<source  class='video'  ";
+			$source ="<source  class='video'  ";
 			if(isset($data->source->attr))
 				foreach ($data->source->attr as $attr_name => $attr_val ) {
 					$source.=" $attr_name='$attr_val' ";
@@ -580,7 +580,8 @@ class componentHTML {
 
 			$source.=" />";
 
-			$container.= "$source</video>";
+			$container.= "$source
+			</video>";
 
 
 
@@ -603,10 +604,10 @@ class componentHTML {
 				$video_container.="width:100%;height:auto;' "; 
 			}
 
-			$video_container.=" >";
+			$video_container.=" >
+			";
 
-			$video_source ="
-			<source  class='video'  ";
+			$video_source ="<source  class='video'  ";
 			if(isset($data->source->attr))
 				foreach ($data->source->attr as $attr_name => $attr_val ) {
 					$video_source.=" $attr_name='$attr_val' ";
@@ -623,7 +624,8 @@ class componentHTML {
 
 			$video_source.=" />";
 
-			$video_container.= "$video_source</video>";
+			$video_container.= "$video_source
+			</video>";
 
 
 			$container.=" 
@@ -778,7 +780,7 @@ class componentHTML {
 
 		$container.=" 
 			
-			<a href='#".$popup_id."' rel='facybox'><img src='popupmarker.png' /></a>
+			<a href='#".$popup_id."' rel='facybox'><img src='popupmarker.png' style='width:100%; height:100%;' /></a>
 			
 			<div id='$popup_id' style='display:none; z-index:9999999; position:relative;'>
 				".$component->data->html_inner."
@@ -972,6 +974,19 @@ class componentHTML {
 			$this->epub->files->others[] = $file;
 			$component->data->img->attr->src=$file->filename;
 
+			$file_contents_marker = file_get_contents($component->data->img->marker);
+
+			$URL_marker = parse_url($component->data->img->marker);
+			$URL_marker = pathinfo($URL_marker[path]);
+			$ext_marker = $URL_marker['extension'];
+			
+			$file_marker = new file( $component->id.'.'.$ext_marker , $this->outputFolder );
+			$file_marker->writeLine($file_contents_marker);
+			$file_marker->closeFile();
+
+			$this->epub->files->others[] = $file_marker;
+			$component->data->img->marker = $file_marker->filename;
+
 			$data=$component->data;
 			//var_dump($data->img->src);
 			//exit();
@@ -1071,18 +1086,32 @@ class componentHTML {
 			foreach ($data->self->css as $css_name => $css_val ) {
 				$css.="$css_name:$css_val;";
 			}
-			$css.="' ";
+			$css.=" background-color:transparent;' ";
 		}		
-
-		$html_id= "rtext".functions::get_random_string();
+/*
+if ($data->self->attr->componentType == "side-text" ){
+			$container = "<div id='text". functions::get_random_string()  ."' $container  class='widgets-rw panel-scrolling-rw scroll-horizontal-rw exclude-auto-rw' >";
+			$container .= "<div class='textarea frame-rw' style='width:".$data->textarea->css->width."'> %component_text% </div> </div>";
+		}else {
+			$container = "<div class='textarea' $container  >%component_text% </div>";
+		}
+*/
+		//$component->data->rtextdiv->val = str_replace('<div>', '', $component->data->rtextdiv->val);
+		//$component->data->rtextdiv->val = str_replace('</div>', '', $component->data->rtextdiv->val);
+		//$component->data->rtextdiv->val = str_replace('<div><br></div>', '</br>', $component->data->rtextdiv->val);
+		$component->data->rtextdiv->val = str_replace('<br>', '</br>', $component->data->rtextdiv->val);
+		$rtext_id= "rtext".functions::get_random_string();
 		$component->data->rtextdiv->val = html_entity_decode($component->data->rtextdiv->val,null,"UTF-8");
 		$container.=" 
-			<div id='$html_id' ".$attr." ".$css.">
+		<div id='$rtext_id' ".$attr." ".$css." class='widgets-rw panel-scrolling-rw scroll-horizontal-rw exclude-auto-rw'>
+
+			<div class='rtext frame-rw'>
+
 				".$component->data->rtextdiv->val."
-			</div>
-	
-		
-		";
+			
+			</div>	
+
+		</div>";
 
 		$this->html=$container;
 

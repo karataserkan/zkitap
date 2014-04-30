@@ -474,15 +474,16 @@ window.lindneo.toolbox = (function(window, $, undefined){
     for (var i = 0; i < elems.length; i++)
     {
       var zindex=document.defaultView.getComputedStyle(elems[i],null).getPropertyValue("z-index");
+      if(zindex==9999) zindex =999;
       console.log(zindex);
       if (zindex != 'auto' && !(eleman[0] === elems[i]) ){
 
         zindex=parseInt(zindex);
-        //console.log(zindex);
-
+        console.log(zindex);
+        console.log(zindexCompare);
         if (( zindex>= zindexCompare) && zindex<9000)
         {
-          //console.log(zindex);
+          console.log(zindex);
           return parseInt(zindex)+1;
         }
       }
