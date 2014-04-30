@@ -127,9 +127,9 @@ var createGaleryComponent = function (event,ui){
                 'position': 'relative',
                 'min-height':'100px',
                 'min-width':'100px',
-
-                'width': image_width,
-                'height': image_height,
+                'width': '100%',
+                'height': '100%'
+                
 
 
               },
@@ -143,8 +143,9 @@ var createGaleryComponent = function (event,ui){
                 'position':'absolute',
                 'top': (ui.offset.top-$(event.target).offset().top ) + 'px',
                 'left':  ( ui.offset.left-$(event.target).offset().left ) + 'px',
-                'background-color': 'transparent'
-                
+                'background-color': 'transparent',
+                'width': image_width,
+                'height': image_height
 
               }
             }
