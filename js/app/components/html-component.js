@@ -138,8 +138,9 @@ var createHtmlComponent = function ( event, ui, oldcomponent ) {
                         }</div>\
                         <script>\
                               var editor = ace.edit("editor");\
-                              editor.setTheme("ace/theme/monokai");\
-                              editor.getSession().setMode("ace/mode/javascript");\
+                              editor.setTheme("ace/theme/twilight");\
+                              var JavaScriptMode = require("ace/mode/javascript").Mode;\
+                              editor.getSession().setMode(new JavaScriptMode());\
                         </script>');
     var add_button = $("<a href='#' id='pop-image-OK' class='btn btn-info' style='padding: 5px 30px;'>Ekle</a> ");
     poup_header.appendTo(html_popup);
