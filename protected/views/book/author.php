@@ -680,11 +680,10 @@ $current_user=User::model()->findByPk(Yii::app()->user->id);
 	
 <!--  arrange popup -->
 
-<div class="popup" id="pop-arrange-popup">
+<div class="popup" id="pop-arrange-popup" style="left:750px;">
 <div class="popup-header">
-	<i class="icon-arrange"></i>
-		Katman
-	<i id="arrange-add-dummy-close-button" class="icon-close size-10" style="float:right; margin-right:10px; margin-top:5px;"></i>
+	<!--<i class="icon-arrange"></i>-->
+	 Katman<i id="arrange-add-dummy-close-button" class="icon-close size-10" style="float:right; margin-right:10px; margin-top:5px;"></i>
 </div>
 <!-- popup content-->
 	<i rel='zindex' action='top' class="toolbox-btn icon-bring-front size-20 dark-blue"><a> En Üste Çıkart</a></i>

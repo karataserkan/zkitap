@@ -1071,6 +1071,13 @@ class componentHTML {
 
 	public function rtextInner($component){
 
+		$tidy_config = array(
+           'indent'         => true,
+           'output-xhtml'   => true,
+           'show-body-only' => true, 
+           'clean' => true,
+           'wrap'           => 200);
+
 		$container='';
 		$attr='';
 		$css='';
@@ -1101,13 +1108,19 @@ if ($data->self->attr->componentType == "side-text" ){
 		//$component->data->rtextdiv->val = str_replace('<div><br></div>', '</br>', $component->data->rtextdiv->val);
 		$component->data->rtextdiv->val = str_replace('<br>', '</br>', $component->data->rtextdiv->val);
 		$rtext_id= "rtext".functions::get_random_string();
+
 		$component->data->rtextdiv->val = html_entity_decode($component->data->rtextdiv->val,null,"UTF-8");
+
+		$tidy = new tidy;
+		$tidy->parseString($component->data->rtextdiv->val, $tidy_config, 'utf8');
+		$tidy->cleanRepair();
+
 		$container.=" 
 		<div id='$rtext_id' ".$attr." ".$css." class='widgets-rw panel-scrolling-rw scroll-horizontal-rw exclude-auto-rw'>
 
 			<div class='rtext frame-rw'>
 
-				".$component->data->rtextdiv->val."
+				".$tidy."
 			
 			</div>	
 
