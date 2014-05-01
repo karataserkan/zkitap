@@ -82,7 +82,6 @@
 		});
 		</script>
 		<!-- ACE HTML-->
-		<script type="text/javascript" src="<?php echo Yii::app()->request->baseUrl; ?>/js/lib/ace/ace.js"></script>
 		<style type="text/css" media="screen">
 		    #editor { 
 		        position: absolute;
@@ -92,7 +91,10 @@
 		        left: 0;
 		    }
 		</style>
-
+		<script type="text/javascript" src="<?php echo Yii::app()->request->baseUrl; ?>/js/lib/ace/ace.js"></script>
+		<script src="<?php echo Yii::app()->request->baseUrl; ?>/js/lib/ace/theme/twilight.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript" src="<?php echo Yii::app()->request->baseUrl; ?>/js/lib/ace/mode-javascript.js"></script>
+		
 		<!-- JS Slider -->
 		<script type="text/javascript" src="<?php echo Yii::app()->request->baseUrl; ?>/js/lib/jssor.core.js"></script>
 	    <script type="text/javascript" src="<?php echo Yii::app()->request->baseUrl; ?>/js/lib/jssor.utils.js"></script>

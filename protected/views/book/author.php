@@ -2033,24 +2033,40 @@ $background= (!empty($img)) ? "background-image:url('".$img."')" : "background:w
 						<?php 
 						$data=json_decode($model->data,true);
 						$template_id=$data["template_id"];
-						$template_chapter=Chapter::model()->find( 'book_id=:book_id', array(':book_id' => $template_id )  );
-
-						$template_pages=Page::model()->findAll(array('order'=>  '`order` asc ,  created asc', "condition"=>'chapter_id=:chapter_id', "params" =>array(':chapter_id' => $template_chapter->chapter_id  ) ) );
-						foreach ($template_pages as $template_page){
-							echo "<li><a href='/page/create?book_id=".$model->book_id."&chapter_id=".$current_chapter->chapter_id."&pageTeplateId=".$template_page->page_id."' ><img src='".$template_page->data. "' >a</a></li>";
+						$template_chapters=Chapter::model()->findAll(array('order'=>  '`order` asc ,  created asc', "condition"=>'book_id=:book_id', "params" =>array(':book_id' => $template_id  ) ) );
+						foreach ($template_chapters as $key => $template_chapter) {
+							$template_pages=Page::model()->findAll(array('order'=>  '`order` asc ,  created asc', "condition"=>'chapter_id=:chapter_id', "params" =>array(':chapter_id' => $template_chapter->chapter_id  ) ) );
+							foreach ($template_pages as $template_page){
+								echo "<li onclick='event.stopPropagation();' class='page' chapter_id='".$template_chapter->chapter_id."' page_id='".$template_page->page_id."' ><canvas class='preview' height='90' width='120'> </canvas><a href='/page/create?book_id=".$model->book_id."&chapter_id=".$current_chapter->chapter_id."&pageTeplateId=".$template_page->page_id."' >Ekle</a></li>";
+								?>
+									<script type="text/javascript">
+										window.lindneo.tlingit.loadPagesPreviews('<?php echo $template_page->page_id ?>');
+									</script>
+								<?php
+							}
 						}
-
-						?>	
-						<li ><img src="/css/images/template/klasik_1_400x300.jpg" ></li>
-						<li ><img src="/css/images/template/klasik_2_400x300.jpg" ></li>
-						<li ><img src="/css/images/template/klasik_3_400x300.jpg" ></li>
-						<li ><img src="/css/images/template/klasik_4_400x300.jpg" ></li>
-				
+						?>
 					<ul>	
 					
 					</div>
 				   <div class="tab-pane fade" id="tab_3_2">
-				
+					<ul class="add-page-list">
+						<?php 
+						$data=json_decode($model->data,true);
+						$template_id=$data["template_id"];
+						$template_chapters=Chapter::model()->findAll(array('order'=>  '`order` asc ,  created asc', "condition"=>'book_id=:book_id', "params" =>array(':book_id' => $template_id  ) ) );
+						foreach ($template_chapters as $key => $template_chapter) {
+							$template_page=Page::model()->find(array('order'=>  '`order` asc ,  created asc', "condition"=>'chapter_id=:chapter_id', "params" =>array(':chapter_id' => $template_chapter->chapter_id  ) ) );
+								echo "<li onclick='event.stopPropagation();' class='page' chapter_id='".$template_chapter->chapter_id."' page_id='".$template_page->page_id."' ><canvas class='preview' height='90' width='120'> </canvas><a href='/page/create?book_id=".$model->book_id."&chapter_id=".$current_chapter->chapter_id."&pageTeplateId=".$template_page->page_id."' >Ekle</a></li>";
+								?>
+									<script type="text/javascript">
+										window.lindneo.tlingit.loadPagesPreviews('<?php echo $template_page->page_id ?>');
+									</script>
+								<?php
+						}
+
+						?>
+					</ul>
 					</div>
 				</div>
 			 </div>
