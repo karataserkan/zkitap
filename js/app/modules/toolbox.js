@@ -83,13 +83,13 @@ window.lindneo.toolbox = (function(window, $, undefined){
   var  componentsAlignmentLeftToSet = function ()
   {
     var position = this.component_position('left');
-    //console.log(position);
+    console.log(position);
     $.each(this.selectedComponents, function( key, component ) {
       //console.log(component.options.component.data.self.css.left);
       component.options.component.data.self.css.left = position;
       window.lindneo.tlingit.componentHasUpdated(component.options.component);
-      window.lindneo.nisga.destroyComponent(component.options.component.id);
-        window.lindneo.nisga.createComponent(component.options.component);
+      window.lindneo.nisga.destroyComponent(component.options.component);
+      window.lindneo.nisga.createComponent(component.options.component);
       
     });
     //return position;
@@ -104,8 +104,8 @@ window.lindneo.toolbox = (function(window, $, undefined){
       var left_position = position - parseInt(component.options.component.data.self.css.width,10);
       component.options.component.data.self.css.left = left_position+'px';
       window.lindneo.tlingit.componentHasUpdated(component.options.component);
-      window.lindneo.nisga.destroyComponent(component.options.component.id);
-        window.lindneo.nisga.createComponent(component.options.component);
+      window.lindneo.nisga.destroyComponent(component.options.component);
+      window.lindneo.nisga.createComponent(component.options.component);
 
     });
     //return position;
@@ -121,8 +121,8 @@ window.lindneo.toolbox = (function(window, $, undefined){
       var object_position = position - (object_width / 2);
       component.options.component.data.self.css.left = object_position;
       window.lindneo.tlingit.componentHasUpdated(component.options.component);
-      window.lindneo.nisga.destroyComponent(component.options.component.id);
-        window.lindneo.nisga.createComponent(component.options.component);
+      window.lindneo.nisga.destroyComponent(component.options.component);
+      window.lindneo.nisga.createComponent(component.options.component);
     });
     //return position;
   };
@@ -133,13 +133,14 @@ window.lindneo.toolbox = (function(window, $, undefined){
     //console.log(position);
     $.each(this.selectedComponents, function( key, component ) {
       //console.log(component.options.component.data.self.css.left);
-      console.log(position);
+      //console.log(position);
+      //console.log(component.options.component);
       component.options.component.data.self.css.top = position;
-      console.log(component.options.component.id);
-      console.log(component.options.component.data.self.css.left);
+      //console.log(component.options.component.id);
+      //console.log(component.options.component.data.self.css.left);
       window.lindneo.tlingit.componentHasUpdated(component.options.component);
-      window.lindneo.nisga.destroyComponent(component.options.component.id);
-        window.lindneo.nisga.createComponent(component.options.component);
+      window.lindneo.nisga.destroyComponent(component.options.component);
+      window.lindneo.nisga.createComponent(component.options.component);
       
     });
     //return position;
@@ -155,8 +156,8 @@ window.lindneo.toolbox = (function(window, $, undefined){
       var top_position = position - parseInt(component.options.component.data.self.css.height,10);
       component.options.component.data.self.css.top = top_position+'px';
       window.lindneo.tlingit.componentHasUpdated(component.options.component);
-      window.lindneo.nisga.destroyComponent(component.options.component.id);
-        window.lindneo.nisga.createComponent(component.options.component);
+      window.lindneo.nisga.destroyComponent(component.options.component);
+      window.lindneo.nisga.createComponent(component.options.component);
 
     });
     //return position;
@@ -172,8 +173,8 @@ window.lindneo.toolbox = (function(window, $, undefined){
       var object_position = position - (object_height / 2);
       component.options.component.data.self.css.top = object_position;
       window.lindneo.tlingit.componentHasUpdated(component.options.component);
-      window.lindneo.nisga.destroyComponent(component.options.component.id);
-        window.lindneo.nisga.createComponent(component.options.component);
+      window.lindneo.nisga.destroyComponent(component.options.component);
+      window.lindneo.nisga.createComponent(component.options.component);
     });
     //return position;
   };
