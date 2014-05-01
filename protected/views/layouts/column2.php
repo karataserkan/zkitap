@@ -160,7 +160,7 @@
 							<li class="has-sub">
 								<a href="javascript:;" class="">
 									<i class="fa fa-clipboard fa-fw"></i>
-									<span class="menu-text"><?php echo __('Templates');?></span>
+									<span class="menu-text"><?php echo __('Şablonlar');?></span>
 									<span class="arrow"></span>
 								</a>
 								<ul class="sub">

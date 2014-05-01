@@ -115,7 +115,7 @@ $current_user=User::model()->findByPk(Yii::app()->user->id);
 					<ul>
 				     <li class="onoff"><a href='#'  ><input type="checkbox" name="cetvel" id="cetvelcheck" class="css-checkbox" /><label for="cetvelcheck" class="css-label"><?php _e('Cetvel') ?></label></a></li>
 			         <li class="onoff"><a href='#'  ><input type="checkbox" name="rehber" id="rehbercheck" class="css-checkbox" /><label for="rehbercheck" class="css-label"><?php _e('Rehber') ?></label></a></li>
-			         <li class="onoff"><a href='#'  ><input type="checkbox" name="yorumlar" id="yorumlarcheck" class="css-checkbox" /><label for="yorumlarcheck" class="css-label"><?php _e('Yorumlar') ?></label></a></li>
+			         <!--<li class="onoff"><a href='#'  ><input type="checkbox" name="yorumlar" id="yorumlarcheck" class="css-checkbox" /><label for="yorumlarcheck" class="css-label"><?php _e('Yorumlar') ?></label></a></li>-->
 			        </ul>
 			   </li>
 				
@@ -199,7 +199,10 @@ $current_user=User::model()->findByPk(Yii::app()->user->id);
 						<option value="">Serbest</option>
 						<option value="h1" >Başlık</option>
 						<option value="h2" >Alt Başlık</option>
-						<option value="h3" >Kucuk Başlık</option>
+						<option value="h3" >Başlık 1</option>
+						<option value="h4" >Başlık 2</option>
+						<option value="h5" >Başlık 3</option>
+						<option value="h6" >Başlık 4</option>
 						<option value="p"  >Paragraf</option>
 						<option value="blockqoute" >Alıntı</option>
 					</select>
@@ -1364,7 +1367,10 @@ $current_user=User::model()->findByPk(Yii::app()->user->id);
 							<div id="fast_styles_main">
 								<a class="btn component" href="#" id="fast_style2" component="h1" ><?php _e("Başlık"); ?></a><br>
 								<a class="btn component" href="#" id="fast_style3" component="h2" ><?php _e("Alt Başlık"); ?></a><br>
-								<a class="btn component" href="#" id="fast_style4" component="h3" ><?php _e("Küçük Başlık"); ?></a><br>
+								<a class="btn component" href="#" id="fast_style4" component="h3" ><?php _e("Başlık 1"); ?></a><br>
+								<a class="btn component" href="#" id="fast_style4" component="h4" ><?php _e("Başlık 2"); ?></a><br>
+								<a class="btn component" href="#" id="fast_style4" component="h5" ><?php _e("Başlık 3"); ?></a><br>
+								<a class="btn component" href="#" id="fast_style4" component="h6" ><?php _e("Başlık 4"); ?></a><br>
 								<a class="btn component" href="#" id="fast_style5" component="p" ><?php _e("Paragraf"); ?></a><br>
 								<a class="btn component" href="#" id="fast_style6" component="blockqoute" ><?php _e("Alıntı"); ?></a>
 							</div>

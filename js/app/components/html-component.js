@@ -122,7 +122,7 @@ var createHtmlComponent = function ( event, ui, oldcomponent ) {
       </div> \
       </div>").appendTo('body').draggable({cancel:'.drag-cancel'}).resizable();*/
     
-    var html_popup = $("<div class='popup ui-draggable' id='pop-popup' style='display: block; top:" + top + "; left: " + left + ";'> \
+    var html_popup = $("<div class='popup ui-draggable' id='pop-popup' style='display: block; top:115px; left: 160px; width: 1100px; height:600px; z-index:99999;'> \
       </div>");
     html_popup.appendTo('body').draggable({cancel:'.drag-cancel'}).resizable();
     var poup_header = $("<div class='popup-header'><i class='icon-m-link'></i> &nbsp;Html Ekle </div> ");
@@ -132,7 +132,15 @@ var createHtmlComponent = function ( event, ui, oldcomponent ) {
         <div style='clear:both'></div> \
       </div> ");
     var popup_wrapper = $("<div class ='popup_wrapper drag-cancel' style='border: 1px #ccc solid; ' ></div> <br>");
-    var popup_detail = $("<textarea  id='popup-explanation' contenteditable='true' class='drag-cancel' rows='4' cols='40'>" + popup_value + "</textarea>");
+    var popup_detail = $('<div id="editor" contenteditable="true" style="width:1000px; height:550px; overflow:auto;">function foo(items) {\
+                            var x = "All this is syntax highlighted";\
+                            return x;\
+                        }</div>\
+                        <script>\
+                              var editor = ace.edit("editor");\
+                              editor.setTheme("ace/theme/monokai");\
+                              editor.getSession().setMode("ace/mode/javascript");\
+                        </script>');
     var add_button = $("<a href='#' id='pop-image-OK' class='btn btn-info' style='padding: 5px 30px;'>Ekle</a> ");
     poup_header.appendTo(html_popup);
     close_button.appendTo(poup_header);
