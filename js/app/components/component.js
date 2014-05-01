@@ -878,7 +878,8 @@ $(document).ready(function(){
         console.log(propertyValue);
         this.setPropertyofObject(propertyName,propertyValue);
         this.setFromData();
-        this._trigger('update', null, this.options.component );
+        if(propertyName != "component_alignment")
+          this._trigger('update', null, this.options.component );
         
     },
 
