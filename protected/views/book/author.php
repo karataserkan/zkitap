@@ -2024,6 +2024,17 @@ $background= (!empty($img)) ? "background-image:url('".$img."')" : "background:w
 				<div class="tab-content">
 				   <div class="tab-pane fade active in" id="tab_3_1">
 					<ul class="add-page-list">
+						<?php 
+						$data=json_decode($model->data,true);
+						$template_id=$data["template_id"];
+						$template_chapter=Chapter::model()->find( 'book_id=:book_id', array(':book_id' => $template_id )  );
+
+						$template_pages=Page::model()->findAll(array('order'=>  '`order` asc ,  created asc', "condition"=>'chapter_id=:chapter_id', "params" =>array(':chapter_id' => $template_chapter->chapter_id  ) ) );
+						foreach ($template_pages as $template_page){
+							echo "<li><a href='/page/create?book_id=".$model->book_id."&chapter_id=".$current_chapter->chapter_id."&pageTeplateId=".$template_page->page_id."' ><img src='".$template_page->data. "' >a</a></li>";
+						}
+
+						?>	
 						<li ><img src="/css/images/template/klasik_1_400x300.jpg" ></li>
 						<li ><img src="/css/images/template/klasik_2_400x300.jpg" ></li>
 						<li ><img src="/css/images/template/klasik_3_400x300.jpg" ></li>

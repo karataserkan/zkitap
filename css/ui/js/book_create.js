@@ -209,12 +209,14 @@
 				//$('#bookCreateWizard').bootstrapWizard('remove', 3, false);
 				//$('#bookCreateWizard').bootstrapWizard('remove', 2, true);
 				$('#bookCreateWizard').bootstrapWizard('display', 4);
-			});
-			$('#uniform-book_type_0 span').on('click', function() {
+                $('#bookCreateWizard').bootstrapWizard('show',1);
+            });
+            $('#uniform-book_type_0 span').on('click', function() {
                 $('.epub_select').show();
-				$('#bookCreateWizard').bootstrapWizard('remove', 4, true);
-				$('#bookCreateWizard').bootstrapWizard('display', 3);
-				$('#bookCreateWizard').bootstrapWizard('display', 2);
+                $('#bookCreateWizard').bootstrapWizard('remove', 4, true);
+                $('#bookCreateWizard').bootstrapWizard('display', 3);
+                $('#bookCreateWizard').bootstrapWizard('display', 2);
+                $('#bookCreateWizard').bootstrapWizard('show',1);
 			});
 
 
