@@ -81,6 +81,17 @@
 		$('#facybox').css('z-index','9999');
 		});
 		</script>
+		<!-- ACE HTML-->
+		<script type="text/javascript" src="<?php echo Yii::app()->request->baseUrl; ?>/js/lib/ace/ace.js"></script>
+		<style type="text/css" media="screen">
+		    #editor { 
+		        position: absolute;
+		        top: 0;
+		        right: 0;
+		        bottom: 0;
+		        left: 0;
+		    }
+		</style>
 
 		<!-- JS Slider -->
 		<script type="text/javascript" src="<?php echo Yii::app()->request->baseUrl; ?>/js/lib/jssor.core.js"></script>
