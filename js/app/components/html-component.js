@@ -16,9 +16,13 @@ $(document).ready(function(){
 
       var componenthtmlid='html'+this.options.component.id;
       
-
-    var html_data = window.decodeURI(this.options.component.data.html_inner);
-
+	try{
+    		var html_data = window.decodeURI(this.options.component.data.html_inner);
+	  }
+	catch(err)
+	{
+		var html_data = this.options.component.data.html_inner;
+	}
       console.log(this.options.component);
      /* while( html_data.indexOf('&lt;') > -1)
       {
