@@ -807,7 +807,7 @@ class componentHTML {
 		}
 
 		$html_id= "html".functions::get_random_string();
-		$component->data->html_inner = urldecode($component->data->html_inner);
+		$component->data->html_inner = rawurldecode($component->data->html_inner);
 		$container.=" 
 			<div id='$html_id' ".$css.">
 				".$component->data->html_inner."
