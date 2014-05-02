@@ -2037,7 +2037,7 @@ $background= (!empty($img)) ? "background-image:url('".$img."')" : "background:w
 						foreach ($template_chapters as $key => $template_chapter) {
 							$template_pages=Page::model()->findAll(array('order'=>  '`order` asc ,  created asc', "condition"=>'chapter_id=:chapter_id', "params" =>array(':chapter_id' => $template_chapter->chapter_id  ) ) );
 							foreach ($template_pages as $template_page){
-								echo "<li onclick='event.stopPropagation();' class='page' chapter_id='".$template_chapter->chapter_id."' page_id='".$template_page->page_id."' ><canvas class='preview' height='90' width='120'> </canvas><a href='/page/create?book_id=".$model->book_id."&chapter_id=".$current_chapter->chapter_id."&pageTeplateId=".$template_page->page_id."' >Ekle</a></li>";
+								echo "<li onclick='event.stopPropagation();' class='page' chapter_id='".$template_chapter->chapter_id."' page_id='".$template_page->page_id."' style='height:90px; width:120px;' ><canvas class='preview' id='pre_".$template_page->page_id."' style='height:90px; width:120px;'> </canvas><a href='/page/create?book_id=".$model->book_id."&chapter_id=".$current_chapter->chapter_id."&pageTeplateId=".$template_page->page_id."' >Ekle</a></li>";
 								?>
 									<script type="text/javascript">
 										window.lindneo.tlingit.loadPagesPreviews('<?php echo $template_page->page_id ?>');
