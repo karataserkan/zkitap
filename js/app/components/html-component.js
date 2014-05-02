@@ -122,27 +122,21 @@ var createHtmlComponent = function ( event, ui, oldcomponent ) {
       </div> \
       </div>").appendTo('body').draggable({cancel:'.drag-cancel'}).resizable();*/
     
-    var html_popup = $("<div class='popup ui-draggable' id='pop-popup' style='display: block; top:115px; left: 160px; width: 1100px; height:600px; z-index:99999;'> \
+    var html_popup = $("<div class='popup ui-draggable' id='pop-popup' style='display: block; top:115px; left: 160px; width: 1100px; height:620px; z-index:99999;'> \
       </div>");
     html_popup.appendTo('body').draggable({cancel:'.drag-cancel'}).resizable();
     var poup_header = $("<div class='popup-header'><i class='icon-m-link'></i> &nbsp;Html Ekle </div> ");
     var close_button = $("<i id='html-add-dummy-close-button' class='icon-close size-10 popup-close-button'></i> ");
     
-    var galery_inner = $("<div class='gallery-inner-holder' style='width: " + width + "px; height: " + height + "px;'> \
+    var galery_inner = $("<div class='gallery-inner-holder' > \
         <div style='clear:both'></div> \
       </div> ");
     var popup_wrapper = $("<div class ='popup_wrapper drag-cancel' style='border: 1px #ccc solid; ' ></div> <br>");
-    var popup_detail = $('<div id="editor" contenteditable="true" style="width:1000px; height:550px; overflow:auto;">function foo(items) {\
-                            var x = "All this is syntax highlighted";\
-                            return x;\
-                        }</div>\
-                        <script>\
-                              var editor = ace.edit("editor");\
-                              editor.setTheme("ace/theme/twilight");\
-                              var JavaScriptMode = require("ace/mode/javascript").Mode;\
-                              editor.getSession().setMode(new JavaScriptMode());\
-                        </script>');
-    var add_button = $("<a href='#' id='pop-image-OK' class='btn btn-info' style='padding: 5px 30px;'>Ekle</a> ");
+    var popup_detail = $('<textarea class="my-code-area" style="width: 1050px; height:500px; overflow:auto; text-align: left;">'+popup_value+'</textarea>\
+                            <script>\
+                              $(".my-code-area").ace({ theme: "twilight", lang: "javascript" })\
+                            </script>');
+    var add_button = $("<a href='#' id='pop-image-OK' class='btn btn-info' style='padding: 5px 30px; margin-left: 480px;'>Ekle</a> ");
     poup_header.appendTo(html_popup);
     close_button.appendTo(poup_header);
     galery_inner.appendTo(html_popup);
@@ -179,12 +173,12 @@ var createHtmlComponent = function ( event, ui, oldcomponent ) {
         top = oldcomponent.data.self.css.top;
         left = oldcomponent.data.self.css.left;
         window.lindneo.tlingit.componentHasDeleted( oldcomponent, oldcomponent.id );
-        oldcomponent.data.html_inner = $("#popup-explanation").html();
+        oldcomponent.data.html_inner = $(".my-code-area").val();
 
       };
-      console.log($("#popup-explanation").val());
+      console.log($(".my-code-area").val());
       //return;
-      var html_data = window.encodeURI($("#popup-explanation").val());
+      var html_data = window.encodeURI($(".my-code-area").val());
       console.log(html_data);
        var  component = {
           'type' : 'html',
