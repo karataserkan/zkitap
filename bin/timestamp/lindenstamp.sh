@@ -23,7 +23,7 @@ else
 	targetIF="wlan0"
 fi
 
-#exported functions
+# exported functions
 checkBalance(){
 	balance=`java -jar zamane.jar -k $timestampServerAddress $timestampServerPort $customerId $password|awk '{print $3}'`
 	if echo $balance | egrep -q '^[0-9]+$';
