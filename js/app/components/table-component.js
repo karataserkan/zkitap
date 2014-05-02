@@ -417,8 +417,12 @@ $(document).ready(function(){
           this.row_delete(this.options.component, this.TableSelection.end);
         else if(propertyName == 'delete_column')
           this.column_delete(this.options.component, this.TableSelection.end);
-        else if(propertyName == 'add_row')
+        else if(propertyName == 'add_row'){
+          console.log("ADDROW BEGIN");
+          console.log(this.TableSelection.end);
+          console.log("ADDROW END");
           this.row_add(this, this.TableSelection.end);
+        }
         else if(propertyName == 'add_column')
           this.column_add(this.options.component, this.TableSelection.end);
         else if(propertyName == 'zindex')
@@ -429,7 +433,9 @@ $(document).ready(function(){
       },
 
       row_add: function(this_val, location){
-        console.log(location.rows);
+        console.log(location);
+        //location.columns-=1;
+        console.log(this_val);
         console.log(this.cells);
         
         //console.log(component.data.table.length);
@@ -887,7 +893,7 @@ $(document).ready(function(){
             
             this.excelCursor.remove();
             //this.excelCursor.dblclick(function(){$(this).parent().dblclick();});
-            //console.log(this.cells);
+            console.log(this.cells);
             //console.log(this.cells[TableSelection.end.rows][TableSelection.end.columns]);
             this.cells[TableSelection.end.rows][TableSelection.end.columns].prepend( this.excelCursor );
 
