@@ -137,13 +137,13 @@ return array(
         ),
 		'Smtpmail'=>array(
             'class'=>'application.extension.smtpmail.PHPMailer',
-            'Host'=>"smtp.gmail.com",
+            'Host'=>"tls://smtp.gmail.com",
             'Username'=>'noreply@okutus.com',
             'Password'=>'7m68FJ:J:JHoAeY',
             'Mailer'=>'smtp',
             'Port'=>465,
             'SMTPAuth'=>true, 
-           	'SMTPSecure' => 'tls',
+           	//'SMTPSecure' => 'tls',
         ),
 	),
 
@@ -152,6 +152,7 @@ return array(
 	'params'=>array(
 		// this is used in contact page
 		'adminEmail'=>'pacific@linden-tech.com',
+		'noreplyEmail'=>'noreply@okutus.com',
 
      	'epubtopdf'=>dirname(__FILE__).DIRECTORY_SEPARATOR.'../../'.'bin/epubtopdf/epubtopdf ',
      	'pdftojpg'=>dirname(__FILE__).DIRECTORY_SEPARATOR.'../../'.'bin/pdftojpg/pdftojpg ',

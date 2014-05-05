@@ -8,9 +8,11 @@
  * @property string $meta_key
  * @property string $meta_value
  * @property integer $created
+ * @property integer $id
  */
 class UserMeta extends CActiveRecord
 {
+	public $maxColumn;
 	/**
 	 * Returns the static model of the specified AR class.
 	 * @param string $className active record class name.
@@ -42,7 +44,7 @@ class UserMeta extends CActiveRecord
 			array('meta_key', 'length', 'max'=>200),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('user_id, meta_key, meta_value, created', 'safe', 'on'=>'search'),
+			array('user_id, meta_key, meta_value, created, id', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -67,6 +69,7 @@ class UserMeta extends CActiveRecord
 			'meta_key' => 'Meta Key',
 			'meta_value' => 'Meta Value',
 			'created' => 'Created',
+			'id' => 'ID',
 		);
 	}
 
@@ -85,6 +88,7 @@ class UserMeta extends CActiveRecord
 		$criteria->compare('meta_key',$this->meta_key,true);
 		$criteria->compare('meta_value',$this->meta_value,true);
 		$criteria->compare('created',$this->created);
+		$criteria->compare('id',$this->id);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
