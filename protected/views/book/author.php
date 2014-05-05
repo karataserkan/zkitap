@@ -1998,6 +1998,8 @@ $background= (!empty($img)) ? "background-image:url('".$img."')" : "background:w
   $(function() {
     $( ".ui-draggable" ).draggable();
     $( "#addPage" ).css('z-index','9999999999999');
+    $( "#box-thumbnail" ).css('z-index','9999999999999');
+    $( "#box-cover" ).css('z-index','9999999999999');
     
   });
   </script>
