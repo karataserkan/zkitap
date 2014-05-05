@@ -234,6 +234,8 @@ window.lindneo.dataservice = (function( $ ) {
     var that = this;
     var requestRoute='EditorActions' +'/' + action;
     //console.log(data);
+    //console.log(action);
+    
     var timestamp = new Date().getTime().toString();
     NProgress.configure({
        ease: 'ease',

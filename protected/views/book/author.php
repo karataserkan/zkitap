@@ -115,7 +115,7 @@ $current_user=User::model()->findByPk(Yii::app()->user->id);
 					<ul>
 				     <li class="onoff"><a href='#'  ><input type="checkbox" name="cetvel" id="cetvelcheck" class="css-checkbox" /><label for="cetvelcheck" class="css-label"><?php _e('Cetvel') ?></label></a></li>
 			         <li class="onoff"><a href='#'  ><input type="checkbox" name="rehber" id="rehbercheck" class="css-checkbox" /><label for="rehbercheck" class="css-label"><?php _e('Rehber') ?></label></a></li>
-			         <li class="onoff"><a href='#'  ><input type="checkbox" name="yorumlar" id="yorumlarcheck" class="css-checkbox" /><label for="yorumlarcheck" class="css-label"><?php _e('Yorumlar') ?></label></a></li>
+			         <!--<li class="onoff"><a href='#'  ><input type="checkbox" name="yorumlar" id="yorumlarcheck" class="css-checkbox" /><label for="yorumlarcheck" class="css-label"><?php _e('Yorumlar') ?></label></a></li>-->
 			        </ul>
 			   </li>
 				
@@ -199,7 +199,10 @@ $current_user=User::model()->findByPk(Yii::app()->user->id);
 						<option value="">Serbest</option>
 						<option value="h1" >Başlık</option>
 						<option value="h2" >Alt Başlık</option>
-						<option value="h3" >Kucuk Başlık</option>
+						<option value="h3" >Başlık 1</option>
+						<option value="h4" >Başlık 2</option>
+						<option value="h5" >Başlık 3</option>
+						<option value="h6" >Başlık 4</option>
 						<option value="p"  >Paragraf</option>
 						<option value="blockqoute" >Alıntı</option>
 					</select>
@@ -680,11 +683,10 @@ $current_user=User::model()->findByPk(Yii::app()->user->id);
 	
 <!--  arrange popup -->
 
-<div class="popup" id="pop-arrange-popup">
+<div class="popup" id="pop-arrange-popup" style="left:750px;">
 <div class="popup-header">
-	<i class="icon-arrange"></i>
-		Katman
-	<i id="arrange-add-dummy-close-button" class="icon-close size-10" style="float:right; margin-right:10px; margin-top:5px;"></i>
+	<!--<i class="icon-arrange"></i>-->
+	 Katman<i id="arrange-add-dummy-close-button" class="icon-close size-10" style="float:right; margin-right:10px; margin-top:5px;"></i>
 </div>
 <!-- popup content-->
 	<i rel='zindex' action='top' class="toolbox-btn icon-bring-front size-20 dark-blue"><a> En Üste Çıkart</a></i>
@@ -1365,7 +1367,10 @@ $current_user=User::model()->findByPk(Yii::app()->user->id);
 							<div id="fast_styles_main">
 								<a class="btn component" href="#" id="fast_style2" component="h1" ><?php _e("Başlık"); ?></a><br>
 								<a class="btn component" href="#" id="fast_style3" component="h2" ><?php _e("Alt Başlık"); ?></a><br>
-								<a class="btn component" href="#" id="fast_style4" component="h3" ><?php _e("Küçük Başlık"); ?></a><br>
+								<a class="btn component" href="#" id="fast_style4" component="h3" ><?php _e("Başlık 1"); ?></a><br>
+								<a class="btn component" href="#" id="fast_style4" component="h4" ><?php _e("Başlık 2"); ?></a><br>
+								<a class="btn component" href="#" id="fast_style4" component="h5" ><?php _e("Başlık 3"); ?></a><br>
+								<a class="btn component" href="#" id="fast_style4" component="h6" ><?php _e("Başlık 4"); ?></a><br>
 								<a class="btn component" href="#" id="fast_style5" component="p" ><?php _e("Paragraf"); ?></a><br>
 								<a class="btn component" href="#" id="fast_style6" component="blockqoute" ><?php _e("Alıntı"); ?></a>
 							</div>
@@ -2025,16 +2030,43 @@ $background= (!empty($img)) ? "background-image:url('".$img."')" : "background:w
 				<div class="tab-content">
 				   <div class="tab-pane fade active in" id="tab_3_1">
 					<ul class="add-page-list">
-						<li ><img src="/css/images/template/klasik_1_400x300.jpg" ></li>
-						<li ><img src="/css/images/template/klasik_2_400x300.jpg" ></li>
-						<li ><img src="/css/images/template/klasik_3_400x300.jpg" ></li>
-						<li ><img src="/css/images/template/klasik_4_400x300.jpg" ></li>
-				
+						<?php 
+						$data=json_decode($model->data,true);
+						$template_id=$data["template_id"];
+						$template_chapters=Chapter::model()->findAll(array('order'=>  '`order` asc ,  created asc', "condition"=>'book_id=:book_id', "params" =>array(':book_id' => $template_id  ) ) );
+						foreach ($template_chapters as $key => $template_chapter) {
+							$template_pages=Page::model()->findAll(array('order'=>  '`order` asc ,  created asc', "condition"=>'chapter_id=:chapter_id', "params" =>array(':chapter_id' => $template_chapter->chapter_id  ) ) );
+							foreach ($template_pages as $template_page){
+								echo "<li class='page' chapter_id='".$template_chapter->chapter_id."' page_id='".$template_page->page_id."' style='height:90px; width:120px;' ><canvas class='preview' id='pre_".$template_page->page_id."' style='height:90px; width:120px;'> </canvas><a href='/page/create?book_id=".$model->book_id."&chapter_id=".$current_chapter->chapter_id."&pageTeplateId=".$template_page->page_id."' >Ekle</a></li>";
+								?>
+									<script type="text/javascript">
+										window.lindneo.tlingit.loadPagesPreviews('<?php echo $template_page->page_id ?>');
+									</script>
+								<?php
+							}
+						}
+						?>
 					<ul>	
 					
 					</div>
 				   <div class="tab-pane fade" id="tab_3_2">
-				
+					<ul class="add-page-list">
+						<?php 
+						$data=json_decode($model->data,true);
+						$template_id=$data["template_id"];
+						$template_chapters=Chapter::model()->findAll(array('order'=>  '`order` asc ,  created asc', "condition"=>'book_id=:book_id', "params" =>array(':book_id' => $template_id  ) ) );
+						foreach ($template_chapters as $key => $template_chapter) {
+							$template_page=Page::model()->find(array('order'=>  '`order` asc ,  created asc', "condition"=>'chapter_id=:chapter_id', "params" =>array(':chapter_id' => $template_chapter->chapter_id  ) ) );
+								echo "<li onclick='event.stopPropagation();' class='page' chapter_id='".$template_chapter->chapter_id."' page_id='".$template_page->page_id."' ><canvas class='preview' height='90' width='120'> </canvas><a href='/page/create?book_id=".$model->book_id."&chapter_id=".$current_chapter->chapter_id."&pageTeplateId=".$template_page->page_id."' >Ekle</a></li>";
+								?>
+									<script type="text/javascript">
+										window.lindneo.tlingit.loadPagesPreviews('<?php echo $template_page->page_id ?>');
+									</script>
+								<?php
+						}
+
+						?>
+					</ul>
 					</div>
 				</div>
 			 </div>

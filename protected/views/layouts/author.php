@@ -81,7 +81,25 @@
 		$('#facybox').css('z-index','9999');
 		});
 		</script>
-
+		<!-- ACE HTML
+		<style type="text/css" media="screen">
+		    #editor { 
+		        position: absolute;
+		        top: 0;
+		        right: 0;
+		        bottom: 0;
+		        left: 0;
+		    }
+		</style>
+		<script type="text/javascript" src="<?php echo Yii::app()->request->baseUrl; ?>/js/lib/ace/ace.js"></script>
+		<script src="<?php echo Yii::app()->request->baseUrl; ?>/js/lib/ace/theme/twilight.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript" src="<?php echo Yii::app()->request->baseUrl; ?>/js/lib/ace/mode-javascript.js"></script> -->
+		<script src="<?php echo Yii::app()->request->baseUrl; ?>/js/lib/cheef_ace/ace/ace.js"></script>
+		<script src="<?php echo Yii::app()->request->baseUrl; ?>/js/lib/cheef_ace/ace/theme-twilight.js"></script>
+		<script src="<?php echo Yii::app()->request->baseUrl; ?>/js/lib/cheef_ace/ace/mode-javascript.js"></script>
+		<script src="<?php echo Yii::app()->request->baseUrl; ?>/js/lib/cheef_ace/jquery-ace.min.js"></script>
+		<link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/js/lib/cheef_ace/css/editor.css" media="screen" />
+		
 		<!-- JS Slider -->
 		<script type="text/javascript" src="<?php echo Yii::app()->request->baseUrl; ?>/js/lib/jssor.core.js"></script>
 	    <script type="text/javascript" src="<?php echo Yii::app()->request->baseUrl; ?>/js/lib/jssor.utils.js"></script>

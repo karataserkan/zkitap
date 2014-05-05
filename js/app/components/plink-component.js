@@ -89,13 +89,16 @@ $.ajax({
   popup_wrapper.appendTo(galery_inner).resizable({alsoResize: galery_inner});
   var chapter= $('<div class="panel-group" id="accordion1"></div>');
   chapter.appendTo(galery_inner);
-  
+  var deger = 1;
   $.each( book_data, function( key, value ) {
     console.log(value.title);
+    var title = value.title;
+    if(value.title == "") title = deger + ". Bölüm";
+    
     var chapter_title = $('<div class="panel panel-default">\
     <a data-toggle="collapse" data-parent="#accordion1" href="#collapse'+value.title+'"><div class="panel-heading">\
       <h4 class="panel-title">\
-        '+value.title+'\
+        '+title+'\
       </h4>\
     </div></a>\
     <div id="collapse'+value.title+'" class="panel-collapse collapse">\

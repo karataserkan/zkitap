@@ -778,14 +778,14 @@ $(document).ready(function(){
       return this._getProperty(propertyName);
     },
     setPropertyofObject : function (propertyName,propertyValue){
-      console.log(propertyName);
-      console.log(propertyValue);
+      //console.log(propertyName);
+      //console.log(propertyValue);
       return this._setPropertyofObject(propertyName,propertyValue) ;
     },
     _setPropertyofObject : function (propertyName,propertyValue){
     //console.log($('#'+this.options.component.id).slickWrap({ cutoff:propertyValue }));
-    console.log(propertyName);
-    console.log(propertyValue);
+    //console.log(propertyName);
+    //console.log(propertyValue);
       switch(propertyName){ 
         case 'cutoff':
           $('#'+this.options.component.id).slickWrap({ cutoff:propertyValue });
@@ -874,11 +874,12 @@ $(document).ready(function(){
       this._setProperty(propertyName,propertyValue);
     },
     _setProperty : function (propertyName,propertyValue){
-        console.log(propertyName);
-        console.log(propertyValue);
+        //console.log(propertyName);
+        //console.log(propertyValue);
         this.setPropertyofObject(propertyName,propertyValue);
         this.setFromData();
-        this._trigger('update', null, this.options.component );
+        if(propertyName != "component_alignment")
+          this._trigger('update', null, this.options.component );
         
     },
 

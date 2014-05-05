@@ -69,16 +69,17 @@ window.lindneo.tlingit = (function(window, $, undefined){
 
   var updateArrivalComponent = function(res) {
     var response = responseFromJson(res);
+    //console.log(response);
     window.lindneo.tsimshian.componentUpdated(response.result.component);
     loadPagesPreviews(response.result.component.page_id);
 
   };
 
   var componentHasDeleted = function ( component, componentId ) {
-    if(typeof componentId == 'undefined')
+    if(typeof componentId != 'undefined')
       oldcomponent_id = componentId;
     oldcomponent = component;
-    //console.log(oldcomponent);
+    //console.log(component.id);
     window.lindneo.dataservice
     .send( 'DeleteComponent', 
       { 
@@ -126,8 +127,9 @@ window.lindneo.tlingit = (function(window, $, undefined){
   };
 
   var responseFromJson = function (response){
-    //console.log(response);
-    return JSON.parse(response);
+      //console.log(response);
+      //return eval("(" +response+ ")");
+      return JSON.parse(response);
   };
 
   var loadPage = function (pageId){
