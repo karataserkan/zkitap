@@ -137,13 +137,13 @@ return array(
         ),
 		'Smtpmail'=>array(
             'class'=>'application.extension.smtpmail.PHPMailer',
-            'Host'=>"tls://smtp.gmail.com",
-            'Username'=>'edubox@linden-tech.com',
-            'Password'=>'12548442',
+            'Host'=>"smtp.gmail.com",
+            'Username'=>'noreply@okutus.com',
+            'Password'=>'7m68FJ:J:JHoAeY',
             'Mailer'=>'smtp',
             'Port'=>465,
             'SMTPAuth'=>true, 
-            //'ssl'=>'tls'
+           	'SMTPSecure' => 'tls',
         ),
 	),
 
