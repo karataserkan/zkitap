@@ -1715,6 +1715,10 @@ $current_user=User::model()->findByPk(Yii::app()->user->id);
 					var maxheight = $( window ).height();
 					$(".panel-collapse.collapse.in").css('max-height',maxheight-280);
 					$(".panel-collapse.collapse.in").css('overflow','auto');
+					$( window ).resize(function() {
+					  	maxheight = $( window ).height();
+					  	$(".panel-collapse.collapse.in").css('max-height',maxheight-280);
+					});
 				});
 				</script>
 			  <div class="panel panel-default">
