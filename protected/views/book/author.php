@@ -348,7 +348,10 @@ $current_user=User::model()->findByPk(Yii::app()->user->id);
 						<option value="">Serbest</option>
 						<option value="h1" >Başlık</option>
 						<option value="h2" >Alt Başlık</option>
-						<option value="h3" >Kucuk Başlık</option>
+						<option value="h3" >Başlık 1</option>
+						<option value="h4" >Başlık 2</option>
+						<option value="h5" >Başlık 3</option>
+						<option value="h6" >Başlık 4</option>
 						<option value="p"  >Paragraf</option>
 						<option value="blockqoute" >Alıntı</option>
 					</select>
@@ -1709,6 +1712,9 @@ $current_user=User::model()->findByPk(Yii::app()->user->id);
 						if (last_timeout) clearTimeout(last_timeout);
 
 					});
+					var maxheight = $( window ).height();
+					$(".panel-collapse.collapse.in").css('max-height',maxheight-280);
+					$(".panel-collapse.collapse.in").css('overflow','auto');
 				});
 				</script>
 			  <div class="panel panel-default">
@@ -1831,23 +1837,17 @@ $current_user=User::model()->findByPk(Yii::app()->user->id);
 					</script>
 					
 					
-					<a class="add-page-list-button" href='/page/create?book_id=<?php echo $model->book_id; ?>&chapter_id=<?php echo $current_chapter->chapter_id; ?>'>
-					<div class="add-page-list-inside">
-					Sayfa Ekle </div>
-					</a>
-
-					<a class="add-page-list-button" href='/chapter/create?book_id=<?php echo $model->book_id; ?>'>
-					<div class="add-page-list-inside">
-					Bölüm Ekle </div>
-					</a>	
+						
 
 				
 					
 				</div>
+
 			
 				</div>
 		
 		</div>
+		
 		</div>
 		</div>
 		</div>
@@ -1991,12 +1991,14 @@ $background= (!empty($img)) ? "background-image:url('".$img."')" : "background:w
 	
 <!-- Page Modal -->
 	
-<div class="modal fade add-page-modal" id="addPage" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div class="modal fade add-page-modal" id="addPage" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" >
   <div class="modal-dialog ">
     <div class="modal-content ui-draggable">
 	<script>
   $(function() {
     $( ".ui-draggable" ).draggable();
+    $( "#addPage" ).css('z-index','9999999999999');
+    
   });
   </script>
       <div class="modal-header">
@@ -2046,7 +2048,15 @@ $background= (!empty($img)) ? "background-image:url('".$img."')" : "background:w
 							}
 						}
 						?>
+						<li>
+							<a class="add-page-list-button" href='/page/create?book_id=<?php echo $model->book_id; ?>&chapter_id=<?php echo $current_chapter->chapter_id; ?>'>
+								<div class="add-page-list-inside">
+								Sayfa Ekle </div>
+							</a>
+						</li>
 					<ul>	
+					
+
 					
 					</div>
 				   <div class="tab-pane fade" id="tab_3_2">
@@ -2066,7 +2076,14 @@ $background= (!empty($img)) ? "background-image:url('".$img."')" : "background:w
 						}
 
 						?>
+						<li>
+							<a class="add-page-list-button" href='/chapter/create?book_id=<?php echo $model->book_id; ?>'>
+								<div class="add-page-list-inside">
+								Bölüm Ekle </div>
+							</a>
+						</li>
 					</ul>
+
 					</div>
 				</div>
 			 </div>
