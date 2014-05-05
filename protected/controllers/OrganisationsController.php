@@ -602,9 +602,9 @@ class OrganisationsController extends Controller
 		$regexp = "/^[^0-9][A-z0-9_]+([.][A-z0-9_]+)*[@][A-z0-9_-]+([.][A-z0-9_]+)*[.][A-z]{2,4}$/";
 		if (preg_match($regexp, $email)) {
 		    //Email address is valid
-			$user= User::model()->findAllByAttributes(array('email'=>$email) );
+			$user= User::model()->findByAttributes(array('email'=>$email) );
 			if ($user) {
-				$userId = $user[0]->id;
+				$userId = $user->id;
 			}
 			else
 			{
@@ -634,7 +634,7 @@ class OrganisationsController extends Controller
 
 			//mail gönderiyorum
 			$mail=Yii::app()->Smtpmail;
-	        $mail->SetFrom('edubox@linden-tech.com', $organisation->organisation_name);
+	        $mail->SetFrom(Yii::app()->params['noreplyEmail'], $organisation->organisation_name);
 	        $mail->Subject    = $organisation->organisation_name.' davetiye.';
 	        $mail->MsgHTML($message);
 	        $mail->AddAddress($email, "");
