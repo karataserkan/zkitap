@@ -314,29 +314,35 @@ class SiteController extends Controller
 			error_log("detectSQLinjection SC:L:".$Yii::app()->user->id." email: ".$email);
 			$this->redirect('index');	
 		}
-			$user= User::model()->findAll('email=:email', 
+			$user= User::model()->find('email=:email', 
 	    				array(':email' => $email) );
 			if (!empty($user)) {
 				$meta=new UserMeta;
-				$meta->user_id=$user[0]->id;
+				$meta->user_id=$user->id;
 				$meta->meta_key='passwordReset';
-
 				$link=Yii::app()->getBaseUrl(true);
 				$link.='/user/forgetPassword?id=';
-				$link .= $meta->meta_id;
 				$meta->meta_value=$email;
+		        $meta->created=time();
+	        	$meta->save();
 
-				$message="Şifre sıfırlama isteği gönderdiniz. <a href='".$link."'>Buraya tıklayarak</a> şifrenizi değiştirebilirsiniz. Şifre değiştirme isteğiniz 10 dakika sonra geçersiz olacaktır.<br>".$link;
 
 				$mail=Yii::app()->Smtpmail;
-		        $mail->SetFrom('edubox@linden-tech.com', "Linden Editor");
+		        $mail->SetFrom(Yii::app()->params['noreplyEmail'], "OKUTUS");
+
 		        $mail->Subject= "Password Reset";
-		        $mail->MsgHTML($message);
 		        $mail->AddAddress($email, "");
-		        $meta->created=time();
-		        
+	        	
+				$link .= base64_encode($meta->id);
+				$message="Şifre sıfırlama isteği gönderdiniz. <a href='".$link."'>Buraya tıklayarak</a> şifrenizi değiştirebilirsiniz. Şifre değiştirme isteğiniz 10 dakika sonra geçersiz olacaktır.<br>".$link;
+		        $mail->MsgHTML($message);
+
 		        if($mail->Send()) {
-		        	$meta->save();
+
+	        	}
+	        	else
+	        	{
+
 	        	}
 			}
 			else
