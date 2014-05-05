@@ -135,7 +135,7 @@ class UserController extends Controller
 
 	public function deleteOldKeys()
 	{
-		$query="delete from user_meta where meta_data='password_reset' AND ((".time()."-created)/60)>10";
+		$query="delete from user_meta where meta_key='passwordReset' AND ((".time()."-created)/60)>10";
 		$command = Yii::app()->db->createCommand($query);
 		$command->execute();
 		//$query->queryAll($query);
@@ -143,13 +143,14 @@ class UserController extends Controller
 
 	public function actionForgetPassword($id=null)
 	{
+		$id=base64_decode($id);
 		$this->deleteOldKeys();
 
 		$meta= Yii::app()->db->createCommand()
     		->select('*')
     		->from('user_meta')
-    		->where('meta_id=:meta_id', array(':meta_id'=>$id))
-    		->andWhere('meta_data=:meta_data', array(':meta_data'=>"password_reset"))
+    		->where('id=:id', array(':id'=>$id))
+    		->andWhere('meta_key=:meta_key', array(':meta_key'=>"passwordReset"))
     		->queryRow()
 		;
 		if (!empty($meta)) {
