@@ -9338,8 +9338,40 @@ ul.stats li small {
 	margin-left:0px;
 }
 
+ul.my_books_category_actions li {
+	height: 100%;
+	padding: 0px 15px;
+	list-style: none;
+	line-height: 3.1em;
+	font-size: 15px;
+	color: #737373;
+	float: left;
+	-webkit-transition: all 0.3s;
+	-moz-transition: all 0.3s;
+	-o-transition: all 0.3s;
+	transition: all 0.3s;	
+}
 
+li.my_books_page_categories ul.dropdown-menu {
+	background: #fff;
+	padding-top: 5px;
+	padding-bottom: 5px;	
+}
 
+li.my_books_page_categories ul.dropdown-menu li{
+	width: 100%;
+	line-height: normal;
+	padding: 5px 10px;	
+}
+
+li.my_books_page_categories ul.dropdown-menu li:hover {
+	border: 0 !important;
+	cursor: pointer;
+}
+
+ul.market_page_left_actions li:hover {
+	background: #f8f8f8;	
+}
 
 
 /** END OF EDITOR MYBOOKS PAGE **/
