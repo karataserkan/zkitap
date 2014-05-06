@@ -226,14 +226,21 @@ $all_books= $this->getWorkspaceBooks($workspace->workspace_id);
 								<div class="page-header" style="overflow:visible; padding-bottom:50px;">
 										<h3 class="content-title pull-left"><?php _e('Kitaplarım') ?></h3>
                                         
-                                        <ul class="my_books_category_actions">
-                                            <li class="dropdown my_books_page_categories">
+                                        <div class="action_bar_spacer"></div>
+                                        
+                                        <ul class="mybooks_category_actions">
+                                            <li class="dropdown mybooks_page_categories">
                                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">Kategoriler <i class="fa fa-chevron-down"></i></a>
                                                     <ul class="dropdown-menu">
-                                                        <li>Kategori 1</li>
-                                                        <li>Kategori 2</li>
-                                                        <li>Kategori 3</li>
-                                                        <li>Kategori 4</li>
+                                                        <li>Hepsi</li>
+                                                        <li>Sahibi</li>
+                                                        <li>Editör</li>
+                                                        <li class="mybooks_page_category_divider"></li>
+                                                        <li>Workspace 1</li>
+                                                        <li>Workspace 2</li>
+                                                        <li>Workspace 3</li>
+                                                        <li>Workspace 4</li>
+                                                        <li>Workspace 5</li>
                                                     </ul>
                                             </li>
                                         </ul>
