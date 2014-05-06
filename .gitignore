@@ -8,3 +8,4 @@ protected/config/*
 *.mp4
 uploads/files/*
 protected/config/main.php
+timestamps/

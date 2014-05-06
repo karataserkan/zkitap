@@ -77,13 +77,6 @@
 	border-right:none;	
 }
 
-.sidebar-menu > ul > li.has-sub.open > a,
-.sidebar-menu > ul > li > a:hover,
-.sidebar-menu > ul > li:hover > a {
-	background: #fff;
-	border-right:5px solid #2880b9;
-}
-
 .navbar-right > li:hover{
 	background-color:#005F9B;
 }
