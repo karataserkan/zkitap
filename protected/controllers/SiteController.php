@@ -437,6 +437,24 @@ class SiteController extends Controller
 							$workspaceUser->userid=$newUser->id;
 							$workspaceUser->added=date('Y-n-d g:i:s',time());
 							$workspaceUser->owner=$newUser->id;
+
+
+							$addWorkspaceOrganization = Yii::app()->db->createCommand();
+							if($addWorkspaceOrganization->insert('organisation_workspaces', array(
+							    'organisation_id'=>$organisation->organisation_id,
+							    'workspace_id'=>$workspace->workspace_id,
+							)))
+							{
+								$msg="ORGANISATION WORKSPACE:CREATE:0:". json_encode(array(array('user'=>Yii::app()->user->id),array('workspaceId'=>$workspace->workspace_id,'organisationId'=>$organisation->organisation_id)));
+								Yii::log($msg,'info');
+							}
+							else
+							{
+								$msg="ORGANISATION WORKSPACE:CREATE:1:". json_encode(array(array('user'=>Yii::app()->user->id),array('workspaceId'=>$workspace->workspace_id,'organisationId'=>$organisation->organisation_id)));
+								Yii::log($msg,'info');
+							}
+
+
 							if ($workspaceUser->save()) {
 								$msg="SITE:LOGIN:CreateWorkspaceUser:0:". json_encode(array('user'=> Yii::app()->user->name,'userId'=>Yii::app()->user->id,'message'=>"workspaceUser created for new user and new workspace"));
 								Yii::log($msg,'info');
