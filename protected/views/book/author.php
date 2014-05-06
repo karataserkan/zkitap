@@ -2043,7 +2043,7 @@ $background= (!empty($img)) ? "background-image:url('".$img."')" : "background:w
 						foreach ($template_chapters as $key => $template_chapter) {
 							$template_pages=Page::model()->findAll(array('order'=>  '`order` asc ,  created asc', "condition"=>'chapter_id=:chapter_id', "params" =>array(':chapter_id' => $template_chapter->chapter_id  ) ) );
 							foreach ($template_pages as $template_page){
-								echo "<li class='page'  chapter_id='".$template_chapter->chapter_id."' page_id='".$template_page->page_id."' style='width:120px; height:90px;'  ><canvas  class='preview pre_".$template_page->page_id."' style='height:90px; width:120px;'> </canvas><a class='pre_".$template_page->page_id."' href='/page/create?book_id=".$model->book_id."&chapter_id=".$current_chapter->chapter_id."&pageTeplateId=".$template_page->page_id."' ></a></li>";
+								echo "<li class='page'  chapter_id='".$template_chapter->chapter_id."' page_id='".$template_page->page_id."' style='width:122px; height:92px; border: 1px solid rgb(55, 108, 150);'  ><canvas  class='preview pre_".$template_page->page_id."' style='height:90px; width:120px;'> </canvas><a class='pre_".$template_page->page_id."' href='/page/create?book_id=".$model->book_id."&chapter_id=".$current_chapter->chapter_id."&pageTeplateId=".$template_page->page_id."' ></a></li>";
 								?>
 									<script type="text/javascript">
 										window.lindneo.tlingit.loadPagesPreviews('<?php echo $template_page->page_id ?>');
@@ -2052,10 +2052,10 @@ $background= (!empty($img)) ? "background-image:url('".$img."')" : "background:w
 							}
 						}
 						?>
-						<li>
-							<a class="add-page-list-button" href='/page/create?book_id=<?php echo $model->book_id; ?>&chapter_id=<?php echo $current_chapter->chapter_id; ?>'>
-								<div class="add-page-list-inside">
-								Sayfa Ekle </div>
+						<li style="width:122px; height:92px; border: 1px solid rgb(55, 108, 150);">
+							<a class="add-page-list-button" href='/page/create?book_id=<?php echo $model->book_id; ?>&chapter_id=<?php echo $current_chapter->chapter_id; ?>' style="width:110px; height:82px;">
+								<div class="add-page-list-inside"> 
+								Boş Sayfa Ekle </div>
 							</a>
 						</li>
 					<ul>	
@@ -2066,18 +2066,18 @@ $background= (!empty($img)) ? "background-image:url('".$img."')" : "background:w
 				   <div class="tab-pane fade" id="tab_3_2">
 					<ul class="add-page-list">
 						<?php 
-						$data=json_decode($model->data,true);
-						$template_id=$data["template_id"];
-						$template_chapters=Chapter::model()->findAll(array('order'=>  '`order` asc ,  created asc', "condition"=>'book_id=:book_id', "params" =>array(':book_id' => $template_id  ) ) );
-						foreach ($template_chapters as $key => $template_chapter) {
-							$template_page=Page::model()->find(array('order'=>  '`order` asc ,  created asc', "condition"=>'chapter_id=:chapter_id', "params" =>array(':chapter_id' => $template_chapter->chapter_id  ) ) );
-								echo "<li onclick='event.stopPropagation();' class='page' chapter_id='".$template_chapter->chapter_id."' page_id='".$template_page->page_id."' ><canvas class='preview' height='90' width='120'> </canvas><a href='/page/create?book_id=".$model->book_id."&chapter_id=".$current_chapter->chapter_id."&pageTeplateId=".$template_page->page_id."' >Ekle</a></li>";
+						// $data=json_decode($model->data,true);
+						// $template_id=$data["template_id"];
+						// $template_chapters=Chapter::model()->findAll(array('order'=>  '`order` asc ,  created asc', "condition"=>'book_id=:book_id', "params" =>array(':book_id' => $template_id  ) ) );
+						// foreach ($template_chapters as $key => $template_chapter) {
+						// 	$template_page=Page::model()->find(array('order'=>  '`order` asc ,  created asc', "condition"=>'chapter_id=:chapter_id', "params" =>array(':chapter_id' => $template_chapter->chapter_id  ) ) );
+						// 		echo "<li onclick='event.stopPropagation();' class='page' chapter_id='".$template_chapter->chapter_id."' page_id='".$template_page->page_id."' ><canvas class='preview' height='90' width='120'> </canvas><a href='/page/create?book_id=".$model->book_id."&chapter_id=".$current_chapter->chapter_id."&pageTeplateId=".$template_page->page_id."' >Ekle</a></li>";
 								?>
 									<script type="text/javascript">
-										window.lindneo.tlingit.loadPagesPreviews('<?php echo $template_page->page_id ?>');
+								//		window.lindneo.tlingit.loadPagesPreviews('<?php echo $template_page->page_id ?>');
 									</script>
 								<?php
-						}
+						//}
 
 						?>
 						<li>
