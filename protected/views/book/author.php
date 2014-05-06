@@ -97,6 +97,8 @@ $current_user=User::model()->findByPk(Yii::app()->user->id);
 			         <li><a href="<?php echo $this->createUrl("EditorActions/ExportPdfBook", array('bookId' => $model->book_id ));?>"> <i class="icon-doc-inv"></i>PDF Yayınla</i></a></li>
 			         <li><a href="<?php echo $this->createUrl("EditorActions/publishBook/", array('bookId' => $model->book_id ));?>"> <i class="icon-doc-inv"></i><?php _e("Hızlı Yayınla"); ?></i></a></li>
 			         <li><a href="<?php echo $this->createUrl("EditorActions/ExportBook", array('bookId' => $model->book_id ));?>"><i class="icon-publish"></i>Yayınla</a></li>
+			         <li><a href="<?php echo $this->createUrl("EditorActions/ExportTimeStamp", array('bookId' => $model->book_id ));?>"><i class="icon-publish"></i>Zaman Damgası</a></li>
+
 					</ul>
 			   </li>
 			   <li class='has-sub'><a href='#'><span>Düzenle</span></a>
