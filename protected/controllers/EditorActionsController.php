@@ -1244,6 +1244,29 @@ right join book using (book_id) where book_id='$bookId' and type!='image';";
 	}
 
 
+	public function actionExportTimeStamp($bookId=null,$id=null){
+		if($bookId==null){
+			$bookId=$id;
+		}
+		$book=Book::model()->findByPk($bookId);
+		$ebook=new epub3($book);
+		$stamp=new TimeStamp();
+		if(file_exists($ebook->ebookFile)){
+			$exportedPath=$ebook->getEbookFile();
+			$date=new DateTime();
+			$timestamp=$date->getTimestamp();
+			$outputPath=Yii::app()->params['timestamps'].$bookId."_".$timestamp;
+			$oppub=$outputPath.".epub";
+			$opzd=$outputPath.".zd";
+
+			copy($exportedPath,$oppub);
+			$response=$stamp->doStamp($oppub,$opzd);
+			print_r($response);
+
+		}
+		die();	
+
+	}
 
 	public function actionExportBook($bookId=null,$id=null){
 		if($bookId==null){
