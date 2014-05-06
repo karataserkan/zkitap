@@ -158,6 +158,7 @@ return array(
      	'pdftojpg'=>dirname(__FILE__).DIRECTORY_SEPARATOR.'../../'.'bin/pdftojpg/pdftojpg ',
      	'tocextractor'=>dirname(__FILE__).DIRECTORY_SEPARATOR.'../../'.'bin/jpdfbookmarks-2.5.2/jpdfbookmarks --dump ',
      	'htmltopng'=>dirname(__FILE__).DIRECTORY_SEPARATOR.'../../'.'bin/htmltopng/htmltopng ',
+     	'lindenstamp'=>dirname(__FILE__).DIRECTORY_SEPARATOR.'../../'.'bin/lindenstamp/lindenstamp '
      	'availableLanguages' => array(
      		'tr_TR' => 'Türkçe',
      		'en_US' => 'English'

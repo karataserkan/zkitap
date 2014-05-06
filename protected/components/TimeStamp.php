@@ -1,0 +1,33 @@
+<?php
+class TimeStamp{
+	
+	private $lindenstamp;
+
+	function __construct() {
+       $this->lindenstamp="/var/www/squid-pacific/egemen/bin/lindenstamp/lindenstamp";//Yii::app()->params['lindenstamp'];
+    }
+
+	public function checkBalance(){
+		$response=shell_exec($this->lindenstamp." checkBalance");
+		$response=json_decode($response);
+		return $response;
+
+	}
+
+	public function doStamp($filepath,$stampPath){
+		$response=shell_exec($this->lindenstamp." doStamp ".$filepath." ".$stampPath);
+		$response=json_decode(str_replace(array("\n", "\r"), '', $response));
+		return $response;
+	}
+
+	public function checkStamp($filepath,$stampPath){
+		$response=shell_exec($this->lindenstamp." checkStamp ".$filepath." ".$stampPath);
+		$response=json_decode(str_replace(array("\n", "\r"), '', $response));
+		return $response;		
+	}
+
+	public function nothing(){
+		$response=shell_exec($this->lindenstamp);
+		return $response;
+	}
+}
