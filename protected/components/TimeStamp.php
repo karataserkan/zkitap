@@ -1,10 +1,10 @@
 <?php
 class TimeStamp{
-	
+
 	private $lindenstamp;
 
 	function __construct() {
-       $this->lindenstamp="/var/www/squid-pacific/egemen/bin/lindenstamp/lindenstamp";//Yii::app()->params['lindenstamp'];
+       $this->lindenstamp=Yii::app()->params['lindenstamp'];//"/var/www/squid-pacific/egemen/bin/lindenstamp/lindenstamp";
     }
 
 	public function checkBalance(){
