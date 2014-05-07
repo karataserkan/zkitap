@@ -28,7 +28,7 @@ foreach ($faqs as $key => $data): ?>
 		$categories="";
 		foreach ($data['categories'] as $key2 => $category): 
 			$categories .= ($key2 != 0) ? ', ' : '' ;
-			$categories .=$category->faq_category_title;
+			$categories .='<a href="/faq/category?categories='.$category->faq_category_title.'">'.$category->faq_category_title.'</a>';
 		endforeach; ?>
 		<td><?php echo $categories; ?></td>
 	<?php else: ?>
@@ -38,7 +38,7 @@ foreach ($faqs as $key => $data): ?>
 		$keywords="";
 		foreach ($data['keywords'] as $key3 => $keyword):
 			$keywords .=($key3 != 0)? ', ': '';
-			$keywords .= $keyword->keyword; 
+			$keywords .= '<a href="/faq/keyword?keywords='.$keyword->keyword.'">'.$keyword->keyword.'</a>'; 
 		endforeach; ?>
 		<td><?php echo $keywords; ?></td>
 	<?php else: ?>
