@@ -1,30 +1,23 @@
 <?php
 /* @var $this OrganisationsController */
- ?><div class="row">
- <br>
- <br>
- <br>
- <br>
-
- <?php
-if ($users) {
-	_en('%s Kullanıcı Bulundu', '%s Kullanıcılar Bulundu', count($users));
-	?><ul style="width:250px;"><?php
-	foreach ($users as $key => $user):
-			?>
-		<li>
-		<span style="line-height:2;"><?php echo $user->name . "  " .$user->surname;?></span>
-		<a href="?r=organisations/deleteOrganisationUser&userId=<?php echo $user->id; ?>&organisationId=<?php echo $organisationId; ?>" class="float-right"><i class="icon-delete"></i><?php _e('Sil'); ?></a>
-		<hr>
-		</li>
-		<?php
-	endforeach;
-	?></ul><?php
-}
  ?>
-</div>
-<div class="row">
-	<a href="#" popup="<?php echo $organisationId; ?>" class="btn white radius book-editors-settings"id="boook-editors-settings" ><i class="icon-add"></i><?php _e('Kullanıcı Ekle'); ?></a>	
+ <div id="content" class="row">
+
+	<div class="col-sm-12">
+		<div class="page-header">
+			
+			
+				<h3 class="content-title pull-left">Kullanıcılar</h3>
+										
+				<a class="btn pull-right btn-primary" id="boook-editors-settings" href="#" popup="<?php echo $organisationId; ?>" >
+											<i class="fa fa-plus-circle"></i>
+											<span><?php _e('Kullanıcı Ekle'); ?></span>
+										</a>
+		</div>
+	</div>
+		
+	
+		
 	<center id="popup-close-area" popup="pop-<?php echo $organisationId; ?>" style="display:none; position:relative">
 				<div id="close-div" style="background-color:#123456; width:100% height:#123456; position:fixed;"> </div>
 				<div class="book-editors-options-box-container" style="height:150px">
@@ -53,7 +46,30 @@ $("[popup='close-<?php echo $organisationId; ?>']").click(function(){
 	$("[popup='pop-<?php echo $organisationId; ?>']").hide("fast");
 });
 </script>
+
+ <?php
+if ($users) {
+	_en('%s Kullanıcı Bulundu', '%s Kullanıcı Bulundu', count($users));
+	?>
+	<div>
+	<?php
+	foreach ($users as $key => $user):
+			?>
+		<div class="col-sm-2">	
+		<div class="well">
+		<img itemprop="image" class="col-sm-12" src="http://2.s3.envato.com/files/89938742/callcenterfemale_3541.jpg">
+		<h5 class="col-sm-12" style="text-transform:capitalize;"><?php echo $user->name . "  " .$user->surname;?></h5>
+		<a href="?r=organisations/deleteOrganisationUser&userId=<?php echo $user->id; ?>&organisationId=<?php echo $organisationId; ?>" class="float-right" style="margin-left:14px"><i class="fa fa-trash-o"></i>&nbsp;&nbsp;<?php _e('Kullanıcılardan Çıkar'); ?></a>
+		<div class="clearfix"></div>
+		</div>
+		</div>
+		<?php
+	endforeach;
+	?><?php
+}
+ ?>
 </div>
+
 <script>											
 function sendUser(e){
     var b = e.id;
