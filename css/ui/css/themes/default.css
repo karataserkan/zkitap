@@ -594,7 +594,7 @@ li.dropdown.user > ul.dropdown-menu li:first-child:hover {
 /* Sidebar collapse */
 .sidebar-collapse,
 .switcher {
-	padding: 8px 5px 0 0;
+	padding: 15px 5px 0 0;
 	position: absolute;
 	left: 10px;
 	color: #FFFFFF;
