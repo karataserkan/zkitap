@@ -1227,6 +1227,7 @@ $current_user=User::model()->findByPk(Yii::app()->user->id);
 			<li ctype="video" class="component " style=" background-image: url(http://can.dev.lindneo.com/css/images/components/video.png);"></li>
 			<li ctype="galery" class="component " style=" background-image: url(http://can.dev.lindneo.com/css/images/components/galery.png);"></li>
 			<li ctype="quiz" class="component " style=" background-image: url(http://can.dev.lindneo.com/css/images/components/quiz.png);"></li>
+			<li ctype="mquiz" class="component " style=" background-image: url(http://can.dev.lindneo.com/css/images/components/quiz.png);"></li>
 			<li ctype="side-text" class="component " style=" background-image: url(http://can.dev.lindneo.com/css/images/components/slider.png);"></li>
 			<li ctype="link" class="component " style=" background-image: url(http://can.dev.lindneo.com/css/images/components/link.png);"></li>
 			<li ctype="popup" class="component " style=" background-image: url(http://can.dev.lindneo.com/css/images/components/popup.png);"></li>
@@ -1790,6 +1791,7 @@ $current_user=User::model()->findByPk(Yii::app()->user->id);
 					  	maxheight = $( window ).height();
 					  	$(".panel-collapse.collapse.in").css('max-height',maxheight-280);
 					});
+					$( ".modal" ).css('z-index','9999999999999');
 				});
 				</script>
 			  <div class="panel panel-default">
@@ -2066,16 +2068,17 @@ $background= (!empty($img)) ? "background-image:url('".$img."')" : "background:w
 	
 <!-- Page Modal -->
 	
-<div class="modal fade add-page-modal" id="addPage" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" >
+<div class="modal fade add-page-modal" id="addPage" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"  >
   <div class="modal-dialog ">
     <div class="modal-content ui-draggable">
 	<script>
   $(function() {
 
-    $( ".ui-draggable" ).draggable("stack",{ scroll: false,  snap: false, revert: false, refreshPositions: true);
+    $( ".modal" ).css('z-index','9999999999999');
     $( "#addPage" ).css('z-index','9999999999999');
     $( "#box-thumbnail" ).css('z-index','9999999999999');
     $( "#box-cover" ).css('z-index','9999999999999');
+    $( ".ui-draggable" ).draggable("stack",{ scroll: false,  snap: false, revert: false, refreshPositions: true);
    
   });
   </script>
