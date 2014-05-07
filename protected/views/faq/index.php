@@ -21,18 +21,22 @@
 							<!-- NAV -->
 							<div id="list-toggle" class="col-md-3">
 								<div class="list-group">
-								<?php foreach ($categories as $key => $category) {?>
+								<?php 
+								if($categories):
+								foreach ($categories as $key => $category) {?>
 								  <a href="#<?php echo $category->faq_category_id; ?>" data-toggle="tab" class="list-group-item <?php echo (!$key) ? 'active':''; ?>"><i class="fa fa-tags"></i> <?php echo $category->faq_category_title; ?></a>
 									
-								<?php } ?>
+								<?php }
+								endif; ?>
 								</div>
 							</div>
 							<!-- /NAV -->
 							<!-- CONTENT -->
 							<div class="col-md-9">
 								<div class="tab-content">
-		
-								  <?php foreach ($categories as $k => $category) {?>
+							<?php
+								if($categories):
+								   foreach ($categories as $k => $category) {?>
 									<div class="tab-pane <?php echo (!$k) ? 'active':''; ?>" id="<?php echo $category->faq_category_id; ?>">
 									  <div class="panel-group" id="accordion">
 										<?php
@@ -60,7 +64,8 @@
 										<?php endforeach; ?> 
 									  </div>
 									</div>
-								  <?php } ?>
+								  <?php }
+								  endif; ?>
 								</div>
 							</div>
 							<!-- /CONTENT -->
