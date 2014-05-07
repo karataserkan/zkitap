@@ -105,7 +105,7 @@
 					</li>
 					-->
 					<li>
-						<a href="#">
+						<a href="/faq">
 							<i class="fa fa-medkit fa-fw"></i> <span class="menu-text">
 							Destek
 						</span>
