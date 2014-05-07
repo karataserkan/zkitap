@@ -69,7 +69,7 @@ class FaqController extends Controller
 
 		$id=functions::new_id(15);
 		//sets faq->id,lang,rate
-		$faq->faq_id = $id;
+		//$faq->faq_id = $id;
 		$faq->lang=$this->getCurrentLang();
 		$faq->rate=0;
 		$model->faq_id=$id;
@@ -151,7 +151,7 @@ class FaqController extends Controller
 				}
 			}
 			//redirects to new faq view
-			$this->redirect(array('/view','id'=>$faq->faq_id));
+			$this->redirect(array('index'));
 
 		}
 
