@@ -223,8 +223,27 @@ $all_books= $this->getWorkspaceBooks($workspace->workspace_id);
 						<!-- PAGE HEADER-->
 						<div class="row">
 							<div class="col-sm-12">
-								<div class="page-header">
+								<div class="page-header" style="overflow:visible; padding-bottom:50px;">
 										<h3 class="content-title pull-left"><?php _e('Kitaplarım') ?></h3>
+                                        
+                                        <div class="action_bar_spacer"></div>
+                                        
+                                        <ul class="mybooks_category_actions">
+                                            <li class="dropdown mybooks_page_categories">
+                                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Kategoriler <i class="fa fa-chevron-down"></i></a>
+                                                    <ul class="dropdown-menu">
+                                                        <li>Hepsi</li>
+                                                        <li>Sahibi</li>
+                                                        <li>Editör</li>
+                                                        <li class="mybooks_page_category_divider"></li>
+                                                        <li>Workspace 1</li>
+                                                        <li>Workspace 2</li>
+                                                        <li>Workspace 3</li>
+                                                        <li>Workspace 4</li>
+                                                        <li>Workspace 5</li>
+                                                    </ul>
+                                            </li>
+                                        </ul>
                                         
 										<a class="btn pull-right btn-primary" id='addNewBookBtn' href="/book/bookCreate">
 											<i class="fa fa-plus-circle"></i>
@@ -283,7 +302,24 @@ foreach ($workspaces as $key => $workspace) { ?>
    
      
      
-     
+   <div class="reader_book_card">
+         <div class="reader_book_card_book_cover">
+             <div class="editor_mybooks_book_settings">
+                 <i class="fa fa-users tip" data-original-title="Editörler"></i>
+                 <i class="fa fa-trash-o tip" data-original-title="Sil"></i>
+                 <i class="fa fa-copy tip" data-original-title="Çoğalt"></i>
+                 <i class="fa fa-edit tip" data-original-title="Düzenle"></i>
+             </div>
+             <img src="../../../css/images/deneme_cover.jpg" />
+         </div>					
+         <div class="reader_book_card_info_container">
+             <div class="editor_mybooks_book_type tip" data-original-title="The Book Type is Here">The Book Type is Here</div>						
+             <div class="clearfix"></div>			
+             <div class="reader_market_book_name tip" data-original-title="The Book Name is Here">The Book Name is Here</div>						
+             <div class="clearfix"></div>						
+             <div class="reader_book_card_writer_name tip" data-original-title="The Writer Name is Here">The Writer Name is Here</div>											
+         </div>				
+</div>  
      
      
      

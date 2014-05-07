@@ -911,5 +911,13 @@ li.reader_book_info_detail {
 
 
 
+/* EDITOR *******************************/
+
+.sidebar-menu > ul > li.has-sub.open > a,
+.sidebar-menu > ul > li > a:hover,
+.sidebar-menu > ul > li:hover > a {
+	background: #f8f8f8;
+}
+
 
 
