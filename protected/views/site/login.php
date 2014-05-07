@@ -192,16 +192,21 @@ $this->breadcrumbs=array(
 					<div class="row">
 						<div class="">
 							<div class="login-box">
-								<form role="form">
-								  <div class="form-group">
-									<label for="exampleInputEmail1"><?php _e("E-Posta adresinizi giriniz"); ?></label>
-									<i class="fa fa-envelope"></i>
-									<input name="Reset[email]" id="Reset_email" type="text">
-								  </div>
-								  <div>
-									<button type="submit" class="btn btn-info"><?php _e("Şifremi Yenile"); ?></button>
-								  </div>
-								</form>
+								<?php if ($passResetSuccess) {
+									echo "<span style='color:green'>".$passResetSuccess."</span>";
+								}else{
+								?>
+									<form role="form">
+									  <div class="form-group">
+										<label for="exampleInputEmail1" <?php echo ($passResetError)?'style="color:red"':''; ?>><?php _e("E-Posta adresinizi giriniz"); ?> <?php echo $passResetError; ?></label>
+										<i class="fa fa-envelope"></i>
+										<input name="Reset[email]" id="Reset_email" type="text" <?php echo ($passResetError)?'style="color:red"':''; ?>>
+									  </div>
+									  <div>
+										<button type="submit" class="btn btn-info"><?php _e("Şifremi Yenile"); ?></button>
+									  </div>
+									</form>
+								<?php } ?>
 								<div class="login-helpers">
 									<a href="#" onclick="swapScreen('login_bg');return false;"><?php _e("Giriş ekranına dön"); ?></a> <br>
 								</div>

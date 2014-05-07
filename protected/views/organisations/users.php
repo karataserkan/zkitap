@@ -53,11 +53,21 @@ if ($users) {
 	?>
 	<div>
 	<?php
+	if ($users):
+	
 	foreach ($users as $key => $user):
 			?>
+
+		<?php
+			$avatarSrc=Yii::app()->request->baseUrl."/css/ui/img/avatars/at.png";
+			$userProfileMeta=UserMeta::model()->find('user_id=:user_id AND meta_key=:meta_key',array('user_id'=>$user->id,'meta_key'=>'profilePicture'));
+			if ($userProfileMeta->meta_value) {
+				$avatarSrc=$userProfileMeta->meta_value;
+			}
+		?>
 		<div class="col-sm-2">	
 		<div class="well">
-		<img itemprop="image" class="col-sm-12" src="http://2.s3.envato.com/files/89938742/callcenterfemale_3541.jpg">
+		<img itemprop="image" class="col-sm-12" src="<?php echo $avatarSrc; ?>" style="height:120px">
 		<h5 class="col-sm-12" style="text-transform:capitalize;"><?php echo $user->name . "  " .$user->surname;?></h5>
 		<a href="?r=organisations/deleteOrganisationUser&userId=<?php echo $user->id; ?>&organisationId=<?php echo $organisationId; ?>" class="float-right" style="margin-left:14px"><i class="fa fa-trash-o"></i>&nbsp;&nbsp;<?php _e('Kullanıcılardan Çıkar'); ?></a>
 		<div class="clearfix"></div>
@@ -65,6 +75,7 @@ if ($users) {
 		</div>
 		<?php
 	endforeach;
+	endif;
 	?><?php
 }
  ?>
