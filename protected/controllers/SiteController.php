@@ -338,11 +338,11 @@ class SiteController extends Controller
 		        $mail->MsgHTML($message);
 
 		        if($mail->Send()) {
-
+		        	$passResetSuccess=__("Şifre yenileme maili gönderildi. Mailinizdeki linke tıklayarak 10 dakika içerisinde şifrenizi yeniden oluşturabilirsiniz.");
 	        	}
 	        	else
 	        	{
-
+	        		$passResetError=__("Mail gönderirlirken beklenmedik bir hata oluştu. Lütfen tekrar deneyiniz.");
 	        	}
 			}
 			else
@@ -495,7 +495,7 @@ class SiteController extends Controller
 			}
 		}
 		// display the login form
-		$this->render('login',array('model'=>$model,'newUser'=>$newUser));
+		$this->render('login',array('model'=>$model,'newUser'=>$newUser,'passResetError'=>$passResetError,'passResetSuccess'=>$passResetSuccess));
 	}
 
 	/**
