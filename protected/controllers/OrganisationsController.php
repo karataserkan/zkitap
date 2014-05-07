@@ -543,7 +543,8 @@ class OrganisationsController extends Controller
 	    				array(':organisation_id' => $organisationId) );
 		$users=array();
 		foreach ($organizationUsers as $key => $organizationUser) {
-			$users[]= User::model()->findByPk($organizationUser->user_id);
+			if(Yii::app()->user->id!==$organizationUser->user_id)
+				$users[]= User::model()->findByPk($organizationUser->user_id);
 		}
 
 		$this->render('users', array(

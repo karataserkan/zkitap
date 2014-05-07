@@ -811,9 +811,6 @@ $(document).ready(function(){
           component.data.table.push(value);
         });
         
-        console.log(row);
-        $('.active').parent().after(row);
-        console.log(component.id);
         //window.lindneo.tlingit.componentHasCreated( component );
         window.lindneo.tlingit.componentHasUpdated( component );
         window.lindneo.nisga.destroyComponent(component, component.id);

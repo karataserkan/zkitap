@@ -43,23 +43,25 @@ checkBalance(){
 
 doStamp()
 {
+	log "Started stamping..."
 	if [ -f "$1" ]
 	then
 		filePath=$(basename "$1")
 		fileName="${filePath%.*}"
 		stampPath=$filePath".zd"
+
+		log "Stamp paths:" $filePath $fileName $stampPath
 		if [ -f "$stampPath" ]
 		then
 			`rm -f $stampPath`
 		fi
 		log "StampPath:"$stampPath" FileName:"$fileName
-		stamp=`java -jar $zamanePath -z $filePath $timestampServerAddress $timestampServerPort $customerId $password`	
-		if [ -f "$stampPath" ]
+		stamp=`java -jar $zamanePath -z $1 $timestampServerAddress $timestampServerPort $customerId $password`
+
+		log "Stamp result:" $stamp
+		$stampFile=$1".zd"
+		if [ -f $stampFile]
 		then
-			#stampFile=$scriptPath"/"$stampPath
-			currentPath=`pwd`
-			stampFile=$currentPath"/"$stampPath
-			log "StampFile:"$stampFile
 			status=1
 			if [ "$2" = "" ]
 			then
