@@ -42,7 +42,9 @@ $(document).ready(function(){
             //console.log(ui);
 
             //$(ui.element.get(0)).resizable("option", "alsoResize",".selected");
-            $(this).resizable("option", "alsoResize",".selected");
+            $(this).resizable("option", "alsoResize",".selected",{
+                                                          containment: "#current_page"
+                                                        });
             //ui.element.resizable("option", "alsoResize",".selected");
             //$(".selected").resizable();
             $(".selected").trigger("resize");

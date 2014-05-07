@@ -97,8 +97,6 @@ $current_user=User::model()->findByPk(Yii::app()->user->id);
 			         <li><a href="<?php echo $this->createUrl("EditorActions/ExportPdfBook", array('bookId' => $model->book_id ));?>"> <i class="icon-doc-inv"></i>PDF Yayınla</i></a></li>
 			         <li><a href="<?php echo $this->createUrl("EditorActions/publishBook/", array('bookId' => $model->book_id ));?>"> <i class="icon-doc-inv"></i><?php _e("Hızlı Yayınla"); ?></i></a></li>
 			         <li><a href="<?php echo $this->createUrl("EditorActions/ExportBook", array('bookId' => $model->book_id ));?>"><i class="icon-publish"></i>Yayınla</a></li>
-			         <li><a href="<?php echo $this->createUrl("EditorActions/ExportTimeStamp", array('bookId' => $model->book_id ));?>"><i class="icon-publish"></i>Zaman Damgası</a></li>
-
 					</ul>
 			   </li>
 			   <li class='has-sub'><a href='#'><span>Düzenle</span></a>
@@ -966,7 +964,71 @@ $current_user=User::model()->findByPk(Yii::app()->user->id);
 	
 <!-- popup content-->
 </div>	
-<!--  end add quiz popup -->		
+<!--  end add quiz popup -->
+
+<!--  add mquiz popup -->	
+<div class="popup" id="pop-mquiz-popup">
+<div class="popup-header">
+	<i class="icon-m-quiz"></i>
+		Quiz Ekle
+	<i id="image-add-dummy-close-button" class="icon-close size-10" style="float:right; margin-right:10px; margin-top:5px;"></i>
+	
+</div>
+
+<!-- popup content-->
+	<div class="gallery-inner-holder">
+		<label class="dropdown-label" id="leading">
+				Şık Sayısı:
+					<select id="leading" class="radius">
+						<option value="0" >2</option>
+						<option value="10" >3</option>
+						<option selected="" value="20" >4</option>
+						<option value="30" >5</option>
+					</select>	
+		</label> 
+		</br>
+		<label class="dropdown-label" id="leading">
+				Doğru Cevap:
+					<select id="leading" class="radius">
+						<option value="0" >A</option>
+						<option value="10" >B</option>
+						<option selected="" value="20" >C</option>
+						<option value="30" >D</option>
+					</select>	
+		</label> 
+
+		</br></br>
+		<div class="quiz-inner">
+			Soru kökü:
+			<form id="video-url">
+			<textarea class="popup-text-area">Soru kökünü buraya yazınız.
+			</textarea> </br>
+			<!--burası çoğalıp azalacak-->
+			1. Soru:
+			<form id="video-url">
+			<textarea class="popup-choices-area">
+			</textarea> </br>
+			
+			2. Soru:
+			<form id="video-url">
+			<textarea class="popup-choices-area">
+			</textarea> </br>
+			
+			3. Soru:
+			<form id="video-url">
+			<textarea class="popup-choices-area">
+			</textarea> </br>
+		</div>
+		
+		<a href="#" class="btn btn-info" id="add-image" style="padding: 5px 30px;">Ekle</a>
+		</form>
+		
+		
+	</div>		
+	
+<!-- popup content-->
+</div>	
+<!--  end add mquiz popup -->		
 	
 	
 <!--  add popup popup -->	
@@ -1160,6 +1222,7 @@ $current_user=User::model()->findByPk(Yii::app()->user->id);
 			<li ctype="tag" class="component icon-m-galery">&nbsp;&nbsp;&nbsp;&nbsp;<?php _e('Etiket'); ?></li>
 			-->
 			<li ctype="quiz"  class="component icon-m-quiz">&nbsp;&nbsp;&nbsp;&nbsp;<?php _e('Quiz'); ?></li>
+			<li ctype="mquiz"  class="component icon-m-quiz">&nbsp;&nbsp;&nbsp;&nbsp;<?php _e('Çoklu Quiz'); ?></li>
 			<li ctype="side-text"  class="component icon-m-listbox">&nbsp;&nbsp;&nbsp;<?php _e('Yazı Kutusu'); ?></li>
 			<li ctype="link" class="component icon-m-link ui-draggable">&nbsp;&nbsp;&nbsp;&nbsp;<?php _e('Bağlantı'); ?></li>
 			<li ctype="popup" class="component icon-m-popup">&nbsp;&nbsp;&nbsp;&nbsp;<?php _e('Açılır Pencere'); ?></li>

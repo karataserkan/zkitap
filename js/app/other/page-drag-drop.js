@@ -169,6 +169,10 @@ $( document ).ready(function () {
             window.lindneo.dataservice.quiz_popup(event, ui);
             break;
 
+          case 'mquiz':
+            createMquizComponent( event, ui  );
+            break;
+
           case 'video':
             window.lindneo.dataservice.video_popup(event, ui);
             break; 
