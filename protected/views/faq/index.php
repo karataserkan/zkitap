@@ -15,6 +15,7 @@
 		<td><?php _e('Anahtar Kelimeler'); ?></td>
 	</tr>
 <?php
+asdfasdfasdf
 foreach ($faqs as $key => $data): ?>
 <tr>
 	<td><?php echo $data['faq']->faq_id; ?></td>
