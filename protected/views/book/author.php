@@ -1142,48 +1142,40 @@ $current_user=User::model()->findByPk(Yii::app()->user->id);
 		
 			
 			
-			<li ctype="image" class="component icon-m-image">&nbsp;&nbsp;&nbsp;&nbsp;<?php _e('Görsel'); ?></li>
-			<li ctype="sound" class="component icon-m-sound">&nbsp;&nbsp;&nbsp;&nbsp;<?php _e('Ses'); ?></li>
-			<li ctype="video" class="component icon-m-video">&nbsp;&nbsp;&nbsp;&nbsp;<?php _e('Video'); ?></li>
+			<li ctype="image" class="component " style=" background-image: url(http://can.dev.lindneo.com/css/images/components/image.png);"></li>
+			<li ctype="sound" class="component " style=" background-image: url(http://can.dev.lindneo.com/css/images/components/audio.png);"></li>
+			<li ctype="video" class="component " style=" background-image: url(http://can.dev.lindneo.com/css/images/components/video.png);"></li>
+			<li ctype="galery" class="component " style=" background-image: url(http://can.dev.lindneo.com/css/images/components/galery.png);"></li>
+			<li ctype="quiz" class="component " style=" background-image: url(http://can.dev.lindneo.com/css/images/components/quiz.png);"></li>
+			<li ctype="side-text" class="component " style=" background-image: url(http://can.dev.lindneo.com/css/images/components/slider.png);"></li>
+			<li ctype="link" class="component " style=" background-image: url(http://can.dev.lindneo.com/css/images/components/link.png);"></li>
+			<li ctype="popup" class="component " style=" background-image: url(http://can.dev.lindneo.com/css/images/components/popup.png);"></li>
+			<li ctype="text" class="component " style=" background-image: url(http://can.dev.lindneo.com/css/images/components/text.png);"></li>
+			<li ctype="rtext" class="component " style=" background-image: url(http://can.dev.lindneo.com/css/images/components/rtext.png);"></li>
+			<li ctype="grafik" class="component " style=" background-image: url(http://can.dev.lindneo.com/css/images/components/graphic.png);"></li>
+			<li ctype="shape" class="component " style=" background-image: url(http://can.dev.lindneo.com/css/images/components/shape.png);"></li>
+			<li ctype="table" class="component " style=" background-image: url(http://can.dev.lindneo.com/css/images/components/table.png);"></li>
+			<li ctype="html" class="component " style=" background-image: url(http://can.dev.lindneo.com/css/images/components/html.png);"></li>
+			<li ctype="plink" class="component " style=" background-image: url(http://can.dev.lindneo.com/css/images/components/pagelink.png);"></li>
+			<li ctype="latex" class="component" style=" background-image: url(http://can.dev.lindneo.com/css/images/components/latex.png);"></li>
 			
-			<li class="left_bar_titles"></li>
+		
+		
 			
-			<li ctype="galery" class="component icon-m-galery">&nbsp;&nbsp;&nbsp;&nbsp;<?php _e('Galeri'); ?></li>
-			<!--
-			<li ctype="slider" class="component icon-m-galery">&nbsp;&nbsp;&nbsp;&nbsp;<?php _e('Slider'); ?></li>
-			<li ctype="thumb" class="component icon-m-galery">&nbsp;&nbsp;&nbsp;&nbsp;<?php _e('Öngörüntü Slider'); ?></li>
-			<li ctype="tag" class="component icon-m-galery">&nbsp;&nbsp;&nbsp;&nbsp;<?php _e('Etiket'); ?></li>
-			-->
-			<li ctype="quiz"  class="component icon-m-quiz">&nbsp;&nbsp;&nbsp;&nbsp;<?php _e('Quiz'); ?></li>
-			<li ctype="side-text"  class="component icon-m-listbox">&nbsp;&nbsp;&nbsp;<?php _e('Yazı Kutusu'); ?></li>
-			<li ctype="link" class="component icon-m-link ui-draggable">&nbsp;&nbsp;&nbsp;&nbsp;<?php _e('Bağlantı'); ?></li>
-			<li ctype="popup" class="component icon-m-popup">&nbsp;&nbsp;&nbsp;&nbsp;<?php _e('Açılır Pencere'); ?></li>
-			
-			<li class="left_bar_titles"></li>
-
-			<li ctype="text" class="component icon-m-text">&nbsp;&nbsp;&nbsp;&nbsp;<?php _e('Yazı'); ?></li>
-			<li ctype="rtext" class="component icon-m-text">&nbsp;&nbsp;&nbsp;&nbsp;<?php _e('Zengin Metin'); ?></li>
-			<li ctype="grafik" class="component icon-m-charts">&nbsp;&nbsp;&nbsp;&nbsp;<?php _e('Grafik'); ?></li>
-			<li ctype="shape" class="component icon-m-shape">&nbsp;&nbsp;&nbsp;&nbsp;<?php _e('Şekil'); ?></li>
-			<li ctype="table" class="component icon-t-merge">&nbsp;&nbsp;&nbsp;&nbsp;<?php _e('Tablo'); ?></li>
-			<li ctype="html" class="component icon-t-merge">&nbsp;&nbsp;&nbsp;&nbsp;<?php _e('Html'); ?></li>
-			<li ctype="plink" class="component icon-t-merge">&nbsp;&nbsp;&nbsp;&nbsp;<?php _e('Sayfa Bağlantısı'); ?></li>
-			<li ctype="latex" class="component icon-t-merge">&nbsp;&nbsp;&nbsp;&nbsp;<?php _e('Latex'); ?></li>
-			<!--<li ctype="wrap" class="component icon-t-merge">&nbsp;&nbsp;&nbsp;&nbsp;<?php _e('Metin Sarma'); ?></li>-->
-			
-			
-			<li class="left_bar_titles"></li>
 		</ul>	
 			
 			
+		<div class="clearfix"></div>
 		
-		<i class="icon-zoom grey-5" style="margin:5px;"></i>	<div id='zoom-pane' class="zoom" style="margin-top: 10px; max-width:150px;"></div>
+		<i class="icon-zoom grey-5" style="margin:5px;"></i>	
+		<div id='zoom-pane' class="zoom" style="margin-top: 10px; max-width:150px;"></div>
 		</br>
 				
 			
 		
 <!-- chat  -->
 	<a class="chat_button"><i class="icon-chat-inv"></i><span class="text-visible">&nbsp;Yazışma</span></a>
+	
 		<div class="chat_window">
 		
 	<div class="chat_inline_holder">
@@ -1222,12 +1214,13 @@ $current_user=User::model()->findByPk(Yii::app()->user->id);
 	</div>
 	
 	<!---- shrinking buttons and scripts ---->
+		<!--
 		<div class="left_bar_shrink">
 		  <i class="icon-angle-left blue"></i>
 		</div>
 		<div class="left_bar_shrink_left">
 		</div>
-		
+		-->
 		
 		
 		<div style="display:none;" class="btn right_bar_shrink_button right_bar_shrink_button_closed" id="right_close" >
@@ -1996,9 +1989,13 @@ $background= (!empty($img)) ? "background-image:url('".$img."')" : "background:w
     <div class="modal-content ui-draggable">
 	<script>
   $(function() {
-    $( ".ui-draggable" ).draggable();
+    $( ".ui-draggable" ).draggable("stack",{ scroll: false,  snap: false, revert: false, refreshPositions: true 
+	});
   });
   </script>
+ 
+  
+  
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
         <h4 class="modal-title" id="myModalLabel"><i class="fa fa-plus-square"></i>&nbsp;&nbsp;Sayfa Ekle</h4>

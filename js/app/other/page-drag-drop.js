@@ -122,7 +122,10 @@ $( document ).ready(function () {
         
 
       });
-
+	
+  
+  
+	
     $('#search').bind("keyup keypress", function(e) {
         var code = e.keyCode || e.which; 
         if (code  == 13) {               
@@ -131,20 +134,44 @@ $( document ).ready(function () {
         }
       });
     
-    
+    	
+	
+	//$(ui.helper).addClass('ul.component_holder li, nowDraggingParentComponent');
+  var componentDragging;
     $( ".component" ).draggable({
-      revert: true, 
-      snap: true
-    });
+	
+	      start:function(){
+          componentDragging=$(this);
+
+        $(this).addClass('nowDraggingParentComponent', 100 );
+
+		   // $(ui.helper).addClass('ul.component_holder li');
+	},
+      stop:function(){
+       	$(this).removeClass('nowDraggingParentComponent', 100);
+			
+	 },
+	
+	 appendTo:'body',
+     helper:function(){
+      return $(this).clone().addClass('nowDraggingClonedComponent').css('width',$(this).width()+'px');
+     },
+     scroll: false,
+	addClasses: false,
+	 
+	 });
+	 
 
 
     $('#current_page').droppable({
-      tolerance: 'fit',
+	
+	   tolerance: 'fit',
       drop: function (event, ui) {
         //create a component object from dom object
         //pass it to tlingit 
               
-        switch( $(ui.helper).attr('ctype') ) {
+        switch( $(ui.helper).attr('ctype')) {
+		
           
           case 'text':
             createTextComponent( event, ui , $(event.toElement).attr('ctype'));

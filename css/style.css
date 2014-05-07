@@ -608,25 +608,23 @@ margin: 0 0 10px;
 
 
 .chat_button {
-	position: absolute;
+	
 	width: 100%;
 	padding: 5px 0px;
 	left:0;
 	bottom:0;
 	background-color:#3375A1;
 	color:white;
+	z-index:999999;
 	text-align:center;
 	font-weight:bold;
+	display:block;
+	text-decoration:none;
 
 }
 
 .chat_button:hover {
 	text-decoration:none;
-	position: absolute;
-	width: 100%;
-	padding: 5px 0px;
-	left:0;
-	bottom:0;
 	background-color:rgba(14, 118, 141, 1);
 	color:white;
 	text-align:center;
@@ -639,7 +637,7 @@ display:none;
 .chat_window{
 position:fixed; 
 display:none; 
-left:127px;
+left:180px;
 bottom:0px;
 padding-top:5px;
 background-color:#3375A1;
@@ -868,9 +866,9 @@ margin:0px;
 	top: 83px;  
     width: 7px;  
 	bottom: 0px;  
-    left: 120px;    
+    left: 200px;    
     background: #E4E4E4;  
-    z-index: 999999;  
+    z-index: 99999;  
 	border-right: 2px solid #d1d2d4;
 	border-top: 1px solid #C5C5C5;
 }
@@ -1002,15 +1000,58 @@ ul li.left_bar_titles {
 ul.component_holder {
 font-size:13px;
 padding:0px;
+overflow-x:visible;
 margin:0px;
 }
 
-ul.component_holder li {
- display:block;
- padding: 5px 5px 5px 5px;
- margin:0px 5px 0px 5px;
- color:#224761;
+.nowDraggingParentComponent{
+opacity:0.7;
+background:#aaaaaa;
+border: 3px dashed #bbbbbb;
+border-radius:10px;
+}
+
+#draggableHelper
+ { width: 300px; height: 300px; background: yellow; }
+
+ 
+ul.component_holder li, .nowDraggingClonedComponent {
+display:block;
+float: left;
+width: 45%;
+height:60px;
+color:#224761;
+margin:5px 3px 5px 5px;
+list-style: none;
 cursor: move;
+background-size: contain;
+background-repeat: no-repeat;
+background-position: center;
+}
+
+
+.components{
+position:fixed;
+top:83px;
+width:180px;
+bottom:0px;
+overflow:auto;
+left:0px;
+background:#f4f4f4; 
+z-index:999999;
+border-right: 2px solid #d1d2d4;
+}
+
+
+
+
+.ui-draggable-dragging{
+z-index:9999999;
+background-color:#f4f4f4;
+border-radius:5px;
+-webkit-box-shadow: 10px 12px 24px -7px rgba(0,0,0,0.75);
+-moz-box-shadow: 10px 12px 24px -7px rgba(0,0,0,0.75);
+box-shadow: 10px 12px 24px -7px rgba(0,0,0,0.75);
 }
 
 ul.component_holder_close {
@@ -1797,8 +1838,6 @@ box-shadow: inset 0 0 2px 6px #f5f5f5;
 	-webkit-box-shadow: inset 0px 0px 3px 0px rgba(139, 139, 139, 1);
 	box-shadow: inset 0px 0px 3px 0px rgba(139, 139, 139, 1);
 }
-
-
 
 
 .styler_box .optbtn {
