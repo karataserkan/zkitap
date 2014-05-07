@@ -95,17 +95,6 @@ font-weight:normal;}
 
 .span-19 { width: 100%}
 
-.components{
-position:fixed;
-top:83px;
-width:120px;
-bottom:0px;
-left:0px;
-overflow:none; 
-background:#f4f4f4; 
-z-index:999999;
-border-right: 2px solid #d1d2d4;
-}
 
 .components-close{
 width:35px;
@@ -147,14 +136,14 @@ vertical-align: middle;
 
 
 .component:hover{
-background:#fff;
-border-radius:5px;
-margin-left:5px;
--webkit-transform: rotate(3deg);
--moz-transform: rotate(3deg);
--ms-transform: rotate(3deg);
--o-transform: rotate(3deg);
+background-color: #fff;
 box-shadow: 1px 0px 3px #666;
+-webkit-border-radius: 5px;
+-moz-border-radius: 5px;
+border-radius: 5px;
+background-size: contain;
+background-repeat: no-repeat;
+
 }
 
 .components-header{
@@ -168,8 +157,10 @@ box-shadow: 1px 0px 3px #666;
 		border-bottom: 1px solid #d1d2d4;
 
 }
-
-
+.ui-draggable-helper
+{
+background-color:#dddddd;
+}
 
 .ui-draggable{
 		z-index:9999;

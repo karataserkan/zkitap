@@ -329,7 +329,7 @@
 
 
 			];
-			tripStart();
+			//tripStart();
 		});
 		</script>
 
