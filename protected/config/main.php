@@ -99,7 +99,7 @@ return array(
 			'showScriptName'=>false,
 			//'caseSensitive'=>false,     
 			'rules'=>array(
-				'<controller:\w+>/<id:\d+>'=>'<controller>/view',
+				'<controller:\w+>/<id:\w+>'=>'<controller>/view',
 				'<controller:\w+>/<action:\w+>/<id:\w+>'=>'<controller>/<action>',
 				'<controller:\w+>/<action:\w+>/<id:\w+>/<id2:\w+>'=>'<controller>/<action>',
 				'<controller:\w+>/<action:\w+>'=>'<controller>/<action>',
