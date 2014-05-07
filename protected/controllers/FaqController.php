@@ -151,7 +151,7 @@ class FaqController extends Controller
 				}
 			}
 			//redirects to new faq view
-			$this->redirect(array('view','id'=>$faq->faq_id));
+			$this->redirect(array('/view','id'=>$faq->faq_id));
 
 		}
 
