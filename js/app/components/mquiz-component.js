@@ -26,6 +26,10 @@ $(document).ready(function(){
 
         // set question text
         console.log(this.element);
+        console.log(that.options.component.data);
+        return;
+
+
         this.element.find('.question-text').text( that.options.component.data.question );
         var n = that.options.component.data.numberOfSelections;
 
@@ -102,13 +106,13 @@ var check_count = 0;
 var question_answers = [];
 var addRow = function(type){
   if(type == "multiple" ){
-      var multiple_answer = $('<div><input class="form-control" id="mul_option'+multiple_count+'" type="text" placeholder="Cevap seçeneklerini giriniz..." style="float: left; width: 230px; margin-right: 10px;"><i id="delete_'+multiple_count+'" class="icon-close size-10 popup-close-button" style="float:left;" onclick="removeRow(\'multiple\','+multiple_count+');"></i><br><br></div>')
+      var multiple_answer = $('<div><input type="radio" name="multipleradios" id="optionsRadios'+multiple_count+'" value="'+multiple_count+'" style="float:left; margin-right:10px;"><input class="form-control" id="mul_option'+multiple_count+'" type="text" placeholder="Cevap seçeneklerini giriniz..."style="float: left; width: 200px; margin-right: 10px;"><i id="delete_'+multiple_count+'" class="icon-close size-10 popup-close-button" style="float:left;" onclick="removeRow(\'multiple\','+multiple_count+');"></i><br><br></div>');
       multiple_answer.appendTo($('.quiz-inner'));
       multiple_count++;
       question_answers.push(multiple_answer);
     }
   else if(type == "checkbox" ){
-      var check_answer = $('<div><input class="form-control" id="check_option'+check_count+'" type="text" placeholder="Cevap seçeneklerini giriniz..."style="float: left; width: 230px; margin-right: 10px;"><i id="delete_'+check_count+'" class="icon-close size-10 popup-close-button" style="float:left;" onclick="removeRow(\'checkbox\','+check_count+');"></i><br><br></div>')
+      var check_answer = $('<div><input type="checkbox" name="multichecks" id="inlineCheckbox'+check_count+'" value="'+check_count+'" style="float:left; margin-right:10px;"><input class="form-control" id="check_option'+check_count+'" type="text" placeholder="Cevap seçeneklerini giriniz..."style="float: left; width: 200px; margin-right: 10px;"><i id="delete_'+check_count+'" class="icon-close size-10 popup-close-button" style="float:left;" onclick="removeRow(\'checkbox\','+check_count+');"></i><br><br></div>');
       check_answer.appendTo($('.quiz-inner'));
       check_count++;
       question_answers.push(check_answer);
@@ -138,7 +142,7 @@ var removeRow = function(type, row_number){
     multiple_count = 0;
     check_count = 0;
     question_answers = [];
-    
+
     if(typeof oldcomponent == 'undefined'){
       var top = (ui.offset.top-$(event.target).offset().top ) + 'px';
       var left = ( ui.offset.left-$(event.target).offset().left ) + 'px';
@@ -164,12 +168,8 @@ var removeRow = function(type, row_number){
         <select id='quiz_type' class='form-control'> \
           <option selected value=''>Lütfen Seçiniz</option> \
           <option value='text'>Yazı</option> \
-          <option value='paragraph'>Paragraf</option> \
           <option value='multiple_choice'>Çoktan Seçmeli</option> \
           <option value='checkbox'>Çoklu Seçmeli</option> \
-          <option value='scale'>Aralık</option> \
-          <option value='grid'>Tablo</option> \
-          <option value='date'>Tarih</option> \
         </select> \
         <label for='question'> Soru: </label> \
         <textarea class='form-control' id='question' rows='3' placeholder='Soru kökünü buraya yazınız...'></textarea>\
@@ -210,7 +210,7 @@ var removeRow = function(type, row_number){
       question_answers=[];
       if($(this).val() == "text"){
         $('.quiz-inner').html('');
-        var answer_text = $("<input type='text' id='qtext' class='form-control' placeholder='Doğru cevapları | arasına yazınız...'><br>");
+        var answer_text = $("<input type='text' id='qtext' class='form-control' placeholder='Cevabınızı buraya giriniz...'><br>");
         answer_text.appendTo($('.quiz-inner'));
         question_answers.push(answer_text);
       }
@@ -224,7 +224,7 @@ var removeRow = function(type, row_number){
         
         $('.quiz-inner').html('');
         $("<a href='#' class='btn btn-info' onclick='addRow(\"multiple\");' >Cevap Ekle</a><br><br>").appendTo($('.quiz-inner'));
-        var multiple_answer = $('<div><input class="form-control" id="mul_option'+multiple_count+'" type="text" placeholder="Cevap seçeneklerini giriniz..."style="float: left; width: 230px; margin-right: 10px;"><i id="delete_'+multiple_count+'" class="icon-close size-10 popup-close-button" style="float:left;" onclick="removeRow(\'multiple\','+multiple_count+');"></i><br><br></div>')
+        var multiple_answer = $('<div><input type="radio" name="multipleradios" id="optionsRadios'+multiple_count+'" value="'+multiple_count+'" style="float:left; margin-right:10px;"><input class="form-control" id="mul_option'+multiple_count+'" type="text" placeholder="Cevap seçeneklerini giriniz..."style="float: left; width: 200px; margin-right: 10px;"><i id="delete_'+multiple_count+'" class="icon-close size-10 popup-close-button" style="float:left;" onclick="removeRow(\'multiple\','+multiple_count+');"></i><br><br></div>');
         multiple_answer.appendTo($('.quiz-inner'));
         multiple_count++;
         question_answers.push(multiple_answer);
@@ -232,7 +232,7 @@ var removeRow = function(type, row_number){
       else if($(this).val() == "checkbox"){
         $('.quiz-inner').html('');
         $("<a href='#' class='btn btn-info' onclick='addRow(\"checkbox\");' >Cevap Ekle</a><br><br>").appendTo($('.quiz-inner'));
-        var check_answer = $('<div><input class="form-control" id="check_option'+check_count+'" type="text" placeholder="Cevap seçeneklerini giriniz..."style="float: left; width: 230px; margin-right: 10px;"><i id="delete_'+check_count+'" class="icon-close size-10 popup-close-button" style="float:left;" onclick="removeRow(\'checkbox\','+check_count+');"></i><br><br></div>')
+        var check_answer = $('<div><input type="checkbox" name="multichecks" id="inlineCheckbox'+check_count+'" value="'+check_count+'" style="float:left; margin-right:10px;"><input class="form-control" id="check_option'+check_count+'" type="text" placeholder="Cevap seçeneklerini giriniz..."style="float: left; width: 200px; margin-right: 10px;"><i id="delete_'+check_count+'" class="icon-close size-10 popup-close-button" style="float:left;" onclick="removeRow(\'checkbox\','+check_count+');"></i><br><br></div>');
         check_answer.appendTo($('.quiz-inner'));
         check_count++;
         question_answers.push(check_answer);
@@ -281,17 +281,51 @@ var removeRow = function(type, row_number){
         window.lindneo.tlingit.componentHasDeleted( oldcomponent, oldcomponent.id );
       };
       var quiz_type = $('#quiz_type').val();
+      var question = $('question').val();
+      var answer = '';
+      var answers = [];
 
       if(quiz_type == "text"){
         console.log(question_answers[0][0].value);
+        answer = question_answers[0][0].value;
       }
       else if(quiz_type == "paragraph"){
         console.log(question_answers[0][0].value);
+        answer = question_answers[0][0].value;
       }
       else if(quiz_type == "multiple_choice"){
+        console.log(question_answers.length);
+        answer = $('input[name=multipleradios]:checked').val();
+
+        $.each( question_answers, function( key, value ) {
+          
+             
+            answers.push($($(value[0]).children()[1])[0].value);
+             
+          });
+        
+        question_answers = answers;
         console.log(question_answers);
+        
+        
       }
       else if(quiz_type == "checkbox"){
+        console.log(question_answers);
+        answer=[];
+        $('input:checkbox[name=multichecks]:checked').each(function() 
+          {
+             //alert( $(this).val());
+             answer.push($(this).val());
+             
+          });
+        $.each( question_answers, function( key, value ) {
+          
+             
+            answers.push($($(value[0]).children()[1])[0].value);
+             
+          });
+        
+        question_answers = answers;
         console.log(question_answers);
       }
         
@@ -307,6 +341,8 @@ var removeRow = function(type, row_number){
           },
           'quiz_type':quiz_type,
           'question_answers':question_answers,
+          'question':question,
+          'answer':answer,
           'lock':'',
           'self': {
             'css': {
@@ -332,7 +368,7 @@ var removeRow = function(type, row_number){
   */
       $('#create-quiz-close-button').trigger('click');
       console.log(component);
-      return;
+      
       window.lindneo.tlingit.componentHasCreated( component );
     });
 
