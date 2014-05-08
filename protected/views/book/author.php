@@ -1320,23 +1320,23 @@ $current_user=User::model()->findByPk(Yii::app()->user->id);
 			
 			<!--<li ctype="wrap" class="component icon-t-merge">&nbsp;&nbsp;&nbsp;&nbsp;<?php _e('Metin Sarma'); ?></li>-->
 
-			<li ctype="image" class="component " style=" background-image: url(http://can.dev.lindneo.com/css/images/components/image.png);"></li>
-			<li ctype="sound" class="component " style=" background-image: url(http://can.dev.lindneo.com/css/images/components/audio.png);"></li>
-			<li ctype="video" class="component " style=" background-image: url(http://can.dev.lindneo.com/css/images/components/video.png);"></li>
-			<li ctype="galery" class="component " style=" background-image: url(http://can.dev.lindneo.com/css/images/components/galery.png);"></li>
-			<li ctype="quiz" class="component " style=" background-image: url(http://can.dev.lindneo.com/css/images/components/quiz.png);"></li>
-			<li ctype="mquiz" class="component " style=" background-image: url(http://can.dev.lindneo.com/css/images/components/quiz.png);"></li>
-			<li ctype="side-text" class="component " style=" background-image: url(http://can.dev.lindneo.com/css/images/components/slider.png);"></li>
-			<li ctype="link" class="component " style=" background-image: url(http://can.dev.lindneo.com/css/images/components/link.png);"></li>
-			<li ctype="popup" class="component " style=" background-image: url(http://can.dev.lindneo.com/css/images/components/popup.png);"></li>
-			<li ctype="text" class="component " style=" background-image: url(http://can.dev.lindneo.com/css/images/components/text.png);"></li>
-			<li ctype="rtext" class="component " style=" background-image: url(http://can.dev.lindneo.com/css/images/components/rtext.png);"></li>
-			<li ctype="grafik" class="component " style=" background-image: url(http://can.dev.lindneo.com/css/images/components/graphic.png);"></li>
-			<li ctype="shape" class="component " style=" background-image: url(http://can.dev.lindneo.com/css/images/components/shape.png);"></li>
-			<li ctype="table" class="component " style=" background-image: url(http://can.dev.lindneo.com/css/images/components/table.png);"></li>
-			<li ctype="html" class="component " style=" background-image: url(http://can.dev.lindneo.com/css/images/components/html.png);"></li>
-			<li ctype="plink" class="component " style=" background-image: url(http://can.dev.lindneo.com/css/images/components/pagelink.png);"></li>
-			<li ctype="latex" class="component" style=" background-image: url(http://can.dev.lindneo.com/css/images/components/latex.png);"></li>
+			<li ctype="image" class="component " style=" background-image: url(<?php echo Yii::app()->getBaseUrl(true);?>/css/images/components/image.png);"></li>
+			<li ctype="sound" class="component " style=" background-image: url(<?php echo Yii::app()->getBaseUrl(true);?>/css/images/components/audio.png);"></li>
+			<li ctype="video" class="component " style=" background-image: url(<?php echo Yii::app()->getBaseUrl(true);?>/css/images/components/video.png);"></li>
+			<li ctype="galery" class="component " style=" background-image: url(<?php echo Yii::app()->getBaseUrl(true);?>/css/images/components/galery.png);"></li>
+			<li ctype="quiz" class="component " style=" background-image: url(<?php echo Yii::app()->getBaseUrl(true);?>/css/images/components/quiz.png);"></li>
+			<li ctype="mquiz" class="component " style=" background-image: url(<?php echo Yii::app()->getBaseUrl(true);?>/css/images/components/quiz.png);"></li>
+			<li ctype="side-text" class="component " style=" background-image: url(<?php echo Yii::app()->getBaseUrl(true);?>/css/images/components/slider.png);"></li>
+			<li ctype="link" class="component " style=" background-image: url(<?php echo Yii::app()->getBaseUrl(true);?>/css/images/components/link.png);"></li>
+			<li ctype="popup" class="component " style=" background-image: url(<?php echo Yii::app()->getBaseUrl(true);?>/css/images/components/popup.png);"></li>
+			<li ctype="text" class="component " style=" background-image: url(<?php echo Yii::app()->getBaseUrl(true);?>/css/images/components/text.png);"></li>
+			<li ctype="rtext" class="component " style=" background-image: url(<?php echo Yii::app()->getBaseUrl(true);?>/css/images/components/rtext.png);"></li>
+			<li ctype="grafik" class="component " style=" background-image: url(<?php echo Yii::app()->getBaseUrl(true);?>/css/images/components/graphic.png);"></li>
+			<li ctype="shape" class="component " style=" background-image: url(<?php echo Yii::app()->getBaseUrl(true);?>/css/images/components/shape.png);"></li>
+			<li ctype="table" class="component " style=" background-image: url(<?php echo Yii::app()->getBaseUrl(true);?>/css/images/components/table.png);"></li>
+			<li ctype="html" class="component " style=" background-image: url(<?php echo Yii::app()->getBaseUrl(true);?>/css/images/components/html.png);"></li>
+			<li ctype="plink" class="component " style=" background-image: url(<?php echo Yii::app()->getBaseUrl(true);?>/css/images/components/pagelink.png);"></li>
+			<li ctype="latex" class="component" style=" background-image: url(<?php echo Yii::app()->getBaseUrl(true);?>/css/images/components/latex.png);"></li>
 
 			
 		
@@ -2177,7 +2177,7 @@ $background= (!empty($img)) ? "background-image:url('".$img."')" : "background:w
     $( "#addPage" ).css('z-index','9999999999999');
     $( "#box-thumbnail" ).css('z-index','9999999999999');
     $( "#box-cover" ).css('z-index','9999999999999');
-    $( ".ui-draggable" ).draggable("stack",{ scroll: false,  snap: false, revert: false, refreshPositions: true);
+    $( ".ui-draggable" ).draggable({ scroll: false,  snap: false, revert: false, refreshPositions: true});
    
   });
   </script>
