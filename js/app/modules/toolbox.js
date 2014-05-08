@@ -85,7 +85,7 @@ window.lindneo.toolbox = (function(window, $, undefined){
     var position = this.component_position('left');
     console.log(position);
     $.each(this.selectedComponents, function( key, component ) {
-      //console.log(component.options.component.data.self.css.left);
+      console.log(component.options.component.data.self.css.left);
       component.options.component.data.self.css.left = position;
       window.lindneo.tlingit.componentHasUpdated(component.options.component);
       window.lindneo.nisga.destroyComponent(component.options.component);
