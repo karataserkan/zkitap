@@ -13,8 +13,143 @@ $(document).ready(function(){
     
 
 
+        console.log(this.element);
+        console.log(that.options.component.data);
 
+        $("<div  class='quiz-component' style=''> \
+            <div class='question-text'></div> \
+            <div class='question-options-container'></div> \
+            <div style='margin-bottom:25px'> \
+              <a href='' class='btn bck-light-green white radius send' > Yanıtla </a> \
+            </div> \
+        </div>").appendTo(this.element);
 
+        this.element.find('.question-text').text( that.options.component.data.question );
+        if(that.options.component.data.quiz_type == "multiple_choice"){
+
+          var n = that.options.component.data.question_answers.length;
+        
+          var appendText = "";
+          for( var i = 0; i < n; i++ ){
+            appendText += 
+            "<div> \
+              <input type='radio' value='" + i + "' name='question' /> \
+              "+ that.options.component.data.question_answers[i] + " \
+            </div>";
+          }
+  
+          this.element.find('.question-options-container').append(appendText);
+          var that = this;
+  
+          this.element.find('.send').click(function(evt){
+  
+            var ind = $('input[type=radio]:checked').val();
+            
+            if( ind === undefined ){
+              alert('secilmemis');
+            } else {
+              var answer = {
+                'selected-index': ind,
+                'selected-option': that.options.component.data.options[ind]
+              };
+  
+              
+              that.element.find('.question-options-container div').each(function(i,element){
+                var color = 'red';
+                if (i==that.options.component.data.answer) color ='green';
+                var newAnserBtn=$("<span style='border-radius: 50%;width:10px;height:10px;display: inline-block;background:"+color+"'></span>");
+                $(this).find('input[type=radio]').remove();
+                $(this).prepend(newAnserBtn);
+                if (ind==i && that.options.component.data.answer==ind){
+                  that.element.css('background','color');
+                  $(this).prepend('+');
+                } else if (ind==i && that.options.component.data.answer!=ind){
+                  that.element.css('background','color');
+                  $(this).prepend('x');
+                }
+  
+                $(this).css('color',color);
+              }); 
+  
+            }
+  
+  
+          });
+        }
+        else if(that.options.component.data.quiz_type == "text"){
+
+          var appendText = "<div id='uanswer'><input type='text' id='user_answer' class='form-control' placeholder='Cevabınızı buraya giriniz...' /></div>";
+          this.element.find('.question-options-container').append(appendText);
+          var that = this;
+
+          this.element.find('.send').click(function(evt){
+            if($('#user_answer').val() == that.options.component.data.answer){
+              $('#uanswer').append($('<div style="color:green;">Tebrikler!...</div>'));
+            }
+            else{
+             $('#uanswer').append($('<div style="color:red;">Üzgünüm Yanlış Cevap!...</div>')); 
+            }
+          });
+
+        }
+        else if(that.options.component.data.quiz_type == "checkbox"){
+
+          var n = that.options.component.data.question_answers.length;
+        
+          var appendText = "";
+          for( var i = 0; i < n; i++ ){
+            appendText += 
+            "<div> \
+              <input type='checkbox' value='" + i + "' name='question' /> \
+              "+ that.options.component.data.question_answers[i] + " \
+            </div>";
+          }
+
+          this.element.find('.question-options-container').append(appendText);
+          var that = this;
+  
+          this.element.find('.send').click(function(evt){
+  
+            var ind = $('input[type=checkbox]:checked').val();
+            
+            if( ind === undefined ){
+              alert('secilmemis');
+            } else {
+              var answer = {
+                'selected-index': ind,
+                'selected-option': that.options.component.data.options[ind]
+              };
+  
+              
+              that.element.find('.question-options-container div').each(function(i,element){
+                var color = 'red';
+                if (i==that.options.component.data.answer) color ='green';
+                var newAnserBtn=$("<span style='border-radius: 50%;width:10px;height:10px;display: inline-block;background:"+color+"'></span>");
+                $(this).find('input[type=radio]').remove();
+                $(this).prepend(newAnserBtn);
+                $.each( that.options.component.data.answer, function( key, value ) {
+
+                  if (ind==i && value==ind){
+                    that.element.css('background','color');
+                    $(this).prepend('+');
+                  } else if (ind==i && value!=ind){
+                    that.element.css('background','color');
+                    $(this).prepend('x');
+                  }
+
+                });
+  
+                $(this).css('color',color);
+              }); 
+  
+            }
+  
+  
+          });
+
+        }
+
+        /*
         // open a window
         $("<div  class='quiz-component' style=''> \
             <div class='question-text'></div> \
@@ -25,9 +160,7 @@ $(document).ready(function(){
         </div>").appendTo(this.element);
 
         // set question text
-        console.log(this.element);
-        console.log(that.options.component.data);
-        return;
+        
 
 
         this.element.find('.question-text').text( that.options.component.data.question );
@@ -84,7 +217,7 @@ $(document).ready(function(){
 
         });
 
-
+        */
       
 
       this._super();
@@ -119,23 +252,43 @@ var addRow = function(type){
     }
 };
 var removeRow = function(type, row_number){
-  console.log(row_number);
+  //console.log(row_number);
+  //console.log(multiple_count);
+  //console.log(type);
   if(type == "multiple" ){
-
+  //console.log(question_answers[row_number]);
     $(question_answers[row_number]).remove();
     
     question_answers.splice(row_number,1);
-    console.log(question_answers);
-    multiple_count--;
-    console.log(multiple_count);
+
+    $.each( question_answers, function( key, value ) {
+          
+       $($(value).children()[1]).attr('id','mul_option'+key);
+       $($(value).children()[2]).attr('onclick',"removeRow('multiple',"+key+");");
+       
+    });
+
+    //console.log(question_answers);
+    if(multiple_count > 0)
+      multiple_count--;
+    //console.log(multiple_count);
   }
   else if(type == "checkbox" ){
     $(question_answers[row_number]).remove();
     
     question_answers.splice(row_number,1);
-    console.log(question_answers);
-    check_count--;
-    console.log(check_count);
+
+    $.each( question_answers, function( key, value ) {
+          
+       $($(value).children()[1]).attr('id','check_option'+key);
+       $($(value).children()[2]).attr('onclick',"removeRow('checkbox',"+key+");");
+       
+    });
+
+    //console.log(question_answers);
+    if(check_count > 0)
+      check_count--;
+    //console.log(check_count);
   }
 };
   var createMquizComponent = function ( event, ui, oldcomponent ) {
@@ -281,13 +434,14 @@ var removeRow = function(type, row_number){
         window.lindneo.tlingit.componentHasDeleted( oldcomponent, oldcomponent.id );
       };
       var quiz_type = $('#quiz_type').val();
-      var question = $('question').val();
+      var question = $('#question').val();
       var answer = '';
       var answers = [];
 
       if(quiz_type == "text"){
         console.log(question_answers[0][0].value);
         answer = question_answers[0][0].value;
+        question_answers = answer;
       }
       else if(quiz_type == "paragraph"){
         console.log(question_answers[0][0].value);
@@ -328,7 +482,7 @@ var removeRow = function(type, row_number){
         question_answers = answers;
         console.log(question_answers);
       }
-        
+
       var component = {
         'type' : 'mquiz',
         'data': {
@@ -366,7 +520,7 @@ var removeRow = function(type, row_number){
         component.data['options'][i] = $('#selection-option-index-' + i).val();
       }
   */
-      $('#create-quiz-close-button').trigger('click');
+      $('#create-mquiz-close-button').trigger('click');
       console.log(component);
       
       window.lindneo.tlingit.componentHasCreated( component );

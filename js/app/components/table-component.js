@@ -764,13 +764,7 @@ $(document).ready(function(){
       },
 
       row_add: function(this_val, location){
-        console.log(location);
-        //location.columns-=1;
-        console.log(this_val);
-        console.log(this.cells);
         
-        //console.log(component.data.table.length);
-        //window.lindneo.tlingit.componentHasDeleted( component);
         var newCellData = {
           'attr': {
             'val': '',
