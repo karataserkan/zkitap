@@ -16,7 +16,9 @@ class TimeStamp{
 
 	public function doStamp($filepath,$stampPath=null){
 		$response=shell_exec($this->lindenstamp." doStamp ".$filepath." ".$stampPath);
-		$response=json_decode(str_replace(array("\n", "\r"), '', $response));
+		//$response=json_decode(str_replace(array("\n", "\r"), '', $response));
+		$response=str_replace(array("\n", "\r"), '', $response);
+		//$response='{"status":1,"result":{"message":"sdfsdfsfdsdfsdf"}}';
 		return $response;
 	}
 

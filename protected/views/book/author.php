@@ -33,7 +33,66 @@ $current_user=User::model()->findByPk(Yii::app()->user->id);
 	window.lindneo.tsimshian.connect();
 
 	window.lindneo.highlightComponent='<?php echo $highlight_component->id; ?>';
+	$(document).ready(function(){
 
+		function modalToggle(status){
+			var modalParentStatus,modalLoadingStatus;
+			if(status)
+			{
+				modalParentStatus="none";
+				modalLoadingStatus="block";
+			}
+			else
+			{
+				modalParentStatus="block";
+				modalLoadingStatus="none";				
+			}
+			var modalParent=$('#export-timestamp');
+			var modalLoading=$('.timestampstyle');
+			modalParent.find(".modal-body").css({"display":modalParentStatus});
+			modalParent.find(".modal-footer").css({"display":modalParentStatus});
+			modalParent.find(".modal-header").css({"display":modalParentStatus});
+			modalLoading.css({"display":modalLoadingStatus});
+		}
+		$('#timestampbutton').click(function(){
+			modalToggle(true);
+			/*begin stamping*/
+			var source=location.protocol+"//"+location.host+"/EditorActions/ExportTimeStamp?id="+window.lindneo.currentBookId
+			console.log("source:"+source);
+			var stampRequest = $.get(source)
+			  .done(function(data) {
+			  	console.log(data);
+			  	var result=$.parseJSON(data);
+			  	console.log(result);
+			    if(result.status==1){
+
+			    	console.log("Successfully created!");
+			    	modalToggle(false);
+			    	$("#export-timestamp").find('button[data-dismiss="modal"]').click();
+			    	$("#export-ok-timestamp").css({"display":"block"});
+			    	$("#export-ok-timestamp").find(".modal-body").html("Zaman damgası başarıyla oluşturuldu!");
+			    	$("#export-ok-timestamp").find('button[data-dismiss="modal"]').click(function(){$("#export-ok-timestamp").css({"display":"none"});});
+			    }
+			    else if(result.status==0){
+			    	console.log("Failed!");
+			    	modalToggle(false);
+			    	$("#export-timestamp").find('button[data-dismiss="modal"]').click();
+			    	$("#export-ok-timestamp").css({"display":"block"});
+			    	$("#export-ok-timestamp").find(".modal-body").html(result.message);
+			    	$("#export-ok-timestamp").find('button[data-dismiss="modal"]').click(function(){$("#export-ok-timestamp").css({"display":"none"});});
+
+			    }
+			    else
+			    {
+			    	console.log("God damn! what the hell:)");
+			    }
+			  })
+			  .fail(function() {
+			    console.log("the link cannot be accessed!");
+			  });
+			/*end stamping*/
+		});
+	});
 
 </script>
 	
@@ -85,7 +144,46 @@ $current_user=User::model()->findByPk(Yii::app()->user->id);
 	<div id='book_title'><?php echo $model->title; ?></div>
 	
 	</div> <!--Header -->
-	
+	<!--begin modal for time stamp-->
+	<div class="modal fade in" id="export-timestamp" tabindex="-1" role="dialog" aria-labelledby="myModalLabelx" aria-hidden="false" style="display: none;">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+					  <h4 class="modal-title"><?php echo __('Zaman Damgası');?></h4>
+				</div>
+				<div class="modal-body">
+					  5070 sayılı Elektronik İmza Kanununa göre Zaman Damgası: Bir elektronik verinin, üretildiği, değiştirildiği, gönderildiği, alındığı ve / veya kaydedildiği zamanın tespit edilmesi amacıyla, elektronik sertifika hizmet sağlayıcısı tarafından elektronik imzayla doğrulanan kaydı, ifade eder.
+					  <br><br><br>
+					  <b>Zaman damgası ile damgalamak ister misiniz?</b>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal"><?php echo __('Vazgeç');?></button>
+					<button type="button" id="timestampbutton" class="btn btn-primary"><?php echo __('Damgala');?></button>
+				</div>
+				<div class="timestampstyle">
+					<p style="margin-left:20px;margin-top:40px;font-weight:bold;">Eserinizin zaman damgası ile damgalanması sona erene kadar lütfen herhangi bir işlem yapmadan bekleyiniz!</p>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="modal fade in" id="export-ok-timestamp" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="false" style="display: none;">
+		<div class="modal-dialog">
+		  <div class="modal-content">
+			<div class="modal-header">
+			 <!--<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>-->
+			  <h4 class="modal-title">Zaman Damgası</h4>
+			</div>
+			<div class="modal-body">
+
+			</div>
+			<div class="modal-footer">
+			  <button type="button" class="btn btn-default" data-dismiss="modal"><?php echo __('Tamam');?></button>
+			</div>
+		  </div>
+		</div>
+	</div>
+	<!--end modal for time stamp-->
 			<div id='headermenu'>
 			<ul>
 			   <li><a style="height:42px;" href="<?php echo $this->createUrl('site/index');  ?>"><img  src="/css/linden_logo.png" ></a></li>
@@ -97,8 +195,8 @@ $current_user=User::model()->findByPk(Yii::app()->user->id);
 			         <li><a href="<?php echo $this->createUrl("EditorActions/ExportPdfBook", array('bookId' => $model->book_id ));?>"> <i class="icon-doc-inv"></i>PDF Yayınla</i></a></li>
 			         <li><a href="<?php echo $this->createUrl("EditorActions/publishBook/", array('bookId' => $model->book_id ));?>"> <i class="icon-doc-inv"></i><?php _e("Hızlı Yayınla"); ?></i></a></li>
 			         <li><a href="<?php echo $this->createUrl("EditorActions/ExportBook", array('bookId' => $model->book_id ));?>"><i class="icon-publish"></i>Yayınla</a></li>
+			         <li><a href="#export-timestamp" data-toggle="modal"><i class="fa fa-tags"></i>Zaman Damgala</a></li>
 
-			         <li><a href="<?php echo $this->createUrl("EditorActions/ExportTimeStamp", array('bookId' => $model->book_id ));?>"><i class="fa fa-tags"></i>Zaman Damgala</a></li>
 
 
 					</ul>
@@ -1787,6 +1885,7 @@ $current_user=User::model()->findByPk(Yii::app()->user->id);
 					var maxheight = $( window ).height();
 					$(".panel-collapse.collapse.in").css('max-height',maxheight-280);
 					$(".panel-collapse.collapse.in").css('overflow','auto');
+
 					$( window ).resize(function() {
 					  	maxheight = $( window ).height();
 					  	$(".panel-collapse.collapse.in").css('max-height',maxheight-280);
