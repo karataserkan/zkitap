@@ -137,26 +137,29 @@ return array(
         ),
 		'Smtpmail'=>array(
             'class'=>'application.extension.smtpmail.PHPMailer',
-            'Host'=>"smtp.gmail.com",
+            'Host'=>"tls://smtp.gmail.com",
             'Username'=>'noreply@okutus.com',
             'Password'=>'7m68FJ:J:JHoAeY',
             'Mailer'=>'smtp',
             'Port'=>465,
             'SMTPAuth'=>true, 
-           	'SMTPSecure' => 'tls',
+           	//'SMTPSecure' => 'tls',
         ),
 	),
 
 	// application-level parameters that can be accessed
-	// using Yii::app()->params['paramName']
+	// using Yii::app()->params['paramName'] 
 	'params'=>array(
 		// this is used in contact page
 		'adminEmail'=>'pacific@linden-tech.com',
+		'noreplyEmail'=>'noreply@okutus.com',
 
      	'epubtopdf'=>dirname(__FILE__).DIRECTORY_SEPARATOR.'../../'.'bin/epubtopdf/epubtopdf ',
      	'pdftojpg'=>dirname(__FILE__).DIRECTORY_SEPARATOR.'../../'.'bin/pdftojpg/pdftojpg ',
      	'tocextractor'=>dirname(__FILE__).DIRECTORY_SEPARATOR.'../../'.'bin/jpdfbookmarks-2.5.2/jpdfbookmarks --dump ',
      	'htmltopng'=>dirname(__FILE__).DIRECTORY_SEPARATOR.'../../'.'bin/htmltopng/htmltopng ',
+     	'lindenstamp'=>dirname(__FILE__).DIRECTORY_SEPARATOR.'../../'.'bin/lindenstamp/lindenstamp ',
+     	'timestamps'=>dirname(__FILE__).DIRECTORY_SEPARATOR.'../../'.'timestamps/',
      	'availableLanguages' => array(
      		'tr_TR' => 'Türkçe',
      		'en_US' => 'English'

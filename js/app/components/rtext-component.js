@@ -81,7 +81,7 @@ $(document).ready(function(){
             var content_text = '<span style="color: '+propertyValue+';">'+localStorage.getItem("selection_text")+'</span>';
             $('#message_rtext'+this.options.component.id).html(this.options.component.data.rtextdiv.val.replace(localStorage.getItem("selection_text"), content_text));  
             that._change( $('#message_rtext'+this.options.component.id).html());
-            localStorage.setItem("selection_text", '');
+            //localStorage.setItem("selection_text", '');
 
           break;
           case 'font-weight':
@@ -89,7 +89,7 @@ $(document).ready(function(){
             var content_text = '<span style="font-weight: '+propertyValue+';">'+localStorage.getItem("selection_text")+'</span>';
             $('#message_rtext'+this.options.component.id).html(this.options.component.data.rtextdiv.val.replace(localStorage.getItem("selection_text"), content_text));  
             that._change( $('#message_rtext'+this.options.component.id).html());
-            localStorage.setItem("selection_text", '');
+            //localStorage.setItem("selection_text", '');
 
           break;
 
@@ -114,7 +114,7 @@ $(document).ready(function(){
             var content_text = '<span style="font-size: '+propertyValue+';">'+localStorage.getItem("selection_text")+'</span>';
             $('#message_rtext'+this.options.component.id).html(this.options.component.data.rtextdiv.val.replace(localStorage.getItem("selection_text"), content_text));  
             that._change( $('#message_rtext'+this.options.component.id).html());
-            localStorage.setItem("selection_text", '');
+            //localStorage.setItem("selection_text", '');
              
           break;
 
@@ -123,7 +123,7 @@ $(document).ready(function(){
             var content_text = '<span style="font-family: '+propertyValue+';">'+localStorage.getItem("selection_text")+'</span>';
             $('#message_rtext'+this.options.component.id).html(this.options.component.data.rtextdiv.val.replace(localStorage.getItem("selection_text"), content_text));  
             that._change( $('#message_rtext'+this.options.component.id).html());
-            localStorage.setItem("selection_text", '');
+            //localStorage.setItem("selection_text", '');
              
           break;
 
@@ -132,7 +132,7 @@ $(document).ready(function(){
             var content_text = '<span style="line-height: '+propertyValue+';">'+localStorage.getItem("selection_text")+'</span>';
             $('#message_rtext'+this.options.component.id).html(this.options.component.data.rtextdiv.val.replace(localStorage.getItem("selection_text"), content_text));  
             that._change( $('#message_rtext'+this.options.component.id).html());
-            localStorage.setItem("selection_text", '');
+            //localStorage.setItem("selection_text", '');
              
           break;
 
@@ -143,55 +143,384 @@ $(document).ready(function(){
 
                   switch (propertyValue){
                     case 'h1':
-                      styles=[
-                      {name:'font-size', val:'46px'},
-                      {name:'font-family', val:'Arial'},
-                      {name:'text-decoration', val:'normal'},
-                      {name:'font-weight', val:'bold'},
-                      {name:'text-align', val:'left'},
-                      {name:'text-transform', val:'capitalize'},
+                    var h1_style="";
+                    var data= {
+                        'book_id': window.lindneo.currentBookId,
+                        'component':propertyValue 
+                      };
 
-                       ];
-                      break;
+                    $.ajax({
+                      type: "POST",
+                      async: false,
+                      url: window.lindneo.url+"book/getFastStyle",
+                      data: data
+                    })
+                    .done(function( result ) {
+                        result=window.lindneo.tlingit.responseFromJson(result);
+                        //console.log(line-height);
+                        
+                        if(result){
+                          //console.log('1');
+                          //(condition) ? true-value : false-value
+                          styles=[
+                          {name:'font-size', val:(typeof result.font_size != "undefined") ? result.font_size : '36px'},
+                          {name:'font-family', val:(typeof result.font_family != "undefined") ? result.font_family : 'Arial'},
+                          {name:'text-decoration', val:(typeof result.text_decoration != "undefined") ? result.text_decoration:'normal'},
+                          {name:'font-weight', val:(typeof result.font_weight != "undefined") ? result.font_weight:'bold'},
+                          {name:'text-align', val:(typeof result.text_align != "undefined") ? result.text_align:'left'},
+                          {name:'text-transform', val:(typeof result.text_transform != "undefined") ? result.text_transform :'capitalize'}
+                           ];
+
+                           
+                        }
+                        else{
+                          //console.log('2');
+                          styles=[
+                          {name:'font-size', val:'36px'},
+                          {name:'font-family', val:'Arial'},
+                          {name:'text-decoration', val:'normal'},
+                          {name:'font-weight', val:'bold'},
+                          {name:'text-align', val:'left'},
+                          {name:'text-transform', val:'capitalize'},
+
+                           ];
+                         };
+                    });
+                    console.log(styles);
+                    break;
                     case 'h2':
-                      styles=[
-                      {name:'font-size', val:'30px'},
-                      {name:'font-family', val:'Arial'},
-                      {name:'text-decoration', val:'normal'},
-                      {name:'font-weight', val:'normal'},
-                      {name:'text-align', val:'left'},
-                      {name:'text-transform', val:'none'},
-                       ];
+
+                      var h2_style="";
+                      var data= {
+                          'book_id': window.lindneo.currentBookId,
+                          'component':propertyValue 
+                        };
+                      $.ajax({
+                        type: "POST",
+                        async: false,
+                        url: window.lindneo.url+"book/getFastStyle",
+                        data: data
+                      })
+                      .done(function( result ) {
+                          result=window.lindneo.tlingit.responseFromJson(result);
+                          //console.log(result.font_size);
+                          
+                          if(result){
+                            //console.log('a');
+                            //(condition) ? true-value : false-value
+                            styles=[
+                            {name:'font-size', val:(typeof result.font_size != "undefined") ? result.font_size : '24px'},
+                            {name:'font-family', val:(typeof result.font_family != "undefined") ? result.font_family : 'Arial'},
+                            {name:'text-decoration', val:(typeof result.text_decoration != "undefined") ? result.text_decoration:'normal'},
+                            {name:'font-weight', val:(typeof result.font_weight != "undefined") ? result.font_weight:'normal'},
+                            {name:'text-align', val:(typeof result.text_align != "undefined") ? result.text_align:'left'},
+                            {name:'text-transform', val:(typeof result.text_transform != "undefined") ? result.text_transform :'none'}
+
+                             ];
+
+                             
+                          }
+                          else{
+                            //console.log('b');
+                            styles=[
+                            {name:'font-size', val:'24px'},
+                            {name:'font-family', val:'Arial'},
+                            {name:'text-decoration', val:'normal'},
+                            {name:'font-weight', val:'normal'},
+                            {name:'text-align', val:'left'},
+                            {name:'text-transform', val:'none'},
+                             ];
+                           };
+                      });
+
+                      console.log(styles);
                        break;
                     case 'h3':
-                      styles=[
-                      {name:'font-size', val:'14px'},
-                      {name:'font-family', val:'Arial'},
-                      {name:'text-decoration', val:'normal'},
-                      {name:'font-weight', val:'bold'},
-                      {name:'text-align', val:'left'},
-                      {name:'text-transform', val:'none'},
-                       ];
+
+                      var h3_style="";
+                      var data= {
+                          'book_id': window.lindneo.currentBookId,
+                          'component':propertyValue 
+                        };
+                      $.ajax({
+                        type: "POST",
+                        async: false,
+                        url: window.lindneo.url+"book/getFastStyle",
+                        data: data
+                      })
+                      .done(function( result ) {
+                          result=window.lindneo.tlingit.responseFromJson(result);
+                          //console.log(result.font_size);
+                          
+                          if(result){
+                            //console.log('a');
+                            //(condition) ? true-value : false-value
+                            styles=[
+                            {name:'font-size', val:(typeof result.font_size != "undefined") ? result.font_size : '19px'},
+                            {name:'font-family', val:(typeof result.font_family != "undefined") ? result.font_family : 'Arial'},
+                            {name:'text-decoration', val:(typeof result.text_decoration != "undefined") ? result.text_decoration:'normal'},
+                            {name:'font-weight', val:(typeof result.font_weight != "undefined") ? result.font_weight:'bold'},
+                            {name:'text-align', val:(typeof result.text_align != "undefined") ? result.text_align:'left'},
+                            {name:'text-transform', val:(typeof result.text_transform != "undefined") ? result.text_transform :'none'}
+
+                             ];
+
+                             
+                          }
+                          else{
+                            //console.log('b');
+                            styles=[
+                            {name:'font-size', val:'19px'},
+                            {name:'font-family', val:'Arial'},
+                            {name:'text-decoration', val:'normal'},
+                            {name:'font-weight', val:'bold'},
+                            {name:'text-align', val:'left'},
+                            {name:'text-transform', val:'none'},
+                             ];
+                           };
+                      });
+
+                      
+                       console.log(styles);
+                       break;
+                    case 'h4':
+
+                      var h4_style="";
+                      var data= {
+                          'book_id': window.lindneo.currentBookId,
+                          'component':propertyValue 
+                        };
+                      $.ajax({
+                        type: "POST",
+                        async: false,
+                        url: window.lindneo.url+"book/getFastStyle",
+                        data: data
+                      })
+                      .done(function( result ) {
+                          result=window.lindneo.tlingit.responseFromJson(result);
+                          //console.log(result.font_size);
+                          
+                          if(result){
+                            //console.log('a');
+                            //(condition) ? true-value : false-value
+                            styles=[
+                            {name:'font-size', val:(typeof result.font_size != "undefined") ? result.font_size : '17px'},
+                            {name:'font-family', val:(typeof result.font_family != "undefined") ? result.font_family : 'Arial'},
+                            {name:'text-decoration', val:(typeof result.text_decoration != "undefined") ? result.text_decoration:'normal'},
+                            {name:'font-weight', val:(typeof result.font_weight != "undefined") ? result.font_weight:'normal'},
+                            {name:'text-align', val:(typeof result.text_align != "undefined") ? result.text_align:'left'},
+                            {name:'text-transform', val:(typeof result.text_transform != "undefined") ? result.text_transform :'none'}
+
+                             ];
+
+                             
+                          }
+                          else{
+                            //console.log('b');
+                            styles=[
+                            {name:'font-size', val:'17px'},
+                            {name:'font-family', val:'Arial'},
+                            {name:'text-decoration', val:'normal'},
+                            {name:'font-weight', val:'bold'},
+                            {name:'text-align', val:'left'},
+                            {name:'text-transform', val:'none'},
+                             ];
+                           };
+                      });
+
+                      
+                       console.log(styles);
+                       break;
+                    case 'h5':
+
+                      var h5_style="";
+                      var data= {
+                          'book_id': window.lindneo.currentBookId,
+                          'component':propertyValue 
+                        };
+                      $.ajax({
+                        type: "POST",
+                        async: false,
+                        url: window.lindneo.url+"book/getFastStyle",
+                        data: data
+                      })
+                      .done(function( result ) {
+                          result=window.lindneo.tlingit.responseFromJson(result);
+                          //console.log(result.font_size);
+                          
+                          if(result){
+                            //console.log('a');
+                            //(condition) ? true-value : false-value
+                            styles=[
+                            {name:'font-size', val:(typeof result.font_size != "undefined") ? result.font_size : '13px'},
+                            {name:'font-family', val:(typeof result.font_family != "undefined") ? result.font_family : 'Arial'},
+                            {name:'text-decoration', val:(typeof result.text_decoration != "undefined") ? result.text_decoration:'normal'},
+                            {name:'font-weight', val:(typeof result.font_weight != "undefined") ? result.font_weight:'normal'},
+                            {name:'text-align', val:(typeof result.text_align != "undefined") ? result.text_align:'left'},
+                            {name:'text-transform', val:(typeof result.text_transform != "undefined") ? result.text_transform :'none'}
+
+                             ];
+
+                             
+                          }
+                          else{
+                            //console.log('b');
+                            styles=[
+                            {name:'font-size', val:'13px'},
+                            {name:'font-family', val:'Arial'},
+                            {name:'text-decoration', val:'normal'},
+                            {name:'font-weight', val:'bold'},
+                            {name:'text-align', val:'left'},
+                            {name:'text-transform', val:'none'},
+                             ];
+                           };
+                      });
+
+                      
+                       console.log(styles);
+                       break;
+                    case 'h6':
+
+                      var data= {
+                          'book_id': window.lindneo.currentBookId,
+                          'component':propertyValue 
+                        };
+                      $.ajax({
+                        type: "POST",
+                        async: false,
+                        url: window.lindneo.url+"book/getFastStyle",
+                        data: data
+                      })
+                      .done(function( result ) {
+                          result=window.lindneo.tlingit.responseFromJson(result);
+                          //console.log(result.font_size);
+                          
+                          if(result){
+                            //console.log('a');
+                            //(condition) ? true-value : false-value
+                            styles=[
+                            {name:'font-size', val:(typeof result.font_size != "undefined") ? result.font_size : '10px'},
+                            {name:'font-family', val:(typeof result.font_family != "undefined") ? result.font_family : 'Arial'},
+                            {name:'text-decoration', val:(typeof result.text_decoration != "undefined") ? result.text_decoration:'normal'},
+                            {name:'font-weight', val:(typeof result.font_weight != "undefined") ? result.font_weight:'normal'},
+                            {name:'text-align', val:(typeof result.text_align != "undefined") ? result.text_align:'left'},
+                            {name:'text-transform', val:(typeof result.text_transform != "undefined") ? result.text_transform :'none'}
+
+                             ];
+
+                             
+                          }
+                          else{
+                            //console.log('b');
+                            styles=[
+                            {name:'font-size', val:'10px'},
+                            {name:'font-family', val:'Arial'},
+                            {name:'text-decoration', val:'normal'},
+                            {name:'font-weight', val:'bold'},
+                            {name:'text-align', val:'left'},
+                            {name:'text-transform', val:'none'},
+                             ];
+                           };
+                      });
+
+                      
+                       console.log(styles);
                        break;
                     case 'p':
-                      styles=[
-                      {name:'font-size', val:'14px'},
-                      {name:'font-family', val:'Arial'},
-                      {name:'text-decoration', val:'normal'},
-                      {name:'font-weight', val:'normal'},
-                      {name:'text-align', val:'left'},
-                      {name:'text-transform', val:'none'},
-                       ];
+
+                      var p_style="";
+                      var data= {
+                          'book_id': window.lindneo.currentBookId,
+                          'component':propertyValue 
+                        };
+                      $.ajax({
+                        type: "POST",
+                        async: false,
+                        url: window.lindneo.url+"book/getFastStyle",
+                        data: data
+                      })
+                      .done(function( result ) {
+                          result=window.lindneo.tlingit.responseFromJson(result);
+                          //console.log(result.font_size);
+                          
+                          if(result){
+                            //console.log('a');
+                            //(condition) ? true-value : false-value
+                            styles=[
+                            {name:'font-size', val:(typeof result.font_size != "undefined") ? result.font_size : '14px'},
+                            {name:'font-family', val:(typeof result.font_family != "undefined") ? result.font_family : 'Arial'},
+                            {name:'text-decoration', val:(typeof result.text_decoration != "undefined") ? result.text_decoration:'normal'},
+                            {name:'font-weight', val:(typeof result.font_weight != "undefined") ? result.font_weight:'normal'},
+                            {name:'text-align', val:(typeof result.text_align != "undefined") ? result.text_align:'left'},
+                            {name:'text-transform', val:(typeof result.text_transform != "undefined") ? result.text_transform :'none'}
+
+                             ];
+
+                             
+                          }
+                          else{
+                            //console.log('b');
+                            styles=[
+                            {name:'font-size', val:'14px'},
+                            {name:'font-family', val:'Arial'},
+                            {name:'text-decoration', val:'normal'},
+                            {name:'font-weight', val:'normal'},
+                            {name:'text-align', val:'left'},
+                            {name:'text-transform', val:'none'},
+                             ];
+                           };
+                      });
+
+                      
+                       console.log(styles);
                        break;
                     case 'blockqoute':
-                      styles=[
-                      {name:'font-size', val:'12px'},
-                      {name:'font-family', val:'Arial'},
-                      {name:'text-decoration', val:'italic'},
-                      {name:'font-weight', val:'normal'},
-                      {name:'text-align', val:'left'},
-                      {name:'text-transform', val:'none'},
-                       ];
+
+                      var blockqoute_style="";
+                      var data= {
+                          'book_id': window.lindneo.currentBookId,
+                          'component':propertyValue 
+                        };
+                      $.ajax({
+                        type: "POST",
+                        async: false,
+                        url: window.lindneo.url+"book/getFastStyle",
+                        data: data
+                      })
+                      .done(function( result ) {
+                          result=window.lindneo.tlingit.responseFromJson(result);
+                          //console.log(result.font_size);
+                          
+                          if(result){
+                            //console.log('a');
+                            //(condition) ? true-value : false-value
+                            styles=[
+                            {name:'font-size', val:(typeof result.font_size != "undefined") ? result.font_size : '12px'},
+                            {name:'font-family', val:(typeof result.font_family != "undefined") ? result.font_family : 'Arial'},
+                            {name:'text-decoration', val:(typeof result.text_decoration != "undefined") ? result.text_decoration:'italic'},
+                            {name:'font-weight', val:(typeof result.font_weight != "undefined") ? result.font_weight:'normal'},
+                            {name:'text-align', val:(typeof result.text_align != "undefined") ? result.text_align:'left'},
+                            {name:'text-transform', val:(typeof result.text_transform != "undefined") ? result.text_transform :'none'}
+
+                             ];
+
+                             
+                          }
+                          else{
+                            //console.log('b');
+                            styles=[
+                            {name:'font-size', val:'12px'},
+                            {name:'font-family', val:'Arial'},
+                            {name:'text-decoration', val:'italic'},
+                            {name:'font-weight', val:'normal'},
+                            {name:'text-align', val:'left'},
+                            {name:'text-transform', val:'none'},
+                             ];
+                           };
+                      });
+
+                      
+                       console.log(styles);
                        break;
                     default: 
                     console.log(styles);
@@ -209,7 +538,7 @@ $(document).ready(function(){
                   var content_text = '<span style="'+style+'">'+localStorage.getItem("selection_text")+'</span>';
                   $('#message_rtext'+this.options.component.id).html(this.options.component.data.rtextdiv.val.replace(localStorage.getItem("selection_text"), content_text));  
                   that._change( $('#message_rtext'+this.options.component.id).html());
-                  localStorage.setItem("selection_text", '');
+                  //localStorage.setItem("selection_text", '');
                 
               break;
 

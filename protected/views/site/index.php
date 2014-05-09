@@ -223,8 +223,27 @@ $all_books= $this->getWorkspaceBooks($workspace->workspace_id);
 						<!-- PAGE HEADER-->
 						<div class="row">
 							<div class="col-sm-12">
-								<div class="page-header">
+								<div class="page-header" style="overflow:visible; padding-bottom:50px;">
 										<h3 class="content-title pull-left"><?php _e('Kitaplarım') ?></h3>
+                                        
+                                        <div class="action_bar_spacer"></div>
+                                        
+                                        <ul class="mybooks_category_actions">
+                                            <li class="dropdown mybooks_page_categories">
+                                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Kategoriler <i class="fa fa-chevron-down"></i></a>
+                                                    <ul class="dropdown-menu" id="filter-controls">
+                                                        <li><a href="#" data-filter="*"><?php _e("Hepsi"); ?></a></li>
+                                                        <li><a href="#" data-filter=".owner"><?php _e("Sahibi"); ?></a></li>
+                                                        <li><a href="#" data-filter=".editor"><?php _e("Editör"); ?></a></li>
+                                                        <li class="mybooks_page_category_divider"></li>
+                                                        <?php 
+														$workspaces= $this->getUserWorkspaces();
+														foreach ($workspaces as $key => $workspace) { ?>
+																<li><a href="#" data-filter=".<?php echo $workspace['workspace_id']; ?>"><?php echo $workspace['workspace_name']; ?></a></li>
+														<?php } ?>
+                                                    </ul>
+                                            </li>
+                                        </ul>
                                         
 										<a class="btn pull-right btn-primary" id='addNewBookBtn' href="/book/bookCreate">
 											<i class="fa fa-plus-circle"></i>
@@ -236,65 +255,19 @@ $all_books= $this->getWorkspaceBooks($workspace->workspace_id);
 						</div>
 						<!-- /PAGE HEADER -->
 						<!-- FAQ -->
-		<div class="row">
-			<div id="filter-controls" class="btn-group">
-            
-            
-            
-            
-            
-            
-			  <div class="hidden-xs">
-				  <a href="#" data-filter="*"><?php _e("Hepsi"); ?></a>
-<?php 
-$workspaces= $this->getUserWorkspaces();
-foreach ($workspaces as $key => $workspace) { ?>
-		<a href="#" class="btn-<?php echo $buttons[$key]; ?>" data-filter=".<?php echo $workspace['workspace_id']; ?>"><?php echo $workspace['workspace_name']; ?></a>		  
-<?php } ?>
-					<!-- <a href="#" class="btn btn-default" data-filter="*"><?php _e("Hepsi"); ?></a> -->
-				  <a href="#" data-filter=".owner"><?php _e("Sahibi"); ?></a>
-				  <a href="#" data-filter=".editor"><?php _e("Editör"); ?></a>
-			  </div>
-			  <div class="visible-xs">
-				   <select id="e1" class="form-control">
-						<option value="*"><?php _e("Hepsi"); ?></option>
-					<?php $workspaces= $this->getUserWorkspaces();
-							foreach ($workspaces as $key => $workspace) { ?>
-						<option value=".<?php echo $workspace['workspace_id']; ?>"><?php echo $workspace['workspace_name']; ?></option>
-					<?php } ?>
-					</select>
-                    <select id="e1" class="form-control">
-						<!-- <option value="*"><?php _e("Hepsi"); ?></option> -->
-						<option value=".owner"><?php _e("Sahibi"); ?></option>
-						<option value=".editor"><?php _e("Editor"); ?></option>
-					</select>
-			  </div>
-		   </div>
-	</div>
+		
 
 
-	<div class="separator"></div>
 	<div id="filter-items" class="mybooks_page_book_filter row">
-        
-
-
-    
     <div class="clearfix"></div>
    
-     
-     
-     
-     
-     
-     
-     
     
 <?php
 $userid=Yii::app()->user->id;
 $workspacesOfUser= $this->getUserWorkspaces();
 foreach ($workspacesOfUser as $key => $workspace) {
         $workspace=(object)$workspace;
-$all_books= $this->getWorkspaceBooks($workspace->workspace_id);
+		$all_books= $this->getWorkspaceBooks($workspace->workspace_id);
 		foreach ($all_books as $key2 => $book) {
 			$userType = $this->userType($book->book_id); ?>
 				
@@ -322,7 +295,7 @@ $all_books= $this->getWorkspaceBooks($workspace->workspace_id);
 		                <img src="<?php echo $thumbnailSrc; ?>" />
 		            </div>					
 		            <div class="reader_book_card_info_container">
-		                <div class="editor_mybooks_book_type tip" data-original-title="<?php _e('Çalışma alanının adı') ?>"><?php echo $workspace->workspace_name; ?></div>						
+		                <div class="editor_mybooks_book_type tip" data-original-title="<?php _e('Çalışma alanının adı') ?>" style="<?php echo ($userType=='owner')? 'border-color:#D9583B':'' ; ?><?php echo ($userType=='editor')? 'border-color:#41A693':'' ; ?>"><?php if ($userType=='owner') {_e('Sahibi');} ?><?php if ($userType=='editor') { _e('Editör'); } ?><?php if ($userType!='owner' && $userType!='editor') { _e('Editör veya sahibi değilsiniz'); } ?></div>
 		                <div class="clearfix"></div>			
 		                <div class="reader_market_book_name tip" data-original-title="<?php _e('Kitabın adı') ?>"></i><a href="/book/author/<?php echo $book->book_id; ?>"><?php echo $book->title ?></a></div>						
 		                <div class="clearfix"></div>						
@@ -334,6 +307,14 @@ $all_books= $this->getWorkspaceBooks($workspace->workspace_id);
 			
 				
 <?php } } ?>
+
+<script type="text/javascript">
+	$().ready(function(){
+		if( $('.reader_book_card').length==0 ) {
+			tripStart();
+		}
+	});
+</script>
 			</div>	
 				
 				<!-- /Page Content -->

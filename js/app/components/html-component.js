@@ -138,7 +138,7 @@ var createHtmlComponent = function ( event, ui, oldcomponent ) {
     var popup_wrapper = $("<div class ='popup_wrapper drag-cancel' style='border: 1px #ccc solid; ' ></div> <br>");
     var popup_detail = $('<textarea class="my-code-area" style="width: 1050px; height:500px; overflow:auto; text-align: left;">'+popup_value+'</textarea>\
                             <script>\
-                              $(".my-code-area").ace({ theme: "twilight", lang: "javascript" })\
+                              $(".my-code-area").ace({ theme: "twilight", lang: "html" })\
                             </script>');
     var add_button = $("<a href='#' id='pop-image-OK' class='btn btn-info' style='padding: 5px 30px; margin-left: 480px;'>Ekle</a> ");
     poup_header.appendTo(html_popup);

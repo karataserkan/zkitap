@@ -97,6 +97,10 @@ $current_user=User::model()->findByPk(Yii::app()->user->id);
 			         <li><a href="<?php echo $this->createUrl("EditorActions/ExportPdfBook", array('bookId' => $model->book_id ));?>"> <i class="icon-doc-inv"></i>PDF Yayınla</i></a></li>
 			         <li><a href="<?php echo $this->createUrl("EditorActions/publishBook/", array('bookId' => $model->book_id ));?>"> <i class="icon-doc-inv"></i><?php _e("Hızlı Yayınla"); ?></i></a></li>
 			         <li><a href="<?php echo $this->createUrl("EditorActions/ExportBook", array('bookId' => $model->book_id ));?>"><i class="icon-publish"></i>Yayınla</a></li>
+
+			         <li><a href="<?php echo $this->createUrl("EditorActions/ExportTimeStamp", array('bookId' => $model->book_id ));?>"><i class="fa fa-tags"></i>Zaman Damgala</a></li>
+
+
 					</ul>
 			   </li>
 			   <li class='has-sub'><a href='#'><span>Düzenle</span></a>
@@ -348,7 +352,10 @@ $current_user=User::model()->findByPk(Yii::app()->user->id);
 						<option value="">Serbest</option>
 						<option value="h1" >Başlık</option>
 						<option value="h2" >Alt Başlık</option>
-						<option value="h3" >Kucuk Başlık</option>
+						<option value="h3" >Başlık 1</option>
+						<option value="h4" >Başlık 2</option>
+						<option value="h5" >Başlık 3</option>
+						<option value="h6" >Başlık 4</option>
 						<option value="p"  >Paragraf</option>
 						<option value="blockqoute" >Alıntı</option>
 					</select>
@@ -555,7 +562,7 @@ $current_user=User::model()->findByPk(Yii::app()->user->id);
 				<div class="vertical-line"></div>
 				
 						<i class="icon-opacity grey-6"></i>
-								<select class='tool-select tool select' rel='opacity' rel='color' id="font-size" class="radius" title="Şeklin Şeffaflık Ayarı">
+							<select class='tool-select tool select' rel='opacity' rel='color' id="font-size" class="radius" title="Bağlantının Şeffaflık Ayarı">
 								
 								<option value="0" >0</option>
 								<option value="0.10" >10</option>
@@ -961,7 +968,71 @@ $current_user=User::model()->findByPk(Yii::app()->user->id);
 	
 <!-- popup content-->
 </div>	
-<!--  end add quiz popup -->		
+<!--  end add quiz popup -->
+
+<!--  add mquiz popup -->	
+<div class="popup" id="pop-mquiz-popup">
+<div class="popup-header">
+	<i class="icon-m-quiz"></i>
+		Quiz Ekle
+	<i id="image-add-dummy-close-button" class="icon-close size-10" style="float:right; margin-right:10px; margin-top:5px;"></i>
+	
+</div>
+
+<!-- popup content-->
+	<div class="gallery-inner-holder">
+		<label class="dropdown-label" id="leading">
+				Şık Sayısı:
+					<select id="leading" class="radius">
+						<option value="0" >2</option>
+						<option value="10" >3</option>
+						<option selected="" value="20" >4</option>
+						<option value="30" >5</option>
+					</select>	
+		</label> 
+		</br>
+		<label class="dropdown-label" id="leading">
+				Doğru Cevap:
+					<select id="leading" class="radius">
+						<option value="0" >A</option>
+						<option value="10" >B</option>
+						<option selected="" value="20" >C</option>
+						<option value="30" >D</option>
+					</select>	
+		</label> 
+
+		</br></br>
+		<div class="quiz-inner">
+			Soru kökü:
+			<form id="video-url">
+			<textarea class="popup-text-area">Soru kökünü buraya yazınız.
+			</textarea> </br>
+			<!--burası çoğalıp azalacak-->
+			1. Soru:
+			<form id="video-url">
+			<textarea class="popup-choices-area">
+			</textarea> </br>
+			
+			2. Soru:
+			<form id="video-url">
+			<textarea class="popup-choices-area">
+			</textarea> </br>
+			
+			3. Soru:
+			<form id="video-url">
+			<textarea class="popup-choices-area">
+			</textarea> </br>
+		</div>
+		
+		<a href="#" class="btn btn-info" id="add-image" style="padding: 5px 30px;">Ekle</a>
+		</form>
+		
+		
+	</div>		
+	
+<!-- popup content-->
+</div>	
+<!--  end add mquiz popup -->		
 	
 	
 <!--  add popup popup -->	
@@ -1142,48 +1213,51 @@ $current_user=User::model()->findByPk(Yii::app()->user->id);
 		
 			
 			
-			<li ctype="image" class="component icon-m-image">&nbsp;&nbsp;&nbsp;&nbsp;<?php _e('Görsel'); ?></li>
-			<li ctype="sound" class="component icon-m-sound">&nbsp;&nbsp;&nbsp;&nbsp;<?php _e('Ses'); ?></li>
-			<li ctype="video" class="component icon-m-video">&nbsp;&nbsp;&nbsp;&nbsp;<?php _e('Video'); ?></li>
-			
-			<li class="left_bar_titles"></li>
-			
-			<li ctype="galery" class="component icon-m-galery">&nbsp;&nbsp;&nbsp;&nbsp;<?php _e('Galeri'); ?></li>
+
 			<!--
 			<li ctype="slider" class="component icon-m-galery">&nbsp;&nbsp;&nbsp;&nbsp;<?php _e('Slider'); ?></li>
 			<li ctype="thumb" class="component icon-m-galery">&nbsp;&nbsp;&nbsp;&nbsp;<?php _e('Öngörüntü Slider'); ?></li>
 			<li ctype="tag" class="component icon-m-galery">&nbsp;&nbsp;&nbsp;&nbsp;<?php _e('Etiket'); ?></li>
 			-->
-			<li ctype="quiz"  class="component icon-m-quiz">&nbsp;&nbsp;&nbsp;&nbsp;<?php _e('Quiz'); ?></li>
-			<li ctype="side-text"  class="component icon-m-listbox">&nbsp;&nbsp;&nbsp;<?php _e('Yazı Kutusu'); ?></li>
-			<li ctype="link" class="component icon-m-link ui-draggable">&nbsp;&nbsp;&nbsp;&nbsp;<?php _e('Bağlantı'); ?></li>
-			<li ctype="popup" class="component icon-m-popup">&nbsp;&nbsp;&nbsp;&nbsp;<?php _e('Açılır Pencere'); ?></li>
 			
-			<li class="left_bar_titles"></li>
-
-			<li ctype="text" class="component icon-m-text">&nbsp;&nbsp;&nbsp;&nbsp;<?php _e('Yazı'); ?></li>
-			<li ctype="rtext" class="component icon-m-text">&nbsp;&nbsp;&nbsp;&nbsp;<?php _e('Zengin Metin'); ?></li>
-			<li ctype="grafik" class="component icon-m-charts">&nbsp;&nbsp;&nbsp;&nbsp;<?php _e('Grafik'); ?></li>
-			<li ctype="shape" class="component icon-m-shape">&nbsp;&nbsp;&nbsp;&nbsp;<?php _e('Şekil'); ?></li>
-			<li ctype="table" class="component icon-t-merge">&nbsp;&nbsp;&nbsp;&nbsp;<?php _e('Tablo'); ?></li>
-			<li ctype="html" class="component icon-t-merge">&nbsp;&nbsp;&nbsp;&nbsp;<?php _e('Html'); ?></li>
-			<li ctype="plink" class="component icon-t-merge">&nbsp;&nbsp;&nbsp;&nbsp;<?php _e('Sayfa Bağlantısı'); ?></li>
-			<li ctype="latex" class="component icon-t-merge">&nbsp;&nbsp;&nbsp;&nbsp;<?php _e('Latex'); ?></li>
 			<!--<li ctype="wrap" class="component icon-t-merge">&nbsp;&nbsp;&nbsp;&nbsp;<?php _e('Metin Sarma'); ?></li>-->
+
+			<li ctype="image" class="component " style=" background-image: url(<?php echo Yii::app()->getBaseUrl(true);?>/css/images/components/image.png);"></li>
+			<li ctype="sound" class="component " style=" background-image: url(<?php echo Yii::app()->getBaseUrl(true);?>/css/images/components/audio.png);"></li>
+			<li ctype="video" class="component " style=" background-image: url(<?php echo Yii::app()->getBaseUrl(true);?>/css/images/components/video.png);"></li>
+			<li ctype="galery" class="component " style=" background-image: url(<?php echo Yii::app()->getBaseUrl(true);?>/css/images/components/galery.png);"></li>
+			<li ctype="quiz" class="component " style=" background-image: url(<?php echo Yii::app()->getBaseUrl(true);?>/css/images/components/quiz.png);"></li>
+			<li ctype="mquiz" class="component " style=" background-image: url(<?php echo Yii::app()->getBaseUrl(true);?>/css/images/components/quiz.png);"></li>
+			<li ctype="side-text" class="component " style=" background-image: url(<?php echo Yii::app()->getBaseUrl(true);?>/css/images/components/slider.png);"></li>
+			<li ctype="link" class="component " style=" background-image: url(<?php echo Yii::app()->getBaseUrl(true);?>/css/images/components/link.png);"></li>
+			<li ctype="popup" class="component " style=" background-image: url(<?php echo Yii::app()->getBaseUrl(true);?>/css/images/components/popup.png);"></li>
+			<li ctype="text" class="component " style=" background-image: url(<?php echo Yii::app()->getBaseUrl(true);?>/css/images/components/text.png);"></li>
+			<li ctype="rtext" class="component " style=" background-image: url(<?php echo Yii::app()->getBaseUrl(true);?>/css/images/components/rtext.png);"></li>
+			<li ctype="grafik" class="component " style=" background-image: url(<?php echo Yii::app()->getBaseUrl(true);?>/css/images/components/graphic.png);"></li>
+			<li ctype="shape" class="component " style=" background-image: url(<?php echo Yii::app()->getBaseUrl(true);?>/css/images/components/shape.png);"></li>
+			<li ctype="table" class="component " style=" background-image: url(<?php echo Yii::app()->getBaseUrl(true);?>/css/images/components/table.png);"></li>
+			<li ctype="html" class="component " style=" background-image: url(<?php echo Yii::app()->getBaseUrl(true);?>/css/images/components/html.png);"></li>
+			<li ctype="plink" class="component " style=" background-image: url(<?php echo Yii::app()->getBaseUrl(true);?>/css/images/components/pagelink.png);"></li>
+			<li ctype="latex" class="component" style=" background-image: url(<?php echo Yii::app()->getBaseUrl(true);?>/css/images/components/latex.png);"></li>
+
 			
+		
+		
 			
-			<li class="left_bar_titles"></li>
 		</ul>	
 			
 			
+		<div class="clearfix"></div>
 		
-		<i class="icon-zoom grey-5" style="margin:5px;"></i>	<div id='zoom-pane' class="zoom" style="margin-top: 10px; max-width:150px;"></div>
+		<i class="icon-zoom grey-5" style="margin:5px;"></i>	
+		<div id='zoom-pane' class="zoom" style="margin-top: 10px; max-width:150px;"></div>
 		</br>
 				
 			
 		
 <!-- chat  -->
 	<a class="chat_button"><i class="icon-chat-inv"></i><span class="text-visible">&nbsp;Yazışma</span></a>
+	
 		<div class="chat_window">
 		
 	<div class="chat_inline_holder">
@@ -1222,12 +1296,13 @@ $current_user=User::model()->findByPk(Yii::app()->user->id);
 	</div>
 	
 	<!---- shrinking buttons and scripts ---->
+		<!--
 		<div class="left_bar_shrink">
 		  <i class="icon-angle-left blue"></i>
 		</div>
 		<div class="left_bar_shrink_left">
 		</div>
-		
+		-->
 		
 		
 		<div style="display:none;" class="btn right_bar_shrink_button right_bar_shrink_button_closed" id="right_close" >
@@ -1709,6 +1784,14 @@ $current_user=User::model()->findByPk(Yii::app()->user->id);
 						if (last_timeout) clearTimeout(last_timeout);
 
 					});
+					var maxheight = $( window ).height();
+					$(".panel-collapse.collapse.in").css('max-height',maxheight-280);
+					$(".panel-collapse.collapse.in").css('overflow','auto');
+					$( window ).resize(function() {
+					  	maxheight = $( window ).height();
+					  	$(".panel-collapse.collapse.in").css('max-height',maxheight-280);
+					});
+					$( ".modal" ).css('z-index','9999999999999');
 				});
 				</script>
 			  <div class="panel panel-default">
@@ -1831,23 +1914,17 @@ $current_user=User::model()->findByPk(Yii::app()->user->id);
 					</script>
 					
 					
-					<a class="add-page-list-button" href='/page/create?book_id=<?php echo $model->book_id; ?>&chapter_id=<?php echo $current_chapter->chapter_id; ?>'>
-					<div class="add-page-list-inside">
-					Sayfa Ekle </div>
-					</a>
-
-					<a class="add-page-list-button" href='/chapter/create?book_id=<?php echo $model->book_id; ?>'>
-					<div class="add-page-list-inside">
-					Bölüm Ekle </div>
-					</a>	
+						
 
 				
 					
 				</div>
+
 			
 				</div>
 		
 		</div>
+		
 		</div>
 		</div>
 		</div>
@@ -1991,14 +2068,23 @@ $background= (!empty($img)) ? "background-image:url('".$img."')" : "background:w
 	
 <!-- Page Modal -->
 	
-<div class="modal fade add-page-modal" id="addPage" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div class="modal fade add-page-modal" id="addPage" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"  >
   <div class="modal-dialog ">
     <div class="modal-content ui-draggable">
 	<script>
   $(function() {
-    $( ".ui-draggable" ).draggable();
+
+    $( ".modal" ).css('z-index','9999999999999');
+    $( "#addPage" ).css('z-index','9999999999999');
+    $( "#box-thumbnail" ).css('z-index','9999999999999');
+    $( "#box-cover" ).css('z-index','9999999999999');
+    $( ".ui-draggable" ).draggable({ scroll: false,  snap: false, revert: false, refreshPositions: true});
+   
   });
   </script>
+ 
+  
+  
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
         <h4 class="modal-title" id="myModalLabel"><i class="fa fa-plus-square"></i>&nbsp;&nbsp;Sayfa Ekle</h4>
@@ -2037,7 +2123,7 @@ $background= (!empty($img)) ? "background-image:url('".$img."')" : "background:w
 						foreach ($template_chapters as $key => $template_chapter) {
 							$template_pages=Page::model()->findAll(array('order'=>  '`order` asc ,  created asc', "condition"=>'chapter_id=:chapter_id', "params" =>array(':chapter_id' => $template_chapter->chapter_id  ) ) );
 							foreach ($template_pages as $template_page){
-								echo "<li class='page' chapter_id='".$template_chapter->chapter_id."' page_id='".$template_page->page_id."' style='height:90px; width:120px;' ><canvas class='preview' id='pre_".$template_page->page_id."' style='height:90px; width:120px;'> </canvas><a href='/page/create?book_id=".$model->book_id."&chapter_id=".$current_chapter->chapter_id."&pageTeplateId=".$template_page->page_id."' >Ekle</a></li>";
+								echo "<li class='page'  chapter_id='".$template_chapter->chapter_id."' page_id='".$template_page->page_id."' style='width:122px; height:92px; border: 1px solid rgb(55, 108, 150);'  ><canvas  class='preview pre_".$template_page->page_id."' style='height:90px; width:120px;'> </canvas><a class='pre_".$template_page->page_id."' href='/page/create?book_id=".$model->book_id."&chapter_id=".$current_chapter->chapter_id."&pageTeplateId=".$template_page->page_id."' ></a></li>";
 								?>
 									<script type="text/javascript">
 										window.lindneo.tlingit.loadPagesPreviews('<?php echo $template_page->page_id ?>');
@@ -2046,27 +2132,42 @@ $background= (!empty($img)) ? "background-image:url('".$img."')" : "background:w
 							}
 						}
 						?>
+						<li style="width:122px; height:92px; border: 1px solid rgb(55, 108, 150);">
+							<a class="add-page-list-button" href='/page/create?book_id=<?php echo $model->book_id; ?>&chapter_id=<?php echo $current_chapter->chapter_id; ?>' style="width:110px; height:82px;">
+								<div class="add-page-list-inside"> 
+								Boş Sayfa Ekle </div>
+							</a>
+						</li>
 					<ul>	
+					
+
 					
 					</div>
 				   <div class="tab-pane fade" id="tab_3_2">
 					<ul class="add-page-list">
 						<?php 
-						$data=json_decode($model->data,true);
-						$template_id=$data["template_id"];
-						$template_chapters=Chapter::model()->findAll(array('order'=>  '`order` asc ,  created asc', "condition"=>'book_id=:book_id', "params" =>array(':book_id' => $template_id  ) ) );
-						foreach ($template_chapters as $key => $template_chapter) {
-							$template_page=Page::model()->find(array('order'=>  '`order` asc ,  created asc', "condition"=>'chapter_id=:chapter_id', "params" =>array(':chapter_id' => $template_chapter->chapter_id  ) ) );
-								echo "<li onclick='event.stopPropagation();' class='page' chapter_id='".$template_chapter->chapter_id."' page_id='".$template_page->page_id."' ><canvas class='preview' height='90' width='120'> </canvas><a href='/page/create?book_id=".$model->book_id."&chapter_id=".$current_chapter->chapter_id."&pageTeplateId=".$template_page->page_id."' >Ekle</a></li>";
+						// $data=json_decode($model->data,true);
+						// $template_id=$data["template_id"];
+						// $template_chapters=Chapter::model()->findAll(array('order'=>  '`order` asc ,  created asc', "condition"=>'book_id=:book_id', "params" =>array(':book_id' => $template_id  ) ) );
+						// foreach ($template_chapters as $key => $template_chapter) {
+						// 	$template_page=Page::model()->find(array('order'=>  '`order` asc ,  created asc', "condition"=>'chapter_id=:chapter_id', "params" =>array(':chapter_id' => $template_chapter->chapter_id  ) ) );
+						// 		echo "<li onclick='event.stopPropagation();' class='page' chapter_id='".$template_chapter->chapter_id."' page_id='".$template_page->page_id."' ><canvas class='preview' height='90' width='120'> </canvas><a href='/page/create?book_id=".$model->book_id."&chapter_id=".$current_chapter->chapter_id."&pageTeplateId=".$template_page->page_id."' >Ekle</a></li>";
 								?>
 									<script type="text/javascript">
-										window.lindneo.tlingit.loadPagesPreviews('<?php echo $template_page->page_id ?>');
+								//		window.lindneo.tlingit.loadPagesPreviews('<?php echo $template_page->page_id ?>');
 									</script>
 								<?php
-						}
+						//}
 
 						?>
+						<li>
+							<a class="add-page-list-button" href='/chapter/create?book_id=<?php echo $model->book_id; ?>'>
+								<div class="add-page-list-inside">
+								Bölüm Ekle </div>
+							</a>
+						</li>
 					</ul>
+
 					</div>
 				</div>
 			 </div>

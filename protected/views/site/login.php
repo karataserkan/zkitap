@@ -49,7 +49,7 @@ $this->breadcrumbs=array(
 
 <div class="col-md-3">
 
-						<section id="login_bg" class="visible">
+						<section id="login_bg" class="visible" style="margin-top:100px;">
 							<div class="login-box">
 								
 							<?php $form=$this->beginWidget('CActiveForm', array(
@@ -85,24 +85,6 @@ $this->breadcrumbs=array(
                                     
                                     
                                     
-									<!-- SOCIAL LOGIN -->
-									<div class="divide-20"></div>
-									<div class="center">
-										<strong><?php _e("Ya da sosyal hesabınızı kullanarak giriş yapın")?></strong>
-									</div>
-									<div class="divide-20"></div>
-									<div class="social-login center">
-										<a class="btn btn-primary btn-lg">
-											<i class="fa fa-facebook"></i>
-										</a>
-										<a class="btn btn-info btn-lg">
-											<i class="fa fa-twitter"></i>
-										</a>
-										<a class="btn btn-danger btn-lg">
-											<i class="fa fa-google-plus"></i>
-										</a>
-									</div>
-									<!-- /SOCIAL LOGIN -->
                                     
                                     
 									<div class="login-helpers">
@@ -118,7 +100,7 @@ $this->breadcrumbs=array(
             
             
 			<!-- REGISTER -->
-			<section id="register_bg" class="font-400">
+			<section id="register_bg" class="font-400" style="margin-top:100px;">
 				<div class="container">
 					<div class="row">
 						<div class="">
@@ -159,43 +141,7 @@ $this->breadcrumbs=array(
 									<input size="60" maxlength="255" name="User[passwordR]" id="User_password_r" type="password">
 								  </div>
 								
-									<div class="box-body">
-										<div class="panel-group" id="accordion">
-										  <div class="panel panel-default">
-											 <div class="panel-heading">
-												<h3 class="panel-title"> <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseOne"><span class="text-info">Fotograf Yükle</span> </a> </h3>
-											 </div>
-											 <div id="collapseOne" class="panel-collapse collapse in">
-												<div class="panel-body"> 
-													<div class="upload-preview" id="upload-preview">
 
-													</div>
-													<input class="file" name="logo" type="file"/>
-												</div>
-											 </div>
-										  </div>
-										  <div class="panel panel-default">
-											 <div class="panel-heading">
-												<h3 class="panel-title"> <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo"><span class="text-info">Fotograf Çek</span></a> </h3>
-											 </div>
-											 <div id="collapseTwo" class="panel-collapse collapse">
-												<div class="panel-body"> 
-													<video id="video" style="width:200px; height:200px"></video>
-											        <a id="button" class="btn btn-success">Fotograf Çek</a>
-
-												        <!-- target for the canvas-->
-												        <div id="canvasHolder"></div>
-
-												        <!--preview image captured from canvas-->
-												        <img id="preview" src="http://www.clker.com/cliparts/A/Y/O/m/o/N/placeholder-hi.png" width="160" height="120" />
-
-												        
-												        <input id="User_data" type="text" name="User[data]" style="display:none" />
-												</div>
-											 </div>
-										  </div>
-									   </div>
-									</div>
 
 								    
 
@@ -241,21 +187,26 @@ $this->breadcrumbs=array(
             
             
 			<!-- FORGOT PASSWORD -->
-			<section id="forgot_bg">
+			<section id="forgot_bg" style="margin-top:100px;">
 				<div class="container">
 					<div class="row">
 						<div class="">
 							<div class="login-box">
-								<form role="form">
-								  <div class="form-group">
-									<label for="exampleInputEmail1"><?php _e("E-Posta adresinizi giriniz"); ?></label>
-									<i class="fa fa-envelope"></i>
-									<input name="Reset[email]" id="Reset_email" type="text">
-								  </div>
-								  <div>
-									<button type="submit" class="btn btn-info"><?php _e("Şifremi Yenile"); ?></button>
-								  </div>
-								</form>
+								<?php if ($passResetSuccess) {
+									echo "<span style='color:green'>".$passResetSuccess."</span>";
+								}else{
+								?>
+									<form role="form">
+									  <div class="form-group">
+										<label for="exampleInputEmail1" <?php echo ($passResetError)?'style="color:red"':''; ?>><?php _e("E-Posta adresinizi giriniz"); ?> <?php echo $passResetError; ?></label>
+										<i class="fa fa-envelope"></i>
+										<input name="Reset[email]" id="Reset_email" type="text" <?php echo ($passResetError)?'style="color:red"':''; ?>>
+									  </div>
+									  <div>
+										<button type="submit" class="btn btn-info"><?php _e("Şifremi Yenile"); ?></button>
+									  </div>
+									</form>
+								<?php } ?>
 								<div class="login-helpers">
 									<a href="#" onclick="swapScreen('login_bg');return false;"><?php _e("Giriş ekranına dön"); ?></a> <br>
 								</div>

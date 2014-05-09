@@ -153,10 +153,10 @@
 			      console.log("onTripChange");
 			    },
 			    backToTopWhenEnded : true,
-			    delay : 3000,
+			    delay : 5000,
 			    prevLabel: 'Geri',
 			    nextLabel: 'İleri',
-			    finishLabel: 'İptal',
+			    finishLabel: 'Bitir',
 			    showNavigation: true,
 			    showCloseBox:true
 			    //overlayZindex:9999999999999999999
@@ -225,6 +225,7 @@
 		<script type="text/javascript">
 
 		$(document).ready(function(){
+
 			tripData=[<?php functions::event('tripData'); ?>];
 			//tripStart();
 		});

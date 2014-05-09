@@ -13,7 +13,6 @@
  */
 class Faq extends CActiveRecord
 {
-	public $maxColumn;
 	/**
 	 * Returns the static model of the specified AR class.
 	 * @param string $className active record class name.
@@ -40,8 +39,7 @@ class Faq extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('faq_id, faq_question, faq_answer, rate', 'required'),
-			//array('faq_id, faq_frequency', 'numerical', 'integerOnly'=>true),
+			array('faq_frequency', 'numerical', 'integerOnly'=>true),
 			array('rate', 'numerical'),
 			array('faq_question, faq_answer', 'length', 'max'=>10000),
 			array('lang', 'length', 'max'=>2),

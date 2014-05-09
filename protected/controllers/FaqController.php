@@ -69,7 +69,7 @@ class FaqController extends Controller
 
 		$id=functions::new_id(15);
 		//sets faq->id,lang,rate
-		$faq->faq_id = $id;
+		//$faq->faq_id = $id;
 		$faq->lang=$this->getCurrentLang();
 		$faq->rate=0;
 		$model->faq_id=$id;
@@ -225,8 +225,28 @@ class FaqController extends Controller
 	/**
 	 * Lists all models.
 	 */
-	public function actionIndex()
+	public function actionIndex($category=null)
 	{
+		$lang=$this->getCurrentLang();
+		// if (!$category) {
+		// 	if ($lang=='tr') {
+		// 		$category='Genel';
+		// 	}else
+		// 	{
+		// 		$category='General';
+		// 	}
+		// }
+
+		$categories=FaqCategory::model()->findAll('lang=:lang',array('lang'=>$lang));
+
+		// $category=FaqCategory::model()->find('faq_category_title=:faq_category_title',array('faq_category_title'=>$category));
+		// $categoryFaqs=FaqCategoryFaq::model()->findAll('faq_category_id=:faq_category_id',array('faq_category_id'=>$category->faq_category_id));
+		// $faqs=array();
+		// foreach ($categoryFaqs as $key => $categoryFaq) {
+		// 	$faqs[]=Faq::model()->find('faq_id=:faq_id',array('faq_id'=>$categoryFaq->faq_id));
+		// }
+
+
 		$model=Faq::model()->findAll(array('order'=>'lang'));
 		foreach ($model as $key => $faq) {
 			$data[$key]['faq']=$faq;
@@ -251,6 +271,7 @@ class FaqController extends Controller
 		}
 		$this->render('index',array(
 			'faqs'=>$data,
+			'categories'=>$categories
 		));
 	}
 

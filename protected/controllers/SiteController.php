@@ -36,106 +36,111 @@ class SiteController extends Controller
 		functions::event('tripData',NULL, function($var){
 
 		?>
+			/* Header */
+				{ 
+			       content : "Okutus Editor'e HoşGeldiniz, Tanıtım için ileriye basınız.",
+			       position:'screen-center',
+			       delay:-1
+			   },
 		
-		
-					/* Header */
-					   { 
-					       sel : $('#sidebar-collapse i'),
-					       content : 'Menuyü açıp kapatabilirsiniz.',
-					       position:'e',
-					       callback:function () {$('#header-user img').click();}
-					       //expose: true
-					   },
-					   { 
-					       sel : $('#header-user'),
-					       content : 'Profil Ayarları ve Çıkış',
-					       position:'w',
-					       callback:function () {$('#header-user img').click();}
-					       //expose: true
-					   },
-		
-					 /* Left Menu */
-					   { 
-					       sel : $('#sidebar'),
-					       content : 'Tüm Seçenekler',
-					       position:'e',
-					       expose: true
-					   },
-		
-					   { 
-					       sel : $($('#sidebar ul li')[0]),
-					       content : 'Başlangıç Ekranı',
-					       position:'e',
-					       //expose: true
-					   },
-					   { 
-					       sel : $($('#sidebar ul li')[1]),
-					       content : 'Kitaplarınız',
-					       position:'e',
-					       //expose: true
-					   },
-					   { 
-					       sel : $($('#sidebar ul li')[2]),
-					       content : 'Tüm yardımcı kaynaklar ve Destek Talebi için',
-					       position:'e',
-					       //expose: true
-					   },
-					   { 
-					       sel : $($('#sidebar ul li')[3]),
-					       content : 'Hesap Ayarlarınızı Yapabilirisiniz',
-					       position:'e',
-					       //expose: true,
-					        callback:function(){$($('#sidebar >div> ul>li')[4]).find('a').click();}
-					   },
-					   { 
-					       sel : $($('#sidebar ul li')[4]),
-					       content : 'Şablonlarınıza erişip, değiştirebilir ve yenilerini oluşturabilirsiniz.',
-					       position:'e',
-					       //expose: true,
-					       callback:function(){$($('#sidebar >div> ul>li')[5]).find('a').click();}
-					   },
-					   { 
-					       sel : $($('#sidebar ul li a')[5]),
-					       content : 'Organizasyonunuzu Yönetebilirsiniz.',
-					       position:'e',
-					       //expose: true,
-					       callback:function(){$($('#sidebar >div> ul>li')[5]).find('a').click();}
-					   },
-		
-					 /* Content */
-					   { 
-					       sel : $('#filter-controls'),
-					       content : 'Çalışma Alanı Hızlı Filtrelerini kullanarak kitaplarınıza hızlı erişebilirsiniz.',
-					       position:'s',
-					       expose: true,
-					       callback:function(){$('a[data-filter=".owner"]').click();}
-					   },
-					   { 
-					       sel : $('a[data-filter=".owner"]'),
-					       content : 'Sahibi Olduklarınıza',
-					       position:'s',
-					       callback:function(){$('a[data-filter=".editor"]').click();}
-					   },
-					   { 
-					       sel : $('a[data-filter=".editor"]'),
-					       content : 'Editörü Olduklarınıza',
-					       position:'s',
-					       //expose: true,
-					       callback:function(){$('a[data-filter="*"]').click();}
-					   },
-					   { 
-					       sel : $('a[data-filter="*"]'),
-					       content : 'ya da kısaca Hepsine',
-					       position:'s',
-					       //expose: true
-					   },
-		   			   { 
-					       sel : $('#addNewBookBtn'),
-					       content : 'Şimdi Yeni Bir Kitap Ekleyiniz',
-					       position:'w',
-					       //expose: true,
-					       delay: -1
-					   }
+			/* Header */
+			   { 
+			       sel : $('#sidebar-collapse i'),
+			       content : 'Menuyü açıp kapatabilirsiniz.',
+			       position:'e',
+			       callback:function () {$('#header-user img').click();}
+			       //expose: true
+			   },
+			   { 
+			       sel : $('#header-user'),
+			       content : 'Profil Ayarları ve Çıkış',
+			       position:'w',
+			       callback:function () {$('#header-user img').click();}
+			       //expose: true
+			   },
+
+			 /* Left Menu */
+			   { 
+			       sel : $('#sidebar'),
+			       content : 'Tüm Seçenekler',
+			       position:'e',
+			       expose: true
+			   },
+
+			   { 
+			       sel : $($('#sidebar ul li')[0]),
+			       content : 'Başlangıç Ekranı',
+			       position:'e',
+			       //expose: true
+			   },
+			   { 
+			       sel : $($('#sidebar ul li')[1]),
+			       content : 'Kitaplarınız',
+			       position:'e',
+			       //expose: true
+			   },
+			   { 
+			       sel : $($('#sidebar ul li')[2]),
+			       content : 'Tüm yardımcı kaynaklar ve Destek Talebi için',
+			       position:'e',
+			       //expose: true
+			   },
+			   { 
+			       sel : $($('#sidebar ul li')[3]),
+			       content : 'Hesap Ayarlarınızı Yapabilirisiniz',
+			       position:'e',
+			       //expose: true,
+			        callback:function(){$($('#sidebar >div> ul>li')[4]).find('a').click();}
+			   },
+			   { 
+			       sel : $($('#sidebar ul li')[4]),
+			       content : 'Şablonlarınıza erişip, değiştirebilir ve yenilerini oluşturabilirsiniz.',
+			       position:'e',
+			       //expose: true,
+			       callback:function(){$($('#sidebar >div> ul>li')[5]).find('a').click();}
+			   },
+			   { 
+			       sel : $($('#sidebar ul li a')[5]),
+			       content : 'Organizasyonunuzu Yönetebilirsiniz.',
+			       position:'e',
+			       //expose: true,
+			       callback:function(){$($('#sidebar >div> ul>li')[5]).find('a').click();}
+			   },
+
+			 /* Content */
+			   { 
+			       sel : $('#filter-controls'),
+			       content : 'Çalışma Alanı Hızlı Filtrelerini kullanarak kitaplarınıza hızlı erişebilirsiniz.',
+			       position:'s',
+			       expose: true,
+			       callback:function(){$('a[data-filter=".owner"]').click();}
+			   },
+			   { 
+			       sel : $('a[data-filter=".owner"]'),
+			       content : 'Sahibi Olduklarınıza',
+			       position:'s',
+			       callback:function(){$('a[data-filter=".editor"]').click();}
+			   },
+			   { 
+			       sel : $('a[data-filter=".editor"]'),
+			       content : 'Editörü Olduklarınıza',
+			       position:'s',
+			       //expose: true,
+			       callback:function(){$('a[data-filter="*"]').click();}
+			   },
+			   { 
+			       sel : $('a[data-filter="*"]'),
+			       content : 'ya da kısaca Hepsine',
+			       position:'s',
+			       //expose: true
+			   },
+   			   { 
+			       sel : $('#addNewBookBtn'),
+			       content : 'Şimdi Yeni Bir Kitap Ekleyiniz',
+			       position:'w',
+			       //expose: true,
+			       delay: -1
+			   },
 		
 		
 		
@@ -431,29 +436,35 @@ class SiteController extends Controller
 			error_log("detectSQLinjection SC:L:".$Yii::app()->user->id." email: ".$email);
 			$this->redirect('index');	
 		}
-			$user= User::model()->findAll('email=:email', 
+			$user= User::model()->find('email=:email', 
 	    				array(':email' => $email) );
 			if (!empty($user)) {
 				$meta=new UserMeta;
-				$meta->user_id=$user[0]->id;
+				$meta->user_id=$user->id;
 				$meta->meta_key='passwordReset';
-
 				$link=Yii::app()->getBaseUrl(true);
 				$link.='/user/forgetPassword?id=';
-				$link .= $meta->meta_id;
 				$meta->meta_value=$email;
+		        $meta->created=time();
+	        	$meta->save();
 
-				$message="Şifre sıfırlama isteği gönderdiniz. <a href='".$link."'>Buraya tıklayarak</a> şifrenizi değiştirebilirsiniz. Şifre değiştirme isteğiniz 10 dakika sonra geçersiz olacaktır.<br>".$link;
 
 				$mail=Yii::app()->Smtpmail;
-		        $mail->SetFrom('edubox@linden-tech.com', "Linden Editor");
+		        $mail->SetFrom(Yii::app()->params['noreplyEmail'], "OKUTUS");
+
 		        $mail->Subject= "Password Reset";
-		        $mail->MsgHTML($message);
 		        $mail->AddAddress($email, "");
-		        $meta->created=time();
-		        
+	        	
+				$link .= base64_encode($meta->id);
+				$message="Şifre sıfırlama isteği gönderdiniz. <a href='".$link."'>Buraya tıklayarak</a> şifrenizi değiştirebilirsiniz. Şifre değiştirme isteğiniz 10 dakika sonra geçersiz olacaktır.<br>".$link;
+		        $mail->MsgHTML($message);
+
 		        if($mail->Send()) {
-		        	$meta->save();
+		        	$passResetSuccess=__("Şifre yenileme maili gönderildi. Mailinizdeki linke tıklayarak 10 dakika içerisinde şifrenizi yeniden oluşturabilirsiniz.");
+	        	}
+	        	else
+	        	{
+	        		$passResetError=__("Mail gönderirlirken beklenmedik bir hata oluştu. Lütfen tekrar deneyiniz.");
 	        	}
 			}
 			else
@@ -548,6 +559,24 @@ class SiteController extends Controller
 							$workspaceUser->userid=$newUser->id;
 							$workspaceUser->added=date('Y-n-d g:i:s',time());
 							$workspaceUser->owner=$newUser->id;
+
+
+							$addWorkspaceOrganization = Yii::app()->db->createCommand();
+							if($addWorkspaceOrganization->insert('organisation_workspaces', array(
+							    'organisation_id'=>$organisation->organisation_id,
+							    'workspace_id'=>$workspace->workspace_id,
+							)))
+							{
+								$msg="ORGANISATION WORKSPACE:CREATE:0:". json_encode(array(array('user'=>Yii::app()->user->id),array('workspaceId'=>$workspace->workspace_id,'organisationId'=>$organisation->organisation_id)));
+								Yii::log($msg,'info');
+							}
+							else
+							{
+								$msg="ORGANISATION WORKSPACE:CREATE:1:". json_encode(array(array('user'=>Yii::app()->user->id),array('workspaceId'=>$workspace->workspace_id,'organisationId'=>$organisation->organisation_id)));
+								Yii::log($msg,'info');
+							}
+
+
 							if ($workspaceUser->save()) {
 								$msg="SITE:LOGIN:CreateWorkspaceUser:0:". json_encode(array('user'=> Yii::app()->user->name,'userId'=>Yii::app()->user->id,'message'=>"workspaceUser created for new user and new workspace"));
 								Yii::log($msg,'info');
@@ -588,7 +617,7 @@ class SiteController extends Controller
 			}
 		}
 		// display the login form
-		$this->render('login',array('model'=>$model,'newUser'=>$newUser));
+		$this->render('login',array('model'=>$model,'newUser'=>$newUser,'passResetError'=>$passResetError,'passResetSuccess'=>$passResetSuccess));
 	}
 
 	/**

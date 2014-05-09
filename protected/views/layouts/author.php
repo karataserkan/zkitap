@@ -96,7 +96,7 @@
 		<script type="text/javascript" src="<?php echo Yii::app()->request->baseUrl; ?>/js/lib/ace/mode-javascript.js"></script> -->
 		<script src="<?php echo Yii::app()->request->baseUrl; ?>/js/lib/cheef_ace/ace/ace.js"></script>
 		<script src="<?php echo Yii::app()->request->baseUrl; ?>/js/lib/cheef_ace/ace/theme-twilight.js"></script>
-		<script src="<?php echo Yii::app()->request->baseUrl; ?>/js/lib/cheef_ace/ace/mode-javascript.js"></script>
+		<script src="<?php echo Yii::app()->request->baseUrl; ?>/js/lib/cheef_ace/ace/mode-html.js"></script>
 		<script src="<?php echo Yii::app()->request->baseUrl; ?>/js/lib/cheef_ace/jquery-ace.min.js"></script>
 		<link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/js/lib/cheef_ace/css/editor.css" media="screen" />
 		
@@ -136,6 +136,7 @@
 		<script src="<?php echo Yii::app()->request->baseUrl; ?>/js/app/components/plink-component.js"></script>
 		<script src="<?php echo Yii::app()->request->baseUrl; ?>/js/app/components/thumb-component.js"></script>
 		<script src="<?php echo Yii::app()->request->baseUrl; ?>/js/app/components/rtext-component.js"></script>	
+		<script src="<?php echo Yii::app()->request->baseUrl; ?>/js/app/components/mquiz-component.js"></script>
 		<!-- Page JS Codes -->
 		<script src="<?php echo Yii::app()->request->baseUrl; ?>/js/app/other/page-drag-drop.js"></script>
 		<script src="<?php echo Yii::app()->request->baseUrl; ?>/js/app/other/page-load.js"></script>
