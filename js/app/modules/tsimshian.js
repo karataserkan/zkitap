@@ -46,6 +46,7 @@ window.lindneo.tsimshian = (function(window, $, undefined){
   }
 
   var componentDestroyed = function(componentId){
+    console.log(componentId);
     this.socket.emit('destroyComponent', componentId);
   };
 
@@ -97,13 +98,13 @@ window.lindneo.tsimshian = (function(window, $, undefined){
 
  
        this.socket.on('destroyComponent', function(componentId){
-          window.lindneo.nisga.destroyComponent(componentId);
+          window.lindneo.nisga.destroyByIdComponent(componentId);
         
        } );
 
        this.socket.on('updateComponent', function(component){
    
-          window.lindneo.nisga.destroyComponent(component.id);
+          window.lindneo.nisga.destroyByIdComponent(component.id);
           window.lindneo.nisga.createComponent(component);
   
        } );

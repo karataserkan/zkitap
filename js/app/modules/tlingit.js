@@ -123,7 +123,7 @@ window.lindneo.tlingit = (function(window, $, undefined){
 
   var componentToJson = function (component){
     // build json of component
-    console.log(component);
+    //console.log(component);
     return JSON.stringify(component);
   };
 
