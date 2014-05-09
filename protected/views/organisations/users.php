@@ -5,14 +5,12 @@
 
 	<div class="col-sm-12">
 		<div class="page-header">
-			
-			
+
 				<h3 class="content-title pull-left">Kullanıcılar</h3>
-										
 				<a class="btn pull-right btn-primary" id="boook-editors-settings" href="#" popup="<?php echo $organisationId; ?>" >
-											<i class="fa fa-plus-circle"></i>
-											<span><?php _e('Kullanıcı Ekle'); ?></span>
-										</a>
+				<i class="fa fa-plus-circle"></i>
+				<span><?php _e('Kullanıcı Ekle'); ?></span>
+				</a>
 		</div>
 	</div>
 		
@@ -68,6 +66,7 @@ if ($users) {
 	?><?php
 }
  ?>
+</div>
 </div>
 
 <script>											
