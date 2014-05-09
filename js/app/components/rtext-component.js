@@ -37,7 +37,54 @@ $(document).ready(function(){
           //console.log(localStorage.getItem("selection_text"));
         }
         that.element.mouseup(capture_selection).keyup(capture_selection);
+
+
         justify_element(this.element[0]);
+        that.element.on('focusout mouseup',function(event){
+           
+            
+
+          justify_element(that.element[0]);
+       
+        });
+
+        /*
+        var keydownonTimeout;
+        that.element.on('keydownz' ,function(event){
+
+          if (event.keyCode<40) return;
+
+
+          clearTimeout(keydownonTimeout);
+
+            var sel = window.getSelection();
+            var currentSel=sel.baseNode.parentElement;
+            var currentpos=sel.focusOffset;
+            
+
+             keydownonTimeout=setTimeout(function(){ 
+            
+            console.log(sel);
+
+            if(currentpos==0) return;
+            
+            var range = document.createRange();
+            range.collapse(true);
+            
+            justify_element(that.element[0]);
+            try{
+               range.setStart(that.element[0], currentpos);
+              }
+            catch(e){
+              range.setStart(that.element[0], that.element.text().length-1);
+              
+            }
+            
+          }, 1000);
+
+
+        });
+        */
         this._super({resizableParams:{handles:"e, s, se"}});
           
       },

@@ -26,7 +26,11 @@ $(document).ready(function(){
 
 
         if (this.options.component.data.self.attr.componentType != 'side-text' )this.element.autogrow({element:this});
+        
+
         justify_element(this.element[0]);
+        
+        
         this._super();
           
       },
