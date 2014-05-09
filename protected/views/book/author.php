@@ -562,7 +562,7 @@ $current_user=User::model()->findByPk(Yii::app()->user->id);
 				<div class="vertical-line"></div>
 				
 						<i class="icon-opacity grey-6"></i>
-								<select class='tool-select tool select' rel='opacity' rel='color' id="font-size" class="radius" title="Şeklin Şeffaflık Ayarı">
+							<select class='tool-select tool select' rel='opacity' rel='color' id="font-size" class="radius" title="Bağlantının Şeffaflık Ayarı">
 								
 								<option value="0" >0</option>
 								<option value="0.10" >10</option>
