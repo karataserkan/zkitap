@@ -134,7 +134,7 @@ window.lindneo.tlingit = (function(window, $, undefined){
   };
 
   var loadPage = function (pageId){
-
+console.log("dedede");
     $('#current_page').empty();
     window.lindneo.currentPageId=pageId;
 
