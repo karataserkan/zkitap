@@ -95,7 +95,7 @@ console.log(oldcomponent);
     var poup_header = $("<div class='popup-header'><i class='icon-m-link'></i> &nbsp;Açılır Pencere Ekle </div> ");
     var close_button = $("<i id='popup-add-dummy-close-button' class='icon-close size-10 popup-close-button'></i> ");
     var drag_file = $("<div class='add-image-drag-area' id='dummy-dropzone' > </div> ");
-    var galery_inner = $("<div class='gallery-inner-holder' style='width: " + width + "px; height: " + height + "px;'> \
+    var galery_inner = $("<div class='gallery-inner-holder' style='width: 100%; height: 100%;'> \
         <div style='clear:both'></div> \
       </div> ");
     var popup_wrapper = $("<div class ='popup_wrapper drag-cancel' style='border: 1px #ccc solid; ' ></div> <br>");
@@ -104,7 +104,7 @@ console.log(oldcomponent);
     poup_header.appendTo(pop_popup);
     close_button.appendTo(poup_header);
     galery_inner.appendTo(pop_popup);
-    popup_wrapper.appendTo(galery_inner).resizable({alsoResize: galery_inner});
+    popup_wrapper.appendTo(galery_inner);//.resizable({alsoResize: galery_inner});
     //drag_file.prependTo(popup_wrapper);
     popup_detail.appendTo(popup_wrapper);
     add_button.appendTo(galery_inner);
