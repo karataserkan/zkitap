@@ -27,6 +27,10 @@ $(document).ready(function(){
 
         if (this.options.component.data.self.attr.componentType != 'side-text' )this.element.autogrow({element:this});
         
+
+        justify_element(this.element[0]);
+        
+        
         this._super();
           
       },
@@ -465,13 +469,20 @@ $(document).ready(function(){
                 
               break;
 
-            case 'font-size':           
             case 'text-align':           
+                if(propertyValue=='justify'){
+                  that.setProperty('text-justify','distribute');
+                } else {
+                  that.setProperty('text-justify','normal');
+                }
+
+            case 'font-size':           
             case 'font-family':         
             case 'color':
             case 'font-weight':           
             case 'font-style':         
             case 'text-decoration':   
+            case 'text-justify':   
 
                 this.getSettable().css[propertyName]=propertyValue;
                 //console.log(this.getSettable());
@@ -509,7 +520,8 @@ $(document).ready(function(){
             case 'font-weight':           
             case 'font-style':         
             case 'text-decoration': 
-            case 'text-align':         
+            case 'text-align':
+            case 'text-justify':      
             
 
                 switch (propertyName){
@@ -533,6 +545,9 @@ $(document).ready(function(){
                     break;
                   case 'color':
                     var default_val='#000';
+                    break;
+                  case 'text-justify':
+                    var default_val='normal';
                     break;
                 }
 
