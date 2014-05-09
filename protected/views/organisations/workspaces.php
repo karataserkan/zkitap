@@ -5,22 +5,33 @@ $organisationId=$organizationUser['organisation_id'];
 
 
 ?>
+ <div id="content" class="row">
+
+	<div class="col-sm-12">
+		<div class="page-header">
+			<h3 class="content-title pull-left">Çalışma Alanı</h3>
+			<a class="btn pull-right btn-primary " href="/workspaces/create?organisationId=<?php echo $organisationId; ?>"  popup="linden_team">
+				<i class="fa fa-plus-circle"></i>
+				<span><?php _e('Çalışma Alanı Ekle'); ?></span>
+			</a>
+		</div>
+	</div>
 
 
-
-<br><br><br>
 	
-<ul style="width:450px">
 <?php
 	foreach ($workspaces as $key => $workspace) {
 		?>
-		<li>
-			<span><?php echo $workspace['workspace_name']; ?></span>
-				<a href="#" popup="<?php echo $workspace['workspace_id']; ?>" class="btn white radius float-right"><i class="icon-users"></i><?php _e('Kullanıcılar'); ?></a>	
-				<a href="/workspaces/deleteWorkspace?id=<?php echo $workspace['workspace_id']; ?>&organisationId=<?php echo $organisationId; ?>" class="btn white radius float-right"><i class="icon-delete"></i><?php _e('Sil'); ?></a>
-				<a href="/workspaces/updateWorkspace?id=<?php echo $workspace['workspace_id']; ?>&organisationId=<?php echo $organisationId; ?>" class="btn white radius float-right"><i class="icon-update"></i><?php _e('Düzenle'); ?></a>	
-		<hr>
-		</li>
+		
+		<div class="col-sm-3">	
+			<div class="well">
+			<h5 class="col-sm-12" style="text-transform:capitalize;"><?php echo $workspace['workspace_name']; ?></h5>
+			<a id="#workspace-users" href="#" popup="<?php echo $workspace['workspace_id']; ?>" class="btn white radius float-right"><i class="icon-users"></i><?php _e('Kullanıcılar'); ?></a>	
+			<a href="/workspaces/deleteWorkspace?id=<?php echo $workspace['workspace_id']; ?>&organisationId=<?php echo $organisationId; ?>" class="btn white radius float-right"><i class="icon-delete"></i><?php _e('Sil'); ?></a>
+			<a href="/workspaces/updateWorkspace?id=<?php echo $workspace['workspace_id']; ?>&organisationId=<?php echo $organisationId; ?>" class="btn white radius float-right"><i class="icon-update"></i><?php _e('Düzenle'); ?></a>	
+			<div class="clearfix"></div>
+			</div>
+		</div>
 <center id="popup-close-area" popup="pop-<?php echo $workspace['workspace_id']; ?>" style="display:none; position:relative">
 				<div id="close-div" style="background-color:#123456; width:100% height:#123456; position:fixed;"> </div>
 				<div class="book-editors-options-box-container">
@@ -74,8 +85,8 @@ $("[popup='close-<?php echo $workspace['workspace_id']; ?>']").click(function(){
 		<?php
 	}
 ?>
-</ul>
-<a href="/workspaces/create?organisationId=<?php echo $organisationId; ?>" class="btn white radius"><i class="icon-add"></i><?php _e('Çalışma Alanı Ekle'); ?></a>
+
+
 <script>											
 function sendUser(e){
     var b = e.id;
@@ -86,3 +97,4 @@ function sendUser(e){
     window.location.assign(link);
     }
 </script>
+</div>

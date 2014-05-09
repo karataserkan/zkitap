@@ -2,7 +2,19 @@
 /* @var $this OrganisationHostingsController */
 /* @var $dataProvider CActiveDataProvider */
 ?>
-<br><br><br>
+
+ <div id="content" class="row">
+
+	<div class="col-sm-12">
+		<div class="page-header">
+
+			<h3 class="content-title pull-left">Sunucular</h3>
+			<i class="fa fa-plus-circle"></i><?php echo CHtml::link(__('Ekle'),"/organisationHostings/create?organisationId=".$organisationId,array('class'=>'btn pull-right btn-primary')); ?>
+			</a>
+		</div>
+	</div>
+
+
 <?php
 if ($hostings):
 	foreach ($hostings as $key => $host):
@@ -23,4 +35,5 @@ if ($hostings):
 	endforeach;
 endif;
 ?>
-<?php echo CHtml::link(__('Ekle'),"/organisationHostings/create?organisationId=".$organisationId,array('class'=>'btn white radius')); ?>
+
+</div>
