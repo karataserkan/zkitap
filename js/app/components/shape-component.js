@@ -95,7 +95,8 @@ $(document).ready(function(){
 
     },
     setPropertyofObject : function (propertyName,propertyValue){
-
+      //console.log(propertyName);
+      //console.log(propertyValue);
       switch (propertyName){
             case 'fillStyle':           
             case 'strokeStyle':         
@@ -109,7 +110,7 @@ $(document).ready(function(){
               break;
             
             default:
-              this._super();
+              this._super(propertyName, propertyValue);
               break;
           }
     },

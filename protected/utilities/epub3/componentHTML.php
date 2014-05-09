@@ -38,6 +38,9 @@ class componentHTML {
 			case 'quiz':
 				$this->quizInner($component);			
 				break;
+			case 'mquiz':
+				$this->mquizInner($component);			
+				break;
 			case 'table':
 			    $this->tableInner($component);
 			    break;
@@ -197,6 +200,224 @@ class componentHTML {
 	});
 	</script>
 		";
+		$this->html=str_replace('%component_inner%' , $container, $this->html);
+
+
+	}
+
+	public function mquizInner($component){
+
+
+
+	        //die;
+		$container.="
+		
+        <div  class='quiz-component' style=''> 
+            <div class='question-text'>".$component->data->question."</div> 
+            <div class='question-options-container'>";
+        $answer=$component->data->answer;
+           if($component->data->quiz_type == "text"){
+
+           	$container.=  
+	            	"<div id='uanswer'> 
+		            	<input type='text' id='user_answer' value='" . $value . "' name='question' /> 
+		            	<div id='qresult'></div>
+		            </div>";
+		    $container.="  
+	         	</div> 
+		            <div style='margin-bottom:25px'> 
+		              <a class='btn bck-light-green white radius send' > Yanıtla </a> 
+		            </div> 
+		        </div>";
+	        $component=json_encode($component);
+	        $component=str_replace("'", "\'", $component);
+
+	        $container.="
+				<script type='text/javascript'>
+			       	$( document ).ready(function(){
+						var component= JSON.parse('".$component."');
+						var that = $('#a'+component.id)
+						
+						that.find('.send').click(function(evt){
+
+							evt.preventDefault();
+							
+							if($('#user_answer').val() == '".$answer."'){
+					              $('#qresult').html('<div style=\"color:green;\">Tebrikler!...</div>');
+				            }
+				            else{
+					             $('#qresult').html('<div style=\"color:red;\">Üzgünüm Yanlış Cevap!...</div>'); 
+				            }
+						});
+					});
+				</script>
+			";
+			
+
+           }
+           else if($component->data->quiz_type == "multiple_choice"){
+	            foreach ($component->data->question_answers as $key => $value) {
+	            	
+
+	            	$container.=  
+	            	"<div> 
+		            	<input type='radio' value='" . $key . "' name='question' /> 
+		            ". $value .   
+		            "</div>";
+	 
+	            }
+	          	$container.="  
+		         	</div> 
+			            <div style='margin-bottom:25px'> 
+			              <a class='btn bck-light-green white radius send' > Yanıtla </a> 
+			            </div> 
+			        </div>";
+		        $component=json_encode($component);
+		        $component=str_replace("'", "\'", $component);
+		        $container.="
+					<script type='text/javascript'>
+				       	$( document ).ready(function(){
+							var component= JSON.parse('".$component."');
+							var that = $('#a'+component.id)
+							
+							that.find('.send').click(function(evt){
+							evt.preventDefault();
+							var ind = that.find('input[type=radio]:checked').val();
+							  
+							if( ind === undefined ){
+							    alert('Lütfen bir şık seçiniz!');
+							} else {
+								that.find('.send').hide();
+							    var answer = {
+							      'selected-index': ind,
+							      'selected-option': component.data.question_answers[ind]
+							    };
+
+							    
+							    that.find('.question-options-container div').each(function(i,element){
+
+								    var color = 'red';
+								    
+								    //if (i==component.data.answer) color ='green';
+
+									$(this).find(\"input[type='radio']\").remove();
+									if (i==component.data.answer){
+										$(this).css({'background-color':'green'});
+										
+									}
+									else{
+										$(this).css({'background-color':'red'});
+										
+									}
+									if (ind==i) {
+										if(component.data.answer==ind){
+											$(this).css({\"text-decoration\":\"underline\",\"font-weight\":\"bold\"});
+										    //$(this).prepend('+');
+								      	} else if (component.data.answer!=ind){
+								      		$(this).css({\"text-decoration\":\"underline\",\"font-weight\":\"bold\"});
+								        	//$(this).prepend('x');
+								      	}
+								  	}
+
+								    //$(this).css('color',color);
+								}); 
+
+							}
+
+
+						});
+					});
+					</script>
+				";
+	        }
+	        else if($component->data->quiz_type == "checkbox"){
+	            foreach ($component->data->question_answers as $key => $value) {
+	            	
+
+	            	$container.=  
+	            	"<div> 
+		            	<input type='checkbox' value='" . $key . "' name='multichecks' /> 
+		            ". $value .   
+		            "</div>";
+	 
+	            }
+	            $container.="  
+		         	</div> 
+			            <div style='margin-bottom:25px'> 
+			              <a class='btn bck-light-green white radius send' > Yanıtla </a> 
+			            </div> 
+			        </div>";
+		        $component=json_encode($component);
+		        $component=str_replace("'", "\'", $component);
+
+		        $container.="
+					<script type='text/javascript'>
+				       	$( document ).ready(function(){
+							var component= JSON.parse('".$component."');
+							var that = $('#a'+component.id)
+							
+							that.find('.send').click(function(evt){
+							evt.preventDefault();
+							var ind = [];
+							$('input:checkbox[name=multichecks]:checked').each(function() 
+					          {
+					             //alert( $(this).val());
+					             ind.push($(this).val());
+					             
+					          });
+							console.log(ind);
+							if( ind === undefined ){
+							    alert('Lütfen bir şık seçiniz!');
+							} else {
+								that.find('.send').hide();
+							    var answer = {
+							      'selected-index': ind,
+							      'selected-option': component.data.question_answers[ind]
+							    };
+
+							    
+							    that.find('.question-options-container div').each(function(i,element){
+
+							    	
+									    var color = 'red';
+									    
+									    //if (i==component.data.answer) color ='green';
+									    element = $(this);
+									    element.css({'background-color':'red'});
+
+										$(this).find(\"input[type='checkbox']\").remove();
+									$.each( component.data.answer, function( key, value ) {
+										if (i==value){
+											element.css({'background-color':'green'});
+											
+										}
+										$.each( ind, function( k, v ) {
+											if (v==i) {
+												if(value==v){
+													element.css({\"text-decoration\":\"underline\",\"font-weight\":\"bold\"});
+												    //$(this).prepend('+');
+										      	} else if (value!=v){
+										      		element.css({\"text-decoration\":\"underline\",\"font-weight\":\"bold\"});
+										        	//$(this).prepend('x');
+										      	}
+										  	}
+										});
+									    //$(this).css('color',color);
+									});
+								}); 
+
+							}
+
+
+						});
+					});
+					</script>
+				";
+	        }
+
+         	
+
+        
 		$this->html=str_replace('%component_inner%' , $container, $this->html);
 
 

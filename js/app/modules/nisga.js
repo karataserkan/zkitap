@@ -37,7 +37,7 @@ window.lindneo.nisga = (function(window, $, undefined){
 
   var createComponent = function( component, oldcomponent_id ){
       ////console.log(revision_value);
-    ////console.log(oldcomponent_id);
+    console.log(component);
     ////console.log(revision_array);
     $.each(revision_array.revisions, function(index,value){ 
         if (value.component_id == oldcomponent_id ){
@@ -78,6 +78,10 @@ window.lindneo.nisga = (function(window, $, undefined){
         break;
       case 'quiz':
         quizComponentBuilder( component );
+        break;
+
+      case 'mquiz':
+        mquizComponentBuilder( component );
         break;
 
       case 'video':
@@ -237,6 +241,14 @@ window.lindneo.nisga = (function(window, $, undefined){
     $('[id="'+delete_component_id+'"]').parent().not('#current_page').remove();
     $('[id="'+delete_component_id+'"]').remove();
     window.lindneo.toolbox.removeComponentFromSelection( $('#'+ delete_component_id) );
+    window.lindneo.tlingit.componentHasDeleted( component.id );
+  };
+
+  var destroyByIdComponent = function ( componentID ) {
+  //console.log(componentID);
+    $('[id="'+componentID+'"]').parent().not('#current_page').remove();
+    $('[id="'+componentID+'"]').remove();
+    window.lindneo.toolbox.removeComponentFromSelection( $('#'+ componentID) );
   };
   
   var ComponentDelete = function ( component ) {
@@ -258,6 +270,9 @@ window.lindneo.nisga = (function(window, $, undefined){
         }
       }
       else revision_value=0;
+      var delete_component_id = "";
+    if(component.id) delete_component_id = component.id;
+    else delete_component_id = oldcomponent_id;
 //        //console.log(revision_array);
     window.lindneo.toolbox.removeComponentFromSelection( $('#'+ component.id) );
     window.lindneo.tlingit.componentHasDeleted( component.id );
@@ -877,6 +892,34 @@ var textComponentBuilder = function( component ) {
     });
   };
 
+  var mquizComponentBuilder = function ( component ) {
+
+    var element  = $('<div></div>');
+    var elementWrap=$('<div></div>');
+    elementWrap.appendTo( page_div_selector );
+
+    element
+    .appendTo( elementWrap )
+    .mquizComponent({
+      'component': component,
+      'update': function( event, component ){
+        if(revision_value==0){
+        var newObject = jQuery.extend(true, {}, component);
+        revision_array.revisions.push({component_id: component.id, component: newObject, revision_date: $.now(), even_type: 'UPDATE'}); 
+                revision_id++; 
+
+      }
+      else revision_value=0;
+      ////console.log(revision_array);
+        window.lindneo.tlingit.componentHasUpdated( component );
+      }, 
+      'selected': function ( event, element_ ){
+        window.lindneo.currentComponentWidget = element_;
+        window.lindneo.toolbox.refresh( element_ );
+      }
+    });
+  };
+
   var setBgColorOfSelectedComponent = function ( componentId ,activeUser){
     $('[id="' + componentId + '"]').parent().css({
       'border': '1px solid #ccc',
@@ -906,6 +949,7 @@ var textComponentBuilder = function( component ) {
     ComponentDelete: ComponentDelete,
     destroyChapter: destroyChapter,
     destroyComponent: destroyComponent,
+    destroyByIdComponent: destroyByIdComponent,
     undoComponent: undoComponent,
     redoComponent: redoComponent,
     setBgColorOfSelectedComponent: setBgColorOfSelectedComponent

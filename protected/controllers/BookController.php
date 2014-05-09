@@ -364,6 +364,25 @@ class BookController extends Controller
 
 	public function copy($book_id,$template_id)
 	{
+		if (!$template_id) {
+			$newchapterid=functions::new_id();//functions::get_random_string();
+			$newChapter=new Chapter;
+			$newChapter->book_id=$book_id;
+			$newChapter->chapter_id=$newchapterid;
+			$newChapter->title='Bölüm 1';
+			$newChapter->order=0;
+			$newChapter->created=date("Y-m-d H:i:s");
+			$newChapter->save();
+
+			$newpageid=functions::new_id();//functions::get_random_string();
+			$newPage= new Page;
+			$newPage->page_id=$newpageid;
+			$newPage->created=date("Y-m-d H:i:s");
+			$newPage->chapter_id=$newchapterid;
+			$newPage->order=0;
+			$newPage->save();
+
+		}
 		$chapters= Chapter::model()->findAll(array(
 				'condition' => 'book_id=:book_id',
 				'params' => array(':book_id' => $template_id),
@@ -381,9 +400,7 @@ class BookController extends Controller
 					$newChapter->order=$chapter->order;
 					$newChapter->data=$chapter->data;
 					$newChapter->created=date("Y-m-d H:i:s");
-					error_log('n:'.$newChapter->order.'-o:'.$chapter->order);
 					$newChapter->save();
-					error_log('n:'.$newChapter->order.'-o:'.$chapter->order);
 
 					$pages = Page::model()->findAll(array(
 						'condition' => 'chapter_id=:chapter_id',

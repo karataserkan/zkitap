@@ -764,13 +764,7 @@ $(document).ready(function(){
       },
 
       row_add: function(this_val, location){
-        console.log(location);
-        //location.columns-=1;
-        console.log(this_val);
-        console.log(this.cells);
         
-        //console.log(component.data.table.length);
-        //window.lindneo.tlingit.componentHasDeleted( component);
         var newCellData = {
           'attr': {
             'val': '',
@@ -795,122 +789,27 @@ $(document).ready(function(){
         //return;
         var column_count = component.data.table[0].length;
         var array_last = component.data.table.splice((location.rows +1), (component.data.table.length - location.rows -1)) ;
-        console.log(array_last);
-        console.log(component.data.table);
-        console.log(column_count);
-        var row = $('<tr class="ExcelTableFormationRow"></tr>');
        
         var new_row = [];
         var rel_row_value=location.rows+1;
-        var onlyoneselected;
-        
-        var isMouseDown=false;
-        that.excelCursor = $("<div class='ExcelCursor'></div>");
 
-        var TableSelectionDisplay = $("<div class='selections_display'></div>");
-        var TableSelection = null;
-        var isHighlighted;
-        var new_cell;
         for ( var i = 0; i < column_count; i++ ) {
 
           new_row.push(newCellData);
-          console.log(i);
-          var new_val = $('<td class="ExcelTableFormationCol col_'+rel_row_value+'_'+i+'" rel ="'+rel_row_value+","+i+'"></td>');
-          console.log(this.cells);
-          this.cells[rel_row_value]=[];
-          this.cells[rel_row_value][i]=new_val;
-          console.log(new_cell);
-          console.log(this.cells);
           
-          new_val
-            .appendTo(row)
-            .text('')
-            .css(newCellData.css)
-            .resizable({
-              'handles': " e, s",
-              'start': function (event,ui){
-              },
-              'stop': function( event, ui ){
-                console.log($(this));
-                that._cellResize(event, ui,$(this));
-              },
-              'resize':function(event,ui){
-                window.lindneo.toolbox.makeMultiSelectionBox();
-              }
-            })
-            .dblclick(function(e){
-              e.stopPropagation();
-              console.log(this);
-              that.editableCell(this);
-
-          })
-          .mousedown(function (e) {
-                that._selected(e,null);
-                if (e.target.localName == "textarea") return;
-                
-                isMouseDown=true;
-                onlyoneselected = true;
-                TableSelection = {
-                  'start':{
-                    'rows':$(this).parent().prevAll().length,
-                    'columns':$(this).prevAll().length
-                  },
-                  'end':{
-                    'rows':$(this).parent().prevAll().length,
-                    'columns':$(this).prevAll().length
-                  }
-                };
-                console.log($(this));
-                that.selectionUpdated(TableSelection);
-
-                return false; // prevent text selection
-
-
-
-              })
-              .mouseover(function () {
-          
-
-
-                if (isMouseDown) {
-                  onlyoneselected = false;
-                  //console.log($(this));
-                  TableSelection.end={
-                    'rows':$(this).parent().prevAll().length,
-                    'columns':$(this).prevAll().length
-                  };
-                  that.selectionUpdated(TableSelection);
-                  
-                  $(this).toggleClass("highlighted", isHighlighted);
-                }
-              })
-              .bind("selectstart", function () {
-                return false;
-              });
         }
         //return;
         component.data.table.push(new_row);
-        for ( var i = array_last.length; i > 0 ; i-- ) {
-          var rel_val= location.rows+i;
-          var new_rel_val = location.rows+i+1;
-          console.log('rel_Val '+rel_val);
-          console.log('new_rel_val '+new_rel_val);
-         // for ( var j = 0; j < column_count; j++ ) {
-          for ( var j = 0; j < column_count; j++ ) {
-            $('.col_'+rel_val+'_'+j).attr('rel',new_rel_val+','+j);
-            $('.col_'+rel_val+'_'+j).addClass( 'col_'+new_rel_val+'_'+j );
-            $('.col_'+new_rel_val+'_'+j).removeClass( 'col_'+rel_val+'_'+j );
-          }
-        }
+        
         $.each( array_last, function( key, value ) {
           component.data.table.push(value);
         });
         
-        console.log(row);
-        $('.active').parent().after(row);
-        console.log(component.data.table);
         //window.lindneo.tlingit.componentHasCreated( component );
         window.lindneo.tlingit.componentHasUpdated( component );
+        window.lindneo.nisga.destroyComponent(component, component.id);
+        window.lindneo.nisga.createComponent(component);
+
 
       },
 
@@ -947,6 +846,8 @@ $(document).ready(function(){
         console.log(component.data.table);
         //window.lindneo.tlingit.componentHasCreated( component );
         window.lindneo.tlingit.componentHasUpdated( component );
+        window.lindneo.nisga.destroyComponent(component, component.id);
+        window.lindneo.nisga.createComponent(component);
       },
 
       row_delete: function(component, location){
@@ -994,6 +895,8 @@ $(document).ready(function(){
           component.data.table.push(value);
         });
         window.lindneo.tlingit.componentHasUpdated( component );
+        window.lindneo.nisga.destroyComponent(component, component.id);
+        window.lindneo.nisga.createComponent(component);
 
       },
 
@@ -1044,6 +947,8 @@ $(document).ready(function(){
             
           });
         window.lindneo.tlingit.componentHasUpdated( component );
+        window.lindneo.nisga.destroyComponent(component, component.id);
+        window.lindneo.nisga.createComponent(component);
       },
 
       getProperty : function (propertyName){

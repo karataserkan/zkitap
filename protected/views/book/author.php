@@ -93,11 +93,9 @@ $current_user=User::model()->findByPk(Yii::app()->user->id);
 			   <li class='has-sub'><a href='#'><span>Dosya</span></a>
 					<ul>
 			         <li><a href="<?php echo $this->createUrl('site/index');  ?>"><span><i class="icon-book"></i>Kitaplarım</span></a></li>
-			         <li><a href="<?php echo $this->createUrl('site/index');  ?>"><span><i class="icon-folder-open"></i>Pdf İçe Aktar </span></a></li>
-			         <li><a href="<?php echo $this->createUrl("EditorActions/ExportPdfBook", array('bookId' => $model->book_id ));?>"> <i class="icon-doc-inv"></i>PDF Yayınla</i></a></li>
-			         <li><a href="<?php echo $this->createUrl("EditorActions/publishBook/", array('bookId' => $model->book_id ));?>"> <i class="icon-doc-inv"></i><?php _e("Hızlı Yayınla"); ?></i></a></li>
-			         <li><a href="<?php echo $this->createUrl("EditorActions/ExportBook", array('bookId' => $model->book_id ));?>"><i class="icon-publish"></i>Yayınla</a></li>
-			         <li><a href="<?php echo $this->createUrl("EditorActions/ExportTimeStamp", array('bookId' => $model->book_id ));?>"><i class="fa fa-tags"></i>Zaman Damgala</a></li>
+			         <li><a href="<?php echo $this->createUrl("EditorActions/ExportPdfBook", array('bookId' => $model->book_id ));?>"> <i class="icon-doc-inv"></i><?php _e("PDF Olarak Aktar"); ?></i></a></li>
+			         <li><a href="<?php echo $this->createUrl("EditorActions/publishBook/", array('bookId' => $model->book_id ));?>"> <i class="icon-doc-inv"></i><?php _e("Markette Yayınla"); ?></i></a></li>
+			         <li><a href="<?php echo $this->createUrl("EditorActions/ExportBook", array('bookId' => $model->book_id ));?>"><i class="icon-publish"></i><?php _e("Epub3 Olarak Aktar"); ?></a></li>
 
 					</ul>
 			   </li>
@@ -145,16 +143,16 @@ $current_user=User::model()->findByPk(Yii::app()->user->id);
 			      <ul>
 
 			      	<?php if (!Yii::app()->user->isGuest) {?>
-			         <li><a href='/index.php?r=user/profile'><span><?php _e('Profil') ?></span></a></li>
+			         <li><a href='/user/profile'><span><?php _e('Profil') ?></span></a></li>
 			         <?php echo " <li>". CHtml::link(__("Çıkış"),"/site/logout") ."</li>"; ?>
 					<?php 
-						foreach (Yii::app()->params->availableLanguages  as $lang_id => $lang_name) {
-							$_GET['language']=$lang_id;
-							$lang_link_params = array_merge(array($this->route),$_GET ) ;
+						// foreach (Yii::app()->params->availableLanguages  as $lang_id => $lang_name) {
+						// 	$_GET['language']=$lang_id;
+						// 	$lang_link_params = array_merge(array($this->route),$_GET ) ;
 
-							echo " <li>". CHtml::link("<span>".$lang_name."</span>",$lang_link_params ) ."</li>";
+						// 	echo " <li>". CHtml::link("<span>".$lang_name."</span>",$lang_link_params ) ."</li>";
 
-						}
+						// }
 					?>
 			         <?php } ?>
 			      </ul>
@@ -301,7 +299,12 @@ $current_user=User::model()->findByPk(Yii::app()->user->id);
 				<div class="vertical-line"></div>
 				-->
 				
-					<i class="icon-opacity grey-6"></i>
+					
+			</div>
+
+			<div class="text-options wrap-options latex-options toolbox" style="display:inline-block;">
+
+				<i class="icon-opacity grey-6"></i>
 							<select class='tool-select tool select' rel='opacity' rel='color' id="font-size" class="radius" title="Yazının Şeffaflık Ayarı">
 								
 								<option value="0" >0</option>
@@ -318,6 +321,7 @@ $current_user=User::model()->findByPk(Yii::app()->user->id);
 							</select>	
 				
 					<div class="vertical-line"></div>
+
 			</div>
 
 			<div class="table-options toolbox" style="display:inline-block;">
@@ -560,7 +564,7 @@ $current_user=User::model()->findByPk(Yii::app()->user->id);
 				<div class="vertical-line"></div>
 				
 						<i class="icon-opacity grey-6"></i>
-								<select class='tool-select tool select' rel='opacity' rel='color' id="font-size" class="radius" title="Şeklin Şeffaflık Ayarı">
+							<select class='tool-select tool select' rel='opacity' rel='color' id="font-size" class="radius" title="Bağlantının Şeffaflık Ayarı">
 								
 								<option value="0" >0</option>
 								<option value="0.10" >10</option>
@@ -966,7 +970,71 @@ $current_user=User::model()->findByPk(Yii::app()->user->id);
 	
 <!-- popup content-->
 </div>	
-<!--  end add quiz popup -->		
+<!--  end add quiz popup -->
+
+<!--  add mquiz popup -->	
+<div class="popup" id="pop-mquiz-popup">
+<div class="popup-header">
+	<i class="icon-m-quiz"></i>
+		Quiz Ekle
+	<i id="image-add-dummy-close-button" class="icon-close size-10" style="float:right; margin-right:10px; margin-top:5px;"></i>
+	
+</div>
+
+<!-- popup content-->
+	<div class="gallery-inner-holder">
+		<label class="dropdown-label" id="leading">
+				Şık Sayısı:
+					<select id="leading" class="radius">
+						<option value="0" >2</option>
+						<option value="10" >3</option>
+						<option selected="" value="20" >4</option>
+						<option value="30" >5</option>
+					</select>	
+		</label> 
+		</br>
+		<label class="dropdown-label" id="leading">
+				Doğru Cevap:
+					<select id="leading" class="radius">
+						<option value="0" >A</option>
+						<option value="10" >B</option>
+						<option selected="" value="20" >C</option>
+						<option value="30" >D</option>
+					</select>	
+		</label> 
+
+		</br></br>
+		<div class="quiz-inner">
+			Soru kökü:
+			<form id="video-url">
+			<textarea class="popup-text-area">Soru kökünü buraya yazınız.
+			</textarea> </br>
+			<!--burası çoğalıp azalacak-->
+			1. Soru:
+			<form id="video-url">
+			<textarea class="popup-choices-area">
+			</textarea> </br>
+			
+			2. Soru:
+			<form id="video-url">
+			<textarea class="popup-choices-area">
+			</textarea> </br>
+			
+			3. Soru:
+			<form id="video-url">
+			<textarea class="popup-choices-area">
+			</textarea> </br>
+		</div>
+		
+		<a href="#" class="btn btn-info" id="add-image" style="padding: 5px 30px;">Ekle</a>
+		</form>
+		
+		
+	</div>		
+	
+<!-- popup content-->
+</div>	
+<!--  end add mquiz popup -->		
 	
 	
 <!--  add popup popup -->	
@@ -1147,22 +1215,33 @@ $current_user=User::model()->findByPk(Yii::app()->user->id);
 		
 			
 			
-			<li ctype="image" class="component " style=" background-image: url(http://can.dev.lindneo.com/css/images/components/image.png);"></li>
-			<li ctype="sound" class="component " style=" background-image: url(http://can.dev.lindneo.com/css/images/components/audio.png);"></li>
-			<li ctype="video" class="component " style=" background-image: url(http://can.dev.lindneo.com/css/images/components/video.png);"></li>
-			<li ctype="galery" class="component " style=" background-image: url(http://can.dev.lindneo.com/css/images/components/galery.png);"></li>
-			<li ctype="quiz" class="component " style=" background-image: url(http://can.dev.lindneo.com/css/images/components/quiz.png);"></li>
-			<li ctype="side-text" class="component " style=" background-image: url(http://can.dev.lindneo.com/css/images/components/slider.png);"></li>
-			<li ctype="link" class="component " style=" background-image: url(http://can.dev.lindneo.com/css/images/components/link.png);"></li>
-			<li ctype="popup" class="component " style=" background-image: url(http://can.dev.lindneo.com/css/images/components/popup.png);"></li>
-			<li ctype="text" class="component " style=" background-image: url(http://can.dev.lindneo.com/css/images/components/text.png);"></li>
-			<li ctype="rtext" class="component " style=" background-image: url(http://can.dev.lindneo.com/css/images/components/rtext.png);"></li>
-			<li ctype="grafik" class="component " style=" background-image: url(http://can.dev.lindneo.com/css/images/components/graphic.png);"></li>
-			<li ctype="shape" class="component " style=" background-image: url(http://can.dev.lindneo.com/css/images/components/shape.png);"></li>
-			<li ctype="table" class="component " style=" background-image: url(http://can.dev.lindneo.com/css/images/components/table.png);"></li>
-			<li ctype="html" class="component " style=" background-image: url(http://can.dev.lindneo.com/css/images/components/html.png);"></li>
-			<li ctype="plink" class="component " style=" background-image: url(http://can.dev.lindneo.com/css/images/components/pagelink.png);"></li>
-			<li ctype="latex" class="component" style=" background-image: url(http://can.dev.lindneo.com/css/images/components/latex.png);"></li>
+
+			<!--
+			<li ctype="slider" class="component icon-m-galery">&nbsp;&nbsp;&nbsp;&nbsp;<?php _e('Slider'); ?></li>
+			<li ctype="thumb" class="component icon-m-galery">&nbsp;&nbsp;&nbsp;&nbsp;<?php _e('Öngörüntü Slider'); ?></li>
+			<li ctype="tag" class="component icon-m-galery">&nbsp;&nbsp;&nbsp;&nbsp;<?php _e('Etiket'); ?></li>
+			-->
+			
+			<!--<li ctype="wrap" class="component icon-t-merge">&nbsp;&nbsp;&nbsp;&nbsp;<?php _e('Metin Sarma'); ?></li>-->
+
+			<li ctype="image" class="component " style=" background-image: url(<?php echo Yii::app()->getBaseUrl(true);?>/css/images/components/image.png);"></li>
+			<li ctype="sound" class="component " style=" background-image: url(<?php echo Yii::app()->getBaseUrl(true);?>/css/images/components/audio.png);"></li>
+			<li ctype="video" class="component " style=" background-image: url(<?php echo Yii::app()->getBaseUrl(true);?>/css/images/components/video.png);"></li>
+			<li ctype="galery" class="component " style=" background-image: url(<?php echo Yii::app()->getBaseUrl(true);?>/css/images/components/galery.png);"></li>
+			<li ctype="quiz" class="component " style=" background-image: url(<?php echo Yii::app()->getBaseUrl(true);?>/css/images/components/quiz.png);"></li>
+			<li ctype="mquiz" class="component " style=" background-image: url(<?php echo Yii::app()->getBaseUrl(true);?>/css/images/components/quiz.png);"></li>
+			<li ctype="side-text" class="component " style=" background-image: url(<?php echo Yii::app()->getBaseUrl(true);?>/css/images/components/slider.png);"></li>
+			<li ctype="link" class="component " style=" background-image: url(<?php echo Yii::app()->getBaseUrl(true);?>/css/images/components/link.png);"></li>
+			<li ctype="popup" class="component " style=" background-image: url(<?php echo Yii::app()->getBaseUrl(true);?>/css/images/components/popup.png);"></li>
+			<li ctype="text" class="component " style=" background-image: url(<?php echo Yii::app()->getBaseUrl(true);?>/css/images/components/text.png);"></li>
+			<li ctype="rtext" class="component " style=" background-image: url(<?php echo Yii::app()->getBaseUrl(true);?>/css/images/components/rtext.png);"></li>
+			<li ctype="grafik" class="component " style=" background-image: url(<?php echo Yii::app()->getBaseUrl(true);?>/css/images/components/graphic.png);"></li>
+			<li ctype="shape" class="component " style=" background-image: url(<?php echo Yii::app()->getBaseUrl(true);?>/css/images/components/shape.png);"></li>
+			<li ctype="table" class="component " style=" background-image: url(<?php echo Yii::app()->getBaseUrl(true);?>/css/images/components/table.png);"></li>
+			<li ctype="html" class="component " style=" background-image: url(<?php echo Yii::app()->getBaseUrl(true);?>/css/images/components/html.png);"></li>
+			<li ctype="plink" class="component " style=" background-image: url(<?php echo Yii::app()->getBaseUrl(true);?>/css/images/components/pagelink.png);"></li>
+			<li ctype="latex" class="component" style=" background-image: url(<?php echo Yii::app()->getBaseUrl(true);?>/css/images/components/latex.png);"></li>
+
 			
 		
 		
@@ -1613,16 +1692,7 @@ $current_user=User::model()->findByPk(Yii::app()->user->id);
 
 			</script>
 
-			 <div class="panel panel-default">
-				<div class="panel-heading">
-					<h3 class="panel-title"> <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo"><i class="fa fa-bars light-blue"></i>&nbsp;&nbsp;&nbsp;İçindekiler </a> </h3>
-				</div>
-					<div id="collapseTwo" class="panel-collapse collapse">
-						<div class="panel-body">
-							asdf
-						</div>
-					</div>
-			</div>
+			 
 				
 				
 				
@@ -1709,7 +1779,13 @@ $current_user=User::model()->findByPk(Yii::app()->user->id);
 					});
 					var maxheight = $( window ).height();
 					$(".panel-collapse.collapse.in").css('max-height',maxheight-280);
+					$(".panel-collapse.collapse.in").css('width','100%');
 					$(".panel-collapse.collapse.in").css('overflow','auto');
+					$( window ).resize(function() {
+					  	maxheight = $( window ).height();
+					  	$(".panel-collapse.collapse.in").css('max-height',maxheight-280);
+					});
+					$( ".modal" ).css('z-index','9999999999999');
 				});
 				</script>
 			  <div class="panel panel-default">
@@ -1986,16 +2062,17 @@ $background= (!empty($img)) ? "background-image:url('".$img."')" : "background:w
 	
 <!-- Page Modal -->
 	
-<div class="modal fade add-page-modal" id="addPage" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" >
+<div class="modal fade add-page-modal" id="addPage" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"  >
   <div class="modal-dialog ">
     <div class="modal-content ui-draggable">
 	<script>
   $(function() {
 
-    $( ".ui-draggable" ).draggable("stack",{ scroll: false,  snap: false, revert: false, refreshPositions: true);
+    $( ".modal" ).css('z-index','9999999999999');
     $( "#addPage" ).css('z-index','9999999999999');
     $( "#box-thumbnail" ).css('z-index','9999999999999');
     $( "#box-cover" ).css('z-index','9999999999999');
+    $( ".ui-draggable" ).draggable({ scroll: false,  snap: false, revert: false, refreshPositions: true});
    
   });
   </script>
