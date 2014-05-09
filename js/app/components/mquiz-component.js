@@ -316,7 +316,7 @@ var removeRow = function(type, row_number){
         <i id='create-mquiz-close-button' class='icon-close size-10 popup-close-button'></i> \
       </div> \
       <!-- popup content --> \
-      <div class='gallery-inner-holder'> \
+      <div class='gallery-inner-holder' style='width:100%'> \
         <label for='quiz_type'> Soru Tipi: </label> \
         <select id='quiz_type' class='form-control'> \
           <option selected value=''>Lütfen Seçiniz</option> \
