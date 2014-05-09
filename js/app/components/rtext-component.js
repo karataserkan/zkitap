@@ -81,7 +81,7 @@ $(document).ready(function(){
             var content_text = '<span style="color: '+propertyValue+';">'+localStorage.getItem("selection_text")+'</span>';
             $('#message_rtext'+this.options.component.id).html(this.options.component.data.rtextdiv.val.replace(localStorage.getItem("selection_text"), content_text));  
             that._change( $('#message_rtext'+this.options.component.id).html());
-            localStorage.setItem("selection_text", '');
+            //localStorage.setItem("selection_text", '');
 
           break;
           case 'font-weight':
@@ -89,7 +89,7 @@ $(document).ready(function(){
             var content_text = '<span style="font-weight: '+propertyValue+';">'+localStorage.getItem("selection_text")+'</span>';
             $('#message_rtext'+this.options.component.id).html(this.options.component.data.rtextdiv.val.replace(localStorage.getItem("selection_text"), content_text));  
             that._change( $('#message_rtext'+this.options.component.id).html());
-            localStorage.setItem("selection_text", '');
+            //localStorage.setItem("selection_text", '');
 
           break;
 
@@ -114,7 +114,7 @@ $(document).ready(function(){
             var content_text = '<span style="font-size: '+propertyValue+';">'+localStorage.getItem("selection_text")+'</span>';
             $('#message_rtext'+this.options.component.id).html(this.options.component.data.rtextdiv.val.replace(localStorage.getItem("selection_text"), content_text));  
             that._change( $('#message_rtext'+this.options.component.id).html());
-            localStorage.setItem("selection_text", '');
+            //localStorage.setItem("selection_text", '');
              
           break;
 
@@ -123,7 +123,7 @@ $(document).ready(function(){
             var content_text = '<span style="font-family: '+propertyValue+';">'+localStorage.getItem("selection_text")+'</span>';
             $('#message_rtext'+this.options.component.id).html(this.options.component.data.rtextdiv.val.replace(localStorage.getItem("selection_text"), content_text));  
             that._change( $('#message_rtext'+this.options.component.id).html());
-            localStorage.setItem("selection_text", '');
+            //localStorage.setItem("selection_text", '');
              
           break;
 
@@ -132,7 +132,7 @@ $(document).ready(function(){
             var content_text = '<span style="line-height: '+propertyValue+';">'+localStorage.getItem("selection_text")+'</span>';
             $('#message_rtext'+this.options.component.id).html(this.options.component.data.rtextdiv.val.replace(localStorage.getItem("selection_text"), content_text));  
             that._change( $('#message_rtext'+this.options.component.id).html());
-            localStorage.setItem("selection_text", '');
+            //localStorage.setItem("selection_text", '');
              
           break;
 
@@ -538,7 +538,7 @@ $(document).ready(function(){
                   var content_text = '<span style="'+style+'">'+localStorage.getItem("selection_text")+'</span>';
                   $('#message_rtext'+this.options.component.id).html(this.options.component.data.rtextdiv.val.replace(localStorage.getItem("selection_text"), content_text));  
                   that._change( $('#message_rtext'+this.options.component.id).html());
-                  localStorage.setItem("selection_text", '');
+                  //localStorage.setItem("selection_text", '');
                 
               break;
 
