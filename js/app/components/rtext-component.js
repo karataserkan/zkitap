@@ -37,7 +37,7 @@ $(document).ready(function(){
           //console.log(localStorage.getItem("selection_text"));
         }
         that.element.mouseup(capture_selection).keyup(capture_selection);
-        
+        justify_element(this.element[0]);
         this._super({resizableParams:{handles:"e, s, se"}});
           
       },
