@@ -105,10 +105,10 @@ console.log(oldcomponent);
     close_button.appendTo(poup_header);
     galery_inner.appendTo(pop_popup);
     popup_wrapper.appendTo(galery_inner).resizable({alsoResize: galery_inner});
-    drag_file.prependTo(popup_wrapper);
+    //drag_file.prependTo(popup_wrapper);
     popup_detail.appendTo(popup_wrapper);
     add_button.appendTo(galery_inner);
-    popup_detail.resizable({alsoResize: galery_inner});
+    popup_detail.resizable({alsoResize: popup_wrapper});
     close_button.click(function(){
 
       pop_popup.remove();  
@@ -181,82 +181,5 @@ console.log(oldcomponent);
         close_button.trigger('click');
 
     });
-    
-    var el = document.getElementById("dummy-dropzone");
-    var FileBinary = '';
-
-    el.addEventListener("dragenter", function(e){
-      e.stopPropagation();
-      e.preventDefault();
-    }, false);
-
-    el.addEventListener("dragexit", function(e){
-      e.stopPropagation();
-      e.preventDefault();
-    },false);
-
-    el.addEventListener("dragover", function(e){
-      e.stopPropagation();
-      e.preventDefault();
-    }, false);
-
-    el.addEventListener("drop", function(e){
-
-      e.stopPropagation();
-      e.preventDefault();
-
-      var reader = new FileReader();
-      var component = {};
-      var imageBinary = '';
-      var videoContentType = '';
-      var videoURL = '';
-      console.log(reader);
-      reader.onload = function (evt) {
-
-        FileBinary = evt.target.result;
-        var contentType = FileBinary.substr(5, FileBinary.indexOf('/')-5);
-        
-        //console.log(contentType);
-        if(contentType == 'image'){
-          var imageBinary = FileBinary;
-          var newImage = $("<img style='width:80%' src='"+imageBinary+"' />");
-
-          $('.popup_wrapper').append(newImage);
-          return;
-          
-        }
-        else if(contentType == 'video'){
-         
-          var contentType = FileBinary.substr(0, FileBinary.indexOf(';'));
-          var videoType = contentType.substr(contentType.indexOf('/')+1);
-          console.log(videoType);
-          var response = '';
-          var token = '';
-          videoContentType = videoType;
-          console.log(videoContentType);
-          window.lindneo.dataservice.send( 'getFileUrl', {'type': videoType}, function(response) {
-            response=window.lindneo.tlingit.responseFromJson(response);
-          
-            window.lindneo.dataservice.send( 'UploadFile', {'token': response.result.token, 'file' : FileBinary} , function(data) {
-              console.log('denemeee');
-              videoURL = response.result.URL;
-              var newVideo = $("<video controls='controls' style='width:80%'><source src='"+videoURL+"'></video>");
-
-              $('.popup_wrapper').append(newVideo);
-              return;
-              
-                
-            });
-
-          });
-
-        }
-
-        
-      };
-
-      reader.readAsDataURL( e.dataTransfer.files[0] );
-
-    }, false);
 
   };
