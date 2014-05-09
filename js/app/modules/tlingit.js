@@ -1,3 +1,4 @@
+
 // Tlingit Tribe jQuery FrameWork for communitacions between Servers and Client Side
 // Combines all events created by BackEnd, Co-Working and Client
 // Triggers events accordingly and simultenously.
@@ -109,7 +110,7 @@ window.lindneo.tlingit = (function(window, $, undefined){
     if( response.result !== null ) {
       components = response.result.components;
     }
-    //console.log( components );
+    console.log( components );
     $.each(components, function(i, val){
           
       window.lindneo.nisga.createComponent( val );
@@ -134,9 +135,9 @@ window.lindneo.tlingit = (function(window, $, undefined){
   };
 
   var loadPage = function (pageId){
-
     $('#current_page').empty();
     window.lindneo.currentPageId=pageId;
+
 
     //page ile ilgili componentların hepsini serverdan çek.
     // hepsi için createComponent 

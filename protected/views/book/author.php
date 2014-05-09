@@ -143,16 +143,16 @@ $current_user=User::model()->findByPk(Yii::app()->user->id);
 			      <ul>
 
 			      	<?php if (!Yii::app()->user->isGuest) {?>
-			         <li><a href='/index.php?r=user/profile'><span><?php _e('Profil') ?></span></a></li>
+			         <li><a href='/user/profile'><span><?php _e('Profil') ?></span></a></li>
 			         <?php echo " <li>". CHtml::link(__("Çıkış"),"/site/logout") ."</li>"; ?>
 					<?php 
-						foreach (Yii::app()->params->availableLanguages  as $lang_id => $lang_name) {
-							$_GET['language']=$lang_id;
-							$lang_link_params = array_merge(array($this->route),$_GET ) ;
+						// foreach (Yii::app()->params->availableLanguages  as $lang_id => $lang_name) {
+						// 	$_GET['language']=$lang_id;
+						// 	$lang_link_params = array_merge(array($this->route),$_GET ) ;
 
-							echo " <li>". CHtml::link("<span>".$lang_name."</span>",$lang_link_params ) ."</li>";
+						// 	echo " <li>". CHtml::link("<span>".$lang_name."</span>",$lang_link_params ) ."</li>";
 
-						}
+						// }
 					?>
 			         <?php } ?>
 			      </ul>

@@ -46,7 +46,7 @@ window.lindneo.tsimshian = (function(window, $, undefined){
   }
 
   var componentDestroyed = function(componentId){
-    console.log(componentId);
+    //console.log(componentId);
     this.socket.emit('destroyComponent', componentId);
   };
 

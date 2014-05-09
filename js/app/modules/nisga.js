@@ -37,7 +37,7 @@ window.lindneo.nisga = (function(window, $, undefined){
 
   var createComponent = function( component, oldcomponent_id ){
       ////console.log(revision_value);
-    ////console.log(oldcomponent_id);
+    console.log(component);
     ////console.log(revision_array);
     $.each(revision_array.revisions, function(index,value){ 
         if (value.component_id == oldcomponent_id ){
@@ -241,6 +241,7 @@ window.lindneo.nisga = (function(window, $, undefined){
     $('[id="'+delete_component_id+'"]').parent().not('#current_page').remove();
     $('[id="'+delete_component_id+'"]').remove();
     window.lindneo.toolbox.removeComponentFromSelection( $('#'+ delete_component_id) );
+    window.lindneo.tlingit.componentHasDeleted( component.id );
   };
 
   var destroyByIdComponent = function ( componentID ) {
@@ -269,6 +270,9 @@ window.lindneo.nisga = (function(window, $, undefined){
         }
       }
       else revision_value=0;
+      var delete_component_id = "";
+    if(component.id) delete_component_id = component.id;
+    else delete_component_id = oldcomponent_id;
 //        //console.log(revision_array);
     window.lindneo.toolbox.removeComponentFromSelection( $('#'+ component.id) );
     window.lindneo.tlingit.componentHasDeleted( component.id );

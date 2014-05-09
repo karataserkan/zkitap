@@ -354,41 +354,6 @@ $( document ).ready(function () {
 
     });
 
-    $( document ).on( "click","canvas.preview" ,function() {
-
-      //get page id from parent li 
-      var page_id = $(this).parent().attr('page_id') ;
-
-      //Load Page
-      window.lindneo.tlingit.loadPage(page_id);
-
-
-      //Remove Current Page
-      $('.page').removeClass('current_page');
-
-      //Add Red Current Page
-      $(this).parent().addClass('current_page');
-      $.ajax({
-        type: "POST",
-        url:'/page/getPdfData?pageId='+page_id,
-      }).done(function(page_data){
-        
-        var page_background = JSON.parse(page_data);
-        //console.log(page_background.result);
-        if(page_background.result){
-                $('#current_page').css('background-image', 'url()');
-                $('#current_page').css('background-image', 'url("'+page_background.result+'")');
-        }
-        else{
-          //console.log('bu ne');
-          $('#current_page').css('background-image', 'url()');
-          $('#current_page').css('background-color', 'white');
-        }
-      });
-      
-
-    });
-
     $( document ).on( "click","canvas.preview" ,function(event, ui) {
       console.log(event);
       console.log(event.toElement.parentElement.children[1].className);
