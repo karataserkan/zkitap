@@ -93,13 +93,9 @@ $current_user=User::model()->findByPk(Yii::app()->user->id);
 			   <li class='has-sub'><a href='#'><span>Dosya</span></a>
 					<ul>
 			         <li><a href="<?php echo $this->createUrl('site/index');  ?>"><span><i class="icon-book"></i>Kitaplarım</span></a></li>
-			         <li><a href="<?php echo $this->createUrl('site/index');  ?>"><span><i class="icon-folder-open"></i>Pdf İçe Aktar </span></a></li>
-			         <li><a href="<?php echo $this->createUrl("EditorActions/ExportPdfBook", array('bookId' => $model->book_id ));?>"> <i class="icon-doc-inv"></i>PDF Yayınla</i></a></li>
-			         <li><a href="<?php echo $this->createUrl("EditorActions/publishBook/", array('bookId' => $model->book_id ));?>"> <i class="icon-doc-inv"></i><?php _e("Hızlı Yayınla"); ?></i></a></li>
-			         <li><a href="<?php echo $this->createUrl("EditorActions/ExportBook", array('bookId' => $model->book_id ));?>"><i class="icon-publish"></i>Yayınla</a></li>
-
-			         <li><a href="<?php echo $this->createUrl("EditorActions/ExportTimeStamp", array('bookId' => $model->book_id ));?>"><i class="fa fa-tags"></i>Zaman Damgala</a></li>
-
+			         <li><a href="<?php echo $this->createUrl("EditorActions/ExportPdfBook", array('bookId' => $model->book_id ));?>"> <i class="icon-doc-inv"></i><?php _e("PDF Olarak Aktar"); ?></i></a></li>
+			         <li><a href="<?php echo $this->createUrl("EditorActions/publishBook/", array('bookId' => $model->book_id ));?>"> <i class="icon-doc-inv"></i><?php _e("Markette Yayınla"); ?></i></a></li>
+			         <li><a href="<?php echo $this->createUrl("EditorActions/ExportBook", array('bookId' => $model->book_id ));?>"><i class="icon-publish"></i><?php _e("Epub3 Olarak Aktar"); ?></a></li>
 
 					</ul>
 			   </li>
@@ -304,7 +300,12 @@ $current_user=User::model()->findByPk(Yii::app()->user->id);
 				<div class="vertical-line"></div>
 				-->
 				
-					<i class="icon-opacity grey-6"></i>
+					
+			</div>
+
+			<div class="text-options wrap-options latex-options toolbox" style="display:inline-block;">
+
+				<i class="icon-opacity grey-6"></i>
 							<select class='tool-select tool select' rel='opacity' rel='color' id="font-size" class="radius" title="Yazının Şeffaflık Ayarı">
 								
 								<option value="0" >0</option>
@@ -321,6 +322,7 @@ $current_user=User::model()->findByPk(Yii::app()->user->id);
 							</select>	
 				
 					<div class="vertical-line"></div>
+
 			</div>
 
 			<div class="table-options toolbox" style="display:inline-block;">
@@ -1691,16 +1693,7 @@ $current_user=User::model()->findByPk(Yii::app()->user->id);
 
 			</script>
 
-			 <div class="panel panel-default">
-				<div class="panel-heading">
-					<h3 class="panel-title"> <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo"><i class="fa fa-bars light-blue"></i>&nbsp;&nbsp;&nbsp;İçindekiler </a> </h3>
-				</div>
-					<div id="collapseTwo" class="panel-collapse collapse">
-						<div class="panel-body">
-							asdf
-						</div>
-					</div>
-			</div>
+			 
 				
 				
 				
@@ -1787,6 +1780,7 @@ $current_user=User::model()->findByPk(Yii::app()->user->id);
 					});
 					var maxheight = $( window ).height();
 					$(".panel-collapse.collapse.in").css('max-height',maxheight-280);
+					$(".panel-collapse.collapse.in").css('width','100%');
 					$(".panel-collapse.collapse.in").css('overflow','auto');
 					$( window ).resize(function() {
 					  	maxheight = $( window ).height();
