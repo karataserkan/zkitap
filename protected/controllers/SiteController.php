@@ -549,7 +549,7 @@ class SiteController extends Controller
 
 						$workspace= new Workspaces;
 						$workspace->workspace_id=functions::new_id();
-						$workspace->workspace_name = $newUser->name." Books";
+						$workspace->workspace_name = $newUser->name;
 						$workspace->creation_time=date('Y-n-d g:i:s',time());
 						if ($workspace->save()) {
 							$msg="SITE:LOGIN:CreateWorkspace:0:". json_encode(array('user'=> Yii::app()->user->name,'userId'=>Yii::app()->user->id,'message'=>"a workspace created for new user"));
@@ -578,6 +578,35 @@ class SiteController extends Controller
 
 
 							if ($workspaceUser->save()) {
+
+								$templateWorkspace=new Workspaces;
+								$templateWorkspace->workspace_id=functions::new_id();
+								$templateWorkspace->workspace_name = $newUser->name." Şablonlar";
+								$templateWorkspace->creation_time=date('Y-n-d g:i:s',time());
+								if ($templateWorkspace->save()) {
+									$templateWorkspaceUser=new WorkspacesUsers;
+									$templateWorkspaceUser->workspace_id=$templateWorkspace->workspace_id;
+									$templateWorkspaceUser->userid=$newUser->id;
+									$templateWorkspaceUser->added=date('Y-n-d g:i:s',time());
+									$templateWorkspaceUser->owner=$newUser->id;
+									$templateWorkspaceUser->save();
+									
+									$addTemplateWorkspaceOrganization = Yii::app()->db->createCommand();
+									$addTemplateWorkspaceOrganization->insert('organisation_workspaces', array(
+									    'organisation_id'=>$organisation->organisation_id,
+									    'workspace_id'=>$templateWorkspace->workspace_id,
+									));
+
+									$addOrganizationMeta = Yii::app()->db->createCommand();
+									$addOrganizationMeta->insert('organisations_meta', array(
+									    'organisation_id'=>$organisation->organisation_id,
+									    'meta'=>'template',
+									    'value'=>$templateWorkspace->workspace_id,
+									));
+
+								}
+
+
 								$msg="SITE:LOGIN:CreateWorkspaceUser:0:". json_encode(array('user'=> Yii::app()->user->name,'userId'=>Yii::app()->user->id,'message'=>"workspaceUser created for new user and new workspace"));
 								Yii::log($msg,'info');
 								$model->password=$attributes['password'];
