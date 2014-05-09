@@ -64,6 +64,7 @@
 					<ul class="dropdown-menu">
                     	<li><span class="username"><?php echo Yii::app()->user->name; ?></span></li>
 						<li><a href="/user/profile"><i class="fa fa-user"></i> <?php _e('Profil') ?></a></li>
+						<li><a href="#" onClick='tripStart();'><i class="fa fa-user"></i> <?php _e('Yardım') ?></a></li>
 						<li><a href="/site/logout"><i class="fa fa-power-off"></i> <?php _e('Çıkış') ?></a></li>
 					</ul>
 				</li>
