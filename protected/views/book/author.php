@@ -33,66 +33,7 @@ $current_user=User::model()->findByPk(Yii::app()->user->id);
 	window.lindneo.tsimshian.connect();
 
 	window.lindneo.highlightComponent='<?php echo $highlight_component->id; ?>';
-	$(document).ready(function(){
 
-		function modalToggle(status){
-			var modalParentStatus,modalLoadingStatus;
-			if(status)
-			{
-				modalParentStatus="none";
-				modalLoadingStatus="block";
-			}
-			else
-			{
-				modalParentStatus="block";
-				modalLoadingStatus="none";				
-			}
-			var modalParent=$('#export-timestamp');
-			var modalLoading=$('.timestampstyle');
-			modalParent.find(".modal-body").css({"display":modalParentStatus});
-			modalParent.find(".modal-footer").css({"display":modalParentStatus});
-			modalParent.find(".modal-header").css({"display":modalParentStatus});
-			modalLoading.css({"display":modalLoadingStatus});
-		}
-		$('#timestampbutton').click(function(){
-			modalToggle(true);
-			/*begin stamping*/
-			var source=location.protocol+"//"+location.host+"/EditorActions/ExportTimeStamp?id="+window.lindneo.currentBookId
-			console.log("source:"+source);
-			var stampRequest = $.get(source)
-			  .done(function(data) {
-			  	console.log(data);
-			  	var result=$.parseJSON(data);
-			  	console.log(result);
-			    if(result.status==1){
-
-			    	console.log("Successfully created!");
-			    	modalToggle(false);
-			    	$("#export-timestamp").find('button[data-dismiss="modal"]').click();
-			    	$("#export-ok-timestamp").css({"display":"block"});
-			    	$("#export-ok-timestamp").find(".modal-body").html("Zaman damgası başarıyla oluşturuldu!");
-			    	$("#export-ok-timestamp").find('button[data-dismiss="modal"]').click(function(){$("#export-ok-timestamp").css({"display":"none"});});
-			    }
-			    else if(result.status==0){
-			    	console.log("Failed!");
-			    	modalToggle(false);
-			    	$("#export-timestamp").find('button[data-dismiss="modal"]').click();
-			    	$("#export-ok-timestamp").css({"display":"block"});
-			    	$("#export-ok-timestamp").find(".modal-body").html(result.message);
-			    	$("#export-ok-timestamp").find('button[data-dismiss="modal"]').click(function(){$("#export-ok-timestamp").css({"display":"none"});});
-
-			    }
-			    else
-			    {
-			    	console.log("God damn! what the hell:)");
-			    }
-			  })
-			  .fail(function() {
-			    console.log("the link cannot be accessed!");
-			  });
-			/*end stamping*/
-		});
-	});
 
 </script>
 	
@@ -144,46 +85,7 @@ $current_user=User::model()->findByPk(Yii::app()->user->id);
 	<div id='book_title'><?php echo $model->title; ?></div>
 	
 	</div> <!--Header -->
-	<!--begin modal for time stamp-->
-	<div class="modal fade in" id="export-timestamp" tabindex="-1" role="dialog" aria-labelledby="myModalLabelx" aria-hidden="false" style="display: none;">
-		<div class="modal-dialog">
-			<div class="modal-content">
-				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-					  <h4 class="modal-title"><?php echo __('Zaman Damgası');?></h4>
-				</div>
-				<div class="modal-body">
-					  5070 sayılı Elektronik İmza Kanununa göre Zaman Damgası: Bir elektronik verinin, üretildiği, değiştirildiği, gönderildiği, alındığı ve / veya kaydedildiği zamanın tespit edilmesi amacıyla, elektronik sertifika hizmet sağlayıcısı tarafından elektronik imzayla doğrulanan kaydı, ifade eder.
-					  <br><br><br>
-					  <b>Zaman damgası ile damgalamak ister misiniz?</b>
-				</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-default" data-dismiss="modal"><?php echo __('Vazgeç');?></button>
-					<button type="button" id="timestampbutton" class="btn btn-primary"><?php echo __('Damgala');?></button>
-				</div>
-				<div class="timestampstyle">
-					<p style="margin-left:20px;margin-top:40px;font-weight:bold;">Eserinizin zaman damgası ile damgalanması sona erene kadar lütfen herhangi bir işlem yapmadan bekleyiniz!</p>
-				</div>
-			</div>
-		</div>
-	</div>
-	<div class="modal fade in" id="export-ok-timestamp" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="false" style="display: none;">
-		<div class="modal-dialog">
-		  <div class="modal-content">
-			<div class="modal-header">
-			 <!--<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>-->
-			  <h4 class="modal-title">Zaman Damgası</h4>
-			</div>
-			<div class="modal-body">
-
-			</div>
-			<div class="modal-footer">
-			  <button type="button" class="btn btn-default" data-dismiss="modal"><?php echo __('Tamam');?></button>
-			</div>
-		  </div>
-		</div>
-	</div>
-	<!--end modal for time stamp-->
+	
 			<div id='headermenu'>
 			<ul>
 			   <li><a style="height:42px;" href="<?php echo $this->createUrl('site/index');  ?>"><img  src="/css/linden_logo.png" ></a></li>
@@ -191,13 +93,9 @@ $current_user=User::model()->findByPk(Yii::app()->user->id);
 			   <li class='has-sub'><a href='#'><span>Dosya</span></a>
 					<ul>
 			         <li><a href="<?php echo $this->createUrl('site/index');  ?>"><span><i class="icon-book"></i>Kitaplarım</span></a></li>
-			         <li><a href="<?php echo $this->createUrl('site/index');  ?>"><span><i class="icon-folder-open"></i>Pdf İçe Aktar </span></a></li>
-			         <li><a href="<?php echo $this->createUrl("EditorActions/ExportPdfBook", array('bookId' => $model->book_id ));?>"> <i class="icon-doc-inv"></i>PDF Yayınla</i></a></li>
-			         <li><a href="<?php echo $this->createUrl("EditorActions/publishBook/", array('bookId' => $model->book_id ));?>"> <i class="icon-doc-inv"></i><?php _e("Hızlı Yayınla"); ?></i></a></li>
-			         <li><a href="<?php echo $this->createUrl("EditorActions/ExportBook", array('bookId' => $model->book_id ));?>"><i class="icon-publish"></i>Yayınla</a></li>
-			         <li><a href="#export-timestamp" data-toggle="modal"><i class="fa fa-tags"></i>Zaman Damgala</a></li>
-
-
+			         <li><a href="<?php echo $this->createUrl("EditorActions/ExportPdfBook", array('bookId' => $model->book_id ));?>"> <i class="icon-doc-inv"></i><?php _e("PDF Olarak Aktar"); ?></i></a></li>
+			         <li><a href="<?php echo $this->createUrl("EditorActions/publishBook/", array('bookId' => $model->book_id ));?>"> <i class="icon-doc-inv"></i><?php _e("Markette Yayınla"); ?></i></a></li>
+			         <li><a href="<?php echo $this->createUrl("EditorActions/ExportBook", array('bookId' => $model->book_id ));?>"><i class="icon-publish"></i><?php _e("Epub3 Olarak Aktar"); ?></a></li>
 
 					</ul>
 			   </li>
@@ -245,16 +143,16 @@ $current_user=User::model()->findByPk(Yii::app()->user->id);
 			      <ul>
 
 			      	<?php if (!Yii::app()->user->isGuest) {?>
-			         <li><a href='/index.php?r=user/profile'><span><?php _e('Profil') ?></span></a></li>
+			         <li><a href='/user/profile'><span><?php _e('Profil') ?></span></a></li>
 			         <?php echo " <li>". CHtml::link(__("Çıkış"),"/site/logout") ."</li>"; ?>
 					<?php 
-						foreach (Yii::app()->params->availableLanguages  as $lang_id => $lang_name) {
-							$_GET['language']=$lang_id;
-							$lang_link_params = array_merge(array($this->route),$_GET ) ;
+						// foreach (Yii::app()->params->availableLanguages  as $lang_id => $lang_name) {
+						// 	$_GET['language']=$lang_id;
+						// 	$lang_link_params = array_merge(array($this->route),$_GET ) ;
 
-							echo " <li>". CHtml::link("<span>".$lang_name."</span>",$lang_link_params ) ."</li>";
+						// 	echo " <li>". CHtml::link("<span>".$lang_name."</span>",$lang_link_params ) ."</li>";
 
-						}
+						// }
 					?>
 			         <?php } ?>
 			      </ul>
@@ -401,7 +299,12 @@ $current_user=User::model()->findByPk(Yii::app()->user->id);
 				<div class="vertical-line"></div>
 				-->
 				
-					<i class="icon-opacity grey-6"></i>
+					
+			</div>
+
+			<div class="text-options wrap-options latex-options toolbox" style="display:inline-block;">
+
+				<i class="icon-opacity grey-6"></i>
 							<select class='tool-select tool select' rel='opacity' rel='color' id="font-size" class="radius" title="Yazının Şeffaflık Ayarı">
 								
 								<option value="0" >0</option>
@@ -418,6 +321,7 @@ $current_user=User::model()->findByPk(Yii::app()->user->id);
 							</select>	
 				
 					<div class="vertical-line"></div>
+
 			</div>
 
 			<div class="table-options toolbox" style="display:inline-block;">
@@ -660,7 +564,7 @@ $current_user=User::model()->findByPk(Yii::app()->user->id);
 				<div class="vertical-line"></div>
 				
 						<i class="icon-opacity grey-6"></i>
-								<select class='tool-select tool select' rel='opacity' rel='color' id="font-size" class="radius" title="Şeklin Şeffaflık Ayarı">
+							<select class='tool-select tool select' rel='opacity' rel='color' id="font-size" class="radius" title="Bağlantının Şeffaflık Ayarı">
 								
 								<option value="0" >0</option>
 								<option value="0.10" >10</option>
@@ -1788,16 +1692,7 @@ $current_user=User::model()->findByPk(Yii::app()->user->id);
 
 			</script>
 
-			 <div class="panel panel-default">
-				<div class="panel-heading">
-					<h3 class="panel-title"> <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo"><i class="fa fa-bars light-blue"></i>&nbsp;&nbsp;&nbsp;İçindekiler </a> </h3>
-				</div>
-					<div id="collapseTwo" class="panel-collapse collapse">
-						<div class="panel-body">
-							asdf
-						</div>
-					</div>
-			</div>
+			 
 				
 				
 				
@@ -1884,8 +1779,8 @@ $current_user=User::model()->findByPk(Yii::app()->user->id);
 					});
 					var maxheight = $( window ).height();
 					$(".panel-collapse.collapse.in").css('max-height',maxheight-280);
+					$(".panel-collapse.collapse.in").css('width','100%');
 					$(".panel-collapse.collapse.in").css('overflow','auto');
-
 					$( window ).resize(function() {
 					  	maxheight = $( window ).height();
 					  	$(".panel-collapse.collapse.in").css('max-height',maxheight-280);
