@@ -242,6 +242,13 @@ window.lindneo.nisga = (function(window, $, undefined){
     $('[id="'+delete_component_id+'"]').remove();
     window.lindneo.toolbox.removeComponentFromSelection( $('#'+ delete_component_id) );
   };
+
+  var destroyByIdComponent = function ( componentID ) {
+  //console.log(componentID);
+    $('[id="'+componentID+'"]').parent().not('#current_page').remove();
+    $('[id="'+componentID+'"]').remove();
+    window.lindneo.toolbox.removeComponentFromSelection( $('#'+ componentID) );
+  };
   
   var ComponentDelete = function ( component ) {
     if(revision_value==0){
@@ -938,6 +945,7 @@ var textComponentBuilder = function( component ) {
     ComponentDelete: ComponentDelete,
     destroyChapter: destroyChapter,
     destroyComponent: destroyComponent,
+    destroyByIdComponent: destroyByIdComponent,
     undoComponent: undoComponent,
     redoComponent: redoComponent,
     setBgColorOfSelectedComponent: setBgColorOfSelectedComponent
