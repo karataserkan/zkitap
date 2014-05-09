@@ -23,12 +23,134 @@ class SiteController extends Controller
 		);
 	}
 
+
+
+
 	/**
 	 * This is the default 'index' action that is invoked
 	 * when an action is not explicitly requested by users.
 	 */
 	public function actionIndex()
 	{
+
+		functions::event('tripData',NULL, function($var){
+
+		?>
+			/* Header */
+				{ 
+			       content : "Okutus Editor'e HoşGeldiniz, Tanıtım için ileriye basınız.",
+			       position:'screen-center',
+			       delay:-1
+			   },
+		
+			/* Header */
+			   { 
+			       sel : $('#sidebar-collapse i'),
+			       content : 'Menuyü açıp kapatabilirsiniz.',
+			       position:'e',
+			       callback:function () {$('#header-user img').click();}
+			       //expose: true
+			   },
+			   { 
+			       sel : $('#header-user'),
+			       content : 'Profil Ayarları ve Çıkış',
+			       position:'w',
+			       callback:function () {$('#header-user img').click();}
+			       //expose: true
+			   },
+
+			 /* Left Menu */
+			   { 
+			       sel : $('#sidebar'),
+			       content : 'Tüm Seçenekler',
+			       position:'e',
+			       expose: true
+			   },
+
+			   { 
+			       sel : $($('#sidebar ul li')[0]),
+			       content : 'Başlangıç Ekranı',
+			       position:'e',
+			       //expose: true
+			   },
+			   { 
+			       sel : $($('#sidebar ul li')[1]),
+			       content : 'Kitaplarınız',
+			       position:'e',
+			       //expose: true
+			   },
+			   { 
+			       sel : $($('#sidebar ul li')[2]),
+			       content : 'Tüm yardımcı kaynaklar ve Destek Talebi için',
+			       position:'e',
+			       //expose: true
+			   },
+			   { 
+			       sel : $($('#sidebar ul li')[3]),
+			       content : 'Hesap Ayarlarınızı Yapabilirisiniz',
+			       position:'e',
+			       //expose: true,
+			        callback:function(){$($('#sidebar >div> ul>li')[4]).find('a').click();}
+			   },
+			   { 
+			       sel : $($('#sidebar ul li')[4]),
+			       content : 'Şablonlarınıza erişip, değiştirebilir ve yenilerini oluşturabilirsiniz.',
+			       position:'e',
+			       //expose: true,
+			       callback:function(){$($('#sidebar >div> ul>li')[5]).find('a').click();}
+			   },
+			   { 
+			       sel : $($('#sidebar ul li a')[5]),
+			       content : 'Organizasyonunuzu Yönetebilirsiniz.',
+			       position:'e',
+			       //expose: true,
+			       callback:function(){$($('#sidebar >div> ul>li')[5]).find('a').click();}
+			   },
+
+			 /* Content */
+			   { 
+			       sel : $('#filter-controls'),
+			       content : 'Çalışma Alanı Hızlı Filtrelerini kullanarak kitaplarınıza hızlı erişebilirsiniz.',
+			       position:'s',
+			       expose: true,
+			       callback:function(){$('a[data-filter=".owner"]').click();}
+			   },
+			   { 
+			       sel : $('a[data-filter=".owner"]'),
+			       content : 'Sahibi Olduklarınıza',
+			       position:'s',
+			       callback:function(){$('a[data-filter=".editor"]').click();}
+			   },
+			   { 
+			       sel : $('a[data-filter=".editor"]'),
+			       content : 'Editörü Olduklarınıza',
+			       position:'s',
+			       //expose: true,
+			       callback:function(){$('a[data-filter="*"]').click();}
+			   },
+			   { 
+			       sel : $('a[data-filter="*"]'),
+			       content : 'ya da kısaca Hepsine',
+			       position:'s',
+			       //expose: true
+			   },
+   			   { 
+			       sel : $('#addNewBookBtn'),
+			       content : 'Şimdi Yeni Bir Kitap Ekleyiniz',
+			       position:'w',
+			       //expose: true,
+			       delay: -1
+			   },
+		
+		
+		
+		
+		
+					
+		
+					<?php
+	});
+
 		// renders the view file 'protected/views/site/index.php'
 		// using the default layout 'protected/views/layouts/main.php'
 		if(Yii::app()->user->isGuest)
