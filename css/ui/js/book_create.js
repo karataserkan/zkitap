@@ -2,22 +2,41 @@
  	$( document ).ready(function() {
     $('form').addClass('form-horizontal');
 
-	$('span div span').on('click','[name="book_size"]',function(){
-		var sizes=$(this).val();
-		$.getJSON( "/book/getTemplates/"+sizes, function( data ) {
-		console.log(data);
-		   var items = [];
-		   $.each( data, function( key, val ) {
-		     items.push('<div class="" id="uniform-templates_'+key+'"><span class=""><input class="uniform" id="templates_'+key+'" value="'+val.id+'" type="radio" name="templates"></span><label for="templates_'+key+'"><img src="'+val.thumbnail+'" width="150px" height="150px">'+val.title+'</label><br></div>');
+    $('#book_size>div').on('click',function(){
+        $('#book_size>div>span>div>span').removeClass('checked');
+        $(this).children().children().children().addClass('checked');
+
+        var sizes=$(this).children().children().children().children().val();
+        $.getJSON( "/book/getTemplates/"+sizes, function( data ) {
+           var items = [];
+           $.each( data, function( key, val ) {
+             items.push('<div class="" id="uniform-templates_'+key+'"><span class=""><input class="uniform" id="templates_'+key+'" value="'+val.id+'" type="radio" name="templates"></span><label for="templates_'+key+'"><img src="'+val.thumbnail+'" width="150px" height="150px">'+val.title+'</label><br></div>');
+             
+           });
+        $('#templates').html(items);         
+          // $( "<ul/>", {
+          //   "class": "my-new-list",
+          //   html: items.join( "" )
+          // }).appendTo( "body" );
+         });
+
+    });
+
+	// $('span div span').on('click','[name="book_size"]',function(){
+	// 	var sizes=$(this).val();
+	// 	$.getJSON( "/book/getTemplates/"+sizes, function( data ) {
+	// 	   var items = [];
+	// 	   $.each( data, function( key, val ) {
+	// 	     items.push('<div class="" id="uniform-templates_'+key+'"><span class=""><input class="uniform" id="templates_'+key+'" value="'+val.id+'" type="radio" name="templates"></span><label for="templates_'+key+'"><img src="'+val.thumbnail+'" width="150px" height="150px">'+val.title+'</label><br></div>');
 		     
-		   });
-		$('#templates').html(items);		 
-		  // $( "<ul/>", {
-		  //   "class": "my-new-list",
-		  //   html: items.join( "" )
-		  // }).appendTo( "body" );
-		 });
-	});
+	// 	   });
+	// 	$('#templates').html(items);		 
+	// 	  // $( "<ul/>", {
+	// 	  //   "class": "my-new-list",
+	// 	  //   html: items.join( "" )
+	// 	  // }).appendTo( "body" );
+	// 	 });
+	// });
 
 	var BookCreateWizard = function () {
     return {
