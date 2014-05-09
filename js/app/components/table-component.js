@@ -732,6 +732,8 @@ $(document).ready(function(){
               break;
             
             default:
+              this.options.component.data.self.css['width']="auto";
+                this.options.component.data.self.css['height']="auto";
               return this._super(propertyName,propertyValue);
               break;
           }
