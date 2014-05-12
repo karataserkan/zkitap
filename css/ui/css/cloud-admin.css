@@ -9658,6 +9658,32 @@ form#myprofile_info_edit > input {
 
 
 
+/** EDITOR GENERAL CSS *******************/
+
+li.user .dropdown-menu li a {
+	-webkit-transition: all 0.3s;
+	-moz-transition: all 0.3s;
+	-o-transition: all 0.3s;
+	transition: all 0.3s;
+}
+
+
+li.user .dropdown-menu li a:hover {
+	background-color:#f8f8f8 !important;
+}
+
+/** END OF EDITOR GENERAL CSS *******************/
+
+
+
+
+
+
+
+
+
+
+
 
 
 

@@ -1056,14 +1056,22 @@ class componentHTML {
 
 
 		$plink_id= "plink".functions::get_random_string();
+		if($component->data->plink_image != "")
+			$container.=" 
+				<div id='$plink_id' ".$css.">
+					<a href='".$component->data->page_link.".html'><img src='".$component->data->plink_image."' /></a>
+				</div>
 		
-		$container.=" 
-			<div id='$plink_id' ".$css.">
-				<a href='".$component->data->page_link.".html'>".$component->data->plink_data."</a>
-			</div>
-	
+			
+			";
+		else 
+			$container.=" 
+				<div id='$plink_id' ".$css.">
+					<a href='".$component->data->page_link.".html'>".$component->data->plink_data."</a>
+				</div>
 		
-		";
+			
+			";
 
 		$this->html=$container;
 		
