@@ -70,6 +70,7 @@ class WorkspacesController extends Controller
 		if(isset($_POST['Workspaces']) && $organisationId)
 		{
 			$model->attributes=$_POST['Workspaces'];
+			$model->workspace_id=functions::new_id();
 			if($model->save())
 			{
 				$addWorkspaceOrganization = Yii::app()->db->createCommand();

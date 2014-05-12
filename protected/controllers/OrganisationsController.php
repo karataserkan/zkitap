@@ -185,11 +185,13 @@ class OrganisationsController extends Controller
 
 	public function actionAccount($id)
 	{
-
-
+		$books = Yii::app()->db->createCommand("SELECT count(*) as book FROM `book` b WHERE b.`workspace_id`=(select workspace_id from organisation_workspaces w where w.organisation_id='".$id."' and w.`workspace_id`=b.`workspace_id`)")->queryRow();
+		$workspaces=Yii::app()->db->createCommand("SELECT count(*) as w FROM `organisation_workspaces` WHERE `organisation_id`='".$id."'")->queryRow();
+		$hosts=Yii::app()->db->createCommand("SELECT count(*) as w FROM `organisation_hostings` WHERE `organisation_id`='".$id."'")->queryRow();
+		$category=Yii::app()->db->createCommand("SELECT count(*) as w FROM `book_categories` WHERE `organisation_id`='".$id."'")->queryRow();
 		$budget=$this->getOrganisationBudget($id);
 
-		$this->render("account");
+		$this->render("account",array('book'=>$books['book'],'workspace'=>$workspaces['w'],'host'=>$hosts['w'],'category'=>$category['w'],'budget'=>$budget,'id'=>$id));
 	}
 
 	public function actionTemplates($id)

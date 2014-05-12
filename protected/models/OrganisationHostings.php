@@ -70,11 +70,11 @@ class OrganisationHostings extends CActiveRecord
 	{
 		return array(
 			'organisation_id' => 'Organisation',
-			'hosting_client_IP' => 'Hosting Client Ip',
-			'hosting_client_port' => 'Hosting Client Port',
+			'hosting_client_IP' => 'Ip',
+			'hosting_client_port' => 'Port',
 			'hosting_client_id' => 'Hosting Client',
-			'hosting_client_key1' => 'Hosting Client Key1',
-			'hosting_client_key2' => 'Hosting Client Key2',
+			'hosting_client_key1' => 'Key1',
+			'hosting_client_key2' => 'Key2',
 		);
 	}
 

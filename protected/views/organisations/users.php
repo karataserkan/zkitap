@@ -1,53 +1,55 @@
 <?php
 /* @var $this OrganisationsController */
  ?>
+ 
+
+<!-- POPUP add -->
+<div class="modal fade" id="addUser" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+	  <div class="modal-content">
+		<div class="modal-header">
+		  <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+		  <h4 class="modal-title"><?php _e("Kullanıcı Ekle"); ?></h4>
+		</div>
+		<div class="modal-body">
+		 	<form id="a<?php echo $organisationId; ?>" method="post">
+					<span class="editor-name" ><?php _e('Email Adresi'); ?>:</span>
+					<input id="email" value="">
+					<input id="organisationId" value="<?php echo $organisationId; ?>" style="display:none">
+			</form>
+		</div>
+      <div class="modal-footer">
+      	<a href="#" onclick="sendUser(a<?php echo $organisationId; ?>)" class="btn btn-primary">
+			<?php _e('Ekle'); ?>
+		</a>
+        <button type="button" class="btn btn-default" data-dismiss="modal"><?php _e("Vazgeç"); ?></button>
+      </div>
+		</div>
+	  </div>
+	</div>
+ 
+<!-- POPUP END -->
+
+
+
  <div id="content" class="row">
 
 	<div class="col-sm-12">
 		<div class="page-header">
 
 				<h3 class="content-title pull-left">Kullanıcılar</h3>
-				<a class="btn pull-right btn-primary" id="boook-editors-settings" href="#" popup="<?php echo $organisationId; ?>" >
+				<a class="btn pull-right btn-primary"  data-id="addUser" data-toggle="modal" data-target="#addUser" >
 				<i class="fa fa-plus-circle"></i>
 				<span><?php _e('Kullanıcı Ekle'); ?></span>
 				</a>
 		</div>
 	</div>
-		
-	
-		
-	<center id="popup-close-area" popup="pop-<?php echo $organisationId; ?>" style="display:none; position:relative">
-				<div id="close-div" style="background-color:#123456; width:100% height:#123456; position:fixed;"> </div>
-				<div class="book-editors-options-box-container" style="height:150px">
-				<h2><?php _e('Kullanıcı Ekle'); ?><a popup="close-<?php echo $organisationId; ?>" id="close-option-box"class="icon-close white size-15 delete-icon float-right" ></a></h2>
-				
 
-				<div style="background-color:#fff; height: 90px; padding:5px; margin:10px; color:#333; text-align:left;">
-					<span class="editor-name" ><?php _e('Kullanıcı Ekle'); ?>:</span>
-					<br style="clear:both; margin-bottom:20px;">
-					<form id="a<?php echo $organisationId; ?>" method="post">
-					<input id="email" value="">
-					<input id="organisationId" value="<?php echo $organisationId; ?>" style="display:none">
-					</form>
-					<a href="#" onclick="sendUser(a<?php echo $organisationId; ?>)" class="btn white radius float-right" style="margin-left:20px; width:50px; text-align:center;">
-						<?php _e('Ekle'); ?>
-					</a>
-				</div>
-
-				</div>
-			</center>
-<script>
-$("[popup='<?php echo $organisationId; ?>']").click(function(){
-	$("[popup='pop-<?php echo $organisationId; ?>']").show("fast").draggable({containment: "#allWorkspaces"});
-});
-$("[popup='close-<?php echo $organisationId; ?>']").click(function(){
-	$("[popup='pop-<?php echo $organisationId; ?>']").hide("fast");
-});
 </script>
 
  <?php
 if ($users) {
-	_en('%s Kullanıcı Bulundu', '%s Kullanıcı Bulundu', count($users));
+	//_en('%s Kullanıcı Bulundu', '%s Kullanıcı Bulundu', count($users));
 	?>
 	<div>
 	<?php
@@ -89,3 +91,10 @@ function sendUser(e){
     window.location.assign(link);
     }
 </script>
+
+<script>
+		jQuery(document).ready(function() {		
+			App.setPage("gallery");  //Set current page
+			App.init(); //Initialise plugins and elements
+		});
+	</script>

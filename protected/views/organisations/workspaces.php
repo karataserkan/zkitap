@@ -1,3 +1,10 @@
+
+<script>
+		jQuery(document).ready(function() {		
+			App.setPage("gallery");  //Set current page
+			App.init(); //Initialise plugins and elements
+		});
+	</script>
 <?php
 /* @var $this OrganisationsController */
 
@@ -26,36 +33,40 @@ $organisationId=$organizationUser['organisation_id'];
 		<div class="col-sm-3">	
 			<div class="well">
 			<h5 class="col-sm-12" style="text-transform:capitalize;"><?php echo $workspace['workspace_name']; ?></h5>
-			<a id="#workspace-users" href="#" popup="<?php echo $workspace['workspace_id']; ?>" class="btn white radius float-right"><i class="icon-users"></i><?php _e('Kullanıcılar'); ?></a>	
+			<a id="#workspace-users" data-id="pop-<?php echo $workspace['workspace_id']; ?>" data-toggle="modal" data-target="#pop-<?php echo $workspace['workspace_id']; ?>" class="btn white radius float-right"><i class="icon-users"></i><?php _e('Kullanıcılar'); ?></a>	
 			<a href="/workspaces/deleteWorkspace?id=<?php echo $workspace['workspace_id']; ?>&organisationId=<?php echo $organisationId; ?>" class="btn white radius float-right"><i class="icon-delete"></i><?php _e('Sil'); ?></a>
 			<a href="/workspaces/updateWorkspace?id=<?php echo $workspace['workspace_id']; ?>&organisationId=<?php echo $organisationId; ?>" class="btn white radius float-right"><i class="icon-update"></i><?php _e('Düzenle'); ?></a>	
 			<div class="clearfix"></div>
 			</div>
 		</div>
-<center id="popup-close-area" popup="pop-<?php echo $workspace['workspace_id']; ?>" style="display:none; position:relative">
-				<div id="close-div" style="background-color:#123456; width:100% height:#123456; position:fixed;"> </div>
-				<div class="book-editors-options-box-container">
-				<h2><?php _e('Çalışma Alanı Kullanıcıları');?><a popup="close-<?php echo $workspace['workspace_id']; ?>" id="close-option-box"class="icon-close white size-15 delete-icon float-right" ></a></h2>
-				<div class="editor-list">
-				<?php 
+
+
+
+<!-- POPUP add -->
+<div class="modal fade" id="pop-<?php echo $workspace['workspace_id']; ?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+	  <div class="modal-content">
+		<div class="modal-header">
+		  <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+		  <h4 class="modal-title"><?php _e("Çalışma Alanı Kullanıcıları"); ?></h4>
+		</div>
+		<div class="modal-body">
+			<?php 
 					$workspaceUsers=$this->workspaceUsers($workspace['workspace_id']);
 
 					foreach ($workspaceUsers as $key => $user): 
 						?>
 						<div id="editor-list-istems" class="editor-list-item">
+							<a href="/organisations/delWorkspaceUser?workspaceId=<?php echo $workspace['workspace_id']; ?>&userId=<?php echo $user['id']; ?>&organizationId=<?php echo $organisationId; ?>" class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i></a>
 							<span id="editor-name" class="editor-name">
 							<?php echo $user['name']." ".$user['surname']; ?>
 							</span>
-							<a href="/organisations/delWorkspaceUser?workspaceId=<?php echo $workspace['workspace_id']; ?>&userId=<?php echo $user['id']; ?>&organizationId=<?php echo $organisationId; ?>" class="icon-close size-15 delete-icon"></a>
-							
+							<br><br>
 						</div>	
 				<?php endforeach; ?>
-				</div>
 
-				<div style="background-color:#fff; height: 60px; padding:5px; margin:10px; color:#333; text-align:left;">
+				<form id="a<?php echo $workspace['workspace_id']; ?>" method="post">
 					<span class="editor-name" ><?php _e('Kullanıcı Ekle'); ?>:</span>
-					<br style="clear:both; margin-bottom:20px;">
-					<form id="a<?php echo $workspace['workspace_id']; ?>" method="post">
 					<input id="workspaceId" value="<?php echo $workspace['workspace_id']; ?>" style="display:none">
 					<input id="organisationId" value="<?php echo $organisationId; ?>" style="display:none">
 					<select id="user" class="book-list-textbox radius grey-9 float-left"  style=" width: 280px;">
@@ -66,22 +77,23 @@ $organisationId=$organizationUser['organisation_id'];
 							}
 						 ?>
 					</select>
-					</form>
-					<a href="#" onclick="sendUser(a<?php echo $workspace['workspace_id']; ?>)" class="btn white radius float-right" style="margin-left:20px; width:50px; text-align:center;">
-						<?php _e('Ekle'); ?>
-					</a>
-				</div>
+				</form>
 
-				</div>
-			</center>
-<script>
-$("[popup='<?php echo $workspace['workspace_id']; ?>']").click(function(){
-	$("[popup='pop-<?php echo $workspace['workspace_id']; ?>']").show("fast").draggable({containment: "#allWorkspaces"});
-});
-$("[popup='close-<?php echo $workspace['workspace_id']; ?>']").click(function(){
-	$("[popup='pop-<?php echo $workspace['workspace_id']; ?>']").hide("fast");
-});
-</script>
+
+		</div>
+      <div class="modal-footer">
+      	<a href="#" onclick="sendUser(a<?php echo $workspace['workspace_id']; ?>)" class="btn btn-primary">
+			<?php _e('Ekle'); ?>
+		</a>
+        <button type="button" class="btn btn-default" data-dismiss="modal"><?php _e("Kapat"); ?></button>
+      </div>
+		</div>
+	  </div>
+	</div>
+ 
+<!-- POPUP END -->
+
+
 		<?php
 	}
 ?>

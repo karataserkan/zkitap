@@ -11,16 +11,14 @@
 	'enableAjaxValidation'=>false,
 )); ?>
 
-	<p class="note">Fields with <span class="required">*</span> are required.</p>
-
 	<?php echo $form->errorSummary($model); ?>
-
+<!-- 
 	<div class="row">
 		<?php echo $form->labelEx($model,'workspace_id'); ?>
 		<?php echo $form->textField($model,'workspace_id',array('size'=>44,'maxlength'=>44)); ?>
 		<?php echo $form->error($model,'workspace_id'); ?>
 	</div>
-
+ -->
 	<div class="row">
 		<?php echo $form->labelEx($model,'workspace_name'); ?>
 		<?php echo $form->textArea($model,'workspace_name',array('rows'=>6, 'cols'=>50)); ?>
@@ -34,7 +32,7 @@
 	</div>
 -->
 	<div class="row buttons">
-		<?php echo CHtml::submitButton($model->isNewRecord ? 'Create' : 'Save'); ?>
+		<?php echo CHtml::submitButton($model->isNewRecord ? 'Create' : 'Kaydet'); ?>
 	</div>
 
 <?php $this->endWidget(); ?>
