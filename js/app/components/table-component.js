@@ -737,9 +737,9 @@ $(document).ready(function(){
           }
       },
       setProperty : function (propertyName,propertyValue){
-        /*
+        
         console.log(propertyName);
-        console.log(this.options.component);
+        /*console.log(this.options.component);
         console.log(this.TableSelection.end);
         console.log(this);
         return;
