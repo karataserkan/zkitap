@@ -256,7 +256,10 @@ $current_user=User::model()->findByPk(Yii::app()->user->id);
 				<input type='radio' rel='text-align' name='text-align' activeVal='left' id="text-align-left"  href="#" class="dark-blue radius toolbox-items radio tool" ><label for='text-align-left' class="icon-text-align-left size-15" title="Sola Yasla"></label>
 				<input type='radio' rel='text-align' name='text-align' activeVal='center' id="text-align-center"  href="#" class="dark-blue radius toolbox-items  radio tool" ><label for='text-align-center' class="icon-text-align-center  size-15" title="Ortala"></label>
 				<input type='radio' rel='text-align' name='text-align' activeVal='right' id="text-align-right"  href="#" class="dark-blue radius toolbox-items  radio tool" ><label for='text-align-right' class="icon-text-align-right  size-15" title="Sağa Yasla"></label>
+
+
 				<!-- <input type='radio' rel='text-align' name='text-align' activeVal='justify' id="text-align-justify"  href="#" class="dark-blue radius toolbox-items  radio tool" ><label for='text-align-justify' class="icon-text-align-justify  size-15" title="İki Yana Yasla"></label -->
+
 
 				<div class="vertical-line"></div>
 				<!--
@@ -348,20 +351,26 @@ $current_user=User::model()->findByPk(Yii::app()->user->id);
 			</div>
 
 			<div class="table-options toolbox" style="display:inline-block;">
-
-				<div id="checkbox-container" style="display:inline-block">
-
+				<div id="generic-options toolbox responsive_1" style="display:inline-block">
+					
+				
+					<a href="#" for="add_row" class="optbtn tablesettings" rel="add_row" id="add_row" title="Satır Ekle"style="background-image: url(/css/images/addrow.png)"></a> 
+					<a href="#" class="optbtn tablesettings" rel="delete_row" id="delete_row" title="Satır Sil" style="background-image: url(/css/images/deleterow.png)"></a> 
+					<a href="#" class="optbtn tablesettings" rel="add_column" id="add_column" title="Sütun Ekle"style="background-image: url(/css/images/addcolumn.png)"></a> 
+					<a href="#" class="optbtn tablesettings" rel="delete_column" id="delete_column" title="Sütun Sil"style="background-image: url(/css/images/deletecolumn.png)"></a> 			
+					
+					<!--
 					<input type="checkbox" id="delete_row" rel="delete_row" class="dark-blue radius toolbox-items btn-checkbox tool checkbox"> 
 					<label for="delete_row" title="Satır Sil">Satır Sil</label>
 					<input type="checkbox" id="delete_column" rel="delete_column" class="dark-blue radius toolbox-items btn-checkbox tool checkbox"> 
 					<label for="delete_column" title="Satır Sil">Sütun Sil</label>
-
 					<input type="checkbox" id="add_row" rel="add_row" class="dark-blue radius toolbox-items btn-checkbox tool checkbox"> 
 					<label for="add_row" title="Satır Ekle">Satır Ekle</label>
 					<input type="checkbox" id="add_column" rel="add_column" class="dark-blue radius toolbox-items btn-checkbox tool checkbox"> 
 					<label for="add_column" title="Satır Ekle">Sütun Ekle</label>
-					
-				</div>
+					-->
+				</div>				
+			</div>
  
 				
 				<div class="vertical-line"></div>
