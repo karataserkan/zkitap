@@ -1265,6 +1265,7 @@
 	text-align: center;
 	min-width: 100px;
 	border-radius: 3px; 
+  z-index: 99999999999999999999!important;
 	}
   
 .trip-block.white {

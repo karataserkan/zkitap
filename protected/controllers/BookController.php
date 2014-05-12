@@ -684,7 +684,7 @@ class BookController extends Controller
 				$this->redirect(array('author','bookId'=>$newId));
 			}
 		}
-		$this->redirect("site/index");
+		$this->redirect("/site/index");
 	}
 
 	public function duplicateBook($layout_id, $workspaceId=null,$title=null){ 
@@ -813,6 +813,11 @@ class BookController extends Controller
 		$model=$this->loadModel($bookId);
 		
 		$bookSize=$model->getPageSize();
+
+
+		functions::event('tripData',NULL, function($var){
+			@include ('js/lib/trips/book/author.json');
+		});
 
 
 		$this->render('author',array(

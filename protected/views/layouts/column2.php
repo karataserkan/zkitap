@@ -53,7 +53,7 @@
 				<li class="dropdown user" id="header-user">
 					<a href="#" class="dropdown-toggle read_page_user" data-toggle="dropdown">
 						<?php
-							$avatarSrc=Yii::app()->request->baseUrl."/css/ui/img/avatars/at.png";
+							$avatarSrc=Yii::app()->request->baseUrl."/css/ui/img/avatars/profile.png";
 							$userProfileMeta=UserMeta::model()->find('user_id=:user_id AND meta_key=:meta_key',array('user_id'=>Yii::app()->user->id,'meta_key'=>'profilePicture'));
 							if ($userProfileMeta->meta_value) {
 								$avatarSrc=$userProfileMeta->meta_value;
@@ -225,7 +225,7 @@
 									<?php if ($organisation['role']=='owner' || $organisation['role']=='manager') { ?>
 									<li>
 										<a href="/organisations/account/<?php echo $organisation["organisation_id"]; ?>">
-											Hesabım
+											Kontrol Paneli
 										</a>
 									</li>
 									<li>
