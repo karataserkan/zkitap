@@ -134,9 +134,9 @@ $current_user=User::model()->findByPk(Yii::app()->user->id);
 					<a id='login_area' style='float:right;'>
 						<?php
 						if(Yii::app()->user->isGuest){
-							echo CHtml::link(array('site/login'));
+							echo CHtml::link(array('/site/login'));
 						}else{
-							echo CHtml::link('('.Yii::app()->user->name.')',array('site/logout'));
+							echo CHtml::link('('.Yii::app()->user->name.')',array('/user/profile'));
 						}
 						?>
 					</a>   
