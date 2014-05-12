@@ -815,6 +815,11 @@ class BookController extends Controller
 		$bookSize=$model->getPageSize();
 
 
+		functions::event('tripData',NULL, function($var){
+			@include ('js/lib/trips/book/author.json');
+		});
+
+
 		$this->render('author',array(
 			'model'=>$model,
 			'page_id'=>$page,

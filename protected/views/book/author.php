@@ -9,7 +9,7 @@ if($page==null)
 			if($component_id) {
 				$highlight_component=Component::model()->findByPk( $component_id);
 				$page=Page::model()->findByPk($highlight_component->page_id);
-			}else {
+			} else {
 				$chapter=Chapter::model()->find('book_id=:book_id', array(':book_id' => $model->book_id ));
 				$page=Page::model()->find('chapter_id=:chapter_id', array(':chapter_id' => $chapter->chapter_id ));
 			}
@@ -256,7 +256,10 @@ $current_user=User::model()->findByPk(Yii::app()->user->id);
 				<input type='radio' rel='text-align' name='text-align' activeVal='left' id="text-align-left"  href="#" class="dark-blue radius toolbox-items radio tool" ><label for='text-align-left' class="icon-text-align-left size-15" title="Sola Yasla"></label>
 				<input type='radio' rel='text-align' name='text-align' activeVal='center' id="text-align-center"  href="#" class="dark-blue radius toolbox-items  radio tool" ><label for='text-align-center' class="icon-text-align-center  size-15" title="Ortala"></label>
 				<input type='radio' rel='text-align' name='text-align' activeVal='right' id="text-align-right"  href="#" class="dark-blue radius toolbox-items  radio tool" ><label for='text-align-right' class="icon-text-align-right  size-15" title="Sağa Yasla"></label>
-				<input type='radio' rel='text-align' name='text-align' activeVal='justify' id="text-align-justify"  href="#" class="dark-blue radius toolbox-items  radio tool" ><label for='text-align-justify' class="icon-text-align-justify  size-15" title="İki Yana Yasla"></label>
+
+
+				<!-- <input type='radio' rel='text-align' name='text-align' activeVal='justify' id="text-align-justify"  href="#" class="dark-blue radius toolbox-items  radio tool" ><label for='text-align-justify' class="icon-text-align-justify  size-15" title="İki Yana Yasla"></label -->
+
 
 				<div class="vertical-line"></div>
 				<!--
@@ -325,21 +328,48 @@ $current_user=User::model()->findByPk(Yii::app()->user->id);
 
 			</div>
 
+			<div class="plink-options toolbox" style="display:inline-block;">
+
+				<i class="icon-opacity grey-6"></i>
+							<select class='tool-select tool select' rel='opacity' rel='color' id="font-size" class="radius" title="Yazının Şeffaflık Ayarı">
+								
+								<option value="0" >0</option>
+								<option value="0.10" >10</option>
+								<option value="0.20" >20</option>
+								<option value="0.30" >30</option>
+								<option value="0.40" >40</option>
+								<option value="0.50" >50</option>
+								<option value="0.60" >60</option>
+								<option value="0.70" >70</option>
+								<option value="0.80" >80</option>
+								<option value="0.90" >90</option>
+								<option selected="selected"  value="1" >100</option>
+							</select>	
+				
+					<div class="vertical-line"></div>
+
+			</div>
+
 			<div class="table-options toolbox" style="display:inline-block;">
-
-				<div id="checkbox-container" style="display:inline-block">
-
+					
+				
+					<a href="#" for="add_row" class="toolbox-btn optbtn tablesettings" rel="add_row" id="add_row" title="Satır Ekle"style="background-image: url(/css/images/addrow.png)"></a> 
+					<a href="#" class="toolbox-btn optbtn tablesettings" rel="delete_row" id="delete_row" title="Satır Sil" style="background-image: url(/css/images/deleterow.png)"></a> 
+					<a href="#" class="toolbox-btn optbtn tablesettings" rel="add_column" id="add_column" title="Sütun Ekle"style="background-image: url(/css/images/addcolumn.png)"></a> 
+					<a href="#" class="toolbox-btn optbtn tablesettings" rel="delete_column" id="delete_column" title="Sütun Sil"style="background-image: url(/css/images/deletecolumn.png)"></a> 			
+					
+					<!--
 					<input type="checkbox" id="delete_row" rel="delete_row" class="dark-blue radius toolbox-items btn-checkbox tool checkbox"> 
 					<label for="delete_row" title="Satır Sil">Satır Sil</label>
 					<input type="checkbox" id="delete_column" rel="delete_column" class="dark-blue radius toolbox-items btn-checkbox tool checkbox"> 
 					<label for="delete_column" title="Satır Sil">Sütun Sil</label>
-
 					<input type="checkbox" id="add_row" rel="add_row" class="dark-blue radius toolbox-items btn-checkbox tool checkbox"> 
 					<label for="add_row" title="Satır Ekle">Satır Ekle</label>
 					<input type="checkbox" id="add_column" rel="add_column" class="dark-blue radius toolbox-items btn-checkbox tool checkbox"> 
 					<label for="add_column" title="Satır Ekle">Sütun Ekle</label>
-					
-				</div>
+					-->
+							
+			</div>
  
 				
 				<div class="vertical-line"></div>
@@ -1699,6 +1729,7 @@ $current_user=User::model()->findByPk(Yii::app()->user->id);
 				
 				<script>
 					$(document).ready(function() {
+						//console.log = function() {}
 						$('#align-add-dummy-close-button').click(function() {
 						/*	
 				          $('#pop-align-popup').remove();
@@ -2111,6 +2142,12 @@ $background= (!empty($img)) ? "background-image:url('".$img."')" : "background:w
 				<div class="tab-content">
 				   <div class="tab-pane fade active in" id="tab_3_1">
 					<ul class="add-page-list">
+						<li style="width:122px; height:92px; border: 1px solid rgb(55, 108, 150);">
+							<a class="add-page-list-button" href='/page/create?book_id=<?php echo $model->book_id; ?>&chapter_id=<?php echo $current_chapter->chapter_id; ?>' style="width:110px; height:82px;">
+								<div class="add-page-list-inside"> 
+								Boş Sayfa Ekle </div>
+							</a>
+						</li>
 						<?php 
 						$data=json_decode($model->data,true);
 						$template_id=$data["template_id"];
@@ -2127,12 +2164,7 @@ $background= (!empty($img)) ? "background-image:url('".$img."')" : "background:w
 							}
 						}
 						?>
-						<li style="width:122px; height:92px; border: 1px solid rgb(55, 108, 150);">
-							<a class="add-page-list-button" href='/page/create?book_id=<?php echo $model->book_id; ?>&chapter_id=<?php echo $current_chapter->chapter_id; ?>' style="width:110px; height:82px;">
-								<div class="add-page-list-inside"> 
-								Boş Sayfa Ekle </div>
-							</a>
-						</li>
+						
 					<ul>	
 					
 
@@ -2140,6 +2172,12 @@ $background= (!empty($img)) ? "background-image:url('".$img."')" : "background:w
 					</div>
 				   <div class="tab-pane fade" id="tab_3_2">
 					<ul class="add-page-list">
+						<li>
+							<a class="add-page-list-button" href='/chapter/create?book_id=<?php echo $model->book_id; ?>'>
+								<div class="add-page-list-inside">
+								Bölüm Ekle </div>
+							</a>
+						</li>
 						<?php 
 						// $data=json_decode($model->data,true);
 						// $template_id=$data["template_id"];
@@ -2155,12 +2193,7 @@ $background= (!empty($img)) ? "background-image:url('".$img."')" : "background:w
 						//}
 
 						?>
-						<li>
-							<a class="add-page-list-button" href='/chapter/create?book_id=<?php echo $model->book_id; ?>'>
-								<div class="add-page-list-inside">
-								Bölüm Ekle </div>
-							</a>
-						</li>
+						
 					</ul>
 
 					</div>
