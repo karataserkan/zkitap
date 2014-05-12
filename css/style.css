@@ -2488,6 +2488,20 @@ font-size: 20px;
 				-ms-user-select: none;
 				user-select: none;
 			}
-			
-			
 
+
+
+
+/** AUTHOR PAGE ********************************************/
+
+.ui-autocomplete.ui-widget-content {
+	position: absolute;
+	z-index: 9999999;
+	margin-top: 7px;
+	border-top-left-radius: 0px;
+	border-top-right-radius: 0px;
+	top:35px;
+	width:200px;	
+}
+
+/** END OF AUTHOR PAGE ***********************************/
