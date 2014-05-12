@@ -144,6 +144,105 @@
 		<script src="<?php echo Yii::app()->request->baseUrl; ?>/js/app/other/page-drag-drop.js"></script>
 		<script src="<?php echo Yii::app()->request->baseUrl; ?>/js/app/other/page-load.js"></script>
 
+
+
+		<!-- Trip.js Tutorial-->
+		<script type="text/javascript" src="<?php echo Yii::app()->request->baseUrl; ?>/js/lib/trip.min.js"></script>
+		<link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/js/lib/trip.css" />
+		<script type="text/javascript">
+		var trip,tripData;
+		var options={
+			    tripTheme : "white",
+			    onTripStart : function() {
+			      console.log("onTripStart");
+			    },
+			    onTripEnd : function() {
+			      console.log("onTripEnd");
+			    },
+			    onTripStop : function() {
+			      console.log("onTripStop");
+			    },
+			    onTripChange : function(index, tripBlock) {
+			      console.log("onTripChange");
+			    },
+			    backToTopWhenEnded : true,
+			    delay : 5000,
+			    prevLabel: 'Geri',
+			    nextLabel: 'İleri',
+			    finishLabel: 'Bitir',
+			    showNavigation: true,
+			    showCloseBox:true
+			    //overlayZindex:9999999999999999999
+			  };
+
+		var Key =
+			{
+			    BACKSPACE: 8,
+			    TAB: 9,
+			    ENTER: 13,
+			    ESC: 27,
+			    PAGEUP: 33,
+			    PAGEDOWN: 34,
+			    END: 35,
+			    HOME: 36,
+			    LEFT: 37,
+			    UP: 38,
+			    RIGHT: 39,
+			    DOWN: 40,
+			    HELP: 47,
+			    H: 72,
+			    K: 75,
+			    N: 78,
+			    R: 82,
+			    NUMERIC_PLUS: 107,
+			    F1: 112,
+			    F2: 113,
+			    F3: 114,
+			    F4: 115,
+			    F5: 116,
+			    F6: 117,
+			    F7: 118,
+			    F8: 119,
+			    F9: 120,
+			    F10: 121,
+			    F11: 122,
+			    F12: 123,
+			    PLUS: 187,
+			    MINUS: 189,
+			    V: 86
+			}
+
+			 function tripStart(){
+				trip= new Trip(tripData, options);
+			    trip.start();
+			}
+			$(document).ready(function(){
+				
+
+				$(document).bind('keypress', function(event) {
+			      switch(event.keyCode) {
+			      	
+			        case Key.BACKSPACE:
+			        case Key.HOME:
+			         if (event.ctrlKey && event.shiftKey){
+			         	console.log('Help is on the way!' + event.keyCode);
+						tripStart();
+
+			         }
+			        break;
+			      }
+			    });
+			    
+			});
+		</script>
+		<script type="text/javascript">
+
+		$(document).ready(function(){
+
+			tripData=[<?php functions::event('tripData'); ?>];
+			//tripStart();
+		});
+		</script>
 </head>
 
 <body class="editor_blue">
