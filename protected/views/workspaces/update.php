@@ -18,5 +18,17 @@ $this->menu=array(
 ?>
 
 <!--<h1>Update Workspaces <?php echo $model->workspace_id; ?></h1>-->
-
+<div class="container">
+				<div class="row">
+					<div id="content" class="col-lg-12">
+						<!-- PAGE HEADER-->
+						<div class="row">
+							<div class="col-sm-12">
 <?php echo $this->renderPartial('_form_edit', array('model'=>$model)); ?>
+
+<script>
+		jQuery(document).ready(function() {		
+			App.setPage("gallery");  //Set current page
+			App.init(); //Initialise plugins and elements
+		});
+	</script>
