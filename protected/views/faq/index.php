@@ -70,7 +70,7 @@
 							</div>
 							<!-- /CONTENT -->
 						</div>
-<?php echo CHtml::link(__('Ekle'),"/faq/create",array('class'=>'btn white radius')); ?>
+<?php //echo CHtml::link(__('Ekle'),"/faq/create",array('class'=>'btn white radius')); ?>
 <script type="text/javascript">
 	$('.list-group-item').on('click',function(){
 		$('.list-group-item').removeClass('active');
