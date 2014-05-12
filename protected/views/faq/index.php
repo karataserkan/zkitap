@@ -2,6 +2,12 @@
 /* @var $this FaqController */
 /* @var $dataProvider CActiveDataProvider */
 ?>
+<script>
+		jQuery(document).ready(function() {		
+			App.setPage("gallery");  //Set current page
+			App.init(); //Initialise plugins and elements
+		});
+	</script>
 <div class="row">
 					<div id="content" class="col-lg-12" style="min-height:1063px !important">
 						<!-- PAGE HEADER-->

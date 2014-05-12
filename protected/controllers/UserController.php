@@ -32,7 +32,7 @@ class UserController extends Controller
 				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
-				'actions'=>array('create','update','profile','updatePhoto'),
+				'actions'=>array('create','update','profile','updatePhoto','updateProfile'),
 				'users'=>array('@'),
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
@@ -249,6 +249,42 @@ class UserController extends Controller
 			
 		}
 	}
+
+
+	public function actionUpdateProfile()
+	{
+		$message="Bilgiler Güncellendi";
+		$user=User::model()->findByPk(Yii::app()->user->id);
+			if ($_POST['name']) {
+				$user->name=$_POST['name'];
+			}
+			if ($_POST['surname']) {
+				$user->surname=$_POST['surname'];
+			}
+			if ($_POST['email']) {
+				$user->email=$_POST['email'];
+			}
+
+			if ($_POST['passwordEski']) {
+				$passOld=md5(sha1($_POST['passwordEski']));
+				if ($user->password==$passOld) {
+					if ($_POST['passwordYeni']==$_POST['passwordYeni2']) {
+						$user->password=md5(sha1($_POST['passwordYeni']));
+					}
+					else
+					{
+						$message = "Yeni Şifre ve Yeni Şifre Tekrarı aynı değil";
+					}
+				}
+				else
+				{
+					$message = "Eski şifreyi yanlış girdiniz";
+				}
+			}
+			$user->save();
+			echo $message;
+	}
+
 
 	/**
 	 * Deletes a particular model.
