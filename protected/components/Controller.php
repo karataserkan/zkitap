@@ -29,10 +29,10 @@ class Controller extends CController
 		if(!isset($language_cookie))
 			{
 				
-				$cookie_var=new CHttpCookie('language', 'tr');
+				$cookie_var=new CHttpCookie('language', 'tr_TR');
 				$cookie_var->expire=$cookie_time;
 				Yii::app()->request->cookies['language'] = $cookie_var;
-				Yii::app()->language='tr';
+				Yii::app()->language='tr_TR';
 			}
 		else if(isset($language))
 			{
