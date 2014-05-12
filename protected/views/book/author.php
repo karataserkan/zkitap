@@ -351,13 +351,12 @@ $current_user=User::model()->findByPk(Yii::app()->user->id);
 			</div>
 
 			<div class="table-options toolbox" style="display:inline-block;">
-				<div id="generic-options toolbox responsive_1" style="display:inline-block">
 					
 				
-					<a href="#" for="add_row" class="optbtn tablesettings" rel="add_row" id="add_row" title="Satır Ekle"style="background-image: url(/css/images/addrow.png)"></a> 
-					<a href="#" class="optbtn tablesettings" rel="delete_row" id="delete_row" title="Satır Sil" style="background-image: url(/css/images/deleterow.png)"></a> 
-					<a href="#" class="optbtn tablesettings" rel="add_column" id="add_column" title="Sütun Ekle"style="background-image: url(/css/images/addcolumn.png)"></a> 
-					<a href="#" class="optbtn tablesettings" rel="delete_column" id="delete_column" title="Sütun Sil"style="background-image: url(/css/images/deletecolumn.png)"></a> 			
+					<a href="#" for="add_row" class="toolbox-btn optbtn tablesettings" rel="add_row" id="add_row" title="Satır Ekle"style="background-image: url(/css/images/addrow.png)"></a> 
+					<a href="#" class="toolbox-btn optbtn tablesettings" rel="delete_row" id="delete_row" title="Satır Sil" style="background-image: url(/css/images/deleterow.png)"></a> 
+					<a href="#" class="toolbox-btn optbtn tablesettings" rel="add_column" id="add_column" title="Sütun Ekle"style="background-image: url(/css/images/addcolumn.png)"></a> 
+					<a href="#" class="toolbox-btn optbtn tablesettings" rel="delete_column" id="delete_column" title="Sütun Sil"style="background-image: url(/css/images/deletecolumn.png)"></a> 			
 					
 					<!--
 					<input type="checkbox" id="delete_row" rel="delete_row" class="dark-blue radius toolbox-items btn-checkbox tool checkbox"> 
@@ -369,7 +368,7 @@ $current_user=User::model()->findByPk(Yii::app()->user->id);
 					<input type="checkbox" id="add_column" rel="add_column" class="dark-blue radius toolbox-items btn-checkbox tool checkbox"> 
 					<label for="add_column" title="Satır Ekle">Sütun Ekle</label>
 					-->
-				</div>				
+							
 			</div>
  
 				
