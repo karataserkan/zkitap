@@ -1229,7 +1229,7 @@ $current_user=User::model()->findByPk(Yii::app()->user->id);
 			<li ctype="sound" class="component " style=" background-image: url(<?php echo Yii::app()->getBaseUrl(true);?>/css/images/components/<?php echo Yii::app()->language;?>_audio.png);"></li>
 			<li ctype="video" class="component " style=" background-image: url(<?php echo Yii::app()->getBaseUrl(true);?>/css/images/components/<?php echo Yii::app()->language;?>_video.png);"></li>
 			<li ctype="galery" class="component " style=" background-image: url(<?php echo Yii::app()->getBaseUrl(true);?>/css/images/components/<?php echo Yii::app()->language;?>_galery.png);"></li>
-			<li ctype="quiz" class="component " style=" background-image: url(<?php echo Yii::app()->getBaseUrl(true);?>/css/images/components/<?php echo Yii::app()->language;?>_quiz.png);"></li>
+			<!--<li ctype="quiz" class="component " style=" background-image: url(<?php echo Yii::app()->getBaseUrl(true);?>/css/images/components/<?php echo Yii::app()->language;?>_quiz.png);"></li>-->
 			<li ctype="mquiz" class="component " style=" background-image: url(<?php echo Yii::app()->getBaseUrl(true);?>/css/images/components/<?php echo Yii::app()->language;?>_quiz.png);"></li>
 			<li ctype="side-text" class="component " style=" background-image: url(<?php echo Yii::app()->getBaseUrl(true);?>/css/images/components/<?php echo Yii::app()->language;?>_slider.png);"></li>
 			<li ctype="link" class="component " style=" background-image: url(<?php echo Yii::app()->getBaseUrl(true);?>/css/images/components/<?php echo Yii::app()->language;?>_link.png);"></li>
