@@ -26,6 +26,11 @@ $(document).ready(function(){
         popupmessage.appendTo(this.element);
         popupmessage.html(plink_data);
       }
+      if(this.options.component.data.plink_image){
+        var popupmessage=$('<div  id="message_'+componentplinkid+'"  ></div>');
+        popupmessage.appendTo(this.element);
+        popupmessage.html('<img src="'+this.options.component.data.plink_image+'"/>');
+      }
        
       this._super(); 
       
@@ -79,6 +84,8 @@ $.ajax({
   
   var galery_inner = $("<div class='gallery-inner-holder' style='width: " + width + "px; height: " + height + "px;'> \
       <div style='clear:both'></div> \
+      <div class='add-image-drag-area' id='dummy-dropzone'> </div> \
+       <div id='new_image'></div>\
     </div> ");
   var popup_wrapper = $("<div class ='popup_wrapper drag-cancel' style='border: 1px #ccc solid; ' ></div> <br>");
   var popup_detail = $("<div  id='popup-explanation' contenteditable='true' class='drag-cancel'><textarea row='2' cols='30' id='baslik' name='baslik' placeholder='Başlığı buraya giriniz...'></textarea></div>");
@@ -120,7 +127,6 @@ $.ajax({
   popup_detail.resizable({alsoResize: galery_inner});
 
   close_button.click(function(){
-    console.log('deneme');
       html_popup.remove();  
 
       if ( html_popup.length ){
@@ -157,6 +163,7 @@ $.ajax({
           'type' : 'plink',
           'data': {
             'plink_data': plink_data ,
+            'plink_image': FileBinary,
             'page_link': page_link ,
             'width': width,
             'height': height,
@@ -180,6 +187,59 @@ $.ajax({
         close_button.trigger('click');
 
     });
+var el = document.getElementById("dummy-dropzone");
+    var FileBinary = '';
+    console.log(el);
+
+    el.addEventListener("dragenter", function(e){
+      e.stopPropagation();
+      e.preventDefault();
+    }, false);
+
+    el.addEventListener("dragexit", function(e){
+      e.stopPropagation();
+      e.preventDefault();
+    },false);
+
+    el.addEventListener("dragover", function(e){
+      e.stopPropagation();
+      e.preventDefault();
+    }, false);
+
+    el.addEventListener("drop", function(e){
+
+      e.stopPropagation();
+      e.preventDefault();
+
+      var reader = new FileReader();
+      var component = {};
+      var imageBinary = '';
+      var videoContentType = '';
+      var videoURL = '';
+      console.log(reader);
+      reader.onload = function (evt) {
+
+        FileBinary = evt.target.result;
+        var contentType = FileBinary.substr(5, FileBinary.indexOf('/')-5);
+        
+        //console.log(contentType);
+        if(contentType == 'image'){
+          var imageBinary = FileBinary;
+          var newImage = $("<img style='width:80%' src='"+imageBinary+"' />");
+
+          $('#new_image').append(newImage);
+          return;
+          
+        }
+
+        
+      };
+
+      reader.readAsDataURL( e.dataTransfer.files[0] );
+
+    }, false);
     
   });
-  };
+  
+
+};
