@@ -413,6 +413,11 @@ label#user:after {
 	content:"";
 }
 
+.tablesettings{
+background-size: 25px;
+background-repeat: no-repeat;
+background-position: center;
+}
 
 table#componentTableSelectorTable {
 	border-spacing: 2px;
