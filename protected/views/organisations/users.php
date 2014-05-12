@@ -59,7 +59,7 @@ if ($users) {
 			?>
 
 		<?php
-			$avatarSrc=Yii::app()->request->baseUrl."/css/ui/img/avatars/at.png";
+			$avatarSrc=Yii::app()->request->baseUrl."/css/ui/img/avatars/profile.png";
 			$userProfileMeta=UserMeta::model()->find('user_id=:user_id AND meta_key=:meta_key',array('user_id'=>$user->id,'meta_key'=>'profilePicture'));
 			if ($userProfileMeta->meta_value) {
 				$avatarSrc=$userProfileMeta->meta_value;
