@@ -684,7 +684,7 @@ class BookController extends Controller
 				$this->redirect(array('author','bookId'=>$newId));
 			}
 		}
-		$this->redirect("site/index");
+		$this->redirect("/site/index");
 	}
 
 	public function duplicateBook($layout_id, $workspaceId=null,$title=null){ 
