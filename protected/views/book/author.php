@@ -325,6 +325,28 @@ $current_user=User::model()->findByPk(Yii::app()->user->id);
 
 			</div>
 
+			<div class="plink-options toolbox" style="display:inline-block;">
+
+				<i class="icon-opacity grey-6"></i>
+							<select class='tool-select tool select' rel='opacity' rel='color' id="font-size" class="radius" title="Yazının Şeffaflık Ayarı">
+								
+								<option value="0" >0</option>
+								<option value="0.10" >10</option>
+								<option value="0.20" >20</option>
+								<option value="0.30" >30</option>
+								<option value="0.40" >40</option>
+								<option value="0.50" >50</option>
+								<option value="0.60" >60</option>
+								<option value="0.70" >70</option>
+								<option value="0.80" >80</option>
+								<option value="0.90" >90</option>
+								<option selected="selected"  value="1" >100</option>
+							</select>	
+				
+					<div class="vertical-line"></div>
+
+			</div>
+
 			<div class="table-options toolbox" style="display:inline-block;">
 
 				<div id="checkbox-container" style="display:inline-block">
@@ -1699,6 +1721,7 @@ $current_user=User::model()->findByPk(Yii::app()->user->id);
 				
 				<script>
 					$(document).ready(function() {
+						//console.log = function() {}
 						$('#align-add-dummy-close-button').click(function() {
 						/*	
 				          $('#pop-align-popup').remove();
@@ -2111,6 +2134,12 @@ $background= (!empty($img)) ? "background-image:url('".$img."')" : "background:w
 				<div class="tab-content">
 				   <div class="tab-pane fade active in" id="tab_3_1">
 					<ul class="add-page-list">
+						<li style="width:122px; height:92px; border: 1px solid rgb(55, 108, 150);">
+							<a class="add-page-list-button" href='/page/create?book_id=<?php echo $model->book_id; ?>&chapter_id=<?php echo $current_chapter->chapter_id; ?>' style="width:110px; height:82px;">
+								<div class="add-page-list-inside"> 
+								Boş Sayfa Ekle </div>
+							</a>
+						</li>
 						<?php 
 						$data=json_decode($model->data,true);
 						$template_id=$data["template_id"];
@@ -2127,12 +2156,7 @@ $background= (!empty($img)) ? "background-image:url('".$img."')" : "background:w
 							}
 						}
 						?>
-						<li style="width:122px; height:92px; border: 1px solid rgb(55, 108, 150);">
-							<a class="add-page-list-button" href='/page/create?book_id=<?php echo $model->book_id; ?>&chapter_id=<?php echo $current_chapter->chapter_id; ?>' style="width:110px; height:82px;">
-								<div class="add-page-list-inside"> 
-								Boş Sayfa Ekle </div>
-							</a>
-						</li>
+						
 					<ul>	
 					
 
@@ -2140,6 +2164,12 @@ $background= (!empty($img)) ? "background-image:url('".$img."')" : "background:w
 					</div>
 				   <div class="tab-pane fade" id="tab_3_2">
 					<ul class="add-page-list">
+						<li>
+							<a class="add-page-list-button" href='/chapter/create?book_id=<?php echo $model->book_id; ?>'>
+								<div class="add-page-list-inside">
+								Bölüm Ekle </div>
+							</a>
+						</li>
 						<?php 
 						// $data=json_decode($model->data,true);
 						// $template_id=$data["template_id"];
@@ -2155,12 +2185,7 @@ $background= (!empty($img)) ? "background-image:url('".$img."')" : "background:w
 						//}
 
 						?>
-						<li>
-							<a class="add-page-list-button" href='/chapter/create?book_id=<?php echo $model->book_id; ?>'>
-								<div class="add-page-list-inside">
-								Bölüm Ekle </div>
-							</a>
-						</li>
+						
 					</ul>
 
 					</div>
