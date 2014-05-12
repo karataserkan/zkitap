@@ -446,7 +446,7 @@ table.table-component-table .ExcelTableFormationCol {
 	font-size: 14px;
 	position: relative;
 	min-width: 20px;
-	border: 3px solid #FFF;
+	border: 1px solid #FFF;
 }
 
 table.table-component-table  .ExcelTableFormationRow {
