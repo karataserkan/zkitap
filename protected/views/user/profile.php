@@ -19,8 +19,15 @@
         <div class="myprofile_information_container">
         
         <div class="myprofile_picture_container">
-        <div class="change_profile_picture"><a href="#"><i class="fa fa-edit"></i></a></div>
-        <img src="/css/images/avatar.png">
+        <div class="change_profile_picture"><a href="#" data-id="box-cover" data-toggle="modal" data-target="#box-cover"><i class="fa fa-edit"></i></a></div>
+        <?php
+            $avatarSrc=Yii::app()->request->baseUrl."/css/ui/img/avatars/profile.png";
+            $userProfileMeta=UserMeta::model()->find('user_id=:user_id AND meta_key=:meta_key',array('user_id'=>Yii::app()->user->id,'meta_key'=>'profilePicture'));
+            if ($userProfileMeta->meta_value) {
+                $avatarSrc=$userProfileMeta->meta_value;
+            }
+        ?>
+        <img src="<?php echo $avatarSrc; ?>" id="profile_img">
         </div>
         
         
@@ -29,22 +36,23 @@
         
         <div class="myprofile_information_components">
         <p>Profilim</p>
-        <button class="btn btn-success">Değişiklikleri Kaydet</button>
+        <span id="feedback"></span>
+        <a href="#" class="btn btn-success" style="float:right" id="updateProfile">Değişiklikleri Kaydet</a>
         </div>
         
         <div class="myprofile_information_components">
         <p>İsim</p>
-        <div class="myprofile_info_edit"><i class="fa fa-edit"></i> <form id="myprofile_info_edit"><input placeholder="Erkan Öğümsöğütlü" /></form></div>
+        <div class="myprofile_info_edit"><i class="fa fa-edit"></i> <form id="myprofile_info_edit"><input id="name" placeholder="<?php echo $user->name; ?>" /></form></div>
         </div>
-        
+
         <div class="myprofile_information_components">
-        <p>Kullanıcı Adı</p>
-        <div class="myprofile_info_edit"><i class="fa fa-edit"></i> <form id="myprofile_info_edit"><input placeholder="erkanogumsogutlu" /></form></div>
+        <p>Soyisim</p>
+        <div class="myprofile_info_edit"><i class="fa fa-edit"></i> <form id="myprofile_info_edit"><input id="surname" placeholder="<?php echo $user->surname; ?>" /></form></div>
         </div>
         
         <div class="myprofile_information_components">
         <p>E-Mail Adres</p>
-        <div class="myprofile_info_edit"><i class="fa fa-edit"></i> <form id="myprofile_info_edit"><input placeholder="erkan@linden-tech.com" /></form></div>
+        <div class="myprofile_info_edit"><i class="fa fa-edit"></i> <form id="myprofile_info_edit"><input id="email" placeholder="<?php echo $user->email; ?>" /></form></div>
         </div>
         
         
@@ -57,9 +65,9 @@
                 </div>
                 <div id="collapseThree" class="panel-collapse collapse">
                   <div class="panel-body"> 
-                        <div><p>Eski Şifre:</p> <input name="LoginForm[password]" id="LoginForm_password" type="password"></div><br />
-                        <div><p>Yeni Şifre:</p> <input name="LoginForm[password]" id="LoginForm_password" type="password"></div><br />
-                        <div> <p>Yine Şifre Tekrarı:</p> <input name="LoginForm[password]" id="LoginForm_password" type="password"></div>
+                        <div><p>Eski Şifre:</p> <input name="LoginForm[password]" id="passwordEski" type="password"></div><br />
+                        <div><p>Yeni Şifre:</p> <input name="LoginForm[password]" id="passwordYeni" type="password"></div><br />
+                        <div> <p>Yine Şifre Tekrarı:</p> <input name="LoginForm[password]" id="passwordYeni2" type="password"></div>
                   </div>
                 </div>
             </div>
@@ -175,6 +183,8 @@
             dataURL = canvas.toDataURL();
             //set preview image src to dataURL
             document.getElementById('upload-cover-preview').src = dataURL;
+
+            document.getElementById('profile_img').src = dataURL;
             image_base64=dataURL;
             // place the image value in the text box
             //document.getElementById('User_data').value = dataURL;
@@ -184,4 +194,22 @@
         var el = document.getElementById("capture");
         el.addEventListener("click", captureImage, false);
 
+    </script>
+    <script type="text/javascript">
+        $('#updateProfile').click(function(){
+            var name=$('#name').val();
+            var surname=$('#surname').val();
+            var email=$('#email').val();
+            var passwordEski=$('#passwordEski').val();
+            var passwordYeni=$('#passwordYeni').val();
+            var passwordYeni2=$('#passwordYeni2').val();
+
+            $.ajax({
+                    type: "POST",
+                    data: { name: name, surname: surname, email: email, passwordEski:passwordEski, passwordYeni:passwordYeni, passwordYeni2:passwordYeni2},
+                    url:'/user/updateProfile',
+            }).done(function(hmtl){
+                $('#feedback').text(hmtl);
+            });
+        });
     </script>

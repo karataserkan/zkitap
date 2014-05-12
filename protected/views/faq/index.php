@@ -2,6 +2,12 @@
 /* @var $this FaqController */
 /* @var $dataProvider CActiveDataProvider */
 ?>
+<script>
+		jQuery(document).ready(function() {		
+			App.setPage("gallery");  //Set current page
+			App.init(); //Initialise plugins and elements
+		});
+	</script>
 <div class="row">
 					<div id="content" class="col-lg-12" style="min-height:1063px !important">
 						<!-- PAGE HEADER-->
@@ -70,7 +76,7 @@
 							</div>
 							<!-- /CONTENT -->
 						</div>
-<?php echo CHtml::link(__('Ekle'),"/faq/create",array('class'=>'btn white radius')); ?>
+<?php //echo CHtml::link(__('Ekle'),"/faq/create",array('class'=>'btn white radius')); ?>
 <script type="text/javascript">
 	$('.list-group-item').on('click',function(){
 		$('.list-group-item').removeClass('active');

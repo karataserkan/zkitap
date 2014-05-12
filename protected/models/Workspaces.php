@@ -62,8 +62,8 @@ class Workspaces extends CActiveRecord
 	public function attributeLabels()
 	{
 		return array(
-			'workspace_id' => 'Workspace',
-			'workspace_name' => 'Workspace Name',
+			'workspace_id' => 'Çalışma Alanı Id',
+			'workspace_name' => 'Çalışma Alanı İsmi',
 			'creation_time' => 'Creation Time',
 		);
 	}

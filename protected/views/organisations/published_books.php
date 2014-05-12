@@ -63,6 +63,30 @@ $workspaces=$this->getUserWorkspaces();
  
 <!-- POPUP END -->
 
+
+<!-- POPUP EDITORS -->
+<div class="modal fade" id="remove_bookModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+	  <div class="modal-content">
+		<div class="modal-header">
+		  <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+		  <h4 class="modal-title"><?php _e("Yayından Kaldır"); ?></h4>
+		</div>
+		<div class="modal-body">
+		 	Eseri yayından kaldırmak istiyor musunuz? Onay verdiğinizde eser yayınlanmış kategorisinden kaldırılıp düzenlenme aşamasına gönderilecek. Ayrıca eserler okuyuculardan da kaldırılacak.
+		</div>
+	      <div class="modal-footer">
+	      	<button type="button" class="btn btn-primary" id="remove_book"><?php _e("Kaldır"); ?></a>
+	        <button type="button" class="btn btn-default" data-dismiss="modal"><?php _e("Vazgeç"); ?></button>
+	      </div>
+		</div>
+	  </div>
+	</div>
+ 
+<!-- POPUP END -->
+
+
+
 <div id="content" class="col-lg-12">
 						<!-- PAGE HEADER-->
 						<div class="row">
@@ -75,54 +99,44 @@ $workspaces=$this->getUserWorkspaces();
 						</div>
 						<!-- /PAGE HEADER -->
 						<!-- FAQ -->
+<div class="clearfix"></div>
+<div id="filter-items" class="mybooks_page_book_filter row">
 <?php
 $userid=Yii::app()->user->id;
-
 		foreach ($books as $key2 => $book) { ?>
-				
-			<div class="col-md-3 item">
-				<!-- BOX -->
-				<div class="box" style="opacity: 1; z-index: 0;">
-					<div class="box-title">
-						<h4><i class="fa fa-book"></i><?php echo $book->title ?></h4>
-						<div class="tools">
-							<a class="copyThisBook" data-id="copyBook" data-toggle="modal" data-target="#copyBook" book-id="<?php echo $book->book_id; ?>"><i class="fa fa-copy"></i></a>
-							<a href="javascript:;" class="collapse">
-								<i class="fa fa-chevron-up"></i>
-							</a>
-						</div>
-					</div>
-					<div class="box-body bg" style="display: block;">
-						<!-- beyaz içerik yeri -->
-						<div class="row">
-								
-								<div class="col-md-4 ">
-									<?php 
-										$thumbnailSrc="/css/images/default-cover.jpg";
-										$bookData=json_decode($book->data,true);
-										 if (isset($bookData['thumbnail'])) {
-										 	$thumbnailSrc=$bookData['thumbnail'];
-										 }
+			<div class="reader_book_card">
+	         <div class="reader_book_card_book_cover">
+	         
+	      <?php 
+				$thumbnailSrc="/css/images/default-cover.jpg";
+				$bookData=json_decode($book->data,true);
+				 if (isset($bookData['thumbnail'])) {
+				 	$thumbnailSrc=$bookData['thumbnail'];
+				 }
 
-									?>
-									<img src="<?php echo $thumbnailSrc; ?>" alt="Book Cover" style="width:110px; height:170px">
-								</div>
-								
-								<div class="col-md-8 form-vertical">
-								<div class="form-group">											
-								<input class="form-control" type="text" name="placeholder" readonly="" placeholder="<?php echo $book->title ?>" >
-								</div>
-								<div class="form-group">
-								<input class="form-control" type="text" name="placeholder" readonly="" placeholder="<?php echo $book->author ?>">
-								</div>
-								<p class="btn-toolbar text-right">
-							</p>
-								</div>
-								</div>
-					</div>
-				</div>
-				<!-- /BOX -->
-			</div>
+			?>
+	         					
+	             <div class="editor_mybooks_book_settings">
+	                 <i class="fa fa-trash-o tip removeBookModal" data-original-title="Yayından Kaldır" data-id="remove_bookModal" data-toggle="modal" data-target="#remove_bookModal" book-id="<?php echo $book->book_id; ?>"></i>
+	                 <i class="fa fa-copy tip copyThisBook" data-original-title="Çoğalt" data-id="copyBook" data-toggle="modal" data-target="#copyBook" book-id="<?php echo $book->book_id; ?>"></i>
+	             </div>
+	             <img src="<?php echo $thumbnailSrc; ?>" />
+	         </div>					
+	         <div class="reader_book_card_info_container">
+	             <div class="editor_mybooks_book_type tip" data-original-title="<?php _e('Çalışma Durumu') ?>"><?php if ($userType=='owner') {_e('Sahibi');} ?><?php if ($userType=='editor') { _e('Editör'); } ?><?php if ($userType!='owner' && $userType!='editor') { _e('Editör veya sahibi değilsiniz'); } ?></div>						
+	             <div class="clearfix"></div>			
+	             <div class="reader_market_book_name tip" data-original-title="Eser İsmi"><?php echo $book->title ?></div>						
+	             <div class="clearfix"></div>						
+	             <div class="reader_book_card_writer_name tip" data-original-title="<?php _e('Yazarın adı') ?>"><?php echo $book->author ?></div>											
+	         </div>				
+	     </div>
+
+
+
+				
+
+
+
 				
 <?php } ?>
 			</div>	
@@ -133,6 +147,11 @@ $userid=Yii::app()->user->id;
 var bookId="";
 $(document).on("click",".copyThisBook",function(e){
 	bookId = $(this).attr('book-id');
+});
+
+var bookId2="";
+$(document).on("click",".removeBookModal",function(e){
+	bookId2 = $(this).attr('book-id');
 });
 
 $(document).on("click",".updateThisBookTitle",function(e){
@@ -157,4 +176,17 @@ $("#update_book_title").click(function(){
 	var link ="/book/updateBookTitle?bookId="+bookId+'&title='+title;
     window.location.assign(link);
 });
+
+$("#remove_book").click(function(){
+	var link ="/organisations/removeFromCategory?id="+bookId2;
+    window.location.assign(link);
+});
+
+</script>
+<script type="text/javascript">
+	$().ready(function(){
+		if( $('.reader_book_card').length==0 ) {
+			tripStart();
+		}
+	});
 </script>

@@ -9,7 +9,7 @@ if($page==null)
 			if($component_id) {
 				$highlight_component=Component::model()->findByPk( $component_id);
 				$page=Page::model()->findByPk($highlight_component->page_id);
-			}else {
+			} else {
 				$chapter=Chapter::model()->find('book_id=:book_id', array(':book_id' => $model->book_id ));
 				$page=Page::model()->find('chapter_id=:chapter_id', array(':chapter_id' => $chapter->chapter_id ));
 			}
@@ -256,7 +256,7 @@ $current_user=User::model()->findByPk(Yii::app()->user->id);
 				<input type='radio' rel='text-align' name='text-align' activeVal='left' id="text-align-left"  href="#" class="dark-blue radius toolbox-items radio tool" ><label for='text-align-left' class="icon-text-align-left size-15" title="Sola Yasla"></label>
 				<input type='radio' rel='text-align' name='text-align' activeVal='center' id="text-align-center"  href="#" class="dark-blue radius toolbox-items  radio tool" ><label for='text-align-center' class="icon-text-align-center  size-15" title="Ortala"></label>
 				<input type='radio' rel='text-align' name='text-align' activeVal='right' id="text-align-right"  href="#" class="dark-blue radius toolbox-items  radio tool" ><label for='text-align-right' class="icon-text-align-right  size-15" title="Sağa Yasla"></label>
-				<input type='radio' rel='text-align' name='text-align' activeVal='justify' id="text-align-justify"  href="#" class="dark-blue radius toolbox-items  radio tool" ><label for='text-align-justify' class="icon-text-align-justify  size-15" title="İki Yana Yasla"></label>
+				<!-- <input type='radio' rel='text-align' name='text-align' activeVal='justify' id="text-align-justify"  href="#" class="dark-blue radius toolbox-items  radio tool" ><label for='text-align-justify' class="icon-text-align-justify  size-15" title="İki Yana Yasla"></label -->
 
 				<div class="vertical-line"></div>
 				<!--
