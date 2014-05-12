@@ -90,26 +90,27 @@ $.ajax({
   var chapter= $('<div class="panel-group" id="accordion1"></div>');
   chapter.appendTo(galery_inner);
   var deger = 1;
+  console.log(book_data);
   $.each( book_data, function( key, value ) {
-    console.log(value.title);
+    console.log(value);
     var title = value.title;
     if(value.title == "") title = deger + ". Bölüm";
     
     var chapter_title = $('<div class="panel panel-default">\
-    <a data-toggle="collapse" data-parent="#accordion1" href="#collapse'+value.title+'"><div class="panel-heading">\
+    <a data-toggle="collapse" data-parent="#accordion1" href="#collapse'+value.chapter_id+'"><div class="panel-heading">\
       <h4 class="panel-title">\
         '+title+'\
       </h4>\
     </div></a>\
-    <div id="collapse'+value.title+'" class="panel-collapse collapse">\
-      <div class="panel-body_'+value.title+'">\
+    <div id="collapse'+value.chapter_id+'" class="panel-collapse collapse">\
+      <div class="panel-body_'+value.chapter_id+'">\
       </div>\
     </div>\
   </div>');
     chapter_title.appendTo(chapter);
     $.each( value.pages, function( key_page, value_page ) {
       console.log(value_page);
-      $('<input type="radio" name="page_select" value="'+value_page.page_id+'">'+page_count+'. Sayfa<br>').appendTo('.panel-body_'+value.title);
+      $('<input type="radio" name="page_select" value="'+value_page.page_id+'">'+page_count+'. Sayfa<br>').appendTo('.panel-body_'+value.chapter_id);
       page_count++;
     });
     
