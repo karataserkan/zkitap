@@ -57,7 +57,7 @@ $(document).ready(function(){
             .text(that.options.component.data.table[i][k].attr.val)
             .css(that.options.component.data.table[i][k].css)
             .resizable({
-              'handles': " e, s",
+              'handles': "e, s",
               'start': function (event,ui){
               },
               'stop': function( event, ui ){
