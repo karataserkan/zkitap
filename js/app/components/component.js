@@ -100,9 +100,10 @@ $(document).ready(function(){
           .attr('component-instance', 'true')
           .draggable({
             containment: "#current_page",
-            snap: '.ui-wrapper',
+            snap: '.guide.shown .ui-wrapper',
             handle: '.dragging_holder, img',
-            snapMode: 'outer',
+            snapTolerance:30,
+            snapMode: 'both',
             'alsoDrag':'.ui-draggable.selected',
             'stop': function(event, ui){
             //console.log();
@@ -188,21 +189,21 @@ $(document).ready(function(){
               } );
 
               if( chosenGuides.top.dist <= MIN_DISTANCE ){
-                  $( "#guide-h" ).css( "top", chosenGuides.top.guide.top- $('#current_page').offset().top ).show(); 
-                  ui.position.top = chosenGuides.top.guide.top - chosenGuides.top.offset - $('#current_page').offset().top;
+                  $( "#guide-h" ).css( "top", chosenGuides.top.guide.top- $('#current_page').offset().top ).addClass("shown").show(); 
+                  //ui.position.top = chosenGuides.top.guide.top - chosenGuides.top.offset - $('#current_page').offset().top;
               }
               else{
-                  $( "#guide-h" ).hide(); 
+                  $( "#guide-h" ).removeClass("shown").hide(); 
                   //ui.position.top = pos.top; 
               }
               
               if( chosenGuides.left.dist <= MIN_DISTANCE ){
-                  $( "#guide-v" ).css( "left", chosenGuides.left.guide.left- $('#current_page').offset().left ).show(); 
+                  $( "#guide-v" ).css( "left", chosenGuides.left.guide.left- $('#current_page').offset().left ).addClass("shown").show(); 
                  
-                  ui.position.left = chosenGuides.left.guide.left - chosenGuides.left.offset- $('#current_page').offset().left; 
+                  //ui.position.left = chosenGuides.left.guide.left - chosenGuides.left.offset- $('#current_page').offset().left; 
               }
               else{
-                  $( "#guide-v" ).hide(); 
+                  $( "#guide-v" ).removeClass("shown").hide(); 
                   //ui.position.left = pos.left; 
               }
 
@@ -965,3 +966,4 @@ function computeGuidesForElement( elem, pos, w, h ){
 jQuery.fn.doesExist = function(){
         return jQuery(this).length > 0;
  };
+ 
