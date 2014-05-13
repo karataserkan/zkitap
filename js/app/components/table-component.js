@@ -1180,10 +1180,11 @@ $(document).ready(function(){
 });
 
 
-
+ 
  var createTableComponent = function (event,ui){
-
-  $("<div class='popup ui-draggable' id='pop-image-popup' style='display: block; top:" + (ui.offset.top-$(event.target).offset().top ) + "px; left: " + ( ui.offset.left-$(event.target).offset().left ) + "px;'> \
+    var top=(event.pageY-25)+"px";
+    var left=(event.pageX-150)+"px";
+  $("<div class='popup ui-draggable' id='pop-image-popup' style='display: block; top:" +top+ "; left: " + left + ";'> \
     <div class='popup-header'> \
     Tablo Ekle \
     <i id='table-add-dummy-close-button' class='icon-close size-10 popup-close-button'></i> \

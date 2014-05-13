@@ -77,10 +77,12 @@ $(document).ready(function(){
     left = oldcomponent.data.self.css.left;
     auto_type = oldcomponent.data.auto_type;
   };
-
+ 
   if(auto_type == 'Y') { auto_y_check = "checked='checked'"; auto_y_check_active = 'active';}
     else { auto_n_check = "checked='checked'"; auto_n_check_active = 'active'; }
-
+  
+  top=(event.pageY-25)+"px";
+  left=(event.pageX-150)+"px";
   $("<div class='popup ui-draggable' id='pop-image-popup' style='display: block; top:" + top + "; left: " + left + ";'> \
     <div class='popup-header'> \
     <i class='icon-m-sound'></i> &nbsp;Ses Ekle \

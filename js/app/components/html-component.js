@@ -124,9 +124,13 @@ var createHtmlComponent = function ( event, ui, oldcomponent ) {
         </div> <br>\
         <a href='#' id='pop-image-OK' class='btn bck-light-green white radius' style='padding: 5px 30px;'>Ekle</a> \
       </div> \
-      </div>").appendTo('body').draggable({cancel:'.drag-cancel'}).resizable();*/
-    
-    var html_popup = $("<div class='popup ui-draggable' id='pop-popup' style='display: block; top:115px; left: 160px; width: 1100px; height:620px; z-index:99999;'> \
+      </div>").appendTo('body').draggable({cancel:'.drag-cancel'}).resizable();*/ 
+    var page_off=$('#current_page').offset();
+    top=page_off.top;
+    left=page_off.left;
+    width=$('#current_page').width();
+    height=$('#current_page').height();
+    var html_popup = $("<div class='popup ui-draggable' id='pop-popup' style='display: block; top:"+top+"px; left: "+left+"px; width: "+width+"px; height:"+(height-10)+"px; z-index:99999;'> \
       </div>");
     html_popup.appendTo('body').draggable({cancel:'.drag-cancel'});
     var poup_header = $("<div class='popup-header'><i class='icon-m-link'></i> &nbsp;Html Ekle </div> ");
@@ -136,7 +140,7 @@ var createHtmlComponent = function ( event, ui, oldcomponent ) {
         <div style='clear:both'></div> \
       </div> ");
     var popup_wrapper = $("<div class ='popup_wrapper drag-cancel' style='border: 1px #ccc solid; ' ></div> <br>");
-    var popup_detail = $('<textarea class="my-code-area" style="width: 1050px; height:500px; overflow:auto; text-align: left;">'+popup_value+'</textarea>\
+    var popup_detail = $('<textarea class="my-code-area" style="width: '+(width-50)+'px; height:'+(height-120)+'px; overflow:auto; text-align: left;">'+popup_value+'</textarea>\
                             <script>\
                               $(".my-code-area").ace({ theme: "twilight", lang: "html" })\
                             </script>');
