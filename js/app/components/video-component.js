@@ -14,7 +14,7 @@ $(document).ready(function() {
             if(this.options.component.data.video_type == 'popup'){
               
               if(typeof this.options.marker ==="undefined" ) {
-                this.options.marker = "http://" + window.location.hostname + "/css/video_play_trans.png";
+                this.options.marker = "http://" + window.location.hostname + "/css/video_play_trans.svg";
               }
 
               var componentvideoid='popup'+this.options.component.id;
@@ -65,8 +65,8 @@ var left = 0;
 
 var createVideoComponent = function( event, ui, oldcomponent ) {
 
-  var marker = window.base_path+'/css/popupmarker.png';
-  var video_marker=window.base_path+'/css/video_play_trans.png';
+  var marker = window.base_path+'/css/popupmarker.svg';
+  var video_marker=window.base_path+'/css/video_play_trans.svg';
   var video_width_height = '';
   var video_type_image = function(){
       var video_type = $('input[name=video_type]:checked').val();
@@ -79,8 +79,8 @@ var createVideoComponent = function( event, ui, oldcomponent ) {
                 <div id='new_image'></div>\
               </span>").appendTo('.type');
           $( "button" ).button();
-          $('#button0').click(function(){$("#video_type0").prop("checked", true); marker = 'http://dev.lindneo.com/css/popupmarker.png'; console.log(marker);});
-          $('#button1').click(function(){$("#video_type1").prop("checked", true); marker = 'http://dev.lindneo.com/css/video_play_trans.png'; console.log(marker);});
+          $('#button0').click(function(){$("#video_type0").prop("checked", true); console.log(marker);});
+          $('#button1').click(function(){$("#video_type1").prop("checked", true); marker = video_marker; console.log(marker);});
         }
         else{ 
           $('#type_image').remove();
