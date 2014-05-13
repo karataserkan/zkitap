@@ -59,7 +59,7 @@ $(document).ready(function(){
       
       
       
-      this._super({resizableParams:{handles:"e, s, se"}}); 
+      //this._super({resizableParams:{handles:"e, s, se"}}); 
 /*
       this.element.resizable("option",'maxHeight', 128 );
       this.element.resizable("option",'minHeight', 128 );
@@ -128,7 +128,7 @@ var createHtmlComponent = function ( event, ui, oldcomponent ) {
     
     var html_popup = $("<div class='popup ui-draggable' id='pop-popup' style='display: block; top:115px; left: 160px; width: 1100px; height:620px; z-index:99999;'> \
       </div>");
-    html_popup.appendTo('body').draggable({cancel:'.drag-cancel'}).resizable();
+    html_popup.appendTo('body').draggable({cancel:'.drag-cancel'});
     var poup_header = $("<div class='popup-header'><i class='icon-m-link'></i> &nbsp;Html Ekle </div> ");
     var close_button = $("<i id='html-add-dummy-close-button' class='icon-close size-10 popup-close-button'></i> ");
     
@@ -144,11 +144,11 @@ var createHtmlComponent = function ( event, ui, oldcomponent ) {
     poup_header.appendTo(html_popup);
     close_button.appendTo(poup_header);
     galery_inner.appendTo(html_popup);
-    popup_wrapper.appendTo(galery_inner).resizable({alsoResize: galery_inner});
+    popup_wrapper.appendTo(galery_inner);
     
     popup_detail.appendTo(popup_wrapper);
     add_button.appendTo(galery_inner);
-    popup_detail.resizable({alsoResize: galery_inner});
+    popup_detail;
     close_button.click(function(){
 
       html_popup.remove();  

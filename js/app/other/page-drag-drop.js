@@ -254,6 +254,9 @@ $( document ).ready(function () {
           case 'rtext':
             createRtextComponent( event, ui );
             break;
+          case 'page':
+            createPageComponent( event, ui );
+            break;
 
           default:
             break; 
@@ -557,9 +560,24 @@ $( document ).ready(function () {
     $('#chapters_pages_view .page').each(function(e){
       pageNum++;
       $(this).find('.page-number').html(pageNum);
+      //console.log($(this).attr('page_id'));
+      if($(this).attr('page_id') == $("#current_page").attr('page_id')){
+        $("#current_page").find('.page_number, textarea').val(pageNum);
+        var page_component_id = $("#current_page").find('.page_number, textarea').attr('id');
+        
+        console.log(page_component_id);
+        window.lindneo.dataservice
+        .send( 'getComponent/'+page_component_id, 
+          {},
+          function(result){
+            console.log(result);
+        });
+      }
+
       if( $(this).attr('page_id')== window.lindneo.currentPageId){ 
         $(this).addClass('current_page');
       }
+      
       window.lindneo.tlingit.PageUpdated(
           $(this).attr('page_id'),
           $(this).parent().parent().attr('chapter_id'),
