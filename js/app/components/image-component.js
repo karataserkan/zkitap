@@ -163,10 +163,12 @@ var createImageComponent = function ( event, ui ,oldcomponent) {
     if(image_type == 'link') { link_check = "checked='checked'"; link_check_active = 'active';}
     else { popup_check = "checked='checked'"; popup_check_active = 'active'; }
 
+
     //console.log(link_check);
     //console.log(popup_check);
-
-      $("<div class='popup ui-draggable' id='pop-image-popup' style='display: block; top:" + top + "; left: " + left + ";'> \
+    top=(event.pageY-25)+"px";
+    left=(event.pageX-150)+"px";
+      var img_cmp="<div class='popup ui-draggable' id='pop-image-popup' style='display: block; top:" + top + "; left: " + left + ";'> \
         <div class='popup-header'> \
         <i class='icon-m-image'></i> &nbsp;Görsel Ekle \
         <i id='images-add-dummy-close-button' class='icon-close size-10 popup-close-button'></i> \
@@ -200,8 +202,8 @@ var createImageComponent = function ( event, ui ,oldcomponent) {
             <input type='text' name='width' id='width' placeholder='Genişlik' value=''>\
             <input type='text' name='height' id='height' placeholder='Yükseklik' value=''>\
           </div> \
-        </div>").appendTo('body').draggable();
-  
+        </div>";
+        $(img_cmp).appendTo('body').draggable();
         if(image_type == 'popup') image_type_image();
 
         $('#images-add-dummy-close-button').click(function(){

@@ -127,10 +127,11 @@ var createVideoComponent = function( event, ui, oldcomponent ) {
 
     if(control_type == 'Y') { control_y_check = "checked='checked'"; control_y_check_active = 'active';}
     else { control_n_check = "checked='checked'"; control_n_check_active = 'active'; }
-
+ 
     console.log(link_check);
     console.log(popup_check);
-
+    top=(event.pageY-25)+"px";
+    left=(event.pageX-250)+"px";
       $("<div class='popup ui-draggable' id='pop-video-popup' style='display: block; top:" + top + "; left: " + left + "; '> \
         <div class='popup-header'> \
         <i class='icon-m-video'></i> &nbsp;Video Ekle \
