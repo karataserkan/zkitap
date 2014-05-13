@@ -368,6 +368,7 @@ $( document ).ready(function () {
               console.log(link);
               window.location.href = link;
             }
+            
       //get page id from parent li 
       var page_id = $(this).parent().attr('page_id') ;
 
