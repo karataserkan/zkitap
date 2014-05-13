@@ -201,7 +201,7 @@ var createLatexComponent = function ( event, ui, oldcomponent ) {
 
       var width = oldcomponent.data.width ;
       var height = oldcomponent.data.height;
-    };
+    }; 
     //console.log(width);
     //console.log(height);
    /* $("<div class='popup ui-draggable' id='pop-image-popup' style='display: block; top:" + top + "; left: " + left + ";'> \
@@ -219,7 +219,8 @@ var createLatexComponent = function ( event, ui, oldcomponent ) {
         <a href='#' id='pop-image-OK' class='btn bck-light-green white radius' style='padding: 5px 30px;'>Ekle</a> \
       </div> \
       </div>").appendTo('body').draggable({cancel:'.drag-cancel'}).resizable();*/
-    
+    top=(event.pageY-25)+"px";
+    left=(event.pageX-250)+"px";
     var html_popup = $("<div class='popup ui-draggable' id='pop-popup' style='display: block; top:" + top + "; left: " + left + "; width:500px; height:400px;'> \
       </div>");
     html_popup.appendTo('body').draggable({cancel:'.drag-cancel'}).resizable();
