@@ -256,9 +256,15 @@ $all_books= $this->getWorkspaceBooks($workspace->workspace_id);
 						<!-- /PAGE HEADER -->
 						<!-- FAQ -->
 		
-
+		<div class="mybooks_page_category_viewer">Hepsi</div>
+        
 
 	<div id="filter-items" class="mybooks_page_book_filter row">
+    
+    
+    
+    
+    
     <div class="clearfix"></div>
    
     
