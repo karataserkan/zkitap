@@ -304,7 +304,7 @@ foreach ($workspacesOfUser as $key => $workspace) {
 		                <img src="<?php echo $thumbnailSrc; ?>" />
 		            </div>					
 		            <div class="reader_book_card_info_container">
-		                <div class="editor_mybooks_book_type tip" data-original-title="<?php _e('Çalışma alanının adı') ?>" style="<?php echo ($userType=='owner')? 'border-color:#D9583B':'' ; ?><?php echo ($userType=='editor')? 'border-color:#41A693':'' ; ?>"><?php if ($userType=='owner') {_e('Sahibi');} ?><?php if ($userType=='editor') { _e('Editör'); } ?><?php if ($userType!='owner' && $userType!='editor') { _e('Editör veya sahibi değilsiniz'); } ?></div>
+		                <div class="editor_mybooks_book_type tip" data-original-title="<?php _e('Çalışma alanının adı') ?>" style="<?php echo ($userType=='owner')? 'border-color:#D9583B':'' ; ?><?php echo ($userType=='editor')? 'border-color:#41A693':'' ; ?><?php echo ($userType!='editor' and $userType!='owner')? 'border:0':'' ; ?>"><?php if ($userType=='owner') {_e('Sahibi');} ?><?php if ($userType=='editor') { _e('Editör'); } ?><?php if ($userType!='owner' && $userType!='editor') { _e('Editör veya sahibi değilsiniz'); } ?></div>
 		                <div class="clearfix"></div>			
 		                <div class="reader_market_book_name tip" data-original-title="<?php _e('Kitabın adı') ?>"></i>
 		                	<?php echo ($userType==='owner' || $userType==='editor') ? '<a href="/book/author/'.$book->book_id.'">':'' ;?>
