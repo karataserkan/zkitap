@@ -144,7 +144,7 @@ class PageController extends Controller
 				$data=array();
 				$data['id']=$component->id;
 				$data['type']=$component->type;
-				$data['data']=$component->data;
+				$data['data']=base64_decode($component->data);
 				$data['created']=$component->created;
 				$data['page_id']=$component->page_id;
 				echo json_encode($data);

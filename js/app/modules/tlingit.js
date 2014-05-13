@@ -54,7 +54,7 @@ window.lindneo.tlingit = (function(window, $, undefined){
   };
 
   var componentHasUpdated = function ( component ) {
-
+    console.log(component);
     window.lindneo.dataservice
       .send( 'UpdateWholeComponentData', 
         { 
