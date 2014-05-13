@@ -143,6 +143,7 @@
 		<script src="<?php echo Yii::app()->request->baseUrl; ?>/js/app/components/thumb-component.js"></script>
 		<script src="<?php echo Yii::app()->request->baseUrl; ?>/js/app/components/rtext-component.js"></script>	
 		<script src="<?php echo Yii::app()->request->baseUrl; ?>/js/app/components/mquiz-component.js"></script>
+		<script src="<?php echo Yii::app()->request->baseUrl; ?>/js/app/components/page-component.js"></script>
 		<!-- Page JS Codes -->
 		<script src="<?php echo Yii::app()->request->baseUrl; ?>/js/app/other/page-drag-drop.js"></script>
 		<script src="<?php echo Yii::app()->request->baseUrl; ?>/js/app/other/page-load.js"></script>

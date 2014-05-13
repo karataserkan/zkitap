@@ -26,6 +26,7 @@ $(document).ready(function(){
 
 
         if (this.options.component.data.self.attr.componentType != 'side-text' )this.element.autogrow({element:this});
+        else $(this.element).attr('title','Yazı Kutusu Aracı');
         
 
         justify_element(this.element[0]);
@@ -73,7 +74,7 @@ $(document).ready(function(){
                     })
                     .done(function( result ) {
                         result=window.lindneo.tlingit.responseFromJson(result);
-                        //console.log(line-height);
+                        console.log(result);
                         
                         if(result){
                           //console.log('1');
@@ -84,7 +85,8 @@ $(document).ready(function(){
                           {name:'text-decoration', val:(typeof result.text_decoration != "undefined") ? result.text_decoration:'normal'},
                           {name:'font-weight', val:(typeof result.font_weight != "undefined") ? result.font_weight:'bold'},
                           {name:'text-align', val:(typeof result.text_align != "undefined") ? result.text_align:'left'},
-                          {name:'text-transform', val:(typeof result.text_transform != "undefined") ? result.text_transform :'capitalize'}
+                          {name:'text-transform', val:(typeof result.text_transform != "undefined") ? result.text_transform :'capitalize'},
+                          {name:'line-height', val:(typeof result.line_height != "undefined") ? result.line_height+'%' :'100%'}
                            ];
 
                            
@@ -98,6 +100,7 @@ $(document).ready(function(){
                           {name:'font-weight', val:'bold'},
                           {name:'text-align', val:'left'},
                           {name:'text-transform', val:'capitalize'},
+                          {name:'line-height', val:'100%'}
 
                            ];
                          };
@@ -130,7 +133,8 @@ $(document).ready(function(){
                             {name:'text-decoration', val:(typeof result.text_decoration != "undefined") ? result.text_decoration:'normal'},
                             {name:'font-weight', val:(typeof result.font_weight != "undefined") ? result.font_weight:'normal'},
                             {name:'text-align', val:(typeof result.text_align != "undefined") ? result.text_align:'left'},
-                            {name:'text-transform', val:(typeof result.text_transform != "undefined") ? result.text_transform :'none'}
+                            {name:'text-transform', val:(typeof result.text_transform != "undefined") ? result.text_transform :'none'},
+                            {name:'line-height', val:(typeof result.line_height != "undefined") ? result.line_height+'%' :'100%'}
 
                              ];
 
@@ -145,6 +149,7 @@ $(document).ready(function(){
                             {name:'font-weight', val:'normal'},
                             {name:'text-align', val:'left'},
                             {name:'text-transform', val:'none'},
+                            {name:'line-height', val:'100%'}
                              ];
                            };
                       });
@@ -177,7 +182,8 @@ $(document).ready(function(){
                             {name:'text-decoration', val:(typeof result.text_decoration != "undefined") ? result.text_decoration:'normal'},
                             {name:'font-weight', val:(typeof result.font_weight != "undefined") ? result.font_weight:'bold'},
                             {name:'text-align', val:(typeof result.text_align != "undefined") ? result.text_align:'left'},
-                            {name:'text-transform', val:(typeof result.text_transform != "undefined") ? result.text_transform :'none'}
+                            {name:'text-transform', val:(typeof result.text_transform != "undefined") ? result.text_transform :'none'},
+                            {name:'line-height', val:(typeof result.line_height != "undefined") ? result.line_height+'%' :'100%'}
 
                              ];
 
@@ -192,6 +198,7 @@ $(document).ready(function(){
                             {name:'font-weight', val:'bold'},
                             {name:'text-align', val:'left'},
                             {name:'text-transform', val:'none'},
+                            {name:'line-height', val:'100%'}
                              ];
                            };
                       });
@@ -225,7 +232,8 @@ $(document).ready(function(){
                             {name:'text-decoration', val:(typeof result.text_decoration != "undefined") ? result.text_decoration:'normal'},
                             {name:'font-weight', val:(typeof result.font_weight != "undefined") ? result.font_weight:'normal'},
                             {name:'text-align', val:(typeof result.text_align != "undefined") ? result.text_align:'left'},
-                            {name:'text-transform', val:(typeof result.text_transform != "undefined") ? result.text_transform :'none'}
+                            {name:'text-transform', val:(typeof result.text_transform != "undefined") ? result.text_transform :'none'},
+                            {name:'line-height', val:(typeof result.line_height != "undefined") ? result.line_height+'%' :'100%'}
 
                              ];
 
@@ -240,6 +248,7 @@ $(document).ready(function(){
                             {name:'font-weight', val:'bold'},
                             {name:'text-align', val:'left'},
                             {name:'text-transform', val:'none'},
+                            {name:'line-height', val:'100%'}
                              ];
                            };
                       });
@@ -273,7 +282,8 @@ $(document).ready(function(){
                             {name:'text-decoration', val:(typeof result.text_decoration != "undefined") ? result.text_decoration:'normal'},
                             {name:'font-weight', val:(typeof result.font_weight != "undefined") ? result.font_weight:'normal'},
                             {name:'text-align', val:(typeof result.text_align != "undefined") ? result.text_align:'left'},
-                            {name:'text-transform', val:(typeof result.text_transform != "undefined") ? result.text_transform :'none'}
+                            {name:'text-transform', val:(typeof result.text_transform != "undefined") ? result.text_transform :'none'},
+                            {name:'line-height', val:(typeof result.line_height != "undefined") ? result.line_height+'%' :'100%'}
 
                              ];
 
@@ -288,6 +298,7 @@ $(document).ready(function(){
                             {name:'font-weight', val:'bold'},
                             {name:'text-align', val:'left'},
                             {name:'text-transform', val:'none'},
+                            {name:'line-height', val:'100%'}
                              ];
                            };
                       });
@@ -320,7 +331,8 @@ $(document).ready(function(){
                             {name:'text-decoration', val:(typeof result.text_decoration != "undefined") ? result.text_decoration:'normal'},
                             {name:'font-weight', val:(typeof result.font_weight != "undefined") ? result.font_weight:'normal'},
                             {name:'text-align', val:(typeof result.text_align != "undefined") ? result.text_align:'left'},
-                            {name:'text-transform', val:(typeof result.text_transform != "undefined") ? result.text_transform :'none'}
+                            {name:'text-transform', val:(typeof result.text_transform != "undefined") ? result.text_transform :'none'},
+                            {name:'line-height', val:(typeof result.line_height != "undefined") ? result.line_height+'%' :'100%'}
 
                              ];
 
@@ -335,6 +347,7 @@ $(document).ready(function(){
                             {name:'font-weight', val:'bold'},
                             {name:'text-align', val:'left'},
                             {name:'text-transform', val:'none'},
+                            {name:'line-height', val:'100%'}
                              ];
                            };
                       });
@@ -368,7 +381,8 @@ $(document).ready(function(){
                             {name:'text-decoration', val:(typeof result.text_decoration != "undefined") ? result.text_decoration:'normal'},
                             {name:'font-weight', val:(typeof result.font_weight != "undefined") ? result.font_weight:'normal'},
                             {name:'text-align', val:(typeof result.text_align != "undefined") ? result.text_align:'left'},
-                            {name:'text-transform', val:(typeof result.text_transform != "undefined") ? result.text_transform :'none'}
+                            {name:'text-transform', val:(typeof result.text_transform != "undefined") ? result.text_transform :'none'},
+                            {name:'line-height', val:(typeof result.line_height != "undefined") ? result.line_height+'%' :'100%'}
 
                              ];
 
@@ -383,6 +397,7 @@ $(document).ready(function(){
                             {name:'font-weight', val:'normal'},
                             {name:'text-align', val:'left'},
                             {name:'text-transform', val:'none'},
+                            {name:'line-height', val:'100%'}
                              ];
                            };
                       });
@@ -416,7 +431,8 @@ $(document).ready(function(){
                             {name:'text-decoration', val:(typeof result.text_decoration != "undefined") ? result.text_decoration:'italic'},
                             {name:'font-weight', val:(typeof result.font_weight != "undefined") ? result.font_weight:'normal'},
                             {name:'text-align', val:(typeof result.text_align != "undefined") ? result.text_align:'left'},
-                            {name:'text-transform', val:(typeof result.text_transform != "undefined") ? result.text_transform :'none'}
+                            {name:'text-transform', val:(typeof result.text_transform != "undefined") ? result.text_transform :'none'},
+                            {name:'line-height', val:(typeof result.line_height != "undefined") ? result.line_height+'%' :'100%'}
 
                              ];
 
@@ -431,6 +447,7 @@ $(document).ready(function(){
                             {name:'font-weight', val:'normal'},
                             {name:'text-align', val:'left'},
                             {name:'text-transform', val:'none'},
+                            {name:'line-height', val:'100%'}
                              ];
                            };
                       });

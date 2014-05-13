@@ -254,6 +254,9 @@ $( document ).ready(function () {
           case 'rtext':
             createRtextComponent( event, ui );
             break;
+          case 'page':
+            createPageComponent( event, ui );
+            break;
 
           default:
             break; 
@@ -356,18 +359,9 @@ $( document ).ready(function () {
 
     $( document ).on( "click","canvas.preview" ,function(event, ui) {
       console.log(event);
-      console.log($('.'+event.toElement.parentElement.children[1].className).attr('bpageTeplateId'));
-      
-      if(event.toElement.parentElement.children[1].className[0] == 'p'){
-          //console.log($(event.toElement.parentElement.children[2]).attr('book-id'));
-              var book_id= $(event.toElement.parentElement.children[2]).attr('book-id');
-              var pageTeplateId=$(event.toElement.parentElement.children[2]).attr('pageTeplateId');
-              //var chapter_id=$(this).attr('chapter_id');
-              var currentPageId=window.lindneo.currentPageId;
-              var link="/page/create?book_id="+book_id+"&page_id="+currentPageId+"&pageTeplateId="+pageTeplateId;
-              console.log(link);
-              window.location.href = link;
-            }
+      console.log(event.toElement.parentElement.children[1].className);
+      if(event.toElement.parentElement.children[1].className[0] == 'p')
+        window.location.href = $('.'+event.toElement.parentElement.children[1].className).attr('href');
       //get page id from parent li 
       var page_id = $(this).parent().attr('page_id') ;
 
@@ -380,6 +374,7 @@ $( document ).ready(function () {
 
       //Add Red Current Page
       $(this).parent().addClass('current_page');
+      sortPages();
       $.ajax({
         type: "POST",
         url:'/page/getPdfData?pageId='+page_id,
@@ -566,9 +561,31 @@ $( document ).ready(function () {
     $('#chapters_pages_view .page').each(function(e){
       pageNum++;
       $(this).find('.page-number').html(pageNum);
+      console.log($(this).attr('page_id'));
+      console.log($("#current_page").attr('page_id'));
+      if($(this).attr('page_id') == $("#current_page").attr('page_id')){
+        $("#current_page").find('.page_number').val(pageNum);
+        var new_num = pageNum;
+        var page_component_id = $("#current_page").find('.page_number').attr('id');
+        
+        console.log(page_component_id);
+        $.ajax({
+          url: "/page/getComponent/"+page_component_id
+        }).done(function(result) {
+          //console.log(result);
+          var update_component = window.lindneo.tlingit.responseFromJson(result);
+          var data = window.lindneo.tlingit.responseFromJson(update_component.data);
+          data.textarea.val = new_num;
+          update_component.data = data;
+          console.log(update_component);
+          window.lindneo.tlingit.componentHasUpdated(update_component);
+        });
+      }
+
       if( $(this).attr('page_id')== window.lindneo.currentPageId){ 
         $(this).addClass('current_page');
       }
+      
       window.lindneo.tlingit.PageUpdated(
           $(this).attr('page_id'),
           $(this).parent().parent().attr('chapter_id'),

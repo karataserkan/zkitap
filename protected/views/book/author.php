@@ -475,14 +475,11 @@ $current_user=User::model()->findByPk(Yii::app()->user->id);
 					<input type="checkbox" id="add_column" rel="add_column" class="dark-blue radius toolbox-items btn-checkbox tool checkbox"> 
 					<label for="add_column" title="Satır Ekle">Sütun Ekle</label>
 					-->
-							
+					<div class="vertical-line"></div>	
 			</div>
  
 				
-				<div class="vertical-line"></div>
-
-			</div>
-
+				
 			<div class="rtext-options toolbox" style="display:inline-block;">
 					
 					
@@ -1379,6 +1376,7 @@ $current_user=User::model()->findByPk(Yii::app()->user->id);
 			<li ctype="html" class="component " style=" background-image: url(<?php echo Yii::app()->getBaseUrl(true);?>/css/images/components/<?php echo Yii::app()->language;?>/html.png);"></li>
 			<li ctype="plink" class="component " style=" background-image: url(<?php echo Yii::app()->getBaseUrl(true);?>/css/images/components/<?php echo Yii::app()->language;?>/pagelink.png);"></li>
 			<li ctype="latex" class="component" style=" background-image: url(<?php echo Yii::app()->getBaseUrl(true);?>/css/images/components/<?php echo Yii::app()->language;?>/latex.png);"></li>
+			<li ctype="page" class="component " style=" background-image: url(<?php echo Yii::app()->getBaseUrl(true);?>/css/images/components/<?php echo Yii::app()->language;?>/text.png);"></li>
 
 			
 		
