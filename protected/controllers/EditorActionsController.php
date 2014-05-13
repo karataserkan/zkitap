@@ -129,6 +129,9 @@ class EditorActionsController extends Controller
 		$model->contentPrice="0";
 		$model->categories="1122";
 
+		$budget=$this->getOrganisationBudget($organisation->organisation_id);
+		$budget=($budget[4]['amount'])?$budget[4]['amount']:'0' ;
+
 		$acl = Yii::app()->db->createCommand()
 		    ->select("*")
 		    ->from("organisations_meta")
@@ -136,7 +139,7 @@ class EditorActionsController extends Controller
 		    ->queryRow();
 		$acls=$acl['value'];
 
-		$this->render('publishBook',array('model'=>$model,'hosts'=>$hosts,'categories'=>$categories,'bookId'=>$bookId,'acls'=>$acls));
+		$this->render('publishBook',array('model'=>$model,'hosts'=>$hosts,'categories'=>$categories,'bookId'=>$bookId,'acls'=>$acls,'budget'=>$budget));
 	}
 
 	public function actionGetFileURL($type=null){
