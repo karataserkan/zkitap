@@ -51,7 +51,7 @@ $(document).ready(function(){
           
           var newColumn = $("<td class='ExcelTableFormationCol col_"+i+"_"+k+"' rel ='"+i+","+k+"'></td>");
           
-          
+          newColumn.start_tag=false;
           newColumn
             .appendTo(newRow)
             .text(that.options.component.data.table[i][k].attr.val)
@@ -59,13 +59,22 @@ $(document).ready(function(){
             .resizable({
               'handles': "e, s",
               'start': function (event,ui){
+                var cell_resizing=event.target;
+                newColumn.start_tag=true;
+                console.log("RESIZING START");
+                console.log(newColumn.start_tag);
               },
               'stop': function( event, ui ){
-
+                newColumn.start_tag=false;
+                console.log("RESIZING END");
+                console.log(newColumn.start_tag);                
                 that._cellResize(event, ui,$(this));
               },
               'resize':function(event,ui){
-                window.lindneo.toolbox.makeMultiSelectionBox();
+                console.log("RESIZING");
+                console.log(newColumn.start_tag);
+                if(!newColumn.start_tag)
+                {window.lindneo.toolbox.makeMultiSelectionBox();}
               }
             })
             .dblclick(function(e){
@@ -75,6 +84,7 @@ $(document).ready(function(){
 
           })
           .mousedown(function (e) {
+                                //if(newColumn.start_tag){return false;} 
                 that._selected(e,null);
                 if (e.target.localName == "textarea") return;
                 
@@ -108,6 +118,7 @@ $(document).ready(function(){
                     'rows':$(this).parent().prevAll().length,
                     'columns':$(this).prevAll().length
                   };
+                  if(!newColumn.start_tag)
                   that.selectionUpdated(TableSelection);
                   
                   $(this).toggleClass("highlighted", isHighlighted);

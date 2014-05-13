@@ -34,6 +34,105 @@ $current_user=User::model()->findByPk(Yii::app()->user->id);
 
 	window.lindneo.highlightComponent='<?php echo $highlight_component->id; ?>';
 
+	$(document).ready(function(){
+		options = {  
+    reject : { // Rejection flags for specific browsers  
+        all: false, // Covers Everything (Nothing blocked)  
+        firefox:true, Webkit:true, konqueror:true, msie: true // Covers MSIE 5-6 (Blocked by default)  
+        /* 
+            * Possibilities are endless... 
+            * 
+            * // MSIE Flags (Global, 5-8) 
+            * msie, msie5, msie6, msie7, msie8, 
+            * // Firefox Flags (Global, 1-3) 
+            * firefox, firefox1, firefox2, firefox3, 
+            * // Konqueror Flags (Global, 1-3) 
+            * konqueror, konqueror1, konqueror2, konqueror3, 
+            * // Chrome Flags (Global, 1-4) 
+            * chrome, chrome1, chrome2, chrome3, chrome4, 
+            * // Safari Flags (Global, 1-4) 
+            * safari, safari2, safari3, safari4, 
+            * // Opera Flags (Global, 7-10) 
+            * opera, opera7, opera8, opera9, opera10, 
+            * // Rendering Engines (Gecko, Webkit, Trident, KHTML, Presto) 
+            * gecko, webkit, trident, khtml, presto, 
+            * // Operating Systems (Win, Mac, Linux, Solaris, iPhone) 
+            * win, mac, linux, solaris, iphone, 
+            * unknown // Unknown covers everything else 
+            */  
+    },  
+    display: ['chrome','opera','msie','safari'], // What browsers to display and their order (default set below)  
+    browserShow: true, // Should the browser options be shown?  
+    browserInfo: { // Settings for which browsers to display    
+        safari: {  
+            text: 'Safari 7',  
+            url: 'http://www.apple.com/safari/download/'  
+        },  
+        opera: {  
+            text: 'Opera 21',  
+            url: 'http://www.opera.com/download/'  
+        },  
+        chrome: {  
+            text: 'Chrome 34',  
+            url: 'http://www.google.com/chrome/'  
+        },  
+        msie: {  
+            text: 'Internet Explorer 11',  
+            url: 'http://www.microsoft.com/windows/Internet-explorer/'  
+        },  
+        gcf: {  
+            text: 'Google Chrome Frame',  
+            url: 'http://code.google.com/chrome/chromeframe/',  
+            // This browser option will only be displayed for MSIE  
+            allow: { all: false, msie: true }  
+        }  
+    },  
+  
+    // Header of pop-up window  
+    header: '<?php echo __("Tarayıcınız, sistemle uyumlu değil!");?>',  
+    // Paragraph 1  
+    paragraph1:'<?php echo __("Tarayıcınız güncel olmayıp sistem tarafından kabul edilmiyor. Uyumlu tarayıcı listesi aşağıdadır.");?>',  
+    // Paragraph 2  
+    paragraph2: '<?php echo __("Uyumlu tarayıcılardan birini yüklemek için simgelerden birini tıklayınız.");?>',  
+    close: true, // Allow closing of window  
+    // Message displayed below closing link  
+    closeMessage:'<?php echo __("Bu pencereyi kapatarak devam etmek, aldığınız hizmet kalitesinde ciddi bir etki yaratacaktır.");?>', 
+    closeLink: 'Kapat', // Text for closing link  
+    closeURL: '#', // Close URL  
+    closeESC: true, // Allow closing of window with esc key  
+  
+    // If cookies should be used to remmember if the window was closed  
+    // See cookieSettings for more options  
+    closeCookie: true,  
+    // Cookie settings are only used if closeCookie is true  
+    cookieSettings: {  
+        // Path for the cookie to be saved on  
+        // Should be root domain in most cases  
+        path: '/',  
+        // Expiration Date (in seconds)  
+        // 0 (default) means it ends with the current session  
+        expires: 0  
+    },  
+  
+    imagePath: '<?php echo Yii::app()->request->getBaseUrl(true); ?>/css/images/jreject/', // Path where images are located  
+    overlayBgColor: '#000', // Background color for overlay  
+    overlayOpacity: 0.8, // Background transparency (0-1)  
+  
+    // Fade in time on open ('slow','medium','fast' or integer in ms)  
+    fadeInTime: 'fast',  
+    // Fade out time on close ('slow','medium','fast' or integer in ms)  
+    fadeOutTime: 'fast',  
+  
+    // Google Analytics Link Tracking (Optional)  
+    // Set to true to enable  
+    // Note: Analytics tracking code must be added separately  
+    analytics: false  
+};  
+
+		 $.reject(options);
+
+	});
+
 
 </script>
 	
@@ -134,9 +233,9 @@ $current_user=User::model()->findByPk(Yii::app()->user->id);
 					<a id='login_area' style='float:right;'>
 						<?php
 						if(Yii::app()->user->isGuest){
-							echo CHtml::link(array('site/login'));
+							echo CHtml::link(array('/site/login'));
 						}else{
-							echo CHtml::link('('.Yii::app()->user->name.')',array('site/logout'));
+							echo CHtml::link('('.Yii::app()->user->name.')',array('/user/profile'));
 						}
 						?>
 					</a>   
@@ -2153,7 +2252,10 @@ $background= (!empty($img)) ? "background-image:url('".$img."')" : "background:w
 						foreach ($template_chapters as $key => $template_chapter) {
 							$template_pages=Page::model()->findAll(array('order'=>  '`order` asc ,  created asc', "condition"=>'chapter_id=:chapter_id', "params" =>array(':chapter_id' => $template_chapter->chapter_id  ) ) );
 							foreach ($template_pages as $template_page){
-								echo "<li class='page'  chapter_id='".$template_chapter->chapter_id."' page_id='".$template_page->page_id."' style='width:122px; height:92px; border: 1px solid rgb(55, 108, 150);'  ><canvas  class='preview pre_".$template_page->page_id."' style='height:90px; width:120px;'> </canvas><a class='pre_".$template_page->page_id."' href='/page/create?book_id=".$model->book_id."&chapter_id=".$current_chapter->chapter_id."&pageTeplateId=".$template_page->page_id."' ></a></li>";
+								echo "<li class='page'  chapter_id='".$template_chapter->chapter_id."' page_id='".$template_page->page_id."' style='width:122px; height:92px; border: 1px solid rgb(55, 108, 150);'  >
+								<canvas  class='pre_".$template_page->page_id."' style='height:90px; width:120px;'> </canvas>
+								<a class='pre_".$template_page->page_id." copyBook' book-id='".$model->book_id."' chapter_id='".$current_chapter->chapter_id."' pageTeplateId='".$template_page->page_id."' href='#' ></a>
+								</li>";
 								?>
 									<script type="text/javascript">
 										window.lindneo.tlingit.loadPagesPreviews('<?php echo $template_page->page_id ?>');
@@ -2162,6 +2264,19 @@ $background= (!empty($img)) ? "background-image:url('".$img."')" : "background:w
 							}
 						}
 						?>
+				<script type="text/javascript">
+					$('.copyBook').click(function(){
+						var book_id=$(this).attr('book-id');
+						var pageTeplateId=$(this).attr('pageTeplateId');
+						//var chapter_id=$(this).attr('chapter_id');
+						var currentPageId=window.lindneo.currentPageId;
+						console.log(pageTeplateId);
+						var link="/page/create?book_id="+book_id+"&page_id="+currentPageId+"&pageTeplateId="+pageTeplateId;
+						
+						window.location.assign(link);
+
+					});
+				</script>
 						
 					<ul>	
 					

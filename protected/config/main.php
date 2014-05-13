@@ -31,6 +31,12 @@ $catalogURL=array(
 	//"lindneo"=>"http://catalog.lindneo.com/site/import"
 	);
 
+$catalog=array(
+	"baracuda"=>"http://bigcat.okutus.com",
+	"lindneo"=>"http://catalog.lindneo.com",
+	//"lindneo"=>"http://catalog.lindneo.com/site/import"
+	);
+
 return array(
 	'basePath'=>dirname(__FILE__).DIRECTORY_SEPARATOR.'..',
 	'name'=>'Squid Pacific',
@@ -165,6 +171,7 @@ return array(
      		'en_US' => 'English'
      		),
      	'catalogExportURL' => $catalogURL[gethostname()],
+     	'catalog' => $catalog[gethostname()],
 	)
 
 );
