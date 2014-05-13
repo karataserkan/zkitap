@@ -67,7 +67,7 @@ var createPlinkComponent = function ( event, ui, oldcomponent ) {
       popup_value = oldcomponent.data.html_inner;
       var width = oldcomponent.data.width ;
       var height = oldcomponent.data.height;
-    };
+    }; 
 var page_count = 1;
 $.ajax({
   url: "/book/getBookPages/"+lindneo.currentBookId,
@@ -75,7 +75,8 @@ $.ajax({
   console.log(result);
   book_data = JSON.parse(result);
   console.log(book_data.length);
-
+  top=(event.pageY-25)+"px";
+  left=(event.pageX-150)+"px";
   var html_popup = $("<div class='popup ui-draggable' id='pop-plink-popup' style='display: block; top:" + top + "; left: " + left + ";'> \
       </div>");
   html_popup.appendTo('body').draggable({cancel:'.drag-cancel'}).resizable();
