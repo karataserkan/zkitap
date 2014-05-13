@@ -54,7 +54,7 @@ class PageController extends Controller
 				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
-				'actions'=>array('create','update','getPdfData','getPdfThumbnail'),
+				'actions'=>array('create','update','getPdfData','getPdfThumbnail','getComponent'),
 				'users'=>array('@'),
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
@@ -134,6 +134,30 @@ class PageController extends Controller
 	
 
 		
+	}
+
+	public function actionGetComponent($id)
+	{
+		if ($id) {
+			$component=Component::model()->findByPk($id);
+			if (!empty($component)) {
+				$data=array();
+				$data['id']=$component->id;
+				$data['type']=$component->type;
+				$data['data']=$component->data;
+				$data['created']=$component->created;
+				$data['page_id']=$component->page_id;
+				echo json_encode($data);
+			}
+			else
+			{
+				echo "component id not found!";
+			}
+		}
+		else
+		{
+			echo "component id not sent!";
+		}
 	}
 
 	/**
