@@ -26,6 +26,7 @@
 		<link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/style.css" />
 		<link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/linden-editor-icons.css" />
 		<link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/form.css" />
+		<link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/jquery.reject.css" />
 		<link href="/css/nprogress.css" rel="stylesheet">
 		<!-- JS Libraries -->
 		<script src="<?php echo Yii::app()->request->baseUrl; ?>/js/lib/jquery-1.9.1.js"></script>
@@ -37,6 +38,8 @@
 		<script src="<?php echo Yii::app()->request->baseUrl; ?>/js/lib/jquery.ui.rotatable.js"></script>
 		<script src="<?php echo Yii::app()->request->baseUrl; ?>/js/lib/nprogress.js"></script>
 		<script src="<?php echo Yii::app()->request->baseUrl; ?>/js/lib/jquery-collision.min.js"></script>
+		<script src="<?php echo Yii::app()->request->baseUrl; ?>/js/lib/jquery.reject.js"></script>
+		
 		<!-- Wrap TEXT -->
 		<script type="text/javascript" src="<?php echo Yii::app()->request->baseUrl; ?>/js/lib/jquery.slickwrap.js"></script>
 		<script src="<?php echo Yii::app()->request->hostInfo; ?>:1881/socket.io/socket.io.js"></script>
