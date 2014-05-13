@@ -368,13 +368,13 @@ $( document ).ready(function () {
       //Load Page
       window.lindneo.tlingit.loadPage(page_id);
 
+      console.log($($(this).parent().children[2]));
 
       //Remove Current Page
       $('.page').removeClass('current_page');
 
       //Add Red Current Page
       $(this).parent().addClass('current_page');
-      sortPages();
       $.ajax({
         type: "POST",
         url:'/page/getPdfData?pageId='+page_id,
@@ -561,8 +561,7 @@ $( document ).ready(function () {
     $('#chapters_pages_view .page').each(function(e){
       pageNum++;
       $(this).find('.page-number').html(pageNum);
-      console.log($(this).attr('page_id'));
-      console.log($("#current_page").attr('page_id'));
+      //console.log($(this).attr('page_id'));
       if($(this).attr('page_id') == $("#current_page").attr('page_id')){
         $("#current_page").find('.page_number').val(pageNum);
         var new_num = pageNum;
