@@ -356,9 +356,18 @@ $( document ).ready(function () {
 
     $( document ).on( "click","canvas.preview" ,function(event, ui) {
       console.log(event);
-      console.log(event.toElement.parentElement.children[1].className);
-      if(event.toElement.parentElement.children[1].className[0] == 'p')
-        window.location.href = $('.'+event.toElement.parentElement.children[1].className).attr('href');
+      console.log($('.'+event.toElement.parentElement.children[1].className).attr('bpageTeplateId'));
+      
+      if(event.toElement.parentElement.children[1].className[0] == 'p'){
+          //console.log($(event.toElement.parentElement.children[2]).attr('book-id'));
+              var book_id= $(event.toElement.parentElement.children[2]).attr('book-id');
+              var pageTeplateId=$(event.toElement.parentElement.children[2]).attr('pageTeplateId');
+              //var chapter_id=$(this).attr('chapter_id');
+              var currentPageId=window.lindneo.currentPageId;
+              var link="/page/create?book_id="+book_id+"&page_id="+currentPageId+"&pageTeplateId="+pageTeplateId;
+              console.log(link);
+              window.location.href = link;
+            }
       //get page id from parent li 
       var page_id = $(this).parent().attr('page_id') ;
 

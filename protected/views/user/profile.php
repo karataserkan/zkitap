@@ -19,7 +19,7 @@
         <div class="myprofile_information_container">
         
         <div class="myprofile_picture_container">
-        <div class="change_profile_picture"><a href="#" data-id="box-cover" data-toggle="modal" data-target="#box-cover"><i class="fa fa-edit"></i></a></div>
+        <div class="change_profile_picture"><a href="#" id="changePicture" data-id="box-cover" data-toggle="modal" data-target="#box-cover"><i class="fa fa-edit"></i></a></div>
         <?php
             $avatarSrc=Yii::app()->request->baseUrl."/css/ui/img/avatars/profile.png";
             $userProfileMeta=UserMeta::model()->find('user_id=:user_id AND meta_key=:meta_key',array('user_id'=>Yii::app()->user->id,'meta_key'=>'profilePicture'));
@@ -108,6 +108,7 @@
   </div>
 <!-- /Picture BOX CONFIGURATION MODAL FORM-->
 <script>
+
 		var image_base64;
 		var preview = $("#upload-cover-preview");
 		
@@ -147,7 +148,6 @@
 
         var video;
         var dataURL;
-
         //http://coderthoughts.blogspot.co.uk/2013/03/html5-video-fun.html - thanks :)
         function setup() {
             navigator.myGetMedia = (navigator.getUserMedia ||
@@ -165,7 +165,9 @@
 
         function error(e) { console.log(e); }
 
-        addEventListener("load", setup);
+window.addEventListener('load',function(){
+    document.getElementById("changePicture").addEventListener("click", setup, false);
+});
 
         function captureImage() {
             var canvas = document.createElement('canvas');
@@ -193,7 +195,7 @@
         //Bind a click to a button to capture an image from the video stream
         var el = document.getElementById("capture");
         el.addEventListener("click", captureImage, false);
-
+    
     </script>
     <script type="text/javascript">
         $('#updateProfile').click(function(){
