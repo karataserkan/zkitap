@@ -10,6 +10,7 @@
 	<link rel="icon" type="image/png" href="/css/favicon.png" />
 	<title><?php echo CHtml::encode($this->pageTitle); ?></title>
 
+		<script type="text/javascript">window.base_path="<?php echo Yii::app()->getBaseUrl(true);?>"</script>
 <!-- default styles and js -->
 
 		<link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/cloud-admin.css" > 
