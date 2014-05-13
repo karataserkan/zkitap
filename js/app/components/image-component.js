@@ -122,21 +122,22 @@ console.log(this.options.component);
 
 var createImageComponent = function ( event, ui ,oldcomponent) {
 
-  var marker = 'http://dev.lindneo.com/css/popupmarker.png';
+  var marker = window.base_path+'/css/popupmarker.png';
+  var video_marker=window.base_path+'/css/image_play_trans.png';
   var image_width_height = '';
   var image_type_image = function(){
       var image_type = $('input[name=image_type]:checked').val();
         if(image_type == 'popup'){
           $("<span id='type_image'>\
-                <input type='radio' id='image_type0' name='image_popup_type' value='image_type0'><button id='button0' style='background:url(\"http://dev.lindneo.com/css/popupmarker.png\") no-repeat center center;-moz-background-size: cover; -webkit-background-size: cover; -o-background-size: cover; background-size: cover; width:70px; height:70px;'></button>\
-                <input type='radio' id='image_type1' name='image_popup_type' value='image_type1'><button id='button1' style='background:url(\"http://dev.lindneo.com/css/video_play_trans.png\") no-repeat center center; -moz-background-size: cover; -webkit-background-size: cover; -o-background-size: cover; background-size: cover; width:70px; height:70px;'></button>\
+                <input type='radio' id='image_type0' name='image_popup_type' value='image_type0'><button id='button0' style='background:url(\""+marker+"\") no-repeat center center;-moz-background-size: cover; -webkit-background-size: cover; -o-background-size: cover; background-size: cover; width:70px; height:70px;'></button>\
+                <input type='radio' id='image_type1' name='image_popup_type' value='image_type1'><button id='button1' style='background:url(\""+video_marker+"\") no-repeat center center; -moz-background-size: cover; -webkit-background-size: cover; -o-background-size: cover; background-size: cover; width:70px; height:70px;'></button>\
                 <a href='#' onclick='document.getElementById(\"image_popup_file\").click(); return false;' class='icon-upload dark-blue size-40' style='padding-left:15px;'></a>\
                 <input type='file' name='image_popup_file' id='image_popup_file' value='' style='visibility: hidden;' >\
                 <div id='new_image'></div>\
               </span>").appendTo('.type');
           $( "button" ).button();
-          $('#button0').click(function(){$("#image_type0").prop("checked", true); marker = 'http://dev.lindneo.com/css/popupmarker.png'; console.log(marker);});
-          $('#button1').click(function(){$("#image_type1").prop("checked", true); marker = 'http://dev.lindneo.com/css/video_play_trans.png'; console.log(marker);});
+          $('#button0').click(function(){$("#image_type0").prop("checked", true); console.log(marker);});
+          $('#button1').click(function(){$("#image_type1").prop("checked", true); marker = video_marker; console.log(marker);});
         }
         else{ 
           $('#type_image').remove();

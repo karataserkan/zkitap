@@ -20,6 +20,7 @@ class epub3 {
 	public $errors=null;
 	public $book ;
 	public $extraOpf='';
+	public current_page_number =-1;
 
 	public function error($domain='EditorActions',$explanation='Error', $arguments=null,$debug_vars=null ){
 			$error=new error($domain,$explanation, $arguments,$debug_vars);
@@ -421,6 +422,7 @@ class epub3 {
 	}
 
 	public function prepare_PageHtml(&$page,$bookSize,$folder,$chapterTitle){
+		$this->current_page_number++;
 		$page_data=json_decode($page->pdf_data,true);
 		if (isset($page_data['image']['data'])&& !empty($page_data['image']['data'])) {
 			$img=$page_data['image']['data'];

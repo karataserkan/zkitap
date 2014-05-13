@@ -9418,7 +9418,17 @@ li.mybooks_page_categories .dropdown-menu li:hover:nth-child(3){
 	padding:5px;
 }
 
-
+.mybooks_page_category_viewer {
+	width: 100%;
+	font-size: 30px;
+	position: relative;
+	top: -20px;
+	padding-bottom: 10px;
+	text-align: center;
+	border-bottom: 1px solid #E9E9E9;
+	text-shadow: #fff 0 1px 0;
+	color: rgb(223, 223, 223);	
+}
 
 /** END OF EDITOR MYBOOKS PAGE **/
 
@@ -10372,7 +10382,7 @@ span.reader_toc_dropdown_page_numbers {
 	float: right;
 	font-size: 26px;
 	height: 100%;
-	padding-top: 12px;
+	padding-top: 9px;
 }
 
 

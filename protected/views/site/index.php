@@ -12,6 +12,8 @@ var data_id = '';
 
     $('#book_id').val(data_id);
   });
+
+
   $("#delete_book").click(function(){
   	href="<?php echo '/book/delete/'.$book->book_id ?>"
   	$.ajax({
@@ -78,6 +80,7 @@ function sendRight(e){
 		<div class="modal-header">
 		  <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
 		  <h4 class="modal-title"><?php _e("Kitabı Kopyala"); ?></h4>
+		  <h4 class="modal-title" id="book_data"></h4>
 		</div>
 		<div class="modal-body">
 		 	<form id="copy" method="post" class="form-horizontal">
@@ -256,9 +259,15 @@ $all_books= $this->getWorkspaceBooks($workspace->workspace_id);
 						<!-- /PAGE HEADER -->
 						<!-- FAQ -->
 		
-
+		<div class="mybooks_page_category_viewer">Hepsi</div>
+        
 
 	<div id="filter-items" class="mybooks_page_book_filter row">
+    
+    
+    
+    
+    
     <div class="clearfix"></div>
    
     
@@ -278,7 +287,7 @@ foreach ($workspacesOfUser as $key => $workspace) {
 		                    <?php if ($userType==='owner') { ?>
 		                    <a href="#box-config<?php echo $book->book_id; ?>" data-toggle="modal" class="config"><i class="fa fa-users tip" data-original-title="Editörler"></i></a>
 		                    <a class="remove_book" data-id="<?php echo $book->book_id; ?>" data-toggle="modal" data-target="#myModal"><i class="fa fa-trash-o tip" data-original-title="Sil"></i></a>
-		                    <a class="copyThisBook" data-id="copyBook" data-toggle="modal" data-target="#copyBook" book-id="<?php echo $book->book_id; ?>"><i class="fa fa-copy tip" data-original-title="Çoğalt"></i></a>
+		                    <a class="copyThisBook" data-id="<?php echo $workspace->workspace_name; ?>" data-name="<?php echo $book->title; ?>" data-toggle="modal" data-target="#copyBook" book-id="<?php echo $book->book_id; ?>"><i class="fa fa-copy tip" data-original-title="Çoğalt"></i></a>
 		                    <a class="updateThisBookTitle" data-id="updateBookTitle" data-toggle="modal" data-target="#updateBookTitle" book-id="<?php echo $book->book_id; ?>"><i class="fa fa-edit tip" data-original-title="Düzenle"></i></a>
 		                    <?php } ?>
 		                    <?php if ($userType==='owner' || $userType==='editor') { ?>
@@ -347,8 +356,12 @@ foreach ($workspacesOfUser as $key => $workspace) {
 var bookId="";
 $(document).on("click",".copyThisBook",function(e){
 	bookId = $(this).attr('book-id');
+	workspace_name = $(this).data('id');
+	book_name = $(this).data('name');
+	var book_copy_data = workspace_name + " / " + book_name;
+	$("#book_data").html(book_copy_data);
+	
 });
-
 $(document).on("click",".updateThisBookTitle",function(e){
 	bookId = $(this).attr('book-id');
 });
