@@ -214,7 +214,7 @@ var createGraphComponent = function ( event, ui, oldcomponent ) {
       top = oldcomponent.data.self.css.top;
       left = oldcomponent.data.self.css.left;
     };
-
+   
       var letters= ["A","B","C","D","E","F","G","H","I","J","K"];
     top=(event.pageY-25)+"px";
     left=(event.pageX-150)+"px";

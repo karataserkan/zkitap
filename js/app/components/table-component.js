@@ -1164,7 +1164,7 @@ $(document).ready(function(){
 });
 
 
-
+ 
  var createTableComponent = function (event,ui){
     var top=(event.pageY-25)+"px";
     var left=(event.pageX-150)+"px";

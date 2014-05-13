@@ -163,6 +163,7 @@ var createImageComponent = function ( event, ui ,oldcomponent) {
     if(image_type == 'link') { link_check = "checked='checked'"; link_check_active = 'active';}
     else { popup_check = "checked='checked'"; popup_check_active = 'active'; }
 
+
     //console.log(link_check);
     //console.log(popup_check);
     top=(event.pageY-25)+"px";

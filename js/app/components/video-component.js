@@ -127,7 +127,7 @@ var createVideoComponent = function( event, ui, oldcomponent ) {
 
     if(control_type == 'Y') { control_y_check = "checked='checked'"; control_y_check_active = 'active';}
     else { control_n_check = "checked='checked'"; control_n_check_active = 'active'; }
-
+ 
     console.log(link_check);
     console.log(popup_check);
     top=(event.pageY-25)+"px";

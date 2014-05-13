@@ -67,7 +67,7 @@ var createPlinkComponent = function ( event, ui, oldcomponent ) {
       popup_value = oldcomponent.data.html_inner;
       var width = oldcomponent.data.width ;
       var height = oldcomponent.data.height;
-    };
+    }; 
 var page_count = 1;
 $.ajax({
   url: "/book/getBookPages/"+lindneo.currentBookId,

@@ -317,7 +317,7 @@ var jssor_slider1_left = function (containerId) {
         }
     });
 };
-
+ 
 var createSliderComponent = function (event,ui){
     var top=(event.pageY-25)+"px";
     var left=(event.pageX-100)+"px";

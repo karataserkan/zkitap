@@ -154,7 +154,7 @@ $(document).ready(function(){
   });
 });
 
- 
+  
 var createShapeComponent = function ( event, ui ) {
     var top=(event.pageY-25)+"px";
     var left=(event.pageX-100)+"px";

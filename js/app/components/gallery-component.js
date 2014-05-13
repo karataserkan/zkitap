@@ -57,7 +57,7 @@ $(document).ready(function(){
   });
 });
  
-
+ 
 var createGaleryComponent = function (event,ui){
 
    var top=(event.pageY-25)+"px";

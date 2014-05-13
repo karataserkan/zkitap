@@ -291,6 +291,7 @@ var removeRow = function(type, row_number){
     //console.log(check_count);
   }
 };
+
   var createMquizComponent = function ( event, ui, oldcomponent ) {
     multiple_count = 0;
     check_count = 0;

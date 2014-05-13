@@ -124,7 +124,7 @@ var createHtmlComponent = function ( event, ui, oldcomponent ) {
         </div> <br>\
         <a href='#' id='pop-image-OK' class='btn bck-light-green white radius' style='padding: 5px 30px;'>Ekle</a> \
       </div> \
-      </div>").appendTo('body').draggable({cancel:'.drag-cancel'}).resizable();*/
+      </div>").appendTo('body').draggable({cancel:'.drag-cancel'}).resizable();*/ 
     var page_off=$('#current_page').offset();
     top=page_off.top;
     left=page_off.left;

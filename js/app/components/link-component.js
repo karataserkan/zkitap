@@ -72,7 +72,7 @@ var IsURL = function (url) {
      var re=new RegExp(strRegex);
      return re.test(url);
  }
-
+ 
 var createLinkComponent = function ( event, ui, oldcomponent ) {
 
     if(typeof oldcomponent == 'undefined'){

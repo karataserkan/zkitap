@@ -201,7 +201,7 @@ var createLatexComponent = function ( event, ui, oldcomponent ) {
 
       var width = oldcomponent.data.width ;
       var height = oldcomponent.data.height;
-    };
+    }; 
     //console.log(width);
     //console.log(height);
    /* $("<div class='popup ui-draggable' id='pop-image-popup' style='display: block; top:" + top + "; left: " + left + ";'> \
