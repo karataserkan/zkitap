@@ -472,7 +472,7 @@ var textComponentBuilder = function( component ) {
     .appendTo( elementWrap )
     .popupComponent({
       'component': component,
-      'marker': 'http://dev.lindneo.com/css/popupmarker.png'  ,
+      'marker': window.base_path+'/css/popupmarker.svg'  ,
       'update': function ( event, component ) {
         if(revision_value==0){
         var newObject = jQuery.extend(true, {}, component);
@@ -503,7 +503,7 @@ var textComponentBuilder = function( component ) {
     .appendTo( elementWrap )
     .wrapComponent({
       'component': component,
-      'marker': 'http://dev.lindneo.com/css/popupmarker.png'  ,
+      'marker': window.base_path+'/css/popupmarker.svg'  ,
       'update': function ( event, component ) {
         if(revision_value==0){
         var newObject = jQuery.extend(true, {}, component);
