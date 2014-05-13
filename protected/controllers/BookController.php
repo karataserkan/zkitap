@@ -797,6 +797,8 @@ class BookController extends Controller
 			$this->redirect('/site/index');	
 		}
 
+
+
 		Yii::app()->db
 		    ->createCommand("DELETE FROM user_meta WHERE user_id=:user_id AND meta_value=:meta_value AND meta_key=:meta_key")
 		    ->bindValues(array(':user_id' => Yii::app()->user->id, ':meta_value' => $bookId,':meta_key'=>'lastEditedBook'))
@@ -814,6 +816,9 @@ class BookController extends Controller
 		
 		$bookSize=$model->getPageSize();
 
+		$ow=OrganisationWorkspaces::model()->find('workspace_id=:workspace_id',array('workspace_id'=>$model->workspace_id));
+		$budget=$this->getOrganisationBudget($ow->organisation_id);
+		$budget=($budget[4]['amount'])?$budget[4]['amount']:'0' ;
 
 		functions::event('tripData',NULL, function($var){
 			@include ('js/lib/trips/book/author.json');
@@ -825,7 +830,8 @@ class BookController extends Controller
 			'page_id'=>$page,
 			'component_id'=>$component,
 			'bookWidth'=>$bookSize['width'],
-			'bookHeight'=>$bookSize['height']
+			'bookHeight'=>$bookSize['height'],
+			'budget'=>$budget
 		)); 
 	}
 
@@ -942,6 +948,27 @@ class BookController extends Controller
 		$this->render('admodelmin',array(
 			'model'=>$model,
 		));
+	}
+
+	public function getOrganisationBudget($id)
+	{
+		$budget = Yii::app()->db->createCommand("select transaction_type, transaction_organisation_id,  SUM(amount)  as amount 
+			from ( select transaction_type, transaction_organisation_id, transaction_currency_code, SUM(transaction_amount) as amount , SUM(transaction_amount_equvalent) as amount_equvalent  
+		from transactions 
+		where transaction_result = 0 and transaction_method = 'deposit'  
+		group by transaction_type, transaction_organisation_id  
+		Union select transaction_type, transaction_organisation_id, transaction_currency_code,  -1 * SUM(transaction_amount) as amount , -1 * SUM(transaction_amount_equvalent) as amount_equvalent  
+		from transactions where transaction_result = 0 and transaction_method = 'withdrawal'  group by transaction_type, transaction_organisation_id, transaction_currency_code ) as tables 
+		group by transaction_type, transaction_organisation_id")->queryAll();
+
+		foreach ($budget as $key => $tr) {
+			if ($tr['transaction_organisation_id']!=$id)
+				{
+					unset($budget[$key]);
+				}
+		}
+
+		return $budget;
 	}
 
 	/**
