@@ -79,6 +79,7 @@ $(document).ready(function(){
             })
             .dblclick(function(e){
               e.stopPropagation();
+              console.log("DBL click")
               console.log(this);
               that.editableCell(this);
 
@@ -826,7 +827,10 @@ $(document).ready(function(){
           
         }
         //return;
+        console.log('NEW ROW')
+        console.log(new_row)
         component.data.table.push(new_row);
+        console.log(component.data.table);
         
         $.each( array_last, function( key, value ) {
           component.data.table.push(value);

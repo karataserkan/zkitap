@@ -65,14 +65,15 @@ var left = 0;
 
 var createVideoComponent = function( event, ui, oldcomponent ) {
 
-  var marker = 'http://dev.lindneo.com/css/popupmarker.png';
+  var marker = window.base_path+'/css/popupmarker.png';
+  var video_marker=window.base_path+'/css/video_play_trans.png';
   var video_width_height = '';
   var video_type_image = function(){
       var video_type = $('input[name=video_type]:checked').val();
         if(video_type == 'popup'){
           $("<span id='type_image'>\
-                <input type='radio' id='video_type0' name='video_image_type' value='video_type0'><button id='button0' style='background:url(\"http://dev.lindneo.com/css/popupmarker.png\") no-repeat center center;-moz-background-size: cover; -webkit-background-size: cover; -o-background-size: cover; background-size: cover; width:70px; height:70px;'></button>\
-                <input type='radio' id='video_type1' name='video_image_type' value='link'><button id='button1' style='background:url(\"http://dev.lindneo.com/css/video_play_trans.png\") no-repeat center center; -moz-background-size: cover; -webkit-background-size: cover; -o-background-size: cover; background-size: cover; width:70px; height:70px;'></button>\
+                <input type='radio' id='video_type0' name='video_image_type' value='video_type0'><button id='button0' style='background:url(\""+marker+"\") no-repeat center center;-moz-background-size: cover; -webkit-background-size: cover; -o-background-size: cover; background-size: cover; width:70px; height:70px;'></button>\
+                <input type='radio' id='video_type1' name='video_image_type' value='link'><button id='button1' style='background:url(\""+video_marker+"\") no-repeat center center; -moz-background-size: cover; -webkit-background-size: cover; -o-background-size: cover; background-size: cover; width:70px; height:70px;'></button>\
                 <a href='#' onclick='document.getElementById(\"video_image_file\").click(); return false;' class='icon-upload dark-blue size-40' style='padding-left:15px;'></a>\
                 <input type='file' name='video_image_file' id='video_image_file' value='' style='visibility: hidden;' >\
                 <div id='new_image'></div>\
