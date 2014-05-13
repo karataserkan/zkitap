@@ -63,9 +63,8 @@ class OrganisationsController extends Controller
 		curl_setopt( $ch, CURLOPT_HEADER, 0);
 		curl_setopt( $ch, CURLOPT_RETURNTRANSFER, 1);
 		$response = curl_exec( $ch );
-		echo $response;
 
-		//$this->redirect('/site/index');
+		$this->redirect('/site/index');
 	}
 
 	public function actionACL($id)

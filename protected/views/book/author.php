@@ -2155,7 +2155,10 @@ $background= (!empty($img)) ? "background-image:url('".$img."')" : "background:w
 						foreach ($template_chapters as $key => $template_chapter) {
 							$template_pages=Page::model()->findAll(array('order'=>  '`order` asc ,  created asc', "condition"=>'chapter_id=:chapter_id', "params" =>array(':chapter_id' => $template_chapter->chapter_id  ) ) );
 							foreach ($template_pages as $template_page){
-								echo "<li class='page'  chapter_id='".$template_chapter->chapter_id."' page_id='".$template_page->page_id."' style='width:122px; height:92px; border: 1px solid rgb(55, 108, 150);'  ><canvas  class='preview pre_".$template_page->page_id."' style='height:90px; width:120px;'> </canvas><a class='pre_".$template_page->page_id."' href='/page/create?book_id=".$model->book_id."&chapter_id=".$current_chapter->chapter_id."&pageTeplateId=".$template_page->page_id."' ></a></li>";
+								echo "<li class='page'  chapter_id='".$template_chapter->chapter_id."' page_id='".$template_page->page_id."' style='width:122px; height:92px; border: 1px solid rgb(55, 108, 150);'  >
+								<canvas  class='pre_".$template_page->page_id."' style='height:90px; width:120px;'> </canvas>
+								<a class='pre_".$template_page->page_id." copyBook' book-id='".$model->book_id."' chapter_id='".$current_chapter->chapter_id."' pageTeplateId='".$template_page->page_id."' href='#' ></a>
+								</li>";
 								?>
 									<script type="text/javascript">
 										window.lindneo.tlingit.loadPagesPreviews('<?php echo $template_page->page_id ?>');
@@ -2164,6 +2167,19 @@ $background= (!empty($img)) ? "background-image:url('".$img."')" : "background:w
 							}
 						}
 						?>
+				<script type="text/javascript">
+					$('.copyBook').click(function(){
+						var book_id=$(this).attr('book-id');
+						var pageTeplateId=$(this).attr('pageTeplateId');
+						//var chapter_id=$(this).attr('chapter_id');
+						var currentPageId=window.lindneo.currentPageId;
+						console.log(pageTeplateId);
+						var link="/page/create?book_id="+book_id+"&page_id="+currentPageId+"&pageTeplateId="+pageTeplateId;
+						
+						window.location.assign(link);
+
+					});
+				</script>
 						
 					<ul>	
 					
