@@ -51,6 +51,19 @@ class OrganisationsController extends Controller
 		$book=Book::model()->findByPk($id);
 		$book->publish_time=NULL;
 		$book->save();
+
+		$url = Yii::app()->params['catalog'].'/api/remove';
+		$params = array(
+						'id'=>$id,
+						);
+		$ch = curl_init( $url );
+		curl_setopt( $ch, CURLOPT_POST, 1);
+		curl_setopt( $ch, CURLOPT_POSTFIELDS, $params);
+		curl_setopt( $ch, CURLOPT_FOLLOWLOCATION, 1);
+		curl_setopt( $ch, CURLOPT_HEADER, 0);
+		curl_setopt( $ch, CURLOPT_RETURNTRANSFER, 1);
+		$response = curl_exec( $ch );
+
 		$this->redirect('/site/index');
 	}
 

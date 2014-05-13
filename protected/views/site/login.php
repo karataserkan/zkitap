@@ -263,65 +263,65 @@ $this->breadcrumbs=array(
 	<!-- /JAVASCRIPTS -->
 
 <script>
-		var preview = $("#upload-preview");
+		// var preview = $("#upload-preview");
 
-		$(".file").change(function(event){
-		   var input = $(event.currentTarget);
-		   var file = input[0].files[0];
-		   var reader = new FileReader();
-		   reader.onload = function(e){
-		       image_base64 = e.target.result;
-		       document.getElementById('User_data').value = image_base64;
-		       preview.html("<img src='"+image_base64+"'/><br/>");
-		   };
-		   reader.readAsDataURL(file);
-		  });
+		// $(".file").change(function(event){
+		//    var input = $(event.currentTarget);
+		//    var file = input[0].files[0];
+		//    var reader = new FileReader();
+		//    reader.onload = function(e){
+		//        image_base64 = e.target.result;
+		//        document.getElementById('User_data').value = image_base64;
+		//        preview.html("<img src='"+image_base64+"'/><br/>");
+		//    };
+		//    reader.readAsDataURL(file);
+		//   });
 		
 
-        var video;
-        var dataURL;
+  //       var video;
+  //       var dataURL;
 
-        //http://coderthoughts.blogspot.co.uk/2013/03/html5-video-fun.html - thanks :)
-        function setup() {
-            navigator.myGetMedia = (navigator.getUserMedia ||
-            navigator.webkitGetUserMedia ||
-            navigator.mozGetUserMedia ||
-            navigator.msGetUserMedia);
-            navigator.myGetMedia({ video: true }, connect, error);
-        }
+  //       //http://coderthoughts.blogspot.co.uk/2013/03/html5-video-fun.html - thanks :)
+  //       function setup() {
+  //           navigator.myGetMedia = (navigator.getUserMedia ||
+  //           navigator.webkitGetUserMedia ||
+  //           navigator.mozGetUserMedia ||
+  //           navigator.msGetUserMedia);
+  //           navigator.myGetMedia({ video: true }, connect, error);
+  //       }
 
-        function connect(stream) {
-            video = document.getElementById("video");
-            video.src = window.URL ? window.URL.createObjectURL(stream) : stream;
-            video.play();
-        }
+  //       function connect(stream) {
+  //           video = document.getElementById("video");
+  //           video.src = window.URL ? window.URL.createObjectURL(stream) : stream;
+  //           video.play();
+  //       }
 
-        function error(e) { console.log(e); }
+  //       function error(e) { console.log(e); }
 
-        addEventListener("load", setup);
+  //       addEventListener("load", setup);
 
-        function captureImage() {
-            var canvas = document.createElement('canvas');
-            canvas.id = 'hiddenCanvas';
-            //$('#video').hide();
-            //add canvas to the body element
-           // document.body.appendChild(canvas);
-            //add canvas to #canvasHolder
-          //  document.getElementById('canvasHolder').value=canvas;
-            var ctx = canvas.getContext('2d');
-            canvas.width = video.videoWidth/4;
-            canvas.height = video.videoHeight/4;
-            ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
-            //save canvas image as data url
-            dataURL = canvas.toDataURL();
-            //set preview image src to dataURL
-            document.getElementById('preview').src = dataURL;
-            // place the image value in the text box
-            document.getElementById('User_data').value = dataURL;
-        }
+  //       function captureImage() {
+  //           var canvas = document.createElement('canvas');
+  //           canvas.id = 'hiddenCanvas';
+  //           //$('#video').hide();
+  //           //add canvas to the body element
+  //          // document.body.appendChild(canvas);
+  //           //add canvas to #canvasHolder
+  //         //  document.getElementById('canvasHolder').value=canvas;
+  //           var ctx = canvas.getContext('2d');
+  //           canvas.width = video.videoWidth/4;
+  //           canvas.height = video.videoHeight/4;
+  //           ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+  //           //save canvas image as data url
+  //           dataURL = canvas.toDataURL();
+  //           //set preview image src to dataURL
+  //           document.getElementById('preview').src = dataURL;
+  //           // place the image value in the text box
+  //           document.getElementById('User_data').value = dataURL;
+  //       }
 
-        //Bind a click to a button to capture an image from the video stream
-        var el = document.getElementById("button");
-        el.addEventListener("click", captureImage, false);
+  //       //Bind a click to a button to capture an image from the video stream
+  //       var el = document.getElementById("button");
+  //       el.addEventListener("click", captureImage, false);
 
     </script>
