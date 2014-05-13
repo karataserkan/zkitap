@@ -60,7 +60,10 @@ $(document).ready(function(){
 
 var createGaleryComponent = function (event,ui){
 
-    $("<div class='popup ui-draggable' id='pop-image-popup' style='display: block; top:" + (ui.offset.top-$(event.target).offset().top ) + "px; left: " + ( ui.offset.left-$(event.target).offset().left ) + "px;'> \
+   var top=(event.pageY-25)+"px";
+   var left=(event.pageX-150)+"px";
+
+    $("<div class='popup ui-draggable' id='pop-image-popup' style='display: block; top:" + top + "; left: " + left + ";'> \
     <div class='popup-header'> \
     <i class='icon-m-galery'></i> &nbsp;Galeri Ekle \
     <i id='galery-add-dummy-close-button' class='icon-close size-10 popup-close-button'></i> \

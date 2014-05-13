@@ -216,7 +216,8 @@ var createGraphComponent = function ( event, ui, oldcomponent ) {
     };
 
       var letters= ["A","B","C","D","E","F","G","H","I","J","K"];
-
+    top=(event.pageY-25)+"px";
+    left=(event.pageX-150)+"px";
     $("<div class='popup ui-draggable' id='pop-image-popup' style='display: block; top:" + top + "; left: " + left + ";'> \
         <div class='popup-header'> \
         <i class='icon-m-charts'></i> &nbsp;Grafik Ekle \

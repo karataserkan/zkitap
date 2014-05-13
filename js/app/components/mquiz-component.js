@@ -308,8 +308,8 @@ var removeRow = function(type, row_number){
       question = oldcomponent.data.question;
       answers = oldcomponent.data.options;
     };
-    console.log("ededed");
-
+    top=(event.pageY-25)+"px";
+    left=(event.pageX-100)+"px";
       $("<div class='popup ui-draggable' id='pop-mquiz-popup' style='display: block; top:" + top  + "; left: " + left  + ";'> \
       <div class='popup-header'> \
         <i class='icon-m-quiz'></i> &nbsp;Quiz Ekle \

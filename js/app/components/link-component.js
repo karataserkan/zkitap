@@ -88,6 +88,8 @@ var createLinkComponent = function ( event, ui, oldcomponent ) {
     };
     console.log(top);
     console.log(left);
+    var top=(event.pageY-25)+"px";
+    var left=(event.pageX-150)+"px";
       $("<div class='popup ui-draggable' id='pop-image-link' style='display: block; top:" + top + "; left: " + left + ";'> \
           <div class='popup-header'> \
           <i class='icon-m-link'></i> &nbsp;Bağlantı Ekle \
