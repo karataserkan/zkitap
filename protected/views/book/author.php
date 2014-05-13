@@ -61,7 +61,7 @@ $current_user=User::model()->findByPk(Yii::app()->user->id);
             * unknown // Unknown covers everything else 
             */  
     },  
-    display: [], // What browsers to display and their order (default set below)  
+    display: ['chrome','opera','msie','safari'], // What browsers to display and their order (default set below)  
     browserShow: true, // Should the browser options be shown?  
     browserInfo: { // Settings for which browsers to display    
         safari: {  
