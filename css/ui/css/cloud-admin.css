@@ -2101,6 +2101,7 @@ fieldset[disabled] .btn-danger.active {
   color: #ffffff;
   background-color: #a8bc7b;
   border-color: #9db36a;
+  text-shadow:none;
 }
 .btn-success:hover,
 .btn-success:focus,
@@ -8198,15 +8199,15 @@ div[data-role="editor-toolbar"] {
 }
 .login-box input,
 .login-box textarea {
-  background: none repeat scroll 0 0 #FFFFFF;
-  font-size: 15px;
-  margin: 0;
-  padding: 10px 8px 8px;
-  width: 100%;
-  border-radius: 6px;
-  box-shadow: none;
-  min-width: 0;
-  padding-left: 33px !important;
+	font-size: 15px;
+	margin: 0;
+	padding: 8px 8px 8px;
+	width: 100%;
+	border-radius: 3px;
+	box-shadow: none;
+	min-width: 0;
+	border: none;
+	padding-left: 40px;
 }
 .login-box button {
   width: 100%;
@@ -9217,6 +9218,7 @@ ul.stats li small {
 
 .reader_book_card_book_cover img{
 	width:198px;
+	max-height:292px;
 	border-top-left-radius:5px;
 	border-top-right-radius:5px;
 }
@@ -9635,7 +9637,7 @@ form#myprofile_info_edit > input {
 	box-shadow: 0 1px 2px 0 #AAAAAA;
 }
 
-.account_info_cards:first-child {
+.account_info_cards_container a:first-child > .account_info_cards {
 	margin-left:0;
 }
 
@@ -9655,11 +9657,13 @@ form#myprofile_info_edit > input {
 	text-align: center;
 	margin-top: 10px;
 	font-size: 35px;
+	color:#333 !important;
 }
 
 .account_info_data_type {
 	text-align: center;
 	font-size: 15px;
+	color:#333 !important;
 }
 
 
@@ -9742,7 +9746,7 @@ div.reader_book_category {
 
 .reader_book_card_book_cover {
 	width:198px;
-	height:264px;
+	height:292px;
 	border-top-right-radius:5px;
 	border-top-left-radius:5px;
 }
