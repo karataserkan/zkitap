@@ -46,6 +46,20 @@ class OrganisationsController extends Controller
 	}
 
 
+	public function userType($bookId)
+	{
+		$userid=Yii::app()->user->id;
+
+		$bookOfUser= Yii::app()->db->createCommand()
+	    ->select("*")
+	    ->from("book_users")
+	    ->where("book_id=:book_id", array(':book_id' => $bookId))
+	    ->andWhere("user_id=:user_id", array(':user_id' => $userid))
+	    ->queryRow();
+	    
+	    return ($bookOfUser) ? $bookOfUser['type'] : false;
+	}
+
 	public function actionRemoveFromCategory($id)
 	{
 		$book=Book::model()->findByPk($id);

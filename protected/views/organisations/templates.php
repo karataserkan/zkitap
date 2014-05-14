@@ -80,61 +80,48 @@ $this->pageTitle=Yii::app()->name;
 						</div>
 						<!-- /PAGE HEADER -->
 						<!-- FAQ -->
+
+<div class="clearfix"></div>
+<div id="filter-items" class="mybooks_page_book_filter row">
 <?php
 $userid=Yii::app()->user->id;
 
-		foreach ($templates as $key2 => $book) { ?>
+		foreach ($templates as $key2 => $book) { 
+			$userType = $this->userType($book->book_id);
+			?>
 				
-			<div class="col-md-3 item">
-				<!-- BOX -->
-				<div class="box" style="opacity: 1; z-index: 0;">
-					<div class="box-title">
-						<h4><i class="fa fa-book"></i><?php echo $book->title ?></h4>
-						<div class="tools">
-							<?php $remove_book_id = ''; ?>
-							<a class="remove_book" data-id="<?php echo $book->book_id; ?>" data-toggle="modal" data-target="#myModal">
-								<i class="fa fa-times"></i>
-							</a>
-							<a class="updateThisBookTitle" data-id="updateBookTitle" data-toggle="modal" data-target="#updateBookTitle" book-id="<?php echo $book->book_id; ?>"><i class="fa fa-edit"></i></a>
-							<a href="javascript:;" class="collapse">
-								<i class="fa fa-chevron-up"></i>
-							</a>
-						</div>
-					</div>
-					<div class="box-body bg" style="display: block;">
-						<!-- beyaz içerik yeri -->
-						<div class="row">
-								
-								<div class="col-md-4 ">
-									<?php 
-										$thumbnailSrc="/css/images/default-cover.jpg";
-										$bookData=json_decode($book->data,true);
-										 if (isset($bookData['thumbnail'])) {
-										 	$thumbnailSrc=$bookData['thumbnail'];
-										 }
+			<!-- book card -->
+				<div class="reader_book_card <?php echo $workspace->workspace_id; ?>">
+		            <div class="reader_book_card_book_cover">					
+		                	<?php if ($userType=="owner") { ?>
+		                <div class="editor_mybooks_book_settings">
+			                    <a class="remove_book" data-id="<?php echo $book->book_id; ?>" data-toggle="modal" data-target="#myModal"><i class="fa fa-trash-o tip" data-original-title="Sil"></i></a>
+			                    <a class="updateThisBookTitle" data-id="updateBookTitle" data-toggle="modal" data-target="#updateBookTitle" book-id="<?php echo $book->book_id; ?>"><i class="fa fa-edit tip" data-original-title="Düzenle"></i></a>
+		                </div>
+		                	<?php } ?>
+		                <?php 
+							$thumbnailSrc="/css/images/deneme_cover.jpg";
+							$bookData=json_decode($book->data,true);
+							 if (isset($bookData['thumbnail'])) {
+							 	$thumbnailSrc=$bookData['thumbnail'];
+							 }
 
-									?>
-									<img src="<?php echo $thumbnailSrc; ?>" alt="Book Cover" style="width:110px; height:170px">
-								</div>
-								
-								<div class="col-md-8 form-vertical">
-								<div class="form-group">											
-								<input class="form-control" type="text" name="placeholder" readonly="" placeholder="<?php echo $book->title ?>" >
-								</div>
-								<div class="form-group">
-								<input class="form-control" type="text" name="placeholder" readonly="" placeholder="<?php echo $book->author ?>">
-								</div>
-								<p class="btn-toolbar text-right">
-								<a href="<?php echo '/book/author/'.$book->book_id ?>" class="btn btn-info"><?php echo __('Düzenle');?></a>
-								<a href="<?php echo '/EditorActions/ExportBook/'.$book->book_id; ?>" class="btn btn-success"><?php echo __('İndir');?></a>
-							</p>
-								</div>
-								</div>
-					</div>
-				</div>
-				<!-- /BOX -->
-			</div>
-				
+						?>
+		                <img src="<?php echo $thumbnailSrc; ?>" />
+		            </div>					
+		            <div class="reader_book_card_info_container">
+		                <div class="editor_mybooks_book_type tip" data-original-title="<?php _e('Çalışma alanının adı') ?>">Şablon</div>
+		                <div class="clearfix"></div>			
+		                <div class="reader_market_book_name tip" data-original-title="<?php _e('Kitabın adı') ?>"></i>
+		                	<?php echo ($userType==='owner' || $userType==='editor') ? '<a href="/book/author/'.$book->book_id.'">':'' ;?>
+		                		<?php echo $book->title ?>
+		                	<?php echo ($userType==='owner' || $userType==='editor') ? '</a>':'' ;?>
+		                </div>						
+		                <div class="clearfix"></div>
+		                <div class="reader_book_card_writer_name tip" data-original-title="<?php _e('Yazarın adı') ?>"><?php echo $book->author ?></div>											
+		            </div>				
+		        </div>
+		        <!-- book card -->
 <?php } ?>
 			</div>	
 				
@@ -180,4 +167,11 @@ $("#update_book_title").click(function(){
 	var link ="/book/updateBookTitle?bookId="+bookId+'&title='+title;
     window.location.assign(link);
 });
+</script>
+<script type="text/javascript">
+	$().ready(function(){
+		if( $('.reader_book_card').length==0 ) {
+			tripStart();
+		}
+	});
 </script>
