@@ -129,8 +129,8 @@ class EditorActionsController extends Controller
 		$model->contentPrice="0";
 		$model->categories="1122";
 
-		$budget=$this->getOrganisationBudget($organisation->organisation_id);
-		$budget=($budget[4]['amount'])?$budget[4]['amount']:'0' ;
+		$budget=$this->getOrganisationEpubBudget($organisation->organisation_id);
+		
 
 		$acl = Yii::app()->db->createCommand()
 		    ->select("*")
@@ -806,7 +806,7 @@ right join book using (book_id) where book_id='$bookId' and type!='image';";
 		
 	}
 
-	public function getOrganisationBudget($id)
+	public function getOrganisationEpubBudget($id)
 	{
 		$budget = Yii::app()->db->createCommand("select transaction_type, transaction_organisation_id,  SUM(amount)  as amount 
 			from ( select transaction_type, transaction_organisation_id, transaction_currency_code, SUM(transaction_amount) as amount , SUM(transaction_amount_equvalent) as amount_equvalent  
@@ -817,14 +817,19 @@ right join book using (book_id) where book_id='$bookId' and type!='image';";
 		from transactions where transaction_result = 0 and transaction_method = 'withdrawal'  group by transaction_type, transaction_organisation_id, transaction_currency_code ) as tables 
 		group by transaction_type, transaction_organisation_id")->queryAll();
 
+		$amount=0;
 		foreach ($budget as $key => $tr) {
-			if ($tr['transaction_organisation_id']!=$id)
+			if ($tr['transaction_organisation_id']!=$id || $tr['transaction_type']!='epub')
 				{
 					unset($budget[$key]);
 				}
+				else{
+					$amount=$tr['amount'];
+				}
 		}
 
-		return $budget;
+
+		return $amount;
 	}
 
 	public function SendFileToQueue($bookId)
@@ -837,14 +842,11 @@ right join book using (book_id) where book_id='$bookId' and type!='image';";
 		
 
 		if (!empty($_POST)) {
-			$budget=$this->getOrganisationBudget($_POST['PublishBookForm']['organisationId']);
-			foreach ($budget as $key => $item) {
-				if ($item['transaction_type']==$_POST['contentType']) {
-					if ($item['amount']<=0) {
-						return "budgetError";
-					}
-				}
+			$budget=$this->getOrganisationEpubBudget($_POST['PublishBookForm']['organisationId']);
+			if ($budget<=0) {
+				return "budgetError";
 			}
+		
 
 			$data['organisationId']=$_POST['PublishBookForm']['organisationId'];
 			$data['organisationName']=$_POST['PublishBookForm']['organisationName'];
