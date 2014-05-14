@@ -478,7 +478,7 @@ class BookController extends Controller
 					    'book_id'=>$model->book_id,
 					    'type'   =>'owner'
 					));
-					
+
 					$this->redirect('/book/author/'.$model->book_id);
 				}				
 				//{"book_type":"pdf","size":{"width":1275,"height":1650}}
@@ -690,8 +690,8 @@ class BookController extends Controller
 	{
 		$organisation_id="SZaFaR3cwct6PrEJmUibyJV6lHFnrNOrH5HGKdMq5l4B";
 		$workspace_id="ghwj7r2jeSIcisP6k2WB0ZmZCPNcqG2pe8crTx6EEaTS";
-		$budget=$this->getOrganisationBudget($organisation_id);
-		$budget=($budget[4]['amount'])?$budget[4]['amount']:'0' ;
+		$budget=$this->getOrganisationEpubBudget($organisation_id);
+		//$budget=($budget[4]['amount'])?$budget[4]['amount']:'0' ;
 		$addBudgetAmount=(100- (int) $budget);
 		if ($addBudgetAmount>10) {
 			$addBudget = Yii::app()->db->createCommand("INSERT INTO `transactions`(`transaction_id`, `transaction_type`, `transaction_method`, `transaction_amount`, `transaction_unit_price`, `transaction_amount_equvalent`, `transaction_currency_code`, `transaction_result`,`transaction_organisation_id`)
@@ -859,8 +859,7 @@ class BookController extends Controller
 		$bookSize=$model->getPageSize();
 
 		$ow=OrganisationWorkspaces::model()->find('workspace_id=:workspace_id',array('workspace_id'=>$model->workspace_id));
-		$budget=$this->getOrganisationBudget($ow->organisation_id);
-		$budget=($budget[4]['amount'])?$budget[4]['amount']:'0' ;
+		$budget=$this->getOrganisationEpubBudget($ow->organisation_id);
 
 		functions::event('tripData',NULL, function($var){
 			@include ('js/lib/trips/book/author.json');
@@ -992,7 +991,7 @@ class BookController extends Controller
 		));
 	}
 
-	public function getOrganisationBudget($id)
+	public function getOrganisationEpubBudget($id)
 	{
 		$budget = Yii::app()->db->createCommand("select transaction_type, transaction_organisation_id,  SUM(amount)  as amount 
 			from ( select transaction_type, transaction_organisation_id, transaction_currency_code, SUM(transaction_amount) as amount , SUM(transaction_amount_equvalent) as amount_equvalent  
@@ -1003,14 +1002,19 @@ class BookController extends Controller
 		from transactions where transaction_result = 0 and transaction_method = 'withdrawal'  group by transaction_type, transaction_organisation_id, transaction_currency_code ) as tables 
 		group by transaction_type, transaction_organisation_id")->queryAll();
 
+		$amount=0;
 		foreach ($budget as $key => $tr) {
-			if ($tr['transaction_organisation_id']!=$id)
+			if ($tr['transaction_organisation_id']!=$id || $tr['transaction_type']!='epub')
 				{
 					unset($budget[$key]);
 				}
+				else{
+					$amount=$tr['amount'];
+				}
 		}
 
-		return $budget;
+
+		return $amount;
 	}
 
 	/**
