@@ -29,7 +29,7 @@ $(document).ready(function(){
         popupmessage.appendTo(this.element);
       }
 
-      this._super(); 
+      this._super({resizableParams:{handles:"e, s, se"}});
 /*
       this.element.resizable("option",'maxHeight', 128 );
       this.element.resizable("option",'minHeight', 128 );
