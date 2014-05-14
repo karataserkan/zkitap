@@ -440,7 +440,7 @@ var textComponentBuilder = function( component ) {
     .appendTo( elementWrap )
     .popupComponent({
       'component': component,
-      'marker': 'http://dev.lindneo.com/css/linkmarker.png'  ,
+      'marker': window.base_url+'/css/linkmarker.png'  ,
       'update': function ( event, component ) {
         if(revision_value==0){
         var newObject = jQuery.extend(true, {}, component);
