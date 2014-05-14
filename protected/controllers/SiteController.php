@@ -417,7 +417,7 @@ class SiteController extends Controller
 		$criteria->select='max(id) AS maxColumn';
 		$row = $newUser->model()->find($criteria);		
 		$userId = $row['maxColumn']+1;
-		
+		$loginError="";
 		$newUser->id=$userId;
 
 		// if it is ajax validation request
@@ -477,18 +477,32 @@ class SiteController extends Controller
 		// collect user input data
 		if(isset($_POST['LoginForm']))
 		{
+			$login_history=new LoginHistory;
+			$login_history->user_email=$_POST['LoginForm']['email'];
+			$login_history->time=date("Y-m-d H:i:s");
+			$login_history->ip=$_SERVER['REMOTE_ADDR'];
+
 			$model->attributes=$_POST['LoginForm'];
 			// validate user input and redirect to the previous page if valid
 			if($model->validate() && $model->login())
 			{
+
 				$msg="SITE:LOGIN:SignIn:0:". json_encode(array('user'=> Yii::app()->user->name,'userId'=>Yii::app()->user->id));
+				
+				$login_history->status=0;
+				$login_history->message=$msg;
 				Yii::log($msg,'profile');
+				$login_history->save();
 				$this->redirect(Yii::app()->user->returnUrl);
 			}
 			else
 			{
 				$msg="SITE:LOGIN:SignIn:1:". json_encode($_POST['LoginForm']);
+				$login_history->status=1;
+				$login_history->message=$msg;
 				Yii::log($msg,'profile');
+				$login_history->save();
+				$loginError="E-Posta veya şifrenizi yanlış girdiniz.";
 			}
 				
 		}
@@ -646,7 +660,7 @@ class SiteController extends Controller
 			}
 		}
 		// display the login form
-		$this->render('login',array('model'=>$model,'newUser'=>$newUser,'passResetError'=>$passResetError,'passResetSuccess'=>$passResetSuccess));
+		$this->render('login',array('model'=>$model,'newUser'=>$newUser,'passResetError'=>$passResetError,'passResetSuccess'=>$passResetSuccess,'loginError'=>$loginError));
 	}
 
 	/**
