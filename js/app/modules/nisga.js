@@ -37,7 +37,7 @@ window.lindneo.nisga = (function(window, $, undefined){
 
   var createComponent = function( component, oldcomponent_id ){
       ////console.log(revision_value);
-    console.log(component);
+    //console.log(component);
     ////console.log(revision_array);
     $.each(revision_array.revisions, function(index,value){ 
         if (value.component_id == oldcomponent_id ){
@@ -59,7 +59,7 @@ window.lindneo.nisga = (function(window, $, undefined){
   };
 
   var componentBuilder = function( component ){
-     console.log(component.type);
+     //console.log(component.type);
     switch( component.type ) {
       case 'text':
         textComponentBuilder( component );

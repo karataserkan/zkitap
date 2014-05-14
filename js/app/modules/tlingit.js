@@ -20,6 +20,7 @@ window.lindneo.tlingit = (function(window, $, undefined){
   };
   var oldcomponent_id = '';
   var oldcomponent = '';
+  var pages = [];
   var createComponent = function ( component, component_id ){
     // create component
     // server'a post et
@@ -106,13 +107,28 @@ window.lindneo.tlingit = (function(window, $, undefined){
 
     var response = responseFromJson(res);
     var components = [];
-    
+    //console.log(response);
     if( response.result !== null ) {
       components = response.result.components;
     }
-    console.log( components );
+    //console.log( components );
     $.each(components, function(i, val){
-          
+      
+
+      console.log(val.page_id);
+      if(val.type === "page"){
+        console.log(window.lindneo.tlingit.pages);
+        $.each(window.lindneo.tlingit.pages, function(index, value){
+          //console.log(value);
+          //console.log(val);
+          if(value.page_id == val.page_id){
+            console.log("efefefe");
+            console.log(val.type);
+            console.log(value.page_num);
+            val.data.textarea.val = value.page_num;
+            }
+        });
+      }
       window.lindneo.nisga.createComponent( val );
     });
 
@@ -159,7 +175,12 @@ window.lindneo.tlingit = (function(window, $, undefined){
 
   var loadAllPagesPreviews = function (){
     $("li.page").each(function(index, pageSlice){
-      //console.log(pageSlice);
+      var num = index + 1;
+      //console.log(pageSlice.attributes[2].nodeValue);
+      //var pages_num = {"page_id": $(this).attr('page_id'), "pane_num": pageNum};
+      //window.lindneo.tlingit.pages.push(pages_num);
+      //if(index == 0) {pages = []; console.log("adasdasdasd");} 
+      pages.push({"page_id": pageSlice.attributes[2].nodeValue, "page_num": num});
 
       var pagePreview = $('<canvas class="preview"  height="90"  width="120"> </canvas>');
     
@@ -465,7 +486,8 @@ window.lindneo.tlingit = (function(window, $, undefined){
     ChapterHasDeleted: ChapterHasDeleted,
     PageHasDeleted: PageHasDeleted,
     DeletePage: DeletePage,
-    DeleteChapter: DeleteChapter
+    DeleteChapter: DeleteChapter,
+    pages: pages
   };
 
 })( window, jQuery );
