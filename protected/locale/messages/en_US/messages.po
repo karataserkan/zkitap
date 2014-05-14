@@ -33,6 +33,8 @@ msgstr  "Project-Id-Version: 0.1\n"
 #: protected/views/site/index.php:342
 #: protected/views/organisations/workspaces.php:31
 #: protected/views/organisationHostings/index.php:30
+#: protected/views/organisations/workspaces.php:38
+#: protected/views/organisationHostings/index.php:37
 #: protected/views/site/dashboard.php:133
 #: protected/views/organisations/workspaces.php:38
 #: protected/views/organisations/categories.php:92
@@ -90,8 +92,9 @@ msgstr  "Editors"
 #: protected/views/site/index.php:205 protected/views/site/index.php:256
 #: protected/views/site/index.php:275 protected/views/site/index.php:237
 #: protected/views/site/index.php:315 protected/views/site/index.php:298
-#: protected/views/site/index.php:160 protected/views/site/index.php:205
-#: protected/views/site/index.php:237 protected/views/site/index.php:298
+#: protected/views/organisations/published_books.php:126
+#: protected/views/site/index.php:163 protected/views/site/index.php:208
+#: protected/views/site/index.php:240 protected/views/site/index.php:307
 #: protected/views/organisations/published_books.php:126
 msgid   "Editör"
 msgstr  "Editor"
@@ -113,9 +116,10 @@ msgstr  "Editor"
 #: protected/views/site/index.php:255 protected/views/site/index.php:268
 #: protected/views/site/index.php:274 protected/views/site/index.php:287
 #: protected/views/site/index.php:236 protected/views/site/index.php:315
-#: protected/views/site/index.php:298 protected/views/site/index.php:157
-#: protected/views/site/index.php:206 protected/views/site/index.php:236
 #: protected/views/site/index.php:298
+#: protected/views/organisations/published_books.php:126
+#: protected/views/site/index.php:160 protected/views/site/index.php:209
+#: protected/views/site/index.php:239 protected/views/site/index.php:307
 #: protected/views/organisations/published_books.php:126
 msgid   "Sahibi"
 msgstr  "Owner"
@@ -151,7 +155,9 @@ msgstr  "Organisation"
 #: protected/views/organisations/users.php:12
 #: protected/views/organisations/users.php:22
 #: protected/views/organisations/users.php:26
-#: protected/views/site/index.php:191
+#: protected/views/organisations/workspaces.php:69
+#: protected/views/organisations/users.php:43
+#: protected/views/site/index.php:194
 #: protected/views/organisations/workspaces.php:69
 #: protected/views/organisations/users.php:12
 #: protected/views/organisations/users.php:43
@@ -190,6 +196,7 @@ msgstr  "Workspace"
 #: protected/views/layouts/column2.php:232
 #: protected/views/organisations/workspaces.php:29
 #: protected/views/layouts/column2.php:233
+#: protected/views/organisations/workspaces.php:36
 #: protected/views/organisations/workspaces.php:36
 #: protected/views/organisations/index.php:8
 #: protected/views/layouts/column2.php:233
@@ -233,7 +240,7 @@ msgstr  "Resolution"
 #: protected/views/book/author.php:91 protected/views/book/author.php:114
 #: protected/views/book/author.php:115 protected/views/book/author.php:116
 #: protected/views/book/author.php:112 protected/views/book/author.php:118
-#: protected/views/book/author.php:114
+#: protected/views/book/author.php:221
 msgid   "Görünüm"
 msgstr  "View"
 
@@ -241,7 +248,7 @@ msgstr  "View"
 #: protected/views/book/author.php:93 protected/views/book/author.php:116
 #: protected/views/book/author.php:117 protected/views/book/author.php:118
 #: protected/views/book/author.php:114 protected/views/book/author.php:120
-#: protected/views/book/author.php:116
+#: protected/views/book/author.php:223
 msgid   "Cetvel"
 msgstr  "Rulers"
 
@@ -249,7 +256,7 @@ msgstr  "Rulers"
 #: protected/views/book/author.php:94 protected/views/book/author.php:117
 #: protected/views/book/author.php:118 protected/views/book/author.php:119
 #: protected/views/book/author.php:115 protected/views/book/author.php:121
-#: protected/views/book/author.php:117
+#: protected/views/book/author.php:224
 msgid   "Rehber"
 msgstr  "Guides"
 
@@ -257,7 +264,7 @@ msgstr  "Guides"
 #: protected/views/book/author.php:95 protected/views/book/author.php:118
 #: protected/views/book/author.php:119 protected/views/book/author.php:120
 #: protected/views/book/author.php:116 protected/views/book/author.php:122
-#: protected/views/book/author.php:118
+#: protected/views/book/author.php:225
 msgid   "Yorumlar"
 msgstr  "Comments"
 
@@ -268,7 +275,7 @@ msgstr  "Comments"
 #: protected/views/book/author.php:149 protected/views/layouts/column2.php:62
 #: protected/views/book/author.php:145 protected/views/book/author.php:144
 #: protected/views/book/author.php:146 protected/views/layouts/column2.php:66
-#: protected/views/book/author.php:150 protected/views/book/author.php:146
+#: protected/views/book/author.php:150 protected/views/book/author.php:253
 #: protected/views/layouts/column2.php:66
 msgid   "Profil"
 msgstr  "Profile"
@@ -283,7 +290,7 @@ msgstr  "Profile"
 #: protected/views/layouts/column2.php:63 protected/views/book/author.php:146
 #: protected/views/book/author.php:145 protected/views/book/author.php:147
 #: protected/views/layouts/column2.php:67 protected/views/book/author.php:151
-#: protected/views/layouts/column2.php:68 protected/views/book/author.php:147
+#: protected/views/layouts/column2.php:68 protected/views/book/author.php:254
 #: protected/views/layouts/column2.php:68
 msgid   "Çıkış"
 msgstr  "Sign Out"
@@ -312,6 +319,7 @@ msgstr[1]       "%s Users Found"
 #: protected/controllers/OrganisationsController.php:647
 #: protected/controllers/OrganisationsController.php:648
 #: protected/controllers/OrganisationsController.php:658
+#: protected/controllers/OrganisationsController.php:671
 msgid   "Kullanıcı davet edildi."
 msgstr  "Invitation is sent to user."
 
@@ -321,6 +329,7 @@ msgstr  "E-mail address is invalid."
 
 #: protected/views/user/invitation.php:5
 #: protected/views/user/invitation.php:17
+#: protected/views/user/invitation.php:17
 msgid   "İsteği kabul ettiniz. Anasayfaya giderek sisteme giriş "
         "yapabilirsiniz."
 msgstr  "Invitation accepted. Login the system."
@@ -328,6 +337,7 @@ msgstr  "Invitation accepted. Login the system."
 #: protected/views/organisations/workspaces.php:12
 #: protected/views/organisations/workspaces.php:78
 #: protected/views/organisations/workspaces.php:15
+#: protected/views/organisations/workspaces.php:22
 #: protected/views/organisations/workspaces.php:22
 msgid   "Çalışma Alanı Ekle"
 msgstr  "Add Workspace"
@@ -345,7 +355,8 @@ msgstr  "Add Workspace"
 #: protected/views/organisations/workspaces.php:30
 #: protected/views/organisationHostings/index.php:31
 #: protected/views/organisations/workspaces.php:37
-#: protected/views/organisations/organisationACL.php:112
+#: protected/views/organisationHostings/index.php:38
+#: protected/views/organisations/workspaces.php:37
 #: protected/views/organisations/categories.php:91
 #: protected/views/organisationHostings/index.php:38
 msgid   "Sil"
@@ -366,7 +377,10 @@ msgstr  "Delete"
 #: protected/views/organisations/users.php:33
 #: protected/views/organisationHostings/index.php:12
 #: protected/views/organisations/workspaces.php:86
-#: protected/views/organisations/organisationACL.php:78
+#: protected/views/organisations/users.php:23
+#: protected/views/organisationHostings/index.php:18
+#: protected/views/organisations/workspaces.php:86
+#: protected/views/organisations/organisationACL.php:97
 #: protected/views/organisations/categories.php:106
 #: protected/views/organisations/users.php:23
 #: protected/views/organisationHostings/index.php:18
@@ -414,19 +428,22 @@ msgstr  "Add"
 #: protected/views/book/author.php:2205 protected/views/book/author.php:2228
 #: protected/views/user/profile.php:96 protected/views/book/author.php:1519
 #: protected/views/book/author.php:2200 protected/views/book/author.php:2223
+#: protected/views/user/profile.php:104 protected/views/book/author.php:1549
+#: protected/views/book/author.php:2233 protected/views/book/author.php:2256
 #: protected/views/faq/create.php:44 protected/views/user/profile.php:104
 #: protected/views/user/forget_password.php:54
 #: protected/views/site/login.php:151
 #: protected/views/organisations/categories.php:33
 #: protected/views/organisations/categories.php:67
-#: protected/views/book/author.php:1549 protected/views/book/author.php:2233
-#: protected/views/book/author.php:2256
+#: protected/views/book/author.php:1649 protected/views/book/author.php:2349
+#: protected/views/book/author.php:2372
 msgid   "Kaydet"
 msgstr  "Save"
 
 #: protected/views/organisations/workspaces.php:25
 #: protected/views/organisations/workspaces.php:27
 #: protected/views/organisations/workspaces.php:38
+#: protected/views/organisations/workspaces.php:51
 #: protected/views/organisations/workspaces.php:51
 msgid   "Çalışma Alanı Kullanıcıları"
 msgstr  "Workspace Users"
@@ -442,6 +459,7 @@ msgstr  "Workspace Users"
 #: protected/controllers/OrganisationsController.php:653
 #: protected/controllers/OrganisationsController.php:654
 #: protected/controllers/OrganisationsController.php:664
+#: protected/controllers/OrganisationsController.php:677
 msgid   "Girdiğiniz e-posta adresi geçersiz."
 msgstr  "E-mail you provide is invalid."
 
@@ -472,11 +490,13 @@ msgstr  "Server"
 #: protected/views/organisationHostings/index.php:11
 #: protected/views/organisationHostings/index.php:23
 #: protected/views/organisationHostings/index.php:30
+#: protected/views/organisationHostings/index.php:30
 msgid   "İstemci ID"
 msgstr  "Host ID"
 
 #: protected/views/organisationHostings/index.php:13
 #: protected/views/organisationHostings/index.php:25
+#: protected/views/organisationHostings/index.php:32
 #: protected/views/organisationHostings/index.php:32
 msgid   "İstemci IP"
 msgstr  "Host IP"
@@ -484,17 +504,20 @@ msgstr  "Host IP"
 #: protected/views/organisationHostings/index.php:14
 #: protected/views/organisationHostings/index.php:26
 #: protected/views/organisationHostings/index.php:33
+#: protected/views/organisationHostings/index.php:33
 msgid   "İstemci Port"
 msgstr  "Host Port"
 
 #: protected/views/organisationHostings/index.php:15
 #: protected/views/organisationHostings/index.php:27
 #: protected/views/organisationHostings/index.php:34
+#: protected/views/organisationHostings/index.php:34
 msgid   "İstemci Key1"
 msgstr  "Host Key1"
 
 #: protected/views/organisationHostings/index.php:16
 #: protected/views/organisationHostings/index.php:28
+#: protected/views/organisationHostings/index.php:35
 #: protected/views/organisationHostings/index.php:35
 msgid   "İstemci Key2"
 msgstr  "Host Key2"
@@ -566,8 +589,8 @@ msgstr  "Keywords"
 #: protected/controllers/BookController.php:637
 #: protected/controllers/BookController.php:194
 #: protected/controllers/BookController.php:261
-#: protected/controllers/BookController.php:570
-#: protected/controllers/BookController.php:637
+#: protected/controllers/BookController.php:578
+#: protected/controllers/BookController.php:645
 msgid   "Bölüm"
 msgstr  "Chapter"
 
@@ -671,7 +694,7 @@ msgstr  "New Password Repeat"
 #: protected/views/site/index.php:260 protected/views/site/index.php:267
 #: protected/views/site/index.php:273 protected/views/site/index.php:279
 #: protected/views/site/index.php:286 protected/views/site/index.php:235
-#: protected/views/site/index.php:235
+#: protected/views/site/index.php:238
 #: protected/views/editorActions/publishBook.php:292
 msgid   "Hepsi"
 msgstr  "All"
@@ -700,7 +723,7 @@ msgstr  "Control Panel"
 #: protected/views/layouts/column2.php:87 protected/views/site/index.php:204
 #: protected/views/site/index.php:232 protected/views/layouts/column2.php:96
 #: protected/views/site/index.php:226 protected/views/site/index.php:227
-#: protected/views/layouts/column2.php:97 protected/views/site/index.php:227
+#: protected/views/layouts/column2.php:97 protected/views/site/index.php:230
 #: protected/views/layouts/column2.php:97
 msgid   "Kitaplarım"
 msgstr  "My Books"
@@ -879,9 +902,10 @@ msgstr  "Reader Group"
 #: protected/views/book/author.php:1434 protected/views/book/author.php:1440
 #: protected/views/book/author.php:1443 protected/views/book/author.php:1438
 #: protected/views/book/author.php:1515 protected/views/book/author.php:1518
+#: protected/views/book/author.php:1548
 #: protected/views/book/create_template.php:109
 #: protected/views/book/book_create.php:183
-#: protected/views/book/author.php:1548
+#: protected/views/book/author.php:1648
 #: protected/views/editorActions/publishBook.php:474
 msgid   "Geri"
 msgstr  "Back"
@@ -909,7 +933,7 @@ msgstr  "Continue"
 #: protected/views/editorActions/publishBook.php:437
 #: protected/views/editorActions/publishBook.php:467
 #: protected/views/editorActions/publishBook.php:480
-#: protected/views/editorActions/publishBook.php:480
+#: protected/views/editorActions/publishBook.php:486
 msgid   "Yayınla"
 msgstr  "Publish"
 
@@ -920,6 +944,7 @@ msgstr  "Category Details"
 
 #: protected/views/user/profile.php:33 protected/views/user/profile.php:31
 #: protected/views/user/profile.php:83 protected/views/user/profile.php:91
+#: protected/views/user/profile.php:91
 msgid   "Profil Resmi"
 msgstr  "Profile Picture"
 
@@ -952,6 +977,9 @@ msgstr  "Profile Picture"
 #: protected/views/user/profile.php:103
 #: protected/views/organisations/workspaces.php:88
 #: protected/views/book/author.php:2232 protected/views/book/author.php:2255
+#: protected/views/user/profile.php:103
+#: protected/views/organisations/workspaces.php:88
+#: protected/views/book/author.php:2348 protected/views/book/author.php:2371
 msgid   "Kapat"
 msgstr  "Close"
 
@@ -979,6 +1007,7 @@ msgstr  "Thumbnail Image"
 #: protected/views/book/author.php:2117 protected/views/book/author.php:2136
 #: protected/views/book/author.php:2135 protected/views/book/author.php:2218
 #: protected/views/book/author.php:2213 protected/views/book/author.php:2246
+#: protected/views/book/author.php:2362
 msgid   "Kapak Resmi"
 msgstr  "Cover Image"
 
@@ -1178,7 +1207,7 @@ msgstr  ""
 #: protected/views/organisations/categories.php:53
 #: protected/views/book/create_template.php:58
 #: protected/views/organisations/organisationACL.php:18
-#: protected/views/organisations/organisationACL.php:18
+#: protected/views/organisations/organisationACL.php:37
 #: protected/views/organisations/categories.php:25
 #: protected/views/organisations/categories.php:53
 #: protected/views/book/create_template.php:58
@@ -1235,7 +1264,7 @@ msgstr  ""
 #: protected/views/site/index.php:57 protected/views/site/index.php:85
 #: protected/views/organisations/published_books.php:24
 #: protected/views/site/index.php:79 protected/views/site/index.php:80
-#: protected/views/site/index.php:80
+#: protected/views/site/index.php:82
 #: protected/views/organisations/published_books.php:24
 msgid   "Kitabı Kopyala"
 msgstr  ""
@@ -1243,7 +1272,7 @@ msgstr  ""
 #: protected/views/site/index.php:63 protected/views/site/index.php:91
 #: protected/views/organisations/published_books.php:30
 #: protected/views/site/index.php:85 protected/views/site/index.php:86
-#: protected/views/site/index.php:86
+#: protected/views/site/index.php:89
 #: protected/views/organisations/published_books.php:30
 msgid   "Çalışma Alanları"
 msgstr  ""
@@ -1251,7 +1280,7 @@ msgstr  ""
 #: protected/views/site/index.php:90 protected/views/site/index.php:118
 #: protected/views/organisations/published_books.php:57
 #: protected/views/site/index.php:112 protected/views/site/index.php:113
-#: protected/views/site/index.php:113
+#: protected/views/site/index.php:116
 #: protected/views/organisations/published_books.php:57
 msgid   "Kopyala"
 msgstr  ""
@@ -1266,10 +1295,12 @@ msgstr  ""
 #: protected/views/organisations/organisationACL.php:76
 #: protected/views/site/index.php:66 protected/views/site/index.php:114
 #: protected/views/organisations/organisationACL.php:79
-#: protected/views/site/index.php:66 protected/views/site/index.php:114
+#: protected/views/organisations/published_books.php:80
+#: protected/views/organisations/users.php:25
+#: protected/views/site/index.php:68 protected/views/site/index.php:117
 #: protected/views/organisations/published_books.php:58
 #: protected/views/organisations/published_books.php:80
-#: protected/views/organisations/organisationACL.php:79
+#: protected/views/organisations/organisationACL.php:98
 #: protected/views/organisations/templates.php:59
 #: protected/views/organisations/users.php:25
 msgid   "Vazgeç"
@@ -1279,7 +1310,7 @@ msgstr  ""
 #: protected/views/organisations/templates.php:45
 #: protected/views/organisations/organisationACL.php:13
 #: protected/views/site/index.php:51 protected/views/site/index.php:52
-#: protected/views/site/index.php:52
+#: protected/views/site/index.php:54
 #: protected/views/organisations/templates.php:45
 msgid   "Eseri Güncelle"
 msgstr  ""
@@ -1288,7 +1319,7 @@ msgstr  ""
 #: protected/views/organisations/templates.php:58
 #: protected/views/organisations/organisationACL.php:26
 #: protected/views/site/index.php:64 protected/views/site/index.php:65
-#: protected/views/site/index.php:65
+#: protected/views/site/index.php:67
 #: protected/views/organisations/templates.php:58
 msgid   "Güncelle"
 msgstr  ""
@@ -1386,7 +1417,7 @@ msgstr  ""
 #: protected/views/book/author.php:1361 protected/views/book/author.php:1360
 #: protected/views/book/author.php:1363 protected/views/book/author.php:1366
 #: protected/views/book/author.php:1438 protected/views/book/author.php:1441
-#: protected/views/book/author.php:1471
+#: protected/views/book/author.php:1471 protected/views/book/author.php:1571
 msgid   "Hızlı Stiller"
 msgstr  ""
 
@@ -1395,7 +1426,7 @@ msgstr  ""
 #: protected/views/book/author.php:1366 protected/views/book/author.php:1365
 #: protected/views/book/author.php:1368 protected/views/book/author.php:1371
 #: protected/views/book/author.php:1443 protected/views/book/author.php:1446
-#: protected/views/book/author.php:1476
+#: protected/views/book/author.php:1476 protected/views/book/author.php:1576
 msgid   "Başlık"
 msgstr  ""
 
@@ -1404,7 +1435,7 @@ msgstr  ""
 #: protected/views/book/author.php:1367 protected/views/book/author.php:1366
 #: protected/views/book/author.php:1369 protected/views/book/author.php:1372
 #: protected/views/book/author.php:1444 protected/views/book/author.php:1447
-#: protected/views/book/author.php:1477
+#: protected/views/book/author.php:1477 protected/views/book/author.php:1577
 msgid   "Alt Başlık"
 msgstr  ""
 
@@ -1420,6 +1451,7 @@ msgstr  ""
 #: protected/views/book/author.php:1374 protected/views/book/author.php:1377
 #: protected/views/book/author.php:1372 protected/views/book/author.php:1449
 #: protected/views/book/author.php:1452 protected/views/book/author.php:1482
+#: protected/views/book/author.php:1582
 msgid   "Paragraf"
 msgstr  ""
 
@@ -1429,6 +1461,7 @@ msgstr  ""
 #: protected/views/book/author.php:1375 protected/views/book/author.php:1378
 #: protected/views/book/author.php:1373 protected/views/book/author.php:1450
 #: protected/views/book/author.php:1453 protected/views/book/author.php:1483
+#: protected/views/book/author.php:1583
 msgid   "Alıntı"
 msgstr  ""
 
@@ -1438,6 +1471,7 @@ msgstr  ""
 #: protected/views/book/author.php:1381 protected/views/book/author.php:1384
 #: protected/views/book/author.php:1379 protected/views/book/author.php:1456
 #: protected/views/book/author.php:1459 protected/views/book/author.php:1489
+#: protected/views/book/author.php:1589
 msgid   "Satır Yüksekliği"
 msgstr  ""
 
@@ -1447,6 +1481,7 @@ msgstr  ""
 #: protected/views/book/author.php:1394 protected/views/book/author.php:1397
 #: protected/views/book/author.php:1392 protected/views/book/author.php:1469
 #: protected/views/book/author.php:1472 protected/views/book/author.php:1502
+#: protected/views/book/author.php:1602
 msgid   "Yazı Tipi"
 msgstr  ""
 
@@ -1456,6 +1491,7 @@ msgstr  ""
 #: protected/views/book/author.php:1414 protected/views/book/author.php:1417
 #: protected/views/book/author.php:1412 protected/views/book/author.php:1489
 #: protected/views/book/author.php:1492 protected/views/book/author.php:1522
+#: protected/views/book/author.php:1622
 msgid   "Yazı Boyutu"
 msgstr  ""
 
@@ -1465,33 +1501,34 @@ msgstr  ""
 #: protected/views/layouts/column2.php:258
 #: protected/views/layouts/column2.php:259
 #: protected/views/organisations/published_books.php:95
+#: protected/views/organisations/published_books.php:95
 #: protected/views/layouts/column2.php:259
 msgid   "Yayınlanan Eserler"
 msgstr  ""
 
 #: protected/views/organisations/organisationACL.php:13
-#: protected/views/organisations/organisationACL.php:13
+#: protected/views/organisations/organisationACL.php:32
 msgid   "ACL Ekle"
 msgstr  ""
 
 #: protected/views/organisations/organisationACL.php:26
-#: protected/views/organisations/organisationACL.php:26
+#: protected/views/organisations/organisationACL.php:45
 msgid   "ACL Tipi"
 msgstr  ""
 
 #: protected/views/organisations/organisationACL.php:35
-#: protected/views/organisations/organisationACL.php:35
+#: protected/views/organisations/organisationACL.php:54
 msgid   "Ip Aralığı"
 msgstr  ""
 
 #: protected/views/organisations/organisationACL.php:42
-#: protected/views/organisations/organisationACL.php:42
+#: protected/views/organisations/organisationACL.php:61
 msgid   "Network"
 msgstr  ""
 
 #: protected/views/organisations/organisationACL.php:48
 #: protected/views/organisations/organisationACL.php:55
-#: protected/views/organisations/organisationACL.php:55
+#: protected/views/organisations/organisationACL.php:74
 msgid   "Ip 1: "
 msgstr  ""
 
@@ -1503,7 +1540,7 @@ msgstr  ""
 #: protected/views/organisations/organisationACL.php:60
 #: protected/views/organisations/organisationACL.php:67
 #: protected/views/organisations/organisationACL.php:70
-#: protected/views/organisations/organisationACL.php:70
+#: protected/views/organisations/organisationACL.php:89
 msgid   "Yorum"
 msgstr  ""
 
@@ -1531,21 +1568,22 @@ msgstr  ""
 #: protected/views/site/index.php:344 protected/views/site/index.php:345
 #: protected/views/site/index.php:325 protected/views/site/index.php:361
 #: protected/views/site/index.php:315 protected/views/site/index.php:298
-#: protected/views/site/index.php:298
+#: protected/views/site/index.php:307
 msgid   "Çalışma alanının adı"
 msgstr  ""
 
 #: protected/views/site/index.php:346 protected/views/site/index.php:347
 #: protected/views/site/index.php:327 protected/views/site/index.php:363
 #: protected/views/site/index.php:317 protected/views/site/index.php:300
-#: protected/views/site/index.php:300
+#: protected/views/site/index.php:309
 msgid   "Kitabın adı"
 msgstr  ""
 
 #: protected/views/site/index.php:348 protected/views/site/index.php:349
 #: protected/views/site/index.php:329 protected/views/site/index.php:365
 #: protected/views/site/index.php:319 protected/views/site/index.php:306
-#: protected/views/site/index.php:306
+#: protected/views/organisations/published_books.php:130
+#: protected/views/site/index.php:315
 #: protected/views/organisations/published_books.php:130
 msgid   "Yazarın adı"
 msgstr  ""
@@ -1638,6 +1676,7 @@ msgstr  ""
 #: protected/views/book/author.php:1150 protected/views/book/author.php:1153
 #: protected/views/book/author.php:1156 protected/views/book/author.php:1218
 #: protected/views/book/author.php:1221 protected/views/book/author.php:1251
+#: protected/views/book/author.php:1355
 msgid   "Slider"
 msgstr  ""
 
@@ -1645,6 +1684,7 @@ msgstr  ""
 #: protected/views/book/author.php:1151 protected/views/book/author.php:1154
 #: protected/views/book/author.php:1157 protected/views/book/author.php:1219
 #: protected/views/book/author.php:1222 protected/views/book/author.php:1252
+#: protected/views/book/author.php:1356
 msgid   "Öngörüntü Slider"
 msgstr  ""
 
@@ -1652,6 +1692,7 @@ msgstr  ""
 #: protected/views/book/author.php:1152 protected/views/book/author.php:1155
 #: protected/views/book/author.php:1158 protected/views/book/author.php:1220
 #: protected/views/book/author.php:1223 protected/views/book/author.php:1253
+#: protected/views/book/author.php:1357
 msgid   "Etiket"
 msgstr  ""
 
@@ -1731,6 +1772,7 @@ msgstr  ""
 #: protected/views/book/author.php:1169 protected/views/book/author.php:1172
 #: protected/views/book/author.php:1175 protected/views/book/author.php:1223
 #: protected/views/book/author.php:1226 protected/views/book/author.php:1256
+#: protected/views/book/author.php:1360
 msgid   "Metin Sarma"
 msgstr  ""
 
@@ -1738,6 +1780,7 @@ msgstr  ""
 #: protected/views/book/author.php:1332 protected/views/book/author.php:1335
 #: protected/views/book/author.php:1338 protected/views/book/author.php:1410
 #: protected/views/book/author.php:1413 protected/views/book/author.php:1443
+#: protected/views/book/author.php:1543
 msgid   "Öngörüntü"
 msgstr  ""
 
@@ -1746,6 +1789,7 @@ msgstr  ""
 #: protected/views/book/author.php:1735 protected/views/book/author.php:1741
 #: protected/views/book/author.php:1736 protected/views/book/author.php:1818
 #: protected/views/book/author.php:1813 protected/views/book/author.php:1844
+#: protected/views/book/author.php:1944
 msgid   "Bölüm adı"
 msgstr  ""
 
@@ -1754,6 +1798,7 @@ msgstr  ""
 #: protected/views/book/author.php:2094 protected/views/book/author.php:2113
 #: protected/views/book/author.php:2112 protected/views/book/author.php:2195
 #: protected/views/book/author.php:2190 protected/views/book/author.php:2223
+#: protected/views/book/author.php:2339
 msgid   "Öngörüntü resmi"
 msgstr  ""
 
@@ -1776,7 +1821,7 @@ msgid   "Erişim Kontrol Listesi"
 msgstr  ""
 
 #: protected/views/organisations/organisationACL.php:49
-#: protected/views/organisations/organisationACL.php:49
+#: protected/views/organisations/organisationACL.php:68
 msgid   "Tek IP"
 msgstr  ""
 
@@ -1788,41 +1833,45 @@ msgid   "Google Analytics Code"
 msgstr  ""
 
 #: protected/views/site/index.php:231 protected/views/site/index.php:250
-#: protected/views/site/index.php:250
+#: protected/views/site/index.php:253
 msgid   "Kitap Ekle"
 msgstr  ""
 
 #: protected/views/book/author.php:1370 protected/views/book/author.php:1373
 #: protected/views/book/author.php:1368 protected/views/book/author.php:1445
 #: protected/views/book/author.php:1448 protected/views/book/author.php:1478
+#: protected/views/book/author.php:1578
 msgid   "Başlık 1"
 msgstr  ""
 
 #: protected/views/book/author.php:1371 protected/views/book/author.php:1374
 #: protected/views/book/author.php:1369 protected/views/book/author.php:1446
 #: protected/views/book/author.php:1449 protected/views/book/author.php:1479
+#: protected/views/book/author.php:1579
 msgid   "Başlık 2"
 msgstr  ""
 
 #: protected/views/book/author.php:1372 protected/views/book/author.php:1375
 #: protected/views/book/author.php:1370 protected/views/book/author.php:1447
 #: protected/views/book/author.php:1450 protected/views/book/author.php:1480
+#: protected/views/book/author.php:1580
 msgid   "Başlık 3"
 msgstr  ""
 
 #: protected/views/book/author.php:1373 protected/views/book/author.php:1376
 #: protected/views/book/author.php:1371 protected/views/book/author.php:1448
 #: protected/views/book/author.php:1451 protected/views/book/author.php:1481
+#: protected/views/book/author.php:1581
 msgid   "Başlık 4"
 msgstr  ""
 
 #: protected/views/organisations/organisationACL.php:62
-#: protected/views/organisations/organisationACL.php:62
+#: protected/views/organisations/organisationACL.php:81
 msgid   "Ip 2:*"
 msgstr  ""
 
 #: protected/views/organisations/organisationACL.php:92
-#: protected/views/organisations/organisationACL.php:92
+#: protected/views/organisations/organisationACL.php:111
 msgid   "Erişim Kontrol Listesi (ACL)"
 msgstr  ""
 
@@ -1841,7 +1890,7 @@ msgid   "Mail gönderirlirken beklenmedik bir hata oluştu. Lütfen tekrar "
 msgstr  ""
 
 #: protected/views/site/index.php:315 protected/views/site/index.php:298
-#: protected/views/site/index.php:298
+#: protected/views/organisations/published_books.php:126
 #: protected/views/organisations/published_books.php:126
 msgid   "Editör veya sahibi değilsiniz"
 msgstr  ""
@@ -1852,15 +1901,15 @@ msgstr  ""
 msgid   "Kullanıcılardan Çıkar"
 msgstr  ""
 
-#: protected/views/book/author.php:96 protected/views/book/author.php:96
+#: protected/views/book/author.php:96 protected/views/book/author.php:195
 msgid   "PDF Olarak Aktar"
 msgstr  ""
 
-#: protected/views/book/author.php:97 protected/views/book/author.php:97
+#: protected/views/book/author.php:97 protected/views/book/author.php:196
 msgid   "Markette Yayınla"
 msgstr  ""
 
-#: protected/views/book/author.php:98 protected/views/book/author.php:98
+#: protected/views/book/author.php:98 protected/views/book/author.php:203
 msgid   "Epub3 Olarak Aktar"
 msgstr  ""
 
@@ -1869,22 +1918,49 @@ msgstr  ""
 msgid   "Yardım"
 msgstr  ""
 
-#: protected/views/user/invitation.php:7
+#: protected/views/user/invitation.php:7 protected/views/user/invitation.php:7
 msgid   "Davet"
 msgstr  ""
 
+#: protected/views/organisations/published_books.php:73
 #: protected/views/organisations/published_books.php:73
 msgid   "Yayından Kaldır"
 msgstr  ""
 
 #: protected/views/organisations/published_books.php:79
+#: protected/views/organisations/published_books.php:79
 msgid   "Kaldır"
 msgstr  ""
 
+#: protected/views/organisations/published_books.php:126
 #: protected/views/organisations/published_books.php:126
 msgid   "Çalışma Durumu"
 msgstr  ""
 
 #: protected/views/organisations/users.php:16
+#: protected/views/organisations/users.php:16
 msgid   "Email Adresi"
+msgstr  ""
+
+#: protected/views/site/index.php:307
+msgid   "Diğer"
+msgstr  ""
+
+#: protected/views/book/author.php:92
+msgid   "Tarayıcınız, sistemle uyumlu değil!"
+msgstr  ""
+
+#: protected/views/book/author.php:94
+msgid   "Tarayıcınız güncel olmayıp sistem tarafından kabul edilmiyor. Uyumlu "
+        "tarayıcı listesi aşağıdadır."
+msgstr  ""
+
+#: protected/views/book/author.php:96
+msgid   "Uyumlu tarayıcılardan birini yüklemek için simgelerden birini "
+        "tıklayınız."
+msgstr  ""
+
+#: protected/views/book/author.php:99
+msgid   "Bu pencereyi kapatarak devam etmek, aldığınız hizmet kalitesinde "
+        "ciddi bir etki yaratacaktır."
 msgstr  ""
