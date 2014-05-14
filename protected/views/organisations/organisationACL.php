@@ -15,8 +15,65 @@
 
 		});
 
-		$('.alert').bind('closed.bs.alert', function (event,ui) {
-  			var id_acl=$(this).find(".close").data().id;
+		$('.close').bind('click', function (event,ui) {
+			var id=$(this).data("id");
+			var target=$(this).data("target");
+			console.log(target);
+			if(target=='#addAcl')
+			{
+				var data=JSON.parse(atob(id));
+				var data_id=data.id;
+				var data_name=data.name;
+				var data_type=data.type;
+				var data_val1=data.val1;
+				var data_val2=data.val2;
+				var data_comment=data.comment;
+
+
+				$('#acl').find('[name=name]').val(data_name);
+				$('#acl').find('[name=val1]').val(data_val1);
+				$('#acl').find('[name=val2]').val(data_val2);
+				$('#acl').find('[name=comment]').val(data_comment);
+				$('#acl').find('[name=status]').val(data_id);
+				$.each($('#acl').find('[name=type]'),function(i,val){$(val).parent();
+					if(data_type==val.value){
+						$(val).parent().addClass('checked');
+
+					}
+					else
+					{
+						$(val).parent().removeClass('checked');
+					}
+				});
+
+				//$.each($('#acl').find('[name=type]'),function(i,val){console.log(val.value);});
+			}
+			else if(target=='#confirmation'){
+				console.log('fssdf');
+				$("#remove_ok").attr("data-id",id);
+			}
+
+		});
+
+		function clearForm(){
+			$('#acl').find('[name=name]').val("");
+			$('#acl').find('[name=val1]').val("");
+			$('#acl').find('[name=val2]').val("");
+			$('#acl').find('[name=comment]').val("");
+			$('#acl').find('[name=status]').val("");
+		}
+
+		$('#confirmation').on('hidden.bs.modal', function () {
+    		clearForm();
+		});
+		$('#addAcl').on('hidden.bs.modal', function () {
+    		clearForm();
+		});
+		$('#remove_ok').bind('click', function (event,ui) {
+			var id_acl =$(this).data("id");
+			console.log(id_acl);
+			
+
   			var organisation_id="<?php echo $organisation_id; ?>";
   			console.log(id_acl);
   			$.ajax(
@@ -46,6 +103,7 @@
 		</div>
 		<div class="modal-body">
 		 	<form id="acl" method="post" class="form-horizontal">
+		 		<input type="hidden" name="status" value="">
 				<div class="form-group">
 					<label class="control-label col-md-3" for="name"><?php _e('İsim'); ?><span class="required">*</span></label>
 					<div class="col-md-4">
@@ -116,6 +174,47 @@
  
 <!-- POPUP END -->
 
+<!--Confirmation starts-->
+<!--
+<div class="modal fade in" id="box-config-1" tabindex="-1" role="dialog" aria-labelledby="myModalLabelx" aria-hidden="false" style="display: block;">
+<div class="modal-dialog">
+  <div class="modal-content">
+	<div class="modal-header">
+	  <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+	  <h4 class="modal-title">Box Settings</h4>
+	</div>
+	<div class="modal-body">
+	  Here goes box setting content.
+	</div>
+	<div class="modal-footer">
+	  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+	  <button type="button" class="btn btn-primary">Save changes</button>
+	</div>
+  </div>
+</div>
+</div>
+-->
+
+<div class="modal fade" id="confirmation" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+	  <div class="modal-content">
+		<div class="modal-header">
+		  <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+		  <h4 class="modal-title"><?php _e("ACL Ekle"); ?></h4>
+		</div>
+		<div class="modal-body">
+		Silmek istediğinizden emin misiniz?
+		</div>
+	      <div class="modal-footer">
+	      	<button type="button" id="remove_ok" class="btn btn-primary" data-id="" id="remove_acl"><?php _e("Evet"); ?></button>
+	        <button type="button" class="btn btn-default" data-dismiss="modal"><?php _e("Hayır"); ?></button>
+	      </div>
+		</div>
+	 </div>
+</div>
+
+<!--Confirmation ends-->
+
 <div id="content" class="col-lg-12">
 <!-- PAGE HEADER-->
 <div class="row">
@@ -128,6 +227,7 @@
 		</div>
 	</div>
 </div>
+
 
 <div class="row">
 
@@ -196,9 +296,14 @@
 			?>
 			
 			<div class="alert alert-block alert-info fade in" style="margin:20px;">
+				<!--
 				<a class="close" data-id="<?php echo $acl['id']; ?>" data-dismiss="alert" href="#" aria-hidden="true">
 					×
-				</a>
+				</a>-->
+
+				<a class="fa fa-times-circle close" data-id="<?php echo $acl['id']; ?>" data-toggle="modal" data-target="#confirmation"></a>
+				<a class="fa fa-edit close" data-id="<?php echo base64_encode(json_encode($acl)); ?>" style="margin-right:5px" data-toggle="modal" data-target="#addAcl"></a>
+				
 
 				<p></p>
 
@@ -254,7 +359,7 @@
 </div>
 <!-- /PAGE HEADER -->
 <script type="text/javascript">
-var type;
+var type='IPRange';
 var name;
 var val1;
 var val2;
@@ -302,6 +407,7 @@ $(document).on("click","#add_acl",function(e){
 	val1=$('[name="val1"]').val();
 	val2=$('[name="val2"]').val();
 	comment=$('[name="comment"]').val();
+	status =$('[name="status"]').val();
 	var error=0;
 	var error2=0;
 	var error3=0;
@@ -393,6 +499,12 @@ $(document).on("click","#add_acl",function(e){
 		item5.name='comment';
 		item5.value=comment;
 		data.push(item5);
+
+		item6={};
+		item6.name='status';
+		console.log(status);
+		item6.value=status;
+		data.push(item6);
 		
 
 		data=JSON.stringify(data);
