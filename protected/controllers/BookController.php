@@ -36,7 +36,7 @@ class BookController extends Controller
 				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
-				'actions'=>array('create','update','selectTemplate','delete','view','author','newBook','selectData','uploadFile','duplicateBook','updateCover',"copyBook","createTemplate","updateBookTitle","getBookPages",'bookCreate','getTemplates','createNewBook','fastStyle','getFastStyle','updateThumbnail'),
+				'actions'=>array('create','update','selectTemplate','delete','view','author','newBook','selectData','uploadFile','duplicateBook','updateCover',"copyBook","createTemplate","updateBookTitle","getBookPages",'bookCreate','getTemplates','createNewBook','fastStyle','getFastStyle','updateThumbnail','manageDemo'),
 				'users'=>array('@'),
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
@@ -676,6 +676,38 @@ class BookController extends Controller
 
 	}
 	
+	public function actionManageDemo()
+	{
+		$organisation_id="SZaFaR3cwct6PrEJmUibyJV6lHFnrNOrH5HGKdMq5l4B";
+		$workspace_id="ghwj7r2jeSIcisP6k2WB0ZmZCPNcqG2pe8crTx6EEaTS";
+		$budget=$this->getOrganisationBudget($organisation_id);
+		$budget=($budget[4]['amount'])?$budget[4]['amount']:'0' ;
+		$addBudgetAmount=100-$budget;
+		if ($addBudgetAmount>10) {
+			$addBudget = Yii::app()->db->createCommand("INSERT INTO `transactions`(`transaction_id`, `transaction_type`, `transaction_method`, `transaction_amount`, `transaction_unit_price`, `transaction_amount_equvalent`, `transaction_currency_code`, `transaction_result`,`transaction_organisation_id`)
+																				VALUES ('".functions::new_id(30)."','epub','deposit',".$addBudgetAmount.",0,0,840,0,'".$organisation_id."')")->queryRow();
+		}
+
+		$templates=array("5XnjyrR4UFgxiVdP62GnrXRb2aNbDUlWdGiZaWUXdfew","pcRva5dQ93puNONLkSfXnMyR7jYN1yNcU1nSM47AquPG","wy7QLbapB2H2k5IzJXANBkdTterGK1Cm7cYOEW6g0Tgo");
+		
+		$workspaces=OrganisationWorkspaces::model()->findAll('organisation_id=:organisation_id',array('organisation_id'=>$organisation_id));
+		foreach ($workspaces as $key => $workspace) {
+			$workspace_books= Book::model()->findAll('workspace_id=:workspace_id AND (publish_time IS NULL OR publish_time=0)', 
+		    				array(':workspace_id' => $workspace->workspace_id) );
+			foreach ($workspace_books as $key => $book) {
+				$book->delete();
+			}
+		}
+
+
+		foreach ($templates as $key => $template) {
+			$this->duplicateBook($template,$workspace_id);
+		}
+
+
+	}
+
+
 	public function actionCopyBook($bookId,$workspaceId,$title=null)
 	{
 		if ($bookId & $workspaceId) {

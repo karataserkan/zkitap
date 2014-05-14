@@ -122,8 +122,8 @@ console.log(this.options.component);
 
 var createImageComponent = function ( event, ui ,oldcomponent) {
 
-  var marker = window.base_path+'/css/popupmarker.png';
-  var video_marker=window.base_path+'/css/image_play_trans.png';
+  var marker = window.base_path+'/css/popupmarker.svg';
+  var video_marker=window.base_path+'/css/image_play_trans.svg';
   var image_width_height = '';
   var image_type_image = function(){
       var image_type = $('input[name=image_type]:checked').val();
@@ -300,7 +300,7 @@ var createImageComponent = function ( event, ui ,oldcomponent) {
         imageBinary = _file.target.result;      
         //console.log(top);
         //$("#images-add-dummy-close-button").trigger('click');
-        if(image_type == 'popup') image_width_height = '80%';
+        if(image_type == 'popup') {image_width_height = '80px';image_height='80px';image_width='80px';}
         else image_width_height = '100%';
 
         component = {
