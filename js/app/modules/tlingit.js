@@ -115,10 +115,10 @@ window.lindneo.tlingit = (function(window, $, undefined){
     $.each(components, function(i, val){
       
 
-      //console.log(val.type);
+      console.log(val.page_id);
       if(val.type === "page"){
-        
-        $.each(pages, function(index, value){
+        console.log(window.lindneo.tlingit.pages);
+        $.each(window.lindneo.tlingit.pages, function(index, value){
           //console.log(value);
           //console.log(val);
           if(value.page_id == val.page_id){

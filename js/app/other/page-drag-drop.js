@@ -374,6 +374,7 @@ $( document ).ready(function () {
       //get page id from parent li 
       var page_id = $(this).parent().attr('page_id') ;
       sortPages();
+      console.log(window.lindneo.tlingit.pages);
       //Load Page
       window.lindneo.tlingit.loadPage(page_id);
 
@@ -570,6 +571,7 @@ $( document ).ready(function () {
     $('#chapters_pages_view .page').each(function(e){
       if(pageNum==0) window.lindneo.tlingit.pages=[];
       pageNum++;
+      console.log({"page_id": $(this).attr('page_id'), "page_num": pageNum});
       window.lindneo.tlingit.pages.push({"page_id": $(this).attr('page_id'), "page_num": pageNum});
       $(this).find('.page-number').html(pageNum);
       //console.log($(this).attr('page_id'));
