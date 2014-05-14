@@ -218,13 +218,39 @@ class OrganisationsController extends Controller
 		$this->redirect(array('bookCategories','id'=>$organisationId));
 	}
 
+	public function getOrganisationEpubBudget($id)
+	{
+		$budget = Yii::app()->db->createCommand("select transaction_type, transaction_organisation_id,  SUM(amount)  as amount 
+			from ( select transaction_type, transaction_organisation_id, transaction_currency_code, SUM(transaction_amount) as amount , SUM(transaction_amount_equvalent) as amount_equvalent  
+		from transactions 
+		where transaction_result = 0 and transaction_method = 'deposit'  
+		group by transaction_type, transaction_organisation_id  
+		Union select transaction_type, transaction_organisation_id, transaction_currency_code,  -1 * SUM(transaction_amount) as amount , -1 * SUM(transaction_amount_equvalent) as amount_equvalent  
+		from transactions where transaction_result = 0 and transaction_method = 'withdrawal'  group by transaction_type, transaction_organisation_id, transaction_currency_code ) as tables 
+		group by transaction_type, transaction_organisation_id")->queryAll();
+
+		$amount=0;
+		foreach ($budget as $key => $tr) {
+			if ($tr['transaction_organisation_id']!=$id || $tr['transaction_type']!='epub')
+				{
+					unset($budget[$key]);
+				}
+				else{
+					$amount=$tr['amount'];
+				}
+		}
+
+
+		return $amount;
+	}
+	
 	public function actionAccount($id)
 	{
 		$books = Yii::app()->db->createCommand("SELECT count(*) as book FROM `book` b WHERE b.`workspace_id`=(select workspace_id from organisation_workspaces w where w.organisation_id='".$id."' and w.`workspace_id`=b.`workspace_id`)")->queryRow();
 		$workspaces=Yii::app()->db->createCommand("SELECT count(*) as w FROM `organisation_workspaces` WHERE `organisation_id`='".$id."'")->queryRow();
 		$hosts=Yii::app()->db->createCommand("SELECT count(*) as w FROM `organisation_hostings` WHERE `organisation_id`='".$id."'")->queryRow();
 		$category=Yii::app()->db->createCommand("SELECT count(*) as w FROM `book_categories` WHERE `organisation_id`='".$id."'")->queryRow();
-		$budget=$this->getOrganisationBudget($id);
+		$budget=$this->getOrganisationEpubBudget($id);
 
 		$this->render("account",array('book'=>$books['book'],'workspace'=>$workspaces['w'],'host'=>$hosts['w'],'category'=>$category['w'],'budget'=>$budget,'id'=>$id));
 	}
