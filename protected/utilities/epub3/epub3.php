@@ -20,7 +20,7 @@ class epub3 {
 	public $errors=null;
 	public $book ;
 	public $extraOpf='';
-	public current_page_number =-1;
+	public $current_page_number =-1;
 
 	public function error($domain='EditorActions',$explanation='Error', $arguments=null,$debug_vars=null ){
 			$error=new error($domain,$explanation, $arguments,$debug_vars);
