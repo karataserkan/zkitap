@@ -3,6 +3,18 @@
 		App.setPage("gallery");  //Set current page
 		App.init(); //Initialise plugins and elements
 
+		$('#acl_info_box_event').click(function(){
+			var box=$('#acl_info_box');
+			console.log(box.css('display'));
+			if(box.css('display')=='none')
+				box.css({'display':'block'});
+			else
+				box.css({'display':'none'});
+
+
+
+		});
+
 		$('.alert').bind('closed.bs.alert', function (event,ui) {
   			var id_acl=$(this).find(".close").data().id;
   			var organisation_id="<?php echo $organisation_id; ?>";
@@ -18,6 +30,7 @@
 					  		function( msg ) 
 					  		{
 					    		console.log("access control list removed!");
+					    		location.reload();
 					  		}
 				  		);
 		});
@@ -115,12 +128,70 @@
 		</div>
 	</div>
 </div>
+
+<div class="row">
+
+<div class="box border blue" style="margin:20px;">
+	<div id="acl_info_box_event" class="box-title">
+		<h4 style="text-shadow:none"><i class="fa fa-info-circle"></i>ACL hakkında bilgiler!</h4>
+		<div class="tools">
+				<i class="fa fa-chevron-down"></i>
+		</div>
+	</div>
+	<div  id="acl_info_box" class="box-body big" style="display: none;">
+		<div class="jumbotron">
+		  <h2>Erişim kontrol listesi(ACL),</h2>
+		  <p>yayınlanan eserlerinizin erişimine bazı kıstaslar eklenmesini sağlar. Bu kıstaslar, 3 ana grup altında toplanmıştır.</p>
+		</div>
+		
+		<div class="jumbotron">
+		  <p>1-Yayınlanan eserlerin sadece bir statik ip adresinden erişilebilmesine olanak sağlar. Örnek, 94.103.32.80</p>
+		  <p><a href="http://tr.wikipedia.org/wiki/IP_adresi" class="btn btn-primary btn-lg" target="_blank" role="button">IP hakkında genel bilgi için</a></p>
+		</div>
+
+		<div class="jumbotron">
+		  <p>2-Yayınlanan eserlerin sadece verilen 2 ip adresi arasındaki tüm ip adreslerinden erişilebilmesine olanak sağlar. Örnek, <br><br>ip adresi 1: 94.103.35.20<br>ip adresi 2: 94.103.35.25<br><br>Erişime izin verilen ip adresleri listesi:
+		  <br>
+			  <ul>
+			  	<li>94.103.35.20</li>
+			  	<li>94.103.35.21</li>
+			  	<li>94.103.35.22</li>
+			  	<li>94.103.35.23</li>
+			  	<li>94.103.35.24</li>
+			  	<li>94.103.35.25</li>
+			  </ul>
+			  </p>
+		</div>
+
+		<div class="jumbotron">
+		  <p>3-Bir İnternet Servis Sağlayıcısı tarafından size tahsis edilen bir alt ağa ait ip adreslerinden yayınlanan eserlerin erişimini sağlar. Örnek, <br><br>Ağ adresi: 192.103.35.16<br>Alt Ağ maskesi:255.255.255.248<br><br>Erişime izin verilen ip adresleri listesi:
+		  		<ul>
+		  			<li>192.103.35.16</li>
+		  			<li>192.103.35.17</li>
+		  			<li>192.103.35.18</li>
+		  			<li>192.103.35.19</li>
+		  			<li>192.103.35.20</li>
+		  			<li>192.103.35.21</li>
+		  			<li>192.103.35.21</li>
+		  			<li>192.103.35.23</li>
+		  		</ul>
+		  </p>
+		  <p><a href="http://tr.wikipedia.org/wiki/Alt_a%C4%9F_maskesi" class="btn btn-primary btn-lg" target="_blank" role="button">Alt ağ maskesi hakkında genel bilgi için</a></p>
+		</div>
+
+
+	</div>
+</div>
+
+
+
+</div>
 <div class="row">
 
 <?php
-	if ($acls) {
-		 
+	if ($acls){
 		$acls=json_decode($acls,true);
+		if(!empty($acls)){
 		foreach ($acls as $key => $acl) {
 			?>
 			
@@ -132,17 +203,29 @@
 				<p></p>
 
 				<h4>
-					<i class="fa fa-check-square-o"></i> 
+					<i class="fa fa-lock"></i> 
 					<?php echo $acl['name']; ?> | <?php echo $acl['type'];?>
 				</h4>
-					<?php echo $acl['val1']; ?>-<?php echo $acl['val1']; ?><br>
+					<?php echo $acl['val1']; ?>-<?php echo $acl['val2']; ?><br>
 					<?php echo $acl['comment']; ?>
 				<p></p>
 			</div>
 
 			<?php
+			}
 		}
-	} 
+	else
+	{
+		?>
+		<div class="alert alert-block alert-warning fade in" style="margin:20px;">
+				<p></p><h4><i class="fa fa-exclamation-circle"></i> Uyarı</h4>Henüz herhangi bir Erişim Kontrol Listesi oluşturulmamış. Bu durum, yayınlanan eserlerin doğrulanmış ve(ya) yetkili kişiler tarafından ip adresi sınırlandırması olmadan erişmesine sebep olacaktır.<p></p>
+		</div>
+<?php
+	}
+
+
+	}
+
 ?>
 
 
@@ -207,9 +290,9 @@ $(document).on("click",".SelectType",function(e){
 
 	$(".SelectType span").removeClass("checked");
 	$(this).children("span").addClass("checked");
-	type=$(this).children("span").children("input").val();
+	type=$(this).children().children().val();
 });
-
+ 
 function validate(str)
 {
     return /^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])$|^(([a-fA-F]|[a-fA-F][a-fA-F0-9\-]*[a-fA-F0-9])\.)*([A-Fa-f]|[A-Fa-f][A-Fa-f0-9\-]*[A-Fa-f0-9])$|^\s*((([0-9A-Fa-f]{1,4}:){7}([0-9A-Fa-f]{1,4}|:))|(([0-9A-Fa-f]{1,4}:){6}(:[0-9A-Fa-f]{1,4}|((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3})|:))|(([0-9A-Fa-f]{1,4}:){5}(((:[0-9A-Fa-f]{1,4}){1,2})|:((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3})|:))|(([0-9A-Fa-f]{1,4}:){4}(((:[0-9A-Fa-f]{1,4}){1,3})|((:[0-9A-Fa-f]{1,4})?:((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3}))|:))|(([0-9A-Fa-f]{1,4}:){3}(((:[0-9A-Fa-f]{1,4}){1,4})|((:[0-9A-Fa-f]{1,4}){0,2}:((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3}))|:))|(([0-9A-Fa-f]{1,4}:){2}(((:[0-9A-Fa-f]{1,4}){1,5})|((:[0-9A-Fa-f]{1,4}){0,3}:((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3}))|:))|(([0-9A-Fa-f]{1,4}:){1}(((:[0-9A-Fa-f]{1,4}){1,6})|((:[0-9A-Fa-f]{1,4}){0,4}:((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3}))|:))|(:(((:[0-9A-Fa-f]{1,4}){1,7})|((:[0-9A-Fa-f]{1,4}){0,5}:((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3}))|:)))(%.+)?\s*$/.test(str);
