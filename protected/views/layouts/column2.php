@@ -114,9 +114,9 @@
 					</li>
 					
 					<li>
-						<a href="#">
+						<a href="/user/profile">
 							<i class="fa fa-user fa-fw"></i> <span class="menu-text">
-							Hesabım
+							Profil
 						</span>
 						</a>
 					</li>

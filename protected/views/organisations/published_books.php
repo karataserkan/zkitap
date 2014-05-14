@@ -103,7 +103,9 @@ $workspaces=$this->getUserWorkspaces();
 <div id="filter-items" class="mybooks_page_book_filter row">
 <?php
 $userid=Yii::app()->user->id;
-		foreach ($books as $key2 => $book) { ?>
+		foreach ($books as $key2 => $book) { 
+			$userType = $this->userType($book->book_id);
+			?>
 			<div class="reader_book_card">
 	         <div class="reader_book_card_book_cover">
 	         
