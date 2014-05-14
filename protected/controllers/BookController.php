@@ -471,6 +471,14 @@ class BookController extends Controller
 				}
 				$model->setPageSize($bookSize[0],$bookSize[1]);
 				if ($model->save()) {
+					$userid=Yii::app()->user->id;
+					$addOwner = Yii::app()->db->createCommand();
+					$addOwner->insert('book_users', array(
+					    'user_id'=>$userid,
+					    'book_id'=>$model->book_id,
+					    'type'   =>'owner'
+					));
+					
 					$this->redirect('/book/author/'.$model->book_id);
 				}				
 				//{"book_type":"pdf","size":{"width":1275,"height":1650}}
@@ -676,13 +684,15 @@ class BookController extends Controller
 
 	}
 	
+	//demo hesabını düzenlemek için
+	//hatalı fonksiyon şimdilik
 	public function actionManageDemo()
 	{
 		$organisation_id="SZaFaR3cwct6PrEJmUibyJV6lHFnrNOrH5HGKdMq5l4B";
 		$workspace_id="ghwj7r2jeSIcisP6k2WB0ZmZCPNcqG2pe8crTx6EEaTS";
 		$budget=$this->getOrganisationBudget($organisation_id);
 		$budget=($budget[4]['amount'])?$budget[4]['amount']:'0' ;
-		$addBudgetAmount=100-$budget;
+		$addBudgetAmount=(100- (int) $budget);
 		if ($addBudgetAmount>10) {
 			$addBudget = Yii::app()->db->createCommand("INSERT INTO `transactions`(`transaction_id`, `transaction_type`, `transaction_method`, `transaction_amount`, `transaction_unit_price`, `transaction_amount_equvalent`, `transaction_currency_code`, `transaction_result`,`transaction_organisation_id`)
 																				VALUES ('".functions::new_id(30)."','epub','deposit',".$addBudgetAmount.",0,0,840,0,'".$organisation_id."')")->queryRow();

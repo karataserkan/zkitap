@@ -2,6 +2,25 @@
 	jQuery(document).ready(function() {		
 		App.setPage("gallery");  //Set current page
 		App.init(); //Initialise plugins and elements
+
+		$('.alert').bind('closed.bs.alert', function (event,ui) {
+  			var id_acl=$(this).find(".close").data().id;
+  			var organisation_id="<?php echo $organisation_id; ?>";
+  			console.log(id_acl);
+  			$.ajax(
+	  					{
+					  		type: "GET",
+					  		url: "/organisations/deleteACL/"+organisation_id,
+					  		data: { acl_id: id_acl }
+						}
+				  )
+				  .done(
+					  		function( msg ) 
+					  		{
+					    		console.log("access control list removed!");
+					  		}
+				  		);
+		});
 	});
 </script>
 <!-- POPUP EDITORS -->
@@ -54,7 +73,7 @@
 				<div class="form-group">
 					<label class="control-label col-md-3" for="val1"><?php _e('Ip 1: '); ?><span class="required">*</span></label>
 					<div class="col-md-4">
-						<input class="form-control checkIp" name="val1" type="text" placeholder="123.123.123.123">															
+						<input class="form-control checkIp" name="val1" type="text" placeholder="255.255.255.255">															
 					</div>
 					<label id="val1error" class="control-label col-md-3"></label>
 				</div>
@@ -97,7 +116,39 @@
 	</div>
 </div>
 <div class="row">
+
 <?php
+	if ($acls) {
+		 
+		$acls=json_decode($acls,true);
+		foreach ($acls as $key => $acl) {
+			?>
+			
+			<div class="alert alert-block alert-info fade in" style="margin:20px;">
+				<a class="close" data-id="<?php echo $acl['id']; ?>" data-dismiss="alert" href="#" aria-hidden="true">
+					×
+				</a>
+
+				<p></p>
+
+				<h4>
+					<i class="fa fa-check-square-o"></i> 
+					<?php echo $acl['name']; ?> | <?php echo $acl['type'];?>
+				</h4>
+					<?php echo $acl['val1']; ?>-<?php echo $acl['val1']; ?><br>
+					<?php echo $acl['comment']; ?>
+				<p></p>
+			</div>
+
+			<?php
+		}
+	} 
+?>
+
+
+
+<?php
+/*
 	if ($acls) {
 		 
 		$acls=json_decode($acls,true);
@@ -115,7 +166,7 @@
 			<br><hr>
 			<?php
 		}
-	} 
+	}*/ 
 ?>
 </div>
 <!-- /PAGE HEADER -->
@@ -133,24 +184,24 @@ $(document).on("click",".SelectType",function(e){
 		$('[name="val2"]').show();
 		$('[for="val2"]').show();
 		$('[for="val2"]').text("Ip 2:*");
-		var IPRange = true;
-		var Network = false;
+		IPRange = true;
+		Network = false;
 		$('#val2error').show();
 	};
 	if ($(this).attr("id")=="uniform-2") {
 		$('[name="val2"]').show();
 		$('[for="val2"]').show();
 		$('[for="val2"]').text("Mask:*");
-		var IPRange = false;
-		var Network = true;
+		IPRange = false;
+		Network = true;
 		$('#val2error').show();
 	};
 	if ($(this).attr("id")=="uniform-3") {
 		val2=0;
 		$('[name="val2"]').hide();
 		$('[for="val2"]').hide();
-		var IPRange = false;
-		var Network = false;
+		IPRange = false;
+		Network = false;
 		$('#val2error').hide();
 	};
 
