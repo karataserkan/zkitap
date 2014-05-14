@@ -2,6 +2,25 @@
 	jQuery(document).ready(function() {		
 		App.setPage("gallery");  //Set current page
 		App.init(); //Initialise plugins and elements
+
+		$('.alert').bind('closed.bs.alert', function (event,ui) {
+  			var id_acl=$(this).find(".close").data().id;
+  			var organisation_id="<?php echo $organisation_id; ?>";
+  			console.log(id_acl);
+  			$.ajax(
+	  					{
+					  		type: "GET",
+					  		url: "/organisations/deleteACL/"+organisation_id,
+					  		data: { acl_id: id_acl }
+						}
+				  )
+				  .done(
+					  		function( msg ) 
+					  		{
+					    		console.log("access control list removed!");
+					  		}
+				  		);
+		});
 	});
 </script>
 <!-- POPUP EDITORS -->
@@ -97,7 +116,39 @@
 	</div>
 </div>
 <div class="row">
+
 <?php
+	if ($acls) {
+		 
+		$acls=json_decode($acls,true);
+		foreach ($acls as $key => $acl) {
+			?>
+			
+			<div class="alert alert-block alert-info fade in" style="margin:20px;">
+				<a class="close" data-id="<?php echo $acl['id']; ?>" data-dismiss="alert" href="#" aria-hidden="true">
+					×
+				</a>
+
+				<p></p>
+
+				<h4>
+					<i class="fa fa-check-square-o"></i> 
+					<?php echo $acl['name']; ?> | <?php echo $acl['type'];?>
+				</h4>
+					<?php echo $acl['val1']; ?>-<?php echo $acl['val1']; ?><br>
+					<?php echo $acl['comment']; ?>
+				<p></p>
+			</div>
+
+			<?php
+		}
+	} 
+?>
+
+
+
+<?php
+/*
 	if ($acls) {
 		 
 		$acls=json_decode($acls,true);
@@ -115,7 +166,7 @@
 			<br><hr>
 			<?php
 		}
-	} 
+	}*/ 
 ?>
 </div>
 <!-- /PAGE HEADER -->
@@ -268,7 +319,7 @@ $(document).on("click","#add_acl",function(e){
 		  data: {acl:data}
 		}).done(function(res){
 			console.log(res);
-			window.location.assign('/organisations/aCL/<?php echo $organisation_id ?>');
+			//window.location.assign('/organisations/aCL/<?php echo $organisation_id ?>');
 		});
 	};
 
