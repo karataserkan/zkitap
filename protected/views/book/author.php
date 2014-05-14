@@ -196,12 +196,13 @@ $current_user=User::model()->findByPk(Yii::app()->user->id);
 			         <li><a href="<?php echo $this->createUrl("EditorActions/publishBook/", array('bookId' => $model->book_id ));?>"> <i class="icon-doc-inv"></i><?php _e("Markette Yayınla"); ?></i></a></li>
 			         <li>
 			         	<?php
+			         	echo $budget;
 			         		if ($budget==0) {
 			         			
 			         		}else{
 			         	 ?>
-			         	<a href="<?php echo $this->createUrl("EditorActions/ExportBook", array('bookId' => $model->book_id ));?>"><i class="icon-publish"></i><?php _e("Epub3 Olarak Aktar"); ?></a>
 			         	<?php } ?>
+			         	<a href="<?php echo $this->createUrl("EditorActions/ExportBook", array('bookId' => $model->book_id ));?>"><i class="icon-publish"></i><?php _e("Epub3 Olarak Aktar"); ?></a>
 			         </li>
 
 					</ul>
