@@ -161,10 +161,36 @@ class SiteController extends Controller
 		$this->render('index',array('workspaces'=>$workspaces));
 	}
 
+	public function getOrganisationEpubBudget($id)
+	{
+		$budget = Yii::app()->db->createCommand("select transaction_type, transaction_organisation_id,  SUM(amount)  as amount 
+			from ( select transaction_type, transaction_organisation_id, transaction_currency_code, SUM(transaction_amount) as amount , SUM(transaction_amount_equvalent) as amount_equvalent  
+		from transactions 
+		where transaction_result = 0 and transaction_method = 'deposit'  
+		group by transaction_type, transaction_organisation_id  
+		Union select transaction_type, transaction_organisation_id, transaction_currency_code,  -1 * SUM(transaction_amount) as amount , -1 * SUM(transaction_amount_equvalent) as amount_equvalent  
+		from transactions where transaction_result = 0 and transaction_method = 'withdrawal'  group by transaction_type, transaction_organisation_id, transaction_currency_code ) as tables 
+		group by transaction_type, transaction_organisation_id")->queryAll();
+
+		$amount=0;
+		foreach ($budget as $key => $tr) {
+			if ($tr['transaction_organisation_id']!=$id || $tr['transaction_type']!='epub')
+				{
+					unset($budget[$key]);
+				}
+				else{
+					$amount=$tr['amount'];
+				}
+		}
+
+
+		return $amount;
+	}
+
 	public function actionDashboard()
 	{
 		$meta_books= Yii::app()->db
-		    ->createCommand("SELECT * FROM user_meta WHERE user_id=:user_id AND meta_key=:meta_key ORDER BY created DESC LIMIT 4")
+		    ->createCommand("SELECT * FROM user_meta WHERE user_id=:user_id AND meta_key=:meta_key ORDER BY created DESC LIMIT 7")
 		    ->bindValues(array(':user_id' => Yii::app()->user->id, ':meta_key' => 'lastEditedBook'))
 		    ->queryAll();
 		 if ($meta_books) {
@@ -173,8 +199,30 @@ class SiteController extends Controller
 			 }		 	
 		 }
 
-		
-		$this->render('dashboard',array('books'=>$books));
+		 $userId=Yii::app()->user->id;
+
+
+		$organisation=Yii::app()->db->createCommand("SELECT count(*) as n FROM `organisation_users` WHERE `user_id`='".$userId."'")->queryRow();
+		$book=Yii::app()->db->createCommand("SELECT count(*) as n FROM `book_users` WHERE `user_id`='".$userId."'")->queryRow();
+		$workspace=Yii::app()->db->createCommand("SELECT count(*) as n FROM `workspaces_users` WHERE `userid`='".$userId."'")->queryRow();
+
+		$hostN=0;
+		$categoryN=0;
+		$budgetN=0;
+
+		$organisations=Yii::app()->db->createCommand("SELECT * FROM `organisation_users` WHERE `user_id`='".$userId."'")->queryAll();
+		foreach ($organisations as $key => $org) {
+			$organisationId=$org['organisation_id'];
+			$host=Yii::app()->db->createCommand("SELECT count(*) as n FROM `organisation_hostings` WHERE `organisation_id`='".$organisationId."'")->queryRow();
+			$category=Yii::app()->db->createCommand("SELECT count(*) as n FROM `book_categories` WHERE `organisation_id`='".$organisationId."'")->queryRow();
+			$budget=$this->getOrganisationEpubBudget($organisationId);
+			$budgetN+=$budget;
+			$categoryN+=$category['n'];
+			$hostN+=$host['n'];
+		}
+
+
+		$this->render('dashboard',array('books'=>$books,'organisation'=>$organisation['n'],'book'=>$book['n'],'workspace'=>$workspace['n'],'host'=>$hostN,'budget'=>$budgetN,'category'=>$categoryN));
 	}
 
 	public function actionRemoveUser($userId,$bookId)
