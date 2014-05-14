@@ -25,7 +25,7 @@ $this->breadcrumbs=array(
 <div class="login_linden_information_text">Seviye Dijital <font style="color:#FFC">Linden Dijital Yayıncılık A.Ş.</font> Tarafından Hazırlanmıştır. <br /> Bizi daha yakından tanımak için logomuza tıklayın.</div>
 </a>
 </div>
-<!--- END OF login_linden_information ----->
+<!--- END OF login_linden_information -->
 
 
 
@@ -62,6 +62,9 @@ $this->breadcrumbs=array(
 
 									<form role="form">
 									  <div class="form-group">
+									  	<?php if ($loginError) {
+								    		echo '<h4 class="alert alert-danger">'.$loginError.'</h4>';
+								    	}?>
 										<label for="exampleInputEmail1"><?php _e("E-Posta"); ?></label>
 										<i class="fa fa-envelope"></i>
 										<?php echo $form->textField($model,'email'); ?>										
