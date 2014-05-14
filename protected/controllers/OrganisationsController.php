@@ -78,8 +78,7 @@ class OrganisationsController extends Controller
 	{
 		if (isset($_POST['acl'])) {
 			$data=json_decode($_POST['acl'],true);
-
-			$this->addACL($id,$data[0]['value'],$data[2]['value'],$data[3]['value'],$data[1]['value'],$data[4]['value']);
+			$this->addACL($id,$data[0]['value'],$data[2]['value'],$data[3]['value'],$data[1]['value'],$data[4]['value'],$data[5]['value']);
 		}
 		
 	}
@@ -113,7 +112,7 @@ class OrganisationsController extends Controller
 		 return $acls['value'];
 	}
 
-	public function addACL($id,$name,$val1,$val2,$type,$comment){
+	public function addACL($id,$name,$val1,$val2,$type,$comment,$status){
 		$Acl=$this->getACL($id);
 		if ($Acl) {
 			$ACLs=json_decode($Acl);
@@ -128,16 +127,33 @@ class OrganisationsController extends Controller
 ,			));
 			$ACLs=array();
 		}
-		$acl_id=functions::new_id(10);
-		$newAcl['id']=$acl_id;
-		$newAcl['name']=$name;
-		$newAcl['type']=$type;
-		$newAcl['val1']=$val1;
-		$newAcl['val2']=$val2;
-		$newAcl['comment']=$comment;
-
-		$ACLs[]=$newAcl;
-
+		$found_flag=false;
+		$new_ACLs=array();
+		foreach ($ACLs as $ACL_item) {
+			if(($ACL_item->id)==$status)
+			{
+				$found_flag=true;
+				$ACL_item->id=$status;
+				$ACL_item->name=$name;
+				$ACL_item->type=$type;
+				$ACL_item->val1=$val1;
+				$ACL_item->val2=$val2;
+				$ACL_item->comment=$comment;
+			}
+			$new_ACLs[]=$ACL_item;
+		}
+		$ACLs=$new_ACLs;
+		if(!$found_flag)
+		{
+			$acl_id=functions::new_id(10);
+			$newAcl['id']=$acl_id;
+			$newAcl['name']=$name;
+			$newAcl['type']=$type;
+			$newAcl['val1']=$val1;
+			$newAcl['val2']=$val2;
+			$newAcl['comment']=$comment;
+			$ACLs[]=$newAcl;
+		}
 		$lastACLs=json_encode($ACLs);
 
 		$updateOrganisationMeta = Yii::app()->db->createCommand();
