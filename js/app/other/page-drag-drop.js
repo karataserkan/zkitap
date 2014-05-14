@@ -24,9 +24,8 @@ $( document ).ready(function () {
   */
   $(':checkbox').change(function() {
     var is_checked = $('input:checkbox[name=cetvel]:checked').val();
-    console.log(is_checked);
+    //console.log(is_checked);
     if(is_checked == "on"){
-      console.log('deneme dene denem');
       $('.ruler, .vruler').show();
     }
     else 
@@ -374,11 +373,11 @@ $( document ).ready(function () {
 
       //get page id from parent li 
       var page_id = $(this).parent().attr('page_id') ;
-
+      sortPages();
       //Load Page
       window.lindneo.tlingit.loadPage(page_id);
 
-      console.log($($(this).parent().children[2]));
+      //console.log(window.lindneo.currentPageId);
 
       //Remove Current Page
       $('.page').removeClass('current_page');
@@ -569,14 +568,16 @@ $( document ).ready(function () {
     var pageNum=0;
     console.log("sort page");
     $('#chapters_pages_view .page').each(function(e){
+      if(pageNum==0) window.lindneo.tlingit.pages=[];
       pageNum++;
+      window.lindneo.tlingit.pages.push({"page_id": $(this).attr('page_id'), "page_num": pageNum});
       $(this).find('.page-number').html(pageNum);
       //console.log($(this).attr('page_id'));
       if($(this).attr('page_id') == $("#current_page").attr('page_id')){
         $("#current_page").find('.page_number').val(pageNum);
         var new_num = pageNum;
         var page_component_id = $("#current_page").find('.page_number').attr('id');
-        
+
         console.log(page_component_id);
         $.ajax({
           url: "/page/getComponent/"+page_component_id
