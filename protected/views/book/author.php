@@ -1936,7 +1936,7 @@ $current_user=User::model()->findByPk(Yii::app()->user->id);
 						//print_r($chapters);
 						foreach ($chapters as $key => $chapter) {
 								
-								$pagesOfChapter=Page::model()->findAll(array('order'=>  '`order` asc ,  created asc', "condition"=>'chapter_id=:chapter_id', "params" =>array(':chapter_id' => $chapter->chapter_id )) );
+								$pagesOfChapter=Page::model()->findAll(array('order'=>  '`order` asc ,  created desc', "condition"=>'chapter_id=:chapter_id', "params" =>array(':chapter_id' => $chapter->chapter_id )) );
 										$chapter_page=0;
 										?>
 					<div class='chapter'  chapter_id='<?php echo $chapter->chapter_id; ?>'>
@@ -2004,7 +2004,7 @@ $current_user=User::model()->findByPk(Yii::app()->user->id);
 						$template_chapter=Chapter::model()->find( 'book_id=:book_id', array(':book_id' => $template_id )  );
 						
 
-						$template_pages=Page::model()->findAll(array('order'=>  '`order` asc ,  created asc', "condition"=>'chapter_id=:chapter_id', "params" =>array(':chapter_id' => $template_chapter->chapter_id  ) ) );
+						$template_pages=Page::model()->findAll(array('order'=>  '`order` asc ,  created desc', "condition"=>'chapter_id=:chapter_id', "params" =>array(':chapter_id' => $template_chapter->chapter_id  ) ) );
 						foreach ($template_pages as $template_page){
 							$template_links .=  "<a href='?r=page/create&chapter_id=".$current_chapter->chapter_id."&pageTeplateId=".$template_page->page_id."' ><img src='".$template_page->data. "' ></a>";
 						}
@@ -2243,7 +2243,7 @@ $background= (!empty($img)) ? "background-image:url('".$img."')" : "background:w
 				   <div class="tab-pane fade active in" id="tab_3_1">
 					<ul class="add-page-list">
 						<li style="width:122px; height:92px; border: 1px solid rgb(55, 108, 150);">
-							<a class="add-page-list-button" href='/page/create?book_id=<?php echo $model->book_id; ?>&chapter_id=<?php echo $current_chapter->chapter_id; ?>' style="width:110px; height:82px;">
+							<a class="add-page-list-button" id="addBlankPage" style="width:110px; height:82px;">
 								<div class="add-page-list-inside"> 
 								Boş Sayfa Ekle </div>
 							</a>
@@ -2253,7 +2253,7 @@ $background= (!empty($img)) ? "background-image:url('".$img."')" : "background:w
 						$template_id=$data["template_id"];
 						$template_chapters=Chapter::model()->findAll(array('order'=>  '`order` asc ,  created asc', "condition"=>'book_id=:book_id', "params" =>array(':book_id' => $template_id  ) ) );
 						foreach ($template_chapters as $key => $template_chapter) {
-							$template_pages=Page::model()->findAll(array('order'=>  '`order` asc ,  created asc', "condition"=>'chapter_id=:chapter_id', "params" =>array(':chapter_id' => $template_chapter->chapter_id  ) ) );
+							$template_pages=Page::model()->findAll(array('order'=>  '`order` asc ,  created desc', "condition"=>'chapter_id=:chapter_id', "params" =>array(':chapter_id' => $template_chapter->chapter_id  ) ) );
 							foreach ($template_pages as $template_page){
 								echo "<li class='page'  chapter_id='".$template_chapter->chapter_id."' page_id='".$template_page->page_id."' style='width:122px; height:92px; border: 1px solid rgb(55, 108, 150);'  >
 								<canvas  class='pre_".$template_page->page_id."' style='height:90px; width:120px;'> </canvas>
@@ -2268,13 +2268,10 @@ $background= (!empty($img)) ? "background-image:url('".$img."')" : "background:w
 						}
 						?>
 				<script type="text/javascript">
-					$('.copyBook').click(function(){
-						var book_id=$(this).attr('book-id');
-						var pageTeplateId=$(this).attr('pageTeplateId');
-						//var chapter_id=$(this).attr('chapter_id');
+					$('#addBlankPage').click(function(){
+						var book_id=window.lindneo.currentBookId;
 						var currentPageId=window.lindneo.currentPageId;
-						console.log(pageTeplateId);
-						var link="/page/create?book_id="+book_id+"&page_id="+currentPageId+"&pageTeplateId="+pageTeplateId;
+						var link="/page/create?book_id="+book_id+"&page_id="+currentPageId;
 						
 						window.location.assign(link);
 

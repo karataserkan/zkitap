@@ -86,6 +86,14 @@ class PageController extends Controller
 	{
 		$currentPage=Page::model()->findByPk($page_id);
 		$chapter_id=$currentPage->chapter_id;
+		
+		//$pages=Page::model()->findAll('chapter_id=:chapter_id and `order` >'.$currentPage->order,array('chapter_id'=>$chapter_id));
+
+		// foreach ($pages as $key => $page) {
+		// 	$page->order+=1;
+		// 	$page->save();
+		// }
+
 		$model=new Page;
 		$new_id=functions::new_id();
 		$model->page_id=$new_id;
@@ -100,6 +108,9 @@ class PageController extends Controller
 			$chapter->save();
 		}
 		$model->chapter_id=$chapter->chapter_id;
+
+
+
 		if ($currentPage->order) {
 			$model->order=$currentPage->order+1;
 		}
