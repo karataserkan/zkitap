@@ -32,7 +32,7 @@ class OrganisationHostingsController extends Controller
 				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
-				'actions'=>array('create','update','delete','deleteHost'),
+				'actions'=>array('create','update','delete','deleteHost','server'),
 				'users'=>array('@'),
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
@@ -68,7 +68,7 @@ class OrganisationHostingsController extends Controller
 		// $this->performAjaxValidation($model);
 
 		$model->hosting_client_id = functions::new_id(15);
-
+		
 		if(isset($_POST['OrganisationHostings']))
 		{
 			$model->attributes=$_POST['OrganisationHostings'];
@@ -83,6 +83,59 @@ class OrganisationHostingsController extends Controller
 		$this->render('create',array(
 			'model'=>$model,
 		));
+	}
+
+	public function actionServer()
+	{
+		$model=new OrganisationHostings;
+		$model->organisation_id=Yii::app()->request->getPost('organisationId');
+		$server_address=Yii::app()->request->getPost('server_address');
+		$server_port=Yii::app()->request->getPost('server_port');
+		$status=Yii::app()->request->getPost('status');
+
+		$model->hosting_client_id = functions::new_id(15);
+		if(isset($_POST))
+		{
+			$retrieved_model=OrganisationHostings::model()->find('hosting_client_id=:hosting_client_id',array(':hosting_client_id'=>$status));
+			if($retrieved_model){
+				$retrieved_model->hosting_client_IP=$server_address;
+				$retrieved_model->hosting_client_port=$server_port;
+				if($retrieved_model->save())
+				{
+					echo "success";
+				}
+				else
+				{
+					echo "fail";
+				}
+
+			}
+			else
+			{
+
+				$key1=functions::new_id(128);
+				$key2=functions::new_id(128);
+				
+				$model->hosting_client_key1=$key1;
+				$model->hosting_client_key2=$key2;
+				$model->hosting_client_IP=$server_address;
+				$model->hosting_client_port=$server_port;
+				if($model->save())
+					{
+						$msg="ORGANISATION_HOSTINGS:CREATE:0:". json_encode(array(array('user'=>Yii::app()->user->id),array('organisationId'=>$organisationId,'hostingClientId'=>$model->hosting_client_id)));
+						Yii::log($msg,'info');
+						echo "success";
+					}
+					else
+					{
+						echo "fail";
+					}
+			}
+		}
+		else
+		{
+			echo "fail";
+		}
 	}
 
 	/**
