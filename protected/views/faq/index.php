@@ -144,6 +144,8 @@
 			subject:konu,
 			body:mesaj
 		});
+		request=btoa(request);
+
 		if (email && konu && mesaj) {
 			$.ajax({
 					type: "POST",
