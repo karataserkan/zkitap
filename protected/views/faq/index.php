@@ -8,7 +8,7 @@
 			App.init(); //Initialise plugins and elements
 		});
 	</script>
-
+<?php $user=User::model()->findByPk(Yii::app()->user->id); ?>
 <!-- POPUP EDITORS -->
 <div class="modal fade" id="addTicket" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 	<div class="modal-dialog">
@@ -30,11 +30,9 @@
 					</div>
 				</div>
 
-				<div class="form-group">
-					<div class="col-md-8">
-						<input class="form-control" name="email" placeholder="E-Posta" id="email" type="text">															
-					</div>
-				</div>
+
+				
+				
 				<div class="form-group">
 					<div class="col-md-8">
 						<input class="form-control" name="konu" placeholder="Konu" id="konu" type="text">															
@@ -54,7 +52,38 @@
 		</div>
 	  </div>
 	</div>
- 
+ <script type="text/javascript">
+	$('#send_ticket').click(function(){
+		var email='<?php echo $user->email; ?>';
+		var konu=$('#konu').val();
+		var mesaj=$('#mesaj').val();
+		var request=JSON.stringify({
+			from_email:email,
+			subject:konu,
+			body:mesaj,
+			allUserData:'<?php echo json_encode ($user->attributes); ?>',
+			name:'<?php echo $user->name; ?>',
+			surname:'<?php echo  $user->surname; ?>'
+		});
+		request=btoa(encodeURI(request));
+
+		if (email && konu && mesaj) {
+			$.ajax({
+					type: "POST",
+	                data: {request:request},
+	                url:'http://crm.linden-tech.com/addTicketFromOkutus.php'
+	            }).done(function(html){
+	            	console.log(html);
+	        		$('#dSuccessFeedback').show();
+					$('#succesF').text('Destek talebiniz alındı. En yakın zamanda iletişime geçeceğiz.');    	
+	            });
+		}else{
+			$('#dFeedback').show();
+			$('#feedback').text('Lütfen bilgileri eksiksiz giriniz!');
+		};
+
+	});
+</script>
 <!-- POPUP END -->
 
 
@@ -132,34 +161,5 @@
 	$('.list-group-item').on('click',function(){
 		$('.list-group-item').removeClass('active');
 		$(this).toggleClass('active');
-	});
-</script>
-<script type="text/javascript">
-	$('#send_ticket').click(function(){
-		var email=$('#email').val();
-		var konu=$('#konu').val();
-		var mesaj=$('#mesaj').val();
-		var request=JSON.stringify({
-			from_email:email,
-			subject:konu,
-			body:mesaj
-		});
-		request=btoa(request);
-
-		if (email && konu && mesaj) {
-			$.ajax({
-					type: "POST",
-	                data: {request:request},
-	                url:'http://crm.linden-tech.com/addTicketFromOkutus.php'
-	            }).done(function(html){
-	            	console.log(html);
-	        		$('#dSuccessFeedback').show();
-					$('#succesF').text('Destek talebiniz alındı. En yakın zamanda iletişime geçeceğiz.');    	
-	            });
-		}else{
-			$('#dFeedback').show();
-			$('#feedback').text('Lütfen bilgileri eksiksiz giriniz!');
-		};
-
 	});
 </script>
