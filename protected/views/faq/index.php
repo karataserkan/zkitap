@@ -8,6 +8,56 @@
 			App.init(); //Initialise plugins and elements
 		});
 	</script>
+
+<!-- POPUP EDITORS -->
+<div class="modal fade" id="addTicket" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+	  <div class="modal-content">
+		<div class="modal-header">
+		  <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+		  <h4 class="modal-title"><?php _e("Destek iste"); ?></h4>
+		</div>
+		<div class="modal-body">
+		 	<form id="destek" class="form-horizontal">
+				<div class="form-group" id="dFeedback" style="display:none">
+					<div class="col-md-12">
+						<span class="alert alert-danger" id="feedback"></span>
+					</div>
+				</div>
+				<div class="form-group" id="dSuccessFeedback" style="display:none">
+					<div class="col-md-12">
+						<span class="alert alert-success" id="succesF"></span>
+					</div>
+				</div>
+
+				<div class="form-group">
+					<div class="col-md-8">
+						<input class="form-control" name="email" placeholder="E-Posta" id="email" type="text">															
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="col-md-8">
+						<input class="form-control" name="konu" placeholder="Konu" id="konu" type="text">															
+					</div>
+				</div>	
+				<div class="form-group">
+					<div class="col-md-8">
+						<textarea class="form-control" name="mesaj" placeholder="Mesaj" id="mesaj" type="text"></textarea>
+					</div>
+				</div>	
+		 	</form>
+		</div>
+	      <div class="modal-footer">
+	      	<button type="button" class="btn btn-primary" id="send_ticket"><?php _e("Gönder"); ?></a>
+	        <button type="button" class="btn btn-default" data-dismiss="modal"><?php _e("Vazgeç"); ?></button>
+	      </div>
+		</div>
+	  </div>
+	</div>
+ 
+<!-- POPUP END -->
+
+
 <div class="row">
 					<div id="content" class="col-lg-12" style="min-height:1063px !important">
 						<!-- PAGE HEADER-->
@@ -69,6 +119,7 @@
 									  		?>
 										<?php endforeach; ?> 
 									  </div>
+									  <a data-id="addTicket" data-toggle="modal" data-target="#addTicket" class="btn btn-xs btn-primary"><i class="fa fa-thumb-tack"></i>Destek İSte</a>
 									</div>
 								  <?php }
 								  endif; ?>
@@ -81,5 +132,32 @@
 	$('.list-group-item').on('click',function(){
 		$('.list-group-item').removeClass('active');
 		$(this).toggleClass('active');
+	});
+</script>
+<script type="text/javascript">
+	$('#send_ticket').click(function(){
+		var email=$('#email').val();
+		var konu=$('#konu').val();
+		var mesaj=$('#mesaj').val();
+		var request=JSON.stringify({
+			from_email:email,
+			subject:konu,
+			body:mesaj
+		});
+		if (email && konu && mesaj) {
+			$.ajax({
+					type: "POST",
+	                data: {request:request},
+	                url:'http://crm.linden-tech.com/addTicketFromOkutus.php'
+	            }).done(function(html){
+	            	console.log(html);
+	        		$('#dSuccessFeedback').show();
+					$('#succesF').text('Destek talebiniz alındı. En yakın zamanda iletişime geçeceğiz.');    	
+	            });
+		}else{
+			$('#dFeedback').show();
+			$('#feedback').text('Lütfen bilgileri eksiksiz giriniz!');
+		};
+
 	});
 </script>
