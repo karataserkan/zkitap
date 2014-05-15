@@ -5,7 +5,6 @@ $this->pageTitle=Yii::app()->name." - ". __("Kontrol Paneli");
 ?>
 
 
-
 <script>
 	jQuery(document).ready(function() {		
 		App.setPage("gallery");  //Set current page
@@ -68,6 +67,10 @@ $this->pageTitle=Yii::app()->name." - ". __("Kontrol Paneli");
 	</div>
 	<br><br>
 <div class="separator"></div>
+<!-- Dashboard Grafik Arayüzü -->
+
+<!-- /Dashboard Grafik Arayüzü -->
+
 	<div id="filter-items" class="mybooks_page_book_filter row">
 <?php
 if (!empty($books)&&$books) {
