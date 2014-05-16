@@ -63,17 +63,55 @@ class WorkspacesController extends Controller
 	public function actionCreate($organisationId=null)
 	{
 		$model=new Workspaces;
+		$model_organisation=new OrganisationWorkspaces;
+		$model_workspace=new WorkspacesUsers;
+
+		$workspace_id=functions::new_id();
+		$workspace_name=Yii::app()->request->getPost('workspace_name');
+		$status=Yii::app()->request->getPost('status');
 
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
-
-		if(isset($_POST['Workspaces']) && $organisationId)
+		echo Yii::app()->user->id;
+		if(isset($_POST))
 		{
-			$model->attributes=$_POST['Workspaces'];
-			$model->workspace_id=functions::new_id();
+			$model_organisation->organisation_id=Yii::app()->request->getPost('organisationId');
+			$model_organisation->workspace_id=$workspace_id;
+
+			$model->workspace_name=$workspace_name;
+			$model->workspace_id=$workspace_id;
+
+			$model_workspace->workspace_id=$workspace_id;
+			$model_workspace->userid=(int)Yii::app()->user->id;
+			$model_workspace->owner=Yii::app()->user->id;
+
+			if($model->save()){
+				if($model_organisation->save())
+			 	{
+			 	if($model_workspace->save())
+			 		{
+						echo "success";
+					}
+					else
+					{
+						print_r($model_workspace->getErrors());
+						echo "fail 3";
+					}
+				}
+				else
+				{echo "fail2";}
+			}
+			else
+			{
+				echo "fail1";
+			}
+
+			/*
+			$model->workspace_id=
 			if($model->save())
 			{
 				$addWorkspaceOrganization = Yii::app()->db->createCommand();
+
 				if($addWorkspaceOrganization->insert('organisation_workspaces', array(
 				    'organisation_id'=>$organisationId,
 				    'workspace_id'=>$model->workspace_id,
@@ -95,15 +133,15 @@ class WorkspacesController extends Controller
 				    'owner'=>'1',
 				));
 
-				$this->redirect( array('organisations/workspaces?organizationId='.$organisationId ) );
-			}
+				//$this->redirect( array('organisations/workspaces?organizationId='.$organisationId ) );
+			}*/
 				
 		}
 
 
-		$this->render('create',array(
+		/*$this->render('create',array(
 			'model'=>$model,
-		));
+		));*/
 	}
 
 	/**
