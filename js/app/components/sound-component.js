@@ -114,12 +114,12 @@ $(document).ready(function(){
         <div style='clear:both'></div> \
         <div class='tabbable'>\
             <ul class='nav nav-tabs' id='mySoundTab'>\
-              <li><a href='#drag' data-toggle='tab'>Ses Dosyası Sürükle</a></li>\
+              <li><a href='#sound_drag' data-toggle='tab'>Ses Dosyası Sürükle</a></li>\
               <li><a href='#upload' data-toggle='tab'>Ses Dosyası Yükle</a></li>\
             </ul>\
           </div>\
           <div class='tab-content'>\
-            <div class='tab-pane fade in active' id='drag'><br>\
+            <div class='tab-pane fade in active' id='sound_drag'><br>\
               <div class='add-image-drag-area' id='dummy-dropzone'> </div> \
             </div>\
             <div class='tab-pane fade' id='upload'><br>\

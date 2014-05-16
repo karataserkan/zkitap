@@ -94,15 +94,15 @@ console.log(top);
         <div style='clear:both'></div> \
         <div class='tabbable'>\
           <ul class='nav nav-tabs' id='myTab'>\
-            <li><a href='#home' data-toggle='tab'>Resim Sürükle</a></li>\
-            <li><a href='#profile' data-toggle='tab'>Resim Yükle</a></li>\
+            <li><a href='#galery_drag' data-toggle='tab'>Resim Sürükle</a></li>\
+            <li><a href='#galery_upload' data-toggle='tab'>Resim Yükle</a></li>\
           </ul>\
         </div>\
         <div class='tab-content'>\
-          <div class='tab-pane fade in active' id='home'><br>\
+          <div class='tab-pane fade in active' id='galery_drag'><br>\
             <div class='add-image-drag-area' id='dummy-dropzone'> </div> \
           </div>\
-          <div class='tab-pane fade' id='profile'><br>\
+          <div class='tab-pane fade' id='galery_upload'><br>\
             <input type='file' name='image_file' id='image_file' value='' ><br><br>\
           </div>\
         </div>\
