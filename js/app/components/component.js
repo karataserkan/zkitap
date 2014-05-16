@@ -86,6 +86,7 @@ $(document).ready(function(){
  
       });
 
+      window.lindneo.toolbox.findHighestZIndexToSet('[component-instance="true"]',this.options.component.id );
 
       this.element.parent()
           .append('  \
