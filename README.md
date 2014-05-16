@@ -104,3 +104,5 @@ Locale(for turkish)
 less /usr/share/i18n/SUPPORTED (desteklenen locallere bak)
 locale-gen tr_TR.UTF-8
 
+
+
