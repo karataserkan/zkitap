@@ -21,11 +21,35 @@ $( document ).ready(function () {
       $('.ruler, .vruler').show();
     }
   });
-  */
+  */  
   $(':checkbox').change(function() {
     var is_checked = $('input:checkbox[name=cetvel]:checked').val();
     //console.log(is_checked);
     if(is_checked == "on"){
+      $('.hruler').width($('#current_page').width());
+      $('.vbruler').height($('#current_page').height());
+      var ruler=$('.ruler').empty();
+      var ruler_h=$('.vruler').empty();
+
+      len=Math.round(Number($('.hruler').width())/38.0);
+      len_height=Math.round(Number($('.vbruler').height())/38.0);
+
+      console.log("LEN:"+len);
+      item = $(document.createElement("div"));
+      item.css({'width':'38px','float':'left', 'border-right': '1px solid #000','text-align':'center'});
+          for (i = 0; i < len; i++) 
+          {
+              ruler.append(item.clone().text(i + 1));
+          }
+
+      item = $(document.createElement("div"));
+      item.css({'height':'38px', 'border-top': '1px solid #000','text-align':'center'});
+          for (i = 0; i < len_height; i++) 
+          {
+              ruler_h.append(item.clone().text(i + 1));
+          }
+
+
       $('.ruler, .vruler').show();
     }
     else 
@@ -464,7 +488,7 @@ $( document ).ready(function () {
 
         $('#zoom-pane').slider({
             value:100,
-            min: 25,
+            min: 100,
             max: 500,
             step: 25,
             slide: function( event, ui ) {
