@@ -328,10 +328,12 @@ var FormWizard = function () {
                         console.log(budgetError);
                         if (budgetError==(-1)) {
                             msg.update({
-                                message: 'Eser yayınlama başarılı.',
+                                message: 'Eser, yayınlama listesine eklendi.',
                                 type: 'success',
                                 hideAfter: 5
-                            })
+
+                            });
+                            $('#publishedbookModal').addClass("in").show();
 
                         }else
                         {

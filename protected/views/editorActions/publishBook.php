@@ -1,4 +1,27 @@
 <section>
+
+
+<!-- POPUP EDITORS -->
+<div class="modal fade" id="publishedbookModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+	  <div class="modal-content">
+		<div class="modal-header">
+		  <h4 class="modal-title"><?php _e("Eser Yayınlama"); ?></h4>
+		</div>
+		<div class="modal-body">
+		 	Eser yayınlanma kuyruğuna eklendi. Yayınlama işlemi bittiğinde e-posta ile bilgi verilecektir.
+		</div>
+	      <div class="modal-footer">
+	      	<a href="/site/index" class="btn btn-primary"><?php _e("Tamam"); ?></a>
+	      </div>
+		</div>
+	  </div>
+	</div>
+ 
+<!-- POPUP END -->
+
+
+
 	<div class="row">
 							<div class="col-md-10">
 								<!-- BOX -->

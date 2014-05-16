@@ -242,7 +242,7 @@
             $('#bookCreateWizard').find('.prevBtn').hide();
             $('#templateCreate').click(function () {
                 msg = Messenger().post({
-                    message:"Şablon oluşturuluyor. Lütfen Bekleyiniz",
+                    message:"Eser oluşturuluyor. Lütfen Bekleyiniz",
                     type:"info",
                     showCloseButton: true,
                     hideAfter: 100
@@ -253,7 +253,7 @@
                     success:function(response) {
                     		if (response) {
 	                            msg.update({
-	                                message: 'Şablon oluşturma başarılı.',
+	                                message: 'Eser oluşturma başarılı.',
 	                                type: 'success',
 	                                hideAfter: 5
 	                            })
