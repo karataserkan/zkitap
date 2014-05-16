@@ -92,7 +92,7 @@ $userType = $this->userType($book->book_id);
 	             <img src="<?php echo $thumbnailSrc; ?>" />
 	         </div>					
 	         <div class="reader_book_card_info_container">
-	             <div class="editor_mybooks_book_type tip" style="border:0" data-original-title="<?php _e('Çalışma Durumu') ?>"><?php if ($userType=='owner') {_e('Sahibi');} ?><?php if ($userType=='editor') { _e('Editör'); } ?><?php if ($userType!='owner' && $userType!='editor') { _e('Editör veya sahibi değilsiniz'); } ?></div>						
+	             <div class="editor_mybooks_book_type tip" style="border:0" data-original-title="<?php _e('Kitap Erişim İzini') ?>"><?php if ($userType=='owner') {_e('Sahibi');} ?><?php if ($userType=='editor') { _e('Editör'); } ?><?php if ($userType!='owner' && $userType!='editor') { _e('Diğer'); } ?></div>						
 	             <div class="clearfix"></div>			
 	             <div class="reader_market_book_name tip" data-original-title="Eser İsmi"><?php echo $book->title ?></div>						
 	             <div class="clearfix"></div>						
