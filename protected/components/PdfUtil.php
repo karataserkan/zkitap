@@ -30,7 +30,7 @@ class PdfUtil{
 		while($line=fgets($input_stream,4096))
 		{
 			error_log($line);
-			preg_match("/([A-Za-z0-9ĞğÖöŞşÜüÇçİı \(\)\%\+\?\*\/'\"!;_\-:.])*[^\$]\d+[,]/",$line,$step1);// 0 => 'How to write a document/6,'
+			preg_match("/([A-Za-z0-9ĞğÖöŞşÜüÇçİı \(\)\%\+\?\*\/'\"!,;_\-:.])*[^\$]\d+[,]/",$line,$step1);// 0 => 'How to write a document/6,'
 			//preg_match("/\D*(\d*)(,)/",$step1[0],$step2);//0 => 'How to write a document/3,',1 => 'How to write a document/',2 => '3'
 			error_log($step1[0]);
 			list($toc_title,$start_page)=explode("/",$step1[0]);
