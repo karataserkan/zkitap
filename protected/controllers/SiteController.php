@@ -614,6 +614,8 @@ class SiteController extends Controller
 						$workspace->workspace_name = $newUser->name;
 						$workspace->creation_time=date('Y-n-d g:i:s',time());
 						if ($workspace->save()) {
+
+
 							$msg="SITE:LOGIN:CreateWorkspace:0:". json_encode(array('user'=> Yii::app()->user->name,'userId'=>Yii::app()->user->id,'message'=>"a workspace created for new user"));
 							Yii::log($msg,'info');
 							$workspaceUser=new WorkspacesUsers;
@@ -622,6 +624,8 @@ class SiteController extends Controller
 							$workspaceUser->added=date('Y-n-d g:i:s',time());
 							$workspaceUser->owner=$newUser->id;
 
+							$bk=new BookController(1);
+							$bk->duplicateBookBody("OgrBCZ5ErK1u1hVGIAgsJXmG2CIkIPsqBqKjUNjzxsaz", $workspace->workspace_id,"Demo Kitap",$newUser->id);
 
 							$addWorkspaceOrganization = Yii::app()->db->createCommand();
 							if($addWorkspaceOrganization->insert('organisation_workspaces', array(
