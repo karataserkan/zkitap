@@ -1210,6 +1210,33 @@ right join book using (book_id) where book_id='$bookId' and type!='image';";
 				$deleteFromQueue=PublishQueue::model()->findByPk($bookId);
 				$deleteFromQueue->delete();
 				functions::delTree($ebook->tempdirParent);
+
+
+
+
+				$mail=Yii::app()->Smtpmail;
+		        $mail->SetFrom(Yii::app()->params['noreplyEmail'], "OKUTUS");
+		        $mail->Subject= $data['contentTitle']." kitabınız yayınlandı.";
+
+
+				$users=UserBook::model()->findAll('book_id=:book_id',array('book_id'=>$bookId));
+
+				foreach ($users as $key => $user) {
+					$userInfo=User::model()->findByPk($user->user_id);
+		        	$mail->AddAddress($userInfo->email, "");
+				}
+
+
+				$message=$data['contentTitle']." yayınlandı. reader.okutus.com adresinden kitabınızı inceleyebilirsiniz. Reader'da yayınladığınız kitapları görmek için üye değilseniz kayıt olarak giriş yapabilirsiniz.";
+		        $mail->MsgHTML($message);
+		        $mail->Send();
+
+
+
+
+
+
+
 			}
 			else
 			{
