@@ -87,6 +87,31 @@ var FormWizard = function () {
             });
             
 
+
+            $('#contentType>div').on('click',function(){
+                $('#contentType>div>span').removeClass('checked');
+                $(this).children().addClass('checked');
+            });
+
+            $('#language>div').on('click',function(){
+                $('#language>div>span').removeClass('checked');
+                $(this).children().addClass('checked');
+            });
+
+            $('#contentIsForSale>div').on('click',function(){
+                $('#contentIsForSale>div>span').removeClass('checked');
+                $(this).children().addClass('checked');
+            });
+
+            $('#contentCurrency>div').on('click',function(){
+                $('#contentCurrency>div>span').removeClass('checked');
+                $(this).children().addClass('checked');
+            });
+
+
+
+
+
             var data;
             $(".datepicker-fullscreen").pickadate({format:'dd/mm/yyyy'});
             $(".siraliDisplay").hide();

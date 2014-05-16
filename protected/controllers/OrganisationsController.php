@@ -60,6 +60,55 @@ class OrganisationsController extends Controller
 	    return ($bookOfUser) ? $bookOfUser['type'] : false;
 	}
 
+	public function actionWorkspace()
+	{
+		$model=new Organisations;
+		$model->organisation_id=Yii::app()->request->getPost('organisationId');
+		$workspace_name=Yii::app()->request->getPost('workspace_name');
+		$workspace_id=Yii::app()->request->getPost('workspace_id');
+		$status=Yii::app()->request->getPost('status');
+
+		$model->workspace_id = functions::new_id(15);
+		if(isset($_POST))
+		{
+			$retrieved_model=OrganisationHostings::model()->find('hosting_client_id=:hosting_client_id',array(':hosting_client_id'=>$status));
+			if($retrieved_model){
+				$retrieved_model->hosting_client_IP=$server_address;
+				$retrieved_model->hosting_client_port=$server_port;
+				if($retrieved_model->save())
+				{
+					echo "success";
+				}
+				else
+				{
+					echo "fail";
+				}
+
+			}
+			else
+			{
+
+				
+				$model->hosting_client_IP=$server_address;
+				$model->hosting_client_port=$server_port;
+				if($model->save())
+					{
+						$msg="ORGANISATION_HOSTINGS:CREATE:0:". json_encode(array(array('user'=>Yii::app()->user->id),array('organisationId'=>$organisationId,'hostingClientId'=>$model->hosting_client_id)));
+						Yii::log($msg,'info');
+						echo "success";
+					}
+					else
+					{
+						echo "fail";
+					}
+			}
+		}
+		else
+		{
+			echo "fail";
+		}
+	}
+
 	public function actionRemoveFromCategory($id)
 	{
 		$book=Book::model()->findByPk($id);
@@ -534,6 +583,7 @@ class OrganisationsController extends Controller
 
 				$this->render('workspaces',array(
 					'organizationUser' => $organizationUser,
+					'organisationId'=>$organizationId,
 					'workspaces' => $workspaces
 					));
 		    }
