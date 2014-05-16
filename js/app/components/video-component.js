@@ -68,22 +68,22 @@ var createVideoComponent = function( event, ui, oldcomponent ) {
   var marker = window.base_path+'/css/popupmarker.svg';
   var video_marker=window.base_path+'/css/video_play_trans.svg';
   var video_width_height = '';
-  var video_type_image = function(){
+  var video_type_video = function(){
       var video_type = $('input[name=video_type]:checked').val();
         if(video_type == 'popup'){
-          $("<span id='type_image'>\
+          $("<span id='type_video'>\
                 <input type='radio' id='video_type0' name='video_image_type' value='video_type0'><button id='button0' style='background:url(\""+marker+"\") no-repeat center center;-moz-background-size: cover; -webkit-background-size: cover; -o-background-size: cover; background-size: cover; width:70px; height:70px;'></button>\
                 <input type='radio' id='video_type1' name='video_image_type' value='link'><button id='button1' style='background:url(\""+video_marker+"\") no-repeat center center; -moz-background-size: cover; -webkit-background-size: cover; -o-background-size: cover; background-size: cover; width:70px; height:70px;'></button>\
                 <a href='#' onclick='document.getElementById(\"video_image_file\").click(); return false;' class='icon-upload dark-blue size-40' style='padding-left:15px;'></a>\
                 <input type='file' name='video_image_file' id='video_image_file' value='' style='visibility: hidden;' >\
                 <div id='new_image'></div>\
-              </span>").appendTo('.type');
+              </span>").appendTo('.typev');
           $( "button" ).button();
           $('#button0').click(function(){$("#video_type0").prop("checked", true); console.log(marker);});
           $('#button1').click(function(){$("#video_type1").prop("checked", true); marker = video_marker; console.log(marker);});
         }
         else{ 
-          $('#type_image').remove();
+          $('#type_video').remove();
         }
     };
     var video_url = "http://lindneo.com/5.mp4";
@@ -165,7 +165,7 @@ console.log(top);
         </div> \
           <div class='gallery-inner-holder' style='width:500px;'> \
             <div style='clear:both'></div> \
-            <div class='type' style='padding: 4px; display: inline-block;'>\
+            <div class='typev' style='padding: 4px; display: inline-block;'>\
                 <div class='btn-group' data-toggle='buttons'>\
                   <label class='btn btn-primary " + link_check_active + "'>\
                     <input type='radio' name='video_type' id='repeat0' " + link_check + " value='link'> Sayfada\
@@ -177,21 +177,21 @@ console.log(top);
             </div>\
             <div class='tabbable'>\
               <ul class='nav nav-tabs' id='myTab'>\
-                <li><a href='#home' data-toggle='tab'>Video Sürükle</a></li>\
-                <li><a href='#profile' data-toggle='tab'>Video Yükle</a></li>\
-                <li><a href='#messages' data-toggle='tab'>Vİdeo Bağlantı</a></li>\
+                <li><a href='#video_drag' data-toggle='tab'>Video Sürükle</a></li>\
+                <li><a href='#video_upload' data-toggle='tab'>Video Yükle</a></li>\
+                <li><a href='#video_link' data-toggle='tab'>Vİdeo Bağlantı</a></li>\
               </ul>\
             </div>\
             <div class='tab-content'>\
-              <div class='tab-pane active' id='home'>\
+              <div class='tab-pane active' id='video_drag'>\
                 <div class='divide-10'></div>\
                 <div class='add-image-drag-area' id='dummy-dropzone'> </div> \
               </div>\
-              <div class='tab-pane ' id='profile'>\
+              <div class='tab-pane ' id='video_upload'>\
                 <div class='divide-10'></div>\
                 <input type='file' name='video_file' id='video_file' value='' ><br><br>\
               </div>\
-              <div class='tab-pane ' id='messages'>\
+              <div class='tab-pane ' id='video_link'>\
                 <div class='divide-10'></div>\
                 <input id='video-url-text' class='input-textbox' type='url' placeholder='URL Adresini Giriniz'   value='" + video_url + "'> \
               </div>\
@@ -222,7 +222,7 @@ console.log(top);
             <a href='#' id='pop-image-OK' class='btn bck-light-green white radius' id='add-image' style='padding: 5px 30px;'>Ekle</a> \
           </div> \
         </div>").appendTo('body').draggable();
-    if(video_type == 'popup') video_type_image();
+    if(video_type == 'popup') video_type_video();
 
       $('#video-add-dummy-close-button').click(function() {
 
@@ -277,7 +277,7 @@ console.log(top);
         });
 
     $("input[name=video_type]:radio").change(function () {
-        video_type_image();
+        video_type_video();
       });
     
     if(changeimage){
