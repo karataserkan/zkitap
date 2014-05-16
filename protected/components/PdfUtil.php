@@ -55,7 +55,7 @@ class PdfUtil{
 			return null;//array('toc_title'=>' ','start_page'=>0,'end_page'=>0);
 		}
 		error_log(print_r($lines,1));
-		$lines[count($lines) - 1]['end_page']=$this->getNumberofPages;
+		$lines[count($lines) - 1]['end_page']=$this->getNumberofPages();
 		error_log(print_r($lines,1));
 		return $lines;
 		//$lines=Array ( [0] => Array ( [toc_title] => ToC 2 samples.pdf [start_page] => 1 [end_page] => 1 ) [1] => Array ( [toc_title] => ToC manuscript in 2 parts [start_page] => 2 [end_page] => 2 ) )
