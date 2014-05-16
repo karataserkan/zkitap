@@ -72,40 +72,59 @@ class WorkspacesController extends Controller
 
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
-		echo Yii::app()->user->id;
+
 		if(isset($_POST))
 		{
-			$model_organisation->organisation_id=Yii::app()->request->getPost('organisationId');
-			$model_organisation->workspace_id=$workspace_id;
+			if($status=='')
+			{
+				$model_organisation->organisation_id=Yii::app()->request->getPost('organisationId');
+				$model_organisation->workspace_id=$workspace_id;
 
-			$model->workspace_name=$workspace_name;
-			$model->workspace_id=$workspace_id;
+				$model->workspace_name=$workspace_name;
+				$model->workspace_id=$workspace_id;
 
-			$model_workspace->workspace_id=$workspace_id;
-			$model_workspace->userid=(int)Yii::app()->user->id;
-			$model_workspace->owner=Yii::app()->user->id;
+				$model_workspace->workspace_id=$workspace_id;
+				$model_workspace->userid=(int)Yii::app()->user->id;
+				$model_workspace->owner=Yii::app()->user->id;
 
-			if($model->save()){
-				if($model_organisation->save())
-			 	{
-			 	if($model_workspace->save())
-			 		{
-						echo "success";
+				if($model->save()){
+					if($model_organisation->save())
+				 	{
+				 	if($model_workspace->save())
+				 		{
+							echo "success";
+						}
+						else
+						{
+							print_r($model_workspace->getErrors());
+							echo "fail 3";
+						}
 					}
 					else
-					{
-						print_r($model_workspace->getErrors());
-						echo "fail 3";
-					}
+					{echo "fail2";}
 				}
 				else
-				{echo "fail2";}
+				{
+					echo "fail1";
+				}
 			}
 			else
 			{
-				echo "fail1";
-			}
+				echo "update";
+				echo $status;
+				$wk=Workspaces::model()->find('workspace_id=:workspace_id',array(':workspace_id'=>$status));
 
+				if($wk){
+
+					$wk->workspace_name=$workspace_name;
+					$wk->save();
+				}
+				else
+				{
+					print_r($wk->getErrors);
+				}
+
+			}
 			/*
 			$model->workspace_id=
 			if($model->save())
