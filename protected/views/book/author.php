@@ -2055,7 +2055,7 @@ $current_user=User::model()->findByPk(Yii::app()->user->id);
 		</div>
 		</div>
 		
-			
+			  
 	
 </div>
 
@@ -2063,22 +2063,26 @@ $current_user=User::model()->findByPk(Yii::app()->user->id);
 	<div id='author_pane' style='position:relative;width:1240px; margin: 0 auto; '> <!-- Outhor Pane -->
 		
 			<div class="hruler">
-			<ul class="ruler" data-items="54"></ul>
+			<!--<ul class="ruler" data-items="54"></ul>-->
+			<div class="ruler" style="width:100%;border-bottom: 3px dotted #000"></div>		
 			</div>
 			
 			<div class="vbruler">
-			<ul class="vruler" data-items="34"></ul>
+			<!--<ul class="vruler" data-items="34"></ul>-->
+			<div class="vruler" style="height:100%;border-right: 2px dotted #000"></div>	
 			</div>
 			
 			
 			<script>
+
+
 			$(function() {
     // Build "dynamic" rulers by adding items
     $(".ruler[data-items]").each(function() {
         var ruler = $(this).empty(),
-            len = Number(ruler.attr("data-items")) || 0,
-            item = $(document.createElement("li")),
-            i;
+            //len = Number(ruler.attr("data-items")) || 0,
+            item = $(document.createElement("li"));
+            var i;
         for (i = 0; i < len; i++) {
             ruler.append(item.clone().text(i + 1));
         }
