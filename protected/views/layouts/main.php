@@ -222,6 +222,18 @@
 			    
 			});
 		</script>
+		<!-- EASY PIE CHART -->
+	<script src="<?php echo Yii::app()->request->baseUrl; ?>/js/lib/dashboard/jquery-easing/jquery.easing.min.js"></script>
+	<script type="text/javascript" src="<?php echo Yii::app()->request->baseUrl; ?>/js/lib/dashboard/easypiechart/jquery.easypiechart.min.js"></script>
+	<!-- FLOT CHARTS -->
+	<script src="<?php echo Yii::app()->request->baseUrl; ?>/js/lib/dashboard/flot/jquery.flot.min.js"></script>
+	<script src="<?php echo Yii::app()->request->baseUrl; ?>/js/lib/dashboard/flot/jquery.flot.time.min.js"></script>
+    <script src="<?php echo Yii::app()->request->baseUrl; ?>/js/lib/dashboard/flot/jquery.flot.selection.min.js"></script>
+	<script src="<?php echo Yii::app()->request->baseUrl; ?>/js/lib/dashboard/flot/jquery.flot.resize.min.js"></script>
+    <script src="<?php echo Yii::app()->request->baseUrl; ?>/js/lib/dashboard/flot/jquery.flot.pie.min.js"></script>
+    <script src="<?php echo Yii::app()->request->baseUrl; ?>/js/lib/dashboard/flot/jquery.flot.stack.min.js"></script>
+    <script src="<?php echo Yii::app()->request->baseUrl; ?>/js/lib/dashboard/flot/jquery.flot.crosshair.min.js"></script>
+
 		<script type="text/javascript">
 
 		$(document).ready(function(){

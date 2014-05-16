@@ -23,7 +23,7 @@ $(document).ready(function(){
 
       //console.log(html_tag_replace(this.options.component.data.html_inner));
       if(this.options.component.data.html_inner){
-        var pop_message=$('<div class="box" id="'+this.options.component.id+'_box"></div>');
+        var pop_message=$('<div class="box" id="'+this.options.component.id+'_box" style=" width:100%; height:100%; overflow:hidden;"></div>');
         //var popupmessage=$('<div></div>');
         pop_message.appendTo(this.element);
         //popupmessage.appendTo(pop_message);
@@ -35,7 +35,7 @@ $(document).ready(function(){
        
 
       
-      this._super(); 
+      this._super({resizableParams:{handles:"e, s, se"}});
 /*
       this.element.resizable("option",'maxHeight', 128 );
       this.element.resizable("option",'minHeight', 128 );
@@ -219,8 +219,32 @@ var createLatexComponent = function ( event, ui, oldcomponent ) {
         <a href='#' id='pop-image-OK' class='btn bck-light-green white radius' style='padding: 5px 30px;'>Ekle</a> \
       </div> \
       </div>").appendTo('body').draggable({cancel:'.drag-cancel'}).resizable();*/
-    top=(event.pageY-25)+"px";
-    left=(event.pageX-250)+"px";
+    
+    var min_left = $("#current_page").offset().left;
+    var min_top = $("#current_page").offset().top;
+    var max_left = $("#current_page").width() + min_left;
+    var max_top = $("#current_page").height() + min_top;
+    
+    var top=(event.pageY - 25);
+    var left=(event.pageX-150);
+
+    console.log(top);
+
+    if(left < min_left)
+      left = min_left;
+    else if(left+510 > max_left)
+      left = max_left - 510;
+
+    if(top < min_top)
+      top = min_top;
+    else if(top+510 > max_top)
+      top = max_top - 510;
+
+console.log(top);
+
+    top = top + "px";
+    left = left + "px";
+
     var html_popup = $("<div class='popup ui-draggable' id='pop-popup' style='display: block; top:" + top + "; left: " + left + "; width:500px; height:400px;'> \
       </div>");
     html_popup.appendTo('body').draggable({cancel:'.drag-cancel'}).resizable();

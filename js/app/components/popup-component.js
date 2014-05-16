@@ -89,8 +89,32 @@ console.log(oldcomponent);
       </div> \
       </div>").appendTo('body').draggable({cancel:'.drag-cancel'}).resizable();*/
 
-    var top=(event.pageY-25)+"px";
-    var left=(event.pageX-100)+"px";
+    
+    var min_left = $("#current_page").offset().left;
+    var min_top = $("#current_page").offset().top;
+    var max_left = $("#current_page").width() + min_left;
+    var max_top = $("#current_page").height() + min_top;
+    
+    var top=(event.pageY - 25);
+    var left=(event.pageX-150);
+
+    console.log(top);
+
+    if(left < min_left)
+      left = min_left;
+    else if(left+200 > max_left)
+      left = max_left - 200;
+
+    if(top < min_top)
+      top = min_top;
+    else if(top+300 > max_top)
+      top = max_top - 300;
+
+console.log(top);
+
+    top = top + "px";
+    left = left + "px";
+
     var pop_popup = $("<div class='popup ui-draggable' id='pop-popup' style='display: block; top:" + top + "; left: " + left + ";'> \
       </div>");
     pop_popup.appendTo('body').draggable({cancel:'.drag-cancel'}).resizable();

@@ -11,7 +11,6 @@ $(document).ready(function(){
     
     _create: function(){
         
-      this._super();
       var that = this;
       var image_width = 0;
       //if( that.options.component.type=='galery')
@@ -43,6 +42,7 @@ $(document).ready(function(){
         $('<div style="clear:both"></div>').appendTo(that.element);
 
       }
+      this._super({resizableParams:{handles:"e, s, se"}});
     },
 
     field: function(key, value){
@@ -60,8 +60,30 @@ $(document).ready(function(){
  
 var createGaleryComponent = function (event,ui){
 
-   var top=(event.pageY-25)+"px";
-   var left=(event.pageX-150)+"px";
+    var min_left = $("#current_page").offset().left;
+    var min_top = $("#current_page").offset().top;
+    var max_left = $("#current_page").width() + min_left;
+    var max_top = $("#current_page").height() + min_top;
+    
+    var top=(event.pageY - 25);
+    var left=(event.pageX-150);
+
+    console.log(top);
+
+    if(left < min_left)
+      left = min_left;
+    else if(left+310 > max_left)
+      left = max_left - 310;
+
+    if(top < min_top)
+      top = min_top;
+    else if(top+500 > max_top)
+      top = max_top - 500;
+
+console.log(top);
+
+    top = top + "px";
+    left = left + "px";
 
     $("<div class='popup ui-draggable' id='pop-image-popup' style='display: block; top:" + top + "; left: " + left + ";'> \
     <div class='popup-header'> \

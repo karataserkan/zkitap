@@ -148,79 +148,9 @@ $(document).ready(function(){
           });
 
         }
-
-        /*
-        // open a window
-        $("<div  class='quiz-component' style=''> \
-            <div class='question-text'></div> \
-            <div class='question-options-container'></div> \
-            <div style='margin-bottom:25px'> \
-              <a href='' class='btn bck-light-green white radius send' > Yanıtla </a> \
-            </div> \
-        </div>").appendTo(this.element);
-
-        // set question text
-        
-
-
-        this.element.find('.question-text').text( that.options.component.data.question );
-        var n = that.options.component.data.numberOfSelections;
-
-        var appendText = "";
-        for( var i = 0; i < n; i++ ){
-          appendText += 
-          "<div> \
-            <input type='radio' value='" + i + "' name='question' /> \
-            "+ that.options.component.data.options[i] + " \
-          </div>";
-        }
-
-
-        this.element.find('.question-options-container').append(appendText);
-        var that = this;
-        
-        // prepare question options
-
-        // click event
-        this.element.find('.send').click(function(evt){
-
-          var ind = $('input[type=radio]:checked').val();
-          
-          if( ind === undefined ){
-            alert('secilmemis');
-          } else {
-            var answer = {
-              'selected-index': ind,
-              'selected-option': that.options.component.data.options[ind]
-            };
-
-            
-            that.element.find('.question-options-container div').each(function(i,element){
-              var color = 'red';
-              if (i==that.options.component.data.correctAnswerIndex) color ='green';
-              var newAnserBtn=$("<span style='border-radius: 50%;width:10px;height:10px;display: inline-block;background:"+color+"'></span>");
-              $(this).find('input[type=radio]').remove();
-              $(this).prepend(newAnserBtn);
-              if (ind==i && that.options.component.data.correctAnswerIndex==ind){
-                that.element.css('background','color');
-                $(this).prepend('+');
-              } else if (ind==i && that.options.component.data.correctAnswerIndex!=ind){
-                that.element.css('background','color');
-                $(this).prepend('x');
-              }
-
-              $(this).css('color',color);
-            }); 
-
-          }
-
-
-        });
-
-        */
       
 
-      this._super();
+      this._super({resizableParams:{handles:"e, s, se"}});
     },
 
     field: function(key, value){
@@ -309,8 +239,32 @@ var removeRow = function(type, row_number){
       question = oldcomponent.data.question;
       answers = oldcomponent.data.options;
     };
-    top=(event.pageY-25)+"px";
-    left=(event.pageX-100)+"px";
+    
+    var min_left = $("#current_page").offset().left;
+    var min_top = $("#current_page").offset().top;
+    var max_left = $("#current_page").width() + min_left;
+    var max_top = $("#current_page").height() + min_top;
+    
+    var top=(event.pageY - 25);
+    var left=(event.pageX-150);
+
+    console.log(top);
+
+    if(left < min_left)
+      left = min_left;
+    else if(left+220 > max_left)
+      left = max_left - 220;
+
+    if(top < min_top)
+      top = min_top;
+    else if(top+430 > max_top)
+      top = max_top - 430;
+
+console.log(top);
+
+    top = top + "px";
+    left = left + "px";
+
       $("<div class='popup ui-draggable' id='pop-mquiz-popup' style='display: block; top:" + top  + "; left: " + left  + ";'> \
       <div class='popup-header'> \
         <i class='icon-m-quiz'></i> &nbsp;Quiz Ekle \

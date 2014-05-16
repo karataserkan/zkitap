@@ -191,17 +191,47 @@ class OrganisationsController extends Controller
 
 	public function actionCreateBookCategory()
 	{
-		if(isset($_POST['category'])&&isset($_POST['organisation']))
+
+		if(isset($_POST['category_name'])&&isset($_POST['organisationId']))
 		{
+			$status=Yii::app()->request->getPost('status');
+			$category_name=Yii::app()->request->getPost('category_name');
+			$retrieved_model=BookCategories::model()->find('category_id=:category_id',array(':category_id'=>$status));
+
+			if($retrieved_model){
+				$retrieved_model->category_name=$category_name;
+				if($retrieved_model->save())
+				{
+					echo "success";
+				}
+				else
+				{
+					echo "fail:db";
+				}
+
+			}
+			else
+			{
 			$category=new BookCategories;
 			$category->category_id=functions::new_id(10);
-			$category->category_name=$_POST['category'];
-			$category->organisation_id=$_POST['organisation'];
+			$category->category_name=$_POST['category_name'];
+			$category->organisation_id=$_POST['organisationId'];
 			$category->periodical=($_POST['periodical']) ? 1 : 0 ;
-			$category->save();
+			if($category->save()){
+				echo "success";
+			}
+			else
+			{
+				echo "fail:db";
+			}
+		}
+		}
+		else
+		{
+			echo "fail";
 		}
 
-		$this->redirect(array('bookCategories','id'=>$_POST['organisation']));
+		//$this->redirect(array('bookCategories','id'=>$_POST['organisation']));
 	}
 
 	public function actionUpdateBookCategory()

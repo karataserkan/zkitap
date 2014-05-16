@@ -167,8 +167,27 @@ var createImageComponent = function ( event, ui ,oldcomponent) {
 
     //console.log(link_check);
     //console.log(popup_check);
-    top=(event.pageY-25)+"px";
-    left=(event.pageX-150)+"px";
+    var min_left = $("#current_page").offset().left;
+    var min_top = $("#current_page").offset().top;
+    var max_left = $("#current_page").width() + min_left;
+    var max_top = $("#current_page").height() + min_top;
+
+    top=(event.pageY-25);
+    left=(event.pageX-150);
+
+    if(left < min_left)
+      left = min_left;
+    else if(left+310 > max_left)
+      left = max_left - 310;
+
+    if(top < min_top)
+      top = min_top;
+    else if(top+600 > max_top)
+      top = max_top - 600;
+
+    top = top + "px";
+    left = left + "px";
+
       var img_cmp="<div class='popup ui-draggable' id='pop-image-popup' style='display: block; top:" + top + "; left: " + left + ";'> \
         <div class='popup-header'> \
         <i class='icon-m-image'></i> &nbsp;Görsel Ekle \
