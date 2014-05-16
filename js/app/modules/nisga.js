@@ -525,7 +525,7 @@ var textComponentBuilder = function( component ) {
 
   var htmlComponentBuilder = function( component ) {
 
-    var element  = $('<div style="width:100%; height:100%;"></div>');
+    var element  = $('<div class="html-controllers" style="width:100%; height:100%;"></div>');
     var elementWrap=$('<div title="HTML Aracı"></div>');
     elementWrap.appendTo( page_div_selector );
     //console.log(component);
