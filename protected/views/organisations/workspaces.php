@@ -266,7 +266,7 @@ $(document).on("click","#add_workspace",function(e){
 		  data: {organisationId:'<?php echo $organisationId;?>',workspace_name:workspace_name_val,status:status}
 		}).done(function(res){
 			console.log(res);
-			//window.location.assign('/organisations/workspaces?organizationId='+'<?php echo $organisationId;?>');
+			window.location.assign('/organisations/workspaces?organizationId='+'<?php echo $organisationId;?>');
 		});
 
 });
