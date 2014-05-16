@@ -1186,8 +1186,32 @@ $(document).ready(function(){
 
  
  var createTableComponent = function (event,ui){
-    var top=(event.pageY-25)+"px";
-    var left=(event.pageX-150)+"px";
+  
+  var min_left = $("#current_page").offset().left;
+    var min_top = $("#current_page").offset().top;
+    var max_left = $("#current_page").width() + min_left;
+    var max_top = $("#current_page").height() + min_top;
+    
+    var top=(event.pageY - 25);
+    var left=(event.pageX-150);
+
+    console.log(top);
+
+    if(left < min_left)
+      left = min_left;
+    else if(left+310 > max_left)
+      left = max_left - 310;
+
+    if(top < min_top)
+      top = min_top;
+    else if(top+380 > max_top)
+      top = max_top - 380;
+
+console.log(top);
+
+    top = top + "px";
+    left = left + "px";
+
   $("<div class='popup ui-draggable' id='pop-image-popup' style='display: block; top:" +top+ "; left: " + left + ";'> \
     <div class='popup-header'> \
     Tablo Ekle \

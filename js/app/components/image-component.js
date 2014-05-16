@@ -171,18 +171,18 @@ var createImageComponent = function ( event, ui ,oldcomponent) {
     var min_top = $("#current_page").offset().top;
     var max_left = $("#current_page").width() + min_left;
     var max_top = $("#current_page").height() + min_top;
-    
+
     top=(event.pageY-25);
     left=(event.pageX-150);
 
     if(left < min_left)
       left = min_left;
-    else if(left+300 > max_left)
+    else if(left+310 > max_left)
       left = max_left - 310;
 
     if(top < min_top)
       top = min_top;
-    else if(top+300 > max_top)
+    else if(top+600 > max_top)
       top = max_top - 600;
 
     top = top + "px";

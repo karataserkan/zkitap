@@ -11,7 +11,6 @@ $(document).ready(function(){
     
     _create: function(){
         
-      this._super();
       var that = this;
       var image_width = 0;
       //if( that.options.component.type=='galery')
@@ -43,6 +42,7 @@ $(document).ready(function(){
         $('<div style="clear:both"></div>').appendTo(that.element);
 
       }
+      this._super({resizableParams:{handles:"e, s, se"}});
     },
 
     field: function(key, value){
@@ -72,12 +72,12 @@ var createGaleryComponent = function (event,ui){
 
     if(left < min_left)
       left = min_left;
-    else if(left+300 > max_left)
+    else if(left+310 > max_left)
       left = max_left - 310;
 
     if(top < min_top)
       top = min_top;
-    else if(top+400 > max_top)
+    else if(top+500 > max_top)
       top = max_top - 500;
 
 console.log(top);
