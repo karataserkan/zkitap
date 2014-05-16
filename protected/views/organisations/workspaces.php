@@ -12,7 +12,7 @@ $organisationId=$organizationUser['organisation_id'];
 
 
 ?>
- <div id="content" class="row">
+ <div id="content">
 
 	<div class="col-sm-12">
 		<div class="page-header">

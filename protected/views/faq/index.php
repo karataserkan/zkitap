@@ -87,7 +87,7 @@
 <!-- POPUP END -->
 
 
-<div class="row">
+
 					<div id="content" class="col-lg-12" style="min-height:1063px !important">
 						<!-- PAGE HEADER-->
 						<div class="row">
@@ -148,14 +148,14 @@
 									  		?>
 										<?php endforeach; ?> 
 									  </div>
-									  <a data-id="addTicket" data-toggle="modal" data-target="#addTicket" class="btn btn-xs btn-primary"><i class="fa fa-thumb-tack"></i>Destek İSte</a>
+									  <a data-id="addTicket" data-toggle="modal" data-target="#addTicket" class="btn btn-xs btn-primary"><i class="fa fa-thumb-tack"></i> Destek İste</a>
 									</div>
 								  <?php }
 								  endif; ?>
 								</div>
 							</div>
 							<!-- /CONTENT -->
-						</div>
+						
 <?php //echo CHtml::link(__('Ekle'),"/faq/create",array('class'=>'btn white radius')); ?>
 <script type="text/javascript">
 	$('.list-group-item').on('click',function(){
