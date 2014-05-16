@@ -1,6 +1,16 @@
 
  	$( document ).ready(function() {
     $('form').addClass('form-horizontal');
+    
+    $('#workspaces>div').on('click',function(){
+        $('#workspaces>div>span>div>span').removeClass('checked');
+        $(this).children().children().children().addClass('checked');
+    });
+
+    $('#templates>div').on('click',function(){
+        $('#templates>div>span>div>span').removeClass('checked');
+        $(this).children().children().children().addClass('checked');
+    });
 
     $('#book_size>div').on('click',function(){
         $('#book_size>div>span>div>span').removeClass('checked');
