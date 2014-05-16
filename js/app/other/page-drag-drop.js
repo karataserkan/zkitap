@@ -36,17 +36,19 @@ $( document ).ready(function () {
 
       console.log("LEN:"+len);
       item = $(document.createElement("div"));
-      item.css({'width':'38px','float':'left', 'border-right': '1px solid #000','text-align':'center'});
+      item.css({'width':'38px','float':'left', 'border-right': '1px solid #000','text-align':'left','padding-left':'2px'});
           for (i = 0; i < len; i++) 
           {
-              ruler.append(item.clone().text(i + 1));
+              ruler.append(item.clone().text(i));
           }
 
       item = $(document.createElement("div"));
-      item.css({'height':'38px', 'border-top': '1px solid #000','text-align':'center'});
+     
           for (i = 0; i < len_height; i++) 
           {
-              ruler_h.append(item.clone().text(i + 1));
+             item.css({'height':'38px', 'border-top': '1px solid #000','text-align':'center'});
+            if(i==0){item.css({'border-top':'none'})}
+              ruler_h.append(item.clone().text(i));
           }
 
 
