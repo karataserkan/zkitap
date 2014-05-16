@@ -592,7 +592,7 @@ left: 118px;
 	text-align: center;
     margin: 0;
     width: 2em;
-	padding-top:20px;
+    //padding-top:20px;
     white-space: nowrap;
 }
 .vruler hr{
