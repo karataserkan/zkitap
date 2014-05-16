@@ -55,7 +55,7 @@ window.lindneo.tlingit = (function(window, $, undefined){
   };
 
   var componentHasUpdated = function ( component ) {
-    console.log(component);
+    //console.log(component);
     window.lindneo.dataservice
       .send( 'UpdateWholeComponentData', 
         { 
@@ -115,16 +115,16 @@ window.lindneo.tlingit = (function(window, $, undefined){
     $.each(components, function(i, val){
       
 
-      console.log(val.page_id);
+      //console.log(val.page_id);
       if(val.type === "page"){
-        console.log(window.lindneo.tlingit.pages);
+        //console.log(window.lindneo.tlingit.pages);
         $.each(window.lindneo.tlingit.pages, function(index, value){
           //console.log(value);
           //console.log(val);
           if(value.page_id == val.page_id){
-            console.log("efefefe");
-            console.log(val.type);
-            console.log(value.page_num);
+            
+            //console.log(val.type);
+            //console.log(value.page_num);
             val.data.textarea.val = value.page_num;
             }
         });
