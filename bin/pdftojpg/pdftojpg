@@ -1,6 +1,10 @@
 #!/bin/bash
 range=`pdfinfo $1 | awk '/Pages/ {print $2}\'`
 echo $range
+mv $1 $1.pdf
+`gs -dNOPAUSE -dBATCH -sDEVICE=pdfwrite -dCompatibilityLevel=1.4 -dPDFSETTINGS=/prepress -sOutputFile=$1 $1.pdf`
+rm $1.pdf
+
 for page in `seq 1 $range`;
 do
     pdftoppm -f $page -l $page -jpeg -r 300 $1 > $2"page-"$page".jpg";
