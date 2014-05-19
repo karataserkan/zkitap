@@ -27,6 +27,16 @@ window.lindneo.tlingit = (function(window, $, undefined){
     // co-worker'lara bildir
     oldcomponent_id = component_id;
     oldcomponent = component;
+    //console.log(component.data.self.css);
+    if(component.data.self.css['z-index'] == "first"){
+        
+        var zindex = window.lindneo.toolbox.findHighestZIndexToSet('[component-instance="true"]', component.id );
+        console.log(zindex);
+        if(zindex == 1) zindex = 990;
+        component.data.self.css['z-index'] = zindex;
+        //console.log(component.data.self.css);
+        
+      }
 
     window.lindneo.dataservice
       .send( 'AddComponent', 

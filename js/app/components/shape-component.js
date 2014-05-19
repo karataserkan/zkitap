@@ -241,7 +241,8 @@ console.log(top);
                 'height': '100px',
                 'background-color': 'transparent',
                 'overflow': 'visible',
-                'opacity': '1'
+                'opacity': '1',
+                'zindex': 'first'
                   }
               
               }

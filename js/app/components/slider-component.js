@@ -438,12 +438,8 @@ var createSliderComponent = function (event,ui){
                 'position':'absolute',
                 'top': (ui.offset.top-$(event.target).offset().top ) + 'px',
                 'left':  ( ui.offset.left-$(event.target).offset().left ) + 'px',
-
-          
-
-                'background-color': 'transparent',
-                
-
+                'zindex': 'first',
+                'background-color': 'transparent'
               }
             }
           }

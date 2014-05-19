@@ -183,7 +183,8 @@ console.log(top);
                 'left':  ( ui.offset.left-$(event.target).offset().left ) + 'px',
                 'background-color': 'transparent',
                 'width': image_width,
-                'height': image_height
+                'height': image_height,
+                'zindex': 'first'
 
               }
             }

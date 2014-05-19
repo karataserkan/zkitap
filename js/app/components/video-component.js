@@ -88,7 +88,6 @@ var createVideoComponent = function( event, ui, oldcomponent ) {
     };
     var video_url = "http://lindneo.com/5.mp4";
     if(typeof oldcomponent == 'undefined'){
-      console.log('dene');
       var top = (ui.offset.top-$(event.target).offset().top ) + 'px';
       var left = ( ui.offset.left-$(event.target).offset().left ) + 'px';
       
@@ -129,8 +128,8 @@ var createVideoComponent = function( event, ui, oldcomponent ) {
     if(control_type == 'Y') { control_y_check = "checked='checked'"; control_y_check_active = 'active';}
     else { control_n_check = "checked='checked'"; control_n_check_active = 'active'; }
  
-    console.log(link_check);
-    console.log(popup_check);
+    //console.log(link_check);
+    //console.log(popup_check);
     
 
     var min_left = $("#current_page").offset().left;
@@ -141,7 +140,7 @@ var createVideoComponent = function( event, ui, oldcomponent ) {
     var top=(event.pageY - 25);
     var left=(event.pageX-150);
 
-    console.log(top);
+    //console.log(top);
 
     if(left < min_left)
       left = min_left;
@@ -153,7 +152,7 @@ var createVideoComponent = function( event, ui, oldcomponent ) {
     else if(top+700 > max_top)
       top = max_top - 700;
 
-console.log(top);
+//console.log(top);
 
     top = top + "px";
     left = left + "px";
@@ -257,23 +256,22 @@ console.log(top);
           var size = file.size;
           var type = file.type;
           var token = '';
-          console.log('dene');
           var reader = new FileReader();
-          console.log(reader);
+          //console.log(reader);
           var component = {};
           var videoURL = '';
           reader.readAsDataURL(file);
-          console.log(reader);
+          //console.log(reader);
           reader.onload = function(_file) {
             imageBinary = _file.target.result;
-            console.log(imageBinary);
+            //console.log(imageBinary);
             $('#new_image').html('');
             $("<input type='radio' id='video_type2' name='video_image_type' value='video_type2' checked='checked'><button id='button2' style='background:url(" + imageBinary +") no-repeat center center; no-repeat center center; -moz-background-size: cover; -webkit-background-size: cover; -o-background-size: cover; background-size: cover; width:70px; height:70px;'></button><br><br>").appendTo('#new_image');
             $( "button" ).button();
             marker = imageBinary;
-            console.log(marker);
+            //console.log(marker);
           }
-          console.log(marker);
+          //console.log(marker);
         });
 
     $("input[name=video_type]:radio").change(function () {
@@ -281,7 +279,7 @@ console.log(top);
       });
     
     if(changeimage){
-          console.log(that);
+          //console.log(that);
           var file = that.files[0];
           var name = file.name;
           var size = file.size;
@@ -293,8 +291,8 @@ console.log(top);
         var video_type = $('input[name=video_type]:checked').val();
         var auto_type = $('input[name=auto_type]:checked').val();
         var control_type = $('input[name=control_type]:checked').val();
-        console.log(auto_type);
-        console.log(control_type);
+        //console.log(auto_type);
+        //console.log(control_type);
         
         if(typeof oldcomponent == 'undefined'){
           
@@ -310,19 +308,18 @@ console.log(top);
         
 
         if(change){
-          console.log(that);
+          //console.log(that);
           var file = that.files[0];
           var name = file.name;
           var size = file.size;
           var type = file.type;
           var token = '';
-          console.log('dene');
           var reader = new FileReader();
-          console.log(reader);
+          //console.log(reader);
           var component = {};
           var videoURL = '';
           reader.readAsDataURL(file);
-          console.log(reader);
+          //console.log(reader);
           reader.onload = function(_file) {
             var videoBinary = _file.target.result;
             var contentType = videoBinary.substr(0, videoBinary.indexOf(';'));
@@ -332,13 +329,13 @@ console.log(top);
             var videoURL = '';
             var token = '';
 
-            console.log(videoBinary);
+            //console.log(videoBinary);
             window.lindneo.dataservice.send( 'getFileUrl', {'type': videoType}, function(response) {
               response=window.lindneo.tlingit.responseFromJson(response);
             
               window.lindneo.dataservice.send( 'UploadFile',{'token': response.result.token, 'file' : videoBinary} , function(data) {
                 videoURL = response.result.URL;
-                console.log(videoURL);
+                //console.log(videoURL);
                 
                 if(video_type == 'popup') video_width_height = '80%';
                 else video_width_height = '100%';
@@ -375,14 +372,15 @@ console.log(top);
                                     'width': 'auto',
                                     'height': '60px',
                                     'background-color': 'transparent',
-                                    'overflow': 'visible'
+                                    'overflow': 'visible',
+                                    'z-index': 'first'
                                 }
                             }
 
                         }
                     };
 
-                    console.log(component);
+                    //console.log(component);
                     window.lindneo.tlingit.componentHasCreated( component );
                   
                 });
@@ -406,7 +404,7 @@ console.log(top);
         var headers = req.getAllResponseHeaders().toLowerCase();
         var contentType = req.getResponseHeader('content-type');
         var contenttypes = contentType.split('/');
-        console.log(contentType);
+        //console.log(contentType);
         /*if (contenttypes[0] != 'video') {
             alert('Lütfen bir video dosyası URL adresi giriniz');
             return;
@@ -423,7 +421,7 @@ console.log(top);
 
         if(video_type == 'popup') video_width_height = '80%';
         else video_width_height = '100%';
-        console.log(contentType);
+        //console.log(contentType);
         var component = {
             'type': 'video',
             'data': {
@@ -457,14 +455,15 @@ console.log(top);
                         'width': 'auto',
                         'height': '60px',
                         'background-color': 'transparent',
-                        'overflow': 'visible'
+                        'overflow': 'visible',
+                        'z-index': 'first'
                     }
                 }
 
             }
         };
 
-        console.log(component);
+        //console.log(component);
         window.lindneo.tlingit.componentHasCreated(component);
         $("#video-add-dummy-close-button").trigger('click');
 
@@ -603,7 +602,8 @@ console.log(top);
                                   'width': 'auto',
                                   'height': '60px',
                                   'background-color': 'transparent',
-                                  'overflow': 'visible'
+                                  'overflow': 'visible',
+                                  'z-index': 'first'
                               }
                           }
 
