@@ -13,12 +13,11 @@ $(document).ready(function(){
 
       var auto_start = '';
       var repeat_type= '';
-       console.log('sound component');
-      console.log(this.options.component.data);
+      //console.log(this.options.component.data);
       if(this.options.component.data.auto_type == 'Y') auto_start = 'autoplay';
       if(this.options.component.data.control_type == 'N') control = '';
       if(this.options.component.data.repeat_type == 'Y') repeat_type='loop';
-      console.log(repeat_type);
+      //console.log(repeat_type);
       if(this.options.component.data.source.attr.src ) {
         var source=$('<source src="'+this.options.component.data.source.attr.src+'" /> ');
         var audio=$('<audio controls="controls" '+auto_start+' '+repeat_type+'></audio>');
@@ -27,7 +26,7 @@ $(document).ready(function(){
         var audio_name=$('<span class="audio-name" >'+audioName+'</span>');
  
         source.appendTo(audio);
-        console.log('deneme');
+        //console.log('deneme');
         audio_name.appendTo(this.element);
         audio.appendTo(this.element);
         audio.css(this.options.component.data.audio.css);
@@ -201,7 +200,7 @@ $(document).ready(function(){
                   'height': '60px',
                   'background-color': 'transparent',
                   'overflow': 'visible',
-                  'zindex': 'first'
+                  'z-index': 'first'
                 }
               }
             

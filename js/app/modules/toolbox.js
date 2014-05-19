@@ -451,7 +451,7 @@ window.lindneo.toolbox = (function(window, $, undefined){
       //console.log(zindex);
 
         
-      if ((zindex >= highest) && zindex<2000 && (zindex != 'auto'))
+      if ((zindex >= highest) && (zindex != 'auto'))
       {
         highest = zindex;
         
