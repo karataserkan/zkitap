@@ -8196,6 +8196,7 @@ div[data-role="editor-toolbar"] {
 	padding-bottom: 30px;
 	position: relative;
 	min-height: 300px;
+	border: 1px solid rgb(124, 124, 124);
 }
 .login-box input,
 .login-box textarea {
