@@ -97,6 +97,8 @@
 									
 									<!-- /STYLER -->
 										<h3 class="content-title pull-left" >Destek</h3>
+                                        
+                                        <a data-id="addTicket" data-toggle="modal" data-target="#addTicket" class="btn pull-right btn-primary"><i class="fa fa-exclamation-circle"></i> Destek İste</a>
 								</div>
 							</div>
 						</div>
@@ -148,7 +150,7 @@
 									  		?>
 										<?php endforeach; ?> 
 									  </div>
-									  <a data-id="addTicket" data-toggle="modal" data-target="#addTicket" class="btn btn-xs btn-primary"><i class="fa fa-thumb-tack"></i> Destek İste</a>
+									  
 									</div>
 								  <?php }
 								  endif; ?>

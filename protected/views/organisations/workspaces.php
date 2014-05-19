@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 
 <script>
 		jQuery(document).ready(function() {		
@@ -111,7 +111,7 @@ function sendUser(e){
     }
 </script>
 </div>
-=======
+
 <script>
 	jQuery(document).ready(function() {		
 		App.setPage("gallery");  //Set current page
@@ -385,4 +385,3 @@ $(document).on("click","#add_workspace",function(e){
 
 });
 </script>
->>>>>>> 3aa03b61c482f1a5cbf309dd6d57247db1275680

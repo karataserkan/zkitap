@@ -9333,6 +9333,10 @@ ul.stats li small {
 	margin-left:0px;
 }
 
+ul.mybooks_category_actions {
+	margin-bottom:3px;
+}
+
 ul.mybooks_category_actions li {
 	height: 100%;
 	padding: 0px 15px;
@@ -9425,12 +9429,10 @@ li.mybooks_page_categories .dropdown-menu li:hover:nth-child(3){
 	width: 100%;
 	font-size: 30px;
 	position: relative;
-	top: -20px;
-	padding-bottom: 10px;
+	top: -10px;
 	text-align: center;
-	border-bottom: 1px solid #E9E9E9;
 	text-shadow: #fff 0 1px 0;
-	color: rgb(223, 223, 223);	
+	color: rgb(213, 213, 213);	
 }
 
 /** END OF EDITOR MYBOOKS PAGE **/
@@ -9567,7 +9569,7 @@ li.mybooks_page_categories .dropdown-menu li:hover:nth-child(3){
 .myprofile_information_components p {
 	float:left;
 	width: 200px;
-	color: #333;	
+	color: #7c7c7c;	
 }
 
 .myprofile_information_part > .myprofile_information_components:last-child > button {
@@ -9610,12 +9612,14 @@ form#myprofile_info_edit > input {
 	color:#333;	
 }
 
+.my_profile_name_top {
+	margin-top:14px;
+	margin-left:10px;
+	color:#666;
+}
+
 
 /** END OF EDITOR MY PROFILE PAGE ***********************************/
-
-
-
-
 
 
 /** EDITOR WORKSPACE ACCOUNT PAGE **/
@@ -9673,6 +9677,35 @@ form#myprofile_info_edit > input {
 
 
 
+/** EDITOR ORGANIZATIONS USERS PAGE *******************/
+
+.users_frame {
+	float:left;
+	width:200px;
+	margin-bottom:50px;
+	text-align:center;
+	text-shadow: 0px 1px #FFFFFF;
+}
+
+.users_frame img{
+	width:120px;
+	height:120px;
+	border-radius: 100%;
+	padding:0;
+	-webkit-box-shadow: 0 2px 6px 0 #C2C2C2;
+	box-shadow: 0 2px 6px 0 #C2C2C2;
+	border:5px solid #fff;
+	float:none;
+	
+}
+
+
+/** END OF EDITOR ORGANIZATIONS USERS PAGE *******************/
+
+
+
+
+
 /** EDITOR GENERAL CSS *******************/
 
 li.user .dropdown-menu li a {
@@ -9688,9 +9721,6 @@ li.user .dropdown-menu li a:hover {
 }
 
 /** END OF EDITOR GENERAL CSS *******************/
-
-
-
 
 
 
@@ -10640,11 +10670,6 @@ header.read_page_navbar i.fa, span.sb-icon-search {
 	color:#918F8F;
 }
 
-.myprofile_information_components p {
-	float:left;
-	width: 200px;
-	color: #333;	
-}
 
 .myprofile_information_part > .myprofile_information_components:last-child > button {
 	float:left !important;
