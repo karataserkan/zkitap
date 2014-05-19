@@ -442,7 +442,8 @@ console.log(top);
                 'width': '300px', 
                 'height': '150px',
                 'background-color': 'transparent',
-                'overflow': 'visible'
+                'overflow': 'visible',
+                'zindex': 'first'
               }
             }
           }

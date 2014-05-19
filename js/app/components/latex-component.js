@@ -424,8 +424,8 @@ console.log(top);
                 'top': top ,
                 'left':  left ,
                 'overflow': 'visible',
-                'opacity': '1',
-                'z-index': '1000'
+                'opacity': '1', 
+                'z-index': 'first'
               }
             }
           }
