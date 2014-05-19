@@ -5,7 +5,10 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0" />
 	<meta name="language" content="<?php functions::_lang_code(); ?>" />
-	<link rel="icon" type="image/png" href="/css/favicon.png" />
+	
+    <link rel="icon" href="/css/images/favicon.ico" type="image/x-icon">
+	<link rel="shortcut icon" href="/css/images/favicon.ico" type="image/x-icon">
+    
 	<title><?php echo CHtml::encode($this->pageTitle); ?></title>
 
 <!-- default styles and js -->

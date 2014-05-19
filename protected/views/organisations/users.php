@@ -32,7 +32,7 @@
 
 
 
- <div id="content" class="row">
+ <div id="content">
 
 	<div class="col-sm-12">
 		<div class="page-header">
@@ -65,13 +65,12 @@ if ($users) {
 				$avatarSrc=$userProfileMeta->meta_value;
 			}
 		?>
-		<div class="col-sm-2">	
-		<div class="well">
-		<img itemprop="image" class="col-sm-12" src="<?php echo $avatarSrc; ?>" style="height:120px">
+		<div class="users_frame">	
+		
+		<img itemprop="image" class="col-sm-12 clearfix" src="<?php echo $avatarSrc; ?>">
 		<h5 class="col-sm-12" style="text-transform:capitalize;"><?php echo $user->name . "  " .$user->surname;?></h5>
-		<a href="?r=organisations/deleteOrganisationUser&userId=<?php echo $user->id; ?>&organisationId=<?php echo $organisationId; ?>" class="float-right" style="margin-left:14px"><i class="fa fa-trash-o"></i>&nbsp;&nbsp;<?php _e('Kullanıcılardan Çıkar'); ?></a>
+		<a class="col-sm-12" href="?r=organisations/deleteOrganisationUser&userId=<?php echo $user->id; ?>&organisationId=<?php echo $organisationId; ?>"><i class="fa fa-trash-o"></i>&nbsp;&nbsp;<?php _e('Kullanıcılardan Çıkar'); ?></a>
 		<div class="clearfix"></div>
-		</div>
 		</div>
 		<?php
 	endforeach;

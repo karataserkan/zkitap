@@ -267,6 +267,8 @@ $all_books= $this->getWorkspaceBooks($workspace->workspace_id);
 		
 		<div class="mybooks_page_category_viewer">Hepsi</div>
         
+        <div class="separator"></div>
+        
 <script type="text/javascript">
 	$('#filter-controls>li>a').click(function(){
 		$('.mybooks_page_category_viewer').html($(this).html());
