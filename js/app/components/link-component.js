@@ -186,7 +186,7 @@ console.log(top);
                 'height': '128px',
                 'background-color': 'transparent',
                 'overflow': 'visible',
-                'z-index': '99997'
+                'z-index': 'first'
               },
               'attr':{
                 'href': targetURL

@@ -765,7 +765,7 @@ var html_tag_replace = function (str){
             'width': '400px',
             'height': '100px',
             'opacity': '1',
-            'z-index': '1000'
+            'z-index': 'first'
 
           },
           'attr' : {

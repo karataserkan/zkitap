@@ -200,7 +200,8 @@ $(document).ready(function(){
                   'width': '250px',
                   'height': '60px',
                   'background-color': 'transparent',
-                  'overflow': 'visible'
+                  'overflow': 'visible',
+                  'zindex': 'first'
                 }
               }
             
