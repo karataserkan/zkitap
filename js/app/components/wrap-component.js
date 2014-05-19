@@ -237,7 +237,7 @@ var createWrapComponent = function ( event, ui, oldcomponent ) {
                 'height': self_height,
                 'background-color': 'transparent',
                 'overflow': 'visible',
-                'z-index': '99998'
+                'z-index': 'first'
               }
             }
           }
