@@ -225,6 +225,10 @@
 			    
 			});
 		</script>
+		<!-- DATE RANGE PICKER -->
+	<script src="<?php echo Yii::app()->request->baseUrl; ?>/js/lib/dashboard/bootstrap-daterangepicker/moment.min.js"></script>
+	
+	<script src="<?php echo Yii::app()->request->baseUrl; ?>/js/lib/dashboard/bootstrap-daterangepicker/daterangepicker.min.js"></script>
 		<!-- EASY PIE CHART -->
 	<script src="<?php echo Yii::app()->request->baseUrl; ?>/js/lib/dashboard/jquery-easing/jquery.easing.min.js"></script>
 	<script type="text/javascript" src="<?php echo Yii::app()->request->baseUrl; ?>/js/lib/dashboard/easypiechart/jquery.easypiechart.min.js"></script>
@@ -236,6 +240,7 @@
     <script src="<?php echo Yii::app()->request->baseUrl; ?>/js/lib/dashboard/flot/jquery.flot.pie.min.js"></script>
     <script src="<?php echo Yii::app()->request->baseUrl; ?>/js/lib/dashboard/flot/jquery.flot.stack.min.js"></script>
     <script src="<?php echo Yii::app()->request->baseUrl; ?>/js/lib/dashboard/flot/jquery.flot.crosshair.min.js"></script>
+    <script src="<?php echo Yii::app()->request->baseUrl; ?>/js/lib/dashboard/script.js"></script>
 
 		<script type="text/javascript">
 

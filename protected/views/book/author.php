@@ -1477,7 +1477,7 @@ $current_user=User::model()->findByPk(Yii::app()->user->id);
 			$("#chapters_pages_view" ).toggle( "slide",{direction: "right"}, 100 );
 			$( "#right_close" ).hide( "slide",{direction: "right"}, 100 );
 			console.log(position);
-			document.getElementById('collapseThree').scrollTop=position;
+			$("#collapseThree").animate({scrollTop: position});
 			console.log(document.getElementById('collapseThree').scrollTop);
 			});
 		</script>
