@@ -11,6 +11,7 @@
  * @property string $password
  * @property string $email
  * @property string $data
+ * @property string $tel
  */
 class User extends CActiveRecord
 {
@@ -44,10 +45,11 @@ class User extends CActiveRecord
 			array('id', 'required'),
 			array('id', 'numerical', 'integerOnly'=>true),
 			array('name, surname, password, email', 'length', 'max'=>255),
+			array('tel', 'length', 'max'=>45),
 			array('created, data', 'safe'),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('id, name, surname, created, password, email, data', 'safe', 'on'=>'search'),
+			array('id, name, surname, created, password, email, data, tel', 'safe', 'on'=>'search'),
 		);
 	}
 

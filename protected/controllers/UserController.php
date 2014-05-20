@@ -32,7 +32,7 @@ class UserController extends Controller
 				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
-				'actions'=>array('create','update','profile','updatePhoto','updateProfile'),
+				'actions'=>array('create','update','profile','updatePhoto','updateProfile','sendConfirmationId','checkConfirmationId'),
 				'users'=>array('@'),
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
@@ -43,6 +43,48 @@ class UserController extends Controller
 				'users'=>array('*'),
 			),
 		);
+	}
+
+	public function actionSendConfirmationId()
+	{
+		if (isset($_POST['tel']) AND $_POST['tel']) {
+			$userConfirmation=UserMeta::model()->find('user_id=:user_id and meta_key=:meta_key',array('user_id'=>Yii::app()->user->id,'meta_key'=>'confirm'));
+			$userConfirmation->meta_value=functions::get_random_string(6,'0123456789');
+			$userConfirmation->save();
+
+			$user=User::model()->findByPk(Yii::app()->user->id);
+			$user->tel=$_POST['tel'];
+			$user->save();
+
+			//if confiemation ID sent
+			echo "0";
+
+			//else
+			//echo 1
+		}
+		else
+			echo "1";
+
+	}
+
+	public function actionCheckConfirmationId()
+	{
+		if (isset($_POST['code']) AND $_POST['code']) {
+			$userConfirmation=UserMeta::model()->find('user_id=:user_id and meta_key=:meta_key',array('user_id'=>Yii::app()->user->id,'meta_key'=>'confirm'));
+			if ($userConfirmation->meta_value==$_POST['code']) {
+				$userConfirmation->meta_value="confirmed";
+				if($userConfirmation->save())
+				{
+					echo "0";
+				}else
+				{
+					echo "1";
+				}
+			}else
+			{
+				echo "1";
+			}
+		}
 	}
 
 	/**
