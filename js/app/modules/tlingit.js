@@ -32,7 +32,7 @@ window.lindneo.tlingit = (function(window, $, undefined){
         
         var zindex = window.lindneo.toolbox.findHighestZIndexToSet('[component-instance="true"]', component.id );
         console.log(zindex);
-        if(zindex == 1) zindex = 990;
+        if(zindex == 1) zindex = 900;
         component.data.self.css['z-index'] = zindex;
         //console.log(component.data.self.css);
         
@@ -91,26 +91,33 @@ window.lindneo.tlingit = (function(window, $, undefined){
     if(typeof componentId != 'undefined')
       oldcomponent_id = componentId;
     oldcomponent = component;
+    //console.log(component);
     //console.log(component.id);
-    window.lindneo.dataservice
-    .send( 'DeleteComponent', 
-      { 
-        'componentId' : component.id
-      },
-      deleteArrivalResult,
-      function(err){
-        console.log('error:' + err);
-    });
+    //console.log(componentId);
+    if(typeof component != 'undefined'){
+      window.lindneo.dataservice
+      .send( 'DeleteComponent', 
+        { 
+          'componentId' : component.id
+        },
+        deleteArrivalResult,
+        function(err){
+          console.log('error:' + err);
+      });
+    }
   };
 
   var deleteArrivalResult = function ( res ) {
     //console.log('deleteArrivalResult');
-    var response = responseFromJson(res);
-    //console.log(oldcomponent);
-    //console.log(response.result);
-    
-    window.lindneo.nisga.destroyComponent(oldcomponent, response.result.delete);
-    window.lindneo.tsimshian.componentDestroyed(response.result.delete);
+    if(res){
+      var response = responseFromJson(res);
+      //console.log(oldcomponent);
+      //console.log(response.result);
+      if(response.result){
+        window.lindneo.nisga.destroyComponent(oldcomponent, response.result.delete);
+        window.lindneo.tsimshian.componentDestroyed(response.result.delete);
+      }
+    }
   };
 
   var loadComponents = function( res ) {
@@ -157,7 +164,8 @@ window.lindneo.tlingit = (function(window, $, undefined){
   var responseFromJson = function (response){
       //console.log(response);
       //return eval("(" +response+ ")");
-      return JSON.parse(response);
+      if(response)
+        return JSON.parse(response);
   };
 
   var loadPage = function (pageId){
@@ -308,36 +316,34 @@ window.lindneo.tlingit = (function(window, $, undefined){
               context.fillStyle= component.data.textarea.css['color'];
 
               if ( $.type(lines) != "undefined")
-              if ( lines != null)
-              if (lines.length > 0)
-              $.each(lines, function (lineNumber,line){
-                  y += fontHeight;
-                  var words = line.split(' ');
-                  var sublines = '';
-                  //console.log(y + ' ' +line) ;
-                  for(var n = 0; n < words.length; n++) {
-
-                    var testLine = sublines + words[n] + ' ';
-                    var metrics = context.measureText(testLine);
-                    var testWidth = metrics.width;
-
-                    if (testWidth > maxWidth && n > 0 ) {
-                      if ( y - starty <= maxHeight ) context.fillText(sublines, x, y);
-                      sublines = words[n] + ' ';
+                if ( lines != null)
+                  if (lines.length > 0)
+                    $.each(lines, function (lineNumber,line){
                       y += fontHeight;
-                    }
-                    else {
-                      sublines = testLine;
-                    }
+                      var words = line.split(' ');
+                      var sublines = '';
+                      //console.log(y + ' ' +line) ;
+                      for(var n = 0; n < words.length; n++) {
 
-                  } 
+                        var testLine = sublines + words[n] + ' ';
+                        var metrics = context.measureText(testLine);
+                        var testWidth = metrics.width;
 
-           
-              if ( y - starty  <= maxHeight ) context.fillText(sublines, x,y );
+                        if (testWidth > maxWidth && n > 0 ) {
+                          if ( y - starty <= maxHeight ) context.fillText(sublines, x, y);
+                          sublines = words[n] + ' ';
+                          y += fontHeight;
+                        }
+                        else {
+                          sublines = testLine;
+                        }
 
-              })
-              
-             ;
+                      } 
+
+               
+                  if ( y - starty  <= maxHeight ) context.fillText(sublines, x,y );
+
+                  });
             
               break;
 

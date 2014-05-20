@@ -1476,7 +1476,9 @@ $current_user=User::model()->findByPk(Yii::app()->user->id);
 			$("#right_close").click(function() {
 			$("#chapters_pages_view" ).toggle( "slide",{direction: "right"}, 100 );
 			$( "#right_close" ).hide( "slide",{direction: "right"}, 100 );
-			
+			console.log(position);
+			$("#collapseThree").animate({scrollTop: position});
+			console.log(document.getElementById('collapseThree').scrollTop);
 			});
 		</script>
 		
@@ -1500,9 +1502,12 @@ $current_user=User::model()->findByPk(Yii::app()->user->id);
 	<div class="btn fa fa-chevron-right right_bar_shrink_button" id="right_open">
 	</div>
 	<script>
+	var position;
 		$( "#right_open" ).click(function() {
-		$( "#chapters_pages_view" ).toggle( "slide",{direction: "right"}, 100 );
-		$( "#right_close" ).show( "slide",{direction: "right"}, 100 );
+			position=document.getElementById('collapseThree').scrollTop;
+			console.log('position:'+position);
+			$( "#chapters_pages_view" ).toggle( "slide",{direction: "right"}, 100 );
+			$( "#right_close" ).show( "slide",{direction: "right"}, 100 );
 		});
 	</script>
 	

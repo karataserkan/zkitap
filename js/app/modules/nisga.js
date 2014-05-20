@@ -244,7 +244,7 @@ window.lindneo.nisga = (function(window, $, undefined){
     $('[id="'+delete_component_id+'"]').parent().not('#current_page').remove();
     $('[id="'+delete_component_id+'"]').remove();
     window.lindneo.toolbox.removeComponentFromSelection( $('#'+ delete_component_id) );
-    window.lindneo.tlingit.componentHasDeleted( component.id );
+    //window.lindneo.tlingit.componentHasDeleted( component.id );
   };
 
   var destroyByIdComponent = function ( componentID ) {
