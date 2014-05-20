@@ -37,7 +37,7 @@ class WorkspacesUsers extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('workspace_id, userid, added, owner', 'required'),
+			array('workspace_id, userid, owner', 'required'),
 			array('userid', 'numerical', 'integerOnly'=>true),
 			array('workspace_id', 'length', 'max'=>44),
 			array('owner', 'length', 'max'=>50),

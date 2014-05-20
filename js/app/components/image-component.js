@@ -11,7 +11,7 @@ $(document).ready(function(){
 
       var that = this;
       
-console.log(this.options.component);
+      //console.log(this.options.component);
       var componentimageid='image'+this.options.component.id;
         if(this.options.component.data.img.image_type == 'popup'){
           if( this.options.marker ) {
@@ -348,7 +348,7 @@ var createImageComponent = function ( event, ui ,oldcomponent) {
                 'height': image_height,
                 'background-color': 'transparent',
                 'overflow': 'visible',
-                'z-index': '990'
+                'z-index': 'first'
               }
             }
           }
@@ -459,7 +459,7 @@ var createImageComponent = function ( event, ui ,oldcomponent) {
                 'height': image_height,
                 'background-color': 'transparent',
                 'overflow': 'visible',
-                'z-index': '990'
+                'z-index': 'first'
               }
             }
           }

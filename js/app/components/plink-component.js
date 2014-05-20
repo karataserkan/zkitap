@@ -202,7 +202,7 @@ console.log(top);
                 'left':  left ,
                 'overflow': 'visible',
                 'opacity': '1',
-                'z-index': '1000'
+                'z-index': 'first'
               }
             }
           }

@@ -20,7 +20,7 @@ $(document).ready(function(){
             <div class='question-text'></div> \
             <div class='question-options-container'></div> \
             <div style='margin-bottom:25px'> \
-              <a href='' class='btn bck-light-green white radius send' > Yanıtla </a> \
+              <a href='#' class='btn bck-light-green white radius send' > Yanıtla </a> \
             </div> \
         </div>").appendTo(this.element);
 
@@ -40,7 +40,7 @@ $(document).ready(function(){
   
           this.element.find('.question-options-container').append(appendText);
           var that = this;
-  
+          /*
           this.element.find('.send').click(function(evt){
   
             var ind = $('input[type=radio]:checked').val();
@@ -74,14 +74,14 @@ $(document).ready(function(){
             }
   
   
-          });
+          });*/
         }
         else if(that.options.component.data.quiz_type == "text"){
 
           var appendText = "<div id='uanswer'><input type='text' id='user_answer' class='form-control' placeholder='Cevabınızı buraya giriniz...' /></div>";
           this.element.find('.question-options-container').append(appendText);
           var that = this;
-
+          /*
           this.element.find('.send').click(function(evt){
             if($('#user_answer').val() == that.options.component.data.answer){
               $('#uanswer').append($('<div style="color:green;">Tebrikler!...</div>'));
@@ -90,6 +90,7 @@ $(document).ready(function(){
              $('#uanswer').append($('<div style="color:red;">Üzgünüm Yanlış Cevap!...</div>')); 
             }
           });
+          */
 
         }
         else if(that.options.component.data.quiz_type == "checkbox"){
@@ -107,7 +108,7 @@ $(document).ready(function(){
 
           this.element.find('.question-options-container').append(appendText);
           var that = this;
-  
+          /*
           this.element.find('.send').click(function(evt){
   
             var ind = $('input[type=checkbox]:checked').val();
@@ -146,6 +147,7 @@ $(document).ready(function(){
   
   
           });
+        */
 
         }
       
@@ -265,9 +267,9 @@ console.log(top);
     top = top + "px";
     left = left + "px";
 
-      $("<div class='popup ui-draggable' id='pop-mquiz-popup' style='display: block; top:" + top  + "; left: " + left  + ";'> \
+      $("<div class='popup ui-draggable' id='pop-mquiz-popup' style='display: block; top:" + top  + "; left: " + left  + "; width:300px;'> \
       <div class='popup-header'> \
-        <i class='icon-m-quiz'></i> &nbsp;Quiz Ekle \
+        <i class='icon-m-quiz'></i> &nbsp;Soru Ekle \
         <i id='create-mquiz-close-button' class='icon-close size-10 popup-close-button'></i> \
       </div> \
       <!-- popup content --> \
@@ -445,7 +447,7 @@ console.log(top);
             'css': {
 
             },
-            'text': 'Quiz Sorusu'
+            'text': 'Sorunuzu giriniz...'
 			
           },
           'quiz_type':quiz_type,
@@ -458,7 +460,7 @@ console.log(top);
               'position':'absolute',
               'top': top ,
               'left':  left ,
-
+              'zindex': 'first'
             }
           }
         }

@@ -194,7 +194,7 @@ console.log(top);
                 'height':'128px',
                 'background-color': 'transparent',
                 'overflow': 'visible',
-                'z-index': '999'
+                'z-index': 'first'
               }
             }
           }

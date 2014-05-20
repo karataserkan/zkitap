@@ -10,7 +10,7 @@
 <div class="row">
 	<div class="col-sm-12">
 		<div class="page-header">
-			<h3 class="content-title pull-left"><?php echo $user->name.' '.$user->surname; ?></h3>
+			<h3 class="content-title pull-left">Profilim</h3> <div class="action_bar_spacer"></div> <h4 class="pull-left my_profile_name_top"> <?php echo $user->name.' '.$user->surname; ?></h4>
 		</div>
 	</div>
 </div>
