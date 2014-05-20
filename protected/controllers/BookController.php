@@ -869,7 +869,7 @@ class BookController extends Controller
 		$budget=$this->getOrganisationEpubBudget($ow->organisation_id);
 
 		functions::event('tripData',NULL, function($var){
-			@include ('js/lib/trips/book/author.json');
+			@include ('js/lib/trips/book/author.js');
 		});
 
 

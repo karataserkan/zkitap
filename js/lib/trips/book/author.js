@@ -117,8 +117,8 @@
 
 
 				}).animate({
-				    left: ("+="+($('#current_page').offset().left+250),
-				   top: ("+="+($('#current_page').offset().top+250), 
+				    left: ("+="+($('#current_page').offset().left+250)),
+				   top: ("+="+($('#current_page').offset().top+250)), 
 				  }, 3000 ,function() {
 				var that = $(this);
 				setTimeout(function() {
