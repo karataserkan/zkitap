@@ -49,26 +49,23 @@ class PoeditParser {
 	public function parse() {
 		$contents = file_get_contents($this->file);
 		$parts = preg_split('#(\r\n|\n){2}#', $contents, -1, PREG_SPLIT_NO_EMPTY);
+		
 		$this->header = array_shift($parts);
 
 		foreach ($parts as $part) {
 
-			// parse comments
-			$comments = array();
-			preg_match_all('#^\\#: (.*?)$#m', $part, $matches, PREG_SET_ORDER);
-			foreach ($matches as $m) $comments[] = $m[1];
+			$part=preg_replace('/#(.*)(\\r\\n|\\n)/i', '', $part, -1, $count);
 
-			$isFuzzy = preg_match('#^\\#, fuzzy$#im', $part) ? true : false;
-
-			preg_match_all('# ^ (msgid|msgstr)\ " ( (?: (?>[^"\\\\]++) | \\\\\\\\ | (?<!\\\\)\\\\(?!\\\\) | \\\\" )* ) (?<!\\\\)" $ #ixm', $part, $matches2, PREG_SET_ORDER);
-			$k = NULL;
-            if(isset($matches2[0][2])){
-                $k = $this->_fixQuotes($matches2[0][2]);	
+			preg_match_all('/[msgid|msgstr].*\"(.*)\".*/ixm', $part, $matches2, PREG_SET_ORDER);
+            if(isset($matches2[0][1])){
+                $k = $this->_fixQuotes($matches2[0][1]);	
             }
 			
-			$v = !empty($matches2[1][2]) ? $this->_fixQuotes($matches2[1][2]) : '';
+			$v = !empty($matches2[1][1]) ? $this->_fixQuotes($matches2[1][1]) : '';
 
-			$this->strings[$k] = new PoeditString($k, $v, $isFuzzy, $comments);
+			$this->strings[$k] = new PoeditString($k, $v);
+			
+
 		}
 
 	}
@@ -161,7 +158,7 @@ $poeditParser->parse();
 
 if ($poeditParser->toJSON($options['-o'], $options['-n'])) {
 	$strings = count($poeditParser->getStrings());
-	echo "Successfully exported " . count($strings) . " strings.\n";
+	echo "Successfully exported " . $strings . " strings.\n";
 } else {
 	echo "Cannor write to file '{$options['-o']}'.\n";
 }
