@@ -11,7 +11,7 @@ $(document).ready(function(){
 
       var that = this;
       
-console.log(this.options.component);
+      //console.log(this.options.component);
       var componentimageid='image'+this.options.component.id;
         if(this.options.component.data.img.image_type == 'popup'){
           if( this.options.marker ) {
@@ -134,7 +134,7 @@ var createImageComponent = function ( event, ui ,oldcomponent) {
                 <a href='#' onclick='document.getElementById(\"image_popup_file\").click(); return false;' class='icon-upload dark-blue size-40' style='padding-left:15px;'></a>\
                 <input type='file' name='image_popup_file' id='image_popup_file' value='' style='visibility: hidden;' >\
                 <div id='new_image'></div>\
-              </span>").appendTo('.type');
+              </span>").appendTo('.typei');
           $( "button" ).button();
           $('#button0').click(function(){$("#image_type0").prop("checked", true); console.log(marker);});
           $('#button1').click(function(){$("#image_type1").prop("checked", true); marker = video_marker; console.log(marker);});
@@ -164,11 +164,29 @@ var createImageComponent = function ( event, ui ,oldcomponent) {
     if(image_type == 'link') { link_check = "checked='checked'"; link_check_active = 'active';}
     else { popup_check = "checked='checked'"; popup_check_active = 'active'; }
 
-
     //console.log(link_check);
     //console.log(popup_check);
-    top=(event.pageY-25)+"px";
-    left=(event.pageX-150)+"px";
+    var min_left = $("#current_page").offset().left;
+    var min_top = $("#current_page").offset().top;
+    var max_left = $("#current_page").width() + min_left;
+    var max_top = $("#current_page").height() + min_top;
+
+    top=(event.pageY-25);
+    left=(event.pageX-150);
+
+    if(left < min_left)
+      left = min_left;
+    else if(left+310 > max_left)
+      left = max_left - 310;
+
+    if(top < min_top)
+      top = min_top;
+    else if(top+600 > max_top)
+      top = max_top - 600;
+
+    top = top + "px";
+    left = left + "px";
+
       var img_cmp="<div class='popup ui-draggable' id='pop-image-popup' style='display: block; top:" + top + "; left: " + left + ";'> \
         <div class='popup-header'> \
         <i class='icon-m-image'></i> &nbsp;Görsel Ekle \
@@ -176,7 +194,7 @@ var createImageComponent = function ( event, ui ,oldcomponent) {
         </div> \
           <div class='gallery-inner-holder'> \
             <div style='clear:both'></div> \
-            <div class='type' style='padding: 4px; display: inline-block;'>\
+            <div class='typei' style='padding: 4px; display: inline-block;'>\
                 <div class='btn-group' data-toggle='buttons'>\
                   <label class='btn btn-primary " + link_check_active + "'>\
                     <input type='radio' name='image_type' id='repeat0' " + link_check + " value='link'> Sayfada\
@@ -188,15 +206,15 @@ var createImageComponent = function ( event, ui ,oldcomponent) {
             </div>\
             <div class='tabbable'>\
               <ul class='nav nav-tabs' id='myTab'>\
-                <li><a href='#home' data-toggle='tab'>Resim Sürükle</a></li>\
-                <li><a href='#profile' data-toggle='tab'>Resim Yükle</a></li>\
+                <li><a href='#image_drag' data-toggle='tab'>Resim Sürükle</a></li>\
+                <li><a href='#image_upload' data-toggle='tab'>Resim Yükle</a></li>\
               </ul>\
             </div>\
             <div class='tab-content'>\
-              <div class='tab-pane fade in active' id='home'><br>\
+              <div class='tab-pane fade in active' id='image_drag'><br>\
                 <div class='add-image-drag-area' id='dummy-dropzone'> </div> \
               </div>\
-              <div class='tab-pane fade' id='profile'><br>\
+              <div class='tab-pane fade' id='image_upload'><br>\
                 <input type='file' name='image_file' id='image_file' value='' ><br><br>\
               </div>\
             </div>\
@@ -330,7 +348,7 @@ var createImageComponent = function ( event, ui ,oldcomponent) {
                 'height': image_height,
                 'background-color': 'transparent',
                 'overflow': 'visible',
-                'z-index': '990'
+                'z-index': 'first'
               }
             }
           }
@@ -441,7 +459,7 @@ var createImageComponent = function ( event, ui ,oldcomponent) {
                 'height': image_height,
                 'background-color': 'transparent',
                 'overflow': 'visible',
-                'z-index': '990'
+                'z-index': 'first'
               }
             }
           }

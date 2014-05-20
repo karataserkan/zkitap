@@ -24,50 +24,17 @@ $(document).ready(function(){
 		var html_data = this.options.component.data.html_inner;
 	}
       console.log(this.options.component);
-     /* while( html_data.indexOf('&lt;') > -1)
-      {
-        html_data = html_data.replace('&lt;', '<');
-      }
+    
 
-    while( html_data.indexOf('&gt;') > -1)
-      {
-        html_data = html_data.replace('&gt;', '>');
-      }
-
-    while( html_data.indexOf('&amp;') > -1)
-      {
-        html_data = html_data.replace('&amp;', '&');
-      }
-
-    while( html_data.indexOf('<div>') > -1)
-      {
-        html_data = html_data.replace('<div>', '');
-      }
-
-    while( html_data.indexOf('</div>') > -1)
-      {
-        html_data = html_data.replace('</div>', '');
-      }
-  */
       if(this.options.component.data.html_inner){
-        //var popupmessage=$('<div  id="message_'+componenthtmlid+'"  ></div>');
-        //popupmessage.appendTo(this.element);
-        //popupmessage.html(html_data);
-        this.element.html(html_data);
+        var popupmessage=$('<div  id="message_'+componenthtmlid+'" style="overflow:hidden;" ></div>');
+        popupmessage.appendTo(this.element);
+        popupmessage.html(html_data);
+        //this.element.html(html_data);
       }
        
-      
-      
-      
-      //this._super({resizableParams:{handles:"e, s, se"}}); 
-/*
-      this.element.resizable("option",'maxHeight', 128 );
-      this.element.resizable("option",'minHeight', 128 );
-      this.element.resizable("option",'maxWidth', 128 );
-      this.element.resizable("option",'minWidth', 128 );
 
-*/ 
-      
+     this._super({resizableParams:{handles:"e, s, se"}});
 
     },
     _on : function () {
@@ -203,7 +170,7 @@ var createHtmlComponent = function ( event, ui, oldcomponent ) {
                 'left':  left ,
                 'overflow': 'visible',
                 'opacity': '1',
-                'z-index': '1000'
+                'z-index': 'first'
               }
             }
           }

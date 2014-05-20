@@ -70,6 +70,8 @@ $(document).ready(function(){
       var innerOffsetX, innerOffsetY; // we'll use those during drag ... 
       //console.log(this.element.parent());
       //this.element.parent().attr('id','c_'+this.options.component.id);
+      console.log(this.options.component.data.self.css);
+      //this.options.component.data.self.css['z-index']=this.options.component.data.self.css.zindex;
       this.element
       .attr('id', this.options.component.id)
       .attr('component-instance', 'true')
@@ -599,7 +601,7 @@ $(document).ready(function(){
       $.each( _data, function(p, data) {
         
         if( p === 'self' ){ 
-
+          console.log(data);
           if( data.css ) that.element.parent().css(data.css);
           if( data.attr ) that.element.parent().attr(data.attr);
 
@@ -787,8 +789,8 @@ $(document).ready(function(){
     },
     _setPropertyofObject : function (propertyName,propertyValue){
     //console.log($('#'+this.options.component.id).slickWrap({ cutoff:propertyValue }));
-    //console.log(propertyName);
-    //console.log(propertyValue);
+    console.log(propertyName);
+    console.log(propertyValue);
       switch(propertyName){ 
         case 'cutoff':
           $('#'+this.options.component.id).slickWrap({ cutoff:propertyValue });

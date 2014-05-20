@@ -526,7 +526,7 @@ left: 118px;
 .ruler, .ruler li {
     margin: 0;
     padding: 0;
-	font-size: 8px;
+    font-size: 8px;
     list-style: none;
     display: inline-block;
 }
@@ -544,7 +544,7 @@ left: 118px;
     color: #333;
     margin: 0;
     height: 2em;
-    padding-right: 1cm;
+    //padding-right: 1cm;
     white-space: nowrap;
 }
 .ruler li {
@@ -561,7 +561,7 @@ left: 118px;
     border-left: 1px solid #ccc;
     height: .64em;
     top: -.64em;
-    right: 1em;
+    right: 0.1em;
 }
 
 /* vruler */
@@ -592,7 +592,7 @@ left: 118px;
 	text-align: center;
     margin: 0;
     width: 2em;
-	padding-top:20px;
+    //padding-top:20px;
     white-space: nowrap;
 }
 .vruler hr{

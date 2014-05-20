@@ -1,6 +1,16 @@
 
  	$( document ).ready(function() {
     $('form').addClass('form-horizontal');
+    
+    $('#workspaces>div').on('click',function(){
+        $('#workspaces>div>span>div>span').removeClass('checked');
+        $(this).children().children().children().addClass('checked');
+    });
+
+    $('#templates>div').on('click',function(){
+        $('#templates>div>span>div>span').removeClass('checked');
+        $(this).children().children().children().addClass('checked');
+    });
 
     $('#book_size>div').on('click',function(){
         $('#book_size>div>span>div>span').removeClass('checked');
@@ -242,7 +252,7 @@
             $('#bookCreateWizard').find('.prevBtn').hide();
             $('#templateCreate').click(function () {
                 msg = Messenger().post({
-                    message:"Şablon oluşturuluyor. Lütfen Bekleyiniz",
+                    message:"Eser oluşturuluyor. Lütfen Bekleyiniz",
                     type:"info",
                     showCloseButton: true,
                     hideAfter: 100
@@ -253,7 +263,7 @@
                     success:function(response) {
                     		if (response) {
 	                            msg.update({
-	                                message: 'Şablon oluşturma başarılı.',
+	                                message: 'Eser oluşturma başarılı.',
 	                                type: 'success',
 	                                hideAfter: 5
 	                            })

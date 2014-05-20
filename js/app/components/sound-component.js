@@ -13,12 +13,11 @@ $(document).ready(function(){
 
       var auto_start = '';
       var repeat_type= '';
-       console.log('sound component');
-      console.log(this.options.component.data);
+      //console.log(this.options.component.data);
       if(this.options.component.data.auto_type == 'Y') auto_start = 'autoplay';
       if(this.options.component.data.control_type == 'N') control = '';
       if(this.options.component.data.repeat_type == 'Y') repeat_type='loop';
-      console.log(repeat_type);
+      //console.log(repeat_type);
       if(this.options.component.data.source.attr.src ) {
         var source=$('<source src="'+this.options.component.data.source.attr.src+'" /> ');
         var audio=$('<audio controls="controls" '+auto_start+' '+repeat_type+'></audio>');
@@ -27,7 +26,7 @@ $(document).ready(function(){
         var audio_name=$('<span class="audio-name" >'+audioName+'</span>');
  
         source.appendTo(audio);
-        console.log('deneme');
+        //console.log('deneme');
         audio_name.appendTo(this.element);
         audio.appendTo(this.element);
         audio.css(this.options.component.data.audio.css);
@@ -81,15 +80,51 @@ $(document).ready(function(){
   if(auto_type == 'Y') { auto_y_check = "checked='checked'"; auto_y_check_active = 'active';}
     else { auto_n_check = "checked='checked'"; auto_n_check_active = 'active'; }
   
-  top=(event.pageY-25)+"px";
-  left=(event.pageX-150)+"px";
-  $("<div class='popup ui-draggable' id='pop-image-popup' style='display: block; top:" + top + "; left: " + left + ";'> \
-    <div class='popup-header'> \
+  var min_left = $("#current_page").offset().left;
+  var min_top = $("#current_page").offset().top;
+  var max_left = $("#current_page").width() + min_left;
+  var max_top = $("#current_page").height() + min_top;
+  
+  var top=(event.pageY - 25);
+  var left=(event.pageX-150);
+
+  //console.log(top);
+
+  if(left < min_left)
+    left = min_left;
+  else if(left+355 > max_left)
+    left = max_left - 355;
+
+  if(top < min_top)
+    top = min_top;
+  else if(top+580 > max_top)
+    top = max_top - 580;
+
+//console.log(top);
+
+  top = top + "px";
+  left = left + "px";
+  $("<div class='popup ui-draggable' id='pop-image-popup' style='display: block; width:355px; top:" + top + "; left: " + left + ";'> \
+    <div class='popup-header' style='width:100%;'> \
     <i class='icon-m-sound'></i> &nbsp;Ses Ekle \
     <i id='sound-add-dummy-close-button' class='icon-close size-10 popup-close-button'></i> \
     </div> \
-      <div class='gallery-inner-holder'> \
+      <div class='gallery-inner-holder' style='width:100%;'> \
         <div style='clear:both'></div> \
+        <div class='tabbable'>\
+            <ul class='nav nav-tabs' id='mySoundTab'>\
+              <li><a href='#sound_drag' data-toggle='tab'>Ses Dosyası Sürükle</a></li>\
+              <li><a href='#upload' data-toggle='tab'>Ses Dosyası Yükle</a></li>\
+            </ul>\
+          </div>\
+          <div class='tab-content'>\
+            <div class='tab-pane fade in active' id='sound_drag'><br>\
+              <div class='add-image-drag-area' id='dummy-dropzone'> </div> \
+            </div>\
+            <div class='tab-pane fade' id='upload'><br>\
+              <input type='file' name='sound_file' id='sound_file' value='' ><br><br>\
+            </div>\
+          </div>\
           <div class='type' style='padding: 4px; display: inline-block;'>\
               <div class='btn-group' data-toggle='buttons'>Otomatik Başlama<br>\
                 <label class='btn btn-primary " + auto_y_check_active + "'>\
@@ -108,9 +143,8 @@ $(document).ready(function(){
                 </label>\
               </div>\
           </div>\
-        <div class='add-image-drag-area' id='dummy-dropzone'> </div> \
       </div> \
-         <input type='text' class='input-textbox' id='pop-sound-name' placeholder='Ses Adı'  /> \
+       <input type='text' class='input-textbox' id='pop-sound-name' placeholder='Ses Adı'  /> \
       <div style='clear:both' > </div> \
      <a id='pop-image-OK' class='btn btn-info' >Ekle</a>\
     </div>").appendTo('body').draggable();
@@ -124,7 +158,7 @@ $(document).ready(function(){
       }
 
     });
-
+    $('#mySoundTab a:first').tab('show');
 
     $('#pop-image-OK').click(function (){
 
@@ -165,7 +199,8 @@ $(document).ready(function(){
                   'width': '250px',
                   'height': '60px',
                   'background-color': 'transparent',
-                  'overflow': 'visible'
+                  'overflow': 'visible',
+                  'z-index': 'first'
                 }
               }
             
@@ -179,6 +214,27 @@ $(document).ready(function(){
 
 
     });
+
+    
+   $('#sound_file').change(function(){
+    var file = this.files[0];
+    var name = file.name;
+    var size = file.size;
+    var type = file.type;
+    
+    var reader = new FileReader();
+    var component = {};
+    reader.readAsDataURL(file);
+    //console.log(reader);
+    reader.onload = function(_file) {
+      //console.log(_file);
+      
+      imageBinary = _file.target.result;
+      console.log(imageBinary);
+
+    };
+
+  });
 
     var el = document.getElementById("dummy-dropzone");
     

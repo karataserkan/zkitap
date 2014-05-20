@@ -57,10 +57,16 @@ function sendRight(e){
 		 	<form id="copy" method="post" class="form-horizontal">
 				<div class="form-group">
 					<label class="control-label col-md-3" for="contentTitle">Eser Adı<span class="required">*</span></label>
-					<div class="col-md-4">
+					<div class="col-md-6">
 						<input class="form-control" name="contentTitle" placeholder="Lütfen bir isim girin!" id="updateContentTitle" type="text">															
 					</div>
 				</div>	
+				<div class="form-group">
+					<label class="control-label col-md-3" for="contentAuthor">Yazar Adı<span class="required">*</span></label>
+					<div class="col-md-6">
+						<input class="form-control" name="contentAuthor" placeholder="Yazarın Adını Girin!" id="updateContentAuthor" type="text">															
+					</div>
+				</div>
 		 	</form>
 		</div>
 	      <div class="modal-footer">
@@ -261,6 +267,8 @@ $all_books= $this->getWorkspaceBooks($workspace->workspace_id);
 		
 		<div class="mybooks_page_category_viewer">Hepsi</div>
         
+        <div class="separator"></div>
+        
 <script type="text/javascript">
 	$('#filter-controls>li>a').click(function(){
 		$('.mybooks_page_category_viewer').html($(this).html());
@@ -282,7 +290,13 @@ foreach ($workspacesOfUser as $key => $workspace) {
         $workspace=(object)$workspace;
 		$all_books= $this->getWorkspaceBooks($workspace->workspace_id);
 		foreach ($all_books as $key2 => $book) {
-			$userType = $this->userType($book->book_id); ?>
+			$userType = $this->userType($book->book_id); 
+
+			$book_update_data = array(
+								'book_name'=>$book->title,
+							   'book_author'=>$book->author
+							    );
+			?>
 				
 				<!-- book card -->
 				<div class="reader_book_card <?php echo $workspace->workspace_id; ?> <?php echo ($userType=='owner')? 'owner editor':''; ?> <?php echo ($userType=='editor')? 'editor':''; ?>">
@@ -292,7 +306,7 @@ foreach ($workspacesOfUser as $key => $workspace) {
 		                    <a href="#box-config<?php echo $book->book_id; ?>" data-toggle="modal" class="config"><i class="fa fa-users tip" data-original-title="Editörler"></i></a>
 		                    <a class="remove_book" data-id="<?php echo $book->book_id; ?>" data-toggle="modal" data-target="#myModal"><i class="fa fa-trash-o tip" data-original-title="Sil"></i></a>
 		                    <a class="copyThisBook" data-id="<?php echo $workspace->workspace_name; ?>" data-name="<?php echo $book->title; ?>" data-toggle="modal" data-target="#copyBook" book-id="<?php echo $book->book_id; ?>"><i class="fa fa-copy tip" data-original-title="Çoğalt"></i></a>
-		                    <a class="updateThisBookTitle" data-id="updateBookTitle" data-toggle="modal" data-target="#updateBookTitle" book-id="<?php echo $book->book_id; ?>"><i class="fa fa-edit tip" data-original-title="Düzenle"></i></a>
+		                    <a class="updateThisBookTitle" data-id="<?php echo base64_encode(json_encode($book_update_data)); ?>" data-toggle="modal" data-target="#updateBookTitle" book-id="<?php echo $book->book_id; ?>"><i class="fa fa-edit tip" data-original-title="Düzenle"></i></a>
 		                    <?php } ?>
 		                    <?php if ($userType==='owner' || $userType==='editor') { ?>
 		                    <?php } ?>
@@ -308,15 +322,15 @@ foreach ($workspacesOfUser as $key => $workspace) {
 		                <img src="<?php echo $thumbnailSrc; ?>" />
 		            </div>					
 		            <div class="reader_book_card_info_container">
-		                <div class="editor_mybooks_book_type tip" data-original-title="<?php _e('Çalışma alanının adı') ?>" style="<?php echo ($userType=='owner')? 'border-color:#D9583B':'' ; ?><?php echo ($userType=='editor')? 'border-color:#41A693':'' ; ?><?php echo ($userType!='editor' and $userType!='owner')? 'border:0':'' ; ?>"><?php if ($userType=='owner') {_e('Sahibi');} ?><?php if ($userType=='editor') { _e('Editör'); } ?><?php if ($userType!='owner' && $userType!='editor') { _e('Diğer'); } ?></div>
+		                <div class="editor_mybooks_book_type tip" data-original-title="<?php _e('Kitap Erişim İzini') ?>" style="<?php echo ($userType=='owner')? 'border-color:#D9583B':'' ; ?><?php echo ($userType=='editor')? 'border-color:#41A693':'' ; ?><?php echo ($userType!='editor' and $userType!='owner')? 'border:0':'' ; ?>"><?php if ($userType=='owner') {_e('Sahibi');} ?><?php if ($userType=='editor') { _e('Editör'); } ?><?php if ($userType!='owner' && $userType!='editor') { _e('Diğer'); } ?></div>
 		                <div class="clearfix"></div>			
-		                <div class="reader_market_book_name tip" data-original-title="<?php _e('Kitabın adı') ?>"></i>
+		                <div class="reader_market_book_name tip" data-original-title="<?php _e('Kitabın adı'); echo ': '.$book->title ?>"></i>
 		                	<?php echo ($userType==='owner' || $userType==='editor') ? '<a href="/book/author/'.$book->book_id.'">':'' ;?>
 		                		<?php echo $book->title ?>
 		                	<?php echo ($userType==='owner' || $userType==='editor') ? '</a>':'' ;?>
 		                </div>						
 		                <div class="clearfix"></div>						
-		                <div class="reader_book_card_writer_name tip" data-original-title="<?php _e('Yazarın adı') ?>"><?php echo $book->author ?></div>											
+		                <div class="reader_book_card_writer_name tip" data-original-title="<?php _e('Yazarın adı'); echo ': '.$book->author ?>"><?php echo $book->author ?></div>											
 		            </div>				
 		        </div>
 		        <!-- book card -->
@@ -368,6 +382,12 @@ $(document).on("click",".copyThisBook",function(e){
 });
 $(document).on("click",".updateThisBookTitle",function(e){
 	bookId = $(this).attr('book-id');
+	var id=$(this).data("id");
+	book_update_data = JSON.parse(atob(id));
+
+	$("#updateContentTitle").val(book_update_data.book_name);
+	$("#updateContentAuthor").val(book_update_data.book_author);
+	console.log(book_update_data);
 });
 
 var workspaceId="";
@@ -383,9 +403,11 @@ $("#copy_book").click(function(){
     window.location.assign(link);
 });
 
+
 $("#update_book_title").click(function(){
 	var title=$("#updateContentTitle").val();
-	var link ="/book/updateBookTitle?bookId="+bookId+'&title='+title;
+	var author=$("#updateContentAuthor").val();
+	var link ="/book/updateBookTitle?bookId="+bookId+'&title='+title+'&author='+author;
     window.location.assign(link);
 });
 

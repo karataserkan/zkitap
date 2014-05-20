@@ -98,3 +98,11 @@ Co-Working
 apt-get install node npm
 npm config set registry http://registry.npmjs.org/
 npm install socket.io
+
+Locale(for turkish)
+-----------------------------------------------------------------
+less /usr/share/i18n/SUPPORTED (desteklenen locallere bak)
+locale-gen tr_TR.UTF-8
+
+
+

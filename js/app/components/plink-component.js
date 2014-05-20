@@ -22,17 +22,17 @@ $(document).ready(function(){
       console.log(plink_data);
       
       if(this.options.component.data.plink_data){
-        var popupmessage=$('<div  id="message_'+componentplinkid+'"  ></div>');
+        var popupmessage=$('<div  id="message_'+componentplinkid+'"  style="overflow:hidden;"></div>');
         popupmessage.appendTo(this.element);
         popupmessage.html(plink_data);
       }
       if(this.options.component.data.plink_image){
-        var popupmessage=$('<div  id="message_'+componentplinkid+'"  ></div>');
+        var popupmessage=$('<div  id="message_'+componentplinkid+'"  style="overflow:hidden;"></div>');
         popupmessage.appendTo(this.element);
         popupmessage.html('<img src="'+this.options.component.data.plink_image+'"/>');
       }
        
-      this._super(); 
+      this._super({resizableParams:{handles:"e, s, se"}});
       
     },
     _on : function () {
@@ -75,8 +75,32 @@ $.ajax({
   console.log(result);
   book_data = JSON.parse(result);
   console.log(book_data.length);
-  top=(event.pageY-25)+"px";
-  left=(event.pageX-150)+"px";
+  
+  var min_left = $("#current_page").offset().left;
+    var min_top = $("#current_page").offset().top;
+    var max_left = $("#current_page").width() + min_left;
+    var max_top = $("#current_page").height() + min_top;
+    
+    var top=(event.pageY - 25);
+    var left=(event.pageX-150);
+
+    console.log(top);
+
+    if(left < min_left)
+      left = min_left;
+    else if(left+310 > max_left)
+      left = max_left - 310;
+
+    if(top < min_top)
+      top = min_top;
+    else if(top+650 > max_top)
+      top = max_top - 650;
+
+console.log(top);
+
+    top = top + "px";
+    left = left + "px";
+
   var html_popup = $("<div class='popup ui-draggable' id='pop-plink-popup' style='display: block; top:" + top + "; left: " + left + ";'> \
       </div>");
   html_popup.appendTo('body').draggable({cancel:'.drag-cancel'}).resizable();
@@ -178,7 +202,7 @@ $.ajax({
                 'left':  left ,
                 'overflow': 'visible',
                 'opacity': '1',
-                'z-index': '1000'
+                'z-index': 'first'
               }
             }
           }

@@ -632,7 +632,7 @@ $(document).ready(function(){
             'width': '400px',
             'height': '100px',
             'opacity': '1',
-            'z-index': '1000'
+            'z-index': 'first'
 
           },
           'attr' : {

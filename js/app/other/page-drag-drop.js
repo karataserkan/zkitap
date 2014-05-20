@@ -1,5 +1,150 @@
 $( document ).ready(function () {
 
+  var keydown_component = [];
+  var count = 0;
+
+  $("body").keydown(function(e)
+        {
+            
+            if(e.which == 46 || e.which == 37 || e.which == 38 || e.which == 39 || e.which == 40){
+              //console.log($('.selected'));
+              //console.log($('.selected').length);
+              keydown_component = $('.selected');
+              count++;
+              
+            }
+
+        });
+
+  $("body").keyup(function(e)
+        {
+            //console.log(e.which);
+            //console.log(e);
+            console.log(count);
+            var moved = count * 3;
+            console.log(moved);
+            //return;
+            if(e.which == 46){
+              for(var i=1; i < keydown_component.length; i++){
+                $.ajax({
+                  url: "/page/getComponent/"+keydown_component[i].id
+                }).done(function(result) {
+                  //console.log(result);
+                  var delete_component = window.lindneo.tlingit.responseFromJson(result);
+                  delete_component.data = window.lindneo.tlingit.responseFromJson(delete_component.data);
+                  //console.log(delete_component);
+                  window.lindneo.tlingit.componentHasDeleted(delete_component, delete_component.id);
+                  $('[id="'+delete_component.id+'"]').parent().not('#current_page').remove();
+                  $('[id="'+delete_component.id+'"]').remove();
+                });
+                      console.log(i);
+                      i++;
+                
+              };
+              
+            }
+            //left
+            if(e.which == 37){
+
+              for(var i=1; i < keydown_component.length; i++){
+                $.ajax({
+                  url: "/page/getComponent/"+keydown_component[i].id
+                }).done(function(result) {
+                  //console.log(result);
+                  var update_component = window.lindneo.tlingit.responseFromJson(result);
+                  update_component.data = window.lindneo.tlingit.responseFromJson(update_component.data);
+                  update_component.data.self.css.left = update_component.data.self.css.left.replace('px','');
+                  update_component.data.self.css.left = update_component.data.self.css.left - moved;
+                  update_component.data.self.css.left = update_component.data.self.css.left+'px';
+                  console.log(update_component.data.self.css.left);
+                  window.lindneo.tlingit.componentHasUpdated(update_component);
+                  $('#'+update_component.id).parent().css('left',update_component.data.self.css.left);
+                  
+                });
+                      console.log(i);
+                      i++;
+                
+              };
+
+            }
+            //top
+            if(e.which == 38){
+
+              for(var i=1; i < keydown_component.length; i++){
+                $.ajax({
+                  url: "/page/getComponent/"+keydown_component[i].id
+                }).done(function(result) {
+                  //console.log(result);
+                  var update_component = window.lindneo.tlingit.responseFromJson(result);
+                  update_component.data = window.lindneo.tlingit.responseFromJson(update_component.data);
+                  update_component.data.self.css.top = update_component.data.self.css.top.replace('px','');
+                  update_component.data.self.css.top = update_component.data.self.css.top - moved;
+                  update_component.data.self.css.top = update_component.data.self.css.top+'px';
+                  console.log(update_component.data.self.css.top);
+                  window.lindneo.tlingit.componentHasUpdated(update_component);
+                  $('#'+update_component.id).parent().css('top',update_component.data.self.css.top);
+                  
+                });
+                      console.log(i);
+                      i++;
+                
+              };
+
+            }
+            //right
+            if(e.which == 39){
+
+              for(var i=1; i < keydown_component.length; i++){
+                $.ajax({
+                  url: "/page/getComponent/"+keydown_component[i].id
+                }).done(function(result) {
+                  //console.log(result);
+                  var update_component = window.lindneo.tlingit.responseFromJson(result);
+                  update_component.data = window.lindneo.tlingit.responseFromJson(update_component.data);
+                  update_component.data.self.css.left = update_component.data.self.css.left.replace('px','');
+                  update_component.data.self.css.left = parseInt(update_component.data.self.css.left,10) + moved;
+                  update_component.data.self.css.left = update_component.data.self.css.left+'px';
+                  console.log(update_component.data.self.css.left);
+                  window.lindneo.tlingit.componentHasUpdated(update_component);
+                  $('#'+update_component.id).parent().css('left',update_component.data.self.css.left);
+                  
+                });
+                      console.log(i);
+                      i++;
+                
+              };
+
+            }
+            //bottom
+            if(e.which == 40){
+
+              for(var i=1; i < keydown_component.length; i++){
+                $.ajax({
+                  url: "/page/getComponent/"+keydown_component[i].id
+                }).done(function(result) {
+                  //console.log(result);
+                  var update_component = window.lindneo.tlingit.responseFromJson(result);
+                  update_component.data = window.lindneo.tlingit.responseFromJson(update_component.data);
+                  update_component.data.self.css.top = update_component.data.self.css.top.replace('px','');
+                  update_component.data.self.css.top = parseInt(update_component.data.self.css.top,10) + moved;
+                  update_component.data.self.css.top = update_component.data.self.css.top+'px';
+                  console.log(update_component.data.self.css.top);
+                  window.lindneo.tlingit.componentHasUpdated(update_component);
+                  $('#'+update_component.id).parent().css('top',update_component.data.self.css.top);
+                  
+                });
+                      console.log(i);
+                      i++;
+                
+              };
+
+            }
+
+            keydown_component = [];
+            count = 0;
+
+        });
+
   $('.ruler, .vruler').hide(); 
 /*
   $('#general-options').change(function(){
@@ -21,11 +166,37 @@ $( document ).ready(function () {
       $('.ruler, .vruler').show();
     }
   });
-  */
+  */  
   $(':checkbox').change(function() {
     var is_checked = $('input:checkbox[name=cetvel]:checked').val();
     //console.log(is_checked);
     if(is_checked == "on"){
+      $('.hruler').width($('#current_page').width());
+      $('.vbruler').height($('#current_page').height());
+      var ruler=$('.ruler').empty();
+      var ruler_h=$('.vruler').empty();
+
+      len=Math.round(Number($('.hruler').width())/38.0);
+      len_height=Math.round(Number($('.vbruler').height())/38.0);
+
+      console.log("LEN:"+len);
+      item = $(document.createElement("div"));
+      item.css({'width':'38px','float':'left', 'border-right': '1px solid #000','text-align':'left','padding-left':'2px'});
+          for (i = 0; i < len; i++) 
+          {
+              ruler.append(item.clone().text(i));
+          }
+
+      item = $(document.createElement("div"));
+     
+          for (i = 0; i < len_height; i++) 
+          {
+             item.css({'height':'38px', 'border-top': '1px solid #000','text-align':'center'});
+            if(i==0){item.css({'border-top':'none'})}
+              ruler_h.append(item.clone().text(i));
+          }
+
+
       $('.ruler, .vruler').show();
     }
     else 
@@ -464,7 +635,7 @@ $( document ).ready(function () {
 
         $('#zoom-pane').slider({
             value:100,
-            min: 25,
+            min: 100,
             max: 500,
             step: 25,
             slide: function( event, ui ) {
@@ -495,6 +666,7 @@ $( document ).ready(function () {
             }
           }
       }
+
 
     }
     function pasteIntoInput(el, text) {
