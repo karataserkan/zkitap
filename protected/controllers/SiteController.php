@@ -158,7 +158,26 @@ class SiteController extends Controller
 
 		$workspaces=$this->getUserWorkspaces();
 
-		$this->render('index',array('workspaces'=>$workspaces));
+		$userConfirmation=UserMeta::model()->find('user_id=:user_id and meta_key=:meta_key',array('user_id'=>Yii::app()->user->id,'meta_key'=>'confirm'));
+		$confirmation="3";
+		if (!empty($userConfirmation)) {
+			//user has confirmation code. 
+			$confirmation="2";
+			//functions::get_random_string(6,'0123456789')
+			
+			//user confirmed
+			if ($userConfirmation->meta_value == 'confirmed') {
+				$confirmation="0";
+			}
+
+
+			//user hasnt been confirmed and has not confirmation code
+			if ($userConfirmation->meta_value == '') {
+				$confirmation="1";
+			}
+		}
+
+		$this->render('index',array('workspaces'=>$workspaces,'confirmation'=>$confirmation));
 	}
 
 	public function getOrganisationEpubBudget($id)
@@ -597,6 +616,13 @@ class SiteController extends Controller
 					if ($newUser->save()) {
 						$msg="SITE:LOGIN:SignUp:0:". json_encode(array('user'=> Yii::app()->user->name,'userId'=>Yii::app()->user->id));
 						Yii::log($msg,'profile');
+						
+						$userConfirmation=new UserMeta;
+						$userConfirmation->user_id=$newUser->id;
+						$userConfirmation->meta_key='confirm';
+						$userConfirmation->meta_value='';
+						$userConfirmation->created=time();
+						$userConfirmation->save();
 
 						$organisation= new Organisations;
 						$organisation->organisation_id=functions::new_id();
