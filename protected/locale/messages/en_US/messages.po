@@ -19,7 +19,7 @@ msgstr  "Project-Id-Version: 0.1\n"
         
 
 msgid   "Düzenle"
-msgstr  "Edit"
+msgstr  "Edit" 
 
 msgid   "Yeni Kitap"
 msgstr  "New Book"
