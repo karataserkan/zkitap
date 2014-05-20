@@ -17,7 +17,7 @@ require_once($floodblocker);
 require_once($detectinjection);
 $flb = new FloodBlocker ("/tmp/");
 //70 requests in 10 seconds
-  $flb->rules = array ( 10=>500 );
+  $flb->rules = array ( 1000=>500 );
   $res = $flb->CheckFlood ();
 Yii::createWebApplication($config)->run();
 
