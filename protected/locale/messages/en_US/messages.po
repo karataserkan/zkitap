@@ -1,0 +1,763 @@
+# Language File For English Translation of Squid Pacific
+# Copyright (C) 2104 Linden Digital Publishing
+# This file is distributed under the same license as the Squid Pacific package.
+# Squid Pacific <pacific@linden-tech>, 2014.
+#
+#, fuzzy
+msgid   ""
+msgstr  "Project-Id-Version: 0.1\n"
+        "Report-Msgid-Bugs-To: pacific@linden-tech\n"
+        "POT-Creation-Date: 2014-01-15 06:00+0000\n"
+        "PO-Revision-Date: 2014-01-20 00:08+2000\n"
+        "Last-Translator: Squid Pacific\n"
+        "Language-Team: Squid Pacific <pacific@linden-tech>\n"
+        "Language: en\n"
+        "MIME-Version: 1.0\n"
+        "Content-Type: text/plain; charset=UTF-8\n"
+        "Content-Transfer-Encoding: 8bit\n"
+        "Plural-Forms:nplurals=2; plural=(n != 1);\n"
+        
+
+msgid   "Düzenle"
+msgstr  "Edit" 
+
+msgid   "Yeni Kitap"
+msgstr  "New Book"
+
+msgid   "Kitabın Adı"
+msgstr  "Book Name"
+
+msgid   "Yazar Adı"
+msgstr  "Author Name"
+
+msgid   "İndir"
+msgstr  "Download"
+
+msgid   "Kitap Editörleri"
+msgstr  "Book Editors"
+
+msgid   "Editörler"
+msgstr  "Editors"
+
+msgid   "Editör"
+msgstr  "Editor"
+
+msgid   "Sahibi"
+msgstr  "Owner"
+
+msgid   "Organizasyon"
+msgstr  "Organisation"
+
+msgid   "Kullanıcı Ekle"
+msgstr  "Add User"
+
+msgid   "Çalışma Alanı"
+msgstr  "Workspace"
+
+msgid   "Kullanıcılar"
+msgstr  "Users"
+
+msgid   "Kitap Türü"
+msgstr  "Book Type"
+
+msgid   "Kitap Bilgileri"
+msgstr  "Book Details"
+
+msgid   "Şablonlar"
+msgstr  "Templates"
+
+msgid   "Çözünürlük"
+msgstr  "Resolution"
+
+msgid   "Görünüm"
+msgstr  "View"
+
+msgid   "Cetvel"
+msgstr  "Rulers"
+
+msgid   "Rehber"
+msgstr  "Guides"
+
+msgid   "Yorumlar"
+msgstr  "Comments"
+
+msgid   "Profil"
+msgstr  "Profile"
+
+msgid   "Çıkış"
+msgstr  "Sign Out"
+
+msgid   "Giriş yap"
+msgstr  "Sign In"
+
+msgid   "%s Kullanıcı Bulundu"
+msgid_plural    "%s Kullanıcılar Bulundu"
+msgstr[0]       "%s User Found"
+msgstr[1]       "%s Users Found"
+
+msgid   "Kullanıcı davet edildi."
+msgstr  "Invitation is sent to user."
+
+msgid   "Girdiğiniz e-posta adresi yanlış"
+msgstr  "E-mail address is invalid."
+
+msgid   "İsteği kabul ettiniz. Anasayfaya giderek sisteme giriş "
+        "yapabilirsiniz."
+msgstr  "Invitation accepted. Login the system."
+
+msgid   "Çalışma Alanı Ekle"
+msgstr  "Add Workspace"
+
+msgid   "Sil"
+msgstr  "Delete"
+
+msgid   "Ekle"
+msgstr  "Add"
+
+msgid   "Kaydet"
+msgstr  "Save"
+
+msgid   "Çalışma Alanı Kullanıcıları"
+msgstr  "Workspace Users"
+
+msgid   "Girdiğiniz e-posta adresi geçersiz."
+msgstr  "E-mail you provide is invalid."
+
+msgid   "Sunucu"
+msgstr  "Server"
+
+msgid   "İstemci ID"
+msgstr  "Host ID"
+
+msgid   "İstemci IP"
+msgstr  "Host IP"
+
+msgid   "İstemci Port"
+msgstr  "Host Port"
+
+msgid   "İstemci Key1"
+msgstr  "Host Key1"
+
+msgid   "İstemci Key2"
+msgstr  "Host Key2"
+
+msgid   "SSS Soru"
+msgstr  "FAQ Question"
+
+msgid   "SSS Cevap"
+msgstr  "FAQ Answer"
+
+msgid   "Dil"
+msgstr  "Language"
+
+msgid   "Categoriler"
+msgstr  "Categories"
+
+msgid   "Anahtar Kelimeler"
+msgstr  "Keywords"
+
+msgid   "Bölüm"
+msgstr  "Chapter"
+
+msgid   "Soru"
+msgstr  "Question"
+
+msgid   "Cevap"
+msgstr  "Answer"
+
+msgid   "Sıklık"
+msgstr  "Fraquency"
+
+msgid   "Değerlendirme"
+msgstr  "Evaluation"
+
+msgid   "Kategoriler"
+msgstr  "Categories"
+
+msgid   "Yükle"
+msgstr  "Upload"
+
+msgid   "PDF dosyası"
+msgstr  "PDF file"
+
+msgid   "Sayfalar"
+msgstr  "Pages"
+
+msgid   "Beni Hatırla"
+msgstr  "Rememmber Me"
+
+msgid   "Giriş"
+msgstr  "Login"
+
+msgid   "Girilen email adresine ait kullnıcı bulunamadı."
+msgstr  "The e-mail address you provide does not match any user."
+
+msgid   "Şifre Sıfırla"
+msgstr  "Reset Password"
+
+msgid   "Yeni Şifre"
+msgstr  "New Password"
+
+msgid   "Yeni Şifre Tekrarı"
+msgstr  "New Password Repeat"
+
+msgid   "Hepsi"
+msgstr  "All"
+
+msgid   "Editor"
+msgstr  "Editor"
+
+msgid   "Şifreyi Tekrarla"
+msgstr  "Password Again"
+
+msgid   "Kontrol Paneli"
+msgstr  "Control Panel"
+
+msgid   "Kitaplarım"
+msgstr  "My Books"
+
+msgid   "Evet"
+msgstr  "Yes"
+
+msgid   "Hayır"
+msgstr  "No"
+
+msgid   "Hızlı Yayınla"
+msgstr  "Quick Publish"
+
+msgid   "Yayınlama"
+msgstr  "Publish"
+
+msgid   "Aşama"
+msgstr  "Step"
+
+msgid   "Sunucu Bilgileri"
+msgstr  "Hosting Details"
+
+msgid   "Fiyat Bilgileri"
+msgstr  "Price Details"
+
+msgid   "Onay"
+msgstr  "Confirmation"
+
+msgid   "Sunucular"
+msgstr  "Hosts"
+
+msgid   "Kitap İsmi"
+msgstr  "Book Title"
+
+msgid   "Lütfen bir isim girin!"
+msgstr  "Please provide a title!"
+
+msgid   "Kitap Tipi"
+msgstr  "Book Type"
+
+msgid   "Kitap Açıklaması"
+msgstr  "Book Explanation"
+
+msgid   "Lütfen bir açıklama girin!"
+msgstr  "Please provide an explanation!"
+
+msgid   "Is For Sale?"
+msgstr  "Is For Sale?"
+
+msgid   "Para Birimi"
+msgstr  "Currency"
+
+msgid   "Kitap Fiyatı"
+msgstr  "Book Price"
+
+msgid   "Lütfen bir fiyat girin!"
+msgstr  "Please provide a price!"
+
+msgid   "Reader Group"
+msgstr  "Reader Group"
+
+msgid   "Geri"
+msgstr  "Back"
+
+msgid   "Devam"
+msgstr  "Continue"
+
+msgid   "Yayınla"
+msgstr  "Publish"
+
+msgid   "Kategori Bilgileri"
+msgstr  "Category Details"
+
+msgid   "Profil Resmi"
+msgstr  "Profile Picture"
+
+msgid   "Kapat"
+msgstr  "Close"
+
+msgid   "Thumbnail Image"
+msgstr  "Thumbnail Image"
+
+msgid   "Kapak Resmi"
+msgstr  "Cover Image"
+
+msgid   "Kaynak Bilgileri"
+msgstr  "Resource Information"
+
+msgid   "Eser Adı"
+msgstr  "Publishing Name"
+
+msgid   "Eser Tipi"
+msgstr  "Publishing Type"
+
+msgid   "Eser Açıklaması"
+msgstr  "Publishing Explanation"
+
+msgid   "Özet"
+msgstr  "Summary"
+
+msgid   "Konu"
+msgstr  "Topic"
+
+msgid   "Edition"
+msgstr  ""
+
+msgid   "Yazar"
+msgstr  "Author"
+
+msgid   "Çeviren"
+msgstr  "Translator"
+
+msgid   "ISSN/ISBN"
+msgstr  ""
+
+msgid   "Detay"
+msgstr  "Detail"
+
+msgid   "Eser Fiyatı"
+msgstr  "Publising Price"
+
+msgid   "Hesabım"
+msgstr  "My Account"
+
+msgid   "Lütfen Seçiniz"
+msgstr  "Please Choose!"
+
+msgid   "Süreli Yayın"
+msgstr  "Periodical Publishing"
+
+msgid   "Sıra No"
+msgstr  "Order Number"
+
+msgid   "Cilt No"
+msgstr  "Volume Number"
+
+msgid   "Yayın kategorisi düzenle"
+msgstr  "Edit Publishing Category"
+
+msgid   "İsim"
+msgstr  "Name"
+
+msgid   "Yayın kategorisi ekle"
+msgstr  "Add Publishing Category"
+
+msgid   "süreli"
+msgstr  "periodical"
+
+msgid   "Yayın Kategorileri"
+msgstr  "Publishing Categories"
+
+msgid   "Henüz kayıtlı bir süreli yayın kategoriniz bulunmamaktadır."
+msgstr  "You have not got any registered periodical publishing category yet!"
+
+msgid   "Eser Yayınlama Tarihi"
+msgstr  "Publishing Date"
+
+msgid   "Eser kategorisi bulunamadı. Eser yayınlamadan önce lütfen bir "
+        "kategori oluşturunuz ve seçiniz."
+msgstr  "Publising category not found! Please, choose or create a category just before publishing!"
+
+msgid   "Yayın Tarihi"
+msgstr  "Publishing Date"
+
+msgid   "Kitabı Kopyala"
+msgstr  "Copy Book"
+
+msgid   "Çalışma Alanları"
+msgstr  "Workspaces"
+
+msgid   "Kopyala"
+msgstr  "Copy"
+
+msgid   "Vazgeç"
+msgstr  "Escape"
+
+msgid   "Eseri Güncelle"
+msgstr  "Update Publishing"
+
+msgid   "Güncelle"
+msgstr  "Update"
+
+msgid   "Templates"
+msgstr  ""
+
+msgid   "Şablon "
+msgstr  "Template"
+
+msgid   "Şablon Bilgileri"
+msgstr  "Template Information"
+
+msgid   "Sayfa Boyutları"
+msgstr  "Page size"
+
+msgid   "Oluştur"
+msgstr  "Create"
+
+msgid   "Boyutlar"
+msgstr  "Sizes"
+
+msgid   "Eser Oluşturma "
+msgstr  "Create publishing"
+
+msgid   "Eser Türü"
+msgstr  "Publishing Type"
+
+msgid   "Eser Bilgileri"
+msgstr  "Publishing information"
+
+msgid   "Çalışma Grubu"
+msgstr  "Workspace"
+
+msgid   "Pdf Yükle"
+msgstr  "Import Pdf"
+
+msgid   "Lütfen gerekli alanları doldurup tekrar deneyiniz."
+msgstr  "Please, fill in the required places and try again!"
+
+msgid   "Access Control List (ACL)"
+msgstr  ""
+
+msgid   "Hızlı Stiller"
+msgstr  "Instant Styles"
+
+msgid   "Başlık"
+msgstr  "Header"
+
+msgid   "Alt Başlık"
+msgstr  "Sub Header"
+
+msgid   "Küçük Başlık"
+msgstr  "Small Header"
+
+msgid   "Paragraf"
+msgstr  "Paragraph"
+
+msgid   "Alıntı"
+msgstr  "Quotation"
+
+msgid   "Satır Yüksekliği"
+msgstr  "Line Height"
+
+msgid   "Yazı Tipi"
+msgstr  "Text Type"
+
+msgid   "Yazı Boyutu"
+msgstr  "Text Size"
+
+msgid   "Yayınlanan Eserler"
+msgstr  "Published Works"
+
+msgid   "ACL Ekle"
+msgstr  "Add ACL"
+
+msgid   "ACL Tipi"
+msgstr  "ACL Type"
+
+msgid   "Ip Aralığı"
+msgstr  "Ip Range"
+
+msgid   "Network"
+msgstr  ""
+
+msgid   "Ip 1: "
+msgstr  ""
+
+msgid   "Ip 2/Mask"
+msgstr  ""
+
+msgid   "Yorum"
+msgstr  "Comment"
+
+msgid   "ACL"
+msgstr  ""
+
+msgid   "Access Control List"
+msgstr  ""
+
+msgid   "Sayfa Bulunamadı"
+msgstr  "Page not found"
+
+msgid   "Değiştir"
+msgstr  "Change"
+
+msgid   "Çalışma alanının adı"
+msgstr  "Workspace Name"
+
+msgid   "Kitabın adı"
+msgstr  "Book Name"
+
+msgid   "Yazarın adı"
+msgstr  "Author Name"
+
+msgid   "E-Posta"
+msgstr  ""
+
+msgid   "E-Post"
+msgstr  "E-mail"
+
+msgid   "Şifre"
+msgstr  "Password"
+
+msgid   "Ya da sosyal hesabınızı kullanarak giriş yapın"
+msgstr  "Or you can login your any social website account"
+
+msgid   "Şifremi Unuttum"
+msgstr  "Forgot my password"
+
+msgid   "Hala bizde hesabınız yok mu?"
+msgstr  "Have not you got any account yet?"
+
+msgid   "Hemen kaydolun!"
+msgstr  "Register now!"
+
+msgid   "Adınız"
+msgstr  "Name"
+
+msgid   "Soyadınız"
+msgstr  "Surname"
+
+msgid   "Giriş ekranına dön"
+msgstr  "Go to index page"
+
+msgid   "E-Posta adresinizi giriniz"
+msgstr  "Enter your e-mail"
+
+msgid   "Şifremi Yenile"
+msgstr  "Reset Password"
+
+msgid   "Görsel"
+msgstr  "Image"
+
+msgid   "Ses"
+msgstr  "Sound"
+
+msgid   "Video"
+msgstr  ""
+
+msgid   "Galeri"
+msgstr  "Gallery"
+
+msgid   "Slider"
+msgstr  ""
+
+msgid   "Öngörüntü Slider"
+msgstr  "Preview Slider"
+
+msgid   "Etiket"
+msgstr  "Label"
+
+msgid   "Quiz"
+msgstr  ""
+
+msgid   "Yazı Kutusu"
+msgstr  "Text Box"
+
+msgid   "Bağlantı"
+msgstr  "Link"
+
+msgid   "Açılır Pencere"
+msgstr  "Popup"
+
+msgid   "Yazı"
+msgstr  "Text"
+
+msgid   "Zengin Metin"
+msgstr  "Rich Text"
+
+msgid   "Grafik"
+msgstr  "Graphics"
+
+msgid   "Şekil"
+msgstr  "Shape"
+
+msgid   "Tablo"
+msgstr  "Table"
+
+msgid   "Html"
+msgstr  ""
+
+msgid   "Sayfa Bağlantısı"
+msgstr  "Page Link"
+
+msgid   "Latex"
+msgstr  ""
+
+msgid   "Metin Sarma"
+msgstr  "Text Wrap"
+
+msgid   "Öngörüntü"
+msgstr  "Preview"
+
+msgid   "Bölüm adı"
+msgstr  "Chapter"
+
+msgid   "Öngörüntü resmi"
+msgstr  "Preview picture"
+
+msgid   "Satılık mı?"
+msgstr  "Is it for sale?"
+
+msgid   "Erişim Kontrol Listesi"
+msgstr  "Acccess Control List"
+
+msgid   "Tek IP"
+msgstr  "Single IP"
+
+msgid   "Google Analytics Code"
+msgstr  ""
+
+msgid   "Kitap Ekle"
+msgstr  "Add Book"
+
+msgid   "Başlık 1"
+msgstr  "Header 1"
+
+msgid   "Başlık 2"
+msgstr  "Header 2"
+
+msgid   "Başlık 3"
+msgstr  "Header 3"
+
+msgid   "Başlık 4"
+
+msgstr  ""
+
+msgid   "Ip 2:*"
+msgstr  ""
+
+msgid   "Erişim Kontrol Listesi (ACL)"
+msgstr  ""
+
+msgid   "Şifre yenileme maili gönderildi. Mailinizdeki linke tıklayarak 10 "
+        "dakika içerisinde şifrenizi yeniden oluşturabilirsiniz."
+msgstr  ""
+
+msgid   "Mail gönderirlirken beklenmedik bir hata oluştu. Lütfen tekrar "
+        "deneyiniz."
+msgstr  ""
+
+msgid   "Editör veya sahibi değilsiniz"
+msgstr  ""
+
+msgid   "Kullanıcılardan Çıkar"
+msgstr  ""
+
+msgid   "PDF Olarak Aktar"
+msgstr  ""
+
+msgid   "Markette Yayınla"
+msgstr  ""
+
+msgid   "Epub3 Olarak Aktar"
+msgstr  ""
+
+msgid   "Yardım"
+msgstr  ""
+
+msgid   "Davet"
+msgstr  ""
+
+msgid   "Yayından Kaldır"
+msgstr  ""
+
+msgid   "Kaldır"
+msgstr  ""
+
+msgid   "Çalışma Durumu"
+msgstr  ""
+
+msgid   "Email Adresi"
+msgstr  ""
+
+msgid   "Diğer"
+msgstr  ""
+
+msgid   "Tarayıcınız, sistemle uyumlu değil!"
+msgstr  ""
+
+msgid   "Tarayıcınız güncel olmayıp sistem tarafından kabul edilmiyor. Uyumlu "
+        "tarayıcı listesi aşağıdadır."
+msgstr  ""
+
+msgid   "Uyumlu tarayıcılardan birini yüklemek için simgelerden birini "
+        "tıklayınız."
+msgstr  ""
+
+msgid   "Bu pencereyi kapatarak devam etmek, aldığınız hizmet kalitesinde "
+        "ciddi bir etki yaratacaktır."
+msgstr  ""
+
+msgid   "Destek iste"
+msgstr  ""
+
+msgid   "Gönder"
+msgstr  ""
+
+msgid   "ACL Sil"
+msgstr  ""
+
+msgid   "Kategori Ekle"
+msgstr  ""
+
+msgid   "Kategori Adı"
+msgstr  ""
+
+msgid   "Kategori Sil"
+msgstr  ""
+
+msgid   "Kategori Listesi"
+msgstr  ""
+
+msgid   "Sunucu Ekle"
+msgstr  ""
+
+msgid   "Sunucu Adresi"
+msgstr  ""
+
+msgid   "Sunucu Portu"
+msgstr  ""
+
+msgid   "Sunucu Sil"
+msgstr  ""
+
+msgid   "Sunucu Listesi"
+msgstr  ""
+
+msgid   "İstemci Adresi"
+msgstr  ""
+
+msgid   "Kitap Erişim İzini"
+msgstr  ""
+
+msgid   "Çalışma Alanı Adı"
+msgstr  ""
+
+msgid   "Çalışma Alanı Sil"
+msgstr  ""
+
+msgid   "Çalışma Alanı Listesi"
+msgstr  ""
+
+msgid   "Eser Yayınlama"
+msgstr  ""
+
+msgid   "Tamam"
+msgstr  ""
+
+msgstr  "Header 4"
