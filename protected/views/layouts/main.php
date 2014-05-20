@@ -53,6 +53,23 @@
 		<!-- Placed at the end of the document so the pages load faster -->
 		<!-- JQUERY -->
 		<script src="<?php echo Yii::app()->request->baseUrl; ?>/css/ui/js/jquery/jquery-2.0.3.min.js"></script>
+
+		<!-- Localization -->
+		<script type="text/javascript">
+
+			window.ln18 = {
+				currentLanguage:"<?php echo Yii::app()->language; ?>",
+				resourcePath: "<?php echo Yii::app()->request->baseUrl; ?>/js/app/locale/<?php echo Yii::app()->language; ?>.js",
+				loadedData:{}
+			};
+
+		</script>
+		<script type="text/javascript" src="<?php echo Yii::app()->request->baseUrl; ?>/js/app/l18n.js"></script>
+		<script type="text/javascript" src="<?php echo Yii::app()->request->baseUrl; ?>/js/app/locale/<?php echo Yii::app()->language; ?>.js"></script>
+
+
+
+
 		<!-- JQUERY UI-->
 		<script src="<?php echo Yii::app()->request->baseUrl; ?>/css/ui/js/jquery-ui-1.10.3.custom/js/jquery-ui-1.10.3.custom.min.js"></script>
         <script src="<?php echo Yii::app()->request->baseUrl; ?>/css/ui/js/select2/select2.min.js"></script>
@@ -135,6 +152,8 @@
 
   		<!-- Trip.js Tutorial-->
 		<script type="text/javascript" src="<?php echo Yii::app()->request->baseUrl; ?>/js/lib/trip.min.js"></script>
+
+
 		<link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/js/lib/trip.css" />
 		<script type="text/javascript">
 		var trip,tripData;
@@ -154,9 +173,9 @@
 			    },
 			    backToTopWhenEnded : true,
 			    delay : 5000,
-			    prevLabel: 'Geri',
-			    nextLabel: 'İleri',
-			    finishLabel: 'Bitir',
+			    prevLabel: j__('Geri'),
+			    nextLabel: j__('İleri'),
+			    finishLabel: j__('Bitir'),
 			    showNavigation: true,
 			    showCloseBox:true
 			    //overlayZindex:9999999999999999999

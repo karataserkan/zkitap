@@ -1,0 +1,1 @@
+window.ln18.loadedData.main = {"tr:first":"tr:first","tr":"tr","Geri":"Previous","\u0130leri":"Next","Bitir":"Finish","CookieConfig":"CookieConfig"}
