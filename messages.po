@@ -1,0 +1,42 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2014-05-20 10:32+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: css/ui/js/datatables/media/js/jquery.dataTables.js:5097
+msgid "tr:first"
+msgstr ""
+
+#: css/ui/js/datatables/media/js/jquery.dataTables.js:5109
+msgid "tr"
+msgstr ""
+
+#: protected/views/layouts/main.php:175
+msgid "Geri"
+msgstr ""
+
+#: protected/views/layouts/main.php:176
+msgid "İleri"
+msgstr ""
+
+#: protected/views/layouts/main.php:177
+msgid "Bitir"
+msgstr ""
+
+#: js/lib/MathJax.js:19 js/lib/mathjax/MathJax.js:19
+msgid "CookieConfig"
+msgstr ""
