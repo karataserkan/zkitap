@@ -4,7 +4,6 @@
 *.log
 protected/config/*
 /nbproject/private/
-*.po
 *.mp4
 uploads/files/*
 protected/config/main.php
