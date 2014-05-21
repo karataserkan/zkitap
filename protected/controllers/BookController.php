@@ -732,47 +732,54 @@ class BookController extends Controller
 	public function duplicateBook($layout_id, $workspaceId=null,$title=null){ 
 
 
-			$layout=Book::model()->findByPk($layout_id);
-			if (!$workspaceId) {
-				$workspaceId=$layout->workspace_id;
-			}
-			$book= new Book;
-			$bookId=functions::new_id();
-			$book->book_id=$bookId;
-			$book->workspace_id=$workspaceId;
-			$book->title=$title;
-			if (!$title) {
-				$book->title="Copy of ".$layout->title;
-			}
-			$book->author=$layout->author;
-			$book->created=date("Y-m-d H:i:s");
-			$book->data=$layout->data;
-			//book->data'ya template_id eklendi
-			$book->setData('template_id',$layout_id);
-
-			$book->save();
-			$userId=Yii::app()->user->id;
-			$addUser = Yii::app()->db->createCommand();
-			$type="owner";
-			if($addUser->insert('book_users', array(
-			    'user_id'=>$userId,
-			    'book_id'=>$bookId,
-			    'type'   =>$type
-			)))
-			{
-				$msg="SITE:RIGHT:0:". json_encode(array(array('user'=>Yii::app()->user->id),array('userId'=>$userId,'bookId'=>$bookId,'type'=>$type)));
-				Yii::log($msg,'info');
-			}
-			else
-			{
-				$msg="SITE:RIGHT:1:". json_encode(array(array('user'=>Yii::app()->user->id),array('userId'=>$userId,'bookId'=>$bookId,'type'=>$type)));
-				Yii::log($msg,'info');
-			}
-			$this->copy($bookId, $layout_id);
+			$this->duplicateBookBody($layout_id,$workspaceId,$title);
 
 		$this->redirect(array('author','bookId'=>$bookId));
 	}
 
+
+	public function duplicateBookBody($layout_id, $workspaceId=null,$title=null,$userId=null)
+	{
+		$layout=Book::model()->findByPk($layout_id);
+		if (!$workspaceId) {
+			$workspaceId=$layout->workspace_id;
+		}
+		$book= new Book;
+		$bookId=functions::new_id();
+		$book->book_id=$bookId;
+		$book->workspace_id=$workspaceId;
+		$book->title=$title;
+		if (!$title) {
+			$book->title="Copy of ".$layout->title;
+		}
+		$book->author=$layout->author;
+		$book->created=date("Y-m-d H:i:s");
+		$book->data=$layout->data;
+		//book->data'ya template_id eklendi
+		$book->setData('template_id',$layout_id);
+
+		$book->save();
+		if (!$userId) {
+			$userId=Yii::app()->user->id;
+		}
+		$addUser = Yii::app()->db->createCommand();
+		$type="owner";
+		if($addUser->insert('book_users', array(
+		    'user_id'=>$userId,
+		    'book_id'=>$bookId,
+		    'type'   =>$type
+		)))
+		{
+			$msg="SITE:RIGHT:0:". json_encode(array(array('user'=>Yii::app()->user->id),array('userId'=>$userId,'bookId'=>$bookId,'type'=>$type)));
+			Yii::log($msg,'info');
+		}
+		else
+		{
+			$msg="SITE:RIGHT:1:". json_encode(array(array('user'=>Yii::app()->user->id),array('userId'=>$userId,'bookId'=>$bookId,'type'=>$type)));
+			Yii::log($msg,'info');
+		}
+		$this->copy($bookId, $layout_id);
+	}
 
 	/**
 	 * display selectdata form and set data
@@ -862,7 +869,7 @@ class BookController extends Controller
 		$budget=$this->getOrganisationEpubBudget($ow->organisation_id);
 
 		functions::event('tripData',NULL, function($var){
-			@include ('js/lib/trips/book/author.json');
+			@include ('js/lib/trips/book/author.js');
 		});
 
 
@@ -935,10 +942,11 @@ class BookController extends Controller
 		}
 	}
 
-	public function actionUpdateBookTitle($bookId,$title)
+	public function actionUpdateBookTitle($bookId,$title,$author)
 	{
 		$book=$this->loadModel($bookId);
 		$book->title=$title;
+		$book->author=$author;
 		$book->save();
 		$this->redirect(array('site/index'));
 	}

@@ -1,13 +1,13 @@
 	/* Welcome */
 	
 	{ 
-		content : "Okutus Editor'e HoşGeldiniz, Editor Tanıtımı için ileriye basınız.",
+		content : j__("Okutus Editor'e HoşGeldiniz, Editor Tanıtımı için ileriye basınız."),
 		position:'screen-center',
 		delay:-1
 	},
 
 	{ 
-		content : "Burası yayın üretiminin yapıldığı bölümdür.",
+		content : j__("Burası yayın üretiminin yapıldığı bölümdür."),
 		position:'screen-center',
 		delay:-1
 	},
@@ -17,45 +17,45 @@
 	
 	{ 
 		sel:'#headermenu>ul>li:eq(1)',
-		content : "Üzerinde çalıştığınız <br> yayının adını <br>buradan görebilirsiniz",
+		content : j__("Üzerinde çalıştığınız <br> yayının adını <br>buradan görebilirsiniz"),
 		position:'s',
 	},
 	{ 
 		sel:'#headermenu>ul>li:eq(2)',
-		content : "Dosya bölümünden kitaplığınıza dönebilir,<br> PDF ekleyebilir, yayınlarınızı <br> PDF veya EPUB formatında <br>yayınlayabilirsiniz.",
+		content : j__("Dosya bölümünden kitaplığınıza dönebilir,<br> PDF ekleyebilir, yayınlarınızı <br> PDF veya EPUB formatında <br>yayınlayabilirsiniz."),
 		position:'s',
 	},
 	{ 
 		sel:'#headermenu>ul>li:eq(3)',
-		content : "Düzen bölümünden yaptığınız işlemi geri-ileri alabilir ve   <br> kes, kopyala, yapıştır ile sayfa  <br> üzerindeki nesneleri yönetebilirsiniz.",
+		content : j__("Düzen bölümünden yaptığınız işlemi geri-ileri alabilir ve   <br> kes, kopyala, yapıştır ile sayfa  <br> üzerindeki nesneleri yönetebilirsiniz."),
 		position:'s',
 	},
 	{ 
 		sel:'#headermenu>ul>li:eq(4)',
-		content : "Görünüm bölümünden Cetvel aracı ile <br>  sayfa üzerindeki nesnelerinizin <br> yatay ve dikey pozisyonunu görebilirsiniz",
+		content : j__("Görünüm bölümünden Cetvel aracı ile <br>  sayfa üzerindeki nesnelerinizin <br> yatay ve dikey pozisyonunu görebilirsiniz"),
 		position:'s',
 	},
 	{ 
 		sel:'#headermenu>ul>li:eq(5)',
-		content : "Bu bölümden sayfa üzerinde metin arama yapabilirsiniz.",
+		content : j__("Bu bölümden sayfa üzerinde metin arama yapabilirsiniz."),
 		position:'s',
 	},
 
 	{ 
 		sel:'#headermenu>ul>li:eq(8)',
-		content : "Şu an beraber çalıştığınız kişilerin <br>listesini buradan takip edebilirsiniz.",
+		content : j__("Şu an beraber çalıştığınız kişilerin <br>listesini buradan takip edebilirsiniz."),
 		position:'s',
 	},
 
 	{ 
 		sel:'#headermenu>ul>li:eq(7)',
-		content : "Yaptığınız işlemlerin <br>sonucunu buradan takip edebilirsiniz. <br> Yeşil-> Herşey yolunda, <br> Mavi -> İşlem yapılıyor, <br> Kırmızı -> İnternet Bağlantısı Problemi <br> demektir. ",
+		content : j__("Yaptığınız işlemlerin <br>sonucunu buradan takip edebilirsiniz. <br> Yeşil-> Herşey yolunda, <br> Mavi -> İşlem yapılıyor, <br> Kırmızı -> İnternet Bağlantısı Problemi <br> demektir. j__("),
 		position:'s',
 		delay:10000
 	},
 	{ 
 		sel:'#headermenu>ul>li:eq(6)',
-		content : "Bu bölümden profilinizi <br>görüntüleyebilir, hesabınızdan<br> çıkış yapabilirsiniz.",
+		content : j__("Bu bölümden profilinizi <br>görüntüleyebilir, hesabınızdan<br> çıkış yapabilirsiniz."),
 		position:'s',
 	},
 
@@ -65,7 +65,7 @@
 	
 	{ 
 		sel:'.styler_box',
-		content : "Buradan üzerinde çalıştığınız bileşen ile ilgili seçenekleri kontrol edebilirsiniz.",
+		content : j__("Buradan üzerinde çalıştığınız bileşen ile ilgili seçenekleri kontrol edebilirsiniz."),
 		position:'s',
 		'callback': 
 			function(){
@@ -117,8 +117,8 @@
 
 
 				}).animate({
-				    left: "+="+($('#current_page').offset().left+250),
-				   top: "+="+($('#current_page').offset().top+250), 
+				    left: ("+="+($('#current_page').offset().left+250)),
+				   top: ("+="+($('#current_page').offset().top+250)), 
 				  }, 3000 ,function() {
 				var that = $(this);
 				setTimeout(function() {
@@ -132,21 +132,21 @@
 
 	{ 
 		sel:'.components',
-		content : "Bu panel üzerinden sayfa üzerine sürükle-bırak ile zenginleştirme ekleyebilirsiniz.",
+		content : j__("Bu panel üzerinden sayfa üzerine sürükle-bırak ile zenginleştirme ekleyebilirsiniz."),
 		position:'e'
 
 	},
 
 	{ 
 		sel:'.icon-zoom.grey-5',
-		content : "Büyüteç aracı ile sayfayı büyütebilirsiniz.",
+		content : j__("Büyüteç aracı ile sayfayı büyütebilirsiniz."),
 		position:'e'
 
 	},
 
 	{ 
 		sel:'.chat_button',
-		content : "Bu bölümden yazarlar aynı yayın üzerinde çoklu çalışma yaparken sohbet edebilirler.",
+		content : j__("Bu bölümden yazarlar aynı yayın üzerinde çoklu çalışma yaparken sohbet edebilirler."),
 		position:'e'
 
 	},
@@ -157,37 +157,37 @@
 
 	{ 
 		sel:'#chapters_pages_view',
-		content : "Sağdaki panelden yayınınızın kapağını, sayfalarını ve bölümlerini düzenleyebilirsiniz.",
+		content : j__("Sağdaki panelden yayınınızın kapağını, sayfalarını ve bölümlerini düzenleyebilirsiniz."),
 		position:'w'
 
 	},
 	{ 
 		sel:'#chapters_pages_view > .box-body > .panel-group > .panel:eq(0)',
-		content : "Buraya tıklayarak yayınınıza kapak ekleyebilirsiniz.",
+		content : j__("Buraya tıklayarak yayınınıza kapak ekleyebilirsiniz."),
 		position:'w'
 
 	},
 	{ 
 		sel:'#chapters_pages_view > .box-body > .panel-group > .panel:eq(1)',
-		content : "Buraya tıklayarak yayınınızın markette görüneceği öngörüntüsünü ekleyebilirsiniz.",
+		content : j__("Buraya tıklayarak yayınınızın markette görüneceği öngörüntüsünü ekleyebilirsiniz."),
 		position:'w'
 
 	},
 	{ 
 		sel:'#chapters_pages_view > .box-body > .panel-group > .panel:eq(2)',
-		content : "Bu bölümden kullanmak üzere hızlı stillerinizi istediğiniz gibi düzenleyebilirsiniz.",
+		content : j__("Bu bölümden kullanmak üzere hızlı stillerinizi istediğiniz gibi düzenleyebilirsiniz."),
 		position:'w'
 
 	},
 	{ 
 		sel:'#chapters_pages_view > .box-body > .panel-group > .panel:eq(3)',
-		content : "Sayfalar bölümünden yeni bölüm başlıklarını değiştirebilir, sayfları ve bölümleri sıralayabilirsiniz.",
+		content : j__("Sayfalar bölümünden yeni bölüm başlıklarını değiştirebilir, sayfları ve bölümleri sıralayabilirsiniz."),
 		position:'w'
 
 	},
 	{ 
 		sel:'#chapters_pages_view > .box-body > .panel-group > .panel:eq(3) i:eq(1) ',
-		content : "Yeni sayfa ve bölüm ekleyebilirsiniz.",
+		content : j__("Yeni sayfa ve bölüm ekleyebilirsiniz."),
 		position:'w'
 
 	},

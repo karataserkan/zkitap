@@ -41,6 +41,19 @@
 		<script src="<?php echo Yii::app()->request->baseUrl; ?>/js/lib/jquery-collision.min.js"></script>
 		<script src="<?php echo Yii::app()->request->baseUrl; ?>/js/lib/jquery.reject.js"></script>
 		
+		<!-- Localization -->
+		<script type="text/javascript">
+
+			window.ln18 = {
+				currentLanguage:"<?php echo Yii::app()->language; ?>",
+				resourcePath: "<?php echo Yii::app()->request->baseUrl; ?>/js/app/locale/<?php echo Yii::app()->language; ?>.js",
+				loadedData:{}
+			};
+
+		</script>
+		<script type="text/javascript" src="<?php echo Yii::app()->request->baseUrl; ?>/js/app/l18n.js"></script>
+		<script type="text/javascript" src="<?php echo Yii::app()->request->baseUrl; ?>/js/app/locale/<?php echo Yii::app()->language; ?>.js"></script>
+
 		<!-- Wrap TEXT -->
 		<script type="text/javascript" src="<?php echo Yii::app()->request->baseUrl; ?>/js/lib/jquery.slickwrap.js"></script>
 		<script src="<?php echo Yii::app()->request->hostInfo; ?>:1881/socket.io/socket.io.js"></script>

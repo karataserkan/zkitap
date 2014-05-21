@@ -1,0 +1,23 @@
+#: css/ui/js/datatables/media/js/jquery.dataTables.js:5097
+msgid "tr:first"
+msgstr ""
+
+#: css/ui/js/datatables/media/js/jquery.dataTables.js:5109
+msgid "tr"
+msgstr ""
+
+#: protected/views/layouts/main.php:175
+msgid "Geri"
+msgstr "Previous"
+
+#: protected/views/layouts/main.php:176
+msgid "İleri"
+msgstr "Next"
+
+#: protected/views/layouts/main.php:177
+msgid "Bitir"
+msgstr "Finish"
+
+#: js/lib/MathJax.js:19 js/lib/mathjax/MathJax.js:19
+msgid "CookieConfig"
+msgstr ""

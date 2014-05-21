@@ -170,7 +170,7 @@ var createHtmlComponent = function ( event, ui, oldcomponent ) {
                 'left':  left ,
                 'overflow': 'visible',
                 'opacity': '1',
-                'z-index': '1000'
+                'z-index': 'first'
               }
             }
           }

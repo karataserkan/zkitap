@@ -87,6 +87,31 @@ var FormWizard = function () {
             });
             
 
+
+            $('#contentType>div').on('click',function(){
+                $('#contentType>div>span').removeClass('checked');
+                $(this).children().addClass('checked');
+            });
+
+            $('#language>div').on('click',function(){
+                $('#language>div>span').removeClass('checked');
+                $(this).children().addClass('checked');
+            });
+
+            $('#contentIsForSale>div').on('click',function(){
+                $('#contentIsForSale>div>span').removeClass('checked');
+                $(this).children().addClass('checked');
+            });
+
+            $('#contentCurrency>div').on('click',function(){
+                $('#contentCurrency>div>span').removeClass('checked');
+                $(this).children().addClass('checked');
+            });
+
+
+
+
+
             var data;
             $(".datepicker-fullscreen").pickadate({format:'dd/mm/yyyy'});
             $(".siraliDisplay").hide();
@@ -328,10 +353,12 @@ var FormWizard = function () {
                         console.log(budgetError);
                         if (budgetError==(-1)) {
                             msg.update({
-                                message: 'Eser yayınlama başarılı.',
+                                message: 'Eser, yayınlama listesine eklendi.',
                                 type: 'success',
                                 hideAfter: 5
-                            })
+
+                            });
+                            $('#publishedbookModal').addClass("in").show();
 
                         }else
                         {

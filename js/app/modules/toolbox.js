@@ -442,22 +442,22 @@ window.lindneo.toolbox = (function(window, $, undefined){
     var elems = $(elem);
     var highest = 0;
 
-    console.log(elem);
-    console.log(elems);
+    //console.log(elem);
+    //console.log(elems);
     
     for (var i = 0; i < elems.length; i++)
     {
       var zindex=document.defaultView.getComputedStyle(elems[i],null).getPropertyValue("z-index");
-      console.log(zindex);
+      //console.log(zindex);
 
         
-      if ((zindex >= highest) && zindex<2000 && (zindex != 'auto'))
+      if ((zindex >= highest) && (zindex != 'auto'))
       {
         highest = zindex;
         
       }
     }
-    console.log(highest);
+    //console.log(highest);
     return parseInt(highest)+1;
   };
 

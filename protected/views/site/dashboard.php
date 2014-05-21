@@ -7,7 +7,7 @@ $this->pageTitle=Yii::app()->name." - ". __("Kontrol Paneli");
 
 <script>
 	jQuery(document).ready(function() {		
-		App.setPage("gallery");  //Set current page
+		App.setPage("dashboard");  //Set current page
 		App.init(); //Initialise plugins and elements
 	});
 </script>
@@ -69,25 +69,8 @@ $this->pageTitle=Yii::app()->name." - ". __("Kontrol Paneli");
 <div class="separator"></div>
 <!-- Dashboard Grafik Arayüzü -->
 
-<div class="clearfix">
-										<h3 class="content-title pull-left">Dashboard</h3>
-										<!-- DATE RANGE PICKER -->
-										<span class="date-range pull-right">
-											<div class="btn-group">
-												<a class="js_update btn btn-default" href="#">Today</a>
-												<a class="js_update btn btn-default" href="#">Last 7 Days</a>
-												<a class="js_update btn btn-default hidden-xs" href="#">Last month</a>
-												
-												<a id="reportrange" class="btn reportrange">
-													<i class="fa fa-calendar"></i>
-													<span>Custom</span>
-													<i class="fa fa-angle-down"></i>
-												</a>
-											</div>
-										</span>
-										<!-- /DATE RANGE PICKER -->
-									</div>
-<div class="row">
+<!-- DASHBOARD CONTENT -->
+						<div class="row">
 							<!-- COLUMN 1 -->
 							<div class="col-md-6">
 								<div class="row">
@@ -130,20 +113,20 @@ $this->pageTitle=Yii::app()->name." - ". __("Kontrol Paneli");
 											<div class="panel-body">
 												<div class="col-md-4 text-center">
 													<div id="dash_pie_1" class="piechart" data-percent="59">
-														<span class="percent">59%</span>
-													<canvas height="121" width="121" style="height: 110px; width: 110px;"></canvas></div>
+														<span class="percent"></span>
+													</div>
 													<a href="#" class="title">New Visitors <i class="fa fa-angle-right"></i></a>
 												</div>
 												<div class="col-md-4 text-center">
 													<div id="dash_pie_2" class="piechart" data-percent="73">
-														<span class="percent">73%</span>
-													<canvas height="121" width="121" style="height: 110px; width: 110px;"></canvas></div>
+														<span class="percent"></span>
+													</div>
 													<a href="#" class="title">Bounce Rate <i class="fa fa-angle-right"></i></a>
 												</div>
 												<div class="col-md-4 text-center">
 													<div id="dash_pie_3" class="piechart" data-percent="90">
-														<span class="percent">90%</span>
-													<canvas height="121" width="121" style="height: 110px; width: 110px;"></canvas></div>
+														<span class="percent"></span>
+													</div>
 													<a href="#" class="title">Brand Popularity <i class="fa fa-angle-right"></i></a>
 												</div>
 											</div>
@@ -177,12 +160,65 @@ $this->pageTitle=Yii::app()->name." - ". __("Kontrol Paneli");
 										</div>
 									</div>
 									<div class="box-body">
-										<div id="chart-revenue" style="height: 240px; padding: 0px; position: relative;"><canvas class="flot-base" width="756" height="264" style="direction: ltr; position: absolute; left: 0px; top: 0px; width: 688px; height: 240px;"></canvas><div class="flot-text" style="position: absolute; top: 0px; left: 0px; bottom: 0px; right: 0px; font-size: smaller; color: rgb(84, 84, 84);"><div class="flot-x-axis flot-x1-axis xAxis x1Axis" style="position: absolute; top: 0px; left: 0px; bottom: 0px; right: 0px; display: block;"><div style="position: absolute; max-width: 98px; top: 227px; font-style: normal; font-variant: normal; font-weight: 400; font-size: 10px; line-height: 11.5px; font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; color: rgb(255, 255, 255); left: 80px; text-align: center;">2</div><div style="position: absolute; max-width: 98px; top: 227px; font-style: normal; font-variant: normal; font-weight: 400; font-size: 10px; line-height: 11.5px; font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; color: rgb(255, 255, 255); left: 199px; text-align: center;">4</div><div style="position: absolute; max-width: 98px; top: 227px; font-style: normal; font-variant: normal; font-weight: 400; font-size: 10px; line-height: 11.5px; font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; color: rgb(255, 255, 255); left: 319px; text-align: center;">6</div><div style="position: absolute; max-width: 98px; top: 227px; font-style: normal; font-variant: normal; font-weight: 400; font-size: 10px; line-height: 11.5px; font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; color: rgb(255, 255, 255); left: 438px; text-align: center;">8</div><div style="position: absolute; max-width: 98px; top: 227px; font-style: normal; font-variant: normal; font-weight: 400; font-size: 10px; line-height: 11.5px; font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; color: rgb(255, 255, 255); left: 554px; text-align: center;">10</div><div style="position: absolute; max-width: 98px; top: 227px; font-style: normal; font-variant: normal; font-weight: 400; font-size: 10px; line-height: 11.5px; font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; color: rgb(255, 255, 255); left: 674px; text-align: center;">12</div></div><div class="flot-y-axis flot-y1-axis yAxis y1Axis" style="position: absolute; top: 0px; left: 0px; bottom: 0px; right: 0px; display: block;"><div style="position: absolute; top: 217px; font-style: normal; font-variant: normal; font-weight: 400; font-size: 10px; line-height: 11.5px; font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; color: rgb(255, 255, 255); left: 13px; text-align: right;">0</div><div style="position: absolute; top: 163px; font-style: normal; font-variant: normal; font-weight: 400; font-size: 10px; line-height: 11.5px; font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; color: rgb(255, 255, 255); left: 7px; text-align: right;">25</div><div style="position: absolute; top: 110px; font-style: normal; font-variant: normal; font-weight: 400; font-size: 10px; line-height: 11.5px; font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; color: rgb(255, 255, 255); left: 7px; text-align: right;">50</div><div style="position: absolute; top: 57px; font-style: normal; font-variant: normal; font-weight: 400; font-size: 10px; line-height: 11.5px; font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; color: rgb(255, 255, 255); left: 7px; text-align: right;">75</div><div style="position: absolute; top: 4px; font-style: normal; font-variant: normal; font-weight: 400; font-size: 10px; line-height: 11.5px; font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; color: rgb(255, 255, 255); left: 2px; text-align: right;">100</div></div></div><canvas class="flot-overlay" width="756" height="264" style="direction: ltr; position: absolute; left: 0px; top: 0px; width: 688px; height: 240px;"></canvas></div>
+										<div id="chart-revenue" style="height:240px"></div>
 									</div>
 								</div>
 							</div>
 							<!-- /COLUMN 2 -->
 						</div>
+					   <!-- /DASHBOARD CONTENT -->
+					   <!-- HERO GRAPH -->
+						<div class="row">
+							<div class="col-md-12">
+								<!-- BOX -->
+								<div class="box border green">
+									<div class="box-title">
+										<h4><i class="fa fa-bars"></i> <span class="hidden-inline-mobile">Traffic & Sales</span></h4>
+									</div>
+									<div class="box-body">
+										<div class="tabbable header-tabs">
+											<ul class="nav nav-tabs">
+												 <li><a href="#box_tab2" data-toggle="tab"><i class="fa fa-search-plus"></i> <span class="hidden-inline-mobile">Select & Zoom Sales Chart</span></a></li>
+												 <li class="active"><a href="#box_tab1" data-toggle="tab"><i class="fa fa-bar-chart-o"></i> <span class="hidden-inline-mobile">Traffic Statistics</span></a></li>
+											 </ul>
+											 <div class="tab-content">
+												 <div class="tab-pane fade in active" id="box_tab1">
+													<!-- TAB 1 -->
+													<div id="chart-dash" class="chart"></div>
+													<hr class="margin-bottom-0">
+												   <!-- /TAB 1 -->
+												 </div>
+												 <div class="tab-pane fade" id="box_tab2">
+													<div class="row">
+														<div class="col-md-8">
+															<div class="demo-container">
+																<div id="placeholder" class="demo-placeholder"></div>
+															</div>
+														</div>
+														<div class="col-md-4">
+															<div class="demo-container" style="height:100px;">
+																<div id="overview" class="demo-placeholder"></div>
+															</div>
+															<div class="well well-bottom">
+																<h4>Month over Month Analysis</h4>
+																<ol>
+																	<li>Selection support makes it easy to construct flexible zooming schemes.</li>
+																	<li>With a few lines of code, the small overview plot to the right has been connected to the large plot.</li>
+																	<li>Try selecting a rectangle on either of them.</li>
+																</ol>
+															</div>
+														</div>
+													</div>
+												</div>
+											 </div>
+										</div>
+									</div>
+								</div>
+								<!-- /BOX -->
+							</div>
+						</div>
+						<!-- /HERO GRAPH -->
+
 <!-- /Dashboard Grafik Arayüzü -->
 
 	<div id="filter-items" class="mybooks_page_book_filter row">
@@ -206,7 +242,7 @@ $userType = $this->userType($book->book_id);
 	             <img src="<?php echo $thumbnailSrc; ?>" />
 	         </div>					
 	         <div class="reader_book_card_info_container">
-	             <div class="editor_mybooks_book_type tip" style="border:0" data-original-title="<?php _e('Çalışma Durumu') ?>"><?php if ($userType=='owner') {_e('Sahibi');} ?><?php if ($userType=='editor') { _e('Editör'); } ?><?php if ($userType!='owner' && $userType!='editor') { _e('Editör veya sahibi değilsiniz'); } ?></div>						
+	             <div class="editor_mybooks_book_type tip" style="border:0" data-original-title="<?php _e('Kitap Erişim İzini') ?>"><?php if ($userType=='owner') {_e('Sahibi');} ?><?php if ($userType=='editor') { _e('Editör'); } ?><?php if ($userType!='owner' && $userType!='editor') { _e('Diğer'); } ?></div>						
 	             <div class="clearfix"></div>			
 	             <div class="reader_market_book_name tip" data-original-title="Eser İsmi"><?php echo $book->title ?></div>						
 	             <div class="clearfix"></div>						

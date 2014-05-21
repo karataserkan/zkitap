@@ -219,7 +219,7 @@ $(document).ready(function(){
               'position':'absolute',
               'top': top ,
               'left':  left ,
-
+              'zindex': 'first'
             }
           }
         }

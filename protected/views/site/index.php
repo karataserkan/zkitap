@@ -1,5 +1,189 @@
+<?php if ($confirmation !=0 AND $confirmation !=3): ?>
+
+<!-- POPUP verification -->
+<div class="modal fade" id="confirm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+	  <div class="modal-content">
+		<div class="modal-header">
+		  <button type="button" class="close confirmationClose" data-dismiss="modal" aria-hidden="true">&times;</button>
+		  <h4 class="modal-title"><?php _e("Aktive et"); ?></h4>
+		</div>
+		<div class="modal-body">
+		 	<form id="copy" method="post" class="form-horizontal">
+		 		<div class="form-group alert" id="confirmationFeedback">
+						
+		 		</div>
+				<div class="form-group" id="confirmationTel">
+					<label class="control-label col-md-3" for="telNumber">Tel: <span class="required">*</span></label>
+					<div class="col-md-6">
+						<input class="form-control" name="telNumber" id="telNumber" type="tel">
+					</div>
+					<!-- <div class="col-md-6">
+						<input class="form-control" name="telNumber" id="telNumber" type="text">															
+					</div> -->
+				</div>	
+				<div class="form-group" id="confirmationCode">
+					<label class="control-label col-md-3" for="confirmId">Aktivasyon Kodu: <span class="required">*</span></label>
+					<div class="col-md-6">
+						<input class="form-control" name="confirmId" id="confirmId" type="text">															
+					</div>
+					<div class="col-md-3" id="refreshCode">
+						<a href="#" class="btn btn-primary"><i class="fa fa-refresh"> </i></a>	
+		 			</div>
+				</div>
+		 	</form>
+		</div>
+	      <div class="modal-footer">
+	      	<a type="button" class="btn btn-primary" id="sendConfirmationId"><?php _e("Gönder"); ?></a>
+	      	<a type="button" class="btn btn-primary" id="checkConfirmationId"><?php _e("Onayla"); ?></a>
+	        <button type="button" class="btn btn-default confirmationClose" data-dismiss="modal" ><?php _e("Kapat"); ?></button>
+	      </div>
+		</div>
+	  </div>
+	</div>
+ 
+<!-- POPUP END -->
+
+
 <script type="text/javascript">
 	$(document).ready(function() {
+
+		$("#telNumber").intlTelInput();
+
+		var confirmation="<?php echo $confirmation ?>";
+		console.log(confirmation);
+		var confirmationFeedback=$('#confirmationFeedback');
+		var refreshCode=$('#refreshCode');
+		var sendConfirmationId=$('#sendConfirmationId');
+		var confirmationCode=$('#confirmationCode');
+		var checkConfirmationId=$('#checkConfirmationId');
+		var confirmationTel=$('#confirmationTel');
+
+		refreshCode.hide();
+		confirmationFeedback.hide();
+
+		var mytheme = 'future';
+		var mypos = 'messenger-on-bottom';
+		//Set theme
+		Messenger.options = {
+			extraClasses: 'messenger-fixed '+mypos,
+			theme: mytheme
+		}
+		var msg;
+		msg = Messenger().post({
+		  message: 'Telefon ile hesabınızı aktif hale getirmediniz.',
+		hideAfter: 150,
+		  type: 'error',
+		  actions: {
+			cancel: {
+			  label: 'Aktive et',
+			  action: function() {
+			  	
+			  	if (confirmation==2) {
+			  		confirmationFeedback.show();
+			  		refreshCode.show();
+			  		confirmationFeedback.removeClass('alert-danger').removeClass('alert-success');
+			  		confirmationFeedback.addClass('alert-warning');
+			  		confirmationFeedback.text("Daha önce aktivasyon kodu almışsınız. Hesabınızı aktive etmek için telefonunuza gelen aktivasyon kodunu girin.");
+					sendConfirmationId.hide();
+	  				confirmationTel.hide();
+				}else{
+			  		checkConfirmationId.hide();
+			  		confirmationCode.hide();
+				};
+
+				$('#confirm').addClass('in');
+				$('#confirm').show();
+				Messenger().hideAll()
+			  }
+			},
+			open: {
+			  label: 'Kapat',
+			  action:function() {
+			  	Messenger().hideAll()
+			  }
+			}
+		  }
+		});
+
+		
+		refreshCode.click(function(){
+			checkConfirmationId.hide();
+	  		confirmationCode.hide();
+	  		sendConfirmationId.show();
+			confirmationTel.show();
+			confirmationFeedback.hide();
+	  		refreshCode.hide();
+
+		});
+
+		$('.confirmationClose').click(function(){
+			$('#confirm').removeClass('in');
+			$('#confirm').hide();
+		});
+
+		sendConfirmationId.click(function(){
+		  	var telNumber=$('#telNumber').val();
+		  	$.ajax({
+			  type: "POST",
+			  data: {tel: telNumber},
+			  url: '/user/sendConfirmationId',
+			}).done(function(res){
+				if (res==0) {
+					checkConfirmationId.show();
+				  	confirmationCode.show();
+				  	sendConfirmationId.hide();
+				  	confirmationTel.hide();
+					confirmationFeedback.show();
+					confirmationFeedback.show();
+					confirmationFeedback.removeClass('alert-danger').removeClass('alert-warning');
+					confirmationFeedback.addClass('alert-success');
+					confirmationFeedback.text('Aktivasyon kodu telefonunuza gönderildi.');
+				}else{
+					confirmationFeedback.removeClass('alert-success').removeClass('alert-warning');
+					confirmationFeedback.addClass('alert-danger');
+					confirmationFeedback.text('Beklenmedik bir hata oluştu. Lütfen tekrar deneyin');
+				}
+				console.log(res);
+			});
+		});
+
+		checkConfirmationId.click(function(){
+			var confirmId=$('#confirmId').val();
+		  	$.ajax({
+			  type: "POST",
+			  data: {code: confirmId},
+			  url: '/user/checkConfirmationId',
+			}).done(function(res){
+				console.log(res);
+				if (res==0) {
+					sendConfirmationId.hide();
+					confirmationCode.hide();
+					checkConfirmationId.hide();
+					confirmationTel.hide();
+					confirmationFeedback.show();
+					confirmationFeedback.removeClass('alert-danger').removeClass('alert-warning');
+					confirmationFeedback.addClass('alert-success');
+					confirmationFeedback.text('Hesabınız başarıyla aktive edildi.');
+				}else{
+					confirmationFeedback.show();
+					confirmationFeedback.removeClass('alert-success').removeClass('alert-warning');
+					confirmationFeedback.addClass('alert-danger');
+					confirmationFeedback.text('Geçersiz bir kod girdiniz. Lütfen tekrar deneyin.');
+				};
+			});
+		});
+	});
+</script>
+
+
+<?php endif; ?>
+<script type="text/javascript">
+	
+
+	
+$(document).ready(function() {
+
 var data_id = '';
   $('.remove_book').click(function () {
 
@@ -45,6 +229,9 @@ function sendRight(e){
 
 
 
+
+
+
 <!-- POPUP EDITORS -->
 <div class="modal fade" id="updateBookTitle" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 	<div class="modal-dialog">
@@ -57,10 +244,16 @@ function sendRight(e){
 		 	<form id="copy" method="post" class="form-horizontal">
 				<div class="form-group">
 					<label class="control-label col-md-3" for="contentTitle">Eser Adı<span class="required">*</span></label>
-					<div class="col-md-4">
+					<div class="col-md-6">
 						<input class="form-control" name="contentTitle" placeholder="Lütfen bir isim girin!" id="updateContentTitle" type="text">															
 					</div>
 				</div>	
+				<div class="form-group">
+					<label class="control-label col-md-3" for="contentAuthor">Yazar Adı<span class="required">*</span></label>
+					<div class="col-md-6">
+						<input class="form-control" name="contentAuthor" placeholder="Yazarın Adını Girin!" id="updateContentAuthor" type="text">															
+					</div>
+				</div>
 		 	</form>
 		</div>
 	      <div class="modal-footer">
@@ -248,7 +441,7 @@ $all_books= $this->getWorkspaceBooks($workspace->workspace_id);
                                             </li>
                                         </ul>
                                         
-										<a class="btn pull-right btn-primary" id='addNewBookBtn' href="/book/bookCreate">
+										<a class="btn pull-right btn-primary" id='addNewBookBtn' href="/book/bookCreate" <?php echo ($confirmation !=0 AND $confirmation !=3)? "disabled":""; ?>>
 											<i class="fa fa-plus-circle"></i>
 											<span><?php _e('Kitap Ekle') ?></span>
 										</a>
@@ -260,6 +453,8 @@ $all_books= $this->getWorkspaceBooks($workspace->workspace_id);
 						<!-- FAQ -->
 		
 		<div class="mybooks_page_category_viewer">Hepsi</div>
+        
+        <div class="separator"></div>
         
 <script type="text/javascript">
 	$('#filter-controls>li>a').click(function(){
@@ -282,7 +477,13 @@ foreach ($workspacesOfUser as $key => $workspace) {
         $workspace=(object)$workspace;
 		$all_books= $this->getWorkspaceBooks($workspace->workspace_id);
 		foreach ($all_books as $key2 => $book) {
-			$userType = $this->userType($book->book_id); ?>
+			$userType = $this->userType($book->book_id); 
+
+			$book_update_data = array(
+								'book_name'=>$book->title,
+							   'book_author'=>$book->author
+							    );
+			?>
 				
 				<!-- book card -->
 				<div class="reader_book_card <?php echo $workspace->workspace_id; ?> <?php echo ($userType=='owner')? 'owner editor':''; ?> <?php echo ($userType=='editor')? 'editor':''; ?>">
@@ -292,7 +493,7 @@ foreach ($workspacesOfUser as $key => $workspace) {
 		                    <a href="#box-config<?php echo $book->book_id; ?>" data-toggle="modal" class="config"><i class="fa fa-users tip" data-original-title="Editörler"></i></a>
 		                    <a class="remove_book" data-id="<?php echo $book->book_id; ?>" data-toggle="modal" data-target="#myModal"><i class="fa fa-trash-o tip" data-original-title="Sil"></i></a>
 		                    <a class="copyThisBook" data-id="<?php echo $workspace->workspace_name; ?>" data-name="<?php echo $book->title; ?>" data-toggle="modal" data-target="#copyBook" book-id="<?php echo $book->book_id; ?>"><i class="fa fa-copy tip" data-original-title="Çoğalt"></i></a>
-		                    <a class="updateThisBookTitle" data-id="updateBookTitle" data-toggle="modal" data-target="#updateBookTitle" book-id="<?php echo $book->book_id; ?>"><i class="fa fa-edit tip" data-original-title="Düzenle"></i></a>
+		                    <a class="updateThisBookTitle" data-id="<?php echo base64_encode(json_encode($book_update_data)); ?>" data-toggle="modal" data-target="#updateBookTitle" book-id="<?php echo $book->book_id; ?>"><i class="fa fa-edit tip" data-original-title="Düzenle"></i></a>
 		                    <?php } ?>
 		                    <?php if ($userType==='owner' || $userType==='editor') { ?>
 		                    <?php } ?>
@@ -308,15 +509,15 @@ foreach ($workspacesOfUser as $key => $workspace) {
 		                <img src="<?php echo $thumbnailSrc; ?>" />
 		            </div>					
 		            <div class="reader_book_card_info_container">
-		                <div class="editor_mybooks_book_type tip" data-original-title="<?php _e('Çalışma alanının adı') ?>" style="<?php echo ($userType=='owner')? 'border-color:#D9583B':'' ; ?><?php echo ($userType=='editor')? 'border-color:#41A693':'' ; ?><?php echo ($userType!='editor' and $userType!='owner')? 'border:0':'' ; ?>"><?php if ($userType=='owner') {_e('Sahibi');} ?><?php if ($userType=='editor') { _e('Editör'); } ?><?php if ($userType!='owner' && $userType!='editor') { _e('Diğer'); } ?></div>
+		                <div class="editor_mybooks_book_type tip" data-original-title="<?php _e('Kitap Erişim İzini') ?>" style="<?php echo ($userType=='owner')? 'border-color:#D9583B':'' ; ?><?php echo ($userType=='editor')? 'border-color:#41A693':'' ; ?><?php echo ($userType!='editor' and $userType!='owner')? 'border:0':'' ; ?>"><?php if ($userType=='owner') {_e('Sahibi');} ?><?php if ($userType=='editor') { _e('Editör'); } ?><?php if ($userType!='owner' && $userType!='editor') { _e('Diğer'); } ?></div>
 		                <div class="clearfix"></div>			
-		                <div class="reader_market_book_name tip" data-original-title="<?php _e('Kitabın adı') ?>"></i>
+		                <div class="reader_market_book_name tip" data-original-title="<?php _e('Kitabın adı'); echo ': '.$book->title ?>"></i>
 		                	<?php echo ($userType==='owner' || $userType==='editor') ? '<a href="/book/author/'.$book->book_id.'">':'' ;?>
 		                		<?php echo $book->title ?>
 		                	<?php echo ($userType==='owner' || $userType==='editor') ? '</a>':'' ;?>
 		                </div>						
 		                <div class="clearfix"></div>						
-		                <div class="reader_book_card_writer_name tip" data-original-title="<?php _e('Yazarın adı') ?>"><?php echo $book->author ?></div>											
+		                <div class="reader_book_card_writer_name tip" data-original-title="<?php _e('Yazarın adı'); echo ': '.$book->author ?>"><?php echo $book->author ?></div>											
 		            </div>				
 		        </div>
 		        <!-- book card -->
@@ -368,6 +569,12 @@ $(document).on("click",".copyThisBook",function(e){
 });
 $(document).on("click",".updateThisBookTitle",function(e){
 	bookId = $(this).attr('book-id');
+	var id=$(this).data("id");
+	book_update_data = JSON.parse(atob(id));
+
+	$("#updateContentTitle").val(book_update_data.book_name);
+	$("#updateContentAuthor").val(book_update_data.book_author);
+	console.log(book_update_data);
 });
 
 var workspaceId="";
@@ -383,9 +590,11 @@ $("#copy_book").click(function(){
     window.location.assign(link);
 });
 
+
 $("#update_book_title").click(function(){
 	var title=$("#updateContentTitle").val();
-	var link ="/book/updateBookTitle?bookId="+bookId+'&title='+title;
+	var author=$("#updateContentAuthor").val();
+	var link ="/book/updateBookTitle?bookId="+bookId+'&title='+title+'&author='+author;
     window.location.assign(link);
 });
 

@@ -32,7 +32,7 @@ class UserController extends Controller
 				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
-				'actions'=>array('create','update','profile','updatePhoto','updateProfile'),
+				'actions'=>array('create','update','profile','updatePhoto','updateProfile','sendConfirmationId','checkConfirmationId'),
 				'users'=>array('@'),
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
@@ -43,6 +43,78 @@ class UserController extends Controller
 				'users'=>array('*'),
 			),
 		);
+	}
+
+	public function actionSendConfirmationId()
+	{
+		if (isset($_POST['tel']) AND $_POST['tel']) {
+			$userConfirmation=UserMeta::model()->find('user_id=:user_id and meta_key=:meta_key',array('user_id'=>Yii::app()->user->id,'meta_key'=>'confirm'));
+			$userConfirmation->meta_value=functions::get_random_string(6,'0123456789');
+			$userConfirmation->save();
+
+			$user=User::model()->findByPk(Yii::app()->user->id);
+			$user->tel=$_POST['tel'];
+			$user->save();
+
+			//require('/path/to/twilio-php/Services/Twilio.php'); 
+			// require('application.utilities.Twilio.php');
+			// require('/var/www/squid-pacific/ekaratas/protected/utilities/Twilio/TinyHttp.php');
+			// require('/var/www/squid-pacific/ekaratas/protected/utilities/Twilio/RestException.php');
+			// require('/var/www/squid-pacific/ekaratas/protected/utilities/Twilio.php');
+			//require '/var/www/squid-pacific/ekaratas/protected/utilities/twilio-php/Services/Twilio.php';
+			require '/var/www/squid-pacific/ekaratas/protected/utilities/Rest/all.php';
+			$account_sid = 'ACc3f166dbd3ba1e05a1949c3764f53ee4'; 
+			$auth_token = 'd4e88e66002c7ec8949bb3882b2f628e'; 
+			$client = new Services_Twilio($account_sid, $auth_token); 
+			$message = $client->account->messages->sendMessage(
+			  '+17864206890', // From a valid Twilio number
+			  '+905395174991', // Text this number
+			  "OKUTUS aktivasyon kodunuz: ".$userConfirmation->meta_value
+			);
+			//$client = new Services_Twilio(); 
+			 
+			// $client->account->messages->create(array( 
+			// 	'To' => "+905395174991", 
+			// 	'From' => "+17864206890", 
+			// 	'Body' => "OKUTUS aktivasyon kodunuz: ".$userConfirmation->meta_value,   
+			// ));
+			//$client->account->messages->sendMessage("+905395174991", "+17864206890", "OKUTUS aktivasyon kodunuz: ".$userConfirmation->meta_value);
+			//if confiemation ID sent
+			echo "0";
+
+			//else
+			//echo 1
+		}
+		else
+			echo "1";
+
+	}
+
+	public function actionMessageStatusCallback()
+	{
+		error_log(json_encode($_POST));
+		error_log($_POST);
+	}
+
+
+	public function actionCheckConfirmationId()
+	{
+		if (isset($_POST['code']) AND $_POST['code']) {
+			$userConfirmation=UserMeta::model()->find('user_id=:user_id and meta_key=:meta_key',array('user_id'=>Yii::app()->user->id,'meta_key'=>'confirm'));
+			if ($userConfirmation->meta_value==$_POST['code']) {
+				$userConfirmation->meta_value="confirmed";
+				if($userConfirmation->save())
+				{
+					echo "0";
+				}else
+				{
+					echo "1";
+				}
+			}else
+			{
+				echo "1";
+			}
+		}
 	}
 
 	/**
@@ -67,24 +139,10 @@ class UserController extends Controller
 	public function actionInvitation($key=null)
 	{
 		$invitation = OrganisationInvitation::model()->findByPk($key);
+		$user=$this->loadModel($invitation->user_id);
 
 		if ($invitation) {
-			$user=$this->loadModel($invitation->user_id);
-			$organisation=Organisations::model()->findByPk($invitation->organisation_id);
-			$organisationUser= new OrganisationUsers;
-			$organisationUser->user_id=$user->id;
-			$organisationUser->organisation_id=$organisation->organisation_id;
-			$organisationUser->role="user";
-			if($organisationUser->save())
-			{
-				$msg="USER:INVITATION:0:". json_encode(array('userId'=>$user->id,'organisationId'=>$organisation->organisation_id,'role'=>'user', 'message'=>'invitation accepted'));
-				Yii::log($msg,'info');
-			}
-			else
-			{
-				$msg="USER:INVITATION:1:". json_encode(array('userId'=>$user->id,'organisationId'=>$organisation->organisation_id,'role'=>'user', 'message'=>'invitation accept error'));
-				Yii::log($msg,'info');
-			}
+			
 
 			//$invitation->delete();
 
@@ -117,7 +175,7 @@ class UserController extends Controller
 								$model->validate();
 								$model->login();
 								$invitation->delete();
-								$this->redirect(array('/site/index?id='.$workspace->workspace_id));
+								$this->redirect('/site/index');
 							}
 						}
 				}
@@ -125,7 +183,25 @@ class UserController extends Controller
 
 
 				//$this->redirect( array('site/login' ) );
+			}else
+			{
+				$organisation=Organisations::model()->findByPk($invitation->organisation_id);
+				$organisationUser= new OrganisationUsers;
+				$organisationUser->user_id=$user->id;
+				$organisationUser->organisation_id=$organisation->organisation_id;
+				$organisationUser->role="user";
+				if($organisationUser->save())
+				{
+					$msg="USER:INVITATION:0:". json_encode(array('userId'=>$user->id,'organisationId'=>$organisation->organisation_id,'role'=>'user', 'message'=>'invitation accepted'));
+					Yii::log($msg,'info');
+				}
+				else
+				{
+					$msg="USER:INVITATION:1:". json_encode(array('userId'=>$user->id,'organisationId'=>$organisation->organisation_id,'role'=>'user', 'message'=>'invitation accept error'));
+					Yii::log($msg,'info');
+				}
 			}
+
 			$this->render('invitation',array(
 				'model'=>$user,
 				'newUser'=>$newUser

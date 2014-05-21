@@ -184,7 +184,7 @@ $(document).ready(function(){
             'width': '40px',
             'height': '40px',
             'opacity': '1',
-            'z-index': '1000'
+            'z-index': 'first'
 
           },
           'attr' : {

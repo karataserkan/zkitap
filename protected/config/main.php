@@ -27,8 +27,7 @@ $db_config_list=array(
 
 $catalogURL=array(
 	"baracuda"=>"http://bigcat.okutus.com/site/import",
-	"lindneo"=>"http://bigcat.okutus.com/site/import",
-	//"lindneo"=>"http://catalog.lindneo.com/site/import"
+	"lindneo"=>"http://catalog.lindneo.com/site/import"
 	);
 
 $catalog=array(
@@ -48,10 +47,10 @@ return array(
 	// autoloading model and component classes
 	'import'=>array(
 		'application.models.*', 
+		'application.controllers.*', 
 		'application.components.*',
 		'application.utilities.*',
-		'application.utilities.epub3.*'
-		
+		'application.utilities.epub3.*'		
 	),
 
 	'modules'=>array(

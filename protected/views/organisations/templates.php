@@ -18,6 +18,7 @@ var data_id = '';
 	  url: "/book/delete/"+data_id,
 	}).done(function() {
 	  $('#myModal').modal('hide');
+	  window.location.href="/organisations/templates/<?php echo $workspace_id; ?>";
 	});
   });
 });
