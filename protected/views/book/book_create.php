@@ -91,7 +91,6 @@
 												<div class="form-group">
 														<label for="radio" class="control-label col-md-3"><?php _e('Çalışma Grubu'); ?><span class="required">*</span></label>
 														<div class="col-md-4">
-														<input id="ytsize" type="hidden" value="" name="workspaces">
 															<span id="workspaces">
 																<?php 
 																$i=0;
