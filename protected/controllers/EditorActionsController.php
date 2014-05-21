@@ -33,6 +33,11 @@ class EditorActionsController extends Controller
 		return $error;
 	}
 
+	public function actionEpubDownload()
+	{
+		$this->render('epub_download',array());
+	}
+
 	public function actionPreviewPage($id=null){
 		
 
