@@ -1049,6 +1049,9 @@ class componentHTML {
 		if(isset($data->self->css)){
 			$css.=" style=' ";
 			foreach ($data->self->css as $css_name => $css_val ) {
+				if($css_name == 'z-index')
+					if($component->data->selected_tab == "#plink_area")
+						$css_val = '9999999';
 				$css.="$css_name:$css_val;";
 			}
 			$css.="' ";
@@ -1060,6 +1063,14 @@ class componentHTML {
 			$container.=" 
 				<div id='$plink_id' ".$css.">
 					<a href='".$component->data->page_link.".html'><img src='".$component->data->marker."' /></a>
+				</div>
+		
+			
+			";
+		else if($component->data->selected_tab == "#plink_area")
+			$container.=" 
+				<div id='$plink_id' ".$css." style='width:".$component->data->width."; height:".$component->data->height."; z-index:999999;'>
+					<a href='".$component->data->page_link.".html'><div style='width:".$component->data->width."; height:".$component->data->height.";'></div></a>
 				</div>
 		
 			
@@ -1153,6 +1164,21 @@ class componentHTML {
 	public function linkInner($component){
 
 		$data=$component->data;
+
+		$css="";
+		if(isset($data->self->css)){
+			$css.=" style=' ";
+			foreach ($data->self->css as $css_name => $css_val ) {
+				if($css_name != 'left' && $css_name != 'top'){
+					if($css_name == 'z-index')
+						if($component->data->link_area == "Y")
+							$css_val = '9999999';
+					$css.="$css_name:$css_val;";
+				}
+			}
+			$css.="' ";
+		}
+
 		$container ="
 		<a target='_blank' ";
 		if(isset($data->self->attr))
@@ -1160,9 +1186,16 @@ class componentHTML {
 				$container.=" $attr_name='$attr_val' ";
 			}
 
+		$link_id= "link".functions::get_random_string();
 
+		if($component->data->link_area == "N")
+			$container.=" ><img  class='image' src='linkmarker.png' style='width:100%;height:100%;' /></a>";
 
-		$container.="><img  class='image' src='linkmarker.png' style='width:100%;height:100%;' /></a>";
+		else if($component->data->link_area == "Y")
+			$container.=" 
+				$css ></a>";
+
+		
 
 		$this->html=str_replace('%component_inner%' ,$container, $this->html);
 
@@ -1459,6 +1492,7 @@ if ($data->self->attr->componentType == "side-text" ){
 			$container.=" style=' ";
 			foreach ($component->data->self->css as $css_name => $css_val ) {
 				if($css_name == 'z-index' && !$css_val) $css_val = '1000';
+				if($component->type == "link" && $css_name == 'z-index') $css_val = '999999';
 				$container.="$css_name:$css_val;";
 			}
 			$container.="' ";
