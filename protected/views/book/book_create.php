@@ -121,7 +121,7 @@
 														<?php _e("Eser Adı"); ?><span class="required">*</span>
 														</label>
 														<div class="col-md-4">
-                                                        " type="text">
+                                                        <input class="form-control" name="book_name" type="text">
 														</div>
 													</div>
 													<div class="form-group">
