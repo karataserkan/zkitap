@@ -6540,7 +6540,6 @@ fieldset[disabled] .btn-yellow.active {
   border-bottom: 1px solid #c4c4c4;
   min-height: 30px;
   color: #808284;
-  text-shadow: 0px 1px 1px #FFFFFF;
 }
 .box .box-title h4 {
   font-family: 'Open Sans';
@@ -9703,6 +9702,58 @@ form#myprofile_info_edit > input {
 /** END OF EDITOR ORGANIZATIONS USERS PAGE *******************/
 
 
+/** EDITOR CREATING BOOK PAGE *******************/
+
+.creating_book_box {
+	position: absolute;
+	margin-left: auto;
+	margin-right: auto;
+	left: 0;
+	right: 0;	
+}
+
+.creating_book_box input[type="text"]{
+	width:220px;	
+}
+
+.creating_book_box span#book_type img{
+	width:150px;
+}
+
+.creating_book_box span#book_type div.radio{
+	display:none;
+}
+
+.creating_book_box span#book_type #uniform-book_type_0, #uniform-book_type_1{
+	margin-right:15px;
+}
+
+.creating_book_box span#book_type #uniform-book_type_0, 
+#uniform-book_type_1, #uniform-book_type_2{
+	float:left;
+}
+
+.creating_book_box span#book_type #uniform-book_type_0, #uniform-book_type_1{
+	margin-right:15px;
+}
+
+.coming_soon_layer {
+	width: 150px;
+	height: 150px;
+	background-color: rgba(0, 0, 0, 0.7);
+	position: absolute;
+	z-index: 1;
+	border-radius: 3px;
+	color: #fff;
+	text-align: center;
+	line-height: 8em;
+	font-size: 20px;
+	font-weight: normal;
+}
+
+/** END OF EDITOR CREATING BOOK PAGE *******************/
+
+
 
 
 
@@ -9721,8 +9772,6 @@ li.user .dropdown-menu li a:hover {
 }
 
 /** END OF EDITOR GENERAL CSS *******************/
-
-
 
 
 

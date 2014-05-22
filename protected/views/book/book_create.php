@@ -1,19 +1,15 @@
-   <!--  
-    <div class="col-sm-12">
-        <div class="page-header" style="overflow:visible; padding-bottom:50px;">
-            <h3 class="content-title pull-left">Kitaplarım</h3>
-        </div>
-	</div>
-	-->
-
-
 <section>
-	
-							<div class="col-md-10">
+	<div id="content" class="col-lg-12">
+    
+    <div class="page-header">
+			<h3 class="content-title pull-left">Eser Oluşturma</h3>
+		</div>
+    
+							<div class="col-md-10 creating_book_box">
 								<!-- BOX -->
-								<div class="box border red" id="bookCreateWizard">
+								<div class="box border blue" id="bookCreateWizard">
 									<div class="box-title">
-										<h4><i class="fa fa-bars"></i><?php _e('Eser Oluşturma '); ?> - <span class="stepHeader"><?php _e('Aşama'); ?> 1 / 3</h4>
+										<h4><i class="fa fa-book"></i><?php _e('Eser Oluşturma '); ?> - <span class="stepHeader"><?php _e('Aşama'); ?> 1 / 3</h4>
 									</div>
 									<div class="box-body form">
 										<!-- <form id="wizForm" action="#" class="form-horizontal" > -->
@@ -76,21 +72,27 @@
 												 </div>
 												<div class="tab-pane active" id="book_type">
 													<div class="form-group">
-														<label for="radio" class="control-label col-md-3"><?php _e('Eser Türü'); ?><span class="required">*</span></label>
-														<div class="col-md-4">
+														<label for="radio" class="control-label col-md-4"><?php _e('Eser Türü'); ?><span class="required">*</span></label>
+														<div class="col-md-8">
 														<input id="ytsize" type="hidden" value="" name="book_type">
 															<span id="book_type">
 																<div class="" id="uniform-book_type_0">
 																	<span class="">
 																		<input class="uniform" id="book_type_0" value="epub" type="radio" name="book_type">
 																	</span>
-																<label for="book_type_0">Epub</label><br>
+																<label for="book_type_0"><img src="../../../css/ui/img/bookcreate/epub.png" /></label><br>
 																</div>
 																<div class="" id="uniform-book_type_1">
 																	<span class="">
 																		<input class="uniform" id="book_type_1" value="pdf" type="radio" name="book_type">
 																	</span>
-																<label for="book_type_1">Pdf</label><br>
+																<label for="book_type_1"><img src="../../../css/ui/img/bookcreate/pdf.png" /></label><br>
+																</div>
+                                                                <div class="" id="uniform-book_type_2">
+																	<span class="">
+																		<input class="uniform" id="book_type_2" value="word" type="radio" name="book_type">
+																	</span>
+																<label for="book_type_2"><div class="coming_soon_layer">YAKINDA...</div><img src="../../../css/ui/img/bookcreate/word.png" /></label><br>
 																</div>
 															</span>
 														</div>
@@ -98,8 +100,8 @@
 												</div>
 												<div class="tab-pane" id="book_information">
 												<div class="form-group">
-														<label for="radio" class="control-label col-md-3"><?php _e('Çalışma Grubu'); ?><span class="required">*</span></label>
-														<div class="col-md-4">
+														<label for="radio" class="control-label col-md-5"><?php _e('Çalışma Grubu'); ?><span class="required">*</span></label>
+														<div class="col-md-7">
 															<span id="workspaces">
 																<?php 
 																$i=0;
@@ -117,26 +119,26 @@
 														</div>
 													</div>
 												<div class="form-group">
-														<label  class="col-md-3 control-label">
+														<label  class="col-md-5 control-label">
 														<?php _e("Eser Adı"); ?><span class="required">*</span>
 														</label>
-														<div class="col-md-4">
+														<div class="col-md-7">
                                                         <input class="form-control" name="book_name" type="text">
 														</div>
 													</div>
 													<div class="form-group">
-														<label  class="col-md-3 control-label">
+														<label  class="col-md-5 control-label">
 														<?php _e("Yazar"); ?><span class="required">*</span>
 														</label>
-														<div class="col-md-4">
+														<div class="col-md-7">
 															<input class="form-control" name="book_author" type="text">
 														</div>
 													</div>
 												</div>
 												<div class="tab-pane" id="book_res">
 													<div class="form-group">
-														<label for="radio" class="control-label col-md-3"><?php _e('Boyutlar'); ?><span class="required">*</span></label>
-														<div class="col-md-4">
+														<label for="radio" class="control-label col-md-6"><?php _e('Boyutlar'); ?><span class="required">*</span></label>
+														<div class="col-md-6">
 														<input id="ytsize" type="hidden" value="" name="book_size">
 															<span id="book_size">
 																<div class="" id="uniform-book_size_0">
@@ -163,8 +165,8 @@
 												</div>
 												<div class="tab-pane" id="book_templates">
 													<div class="form-group">
-														<label for="radio" class="control-label col-md-3"><?php _e('Şablonlar'); ?></label>
-														<div class="col-md-4">
+														<label for="radio" class="control-label col-md-6"><?php _e('Şablonlar'); ?></label>
+														<div class="col-md-6">
 															<input id="ytsize" type="hidden" value="" name="templates">
 															<span id="templates">
 
@@ -174,8 +176,8 @@
 												</div>
 												<div class="tab-pane" id="pdf_upload">
 													<div class="form-group">
-														<label for="pdf" class="control-label col-md-3"><?php _e('Pdf Yükle'); ?></label>
-														<div class="col-md-4">
+														<label for="pdf" class="control-label col-md-6"><?php _e('Pdf Yükle'); ?></label>
+														<div class="col-md-6">
 															<!-- <input name="pdf" type="file" multiple="" /> -->
 															<?php echo $form->fileField($model, 'pdf_file'); ?>
 															<?php echo $form->error($model,'pdf_file'); ?>
@@ -186,11 +188,11 @@
 										   <div class="wizard-buttons">
 											  <div class="row">
 												 <div class="col-md-12">
-													<div class="col-md-offset-3 col-md-9">
+													<div class="col-md-offset-5 col-md-9">
 													   <a href="javascript:;" class="btn btn-default prevBtn">
 														<i class="fa fa-arrow-circle-left"></i> <?php _e('Geri'); ?> 
 													   </a>
-													   <a href="javascript:;" class="btn btn-primary nextBtn">
+													   <a href="javascript:;" class="btn brand_color_for_buttons nextBtn">
 														<?php _e('Devam'); ?> <i class="fa fa-arrow-circle-right"></i>
 													   </a>
 													   <a href="javascript:;" class="btn btn-success submitBtn" id="templateCreate">
@@ -207,5 +209,5 @@
 								</div>
 								<!-- /BOX -->
 							</div>
-						
+	</div>
 </section>
