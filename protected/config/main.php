@@ -168,6 +168,7 @@ return array(
      	'htmltopng'=>dirname(__FILE__).DIRECTORY_SEPARATOR.'../../'.'bin/htmltopng/htmltopng ',
      	'lindenstamp'=>dirname(__FILE__).DIRECTORY_SEPARATOR.'../../'.'bin/lindenstamp/lindenstamp ',
      	'timestamps'=>dirname(__FILE__).DIRECTORY_SEPARATOR.'../../'.'timestamps/',
+     	'storage'=>dirname(__FILE__).DIRECTORY_SEPARATOR.'../../'.'uploads/files/',
      	'availableLanguages' => array(
      		'tr_TR' => 'Türkçe',
      		'en_US' => 'English'
