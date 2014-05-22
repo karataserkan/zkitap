@@ -158,6 +158,9 @@ return array(
 		// this is used in contact page
 		'adminEmail'=>'pacific@linden-tech.com',
 		'noreplyEmail'=>'noreply@okutus.com',
+		'twilioSid'=>'AC32ab2abb469b9c87c749dbffe37d5f06',
+		'twilioToken'=>'26d65a599d9f301162f13cf5ca7b696e',
+		'twilioFrom'=>'+18282124403'	,
 
      	'epubtopdf'=>dirname(__FILE__).DIRECTORY_SEPARATOR.'../../'.'bin/epubtopdf/epubtopdf ',
      	'pdftojpg'=>dirname(__FILE__).DIRECTORY_SEPARATOR.'../../'.'bin/pdftojpg/pdftojpg ',
