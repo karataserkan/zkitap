@@ -62,20 +62,25 @@ class UserController extends Controller
 			spl_autoload_unregister(array('YiiBase','autoload'));
 			require('Services/Twilio.php');
 			spl_autoload_register(array('YiiBase','autoload'));
-			$account_sid = 'ACc3f166dbd3ba1e05a1949c3764f53ee4'; 
-			$auth_token = 'd4e88e66002c7ec8949bb3882b2f628e'; 
+			$account_sid = Yii::app()->params['twilioSid']; 
+			$auth_token = Yii::app()->params['twilioToken'];
 			
 			$client = new Services_Twilio($account_sid, $auth_token); 
 			$message = $client->account->messages->sendMessage(
-			  '+17864206890', // From a valid Twilio number
-			  $tel, // Text this number
+			  Yii::app()->params['twilioFrom'],
+			  $tel,
 			  "OKUTUS aktivasyon kodunuz: ".$userConfirmation->meta_value
 			);
-
-			echo "0";
+			if ($message->sid) {
+				echo "0";
+			}
+			else
+			{
+				echo "1";
+			}
+			error_log($message->sid);
 
 			//else
-			//echo 1
 		}
 		else
 			echo "1";
