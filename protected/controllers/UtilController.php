@@ -2,6 +2,23 @@
 class UtilController extends Controller{
 
 
+	public function actionCalculateOrganisationSpace()
+	{	$user=Yii::app()->user;
+		$storagePath=Yii::app()->params['storage'];
+		$organisation=OrganisationUsers::model()->find('user_id=:user_id',array(':user_id'=>Yii::app()->user->id));
+		if ($organisation){
+			print_r($organisationId);
+			$queryString="select component.id,component.type from organisation_workspaces,book,chapter,page,component where organisation_workspaces.organisation_id='".$organisation->organisation_id."' AND organisation_workspaces.workspace_id=book.workspace_id AND book.book_id=chapter.book_id AND chapter.chapter_id=page.chapter_id AND page.page_id=component.page_id";
+			$results=Yii::app()->db->createCommand($queryString)->queryAll();
+			foreach ($results as $result) {
+				print_r($result);
+				print_r(glob($storagePath.$result['id'].'.*',GLOB_BRACE));
+				echo "<br>";
+
+			}
+		}
+
+	}
 	public function actionSetCoverThumbnail(){
 		$path="/var/www/squid-pacific/master/uploads/files/";
 		$seviye_books=Book::model()->findAll('author=:author',array('author' => 'Seviye Yayınları'));
