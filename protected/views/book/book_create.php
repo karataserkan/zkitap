@@ -1,10 +1,10 @@
-    
+   <!--  
     <div class="col-sm-12">
         <div class="page-header" style="overflow:visible; padding-bottom:50px;">
             <h3 class="content-title pull-left">Kitaplarım</h3>
         </div>
 	</div>
-
+	-->
 
 
 <section>
