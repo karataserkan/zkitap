@@ -32,7 +32,7 @@ class UserController extends Controller
 				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
-				'actions'=>array('create','update','profile','updatePhoto','updateProfile','sendConfirmationId','checkConfirmationId'),
+				'actions'=>array('create','update','profile','updatePhoto','updateProfile','sendConfirmationId','checkConfirmationId','messageStatusCallback'),
 				'users'=>array('@'),
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
@@ -52,34 +52,26 @@ class UserController extends Controller
 			$userConfirmation->meta_value=functions::get_random_string(6,'0123456789');
 			$userConfirmation->save();
 
+			$tel=str_replace(' ', '', $_POST['tel']);
+
 			$user=User::model()->findByPk(Yii::app()->user->id);
-			$user->tel=$_POST['tel'];
+			$user->tel=$tel;
 			$user->save();
 
-			//require('/path/to/twilio-php/Services/Twilio.php'); 
-			// require('application.utilities.Twilio.php');
-			// require('/var/www/squid-pacific/ekaratas/protected/utilities/Twilio/TinyHttp.php');
-			// require('/var/www/squid-pacific/ekaratas/protected/utilities/Twilio/RestException.php');
-			// require('/var/www/squid-pacific/ekaratas/protected/utilities/Twilio.php');
-			//require '/var/www/squid-pacific/ekaratas/protected/utilities/twilio-php/Services/Twilio.php';
-			require '/var/www/squid-pacific/ekaratas/protected/utilities/Rest/all.php';
+
+			spl_autoload_unregister(array('YiiBase','autoload'));
+			require('Services/Twilio.php');
+			spl_autoload_register(array('YiiBase','autoload'));
 			$account_sid = 'ACc3f166dbd3ba1e05a1949c3764f53ee4'; 
 			$auth_token = 'd4e88e66002c7ec8949bb3882b2f628e'; 
+			
 			$client = new Services_Twilio($account_sid, $auth_token); 
 			$message = $client->account->messages->sendMessage(
 			  '+17864206890', // From a valid Twilio number
-			  '+905395174991', // Text this number
+			  $tel, // Text this number
 			  "OKUTUS aktivasyon kodunuz: ".$userConfirmation->meta_value
 			);
-			//$client = new Services_Twilio(); 
-			 
-			// $client->account->messages->create(array( 
-			// 	'To' => "+905395174991", 
-			// 	'From' => "+17864206890", 
-			// 	'Body' => "OKUTUS aktivasyon kodunuz: ".$userConfirmation->meta_value,   
-			// ));
-			//$client->account->messages->sendMessage("+905395174991", "+17864206890", "OKUTUS aktivasyon kodunuz: ".$userConfirmation->meta_value);
-			//if confiemation ID sent
+
 			echo "0";
 
 			//else
