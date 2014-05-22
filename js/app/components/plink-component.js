@@ -12,7 +12,8 @@ $(document).ready(function(){
 
       var that = this;
 
-      
+      console.log(this.options.component.data.width);
+      //return;
 
       var componentplinkid='plink'+this.options.component.id;
       
@@ -24,7 +25,7 @@ $(document).ready(function(){
       console.log(plink_data);
       
       if(selected_tab == "#plink_name"){
-        var popupmessage=$('<div  id="message_'+componentplinkid+'"  style="overflow:hidden;width:100%; height:100%; "></div>');
+        var popupmessage=$('<div  id="message_'+componentplinkid+'"  style="overflow:hidden; width:100%; height:100%; "></div>');
         popupmessage.appendTo(this.element);
         popupmessage.html(plink_data);
       }
@@ -32,6 +33,10 @@ $(document).ready(function(){
         var popupmessage=$('<div  id="message_'+componentplinkid+'"  style="overflow:hidden; "></div>');
         popupmessage.appendTo(this.element);
         popupmessage.html('<img src="'+this.options.component.data.marker+'" style="width:100%; height:100%;"/>');
+      }
+      else if(selected_tab == "#plink_area"){
+        var popupmessage=$('<div  id="message_'+componentplinkid+'"  style="overflow:hidden; border: solid yellow; width:'+this.options.component.data.width+'px; height:'+this.options.component.data.height+'px;"></div>');
+        popupmessage.appendTo(this.element);
       }
        
       this._super({resizableParams:{handles:"e, s, se"}});
@@ -44,7 +49,7 @@ $(document).ready(function(){
     field: function(key, value){
       
       this._super();
-      
+
 
       // set
       this.options.component[key] = value
@@ -108,7 +113,7 @@ console.log(top);
   
   
 
-  var html_popup = $("<div class='popup ui-draggable' id='pop-plink-popup' style='display: block; top:" + top + "; left: " + left + "; width:380px;'> \
+  var html_popup = $("<div class='popup ui-draggable' id='pop-plink-popup' style='display: block; top:" + top + "; left: " + left + "; width:550px;'> \
       </div>");
   html_popup.appendTo('body').draggable({cancel:'.drag-cancel'}).resizable();
   var poup_header = $("<div class='popup-header'><i class='icon-m-link'></i> &nbsp;Sayfa Bağlantısı Ekle </div> ");
@@ -122,6 +127,7 @@ console.log(top);
                             <ul class='nav nav-tabs' id='plink_tab'>\
                               <li><a href='#plink_name' data-toggle='tab'>Sayfa Bağlantısı Adı</a></li>\
                               <li><a href='#plink_icon' data-toggle='tab'>Sayfa Bağlantısı İkonu</a></li>\
+                              <li><a href='#plink_area' data-toggle='tab'>Sayfa Bağlantısı Alanı</a></li>\
                             </ul>\
                           </div>\
                           <div class='tab-content'>\
@@ -137,6 +143,9 @@ console.log(top);
                                 <div id='new_image'></div>\
                                 <div class='add-image-drag-area' id='dummy-dropzone'> </div> \
                               </span>\
+                            </div>\
+                            <div class='tab-pane fade in active' id='plink_area'><br>\
+                              <div  id='area' contenteditable='true' class='drag-cancel'>Sayfa Bağlantısı Alanı Ekle butonuna basıldıktan sonra sayfaya eklenecek ve alanın büyüklüğünü sayfa üzerinden yapabileceksiniz...</div> \
                             </div>\
                           </div>\
                         </div> <br>");
@@ -245,6 +254,7 @@ console.log(top);
       return;*/
       var plink_data = $("textarea#baslik").val();
       var page_link = $('input[name=page_select]:checked').val();
+
        var  component = {
           'type' : 'plink',
           'data': {

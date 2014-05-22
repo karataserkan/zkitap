@@ -438,7 +438,7 @@ var textComponentBuilder = function( component ) {
 
     link_element
     .appendTo( elementWrap )
-    .popupComponent({
+    .linkComponent({
       'component': component,
       'marker': window.base_url+'/css/linkmarker.png'  ,
       'update': function ( event, component ) {

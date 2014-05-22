@@ -122,6 +122,12 @@ console.log(top);
 
     });
 
+    $('.galey-image-delete').click(function(){
+
+      console.log(this);
+
+    });
+
 
 
     $('#pop-image-OK').click(function (){
