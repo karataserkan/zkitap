@@ -1056,10 +1056,10 @@ class componentHTML {
 
 
 		$plink_id= "plink".functions::get_random_string();
-		if($component->data->plink_image != "")
+		if($component->data->selected_tab == "#plink_icon")
 			$container.=" 
 				<div id='$plink_id' ".$css.">
-					<a href='".$component->data->page_link.".html'><img src='".$component->data->plink_image."' /></a>
+					<a href='".$component->data->page_link.".html'><img src='".$component->data->marker."' /></a>
 				</div>
 		
 			
