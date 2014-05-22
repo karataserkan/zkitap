@@ -1,5 +1,14 @@
+    
+    <div class="col-sm-12">
+        <div class="page-header" style="overflow:visible; padding-bottom:50px;">
+            <h3 class="content-title pull-left">Kitaplarım</h3>
+        </div>
+	</div>
+
+
+
 <section>
-	<div class="row">
+	
 							<div class="col-md-10">
 								<!-- BOX -->
 								<div class="box border red" id="bookCreateWizard">
@@ -112,7 +121,7 @@
 														<?php _e("Eser Adı"); ?><span class="required">*</span>
 														</label>
 														<div class="col-md-4">
-															<input class="form-control" name="book_name" type="text">
+                                                        " type="text">
 														</div>
 													</div>
 													<div class="form-group">
@@ -198,5 +207,5 @@
 								</div>
 								<!-- /BOX -->
 							</div>
-						</div>
+						
 </section>
