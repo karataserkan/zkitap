@@ -13,8 +13,8 @@ $organisationId=$organizationUser['organisation_id'];
 
 
 ?>
- <div id="content">
-
+ <div id="content_main">
+ <!--
 	<div class="col-sm-12">
 		<div class="page-header">
 			<h3 class="content-title pull-left">Çalışma Alanı</h3>
@@ -23,14 +23,14 @@ $organisationId=$organizationUser['organisation_id'];
 				<span><?php _e('Çalışma Alanı Ekle'); ?></span>
 			</a>
 		</div>
-	</div>
+	</div>-->
 
 
 	
 <?php
 	foreach ($workspaces as $key => $workspace) {
 		?>
-		
+		<!--
 		<div class="col-sm-3">	
 			<div class="well">
 			<h5 class="col-sm-12" style="text-transform:capitalize;"><?php echo $workspace['workspace_name']; ?></h5>
@@ -39,7 +39,7 @@ $organisationId=$organizationUser['organisation_id'];
 			<a href="/workspaces/updateWorkspace?id=<?php echo $workspace['workspace_id']; ?>&organisationId=<?php echo $organisationId; ?>" class="btn white radius float-right"><i class="icon-update"></i><?php _e('Düzenle'); ?></a>	
 			<div class="clearfix"></div>
 			</div>
-		</div>
+		</div>-->
 
 
 
@@ -313,8 +313,9 @@ function sendUser(e){
 					×
 				</a>-->
 
-				<a class="fa fa-times-circle close" data-id="<?php echo $workspace['workspace_id']; ?>" data-toggle="modal" data-target="#confirmation"></a>
+				<a class="fa fa-times-circle close" data-id="<?php echo $workspace['workspace_id']; ?>" style="margin-right:5px" data-toggle="modal" data-target="#confirmation"></a>
 				<a class="fa fa-edit close" data-id="<?php echo base64_encode(json_encode($workspace_data)); ?>" style="margin-right:5px" data-toggle="modal" data-target="#addWorkspace"></a>
+				<a class="fa fa-users close" data-id="pop-<?php echo $workspace['workspace_id']; ?>" style="margin-right:5px" data-toggle="modal" data-target="#pop-<?php echo $workspace['workspace_id']; ?>"></a>
 				
 
 				<p></p>
