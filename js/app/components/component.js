@@ -40,7 +40,10 @@ $(document).ready(function(){
           'start': function (event,ui){
             that._selected(event,ui);
             //console.log(ui);
-
+            if(that.options.component.type == "plink"){
+              $('#message_plink'+that.options.component.id).css('height','100%');
+              $('#message_plink'+that.options.component.id).css('width','100%');
+            }
             //$(ui.element.get(0)).resizable("option", "alsoResize",".selected");
             $(this).resizable("option", "alsoResize",".selected",{
                                                           containment: "#current_page"
