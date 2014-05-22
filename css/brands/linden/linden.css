@@ -50,7 +50,7 @@
 }
 
 .solid_brand_color {
-	background-color:#2880b9;
+	background-color:#2880b9 !important;
 }
 
 .brand_text_color {
@@ -59,7 +59,8 @@
 
 .brand_color_for_buttons {
 	background-color: #2880b9;
-	border-color: #226e99;	
+	border-color: #226e99;
+	color:#fff;
 }
 
 
