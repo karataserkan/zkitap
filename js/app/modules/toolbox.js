@@ -561,7 +561,10 @@ window.lindneo.toolbox = (function(window, $, undefined){
 
     var that = this;
       $('.toolbox').hide();
-
+      console.log('BEGIN');
+      console.log(this.selectedComponents);
+      console.log('END');
+      //return;
       $.each(this.selectedComponents, function( key, component ) {
         if($.type(component.options.component.data.lock.username) == "undefined"){
           $('.toolbox.'+component.options.component.type+'-options, .toolbox.generic-options').show();
@@ -570,13 +573,24 @@ window.lindneo.toolbox = (function(window, $, undefined){
 
         $('.toolbox .tool').unbind( "change" );
         $('.toolbox-btn').unbind( "click" );
-
+        console.log(component);
+              //return;
 
         $('.toolbox .tool, .toolbox-btn').each(function (index) {
+
               var rel=$(this).attr('rel');
-              //console.log(rel);
+              
               var relValue = component.getProperty(rel);
-              //console.log  ( relValue );
+              if(rel == "rotate"){
+                //relValue =
+                
+                var rotation = component.options.component.data.self.rotation;
+                var degree_rotation = rotation * 180 / 3.14
+                //console.log  ( degree_rotation );
+                if(isNaN(degree_rotation))
+                  degree_rotation = 0;
+                relValue = Math.round(degree_rotation).toFixed(2);
+              }
               if( relValue != null) { 
                 // text select ve color icin
                 $(this).not('radio').val(relValue);
@@ -618,12 +632,32 @@ window.lindneo.toolbox = (function(window, $, undefined){
                 });
 
              }
+             else if($(this).hasClass('text')){
+                $(this).keydown(function(e){
+                  if(e.which == "13"){
+                    console.log(component);
+                    //return;
+                    var degree = $(this).val();
+                    var radian = (degree/180)*3.14;
+                    var glob_rel=$(this).attr('rel');
+                    $.each(window.lindneo.toolbox.selectedComponents,function(i,val){
+                      console.log(val);
+                        val.setProperty ( glob_rel , radian );
+                    });
+            
+                    //that.selectionUpdated();
+                    console.log(that);
+                  }
+                });
+
+             }
         });
       });
       this.makeMultiSelectionBox();
-     
-     
-
+     /*
+      while(this.selectedComponents.length > 0) {
+        this.selectedComponents.pop();
+      }*/
 
   };
 

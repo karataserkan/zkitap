@@ -604,7 +604,7 @@ $(document).ready(function(){
       $.each( _data, function(p, data) {
         
         if( p === 'self' ){ 
-          console.log(data);
+          //console.log(data);
           if( data.css ) that.element.parent().css(data.css);
           if( data.attr ) that.element.parent().attr(data.attr);
 
@@ -663,14 +663,14 @@ $(document).ready(function(){
     },
 
     _rotate: function ( event, angle ) {
-      //console.log(this);
+      //console.log(this.options.component);
       //this.options.component.data.self.css.width = ui.size.width + "px";
       //this.options.component.data.self.css.height = ui.size.height + "px";
       this.options.component.data.self.rotation = angle;
-
+      //console.log(this.options.component.data.self.rotation);
       this.options.component.data.self.css['-webkit-transform'] = "rotate("+angle+"rad)" ;
       //$(self).css('-webkit-transform',"rotate("+angle+"rad)");
-      //console.log(angle);
+      //console.log(this.options.component.data.self.css['-webkit-transform']);
       this._trigger('update', null, this.options.component );
       //this._selected(event, ui)
       //console.log(this.options.component);
@@ -792,11 +792,13 @@ $(document).ready(function(){
     },
     _setPropertyofObject : function (propertyName,propertyValue){
     //console.log($('#'+this.options.component.id).slickWrap({ cutoff:propertyValue }));
-    console.log(propertyName);
-    console.log(propertyValue);
+    //console.log(propertyName);
+    //console.log(propertyValue);
       switch(propertyName){ 
         case 'cutoff':
           $('#'+this.options.component.id).slickWrap({ cutoff:propertyValue });
+        case 'rotate':
+          this._rotate('', propertyValue);
         case 'zindex':
             switch (propertyValue){
               case 'top':
