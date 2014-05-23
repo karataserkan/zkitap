@@ -20,9 +20,9 @@ $( document ).ready(function () {
         {
             //console.log(e.which);
             //console.log(e);
-            console.log(count);
+            //console.log(count);
             var moved = count * 3;
-            console.log(moved);
+            //console.log(moved);
             //return;
             if(e.which == 46){
               for(var i=1; i < keydown_component.length; i++){
