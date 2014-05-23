@@ -589,7 +589,7 @@ window.lindneo.toolbox = (function(window, $, undefined){
                 //console.log  ( degree_rotation );
                 if(isNaN(degree_rotation))
                   degree_rotation = 0;
-                relValue = Math.round(degree_rotation).toFixed(2);
+                relValue = Math.round(degree_rotation).toFixed(0);
               }
               if( relValue != null) { 
                 // text select ve color icin
