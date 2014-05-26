@@ -34,17 +34,17 @@ $db_config_list=array(
 
 $catalogURL=array(
 	"baracuda"=>"http://bigcat.okutus.com/site/import",
-	"lindneo"=>"http://catalog.lindneo.com/site/import"
+	"ulgen"=>"http://catalog.lindneo.com/site/import"
 	);
 
 $catalog=array(
 	"baracuda"=>"http://bigcat.okutus.com",
-	"lindneo"=>"http://catalog.lindneo.com",
+	"ulgen"=>"http://catalog.lindneo.com",
 	//"lindneo"=>"http://catalog.lindneo.com/site/import"
 	);
 
 $host_config=array(
-			"lindneo"=>array(
+			"ulgen"=>array(
                 				'catalog_host'=>'http://catalog.lindneo.com',
 				                'kerbela_host'=>'http://kerbela.lindneo.com',
 				                'panda_host'=>'http://panda.lindneo.com',

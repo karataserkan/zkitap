@@ -80,15 +80,15 @@ $('#card_preview').css({'background-image': 'url(<?php echo Yii::app()->request-
                 var name=$('#name').val();
                 var number=$('#cardnumber').val();
                 
-                var ccv=($('#cvc').val();
+                var ccv=$('#cvc').val();
                 
                 console.log(month);
                 console.log(year);
 
                 $.ajax({
                     type: "POST",
-                    url: "/organisations/checkoutPlan",
-                    data: {params:"['tutar':'<?php echo $tutar; ?>', 'plan_id': '<?php echo $plan_id; ?>', 'name': "+name+", 'number': "+number+", 'month':"+month+", 'year':"+year+",'ccv':"+ccv+"]"}
+                    url: "/organisations/checkoutPlan/<?php echo $organisation?>",
+                    data: {tutar:"<?php echo $tutar; ?>", plan_id: "<?php echo $plan_id; ?>", name: name, number: number, month:month, year:year,ccv:ccv}
                 })
                   .done(function( result ) {
                     console.log(result);
