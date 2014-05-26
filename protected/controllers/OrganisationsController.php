@@ -32,7 +32,7 @@ class OrganisationsController extends Controller
 				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
-				'actions'=>array('create','update','workspaces','delWorkspaceUser','addWorkspaceUser','users','addUser','deleteOrganisationUser','account','bookCategories','deleteCategory','createBookCategory','updateBookCategory','templates','aCL','addACL','publishedBooks','deleteACL','removeFromCategory','addBalance','selectPlan'),
+				'actions'=>array('create','update','workspaces','delWorkspaceUser','addWorkspaceUser','users','addUser','deleteOrganisationUser','account','bookCategories','deleteCategory','createBookCategory','updateBookCategory','templates','aCL','addACL','publishedBooks','deleteACL','removeFromCategory','addBalance','selectPlan','checkoutPlan'),
 				'users'=>array('@'),
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
@@ -115,10 +115,72 @@ class OrganisationsController extends Controller
 		$this->render('select_plan',array());
 	}
 
-	public function actionAddBalance()
+	public function actionCheckoutPlan()
 	{
+		if (isset($_POST['params'])) {
 
-		$this->render('add_money',array());
+			$attributes=json_decode($_POST['params']);
+			$email=Yii::app()->user->email;
+			$type='plan';
+			$tutar=$attributes['tutar'];
+			$plan_id=$attributes['plan_id'];
+			$kartOwner=$attributes['name'];
+			$kartNumber=$attributes['number'];
+			$kartMonth=$attributes['month'];
+			$kartYear=$attributes['year'];
+			$kartCCV=$attributes['ccv'];
+			print_r($attributes);
+			
+			$transaction=new Transactions;
+			$transaction->transaction_id=functions::new_id(40);
+			$transaction->transaction_type="plan";
+			$transaction->transaction_method="deposit";
+			$transaction->transaction_amount=1;
+			$transaction->transaction_unit_price=$tutar;
+			$transaction->transaction_amount_equvalent=$tutar;
+			$transaction->transaction_start_date=date('Y-n-d g:i:s',time());;
+			$transaction->transaction_organisation_id='';
+			
+			$url = Yii::app()->params['panda_host'].'/api/addPlan';
+			//userId=email
+			$params = array(
+							'email'=>$email,
+							'type_name'=>$type,
+							'type_id'=>$plan_id,
+							'amount'=>$tutar
+							);
+
+			$ch = curl_init( $url );
+			curl_setopt( $ch, CURLOPT_POST, 1);
+			curl_setopt( $ch, CURLOPT_POSTFIELDS, $params);
+			curl_setopt( $ch, CURLOPT_FOLLOWLOCATION, 1);
+			curl_setopt( $ch, CURLOPT_HEADER, 0);
+			curl_setopt( $ch, CURLOPT_RETURNTRANSFER, 1);
+			//$response = curl_exec( $ch );
+			//$this->response($response);
+		}
+		else
+		{
+			echo "1";
+		}
+
+	}
+
+
+	public function actionAddBalance($plan=0)
+	{
+	 	$tutar="0";
+		if ($plan==2) {
+		  $tutar="49.99";
+		}elseif ($plan==3) {
+		  $tutar="199.99";
+		}elseif ($plan==4) {
+		  $tutar="299.99";
+		}
+
+		//url: "<?php echo Yii::app()->params['panda_host']; /api/transaction",
+
+		$this->render('add_money',array('tutar'=>$tutar,'plan_id'=>$plan));
 	}
 
 	public function actionRemoveFromCategory($id)
