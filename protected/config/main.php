@@ -34,11 +34,13 @@ $db_config_list=array(
 
 $catalogURL=array(
 	"baracuda"=>"http://bigcat.okutus.com/site/import",
+	"lindneo"=>"http://catalog.lindneo.com/site/import",
 	"ulgen"=>"http://catalog.lindneo.com/site/import"
 	);
 
 $catalog=array(
 	"baracuda"=>"http://bigcat.okutus.com",
+	"lindneo"=>"http://catalog.lindneo.com",
 	"ulgen"=>"http://catalog.lindneo.com",
 	//"lindneo"=>"http://catalog.lindneo.com/site/import"
 	);
