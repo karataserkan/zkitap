@@ -244,7 +244,7 @@ console.log(top);
 
     $("<div class='popup ui-draggable' id='pop-image-popup' style='display: block; top:" + top + "; left: " + left + ";'> \
         <div class='popup-header'> \
-        <i class='icon-m-charts'></i> &nbsp;Grafik Ekle \
+        <i class='icon-m-charts'></i> &nbsp;"+j__("Grafik Ekle")+" \
         <i id='graph-add-dummy-close-button' class='icon-close size-10 popup-close-button'></i>\
 		</div> \
           <div class='gallery-inner-holder'> \
@@ -253,8 +253,8 @@ console.log(top);
           <label class='dropdown-label' id='graph_leading'> \
                   Grafik Çeşidi:  \
                     <select id='Graph Type' class='radius'> \
-                      <option value='pie-chart'> Pasta</option> \
-                      <option value='bar-chart' >Çubuk</option> \
+                      <option value='pie-chart'> "+j__("Pasta")+"</option> \
+                      <option value='bar-chart' >"+j__("Çubuk")+"</option> \
                     </select>  \
           </label> \
           <select id='verisayisi' class='radius'> \
@@ -270,7 +270,7 @@ console.log(top);
                     </select>  \
             <div id='bar-chart-properties' class='chart_prop bar-chart' style='display:none;'> \
               <div class='bar-chart-slice-holder slice-holder'> \
-                Arkaplan Rengi:  \
+                "+j__("Arkaplan Rengi")+":  \
                 <input type='color'  id='chart-bar-background' class='color-picker-box radius color' value='"+get_random_color()+"' placeholder='#bbbbbb'> <br> \
                 Çubuk Rengi:  \
                  <input type='color' id='chart-bar-stroke' class='color-picker-box radius color' value='"+get_random_color()+"' placeholder='#bbbbbb'> <br> \
@@ -279,7 +279,7 @@ console.log(top);
           <div id='pie-chart-properties' class='chart_prop pie-chart'> \
           </div> \
                \
-          <a href='#' class='btn btn-info  ' id='pop-image-OK' style='padding: 5px 30px;'>Ekle</a> \
+          <a href='#' class='btn btn-info  ' id='pop-image-OK' style='padding: 5px 30px;'>"+j__("Ekle")+"</a> \
           </div> \
           </div> \
         </div>").appendTo('body').draggable();
@@ -323,16 +323,16 @@ console.log(top);
       for (var i= current ;i <  newlenght; i++){
       
           var newPieRow= $("<div class='pie-chart-slice-holder slice-holder data-row'> \
-                      "+(i+1)+". Dilim <br> \
+                      "+(i+1)+". "+j__("Dilim")+" <br> \
                       %<input type='text' class='chart-textbox radius grey-9 percent' value='"+Math.floor((Math.random()*100)+1)+"'><br> \
-                      Etiket<input type='text' class='chart-textbox-wide radius grey-9 label' value='"+letters[i]+"'> \
+                      "+j__("Etiket")+"<input type='text' class='chart-textbox-wide radius grey-9 label' value='"+letters[i]+"'> \
                       <input type='color' class='color-picker-box radius color' value='"+ get_random_color()+"' placeholder='e.g. #bbbbbb'> \
               </div> \
               ");
          var newBarRow= $("<div class='bar-chart-slice-holder slice-holder data-row'> \
-             "+(i+1)+". sütun adı: \
+             "+(i+1)+". "+j__("sütun adı")+": \
             <input type='text' class='chart-textbox-wide radius grey-9 label ' value='"+letters[i]+"'><br> \
-             "+(i+1)+". sütun değeri:  \
+             "+(i+1)+". "+j__("sütun değeri")+":  \
             <input type='text' class='chart-textbox-wide radius grey-9 value ' value='"+Math.floor((Math.random()*100)+1)+"'><br> \
           </div> \
                 ");
