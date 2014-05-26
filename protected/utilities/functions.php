@@ -15,7 +15,7 @@ class functions {
      * @param mixed $value the optional value to pass to each callback
      * @param mixed $callback the method or function to call - FALSE to remove all callbacks for event
      */
-    function event($event, $value = NULL, $callback = NULL)
+    static function event($event, $value = NULL, $callback = NULL)
     {
         static $events;
 

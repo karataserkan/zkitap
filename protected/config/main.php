@@ -22,7 +22,14 @@ $db_config_list=array(
                         			'username' => 'db_squid_pacific',
                         			'password' => '7GqA3Pqcy38QnfPQ',
                         			'charset' => 'utf8',
-                			)
+                			),
+			"ulgen"=>array(
+                        			'connectionString' => 'mysql:host=datamaster.private.services.lindneo.com;port=3306;dbname=squid_pacific',
+                        			'emulatePrepare' => true,
+                        			'username' => 'db_squid_pacific',
+                        			'password' => '7GqA3Pqcy38QnfPQ',
+                        			'charset' => 'utf8',
+                			),
 );      
 
 $catalogURL=array(
@@ -79,7 +86,7 @@ return array(
 	    	'basePath'=>'/var/www/squid-pacific/egemen/protected/messages',
 			)	,*/
 		
-		 'messages' => array(
+		/* 'messages' => array(
 		 			'language'=>'en_US',
                     'class' => 'CGettextMessageSource',
                     'basePath'=>'/var/www/squid-pacific/egemen/protected/locale/messages',
