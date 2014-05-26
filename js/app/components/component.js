@@ -350,8 +350,8 @@ $(document).ready(function(){
       that.comment_list =  $('<div class="comment_cards_list"> </div>');
       that.newCommentBox = $('<div></div>');
 
-      that.newCommentBox_textarea = $('<input type="text" class="commentBoxTextarea" placeholder="Yorum giriniz..." id="commentBoxTextarea'+that.options.component.id+'" />');
-      that.newCommentBox_button = $('<button id="commentBoxTextareaSend'+that.options.component.id+'" class="commentBoxTextareaSend">Gönder</button></div>');
+      that.newCommentBox_textarea = $('<input type="text" class="commentBoxTextarea" placeholder="'+j__("Yorum giriniz")+'..." id="commentBoxTextarea'+that.options.component.id+'" />');
+      that.newCommentBox_button = $('<button id="commentBoxTextareaSend'+that.options.component.id+'" class="commentBoxTextareaSend">'+j__("Gönder")+'</button></div>');
 
       that.newCommentBox_button.click(function(){
                 var commentBoxTextareaValue = that.newCommentBox_textarea.val();

@@ -170,7 +170,7 @@ $(document).ready(function(){
             'overflow': (type == 'text' ? 'visible' : 'hidden' )
           } , 
           'attr': {
-            'placeholder':'Sayfa Numarası',
+            'placeholder': j__("Sayfa Numarası"),
           },
           'val': ''
         },

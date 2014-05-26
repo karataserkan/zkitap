@@ -182,7 +182,7 @@ console.log(top);
     left = left + "px";
     $("<div class='popup ui-draggable' id='pop-image-popup' style='display: block; top:" + top + "; left: " + left + ";'> \
       <div class='popup-header'> \
-<i class='icon-m-galery'></i> &nbsp;Şekil Ekle \
+<i class='icon-m-galery'></i> &nbsp;"+j__("Şekil Ekle")+" \
 <i id='shape-add-dummy-close-button' class='icon-close size-10 popup-close-button'></i> \
 </div> \
 <!--  popup content --> \

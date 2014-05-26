@@ -32,7 +32,7 @@ class OrganisationsController extends Controller
 				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
-				'actions'=>array('create','update','workspaces','delWorkspaceUser','addWorkspaceUser','users','addUser','deleteOrganisationUser','account','bookCategories','deleteCategory','createBookCategory','updateBookCategory','templates','aCL','addACL','publishedBooks','deleteACL','removeFromCategory','addBalance','selectPlan'),
+				'actions'=>array('create','update','workspaces','delWorkspaceUser','addWorkspaceUser','users','addUser','deleteOrganisationUser','account','bookCategories','deleteCategory','createBookCategory','updateBookCategory','templates','aCL','addACL','publishedBooks','deleteACL','removeFromCategory','addBalance','selectPlan','checkoutPlan','deneme'),
 				'users'=>array('@'),
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
@@ -58,6 +58,11 @@ class OrganisationsController extends Controller
 	    ->queryRow();
 	    
 	    return ($bookOfUser) ? $bookOfUser['type'] : false;
+	}
+
+	public function actionDeneme()
+	{
+		echo Yii::app()->params['panda_host'];
 	}
 
 	public function actionWorkspace()
@@ -109,16 +114,90 @@ class OrganisationsController extends Controller
 		}
 	}
 
-	public function actionSelectPlan()
+	public function actionSelectPlan($id=0)
 	{
-
-		$this->render('select_plan',array());
+		if ($id) {
+			$this->render('select_plan',array('organisation'=>$id));
+		}
 	}
 
-	public function actionAddBalance()
+	public function actionCheckoutPlan($id=0)
 	{
+		if (isset($_POST['tutar']) AND isset($_POST['tutar']) AND isset($_POST['plan_id']) AND isset($_POST['name']) AND isset($_POST['number']) AND isset($_POST['month']) AND isset($_POST['year']) AND isset($_POST['ccv'])) {
+			$user=Yii::app()->user->id;
+			$userModel=User::model()->findByPk($user);
+			$email=$userModel->email;
+			$type='plan';
+			$tutar=$_POST['tutar'];
+			$plan_id=$_POST['plan_id'];
+			$kartOwner=$_POST['name'];
+			$kartNumber=$_POST['number'];
+			$kartMonth=$_POST['month'];
+			$kartYear=$_POST['year'];
+			$kartCCV=$_POST['ccv'];
+			
+			$ticketUrl = Yii::app()->params['panda_host'].'/api/getTransactionTicket';
+			$ch = curl_init( $ticketUrl );
+			curl_setopt( $ch, CURLOPT_RETURNTRANSFER, 1);
+			$ticket = curl_exec( $ch );
+			error_log('ticket: '.$ticket);
+			error_log('ticketUrl: '.$ticketUrl);
 
-		$this->render('add_money',array());
+			if ($ticket) {
+				$transaction=new Transactions;
+				$transaction->transaction_id=$ticket;
+				$transaction->transaction_type="plan";
+				$transaction->transaction_method="deposit";
+				$transaction->transaction_amount=1;
+				$transaction->transaction_unit_price=$tutar;
+				$transaction->transaction_amount_equvalent=$tutar;
+				$transaction->transaction_start_date=date('Y-n-d g:i:s',time());;
+				$transaction->transaction_organisation_id=$id;
+				$transaction->save();
+
+				$url = Yii::app()->params['panda_host'].'/api/addPlan';
+				$params = array(
+								'transaction'=>$ticket,
+								'email'=>$email,
+								'type_name'=>$type,
+								'type_id'=>$plan_id,
+								'amount'=>$tutar
+								);
+				error_log('params: '.$params);
+				$ch = curl_init( $url );
+				curl_setopt( $ch, CURLOPT_POST, 1);
+				curl_setopt( $ch, CURLOPT_POSTFIELDS, $params);
+				curl_setopt( $ch, CURLOPT_FOLLOWLOCATION, 1);
+				curl_setopt( $ch, CURLOPT_HEADER, 0);
+				curl_setopt( $ch, CURLOPT_RETURNTRANSFER, 1);
+				$response = curl_exec( $ch );
+				echo $response;
+				error_log('response: '.$response);
+
+			}
+		}
+		else
+		{
+			echo "1";
+		}
+
+	}
+
+
+	public function actionAddBalance($plan=0,$organisation=0)
+	{
+	 	$tutar="0";
+		if ($plan==2) {
+		  $tutar="49.99";
+		}elseif ($plan==3) {
+		  $tutar="199.99";
+		}elseif ($plan==4) {
+		  $tutar="299.99";
+		}
+
+		//url: "<?php echo Yii::app()->params['panda_host']; /api/transaction",
+
+		$this->render('add_money',array('tutar'=>$tutar,'plan_id'=>$plan,'organisation'=>$organisation));
 	}
 
 	public function actionRemoveFromCategory($id)
