@@ -40,7 +40,10 @@ $(document).ready(function(){
           'start': function (event,ui){
             that._selected(event,ui);
             //console.log(ui);
-
+            if(that.options.component.type == "plink"){
+              $('#message_plink'+that.options.component.id).css('height','100%');
+              $('#message_plink'+that.options.component.id).css('width','100%');
+            }
             //$(ui.element.get(0)).resizable("option", "alsoResize",".selected");
             $(this).resizable("option", "alsoResize",".selected",{
                                                           containment: "#current_page"
@@ -347,8 +350,8 @@ $(document).ready(function(){
       that.comment_list =  $('<div class="comment_cards_list"> </div>');
       that.newCommentBox = $('<div></div>');
 
-      that.newCommentBox_textarea = $('<input type="text" class="commentBoxTextarea" placeholder="Yorum giriniz..." id="commentBoxTextarea'+that.options.component.id+'" />');
-      that.newCommentBox_button = $('<button id="commentBoxTextareaSend'+that.options.component.id+'" class="commentBoxTextareaSend">Gönder</button></div>');
+      that.newCommentBox_textarea = $('<input type="text" class="commentBoxTextarea" placeholder="'+j__("Yorum giriniz")+'..." id="commentBoxTextarea'+that.options.component.id+'" />');
+      that.newCommentBox_button = $('<button id="commentBoxTextareaSend'+that.options.component.id+'" class="commentBoxTextareaSend">'+j__("Gönder")+'</button></div>');
 
       that.newCommentBox_button.click(function(){
                 var commentBoxTextareaValue = that.newCommentBox_textarea.val();
@@ -601,7 +604,7 @@ $(document).ready(function(){
       $.each( _data, function(p, data) {
         
         if( p === 'self' ){ 
-          console.log(data);
+          //console.log(data);
           if( data.css ) that.element.parent().css(data.css);
           if( data.attr ) that.element.parent().attr(data.attr);
 
@@ -660,14 +663,14 @@ $(document).ready(function(){
     },
 
     _rotate: function ( event, angle ) {
-      //console.log(this);
+      //console.log(this.options.component);
       //this.options.component.data.self.css.width = ui.size.width + "px";
       //this.options.component.data.self.css.height = ui.size.height + "px";
       this.options.component.data.self.rotation = angle;
-
+      //console.log(this.options.component.data.self.rotation);
       this.options.component.data.self.css['-webkit-transform'] = "rotate("+angle+"rad)" ;
       //$(self).css('-webkit-transform',"rotate("+angle+"rad)");
-      //console.log(angle);
+      //console.log(this.options.component.data.self.css['-webkit-transform']);
       this._trigger('update', null, this.options.component );
       //this._selected(event, ui)
       //console.log(this.options.component);
@@ -789,11 +792,13 @@ $(document).ready(function(){
     },
     _setPropertyofObject : function (propertyName,propertyValue){
     //console.log($('#'+this.options.component.id).slickWrap({ cutoff:propertyValue }));
-    console.log(propertyName);
-    console.log(propertyValue);
+    //console.log(propertyName);
+    //console.log(propertyValue);
       switch(propertyName){ 
         case 'cutoff':
           $('#'+this.options.component.id).slickWrap({ cutoff:propertyValue });
+        case 'rotate':
+          this._rotate('', propertyValue);
         case 'zindex':
             switch (propertyValue){
               case 'top':

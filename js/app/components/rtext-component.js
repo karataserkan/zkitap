@@ -751,9 +751,9 @@ var html_tag_replace = function (str){
             'background-color' : 'transparent'
           } , 
           'attr': {
-            'placeholder':'Metin Kutusu',
+            'placeholder': j__("Metin Kutusu"),
           },
-          'val': 'deneme yazıdır....'
+          'val': j__("deneme yazıdır....")
         },
         'lock':'',
         'self': {

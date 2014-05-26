@@ -75,7 +75,7 @@ window.lindneo.tsimshian = (function(window, $, undefined){
   var init = function (serverName){
 
     if ( typeof io == 'undefined' ){
-      alert ('Co-working System Error');
+      alert (j__("Co-working System Error"));
       location.reload();
       return;
 

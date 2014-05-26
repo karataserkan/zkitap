@@ -286,7 +286,7 @@ window.lindneo.nisga = (function(window, $, undefined){
   var shapeComponentBuilder = function( component ) {
     
     var element  = $('<canvas> </canvas>');
-    var elementWrap=$('<div title="Şekil Aracı"></div>');
+    var elementWrap=$('<div title="'+j__("Şekil Aracı")+'"></div>');
     elementWrap.appendTo( page_div_selector );
 
     element
@@ -316,7 +316,7 @@ window.lindneo.nisga = (function(window, $, undefined){
    
 
     var element  = $('<div ></div>');
-    var elementWrap=$('<div title="Tablo Aracı"></div>');
+    var elementWrap=$('<div title="'+j__("Tablo Aracı")+'"></div>');
     elementWrap.appendTo( page_div_selector );
 
     element
@@ -344,7 +344,7 @@ window.lindneo.nisga = (function(window, $, undefined){
   var graphComponentBuilder = function( component ) {
     
     var element  = $('<canvas style="width:100%;height:100%;"> </canvas>');
-    var elementWrap=$('<div title="Grafik Aracı"></div>');
+    var elementWrap=$('<div title="'+j__("Grafik Aracı")+'"></div>');
     elementWrap.appendTo( page_div_selector );
 
     element
@@ -372,7 +372,7 @@ window.lindneo.nisga = (function(window, $, undefined){
 //
 var textComponentBuilder = function( component ) {
 
-    var element = $('<textarea title="Yazı Aracı"></textarea>'); 
+    var element = $('<textarea title="'+j__("Yazı Aracı")+'"></textarea>'); 
 
     element
     .appendTo( page_div_selector )
@@ -401,7 +401,7 @@ var textComponentBuilder = function( component ) {
 
   var pageComponentBuilder = function( component ) {
 
-    var element = $('<textarea class="page_number" title="Sayfa Numara Aracı"></textarea>'); 
+    var element = $('<textarea class="page_number" title="'+j__("Sayfa Numara Aracı")+'"></textarea>'); 
 
     element
     .appendTo( page_div_selector )
@@ -430,7 +430,7 @@ var textComponentBuilder = function( component ) {
 
   var linkComponentBuilder = function ( component ) {
     
-    var link_element  = $('<div class="link-controllers" title="Bağlantı Aracı" style="width:100%; height:100%;"></div>');
+    var link_element  = $('<div class="link-controllers" title="'+j__("Bağlantı Aracı")+'" style="width:100%; height:100%;"></div>');
     var element  = $('<a class="link-component"></a>');
     var elementWrap=$('<div ></div>');
     elementWrap.appendTo( page_div_selector );
@@ -438,7 +438,7 @@ var textComponentBuilder = function( component ) {
 
     link_element
     .appendTo( elementWrap )
-    .popupComponent({
+    .linkComponent({
       'component': component,
       'marker': window.base_url+'/css/linkmarker.png'  ,
       'update': function ( event, component ) {
@@ -465,7 +465,7 @@ var textComponentBuilder = function( component ) {
     
     
     var element  = $('<div class="popup-controllers" style="width:100%; height:100%;"> </div>');
-    var elementWrap=$('<div title="Açılır Pencere Aracı"></div>');
+    var elementWrap=$('<div title='+j__("Açılır Pencere Aracı")+'"></div>');
     elementWrap.appendTo( page_div_selector );
 
     element
@@ -496,7 +496,7 @@ var textComponentBuilder = function( component ) {
     
     
     var element  = $('<div class="wrap-controllers" style="width:100%; height:100%;"> </div>');
-    var elementWrap=$('<div  title="Metin Sarma Aracı"></div>');
+    var elementWrap=$('<div  title="'+j__("Metin Sarma Aracı")+'"></div>');
     elementWrap.appendTo( page_div_selector );
 
     element
@@ -526,7 +526,7 @@ var textComponentBuilder = function( component ) {
   var htmlComponentBuilder = function( component ) {
 
     var element  = $('<div class="html-controllers" style="width:100%; height:100%;"></div>');
-    var elementWrap=$('<div title="HTML Aracı"></div>');
+    var elementWrap=$('<div title="'+j__("HTML Aracı")+'"></div>');
     elementWrap.appendTo( page_div_selector );
     //console.log(component);
     element
@@ -556,7 +556,7 @@ var textComponentBuilder = function( component ) {
   var rtextComponentBuilder = function( component ) {
 
     var element  = $('<div class="rtext-controllers" style="width:100%; height:100%;" > </div>');
-    var elementWrap=$('<div title="Zengin Metin Aracı"></div>');
+    var elementWrap=$('<div title="'+j__("Zengin Metin Aracı")+'"></div>');
     elementWrap.appendTo( page_div_selector );
     //console.log(component);
     element
@@ -586,7 +586,7 @@ var textComponentBuilder = function( component ) {
   var plinkComponentBuilder = function( component ) {
 
     var element  = $('<div class="plink-controllers" style="width:100%; height:100%;"> </div>');
-    var elementWrap=$('<div title="Sayfa Bağlantı Aracı"></div>');
+    var elementWrap=$('<div title="'+j__("Sayfa Bağlantı Aracı")+'"></div>');
     elementWrap.appendTo( page_div_selector );
     //console.log(component);
     element
@@ -616,7 +616,7 @@ var textComponentBuilder = function( component ) {
   var latexComponentBuilder = function( component ) {
 
     var element  = $('<div class="latex-controllers" style="width:100%; height:100%;"> </div>');
-    var elementWrap=$('<div title="Latex Aracı"></div>');
+    var elementWrap=$('<div title="'+j__("Latex Aracı")+'"></div>');
     elementWrap.appendTo( page_div_selector );
 
     element
@@ -656,7 +656,7 @@ var textComponentBuilder = function( component ) {
     //var element = $('<img></img>');
 
     var element  = $('<img>');
-    var elementWrap=$('<div class="popup-controllers" title="Resim Aracı"></div>');
+    var elementWrap=$('<div class="popup-controllers" title="'+j__("Resim Aracı")+'"></div>');
     elementWrap.appendTo( page_div_selector );
     ////console.log(component);
     element
@@ -715,7 +715,7 @@ var textComponentBuilder = function( component ) {
     //var element = $('<img></img>');
 
     var element  = $('<div class="popup-controllers"> </div>');
-    var elementWrap=$('<div title="Etiketleme Aracı"></div>');
+    var elementWrap=$('<div title="'+j__("Etiketleme Aracı")+'"></div>');
     elementWrap.appendTo( page_div_selector );
     ////console.log(component);
     element
@@ -744,7 +744,7 @@ var textComponentBuilder = function( component ) {
   var videoComponentBuilder = function ( component ) {
     
     var element  = $('<div class="video-controllers" style="width:100%; height:100%;"> </div>');
-    var elementWrap=$('<div title="Video Aracı"></div>');
+    var elementWrap=$('<div title="'+j__("Video Aracı")+'"></div>');
     elementWrap.appendTo( page_div_selector );
     ////console.log(component);
     element
@@ -777,7 +777,7 @@ var textComponentBuilder = function( component ) {
 
   var soundComponentBuilder = function ( component ) {
     var element  = $('<div class="sound-controllers"> </div>');
-    var elementWrap=$('<div title="Ses Aracı"></div>');
+    var elementWrap=$('<div title="'+j__("Ses Aracı")+'"></div>');
     elementWrap.appendTo( page_div_selector );
 
     element
@@ -807,7 +807,7 @@ var textComponentBuilder = function( component ) {
     
 
     var element  = $('<div class="some-gallery" style="width:100%;height:100%;"> </div>');
-    var elementWrap=$('<div title="Galeri Aracı"></div>');
+    var elementWrap=$('<div title="'+j__("Galeri Aracı")+'"></div>');
 
     elementWrap.appendTo( page_div_selector );
 
@@ -838,7 +838,7 @@ var textComponentBuilder = function( component ) {
     
 
     var element  = $('<div id="slider1_container" style="position: relative; top: 0px; left: 0px; width: 800px; height: 456px; background: #24262e; overflow: hidden;">');
-    var elementWrap=$('<div title="Sürgü Aracı"></div>');
+    var elementWrap=$('<div title="'+j__("Sürgü Aracı")+'"></div>');
 
     elementWrap.appendTo( page_div_selector );
 
@@ -869,7 +869,7 @@ var textComponentBuilder = function( component ) {
     
 
     var element  = $('<div id="thumb_container" style="position: relative; top: 0px; left: 0px; min-width: '+component.data.somegallery.css.width+'px; min-height: '+component.data.somegallery.css.height+'px; background: #24262e; overflow: hidden;">');
-    var elementWrap=$('<div title="Öngörüntü Slider Aracı"></div>');
+    var elementWrap=$('<div title="'+j__("Öngörüntü Slider Aracı")+'"></div>');
 
     elementWrap.appendTo( page_div_selector );
 
@@ -899,7 +899,7 @@ var textComponentBuilder = function( component ) {
   var quizComponentBuilder = function ( component ) {
 
     var element  = $('<div></div>');
-    var elementWrap=$('<div title="Soru Aracı"></div>');
+    var elementWrap=$('<div title="'+j__("Soru Aracı")+'"></div>');
     elementWrap.appendTo( page_div_selector );
 
     element
@@ -927,7 +927,7 @@ var textComponentBuilder = function( component ) {
   var mquizComponentBuilder = function ( component ) {
 
     var element  = $('<div></div>');
-    var elementWrap=$('<div title="Soru Aracı"></div>');
+    var elementWrap=$('<div title="'+j__("Soru Aracı")+'"></div>');
     elementWrap.appendTo( page_div_selector );
 
     element

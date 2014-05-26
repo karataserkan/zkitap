@@ -233,6 +233,7 @@
 			 $('#bookCreateWizard').bootstrapWizard({'tabClass': 'nav nav-pills'});
 
             $('#uniform-book_type_1 span').on('click', function() {
+                $($('#uniform-book_type_1 span').children()[0]).find('input').attr('checked','checked');
 				$('#bookCreateWizard').bootstrapWizard('remove', 2, false);
                 $('.pdf_select').show();
 				//$('#bookCreateWizard').bootstrapWizard('remove', 3, false);
@@ -241,6 +242,7 @@
                 $('#bookCreateWizard').bootstrapWizard('show',1);
             });
             $('#uniform-book_type_0 span').on('click', function() {
+                $($('#uniform-book_type_0 span').children()[0]).find('input').attr('checked','checked');
                 $('.epub_select').show();
                 $('#bookCreateWizard').bootstrapWizard('remove', 4, true);
                 $('#bookCreateWizard').bootstrapWizard('display', 3);

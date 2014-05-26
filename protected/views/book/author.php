@@ -720,6 +720,7 @@ $current_user=User::model()->findByPk(Yii::app()->user->id);
 			<!--	<a href="#" class="bck-dark-blue white btn btn-default" id="pop-align"><i class="icon-align-center size-20"></i></a> -->
 
 				<a href="#" class="optbtn" id="pop-arrange" ><i style="vertical-align:bottom; color:#2C6185;" class="icon-send-backward size-15" title="Sırasını Değiştir"></i></a>
+				<input type="text" id="rotate_val" class="tool text radius" rel='rotate' rel='color' value="0" style="width:50px;" title="Nesne Dönme Derecesi">
 
 			<!--	<a href="#" class="btn btn-info">Grupla</a>    -->
 			</div>

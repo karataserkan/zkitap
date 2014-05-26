@@ -14,6 +14,10 @@
 		<div class="col-sm-12">
 			<div class="page-header">
 				<h3 class="content-title pull-left"><?php _e('Hesabım') ?></h3>
+                <a class="btn pull-right btn-primary" id='addNewBookBtn' href="/organisations/selectPlan/<?php echo $id?>">
+                    <i class="fa fa-plus-circle"></i>
+                    <span><?php _e('Bakiye Ekle') ?></span>
+                </a>
 			</div>
 		</div>
 	</div>

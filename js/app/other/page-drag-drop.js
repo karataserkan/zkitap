@@ -20,9 +20,9 @@ $( document ).ready(function () {
         {
             //console.log(e.which);
             //console.log(e);
-            console.log(count);
+            //console.log(count);
             var moved = count * 3;
-            console.log(moved);
+            //console.log(moved);
             //return;
             if(e.which == 46){
               for(var i=1; i < keydown_component.length; i++){
@@ -441,7 +441,7 @@ $( document ).ready(function () {
     function image_popup(event, ui, component){
       $("<div class='popup ui-draggable' id='pop-image-popup' style='display: block; top:" + (ui.offset.top-$(event.target).offset().top ) + "px; left: " + ( ui.offset.left-$(event.target).offset().left ) + "px;'> \
         <div class='popup-header'> \
-        Görsel Ekle \
+        "+j__("Görsel Ekle")+" \
         <div class='popup-close' id='image-add-dummy-close-button'>x</div> \
         </div> \
           <div class='gallery-inner-holder'> \
@@ -449,8 +449,8 @@ $( document ).ready(function () {
             <div class='add-image-drag-area' id='dummy-dropzone'> </div> \
           </div> \
           <div>\
-            <input type='text' name='width' id='width' placeholder='Genişlik' value=''>\
-            <input type='text' name='height' id='height' placeholder='Yükseklik' value=''>\
+            <input type='text' name='width' id='width' placeholder='"+j__("Genişlik")+"' value=''>\
+            <input type='text' name='height' id='height' placeholder='"+j__("Yükseklik")+"' value=''>\
           </div> \
         </div>").appendTo('body').draggable();
 

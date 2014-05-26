@@ -1214,7 +1214,7 @@ console.log(top);
 
   $("<div class='popup ui-draggable' id='pop-image-popup' style='display: block; top:" +top+ "; left: " + left + ";'> \
     <div class='popup-header'> \
-    Tablo Ekle \
+    "+j__("Tablo Ekle")+" \
     <i id='table-add-dummy-close-button' class='icon-close size-10 popup-close-button'></i> \
     </div> \
       <div class='gallery-inner-holder' id='componentTableSelector'> \

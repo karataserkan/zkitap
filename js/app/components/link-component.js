@@ -12,14 +12,19 @@ $(document).ready(function(){
 
       var that = this;
 
-      
+      console.log(this.options.component.data);      
 
       var componentlinkid='link'+this.options.component.id;
 
-
-      if( this.options.marker ) {
-        var newimage=$('<img id="img_'+componentlinkid+'" src="' + this.options.marker +  '" />');
-        newimage.appendTo(this.element);
+      if(this.options.component.data.link_area == "N"){
+        if( this.options.marker ) {
+          var newimage=$('<img id="img_'+componentlinkid+'" src="' + this.options.marker +  '" />');
+          newimage.appendTo(this.element);
+        }
+      }
+      else{
+        var blanklink=$('<div  id="message_'+componentlinkid+'"  style="overflow:hidden; border: solid yellow; width:100%; height:100%;"></div>');
+        blanklink.appendTo(this.element);
       }
       
 
@@ -80,6 +85,7 @@ var createLinkComponent = function ( event, ui, oldcomponent ) {
       var top = (ui.offset.top-$(event.target).offset().top ) + 'px';
       var left = ( ui.offset.left-$(event.target).offset().left ) + 'px';
       var link_value = 'http://linden-tech.com';
+      var control_type = "N";
     }
     else{
       top = oldcomponent.data.self.css.top;
@@ -93,6 +99,15 @@ var createLinkComponent = function ( event, ui, oldcomponent ) {
     var min_top = $("#current_page").offset().top;
     var max_left = $("#current_page").width() + min_left;
     var max_top = $("#current_page").height() + min_top;
+
+    var control_y_check = '';
+    var control_y_check_active = '';
+    var control_n_check = '';
+    var control_n_check_active = '';
+
+    if(control_type == 'Y') { control_y_check = "checked='checked'"; control_y_check_active = 'active';}
+    else { control_n_check = "checked='checked'"; control_n_check_active = 'active'; }
+ 
     
     var top=(event.pageY - 25);
     var left=(event.pageX-150);
@@ -116,15 +131,25 @@ console.log(top);
 
       $("<div class='popup ui-draggable' id='pop-image-link' style='display: block; top:" + top + "; left: " + left + ";'> \
           <div class='popup-header'> \
-          <i class='icon-m-link'></i> &nbsp;Bağlantı Ekle \
+          <i class='icon-m-link'></i> &nbsp;"+j__("Bağlantı Ekle")+" \
           <i id='link-add-dummy-close-button' class='icon-close size-10 popup-close-button'></i> \
           </div> \
          \
         <!-- popup content--> \
           <div class='gallery-inner-holder'> \
             <form id='video-url'> \
-            <input id='link-url-text' class='input-textbox' type='url' placeholder='URL Adresini Giriniz'   value=" + link_value + "> \
-            <a href='#' id='pop-image-OK' class='btn btn-info' id='add-image' >Ekle</a> \
+            <input id='link-url-text' class='input-textbox' type='url' placeholder='"+j__("URL Adresini Giriniz")+"'   value=" + link_value + "> \
+            <div class='type1' style='padding: 4px; display: inline-block;'>"+j__("Bağlantı belli br alanda mı etkili olsun?")+"\
+                  <div class='btn-group' data-toggle='buttons'><br>\
+                    <label class='btn btn-primary " + control_y_check_active + "'>\
+                      <input type='radio' name='link_area' id='repeat0' " + control_y_check + " value='Y'> "+j__("Evet")+"\
+                    </label>\
+                    <label class='btn btn-primary " + control_n_check_active + "'>\
+                      <input type='radio' name='link_area' id='repeat1' " + control_n_check + " value='N'> "+j__("Hayır")+"\
+                    </label>\
+                  </div>\
+              </div><br><br>\
+            <a href='#' id='pop-image-OK' class='btn btn-info' id='add-image' >"+j__("Ekle")+"</a> \
             </form> \
           </div>     \
            \
@@ -143,9 +168,10 @@ console.log(top);
 
     $('#pop-image-OK').click(function (){   
     var targetURL = $("#link-url-text").val();
+    var link_area = $('input[name=link_area]:checked').val();
 
       if (!IsURL (targetURL) ){
-        alert ("Lütfen gecerli bir URL adresi giriniz.");
+        alert (j__("Lütfen gecerli bir URL adresi giriniz."));
         return;
 
       }
@@ -177,6 +203,7 @@ console.log(top);
               } 
             },
             'lock':'',
+            'link_area': link_area,
             'self': {
               'css': {
                 'position':'absolute',

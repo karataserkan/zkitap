@@ -51,6 +51,8 @@
 		<link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/ui/js/datepicker/themes/default.date.min.css" />
 		<link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/ui/js/datepicker/themes/default.time.min.css" />
 
+	<link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/intlTelInput.css" />
+		
 			
 		<!-- JAVASCRIPTS -->
 		<!-- Placed at the end of the document so the pages load faster -->
@@ -155,6 +157,8 @@
 
   		<!-- Trip.js Tutorial-->
 		<script type="text/javascript" src="<?php echo Yii::app()->request->baseUrl; ?>/js/lib/trip.min.js"></script>
+		
+		
 
 
 		<link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/js/lib/trip.css" />
@@ -260,7 +264,10 @@
     <script src="<?php echo Yii::app()->request->baseUrl; ?>/js/lib/dashboard/flot/jquery.flot.stack.min.js"></script>
     <script src="<?php echo Yii::app()->request->baseUrl; ?>/js/lib/dashboard/flot/jquery.flot.crosshair.min.js"></script>
     <script src="<?php echo Yii::app()->request->baseUrl; ?>/js/lib/dashboard/script.js"></script>
-
+	<!-- international tel numbers with flags -->
+	<script type="text/javascript" src="<?php echo Yii::app()->request->baseUrl; ?>/js/lib/intlTelInput.js"></script>
+	
+	
 		<script type="text/javascript">
 
 		$(document).ready(function(){

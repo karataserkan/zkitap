@@ -239,6 +239,20 @@ $this->breadcrumbs=array(
 		jQuery(document).ready(function() {		
 			App.setPage("login_bg");  //Set current page
 			App.init(); //Initialise plugins and elements
+
+			var url=window.location.href;
+			var isRequestUrl = url.search('#');
+			if (isRequestUrl) {
+				var splUrl=url.split('#');
+				console.log(splUrl[1]);
+				var page=splUrl[1];
+				if (page=='signup') {
+					swapScreen('register_bg');
+				}else if(page=='forget')
+				{
+					swapScreen('forgot_bg');
+				};
+			};
 		});
 	</script>
 	<script type="text/javascript">
@@ -248,23 +262,6 @@ $this->breadcrumbs=array(
 		}
 	</script>
 	<!-- /JAVASCRIPTS -->
-
-
-
-	<script>
-		jQuery(document).ready(function() {		
-			App.setPage("login_bg");  //Set current page
-			App.init(); //Initialise plugins and elements
-		});
-	</script>
-	<script type="text/javascript">
-		function swapScreen(id) {
-			jQuery('.visible').removeClass('visible animated fadeInUp');
-			jQuery('#'+id).addClass('visible animated fadeInUp');
-		}
-	</script>
-	<!-- /JAVASCRIPTS -->
-
 <script>
 		// var preview = $("#upload-preview");
 

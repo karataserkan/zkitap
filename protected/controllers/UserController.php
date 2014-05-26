@@ -32,7 +32,7 @@ class UserController extends Controller
 				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
-				'actions'=>array('create','update','profile','updatePhoto','updateProfile','sendConfirmationId','checkConfirmationId'),
+				'actions'=>array('create','update','profile','updatePhoto','updateProfile','sendConfirmationId','checkConfirmationId','messageStatusCallback'),
 				'users'=>array('@'),
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
@@ -52,20 +52,47 @@ class UserController extends Controller
 			$userConfirmation->meta_value=functions::get_random_string(6,'0123456789');
 			$userConfirmation->save();
 
+			$tel=str_replace(' ', '', $_POST['tel']);
+
 			$user=User::model()->findByPk(Yii::app()->user->id);
-			$user->tel=$_POST['tel'];
+			$user->tel=$tel;
 			$user->save();
 
-			//if confiemation ID sent
-			echo "0";
+
+			spl_autoload_unregister(array('YiiBase','autoload'));
+			require('Services/Twilio.php');
+			spl_autoload_register(array('YiiBase','autoload'));
+			$account_sid = Yii::app()->params['twilioSid']; 
+			$auth_token = Yii::app()->params['twilioToken'];
+			
+			$client = new Services_Twilio($account_sid, $auth_token); 
+			$message = $client->account->messages->sendMessage(
+			  Yii::app()->params['twilioFrom'],
+			  $tel,
+			  "OKUTUS aktivasyon kodunuz: ".$userConfirmation->meta_value
+			);
+			if ($message->sid) {
+				echo "0";
+			}
+			else
+			{
+				echo "1";
+			}
+			error_log($message->sid);
 
 			//else
-			//echo 1
 		}
 		else
 			echo "1";
 
 	}
+
+	public function actionMessageStatusCallback()
+	{
+		error_log(json_encode($_POST));
+		error_log($_POST);
+	}
+
 
 	public function actionCheckConfirmationId()
 	{
@@ -109,24 +136,10 @@ class UserController extends Controller
 	public function actionInvitation($key=null)
 	{
 		$invitation = OrganisationInvitation::model()->findByPk($key);
+		$user=$this->loadModel($invitation->user_id);
 
 		if ($invitation) {
-			$user=$this->loadModel($invitation->user_id);
-			$organisation=Organisations::model()->findByPk($invitation->organisation_id);
-			$organisationUser= new OrganisationUsers;
-			$organisationUser->user_id=$user->id;
-			$organisationUser->organisation_id=$organisation->organisation_id;
-			$organisationUser->role="user";
-			if($organisationUser->save())
-			{
-				$msg="USER:INVITATION:0:". json_encode(array('userId'=>$user->id,'organisationId'=>$organisation->organisation_id,'role'=>'user', 'message'=>'invitation accepted'));
-				Yii::log($msg,'info');
-			}
-			else
-			{
-				$msg="USER:INVITATION:1:". json_encode(array('userId'=>$user->id,'organisationId'=>$organisation->organisation_id,'role'=>'user', 'message'=>'invitation accept error'));
-				Yii::log($msg,'info');
-			}
+			
 
 			//$invitation->delete();
 
@@ -159,7 +172,7 @@ class UserController extends Controller
 								$model->validate();
 								$model->login();
 								$invitation->delete();
-								$this->redirect(array('/site/index?id='.$workspace->workspace_id));
+								$this->redirect('/site/index');
 							}
 						}
 				}
@@ -167,7 +180,25 @@ class UserController extends Controller
 
 
 				//$this->redirect( array('site/login' ) );
+			}else
+			{
+				$organisation=Organisations::model()->findByPk($invitation->organisation_id);
+				$organisationUser= new OrganisationUsers;
+				$organisationUser->user_id=$user->id;
+				$organisationUser->organisation_id=$organisation->organisation_id;
+				$organisationUser->role="user";
+				if($organisationUser->save())
+				{
+					$msg="USER:INVITATION:0:". json_encode(array('userId'=>$user->id,'organisationId'=>$organisation->organisation_id,'role'=>'user', 'message'=>'invitation accepted'));
+					Yii::log($msg,'info');
+				}
+				else
+				{
+					$msg="USER:INVITATION:1:". json_encode(array('userId'=>$user->id,'organisationId'=>$organisation->organisation_id,'role'=>'user', 'message'=>'invitation accept error'));
+					Yii::log($msg,'info');
+				}
 			}
+
 			$this->render('invitation',array(
 				'model'=>$user,
 				'newUser'=>$newUser

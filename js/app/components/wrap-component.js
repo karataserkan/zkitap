@@ -146,7 +146,7 @@ var createWrapComponent = function ( event, ui, oldcomponent ) {
     var pop_popup = $("<div class='popup ui-draggable' id='pop-popup' style='display: block; top:" + top + "; left: " + left + "; width:700px;'> \
       </div>");
     pop_popup.appendTo('body').draggable({cancel:'.drag-cancel'}).resizable();
-    var poup_header = $("<div class='popup-header'><i class='icon-m-link'></i> &nbsp;Metin Sarma Ekle </div> ");
+    var poup_header = $("<div class='popup-header'><i class='icon-m-link'></i> &nbsp;"+j__("Metin Sarma Ekle")+" </div> ");
     var close_button = $("<i id='popup-add-dummy-close-button' class='icon-close size-10 popup-close-button'></i> ");
     var drag_file = $("<div class='add-image-drag-area' id='dummy-dropzone'> </div> ");
     var galery_inner = $("<div class='gallery-inner-holder' style='width: 700px; height: " + height + "px;'> \
@@ -154,17 +154,17 @@ var createWrapComponent = function ( event, ui, oldcomponent ) {
         <div class='type' style='padding: 4px; display: inline-block;'>\
                 <div class='btn-group'>\
                   <label class='btn btn-primary " + wrap_right_active + "'>\
-                    <input type='radio' name='wrap_align' id='repeat0' " + wrap_right + " value='right'> Sağ\
+                    <input type='radio' name='wrap_align' id='repeat0' " + wrap_right + " value='right'> "+j__("Sağ")+"\
                   </label>\
                   <label class='btn btn-primary " + wrap_left_active + "'>\
-                    <input type='radio' name='wrap_align' id='repeat1' " + wrap_left + " value='left'> Sol\
+                    <input type='radio' name='wrap_align' id='repeat1' " + wrap_left + " value='left'> "+j__("Sol")+"\
                   </label>\
-                </div><br><br><input type='text' name='cutoff' id='cutoff' value='"+old_cutoff+"' placeholder='Çözünürlik Toleransı giriniz....'><br><br>\
+                </div><br><br><input type='text' name='cutoff' id='cutoff' value='"+old_cutoff+"' placeholder='"+j__("Çözünürlik Toleransı giriniz")+"....'><br><br>\
             </div>\
       </div> ");
     var popup_wrapper = $("<div class ='popup_wrapper drag-cancel' style='border: 1px #ccc solid; ' ></div> <br>");
     var popup_detail = $("<div  id='popup-explanation' contenteditable='true' class='drag-cancel' style='min-height:300px;'>" + popup_value + "</div>");
-    var add_button = $("<a href='#' id='pop-image-OK' class='btn btn-info' style='padding: 5px 30px;'>Ekle</a> ");
+    var add_button = $("<a href='#' id='pop-image-OK' class='btn btn-info' style='padding: 5px 30px;'>"+j__("Ekle")+"</a> ");
     poup_header.appendTo(pop_popup);
     close_button.appendTo(poup_header);
     galery_inner.appendTo(pop_popup);

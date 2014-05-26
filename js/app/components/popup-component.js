@@ -118,7 +118,7 @@ console.log(top);
     var pop_popup = $("<div class='popup ui-draggable' id='pop-popup' style='display: block; top:" + top + "; left: " + left + ";'> \
       </div>");
     pop_popup.appendTo('body').draggable({cancel:'.drag-cancel'}).resizable();
-    var poup_header = $("<div class='popup-header'><i class='icon-m-link'></i> &nbsp;Açılır Pencere Ekle </div> ");
+    var poup_header = $("<div class='popup-header'><i class='icon-m-link'></i> &nbsp;"+j__("Açılır Pencere Ekle")+" </div> ");
     var close_button = $("<i id='popup-add-dummy-close-button' class='icon-close size-10 popup-close-button'></i> ");
     var drag_file = $("<div class='add-image-drag-area' id='dummy-dropzone' > </div> ");
     var galery_inner = $("<div class='gallery-inner-holder' style='width: 100%; height: 100%;'> \
@@ -126,7 +126,7 @@ console.log(top);
       </div> ");
     var popup_wrapper = $("<div class ='popup_wrapper drag-cancel' style='border: 1px #ccc solid; ' ></div> <br>");
     var popup_detail = $("<textarea  id='popup-explanation' class='drag-cancel' style='width:100%; height:100%;'>" + popup_value + "</textarea>");
-    var add_button = $("<a href='#' id='pop-image-OK' class='btn btn-info' style='padding: 5px 30px;'>Ekle</a> ");
+    var add_button = $("<a href='#' id='pop-image-OK' class='btn btn-info' style='padding: 5px 30px;'>"+j__("Ekle")+"</a> ");
     poup_header.appendTo(pop_popup);
     close_button.appendTo(poup_header);
     galery_inner.appendTo(pop_popup);

@@ -100,7 +100,7 @@ var createHtmlComponent = function ( event, ui, oldcomponent ) {
     var html_popup = $("<div class='popup ui-draggable' id='pop-popup' style='display: block; top:"+top+"px; left: "+left+"px; width: "+width+"px; height:"+(height-10)+"px; z-index:99999;'> \
       </div>");
     html_popup.appendTo('body').draggable({cancel:'.drag-cancel'});
-    var poup_header = $("<div class='popup-header'><i class='icon-m-link'></i> &nbsp;Html Ekle </div> ");
+    var poup_header = $("<div class='popup-header'><i class='icon-m-link'></i> &nbsp;"+j__("Html Ekle")+" </div> ");
     var close_button = $("<i id='html-add-dummy-close-button' class='icon-close size-10 popup-close-button'></i> ");
     
     var galery_inner = $("<div class='gallery-inner-holder' > \
@@ -111,7 +111,7 @@ var createHtmlComponent = function ( event, ui, oldcomponent ) {
                             <script>\
                               $(".my-code-area").ace({ theme: "twilight", lang: "html" })\
                             </script>');
-    var add_button = $("<a href='#' id='pop-image-OK' class='btn btn-info' style='padding: 5px 30px; margin-left: 480px;'>Ekle</a> ");
+    var add_button = $("<a href='#' id='pop-image-OK' class='btn btn-info' style='padding: 5px 30px; margin-left: 480px;'>"+j__("Ekle")+"</a> ");
     poup_header.appendTo(html_popup);
     close_button.appendTo(poup_header);
     galery_inner.appendTo(html_popup);

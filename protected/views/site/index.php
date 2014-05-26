@@ -13,12 +13,14 @@
 		 		<div class="form-group alert" id="confirmationFeedback">
 						
 		 		</div>
-		 		
 				<div class="form-group" id="confirmationTel">
 					<label class="control-label col-md-3" for="telNumber">Tel: <span class="required">*</span></label>
 					<div class="col-md-6">
-						<input class="form-control" name="telNumber" id="telNumber" type="text">															
+						<input class="form-control" name="telNumber" id="telNumber" type="tel">
 					</div>
+					<!-- <div class="col-md-6">
+						<input class="form-control" name="telNumber" id="telNumber" type="text">															
+					</div> -->
 				</div>	
 				<div class="form-group" id="confirmationCode">
 					<label class="control-label col-md-3" for="confirmId">Aktivasyon Kodu: <span class="required">*</span></label>
@@ -45,6 +47,9 @@
 
 <script type="text/javascript">
 	$(document).ready(function() {
+
+		$("#telNumber").intlTelInput();
+
 		var confirmation="<?php echo $confirmation ?>";
 		console.log(confirmation);
 		var confirmationFeedback=$('#confirmationFeedback');

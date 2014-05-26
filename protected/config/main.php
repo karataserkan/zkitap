@@ -22,19 +22,47 @@ $db_config_list=array(
                         			'username' => 'db_squid_pacific',
                         			'password' => '7GqA3Pqcy38QnfPQ',
                         			'charset' => 'utf8',
-                			)
+                			),
+			"ulgen"=>array(
+                        			'connectionString' => 'mysql:host=datamaster.private.services.lindneo.com;port=3306;dbname=squid_pacific',
+                        			'emulatePrepare' => true,
+                        			'username' => 'db_squid_pacific',
+                        			'password' => '7GqA3Pqcy38QnfPQ',
+                        			'charset' => 'utf8',
+                			),
 );      
 
 $catalogURL=array(
 	"baracuda"=>"http://bigcat.okutus.com/site/import",
-	"lindneo"=>"http://catalog.lindneo.com/site/import"
+	"lindneo"=>"http://catalog.lindneo.com/site/import",
+	"ulgen"=>"http://catalog.lindneo.com/site/import"
 	);
 
 $catalog=array(
 	"baracuda"=>"http://bigcat.okutus.com",
 	"lindneo"=>"http://catalog.lindneo.com",
+	"ulgen"=>"http://catalog.lindneo.com",
 	//"lindneo"=>"http://catalog.lindneo.com/site/import"
 	);
+
+$host_config=array(
+			"ulgen"=>array(
+                				'catalog_host'=>'http://catalog.lindneo.com',
+				                'kerbela_host'=>'http://kerbela.lindneo.com',
+				                'panda_host'=>'http://panda.lindneo.com',
+				                'koala_host'=>'http://koala.lindneo.com',
+								'cloud_host'=>'http://cloud.lindneo.com',
+								'reader_host'=>'http://reader.lindneo.com/ekaratas'
+					),
+			"tigerfish"=>array(
+                                'catalog_host'=>'http://bigcat.okutus.com',
+                                'kerbela_host'=>'http://kerbela.okutus.com',
+                                'panda_host'=>'http://boxoffice.okutus.com',
+                                'koala_host'=>'http://wow.okutus.com',
+								'cloud_host'=>'http://cloud.okutus.com',
+								'reader_host'=>'http://reader.okutus.com'
+				)
+		);
 
 return array(
 	'basePath'=>dirname(__FILE__).DIRECTORY_SEPARATOR.'..',
@@ -50,8 +78,7 @@ return array(
 		'application.controllers.*', 
 		'application.components.*',
 		'application.utilities.*',
-		'application.utilities.epub3.*'
-		
+		'application.utilities.epub3.*'		
 	),
 
 	'modules'=>array(
@@ -80,7 +107,7 @@ return array(
 	    	'basePath'=>'/var/www/squid-pacific/egemen/protected/messages',
 			)	,*/
 		
-		 'messages' => array(
+		/* 'messages' => array(
 		 			'language'=>'en_US',
                     'class' => 'CGettextMessageSource',
                     'basePath'=>'/var/www/squid-pacific/egemen/protected/locale/messages',
@@ -159,6 +186,9 @@ return array(
 		// this is used in contact page
 		'adminEmail'=>'pacific@linden-tech.com',
 		'noreplyEmail'=>'noreply@okutus.com',
+		'twilioSid'=>'AC32ab2abb469b9c87c749dbffe37d5f06',
+		'twilioToken'=>'26d65a599d9f301162f13cf5ca7b696e',
+		'twilioFrom'=>'+18282124403'	,
 
      	'epubtopdf'=>dirname(__FILE__).DIRECTORY_SEPARATOR.'../../'.'bin/epubtopdf/epubtopdf ',
      	'pdftojpg'=>dirname(__FILE__).DIRECTORY_SEPARATOR.'../../'.'bin/pdftojpg/pdftojpg ',
@@ -166,12 +196,20 @@ return array(
      	'htmltopng'=>dirname(__FILE__).DIRECTORY_SEPARATOR.'../../'.'bin/htmltopng/htmltopng ',
      	'lindenstamp'=>dirname(__FILE__).DIRECTORY_SEPARATOR.'../../'.'bin/lindenstamp/lindenstamp ',
      	'timestamps'=>dirname(__FILE__).DIRECTORY_SEPARATOR.'../../'.'timestamps/',
+     	'storage'=>dirname(__FILE__).DIRECTORY_SEPARATOR.'../../'.'uploads/files/',
      	'availableLanguages' => array(
      		'tr_TR' => 'Türkçe',
      		'en_US' => 'English'
      		),
      	'catalogExportURL' => $catalogURL[gethostname()],
      	'catalog' => $catalog[gethostname()],
+     	'catalog_host'=>$host_config[gethostname()]['catalog_host'],
+        'kerbela_host'=>$host_config[gethostname()]['kerbela_host'],
+        'panda_host'=>$host_config[gethostname()]['panda_host'],
+        'koala_host'=>$host_config[gethostname()]['koala_host'],
+        'cloud_host'=>$host_config[gethostname()]['cloud_host'],
+        'reader_host'=>$host_config[gethostname()]['reader_host'],
+
 	)
 
 );

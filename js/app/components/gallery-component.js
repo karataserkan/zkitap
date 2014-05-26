@@ -87,15 +87,15 @@ console.log(top);
 
     $("<div class='popup ui-draggable' id='pop-image-popup' style='display: block; top:" + top + "; left: " + left + ";'> \
     <div class='popup-header'> \
-    <i class='icon-m-galery'></i> &nbsp;Galeri Ekle \
+    <i class='icon-m-galery'></i> &nbsp;"+j__("Galeri Ekle")+" \
     <i id='galery-add-dummy-close-button' class='icon-close size-10 popup-close-button'></i> \
     </div> \
       <div class='gallery-inner-holder'> \
         <div style='clear:both'></div> \
         <div class='tabbable'>\
           <ul class='nav nav-tabs' id='myTab'>\
-            <li><a href='#galery_drag' data-toggle='tab'>Resim Sürükle</a></li>\
-            <li><a href='#galery_upload' data-toggle='tab'>Resim Yükle</a></li>\
+            <li><a href='#galery_drag' data-toggle='tab'>"+j__("Resim Sürükle")+"</a></li>\
+            <li><a href='#galery_upload' data-toggle='tab'>"+j__("Resim Yükle")+"</a></li>\
           </ul>\
         </div>\
         <div class='tab-content'>\
@@ -110,7 +110,7 @@ console.log(top);
       <ul id='galery-popup-images' style='width: 250px;'> \
       </ul> \
      <div style='clear:both' > </div> \
-     <a id='pop-image-OK' class='btn btn-info' >Tamam</a>\
+     <a id='pop-image-OK' class='btn btn-info' >"+j__("Tamam")+"</a>\
     </div> ").appendTo('body').draggable();
     $('#galery-add-dummy-close-button').click(function(){
 
@@ -119,6 +119,12 @@ console.log(top);
       if ( $('#pop-image-popup').length ){
         $('#pop-image-popup').remove();  
       }
+
+    });
+
+    $('.galey-image-delete').click(function(){
+
+      console.log(this);
 
     });
 
