@@ -797,9 +797,18 @@ class OrganisationsController extends Controller
 				$users[]= User::model()->findByPk($organizationUser->user_id);
 		}
 
+		$invitated=OrganisationInvitation::model()->findAll('organisation_id=:organisation_id',array('organisation_id'=>$organisationId));
+		
+		$invitatedUsers=array();
+		foreach ($invitated as $key => $user) {
+			$invitatedUsers[]=User::model()->findByPk($user->user_id);
+		}
+
 		$this->render('users', array(
 			'users'=>$users,
-			'organisationId'=>$organisationId));
+			'organisationId'=>$organisationId,
+			'invitated'=>$invitatedUsers
+			));
 	}
 
 	/**
@@ -808,30 +817,35 @@ class OrganisationsController extends Controller
 	 * @param  ID $organisationId 
 	 * @return redirect previous page
 	 */
-	public function actionDeleteOrganisationUser($userId,$organisationId)
+	public function actionDeleteOrganisationUser()
 	{
-		$organisationWorkspaces= OrganisationWorkspaces::model()->findAll('organisation_id=:organisation_id', 
-	    				array(':organisation_id' => $organisationId) );
-		foreach ($organisationWorkspaces as $key => $workspace) {
-			$workspaceUser = WorkspacesUsers::model()->findByPk(array('userid'=>$userId,'workspace_id'=>$workspace->workspace_id));
-			if ($workspaceUser) {
-				$workspaceUser->delete();
+		if (isset($_POST['userId']) AND isset($_POST['organisationId'])) {
+			$userId=$_POST['userId'];
+			$organisationId=$_POST['organisationId'];
+			
+			$organisationWorkspaces= OrganisationWorkspaces::model()->findAll('organisation_id=:organisation_id', 
+		    				array(':organisation_id' => $organisationId) );
+			foreach ($organisationWorkspaces as $key => $workspace) {
+				$workspaceUser = WorkspacesUsers::model()->findByPk(array('userid'=>$userId,'workspace_id'=>$workspace->workspace_id));
+				if ($workspaceUser) {
+					$workspaceUser->delete();
+				}
+			}
+
+			$user = OrganisationUsers::model()->findByPk(array('user_id'=>$userId,'organisation_id'=>$organisationId));
+			if($user->delete())
+			{
+				$msg="ORGANISATIONS:DELETE_ORGANISATION_USER:0:". json_encode(array(array('user'=>Yii::app()->user->id),array('userId'=>$userId,'organisationId'=>$organizationId)));
+				Yii::log($msg,'info');
+			}
+			else
+			{
+				$msg="ORGANISATIONS:DELETE_ORGANISATION_USER:1:". json_encode(array(array('user'=>Yii::app()->user->id),array('userId'=>$userId,'organisationId'=>$organizationId)));
+				Yii::log($msg,'info');
 			}
 		}
 
-		$user = OrganisationUsers::model()->findByPk(array('user_id'=>$userId,'organisation_id'=>$organisationId));
-		if($user->delete())
-		{
-			$msg="ORGANISATIONS:DELETE_ORGANISATION_USER:0:". json_encode(array(array('user'=>Yii::app()->user->id),array('userId'=>$userId,'organisationId'=>$organizationId)));
-			Yii::log($msg,'info');
-		}
-		else
-		{
-			$msg="ORGANISATIONS:DELETE_ORGANISATION_USER:1:". json_encode(array(array('user'=>Yii::app()->user->id),array('userId'=>$userId,'organisationId'=>$organizationId)));
-			Yii::log($msg,'info');
-		}
-
-		$this->redirect( array('organisations/users?organizationId='.$organisationId ) );
+		//$this->redirect( array('organisations/users?organizationId='.$organisationId ) );
 	}
 
 	/**
