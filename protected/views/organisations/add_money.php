@@ -1,6 +1,8 @@
 <?php
 /* @var $this OrganisationsController */
 /* @var $dataProvider CActiveDataProvider */
+
+
  ?>
 <style type="text/css">
     
@@ -10,7 +12,6 @@
 	jQuery(document).ready(function() {		
 		App.setPage("gallery");  //Set current page
 		App.init(); //Initialise plugins and elements
-	});
 $('#card_preview').css({'background-image': 'url(<?php echo Yii::app()->request->baseUrl; ?>/css/ui/img/card.jpg)', 'background-repeat': 'no-repeat'});
             $('#CreditCardBack').hide();
             $('.UserName').css('background-color','');
@@ -75,34 +76,28 @@ $('#card_preview').css({'background-image': 'url(<?php echo Yii::app()->request-
                 year = $(this).val();
             });
 
-            $('#buy_book').click(function() {
-                console.log($('#name').val());
-                console.log($('#cardnumber').val());
-                console.log($('#cvc').val());
+            $('#add_balance').click(function() {
+                var name=$('#name').val();
+                var number=$('#cardnumber').val();
+                
+                var ccv=($('#cvc').val();
+                
                 console.log(month);
                 console.log(year);
 
-                kerbela.setRequestedHttpService('panda');
-                if (kerbela.getTicket()==null) {
-                    window.location.href="<?php echo Yii::app()->request->baseUrl; ?>";
-                };
-                console.log(kerbela.getRequestedHttpService());
-                var auth_panda = kerbela.getAuthTicket();
-                var HTTP_service_ticket_panda = kerbela.getTicket().HTTP_service_ticket;
                 $.ajax({
                     type: "POST",
-                    url: "<?php echo Yii::app()->params['panda_host']; ?>/api/transaction",
-                    data: { type_name:'book', type_id: '<?php echo $id; ?>', auth: auth_panda, http_service_ticket: HTTP_service_ticket_panda, type:"web"}
+                    url: "/organisations/checkoutPlan",
+                    data: {params:"['tutar':'<?php echo $tutar; ?>', 'plan_id': '<?php echo $plan_id; ?>', 'name': "+name+", 'number': "+number+", 'month':"+month+", 'year':"+year+",'ccv':"+ccv+"]"}
                 })
                   .done(function( result ) {
                     console.log(result);
                     if(result){
-                        $('#buybook').modal('hide');
-                        $('#bbook').hide();
-                        $('#rbook').show();
+                        
                     }
                 });
             });
+  });
 
 //if( !$('#sidebar').hasClass('mini-menu')) $('#sidebar').addClass('mini-menu');
     </script>
@@ -118,21 +113,9 @@ $('#card_preview').css({'background-image': 'url(<?php echo Yii::app()->request-
 	</div>
 	<!-- /PAGE HEADER -->
 	<div class="row">
- 
-<button class="btn btn-primary pull-right book_info_add_to_library_button brand_color_for_buttons"  id="bbook" data-toggle="modal" data-target="#buybook">Satın Al</button>      
 
-	</div>
-</div>
-<!-- KİTAP SATIN ALMA MODAL -->
-<div class="modal fade" id="buybook" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" >
-  <div class="modal-dialog" style="width:800px; height:500px;">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-        <h4 class="modal-title" id="myModalLabel">Kitap Satın Al</h4>
-      </div>
-      <div class="modal-body">
-        <div style="width:760px; float:left;">
+
+<div style="width:60px; float:left;">
         <!-- Kitap Bilgileri -->
               
             <div id="bookname" style="float:left; font-size:18px;"></div>
@@ -146,6 +129,7 @@ $('#card_preview').css({'background-image': 'url(<?php echo Yii::app()->request-
               <!-- Kart Bilgileri -->
               
              
+                    <input type="text" class="form-control" id="tutar" value="Çekilecek tutar: <?php echo $tutar; ?>$" disabled><br>
                     <input type="text" class="form-control" id="name" placeholder="Kart Üzerindeki Ad Soyad"><br>
                     <input type="text" class="form-control" id="cardnumber" placeholder="Kart Numarası"><br>
                 <div id="cardmonth">
@@ -187,7 +171,16 @@ $('#card_preview').css({'background-image': 'url(<?php echo Yii::app()->request-
                         <option value="30">2030</option>
                     </select>
                 </div>
-                    <input type="text" class="form-control" id="cvc" placeholder="CVC" style="float:right; width:200px;"><br>
+                    <input type="text" class="form-control" id="cvc" placeholder="CVC" style="float:right; width:200px;">
+                    <br>
+                    <br>
+                    <br>
+                
+                <div class="row">
+                </div>
+                <div class="row">
+                  <button type="button" class="btn btn-success" id="add_balance">Satın Al</button>
+                </div>
             
               <!-- /Kart Bilgileri -->
             </div>
@@ -212,12 +205,7 @@ $('#card_preview').css({'background-image': 'url(<?php echo Yii::app()->request-
                 </div>
             </div><br><br>
             </div>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-danger" data-dismiss="modal">Kapat</button>
-        <button type="button" class="btn btn-success" id="buy_book">Satın Al</button>
-      </div>
-    </div>
-  </div>
+ 
+
+	</div>
 </div>
-<!-- /KİTAP SATIN ALMA MODAL -->

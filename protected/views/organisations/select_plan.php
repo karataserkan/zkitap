@@ -38,7 +38,7 @@
 													
 												</ul>
 												<div class="footer">
-													<a href="#" class="btn btn-info"><?php _e('Satın Al') ?></a>
+													<a href="/organisations/addBalance?plan=1" class="btn btn-info"><?php _e('Satın Al') ?></a>
 												</div>
 											</li>
 
@@ -66,7 +66,7 @@
 													
 												</ul>
 												<div class="footer">
-													<a href="#" class="btn btn-info"><?php _e('Satın Al') ?></a>
+													<a href="/organisations/addBalance?plan=2" class="btn btn-info"><?php _e('Satın Al') ?></a>
 												</div>
 											</li>
 
@@ -92,7 +92,7 @@
 													
 												</ul>
 												<div class="footer">
-													<a href="#" class="btn btn-info"><?php _e('Satın Al') ?></a>
+													<a href="/organisations/addBalance?plan=3" class="btn btn-info"><?php _e('Satın Al') ?></a>
 												</div>
 											</li>
 
@@ -120,7 +120,7 @@
 													
 												</ul>
 												<div class="footer">
-													<a href="#" class="btn btn-info"><?php _e('Satın Al') ?></a>
+													<a href="/organisations/addBalance?plan=4" class="btn btn-info"><?php _e('Satın Al') ?></a>
 												</div>
 											</li>
 										</ul>
