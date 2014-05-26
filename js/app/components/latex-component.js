@@ -248,7 +248,7 @@ console.log(top);
     var html_popup = $("<div class='popup ui-draggable' id='pop-popup' style='display: block; top:" + top + "; left: " + left + "; width:500px; height:400px;'> \
       </div>");
     html_popup.appendTo('body').draggable({cancel:'.drag-cancel'}).resizable();
-    var poup_header = $("<div class='popup-header'><i class='icon-m-link'></i> &nbsp;Latex Ekle </div> ");
+    var poup_header = $("<div class='popup-header'><i class='icon-m-link'></i> &nbsp;"+j__("Latex Ekle")+" </div> ");
     var close_button = $("<i id='html-add-dummy-close-button' class='icon-close size-10 popup-close-button'></i> ");
     
     var galery_inner = $("<div class='gallery-inner-holder' style='width: 100%; height: 75%;'> \
@@ -256,8 +256,8 @@ console.log(top);
       </div> ");
     var latex_temp = $("<div  style='width: 100%; '>\
           <div style='width:49%; float:left;'>\
-            <select class='form-control' id='mathsymbols' title='Genel Latex Sembolleri'>\
-              <option value=''>Semboller</option>\
+            <select class='form-control' id='mathsymbols' title='"+j__("Genel Latex Sembolleri")+"'>\
+              <option value=''>"+j__("Semboller")+"</option>\
               <option title= '\\sqrt{x}' value='\\sqrt{x}'>√</option>\
               <option title= '\\sqrt[n]{x}' value='\\sqrt[n]{x}'>∛</option>\
               <option title= 'x^n' value='x^n'>x²</option>\
@@ -293,8 +293,8 @@ console.log(top);
             </select>\
           </div>\
           <div style='width:49%; margin-left:5px; float:left;'>\
-            <select class='form-control' id='greeksymbols' title='Harf Karekterleri'>\
-              <option title=''>Harfler</option>\
+            <select class='form-control' id='greeksymbols' title='"+j__("Harf Karekterleri")+"'>\
+              <option title=''>"+j__("Harfler")+"</option>\
                   <optgroup label= 'Lowercase'>\
                     <option title= '\\alpha' value='\\alpha'>ɑ</option>\
                     <option title= '\\beta' value='\\beta'>β</option>\
@@ -346,7 +346,7 @@ console.log(top);
     var latex_preview = $('<div class="box" id="box" style="visibility:hidden">\
                             <div id="MathOutput" class="output"></div>\
                           </div>');
-    var add_button = $("<a href='#' id='pop-image-OK' class='btn btn-info' style='padding: 5px 30px;'>Ekle</a> ");
+    var add_button = $("<a href='#' id='pop-image-OK' class='btn btn-info' style='padding: 5px 30px;'>"+j__("Ekle")+"</a> ");
     poup_header.appendTo(html_popup);
     close_button.appendTo(poup_header);
     galery_inner.appendTo(html_popup);

@@ -116,7 +116,7 @@ console.log(top);
   var html_popup = $("<div class='popup ui-draggable' id='pop-plink-popup' style='display: block; top:" + top + "; left: " + left + "; width:550px;'> \
       </div>");
   html_popup.appendTo('body').draggable({cancel:'.drag-cancel'}).resizable();
-  var poup_header = $("<div class='popup-header'><i class='icon-m-link'></i> &nbsp;Sayfa Bağlantısı Ekle </div> ");
+  var poup_header = $("<div class='popup-header'><i class='icon-m-link'></i> &nbsp;"+j__("Sayfa Bağlantısı Ekle")+" </div> ");
   var close_button = $("<i id='plink-add-dummy-close-button' class='icon-close size-10 popup-close-button'></i> ");
   
   var galery_inner = $("<div class='gallery-inner-holder' style='width: " + width + "; height: " + height + ";'> \
@@ -125,14 +125,14 @@ console.log(top);
   var popup_wrapper = $("<div class ='popup_wrapper drag-cancel' style='border: 1px #ccc solid; ' >\
                           <div class='tabbable'>\
                             <ul class='nav nav-tabs' id='plink_tab'>\
-                              <li><a href='#plink_name' data-toggle='tab'>Sayfa Bağlantısı Adı</a></li>\
-                              <li><a href='#plink_icon' data-toggle='tab'>Sayfa Bağlantısı İkonu</a></li>\
-                              <li><a href='#plink_area' data-toggle='tab'>Sayfa Bağlantısı Alanı</a></li>\
+                              <li><a href='#plink_name' data-toggle='tab'>"+j__("Sayfa Bağlantısı Adı")+"</a></li>\
+                              <li><a href='#plink_icon' data-toggle='tab'>"+j__("Sayfa Bağlantısı İkonu")+"</a></li>\
+                              <li><a href='#plink_area' data-toggle='tab'>"+j__("Sayfa Bağlantısı Alanı")+"</a></li>\
                             </ul>\
                           </div>\
                           <div class='tab-content'>\
                             <div class='tab-pane fade in active' id='plink_name'><br>\
-                              <div  id='popup-explanation' contenteditable='true' class='drag-cancel'><textarea row='2' cols='30' id='baslik' name='baslik' placeholder='Başlığı buraya giriniz...'></textarea></div> \
+                              <div  id='popup-explanation' contenteditable='true' class='drag-cancel'><textarea row='2' cols='30' id='baslik' name='baslik' placeholder='"+j__("Başlığı buraya giriniz")+"...'></textarea></div> \
                             </div>\
                             <div class='tab-pane fade' id='plink_icon'><br>\
                               <span id='plink_image'>\
@@ -145,11 +145,11 @@ console.log(top);
                               </span>\
                             </div>\
                             <div class='tab-pane fade in active' id='plink_area'><br>\
-                              <div  id='area' contenteditable='true' class='drag-cancel'>Sayfa Bağlantısı Alanı Ekle butonuna basıldıktan sonra sayfaya eklenecek ve alanın büyüklüğünü sayfa üzerinden yapabileceksiniz...</div> \
+                              <div  id='area' contenteditable='true' class='drag-cancel'>"+j__("Sayfa Bağlantısı Alanı Ekle butonuna basıldıktan sonra sayfaya eklenecek ve alanın büyüklüğünü sayfa üzerinden yapabileceksiniz")+"...</div> \
                             </div>\
                           </div>\
                         </div> <br>");
-  var add_button = $("<br><a href='#' id='pop-image-OK' class='btn btn-info' style='padding: 5px 30px;'>Ekle</a> ");
+  var add_button = $("<br><a href='#' id='pop-image-OK' class='btn btn-info' style='padding: 5px 30px;'>"+j__("Ekle")+"</a> ");
   poup_header.appendTo(html_popup);
   close_button.appendTo(poup_header);
   galery_inner.appendTo(html_popup);
@@ -165,7 +165,7 @@ console.log(top);
   $.each( book_data, function( key, value ) {
     console.log(value.title);
     var title = value.title;
-    if(!value.title) title = deger + ". Bölüm";
+    if(!value.title) title = deger + ". "+j__("Bölüm");
     
     var chapter_title = $('<div class="panel panel-default">\
     <a data-toggle="collapse" data-parent="#accordion1" href="#collapse'+value.chapter_id+'"><div class="panel-heading">\
@@ -182,7 +182,7 @@ console.log(top);
     $.each( value.pages, function( key_page, value_page ) {
       console.log(value_page);
       if(value_page)
-        $('<input type="radio" name="page_select" value="'+value_page.page_id+'">'+page_count+'. Sayfa<br>').appendTo('.panel-body_'+value.chapter_id);
+        $('<input type="radio" name="page_select" value="'+value_page.page_id+'">'+page_count+'. '+j__("Sayfa")+'<br>').appendTo('.panel-body_'+value.chapter_id);
       page_count++;
     });
     

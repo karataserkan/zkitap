@@ -189,7 +189,7 @@ var createImageComponent = function ( event, ui ,oldcomponent) {
 
       var img_cmp="<div class='popup ui-draggable' id='pop-image-popup' style='display: block; top:" + top + "; left: " + left + ";'> \
         <div class='popup-header'> \
-        <i class='icon-m-image'></i> &nbsp;Görsel Ekle \
+        <i class='icon-m-image'></i> &nbsp;"+j__("Görsel Ekle")+" \
         <i id='images-add-dummy-close-button' class='icon-close size-10 popup-close-button'></i> \
         </div> \
           <div class='gallery-inner-holder'> \
@@ -197,17 +197,17 @@ var createImageComponent = function ( event, ui ,oldcomponent) {
             <div class='typei' style='padding: 4px; display: inline-block;'>\
                 <div class='btn-group' data-toggle='buttons'>\
                   <label class='btn btn-primary " + link_check_active + "'>\
-                    <input type='radio' name='image_type' id='repeat0' " + link_check + " value='link'> Sayfada\
+                    <input type='radio' name='image_type' id='repeat0' " + link_check + " value='link'> "+j__("Sayfada")+"\
                   </label>\
                   <label class='btn btn-primary " + popup_check_active + "'>\
-                    <input type='radio' name='image_type' id='repeat1' " + popup_check + " value='popup'> Açılır Pencerede\
+                    <input type='radio' name='image_type' id='repeat1' " + popup_check + " value='popup'> "+j__("Açılır Pencerede")+"\
                   </label>\
                 </div><br><br>\
             </div>\
             <div class='tabbable'>\
               <ul class='nav nav-tabs' id='myTab'>\
-                <li><a href='#image_drag' data-toggle='tab'>Resim Sürükle</a></li>\
-                <li><a href='#image_upload' data-toggle='tab'>Resim Yükle</a></li>\
+                <li><a href='#image_drag' data-toggle='tab'>"+j__("Resim Sürükle")+"</a></li>\
+                <li><a href='#image_upload' data-toggle='tab'>"+j__("Resim Yükle")+"</a></li>\
               </ul>\
             </div>\
             <div class='tab-content'>\
@@ -218,8 +218,8 @@ var createImageComponent = function ( event, ui ,oldcomponent) {
                 <input type='file' name='image_file' id='image_file' value='' ><br><br>\
               </div>\
             </div>\
-            <input type='text' name='width' id='width' placeholder='Genişlik' value=''>\
-            <input type='text' name='height' id='height' placeholder='Yükseklik' value=''>\
+            <input type='text' name='width' id='width' placeholder='"+j__("Genişlik")+"' value=''>\
+            <input type='text' name='height' id='height' placeholder='"+j__("Yükseklik")+"' value=''>\
           </div> \
         </div>";
         $(img_cmp).appendTo('body').draggable();

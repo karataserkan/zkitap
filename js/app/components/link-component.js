@@ -131,25 +131,25 @@ console.log(top);
 
       $("<div class='popup ui-draggable' id='pop-image-link' style='display: block; top:" + top + "; left: " + left + ";'> \
           <div class='popup-header'> \
-          <i class='icon-m-link'></i> &nbsp;Bağlantı Ekle \
+          <i class='icon-m-link'></i> &nbsp;"+j__("Bağlantı Ekle")+" \
           <i id='link-add-dummy-close-button' class='icon-close size-10 popup-close-button'></i> \
           </div> \
          \
         <!-- popup content--> \
           <div class='gallery-inner-holder'> \
             <form id='video-url'> \
-            <input id='link-url-text' class='input-textbox' type='url' placeholder='URL Adresini Giriniz'   value=" + link_value + "> \
-            <div class='type1' style='padding: 4px; display: inline-block;'>Bağlantı belli br alanda mı etkili olsun?\
+            <input id='link-url-text' class='input-textbox' type='url' placeholder='"+j__("URL Adresini Giriniz")+"'   value=" + link_value + "> \
+            <div class='type1' style='padding: 4px; display: inline-block;'>"+j__("Bağlantı belli br alanda mı etkili olsun?")+"\
                   <div class='btn-group' data-toggle='buttons'><br>\
                     <label class='btn btn-primary " + control_y_check_active + "'>\
-                      <input type='radio' name='link_area' id='repeat0' " + control_y_check + " value='Y'> Evet\
+                      <input type='radio' name='link_area' id='repeat0' " + control_y_check + " value='Y'> "+j__("Evet")+"\
                     </label>\
                     <label class='btn btn-primary " + control_n_check_active + "'>\
-                      <input type='radio' name='link_area' id='repeat1' " + control_n_check + " value='N'> Hayır\
+                      <input type='radio' name='link_area' id='repeat1' " + control_n_check + " value='N'> "+j__("Hayır")+"\
                     </label>\
                   </div>\
               </div><br><br>\
-            <a href='#' id='pop-image-OK' class='btn btn-info' id='add-image' >Ekle</a> \
+            <a href='#' id='pop-image-OK' class='btn btn-info' id='add-image' >"+j__("Ekle")+"</a> \
             </form> \
           </div>     \
            \
@@ -171,7 +171,7 @@ console.log(top);
     var link_area = $('input[name=link_area]:checked').val();
 
       if (!IsURL (targetURL) ){
-        alert ("Lütfen gecerli bir URL adresi giriniz.");
+        alert (j__("Lütfen gecerli bir URL adresi giriniz."));
         return;
 
       }

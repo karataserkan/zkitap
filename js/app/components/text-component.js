@@ -26,7 +26,7 @@ $(document).ready(function(){
 
 
         if (this.options.component.data.self.attr.componentType != 'side-text' )this.element.autogrow({element:this});
-        else $(this.element).attr('title','Yazı Kutusu Aracı');
+        else $(this.element).attr('title',j__("Yazı Kutusu Aracı"));
         
 
         justify_element(this.element[0]);
@@ -618,7 +618,7 @@ $(document).ready(function(){
              'overflow': (type == 'text' ? 'visible' : 'hidden' )
           } , 
           'attr': {
-            'placeholder':'Metin Kutusu',
+            'placeholder': j__("Metin Kutusu"),
           },
           'val': ''
         },
