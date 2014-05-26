@@ -32,6 +32,31 @@
 
 
 
+<!-- POPUP add -->
+<div class="modal fade" id="delUser" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+	  <div class="modal-content">
+		<div class="modal-header">
+		  <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+		  <h4 class="modal-title"><?php _e("Kullanıcıyı Kaldır"); ?></h4>
+		</div>
+		<div class="modal-body">
+		 	Kullanıcıyı kaldırmak istediğinizden emin misiniz?
+		</div>
+      <div class="modal-footer">
+      	<a href="#" id="delUserBtn" class="btn btn-primary">
+			<?php _e('Kaldır'); ?>
+		</a>
+        <button type="button" class="btn btn-default" data-dismiss="modal"><?php _e("Vazgeç"); ?></button>
+      </div>
+		</div>
+	  </div>
+	</div>
+ 
+<!-- POPUP END -->
+
+
+
  <div id="content">
 
 	<div class="col-sm-12">
@@ -69,16 +94,32 @@ if ($users) {
 		
 		<img itemprop="image" class="col-sm-12 clearfix" src="<?php echo $avatarSrc; ?>">
 		<h5 class="col-sm-12" style="text-transform:capitalize;"><?php echo $user->name . "  " .$user->surname;?></h5>
-		<a class="col-sm-12" href="?r=organisations/deleteOrganisationUser&userId=<?php echo $user->id; ?>&organisationId=<?php echo $organisationId; ?>"><i class="fa fa-trash-o"></i>&nbsp;&nbsp;<?php _e('Kullanıcılardan Çıkar'); ?></a>
+		<!-- <a class="col-sm-12" href="?r=organisations/deleteOrganisationUser&userId=<?php echo $user->id; ?>&organisationId=<?php echo $organisationId; ?>"><i class="fa fa-trash-o"></i>&nbsp;&nbsp;<?php _e('Kullanıcılardan Çıkar'); ?></a> -->
+		<a class="col-sm-12 delUser" data-id="<?php echo $user->id; ?>" data-toggle="modal" data-target="#delUser" href="#" user="<?php echo $user->id; ?>"><i class="fa fa-trash-o"></i>&nbsp;&nbsp;<?php _e('Kullanıcılardan Çıkar'); ?></a>
 		<div class="clearfix"></div>
 		</div>
 		<?php
 	endforeach;
 	endif;
+	?>
+	<?php 
+	if ($invitated) { ?>
+</div>
+<div class="col-sm-12">
+
+				<h3 class="content-title pull-left">Davetli kullanıcılar</h3>
+	</div>
+
+		<?php foreach ($invitated as $key => $user) { ?>
+			<div class="users_frame">	
+				<h5><?php echo $user->email; ?></h5>
+			</div>
+		<?php }
+	}
+
 	?><?php
 }
  ?>
-</div>
 </div>
 
 <script>											
@@ -95,5 +136,27 @@ function sendUser(e){
 		jQuery(document).ready(function() {		
 			App.setPage("gallery");  //Set current page
 			App.init(); //Initialise plugins and elements
+
+			var userId;
+			var organisationId="<?php echo $organisationId;?>";
+			$('.delUser').click(function(){
+				userId=$(this).data("id");
+			});
+			$('#delUserBtn').click(function(){
+				$.ajax(
+	  					{
+					  		type: "POST",
+					  		url: "/organisations/deleteOrganisationUser/",
+					  		data: { userId:userId,organisationId:organisationId }
+						}
+				  )
+				  .done(
+				  		function( msg ) 
+				  		{
+				    		console.log("user removed!");
+				    		location.reload();
+				  		}
+			  		);
+			});
 		});
 	</script>
