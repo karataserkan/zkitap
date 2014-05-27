@@ -441,7 +441,7 @@ $all_books= $this->getWorkspaceBooks($workspace->workspace_id);
                                             </li>
                                         </ul>
                                         
-										<a class="btn pull-right btn-primary" id='addNewBookBtn' href="/book/bookCreate" <?php echo ($confirmation !=0 AND $confirmation !=3)? "disabled":""; ?>>
+										<a class="btn pull-right brand_color_for_buttons" id='addNewBookBtn' href="/book/bookCreate" <?php echo ($confirmation !=0 AND $confirmation !=3)? "disabled":""; ?>>
 											<i class="fa fa-plus-circle"></i>
 											<span><?php _e('Kitap Ekle') ?></span>
 										</a>
