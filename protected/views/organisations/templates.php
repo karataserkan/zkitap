@@ -71,7 +71,7 @@ $this->pageTitle=Yii::app()->name;
 							<div class="col-sm-12">
 								<div class="page-header">
 										<h3 class="content-title pull-left"><?php _e('Templates') ?></h3>
-										<a class="btn pull-right btn-primary" href="/book/createTemplate/<?php echo $workspace_id;?>">
+										<a class="btn pull-right brand_color_for_buttons" href="/book/createTemplate/<?php echo $workspace_id;?>">
 							<i class="fa fa-plus-circle"></i>
 							<span>Template Ekle</span>
 						</a>
