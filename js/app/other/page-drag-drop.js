@@ -355,7 +355,7 @@ $( document ).ready(function () {
             break;
 
           case 'galery':
-            createGaleryComponent( event, ui );
+            window.lindneo.dataservice.galery_popup(event, ui);
             break;
 
           case 'sound':
