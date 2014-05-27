@@ -27,8 +27,8 @@ $(document).ready(function(){
         $.each (that.options.component.data.ul.imgs , function (index,value) {
           if(  value.src ) {
             counter++;
-            var image= $('<img class="galery_component_image" style="display: block; margin: auto; min-width: 50%; min-height: 50%; " src="'+value.src+ '" />'); 
-            var container=$('<li class="galery_component_li" style="float:left; position: absolute; width: 200%; height: 200%; left: -50%;'+ (counter==1 ? ''  : 'display:none;')+ '" ></li>');
+            var image= $('<img class="galery_component_image" style="display: block; margin: auto; width: 100%; height: 100%; " src="'+value.src+ '" />'); 
+            var container=$('<li class="galery_component_li" style="float:left; position: absolute; width: 100%; height: 100%; '+ (counter==1 ? ''  : 'display:none;')+ '" ></li>');
             image.appendTo(container);        
             container.appendTo(ul);
           }       
@@ -106,7 +106,12 @@ var createGaleryComponent = function (event,ui, oldcomponent){
             <div class='add-image-drag-area' id='dummy-dropzone'> </div> \
           </div>\
           <div class='tab-pane fade' id='galery_upload'><br>\
-            <input type='file' name='image_file' id='image_file' value='' ><br><br>\
+            <!--<input type='file' name='image_file' id='image_file' value='' >-->\
+            <span class='btn btn-success fileinput-button'>\
+              <i class='fa fa-plus'></i>\
+              <span>"+j__("Resim Ekle")+"</span>\
+              <input type='file' name='files[]' id='image_file' multiple>\
+            </span><br><br>\
           </div>\
         </div>\
       </div> \
@@ -124,6 +129,9 @@ var createGaleryComponent = function (event,ui, oldcomponent){
       }
 
     });
+
+    $(".fileinput-button").css({"position": "relative", "overflow": "hidden"});
+    $(".fileinput-button input[type=file]").css({"position": "absolute", "top": "0", "right": "0", "min-width": "100%", "min-height": "100%", "font-size": "999px", "text-align": "right", "filter": "alpha(opacity=0)", "opacity": "0", "outline": "none", "background": "white", "cursor": "inherit", "display": "block"});    
     if(typeof oldcomponent != "undefined"){
       
       $.each(oldcomponent.data.ul.imgs, function(i,val){
@@ -136,6 +144,10 @@ var createGaleryComponent = function (event,ui, oldcomponent){
       var left = oldcomponent.data.self.css.left;
       //console.log(top);
       //console.log(oldcomponent.data.self.css.width);
+      $('#galery-popup-images').sortable({
+          placeholder: "ui-state-highlight"
+        });
+      $('#galery-popup-images').disableSelection(); 
       
     }
     else{
@@ -242,10 +254,60 @@ var createGaleryComponent = function (event,ui, oldcomponent){
     var imageBinary = '';
 
 
-  $('#image_file').change(function(){
+  //$('#image_file').change(function(){
+    var filesInput = document.getElementById("image_file");
+        
+    filesInput.addEventListener("change", function(event){
+
     var image_type = $('input[name=image_type]:checked').val();
+
+    var files = event.target.files;
+    console.log(files);
+
+    for(var i = 0; i< files.length; i++)
+    {
+        var file = files[i];
+        
+        //Only pics
+        if(!file.type.match('image'))
+          continue;
+        
+        var picReader = new FileReader();
+        
+        picReader.addEventListener("load",function(event){
+            
+            var picFile = event.target;
+            
+            //var div = document.createElement("div");
+            
+            //div.innerHTML = "<img class='thumbnail' src='" + picFile.result + "'" +
+                    //"title='" + picFile.name + "'/>";
+            
+            //output.insertBefore(div,null);            
+            imageBinary = picFile.result;
+       
+        $('#galery-popup-images').append('<li style="height:60px; width:60px; margin:10px; border : 1px dashed #ccc; float:left;"><a class="btn btn-info size-10 icon-delete galey-image-delete  " style="margin-left: 42px; position:absolute;"></a>\
+            <img style="height:100%; " src='+imageBinary+' /> \
+          </li>');
+        $('.galey-image-delete').click(function(){
+
+          //console.log(this);
+          $(this).parent().remove();
+
+        });
+        $('#galery-popup-images').sortable({
+          placeholder: "ui-state-highlight"
+        });
+        $('#galery-popup-images').disableSelection();
+        
+        });
+        
+         //Read the image
+        picReader.readAsDataURL(file);
+    }   
     //console.log(image_type);
     //console.log(marker);
+    /*
     var image_width = '200px';
     var image_height = '150px';
     var file = this.files[0];
@@ -295,7 +357,7 @@ var createGaleryComponent = function (event,ui, oldcomponent){
             
       };
     };
-
+    */
 });
 
     el.addEventListener("dragenter", function(e){
