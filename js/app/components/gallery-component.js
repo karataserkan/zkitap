@@ -12,7 +12,7 @@ $(document).ready(function(){
     _create: function(){
         
       var that = this;
-      var image_width = 0;
+      //var image_width = "";
       //if( that.options.component.type=='galery')
       console.log(that.options.component.data);
       if( that.options.component.data.ul.imgs ) {
@@ -46,7 +46,6 @@ $(document).ready(function(){
     },
 
     field: function(key, value){
-      console.log(image_width);
       this._super();
 
       // set
@@ -57,8 +56,12 @@ $(document).ready(function(){
   });
 });
  
- 
-var createGaleryComponent = function (event,ui){
+var image_width ;
+var image_height;
+
+var createGaleryComponent = function (event,ui, oldcomponent){
+
+    
 
     var min_left = $("#current_page").offset().left;
     var min_top = $("#current_page").offset().top;
@@ -68,7 +71,7 @@ var createGaleryComponent = function (event,ui){
     var top=(event.pageY - 25);
     var left=(event.pageX-150);
 
-    console.log(top);
+    
 
     if(left < min_left)
       left = min_left;
@@ -80,7 +83,7 @@ var createGaleryComponent = function (event,ui){
     else if(top+500 > max_top)
       top = max_top - 500;
 
-console.log(top);
+//console.log(top);
 
     top = top + "px";
     left = left + "px";
@@ -121,16 +124,46 @@ console.log(top);
       }
 
     });
+    if(typeof oldcomponent != "undefined"){
+      
+      $.each(oldcomponent.data.ul.imgs, function(i,val){
+        //console.log(val.src);
+        $('#galery-popup-images').append('<li style="height:60px; width:60px; margin:10px; border : 1px dashed #ccc; float:left;"><a class="btn btn-info size-10 icon-delete galey-image-delete  " style="margin-left: 42px; position:absolute;"></a>\
+            <img style="height:100%; " src='+val.src+' /> \
+          </li>');
+      });
+      var top = oldcomponent.data.self.css.top;
+      var left = oldcomponent.data.self.css.left;
+      //console.log(top);
+      //console.log(oldcomponent.data.self.css.width);
+      
+    }
+    else{
+      top = (ui.offset.top-$(event.target).offset().top )+ 'px';
+      left = ( ui.offset.left-$(event.target).offset().left )+ 'px';
+    }
 
     $('.galey-image-delete').click(function(){
 
-      console.log(this);
+      //console.log(this);
+      $(this).parent().remove();
 
     });
 
 
 
     $('#pop-image-OK').click(function (){
+
+      if(typeof oldcomponent != "undefined"){
+        window.lindneo.tlingit.componentHasDeleted( oldcomponent, oldcomponent.id );
+        //console.log(oldcomponent.data.self.css.width);
+        image_width = oldcomponent.data.self.css.width;
+        image_height = oldcomponent.data.self.css.height;
+      }
+      else{
+        image_width = "200px";
+        image_height = "200px";
+      }
 
       var imgs=[];
         $('#galery-popup-images img').each(function( index ) {
@@ -151,7 +184,8 @@ console.log(top);
           console.log( index + ": " + $( this ).text() );
         });
 
-        
+      //console.log(image_width);
+      //return;
       var component = {
           'type' : 'galery',
           'data': {
@@ -185,8 +219,8 @@ console.log(top);
             'self': {
               'css': {
                 'position':'absolute',
-                'top': (ui.offset.top-$(event.target).offset().top ) + 'px',
-                'left':  ( ui.offset.left-$(event.target).offset().left ) + 'px',
+                'top': top ,
+                'left':  left ,
                 'background-color': 'transparent',
                 'width': image_width,
                 'height': image_height,
@@ -203,8 +237,7 @@ console.log(top);
     });
 
     var control_val = 0;
-    var image_width = 0;
-    var image_height = 0;
+    
     var el = document.getElementById("dummy-dropzone");
     var imageBinary = '';
 
@@ -242,12 +275,19 @@ console.log(top);
               control_val++;
             }
         
-        console.log(image_width);
-        console.log(control_val);
+        //console.log(image_width);
+        //console.log(control_val);
         imageBinary = image.src;
-        $('#galery-popup-images').append('<li style="height:60px; width:60px; margin:10px; border : 1px dashed #ccc; float:left;"><img style="height:100%;" src='+imageBinary+' /> \
-          <a class="btn btn-info size-15 icon-delete galey-image-delete hidden-delete " style="margin-left: 38px;"></a> \
+       
+        $('#galery-popup-images').append('<li style="height:60px; width:60px; margin:10px; border : 1px dashed #ccc; float:left;"><a class="btn btn-info size-10 icon-delete galey-image-delete  " style="margin-left: 42px; position:absolute;"></a>\
+            <img style="height:100%; " src='+imageBinary+' /> \
           </li>');
+        $('.galey-image-delete').click(function(){
+
+          //console.log(this);
+          $(this).parent().remove();
+
+        });
         $('#galery-popup-images').sortable({
           placeholder: "ui-state-highlight"
         });
@@ -303,12 +343,18 @@ console.log(top);
               control_val++;
             }
         
-        console.log(image_width);
-        console.log(control_val);
+        //console.log(image_width);
+        //console.log(control_val);
         imageBinary = evt.target.result;
-        $('#galery-popup-images').append('<li style="height:60px; width:60px; margin:10px; border : 1px dashed #ccc; float:left;"><img style="height:100%;" src='+imageBinary+' /> \
-          <a class="btn btn-info size-15 icon-delete galey-image-delete hidden-delete " style="margin-left: 38px;"></a> \
+        $('#galery-popup-images').append('<li style="height:60px; width:60px; margin:10px; border : 1px dashed #ccc; float:left;"><a class="btn btn-info size-10 icon-delete galey-image-delete  " style="margin-left: 42px; position:absolute;"></a>\
+            <img style="height:100%; " src='+imageBinary+' /> \
           </li>');
+        $('.galey-image-delete').click(function(){
+
+          //console.log(this);
+          $(this).parent().remove();
+
+        });
         $('#galery-popup-images').sortable({
           placeholder: "ui-state-highlight"
         });

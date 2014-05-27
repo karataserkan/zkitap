@@ -561,9 +561,9 @@ window.lindneo.toolbox = (function(window, $, undefined){
 
     var that = this;
       $('.toolbox').hide();
-      console.log('BEGIN');
-      console.log(this.selectedComponents);
-      console.log('END');
+      //console.log('BEGIN');
+      //console.log(this.selectedComponents);
+      //console.log('END');
       //return;
       $.each(this.selectedComponents, function( key, component ) {
         if($.type(component.options.component.data.lock.username) == "undefined"){
@@ -573,7 +573,7 @@ window.lindneo.toolbox = (function(window, $, undefined){
 
         $('.toolbox .tool').unbind( "change" );
         $('.toolbox-btn').unbind( "click" );
-        console.log(component);
+        //console.log(component);
               //return;
 
         $('.toolbox .tool, .toolbox-btn').each(function (index) {

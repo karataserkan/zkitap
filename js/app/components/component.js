@@ -247,6 +247,8 @@ $(document).ready(function(){
               window.lindneo.dataservice.wrap_popup(event, ui, that.options.component);
             else if(that.options.component.type == 'latex')
               window.lindneo.dataservice.latex_popup(event, ui, that.options.component);
+            else if(that.options.component.type == 'galery')
+              window.lindneo.dataservice.galery_popup(event, ui, that.options.component);
           })
           
           .mouseenter(function(event){
