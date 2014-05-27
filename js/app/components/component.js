@@ -56,6 +56,9 @@ $(document).ready(function(){
             that._resize(event, ui);
           },
           'resize':function(event,ui){
+            if( typeof this.resize_pass != "undefined" )
+              this.resize_pass(event,ui);
+            
             window.lindneo.toolbox.makeMultiSelectionBox();
           }
         };
