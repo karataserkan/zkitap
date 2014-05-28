@@ -221,6 +221,11 @@ var createGraphComponent = function ( event, ui, oldcomponent ) {
     var min_top = $("#current_page").offset().top;
     var max_left = $("#current_page").width() + min_left;
     var max_top = $("#current_page").height() + min_top;
+    var window_width = $( window ).width();
+    var window_height = $( window ).height();
+
+    if(max_top > window_height) max_top = window_height;
+    if(max_left > window_width) max_top = window_width;
     
     var top=(event.pageY - 25);
     var left=(event.pageX-150);
@@ -244,9 +249,8 @@ console.log(top);
 
     $("<div class='popup ui-draggable' id='pop-image-popup' style='display: block; top:" + top + "; left: " + left + ";'> \
         <div class='popup-header'> \
-        <i class='icon-m-charts'></i> &nbsp;"+j__("Grafik Ekle")+" \
-        <i id='graph-add-dummy-close-button' class='icon-close size-10 popup-close-button'></i>\
-		</div> \
+          <i class='icon-m-charts'></i> &nbsp;"+j__("Grafik Ekle")+" \
+		    </div> \
           <div class='gallery-inner-holder'> \
             <div class='gallery-inner-holder'> \
          \
@@ -283,8 +287,11 @@ console.log(top);
           </div> \
           </div> \
         </div>").appendTo('body').draggable();
+    
+      var close_button = $("<i id='graph-add-dummy-close-button' class='icon-close size-10 popup-close-button'></i>");
+      close_button.appendTo('.popup-header');
 
-      $('#graph-add-dummy-close-button').click(function(){
+      close_button.click(function(){
 
         $('#pop-image-popup').remove();  
 

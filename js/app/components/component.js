@@ -45,9 +45,10 @@ $(document).ready(function(){
               $('#message_plink'+that.options.component.id).css('width','100%');
             }
             //$(ui.element.get(0)).resizable("option", "alsoResize",".selected");
-            $(this).resizable("option", "alsoResize",".selected",{
-                                                          containment: "#current_page"
-                                                        });
+            $(this).resizable("option", "alsoResize",".selected");
+           
+            //console.log($(this).parent().parent());
+            //console.log($(this).css("left").replace("px",""));
             //ui.element.resizable("option", "alsoResize",".selected");
             //$(".selected").resizable();
             $(".selected").trigger("resize");

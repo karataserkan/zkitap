@@ -60,6 +60,7 @@ $(document).ready(function(){
 
 
 var createPlinkComponent = function ( event, ui, oldcomponent ) {  
+
   var book_data='';
   var marker = window.base_path+'/css/popupmarker.svg';
   var video_marker=window.base_path+'/css/image_play_trans.svg';
@@ -79,6 +80,7 @@ var createPlinkComponent = function ( event, ui, oldcomponent ) {
       var height = oldcomponent.data.height;
     }; 
 var page_count = 1;
+console.log("dede ");
 $.ajax({
   url: "/book/getBookPages/"+lindneo.currentBookId,
 }).done(function(result) {
@@ -90,6 +92,11 @@ $.ajax({
     var min_top = $("#current_page").offset().top;
     var max_left = $("#current_page").width() + min_left;
     var max_top = $("#current_page").height() + min_top;
+    var window_width = $( window ).width();
+    var window_height = $( window ).height();
+
+    if(max_top > window_height) max_top = window_height;
+    if(max_left > window_width) max_top = window_width;
     
     var top=(event.pageY - 25);
     var left=(event.pageX-150);

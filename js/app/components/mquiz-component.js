@@ -246,6 +246,11 @@ var removeRow = function(type, row_number){
     var min_top = $("#current_page").offset().top;
     var max_left = $("#current_page").width() + min_left;
     var max_top = $("#current_page").height() + min_top;
+    var window_width = $( window ).width();
+    var window_height = $( window ).height();
+
+    if(max_top > window_height) max_top = window_height;
+    if(max_left > window_width) max_top = window_width;
     
     var top=(event.pageY - 25);
     var left=(event.pageX-150);
