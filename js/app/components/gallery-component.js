@@ -110,7 +110,12 @@ var createGaleryComponent = function (event,ui, oldcomponent){
     var min_top = $("#current_page").offset().top;
     var max_left = $("#current_page").width() + min_left;
     var max_top = $("#current_page").height() + min_top;
-    
+    var window_width = $( window ).width();
+    var window_height = $( window ).height();
+
+    if(max_top > window_height) max_top = window_height;
+    if(max_left > window_width) max_top = window_width;
+
     var top=(event.pageY - 25);
     var left=(event.pageX-150);
 
@@ -121,7 +126,8 @@ var createGaleryComponent = function (event,ui, oldcomponent){
     if(galery_type == 'inner') { control_y_check = "checked='checked'"; control_y_check_active = 'active';}
     else { control_n_check = "checked='checked'"; control_n_check_active = 'active'; }
     
-
+    console.log(min_top);
+    console.log(max_top);
     if(left < min_left)
       left = min_left;
     else if(left+310 > max_left)
@@ -132,16 +138,15 @@ var createGaleryComponent = function (event,ui, oldcomponent){
     else if(top+500 > max_top)
       top = max_top - 500;
 
-//console.log(top);
+console.log(top);
 
     top = top + "px";
     left = left + "px";
 
     $("<div class='popup ui-draggable' id='pop-image-popup' style='display: block; top:" + top + "; left: " + left + ";'> \
-    <div class='popup-header'> \
-    <i class='icon-m-galery'></i> &nbsp;"+j__("Galeri Ekle")+" \
-    <i id='galery-add-dummy-close-button' class='icon-close size-10 popup-close-button'></i> \
-    </div> \
+      <div class='popup-header'> \
+        <i class='icon-m-galery'></i> &nbsp;"+j__("Galeri Ekle")+" \
+      </div> \
       <div class='gallery-inner-holder'> \
         <div style='clear:both'></div> \
         <div class='tabbable'>\
@@ -179,7 +184,10 @@ var createGaleryComponent = function (event,ui, oldcomponent){
     </div><br><br>\
      <a id='pop-image-OK' class='btn btn-info' >"+j__("Tamam")+"</a>\
     </div> ").appendTo('body').draggable();
-    $('#galery-add-dummy-close-button').click(function(){
+    var close_button = $("<i id='graph-add-dummy-close-button' class='icon-close size-10 popup-close-button'></i>");
+    close_button.appendTo('.popup-header');
+
+    close_button.click(function(){
 
       $('#pop-image-popup').remove();  
 
