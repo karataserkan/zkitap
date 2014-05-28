@@ -195,9 +195,11 @@ $this->breadcrumbs=array(
 					<div class="row">
 						<div class="">
 							<div class="login-box">
-								<?php if ($passResetSuccess) {
-									echo "<span style='color:green'>".$passResetSuccess."</span>";
-								}else{
+								<?php if ($passResetSuccess) { ?>
+									<div class="alert alert-success">
+										<span><?php echo $passResetSuccess; ?></span>
+									</div>
+								<?php }else{
 								?>
 									<form role="form">
 									  <div class="form-group">
@@ -260,7 +262,7 @@ $this->breadcrumbs=array(
 				if (len<7) {
 					$('#addUser').attr('disabled','disabled')
 					$("[for='exampleInputPassword1']").text("Şifre/Minimum 8 karakter olmalıdır");
-					$("[for='exampleInputPassword1']").addClass('text-danger')
+					$("[for='exampleInputPassword1']").addClass('text-danger').removeClass('text-success');
 				}else{
 					$('#addUser').removeAttr('disabled');
 					$("[for='exampleInputPassword1']").text("Şifre");
@@ -282,7 +284,10 @@ $this->breadcrumbs=array(
 						$("[for='exampleInputPassword2']").addClass('text-danger').removeClass('text-success');
 					};
 			});
-
+			var passResetSuccess="<?php echo $passResetSuccess ?>";
+			if (passResetSuccess) {
+				swapScreen('forgot_bg');
+			};
 		});
 	</script>
 	<script type="text/javascript">
