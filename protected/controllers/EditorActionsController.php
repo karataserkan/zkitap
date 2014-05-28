@@ -1013,7 +1013,7 @@ right join book using (book_id) where book_id='$bookId' and type!='image';";
 		$updateQueue=PublishQueue::model()->findByPk($bookId);
 		$updateQueue->is_in_progress=-1;
 		$updateQueue->success=-1;
-		$updateQueue->message=$message;
+		$updateQueue->message=json_encode($message);
 		$updateQueue->save();
 	} 
 
@@ -1147,7 +1147,7 @@ right join book using (book_id) where book_id='$bookId' and type!='image';";
 			$attr['transaction_type']=$data['contentType'];
 
 			$success=0;
-			
+			$errorMessage=array();
 			$transaction=new Transactions;
 			$transaction['attributes']=$attr;
 			$transaction->transaction_amount=0;
@@ -1159,6 +1159,7 @@ right join book using (book_id) where book_id='$bookId' and type!='image';";
 			}
 			else
 			{
+				$errorMessage[]='Content could not added to the Catalog Database';
 				$transaction->transaction_result=1;
 				$transaction->transaction_explanation="Catalog Could NOT Created";
 			}
@@ -1176,6 +1177,7 @@ right join book using (book_id) where book_id='$bookId' and type!='image';";
 			}
 			else
 			{
+				$errorMessage[]='python bin/client.py -> AddToCatalog could not work properly. File Could NOT Created. Shell_output must return 100. Now shell_output:'.$res_res->shell_output[0];
 				$transaction->transaction_result=$res_res->cc;
 				$transaction->transaction_explanation="File Could NOT Created";
 			}
@@ -1195,6 +1197,7 @@ right join book using (book_id) where book_id='$bookId' and type!='image';";
 			}
 			else
 			{
+				$errorMessage[]='python bin/client.py -> AddToCatalog could not work properly. File Could NOT Uploaded to Cloud. Shell_signal must return 100. Now shell_signal:'.$res_res->shell_signal[0];
 				$transaction->transaction_result=$res_res->shell_signal;
 				$transaction->transaction_explanation="File Could NOT Uploaded to Cloud";
 			}
@@ -1245,7 +1248,7 @@ right join book using (book_id) where book_id='$bookId' and type!='image';";
 			}
 			else
 			{
-				$this->errorQueue($bookId,'ERROR!, success='.$success);
+				$this->errorQueue($bookId, $errorMessage);
 			}
 
 		}
