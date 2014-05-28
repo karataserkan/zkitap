@@ -132,7 +132,7 @@ $this->breadcrumbs=array(
 									<?php echo $form->textField($newUser,'email',array('size'=>60,'maxlength'=>255)); ?>
 								  </div>
 								
-								  <div class="form-group has-error"> 
+								  <div class="form-group"> 
 									<label for="exampleInputPassword1"><?php _e("Şifre"); ?></label>
 									<i class="fa fa-lock"></i>
 									<?php echo $form->passwordField($newUser,'password',array('size'=>60,'maxlength'=>255)); ?>
