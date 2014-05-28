@@ -498,7 +498,7 @@ class BookController extends Controller
 				$pages=Page::model()->findAll(array('order'=>  '`order` asc ,  created asc', "condition"=>'chapter_id=:chapter_id', "params" =>array(':chapter_id' => $chapter->chapter_id )) );
 				if ($pages) {
 					foreach ($pages as $key2 => $page) {
-						$data[$key]['pages'][$key2]=$page->attributes;
+						$data[$key]['pages'][$key2]=$page->page_id;
 					}
 				}
 				else{
