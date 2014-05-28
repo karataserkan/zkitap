@@ -218,7 +218,7 @@ class UserController extends Controller
 	{
 		$id=base64_decode($id);
 		$this->deleteOldKeys();
-
+		$result=0;
 		$meta= Yii::app()->db->createCommand()
     		->select('*')
     		->from('user_meta')
@@ -241,12 +241,12 @@ class UserController extends Controller
 						$user=User::model()->findByPk($meta['user_id']);
 						$user->password=$newpassword;
 						$user->save();
-						$this->redirect('/site/login');
+						$result=1;
 					}
 
 				}
 				$this->layout = '//layouts/column1';
-				$this->render('forget_password');
+				$this->render('forget_password',array('result'=>$result));
 			}
 		}
 	}
