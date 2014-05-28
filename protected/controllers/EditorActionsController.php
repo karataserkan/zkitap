@@ -1177,7 +1177,7 @@ right join book using (book_id) where book_id='$bookId' and type!='image';";
 			}
 			else
 			{
-				$errorMessage[]='python bin/client.py -> AddToCatalog could not work properly. File Could NOT Created. Shell_output must return 100. Now shell_output:'.$res_res->shell_output[0];
+				$errorMessage[]='python bin/client.py -> AddToCatalog could not work properly. File Could NOT Created. Shell_output must return 100. Now shell_output:'.$res_res->shell_output[0].' output:'.$res_res->shell_output;
 				$transaction->transaction_result=$res_res->cc;
 				$transaction->transaction_explanation="File Could NOT Created";
 			}
@@ -1197,7 +1197,7 @@ right join book using (book_id) where book_id='$bookId' and type!='image';";
 			}
 			else
 			{
-				$errorMessage[]='python bin/client.py -> AddToCatalog could not work properly. File Could NOT Uploaded to Cloud. Shell_signal must return 100. Now shell_signal:'.$res_res->shell_signal[0];
+				$errorMessage[]='python bin/client.py -> AddToCatalog could not work properly. File Could NOT Uploaded to Cloud. Shell_signal must return 100. Now shell_signal:'.$res_res->shell_signal;
 				$transaction->transaction_result=$res_res->shell_signal;
 				$transaction->transaction_explanation="File Could NOT Uploaded to Cloud";
 			}
