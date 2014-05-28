@@ -120,6 +120,7 @@ class EditorActionsController extends Controller
 		));
 		//var_dump($hosts);
 		$categories=BookCategories::model()->findAll('organisation_id=:organisation_id',array('organisation_id'=>$organisation->organisation_id));
+		$categories2=BookCategories::model()->findAll('organisation_id=:organisation_id',array('organisation_id'=>'general_'.$this->getCurrentLang()));
 
 		$model=new PublishBookForm;
 
