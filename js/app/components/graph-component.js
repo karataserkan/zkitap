@@ -250,6 +250,7 @@ console.log(top);
     $("<div class='popup ui-draggable' id='pop-image-popup' style='display: block; top:" + top + "; left: " + left + ";'> \
         <div class='popup-header'> \
           <i class='icon-m-charts'></i> &nbsp;"+j__("Grafik Ekle")+" \
+          <i id='graph-add-dummy-close-button' class='icon-close size-10 popup-close-button'></i>\
 		    </div> \
           <div class='gallery-inner-holder'> \
             <div class='gallery-inner-holder'> \
@@ -288,10 +289,7 @@ console.log(top);
           </div> \
         </div>").appendTo('body').draggable();
     
-      var close_button = $("<i id='graph-add-dummy-close-button' class='icon-close size-10 popup-close-button'></i>");
-      close_button.appendTo('.popup-header');
-
-      close_button.click(function(){
+      $("#graph-add-dummy-close-button").click(function(){
 
         $('#pop-image-popup').remove();  
 
