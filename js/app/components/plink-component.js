@@ -161,7 +161,7 @@ console.log(top);
   close_button.appendTo(poup_header);
   galery_inner.appendTo(html_popup);
   popup_wrapper.appendTo(galery_inner).resizable({alsoResize: galery_inner});
-  var chapter= $('<div class="panel-group" id="accordion1"></div>');
+  var chapter= $('<div class="panel-group" id="accordion1" style="height: 300px; overflow: auto;"></div>');
   chapter.appendTo(galery_inner);
   $('#plink_tab a:first').tab('show');
   $( "button" ).button();
