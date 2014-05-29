@@ -319,8 +319,31 @@ var jssor_slider1_left = function (containerId) {
 };
  
 var createSliderComponent = function (event,ui){
-    var top=(event.pageY-25)+"px";
-    var left=(event.pageX-100)+"px";
+    var min_left = $("#current_page").offset().left;
+    var min_top = $("#current_page").offset().top;
+    var max_left = $("#current_page").width() + min_left;
+    var max_top = $("#current_page").height() + min_top;
+    var window_width = $( window ).width();
+    var window_height = $( window ).height();
+
+    if(max_top > window_height) max_top = window_height;
+    if(max_left > window_width) max_top = window_width;
+    
+    var top=(event.pageY - 25);
+    var left=(event.pageX-150);
+
+    console.log(top);
+
+    if(left < min_left)
+      left = min_left;
+    else if(left+210 > max_left)
+      left = max_left - 210;
+
+    if(top < min_top)
+      top = min_top;
+    else if(top+230 > max_top)
+      top = max_top - 230;
+  
     $("<div class='popup ui-draggable' id='pop-image-popup' style='display: block; top:" + top + "; left: " + left + ";'> \
     <div class='popup-header'> \
     <i class='icon-m-galery'></i> &nbsp;"+j__("Galeri Ekle")+" \

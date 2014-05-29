@@ -44,6 +44,10 @@ window.lindneo.dataservice = (function( $ ) {
   var video_popup = function(event, ui, component){
       createVideoComponent( event, ui, component );
     };
+
+  var galery_popup = function(event, ui, component){
+      createGaleryComponent( event, ui, component );
+    };
     
   var newComponentDropPage = function(div_id, e, reader, file){
     var that =this;
@@ -340,6 +344,7 @@ window.lindneo.dataservice = (function( $ ) {
     html_popup: html_popup,
     wrap_popup: wrap_popup,
     latex_popup: latex_popup,
+    galery_popup: galery_popup,
     send: send
   };
 

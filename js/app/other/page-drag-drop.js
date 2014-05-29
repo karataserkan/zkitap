@@ -355,7 +355,7 @@ $( document ).ready(function () {
             break;
 
           case 'galery':
-            createGaleryComponent( event, ui );
+            window.lindneo.dataservice.galery_popup(event, ui);
             break;
 
           case 'sound':
@@ -530,6 +530,8 @@ $( document ).ready(function () {
     $( document ).on( "click","canvas.preview" ,function(event, ui) {
       console.log(event);
       console.log($('.'+event.toElement.parentElement.children[1].className).attr('bpageTeplateId'));
+
+      $('.selected').trigger('unselect');
       
       if(event.toElement.parentElement.children[1].className[0] == 'p'){
           //console.log($(event.toElement.parentElement.children[2]).attr('book-id'));

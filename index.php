@@ -3,7 +3,16 @@ ini_set('display_errors', 'On');
 ini_set('set_time_limit', '5');
 error_reporting(E_ERROR | E_PARSE);
 // change the following paths if necessary
-$yii=dirname(__FILE__).'/../../../../dump/yii_framework/framework/yii.php';
+
+if(gethostname()=='ulgen'){
+$host_config='/../../../../dump/yii_framework/framework/yii.php';
+}
+else
+{
+$host_config='./../dump/yii_framework/framework/yii.php';
+}
+
+$yii=dirname(__FILE__).$host_config;
 $config=dirname(__FILE__).'/protected/config/main.php';
 $floodblocker=dirname(__FILE__).'/protected/security/floodblocker.php';
 $detectinjection=dirname(__FILE__).'/protected/security/detectinjection.php';
