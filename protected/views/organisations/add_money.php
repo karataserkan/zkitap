@@ -108,7 +108,7 @@ $('#card_preview').css({'background-image': 'url(<?php echo Yii::app()->request-
                     .done(function( result ) {
                       console.log(result);
                       if(result){
-                          
+                          window.location.href="/organisations/account/<?php echo $organisation ?>";
                       }
                   });
                 }else{
