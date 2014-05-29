@@ -79,23 +79,42 @@ $('#card_preview').css({'background-image': 'url(<?php echo Yii::app()->request-
             $('#add_balance').click(function() {
                 var name=$('#name').val();
                 var number=$('#cardnumber').val();
-                
+                number = number.replace(/\s/g, '');
                 var ccv=$('#cvc').val();
-                
-                console.log(month);
-                console.log(year);
+                var num=0;
+                var sum=0;
+                for (var i = 0; i < number.length; i++) {
+                  if ((i%2==0)) {
+                    num=(number[i]*2);
+                  }
+                  else{
+                    num=number[i];
+                  }                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         
+                  
+                  if (num>9) {
+                    num=1+(num-10);
+                  }
 
-                $.ajax({
-                    type: "POST",
-                    url: "/organisations/checkoutPlan/<?php echo $organisation?>",
-                    data: {tutar:"<?php echo $tutar; ?>", plan_id: "<?php echo $plan_id; ?>", name: name, number: number, month:month, year:year,ccv:ccv}
-                })
-                  .done(function( result ) {
-                    console.log(result);
-                    if(result){
-                        
-                    }
-                });
+                  sum+=parseInt(num);
+                };
+                
+                if ((sum%10)==0) {
+                  $('#cardnumber').css("color","green");
+                  $.ajax({
+                      type: "POST",
+                      url: "/organisations/checkoutPlan/<?php echo $organisation?>",
+                      data: {tutar:"<?php echo $tutar; ?>", plan_id: "<?php echo $plan_id; ?>", name: name, number: number, month:month, year:year,ccv:ccv}
+                  })
+                    .done(function( result ) {
+                      console.log(result);
+                      if(result){
+                          
+                      }
+                  });
+                }else{
+                  $('#cardnumber').css("color","red");
+                };
+
             });
   });
 
@@ -131,7 +150,7 @@ $('#card_preview').css({'background-image': 'url(<?php echo Yii::app()->request-
              
                     <input type="text" class="form-control" id="tutar" value="Çekilecek tutar: <?php echo $tutar; ?>$" disabled><br>
                     <input type="text" class="form-control" id="name" placeholder="Kart Üzerindeki Ad Soyad"><br>
-                    <input type="text" class="form-control" id="cardnumber" placeholder="Kart Numarası"><br>
+                    <input type="text" class="form-control" id="cardnumber" placeholder="Kart Numarası" data-mask="9999 9999 9999 9999"><br>
                 <div id="cardmonth">
                     <select class="form-control" id="card_month" style="float:left; width:100px;">
                         <option value="0">Ay</option>
