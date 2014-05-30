@@ -36,7 +36,7 @@ class BookController extends Controller
 				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
-				'actions'=>array('create','update','selectTemplate','delete','view','author','newBook','selectData','uploadFile','duplicateBook','updateCover',"copyBook","createTemplate","updateBookTitle","getBookPages",'bookCreate','getTemplates','createNewBook','fastStyle','getFastStyle','updateThumbnail','manageDemo'),
+				'actions'=>array('create','update','selectTemplate','delete','view','author','newBook','selectData','uploadFile','duplicateBook','updateCover','getPagesAndChapters',"copyBook","createTemplate","updateBookTitle","getBookPages",'bookCreate','getTemplates','createNewBook','fastStyle','getFastStyle','updateThumbnail','manageDemo'),
 				'users'=>array('@'),
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
@@ -47,6 +47,25 @@ class BookController extends Controller
 				'users'=>array('*'),
 			),
 		);
+	}
+
+	public function actionGetPagesAndChapters($id)
+	{
+		$res=array();
+		$pages=array();
+		$chapters=Chapter::model()->findAll(array('order'=>  '`order` asc ,  created asc', "condition"=>'book_id=:book_id', "params" => array(':book_id' => $id )));
+
+		foreach ($chapters as $key => $chapter) {
+			$res['chapters'][]=$chapter;
+			$pages=Page::model()->findAll(array('order'=>  '`order` asc ,  created desc', "condition"=>'chapter_id=:chapter_id', "params" =>array(':chapter_id' => $chapter->chapter_id)));
+			foreach ($pages as $key => $page) {
+				$res['pages'][$chapter->chapter_id][]=$page->page_id;
+			}
+		}
+
+		echo CJSON::encode($res);
+		//echo json_encode($res);
+
 	}
 
 	public function actionFastStyle()
