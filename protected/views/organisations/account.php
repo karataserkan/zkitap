@@ -14,11 +14,36 @@
 		<div class="col-sm-12">
 			<div class="page-header">
 				<h3 class="content-title pull-left"><?php _e('Hesabım') ?></h3>
-                <a class="btn pull-right brand_color_for_buttons" id='addNewBookBtn' href="/organisations/selectPlan/<?php echo $id?>">
-                    <i class="fa fa-plus-circle"></i>
-                    <span><?php _e('Bakiye Ekle') ?></span>
+                    <?php if ($plan) {
+                            $planName=__('Başlangıç Paketi');
+                            if ($plan->transaction_explanation==2) {
+                                $planName=__('Temel Paket');
+                             }elseif ($plan->transaction_explanation==3) {
+                                $planName=__('Ayrıcalıklı Paket');
+                             }elseif ($plan->transaction_explanation==4) {
+                                $planName=__('Kurumsal Paket');
+                             }
+                        ?>
+                    <a class="btn pull-right btn-primary" id='addNewBookBtn' href="/organisations/selectPlan?id=<?php echo $id?>&current=<?php echo $plan->transaction_explanation?>">
+                        <i class="fa fa-plus-circle"></i>
+                        <span><?php _e('Yükselt') ?></span>
+                    <?php }else{ ?>
+                        <a class="btn pull-right btn-primary" id='addNewBookBtn' href="/organisations/selectPlan?id=/<?php echo $id?>">
+                        <i class="fa fa-plus-circle"></i>
+                        <span><?php _e('Ekle') ?></span>
+                    <?php }?>
                 </a>
-			</div>
+                
+                <?php if ($plan) { ?>
+                    <span class="alert alert-success pull-right"><?php _e('Geçerli planınız: '); echo $planName; ?>
+                        <br>
+                        <?php _e('Planın bitmesine kalan gün: '); echo $remainDay; ?>
+                    </span>
+                <?php }else{ ?>
+                    <span class="alert alert-danger pull-right"><?php _e('Geçerli planınız bulunmamaktadır'); ?>
+                    </span>
+               <?php }?>
+            </div>
 		</div>
 	</div>
 	<!-- /PAGE HEADER -->

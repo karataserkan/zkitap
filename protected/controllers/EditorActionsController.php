@@ -119,9 +119,9 @@ class EditorActionsController extends Controller
 		    'params'=>array(':organisation_id'=>$organisation->organisation_id),
 		));
 		//var_dump($hosts);
-		$categories=BookCategories::model()->findAll('organisation_id=:organisation_id',array('organisation_id'=>$organisation->organisation_id));
-		$categories2=BookCategories::model()->findAll('organisation_id=:organisation_id',array('organisation_id'=>'general_'.$this->getCurrentLang()));
-
+		$categories=BookCategories::model()->findAll(array('condition'=>'organisation_id=:organisation_id','order'=>'`category_name` asc','params'=>array('organisation_id'=>$organisation->organisation_id)));
+		//$pages=Page::model()->findAll(array("condition"=>"page_id=:page_id","order"=>'`order` asc ,  created asc',"params"=> array('page_id' => $page_id )));
+		
 		$model=new PublishBookForm;
 
 		$model->contentId=$bookId;

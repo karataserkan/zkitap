@@ -114,10 +114,10 @@ class OrganisationsController extends Controller
 		}
 	}
 
-	public function actionSelectPlan($id=0)
+	public function actionSelectPlan($id=0,$current=0)
 	{
 		if ($id) {
-			$this->render('select_plan',array('organisation'=>$id));
+			$this->render('select_plan',array('organisation'=>$id,'current'=>$current));
 		}
 	}
 
@@ -148,11 +148,13 @@ class OrganisationsController extends Controller
 				$transaction->transaction_id=$ticket;
 				$transaction->transaction_type="plan";
 				$transaction->transaction_method="deposit";
+				$transaction->transaction_explanation=$plan_id;
 				$transaction->transaction_amount=1;
 				$transaction->transaction_unit_price=$tutar;
 				$transaction->transaction_amount_equvalent=$tutar;
-				$transaction->transaction_start_date=date('Y-n-d g:i:s',time());;
+				$transaction->transaction_start_date=date('Y-n-d g:i:s',time());
 				$transaction->transaction_organisation_id=$id;
+
 				$transaction->save();
 
 				$url = Yii::app()->params['panda_host'].'/api/addPlan';
@@ -173,7 +175,9 @@ class OrganisationsController extends Controller
 				$response = curl_exec( $ch );
 				echo $response;
 				error_log('response: '.$response);
-
+				$transaction->transaction_result=0;
+				$transaction->transaction_end_date=date('Y-n-d g:i:s',time());
+				$transaction->save();
 			}
 		}
 		else
@@ -438,7 +442,16 @@ class OrganisationsController extends Controller
 		$category=Yii::app()->db->createCommand("SELECT count(*) as w FROM `book_categories` WHERE `organisation_id`='".$id."'")->queryRow();
 		$budget=$this->getOrganisationEpubBudget($id);
 
-		$this->render("account",array('book'=>$books['book'],'workspace'=>$workspaces['w'],'host'=>$hosts['w'],'category'=>$category['w'],'budget'=>$budget,'id'=>$id));
+		$plan=Transactions::model()->find('transaction_type="plan" AND transaction_method="deposit" AND transaction_result=0 AND transaction_organisation_id=:transaction_organisation_id',array('transaction_organisation_id'=>$id));
+		$remainDay=0;
+		if ($plan) {
+			$datetime1 = new DateTime('now');
+			$datetime2 = new DateTime($plan->transaction_start_date);
+			$interval = $datetime2->diff($datetime1);
+			$remainDay=30-$interval->format('%R%a');
+		}
+
+		$this->render("account",array('book'=>$books['book'],'workspace'=>$workspaces['w'],'host'=>$hosts['w'],'category'=>$category['w'],'budget'=>$budget,'id'=>$id,'plan'=>$plan,'remainDay'=>$remainDay));
 	}
 
 	public function actionTemplates($id)

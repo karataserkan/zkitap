@@ -244,10 +244,29 @@
 													?>
 
 													<div class="form-group">
-														<label  class="col-md-3 control-label">
+														<?php
+															$general_categories=[
+																				"Science"=>__('Bilim'),
+																				"Children"=>__('Çocuk'),
+																				"Education"=>__('Eğitim'),
+																				"General"=>__('Genel'),
+																				"Business"=>__('İş'),
+																				"Medical"=>__('Medikal'),
+																				"Art"=>__('Sanat'),
+																				"Travel"=>__('Seyehat'),
+																				"Sports"=>__('Spor'),
+																				"Poetry"=>__('Şiir'),
+																				"History"=>__('Tarih'),
+																				"Technology"=>__('Teknoloji')];
+															foreach ($general_categories as $key => $category) {
+																$categoryIds[$key]=$category;
+															}
+														 ?>
+														
+														<label  class="col-md-1 control-label">
 														<?php _e("Kategoriler"); ?>
 														</label>
-														<div class="col-md-9">
+														<div class="col-md-5">
 															<?php echo $form->checkBoxList($model,'categories',$categoryIds,array('class'=>'uniform','name'=>'categories')); ?>
 														<?php if (!empty($categorySiraliIds)&&$categorySiraliIds) { ?>	
 															<br>
