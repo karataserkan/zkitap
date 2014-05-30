@@ -433,6 +433,25 @@ class OrganisationsController extends Controller
 
 		return $amount;
 	}
+
+	public function getRemainPlanDays($id){
+		$lastDay=0;
+		$plans=Transactions::model()->findAll('transaction_type="plan" AND transaction_method="deposit" AND transaction_result=0 AND transaction_organisation_id=:transaction_organisation_id AND `transaction_start_date`>= DATE_SUB(CURDATE(), INTERVAL 30 DAY) AND `transaction_start_date` <= CURDATE() ORDER BY `transaction_start_date`',array('transaction_organisation_id'=>$id));
+		if ($plans) {
+			foreach ($plans as $key => $plan) {
+				if ($key==0) {
+					$date = new DateTime($plan->transaction_start_date);
+					$lastDay=$date->add(new DateInterval('P30D'));
+				}
+				else
+					$lastDay=$lastDay->add(new DateInterval('P30D'));
+
+			}
+			$lastDay=$date->format('d-m-Y');
+		}
+
+		return $lastDay;
+	}
 	
 	public function actionAccount($id)
 	{
@@ -442,16 +461,16 @@ class OrganisationsController extends Controller
 		$category=Yii::app()->db->createCommand("SELECT count(*) as w FROM `book_categories` WHERE `organisation_id`='".$id."'")->queryRow();
 		$budget=$this->getOrganisationEpubBudget($id);
 
-		$plan=Transactions::model()->find('transaction_type="plan" AND transaction_method="deposit" AND transaction_result=0 AND transaction_organisation_id=:transaction_organisation_id',array('transaction_organisation_id'=>$id));
+		$plan=Transactions::model()->find('transaction_type="plan" AND transaction_method="deposit" AND transaction_result=0 AND transaction_organisation_id=:transaction_organisation_id AND `transaction_start_date`>= DATE_SUB(CURDATE(), INTERVAL 30 DAY) AND `transaction_start_date` <= CURDATE()',array('transaction_organisation_id'=>$id));
 		$remainDay=0;
-		if ($plan) {
+		$lastDay=$this->getRemainPlanDays($id);
+		if ($lastDay) {
 			$datetime1 = new DateTime('now');
-			$datetime2 = new DateTime($plan->transaction_start_date);
-			$interval = $datetime2->diff($datetime1);
-			$remainDay=30-$interval->format('%R%a');
+			$datetime2 = new DateTime($lastDay);
+			 $interval = $datetime1->diff($datetime2);
+			 $remainDay=$interval->format('%a');
 		}
-
-		$this->render("account",array('book'=>$books['book'],'workspace'=>$workspaces['w'],'host'=>$hosts['w'],'category'=>$category['w'],'budget'=>$budget,'id'=>$id,'plan'=>$plan,'remainDay'=>$remainDay));
+		$this->render("account",array('book'=>$books['book'],'workspace'=>$workspaces['w'],'host'=>$hosts['w'],'category'=>$category['w'],'budget'=>$budget,'id'=>$id,'plan'=>$plan,'remainDay'=>$remainDay,'lastDay'=>$lastDay));
 	}
 
 	public function actionTemplates($id)
