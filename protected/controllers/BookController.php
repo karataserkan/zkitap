@@ -62,8 +62,9 @@ class BookController extends Controller
 				$res['pages'][$chapter->chapter_id][]=$page->page_id;
 			}
 		}
-
+		header('Content-type: application/json');
 		echo CJSON::encode($res);
+		Yii::app()->end();
 		//echo json_encode($res);
 
 	}

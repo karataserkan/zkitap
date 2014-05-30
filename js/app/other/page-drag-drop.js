@@ -1,4 +1,6 @@
 $( document ).ready(function () {
+  bookPagePreviews();
+  sortPages();
 
   var keydown_component = [];
   var count = 0;
@@ -793,11 +795,53 @@ $( document ).ready(function () {
     });
   }
 
-  function page_previews(){
-    //console.log(window.lindneo.chapters_preview);
-    $.each(window.lindneo.chapters_preview,function(i, key){
-      console.log(key);
-    });
+  function bookPagePreviews(){
 
+    $.ajax({
+      type: "GET",
+      url: window.location.origin + "/book/getPagesAndChapters/" + window.lindneo.currentBookId,
+      contentType: "application/json; charset=utf-8",
+      dataType: "json",
+      cache: false,
+      success: function (result) {
+
+          console.log(result.chapters); 
+          console.log(result.pages); 
+          var value = "";
+          var page_NUM = 0; 
+          $.each(result.chapters, function(index, key){
+            var chapter_page = 0;
+            console.log(key);
+            value += '<div class="chapter"  chapter_id="'+key.chapter_id+'"">\
+                            <div class="chapter-detail">\
+                              <input type="text" class="chapter-title" placeholder='+j__("Bölüm adı")+' value="'+key.title+'">\
+                              <a class="btn btn-danger  page-chapter-delete delete-chapter hidden-delete" style="float: right; margin-top: -23px;"><i class="icon-ok"></i></a>\
+                              <a class="page-chapter-delete_control hidden-delete" style="float: right; margin-top: -23px;"><i class="icon-delete"></i><i class="icon-delete"></i></a>\
+                            </div>\
+                            <ul class="pages" >';
+            console.log(result.pages[key.chapter_id]);
+            if(typeof result.pages[key.chapter_id] != "undefined"){
+              $.each(result.pages[key.chapter_id], function(indexp, keyp){
+                console.log(page_NUM);
+                console.log(keyp);
+                page_NUM++;
+                var page_link = "/book/author/"+window.lindneo.currentBookId+'/'+result.pages[key.chapter_id][indexp];
+
+                value += '<li class="page ' + (window.lindneo.currentPageId == keyp  ? "current_page": "") +'" chapter_id="' + key.chapter_id + '" page_id="' + keyp + '" >\
+                              <a class="btn btn-danger page-chapter-delete delete-page hidden-delete "  style="top: 0px;right: 0px; position: absolute;"><i class="icon-delete"></i></a>\
+                                <a href="/book/author/'+ window.lindneo.currentBookId +'/'+ keyp +'"/>\
+                                <span class="page-number">'+ page_NUM +'</span>\
+                              </a> \
+                            </li>';
+                chapter_page++;
+              });
+              value += '</ul></div>';
+            }
+          });
+          value = $(value);
+          value.appendTo('.panel-body');
+        //console.log(value);
+      }
+    });
   }
 

@@ -66,6 +66,7 @@ function pagesoffchapter_preview(){
 	//console.log(pagesoffchapterPreview);
 	return pagesoffchapterPreview;
 }
+
 	
 	window.lindneo.currentPageId='<?php echo $current_page->page_id; ?>';
 	window.lindneo.currentBookId='<?php echo $model->book_id; ?>';
@@ -77,8 +78,6 @@ function pagesoffchapter_preview(){
 
 	window.lindneo.highlightComponent='<?php echo $highlight_component->id; ?>';
 
-	window.lindneo.chapters_preview = chapters_preview();
-	window.lindneo.pagesoffchapter_preview = pagesoffchapter_preview();
 
 	$(document).ready(function(){
 		options = {  
@@ -1981,65 +1980,7 @@ function pagesoffchapter_preview(){
 				 <div id="collapseThree" class="panel-collapse collapse in">
 
 					<div class="panel-body">
-						<?php 
-						$page_NUM=0;
-
-						$chapters=Chapter::model()->findAll(array('order'=>  '`order` asc ,  created asc', "condition"=>'book_id=:book_id', "params" => array(':book_id' => $model->book_id )));
-						//print_r($chapters);
-						foreach ($chapters as $key => $chapter) {
-								
-								$pagesOfChapter=Page::model()->findAll(array('order'=>  '`order` asc ,  created desc', "condition"=>'chapter_id=:chapter_id', "params" =>array(':chapter_id' => $chapter->chapter_id )) );
-										$chapter_page=0;
-										?>
-					<div class='chapter'  chapter_id='<?php echo $chapter->chapter_id; ?>'>
-					<div class="chapter-detail">
-					<input type="text" class="chapter-title" placeholder="<?php _e('Bölüm adı') ?>" value="<?php echo $chapter->title; ?>">
-					
-					<a class="btn btn-danger  page-chapter-delete delete-chapter hidden-delete" style="float: right; margin-top: -23px;"><i class="icon-ok"></i></a> 
-					<a class="page-chapter-delete_control hidden-delete" style="float: right; margin-top: -23px;"><i class="icon-delete"></i><i class="icon-delete"></i></a> 
-					</div>
-					<!-- <?php echo $chapter->title; ?>  chapter title--> 
-										<ul class="pages" >
-												<?php
-												
-								foreach ($pagesOfChapter as $key => $pages) {
-									
-									/* if( $pages->page_id	<div style='	<div style='clear:both;'>
-
-
-						</div>clear:both;'> 
-
-					 
-						</div>
-										==
-										$page->page_id ){
-										$this->current_page=$page; 
-										$this->current_chapter=$chapter;
-									}*/
-									$page_NUM++;
-									$page_link = "/book/author/".$model->book_id.'/'.$pages->page_id;
-									?> 
-										
-										<li class='page <?php echo ( $current_page->page_id== $pages->page_id  ? "current_page": "" ); ?>' chapter_id='<?php echo $pages->chapter_id; ?>' page_id='<?php echo $pages->page_id; ?>' chapter_id='<?php echo $pages->page_id; ?>'   >
-											<a class="btn btn-danger page-chapter-delete delete-page hidden-delete "  style="top: 0px;right: 0px; position: absolute;"><i class="icon-delete"></i></a>
-											<!--<a href='<?php echo $this->createUrl("book/author", array('bookId' => $model->book_id, 'page'=>$pages->page_id ));?>' >-->
-												<a href='<?php echo "/book/author/".$model->book_id.'/'.$pages->page_id;?>'/>
-													
-												<span class="page-number"><?php echo $page_NUM; ?></span>
-											</a>	
-										</li>
-									<?php
-									$chapter_page++;
-								}
-														?>
-											</ul>
-											</div>
-								<?php
-
-						}
 						
-						//$this->current_chapter=null;
-						?>
 						
 						<!-- yeni butonlar gelmeden önce en altta olan zımbırtı -->
 						<!--  <div id="add-button" class="bck-dark-blue size-25 icon-add white" style="position: fixed; bottom: 0px; right: 0px; width: 140px; text-align: center;"></div -->
