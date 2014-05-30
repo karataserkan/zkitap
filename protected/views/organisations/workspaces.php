@@ -9,7 +9,7 @@
 <?php
 /* @var $this OrganisationsController */
 
-$organisationId=$organizationUser['organisation_id'];
+//$organisationId=$organizationUser['organisation_id'];
 
 
 ?>
@@ -73,6 +73,7 @@ $organisationId=$organizationUser['organisation_id'];
 					<select id="user" class="book-list-textbox radius grey-9 float-left"  style=" width: 280px;">
 						<?php
 							$organizationUsers = $this->freeWorkspaceUsers($workspace['workspace_id'],$organisationId);//$this->organizationUsers($organisationId);
+
 							foreach ($organizationUsers as $key => $organizationUser) {
 								echo '<option value="'.$organizationUser['id'].'">'.$organizationUser['name'].' '.$organizationUser['surname'].'</option>';
 							}

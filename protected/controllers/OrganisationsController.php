@@ -62,7 +62,7 @@ class OrganisationsController extends Controller
 
 	public function actionDeneme()
 	{
-		echo Yii::app()->params['panda_host'];
+		print_r($this->freeWorkspaceUsers('seviye_ws1','qwertyu'));
 	}
 
 	public function actionWorkspace()
