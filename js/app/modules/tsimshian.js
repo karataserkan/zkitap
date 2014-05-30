@@ -20,7 +20,7 @@ window.lindneo.tsimshian = (function(window, $, undefined){
   };
  
   var serverName = function (){ 
-    return "http://dev.lindneo.com:1881";
+    return window.location.origin+":1881";
   }; 
 
 
@@ -48,6 +48,11 @@ window.lindneo.tsimshian = (function(window, $, undefined){
   var componentDestroyed = function(componentId){
     //console.log(componentId);
     this.socket.emit('destroyComponent', componentId);
+  };
+
+  var pageDestroyed = function(pageId){
+    console.log(pageId);
+    this.socket.emit('destroyComponent', pageId);
   };
 
   var emitSelectedComponent = function ( component ) {
@@ -81,7 +86,7 @@ window.lindneo.tsimshian = (function(window, $, undefined){
 
     }
 
-    this.socket = io.connect("http://dev.lindneo.com:1881");
+    this.socket = io.connect(window.location.origin+":1881");
     this.socket.on('connection', function (data) {
       var user=window.lindneo.tsimshian.getCurrentUser();
        this.socket.emit('changePage',user);
@@ -97,8 +102,20 @@ window.lindneo.tsimshian = (function(window, $, undefined){
        } );
 
  
-       this.socket.on('destroyComponent', function(componentId){
-          window.lindneo.nisga.destroyByIdComponent(componentId);
+       this.socket.on('destroyComponent', function(pageId){
+        console.log(pageId);
+          //window.lindneo.nisga.destroyByIdComponent(componentId);
+          window.lindneo.nisga.destroyPage(pageId);
+          sortPages();
+          window.lindneo.tlingit.loadAllPagesPreviews();
+        
+       } );
+
+       this.socket.on('destroyPage', function(pageId){
+          console.log(pageId);
+          window.lindneo.nisga.destroyPage(pageId);
+          sortPages();
+          window.lindneo.tlingit.loadAllPagesPreviews();
         
        } );
 
@@ -191,6 +208,7 @@ window.lindneo.tsimshian = (function(window, $, undefined){
     componentUpdated: componentUpdated,
     changePage: changePage,
     componentDestroyed: componentDestroyed,
+    pageDestroyed: pageDestroyed,
     componentCreated: componentCreated,
     myComponent: myComponent,
     emitSelectedComponent: emitSelectedComponent,

@@ -461,6 +461,8 @@ window.lindneo.tlingit = (function(window, $, undefined){
 
 
   var PageHasDeleted = function (pageId){
+    console.log(pageId);
+    window.lindneo.tsimshian.pageDestroyed( pageId );
     window.lindneo.dataservice
     .send( 'DeletePage', 
       { 
@@ -475,7 +477,7 @@ window.lindneo.tlingit = (function(window, $, undefined){
   };
 
   var DeletePage =function(response){
-    var response = responseFromJson(response);
+    //var response = responseFromJson(response);
     //pass to nisga to destroy page
     //console.log(response);
 

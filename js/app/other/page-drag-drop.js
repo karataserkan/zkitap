@@ -580,12 +580,24 @@ $( document ).ready(function () {
     });
 
     $('.delete-page').click(function(){
+
       var delete_buttons = $('<i class="icon-delete"></i><i class="icon-delete"></i>');
 
       var page_id=$(this).parent().attr('page_id');
-
+      var control_value = 0;
+      $.each(window.lindneo.book_users, function(index,key){
+        console.log(key);
+        if(key.username != window.lindneo.user.username)
+          if(key.pageid == page_id){
+            alert("Başka bir kullanıcı bu sayfada çalıştığından bu sayfayı silemezsiniz!...");
+            control_value = 1;
+          }
+      });
+      if(control_value == 1)
+        return;
+      //return;
       window.lindneo.tlingit.PageHasDeleted( page_id );
-
+      //return;
       //ekaratas start
       //sayfa silindiğinde sayfaya ait olan çalışma alanını kaldırdım
 
@@ -779,5 +791,13 @@ $( document ).ready(function () {
         );
 
     });
+  }
+
+  function page_previews(){
+    //console.log(window.lindneo.chapters_preview);
+    $.each(window.lindneo.chapters_preview,function(i, key){
+      console.log(key);
+    });
+
   }
 
