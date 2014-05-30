@@ -35,7 +35,17 @@ $(document).ready(function(){
         popupmessage.html('<img src="'+this.options.component.data.marker+'" style="width:100%; height:100%;"/>');
       }
       else if(selected_tab == "#plink_area"){
-        var popupmessage=$('<div  id="message_'+componentplinkid+'"  style="overflow:hidden; border: solid yellow; width:'+this.options.component.data.width+'px; height:'+this.options.component.data.height+'px;"></div>');
+        console.log("GELIYO");
+        console.log(this.options.component.data.height);
+        console.log(this.options.component.data.self.css);
+        var width = this.options.component.data.self.css.width;
+        var height = this.options.component.data.self.css.height; 
+        if(this.options.component.data.height!=0){
+          var popupmessage=$('<div  id="message_'+componentplinkid+'"  style="overflow:hidden; border: solid yellow; width:'+width+'; height:'+height+';"></div>');
+        }
+        else{
+          var popupmessage=$('<div  id="message_'+componentplinkid+'"  style="overflow:hidden; border: solid yellow; min-width:'+'100%; min-height:'+'100%;"></div>');
+        }
         popupmessage.appendTo(this.element);
       }
        
@@ -261,8 +271,8 @@ console.log(top);
             'plink_data': plink_data ,
             'plink_image': FileBinary,
             'page_link': page_link ,
-            'width': width,
-            'height': height,
+            'width': '0',
+            'height': '0',
             'marker': marker,
             'selected_tab': selected_tab,
             'overflow': 'visible',
@@ -274,7 +284,9 @@ console.log(top);
                 'left':  left ,
                 'overflow': 'visible',
                 'opacity': '1',
-                'z-index': 'first'
+                'z-index': 'first',
+                'width':width,
+                'height':height
               }
             }
           }
