@@ -87,7 +87,7 @@ $(document).ready(function(){
       var innerOffsetX, innerOffsetY; // we'll use those during drag ... 
       //console.log(this.element.parent());
       //this.element.parent().attr('id','c_'+this.options.component.id);
-      console.log(this.options.component.data.self.css);
+      //console.log(this.options.component.data.self.css);
       //this.options.component.data.self.css['z-index']=this.options.component.data.self.css.zindex;
       this.element
       .attr('id', this.options.component.id)

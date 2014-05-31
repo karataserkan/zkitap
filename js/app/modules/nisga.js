@@ -649,6 +649,12 @@ var textComponentBuilder = function( component ) {
     $(".chapter[chapter_id='"+chapter+"']").remove();
   }; 
 
+  var destroyPage = function(pageId){
+    console.log(pageId);
+    
+    $("li[page_id="+pageId+"]").remove();
+  }; 
+
 
   
   var imageComponentBuilder = function ( component ) {
@@ -980,6 +986,7 @@ var textComponentBuilder = function( component ) {
     deleteComponent: deleteComponent,
     ComponentDelete: ComponentDelete,
     destroyChapter: destroyChapter,
+    destroyPage: destroyPage,
     destroyComponent: destroyComponent,
     destroyByIdComponent: destroyByIdComponent,
     undoComponent: undoComponent,
