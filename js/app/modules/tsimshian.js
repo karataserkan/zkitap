@@ -52,7 +52,12 @@ window.lindneo.tsimshian = (function(window, $, undefined){
 
   var pageDestroyed = function(pageId){
     console.log(pageId);
-    this.socket.emit('destroyComponent', pageId);
+    this.socket.emit('destroyPage', pageId);
+  };
+
+  var pageCreated = function(){
+    console.log("page");
+    window.lindneo.tsimshian.socket.emit('createPage');
   };
 
   var emitSelectedComponent = function ( component ) {
@@ -102,12 +107,10 @@ window.lindneo.tsimshian = (function(window, $, undefined){
        } );
 
  
-       this.socket.on('destroyComponent', function(pageId){
-        console.log(pageId);
-          //window.lindneo.nisga.destroyByIdComponent(componentId);
-          window.lindneo.nisga.destroyPage(pageId);
-          sortPages();
-          window.lindneo.tlingit.loadAllPagesPreviews();
+       this.socket.on('destroyComponent', function(componentId){
+        
+          window.lindneo.nisga.destroyByIdComponent(componentId);
+          
         
        } );
 
@@ -116,6 +119,12 @@ window.lindneo.tsimshian = (function(window, $, undefined){
           window.lindneo.nisga.destroyPage(pageId);
           sortPages();
           window.lindneo.tlingit.loadAllPagesPreviews();
+        
+       } );
+
+       this.socket.on('createPage', function(){
+          
+          window.lindneo.tlingit.PageHasCreated();
         
        } );
 
@@ -209,6 +218,7 @@ window.lindneo.tsimshian = (function(window, $, undefined){
     changePage: changePage,
     componentDestroyed: componentDestroyed,
     pageDestroyed: pageDestroyed,
+    pageCreated: pageCreated,
     componentCreated: componentCreated,
     myComponent: myComponent,
     emitSelectedComponent: emitSelectedComponent,

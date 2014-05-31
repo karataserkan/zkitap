@@ -1,6 +1,8 @@
 $( document ).ready(function () {
   bookPagePreviews();
-  sortPages();
+
+  
+
 
   var keydown_component = [];
   var count = 0;
@@ -545,7 +547,7 @@ $( document ).ready(function () {
               console.log(link);
               window.location.href = link;
             }
-
+      window.lindneo.tsimshian.pageCreated();
       //get page id from parent li 
       var page_id = $(this).parent().attr('page_id') ;
       sortPages();
@@ -797,6 +799,8 @@ $( document ).ready(function () {
 
   function bookPagePreviews(){
 
+    $($(".panel-body")[3]).html("");
+
     $.ajax({
       type: "GET",
       url: window.location.origin + "/book/getPagesAndChapters/" + window.lindneo.currentBookId,
@@ -805,13 +809,13 @@ $( document ).ready(function () {
       cache: false,
       success: function (result) {
 
-          console.log(result.chapters); 
-          console.log(result.pages); 
+          //console.log(result.chapters); 
+          //console.log(result.pages); 
           var value = "";
           var page_NUM = 0; 
           $.each(result.chapters, function(index, key){
             var chapter_page = 0;
-            console.log(key);
+            //console.log(key);
             value += '<div class="chapter"  chapter_id="'+key.chapter_id+'"">\
                             <div class="chapter-detail">\
                               <input type="text" class="chapter-title" placeholder='+j__("Bölüm adı")+' value="'+key.title+'">\
@@ -819,29 +823,149 @@ $( document ).ready(function () {
                               <a class="page-chapter-delete_control hidden-delete" style="float: right; margin-top: -23px;"><i class="icon-delete"></i><i class="icon-delete"></i></a>\
                             </div>\
                             <ul class="pages" >';
-            console.log(result.pages[key.chapter_id]);
+            //console.log(result.pages[key.chapter_id]);
             if(typeof result.pages[key.chapter_id] != "undefined"){
               $.each(result.pages[key.chapter_id], function(indexp, keyp){
-                console.log(page_NUM);
-                console.log(keyp);
+                //console.log(page_NUM);
+                //console.log(keyp);
                 page_NUM++;
                 var page_link = "/book/author/"+window.lindneo.currentBookId+'/'+result.pages[key.chapter_id][indexp];
 
                 value += '<li class="page ' + (window.lindneo.currentPageId == keyp  ? "current_page": "") +'" chapter_id="' + key.chapter_id + '" page_id="' + keyp + '" >\
-                              <a class="btn btn-danger page-chapter-delete delete-page hidden-delete "  style="top: 0px;right: 0px; position: absolute;"><i class="icon-delete"></i></a>\
-                                <a href="/book/author/'+ window.lindneo.currentBookId +'/'+ keyp +'"/>\
-                                <span class="page-number">'+ page_NUM +'</span>\
-                              </a> \
-                            </li>';
+                            <a class="btn btn-danger page-chapter-delete delete-page hidden-delete "  style="top: 0px;right: 0px; position: absolute;"><i class="icon-delete"></i></a>\
+                            <a href="/book/author/'+ window.lindneo.currentBookId +'/'+ keyp +'"/><span class="page-number">'+ page_NUM +'</span></a>\
+                          </li>';
                 chapter_page++;
               });
               value += '</ul></div>';
+              //console.log(value);
             }
           });
           value = $(value);
-          value.appendTo('.panel-body');
+          //value.appendTo('.panel-body');
+          $($(".panel-body")[3]).html(value);
+          $('.pages').sortable({ 
+            distance: 15,
+            connectWith: '.pages' , 
+            axis:'y',
+            stop: function( event,ui){
+              sortPages();
+            }  
+          });
+
+          var last_timeout;
+          $('.pages .page').hover(
+            function(){
+              //console.log('hover started');
+              var timeout;
+              var page_thumb_item = $(this);
+
+              //$(this).find('.page-chapter-delete').hide();
+              timeout = setTimeout(function(){ 
+                page_thumb_item.find('.page-chapter-delete').show();
+                //console.log('hover-timeout');
+                clearTimeout(timeout);
+              },1000);
+
+              setTimeout(function(){
+                clearTimeout(timeout);
+              },2000); 
+
+              last_timeout = timeout;
+              //console.log('hover-out');
+              //setTimeout(function(){alert("OK");}, 3000);
+
+          },  
+          function(){
+            //clearTimeout(my_timer);
+            $(this).find('.page-chapter-delete').hide();
+            if (last_timeout) clearTimeout(last_timeout);
+
+          });
+          $('.chapter-detail').hover(
+            function(){
+              console.log('hover started');
+              var timeout;
+              var page_thumb_item = $(this);
+
+              //$(this).find('.page-chapter-delete').hide();
+              timeout = setTimeout(function(){ 
+                page_thumb_item.find('.page-chapter-delete').eq(0).show();
+                console.log('hover-timeout');
+                clearTimeout(timeout);
+              },1000);
+
+              setTimeout(function(){
+                clearTimeout(timeout);
+              },2000); 
+
+              last_timeout = timeout;
+              console.log('hover-out');
+              //setTimeout(function(){alert("OK");}, 3000);
+
+          },  
+          function(){
+            //clearTimeout(my_timer);
+            $(this).find('.page-chapter-delete').hide();
+            if (last_timeout) clearTimeout(last_timeout);
+
+          });
+
+          window.lindneo.tlingit.loadAllPagesPreviews();
+
         //console.log(value);
       }
     });
+
+    $('.delete-page').click(function(){
+
+      var delete_buttons = $('<i class="icon-delete"></i><i class="icon-delete"></i>');
+
+      var page_id=$(this).parent().attr('page_id');
+      var control_value = 0;
+      $.each(window.lindneo.book_users, function(index,key){
+        console.log(key);
+        if(key.username != window.lindneo.user.username)
+          if(key.pageid == page_id){
+            alert("Başka bir kullanıcı bu sayfada çalıştığından bu sayfayı silemezsiniz!...");
+            control_value = 1;
+          }
+      });
+      if(control_value == 1)
+        return;
+      //return;
+      window.lindneo.tlingit.PageHasDeleted( page_id );
+      //return;
+      //ekaratas start
+      //sayfa silindiğinde sayfaya ait olan çalışma alanını kaldırdım
+
+      if (page_id==window.lindneo.currentPageId) {
+        $('#current_page').hide().remove();
+
+        var link=$("#chapters_pages_view > div:first-child > ul:first-child > li:first-child > a:nth-child(2)").attr('href');
+        
+        var page_id = $(".page:first-child").attr("page_id");
+        
+        var link='?r=book/author&bookId='+window.lindneo.currentBookId+'&page='+page_id;
+
+        var slink='?r=chapter/create&book_id='+window.lindneo.currentBookId;
+
+        if (link != "") {
+          window.location.assign(link);
+        }
+        else
+          window.location.assign(slink);
+
+
+      };
+      //ekaratas end
+
+      $('.page[page_id="'+page_id+'"]').hide('slow', function(){  $('.page[page_id="'+page_id+'"]').remove();});
+      sortPages();
+
+    });
+    
+
   }
 
+  
