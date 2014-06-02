@@ -1,23 +1,144 @@
-#: css/ui/js/datatables/media/js/jquery.dataTables.js:5097
-msgid "tr:first"
+# Language File For English Translation of Squid Pacific
+# Copyright (C) 2104 Linden Digital Publishing
+# This file is distributed under the same license as the Squid Pacific package.
+# Squid Pacific <pacific@linden-tech>, 2014.
+#
+msgid ""
 msgstr ""
+"Project-Id-Version: 0.1\n"
+"Report-Msgid-Bugs-To: pacific@linden-tech\n"
+"POT-Creation-Date: 2014-01-15 06:00+0000\n"
+"PO-Revision-Date: 2014-05-20 14:18+0200\n"
+"Last-Translator: ugur <ugur@linden-tech.com>\n"
+"Language-Team: Squid Pacific <pacific@linden-tech>\n"
+"Language: en\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 1.5.4\n"
+
+#: css/ui/js/datatables/media/js/jquery.dataTables.js:5097
+#: css/ui/js/datatables/media/js/jquery.dataTables.js:5097
+msgid   "tr:first"
+msgstr  ""
 
 #: css/ui/js/datatables/media/js/jquery.dataTables.js:5109
-msgid "tr"
-msgstr ""
+#: css/ui/js/datatables/media/js/jquery.dataTables.js:5109
+msgid   "tr"
+msgstr  ""
 
-#: protected/views/layouts/main.php:175
-msgid "Geri"
-msgstr "Previous"
+#: protected/views/layouts/main.php:175 protected/views/layouts/main.php:179
+#: protected/views/layouts/main.php:179
+msgid   "Geri"
+msgstr  "Previous"
 
-#: protected/views/layouts/main.php:176
-msgid "İleri"
-msgstr "Next"
+#: protected/views/layouts/main.php:176 protected/views/layouts/main.php:180
+#: protected/views/layouts/main.php:180
+msgid   "İleri"
+msgstr  "Next"
 
-#: protected/views/layouts/main.php:177
-msgid "Bitir"
-msgstr "Finish"
+#: protected/views/layouts/main.php:177 protected/views/layouts/main.php:181
+#: protected/views/layouts/main.php:181
+msgid   "Bitir"
+msgstr  "Finish"
 
-#: js/lib/MathJax.js:19 js/lib/mathjax/MathJax.js:19
-msgid "CookieConfig"
-msgstr ""
+#: js/lib/MathJax.js:19 js/lib/mathjax/MathJax.js:19 js/lib/MathJax.js:19
+#: js/lib/mathjax/MathJax.js:19
+msgid   "CookieConfig"
+msgstr  ""
+
+#: js/lib/trips/book/author.js:4
+msgid   "Okutus Editor'e HoşGeldiniz, Editor Tanıtımı için ileriye basınız."
+msgstr  ""
+
+#: js/lib/trips/book/author.js:10
+msgid   "Burası yayın üretiminin yapıldığı bölümdür."
+msgstr  ""
+
+#: js/lib/trips/book/author.js:20
+msgid   "Üzerinde çalıştığınız <br> yayının adını <br>buradan görebilirsiniz"
+msgstr  ""
+
+#: js/lib/trips/book/author.js:25
+msgid   "Dosya bölümünden kitaplığınıza dönebilir,<br> PDF ekleyebilir, "
+        "yayınlarınızı <br> PDF veya EPUB formatında <br>yayınlayabilirsiniz."
+msgstr  ""
+
+#: js/lib/trips/book/author.js:30
+msgid   "Düzen bölümünden yaptığınız işlemi geri-ileri alabilir ve   <br> "
+        "kes, kopyala, yapıştır ile sayfa  <br> üzerindeki nesneleri "
+        "yönetebilirsiniz."
+msgstr  ""
+
+#: js/lib/trips/book/author.js:35
+msgid   "Görünüm bölümünden Cetvel aracı ile <br>  sayfa üzerindeki "
+        "nesnelerinizin <br> yatay ve dikey pozisyonunu görebilirsiniz"
+msgstr  ""
+
+#: js/lib/trips/book/author.js:40
+msgid   "Bu bölümden sayfa üzerinde metin arama yapabilirsiniz."
+msgstr  ""
+
+#: js/lib/trips/book/author.js:46
+msgid   "Şu an beraber çalıştığınız kişilerin <br>listesini buradan takip "
+        "edebilirsiniz."
+msgstr  ""
+
+#: js/lib/trips/book/author.js:52
+msgid   "Yaptığınız işlemlerin <br>sonucunu buradan takip edebilirsiniz. <br> "
+        "Yeşil-> Herşey yolunda, <br> Mavi -> İşlem yapılıyor, <br> Kırmızı -"
+        "> İnternet Bağlantısı Problemi <br> demektir. j__("
+msgstr  ""
+
+#: js/lib/trips/book/author.js:58
+msgid   "Bu bölümden profilinizi <br>görüntüleyebilir, hesabınızdan<br> çıkış "
+        "yapabilirsiniz."
+msgstr  ""
+
+#: js/lib/trips/book/author.js:68
+msgid   "Buradan üzerinde çalıştığınız bileşen ile ilgili seçenekleri kontrol "
+        "edebilirsiniz."
+msgstr  ""
+
+#: js/lib/trips/book/author.js:135
+msgid   "Bu panel üzerinden sayfa üzerine sürükle-bırak ile zenginleştirme "
+        "ekleyebilirsiniz."
+msgstr  ""
+
+#: js/lib/trips/book/author.js:142
+msgid   "Büyüteç aracı ile sayfayı büyütebilirsiniz."
+msgstr  ""
+
+#: js/lib/trips/book/author.js:149
+msgid   "Bu bölümden yazarlar aynı yayın üzerinde çoklu çalışma yaparken "
+        "sohbet edebilirler."
+msgstr  ""
+
+#: js/lib/trips/book/author.js:160
+msgid   "Sağdaki panelden yayınınızın kapağını, sayfalarını ve bölümlerini "
+        "düzenleyebilirsiniz."
+msgstr  ""
+
+#: js/lib/trips/book/author.js:166
+msgid   "Buraya tıklayarak yayınınıza kapak ekleyebilirsiniz."
+msgstr  ""
+
+#: js/lib/trips/book/author.js:172
+msgid   "Buraya tıklayarak yayınınızın markette görüneceği öngörüntüsünü "
+        "ekleyebilirsiniz."
+msgstr  ""
+
+#: js/lib/trips/book/author.js:178
+msgid   "Bu bölümden kullanmak üzere hızlı stillerinizi istediğiniz gibi "
+        "düzenleyebilirsiniz."
+msgstr  ""
+
+#: js/lib/trips/book/author.js:184
+msgid   "Sayfalar bölümünden yeni bölüm başlıklarını değiştirebilir, sayfları "
+        "ve bölümleri sıralayabilirsiniz."
+msgstr  ""
+
+#: js/lib/trips/book/author.js:190
+msgid   "Yeni sayfa ve bölüm ekleyebilirsiniz."
+msgstr  ""

@@ -34,20 +34,31 @@ $(document).ready(function(){
 
 
       that.options.resizableParams = {
-        "maxHeight":null,
-        "minHeight":null,
+        //"maxHeight":null,
+        //"minHeight":null,
         "handles":"n, e, w, s, nw, se, sw, ne",
           'start': function (event,ui){
             that._selected(event,ui);
+           // console.log($(event.currentTarget).offset());
             //console.log(ui);
+            //console.log($("#current_page").width());
             if(that.options.component.type == "plink"){
               $('#message_plink'+that.options.component.id).css('height','100%');
               $('#message_plink'+that.options.component.id).css('width','100%');
             }
             //$(ui.element.get(0)).resizable("option", "alsoResize",".selected");
-            $(this).resizable("option", "alsoResize",".selected",{
-                                                          containment: "#current_page"
-                                                        });
+            $(this).resizable("option", "alsoResize",".selected");
+           //var max_width = $("#current_page").width() - $(event.currentTarget).offset().left + 284;
+           //var max_height = $("#current_page").height() - $(event.currentTarget).offset().top + 124;
+           console.log($(this));
+           console.log($(this).parent());
+          $(this).resizable({
+            containment: "#current_page",
+            //maxWidth: max_width,
+            //maxHeight: max_height
+          });
+            //console.log($(this).parent().parent());
+            //console.log($(this).css("left").replace("px",""));
             //ui.element.resizable("option", "alsoResize",".selected");
             //$(".selected").resizable();
             $(".selected").trigger("resize");
@@ -56,6 +67,9 @@ $(document).ready(function(){
             that._resize(event, ui);
           },
           'resize':function(event,ui){
+            if( typeof this.resize_pass != "undefined" )
+              this.resize_pass(event,ui);
+            
             window.lindneo.toolbox.makeMultiSelectionBox();
           }
         };
@@ -73,7 +87,7 @@ $(document).ready(function(){
       var innerOffsetX, innerOffsetY; // we'll use those during drag ... 
       //console.log(this.element.parent());
       //this.element.parent().attr('id','c_'+this.options.component.id);
-      console.log(this.options.component.data.self.css);
+      //console.log(this.options.component.data.self.css);
       //this.options.component.data.self.css['z-index']=this.options.component.data.self.css.zindex;
       this.element
       .attr('id', this.options.component.id)
@@ -247,6 +261,8 @@ $(document).ready(function(){
               window.lindneo.dataservice.wrap_popup(event, ui, that.options.component);
             else if(that.options.component.type == 'latex')
               window.lindneo.dataservice.latex_popup(event, ui, that.options.component);
+            else if(that.options.component.type == 'galery')
+              window.lindneo.dataservice.galery_popup(event, ui, that.options.component);
           })
           
           .mouseenter(function(event){
@@ -350,8 +366,8 @@ $(document).ready(function(){
       that.comment_list =  $('<div class="comment_cards_list"> </div>');
       that.newCommentBox = $('<div></div>');
 
-      that.newCommentBox_textarea = $('<input type="text" class="commentBoxTextarea" placeholder="Yorum giriniz..." id="commentBoxTextarea'+that.options.component.id+'" />');
-      that.newCommentBox_button = $('<button id="commentBoxTextareaSend'+that.options.component.id+'" class="commentBoxTextareaSend">Gönder</button></div>');
+      that.newCommentBox_textarea = $('<input type="text" class="commentBoxTextarea" placeholder="'+j__("Yorum giriniz")+'..." id="commentBoxTextarea'+that.options.component.id+'" />');
+      that.newCommentBox_button = $('<button id="commentBoxTextareaSend'+that.options.component.id+'" class="commentBoxTextareaSend">'+j__("Gönder")+'</button></div>');
 
       that.newCommentBox_button.click(function(){
                 var commentBoxTextareaValue = that.newCommentBox_textarea.val();

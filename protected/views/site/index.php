@@ -337,6 +337,13 @@ $all_books= $this->getWorkspaceBooks($workspace->workspace_id);
 		 
 		<?php 
 			$users = $this->bookUsers($book->book_id);
+			$bookUsers=$this->bookUsers($book->book_id);
+			$numberOfOwner=0;
+			foreach ($bookUsers as $key => $bookUser) {
+				if ($bookUser['type']=='owner'){
+					$numberOfOwner++;
+				}
+			}
 
 			foreach ($users as $key => $user): 
 				if ($user['type']=='owner' || $user['type']=='editor'){?>
@@ -360,6 +367,7 @@ $all_books= $this->getWorkspaceBooks($workspace->workspace_id);
 					
 					<div class="col-md-1">
 						<?php 
+						if ($user['type']=='editor' || $numberOfOwner > 1) {
 							echo CHtml::link(CHtml::encode(''), array("site/removeUser?userId=".$user['id']."&bookId=".$book->book_id),
 							  array(
 								'submit'=>array("site/removeUser?userId=".$user['id']."&bookId=".$book->book_id, 'userId'=>$user['id'],'bookId'=>$book->book_id),
@@ -367,6 +375,7 @@ $all_books= $this->getWorkspaceBooks($workspace->workspace_id);
 								'class' => 'fa fa-trash-o pull-right'
 							  )
 							);
+							}
 							?>
 
 					</div>
@@ -393,7 +402,9 @@ $all_books= $this->getWorkspaceBooks($workspace->workspace_id);
 					$workspaceUsers = $this->workspaceUsers($workspace->workspace_id);
 					
 					foreach ($workspaceUsers as $key => $workspaceUser) {
-						echo '<option value="'.$workspaceUser['userid'].'">'.$workspaceUser['name'].' '.$workspaceUser['surname'].'</option>';
+						if ($workspaceUser['userid'] != Yii::app()->user->id) {
+							echo '<option value="'.$workspaceUser['userid'].'">'.$workspaceUser['name'].' '.$workspaceUser['surname'].'</option>';
+						}
 					}
 				 ?>
 			</select>
@@ -441,7 +452,7 @@ $all_books= $this->getWorkspaceBooks($workspace->workspace_id);
                                             </li>
                                         </ul>
                                         
-										<a class="btn pull-right btn-primary" id='addNewBookBtn' href="/book/bookCreate" <?php echo ($confirmation !=0 AND $confirmation !=3)? "disabled":""; ?>>
+										<a class="btn pull-right brand_color_for_buttons" id='addNewBookBtn' href="/book/bookCreate" <?php echo ($confirmation !=0 AND $confirmation !=3)? "disabled":""; ?>>
 											<i class="fa fa-plus-circle"></i>
 											<span><?php _e('Kitap Ekle') ?></span>
 										</a>

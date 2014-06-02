@@ -66,19 +66,19 @@ var createThumbComponent = function (event,ui){
 
     $("<div class='popup ui-draggable' id='pop-image-popup' style='display: block; top:" + (ui.offset.top-$(event.target).offset().top ) + "px; left: " + ( ui.offset.left-$(event.target).offset().left ) + "px;'> \
     <div class='popup-header'> \
-    <i class='icon-m-galery'></i> &nbsp;Galeri Ekle \
+    <i class='icon-m-galery'></i> &nbsp;"+j__("Galeri Ekle")+" \
     <i id='galery-add-dummy-close-button' class='icon-close size-10 popup-close-button'></i> \
     </div> \
       <div class='gallery-inner-holder'> \
         <div style='clear:both'></div> \
-        <input type='text' class='form-control' id='thumb_width' placeholder='Genişlik' style='width:45%; float:left;'>\
-        <input type='text' class='form-control' id='thumb_height' placeholder='Yükseklik' style='width:45%; float:right;'><br><br>\
+        <input type='text' class='form-control' id='thumb_width' placeholder='"+j__("Genişlik")+"' style='width:45%; float:left;'>\
+        <input type='text' class='form-control' id='thumb_height' placeholder='"+j__("Yükseklik")+"' style='width:45%; float:right;'><br><br>\
         <div class='add-image-drag-area' id='dummy-dropzone'> </div> \
       </div> \
       <ul id='galery-popup-images' style='width: 250px;'> \
       </ul> \
      <div style='clear:both' > </div> \
-     <a id='pop-image-OK' class='btn btn-info' >Tamam</a>\
+     <a id='pop-image-OK' class='btn btn-info' >"+j__("Tamam")+"</a>\
     </div> ").appendTo('body').draggable();
     $('#galery-add-dummy-close-button').click(function(){
 

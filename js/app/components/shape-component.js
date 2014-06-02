@@ -160,6 +160,11 @@ var createShapeComponent = function ( event, ui ) {
     var min_top = $("#current_page").offset().top;
     var max_left = $("#current_page").width() + min_left;
     var max_top = $("#current_page").height() + min_top;
+    var window_width = $( window ).width();
+    var window_height = $( window ).height();
+
+    if(max_top > window_height) max_top = window_height;
+    if(max_left > window_width) max_top = window_width;
     
     var top=(event.pageY - 25);
     var left=(event.pageX-150);
@@ -182,7 +187,7 @@ console.log(top);
     left = left + "px";
     $("<div class='popup ui-draggable' id='pop-image-popup' style='display: block; top:" + top + "; left: " + left + ";'> \
       <div class='popup-header'> \
-<i class='icon-m-galery'></i> &nbsp;Şekil Ekle \
+<i class='icon-m-galery'></i> &nbsp;"+j__("Şekil Ekle")+" \
 <i id='shape-add-dummy-close-button' class='icon-close size-10 popup-close-button'></i> \
 </div> \
 <!--  popup content --> \

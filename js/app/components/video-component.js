@@ -136,6 +136,11 @@ var createVideoComponent = function( event, ui, oldcomponent ) {
     var min_top = $("#current_page").offset().top;
     var max_left = $("#current_page").width() + min_left;
     var max_top = $("#current_page").height() + min_top;
+    var window_width = $( window ).width();
+    var window_height = $( window ).height();
+
+    if(max_top > window_height) max_top = window_height;
+    if(max_left > window_width) max_top = window_width;
     
     var top=(event.pageY - 25);
     var left=(event.pageX-150);
@@ -159,7 +164,7 @@ var createVideoComponent = function( event, ui, oldcomponent ) {
 
       $("<div class='popup ui-draggable' id='pop-video-popup' style='display: block; top:" + top + "; left: " + left + "; '> \
         <div class='popup-header'> \
-        <i class='icon-m-video'></i> &nbsp;Video Ekle \
+        <i class='icon-m-video'></i> &nbsp;"+j__("Video Ekle")+" \
         <i id='video-add-dummy-close-button' class='icon-close size-10 popup-close-button'></i> \
         </div> \
           <div class='gallery-inner-holder' style='width:500px;'> \
@@ -167,18 +172,18 @@ var createVideoComponent = function( event, ui, oldcomponent ) {
             <div class='typev' style='padding: 4px; display: inline-block;'>\
                 <div class='btn-group' data-toggle='buttons'>\
                   <label class='btn btn-primary " + link_check_active + "'>\
-                    <input type='radio' name='video_type' id='repeat0' " + link_check + " value='link'> Sayfada\
+                    <input type='radio' name='video_type' id='repeat0' " + link_check + " value='link'> "+j__("Sayfada")+"\
                   </label>\
                   <label class='btn btn-primary " + popup_check_active + "'>\
-                    <input type='radio' name='video_type' id='repeat1' " + popup_check + " value='popup'> Açılır Pencerede\
+                    <input type='radio' name='video_type' id='repeat1' " + popup_check + " value='popup'> "+j__("Açılır Pencerede")+"\
                   </label>\
                 </div><br><br>\
             </div>\
             <div class='tabbable'>\
               <ul class='nav nav-tabs' id='myTab'>\
-                <li><a href='#video_drag' data-toggle='tab'>Video Sürükle</a></li>\
-                <li><a href='#video_upload' data-toggle='tab'>Video Yükle</a></li>\
-                <li><a href='#video_link' data-toggle='tab'>Vİdeo Bağlantı</a></li>\
+                <li><a href='#video_drag' data-toggle='tab'>"+j__("Video Sürükle")+"</a></li>\
+                <li><a href='#video_upload' data-toggle='tab'>"+j__("Video Yükle")+"</a></li>\
+                <li><a href='#video_link' data-toggle='tab'>"+j__("Video Bağlantı")+"</a></li>\
               </ul>\
             </div>\
             <div class='tab-content'>\
@@ -192,33 +197,33 @@ var createVideoComponent = function( event, ui, oldcomponent ) {
               </div>\
               <div class='tab-pane ' id='video_link'>\
                 <div class='divide-10'></div>\
-                <input id='video-url-text' class='input-textbox' type='url' placeholder='URL Adresini Giriniz'   value='" + video_url + "'> \
+                <input id='video-url-text' class='input-textbox' type='url' placeholder='"+j__("URL Adresini Giriniz")+"'   value='" + video_url + "'> \
               </div>\
             </div>\
             <div class='gallery-inner-holder' style='width:500px;'> \
               <div style='clear:both'></div> \
               <div class='type1' style='padding: 4px; display: inline-block;'>\
-                  <div class='btn-group' data-toggle='buttons'>Otomatik Başlama<br>\
+                  <div class='btn-group' data-toggle='buttons'>"+j__("Otomatik Başlama")+"<br>\
                     <label class='btn btn-primary " + auto_y_check_active + "'>\
-                      <input type='radio' name='auto_type' id='repeat0' " + auto_y_check + " value='Y'> Evet\
+                      <input type='radio' name='auto_type' id='repeat0' " + auto_y_check + " value='Y'> "+j__("Evet")+"\
                     </label>\
                     <label class='btn btn-primary " + auto_n_check_active + "'>\
-                      <input type='radio' name='auto_type' id='repeat1' " + auto_n_check + " value='N'> Hayır\
+                      <input type='radio' name='auto_type' id='repeat1' " + auto_n_check + " value='N'> "+j__("Hayır")+"\
                     </label>\
                   </div>\
                 </div>\
                 <div class='type1' style='padding: 4px; display: inline-block;'>\
-                  <div class='btn-group' data-toggle='buttons'>Kontrol Panel Görünümü<br>\
+                  <div class='btn-group' data-toggle='buttons'>"+j__("Kontrol Panel Görünümü")+"<br>\
                     <label class='btn btn-primary " + control_y_check_active + "'>\
-                      <input type='radio' name='control_type' id='repeat0' " + control_y_check + " value='Y'> Evet\
+                      <input type='radio' name='control_type' id='repeat0' " + control_y_check + " value='Y'> "+j__("Evet")+"\
                     </label>\
                     <label class='btn btn-primary " + control_n_check_active + "'>\
-                      <input type='radio' name='control_type' id='repeat1' " + control_n_check + " value='N'> Hayır\
+                      <input type='radio' name='control_type' id='repeat1' " + control_n_check + " value='N'> "+j__("Hayır")+"\
                     </label>\
                   </div>\
               </div>\
             </div>\
-            <a href='#' id='pop-image-OK' class='btn bck-light-green white radius' id='add-image' style='padding: 5px 30px;'>Ekle</a> \
+            <a href='#' id='pop-image-OK' class='btn bck-light-green white radius' id='add-image' style='padding: 5px 30px;'>"+j__("Ekle")+"</a> \
           </div> \
         </div>").appendTo('body').draggable();
     if(video_type == 'popup') video_type_video();

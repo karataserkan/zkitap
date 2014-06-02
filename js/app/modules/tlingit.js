@@ -27,7 +27,7 @@ window.lindneo.tlingit = (function(window, $, undefined){
     // co-worker'lara bildir
     oldcomponent_id = component_id;
     oldcomponent = component;
-    //console.log(component.data.self.css);
+    console.log(component.data.self.css);
     if(component.data.self.css['z-index'] == "first"){
         
         var zindex = window.lindneo.toolbox.findHighestZIndexToSet('[component-instance="true"]', component.id );
@@ -282,6 +282,7 @@ window.lindneo.tlingit = (function(window, $, undefined){
         return -1;
       });
       
+      var component_previews = [];
 
       $.each(components,function(i,component){
         var page_slice= $('[page_id="'+component.page_id+'"]');
@@ -297,6 +298,32 @@ window.lindneo.tlingit = (function(window, $, undefined){
 
 
           switch (component.type){
+
+            case 'image':
+             
+              var image=new Image();
+              image.src = component.data.img.src;
+              var y= parseInt( parseInt(component.data.self.css['top'] ) /ratio ) ;
+              var x= parseInt( parseInt(component.data.self.css['left'] )  /ratio );
+              var width= parseInt( parseInt(component.data.self.css['width'] )  /ratio );
+              var height= parseInt( parseInt(component.data.self.css['height'] )  /ratio );
+
+              image.onload= function(){
+                context.drawImage(image,x,y,width,height );
+                var componentPreview = {
+                  'type' : 'image',
+                  'image' : image,
+                  'x' : x,
+                  'y' : y,
+                  'width' : width,
+                  'height' : height
+                };
+                component_previews.push(componentPreview);
+              }
+              
+
+
+              break;
 
 
             case 'text':
@@ -314,7 +341,7 @@ window.lindneo.tlingit = (function(window, $, undefined){
 
               context.font= fontHeight + 'px Arial';
               context.fillStyle= component.data.textarea.css['color'];
-
+              
               if ( $.type(lines) != "undefined")
                 if ( lines != null)
                   if (lines.length > 0)
@@ -330,7 +357,16 @@ window.lindneo.tlingit = (function(window, $, undefined){
                         var testWidth = metrics.width;
 
                         if (testWidth > maxWidth && n > 0 ) {
-                          if ( y - starty <= maxHeight ) context.fillText(sublines, x, y);
+                          if ( y - starty <= maxHeight ) {
+                            context.fillText(sublines, x, y);
+                            var componentPreview = {
+                              'type' : 'text',
+                              'text' : sublines,
+                              'x' : x,
+                              'y' : y
+                            };
+                            component_previews.push(componentPreview);
+                          }
                           sublines = words[n] + ' ';
                           y += fontHeight;
                         }
@@ -341,28 +377,22 @@ window.lindneo.tlingit = (function(window, $, undefined){
                       } 
 
                
-                  if ( y - starty  <= maxHeight ) context.fillText(sublines, x,y );
+                  if ( y - starty  <= maxHeight ) {
+                    context.fillText(sublines, x,y );
+                    var componentPreview = {
+                      'type' : 'text',
+                      'text' : sublines,
+                      'x' : x,
+                      'y' : y
+                    };
+                    component_previews.push(componentPreview);
+                  }
 
                   });
             
               break;
 
-            case 'image':
-              var image=new Image();
-              image.src = component.data.img.src;
-              var y= parseInt( parseInt(component.data.self.css['top'] ) /ratio ) ;
-              var x= parseInt( parseInt(component.data.self.css['left'] )  /ratio );
-              var width= parseInt( parseInt(component.data.self.css['width'] )  /ratio );
-              var height= parseInt( parseInt(component.data.self.css['height'] )  /ratio );
-
-              image.onload= function(){
-                context.drawImage(image,x,y,width,height );
-              }
-              
-
-
-
-              break;
+            
 
             default:
               
@@ -372,6 +402,9 @@ window.lindneo.tlingit = (function(window, $, undefined){
 
 
       });
+
+    //console.log(component_previews);
+
 
     };
  
@@ -459,8 +492,16 @@ window.lindneo.tlingit = (function(window, $, undefined){
 
   }; 
 
+  var PageHasCreated = function (pageId){
+    console.log("page created");
+    bookPagePreviews();
+   
+  };
+
 
   var PageHasDeleted = function (pageId){
+    console.log(pageId);
+    window.lindneo.tsimshian.pageDestroyed( pageId );
     window.lindneo.dataservice
     .send( 'DeletePage', 
       { 
@@ -475,7 +516,7 @@ window.lindneo.tlingit = (function(window, $, undefined){
   };
 
   var DeletePage =function(response){
-    var response = responseFromJson(response);
+    //var response = responseFromJson(response);
     //pass to nisga to destroy page
     //console.log(response);
 
@@ -501,6 +542,7 @@ window.lindneo.tlingit = (function(window, $, undefined){
     loadPage: loadPage ,
     ChapterHasDeleted: ChapterHasDeleted,
     PageHasDeleted: PageHasDeleted,
+    PageHasCreated: PageHasCreated,
     DeletePage: DeletePage,
     DeleteChapter: DeleteChapter,
     pages: pages

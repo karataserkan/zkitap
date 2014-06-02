@@ -319,11 +319,34 @@ var jssor_slider1_left = function (containerId) {
 };
  
 var createSliderComponent = function (event,ui){
-    var top=(event.pageY-25)+"px";
-    var left=(event.pageX-100)+"px";
+    var min_left = $("#current_page").offset().left;
+    var min_top = $("#current_page").offset().top;
+    var max_left = $("#current_page").width() + min_left;
+    var max_top = $("#current_page").height() + min_top;
+    var window_width = $( window ).width();
+    var window_height = $( window ).height();
+
+    if(max_top > window_height) max_top = window_height;
+    if(max_left > window_width) max_top = window_width;
+    
+    var top=(event.pageY - 25);
+    var left=(event.pageX-150);
+
+    console.log(top);
+
+    if(left < min_left)
+      left = min_left;
+    else if(left+210 > max_left)
+      left = max_left - 210;
+
+    if(top < min_top)
+      top = min_top;
+    else if(top+230 > max_top)
+      top = max_top - 230;
+  
     $("<div class='popup ui-draggable' id='pop-image-popup' style='display: block; top:" + top + "; left: " + left + ";'> \
     <div class='popup-header'> \
-    <i class='icon-m-galery'></i> &nbsp;Galeri Ekle \
+    <i class='icon-m-galery'></i> &nbsp;"+j__("Galeri Ekle")+" \
     <i id='galery-add-dummy-close-button' class='icon-close size-10 popup-close-button'></i> \
     </div> \
       <div class='gallery-inner-holder'> \
@@ -331,13 +354,13 @@ var createSliderComponent = function (event,ui){
         <div class='type' style='padding: 4px; display: inline-block;'>\
             <div class='btn-group' >\
               <label class='btn btn-primary active'>\
-                <input type='radio' name='slider_align' checked='checked' id='repeat0' value='left'> Sol\
+                <input type='radio' name='slider_align' checked='checked' id='repeat0' value='left'> "+j__("Sol")+"\
               </label>\
               <label class='btn btn-primary '>\
-                <input type='radio' name='slider_align' id='repeat1' value='bottom'> Orta\
+                <input type='radio' name='slider_align' id='repeat1' value='bottom'> "+j__("Orta")+"\
               </label>\
               <label class='btn btn-primary '>\
-                <input type='radio' name='slider_align' id='repeat2' value='right'> Sağ\
+                <input type='radio' name='slider_align' id='repeat2' value='right'> "+j__("Sağ")+"\
               </label>\
             </div><br><br>\
         </div>\
@@ -346,7 +369,7 @@ var createSliderComponent = function (event,ui){
       <ul id='galery-popup-images' style='width: 250px;'> \
       </ul> \
      <div style='clear:both' > </div> \
-     <a id='pop-image-OK' class='btn btn-info' >Tamam</a>\
+     <a id='pop-image-OK' class='btn btn-info' >"+j__("Tamam")+"</a>\
     </div> ").appendTo('body').draggable();
     $('#galery-add-dummy-close-button').click(function(){
 

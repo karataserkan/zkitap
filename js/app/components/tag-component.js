@@ -34,14 +34,14 @@ $(document).ready(function(){
                 <div class="modal-content">\
                   <div class="modal-header">\
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>\
-                    <h4 class="modal-title" id="myModalLabel">Modal title</h4>\
+                    <h4 class="modal-title" id="myModalLabel">'+j__("Modal title")+'</h4>\
                   </div>\
                   <div class="modal-body">\
                     '+that.options.component.data.tagDetails[key]+'\
                   </div>\
                   <div class="modal-footer">\
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>\
-                    <button type="button" class="btn btn-primary">Save changes</button>\
+                    <button type="button" class="btn btn-default" data-dismiss="modal">'+j__("Close")+'</button>\
+                    <button type="button" class="btn btn-primary">'+j__("Save changes")+'</button>\
                   </div>\
                 </div>\
               </div>\
@@ -68,7 +68,7 @@ var createTagComponent = function (event,ui){
 
     $("<div class='popup ui-draggable' id='pop-image-popup' style='display: block; top:" + (ui.offset.top-$(event.target).offset().top ) + "px; left: " + ( ui.offset.left-$(event.target).offset().left ) + "px; width800x;'> \
     <div class='popup-header'> \
-    <i class='icon-m-galery'></i> &nbsp;Galeri Ekle \
+    <i class='icon-m-galery'></i> &nbsp;"+j__("Galeri Ekle")+" \
     <i id='tag-close-button' class='icon-close size-10 popup-close-button' style='width: 800px; height:50px;'></i> \
     </div> \
       <div class='gallery-inner-holder' style='width:800px;'> \
@@ -81,7 +81,7 @@ var createTagComponent = function (event,ui){
         </div> \
       </div> \
      <div style='clear:both' > </div> \
-     <a id='pop-image-OK' class='btn btn-info' >Tamam</a>\
+     <a id='pop-image-OK' class='btn btn-info' >"+j__("Tamam")+"</a>\
     </div> ").appendTo('body').draggable();
     $('#tag-close-button').click(function(){
 
@@ -105,7 +105,7 @@ var createTagComponent = function (event,ui){
         console.log(event);
         console.log(ui.position);
         var new_image_tag = $('<img id="tag_'+count+'" style="position:absolute;" src="/css/images/t01.png">');
-        var new_image_tag_detail = $('<textarea id="tag_detail_'+count+'"rows="3" style="width:500px; margin-left:150px; margin-top:5px;" placeholder="'+(count+1)+'. Tag için açıklama giriniz...."></textarea><br>');
+        var new_image_tag_detail = $('<textarea id="tag_detail_'+count+'"rows="3" style="width:500px; margin-left:150px; margin-top:5px;" placeholder="'+(count+1)+'. '+j__("Tag için açıklama giriniz")+'...."></textarea><br>');
         new_image_tag.appendTo('#drop_area');
         var tag_margin_left = (ui.position.left-225)-555;
         var tag_margin_top = (ui.position.top-84);

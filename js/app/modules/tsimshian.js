@@ -20,7 +20,7 @@ tsimshian = (function(window, $, undefined){
   };
  
   var serverName = function (){ 
-    return "http://dev.lindneo.com:1881";
+    return window.location.origin+":1881";
   }; 
 
 
@@ -50,6 +50,16 @@ tsimshian = (function(window, $, undefined){
     this.socket.emit('destroyComponent', componentId);
   };
 
+  var pageDestroyed = function(pageId){
+    console.log(pageId);
+    this.socket.emit('destroyPage', pageId);
+  };
+
+  var pageCreated = function(){
+    console.log("page");
+    window.lindneo.tsimshian.socket.emit('createPage');
+  };
+
   var emitSelectedComponent = function ( component ) {
 
     tsimshian.myComponent = component.id();
@@ -75,13 +85,13 @@ tsimshian = (function(window, $, undefined){
   var init = function (serverName){
 
     if ( typeof io == 'undefined' ){
-      alert ('Co-working System Error');
+      alert (j__("Co-working System Error"));
       location.reload();
       return;
 
     }
 
-    this.socket = io.connect("http://dev.lindneo.com:1881");
+    this.socket = io.connect(window.location.origin+":1881");
     this.socket.on('connection', function (data) {
       var user=tsimshian.getCurrentUser();
        this.socket.emit('changePage',user);
@@ -98,7 +108,23 @@ tsimshian = (function(window, $, undefined){
 
  
        this.socket.on('destroyComponent', function(componentId){
+        
           window.lindneo.nisga.destroyByIdComponent(componentId);
+          
+        
+       } );
+
+       this.socket.on('destroyPage', function(pageId){
+          console.log(pageId);
+          window.lindneo.nisga.destroyPage(pageId);
+          sortPages();
+          window.lindneo.tlingit.loadAllPagesPreviews();
+        
+       } );
+
+       this.socket.on('createPage', function(){
+          
+          window.lindneo.tlingit.PageHasCreated();
         
        } );
 
@@ -191,6 +217,8 @@ tsimshian = (function(window, $, undefined){
     componentUpdated: componentUpdated,
     changePage: changePage,
     componentDestroyed: componentDestroyed,
+    pageDestroyed: pageDestroyed,
+    pageCreated: pageCreated,
     componentCreated: componentCreated,
     myComponent: myComponent,
     emitSelectedComponent: emitSelectedComponent,

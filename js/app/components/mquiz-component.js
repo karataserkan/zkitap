@@ -20,7 +20,7 @@ $(document).ready(function(){
             <div class='question-text'></div> \
             <div class='question-options-container'></div> \
             <div style='margin-bottom:25px'> \
-              <a href='#' class='btn bck-light-green white radius send' > Yanıtla </a> \
+              <a href='#' class='btn bck-light-green white radius send' > "+j__("Yanıtla")+" </a> \
             </div> \
         </div>").appendTo(this.element);
 
@@ -78,7 +78,7 @@ $(document).ready(function(){
         }
         else if(that.options.component.data.quiz_type == "text"){
 
-          var appendText = "<div id='uanswer'><input type='text' id='user_answer' class='form-control' placeholder='Cevabınızı buraya giriniz...' /></div>";
+          var appendText = "<div id='uanswer'><input type='text' id='user_answer' class='form-control' placeholder='"+j__("Cevabınızı buraya giriniz...")+"' /></div>";
           this.element.find('.question-options-container').append(appendText);
           var that = this;
           /*
@@ -232,7 +232,7 @@ var removeRow = function(type, row_number){
     if(typeof oldcomponent == 'undefined'){
       var top = (ui.offset.top-$(event.target).offset().top ) + 'px';
       var left = ( ui.offset.left-$(event.target).offset().left ) + 'px';
-      var question = "Soru kökünü buraya yazınız.";
+      var question = j__("Soru kökünü buraya yazınız.");
       var answers = [];
     }
     else{
@@ -246,6 +246,11 @@ var removeRow = function(type, row_number){
     var min_top = $("#current_page").offset().top;
     var max_left = $("#current_page").width() + min_left;
     var max_top = $("#current_page").height() + min_top;
+    var window_width = $( window ).width();
+    var window_height = $( window ).height();
+
+    if(max_top > window_height) max_top = window_height;
+    if(max_left > window_width) max_top = window_width;
     
     var top=(event.pageY - 25);
     var left=(event.pageX-150);
@@ -269,20 +274,20 @@ console.log(top);
 
       $("<div class='popup ui-draggable' id='pop-mquiz-popup' style='display: block; top:" + top  + "; left: " + left  + "; width:300px;'> \
       <div class='popup-header'> \
-        <i class='icon-m-quiz'></i> &nbsp;Soru Ekle \
+        <i class='icon-m-quiz'></i> &nbsp;"+j__("Soru Ekle")+" \
         <i id='create-mquiz-close-button' class='icon-close size-10 popup-close-button'></i> \
       </div> \
       <!-- popup content --> \
       <div class='gallery-inner-holder' style='width:100%'> \
-        <label for='quiz_type'> Soru Tipi: </label> \
+        <label for='quiz_type'> "+j__("Soru Tipi")+": </label> \
         <select id='quiz_type' class='form-control'> \
-          <option selected value=''>Lütfen Seçiniz</option> \
-          <option value='text'>Yazı</option> \
-          <option value='multiple_choice'>Çoktan Seçmeli</option> \
-          <option value='checkbox'>Çoklu Seçmeli</option> \
+          <option selected value=''>"+j__("Lütfen Seçiniz")+"</option> \
+          <option value='text'>"+j__("Yazı")+"</option> \
+          <option value='multiple_choice'>"+j__("Çoktan Seçmeli")+"</option> \
+          <option value='checkbox'>"+j__("Çoklu Seçmeli")+"</option> \
         </select> \
-        <label for='question'> Soru: </label> \
-        <textarea class='form-control' id='question' rows='3' placeholder='Soru kökünü buraya yazınız...'></textarea>\
+        <label for='question'> "+j__("Soru")+": </label> \
+        <textarea class='form-control' id='question' rows='3' placeholder='"+j__("Soru kökünü buraya yazınız")+"...'></textarea>\
         <br /><br /> \
         <div class='quiz-inner'> \
         </div> \
@@ -320,20 +325,20 @@ console.log(top);
       question_answers=[];
       if($(this).val() == "text"){
         $('.quiz-inner').html('');
-        var answer_text = $("<input type='text' id='qtext' class='form-control' placeholder='Cevabınızı buraya giriniz...'><br>");
+        var answer_text = $("<input type='text' id='qtext' class='form-control' placeholder='"+j__("Cevabınızı buraya giriniz")+"...'><br>");
         answer_text.appendTo($('.quiz-inner'));
         question_answers.push(answer_text);
       }
       else if($(this).val() == "paragraph"){
         $('.quiz-inner').html('');
-        var answer_paragraph = $("<textarea class='form-control' id='qparagraph' rows='3' placeholder='Cevabınızı buraya giriniz...'></textarea><br>")
+        var answer_paragraph = $("<textarea class='form-control' id='qparagraph' rows='3' placeholder='"+j__("Cevabınızı buraya giriniz")+"...'></textarea><br>")
         answer_paragraph.appendTo($('.quiz-inner'));
         question_answers.push(answer_paragraph);
       }
       else if($(this).val() == "multiple_choice"){
         
         $('.quiz-inner').html('');
-        $("<a href='#' class='btn btn-info' onclick='addRow(\"multiple\");' >Cevap Ekle</a><br><br>").appendTo($('.quiz-inner'));
+        $("<a href='#' class='btn btn-info' onclick='addRow(\"multiple\");' >"+j__("Cevap Ekle")+"</a><br><br>").appendTo($('.quiz-inner'));
         var multiple_answer = $('<div><input type="radio" name="multipleradios" id="optionsRadios'+multiple_count+'" value="'+multiple_count+'" style="float:left; margin-right:10px;"><input class="form-control" id="mul_option'+multiple_count+'" type="text" placeholder="Cevap seçeneklerini giriniz..."style="float: left; width: 200px; margin-right: 10px;"><i id="delete_'+multiple_count+'" class="icon-close size-10 popup-close-button" style="float:left;" onclick="removeRow(\'multiple\','+multiple_count+');"></i><br><br></div>');
         multiple_answer.appendTo($('.quiz-inner'));
         multiple_count++;
@@ -341,7 +346,7 @@ console.log(top);
       }
       else if($(this).val() == "checkbox"){
         $('.quiz-inner').html('');
-        $("<a href='#' class='btn btn-info' onclick='addRow(\"checkbox\");' >Cevap Ekle</a><br><br>").appendTo($('.quiz-inner'));
+        $("<a href='#' class='btn btn-info' onclick='addRow(\"checkbox\");' >"+j__("Cevap Ekle")+"</a><br><br>").appendTo($('.quiz-inner'));
         var check_answer = $('<div><input type="checkbox" name="multichecks" id="inlineCheckbox'+check_count+'" value="'+check_count+'" style="float:left; margin-right:10px;"><input class="form-control" id="check_option'+check_count+'" type="text" placeholder="Cevap seçeneklerini giriniz..."style="float: left; width: 200px; margin-right: 10px;"><i id="delete_'+check_count+'" class="icon-close size-10 popup-close-button" style="float:left;" onclick="removeRow(\'checkbox\','+check_count+');"></i><br><br></div>');
         check_answer.appendTo($('.quiz-inner'));
         check_count++;
@@ -447,7 +452,7 @@ console.log(top);
             'css': {
 
             },
-            'text': 'Sorunuzu giriniz...'
+            'text': j__("Sorunuzu giriniz...")
 			
           },
           'quiz_type':quiz_type,

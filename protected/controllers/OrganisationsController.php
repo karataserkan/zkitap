@@ -32,7 +32,7 @@ class OrganisationsController extends Controller
 				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
-				'actions'=>array('create','update','workspaces','delWorkspaceUser','addWorkspaceUser','users','addUser','deleteOrganisationUser','account','bookCategories','deleteCategory','createBookCategory','updateBookCategory','templates','aCL','addACL','publishedBooks','deleteACL','removeFromCategory','addBalance','selectPlan'),
+				'actions'=>array('create','update','workspaces','delWorkspaceUser','addWorkspaceUser','users','addUser','deleteOrganisationUser','account','bookCategories','deleteCategory','createBookCategory','updateBookCategory','templates','aCL','addACL','publishedBooks','deleteACL','removeFromCategory','addBalance','selectPlan','checkoutPlan','deneme','changeTitle'),
 				'users'=>array('@'),
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
@@ -58,6 +58,11 @@ class OrganisationsController extends Controller
 	    ->queryRow();
 	    
 	    return ($bookOfUser) ? $bookOfUser['type'] : false;
+	}
+
+	public function actionDeneme()
+	{
+		print_r($this->freeWorkspaceUsers('seviye_ws1','qwertyu'));
 	}
 
 	public function actionWorkspace()
@@ -109,16 +114,94 @@ class OrganisationsController extends Controller
 		}
 	}
 
-	public function actionSelectPlan()
+	public function actionSelectPlan($id=0,$current=0)
 	{
-
-		$this->render('select_plan',array());
+		if ($id) {
+			$this->render('select_plan',array('organisation'=>$id,'current'=>$current));
+		}
 	}
 
-	public function actionAddBalance()
+	public function actionCheckoutPlan($id=0)
 	{
+		if (isset($_POST['tutar']) AND isset($_POST['tutar']) AND isset($_POST['plan_id']) AND isset($_POST['name']) AND isset($_POST['number']) AND isset($_POST['month']) AND isset($_POST['year']) AND isset($_POST['ccv'])) {
+			$user=Yii::app()->user->id;
+			$userModel=User::model()->findByPk($user);
+			$email=$userModel->email;
+			$type='plan';
+			$tutar=$_POST['tutar'];
+			$plan_id=$_POST['plan_id'];
+			$kartOwner=$_POST['name'];
+			$kartNumber=$_POST['number'];
+			$kartMonth=$_POST['month'];
+			$kartYear=$_POST['year'];
+			$kartCCV=$_POST['ccv'];
+			
+			$ticketUrl = Yii::app()->params['panda_host'].'/api/getTransactionTicket';
+			$ch = curl_init( $ticketUrl );
+			curl_setopt( $ch, CURLOPT_RETURNTRANSFER, 1);
+			$ticket = curl_exec( $ch );
+			error_log('ticket: '.$ticket);
+			error_log('ticketUrl: '.$ticketUrl);
 
-		$this->render('add_money',array());
+			if ($ticket) {
+				$transaction=new Transactions;
+				$transaction->transaction_id=$ticket;
+				$transaction->transaction_type="plan";
+				$transaction->transaction_method="deposit";
+				$transaction->transaction_explanation=$plan_id;
+				$transaction->transaction_amount=1;
+				$transaction->transaction_unit_price=$tutar;
+				$transaction->transaction_amount_equvalent=$tutar;
+				$transaction->transaction_start_date=date('Y-n-d g:i:s',time());
+				$transaction->transaction_organisation_id=$id;
+
+				$transaction->save();
+
+				$url = Yii::app()->params['panda_host'].'/api/addPlan';
+				$params = array(
+								'transaction'=>$ticket,
+								'email'=>$email,
+								'type_name'=>$type,
+								'type_id'=>$plan_id,
+								'amount'=>$tutar
+								);
+				error_log('params: '.$params);
+				$ch = curl_init( $url );
+				curl_setopt( $ch, CURLOPT_POST, 1);
+				curl_setopt( $ch, CURLOPT_POSTFIELDS, $params);
+				curl_setopt( $ch, CURLOPT_FOLLOWLOCATION, 1);
+				curl_setopt( $ch, CURLOPT_HEADER, 0);
+				curl_setopt( $ch, CURLOPT_RETURNTRANSFER, 1);
+				$response = curl_exec( $ch );
+				echo $response;
+				error_log('response: '.$response);
+				$transaction->transaction_result=0;
+				$transaction->transaction_end_date=date('Y-n-d g:i:s',time());
+				$transaction->save();
+			}
+		}
+		else
+		{
+			echo "1";
+		}
+
+	}
+
+
+	public function actionAddBalance($plan=0,$organisation=0)
+	{
+	 	$tutar="0";
+		if ($plan==2) {
+		  $tutar="49.99";
+		}elseif ($plan==3) {
+		  $tutar="199.99";
+		}elseif ($plan==4) {
+		  $tutar="299.99";
+		}
+
+		//url: "<?php echo Yii::app()->params['panda_host']; /api/transaction",
+
+		$this->render('add_money',array('tutar'=>$tutar,'plan_id'=>$plan,'organisation'=>$organisation));
 	}
 
 	public function actionRemoveFromCategory($id)
@@ -350,6 +433,41 @@ class OrganisationsController extends Controller
 
 		return $amount;
 	}
+
+	public function getRemainPlanDays($id){
+		$lastDay=0;
+		$plans=Transactions::model()->findAll('transaction_type="plan" AND transaction_method="deposit" AND transaction_result=0 AND transaction_organisation_id=:transaction_organisation_id AND `transaction_start_date`>= DATE_SUB(CURDATE(), INTERVAL 30 DAY) AND `transaction_start_date` <= CURDATE() ORDER BY `transaction_start_date`',array('transaction_organisation_id'=>$id));
+		if ($plans) {
+			foreach ($plans as $key => $plan) {
+				if ($key==0) {
+					$date = new DateTime($plan->transaction_start_date);
+					$lastDay=$date->add(new DateInterval('P30D'));
+				}
+				else
+					$lastDay=$lastDay->add(new DateInterval('P30D'));
+
+			}
+			$lastDay=$date->format('d-m-Y');
+		}
+
+		return $lastDay;
+	}
+
+	public function actionChangeTitle()
+	{
+		if (isset($_POST['title'])&&isset($_POST['organisation'])) {
+			$organisation=Organisations::model()->findByPk($_POST['organisation']);
+			$organisation->organisation_name=$_POST['title'];
+			if($organisation->save())
+			{
+				echo "0";
+			}else{
+				echo "1";
+			}
+		}else{
+			echo "1";
+		}
+	}
 	
 	public function actionAccount($id)
 	{
@@ -358,8 +476,17 @@ class OrganisationsController extends Controller
 		$hosts=Yii::app()->db->createCommand("SELECT count(*) as w FROM `organisation_hostings` WHERE `organisation_id`='".$id."'")->queryRow();
 		$category=Yii::app()->db->createCommand("SELECT count(*) as w FROM `book_categories` WHERE `organisation_id`='".$id."'")->queryRow();
 		$budget=$this->getOrganisationEpubBudget($id);
-
-		$this->render("account",array('book'=>$books['book'],'workspace'=>$workspaces['w'],'host'=>$hosts['w'],'category'=>$category['w'],'budget'=>$budget,'id'=>$id));
+		$organisation=Organisations::model()->findByPk($id);
+		$plan=Transactions::model()->find('transaction_type="plan" AND transaction_method="deposit" AND transaction_result=0 AND transaction_organisation_id=:transaction_organisation_id AND `transaction_start_date`>= DATE_SUB(CURDATE(), INTERVAL 30 DAY) AND `transaction_start_date` <= CURDATE()',array('transaction_organisation_id'=>$id));
+		$remainDay=0;
+		$lastDay=$this->getRemainPlanDays($id);
+		if ($lastDay) {
+			$datetime1 = new DateTime('now');
+			$datetime2 = new DateTime($lastDay);
+			 $interval = $datetime1->diff($datetime2);
+			 $remainDay=$interval->format('%a');
+		}
+		$this->render("account",array('book'=>$books['book'],'workspace'=>$workspaces['w'],'host'=>$hosts['w'],'category'=>$category['w'],'budget'=>$budget,'id'=>$id,'plan'=>$plan,'remainDay'=>$remainDay,'lastDay'=>$lastDay,'organisation'=>$organisation));
 	}
 
 	public function actionTemplates($id)
@@ -718,9 +845,18 @@ class OrganisationsController extends Controller
 				$users[]= User::model()->findByPk($organizationUser->user_id);
 		}
 
+		$invitated=OrganisationInvitation::model()->findAll('organisation_id=:organisation_id',array('organisation_id'=>$organisationId));
+		
+		$invitatedUsers=array();
+		foreach ($invitated as $key => $user) {
+			$invitatedUsers[]=User::model()->findByPk($user->user_id);
+		}
+
 		$this->render('users', array(
 			'users'=>$users,
-			'organisationId'=>$organisationId));
+			'organisationId'=>$organisationId,
+			'invitated'=>$invitatedUsers
+			));
 	}
 
 	/**
@@ -729,30 +865,35 @@ class OrganisationsController extends Controller
 	 * @param  ID $organisationId 
 	 * @return redirect previous page
 	 */
-	public function actionDeleteOrganisationUser($userId,$organisationId)
+	public function actionDeleteOrganisationUser()
 	{
-		$organisationWorkspaces= OrganisationWorkspaces::model()->findAll('organisation_id=:organisation_id', 
-	    				array(':organisation_id' => $organisationId) );
-		foreach ($organisationWorkspaces as $key => $workspace) {
-			$workspaceUser = WorkspacesUsers::model()->findByPk(array('userid'=>$userId,'workspace_id'=>$workspace->workspace_id));
-			if ($workspaceUser) {
-				$workspaceUser->delete();
+		if (isset($_POST['userId']) AND isset($_POST['organisationId'])) {
+			$userId=$_POST['userId'];
+			$organisationId=$_POST['organisationId'];
+			
+			$organisationWorkspaces= OrganisationWorkspaces::model()->findAll('organisation_id=:organisation_id', 
+		    				array(':organisation_id' => $organisationId) );
+			foreach ($organisationWorkspaces as $key => $workspace) {
+				$workspaceUser = WorkspacesUsers::model()->findByPk(array('userid'=>$userId,'workspace_id'=>$workspace->workspace_id));
+				if ($workspaceUser) {
+					$workspaceUser->delete();
+				}
+			}
+
+			$user = OrganisationUsers::model()->findByPk(array('user_id'=>$userId,'organisation_id'=>$organisationId));
+			if($user->delete())
+			{
+				$msg="ORGANISATIONS:DELETE_ORGANISATION_USER:0:". json_encode(array(array('user'=>Yii::app()->user->id),array('userId'=>$userId,'organisationId'=>$organizationId)));
+				Yii::log($msg,'info');
+			}
+			else
+			{
+				$msg="ORGANISATIONS:DELETE_ORGANISATION_USER:1:". json_encode(array(array('user'=>Yii::app()->user->id),array('userId'=>$userId,'organisationId'=>$organizationId)));
+				Yii::log($msg,'info');
 			}
 		}
 
-		$user = OrganisationUsers::model()->findByPk(array('user_id'=>$userId,'organisation_id'=>$organisationId));
-		if($user->delete())
-		{
-			$msg="ORGANISATIONS:DELETE_ORGANISATION_USER:0:". json_encode(array(array('user'=>Yii::app()->user->id),array('userId'=>$userId,'organisationId'=>$organizationId)));
-			Yii::log($msg,'info');
-		}
-		else
-		{
-			$msg="ORGANISATIONS:DELETE_ORGANISATION_USER:1:". json_encode(array(array('user'=>Yii::app()->user->id),array('userId'=>$userId,'organisationId'=>$organizationId)));
-			Yii::log($msg,'info');
-		}
-
-		$this->redirect( array('organisations/users?organizationId='.$organisationId ) );
+		//$this->redirect( array('organisations/users?organizationId='.$organisationId ) );
 	}
 
 	/**

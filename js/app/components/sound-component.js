@@ -84,6 +84,11 @@ $(document).ready(function(){
   var min_top = $("#current_page").offset().top;
   var max_left = $("#current_page").width() + min_left;
   var max_top = $("#current_page").height() + min_top;
+  var window_width = $( window ).width();
+  var window_height = $( window ).height();
+
+  if(max_top > window_height) max_top = window_height;
+  if(max_left > window_width) max_top = window_width;
   
   var top=(event.pageY - 25);
   var left=(event.pageX-150);
@@ -106,15 +111,15 @@ $(document).ready(function(){
   left = left + "px";
   $("<div class='popup ui-draggable' id='pop-image-popup' style='display: block; width:355px; top:" + top + "; left: " + left + ";'> \
     <div class='popup-header' style='width:100%;'> \
-    <i class='icon-m-sound'></i> &nbsp;Ses Ekle \
+    <i class='icon-m-sound'></i> &nbsp;"+j__("Ses Ekle")+" \
     <i id='sound-add-dummy-close-button' class='icon-close size-10 popup-close-button'></i> \
     </div> \
       <div class='gallery-inner-holder' style='width:100%;'> \
         <div style='clear:both'></div> \
         <div class='tabbable'>\
             <ul class='nav nav-tabs' id='mySoundTab'>\
-              <li><a href='#sound_drag' data-toggle='tab'>Ses Dosyası Sürükle</a></li>\
-              <li><a href='#upload' data-toggle='tab'>Ses Dosyası Yükle</a></li>\
+              <li><a href='#sound_drag' data-toggle='tab'>"+j__("Ses Dosyası Sürükle")+"</a></li>\
+              <li><a href='#upload' data-toggle='tab'>"+j__("Ses Dosyası Yükle")+"</a></li>\
             </ul>\
           </div>\
           <div class='tab-content'>\
@@ -126,7 +131,7 @@ $(document).ready(function(){
             </div>\
           </div>\
           <div class='type' style='padding: 4px; display: inline-block;'>\
-              <div class='btn-group' data-toggle='buttons'>Otomatik Başlama<br>\
+              <div class='btn-group' data-toggle='buttons'>"+j__("Otomatik Başlama")+"<br>\
                 <label class='btn btn-primary " + auto_y_check_active + "'>\
                   <input type='radio' name='auto_type' id='repeat0' " + auto_y_check + " value='Y'> Evet\
                 </label>\
@@ -134,7 +139,7 @@ $(document).ready(function(){
                   <input type='radio' name='auto_type' id='repeat1' " + auto_n_check + " value='N'> Hayır\
                 </label>\
               </div>\
-              <div class='btn-group' data-toggle='buttons'>Tekrar et<br>\
+              <div class='btn-group' data-toggle='buttons'>"+j__("Tekrar et")+"<br>\
                 <label class='btn btn-primary " + auto_y_check_active + "'>\
                   <input type='radio' name='repeat_type' id='repeat0' " + auto_y_check + " value='Y'> Evet\
                 </label>\
@@ -146,7 +151,7 @@ $(document).ready(function(){
       </div> \
        <input type='text' class='input-textbox' id='pop-sound-name' placeholder='Ses Adı'  /> \
       <div style='clear:both' > </div> \
-     <a id='pop-image-OK' class='btn btn-info' >Ekle</a>\
+     <a id='pop-image-OK' class='btn btn-info' >"+j__("Ekle")+"</a>\
     </div>").appendTo('body').draggable();
 
     $('#sound-add-dummy-close-button').click(function(){

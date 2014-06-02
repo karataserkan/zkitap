@@ -14,15 +14,18 @@ $(document).ready(function(){
       //console.log(this.options.component);
       var componentimageid='image'+this.options.component.id;
         if(this.options.component.data.img.image_type == 'popup'){
+          console.log(this.options.marker);
           if( this.options.marker ) {
             //var newimage=$('<img id="img_'+componentimageid+'" src="' + this.options.marker +  '"/>');
             //console.log(this.options);
             //newimage.appendTo(this.element);
+
             this.element.attr('src', this.options.marker);
           }
-          this.options.component.data.html_inner = '<img src="' + this.options.component.data.img.src + '" ></img> ';
-          var popupmessage=$('<div  id="message_'+componentimageid+'" style="display:none" >'+this.options.component.data.html_inner+'</div>');
-          popupmessage.appendTo(this.element.parent());
+          
+          //this.options.component.data.html_inner = '<img src="' + this.options.component.data.img.src + '" ></img> ';
+          //var popupmessage=$('<div  id="message_'+componentimageid+'" style="display:none" >'+this.options.component.data.html_inner+'</div>');
+          //popupmessage.appendTo(this.element.parent());
         }
       else{
         if( this.options.component.data.img ) {
@@ -170,6 +173,11 @@ var createImageComponent = function ( event, ui ,oldcomponent) {
     var min_top = $("#current_page").offset().top;
     var max_left = $("#current_page").width() + min_left;
     var max_top = $("#current_page").height() + min_top;
+    var window_width = $( window ).width();
+    var window_height = $( window ).height();
+
+    if(max_top > window_height) max_top = window_height;
+    if(max_left > window_width) max_top = window_width;
 
     top=(event.pageY-25);
     left=(event.pageX-150);
@@ -189,7 +197,7 @@ var createImageComponent = function ( event, ui ,oldcomponent) {
 
       var img_cmp="<div class='popup ui-draggable' id='pop-image-popup' style='display: block; top:" + top + "; left: " + left + ";'> \
         <div class='popup-header'> \
-        <i class='icon-m-image'></i> &nbsp;Görsel Ekle \
+        <i class='icon-m-image'></i> &nbsp;"+j__("Görsel Ekle")+" \
         <i id='images-add-dummy-close-button' class='icon-close size-10 popup-close-button'></i> \
         </div> \
           <div class='gallery-inner-holder'> \
@@ -197,17 +205,17 @@ var createImageComponent = function ( event, ui ,oldcomponent) {
             <div class='typei' style='padding: 4px; display: inline-block;'>\
                 <div class='btn-group' data-toggle='buttons'>\
                   <label class='btn btn-primary " + link_check_active + "'>\
-                    <input type='radio' name='image_type' id='repeat0' " + link_check + " value='link'> Sayfada\
+                    <input type='radio' name='image_type' id='repeat0' " + link_check + " value='link'> "+j__("Sayfada")+"\
                   </label>\
                   <label class='btn btn-primary " + popup_check_active + "'>\
-                    <input type='radio' name='image_type' id='repeat1' " + popup_check + " value='popup'> Açılır Pencerede\
+                    <input type='radio' name='image_type' id='repeat1' " + popup_check + " value='popup'> "+j__("Açılır Pencerede")+"\
                   </label>\
                 </div><br><br>\
             </div>\
             <div class='tabbable'>\
               <ul class='nav nav-tabs' id='myTab'>\
-                <li><a href='#image_drag' data-toggle='tab'>Resim Sürükle</a></li>\
-                <li><a href='#image_upload' data-toggle='tab'>Resim Yükle</a></li>\
+                <li><a href='#image_drag' data-toggle='tab'>"+j__("Resim Sürükle")+"</a></li>\
+                <li><a href='#image_upload' data-toggle='tab'>"+j__("Resim Yükle")+"</a></li>\
               </ul>\
             </div>\
             <div class='tab-content'>\
@@ -218,8 +226,8 @@ var createImageComponent = function ( event, ui ,oldcomponent) {
                 <input type='file' name='image_file' id='image_file' value='' ><br><br>\
               </div>\
             </div>\
-            <input type='text' name='width' id='width' placeholder='Genişlik' value=''>\
-            <input type='text' name='height' id='height' placeholder='Yükseklik' value=''>\
+            <input type='text' name='width' id='width' placeholder='"+j__("Genişlik")+"' value=''>\
+            <input type='text' name='height' id='height' placeholder='"+j__("Yükseklik")+"' value=''>\
           </div> \
         </div>";
         $(img_cmp).appendTo('body').draggable();
@@ -318,8 +326,9 @@ var createImageComponent = function ( event, ui ,oldcomponent) {
         imageBinary = _file.target.result;      
         //console.log(top);
         //$("#images-add-dummy-close-button").trigger('click');
-        if(image_type == 'popup') {image_width_height = '80px';image_height='80px';image_width='80px';}
-        else image_width_height = '100%';
+        //if(image_type == 'popup') {image_width_height = '80px';image_height='80px';image_width='80px';}
+        //else image_width_height = '100%';
+        image_width_height = '100%';
 
         component = {
           'type' : 'image',

@@ -151,7 +151,7 @@ $this->breadcrumbs=array(
 								  <div>
 								  	<br>
 									<!-- <label class="checkbox"> <input type="checkbox" class="uniform" value=""> I agree to the <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a></label> -->
-									<button type="submit" class="btn btn-success"><?php _e("Kaydet");?></button>
+									<button type="submit" class="btn btn-success" id="addUser"><?php _e("Kaydet");?></button>
 								  </div>
 
 								<?php $this->endWidget(); ?>
@@ -195,9 +195,11 @@ $this->breadcrumbs=array(
 					<div class="row">
 						<div class="">
 							<div class="login-box">
-								<?php if ($passResetSuccess) {
-									echo "<span style='color:green'>".$passResetSuccess."</span>";
-								}else{
+								<?php if ($passResetSuccess) { ?>
+									<div class="alert alert-success">
+										<span><?php echo $passResetSuccess; ?></span>
+									</div>
+								<?php }else{
 								?>
 									<form role="form">
 									  <div class="form-group">
@@ -252,6 +254,39 @@ $this->breadcrumbs=array(
 				{
 					swapScreen('forgot_bg');
 				};
+			};
+			var pass;
+			$('#User_password').keydown(function(){
+				pass=$('#User_password').val();
+				var len=pass.length;
+				if (len<7) {
+					$('#addUser').attr('disabled','disabled')
+					$("[for='exampleInputPassword1']").text("Şifre/Minimum 8 karakter olmalıdır");
+					$("[for='exampleInputPassword1']").addClass('text-danger').removeClass('text-success');
+				}else{
+					$('#addUser').removeAttr('disabled');
+					$("[for='exampleInputPassword1']").text("Şifre");
+					$("[for='exampleInputPassword1']").removeClass('text-danger').addClass('text-success');
+				};
+			});
+
+			$('#User_password_r').keydown(function(){
+				var sifreTekrar=$('#User_password_r').val();
+				var len=sifreTekrar.length;
+				
+				if (sifreTekrar==pass) {
+						$('#addUser').removeAttr('disabled');
+						$("[for='exampleInputPassword2']").text("Şifreyi Tekrarla");
+						$("[for='exampleInputPassword2']").removeClass('text-danger').addClass('text-success');
+					}else{
+						$('#addUser').attr('disabled','disabled');
+						$("[for='exampleInputPassword2']").text("Şifreyi Tekrarla/Şifreler uyuşmuyor");
+						$("[for='exampleInputPassword2']").addClass('text-danger').removeClass('text-success');
+					};
+			});
+			var passResetSuccess="<?php echo $passResetSuccess ?>";
+			if (passResetSuccess) {
+				swapScreen('forgot_bg');
 			};
 		});
 	</script>
