@@ -939,8 +939,11 @@ class componentHTML {
 
 		}
 
+		$css_zindex =  (array) $css;
+		
+
 		if($css){
-			$size_style="width:" .$css->width. ";height:".$css->height.";";
+			$size_style="width:" .$css->width. ";height:".$css->height."; z-index:".$css_zindex["z-index"];
 			$size_style_attr="style='$size_style'";
 
 		}
@@ -1272,7 +1275,7 @@ class componentHTML {
 
 			$container.=" 
 				
-				<img  class='popup ref-popup-rw' data-popup-target='$image_id' src='".$component->data->img->marker."' />
+				<img  class='popup ref-popup-rw' data-popup-target='$image_id' src='".$component->data->img->marker."' style='width:100%; height:100%;' />
 				
 				<div class='widgets-rw popup-text-rw exclude-auto-rw' id='$image_id' style='width:300px; height:300px'>
 					 <button xmlns='http://www.w3.org/1999/xhtml' onclick='$(this).parent().remove();' class='ppclose' style='float:right;'>X</button>

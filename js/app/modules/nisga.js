@@ -664,7 +664,7 @@ var textComponentBuilder = function( component ) {
     var element  = $('<img>');
     var elementWrap=$('<div class="popup-controllers" title="'+j__("Resim Aracı")+'"></div>');
     elementWrap.appendTo( page_div_selector );
-    ////console.log(component);
+    console.log(component.data.img.marker);
     element
     .appendTo( elementWrap )
     .imageComponent({
