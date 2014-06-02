@@ -841,8 +841,9 @@ $( document ).ready(function () {
               //console.log(value);
             }
           });
-          value = $(value);
+          //value = $(value);
           //value.appendTo('.panel-body');
+          console.log(value);
           $($(".panel-body")[3]).html(value);
           $('.pages').sortable({ 
             distance: 15,

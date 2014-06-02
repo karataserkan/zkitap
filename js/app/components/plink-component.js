@@ -12,7 +12,7 @@ $(document).ready(function(){
 
       var that = this;
 
-      console.log(this.options.component.data.width);
+      console.log(this.options.component.data);
       //return;
 
       var componentplinkid='plink'+this.options.component.id;
@@ -199,7 +199,7 @@ console.log(top);
     $.each( value.pages, function( key_page, value_page ) {
       console.log(value_page);
       if(value_page)
-        $('<input type="radio" name="page_select" value="'+value_page.page_id+'">'+page_count+'. '+j__("Sayfa")+'<br>').appendTo('.panel-body_'+value.chapter_id);
+        $('<input type="radio" name="page_select" value="'+value_page+'">'+page_count+'. '+j__("Sayfa")+'<br>').appendTo('.panel-body_'+value.chapter_id);
       page_count++;
     });
     
@@ -298,7 +298,8 @@ console.log(top);
             }
           }
         };
-       
+       console.log(component);
+       return;
         window.lindneo.tlingit.componentHasCreated( component );
         
         close_button.trigger('click');
