@@ -23,54 +23,20 @@ $current_user=User::model()->findByPk(Yii::app()->user->id);
 //$chapters_preview =Chapter::model()->findAll(array('order'=>  '`order` asc ,  created asc', "condition"=>'book_id=:book_id', "params" => array(':book_id' => $model->book_id )));
 //echo CJSON::encode($chapters_preview);
 
-function chapters_preview($book_id){
-	
-	$chapters_preview =Chapter::model()->findAll(array('order'=>  '`order` asc ,  created asc', "condition"=>'book_id=:book_id', "params" => array(':book_id' => $book_id )));
-	//print_r($chapters_preview);
-	//echo CJSON::encode($chapters_preview);
-
-	return $chapters_preview;
-}
-
-function pagesoffchapter_preview($book_id){
-	$chapters_preview =Chapter::model()->findAll(array('order'=>  '`order` asc ,  created asc', "condition"=>'book_id=:book_id', "params" => array(':book_id' => $book_id )));
-	$pagesChapter = array();
-
-	foreach ($chapters_preview as $key => $chapter) {
-									
-		$pagesOfChapter=Page::model()->findAll(array('order'=>  '`order` asc ,  created desc', "condition"=>'chapter_id=:chapter_id', "params" =>array(':chapter_id' => $chapter->chapter_id )) );
-		$pagesChapter[] = $pagesOfChapter;
-		//array_push($pagesChapter,$pagesOfChapter);
-		
-		
-	}
-	return $pagesChapter;
-}
-
 //print_r($pagesChapter);
 //$deneme = chapters_preview($model->book_id);
 //echo $deneme[0];
 //print_r($deneme);
 //echo CJSON::encode($deneme[0]);
 ?>
+ 
 	
 <script type="text/javascript">
-function chapters_preview(){
-	var chaptersPreview = JSON.parse('<?php echo CJSON::encode(chapters_preview($model->book_id)); ?>');
-	//console.log(chaptersPreview);
-	return chaptersPreview;
-}
 
-function pagesoffchapter_preview(){
-	var pagesoffchapterPreview = JSON.parse('<?php echo CJSON::encode(pagesoffchapter_preview($model->book_id)); ?>');
-	//console.log(pagesoffchapterPreview);
-	return pagesoffchapterPreview;
-}
 
-	
 	window.lindneo.currentPageId='<?php echo $current_page->page_id; ?>';
 	window.lindneo.currentBookId='<?php echo $model->book_id; ?>';
-
+	console.log(window.lindneo.currentBookId);
 	window.lindneo.user={};
 	window.lindneo.user.username='<?php echo Yii::app()->user->name; ?>';
 	window.lindneo.user.name='<?php echo $current_user->name . " ". $current_user->surname; ?>';
