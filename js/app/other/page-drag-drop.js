@@ -845,11 +845,8 @@ $( document ).ready(function () {
           //value.appendTo('.panel-body');
           //console.log(value);
           $($(".panel-body")[3]).html(value);
-          var value_length = $($(".panel-body")[3]).find("li").length;
-          console.log(value_length);
+          
           $.each($($(".panel-body")[3]).find("li"), function(i, k){
-            console.log(i);
-            console.log(k);
             var j = i+1;
             $("#page_"+j).append('<span class="page-number">'+ j +'</span>');
           });
@@ -920,58 +917,59 @@ $( document ).ready(function () {
 
           });
 
+          $('.delete-page').click(function(){
+      
+            var delete_buttons = $('<i class="icon-delete"></i><i class="icon-delete"></i>');
+
+            var page_id=$(this).parent().attr('page_id');
+            var control_value = 0;
+            $.each(window.lindneo.book_users, function(index,key){
+              console.log(key);
+              if(key.username != window.lindneo.user.username)
+                if(key.pageid == page_id){
+                  alert("Başka bir kullanıcı bu sayfada çalıştığından bu sayfayı silemezsiniz!...");
+                  control_value = 1;
+                }
+            });
+            if(control_value == 1)
+              return;
+            //return;
+            window.lindneo.tlingit.PageHasDeleted( page_id );
+            //return;
+            //ekaratas start
+            //sayfa silindiğinde sayfaya ait olan çalışma alanını kaldırdım
+
+            if (page_id==window.lindneo.currentPageId) {
+              $('#current_page').hide().remove();
+
+              var link=$("#chapters_pages_view > div:first-child > ul:first-child > li:first-child > a:nth-child(2)").attr('href');
+              
+              var page_id = $(".page:first-child").attr("page_id");
+              
+              var link='?r=book/author&bookId='+window.lindneo.currentBookId+'&page='+page_id;
+
+              var slink='?r=chapter/create&book_id='+window.lindneo.currentBookId;
+
+              if (link != "") {
+                window.location.assign(link);
+              }
+              else
+                window.location.assign(slink);
+
+
+            };
+            //ekaratas end
+
+            $('.page[page_id="'+page_id+'"]').hide('slow', function(){  $('.page[page_id="'+page_id+'"]').remove();});
+            sortPages();
+
+          });
+    
+
           window.lindneo.tlingit.loadAllPagesPreviews();
 
         //console.log(value);
       }
-    });
-
-    $('.delete-page').click(function(){
-
-      var delete_buttons = $('<i class="icon-delete"></i><i class="icon-delete"></i>');
-
-      var page_id=$(this).parent().attr('page_id');
-      var control_value = 0;
-      $.each(window.lindneo.book_users, function(index,key){
-        console.log(key);
-        if(key.username != window.lindneo.user.username)
-          if(key.pageid == page_id){
-            alert("Başka bir kullanıcı bu sayfada çalıştığından bu sayfayı silemezsiniz!...");
-            control_value = 1;
-          }
-      });
-      if(control_value == 1)
-        return;
-      //return;
-      window.lindneo.tlingit.PageHasDeleted( page_id );
-      //return;
-      //ekaratas start
-      //sayfa silindiğinde sayfaya ait olan çalışma alanını kaldırdım
-
-      if (page_id==window.lindneo.currentPageId) {
-        $('#current_page').hide().remove();
-
-        var link=$("#chapters_pages_view > div:first-child > ul:first-child > li:first-child > a:nth-child(2)").attr('href');
-        
-        var page_id = $(".page:first-child").attr("page_id");
-        
-        var link='?r=book/author&bookId='+window.lindneo.currentBookId+'&page='+page_id;
-
-        var slink='?r=chapter/create&book_id='+window.lindneo.currentBookId;
-
-        if (link != "") {
-          window.location.assign(link);
-        }
-        else
-          window.location.assign(slink);
-
-
-      };
-      //ekaratas end
-
-      $('.page[page_id="'+page_id+'"]').hide('slow', function(){  $('.page[page_id="'+page_id+'"]').remove();});
-      sortPages();
-
     });
     
 
