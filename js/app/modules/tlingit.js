@@ -122,6 +122,9 @@ window.lindneo.tlingit = (function(window, $, undefined){
 
   var loadComponents = function( res ) {
 
+    console.log("LOAD components");
+    console.log(window.lindneo.currentBookId);
+    console.log(res);
     var response = responseFromJson(res);
     var components = [];
     //console.log(response);
