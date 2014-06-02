@@ -5,17 +5,17 @@
 window.lindneo = window.lindneo || {};
  
 // tsimshian module
-window.lindneo.tsimshian = (function(window, $, undefined){
+tsimshian = (function(window, $, undefined){
 
   var socket;
   var myComponent='';
   var hereACounter = 0;
   var book_user_list = [];
-
+  var tsimshian = this;
   var connect = function () {
 
-    window.lindneo.tsimshian.init(); 
-    window.lindneo.tsimshian.changePage(window.lindneo.currentPageId); 
+    tsimshian.init(); 
+    tsimshian.changePage(window.lindneo.currentPageId); 
 
   };
  
@@ -27,16 +27,16 @@ window.lindneo.tsimshian = (function(window, $, undefined){
 
   var componentUpdated = function (component) {    
 
-    window.lindneo.tsimshian.myComponent = component.id;
+    tsimshian.myComponent = component.id;
     //console.log('Sending');
-    //console.log(window.lindneo.tsimshian.myComponent);
+    //console.log(tsimshian.myComponent);
     this.socket.emit('updateComponent', component);
 
   };
 
   var componentCreated = function (component) {    
 
-          window.lindneo.tsimshian.myComponent = component.id;
+          tsimshian.myComponent = component.id;
           this.socket.emit('newComponent', component);
 
   };
@@ -52,7 +52,7 @@ window.lindneo.tsimshian = (function(window, $, undefined){
 
   var emitSelectedComponent = function ( component ) {
 
-    window.lindneo.tsimshian.myComponent = component.id();
+    tsimshian.myComponent = component.id();
 
     this.socket.emit( 'emitSelectedComponent',   component.id()  );
   };
@@ -69,7 +69,7 @@ window.lindneo.tsimshian = (function(window, $, undefined){
    
  
    
-    window.lindneo.tsimshian.socket.emit('changePage',user);
+    tsimshian.socket.emit('changePage',user);
   };
 
   var init = function (serverName){
@@ -83,7 +83,7 @@ window.lindneo.tsimshian = (function(window, $, undefined){
 
     this.socket = io.connect("http://dev.lindneo.com:1881");
     this.socket.on('connection', function (data) {
-      var user=window.lindneo.tsimshian.getCurrentUser();
+      var user=tsimshian.getCurrentUser();
        this.socket.emit('changePage',user);
 
     });
@@ -92,7 +92,7 @@ window.lindneo.tsimshian = (function(window, $, undefined){
   
        this.socket.on('newComponent', function(component){
           //console.log(component.id) ;
-          //console.log(window.lindneo.tsimshian.myComponent) ;
+          //console.log(tsimshian.myComponent) ;
           window.lindneo.nisga.createComponent(component); 
        } );
 
@@ -134,7 +134,7 @@ window.lindneo.tsimshian = (function(window, $, undefined){
         //console.log('disconnected');
         if (this.hereACounter++ < 3){
                   //console.log('retrying');
-                  window.lindneo.tsimshian.connect();
+                  tsimshian.connect();
                 }else {
                           //console.log('refreshing');
                           location.reload(); 
