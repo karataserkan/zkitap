@@ -1073,20 +1073,22 @@ class componentHTML {
 		else if($component->data->selected_tab == "#plink_area")
 			$container.=" 
 				<div id='$plink_id' ".$css." style='width:".$component->data->width."; height:".$component->data->height."; z-index:999999;'>
-					<a href='".$component->data->page_link.".html'><div style='width:".$component->data->width."; height:".$component->data->height.";'></div></a>
+					<a href='".$component->data->page_link.".html'><div style='width:".$component->data->self->css->width."; height:".$component->data->self->css->height.";'></div></a>
 				</div>
 		
 			
 			";
 		else 
 			$container.=" 
-				<div id='$plink_id' ".$css.">
-					<a href='".$component->data->page_link.".html'>".$component->data->plink_data."</a>
+				<div id='$plink_id' ".$css." >
+					<a href='".$component->data->page_link.".html'><div style='width:".$component->data->self->css->width."; height:".$component->data->self->css->height.";'></a>
 				</div>
 		
 			
 			";
-
+			print_r($component->data->self->css->width);
+echo "asdasd";
+		
 		$this->html=$container;
 		
 	}
