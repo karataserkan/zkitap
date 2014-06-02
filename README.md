@@ -97,7 +97,7 @@ Co-Working
 -----------------------------------------------------------------
 apt-get install nodejs npm
 npm config set registry http://registry.npmjs.org/
-npm install socket.io
+npm install -g socket.io
 
 Locale(for turkish)
 -----------------------------------------------------------------
