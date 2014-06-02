@@ -1084,10 +1084,8 @@ class componentHTML {
 					<a href='".$component->data->page_link.".html'><div style='width:".$component->data->self->css->width."; height:".$component->data->self->css->height.";'></a>
 				</div>
 		
-			
 			";
-			print_r($component->data->self->css->width);
-echo "asdasd";
+			
 		
 		$this->html=$container;
 		
