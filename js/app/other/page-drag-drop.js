@@ -816,7 +816,7 @@ $( document ).ready(function () {
           $.each(result.chapters, function(index, key){
             var chapter_page = 0;
             //console.log(key);
-            value += '<div class="chapter"  chapter_id="'+key.chapter_id+'"">\
+            value += '<div class="chapter"  chapter_id="'+key.chapter_id+'">\
                             <div class="chapter-detail">\
                               <input type="text" class="chapter-title" placeholder='+j__("Bölüm adı")+' value="'+key.title+'">\
                               <a class="btn btn-danger  page-chapter-delete delete-chapter hidden-delete" style="float: right; margin-top: -23px;"><i class="icon-ok"></i></a>\
@@ -833,7 +833,7 @@ $( document ).ready(function () {
 
                 value += '<li class="page ' + (window.lindneo.currentPageId == keyp  ? "current_page": "") +'" chapter_id="' + key.chapter_id + '" page_id="' + keyp + '" >\
                             <a class="btn btn-danger page-chapter-delete delete-page hidden-delete "  style="top: 0px;right: 0px; position: absolute;"><i class="icon-delete"></i></a>\
-                            <a href="/book/author/'+ window.lindneo.currentBookId +'/'+ keyp +'"/><span class="page-number">'+ page_NUM +'</span></a>\
+                            <a id="page_'+page_NUM+'" href="/book/author/'+ window.lindneo.currentBookId +'/'+ keyp +'"/></a>\
                           </li>';
                 chapter_page++;
               });
@@ -843,8 +843,16 @@ $( document ).ready(function () {
           });
           //value = $(value);
           //value.appendTo('.panel-body');
-          console.log(value);
+          //console.log(value);
           $($(".panel-body")[3]).html(value);
+          var value_length = $($(".panel-body")[3]).find("li").length;
+          console.log(value_length);
+          $.each($($(".panel-body")[3]).find("li"), function(i, k){
+            console.log(i);
+            console.log(k);
+            var j = i+1;
+            $("#page_"+j).append('<span class="page-number">'+ j +'</span>');
+          });
           $('.pages').sortable({ 
             distance: 15,
             connectWith: '.pages' , 
