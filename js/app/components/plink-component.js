@@ -298,8 +298,7 @@ console.log(top);
             }
           }
         };
-       console.log(component);
-       return;
+       
         window.lindneo.tlingit.componentHasCreated( component );
         
         close_button.trigger('click');
