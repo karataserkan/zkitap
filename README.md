@@ -19,7 +19,7 @@ apt-get install libapache2-mod-xsendfile
 a2enmod ssl
 a2enmod rewrite
 a2enmod xsendfile
-
+a2enmod headers
 
 Php5 Installation
 -----------------------------------------------------------------
