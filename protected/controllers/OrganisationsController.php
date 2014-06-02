@@ -32,7 +32,7 @@ class OrganisationsController extends Controller
 				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
-				'actions'=>array('create','update','workspaces','delWorkspaceUser','addWorkspaceUser','users','addUser','deleteOrganisationUser','account','bookCategories','deleteCategory','createBookCategory','updateBookCategory','templates','aCL','addACL','publishedBooks','deleteACL','removeFromCategory','addBalance','selectPlan','checkoutPlan','deneme'),
+				'actions'=>array('create','update','workspaces','delWorkspaceUser','addWorkspaceUser','users','addUser','deleteOrganisationUser','account','bookCategories','deleteCategory','createBookCategory','updateBookCategory','templates','aCL','addACL','publishedBooks','deleteACL','removeFromCategory','addBalance','selectPlan','checkoutPlan','deneme','changeTitle'),
 				'users'=>array('@'),
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
@@ -452,6 +452,22 @@ class OrganisationsController extends Controller
 
 		return $lastDay;
 	}
+
+	public function actionChangeTitle()
+	{
+		if (isset($_POST['title'])&&isset($_POST['organisation'])) {
+			$organisation=Organisations::model()->findByPk($_POST['organisation']);
+			$organisation->organisation_name=$_POST['title'];
+			if($organisation->save())
+			{
+				echo "0";
+			}else{
+				echo "1";
+			}
+		}else{
+			echo "1";
+		}
+	}
 	
 	public function actionAccount($id)
 	{
@@ -460,7 +476,7 @@ class OrganisationsController extends Controller
 		$hosts=Yii::app()->db->createCommand("SELECT count(*) as w FROM `organisation_hostings` WHERE `organisation_id`='".$id."'")->queryRow();
 		$category=Yii::app()->db->createCommand("SELECT count(*) as w FROM `book_categories` WHERE `organisation_id`='".$id."'")->queryRow();
 		$budget=$this->getOrganisationEpubBudget($id);
-
+		$organisation=Organisations::model()->findByPk($id);
 		$plan=Transactions::model()->find('transaction_type="plan" AND transaction_method="deposit" AND transaction_result=0 AND transaction_organisation_id=:transaction_organisation_id AND `transaction_start_date`>= DATE_SUB(CURDATE(), INTERVAL 30 DAY) AND `transaction_start_date` <= CURDATE()',array('transaction_organisation_id'=>$id));
 		$remainDay=0;
 		$lastDay=$this->getRemainPlanDays($id);
@@ -470,7 +486,7 @@ class OrganisationsController extends Controller
 			 $interval = $datetime1->diff($datetime2);
 			 $remainDay=$interval->format('%a');
 		}
-		$this->render("account",array('book'=>$books['book'],'workspace'=>$workspaces['w'],'host'=>$hosts['w'],'category'=>$category['w'],'budget'=>$budget,'id'=>$id,'plan'=>$plan,'remainDay'=>$remainDay,'lastDay'=>$lastDay));
+		$this->render("account",array('book'=>$books['book'],'workspace'=>$workspaces['w'],'host'=>$hosts['w'],'category'=>$category['w'],'budget'=>$budget,'id'=>$id,'plan'=>$plan,'remainDay'=>$remainDay,'lastDay'=>$lastDay,'organisation'=>$organisation));
 	}
 
 	public function actionTemplates($id)
