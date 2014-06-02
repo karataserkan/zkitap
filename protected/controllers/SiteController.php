@@ -159,6 +159,14 @@ class SiteController extends Controller
 		$workspaces=$this->getUserWorkspaces();
 
 		$userConfirmation=UserMeta::model()->find('user_id=:user_id and meta_key=:meta_key',array('user_id'=>Yii::app()->user->id,'meta_key'=>'confirm'));
+		$verifiedEmail="1";
+		$emailVerify=UserMeta::model()->find('user_id=:user_id and meta_key=:meta_key',array('user_id'=>Yii::app()->user->id,'meta_key'=>'emailVerify'));
+		if ($emailVerify) {
+			if ($emailVerify->meta_value=="verified") {
+				$verifiedEmail="0";
+			}
+		}
+
 		$confirmation="3";
 		if (!empty($userConfirmation)) {
 			//user has confirmation code. 
@@ -177,7 +185,7 @@ class SiteController extends Controller
 			}
 		}
 
-		$this->render('index',array('workspaces'=>$workspaces,'confirmation'=>$confirmation));
+		$this->render('index',array('workspaces'=>$workspaces,'confirmation'=>$confirmation,'verifiedEmail'=>$verifiedEmail));
 	}
 
 	public function getOrganisationEpubBudget($id)
@@ -607,6 +615,9 @@ class SiteController extends Controller
 			$newUser->surname=$attributes['surname'];
 			$newUser->email=$attributes['email'];
 			$newUser->created=date('Y-n-d g:i:s',time());
+
+			
+
 			$hasEmail= User::model()->findAll('email=:email', 
 	    				array(':email' => $attributes['email']) );
 
@@ -617,10 +628,32 @@ class SiteController extends Controller
 						$msg="SITE:LOGIN:SignUp:0:". json_encode(array('user'=> Yii::app()->user->name,'userId'=>Yii::app()->user->id));
 						Yii::log($msg,'profile');
 						
+						$verifyEmailId=functions::new_id();
+						$emailMeta=new UserMeta;
+						$emailMeta->user_id=$newUser->id;
+						$emailMeta->meta_key='emailVerify';
+						$emailMeta->meta_value=$verifyEmailId;
+						$emailMeta->created=time();
+						$emailMeta->save();
+
+						$mail=Yii::app()->Smtpmail;
+				        $mail->SetFrom(Yii::app()->params['noreplyEmail'], "OKUTUS");
+
+				        $mail->Subject= "E-posta doğrulama";
+				        $mail->AddAddress($newUser->email, "");
+			        	
+			        	$link=Yii::app()->getBaseUrl(true);
+						$link .='/user/verifyEmail/';
+						$link .= $verifyEmailId;
+						
+						$message="Okutusa hoşgeldin. E-postanızı doğrulamak için <a href='".$link."'>buraya tıklayınız</a>.<br>".$link;
+				        $mail->MsgHTML($message);
+				        $mail->Send();
+
 						$userConfirmation=new UserMeta;
 						$userConfirmation->user_id=$newUser->id;
 						$userConfirmation->meta_key='confirm';
-						$userConfirmation->meta_value='';
+						$userConfirmation->meta_value='1';
 						$userConfirmation->created=time();
 						$userConfirmation->save();
 

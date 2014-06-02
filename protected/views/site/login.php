@@ -76,9 +76,9 @@ $this->breadcrumbs=array(
 										<?php echo $form->passwordField($model,'password'); ?>										
 									  </div>
 									  
-									  <div class="form-group">
+									  <!-- <div class="form-group">
 									  <label for="ytLoginForm_rememberMe"><input id="ytLoginForm_rememberMe" type="checkbox"  class="uniform"  value="0" name="LoginForm[rememberMe]"><?php _e("Beni Hatırla"); ?></label>
-									  </div>
+									  </div> -->
 
 									  <div class="form-group">
 										<button type="submit" class="btn btn-danger"><?php _e("Giriş"); ?></button>										
