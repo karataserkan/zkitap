@@ -95,7 +95,7 @@ apt-get install texlive-extra-utils
 
 Co-Working
 -----------------------------------------------------------------
-apt-get install node npm
+apt-get install nodejs npm
 npm config set registry http://registry.npmjs.org/
 npm install socket.io
 
