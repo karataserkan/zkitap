@@ -34,7 +34,9 @@ $(document).ready(function(){
         var iframe = document.getElementById('if'+componenthtmlid),
         iframedoc = iframe.contentDocument || iframe.contentWindow.document;
 
-        iframedoc.body.innerHTML = html_data;
+        iframedoc.open();
+        iframedoc.write(html_data);
+        iframedoc.close();
       }
        
 
