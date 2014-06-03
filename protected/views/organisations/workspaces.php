@@ -2,14 +2,14 @@
 
 <script>
 		jQuery(document).ready(function() {		
-			App.setPage("gallery");  //Set current page
-			App.init(); //Initialise plugins and elements
+			// App.setPage("gallery");  //Set current page
+			// App.init(); //Initialise plugins and elements
 		});
 	</script>
 <?php
 /* @var $this OrganisationsController */
 
-$organisationId=$organizationUser['organisation_id'];
+//$organisationId=$organizationUser['organisation_id'];
 
 
 ?>
@@ -73,6 +73,7 @@ $organisationId=$organizationUser['organisation_id'];
 					<select id="user" class="book-list-textbox radius grey-9 float-left"  style=" width: 280px;">
 						<?php
 							$organizationUsers = $this->freeWorkspaceUsers($workspace['workspace_id'],$organisationId);//$this->organizationUsers($organisationId);
+
 							foreach ($organizationUsers as $key => $organizationUser) {
 								echo '<option value="'.$organizationUser['id'].'">'.$organizationUser['name'].' '.$organizationUser['surname'].'</option>';
 							}
@@ -313,10 +314,9 @@ function sendUser(e){
 					×
 				</a>-->
 
-				<a class="fa fa-times-circle close" data-id="<?php echo $workspace['workspace_id']; ?>" style="margin-right:5px" data-toggle="modal" data-target="#confirmation"></a>
-				<a class="fa fa-edit close" data-id="<?php echo base64_encode(json_encode($workspace_data)); ?>" style="margin-right:5px" data-toggle="modal" data-target="#addWorkspace"></a>
-				<a class="fa fa-users close" data-id="pop-<?php echo $workspace['workspace_id']; ?>" style="margin-right:5px" data-toggle="modal" data-target="#pop-<?php echo $workspace['workspace_id']; ?>"></a>
-				
+				<a class="fa fa-times-circle close tip" data-original-title="<?php _e('Çalışma alanını sil') ?>" data-id="<?php echo $workspace['workspace_id']; ?>" style="margin-right:5px" data-toggle="modal" data-target="#confirmation"></a>
+				<a class="fa fa-edit close tip" data-original-title="<?php _e('Çalışma alanını düzenle') ?>" data-id="<?php echo base64_encode(json_encode($workspace_data)); ?>" style="margin-right:5px" data-toggle="modal" data-target="#addWorkspace"></a>
+				<a class="fa fa-users close tip" data-original-title="<?php _e('Çalışma alanı kullanıcılarını düzenle') ?>" data-id="pop-<?php echo $workspace['workspace_id']; ?>" style="margin-right:5px" data-toggle="modal" data-target="#pop-<?php echo $workspace['workspace_id']; ?>"></a>
 
 				<p></p>
 

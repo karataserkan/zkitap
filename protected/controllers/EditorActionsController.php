@@ -119,8 +119,9 @@ class EditorActionsController extends Controller
 		    'params'=>array(':organisation_id'=>$organisation->organisation_id),
 		));
 		//var_dump($hosts);
-		$categories=BookCategories::model()->findAll('organisation_id=:organisation_id',array('organisation_id'=>$organisation->organisation_id));
-
+		$categories=BookCategories::model()->findAll(array('condition'=>'organisation_id=:organisation_id','order'=>'`category_name` asc','params'=>array('organisation_id'=>$organisation->organisation_id)));
+		//$pages=Page::model()->findAll(array("condition"=>"page_id=:page_id","order"=>'`order` asc ,  created asc',"params"=> array('page_id' => $page_id )));
+		
 		$model=new PublishBookForm;
 
 		$model->contentId=$bookId;
@@ -1013,7 +1014,7 @@ right join book using (book_id) where book_id='$bookId' and type!='image';";
 		$updateQueue=PublishQueue::model()->findByPk($bookId);
 		$updateQueue->is_in_progress=-1;
 		$updateQueue->success=-1;
-		$updateQueue->message=$message;
+		$updateQueue->message=json_encode($message);
 		$updateQueue->save();
 	} 
 
@@ -1147,7 +1148,7 @@ right join book using (book_id) where book_id='$bookId' and type!='image';";
 			$attr['transaction_type']=$data['contentType'];
 
 			$success=0;
-			
+			$errorMessage=array();
 			$transaction=new Transactions;
 			$transaction['attributes']=$attr;
 			$transaction->transaction_amount=0;
@@ -1159,6 +1160,7 @@ right join book using (book_id) where book_id='$bookId' and type!='image';";
 			}
 			else
 			{
+				$errorMessage[]="Content could not added to the Catalog Database";
 				$transaction->transaction_result=1;
 				$transaction->transaction_explanation="Catalog Could NOT Created";
 			}
@@ -1176,6 +1178,7 @@ right join book using (book_id) where book_id='$bookId' and type!='image';";
 			}
 			else
 			{
+				$errorMessage[]="python bin/client.py -> AddToCatalog could not work properly. File Could NOT Created. Shell_output must return 100. Now shell_output:".$res_res->shell_output[0]." output:".json_encode($res_res->shell_output);
 				$transaction->transaction_result=$res_res->cc;
 				$transaction->transaction_explanation="File Could NOT Created";
 			}
@@ -1195,6 +1198,7 @@ right join book using (book_id) where book_id='$bookId' and type!='image';";
 			}
 			else
 			{
+				$errorMessage[]="python bin/client.py -> AddToCatalog could not work properly. File Could NOT Uploaded to Cloud. Shell_signal must return 100. Now shell_signal:".$res_res->shell_signal;
 				$transaction->transaction_result=$res_res->shell_signal;
 				$transaction->transaction_explanation="File Could NOT Uploaded to Cloud";
 			}
@@ -1245,7 +1249,7 @@ right join book using (book_id) where book_id='$bookId' and type!='image';";
 			}
 			else
 			{
-				$this->errorQueue($bookId,'ERROR!, success='.$success);
+				$this->errorQueue($bookId, $errorMessage);
 			}
 
 		}

@@ -440,7 +440,7 @@ var textComponentBuilder = function( component ) {
     .appendTo( elementWrap )
     .linkComponent({
       'component': component,
-      'marker': window.base_url+'/css/linkmarker.png'  ,
+      'marker': window.base_path+'/css/linkmarker.png'  ,
       'update': function ( event, component ) {
         if(revision_value==0){
         var newObject = jQuery.extend(true, {}, component);
@@ -649,6 +649,12 @@ var textComponentBuilder = function( component ) {
     $(".chapter[chapter_id='"+chapter+"']").remove();
   }; 
 
+  var destroyPage = function(pageId){
+    console.log(pageId);
+    
+    $("li[page_id="+pageId+"]").remove();
+  }; 
+
 
   
   var imageComponentBuilder = function ( component ) {
@@ -658,7 +664,7 @@ var textComponentBuilder = function( component ) {
     var element  = $('<img>');
     var elementWrap=$('<div class="popup-controllers" title="'+j__("Resim Aracı")+'"></div>');
     elementWrap.appendTo( page_div_selector );
-    ////console.log(component);
+    console.log(component.data.img.marker);
     element
     .appendTo( elementWrap )
     .imageComponent({
@@ -980,6 +986,7 @@ var textComponentBuilder = function( component ) {
     deleteComponent: deleteComponent,
     ComponentDelete: ComponentDelete,
     destroyChapter: destroyChapter,
+    destroyPage: destroyPage,
     destroyComponent: destroyComponent,
     destroyByIdComponent: destroyByIdComponent,
     undoComponent: undoComponent,

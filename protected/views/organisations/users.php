@@ -60,9 +60,27 @@
  <div id="content">
 
 	<div class="col-sm-12">
-		<div class="page-header">
+		<div class="page-header" style="overflow:visible; padding-bottom:50px;">
 
 				<h3 class="content-title pull-left">Kullanıcılar</h3>
+                
+                
+                                        <div class="action_bar_spacer"></div>
+                                        
+                                        <ul class="users_category_actions">
+                                            <li class="dropdown users_page_categories">
+                                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Davetli Kullanıcı Listesi <i class="fa fa-chevron-down"></i></a>
+                                                    <ul class="dropdown-menu" id="filter-controls">
+                                                        <li><div class="invited_user_status users_waiting tip-left" title="Bekleniyor..."></div><span>Bekleyen Kullanıcı</span></li>
+                                                        <li><div class="invited_user_status users_refused tip-left" title="Reddedildi"></div><span>Reddeden Kullanıcı</span></li>
+                                                        <li><div class="invited_user_status users_accepted tip-left" title="Onaylandı"></div><span>Onaylayan Kullanıcı</span></li>
+                                                    </ul>
+                                            </li>
+                                        </ul>
+
+                
+                
+                
 				<a class="btn pull-right btn-primary"  data-id="addUser" data-toggle="modal" data-target="#addUser" >
 				<i class="fa fa-plus-circle"></i>
 				<span><?php _e('Kullanıcı Ekle'); ?></span>
@@ -107,7 +125,7 @@ if ($users) {
 </div>
 <div class="col-sm-12">
 
-				<h3 class="content-title pull-left">Davetli kullanıcılar</h3>
+				<h3 class="content-title pull-left">Davetli Kullanıcılar</h3>
 	</div>
 
 		<?php foreach ($invitated as $key => $user) { ?>

@@ -22,6 +22,7 @@
 	<div class="row">
  		<div class="box-body">
 										<ul class="pricing_table row">
+											
 											<li class="price_block col-md-3 col-xs-11">
 												<h3><?php _e('Başlangıç Paketi') ?></h3>
 												<div class="price green">
@@ -38,7 +39,7 @@
 													
 												</ul>
 												<div class="footer">
-													<a href="/organisations/addBalance?plan=1&organisation=<?php echo $organisation ?>" class="btn btn-info"><?php _e('Satın Al') ?></a>
+													<a  <?php echo ($current==3 || $current==4 || $current==2)? 'disabled':''; ?> href="/organisations/addBalance?plan=1&organisation=<?php echo $organisation ?>" class="btn btn-info"><?php _e('Satın Al') ?></a>
 												</div>
 											</li>
 
@@ -66,7 +67,7 @@
 													
 												</ul>
 												<div class="footer">
-													<a href="/organisations/addBalance?plan=2&organisation=<?php echo $organisation ?>" class="btn btn-info"><?php _e('Satın Al') ?></a>
+													<a <?php echo ($current==3 || $current==4)? 'disabled':''; ?> href="/organisations/addBalance?plan=2&organisation=<?php echo $organisation ?>" class="btn btn-info"><?php _e('Satın Al') ?></a>
 												</div>
 											</li>
 
@@ -92,7 +93,7 @@
 													
 												</ul>
 												<div class="footer">
-													<a href="/organisations/addBalance?plan=3&organisation=<?php echo $organisation ?>" class="btn btn-info"><?php _e('Satın Al') ?></a>
+													<a <?php echo ($current==4)? 'disabled':''; ?> href="/organisations/addBalance?plan=3&organisation=<?php echo $organisation ?>" class="btn btn-info"><?php _e('Satın Al') ?></a>
 												</div>
 											</li>
 

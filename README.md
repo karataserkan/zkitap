@@ -19,7 +19,7 @@ apt-get install libapache2-mod-xsendfile
 a2enmod ssl
 a2enmod rewrite
 a2enmod xsendfile
-
+a2enmod headers
 
 Php5 Installation
 -----------------------------------------------------------------
@@ -95,9 +95,9 @@ apt-get install texlive-extra-utils
 
 Co-Working
 -----------------------------------------------------------------
-apt-get install node npm
+apt-get install nodejs npm
 npm config set registry http://registry.npmjs.org/
-npm install socket.io
+npm install -g socket.io
 
 Locale(for turkish)
 -----------------------------------------------------------------

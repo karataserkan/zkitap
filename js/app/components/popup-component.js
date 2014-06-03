@@ -23,7 +23,7 @@ $(document).ready(function(){
       }
       
 
-      console.log(this.options.component.data.html_inner);
+      //console.log(this.options.component.data.html_inner);
       if(this.options.component.data.html_inner){
         var popupmessage=$('<div  id="message_'+componentpopupid+'" style="display:none" >'+this.options.component.data.html_inner+'</div>');
         popupmessage.appendTo(this.element);
@@ -94,6 +94,11 @@ console.log(oldcomponent);
     var min_top = $("#current_page").offset().top;
     var max_left = $("#current_page").width() + min_left;
     var max_top = $("#current_page").height() + min_top;
+    var window_width = $( window ).width();
+    var window_height = $( window ).height();
+
+    if(max_top > window_height) max_top = window_height;
+    if(max_left > window_width) max_top = window_width;
     
     var top=(event.pageY - 25);
     var left=(event.pageX-150);

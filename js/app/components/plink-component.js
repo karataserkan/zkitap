@@ -12,7 +12,7 @@ $(document).ready(function(){
 
       var that = this;
 
-      console.log(this.options.component.data.width);
+      console.log(this.options.component.data);
       //return;
 
       var componentplinkid='plink'+this.options.component.id;
@@ -35,7 +35,17 @@ $(document).ready(function(){
         popupmessage.html('<img src="'+this.options.component.data.marker+'" style="width:100%; height:100%;"/>');
       }
       else if(selected_tab == "#plink_area"){
-        var popupmessage=$('<div  id="message_'+componentplinkid+'"  style="overflow:hidden; border: solid yellow; width:'+this.options.component.data.width+'px; height:'+this.options.component.data.height+'px;"></div>');
+        console.log("GELIYO");
+        console.log(this.options.component.data.height);
+        console.log(this.options.component.data.self.css);
+        var width = this.options.component.data.self.css.width;
+        var height = this.options.component.data.self.css.height; 
+        if(this.options.component.data.height!=0){
+          var popupmessage=$('<div  id="message_'+componentplinkid+'"  style="overflow:hidden; border: solid yellow; width:'+width+'; height:'+height+';"></div>');
+        }
+        else{
+          var popupmessage=$('<div  id="message_'+componentplinkid+'"  style="overflow:hidden; border: solid yellow; min-width:'+'100%; min-height:'+'100%;"></div>');
+        }
         popupmessage.appendTo(this.element);
       }
        
@@ -60,6 +70,7 @@ $(document).ready(function(){
 
 
 var createPlinkComponent = function ( event, ui, oldcomponent ) {  
+
   var book_data='';
   var marker = window.base_path+'/css/popupmarker.svg';
   var video_marker=window.base_path+'/css/image_play_trans.svg';
@@ -79,6 +90,7 @@ var createPlinkComponent = function ( event, ui, oldcomponent ) {
       var height = oldcomponent.data.height;
     }; 
 var page_count = 1;
+console.log("dede ");
 $.ajax({
   url: "/book/getBookPages/"+lindneo.currentBookId,
 }).done(function(result) {
@@ -90,6 +102,11 @@ $.ajax({
     var min_top = $("#current_page").offset().top;
     var max_left = $("#current_page").width() + min_left;
     var max_top = $("#current_page").height() + min_top;
+    var window_width = $( window ).width();
+    var window_height = $( window ).height();
+
+    if(max_top > window_height) max_top = window_height;
+    if(max_left > window_width) max_top = window_width;
     
     var top=(event.pageY - 25);
     var left=(event.pageX-150);
@@ -154,7 +171,7 @@ console.log(top);
   close_button.appendTo(poup_header);
   galery_inner.appendTo(html_popup);
   popup_wrapper.appendTo(galery_inner).resizable({alsoResize: galery_inner});
-  var chapter= $('<div class="panel-group" id="accordion1"></div>');
+  var chapter= $('<div class="panel-group" id="accordion1" style="height: 300px; overflow: auto;"></div>');
   chapter.appendTo(galery_inner);
   $('#plink_tab a:first').tab('show');
   $( "button" ).button();
@@ -182,7 +199,7 @@ console.log(top);
     $.each( value.pages, function( key_page, value_page ) {
       console.log(value_page);
       if(value_page)
-        $('<input type="radio" name="page_select" value="'+value_page.page_id+'">'+page_count+'. '+j__("Sayfa")+'<br>').appendTo('.panel-body_'+value.chapter_id);
+        $('<input type="radio" name="page_select" value="'+value_page+'">'+page_count+'. '+j__("Sayfa")+'<br>').appendTo('.panel-body_'+value.chapter_id);
       page_count++;
     });
     
@@ -261,8 +278,8 @@ console.log(top);
             'plink_data': plink_data ,
             'plink_image': FileBinary,
             'page_link': page_link ,
-            'width': width,
-            'height': height,
+            'width': '0',
+            'height': '0',
             'marker': marker,
             'selected_tab': selected_tab,
             'overflow': 'visible',
@@ -274,7 +291,9 @@ console.log(top);
                 'left':  left ,
                 'overflow': 'visible',
                 'opacity': '1',
-                'z-index': 'first'
+                'z-index': 'first',
+                'width':width,
+                'height':height
               }
             }
           }

@@ -32,7 +32,7 @@ class OrganisationsController extends Controller
 				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
-				'actions'=>array('create','update','workspaces','delWorkspaceUser','addWorkspaceUser','users','addUser','deleteOrganisationUser','account','bookCategories','deleteCategory','createBookCategory','updateBookCategory','templates','aCL','addACL','publishedBooks','deleteACL','removeFromCategory','addBalance','selectPlan','checkoutPlan','deneme'),
+				'actions'=>array('create','update','workspaces','delWorkspaceUser','addWorkspaceUser','users','addUser','deleteOrganisationUser','account','bookCategories','deleteCategory','createBookCategory','updateBookCategory','templates','aCL','addACL','publishedBooks','deleteACL','removeFromCategory','addBalance','selectPlan','checkoutPlan','deneme','changeTitle'),
 				'users'=>array('@'),
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
@@ -62,7 +62,7 @@ class OrganisationsController extends Controller
 
 	public function actionDeneme()
 	{
-		echo Yii::app()->params['panda_host'];
+		print_r($this->freeWorkspaceUsers('seviye_ws1','qwertyu'));
 	}
 
 	public function actionWorkspace()
@@ -114,10 +114,10 @@ class OrganisationsController extends Controller
 		}
 	}
 
-	public function actionSelectPlan($id=0)
+	public function actionSelectPlan($id=0,$current=0)
 	{
 		if ($id) {
-			$this->render('select_plan',array('organisation'=>$id));
+			$this->render('select_plan',array('organisation'=>$id,'current'=>$current));
 		}
 	}
 
@@ -148,11 +148,13 @@ class OrganisationsController extends Controller
 				$transaction->transaction_id=$ticket;
 				$transaction->transaction_type="plan";
 				$transaction->transaction_method="deposit";
+				$transaction->transaction_explanation=$plan_id;
 				$transaction->transaction_amount=1;
 				$transaction->transaction_unit_price=$tutar;
 				$transaction->transaction_amount_equvalent=$tutar;
-				$transaction->transaction_start_date=date('Y-n-d g:i:s',time());;
+				$transaction->transaction_start_date=date('Y-n-d g:i:s',time());
 				$transaction->transaction_organisation_id=$id;
+
 				$transaction->save();
 
 				$url = Yii::app()->params['panda_host'].'/api/addPlan';
@@ -173,7 +175,9 @@ class OrganisationsController extends Controller
 				$response = curl_exec( $ch );
 				echo $response;
 				error_log('response: '.$response);
-
+				$transaction->transaction_result=0;
+				$transaction->transaction_end_date=date('Y-n-d g:i:s',time());
+				$transaction->save();
 			}
 		}
 		else
@@ -429,6 +433,41 @@ class OrganisationsController extends Controller
 
 		return $amount;
 	}
+
+	public function getRemainPlanDays($id){
+		$lastDay=0;
+		$plans=Transactions::model()->findAll('transaction_type="plan" AND transaction_method="deposit" AND transaction_result=0 AND transaction_organisation_id=:transaction_organisation_id AND `transaction_start_date`>= DATE_SUB(CURDATE(), INTERVAL 30 DAY) AND `transaction_start_date` <= CURDATE() ORDER BY `transaction_start_date`',array('transaction_organisation_id'=>$id));
+		if ($plans) {
+			foreach ($plans as $key => $plan) {
+				if ($key==0) {
+					$date = new DateTime($plan->transaction_start_date);
+					$lastDay=$date->add(new DateInterval('P30D'));
+				}
+				else
+					$lastDay=$lastDay->add(new DateInterval('P30D'));
+
+			}
+			$lastDay=$date->format('d-m-Y');
+		}
+
+		return $lastDay;
+	}
+
+	public function actionChangeTitle()
+	{
+		if (isset($_POST['title'])&&isset($_POST['organisation'])) {
+			$organisation=Organisations::model()->findByPk($_POST['organisation']);
+			$organisation->organisation_name=$_POST['title'];
+			if($organisation->save())
+			{
+				echo "0";
+			}else{
+				echo "1";
+			}
+		}else{
+			echo "1";
+		}
+	}
 	
 	public function actionAccount($id)
 	{
@@ -437,8 +476,17 @@ class OrganisationsController extends Controller
 		$hosts=Yii::app()->db->createCommand("SELECT count(*) as w FROM `organisation_hostings` WHERE `organisation_id`='".$id."'")->queryRow();
 		$category=Yii::app()->db->createCommand("SELECT count(*) as w FROM `book_categories` WHERE `organisation_id`='".$id."'")->queryRow();
 		$budget=$this->getOrganisationEpubBudget($id);
-
-		$this->render("account",array('book'=>$books['book'],'workspace'=>$workspaces['w'],'host'=>$hosts['w'],'category'=>$category['w'],'budget'=>$budget,'id'=>$id));
+		$organisation=Organisations::model()->findByPk($id);
+		$plan=Transactions::model()->find('transaction_type="plan" AND transaction_method="deposit" AND transaction_result=0 AND transaction_organisation_id=:transaction_organisation_id AND `transaction_start_date`>= DATE_SUB(CURDATE(), INTERVAL 30 DAY) AND `transaction_start_date` <= CURDATE()',array('transaction_organisation_id'=>$id));
+		$remainDay=0;
+		$lastDay=$this->getRemainPlanDays($id);
+		if ($lastDay) {
+			$datetime1 = new DateTime('now');
+			$datetime2 = new DateTime($lastDay);
+			 $interval = $datetime1->diff($datetime2);
+			 $remainDay=$interval->format('%a');
+		}
+		$this->render("account",array('book'=>$books['book'],'workspace'=>$workspaces['w'],'host'=>$hosts['w'],'category'=>$category['w'],'budget'=>$budget,'id'=>$id,'plan'=>$plan,'remainDay'=>$remainDay,'lastDay'=>$lastDay,'organisation'=>$organisation));
 	}
 
 	public function actionTemplates($id)

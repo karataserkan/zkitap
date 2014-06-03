@@ -98,7 +98,7 @@
 									<!-- /STYLER -->
 										<h3 class="content-title pull-left" >Destek</h3>
                                         
-                                        <a data-id="addTicket" data-toggle="modal" data-target="#addTicket" class="btn pull-right btn-primary"><i class="fa fa-exclamation-circle"></i> Destek İste</a>
+                                        <a data-id="addTicket" data-toggle="modal" data-target="#addTicket" class="btn pull-right brand_color_for_buttons"><i class="fa fa-exclamation-circle"></i> Destek İste</a>
 								</div>
 							</div>
 						</div>

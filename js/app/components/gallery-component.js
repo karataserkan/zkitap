@@ -14,7 +14,7 @@ $(document).ready(function(){
       var that = this;
       //var image_width = "";
       //if( that.options.component.type=='galery')
-      console.log(that.options.component.data);
+      //console.log(that.options.component.data);
       if( that.options.component.data.ul.imgs ) {
         var counter=0;
         var ul=$('<ul></ul>');
@@ -22,13 +22,24 @@ $(document).ready(function(){
         this.element.parent().find('.some-gallery').css(that.options.component.data['some_gallery'].css);
         
     
+        //console.log(that);
 
-        console.log(that);  
+        that.imageDOMs=[];  
         $.each (that.options.component.data.ul.imgs , function (index,value) {
           if(  value.src ) {
             counter++;
-            var image= $('<img class="galery_component_image" style="display: block; margin: auto; width: 100%; height: 100%; " src="'+value.src+ '" />'); 
-            var container=$('<li class="galery_component_li" style="float:left; position: absolute; width: 100%; height: 100%; '+ (counter==1 ? ''  : 'display:none;')+ '" ></li>');
+            //var image= $('<img class="galery_component_image" style="display: block; margin: auto; min-width: 50%; min-height: 50%; " src="'+value.src+ '" />'); 
+            //var container=$('<li class="galery_component_li" style="float:left; position: absolute; width: 200%; height: 200%; left: -50%;'+ (counter==1 ? ''  : 'display:none;')+ '" ></li>');
+            if( that.options.component.data.galery_type=='inner'){
+              var image= $('<img class="galery_component_image" style="display: block; margin: auto auto; height:auto; padding:0; position:absolute; top:0; right:0; bottom:0; left:0; " src="'+value.src+ '" />'); 
+              var container=$('<li class="galery_component_li" style="background-color:black; float:left; position: relative; clear:both; width: 100%; height: 100%; '+ (counter==1 ? ''  : 'display:none;')+ '" ></li>');
+              image.galleryContainer=container;
+              that.imageDOMs.push(image);
+              }
+            else{
+              var image= $('<img class="galery_component_image" style="display: block; margin: auto; min-width: 50%; min-height: 50%; " src="'+value.src+ '" />'); 
+              var container=$('<li class="galery_component_li" style="float:left; position: absolute; width: 200%; height: 200%; left: -50%;'+ (counter==1 ? ''  : 'display:none;')+ '" ></li>');
+            }
             image.appendTo(container);        
             container.appendTo(ul);
           }       
@@ -42,7 +53,33 @@ $(document).ready(function(){
         $('<div style="clear:both"></div>').appendTo(that.element);
 
       }
-      this._super({resizableParams:{handles:"e, s, se"}});
+      this._super({resizableParams:{handles:"e, s, se", minWidth:100, minHeight:100,resize:function(event,ui){
+                                                        
+                                                        window.lindneo.toolbox.makeMultiSelectionBox();
+                                                        if( that.options.component.data.galery_type=='inner')
+                                                            that.also_resize_inner_images(event,ui,that);
+
+                                                      }
+    }});
+    },
+
+    also_resize_inner_images: function(event,ui,that){
+                                                      $.each(that.imageDOMs,function(index,element){
+                                                            var containerWidth = element.galleryContainer.width();
+                                                            var containerHeight = element.galleryContainer.height();
+                                                            var imageWidth = element.width();
+                                                            var imageHeight = element.height();
+
+                                                            var containerAspect = containerWidth/containerHeight;
+                                                            var imageAspect = imageWidth/imageHeight;
+
+                                                            if(containerAspect<imageAspect){
+                                                              element.css({'width':containerWidth +"px" , "height" : "auto" });
+                                                            } else {
+                                                              element.css({'height':containerHeight +"px" , "width" : "auto" });
+                                                            }
+                                                            //console.log(containerWidth);
+                                                        });
     },
 
     field: function(key, value){
@@ -61,18 +98,36 @@ var image_height;
 
 var createGaleryComponent = function (event,ui, oldcomponent){
 
+  if(typeof oldcomponent == "undefined"){
+    var galery_type = "inner";
+  }
+  else{
+    var galery_type = oldcomponent.data.galery_type;
+  }
     
 
     var min_left = $("#current_page").offset().left;
     var min_top = $("#current_page").offset().top;
     var max_left = $("#current_page").width() + min_left;
     var max_top = $("#current_page").height() + min_top;
-    
+    var window_width = $( window ).width();
+    var window_height = $( window ).height();
+
+    if(max_top > window_height) max_top = window_height;
+    if(max_left > window_width) max_top = window_width;
+
     var top=(event.pageY - 25);
     var left=(event.pageX-150);
 
+    var control_y_check ="";
+    var control_y_check_active ="";
+    var control_n_check ="";
+    var control_n_check_active ="";
+    if(galery_type == 'inner') { control_y_check = "checked='checked'"; control_y_check_active = 'active';}
+    else { control_n_check = "checked='checked'"; control_n_check_active = 'active'; }
     
-
+    console.log(min_top);
+    console.log(max_top);
     if(left < min_left)
       left = min_left;
     else if(left+310 > max_left)
@@ -83,16 +138,16 @@ var createGaleryComponent = function (event,ui, oldcomponent){
     else if(top+500 > max_top)
       top = max_top - 500;
 
-//console.log(top);
+console.log(top);
 
     top = top + "px";
     left = left + "px";
 
     $("<div class='popup ui-draggable' id='pop-image-popup' style='display: block; top:" + top + "; left: " + left + ";'> \
-    <div class='popup-header'> \
-    <i class='icon-m-galery'></i> &nbsp;"+j__("Galeri Ekle")+" \
-    <i id='galery-add-dummy-close-button' class='icon-close size-10 popup-close-button'></i> \
-    </div> \
+      <div class='popup-header'> \
+        <i class='icon-m-galery'></i> &nbsp;"+j__("Galeri Ekle")+" \
+        <i id='galery-add-dummy-close-button' class='icon-close size-10 popup-close-button'></i>\
+      </div> \
       <div class='gallery-inner-holder'> \
         <div style='clear:both'></div> \
         <div class='tabbable'>\
@@ -118,9 +173,20 @@ var createGaleryComponent = function (event,ui, oldcomponent){
       <ul id='galery-popup-images' style='width: 250px;'> \
       </ul> \
      <div style='clear:both' > </div> \
+     <div class='type1' style='padding: 4px; display: inline-block;'>\
+        <div class='btn-group' data-toggle='buttons'>"+j__("Galeri Tipi")+"<br>\
+          <label class='btn btn-primary " + control_y_check_active + "'>\
+            <input type='radio' name='galery_type' id='repeat0' " + control_y_check + " value='inner'> "+j__("İçe Yaslı")+"\
+          </label>\
+          <label class='btn btn-primary " + control_n_check_active + "'>\
+            <input type='radio' name='galery_type' id='repeat1' " + control_n_check + " value='outer'> "+j__("dışa Yaslı")+"\
+          </label>\
+        </div>\
+    </div><br><br>\
      <a id='pop-image-OK' class='btn btn-info' >"+j__("Tamam")+"</a>\
     </div> ").appendTo('body').draggable();
-    $('#galery-add-dummy-close-button').click(function(){
+    
+    $("#galery-add-dummy-close-button").click(function(){
 
       $('#pop-image-popup').remove();  
 
@@ -176,7 +242,7 @@ var createGaleryComponent = function (event,ui, oldcomponent){
         image_width = "200px";
         image_height = "200px";
       }
-
+      var galery_type = $('input[name=galery_type]:checked').val();
       var imgs=[];
         $('#galery-popup-images img').each(function( index ) {
           var img={
@@ -209,6 +275,7 @@ var createGaleryComponent = function (event,ui, oldcomponent){
                 'min-width':'100px',
               }
             },
+            'galery_type': galery_type,
             'ul':{
               'css': {
                 'overflow':'hidden',
@@ -236,7 +303,7 @@ var createGaleryComponent = function (event,ui, oldcomponent){
                 'background-color': 'transparent',
                 'width': image_width,
                 'height': image_height,
-                'zindex': 'first'
+                'z-index': 'first'
 
               }
             }
