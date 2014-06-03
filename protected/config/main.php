@@ -45,6 +45,21 @@ $catalog=array(
 	//"lindneo"=>"http://catalog.lindneo.com/site/import"
 	);
 
+$mainCloud=array(
+		"lindneo"=>array(
+				"host"=>"cloud.lindneo.com",
+				"port"=>"2222",
+			),
+		"ulgen"=>array(
+				"host"=>"cloud.lindneo.com",
+				"port"=>"2222",
+			),
+		"baracuda"=>array(
+				"host"=>"cloud.okutus.com",
+				"port"=>"2222",
+			),
+	);
+
 $host_config=array(
 			"ulgen"=>array(
                 				'catalog_host'=>'http://catalog.lindneo.com',
@@ -209,6 +224,7 @@ return array(
         'koala_host'=>$host_config[gethostname()]['koala_host'],
         'cloud_host'=>$host_config[gethostname()]['cloud_host'],
         'reader_host'=>$host_config[gethostname()]['reader_host'],
+        'mainCloud'=>$mainCloud[gethostname()],
 
 	)
 

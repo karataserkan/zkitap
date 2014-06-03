@@ -98,7 +98,8 @@
 													foreach ($hosts as $key => $host) {
 														$contentHostIds[$host->hosting_client_id]=$host->hosting_client_IP.' : '.$host->hosting_client_port;
 													}
-													$contentHostIds['GIWwMdmQXL']='cloud.lindneo.com : 2222';
+													//$contentHostIds['GIWwMdmQXL']='cloud.lindneo.com : 2222';
+													$contentHostIds['GIWwMdmQXL']=Yii::app()->params['mainCloud']['host'].' : '.Yii::app()->params['mainCloud']['port'];
 													?>
 
 
