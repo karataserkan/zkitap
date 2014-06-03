@@ -104,6 +104,25 @@
 		refreshCode.hide();
 		confirmationFeedback.hide();
 
+
+		$('#confirmTelButton').click(function(){
+			if (confirmation==2) {
+			  		confirmationFeedback.show();
+			  		refreshCode.show();
+			  		confirmationFeedback.removeClass('alert-danger').removeClass('alert-success');
+			  		confirmationFeedback.addClass('alert-warning');
+			  		confirmationFeedback.text("Daha önce aktivasyon kodu almışsınız. Hesabınızı aktive etmek için telefonunuza gelen aktivasyon kodunu girin.");
+					sendConfirmationId.hide();
+	  				confirmationTel.hide();
+				}else{
+			  		checkConfirmationId.hide();
+			  		confirmationCode.hide();
+				};
+
+				$('#confirm').addClass('in');
+				$('#confirm').show();
+		});
+
 		var mytheme = 'future';
 		var mypos = 'messenger-on-bottom';
 		//Set theme
@@ -502,7 +521,7 @@ $all_books= $this->getWorkspaceBooks($workspace->workspace_id);
 											<span><?php _e('Kitap Ekle') ?></span>
 										</a>
 										<?php if($confirmation !=0 AND $confirmation !=3) { ?>
-										<a class="btn pull-right btn-danger" data-toggle="modal" data-target="#confirm" data-id="confirm" href="#">
+										<a class="btn pull-right btn-danger" id="confirmTelButton" data-toggle="modal" data-target="#confirm" data-id="confirm" href="#">
 											<span><?php _e('Telefon doğrula') ?></span>
 										</a>
 										<?php } ?>
