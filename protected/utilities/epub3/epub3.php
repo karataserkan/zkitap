@@ -572,12 +572,14 @@ class epub3 {
 			var height = $("#facybox").height() ;
 			var max_width = $("body").width() ;
 			var max_height = $("body").height() ;
+			var min_left = 0;
+			var min_top = 0;
 			var id = $(this).attr("href");
 			var value = $(id).html();
 			console.log(top);
 			console.log(left);
-			if(left < 0) left = 0; 
-			if(top < 0) top = 0; 
+			left = (left &lt; min_left)?0:left;
+			top = (left &lt; min_left)?0:top;
 			if((left + width) > max_width) left = max_width - width;
 			if((top + height) > max_height) top = max_height - height;
 
