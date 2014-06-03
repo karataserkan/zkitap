@@ -24,7 +24,8 @@ $(document).ready(function() {
 
             }
 
-
+            console.log(this.options.component);
+                  
               if(this.options.component.data.control_type == 'N') 
                 this.videoTag.attr("control","true");
 
