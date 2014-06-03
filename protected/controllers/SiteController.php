@@ -168,22 +168,20 @@ class SiteController extends Controller
 		}
 
 		$confirmation="3";
-		if (!empty($userConfirmation)) {
-			//user has confirmation code. 
-			$confirmation="2";
-			//functions::get_random_string(6,'0123456789')
-			
-			//user confirmed
-			if ($userConfirmation->meta_value == 'confirmed') {
-				$confirmation="0";
-			}
-
-
-			//user hasnt been confirmed and has not confirmation code
-			if ($userConfirmation->meta_value == '') {
+		if ($userConfirmation) {
+			if ($userConfirmation->meta_value == '1') {
+				//user hasnt been confirmed and has not confirmation code
 				$confirmation="1";
+			}elseif ($userConfirmation->meta_value == 'confirmed') {
+				//user confirmed
+				$confirmation="0";
+			}else{
+				//user has confirmation code. 
+				$confirmation="2";
 			}
 		}
+		
+		
 
 		$this->render('index',array('workspaces'=>$workspaces,'confirmation'=>$confirmation,'verifiedEmail'=>$verifiedEmail));
 	}
