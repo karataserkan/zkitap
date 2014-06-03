@@ -561,9 +561,29 @@ class epub3 {
 			});
 			okutus_stop();
 
-		$("a[rel*=facybox]").facybox({
+		//$("a[rel*=facybox]").facybox({
 	        // noAutoload: true
-	      });
+	      //});
+		$("a[rel=facybox]").click(function() {
+			
+			var top = $(this).offset().top - 90;
+			var left = $(this).offset().left - 190;
+			var width = $("#facybox").width() ;
+			var height = $("#facybox").height() ;
+			var max_width = $("body").width() ;
+			var max_height = $("body").height() ;
+			var id = $(this).attr("href");
+			var value = $(id).html();
+			console.log(top);
+			console.log(left);
+			if(left<0) left = 0; 
+			if(top<0) top = 0; 
+			if((left + width) > max_width) left = max_width - width;
+			if((top + height) > max_height) top = max_height - height;
+
+		    $.facybox(value);
+		    $("#facybox").css({"top":top+"px","left":left+"px"});
+		  });
 
 		});
 		</script>
