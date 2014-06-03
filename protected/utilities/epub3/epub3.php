@@ -576,8 +576,8 @@ class epub3 {
 			var value = $(id).html();
 			console.log(top);
 			console.log(left);
-			if(left<0) left = 0; 
-			if(top<0) top = 0; 
+			//if(left<0) left = 0; 
+			//if(top<0) top = 0; 
 			if((left + width) > max_width) left = max_width - width;
 			if((top + height) > max_height) top = max_height - height;
 
