@@ -550,7 +550,7 @@ $( document ).ready(function () {
       window.lindneo.tsimshian.pageCreated();
       //get page id from parent li 
       var page_id = $(this).parent().attr('page_id') ;
-      sortPages();
+      //sortPages();
       console.log(window.lindneo.tlingit.pages);
       //Load Page
       window.lindneo.tlingit.loadPage(page_id);

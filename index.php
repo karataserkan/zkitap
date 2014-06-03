@@ -7,7 +7,7 @@ error_reporting(E_ERROR | E_PARSE);
 
 if(gethostname()=='ulgen'){
 	$host_config='/../../../../dump/yii_framework/framework/yii.php';
-	if(!file_exists($host_config))
+	if(!file_exists(dirname(__FILE__).$host_config))
 	{
 		$host_config='/../../dump/yii_framework/framework/yii.php';
 	}
