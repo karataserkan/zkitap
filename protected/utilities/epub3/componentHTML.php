@@ -851,7 +851,7 @@ class componentHTML {
 
 			$container.=" 
 				
-				<img  class='popup ref-popup-rw' style='z-index:99999; position:relative;' data-popup-target='$video_id' src='".$component->data->marker."' />
+				<img  class='popup ref-popup-rw' style='z-index:99999; position:relative; width:100%; height:100%;' data-popup-target='$video_id' src='".$component->data->marker."' />
 				
 				<div class='widgets-rw popup-text-rw exclude-auto-rw' id='$video_id' style='width:500px; height:auto'>
 					 <button xmlns='http://www.w3.org/1999/xhtml' onclick='$(this).parent().remove();' class='ppclose' style='float:right;'>X</button>
