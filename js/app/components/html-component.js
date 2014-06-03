@@ -27,10 +27,14 @@ $(document).ready(function(){
     
 
       if(this.options.component.data.html_inner){
-        var popupmessage=$('<div  id="message_'+componenthtmlid+'" style="overflow:hidden;" ></div>');
+        var popupmessage=$('<div  id="message_'+componenthtmlid+'" style="overflow:hidden; width:100%; height:100%;" ><iframe id="if'+componenthtmlid+'" style="width:100%; height:100%;" /></iframe></div>');
         popupmessage.appendTo(this.element);
-        popupmessage.html(html_data);
+        //popupmessage.html(html_data);
         //this.element.html(html_data);
+        var iframe = document.getElementById('if'+componenthtmlid),
+        iframedoc = iframe.contentDocument || iframe.contentWindow.document;
+
+        iframedoc.body.innerHTML = html_data;
       }
        
 

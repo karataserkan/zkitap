@@ -886,7 +886,7 @@ class componentHTML {
 			foreach ($data->audio->attr as $attr_name => $attr_val ) {
 				$container.=" $attr_name='$attr_val' ";
 			}
-		$container.=$repeat_type.' '.$auto_type;
+		$container.=$repeat_type.' = '.$repeat_type.' '.$auto_type.' = '.$auto_type;
 
 		if(isset($data->audio->css)){
 			$container.=" style=' ";
