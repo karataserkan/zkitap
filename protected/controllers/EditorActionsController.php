@@ -426,7 +426,9 @@ class EditorActionsController extends Controller
 
 	                //var_dump($component_attribs);
 	                //exit();
-
+			if($component_attribs->type == "html"  ) {
+				file_put_contents(Yii::app()->params['storage'].$new_id.'.html' , rawurldecode($component_attribs->data->html_inner));
+			}
 			if($component_attribs->data->img->src  ) {
 				$component_attribs->data->img->src =$component_attribs->data->img->src;
 			}
@@ -559,6 +561,9 @@ class EditorActionsController extends Controller
 	}
 
 	public function deleteComponent($componentId){
+		$file = Yii::app()->params['storage'].$componentId.'.html';
+		if(file_exists($file) && !is_dir($file))
+			unlink($file);
 		$component=Component::model()->findByPk($componentId);
 		if (!$component) {
 			$this->error("EA-DCom","Component Not Found",func_get_args(),$component);

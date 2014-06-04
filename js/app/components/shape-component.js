@@ -247,7 +247,7 @@ console.log(top);
                 'background-color': 'transparent',
                 'overflow': 'visible',
                 'opacity': '1',
-                'zindex': 'first'
+                'z-index': 'first'
                   }
               
               }

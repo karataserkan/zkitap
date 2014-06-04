@@ -553,6 +553,7 @@ class epub3 {
 		}
 
 		$(document).ready(function() {
+			$("video").each(function () { this.pause() });
 			$(window).focus(function(){
 				okutus_play();
 			});
