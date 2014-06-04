@@ -853,7 +853,7 @@ class componentHTML {
 				
 				<a href='#".$video_id."' rel='facybox'><img style='z-index:99999; position:relative; width:100%; height:100%;' src='".$component->data->marker."' /></a>
 				
-				<div id='$video_id' style='display:none; z-index:9999999; position:relative;'>
+				<div id='$video_id' style='position:relative; display:none;'>
 					 ".$video_container."
 				</div>
 			";
@@ -1033,14 +1033,28 @@ class componentHTML {
 
 		$html_id= "html".functions::get_random_string();
 		$component->data->html_inner = rawurldecode($component->data->html_inner);
+
+		$component->data->html_inner = str_replace(array("\n", "\r"), " ", $component->data->html_inner);
+		
 		$container.=" 
+
 			<div id='$html_id' ".$css.">
-				".$component->data->html_inner."
+				<iframe id='i".$html_id."' style='width:100%; height:100%;' ></iframe>
 			</div>
-	
+			<script>
+				var id = '".$html_id."';
+				id = 'i' + id;
+				
+				var iframe = document.getElementById(id),
+		        iframedoc = iframe.contentDocument || iframe.contentWindow.document;
+
+		        iframedoc.open();
+		        iframedoc.write('".$component->data->html_inner."');
+		        iframedoc.close();
+			</script>
 		
 		";
-
+	
 		$this->html=$container;
 
 	}
@@ -1278,7 +1292,7 @@ class componentHTML {
 				
 				<a href='#".$image_id."' rel='facybox'><img src='".$component->data->img->marker."' style='width:100%; height:100%;' /></a>
 				
-				<div id='$popup_id' style='display:none; z-index:9999999; position:relative;'>
+				<div id='$image_id' style='position:relative; display:none;'>
 					 ".$image_container."
 				</div>
 			";
