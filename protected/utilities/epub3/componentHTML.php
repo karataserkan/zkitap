@@ -853,7 +853,7 @@ class componentHTML {
 				
 				<a href='#".$video_id."' rel='facybox'><img style='z-index:99999; position:relative; width:100%; height:100%;' src='".$component->data->marker."' /></a>
 				
-				<div id='$video_id' style='display:none; z-index:9999999; position:relative;'>
+				<div id='$video_id' style='position:relative; display:none;'>
 					 ".$video_container."
 				</div>
 			";
@@ -1021,6 +1021,19 @@ class componentHTML {
 
 	public function htmlInner($component){
 
+		$file_contents = file_get_contents(Yii::app()->params['storage'].$component->id.'.html');
+
+		$URL=parse_url(Yii::app()->params['storage'].$component->id.'.html');
+		$URL=pathinfo($URL[path]);
+		$ext=$URL['extension'];
+
+		$file=new file( $component->id.'.'.$ext , $this->outputFolder );
+		$file->writeLine($file_contents);
+		$file->closeFile();
+
+		$this->epub->files->others[] = $file;
+		$html_file = $file->filename;
+
 		$data=$component->data;
 		$css="";
 		if(isset($data->self->css)){
@@ -1033,14 +1046,15 @@ class componentHTML {
 
 		$html_id= "html".functions::get_random_string();
 		$component->data->html_inner = rawurldecode($component->data->html_inner);
+
 		$container.=" 
+
 			<div id='$html_id' ".$css.">
-				".$component->data->html_inner."
+				<iframe id='i".$html_id."' src ='$html_file'style='width:100%; height:100%;' ></iframe>
 			</div>
-	
 		
 		";
-
+	
 		$this->html=$container;
 
 	}
@@ -1278,7 +1292,7 @@ class componentHTML {
 				
 				<a href='#".$image_id."' rel='facybox'><img src='".$component->data->img->marker."' style='width:100%; height:100%;' /></a>
 				
-				<div id='$popup_id' style='display:none; z-index:9999999; position:relative;'>
+				<div id='$image_id' style='position:relative; display:none;'>
 					 ".$image_container."
 				</div>
 			";

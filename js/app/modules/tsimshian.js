@@ -1,17 +1,17 @@
-// Tsimshian Tribe Library for Co-working
+// window.lindneo.tsimshian Tribe Library for Co-working
 // Triggers Framework events and Coworking events
 'use strict'; 
 
 window.lindneo = window.lindneo || {};
  
-// tsimshian module
+// window.lindneo.tsimshian module
 window.lindneo.tsimshian = (function(window, $, undefined){
 
   var socket;
   var myComponent='';
   var hereACounter = 0;
   var book_user_list = [];
-
+  var tsimshian = this;
   var connect = function () {
 
     window.lindneo.tsimshian.init(); 
@@ -75,7 +75,8 @@ window.lindneo.tsimshian = (function(window, $, undefined){
       name:window.lindneo.user.name,
       username:window.lindneo.user.username
     }
-    
+    window.lindneo.tsimshian.pageId=pageId;
+
    
  
    
@@ -103,7 +104,8 @@ window.lindneo.tsimshian = (function(window, $, undefined){
        this.socket.on('newComponent', function(component){
           //console.log(component.id) ;
           //console.log(window.lindneo.tsimshian.myComponent) ;
-          window.lindneo.nisga.createComponent(component); 
+          if (window.lindneo.tsimshian.pageId == component.pageid)
+            window.lindneo.nisga.createComponent(component); 
        } );
 
  

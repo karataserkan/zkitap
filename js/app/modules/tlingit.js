@@ -13,11 +13,14 @@ window.lindneo.tlingit = (function(window, $, undefined){
 
   var componentHasCreated = function (component){
  
-    //co-workers have created a new component, fuck them all.
+    //co-workers have created a new component.
     
     createComponent(component);
 
   };
+
+
+  var componentPreviosVersions=[];
   var oldcomponent_id = '';
   var oldcomponent = '';
   var pages = [];
@@ -57,7 +60,7 @@ window.lindneo.tlingit = (function(window, $, undefined){
     if( response.result === null ) {
       alert('hata'); 
       return;
-    } 
+    }  
     
     window.lindneo.nisga.createComponent( response.result.component, oldcomponent_id );
     window.lindneo.tsimshian.componentCreated( response.result.component );
@@ -66,24 +69,49 @@ window.lindneo.tlingit = (function(window, $, undefined){
 
   var componentHasUpdated = function ( component ) {
     //console.log(component);
-    window.lindneo.dataservice
-      .send( 'UpdateWholeComponentData', 
-        { 
-          'componentId' : component.id, 
-          'jsonProperties' : componentToJson(component) 
-        },
-        updateArrivalComponent,
-        function(err){
-          //console.log('error:' + err);
-      });
+    if( typeof  componentPreviosVersions[component.id] == "undefined"){
+         
+
+          console.log('firstUpdate');
+        
+    
+        window.lindneo.dataservice
+          .send( 'UpdateWholeComponentData', 
+            { 
+              'componentId' : component.id, 
+              'jsonProperties' : componentToJson(component) 
+            },
+            updateArrivalComponent,
+            function(err){
+              //console.log('error:' + err);
+          });
+
+
+    } else {
+        
+        var componentDiff = deepDiffMapper.map(component.data, componentPreviosVersions[component.id].data);
+        console.log(componentDiff);
+         window.lindneo.dataservice
+          .send( 'UpdateMappedComponentData', 
+            { 
+              'componentId' : component.id, 
+              'jsonProperties' : componentToJson(componentDiff) 
+            },
+            updateArrivalComponent,
+            function(err){
+              //console.log('error:' + err);
+          });
+
+    }
+     componentPreviosVersions[component.id]= JSON.parse(JSON.stringify(component)); 
+    //window.lindneo.tsimshian.componentUpdated(component);
     
   };
 
   var updateArrivalComponent = function(res) {
-    var response = responseFromJson(res);
+    //var response = responseFromJson(res);
     //console.log(response);
-    window.lindneo.tsimshian.componentUpdated(response.result.component);
-    loadPagesPreviews(response.result.component.page_id);
+    //loadPagesPreviews(response.result.component.page_id);
 
   };
 
@@ -548,7 +576,84 @@ window.lindneo.tlingit = (function(window, $, undefined){
     PageHasCreated: PageHasCreated,
     DeletePage: DeletePage,
     DeleteChapter: DeleteChapter,
-    pages: pages
+    pages: pages,
+    componentPreviosVersions: componentPreviosVersions
   };
 
 })( window, jQuery );
+
+
+
+var deepDiffMapper = function() {
+    return {
+        VALUE_CREATED: 'created',
+        VALUE_UPDATED: 'updated',
+        VALUE_DELETED: 'deleted',
+        VALUE_UNCHANGED: 'unchanged',
+        map: function(obj1, obj2) {
+            if (this.isFunction(obj1) || this.isFunction(obj2)) {
+                throw 'Invalid argument. Function given, object expected.';
+            }
+            if (this.isValue(obj1) || this.isValue(obj2)) {
+                return {mapped_type: this.compareValues(obj1, obj2), mapped_data: obj1 || obj2};
+            }
+
+            var diff = {};
+            for (var key in obj1) {
+                if (this.isFunction(obj1[key])) {
+                    continue;
+                }
+
+                var value2 = undefined;
+                if ('undefined' != typeof(obj2[key])) {
+                    value2 = obj2[key];
+                }
+
+                var adding = this.map(obj1[key], value2);
+                //if(adding.type != this.VALUE_UNCHANGED)
+                  diff[key] = adding;
+            }
+            for (var key in obj2) {
+                if (this.isFunction(obj2[key]) || ('undefined' != typeof(diff[key]))) {
+                    continue;
+                }
+
+               
+                var adding = this.map(undefined, obj2[key]);
+                
+                  diff[key] = adding;
+            }
+            for (var key in diff){
+              if(diff[key].mapped_type == this.VALUE_UNCHANGED)
+                delete diff[key];
+            }
+            return diff;
+
+        },
+        compareValues: function(value1, value2) {
+            if (value1 === value2) {
+                return this.VALUE_UNCHANGED;
+            }
+            if ('undefined' == typeof(value1)) {
+                return this.VALUE_CREATED;
+            }
+            if ('undefined' == typeof(value2)) {
+                return this.VALUE_DELETED;
+            }
+
+            return this.VALUE_UPDATED;
+        },
+        isFunction: function(obj) {
+            return toString.apply(obj) === '[object Function]';
+        },
+        isArray: function(obj) {
+            return toString.apply(obj) === '[object Array]';
+        },
+        isObject: function(obj) {
+            return toString.apply(obj) === '[object Object]';
+        },
+        isValue: function(obj) {
+            return !this.isObject(obj) && !this.isArray(obj);
+        }
+    }
+}();
