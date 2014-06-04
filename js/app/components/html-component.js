@@ -30,7 +30,7 @@ $(document).ready(function(){
 
 
 
-        var popupmessage=$('<div  id="message_'+componenthtmlid+'" style="overflow:hidden; width:100%; height:100%;" ><iframe id="if'+componenthtmlid+'" src="'+window.base_path+"/uploads/files/"+this.options.component.id+'.html" style="width:100%; height:100%;" /></iframe></div>');
+        var popupmessage=$('<div  id="message_'+componenthtmlid+'" style="overflow:hidden; width:100%; height:100%;" ><iframe id="if'+componenthtmlid+'" src="'+window.base_path+"/uploads/files/"+this.options.component.id+'.html" style="width:100%; height:100%; border:none;" /></iframe></div>');
         popupmessage.appendTo(this.element);
         //popupmessage.html(html_data);
         //this.element.html(html_data);
