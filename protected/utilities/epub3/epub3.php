@@ -529,6 +529,7 @@ class epub3 {
 		<link rel="stylesheet" type="text/css" href="facybox/facybox.css" media="screen" />
 		<link rel="stylesheet" type="text/css" href="facybox/facybox_urls.css" media="screen" />
 		<script type="text/javascript">
+		//<![CDATA[
 		function okutus_play(){
 			
 				$("audio.reader_base_paused").each(function(){
@@ -564,6 +565,7 @@ class epub3 {
 		//$("a[rel*=facybox]").facybox({
 	        // noAutoload: true
 	      //});
+		
 		$("a[rel=facybox]").click(function() {
 			
 			var top = $(this).offset().top - 90;
@@ -578,8 +580,8 @@ class epub3 {
 			var value = $(id).html();
 			console.log(top);
 			console.log(left);
-			left = (left &lt; min_left)?0:left;
-			top = (left &lt; min_left)?0:top;
+			if(left < min_left) left = 0;
+			if(top < min_top) top = 0;
 			if((left + width) > max_width) left = max_width - width;
 			if((top + height) > max_height) top = max_height - height;
 
@@ -588,6 +590,7 @@ class epub3 {
 		  });
 
 		});
+		//]]>
 		</script>
 		<style type="text/css">
 		.fancybox-custom .fancybox-skin {

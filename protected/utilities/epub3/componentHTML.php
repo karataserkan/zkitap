@@ -851,10 +851,9 @@ class componentHTML {
 
 			$container.=" 
 				
-				<img  class='popup ref-popup-rw' style='z-index:99999; position:relative; width:100%; height:100%;' data-popup-target='$video_id' src='".$component->data->marker."' />
+				<a href='#".$video_id."' rel='facybox'><img style='z-index:99999; position:relative; width:100%; height:100%;' src='".$component->data->marker."' /></a>
 				
-				<div class='widgets-rw popup-text-rw exclude-auto-rw' id='$video_id' style='width:500px; height:auto'>
-					 <button xmlns='http://www.w3.org/1999/xhtml' onclick='$(this).parent().remove();' class='ppclose' style='float:right;'>X</button>
+				<div id='$video_id' style='display:none; z-index:9999999; position:relative;'>
 					 ".$video_container."
 				</div>
 			";
@@ -1277,10 +1276,9 @@ class componentHTML {
 
 			$container.=" 
 				
-				<img  class='popup ref-popup-rw' data-popup-target='$image_id' src='".$component->data->img->marker."' style='width:100%; height:100%;' />
+				<a href='#".$image_id."' rel='facybox'><img src='".$component->data->img->marker."' style='width:100%; height:100%;' /></a>
 				
-				<div class='widgets-rw popup-text-rw exclude-auto-rw' id='$image_id' style='width:300px; height:300px'>
-					 <button xmlns='http://www.w3.org/1999/xhtml' onclick='$(this).parent().remove();' class='ppclose' style='float:right;'>X</button>
+				<div id='$popup_id' style='display:none; z-index:9999999; position:relative;'>
 					 ".$image_container."
 				</div>
 			";

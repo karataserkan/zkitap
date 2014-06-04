@@ -570,6 +570,9 @@ var createVideoComponent = function( event, ui, oldcomponent ) {
           var videoURL = '';
           var token = '';
 
+          var top = (ui.offset.top-$(event.target).offset().top ) + 'px';
+          var left = ( ui.offset.left-$(event.target).offset().left ) + 'px';
+
 
           window.lindneo.dataservice.send( 'getFileUrl', {'type': videoType}, function(response) {
             response=window.lindneo.tlingit.responseFromJson(response);
@@ -603,8 +606,8 @@ var createVideoComponent = function( event, ui, oldcomponent ) {
                           'self': {
                               'css': {
                                   'position': 'absolute',
-                                  'top': (e.offsetY ) + 'px',
-                                  'left':  ( e.offsetX ) + 'px',
+                                  'top': top,
+                                  'left':  left,
                                   'width': 'auto',
                                   'height': '60px',
                                   'background-color': 'transparent',
