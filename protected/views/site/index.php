@@ -613,7 +613,7 @@ foreach ($workspacesOfUser as $key => $workspace) {
 
 <script type="text/javascript">
 	$().ready(function(){
-		if( $('.reader_book_card').length==0 ) {
+		if( $('.reader_book_card').length<=1 ) {
 			tripStart();
 		}
 	});

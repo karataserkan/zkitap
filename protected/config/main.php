@@ -42,6 +42,10 @@ $mainCloud=array(
 				"host"=>"cloud.okutus.com",
 				"port"=>"2222",
 			),
+		"z-kitap"=>array(
+				"host"=>"zkitap-cloud1.eba.gov.tr",
+				"port"=>"443",
+			),
 	);
 
 $host_config=array(

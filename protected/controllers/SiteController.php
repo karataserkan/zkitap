@@ -682,7 +682,7 @@ class SiteController extends Controller
 							$workspaceUser->owner=$newUser->id;
 
 							$bk=new BookController(1);
-							$bk->duplicateBookBody("OgrBCZ5ErK1u1hVGIAgsJXmG2CIkIPsqBqKjUNjzxsaz", $workspace->workspace_id,"Demo Kitap",$newUser->id);
+							$bk->duplicateBookBody("3pZhk6S4uq8rSiGsLvqt1M4DUrOFjjF4xxkSt2UoF8P2", $workspace->workspace_id,"Demo Kitap",$newUser->id);
 
 							$addWorkspaceOrganization = Yii::app()->db->createCommand();
 							if($addWorkspaceOrganization->insert('organisation_workspaces', array(
