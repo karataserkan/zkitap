@@ -13,7 +13,7 @@ window.lindneo.tlingit = (function(window, $, undefined){
 
   var componentHasCreated = function (component){
  
-    //co-workers have created a new component, fuck them all.
+    //co-workers have created a new component.
     
     createComponent(component);
 
@@ -60,7 +60,7 @@ window.lindneo.tlingit = (function(window, $, undefined){
     if( response.result === null ) {
       alert('hata'); 
       return;
-    } 
+    }  
     
     window.lindneo.nisga.createComponent( response.result.component, oldcomponent_id );
     window.lindneo.tsimshian.componentCreated( response.result.component );
@@ -69,8 +69,8 @@ window.lindneo.tlingit = (function(window, $, undefined){
 
   var componentHasUpdated = function ( component ) {
     //console.log(component);
-    if( typeof  this.componentPreviosVersions[component.id] == "undefined"){
-          this.componentPreviosVersions[component.id]=component;
+    if( typeof  componentPreviosVersions[component.id] == "undefined"){
+         
 
           console.log('firstUpdate');
         
@@ -89,7 +89,7 @@ window.lindneo.tlingit = (function(window, $, undefined){
 
     } else {
         
-        var componentDiff = deepDiffMapper.map(component, this.componentPreviosVersions[component.id]);
+        var componentDiff = deepDiffMapper.map(component.data, componentPreviosVersions[component.id].data);
         console.log(componentDiff);
          window.lindneo.dataservice
           .send( 'UpdateMappedComponentData', 
@@ -103,8 +103,8 @@ window.lindneo.tlingit = (function(window, $, undefined){
           });
 
     }
-
-    window.lindneo.tsimshian.componentUpdated(response.result.component);
+     componentPreviosVersions[component.id]= JSON.parse(JSON.stringify(component)); 
+    //window.lindneo.tsimshian.componentUpdated(component);
     
   };
 
@@ -576,7 +576,8 @@ window.lindneo.tlingit = (function(window, $, undefined){
     PageHasCreated: PageHasCreated,
     DeletePage: DeletePage,
     DeleteChapter: DeleteChapter,
-    pages: pages
+    pages: pages,
+    componentPreviosVersions: componentPreviosVersions
   };
 
 })( window, jQuery );
@@ -594,7 +595,7 @@ var deepDiffMapper = function() {
                 throw 'Invalid argument. Function given, object expected.';
             }
             if (this.isValue(obj1) || this.isValue(obj2)) {
-                return {type: this.compareValues(obj1, obj2), data: obj1 || obj2};
+                return {mapped_type: this.compareValues(obj1, obj2), mapped_data: obj1 || obj2};
             }
 
             var diff = {};
@@ -623,7 +624,7 @@ var deepDiffMapper = function() {
                   diff[key] = adding;
             }
             for (var key in diff){
-              if(diff[key].type == this.VALUE_UNCHANGED)
+              if(diff[key].mapped_type == this.VALUE_UNCHANGED)
                 delete diff[key];
             }
             return diff;

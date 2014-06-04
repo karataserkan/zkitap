@@ -1,11 +1,11 @@
-// Tsimshian Tribe Library for Co-working
+// window.lindneo.tsimshian Tribe Library for Co-working
 // Triggers Framework events and Coworking events
 'use strict'; 
 
 window.lindneo = window.lindneo || {};
  
-// tsimshian module
-tsimshian = (function(window, $, undefined){
+// window.lindneo.tsimshian module
+window.lindneo.tsimshian = (function(window, $, undefined){
 
   var socket;
   var myComponent='';
@@ -14,8 +14,8 @@ tsimshian = (function(window, $, undefined){
   var tsimshian = this;
   var connect = function () {
 
-    tsimshian.init(); 
-    tsimshian.changePage(window.lindneo.currentPageId); 
+    window.lindneo.tsimshian.init(); 
+    window.lindneo.tsimshian.changePage(window.lindneo.currentPageId); 
 
   };
  
@@ -27,16 +27,16 @@ tsimshian = (function(window, $, undefined){
 
   var componentUpdated = function (component) {    
 
-    tsimshian.myComponent = component.id;
+    window.lindneo.tsimshian.myComponent = component.id;
     //console.log('Sending');
-    //console.log(tsimshian.myComponent);
+    //console.log(window.lindneo.tsimshian.myComponent);
     this.socket.emit('updateComponent', component);
 
   };
 
   var componentCreated = function (component) {    
 
-          tsimshian.myComponent = component.id;
+          window.lindneo.tsimshian.myComponent = component.id;
           this.socket.emit('newComponent', component);
 
   };
@@ -57,12 +57,12 @@ tsimshian = (function(window, $, undefined){
 
   var pageCreated = function(){
     console.log("page");
-    window.lindneo.tsimshian.socket.emit('createPage');
+    window.lindneo.window.lindneo.tsimshian.socket.emit('createPage');
   };
 
   var emitSelectedComponent = function ( component ) {
 
-    tsimshian.myComponent = component.id();
+    window.lindneo.tsimshian.myComponent = component.id();
 
     this.socket.emit( 'emitSelectedComponent',   component.id()  );
   };
@@ -75,12 +75,12 @@ tsimshian = (function(window, $, undefined){
       name:window.lindneo.user.name,
       username:window.lindneo.user.username
     }
-    tsimshian.pageId=pageId;
+    window.lindneo.tsimshian.pageId=pageId;
 
    
  
    
-    tsimshian.socket.emit('changePage',user);
+    window.lindneo.tsimshian.socket.emit('changePage',user);
   };
 
   var init = function (serverName){
@@ -94,7 +94,7 @@ tsimshian = (function(window, $, undefined){
 
     this.socket = io.connect(window.location.origin+":1881");
     this.socket.on('connection', function (data) {
-      var user=tsimshian.getCurrentUser();
+      var user=window.lindneo.tsimshian.getCurrentUser();
        this.socket.emit('changePage',user);
 
     });
@@ -103,8 +103,8 @@ tsimshian = (function(window, $, undefined){
   
        this.socket.on('newComponent', function(component){
           //console.log(component.id) ;
-          //console.log(tsimshian.myComponent) ;
-          if (tsimshian.pageId == component.pageid)
+          //console.log(window.lindneo.tsimshian.myComponent) ;
+          if (window.lindneo.tsimshian.pageId == component.pageid)
             window.lindneo.nisga.createComponent(component); 
        } );
 
@@ -162,7 +162,7 @@ tsimshian = (function(window, $, undefined){
         //console.log('disconnected');
         if (this.hereACounter++ < 3){
                   //console.log('retrying');
-                  tsimshian.connect();
+                  window.lindneo.tsimshian.connect();
                 }else {
                           //console.log('refreshing');
                           location.reload(); 

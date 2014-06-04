@@ -29,7 +29,7 @@ $(document).ready(function(){
     _create: function (params) {
 
       var that = this;
-
+      window.lindneo.tlingit.componentPreviosVersions[that.options.component.id]= JSON.parse(JSON.stringify(that.options.component));  ;
       that.overwriteParams = params;
 
 
