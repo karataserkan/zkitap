@@ -186,6 +186,14 @@ window.lindneo.dataservice = (function( $ ) {
       return false;
   };
 
+  var askNotToLeave = function (){
+    return j__("Şu an kaydetme işlemi devam ediyor. Lütfen bitmesini bekleyiniz. Sayfayı terketmeniz veri kaybına neden olabilir.");
+  };
+
+  var dontAskNotToLeave = function (){
+   
+  };
+
   var newProgressBar= function(){
     var newProgressBarContainer=$("<li style='float:right; ' class='has-sub'></li>");
     var newProgressBarElement=$("<div style='width:100px;'></div>");
@@ -208,6 +216,7 @@ window.lindneo.dataservice = (function( $ ) {
     progressbar.remove();
   }
   var progressContinue = function(){
+    window.onbeforeunload = askNotToLeave;
      $('#save_status').addClass('icon-arrows-cw animate-spin size-30 light-blue');
   }
   var ProgressOfTop = function () {
@@ -229,12 +238,14 @@ window.lindneo.dataservice = (function( $ ) {
    // console.log(Floaded / Ftotal);
     if (Ftotal==0){
       NProgress.done();
+      window.onbeforeunload = dontAskNotToLeave;
     } else {
     NProgress.set(Floaded / Ftotal);
     }
 
   }
   var send = function( action, data, successCallback, failCallback ){
+    
     var that = this;
     var requestRoute='EditorActions' +'/' + action;
     //console.log(data);
@@ -264,7 +275,7 @@ window.lindneo.dataservice = (function( $ ) {
                 total:evt.total,
                 loaded:evt.loaded
               };
-
+             window.onbeforeunload = askNotToLeave;
              window.lindneo.dataservice.GrandTotals[timestamp]=totalz;
              that.ProgressOfTop();         
 
@@ -280,7 +291,7 @@ window.lindneo.dataservice = (function( $ ) {
                 total:evt.total,
                 loaded:evt.loaded
               };
-
+             window.onbeforeunload = askNotToLeave;
              window.lindneo.dataservice.GrandTotals[timestamp]=totalz;
              that.ProgressOfTop();         
              
@@ -299,6 +310,7 @@ window.lindneo.dataservice = (function( $ ) {
       
       beforeSend: function(){
         // Handle the beforeSend event
+        window.onbeforeunload = askNotToLeave;
         progressContinue();
       },
       'success': function(data) {

@@ -40,20 +40,42 @@ window.lindneo.tlingit = (function(window, $, undefined){
         //console.log(component.data.self.css);
         
       }
+    
+    var fakeComponent = JSON.parse(JSON.stringify(component));
+    
+    delete fakeComponent["data"];
 
     window.lindneo.dataservice
       .send( 'AddComponent', 
         { 
           'pageId' : window.lindneo.currentPageId, 
-          'attributes' : componentToJson(component),
+          'attributes' : componentToJson(fakeComponent),
           'oldcomponent_id' : oldcomponent_id 
         },
-        newArrivalComponent,
+        function (res) {
+            var response = responseFromJson(res);
+            
+            if( response.result === null ) {
+              alert('hata'); 
+              return;
+            }  
+            
+            response.result.component.data = component.data;
+
+
+            componentHasUpdated (response.result.component);
+
+            window.lindneo.nisga.createComponent( response.result.component, oldcomponent_id );
+            window.lindneo.tsimshian.componentCreated( response.result.component );
+            //loadPagesPreviews(response.result.component.page_id);
+
+          },
         function(err){
-          //console.log('error:' + err);
+          
       });
   };
 
+/*
   var newArrivalComponent = function (res) {
     var response = responseFromJson(res);
     
@@ -66,7 +88,7 @@ window.lindneo.tlingit = (function(window, $, undefined){
     window.lindneo.tsimshian.componentCreated( response.result.component );
     loadPagesPreviews(response.result.component.page_id);
   };
-
+*/
   var componentHasUpdated = function ( component ) {
     //console.log(component);
     if( typeof  componentPreviosVersions[component.id] == "undefined"){
@@ -104,7 +126,7 @@ window.lindneo.tlingit = (function(window, $, undefined){
 
     }
      componentPreviosVersions[component.id]= JSON.parse(JSON.stringify(component)); 
-    //window.lindneo.tsimshian.componentUpdated(component);
+    window.lindneo.tsimshian.componentUpdated(component);
     
   };
 
