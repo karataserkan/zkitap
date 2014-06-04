@@ -761,9 +761,9 @@ class componentHTML {
 
 
 
-
+			$videoID= "v".functions::get_random_string();
 			
-			$container ="<video poster='video_play.png' controls='controls'  class='video' ";
+			$container ="<video poster='video_play.png' id='$videoID' controls='controls'  class='video' ";
 			if(isset($data->video->attr))
 				foreach ($data->video->attr as $attr_name => $attr_val ) {
 					$container.=" $attr_name='$attr_val' ";
@@ -1050,7 +1050,7 @@ class componentHTML {
 		$container.=" 
 
 			<div id='$html_id' ".$css.">
-				<iframe id='i".$html_id."' src ='$html_file'style='width:100%; height:100%;' ></iframe>
+				<iframe id='i".$html_id."' src ='$html_file' style='width:100%; height:100%;' ></iframe>
 			</div>
 		
 		";
