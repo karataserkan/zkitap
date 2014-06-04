@@ -461,7 +461,7 @@ var createSliderComponent = function (event,ui){
                 'position':'absolute',
                 'top': (ui.offset.top-$(event.target).offset().top ) + 'px',
                 'left':  ( ui.offset.left-$(event.target).offset().left ) + 'px',
-                'zindex': 'first',
+                'z-index': 'first',
                 'background-color': 'transparent'
               }
             }
