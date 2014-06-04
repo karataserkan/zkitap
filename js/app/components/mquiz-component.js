@@ -465,7 +465,7 @@ console.log(top);
               'position':'absolute',
               'top': top ,
               'left':  left ,
-              'zindex': 'first'
+              'z-index': 'first'
             }
           }
         }

@@ -448,7 +448,7 @@ console.log(top);
                 'height': '150px',
                 'background-color': 'transparent',
                 'overflow': 'visible',
-                'zindex': 'first'
+                'z-index': 'first'
               }
             }
           }
