@@ -75,7 +75,8 @@ tsimshian = (function(window, $, undefined){
       name:window.lindneo.user.name,
       username:window.lindneo.user.username
     }
-    
+    tsimshian.pageId=pageId;
+
    
  
    
@@ -103,7 +104,8 @@ tsimshian = (function(window, $, undefined){
        this.socket.on('newComponent', function(component){
           //console.log(component.id) ;
           //console.log(tsimshian.myComponent) ;
-          window.lindneo.nisga.createComponent(component); 
+          if (tsimshian.pageId == component.pageid)
+            window.lindneo.nisga.createComponent(component); 
        } );
 
  

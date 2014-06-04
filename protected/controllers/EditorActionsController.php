@@ -692,6 +692,25 @@ class EditorActionsController extends Controller
 		}
 	}
 
+	public function actionUpdateMappedComponentData($componentId,$jsonProperties)
+	{
+		if(EditorActionsController::isJson($jsonProperties))
+		{
+			$response=false;
+
+			if($return=$this->updateComponent($componentId,$jsonProperties) ){
+					$response['component']=$return; 
+			}
+
+			return $this->response($response);
+		}
+		else
+		{
+			return $this->response(json_encode(array("success"=>false,"message"=>"you should wait while the component is being saved!")));
+
+		}
+	}
+
 	public function UpdatePage($pageId,$chapterId,$order){
 		
 		$page=Page::model()->findByPk($pageId);
