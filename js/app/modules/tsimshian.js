@@ -57,7 +57,7 @@ window.lindneo.tsimshian = (function(window, $, undefined){
 
   var pageCreated = function(){
     console.log("page");
-    window.lindneo.window.lindneo.tsimshian.socket.emit('createPage');
+    window.lindneo.tsimshian.socket.emit('createPage');
   };
 
   var emitSelectedComponent = function ( component ) {
