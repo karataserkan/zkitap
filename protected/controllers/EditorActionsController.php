@@ -5,6 +5,11 @@ class EditorActionsController extends Controller
 
 	public $response=null; 
 	public $errors=null; 
+	const VALUE_CREATED="created";
+	const VALUE_UPDATED="updated";
+	const VALUE_DELETED="deleted";
+	const VALUE_UNCHANGED="unchanged";
+
 
 	public static function isJson($string) {
  		json_decode($string);
@@ -676,6 +681,77 @@ class EditorActionsController extends Controller
 
 	}
 
+
+	public function updateMappedComponent($componentId,$jsonProperties){
+		$result=Component::model()->findByPk($componentId);
+		if (!$result) {
+			$this->error("EA-UMappedCom","Component Not Found",func_get_args(),$result);
+			return false;
+		}
+
+		// get mapped object from client
+		$component_attribs=json_decode($jsonProperties);
+	
+		$original_data = $result->data;
+
+
+		// get data attrib from database
+		$component_data=$result->get_data();
+
+		//rescontructe with mapped data
+		$this->recontstructFromMappedData($component_attribs , $component_data);
+		
+
+		// set for databse again
+		$result->set_data($component_data);
+
+		if( $original_data == $result->data ){
+			return SELF::VALUE_UNCHANGED;
+		}
+
+		//save
+		if(!$result->save()){
+			$this->error("EA-UWholeCom","Component Not Saved",func_get_args(),$result);
+			return false;
+
+		} 
+
+		return true;
+
+	}
+
+
+	public function recontstructFromMappedData ($mapped,&$original){
+
+		
+		foreach ($mapped as $key => $value) {
+			if(empty($value)) {
+				return;
+			}
+
+			if( isset($value->mapped_data) && isset($value->mapped_type)  ) {
+
+				switch ($value->mapped_type) {
+					case SELF::VALUE_CREATED :
+					case SELF::VALUE_UPDATED :
+						$original->{$key}=$value->mapped_data;
+						break;
+					case SELF::VALUE_DELETED :
+						unset($original->{$key});
+						break;
+					
+				}
+			} 
+
+			if(is_object($value)){
+				$this->recontstructFromMappedData ($value,$original->{$key});
+			}
+
+
+
+
+		}
+	}
  
 
 	public function actionUpdateWholeComponentData($componentId,$jsonProperties)
@@ -688,6 +764,24 @@ class EditorActionsController extends Controller
 					$response['component']=$return; 
 			}
 
+			return $this->response($response);
+		}
+		else
+		{
+			return $this->response(json_encode(array("success"=>false,"message"=>"you should wait while the component is being saved!")));
+
+		}
+	}
+
+	public function actionUpdateMappedComponentData($componentId,$jsonProperties)
+	{
+		if(EditorActionsController::isJson($jsonProperties))
+		{
+			$response=false;
+
+			if($return=$this->updateMappedComponent($componentId,$jsonProperties) ){
+					$response['component']=$return; 
+			}
 			return $this->response($response);
 		}
 		else
