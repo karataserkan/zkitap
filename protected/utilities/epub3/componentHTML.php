@@ -1021,6 +1021,19 @@ class componentHTML {
 
 	public function htmlInner($component){
 
+		$file_contents = file_get_contents(Yii::app()->params['storage'].$component->id.'.html');
+
+		$URL=parse_url(Yii::app()->params['storage'].$component->id.'.html');
+		$URL=pathinfo($URL[path]);
+		$ext=$URL['extension'];
+
+		$file=new file( $component->id.'.'.$ext , $this->outputFolder );
+		$file->writeLine($file_contents);
+		$file->closeFile();
+
+		$this->epub->files->others[] = $file;
+		$html_file = $file->filename;
+
 		$data=$component->data;
 		$css="";
 		if(isset($data->self->css)){
@@ -1034,24 +1047,11 @@ class componentHTML {
 		$html_id= "html".functions::get_random_string();
 		$component->data->html_inner = rawurldecode($component->data->html_inner);
 
-		$component->data->html_inner = str_replace(array("\n", "\r"), " ", $component->data->html_inner);
-		
 		$container.=" 
 
 			<div id='$html_id' ".$css.">
-				<iframe id='i".$html_id."' style='width:100%; height:100%;' ></iframe>
+				<iframe id='i".$html_id."' src ='$html_file'style='width:100%; height:100%;' ></iframe>
 			</div>
-			<script>
-				var id = '".$html_id."';
-				id = 'i' + id;
-				
-				var iframe = document.getElementById(id),
-		        iframedoc = iframe.contentDocument || iframe.contentWindow.document;
-
-		        iframedoc.open();
-		        iframedoc.write('".$component->data->html_inner."');
-		        iframedoc.close();
-			</script>
 		
 		";
 	
