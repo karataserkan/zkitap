@@ -27,16 +27,19 @@ $(document).ready(function(){
     
 
       if(this.options.component.data.html_inner){
-        var popupmessage=$('<div  id="message_'+componenthtmlid+'" style="overflow:hidden; width:100%; height:100%;" ><iframe id="if'+componenthtmlid+'" style="width:100%; height:100%;" /></iframe></div>');
+
+
+
+        var popupmessage=$('<div  id="message_'+componenthtmlid+'" style="overflow:hidden; width:100%; height:100%;" ><iframe id="if'+componenthtmlid+'" src="'+window.base_path+"/uploads/files/"+this.options.component.id+'.html" style="width:100%; height:100%;" /></iframe></div>');
         popupmessage.appendTo(this.element);
         //popupmessage.html(html_data);
         //this.element.html(html_data);
-        var iframe = document.getElementById('if'+componenthtmlid),
-        iframedoc = iframe.contentDocument || iframe.contentWindow.document;
+        //var iframe = document.getElementById('if'+componenthtmlid),
+        //iframedoc = iframe.contentDocument || iframe.contentWindow.document;
 
-        iframedoc.open();
-        iframedoc.write(html_data);
-        iframedoc.close();
+        //iframedoc.open();
+        //iframedoc.write(html_data);
+        //iframedoc.close();
       }
        
 
