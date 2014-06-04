@@ -529,6 +529,7 @@ class epub3 {
 		<link rel="stylesheet" type="text/css" href="facybox/facybox.css" media="screen" />
 		<link rel="stylesheet" type="text/css" href="facybox/facybox_urls.css" media="screen" />
 		<script type="text/javascript">
+		//<![CDATA[
 		function okutus_play(){
 			
 				$("audio.reader_base_paused").each(function(){
@@ -561,11 +562,35 @@ class epub3 {
 			});
 			okutus_stop();
 
-		$("a[rel*=facybox]").facybox({
+		//$("a[rel*=facybox]").facybox({
 	        // noAutoload: true
-	      });
+	      //});
+		
+		$("a[rel=facybox]").click(function() {
+			
+			var top = $(this).offset().top - 90;
+			var left = $(this).offset().left - 190;
+			var width = $("#facybox").width() ;
+			var height = $("#facybox").height() ;
+			var max_width = $("body").width() ;
+			var max_height = $("body").height() ;
+			var min_left = 0;
+			var min_top = 0;
+			var id = $(this).attr("href");
+			var value = $(id).html();
+			console.log(top);
+			console.log(left);
+			if(left < min_left) left = 0;
+			if(top < min_top) top = 0;
+			if((left + width) > max_width) left = max_width - width;
+			if((top + height) > max_height) top = max_height - height;
+
+		    $.facybox(value);
+		    $("#facybox").css({"top":top+"px","left":left+"px"});
+		  });
 
 		});
+		//]]>
 		</script>
 		<style type="text/css">
 		.fancybox-custom .fancybox-skin {

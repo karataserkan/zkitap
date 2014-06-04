@@ -550,7 +550,7 @@ $( document ).ready(function () {
       window.lindneo.tsimshian.pageCreated();
       //get page id from parent li 
       var page_id = $(this).parent().attr('page_id') ;
-      sortPages();
+      //sortPages();
       console.log(window.lindneo.tlingit.pages);
       //Load Page
       window.lindneo.tlingit.loadPage(page_id);
@@ -914,6 +914,16 @@ $( document ).ready(function () {
             //clearTimeout(my_timer);
             $(this).find('.page-chapter-delete').hide();
             if (last_timeout) clearTimeout(last_timeout);
+
+          });
+
+          $('.delete-chapter').click(function(){
+
+            var chapter_id=$(this).parent().parent().attr('chapter_id');
+            
+            $('.chapter[chapter_id="'+chapter_id+'"]').hide('slow', function(){  $('.chapter[chapter_id="'+chapter_id+'"]').remove();});
+            window.lindneo.tlingit.ChapterHasDeleted( chapter_id );
+            sortPages();
 
           });
 

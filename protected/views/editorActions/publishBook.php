@@ -98,7 +98,8 @@
 													foreach ($hosts as $key => $host) {
 														$contentHostIds[$host->hosting_client_id]=$host->hosting_client_IP.' : '.$host->hosting_client_port;
 													}
-													$contentHostIds['GIWwMdmQXL']='cloud.lindneo.com : 2222';
+													//$contentHostIds['GIWwMdmQXL']='cloud.lindneo.com : 2222';
+													$contentHostIds['GIWwMdmQXL']=Yii::app()->params['mainCloud']['host'].' : '.Yii::app()->params['mainCloud']['port'];
 													?>
 
 
@@ -245,7 +246,7 @@
 
 													<div class="form-group">
 														<?php
-															$general_categories=[
+															$general_categories=array(
 																				"Science"=>__('Bilim'),
 																				"Children"=>__('Çocuk'),
 																				"Education"=>__('Eğitim'),
@@ -257,7 +258,7 @@
 																				"Sports"=>__('Spor'),
 																				"Poetry"=>__('Şiir'),
 																				"History"=>__('Tarih'),
-																				"Technology"=>__('Teknoloji')];
+																				"Technology"=>__('Teknoloji'));
 															foreach ($general_categories as $key => $category) {
 																$categoryIds[$key]=$category;
 															}

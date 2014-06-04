@@ -29,6 +29,21 @@ $catalog=array(
 
 	);
 
+$mainCloud=array(
+		"lindneo"=>array(
+				"host"=>"cloud.lindneo.com",
+				"port"=>"2222",
+			),
+		"ulgen"=>array(
+				"host"=>"cloud.lindneo.com",
+				"port"=>"2222",
+			),
+		"baracuda"=>array(
+				"host"=>"cloud.okutus.com",
+				"port"=>"2222",
+			),
+	);
+
 $host_config=array(
 
 			"z-kitap"=>array(
@@ -186,6 +201,7 @@ return array(
         'koala_host'=>$host_config[gethostname()]['koala_host'],
         'cloud_host'=>$host_config[gethostname()]['cloud_host'],
         'reader_host'=>$host_config[gethostname()]['reader_host'],
+        'mainCloud'=>$mainCloud[gethostname()],
 
 	)
 
