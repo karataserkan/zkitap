@@ -851,10 +851,9 @@ class componentHTML {
 
 			$container.=" 
 				
-				<img  class='popup ref-popup-rw' style='z-index:99999; position:relative;' data-popup-target='$video_id' src='".$component->data->marker."' />
+				<a href='#".$video_id."' rel='facybox'><img style='z-index:99999; position:relative; width:100%; height:100%;' src='".$component->data->marker."' /></a>
 				
-				<div class='widgets-rw popup-text-rw exclude-auto-rw' id='$video_id' style='width:500px; height:auto'>
-					 <button xmlns='http://www.w3.org/1999/xhtml' onclick='$(this).parent().remove();' class='ppclose' style='float:right;'>X</button>
+				<div id='$video_id' style='position:relative; display:none;'>
 					 ".$video_container."
 				</div>
 			";
@@ -886,8 +885,10 @@ class componentHTML {
 			foreach ($data->audio->attr as $attr_name => $attr_val ) {
 				$container.=" $attr_name='$attr_val' ";
 			}
-		$container.=$repeat_type.' '.$auto_type;
 
+		$container.= $repeat_type.' = "'.$repeat_type.'" '.$auto_type.' = "'.$auto_type.'"';
+		
+		
 		if(isset($data->audio->css)){
 			$container.=" style=' ";
 			foreach ($data->audio->css as $css_name => $css_val ) {
@@ -1032,14 +1033,28 @@ class componentHTML {
 
 		$html_id= "html".functions::get_random_string();
 		$component->data->html_inner = rawurldecode($component->data->html_inner);
+
+		$component->data->html_inner = str_replace(array("\n", "\r"), " ", $component->data->html_inner);
+		
 		$container.=" 
+
 			<div id='$html_id' ".$css.">
-				".$component->data->html_inner."
+				<iframe id='i".$html_id."' style='width:100%; height:100%;' ></iframe>
 			</div>
-	
+			<script>
+				var id = '".$html_id."';
+				id = 'i' + id;
+				
+				var iframe = document.getElementById(id),
+		        iframedoc = iframe.contentDocument || iframe.contentWindow.document;
+
+		        iframedoc.open();
+		        iframedoc.write('".$component->data->html_inner."');
+		        iframedoc.close();
+			</script>
 		
 		";
-
+	
 		$this->html=$container;
 
 	}
@@ -1073,20 +1088,20 @@ class componentHTML {
 		else if($component->data->selected_tab == "#plink_area")
 			$container.=" 
 				<div id='$plink_id' ".$css." style='width:".$component->data->width."; height:".$component->data->height."; z-index:999999;'>
-					<a href='".$component->data->page_link.".html'><div style='width:".$component->data->width."; height:".$component->data->height.";'></div></a>
+					<a href='".$component->data->page_link.".html'><div style='width:".$component->data->self->css->width."; height:".$component->data->self->css->height.";'></div></a>
 				</div>
 		
 			
 			";
 		else 
 			$container.=" 
-				<div id='$plink_id' ".$css.">
-					<a href='".$component->data->page_link.".html'>".$component->data->plink_data."</a>
+				<div id='$plink_id' ".$css." >
+					<a href='".$component->data->page_link.".html'><div style='width:".$component->data->self->css->width."; height:".$component->data->self->css->height.";'></a>
 				</div>
 		
-			
 			";
-
+			
+		
 		$this->html=$container;
 		
 	}
@@ -1275,10 +1290,9 @@ class componentHTML {
 
 			$container.=" 
 				
-				<img  class='popup ref-popup-rw' data-popup-target='$image_id' src='".$component->data->img->marker."' style='width:100%; height:100%;' />
+				<a href='#".$image_id."' rel='facybox'><img src='".$component->data->img->marker."' style='width:100%; height:100%;' /></a>
 				
-				<div class='widgets-rw popup-text-rw exclude-auto-rw' id='$image_id' style='width:300px; height:300px'>
-					 <button xmlns='http://www.w3.org/1999/xhtml' onclick='$(this).parent().remove();' class='ppclose' style='float:right;'>X</button>
+				<div id='$image_id' style='position:relative; display:none;'>
 					 ".$image_container."
 				</div>
 			";

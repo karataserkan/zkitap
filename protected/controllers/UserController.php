@@ -28,11 +28,11 @@ class UserController extends Controller
 	{
 		return array(
 			array('allow',  // allow all users to perform 'index' and 'view' actions
-				'actions'=>array('index','view','invitation','signup','forgetPassword'),
+				'actions'=>array('index','view','invitation','signup','forgetPassword','verifyEmail'),
 				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
-				'actions'=>array('create','update','profile','updatePhoto','updateProfile','sendConfirmationId','checkConfirmationId','messageStatusCallback'),
+				'actions'=>array('create','update','profile','updatePhoto','updateProfile','sendConfirmationId','checkConfirmationId','messageStatusCallback','reSendEmailVerification'),
 				'users'=>array('@'),
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
@@ -43,6 +43,63 @@ class UserController extends Controller
 				'users'=>array('*'),
 			),
 		);
+	}
+
+	public function actionReSendEmailVerification()
+	{
+		$meta=UserMeta::model()->find('meta_key=:meta_key AND user_id=:user_id',array('meta_key'=>'emailVerify','user_id'=>Yii::app()->user->id));
+		$user=User::model()->findByPk(Yii::app()->user->id);
+
+		$verifyEmailId=functions::new_id();
+		if (!$meta) {
+			$meta=new UserMeta;
+			$meta->user_id=Yii::app()->user->id;
+			$meta->meta_key='emailVerify';
+			$meta->created=time();
+		}
+		
+		$meta->meta_value=$verifyEmailId;
+		if($meta->save()){
+			$mail=Yii::app()->Smtpmail;
+	        $mail->SetFrom(Yii::app()->params['noreplyEmail'], "OKUTUS");
+
+	        $mail->Subject= "E-posta doğrulama";
+	        $mail->AddAddress($user->email, "");
+	    	
+	    	$link=Yii::app()->getBaseUrl(true);
+			$link .='/user/verifyEmail/';
+			$link .= $verifyEmailId;
+			
+			$message="Okutusa hoşgeldin. E-postanızı doğrulamak için <a href='".$link."'>buraya tıklayınız</a>.<br>".$link;
+	        $mail->MsgHTML($message);
+	        if($mail->Send()){
+	        	echo "0";
+	        }else{
+	        	echo "1";
+	        }
+		}else{
+        	echo "1";
+		}
+
+	}
+
+	public function actionVerifyEmail($id)
+	{
+		$this->layout = '//layouts/column1';
+		$result="1";
+		$meta=UserMeta::model()->find('meta_key=:meta_key AND meta_value=:meta_value',array('meta_key'=>'emailVerify','meta_value'=>$id));
+		if ($meta) {
+			$meta->meta_value="verified";
+			if ($meta->save()) {
+				$result="0";
+			}else{
+				$result="1";
+			}
+		}
+
+		$this->render('verifyEmail',array(
+				'result'=>$result
+			));
 	}
 
 	public function actionSendConfirmationId()

@@ -1,11 +1,16 @@
 <?php
+
 ini_set('display_errors', 'On');
 ini_set('set_time_limit', '5');
 error_reporting(E_ERROR | E_PARSE);
 // change the following paths if necessary
 
 if(gethostname()=='ulgen'){
-$host_config='/../../../../dump/yii_framework/framework/yii.php';
+	$host_config='/../../../../dump/yii_framework/framework/yii.php';
+	if(!file_exists(dirname(__FILE__).$host_config))
+	{
+		$host_config='/../../dump/yii_framework/framework/yii.php';
+	}
 }
 else
 {

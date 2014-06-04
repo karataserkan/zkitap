@@ -1,22 +1,20 @@
-# Language File For English Translation of Squid Pacific
-# Copyright (C) 2104 Linden Digital Publishing
-# This file is distributed under the same license as the Squid Pacific package.
-# Squid Pacific <pacific@linden-tech>, 2014.
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
-msgid ""
-msgstr ""
-"Project-Id-Version: 0.1\n"
-"Report-Msgid-Bugs-To: pacific@linden-tech\n"
-"POT-Creation-Date: 2014-01-15 06:00+0000\n"
-"PO-Revision-Date: 2014-05-20 14:18+0200\n"
-"Last-Translator: ugur <ugur@linden-tech.com>\n"
-"Language-Team: Squid Pacific <pacific@linden-tech>\n"
-"Language: en\n"
-"MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 1.5.4\n"
+#, fuzzy
+msgid   ""
+msgstr  "Project-Id-Version: PACKAGE VERSION\n"
+        "Report-Msgid-Bugs-To: \n"
+        "POT-Creation-Date: 2014-06-03 06:00+0300\n"
+        "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+        "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+        "Language-Team: LANGUAGE <LL@li.org>\n"
+        "Language: \n"
+        "MIME-Version: 1.0\n"
+        "Content-Type: text/plain; charset=UTF-8\n"
+        "Content-Transfer-Encoding: 8bit\n"
 
 #: css/ui/js/datatables/media/js/jquery.dataTables.js:5097
 #: css/ui/js/datatables/media/js/jquery.dataTables.js:5097
@@ -29,17 +27,17 @@ msgid   "tr"
 msgstr  ""
 
 #: protected/views/layouts/main.php:175 protected/views/layouts/main.php:179
-#: protected/views/layouts/main.php:179
+#: protected/views/layouts/main.php:183 protected/views/layouts/main.php:183
 msgid   "Geri"
 msgstr  "Previous"
 
 #: protected/views/layouts/main.php:176 protected/views/layouts/main.php:180
-#: protected/views/layouts/main.php:180
+#: protected/views/layouts/main.php:184 protected/views/layouts/main.php:184
 msgid   "İleri"
 msgstr  "Next"
 
 #: protected/views/layouts/main.php:177 protected/views/layouts/main.php:181
-#: protected/views/layouts/main.php:181
+#: protected/views/layouts/main.php:185 protected/views/layouts/main.php:185
 msgid   "Bitir"
 msgstr  "Finish"
 
@@ -48,97 +46,651 @@ msgstr  "Finish"
 msgid   "CookieConfig"
 msgstr  ""
 
-#: js/lib/trips/book/author.js:4
+#: js/lib/trips/book/author.js:4 js/lib/trips/book/author.js:4
 msgid   "Okutus Editor'e HoşGeldiniz, Editor Tanıtımı için ileriye basınız."
 msgstr  ""
 
-#: js/lib/trips/book/author.js:10
+#: js/lib/trips/book/author.js:10 js/lib/trips/book/author.js:10
 msgid   "Burası yayın üretiminin yapıldığı bölümdür."
 msgstr  ""
 
-#: js/lib/trips/book/author.js:20
+#: js/lib/trips/book/author.js:20 js/lib/trips/book/author.js:20
 msgid   "Üzerinde çalıştığınız <br> yayının adını <br>buradan görebilirsiniz"
 msgstr  ""
 
-#: js/lib/trips/book/author.js:25
+#: js/lib/trips/book/author.js:25 js/lib/trips/book/author.js:25
 msgid   "Dosya bölümünden kitaplığınıza dönebilir,<br> PDF ekleyebilir, "
         "yayınlarınızı <br> PDF veya EPUB formatında <br>yayınlayabilirsiniz."
 msgstr  ""
 
-#: js/lib/trips/book/author.js:30
+#: js/lib/trips/book/author.js:30 js/lib/trips/book/author.js:30
 msgid   "Düzen bölümünden yaptığınız işlemi geri-ileri alabilir ve   <br> "
         "kes, kopyala, yapıştır ile sayfa  <br> üzerindeki nesneleri "
         "yönetebilirsiniz."
 msgstr  ""
 
-#: js/lib/trips/book/author.js:35
+#: js/lib/trips/book/author.js:35 js/lib/trips/book/author.js:35
 msgid   "Görünüm bölümünden Cetvel aracı ile <br>  sayfa üzerindeki "
         "nesnelerinizin <br> yatay ve dikey pozisyonunu görebilirsiniz"
 msgstr  ""
 
-#: js/lib/trips/book/author.js:40
+#: js/lib/trips/book/author.js:40 js/lib/trips/book/author.js:40
 msgid   "Bu bölümden sayfa üzerinde metin arama yapabilirsiniz."
 msgstr  ""
 
-#: js/lib/trips/book/author.js:46
+#: js/lib/trips/book/author.js:46 js/lib/trips/book/author.js:46
 msgid   "Şu an beraber çalıştığınız kişilerin <br>listesini buradan takip "
         "edebilirsiniz."
 msgstr  ""
 
-#: js/lib/trips/book/author.js:52
+#: js/lib/trips/book/author.js:52 js/lib/trips/book/author.js:52
 msgid   "Yaptığınız işlemlerin <br>sonucunu buradan takip edebilirsiniz. <br> "
         "Yeşil-> Herşey yolunda, <br> Mavi -> İşlem yapılıyor, <br> Kırmızı -"
         "> İnternet Bağlantısı Problemi <br> demektir. j__("
 msgstr  ""
 
-#: js/lib/trips/book/author.js:58
+#: js/lib/trips/book/author.js:58 js/lib/trips/book/author.js:58
 msgid   "Bu bölümden profilinizi <br>görüntüleyebilir, hesabınızdan<br> çıkış "
         "yapabilirsiniz."
 msgstr  ""
 
-#: js/lib/trips/book/author.js:68
+#: js/lib/trips/book/author.js:68 js/lib/trips/book/author.js:68
 msgid   "Buradan üzerinde çalıştığınız bileşen ile ilgili seçenekleri kontrol "
         "edebilirsiniz."
 msgstr  ""
 
-#: js/lib/trips/book/author.js:135
+#: js/lib/trips/book/author.js:135 js/lib/trips/book/author.js:135
 msgid   "Bu panel üzerinden sayfa üzerine sürükle-bırak ile zenginleştirme "
         "ekleyebilirsiniz."
 msgstr  ""
 
-#: js/lib/trips/book/author.js:142
+#: js/lib/trips/book/author.js:142 js/lib/trips/book/author.js:142
 msgid   "Büyüteç aracı ile sayfayı büyütebilirsiniz."
 msgstr  ""
 
-#: js/lib/trips/book/author.js:149
+#: js/lib/trips/book/author.js:149 js/lib/trips/book/author.js:149
 msgid   "Bu bölümden yazarlar aynı yayın üzerinde çoklu çalışma yaparken "
         "sohbet edebilirler."
 msgstr  ""
 
-#: js/lib/trips/book/author.js:160
+#: js/lib/trips/book/author.js:160 js/lib/trips/book/author.js:160
 msgid   "Sağdaki panelden yayınınızın kapağını, sayfalarını ve bölümlerini "
         "düzenleyebilirsiniz."
 msgstr  ""
 
-#: js/lib/trips/book/author.js:166
+#: js/lib/trips/book/author.js:166 js/lib/trips/book/author.js:166
 msgid   "Buraya tıklayarak yayınınıza kapak ekleyebilirsiniz."
 msgstr  ""
 
-#: js/lib/trips/book/author.js:172
+#: js/lib/trips/book/author.js:172 js/lib/trips/book/author.js:172
 msgid   "Buraya tıklayarak yayınınızın markette görüneceği öngörüntüsünü "
         "ekleyebilirsiniz."
 msgstr  ""
 
-#: js/lib/trips/book/author.js:178
+#: js/lib/trips/book/author.js:178 js/lib/trips/book/author.js:178
 msgid   "Bu bölümden kullanmak üzere hızlı stillerinizi istediğiniz gibi "
         "düzenleyebilirsiniz."
 msgstr  ""
 
-#: js/lib/trips/book/author.js:184
+#: js/lib/trips/book/author.js:184 js/lib/trips/book/author.js:184
 msgid   "Sayfalar bölümünden yeni bölüm başlıklarını değiştirebilir, sayfları "
         "ve bölümleri sıralayabilirsiniz."
 msgstr  ""
 
-#: js/lib/trips/book/author.js:190
+#: js/lib/trips/book/author.js:190 js/lib/trips/book/author.js:190
 msgid   "Yeni sayfa ve bölüm ekleyebilirsiniz."
+msgstr  ""
+
+#: js/app/modules/tsimshian.js:78 js/app/modules/tsimshian.js:78
+msgid   "Co-working System Error"
+msgstr  ""
+
+#: js/app/modules/nisga.js:289 js/app/modules/nisga.js:289
+msgid   "Şekil Aracı"
+msgstr  ""
+
+#: js/app/modules/nisga.js:319 js/app/modules/nisga.js:319
+msgid   "Tablo Aracı"
+msgstr  ""
+
+#: js/app/modules/nisga.js:347 js/app/modules/nisga.js:347
+msgid   "Grafik Aracı"
+msgstr  ""
+
+#: js/app/modules/nisga.js:375 js/app/modules/nisga.js:375
+msgid   "Yazı Aracı"
+msgstr  ""
+
+#: js/app/modules/nisga.js:404 js/app/modules/nisga.js:404
+msgid   "Sayfa Numara Aracı"
+msgstr  ""
+
+#: js/app/modules/nisga.js:433 js/app/modules/nisga.js:433
+msgid   "Bağlantı Aracı"
+msgstr  ""
+
+#: js/app/modules/nisga.js:468 js/app/modules/nisga.js:468
+msgid   "Açılır Pencere Aracı"
+msgstr  ""
+
+#: js/app/modules/nisga.js:499 js/app/modules/nisga.js:499
+msgid   "Metin Sarma Aracı"
+msgstr  ""
+
+#: js/app/modules/nisga.js:529 js/app/modules/nisga.js:529
+msgid   "HTML Aracı"
+msgstr  ""
+
+#: js/app/modules/nisga.js:559 js/app/modules/nisga.js:559
+msgid   "Zengin Metin Aracı"
+msgstr  ""
+
+#: js/app/modules/nisga.js:589 js/app/modules/nisga.js:589
+msgid   "Sayfa Bağlantı Aracı"
+msgstr  ""
+
+#: js/app/modules/nisga.js:619 js/app/modules/nisga.js:619
+msgid   "Latex Aracı"
+msgstr  ""
+
+#: js/app/modules/nisga.js:659 js/app/modules/nisga.js:659
+msgid   "Resim Aracı"
+msgstr  ""
+
+#: js/app/modules/nisga.js:718 js/app/modules/nisga.js:718
+msgid   "Etiketleme Aracı"
+msgstr  ""
+
+#: js/app/modules/nisga.js:747 js/app/modules/nisga.js:747
+msgid   "Video Aracı"
+msgstr  ""
+
+#: js/app/modules/nisga.js:780 js/app/modules/nisga.js:780
+msgid   "Ses Aracı"
+msgstr  ""
+
+#: js/app/modules/nisga.js:810 js/app/modules/nisga.js:810
+msgid   "Galeri Aracı"
+msgstr  ""
+
+#: js/app/modules/nisga.js:841 js/app/modules/nisga.js:841
+msgid   "Sürgü Aracı"
+msgstr  ""
+
+#: js/app/modules/nisga.js:872 js/app/modules/nisga.js:872
+msgid   "Öngörüntü Slider Aracı"
+msgstr  ""
+
+#: js/app/modules/nisga.js:902 js/app/modules/nisga.js:930
+#: js/app/modules/nisga.js:902 js/app/modules/nisga.js:930
+msgid   "Soru Aracı"
+msgstr  ""
+
+#: js/app/other/page-drag-drop.js:444 js/app/components/image-component.js:192
+#: js/app/other/page-drag-drop.js:444 js/app/components/image-component.js:192
+msgid   "Görsel Ekle"
+msgstr  ""
+
+#: js/app/other/page-drag-drop.js:452 js/app/components/thumb-component.js:74
+#: js/app/components/image-component.js:221 js/app/other/page-drag-drop.js:452
+#: js/app/components/thumb-component.js:74
+#: js/app/components/image-component.js:221
+msgid   "Genişlik"
+msgstr  ""
+
+#: js/app/other/page-drag-drop.js:453 js/app/components/thumb-component.js:75
+#: js/app/components/image-component.js:222 js/app/other/page-drag-drop.js:453
+#: js/app/components/thumb-component.js:75
+#: js/app/components/image-component.js:222
+msgid   "Yükseklik"
+msgstr  ""
+
+#: js/app/components/wrap-component.js:149
+#: js/app/components/wrap-component.js:149
+msgid   "Metin Sarma Ekle"
+msgstr  ""
+
+#: js/app/components/wrap-component.js:157
+#: js/app/components/slider-component.js:340
+#: js/app/components/wrap-component.js:157
+#: js/app/components/slider-component.js:340
+msgid   "Sağ"
+msgstr  ""
+
+#: js/app/components/wrap-component.js:160
+#: js/app/components/slider-component.js:334
+#: js/app/components/wrap-component.js:160
+#: js/app/components/slider-component.js:334
+msgid   "Sol"
+msgstr  ""
+
+#: js/app/components/wrap-component.js:162
+#: js/app/components/wrap-component.js:162
+msgid   "Çözünürlik Toleransı giriniz"
+msgstr  ""
+
+#: js/app/components/wrap-component.js:167
+#: js/app/components/sound-component.js:149
+#: js/app/components/video-component.js:221
+#: js/app/components/link-component.js:152
+#: js/app/components/latex-component.js:349
+#: js/app/components/html-component.js:114
+#: js/app/components/graph-component.js:282
+#: js/app/components/popup-component.js:129
+#: js/app/components/plink-component.js:152
+#: js/app/components/wrap-component.js:167
+#: js/app/components/sound-component.js:149
+#: js/app/components/video-component.js:221
+#: js/app/components/link-component.js:152
+#: js/app/components/latex-component.js:349
+#: js/app/components/html-component.js:114
+#: js/app/components/graph-component.js:282
+#: js/app/components/popup-component.js:129
+#: js/app/components/plink-component.js:152
+msgid   "Ekle"
+msgstr  ""
+
+#: js/app/components/thumb-component.js:69
+#: js/app/components/gallery-component.js:90
+#: js/app/components/slider-component.js:326
+#: js/app/components/tag-component.js:71
+#: js/app/components/gallery-component.js:93
+#: js/app/components/thumb-component.js:69
+#: js/app/components/gallery-component.js:93
+#: js/app/components/slider-component.js:326
+#: js/app/components/tag-component.js:71
+msgid   "Galeri Ekle"
+msgstr  ""
+
+#: js/app/components/thumb-component.js:81
+#: js/app/components/gallery-component.js:113
+#: js/app/components/slider-component.js:349
+#: js/app/components/tag-component.js:84
+#: js/app/components/gallery-component.js:121
+#: js/app/components/thumb-component.js:81
+#: js/app/components/gallery-component.js:121
+#: js/app/components/slider-component.js:349
+#: js/app/components/tag-component.js:84
+msgid   "Tamam"
+msgstr  ""
+
+#: js/app/components/sound-component.js:109
+#: js/app/components/sound-component.js:109
+msgid   "Ses Ekle"
+msgstr  ""
+
+#: js/app/components/sound-component.js:116
+#: js/app/components/sound-component.js:116
+msgid   "Ses Dosyası Sürükle"
+msgstr  ""
+
+#: js/app/components/sound-component.js:117
+#: js/app/components/sound-component.js:117
+msgid   "Ses Dosyası Yükle"
+msgstr  ""
+
+#: js/app/components/sound-component.js:129
+#: js/app/components/video-component.js:201
+#: js/app/components/sound-component.js:129
+#: js/app/components/video-component.js:201
+msgid   "Otomatik Başlama"
+msgstr  ""
+
+#: js/app/components/sound-component.js:137
+#: js/app/components/sound-component.js:137
+msgid   "Tekrar et"
+msgstr  ""
+
+#: js/app/components/shape-component.js:185
+#: js/app/components/shape-component.js:185
+msgid   "Şekil Ekle"
+msgstr  ""
+
+#: js/app/components/image-component.js:200
+#: js/app/components/video-component.js:170
+#: js/app/components/image-component.js:200
+#: js/app/components/video-component.js:170
+msgid   "Sayfada"
+msgstr  ""
+
+#: js/app/components/image-component.js:203
+#: js/app/components/video-component.js:173
+#: js/app/components/image-component.js:203
+#: js/app/components/video-component.js:173
+msgid   "Açılır Pencerede"
+msgstr  ""
+
+#: js/app/components/image-component.js:209
+#: js/app/components/gallery-component.js:97
+#: js/app/components/gallery-component.js:100
+#: js/app/components/image-component.js:209
+#: js/app/components/gallery-component.js:100
+msgid   "Resim Sürükle"
+msgstr  ""
+
+#: js/app/components/image-component.js:210
+#: js/app/components/gallery-component.js:98
+#: js/app/components/gallery-component.js:101
+#: js/app/components/image-component.js:210
+#: js/app/components/gallery-component.js:101
+msgid   "Resim Yükle"
+msgstr  ""
+
+#: js/app/components/video-component.js:162
+#: js/app/components/video-component.js:162
+msgid   "Video Ekle"
+msgstr  ""
+
+#: js/app/components/video-component.js:179
+#: js/app/components/video-component.js:179
+msgid   "Video Sürükle"
+msgstr  ""
+
+#: js/app/components/video-component.js:180
+#: js/app/components/video-component.js:180
+msgid   "Video Yükle"
+msgstr  ""
+
+#: js/app/components/video-component.js:181
+#: js/app/components/video-component.js:181
+msgid   "Video Bağlantı"
+msgstr  ""
+
+#: js/app/components/video-component.js:195
+#: js/app/components/link-component.js:141
+#: js/app/components/video-component.js:195
+#: js/app/components/link-component.js:141
+msgid   "URL Adresini Giriniz"
+msgstr  ""
+
+#: js/app/components/video-component.js:203
+#: js/app/components/video-component.js:213
+#: js/app/components/link-component.js:145
+#: js/app/components/video-component.js:203
+#: js/app/components/video-component.js:213
+#: js/app/components/link-component.js:145
+msgid   "Evet"
+msgstr  ""
+
+#: js/app/components/video-component.js:206
+#: js/app/components/video-component.js:216
+#: js/app/components/link-component.js:148
+#: js/app/components/video-component.js:206
+#: js/app/components/video-component.js:216
+#: js/app/components/link-component.js:148
+msgid   "Hayır"
+msgstr  ""
+
+#: js/app/components/video-component.js:211
+#: js/app/components/video-component.js:211
+msgid   "Kontrol Panel Görünümü"
+msgstr  ""
+
+#: js/app/components/rtext-component.js:754
+#: js/app/components/text-component.js:621
+#: js/app/components/rtext-component.js:754
+#: js/app/components/text-component.js:621
+msgid   "Metin Kutusu"
+msgstr  ""
+
+#: js/app/components/rtext-component.js:756
+#: js/app/components/rtext-component.js:756
+msgid   "deneme yazıdır...."
+msgstr  ""
+
+#: js/app/components/link-component.js:134
+#: js/app/components/link-component.js:134
+msgid   "Bağlantı Ekle"
+msgstr  ""
+
+#: js/app/components/link-component.js:142
+#: js/app/components/link-component.js:142
+msgid   "Bağlantı belli br alanda mı etkili olsun?"
+msgstr  ""
+
+#: js/app/components/link-component.js:174
+#: js/app/components/link-component.js:174
+msgid   "Lütfen gecerli bir URL adresi giriniz."
+msgstr  ""
+
+#: js/app/components/text-component.js:29
+#: js/app/components/text-component.js:29
+msgid   "Yazı Kutusu Aracı"
+msgstr  ""
+
+#: js/app/components/latex-component.js:251
+#: js/app/components/latex-component.js:251
+msgid   "Latex Ekle"
+msgstr  ""
+
+#: js/app/components/latex-component.js:259
+#: js/app/components/latex-component.js:259
+msgid   "Genel Latex Sembolleri"
+msgstr  ""
+
+#: js/app/components/latex-component.js:260
+#: js/app/components/latex-component.js:260
+msgid   "Semboller"
+msgstr  ""
+
+#: js/app/components/latex-component.js:296
+#: js/app/components/latex-component.js:296
+msgid   "Harf Karekterleri"
+msgstr  ""
+
+#: js/app/components/latex-component.js:297
+#: js/app/components/latex-component.js:297
+msgid   "Harfler"
+msgstr  ""
+
+#: js/app/components/component.js:353 js/app/components/component.js:355
+#: js/app/components/component.js:355
+msgid   "Yorum giriniz"
+msgstr  ""
+
+#: js/app/components/component.js:354 js/app/components/component.js:356
+#: js/app/components/component.js:356
+msgid   "Gönder"
+msgstr  ""
+
+#: js/app/components/slider-component.js:337
+#: js/app/components/slider-component.js:337
+msgid   "Orta"
+msgstr  ""
+
+#: js/app/components/page-component.js:173
+#: js/app/components/page-component.js:173
+msgid   "Sayfa Numarası"
+msgstr  ""
+
+#: js/app/components/html-component.js:103
+#: js/app/components/html-component.js:103
+msgid   "Html Ekle"
+msgstr  ""
+
+#: js/app/components/graph-component.js:247
+#: js/app/components/graph-component.js:247
+msgid   "Grafik Ekle"
+msgstr  ""
+
+#: js/app/components/graph-component.js:256
+#: js/app/components/graph-component.js:256
+msgid   "Pasta"
+msgstr  ""
+
+#: js/app/components/graph-component.js:257
+#: js/app/components/graph-component.js:257
+msgid   "Çubuk"
+msgstr  ""
+
+#: js/app/components/graph-component.js:273
+#: js/app/components/graph-component.js:273
+msgid   "Arkaplan Rengi"
+msgstr  ""
+
+#: js/app/components/graph-component.js:326
+#: js/app/components/graph-component.js:326
+msgid   "Dilim"
+msgstr  ""
+
+#: js/app/components/graph-component.js:328
+#: js/app/components/graph-component.js:328
+msgid   "Etiket"
+msgstr  ""
+
+#: js/app/components/graph-component.js:333
+#: js/app/components/graph-component.js:333
+msgid   "sütun adı"
+msgstr  ""
+
+#: js/app/components/graph-component.js:335
+#: js/app/components/graph-component.js:335
+msgid   "sütun değeri"
+msgstr  ""
+
+#: js/app/components/popup-component.js:121
+#: js/app/components/popup-component.js:121
+msgid   "Açılır Pencere Ekle"
+msgstr  ""
+
+#: js/app/components/plink-component.js:119
+#: js/app/components/plink-component.js:119
+msgid   "Sayfa Bağlantısı Ekle"
+msgstr  ""
+
+#: js/app/components/plink-component.js:128
+#: js/app/components/plink-component.js:128
+msgid   "Sayfa Bağlantısı Adı"
+msgstr  ""
+
+#: js/app/components/plink-component.js:129
+#: js/app/components/plink-component.js:129
+msgid   "Sayfa Bağlantısı İkonu"
+msgstr  ""
+
+#: js/app/components/plink-component.js:130
+#: js/app/components/plink-component.js:130
+msgid   "Sayfa Bağlantısı Alanı"
+msgstr  ""
+
+#: js/app/components/plink-component.js:135
+#: js/app/components/plink-component.js:135
+msgid   "Başlığı buraya giriniz"
+msgstr  ""
+
+#: js/app/components/plink-component.js:148
+#: js/app/components/plink-component.js:148
+msgid   "Sayfa Bağlantısı Alanı Ekle butonuna basıldıktan sonra sayfaya "
+        "eklenecek ve alanın büyüklüğünü sayfa üzerinden yapabileceksiniz"
+msgstr  ""
+
+#: js/app/components/plink-component.js:168
+#: js/app/components/plink-component.js:168
+msgid   "Bölüm"
+msgstr  ""
+
+#: js/app/components/plink-component.js:185
+#: js/app/components/plink-component.js:185
+msgid   "Sayfa"
+msgstr  ""
+
+#: js/app/components/mquiz-component.js:23
+#: js/app/components/mquiz-component.js:23
+msgid   "Yanıtla"
+msgstr  ""
+
+#: js/app/components/mquiz-component.js:81
+#: js/app/components/mquiz-component.js:81
+msgid   "Cevabınızı buraya giriniz..."
+msgstr  ""
+
+#: js/app/components/mquiz-component.js:235
+#: js/app/components/mquiz-component.js:235
+msgid   "Soru kökünü buraya yazınız."
+msgstr  ""
+
+#: js/app/components/mquiz-component.js:272
+#: js/app/components/mquiz-component.js:272
+msgid   "Soru Ekle"
+msgstr  ""
+
+#: js/app/components/mquiz-component.js:277
+#: js/app/components/mquiz-component.js:277
+msgid   "Soru Tipi"
+msgstr  ""
+
+#: js/app/components/mquiz-component.js:279
+#: js/app/components/mquiz-component.js:279
+msgid   "Lütfen Seçiniz"
+msgstr  ""
+
+#: js/app/components/mquiz-component.js:280
+#: js/app/components/mquiz-component.js:280
+msgid   "Yazı"
+msgstr  ""
+
+#: js/app/components/mquiz-component.js:281
+#: js/app/components/mquiz-component.js:281
+msgid   "Çoktan Seçmeli"
+msgstr  ""
+
+#: js/app/components/mquiz-component.js:282
+#: js/app/components/mquiz-component.js:282
+msgid   "Çoklu Seçmeli"
+msgstr  ""
+
+#: js/app/components/mquiz-component.js:284
+#: js/app/components/mquiz-component.js:284
+msgid   "Soru"
+msgstr  ""
+
+#: js/app/components/mquiz-component.js:285
+#: js/app/components/mquiz-component.js:285
+msgid   "Soru kökünü buraya yazınız"
+msgstr  ""
+
+#: js/app/components/mquiz-component.js:323
+#: js/app/components/mquiz-component.js:329
+#: js/app/components/mquiz-component.js:323
+#: js/app/components/mquiz-component.js:329
+msgid   "Cevabınızı buraya giriniz"
+msgstr  ""
+
+#: js/app/components/mquiz-component.js:336
+#: js/app/components/mquiz-component.js:344
+#: js/app/components/mquiz-component.js:336
+#: js/app/components/mquiz-component.js:344
+msgid   "Cevap Ekle"
+msgstr  ""
+
+#: js/app/components/mquiz-component.js:450
+#: js/app/components/mquiz-component.js:450
+msgid   "Sorunuzu giriniz..."
+msgstr  ""
+
+#: js/app/components/table-component.js:1217
+#: js/app/components/table-component.js:1217
+msgid   "Tablo Ekle"
+msgstr  ""
+
+#: js/app/components/tag-component.js:37 js/app/components/tag-component.js:37
+msgid   "Modal title"
+msgstr  ""
+
+#: js/app/components/tag-component.js:43 js/app/components/tag-component.js:43
+msgid   "Close"
+msgstr  ""
+
+#: js/app/components/tag-component.js:44 js/app/components/tag-component.js:44
+msgid   "Save changes"
+msgstr  ""
+
+#: js/app/components/tag-component.js:108
+#: js/app/components/tag-component.js:108
+msgid   "Tag için açıklama giriniz"
+msgstr  ""
+
+#: js/app/components/gallery-component.js:112
+#: js/app/components/gallery-component.js:112
+msgid   "Resim Ekle"
 msgstr  ""

@@ -945,15 +945,26 @@ right join book using (book_id) where book_id='$bookId' and type!='image';";
 			if (isset($_POST['host'])) {
 				$hosts=$_POST['host'];
 				foreach ($hosts as $key => $hostId) {
-					$host=OrganisationHostings::model()->findByPk($hostId);
-					$data['hosts'][$hostId]['host']=$host->hosting_client_IP;
-					$data['hosts'][$hostId]['port']=$host->hosting_client_port;
-					$data['hosts'][$hostId]['key1']=$host->hosting_client_key1;
-					$data['hosts'][$hostId]['key2']=$host->hosting_client_key2;
-					$data['hosts'][$hostId]['id']=$host->hosting_client_id;
-					
-					$data['hosting_client_IP']=$host->hosting_client_IP;
-					$data['hosting_client_id']=$host->hosting_client_id;
+					if ($hostId=="GIWwMdmQXL") {
+						$data['hosts'][$hostId]['host']=Yii::app()->params['mainCloud']['host'];
+						$data['hosts'][$hostId]['port']=Yii::app()->params['mainCloud']['port'];
+						$data['hosts'][$hostId]['key1']="1";
+						$data['hosts'][$hostId]['key2']="1";
+						$data['hosts'][$hostId]['id']=$hostId;
+						
+						$data['hosting_client_IP']=Yii::app()->params['mainCloud']['host'];
+						$data['hosting_client_id']=$hostId;
+					}else{
+						$host=OrganisationHostings::model()->findByPk($hostId);
+						$data['hosts'][$hostId]['host']=$host->hosting_client_IP;
+						$data['hosts'][$hostId]['port']=$host->hosting_client_port;
+						$data['hosts'][$hostId]['key1']=$host->hosting_client_key1;
+						$data['hosts'][$hostId]['key2']=$host->hosting_client_key2;
+						$data['hosts'][$hostId]['id']=$host->hosting_client_id;
+						
+						$data['hosting_client_IP']=$host->hosting_client_IP;
+						$data['hosting_client_id']=$host->hosting_client_id;
+					}
 				}
 
 			}

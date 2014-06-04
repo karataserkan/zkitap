@@ -1,3 +1,45 @@
+<?php if($verifiedEmail!=0) { ?>
+<!-- POPUP email verification -->
+<div class="modal fade" id="confirmEmail" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+	  <div class="modal-content">
+		<div class="modal-header">
+		  <button type="button" class="close confirmationClose" data-dismiss="modal" aria-hidden="true">&times;</button>
+		  <h4 class="modal-title"><?php _e("E-posta Doğrula"); ?></h4>
+		</div>
+		<div class="modal-body">
+			<div class="alert alert-info" id="confirmEmailFeed">
+				<?php _e("E-posta adresinize gönderilen linke tıklayarak epostanızı doğrulayabilirsiniz."); ?>
+			</div>
+	      	<a type="button" class="btn btn-primary" id="reSendEmailVerId"><?php _e("Tekrar Gönder"); ?></a>
+		</div>
+	      <div class="modal-footer">
+	        <button type="button" class="btn btn-default confirmationClose" data-dismiss="modal" ><?php _e("Kapat"); ?></button>
+	      </div>
+		</div>
+	  </div>
+	</div>
+ 
+<!-- POPUP END -->
+<script type="text/javascript">
+	$('#reSendEmailVerId').click(function(){
+		var feed=$("#confirmEmailFeed");
+		$.ajax({
+              type: "GET",
+              //data: {title: title, organisation:organisation},
+              url: '/user/reSendEmailVerification',
+            }).done(function(res){
+                console.log(res);
+                if (res=="0") {
+                	feed.append("<br><br>E-posta adresinize yeni doğrulama linkiniz gönderildi.");
+                	$('#reSendEmailVerId').removeClass("btn-primary").addClass("btn-success").text("Gönderildi");
+                }else{
+                	feed.append("<br><br>Yeni doğrulama linkiniz gönderilirken bir hata oluştu. Lütfen tekrar deneyiniz!");
+                };
+            });
+	});
+</script>
+<?php } ?>
 <?php if ($confirmation !=0 AND $confirmation !=3): ?>
 
 <!-- POPUP verification -->
@@ -61,6 +103,25 @@
 
 		refreshCode.hide();
 		confirmationFeedback.hide();
+
+
+		$('#confirmTelButton').click(function(){
+			if (confirmation==2) {
+			  		confirmationFeedback.show();
+			  		refreshCode.show();
+			  		confirmationFeedback.removeClass('alert-danger').removeClass('alert-success');
+			  		confirmationFeedback.addClass('alert-warning');
+			  		confirmationFeedback.text("Daha önce aktivasyon kodu almışsınız. Hesabınızı aktive etmek için telefonunuza gelen aktivasyon kodunu girin.");
+					sendConfirmationId.hide();
+	  				confirmationTel.hide();
+				}else{
+			  		checkConfirmationId.hide();
+			  		confirmationCode.hide();
+				};
+
+				$('#confirm').addClass('in');
+				$('#confirm').show();
+		});
 
 		var mytheme = 'future';
 		var mypos = 'messenger-on-bottom';
@@ -178,6 +239,9 @@
 
 
 <?php endif; ?>
+
+
+
 <script type="text/javascript">
 	
 
@@ -452,11 +516,21 @@ $all_books= $this->getWorkspaceBooks($workspace->workspace_id);
                                             </li>
                                         </ul>
                                         
-										<a class="btn pull-right brand_color_for_buttons" id='addNewBookBtn' href="/book/bookCreate" <?php echo ($confirmation !=0 AND $confirmation !=3)? "disabled":""; ?>>
+										<a class="btn pull-right brand_color_for_buttons" id='addNewBookBtn' href="/book/bookCreate" <?php echo ($confirmation !=0 AND $confirmation !=3 AND $verifiedEmail!=0)? "disabled":""; ?>>
 											<i class="fa fa-plus-circle"></i>
 											<span><?php _e('Kitap Ekle') ?></span>
 										</a>
-									
+										<?php if($confirmation !=0 AND $confirmation !=3) { ?>
+										<a class="btn pull-right btn-danger" id="confirmTelButton" data-toggle="modal" data-target="#confirm" data-id="confirm" href="#">
+											<span><?php _e('Telefon doğrula') ?></span>
+										</a>
+										<?php } ?>
+										<?php if($verifiedEmail!=0) { ?>
+										<a class="btn pull-right btn-danger" data-toggle="modal" data-target="#confirmEmail" data-id="confirmEmail"  href="#">
+											<span><?php _e('E-posta doğrula') ?></span>
+										</a>
+										<?php } ?>
+										
 								</div>
 							</div>
 						</div>

@@ -159,25 +159,31 @@ class SiteController extends Controller
 		$workspaces=$this->getUserWorkspaces();
 
 		$userConfirmation=UserMeta::model()->find('user_id=:user_id and meta_key=:meta_key',array('user_id'=>Yii::app()->user->id,'meta_key'=>'confirm'));
-		$confirmation="3";
-		if (!empty($userConfirmation)) {
-			//user has confirmation code. 
-			$confirmation="2";
-			//functions::get_random_string(6,'0123456789')
-			
-			//user confirmed
-			if ($userConfirmation->meta_value == 'confirmed') {
-				$confirmation="0";
-			}
-
-
-			//user hasnt been confirmed and has not confirmation code
-			if ($userConfirmation->meta_value == '') {
-				$confirmation="1";
+		$verifiedEmail="1";
+		$emailVerify=UserMeta::model()->find('user_id=:user_id and meta_key=:meta_key',array('user_id'=>Yii::app()->user->id,'meta_key'=>'emailVerify'));
+		if ($emailVerify) {
+			if ($emailVerify->meta_value=="verified") {
+				$verifiedEmail="0";
 			}
 		}
 
-		$this->render('index',array('workspaces'=>$workspaces,'confirmation'=>$confirmation));
+		$confirmation="3";
+		if ($userConfirmation) {
+			if ($userConfirmation->meta_value == '1') {
+				//user hasnt been confirmed and has not confirmation code
+				$confirmation="1";
+			}elseif ($userConfirmation->meta_value == 'confirmed') {
+				//user confirmed
+				$confirmation="0";
+			}else{
+				//user has confirmation code. 
+				$confirmation="2";
+			}
+		}
+		
+		
+
+		$this->render('index',array('workspaces'=>$workspaces,'confirmation'=>$confirmation,'verifiedEmail'=>$verifiedEmail));
 	}
 
 	public function getOrganisationEpubBudget($id)
@@ -607,6 +613,9 @@ class SiteController extends Controller
 			$newUser->surname=$attributes['surname'];
 			$newUser->email=$attributes['email'];
 			$newUser->created=date('Y-n-d g:i:s',time());
+
+			
+
 			$hasEmail= User::model()->findAll('email=:email', 
 	    				array(':email' => $attributes['email']) );
 
@@ -617,10 +626,32 @@ class SiteController extends Controller
 						$msg="SITE:LOGIN:SignUp:0:". json_encode(array('user'=> Yii::app()->user->name,'userId'=>Yii::app()->user->id));
 						Yii::log($msg,'profile');
 						
+						$verifyEmailId=functions::new_id();
+						$emailMeta=new UserMeta;
+						$emailMeta->user_id=$newUser->id;
+						$emailMeta->meta_key='emailVerify';
+						$emailMeta->meta_value=$verifyEmailId;
+						$emailMeta->created=time();
+						$emailMeta->save();
+
+						$mail=Yii::app()->Smtpmail;
+				        $mail->SetFrom(Yii::app()->params['noreplyEmail'], "OKUTUS");
+
+				        $mail->Subject= "E-posta doğrulama";
+				        $mail->AddAddress($newUser->email, "");
+			        	
+			        	$link=Yii::app()->getBaseUrl(true);
+						$link .='/user/verifyEmail/';
+						$link .= $verifyEmailId;
+						
+						$message="Okutusa hoşgeldin. E-postanızı doğrulamak için <a href='".$link."'>buraya tıklayınız</a>.<br>".$link;
+				        $mail->MsgHTML($message);
+				        $mail->Send();
+
 						$userConfirmation=new UserMeta;
 						$userConfirmation->user_id=$newUser->id;
 						$userConfirmation->meta_key='confirm';
-						$userConfirmation->meta_value='';
+						$userConfirmation->meta_value='1';
 						$userConfirmation->created=time();
 						$userConfirmation->save();
 
