@@ -9,6 +9,7 @@ echo $range
 
 for page in `seq 1 $range`;
 do
-    pdftoppm -f $page -l $page -jpeg -r 300 $1 > $2"page-"$page".jpg";
-    pdftoppm -f $page -l $page -jpeg -r 18 $1 > $2"thumbnailpage-"$page".jpg";
+    pdftoppm -f $page -l $page -jpeg -r 300 $1 > $2"page-"$page".jpg" &
+    pdftoppm -f $page -l $page -jpeg -r 18 $1 > $2"thumbnailpage-"$page".jpg" &
 done
+wait

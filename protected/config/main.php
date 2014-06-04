@@ -9,58 +9,35 @@
 require_once(dirname(__FILE__).'/../includes/localization.php');
 
 $db_config_list=array(
-			"baracuda"=>array(
-                        			'connectionString' => 'mysql:host=pufferfish.private.services.okutus.com;port=3306;dbname=squid_pacific',
-                        			'emulatePrepare' => true,
-                        			'username' => 'barracuda',
-                        			'password' => 'hWqG49pCYnGSsaXU',
-                        			'charset' => 'utf8',
-                			),
-			"lindneo"=>array(
-                        			'connectionString' => 'mysql:host=lindneo.com;port=3306;dbname=squid_pacific',
-                        			'emulatePrepare' => true,
-                        			'username' => 'db_squid_pacific',
-                        			'password' => '7GqA3Pqcy38QnfPQ',
-                        			'charset' => 'utf8',
-                			),
-			"ulgen"=>array(
-                        			'connectionString' => 'mysql:host=datamaster.private.services.lindneo.com;port=3306;dbname=squid_pacific',
-                        			'emulatePrepare' => true,
-                        			'username' => 'db_squid_pacific',
-                        			'password' => '7GqA3Pqcy38QnfPQ',
-                        			'charset' => 'utf8',
-                			),
+			"z-kitap"=>array(
+            			'connectionString' => 'mysql:host=localhost;port=3306;dbname=squid_pacific',
+            			'emulatePrepare' => true,
+            			'username' => 'zkitap',
+            			'password' => 'pPAzBqRKAQPLeda3',
+            			'charset' => 'utf8',
+    			),
 );      
 
 $catalogURL=array(
-	"baracuda"=>"http://bigcat.okutus.com/site/import",
-	"lindneo"=>"http://catalog.lindneo.com/site/import",
-	"ulgen"=>"http://catalog.lindneo.com/site/import"
+
+	"z-kitap"=>"http://zkitap-katalog.eba.gov.tr/site/import"
 	);
 
 $catalog=array(
-	"baracuda"=>"http://bigcat.okutus.com",
-	"lindneo"=>"http://catalog.lindneo.com",
-	"ulgen"=>"http://catalog.lindneo.com",
-	//"lindneo"=>"http://catalog.lindneo.com/site/import"
+
+	"z-kitap"=>"http://zkitap-katalog.eba.gov.tr"
+
 	);
 
 $host_config=array(
-			"ulgen"=>array(
-                				'catalog_host'=>'http://catalog.lindneo.com',
-				                'kerbela_host'=>'http://kerbela.lindneo.com',
-				                'panda_host'=>'http://panda.lindneo.com',
-				                'koala_host'=>'http://koala.lindneo.com',
-								'cloud_host'=>'http://cloud.lindneo.com',
-								'reader_host'=>'http://reader.lindneo.com/ekaratas'
-					),
-			"tigerfish"=>array(
-                                'catalog_host'=>'http://bigcat.okutus.com',
-                                'kerbela_host'=>'http://kerbela.okutus.com',
-                                'panda_host'=>'http://boxoffice.okutus.com',
-                                'koala_host'=>'http://wow.okutus.com',
-								'cloud_host'=>'http://cloud.okutus.com',
-								'reader_host'=>'http://reader.okutus.com'
+
+			"z-kitap"=>array(
+                                'catalog_host'=>'http://zkitap-katalog.eba.gov.tr',
+                                'kerbela_host'=>'http://zkitap-cetus.eba.gov.tr',
+                                'panda_host'=>'http://zkitap-panda.eba.gov.tr',
+                                'koala_host'=>'http://zkitap-koala.eba.gov.tr',
+								'cloud_host'=>'http://zkitap-cloud.eba.gov.tr',
+								'reader_host'=>'http://zkitap-reader.eba.gov.tr'
 				)
 		);
 
