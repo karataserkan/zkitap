@@ -625,7 +625,7 @@ $(document).ready(function(){
           if( data.attr ) that.element.parent().attr(data.attr);
 
         } else {
-          if (typeof data != "undefined"){
+          if (typeof data != "null"){
                     if( data.css ) that.element.parent().find(p).css(data.css);
                     if( data.attr )  that.element.parent().find(p).attr(data.attr);
                     if( data.val ) that.element.parent().find(p).val( data.val );
