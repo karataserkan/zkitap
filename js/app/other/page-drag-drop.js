@@ -591,8 +591,8 @@ $( document ).ready(function () {
         var page_background = JSON.parse(page_data);
         //console.log(page_background.result);
         if(page_background.result){
-                $('#current_page').css('background-image', 'url()');
-                $('#current_page').css('background-image', 'url("'+page_background.result+'")');
+                //$('#current_page').css('background-image', 'url()');
+                $('#current_page').css('background-image', 'url("'+page_background.result.replace(/\s/g, '')+'")');
         }
         else{
           //console.log('bu ne');
@@ -998,7 +998,10 @@ $( document ).ready(function () {
     
 
           window.lindneo.tlingit.loadAllPagesPreviews();
-
+          $(window).bind("beforeunload", function() {
+             window.lindneo.tlingit.updatePageCanvas(window.lindneo.currentPageId, function(){},false);
+   
+          });
         //console.log(value);
       }
     });

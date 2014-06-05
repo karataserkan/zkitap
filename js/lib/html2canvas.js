@@ -2302,6 +2302,14 @@ _html2canvas.Preload = function( options ) {
 
     _html2canvas.Util.parseBackgroundImage(background_image).filter(invalidBackgrounds).forEach(function(background_image) {
       if (background_image.method === 'url') {
+       
+       /* if(background_image.args[0].charAt(0)=="'")
+          background_image.args[0]= background_image.args[0].substr(1);
+      */
+        console.log(background_image.args[0]);
+        background_image.args[0] = background_image.args[0].replace(/\s/g, '');
+        background_image.args[0] = background_image.args[0].replace(/'/g, '');
+        console.log(background_image.args[0]);
         methods.loadImage(background_image.args[0]);
       } else if(background_image.method.match(/\-?gradient$/)) {
         if(bounds === undefined) {
@@ -2381,11 +2389,15 @@ _html2canvas.Preload = function( options ) {
       var img, imageObj;
       if ( src && images[src] === undefined ) {
         img = new Image();
-        if ( src.match(/data:image\/.*;base64,/i) ) {
-          img.src = src.replace(/url\(['"]{0,}|['"]{0,}\)$/ig, '');
+        
+        src = src.replace(/data:[\s]{0,}image/i, 'data:image');
+        if ( src.match(/data:[\s]{0,}image\/.*;base64,/i) ) {
+          src = src.replace(/url[\s]{0,}\([\s]{0,}['"]{0,}|['"]{0,}[\s]{0,}\)[\s]{0,}$/ig, '');
+          img.src = src;
           imageObj = images[src] = {
             img: img
           };
+
           images.numTotal++;
           setImageLoadHandlers(img, imageObj);
         } else if ( isSameOrigin( src ) || options.allowTaint ===  true ) {

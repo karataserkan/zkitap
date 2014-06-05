@@ -266,12 +266,41 @@ class EditorActionsController extends Controller
 
 	}
 
+	public function actionGetPagePreviewThumbnailsOfBook ($bookId){
+		$result = array();
+
+		$pages=$this->getPagesOfBook($bookId);
+		foreach ($pages as $key => $page) {
+			$enrty = new stdClass();
+			$enrty->page_id=$page->page_id;
+			if ( $page->data )
+				$enrty->data = $page->data;
+			else
+				if ($page->pdf_data)
+					$enrty->data =  json_decode($page->pdf_data,true)['thumnail']['data'];
+				else
+					$enrty->data = null;
+
+			$result[$enrty->page_id] = $enrty;
+			unset($enrty);
+
+		}
+		return $this->response($result);
+
+	}
+
 	public function getPagesOfBook($bookId){
-		$defaultChapter=Chapter::model()->find(array("condition"=>"book_id=:book_id","params"=> array('book_id' => $bookId )));
+		$bookPages = array();
 
-		$bookPages=Page::model()->findAll(array("condition"=>"chapter_id=:chapter_id","params"=> array('chapter_id' => $defaultChapter->chapter_id )));
+		$book_chapters=Chapter::model()->findAll(array('order'=>  '`order` asc ,  created asc', "condition"=>'book_id=:book_id', "params" =>array(':book_id' => $bookId  ) ) );
+		foreach ($book_chapters as $key => $book_chapter) {
 
-		if (!$bookPages) {
+			$book_pages=Page::model()->findAll(array('order'=>  '`order` asc ,  created desc', "condition"=>'chapter_id=:chapter_id', "params" =>array(':chapter_id' => $book_chapter->chapter_id  ) ) );
+			$bookPages=array_merge($bookPages,$book_pages);
+
+		}
+
+		if (empty($bookPages)) {
 			$this->error('getPagesOfBook','Book not found');
 			return false;
 
