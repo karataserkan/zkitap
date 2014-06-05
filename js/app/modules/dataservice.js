@@ -191,7 +191,7 @@ window.lindneo.dataservice = (function( $ ) {
   };
 
   var dontAskNotToLeave = function (){
-   
+    
   };
 
   var newProgressBar= function(){
@@ -244,8 +244,11 @@ window.lindneo.dataservice = (function( $ ) {
     }
 
   }
-  var send = function( action, data, successCallback, failCallback ){
-    
+  var send = function( action, data, successCallback, failCallback ,async ){
+
+    if(typeof async == "undefined") async = true;
+    if(typeof successCallback == "undefined") successCallback = function () {};
+    if(typeof failCallback == "undefined") failCallback = function () {};
     var that = this;
     var requestRoute='EditorActions' +'/' + action;
     //console.log(data);
@@ -307,7 +310,7 @@ window.lindneo.dataservice = (function( $ ) {
       'type': 'POST',
       'url': window.lindneo.url+requestRoute,
       'data': data,
-      
+      'async' : async,
       beforeSend: function(){
         // Handle the beforeSend event
         window.onbeforeunload = askNotToLeave;

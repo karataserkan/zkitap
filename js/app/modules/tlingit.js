@@ -133,7 +133,7 @@ window.lindneo.tlingit = (function(window, $, undefined){
   };
 
   var updateArrivalComponent = function(res) {
-    updatePageCanvas();
+   
     //var response = responseFromJson(res);
     //console.log(response);
     //loadPagesPreviews(response.result.component.page_id);
@@ -171,7 +171,7 @@ window.lindneo.tlingit = (function(window, $, undefined){
         window.lindneo.tsimshian.componentDestroyed(response.result.delete);
       }
     }
-    updatePageCanvas();
+    
   };
 
   var loadComponents = function( res ) {
@@ -226,248 +226,75 @@ window.lindneo.tlingit = (function(window, $, undefined){
   };
 
   var loadPage = function (pageId){
-    $('#current_page').empty();
-    window.lindneo.currentPageId=pageId;
+     updatePageCanvas(window.lindneo.currentPageId, function(){
+          $('#current_page').empty();
+          window.lindneo.currentPageId=pageId;
+          window.lindneo.dataservice
+          .send( 'GetPageComponents', 
+            { 
+              'pageId' : pageId
+            },
+            loadComponents,
+            function(err){
+             
+          });
+     });
 
 
-    //page ile ilgili componentların hepsini serverdan çek.
-    // hepsi için createComponent 
-
-    // find current page id from somewhere
-    window.lindneo.dataservice
-      .send( 'GetPageComponents', 
-        { 
-          'pageId' : pageId
-        },
-        loadComponents,
-        function(err){
-          //console.log('error:' + err);
-      });
 
       
 
   };
 
   var loadAllPagesPreviews = function (){
-    $("li.page").each(function(index, pageSlice){
-      var num = index + 1;
-      //console.log(pageSlice.attributes[2].nodeValue);
-      //var pages_num = {"page_id": $(this).attr('page_id'), "pane_num": pageNum};
-      //window.lindneo.tlingit.pages.push(pages_num);
-      //if(index == 0) {pages = []; console.log("adasdasdasd");} 
-      pages.push({"page_id": pageSlice.attributes[2].nodeValue, "page_num": num});
 
-      var pagePreview = $('<canvas class="preview"  height="90"  width="120"> </canvas>');
-    
-      $(pageSlice).children('.preview').remove();
-      $(pageSlice).prepend(pagePreview);
-      var canvas=$(pageSlice).children('.preview')[0];
-      var context=canvas.getContext("2d");
-     context.fillStyle = '#FFF';
-      context.fillRect(0,0,canvas.width,canvas.height);
-      //console.log('ddedededede');
-      //$('.chapter .page').each(function(){
-      //console.log($(this).attr('page_id'));
-      
-
-      $.ajax({
-          type: "POST",
-          url:'/page/getPdfThumbnail?pageId='+$(this).attr('page_id'),
-        }).done(function(page_data){
-          
-          var page_background = JSON.parse(page_data);
-          //console.log(page_background.result);
-          if(page_background.result){
-            /*var background_img = '<img src="'+page_background.result+'" id="canvas_'+$(this).attr('page_id')+'"  height="90" width="120" style="display:none"/>';
-            $(pageSlice).prepend(background_img);
-            var background = document.getElementById('canvas_'+$(this).attr('page_id'));
-            context.drawImage(background, 120,90);*/
-            var img = new Image();
-            img.src = page_background.result;
-            img.onload = function(){
-              context.drawImage(img, 0, 0);
-            };
-
-          }
-        });
-      //});
-    });
-   $('.chapter .page').each(function(){
-    //console.log($(this).attr('page_id'));
-    loadPagesPreviews($(this).attr('page_id'));
-    });
-  };
-
-  var loadPagesPreviews = function (pageId) {
-        //console.log(components);
-    
-    var pageSlice=$('[page_id="'+pageId+'"]');
-    if (pageSlice)
-     window.lindneo.dataservice
-      .send( 'GetPageComponents', 
+    window.lindneo.dataservice
+      .send( 'GetPagePreviewThumbnailsOfBook', 
         { 
-          'pageId' : pageId
+          'bookId' : window.lindneo.currentBookId
         },
-        PreviewOfPage,  
+        function(res){
+
+          var response = responseFromJson(res);
+          res = "";
+
+               $("li.page").each(function(index, pageSlice){
+                  var num = index + 1;
+                  //console.log(pageSlice.attributes[2].nodeValue);
+                  //var pages_num = {"page_id": $(this).attr('page_id'), "pane_num": pageNum};
+                  //window.lindneo.tlingit.pages.push(pages_num);
+                  //if(index == 0) {pages = []; console.log("adasdasdasd");} 
+                  pages.push({"page_id": pageSlice.attributes[2].nodeValue, "page_num": num});
+
+
+
+                  var CCHeight = $('#current_page').height();
+                  var CCWidth = $('#current_page').width();
+                  var canvasHeight = parseInt( CCHeight * 120   / (  CCWidth ) ); 
+                  var pagePreview = $('<canvas class="preview"  height="' +canvasHeight+ '"  width="120"> </canvas>');
+                
+                  $(pageSlice).children('.preview').remove();
+                  $(pageSlice).prepend(pagePreview);
+                  var canvas=$(pageSlice).children('.preview')[0];
+                  var context=canvas.getContext("2d");
+                  context.fillStyle = '#FFF';
+                  context.fillRect(0,0,canvas.width,canvas.height);
+                  var img = new Image();
+                  img.src = response.result[$(this).attr('page_id')].data;
+                  img.onload = function(){
+                    context.drawImage(img, 0, 0,canvas.width,canvas.height);
+                  };
+
+                });
+
+
+        },  
         function(err){
           //console.log('error:' + err);
       });
+    
+  
   };
-
-  var PreviewOfPage = function (response) {
-//console.log(response);
-    if ($.isEmptyObject(responseFromJson(response).result)) return false;
-
-    var components= responseFromJson(response).result.components;
-
-    $.each(components,function(i,component){
-      var pageSlice=$('[page_id="'+component.page_id+'"]');
-      var canvas=$(pageSlice).children('.preview')[0];
-      var context=canvas.getContext("2d");
-       context.fillStyle = '#FFF';
-        context.fillRect(0,0,canvas.width,canvas.height);
-       
-      
-    });
-
-
-      var canvas_reset=[];
-      //console.log(components);
-      components=components.sort (function(a,b){
-        //console.log(a.data);
-        if (a.data.self.css['z-index'] > b.data.self.css['z-index']) return +1;
-        return -1;
-      });
-      
-      var component_previews = [];
-
-      $.each(components,function(i,component){
-        var page_slice= $('[page_id="'+component.page_id+'"]');
-        var ratio = $('#current_page').width() / page_slice.width();
-        
-        var canvas=page_slice.children('.preview')[0];
-        var context=canvas.getContext("2d");
-        
-          context.fillStyle = '#FFF';
-          context.fillRect(0,0,canvas.width,canvas.height);
-          canvas_reset[component.page_id]=true;
-       
-
-
-          switch (component.type){
-
-            case 'image':
-             
-              var image=new Image();
-              image.src = component.data.img.src;
-              var y= parseInt( parseInt(component.data.self.css['top'] ) /ratio ) ;
-              var x= parseInt( parseInt(component.data.self.css['left'] )  /ratio );
-              var width= parseInt( parseInt(component.data.self.css['width'] )  /ratio );
-              var height= parseInt( parseInt(component.data.self.css['height'] )  /ratio );
-
-              image.onload= function(){
-                context.drawImage(image,x,y,width,height );
-                var componentPreview = {
-                  'type' : 'image',
-                  'image' : image,
-                  'x' : x,
-                  'y' : y,
-                  'width' : width,
-                  'height' : height
-                };
-                component_previews.push(componentPreview);
-              }
-              
-
-
-              break;
-
-
-            case 'text':
-
-
-
-              var fontHeight=(parseInt(component.data.textarea.css['font-size'] ) /ratio );
-              var lines = component.data.textarea.val.match(/[^\n]+(?:\r?\n|$)/g) ;
-              var y= parseInt( parseInt(component.data.self.css['top'] ) /ratio ) ;
-              var x= parseInt( parseInt(component.data.self.css['left'] )  /ratio );
-              var starty=y;
-
-              var maxWidth=parseInt( parseInt(component.data.self.css['width']  ) /ratio );
-              var maxHeight=parseInt( parseInt(component.data.self.css['height']  ) /ratio );
-
-              context.font= fontHeight + 'px Arial';
-              context.fillStyle= component.data.textarea.css['color'];
-              
-              if ( $.type(lines) != "undefined")
-                if ( lines != null)
-                  if (lines.length > 0)
-                    $.each(lines, function (lineNumber,line){
-                      y += fontHeight;
-                      var words = line.split(' ');
-                      var sublines = '';
-                      //console.log(y + ' ' +line) ;
-                      for(var n = 0; n < words.length; n++) {
-
-                        var testLine = sublines + words[n] + ' ';
-                        var metrics = context.measureText(testLine);
-                        var testWidth = metrics.width;
-
-                        if (testWidth > maxWidth && n > 0 ) {
-                          if ( y - starty <= maxHeight ) {
-                            context.fillText(sublines, x, y);
-                            var componentPreview = {
-                              'type' : 'text',
-                              'text' : sublines,
-                              'x' : x,
-                              'y' : y
-                            };
-                            component_previews.push(componentPreview);
-                          }
-                          sublines = words[n] + ' ';
-                          y += fontHeight;
-                        }
-                        else {
-                          sublines = testLine;
-                        }
-
-                      } 
-
-               
-                  if ( y - starty  <= maxHeight ) {
-                    context.fillText(sublines, x,y );
-                    var componentPreview = {
-                      'type' : 'text',
-                      'text' : sublines,
-                      'x' : x,
-                      'y' : y
-                    };
-                    component_previews.push(componentPreview);
-                  }
-
-                  });
-            
-              break;
-
-            
-
-            default:
-              
-              break;
-
-          }
-
-
-      });
-
-    //console.log(component_previews);
-
-
-    };
- 
-
-
-
 
   var snycServer = function (action,jsonComponent) {
     //ajax to Server
@@ -578,25 +405,36 @@ window.lindneo.tlingit = (function(window, $, undefined){
     //console.log(response);
 
   }; 
-  var updatePageCanvas = function (page_id){
-    GenerateCurrentPagePreview(page_id) ;
+  var updatePageCanvas = function (page_id,callback,async) {
+    if (typeof async == "undefined") async = true;
+    if (typeof callback == "undefined") callback = function(){};
+    GenerateCurrentPagePreview(page_id,callback,async) ;
      
   }
-  var GenerateCurrentPagePreview = function (page_id){
+  var GenerateCurrentPagePreview = function (page_id,callback,async){
+    if(typeof async == "undefined") async = true;
     html2canvas($('#current_page')[0], {
       onrendered: function(canvas) {
          
-          var currentPagePreviewCanvas = $('.current_page canvas.preview')[0];
-          var img = new Image();
-          img.src = canvas.toDataURL();
-     
+          var currentPagePreviewCanvas = $('li[page_id="'+page_id+'"] canvas.preview')[0];
+          if (currentPagePreviewCanvas){
+            var img = new Image();
+            img.src = canvas.toDataURL();
+
             currentPagePreviewCanvas.getContext("2d").drawImage(img, 0, 0, currentPagePreviewCanvas.width, currentPagePreviewCanvas.height);
+
             window.lindneo.dataservice
-            .send('DeletePage', 
+            .send('UpdatePageData', 
               { 
                 'pageId' : page_id,
                 'data' : currentPagePreviewCanvas.toDataURL(),
-              });
+              }, 
+              function(){},
+              function(){},
+              async
+              );
+          }
+          callback();
 
       }
     });
@@ -608,7 +446,6 @@ window.lindneo.tlingit = (function(window, $, undefined){
 
   return {
     loadAllPagesPreviews: loadAllPagesPreviews,
-    loadPagesPreviews: loadPagesPreviews,
     responseFromJson: responseFromJson,
     componentToJson: componentToJson,
     UpdatePage: UpdatePage,
@@ -626,7 +463,8 @@ window.lindneo.tlingit = (function(window, $, undefined){
     DeletePage: DeletePage,
     DeleteChapter: DeleteChapter,
     pages: pages,
-    componentPreviosVersions: componentPreviosVersions
+    componentPreviosVersions: componentPreviosVersions,
+    updatePageCanvas: updatePageCanvas
   };
 
 })( window, jQuery );
