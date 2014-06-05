@@ -73,6 +73,8 @@ window.lindneo.tlingit = (function(window, $, undefined){
         function(err){
           
       });
+
+
   };
 
 /*
@@ -131,6 +133,7 @@ window.lindneo.tlingit = (function(window, $, undefined){
   };
 
   var updateArrivalComponent = function(res) {
+    updatePageCanvas();
     //var response = responseFromJson(res);
     //console.log(response);
     //loadPagesPreviews(response.result.component.page_id);
@@ -168,6 +171,7 @@ window.lindneo.tlingit = (function(window, $, undefined){
         window.lindneo.tsimshian.componentDestroyed(response.result.delete);
       }
     }
+    updatePageCanvas();
   };
 
   var loadComponents = function( res ) {
@@ -574,6 +578,29 @@ window.lindneo.tlingit = (function(window, $, undefined){
     //console.log(response);
 
   }; 
+  var updatePageCanvas = function (page_id){
+    GenerateCurrentPagePreview(page_id) ;
+     
+  }
+  var GenerateCurrentPagePreview = function (page_id){
+    html2canvas($('#current_page')[0], {
+      onrendered: function(canvas) {
+         
+          var currentPagePreviewCanvas = $('.current_page canvas.preview')[0];
+          var img = new Image();
+          img.src = canvas.toDataURL();
+     
+            currentPagePreviewCanvas.getContext("2d").drawImage(img, 0, 0, currentPagePreviewCanvas.width, currentPagePreviewCanvas.height);
+            window.lindneo.dataservice
+            .send('DeletePage', 
+              { 
+                'pageId' : page_id,
+                'data' : currentPagePreviewCanvas.toDataURL(),
+              });
+
+      }
+    });
+  };
 
 
 

@@ -123,8 +123,12 @@
 	    <script type="text/javascript" src="<?php echo Yii::app()->request->baseUrl; ?>/js/lib/jssor.utils.js"></script>
 	    <script type="text/javascript" src="<?php echo Yii::app()->request->baseUrl; ?>/js/lib/jssor.slider.js"></script>
 
-	    <!-- İSCROLL-->
+	    <!-- iScrool-->
 	    <script type="text/javascript" src="<?php echo Yii::app()->request->baseUrl; ?>/js/lib/iscroll.js"></script>
+
+	    
+	    <!-- HTML2Canvas -->
+	    <script type="text/javascript" src="<?php echo Yii::app()->request->baseUrl; ?>/js/lib/html2canvas.js"></script>
 
 	    <!--SweetJustice-tr-->
 	    <script type="text/javascript" src="<?php echo Yii::app()->request->baseUrl; ?>/js/lib/sweet-justice.js"></script>

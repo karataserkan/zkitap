@@ -269,7 +269,7 @@ class EditorActionsController extends Controller
 	public function getPagesOfBook($bookId){
 		$defaultChapter=Chapter::model()->find(array("condition"=>"book_id=:book_id","params"=> array('book_id' => $bookId )));
 
-		$bookPages=Page::model()->findAll(array("condition"=>"chapter_id=:chapter_id","params"=> array('chapter_id' => $$defaultChapter->chapter_id )));
+		$bookPages=Page::model()->findAll(array("condition"=>"chapter_id=:chapter_id","params"=> array('chapter_id' => $defaultChapter->chapter_id )));
 
 		if (!$bookPages) {
 			$this->error('getPagesOfBook','Book not found');
@@ -824,6 +824,41 @@ class EditorActionsController extends Controller
 
 		if($return=$this->UpdatePage($pageId,$chapterId,$order) ){
 				$response['component']=$return; 
+		}
+
+		return $this->response($response);
+	}
+
+
+
+ 	public function UpdatePageData($pageId,$data){
+		
+		$page=Page::model()->findByPk($pageId);
+		if (!$page) {
+			$this->error("EA-UPage","Page Not Found",func_get_args(),$pageId);
+			return false;
+		}
+
+		$page->data=$data;
+
+
+
+		if(!$page->save()){
+			$this->error("EA-UPage","UPage Not Saved",func_get_args(),$pageId);
+			return false;
+		}
+		
+		return $page->attributes;
+	}
+
+
+	public function actionUpdatePageData($pageId,$data)
+	{
+
+		$response=false;
+
+		if($return=$this->UpdatePageData($pageId,$data) ){
+				$response['page']=$return; 
 		}
 
 		return $this->response($response);
