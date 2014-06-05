@@ -566,10 +566,13 @@ window.lindneo.toolbox = (function(window, $, undefined){
       //console.log('END');
       //return;
       $.each(this.selectedComponents, function( key, component ) {
-        if($.type(component.options.component.data.lock.username) == "undefined"){
-          $('.toolbox.'+component.options.component.type+'-options, .toolbox.generic-options').show();
-
+        if($.type(this.options.component.data.lock) == "undefined") { 
+          if($.type(component.options.component.data.lock.username) == "undefined"){
+            $('.toolbox.'+component.options.component.type+'-options, .toolbox.generic-options').show();
+          }
         }
+
+
 
         $('.toolbox .tool').unbind( "change" );
         $('.toolbox-btn').unbind( "click" );

@@ -300,7 +300,7 @@ window.lindneo.tlingit = (function(window, $, undefined){
 
   var loadPagesPreviews = function (pageId) {
         //console.log(components);
-    
+    return ;
     var pageSlice=$('[page_id="'+pageId+'"]');
     if (pageSlice)
      window.lindneo.dataservice
@@ -315,6 +315,8 @@ window.lindneo.tlingit = (function(window, $, undefined){
   };
 
   var PreviewOfPage = function (response) {
+
+    return ;
 //console.log(response);
     if ($.isEmptyObject(responseFromJson(response).result)) return false;
 
@@ -592,7 +594,7 @@ window.lindneo.tlingit = (function(window, $, undefined){
      
             currentPagePreviewCanvas.getContext("2d").drawImage(img, 0, 0, currentPagePreviewCanvas.width, currentPagePreviewCanvas.height);
             window.lindneo.dataservice
-            .send('DeletePage', 
+            .send('UpdatePageData', 
               { 
                 'pageId' : page_id,
                 'data' : currentPagePreviewCanvas.toDataURL(),
