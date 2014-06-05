@@ -670,6 +670,7 @@ $(document).on("click",".SelectWorkspace",function(e){
 });
 
 $("#copy_book").click(function(){
+	$("#copy_book").removeClass("btn-primary").addClass("btn-success").attr("disabled","disabled");
 	var title=$("#newContentTitle").val();
 	var link ="/book/copyBook?bookId="+bookId+"&workspaceId="+workspaceId+'&title='+title;
     window.location.assign(link);
