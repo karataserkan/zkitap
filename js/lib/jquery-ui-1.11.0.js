@@ -3680,7 +3680,27 @@ $.ui.plugin.add( "resizable", "containment", {
 			},
 			ce = that.containerElement,
 			continueResize = true;
+			//sonradan eklenen kısım
 
+			if(typeof that.containerElement == "undefined"){
+				ce = $("#current_page");
+				that.containerElement = $("#current_page");
+			}
+			if(typeof that.containerOffset == "undefined")
+				co = $("#current_page").offset();
+			if(typeof that.parentData == "undefined")
+				that.parentData = {
+					"element": "#current_page",
+					"height": $("#current_page").height(),
+					"left": $("#current_page").offset().left,
+					"top": $("#current_page").offset().top,
+					"width": $("#current_page").width(),
+				};
+			//console.log(that);
+			//console.log(that.element.parent().get( 0 ));
+			//console.log(ce.get( 0 ));
+
+			//!!sonradan eklenen kısım
 		if ( ce[ 0 ] !== document && ( /static/ ).test( ce.css( "position" ) ) ) {
 			cop = co;
 		}
@@ -3804,7 +3824,25 @@ $.ui.plugin.add("resizable", "alsoResize", {
 
 			_alsoResize = function (exp, c) {
 				$(exp).each(function() {
-					var el = $(this), start = $(this).data("ui-resizable-alsoresize"), style = {},
+					//sonradan eklenen
+					if(typeof $(this).data("ui-resizable-alsoresize") =='undefined'){
+						var_also_resize={'width':os.width,'height':os.height,'left':NaN,'top':NaN};
+
+					}
+					else{
+						var_also_resize=$(this).data("ui-resizable-alsoresize");
+
+					}
+					if(isNaN(var_also_resize.top)||isNaN(var_also_resize.left))
+					{
+						var_also_resize.top=that.offset.top;
+						var_also_resize.left=that.offset.left;
+
+					}
+					//var el = $(this), start = $(this).data("ui-resizable-alsoresize"), style = {},
+					//!!sonradan eklenen
+
+					var el = $(this), start = var_also_resize, style = {},
 						css = c && c.length ? c : el.parents(ui.originalElement[0]).length ? ["width", "height"] : ["width", "height", "top", "left"];
 
 					$.each(css, function (i, prop) {
