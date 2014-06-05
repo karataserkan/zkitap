@@ -276,8 +276,10 @@ class EditorActionsController extends Controller
 			if ( $page->data )
 				$enrty->data = $page->data;
 			else
-				if ($page->pdf_data)
-					$enrty->data =  json_decode($page->pdf_data,true)['thumnail']['data'];
+				if ($page->pdf_data){
+									$enrty->data =  json_decode($page->pdf_data,true);
+									$enrty->data=$enrty->data['thumnail']['data'];
+								}
 				else
 					$enrty->data = null;
 
