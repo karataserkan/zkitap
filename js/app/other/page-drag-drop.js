@@ -1,4 +1,25 @@
 $( document ).ready(function () {
+  
+  $("#editor_view_pane").click(function(e){
+    var control = true;
+    if(e.target.id != "current_page")
+    {
+      var children = $("#current_page").children();
+      $.each(children, function(i,key){
+
+        if($($($(key).children()[0]).children()[0]).attr("id") == e.target.id || $($(key).children()[0]).attr("id") == e.target.id){
+          //console.log($($($(key).children()[0]).children()[0]).attr("id")+" - "+e.target.id);
+          control = false;
+        }
+      
+      });
+      if(control){
+        //console.log("deselect");
+         $('.selected').trigger('unselect');
+       }
+    } 
+  });
+
   bookPagePreviews();
 
   
@@ -28,7 +49,7 @@ $( document ).ready(function () {
             var moved = count * 3;
             //console.log(moved);
             //return;
-            if(e.which == 46){
+            if(e.which == 46 && e.shiftKey){
               for(var i=1; i < keydown_component.length; i++){
                 $.ajax({
                   url: "/page/getComponent/"+keydown_component[i].id
