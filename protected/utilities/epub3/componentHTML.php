@@ -1050,7 +1050,7 @@ class componentHTML {
 		$container.=" 
 
 			<div id='$html_id' ".$css.">
-				<iframe id='i".$html_id."' src ='$html_file' style='width:100%; height:100%;' ></iframe>
+				<iframe id='i".$html_id."' src ='$html_file' style='width:100%; height:100%;' frameborder='0'></iframe>
 			</div>
 		
 		";

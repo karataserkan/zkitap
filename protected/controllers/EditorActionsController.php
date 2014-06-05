@@ -424,8 +424,8 @@ class EditorActionsController extends Controller
 
 			$component_attribs=json_decode($attributes);
 
-	                //var_dump($component_attribs);
-	                //exit();
+	                /*var_dump($component_attribs);
+	                die();*/
 			if($component_attribs->type == "html"  ) {
 				file_put_contents(Yii::app()->params['storage'].$new_id.'.html' , rawurldecode($component_attribs->data->html_inner));
 			}
@@ -461,7 +461,7 @@ class EditorActionsController extends Controller
 				return false;
 			}
 
-
+			//echo CJSON::encode($result);
 			return $result->attributes;
 
 	}
@@ -662,6 +662,10 @@ class EditorActionsController extends Controller
 		$component->set_data($component_attribs->data);
 		//new dBug($component_attribs);
 		
+		if($component_attribs->type == "html"  ) {
+				file_put_contents(Yii::app()->params['storage'].$componentId.'.html' , rawurldecode($component_attribs->data->html_inner));
+		}
+
 		if(!$component->save()){
 			$this->error("EA-UWholeCom","Component Not Saved",func_get_args(),$component);
 			return false;
@@ -706,7 +710,7 @@ class EditorActionsController extends Controller
 		$result->set_data($component_data);
 
 		if( $original_data == $result->data ){
-			return SELF::VALUE_UNCHANGED;
+			return self::VALUE_UNCHANGED;
 		}
 
 		//save
@@ -732,11 +736,11 @@ class EditorActionsController extends Controller
 			if( isset($value->mapped_data) && isset($value->mapped_type)  ) {
 
 				switch ($value->mapped_type) {
-					case SELF::VALUE_CREATED :
-					case SELF::VALUE_UPDATED :
+					case self::VALUE_CREATED :
+					case self::VALUE_UPDATED :
 						$original->{$key}=$value->mapped_data;
 						break;
-					case SELF::VALUE_DELETED :
+					case self::VALUE_DELETED :
 						unset($original->{$key});
 						break;
 					
