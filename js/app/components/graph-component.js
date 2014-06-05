@@ -248,6 +248,19 @@ console.log(top);
 
     top = top + "px";
     left = left + "px";
+           var color_for_barchart;
+        try
+        {
+          color_for_barchart=oldcomponent.data.series.colors;
+          if(typeof color_for_barchart =='undefined')
+            throw true;
+        }
+        catch(err)
+        {
+          color_for_barchart=new Object();
+          color_for_barchart.background=get_random_color();
+          color_for_barchart.stroke=get_random_color();
+        }
 
     $("<div class='popup ui-draggable' id='pop-image-popup' style='display: block; top:" + top + "; left: " + left + ";'> \
         <div class='popup-header'> \
@@ -278,9 +291,9 @@ console.log(top);
             <div id='bar-chart-properties' class='chart_prop bar-chart' style='display:none;'> \
               <div class='bar-chart-slice-holder slice-holder'> \
                 "+j__("Arkaplan Rengi")+":  \
-                <input type='color'  id='chart-bar-background' class='color-picker-box radius color' value='"+get_random_color()+"' placeholder='#bbbbbb'> <br> \
+                <input type='color'  id='chart-bar-background' class='color-picker-box radius color' value='"+color_for_barchart.background+"' placeholder='#bbbbbb'> <br> \
                 Çubuk Rengi:  \
-                 <input type='color' id='chart-bar-stroke' class='color-picker-box radius color' value='"+get_random_color()+"' placeholder='#bbbbbb'> <br> \
+                 <input type='color' id='chart-bar-stroke' class='color-picker-box radius color' value='"+color_for_barchart.stroke+"' placeholder='#bbbbbb'> <br> \
               </div> \
           </div> \
           <div id='pie-chart-properties' class='chart_prop pie-chart'> \
@@ -301,8 +314,6 @@ console.log(top);
       if(typeof oldcomponent != 'undefined'){
         type_for_update=oldcomponent.data.type;
         length_for_update=(type_for_update=='bar-chart'?oldcomponent.data.series.datasets.data.length:oldcomponent.data.series.length);
-        //length_for_update=oldcomponent.data.series.length;
-
         console.log("update");
         console.log(oldcomponent.data);
         console.log(length_for_update);
@@ -318,10 +329,7 @@ console.log(top);
             bar_chart_data=oldcomponent.data.series;
           }
         data_for_update=(type_for_update=='bar-chart'?bar_chart_data:oldcomponent.data.series);
-        //data_for_update=oldcomponent.data.series;
-        console.log("DATAFOR UPDATE");
-        console.log(length_for_update);
-        console.log(data_for_update);
+ 
         for(var data_key in data_for_update){
           if((data_for_update[data_key]).color!='undefined')
               graph_colors.push((data_for_update[data_key]).color);
@@ -334,8 +342,7 @@ console.log(top);
         $('#Graph_Type').val(type_for_update);
         $('#Graph_Type').change();
         $('#verisayisi').change();
-        console.log("I am changing value to"+type_for_update);
-        $('#Graph_Type').change();
+
       }
       /*Update stuff end*/
 
