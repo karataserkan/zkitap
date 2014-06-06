@@ -751,6 +751,21 @@ class componentHTML {
 			$this->epub->files->others[] = $file_marker;
 			$component->data->marker = $file_marker->filename;
 
+			if($component->data->poster != ''){
+				$file_contents_poster = file_get_contents($component->data->poster);
+
+				$URL_poster = parse_url($component->data->file_contents_poster);
+				$URL_poster = pathinfo($URL_poster[path]);
+				$ext_poster = $URL_poster['extension'];
+
+				$file_poster = new file( 'p'.$component->id.'.'.$ext_poster , $this->outputFolder );
+				$file_poster->writeLine($file_contents_poster);
+				$file_poster->closeFile();
+
+				$this->epub->files->others[] = $file_poster;
+				$component->data->poster = $file_poster->filename;
+			}
+
 			//$file = functions::save_base64_file ( $component->data->source->attr->src , $component->id , $this->outputFolder);
 			
 			//new dBug($component); die;
@@ -762,8 +777,12 @@ class componentHTML {
 
 
 			$videoID= "v".functions::get_random_string();
-			
-			$container ="<video poster='video_play.png' id='$videoID' controls='controls'  class='video' ";
+			$poster="video_play.png";
+			if($component->data->poster != '') {
+				$poster=$component->data->poster;
+			}
+		
+			$container ="<video poster='$poster' id='$videoID' controls='controls'  class='video' ";
 			if(isset($data->video->attr))
 				foreach ($data->video->attr as $attr_name => $attr_val ) {
 					$container.=" $attr_name='$attr_val' ";
@@ -811,7 +830,13 @@ class componentHTML {
 		else{
 			
 			$video_id= "video".functions::get_random_string();
-			$video_container ="<video poster='video_play.png' controls='controls' class='video' ";
+			$poster="video_play.png";
+			if($component->data->poster != '') {
+				$poster=$component->data->poster;
+				
+			}
+			
+			$video_container ="<video poster='$poster' controls='controls' class='video' ";
 			if(isset($data->video->attr))
 				foreach ($data->video->attr as $attr_name => $attr_val ) {
 					$video_container.=" $attr_name='$attr_val' ";
