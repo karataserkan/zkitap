@@ -948,6 +948,14 @@ $( document ).ready(function () {
 
           });
 
+          $('.chapter-title').change(function(){
+              window.lindneo.tlingit.ChapterUpdated(
+                $(this).parent().parent().attr('chapter_id'),
+                $(this).val( ),
+                $(this).parent().index() 
+              );
+          });
+
           $('.delete-page').click(function(){
       
             var delete_buttons = $('<i class="icon-delete"></i><i class="icon-delete"></i>');

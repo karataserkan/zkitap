@@ -528,7 +528,7 @@ var createVideoComponent = function( event, ui, oldcomponent ) {
                                   height: options.height
                               })[0];
                               // Get context and draw screen on it
-                              
+                              //video.crossOrigin = "Anonymous";
                               canvas.getContext('2d').drawImage(video, 0, 0, options.width, options.height);
                               // Seek video back if we have previous position 
                               if (prevPos) {
@@ -779,7 +779,7 @@ var createVideoComponent = function( event, ui, oldcomponent ) {
                     }
 
                 });
-                
+
                $('#capture').click(function() {
                   var canvases = $('canvas');
                   VideoSnapper.captureAsCanvas(video, { width: 160, height: 68, time: 0 }, function(canvas) {
