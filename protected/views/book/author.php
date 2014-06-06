@@ -30,8 +30,10 @@ $current_user=User::model()->findByPk(Yii::app()->user->id);
 //echo CJSON::encode($deneme[0]);
 ?>
  
-	
+
 <script type="text/javascript">
+
+
 
 
 	window.lindneo.currentPageId='<?php echo $current_page->page_id; ?>';
@@ -46,6 +48,9 @@ $current_user=User::model()->findByPk(Yii::app()->user->id);
 
 
 	$(document).ready(function(){
+	
+	
+	
 		options = {  
     reject : { // Rejection flags for specific browsers  
         all: false, // Covers Everything (Nothing blocked)  
@@ -143,6 +148,7 @@ $current_user=User::model()->findByPk(Yii::app()->user->id);
 		 $.reject(options);
 
 	});
+
 
 
 </script>
@@ -2215,7 +2221,7 @@ $background= (!empty($img)) ? "background-image:url('".str_replace(" ", "", $img
 								</li>";
 								?>
 									<script type="text/javascript">
-										window.lindneo.tlingit.loadPagesPreviews('<?php echo $template_page->page_id ?>');
+										//window.lindneo.tlingit.loadPagesPreviews('<?php echo $template_page->page_id ?>');
 									</script>
 								<?php
 							}
@@ -2331,6 +2337,7 @@ $background= (!empty($img)) ? "background-image:url('".str_replace(" ", "", $img
 	Preview Sayfası buraya gelecek....
 </div>
 -->
+
 
 <script type="text/javascript">
 	var preview = $("#upload-thmn-preview");

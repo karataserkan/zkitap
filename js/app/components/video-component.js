@@ -9,7 +9,7 @@ $(document).ready(function() {
             var that = this;
 
             
-            this.videoTag=$('<video></video>');
+            this.videoTag=$('<video poster="'+this.options.component.data.poster+'" style="width:100%; height:100%;"></video>');
 
             if(this.options.component.data.video_type == 'popup'){
               
@@ -60,9 +60,10 @@ $(document).ready(function() {
     });
 });
 
+
+
 var top = 0;
 var left = 0;
-
 
 var createVideoComponent = function( event, ui, oldcomponent ) {
 
@@ -244,7 +245,7 @@ var createVideoComponent = function( event, ui, oldcomponent ) {
    //$('#dialog').dialog();
    /*\
             <div id='dialog' title='Video'>\
-  <video controls='controls' style='width: 100%; height: 100%;''><source src='http://lindneo.com/5.mp4'></video>\
+  <video controls='controls' style='width: 100%; height: 100%;''><source src='http://lindneo.com/5.mp4'></video><br><br>\
 </div>\*/
     var changeimage = false;
     var change = false;
@@ -293,7 +294,7 @@ var createVideoComponent = function( event, ui, oldcomponent ) {
         };
 
     $('#pop-image-OK').click(function() {
-
+        var poster = "";
         var video_type = $('input[name=video_type]:checked').val();
         var auto_type = $('input[name=auto_type]:checked').val();
         var control_type = $('input[name=control_type]:checked').val();
@@ -341,8 +342,101 @@ var createVideoComponent = function( event, ui, oldcomponent ) {
             
               window.lindneo.dataservice.send( 'UploadFile',{'token': response.result.token, 'file' : videoBinary} , function(data) {
                 videoURL = response.result.URL;
-                //console.log(videoURL);
                 
+                $("#video-add-dummy-close-button").trigger('click');
+                var VideoSnapper = {
+    
+                    /**
+                     * Capture screen as canvas
+                     * @param {HTMLElement} video element 
+                     * @param {Object} options = width of screen, height of screen, time to seek
+                     * @param {Function} handle function with canvas element in param
+                     */
+                    captureAsCanvas: function(video, options, handle) {
+                    
+                        // Create canvas and call handle function
+                        var callback = function() {
+                            // Create canvas
+                            var canvas = $('<canvas />').attr({
+                                width: options.width,
+                                height: options.height
+                            })[0];
+                            // Get context and draw screen on it
+                            
+                            canvas.getContext('2d').drawImage(video, 0, 0, options.width, options.height);
+                            // Seek video back if we have previous position 
+                            if (prevPos) {
+                                // Unbind seeked event - against loop
+                                $(video).unbind('seeked');
+                                // Seek video to previous position
+                                video.currentTime = prevPos;
+                            }
+                            // Call handle function (because of event)
+                            handle.call(this, canvas);    
+                        }
+
+                        // If we have time in options 
+                        if (options.time && !isNaN(parseInt(options.time))) {
+                            // Save previous (current) video position
+                            var prevPos = video.currentTime;
+                            // Seek to any other time
+                            video.currentTime = options.time;
+                            // Wait for seeked event
+                            $(video).bind('seeked', callback);              
+                            return;
+                        }
+                        
+                        // Otherwise callback with video context - just for compatibility with calling in the seeked event
+                        return callback.apply(video);
+                    }
+                };
+
+           
+                        
+                   
+
+                $("<div class='popup ui-draggable' id='pop-video-poster' style='display: block; top:" + top + "; left: " + left + "; '> \
+                  <div class='popup-header'> \
+                  <i class='icon-m-video'></i> &nbsp;"+j__("Poster Ekle")+" \
+                  <i id='poster-add-dummy-close-button' class='icon-close size-10 popup-close-button'></i> \
+                  </div> \
+                    <div class='gallery-inner-holder' style='width:500px;'> \
+                      <video id='video' width='320' height='240' controls preload='none' onloadedmetadata=\"$(this).trigger('video_really_ready')\">\
+                        <source id='"+videoType+"' src='"+videoURL+"' type='video/"+videoType+"'>\
+                      </video><br><br>\
+                      <input type='button' id='capture' value='Capture' />    "+j__("Video'yu başlatarak istediğiniz anda görüntüyü yakalayabilirsiniz")+"<br><br>\
+                      <div id='screen'></div><br>\
+                      <a href='#' id='pop-poster-OK' class='btn bck-light-green white radius' id='add-poster' style='padding: 5px 30px;'>"+j__("Ekle")+"</a> \
+                    </div> \
+                  </div>\
+                  ").appendTo('body').draggable();
+                  
+                $('#poster-add-dummy-close-button').click(function() {
+
+                    $('#pop-video-poster').remove();
+
+                    if ($('#pop-video-poster').length) {
+                        $('#pop-video-poster').remove();
+                    }
+
+                });
+                
+                 $('#capture').click(function() {
+                            var canvases = $('canvas');
+                            VideoSnapper.captureAsCanvas(video, { width: 160, height: 68, time: 0 }, function(canvas) {
+                                $('#screen').html("");
+                                $('#screen').append(canvas); 
+                                var image = new Image();
+                                image.src = canvas.toDataURL();
+                                poster = image.src;
+                                //console.log(image.src);
+                                //console.log(canvas);
+                       
+                                if (canvases.length == 4) 
+                                    canvases.eq(0).remove();     
+                            })
+                        }); 
+                $('#pop-poster-OK').click(function() {         
                 if(video_type == 'popup') video_width_height = '80%';
                 else video_width_height = '100%';
 
@@ -356,6 +450,7 @@ var createVideoComponent = function( event, ui, oldcomponent ) {
                                 },
                                 'contentType': contentType
                             },
+                            'poster': poster,
                             'video_type' : video_type,
                             'auto_type' : auto_type,
                             'control_type' : control_type,
@@ -388,91 +483,175 @@ var createVideoComponent = function( event, ui, oldcomponent ) {
 
                     //console.log(component);
                     window.lindneo.tlingit.componentHasCreated( component );
-                  
+                    $("#poster-add-dummy-close-button").trigger('click');
+                  });
                 });
 
             });
 
 
-          $("#video-add-dummy-close-button").trigger('click');
+          
 
         };
 
       }
       else{
+        if($($("#myTab").find(".active")).children().attr("href") == "#video_link"){
+          var poster = "";
+          var video_type = $('input[name=video_type]:checked').val();
+          var req = new XMLHttpRequest();
+          var videoURL = $('#video-url-text').val();
 
-        var video_type = $('input[name=video_type]:checked').val();
-        var req = new XMLHttpRequest();
-        var videoURL = $('#video-url-text').val();
+          req.open('HEAD', videoURL, false);
+          req.send(null);
+          var headers = req.getAllResponseHeaders().toLowerCase();
+          var contentType = req.getResponseHeader('content-type');
+          var contenttypes = contentType.split('/');
+          console.log(contenttypes[1]);
+          
+          $("#video-add-dummy-close-button").trigger('click');
+                  var VideoSnapper = {
+      
+                      /**
+                       * Capture screen as canvas
+                       * @param {HTMLElement} video element 
+                       * @param {Object} options = width of screen, height of screen, time to seek
+                       * @param {Function} handle function with canvas element in param
+                       */
+                      captureAsCanvas: function(video, options, handle) {
+                      
+                          // Create canvas and call handle function
+                          var callback = function() {
+                              // Create canvas
+                              var canvas = $('<canvas />').attr({
+                                  width: options.width,
+                                  height: options.height
+                              })[0];
+                              // Get context and draw screen on it
+                              //video.crossOrigin = "Anonymous";
+                              canvas.getContext('2d').drawImage(video, 0, 0, options.width, options.height);
+                              // Seek video back if we have previous position 
+                              if (prevPos) {
+                                  // Unbind seeked event - against loop
+                                  $(video).unbind('seeked');
+                                  // Seek video to previous position
+                                  video.currentTime = prevPos;
+                              }
+                              // Call handle function (because of event)
+                              handle.call(this, canvas);    
+                          }
 
-        req.open('HEAD', videoURL, false);
-        req.send(null);
-        var headers = req.getAllResponseHeaders().toLowerCase();
-        var contentType = req.getResponseHeader('content-type');
-        var contenttypes = contentType.split('/');
-        //console.log(contentType);
-        /*if (contenttypes[0] != 'video') {
-            alert('Lütfen bir video dosyası URL adresi giriniz');
-            return;
-        }*/
-        /*
-         $.ajax({
-         type: "POST",
-         url: 'http://ugur.dev.lindneo.com/index.php?r=EditorActions/UploadFile&url=fileiQH34JPdOLbbOyhW5vfLzpwrtbWlfr',
-         data: {file:'data:video/mp4;base64,AAAAGGZ0eXBtcDQyAAAAAW1wNDJhdmMxAAJwqW1vb3YAAABsbXZoZAAAAADFzieXxc4nmQAACcQACJVEAAEAAAEAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAUAANpZdHJhawAAAFx0a2hkAAAAAcXOJ5LFzieZAAAAAQAAAAAACJVEAAAAAAAAAAAAAAAAAQAAAAABAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAJGVkdHMAAAAcZWxzdAAAAAAAAAABAAiVRAAAAAAAAQAAAADZ0W1kaWEAAAAgbWRoZAAAAADFzieXxc4nlwAArEQAl2gAFccAAAAAADpoZGxyAAAAAAAAAABzb3VuAAAAAAAAAAAAAAAAQXBwbGUgU291bmQgTWVkaWEgSGFuZGxlcgAAANlvbWluZgAAABBzbWhkAAAAAAAAAAAAAAAkZGluZgAAABxkcmVmAAAAAAAAAAEAAAAMdXJsIAAAAAEAANkzc3RibAAAAGdzdHNkAAAAAAAAAAEAAABXbXA0YQAAAAAAAAABAAAAAAAAAAAAAgAQAAAAAKxEAAAAAAAzZXNkcwAAAAADgICAIgAAAASAgIAUQBUAGAAAAfQAAAH0AAWAgIACEhAGgICAAQIAAAAYc3R0cwAAAAAAAAABAAAl2gAABAAA'},
-         success: function(data){console.log(data);},
-         });
-         
-         */
+                          // If we have time in options 
+                          if (options.time && !isNaN(parseInt(options.time))) {
+                              // Save previous (current) video position
+                              var prevPos = video.currentTime;
+                              // Seek to any other time
+                              video.currentTime = options.time;
+                              // Wait for seeked event
+                              $(video).bind('seeked', callback);              
+                              return;
+                          }
+                          
+                          // Otherwise callback with video context - just for compatibility with calling in the seeked event
+                          return callback.apply(video);
+                      }
+                  };
 
-        if(video_type == 'popup') video_width_height = '80%';
-        else video_width_height = '100%';
-        //console.log(contentType);
-        var component = {
-            'type': 'video',
-            'data': {
-                'video': {
-                    'css': {
-                        'width': video_width_height,
-                        'height': video_width_height,
+                $("<div class='popup ui-draggable' id='pop-video-poster' style='display: block; top:" + top + "; left: " + left + "; '> \
+                  <div class='popup-header'> \
+                  <i class='icon-m-video'></i> &nbsp;"+j__("Poster Ekle")+" \
+                  <i id='poster-add-dummy-close-button' class='icon-close size-10 popup-close-button'></i> \
+                  </div> \
+                    <div class='gallery-inner-holder' style='width:500px;'> \
+                      <video id='video' width='320' height='240' controls preload='none' onloadedmetadata=\"$(this).trigger('video_really_ready')\">\
+                        <source id='"+contenttypes[1]+"' src='"+videoURL+"' type='video/"+contenttypes[1]+"'>\
+                      </video><br><br>\
+                      <input type='button' id='capture' value='Capture' />    "+j__("Video'yu başlatarak istediğiniz anda görüntüyü yakalayabilirsiniz")+"<br><br>\
+                      <div id='screen'></div><br>\
+                      <a href='#' id='pop-poster-OK' class='btn bck-light-green white radius' id='add-poster' style='padding: 5px 30px;'>"+j__("Ekle")+"</a> \
+                    </div> \
+                  </div>\
+                  ").appendTo('body').draggable();
+
+                $('#poster-add-dummy-close-button').click(function() {
+
+                    $('#pop-video-poster').remove();
+
+                    if ($('#pop-video-poster').length) {
+                        $('#pop-video-poster').remove();
+                    }
+
+                });
+
+               $('#capture').click(function() {
+                  var canvases = $('canvas');
+                  VideoSnapper.captureAsCanvas(video, { width: 160, height: 68, time: 0 }, function(canvas) {
+                    $('#screen').html("");
+                    $('#screen').append(canvas); 
+                    var image = new Image();
+                    image.src = canvas.toDataURL();
+                    poster = image.src;
+                    //console.log(image.src);
+                    //console.log(canvas);
+                    console.log(poster);
+                    return;
+           
+                    if (canvases.length == 4) 
+                      canvases.eq(0).remove();     
+                  })
+              }); 
+              $('#pop-poster-OK').click(function() {
+              if(video_type == 'popup') video_width_height = '80%';
+              else video_width_height = '100%';
+              //console.log(contentType);
+                    console.log(poster);
+              var component = {
+                'type': 'video',
+                'data': {
+                    'video': {
+                        'css': {
+                            'width': video_width_height,
+                            'height': video_width_height,
+                        },
+                        'contentType': contentType
                     },
-                    'contentType': contentType
-                },
-                'video_type' : video_type,
-                'auto_type' : auto_type,
-                'control_type' : control_type,
-                'marker' : marker,
-                'source': {
-                    'attr': {
-                        'src': videoURL
+                    'poster': poster,
+                    'video_type' : video_type,
+                    'auto_type' : auto_type,
+                    'control_type' : control_type,
+                    'marker' : marker,
+                    'source': {
+                        'attr': {
+                            'src': videoURL
+                        }
+                    },
+                    '.audio-name': {
+                        'css': {
+                            'width': '100%'
+                        }
+                    },
+                    'lock':'',
+                    'self': {
+                        'css': {
+                            'position': 'absolute',
+                            'top': top ,
+                            'left': left ,
+                            'width': 'auto',
+                            'height': '60px',
+                            'background-color': 'transparent',
+                            'overflow': 'visible',
+                            'z-index': 'first'
+                        }
                     }
-                },
-                '.audio-name': {
-                    'css': {
-                        'width': '100%'
-                    }
-                },
-                'lock':'',
-                'self': {
-                    'css': {
-                        'position': 'absolute',
-                        'top': top ,
-                        'left': left ,
-                        'width': 'auto',
-                        'height': '60px',
-                        'background-color': 'transparent',
-                        'overflow': 'visible',
-                        'z-index': 'first'
-                    }
+
                 }
+            };
 
-            }
-        };
-
-        //console.log(component);
-        window.lindneo.tlingit.componentHasCreated(component);
-        $("#video-add-dummy-close-button").trigger('click');
-
+            //console.log(component);
+            window.lindneo.tlingit.componentHasCreated(component);
+            $("#poster-add-dummy-close-button").trigger('click');
+          });
+        }
       };
     });
     // http://bekir.dev.lindneo.com/index.php?r=EditorActions/getFileUrl&type=mp4
@@ -501,67 +680,13 @@ var createVideoComponent = function( event, ui, oldcomponent ) {
         e.preventDefault();
 
         var token = '';
+        var poster = '';
         var video_type = $('input[name=video_type]:checked').val();
         var reader = new FileReader();
         var component = {};
         var videoURL = '';
         reader.onload = function(evt) {
-            /*
-            console.log('niden ama');
-            var videoBinary = evt.target.result;
-            var contentType = videoBinary.substr(0, videoBinary.indexOf(';'));
-            var videoType = contentType.substr(contentType.indexOf('/')+1);
-           
-           
-            window.lindneo.dataservice.send( 'getFileUrl', {'type': videoType}, function(response) {
-            response=window.lindneo.tlingit.responseFromJson(response);
           
-                window.lindneo.dataservice.send( 'UploadFile',{'token': response.result.token, 'file' : videoBinary} , function(data) {
-                  var component = {
-                            'type': 'video',
-                            'data': {
-                                'video': {
-                                    'attr': {
-                                        'controls': 'controls'
-                                    },
-                                    'css': {
-                                        'width': '100%',
-                                        'height': '100%',
-                                    },
-                                    'contentType': contentType
-                                },
-                                'source': {
-                                    'attr': {
-                                        'src': response.result.URL
-                                    }
-                                },
-                                '.audio-name': {
-                                    'css': {
-                                        'width': '100%'
-                                    }
-                                },
-                                'self': {
-                                    'css': {
-                                        'position': 'absolute',
-                                        'top': top ,
-                                        'left': left ,
-                                        'width': 'auto',
-                                        'height': '60px',
-                                        'background-color': 'transparent',
-                                        'overflow': 'visible'
-                                    }
-                                }
-
-                            }
-                        };
-
-
-                 window.lindneo.tlingit.componentHasCreated(component);
-              });
-
-          });
-*/
-          //window.lindneo.tlingit.componentHasDeleted( oldcomponent, oldcomponent.id );
           var videoBinary = evt.target.result;
           var contentType = videoBinary.substr(0, videoBinary.indexOf(';'));
           var videoType = contentType.substr(contentType.indexOf('/')+1);
@@ -579,60 +704,160 @@ var createVideoComponent = function( event, ui, oldcomponent ) {
           
             window.lindneo.dataservice.send( 'UploadFile',{'token': response.result.token, 'file' : videoBinary} , function(data) {
               videoURL = response.result.URL;
-                  var component = {
-                      'type': 'video',
-                      'data': {
-                          'video': {
-                              'css': {
-                                  'width': '100%',
-                                  'height': '100%',
-                              },
-                              'contentType': contentType
-                          },
-                          'video_type' : video_type,
-                          'auto_type' : auto_type,
-                          'control_type' : control_type,
-                          'marker' : marker,
-                          'source': {
-                              'attr': {
-                                  'src': response.result.URL
+                if($($("#myTab").find(".active")).children().attr("href") == "#video_drag"){
+                  console.log("12313123");
+                  $("#video-add-dummy-close-button").trigger('click');
+                  var VideoSnapper = {
+      
+                      /**
+                       * Capture screen as canvas
+                       * @param {HTMLElement} video element 
+                       * @param {Object} options = width of screen, height of screen, time to seek
+                       * @param {Function} handle function with canvas element in param
+                       */
+                      captureAsCanvas: function(video, options, handle) {
+                      
+                          // Create canvas and call handle function
+                          var callback = function() {
+                              // Create canvas
+                              var canvas = $('<canvas />').attr({
+                                  width: options.width,
+                                  height: options.height
+                              })[0];
+                              // Get context and draw screen on it
+                              
+                              canvas.getContext('2d').drawImage(video, 0, 0, options.width, options.height);
+                              // Seek video back if we have previous position 
+                              if (prevPos) {
+                                  // Unbind seeked event - against loop
+                                  $(video).unbind('seeked');
+                                  // Seek video to previous position
+                                  video.currentTime = prevPos;
                               }
-                          },
-                          '.audio-name': {
-                              'css': {
-                                  'width': '100%'
-                              }
-                          },
-                          'self': {
-                              'css': {
-                                  'position': 'absolute',
-                                  'top': top,
-                                  'left':  left,
-                                  'width': 'auto',
-                                  'height': '60px',
-                                  'background-color': 'transparent',
-                                  'overflow': 'visible',
-                                  'z-index': 'first'
-                              }
+                              // Call handle function (because of event)
+                              handle.call(this, canvas);    
                           }
 
+                          // If we have time in options 
+                          if (options.time && !isNaN(parseInt(options.time))) {
+                              // Save previous (current) video position
+                              var prevPos = video.currentTime;
+                              // Seek to any other time
+                              video.currentTime = options.time;
+                              // Wait for seeked event
+                              $(video).bind('seeked', callback);              
+                              return;
+                          }
+                          
+                          // Otherwise callback with video context - just for compatibility with calling in the seeked event
+                          return callback.apply(video);
                       }
                   };
 
+                $("<div class='popup ui-draggable' id='pop-video-poster' style='display: block; top:" + top + "; left: " + left + "; '> \
+                  <div class='popup-header'> \
+                  <i class='icon-m-video'></i> &nbsp;"+j__("Poster Ekle")+" \
+                  <i id='poster-add-dummy-close-button' class='icon-close size-10 popup-close-button'></i> \
+                  </div> \
+                    <div class='gallery-inner-holder' style='width:500px;'> \
+                      <video id='video' width='320' height='240' controls preload='none' onloadedmetadata=\"$(this).trigger('video_really_ready')\">\
+                        <source id='"+videoType+"' src='"+videoURL+"' type='video/"+videoType+"'>\
+                      </video><br><br>\
+                      <input type='button' id='capture' value='Capture' />    "+j__("Video'yu başlatarak istediğiniz anda görüntüyü yakalayabilirsiniz")+"<br><br>\
+                      <div id='screen'></div><br>\
+                      <a href='#' id='pop-poster-OK' class='btn bck-light-green white radius' id='add-poster' style='padding: 5px 30px;'>"+j__("Ekle")+"</a> \
+                    </div> \
+                  </div>\
+                  ").appendTo('body').draggable();
 
-                 if(typeof oldcomponent == 'undefined')
-                  window.lindneo.tlingit.componentHasCreated( component );
-                else{
-                  oldcomponent.data.video.contentType = contentType;
-                  oldcomponent.data.source.attr.src = videoURL;
-                  window.lindneo.tlingit.componentHasUpdated( oldcomponent );
+                $('#poster-add-dummy-close-button').click(function() {
+
+                    $('#pop-video-poster').remove();
+
+                    if ($('#pop-video-poster').length) {
+                        $('#pop-video-poster').remove();
+                    }
+
+                });
+
+               $('#capture').click(function() {
+                  var canvases = $('canvas');
+                  VideoSnapper.captureAsCanvas(video, { width: 160, height: 68, time: 0 }, function(canvas) {
+                    $('#screen').html("");
+                    $('#screen').append(canvas); 
+                    var image = new Image();
+                    image.src = canvas.toDataURL();
+                    poster = image.src;
+                    //console.log(image.src);
+                    //console.log(canvas);
+           
+                    if (canvases.length == 4) 
+                      canvases.eq(0).remove();     
+                  })
+              }); 
+              $('#pop-poster-OK').click(function() {
+                    console.log("dede");
+
+                    var component = {
+                        'type': 'video',
+                        'data': {
+                            'video': {
+                                'css': {
+                                    'width': '100%',
+                                    'height': '100%',
+                                },
+                                'contentType': contentType
+                            },
+                            'poster' : poster,
+                            'video_type' : video_type,
+                            'auto_type' : auto_type,
+                            'control_type' : control_type,
+                            'marker' : marker,
+                            'source': {
+                                'attr': {
+                                    'src': response.result.URL
+                                }
+                            },
+                            '.audio-name': {
+                                'css': {
+                                    'width': '100%'
+                                }
+                            },
+                            'self': {
+                                'css': {
+                                    'position': 'absolute',
+                                    'top': top,
+                                    'left':  left,
+                                    'width': 'auto',
+                                    'height': '60px',
+                                    'background-color': 'transparent',
+                                    'overflow': 'visible',
+                                    'z-index': 'first'
+                                }
+                            }
+
+                        }
+                    };
+
+
+                    if(typeof oldcomponent == 'undefined'){
+                      window.lindneo.tlingit.componentHasCreated( component );
+                      
+                      }
+                    else{
+                      oldcomponent.data.video.contentType = contentType;
+                      oldcomponent.data.source.attr.src = videoURL;
+                      window.lindneo.tlingit.componentHasUpdated( oldcomponent );
+                    }
+                    $("#poster-add-dummy-close-button").trigger('click');
+                  });
                 }
-              });
+            });
 
           });
 
 
-        $("#video-add-dummy-close-button").trigger('click');
+        //$("#video-add-dummy-close-button").trigger('click');
 
         };
         reader.readAsDataURL(e.dataTransfer.files[0]);
