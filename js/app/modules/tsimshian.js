@@ -173,7 +173,7 @@ window.lindneo.tsimshian = (function(window, $, undefined){
        
 
        this.socket.on('pagePreviewUpdate', function(pageid){
-         window.lindneo.tlingit.loadPagesPreviews(pageid);
+         //window.lindneo.tlingit.loadPagesPreviews(pageid);
 
        });
 
