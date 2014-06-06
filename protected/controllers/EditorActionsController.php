@@ -266,12 +266,43 @@ class EditorActionsController extends Controller
 
 	}
 
+	public function actionGetPagePreviewThumbnailsOfBook ($bookId){
+		$result = array();
+
+		$pages=$this->getPagesOfBook($bookId);
+		foreach ($pages as $key => $page) {
+			$enrty = new stdClass();
+			$enrty->page_id=$page->page_id;
+			if ( $page->data )
+				$enrty->data = $page->data;
+			else
+				if ($page->pdf_data){
+									$enrty->data =  json_decode($page->pdf_data,true);
+									$enrty->data=$enrty->data['thumnail']['data'];
+								}
+				else
+					$enrty->data = null;
+
+			$result[$enrty->page_id] = $enrty;
+			unset($enrty);
+
+		}
+		return $this->response($result);
+
+	}
+
 	public function getPagesOfBook($bookId){
-		$defaultChapter=Chapter::model()->find(array("condition"=>"book_id=:book_id","params"=> array('book_id' => $bookId )));
+		$bookPages = array();
 
-		$bookPages=Page::model()->findAll(array("condition"=>"chapter_id=:chapter_id","params"=> array('chapter_id' => $$defaultChapter->chapter_id )));
+		$book_chapters=Chapter::model()->findAll(array('order'=>  '`order` asc ,  created asc', "condition"=>'book_id=:book_id', "params" =>array(':book_id' => $bookId  ) ) );
+		foreach ($book_chapters as $key => $book_chapter) {
 
-		if (!$bookPages) {
+			$book_pages=Page::model()->findAll(array('order'=>  '`order` asc ,  created desc', "condition"=>'chapter_id=:chapter_id', "params" =>array(':chapter_id' => $book_chapter->chapter_id  ) ) );
+			$bookPages=array_merge($bookPages,$book_pages);
+
+		}
+
+		if (empty($bookPages)) {
 			$this->error('getPagesOfBook','Book not found');
 			return false;
 
@@ -820,6 +851,41 @@ class EditorActionsController extends Controller
 
 		if($return=$this->UpdatePage($pageId,$chapterId,$order) ){
 				$response['component']=$return; 
+		}
+
+		return $this->response($response);
+	}
+
+
+
+ 	public function UpdatePageData($pageId,$data){
+		
+		$page=Page::model()->findByPk($pageId);
+		if (!$page) {
+			$this->error("EA-UPage","Page Not Found",func_get_args(),$pageId);
+			return false;
+		}
+
+		$page->data=$data;
+
+
+
+		if(!$page->save()){
+			$this->error("EA-UPage","UPage Not Saved",func_get_args(),$pageId);
+			return false;
+		}
+		
+		return $page->attributes;
+	}
+
+
+	public function actionUpdatePageData($pageId,$data)
+	{
+
+		$response=false;
+
+		if($return=$this->UpdatePageData($pageId,$data) ){
+				$response['page']=$return; 
 		}
 
 		return $this->response($response);

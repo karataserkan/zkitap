@@ -559,7 +559,8 @@ class epub3 {
 			});
 			$(window).blur(function()
 			{
-				okutus_stop();
+				//okutus_stop(); by egemen 
+				okutus_play();
 			});
 			okutus_stop();
 
