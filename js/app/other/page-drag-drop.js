@@ -1,5 +1,5 @@
 $( document ).ready(function () {
-  
+  /*
   $("#editor_view_pane").click(function(e){
     var control = true;
     if(e.target.id != "current_page")
@@ -19,7 +19,7 @@ $( document ).ready(function () {
        }
     } 
   });
-
+*/
   bookPagePreviews();
 
   
@@ -1008,5 +1008,6 @@ $( document ).ready(function () {
     
 
   }
+
 
   

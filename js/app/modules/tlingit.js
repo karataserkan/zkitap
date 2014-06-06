@@ -280,7 +280,8 @@ window.lindneo.tlingit = (function(window, $, undefined){
                   context.fillStyle = '#FFF';
                   context.fillRect(0,0,canvas.width,canvas.height);
                   var img = new Image();
-                  img.src = response.result[$(this).attr('page_id')].data;
+                  img.src = response.result[$(this).attr('page_id')];
+                  img.src = img.src.data;
                   img.onload = function(){
                     context.drawImage(img, 0, 0,canvas.width,canvas.height);
                   };
