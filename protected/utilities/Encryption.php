@@ -6,7 +6,7 @@ class Encryption
 {
     const CYPHER = MCRYPT_RIJNDAEL_256;
     const MODE   = MCRYPT_MODE_CBC;
-    const SALT    = "myverylovelysalthere";
+    const SALT    = "myverylovelysalthere"; 
 
     public function encrypt($key,$plaintext)
     {
