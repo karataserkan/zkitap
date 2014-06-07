@@ -834,7 +834,7 @@ class epub3 {
 		<dc:description>by linden</dc:description>
 		<meta name="covers" content="thumbnail"/>
 		<meta property="rendition:layout">pre-paginated</meta>
-		<meta property="rendition:orientation">landscape</meta>
+		<meta property="rendition:orientation">auto</meta>
 		<meta property="rendition:spread">none</meta>
 
 
