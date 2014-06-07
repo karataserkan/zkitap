@@ -246,12 +246,14 @@ window.lindneo.tlingit = (function(window, $, undefined){
 
   };
 
-  var loadAllPagesPreviews = function (){
+  var loadAllPagesPreviews = function (bookId){
+    if (typeof bookId == "undefined") bookId = window.lindneo.currentBookId;
+
 
     window.lindneo.dataservice
       .send( 'GetPagePreviewThumbnailsOfBook', 
         { 
-          'bookId' : window.lindneo.currentBookId
+          'bookId' : bookId
         },
         function(res){
 
@@ -259,6 +261,8 @@ window.lindneo.tlingit = (function(window, $, undefined){
           res = "";
 
                $("li.page").each(function(index, pageSlice){
+                  if (typeof  response.result[$(this).attr('page_id')] == "undefined") return;
+
                   var num = index + 1;
                   //console.log(pageSlice.attributes[2].nodeValue);
                   //var pages_num = {"page_id": $(this).attr('page_id'), "pane_num": pageNum};
