@@ -256,25 +256,19 @@ $this->breadcrumbs=array(
 				};
 			};
 			var pass;
-			$('#User_password').keydown(function(){
+			$('#User_password , #User_password_r').keyup(function(){
 				pass=$('#User_password').val();
+				var sifreTekrar=$('#User_password_r').val();
+
 				var len=pass.length;
 				if (len<7) {
+
 					$('#addUser').attr('disabled','disabled')
 					$("[for='exampleInputPassword1']").text("Şifre/Minimum 8 karakter olmalıdır");
 					$("[for='exampleInputPassword1']").addClass('text-danger').removeClass('text-success');
 				}else{
-					$('#addUser').removeAttr('disabled');
-					$("[for='exampleInputPassword1']").text("Şifre");
-					$("[for='exampleInputPassword1']").removeClass('text-danger').addClass('text-success');
-				};
-			});
 
-			$('#User_password_r').keydown(function(){
-				var sifreTekrar=$('#User_password_r').val();
-				var len=sifreTekrar.length;
-				
-				if (sifreTekrar==pass) {
+					if (sifreTekrar==pass) {
 						$('#addUser').removeAttr('disabled');
 						$("[for='exampleInputPassword2']").text("Şifreyi Tekrarla");
 						$("[for='exampleInputPassword2']").removeClass('text-danger').addClass('text-success');
@@ -283,6 +277,17 @@ $this->breadcrumbs=array(
 						$("[for='exampleInputPassword2']").text("Şifreyi Tekrarla/Şifreler uyuşmuyor");
 						$("[for='exampleInputPassword2']").addClass('text-danger').removeClass('text-success');
 					};
+					$('#addUser').removeAttr('disabled');
+					$("[for='exampleInputPassword1']").text("Şifre");
+					$("[for='exampleInputPassword1']").removeClass('text-danger').addClass('text-success');
+				};
+			});
+
+			$('#User_password_r').keydown(function(){
+				
+				var len=sifreTekrar.length;
+				
+				
 			});
 			var passResetSuccess="<?php echo $passResetSuccess ?>";
 			if (passResetSuccess) {
