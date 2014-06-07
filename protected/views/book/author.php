@@ -2221,7 +2221,11 @@ $background= (!empty($img)) ? "background-image:url('".str_replace(" ", "", $img
 								</li>";
 								?>
 									<script type="text/javascript">
+
+										window.lindneo.tlingit.loadAllPagesPreviews('<?php echo $template_id ?>');
+
 										//window.lindneo.tlingit.loadPagesPreviews('<?php echo $template_page->page_id ?>');
+
 									</script>
 								<?php
 							}
