@@ -6,23 +6,40 @@ class Encryption
 {
     const CYPHER = MCRYPT_RIJNDAEL_256;
     const MODE   = MCRYPT_MODE_CBC;
-    const SALT    = "myverylovelysalthere";
+    const SALT    = "myverylovelysalthere"; 
 
     public function encrypt($key,$plaintext)
     {
 
-        return openssl_encrypt($plaintext,'aes-256-cfb' , $key,$options=2,$iv=substr($key,0,16));
+        return openssl_encrypt($plaintext,'aes-256-cfb' , $key,$options=1,$iv=substr($key,0,16));
     }
 
     public function decrypt($key,$crypttext)
     {
-        return openssl_decrypt($crypttext,'aes-256-cfb' , $key,$options=2,$iv=substr($key,0,16));   
+        return openssl_decrypt($crypttext,'aes-256-cfb' , $key,$options=1,$iv=substr($key,0,16));   
     }
 
     public function salty($filepath){
         return substr(hash('sha256',$filepath.'myverylovelysalthere'),0,32);
     }
-
+    public function getBinary($data){
+        if(is_base64($data)){
+            return base64_decode($data);
+        }
+        else
+        {
+            return $data;
+        }
+    }
+    public function is_base64($data){
+        if (base64_decode($data, true)) {
+                // is valid
+                return true;
+            } else {
+                // not valid
+                return false;
+            }
+    }
     public function encryptFile($filepath,$saveas=null){
         
         $key = self::salty( basename($filepath) );

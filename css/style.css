@@ -1028,6 +1028,7 @@ border-radius:10px;
  { width: 300px; height: 300px; background: yellow; }
 
  
+ 
 ul.component_holder li, .nowDraggingClonedComponent {
 display:block;
 float: left;
@@ -1066,6 +1067,21 @@ border-radius:5px;
 -moz-box-shadow: 10px 12px 24px -7px rgba(0,0,0,0.75);
 box-shadow: 10px 12px 24px -7px rgba(0,0,0,0.75);
 }
+
+#author_pane_container .ui-draggable-dragging{
+z-index:9999999;
+background-color:transparent;
+border-radius:0px;
+-webkit-box-shadow: 0 0 0 0px rgba(0,0,0,0);
+-moz-box-shadow: 0 0 0 0px rgba(0,0,0,0);
+box-shadow: 0 0 0 0px rgba(0,0,0,0);
+z-index:inherit;
+}
+
+
+
+
+
 
 ul.component_holder_close {
  display:block;
@@ -2241,7 +2257,8 @@ width: 10px!important; }
 }
 
 #current_page  .ui-draggable.selected {
-	outline:3px solid #39F !important;	
+	outline: thin solid #39F !important;
+	box-shadow:none;
 }
 
 
@@ -2253,7 +2270,7 @@ width: 10px!important; }
 	cursor: n-resize;
 	height: 7px;
 	width: 7px;
-	top: -6px;
+	top: -4px;
 	left: 50%;
 	background-color:#39F;
 	border:1px solid #fff;
@@ -2262,7 +2279,7 @@ width: 10px!important; }
 	cursor: s-resize;	
 	height: 7px;
 	width: 7px;
-	bottom: -6px;
+	bottom: -4px;
 	left: 50%;
 	background: #000;
 	background-color:#39F;
@@ -2272,7 +2289,7 @@ width: 10px!important; }
 	cursor: e-resize;	
 	height: 7px;
 	width: 7px;
-	right: -6px;
+	right: -4px;
 	top: 50%;
 	background-color:#39F;
 	border:1px solid #fff;
@@ -2281,7 +2298,7 @@ width: 10px!important; }
 	cursor: w-resize;	
 	height: 7px;
 	width: 7px;
-	left: -6px;
+	left: -4px;
 	top: 50%;
 	background-color:#39F;
 	border:1px solid #fff;
@@ -2290,8 +2307,8 @@ width: 10px!important; }
 	cursor: se-resize;	
 	height: 7px;
 	width: 7px;
-	right: -6px;
-	bottom: -6px;
+	right: -4px;
+	bottom: -4px;
 	background-color:#39F;
 	border:1px solid #fff;
 }
@@ -2299,8 +2316,8 @@ width: 10px!important; }
 	cursor: sw-resize;	
 	height: 7px;
 	width: 7px;
-	left: -6px;
-	bottom: -6px;
+	left: -4px;
+	bottom: -4px;
 	background-color:#39F;
 	border:1px solid #fff;
 }
@@ -2308,8 +2325,8 @@ width: 10px!important; }
 	cursor: nw-resize;	
 	height: 7px;
 	width: 7px;
-	left: -6px;
-	top: -6px;
+	left: -4px;
+	top: -4px;
 	background-color:#39F;
 	border:1px solid #fff;
 }
@@ -2317,12 +2334,11 @@ width: 10px!important; }
 	cursor: ne-resize;
 	height: 7px;
 	width: 7px;
-	right: -6px;
-	top: -6px;
+	right: -4px;
+	top: -4px;
 	background-color:#39F;
 	border:1px solid #fff;
 }
-
 
 #current_page  td .ui-resizable-e {
 cursor: e-resize;
@@ -2510,3 +2526,18 @@ font-size: 20px;
 }
 
 /** END OF AUTHOR PAGE ***********************************/
+
+#current_page > div:hover {
+-webkit-box-shadow: 0 0 5px 0 rgba(0,0,0,0.5);
+-moz-box-shadow: 0 0 5px 0 rgba(0,0,0,0.5);
+box-shadow: 0 0 5px 0 rgba(0,0,0,0.5);
+	
+}
+
+
+
+
+
+
+
+

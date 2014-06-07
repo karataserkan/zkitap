@@ -1,5 +1,5 @@
 $( document ).ready(function () {
-  
+  /*
   $("#editor_view_pane").click(function(e){
     var control = true;
     if(e.target.id != "current_page")
@@ -19,7 +19,7 @@ $( document ).ready(function () {
        }
     } 
   });
-
+*/
   bookPagePreviews();
 
   
@@ -948,6 +948,14 @@ $( document ).ready(function () {
 
           });
 
+          $('.chapter-title').change(function(){
+              window.lindneo.tlingit.ChapterUpdated(
+                $(this).parent().parent().attr('chapter_id'),
+                $(this).val( ),
+                $(this).parent().index() 
+              );
+          });
+
           $('.delete-page').click(function(){
       
             var delete_buttons = $('<i class="icon-delete"></i><i class="icon-delete"></i>');
@@ -1008,5 +1016,6 @@ $( document ).ready(function () {
     
 
   }
+
 
   
