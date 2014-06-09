@@ -262,7 +262,7 @@ class SiteController extends Controller
 	}
 
 	//kullanıcı haklarını burada düzenliyorum
-	public function actionRight($userId,$bookId,$type)
+	public function actionRight($userId,$bookId,$type,$newUser=0)
 	{
 		if(Yii::app()->user->isGuest)
 			$this->redirect( array('site/login' ) );
@@ -284,50 +284,144 @@ class SiteController extends Controller
 			error_log("detectSQLinjection SC:R:".$Yii::app()->user->id." bookId: ".$type);
 			$this->redirect('index');	
 		}
+		//organisation Id
+		$book=Book::model()->findByPk($bookId);
+		$organisation=OrganisationWorkspaces::model()->find('workspace_id=:workspace_id',array('workspace_id'=>$book->workspace_id));
 
-		$hasRight=Yii::app()->db
-		    ->createCommand("SELECT * FROM book_users WHERE user_id=:user_id AND book_id=:book_id")
-		    ->bindValues(array(':user_id' => $userId, ':book_id' => $bookId))
-		    ->execute();
-	    
-	    if ($hasRight) {
-	    	
-	    	
-		    if(Yii::app()->db
-		    ->createCommand("UPDATE book_users SET type = :type WHERE user_id=:user_id AND book_id=:book_id")
-		    ->bindValues(array(':type' => $type, ':user_id' => $userId, ':book_id' => $bookId))
-		    ->execute())
-		    {
-		    	$msg="SITE:RIGHT:0:". json_encode(array(array('user'=>Yii::app()->user->id),array('userId'=>$userId,'bookId'=>$bookId,'type'=>$type)));
+
+		//email adresi ile gelmiş
+		if ($newUser) {
+			//email adresinin doğruluğunu check eden regexp
+			$regexp = "/^[^0-9][A-z0-9_]+([.][A-z0-9_]+)*[@][A-z0-9_-]+([.][A-z0-9_]+)*[.][A-z]{2,4}$/";
+			$user=User::model()->find('email=:email',array('email'=>$userId));
+			if (preg_match($regexp, $userId)) {
+				if ($user) {
+					$userId=$user->id;
+					//kullanıcı editöre üye
+					$isOrganisationUser=OrganisationUsers::model()->find('user_id=:user_id AND organisation_id=:organisation_id',array('user_id'=>$userId,'organisation_id'=>$organisation->organisation_id));
+					if ($isOrganisationUser) {
+						//kullanıcı Organizasyona üye
+						$isWorkspaceUser=WorkspacesUsers::model()->find('userid=:userid AND workspace_id=:workspace_id',array('userid'=>$userId,'workspace_id'=>$book->workspace_id));
+						if ($isWorkspaceUser) {
+							//kullanıcı Çalışma Alanına üye
+							$this->userBookAccess($userId,$bookId,$type);
+						}else{
+							//kullanıcı Çalışma Alanına üye Değil
+							$addUserToWorkspace=new WorkspacesUsers;
+							$addUserToWorkspace->workspace_id=$book->workspace_id;
+							$addUserToWorkspace->userid=$userId;
+							$addUserToWorkspace->added=date('Y-n-d g:i:s',time());
+							$addUserToWorkspace->owner="1";
+							$addUserToWorkspace->save();
+
+							$this->userBookAccess($userId,$bookId,$type);
+						}
+					}else{
+						//kullanıcı Organizasyona üye Değil
+						$this->sendInvitation($userId,$bookId,$user->email);
+					}
+				}else{
+					//kullanıcı editöre üye Değil
+					$addUser = new User;
+					$criteria=new CDbCriteria;
+					$criteria->select='max(id) AS maxColumn';
+					$row = $addUser->model()->find($criteria);
+					
+					$newUserId = $row['maxColumn']+1;//functions::new_id();
+					$addUser->id = $newUserId;
+					$addUser->email=$userId;
+					$addUser->save();
+					
+					$this->sendInvitation($newUserId,$bookId,$userId);
+
+				}
+			}else{
+				//Email address is NOT valid
+			    $error = __("Girdiğiniz e-posta adresi geçersiz.");
+			    $msg="ORGANISATIONS:ADD_USER:1:". json_encode(array(array('user'=>Yii::app()->user->id),array('organisationId'=>$organisation->organisation_id,'message'=>'invalid email address')));
 				Yii::log($msg,'info');
-		    }
-		    else
-		    {
-		    	$msg="SITE:RIGHT:1:". json_encode(array(array('user'=>Yii::app()->user->id),array('userId'=>$userId,'bookId'=>$bookId,'type'=>$type)));
-				Yii::log($msg,'info');
-		    }
+			}
+		}else{
+		//userId ile gelmiş
+			$this->userBookAccess($userId,$bookId,$type);
 		}
-	    else
-	    {
-	    	$addUser = Yii::app()->db->createCommand();
-			if($addUser->insert('book_users', array(
-			    'user_id'=>$userId,
-			    'book_id'=>$bookId,
-			    'type'   =>$type
-			)))
-			{
-				$msg="SITE:RIGHT:0:". json_encode(array(array('user'=>Yii::app()->user->id),array('userId'=>$userId,'bookId'=>$bookId,'type'=>$type)));
-				Yii::log($msg,'info');
-			}
-			else
-			{
-				$msg="SITE:RIGHT:1:". json_encode(array(array('user'=>Yii::app()->user->id),array('userId'=>$userId,'bookId'=>$bookId,'type'=>$type)));
-				Yii::log($msg,'info');
-			}
-	    }
-		
+
 	    $this->redirect(array('/site/index'));
 		//$this->render('index');
+	}
+
+	public function sendInvitation($userId,$bookId,$email){
+		//yeni davetiye oluşturuyoruz
+		$invitation= new OrganisationInvitation;
+		$invitation->organisation_id = $bookId;
+		$invitation->user_id = $userId;
+		$invitation->invitation_id = functions::new_id();
+		$invitation->save();
+
+		$link=Yii::app()->getBaseUrl(true);
+		$link.='/user/invitation?key=';
+		//linke davetiye IDsini de ekliyorum
+		$link .= $invitation->invitation_id;
+
+		$message="OKUTUS editöre katılım davetiyesi aldınız. İsteği kabul etmek için <a href='".$link."'>tıklayın</a>.<br>".$link;	
+
+		//mail gönderiyorum
+		$mail=Yii::app()->Smtpmail;
+        $mail->SetFrom(Yii::app()->params['noreplyEmail'], "OKUTUS");
+        $mail->Subject    = 'OKUTUS Davetiye.';
+        $mail->MsgHTML($message);
+        $mail->AddAddress($email, "");
+        
+        if(!$mail->Send()) {
+            echo "Mailer Error: " . $mail->ErrorInfo;
+            $msg="ORGANISATIONS:ADD_USER:1:". json_encode(array(array('user'=>Yii::app()->user->id),array('userId'=>$userId,'organisationId'=>$bookId,'message'=>'Mailer Error'.$mail->ErrorInfo)));
+			Yii::log($msg,'info');
+        }else {
+            $success=__("Kullanıcı davet edildi.");
+            $msg="ORGANISATIONS:ADD_USER:0:". json_encode(array(array('user'=>Yii::app()->user->id),array('userId'=>$userId,'organisationId'=>$bookId)));
+			Yii::log($msg,'info');
+        }
+	}
+
+	public function userBookAccess($userId,$bookId,$type){
+		$hasRight=Yii::app()->db
+			    ->createCommand("SELECT * FROM book_users WHERE user_id=:user_id AND book_id=:book_id")
+			    ->bindValues(array(':user_id' => $userId, ':book_id' => $bookId))
+			    ->execute();
+		    
+		    if ($hasRight) {
+			    if(Yii::app()->db
+			    ->createCommand("UPDATE book_users SET type = :type WHERE user_id=:user_id AND book_id=:book_id")
+			    ->bindValues(array(':type' => $type, ':user_id' => $userId, ':book_id' => $bookId))
+			    ->execute())
+			    {
+			    	$msg="SITE:RIGHT:0:". json_encode(array(array('user'=>Yii::app()->user->id),array('userId'=>$userId,'bookId'=>$bookId,'type'=>$type)));
+					Yii::log($msg,'info');
+			    }
+			    else
+			    {
+			    	$msg="SITE:RIGHT:1:". json_encode(array(array('user'=>Yii::app()->user->id),array('userId'=>$userId,'bookId'=>$bookId,'type'=>$type)));
+					Yii::log($msg,'info');
+			    }
+			}
+		    else
+		    {
+		    	$addUser = Yii::app()->db->createCommand();
+				if($addUser->insert('book_users', array(
+				    'user_id'=>$userId,
+				    'book_id'=>$bookId,
+				    'type'   =>$type
+				)))
+				{
+					$msg="SITE:RIGHT:0:". json_encode(array(array('user'=>Yii::app()->user->id),array('userId'=>$userId,'bookId'=>$bookId,'type'=>$type)));
+					Yii::log($msg,'info');
+				}
+				else
+				{
+					$msg="SITE:RIGHT:1:". json_encode(array(array('user'=>Yii::app()->user->id),array('userId'=>$userId,'bookId'=>$bookId,'type'=>$type)));
+					Yii::log($msg,'info');
+				}
+		    }
 	}
 
 	/**
