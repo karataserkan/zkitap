@@ -190,6 +190,7 @@ window.lindneo.nisga = (function(window, $, undefined){
 
         }
         else if(revision_array.revisions[revision_id].even_type=='DELETE'){
+          //console.log(revision_array.revisions[revision_id].component);
          window.lindneo.tlingit.createComponent(revision_array.revisions[revision_id].component, revision_array.revisions[revision_id].component.id);
         }
       }
@@ -230,10 +231,12 @@ window.lindneo.nisga = (function(window, $, undefined){
    }
 
   var destroyComponent = function ( component, oldcomponent_id ) {
+    //console.log(oldcomponent_id);
     if(revision_value==0){
         if(typeof oldcomponent_id == 'undefined')  {
           revision_array.revisions.push({component_id: component.id, component: component, revision_date: $.now(), even_type: 'DELETE'});
           revision_id++;
+          //console.log(revision_array.revisions); 
         }
       }
       else revision_value=0;
@@ -258,6 +261,7 @@ window.lindneo.nisga = (function(window, $, undefined){
     if(revision_value==0){
         revision_array.revisions.push({component_id: component.id, component: component, revision_date: $.now(), even_type: 'DELETE'});
         revision_id++;
+        //console.log(revision_array.revisions); 
       }
       else revision_value=0;
     //console.log(componentId);
@@ -344,11 +348,11 @@ window.lindneo.nisga = (function(window, $, undefined){
   var graphComponentBuilder = function( component ) {
     
     var element  = $('<canvas style="width:100%;height:100%;"> </canvas>');
-    var elementWrap=$('<div title="'+j__("Grafik Aracı")+'"></div>');
-    elementWrap.appendTo( page_div_selector );
+    //var elementWrap=$('<div title="'+j__("Grafik Aracı")+'"></div>');
+    //elementWrap.appendTo( page_div_selector );
 
     element
-    .appendTo( elementWrap )
+    .appendTo( page_div_selector )
     .graphComponent({
       'component': component,
       'update': function ( event, component ) {
@@ -650,7 +654,7 @@ var textComponentBuilder = function( component ) {
   }; 
 
   var destroyPage = function(pageId){
-    console.log(pageId);
+    //console.log(pageId);
     
     $("li[page_id="+pageId+"]").remove();
   }; 
@@ -664,7 +668,7 @@ var textComponentBuilder = function( component ) {
     var element  = $('<img>');
     var elementWrap=$('<div class="popup-controllers" title="'+j__("Resim Aracı")+'"></div>');
     elementWrap.appendTo( page_div_selector );
-    console.log(component.data.img.marker);
+    //console.log(component.data.img.marker);
     element
     .appendTo( elementWrap )
     .imageComponent({

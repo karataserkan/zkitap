@@ -38,7 +38,7 @@ $current_user=User::model()->findByPk(Yii::app()->user->id);
 
 	window.lindneo.currentPageId='<?php echo $current_page->page_id; ?>';
 	window.lindneo.currentBookId='<?php echo $model->book_id; ?>';
-	console.log(window.lindneo.currentBookId);
+	//console.log(window.lindneo.currentBookId);
 	window.lindneo.user={};
 	window.lindneo.user.username='<?php echo Yii::app()->user->name; ?>';
 	window.lindneo.user.name='<?php echo $current_user->name . " ". $current_user->surname; ?>';
@@ -2259,28 +2259,47 @@ $background= (!empty($img)) ? "background-image:url('".str_replace(" ", "", $img
 					</div>
 				   <div class="tab-pane fade" id="tab_3_2">
 					<ul class="add-page-list">
-						<li>
-							<a class="add-page-list-button" href='/chapter/create?book_id=<?php echo $model->book_id; ?>'>
+						<li class='page' style='width:122px; height:92px; border: 1px solid rgb(55, 108, 150);'>
+							<a class="add-page-list-button" id='addBlankChapter' href='#' style="width:110px; height:82px;">
 								<div class="add-page-list-inside">
 								Bölüm Ekle </div>
 							</a>
 						</li>
 						<?php 
-						// $data=json_decode($model->data,true);
-						// $template_id=$data["template_id"];
-						// $template_chapters=Chapter::model()->findAll(array('order'=>  '`order` asc ,  created asc', "condition"=>'book_id=:book_id', "params" =>array(':book_id' => $template_id  ) ) );
-						// foreach ($template_chapters as $key => $template_chapter) {
-						// 	$template_page=Page::model()->find(array('order'=>  '`order` asc ,  created asc', "condition"=>'chapter_id=:chapter_id', "params" =>array(':chapter_id' => $template_chapter->chapter_id  ) ) );
-						// 		echo "<li onclick='event.stopPropagation();' class='page' chapter_id='".$template_chapter->chapter_id."' page_id='".$template_page->page_id."' ><canvas class='preview' height='90' width='120'> </canvas><a href='/page/create?book_id=".$model->book_id."&chapter_id=".$current_chapter->chapter_id."&pageTeplateId=".$template_page->page_id."' >Ekle</a></li>";
+						$data=json_decode($model->data,true);
+						$template_id=$data["template_id"];
+						$template_chapters=Chapter::model()->findAll(array('order'=>  '`order` asc ,  created asc', "condition"=>'book_id=:book_id', "params" =>array(':book_id' => $template_id  ) ) );
+						foreach ($template_chapters as $key => $template_chapter) {
+							$template_page=Page::model()->find(array('order'=>  '`order` asc ,  created asc', "condition"=>'chapter_id=:chapter_id', "params" =>array(':chapter_id' => $template_chapter->chapter_id  ) ) );
+							echo "<li class='page'  chapter_id='".$template_chapter->chapter_id."' page_id='".$template_page->page_id."' style='width:122px; height:92px; border: 1px solid rgb(55, 108, 150);'  >
+								<canvas  class='ch_".$template_page->page_id."' style='height:90px; width:120px;'> </canvas>
+								<a class='ch_".$template_page->page_id." copyBook' book-id='".$model->book_id."' chapter_id='".$current_chapter->chapter_id."' pageTeplateId='".$template_page->page_id."' href='#' ></a>
+								</li>";
+							/*
+							echo "<li onclick='event.stopPropagation();' class='page' chapter_id='".$template_chapter->chapter_id."' page_id='".$template_page->page_id."' >
+									<canvas class='preview' height='90' width='120'></canvas>
+									<a href='/page/create?book_id=".$model->book_id."&chapter_id=".$current_chapter->chapter_id."&pageTeplateId=".$template_page->page_id."' >Ekle</a>
+								</li>";
+							*/
 								?>
 									<script type="text/javascript">
-								//		window.lindneo.tlingit.loadPagesPreviews('<?php echo $template_page->page_id ?>');
+									window.lindneo.tlingit.loadPagesPreviews('<?php echo $template_page->page_id ?>');
 									</script>
 								<?php
-						//}
+						}
 
 						?>
-						
+						<script type="text/javascript">
+							$('#addBlankChapter').click(function(){
+								//chapter/create?book_id=<?php echo $model->book_id; ?>
+								//var link="/page/create?book_id="+book_id+"&page_id="+currentPageId;
+								var book_id=window.lindneo.currentBookId;
+								var link="/chapter/create?book_id="+book_id;
+								
+								window.location.assign(link);
+
+							});
+						</script>
 					</ul>
 
 					</div>
