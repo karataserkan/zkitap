@@ -388,7 +388,9 @@ window.lindneo.tlingit = (function(window, $, undefined){
   };
 
 
-  var PageHasDeleted = function (pageId){
+
+  var PageHasDeleted = function (pageId,callback){
+    if (typeof callback == "undefined") var callback = function(){};
     //console.log(pageId);
     window.lindneo.tsimshian.pageDestroyed( pageId );
     window.lindneo.dataservice
@@ -396,7 +398,7 @@ window.lindneo.tlingit = (function(window, $, undefined){
       { 
         'pageId' : pageId,
       },
-      DeletePage,
+      callback,
       function(err){
         console.log('error:' + err);
       });
