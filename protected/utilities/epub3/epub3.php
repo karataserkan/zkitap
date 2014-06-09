@@ -1139,6 +1139,17 @@ class epub3 {
 	{
 		return $this->sanitized_filename;
 	}
+
+	public function png2jpg($originalFile, $outputFile, $quality) {
+	    $image = imagecreatefrompng($originalFile);
+	    imagejpeg($image, $outputFile, $quality);
+	    imagedestroy($image);
+	}
+	public function jepg2png($originalFile, $outputFile, $quality) {
+	    $image = imagecreatefromjpeg($originalFile);
+	    imagepng($image, $outputFile, $quality);
+	    imagedestroy($image);
+	}
 	public function createThumbnails(){
 
 
@@ -1162,6 +1173,10 @@ class epub3 {
 			
 			$extension='.'.$ext2[1];
 			$thumbImage = functions::save_base64_file ( $data , $page->page_id , $this->get_tmp_file(),$extension);
+			// if jpeg then convert to png
+			if ($ext2[1]=="jpeg"){
+				$this->jepg2png($thumbImage->filepath, str_replace(".jpeg", ".png",$thumbImage->filepath ),1 ); 
+			}	
 
 		}
 
