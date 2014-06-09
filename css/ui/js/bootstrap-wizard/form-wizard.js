@@ -113,7 +113,11 @@ var FormWizard = function () {
 
 
             var data;
-            $(".datepicker-fullscreen").pickadate({format:'dd/mm/yyyy'});
+            date=$.datepicker.formatDate('dd/mm/yy', new Date());
+            $(".datepicker-fullscreen").pickadate({format:'dd/mm/yyyy'}).val(date);
+            
+            $("#acl>#uniform-acl_0").children().addClass("checked");
+
             $(".siraliDisplay").hide();
             var formDisplay = function(){
                 $("p[data-display='contentTitle']").text($("[name='contentTitle']").val());
