@@ -196,10 +196,18 @@ class UserController extends Controller
 		$user=$this->loadModel($invitation->user_id);
 
 		if ($invitation) {
-			
-
 			//$invitation->delete();
+			//
+			
+			$isBookInvitation=Book::model()->findByPk($invitation->organisation_id);
 
+			if ($isBookInvitation) {
+			}else{
+				
+			}
+
+
+			$isOrganisationUser=OrganisationUsers::model()->find('user_id=:user_id AND organisation_id=:organisation_id',array('user_id'=>$user->id,'organisation_id'=>$invitation->organisation_id));
 			
 			$newUser=false;
 			if ($user->name == "" || $user->surname=="" || $user->password=="") {
@@ -233,27 +241,59 @@ class UserController extends Controller
 							}
 						}
 				}
-
-
-
 				//$this->redirect( array('site/login' ) );
 			}else
 			{
-				$organisation=Organisations::model()->findByPk($invitation->organisation_id);
-				$organisationUser= new OrganisationUsers;
-				$organisationUser->user_id=$user->id;
-				$organisationUser->organisation_id=$organisation->organisation_id;
-				$organisationUser->role="user";
-				if($organisationUser->save())
-				{
-					$msg="USER:INVITATION:0:". json_encode(array('userId'=>$user->id,'organisationId'=>$organisation->organisation_id,'role'=>'user', 'message'=>'invitation accepted'));
-					Yii::log($msg,'info');
+				if (!$isOrganisationUser) {
+					if ($isBookInvitation) {
+						$isOrganisationUser=OrganisationUsers::model()->find('user_id=:user_id AND organisation_id=:organisation_id',array('user_id'=>$user->id,'organisation_id'=>$invitation->organisation_id));
+						$organisation=Organisations::model()->findByPk($isOrganisationUser->organisation_id);
+					}else{
+						$organisation=Organisations::model()->findByPk($invitation->organisation_id);
+					}
+					$organisationUser= new OrganisationUsers;
+					$organisationUser->user_id=$user->id;
+					$organisationUser->organisation_id=$organisation->organisation_id;
+					$organisationUser->role="user";
+					if($organisationUser->save())
+					{
+						$invitation->delete();
+						$msg="USER:INVITATION:0:". json_encode(array('userId'=>$user->id,'organisationId'=>$organisation->organisation_id,'role'=>'user', 'message'=>'invitation accepted'));
+						Yii::log($msg,'info');
+					}
+					else
+					{
+						$msg="USER:INVITATION:1:". json_encode(array('userId'=>$user->id,'organisationId'=>$organisation->organisation_id,'role'=>'user', 'message'=>'invitation accept error'));
+						Yii::log($msg,'info');
+					}
 				}
-				else
-				{
-					$msg="USER:INVITATION:1:". json_encode(array('userId'=>$user->id,'organisationId'=>$organisation->organisation_id,'role'=>'user', 'message'=>'invitation accept error'));
-					Yii::log($msg,'info');
+
+				if ($isBookInvitation) {
+					$addWorkspaceUser=new WorkspacesUsers;
+					$addWorkspaceUser->workspace_id=$isBookInvitation->workspace_id;
+					$addWorkspaceUser->userid=$user->id;
+					$addWorkspaceUser->added=date('Y-n-d g:i:s',time());
+					$addWorkspaceUser->owner=$user->id;
+					$addWorkspaceUser->save();
+					$addUser = Yii::app()->db->createCommand();
+					if($addUser->insert('book_users', array(
+					    'user_id'=>$$user->id,
+					    'book_id'=>$isBookInvitation->id,
+					    'type'   =>"editor"
+					)))
+					{
+						$msg="SITE:RIGHT:0:". json_encode(array(array('user'=>Yii::app()->user->id),array('userId'=>$userId,'bookId'=>$isBookInvitation->id)));
+						Yii::log($msg,'info');
+					}
+					else
+					{
+						$msg="SITE:RIGHT:1:". json_encode(array(array('user'=>Yii::app()->user->id),array('userId'=>$userId,'bookId'=>$isBookInvitation->id)));
+						Yii::log($msg,'info');
+					}
+				}else{
+					
 				}
+
 			}
 
 			$this->render('invitation',array(

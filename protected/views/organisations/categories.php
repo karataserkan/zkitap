@@ -200,8 +200,8 @@
 					×
 				</a>-->
 
-				<a class="fa fa-times-circle close" data-id="<?php echo $category->category_id; ?>" data-toggle="modal" data-target="#confirmation"></a>
-				<a class="fa fa-edit close" data-id="<?php echo base64_encode(json_encode($category_data)); ?>" style="margin-right:5px" data-toggle="modal" data-target="#addCategory"></a>
+				<a class="fa fa-times-circle close tip" data-original-title="<?php _e('Kategoriyi Kaldır'); ?>" data-id="<?php echo $category->category_id; ?>" data-toggle="modal" data-target="#confirmation"></a>
+				<a class="fa fa-edit close tip" data-original-title="<?php _e('Kategoriyi Düzenle'); ?>" data-id="<?php echo base64_encode(json_encode($category_data)); ?>" style="margin-right:5px" data-toggle="modal" data-target="#addCategory"></a>
 				
 
 				<p></p>
