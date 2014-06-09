@@ -21,6 +21,7 @@ class epub3 {
 	public $book ;
 	public $extraOpf='';
 	public $current_page_number =-1;
+	public $thumbnail_width = 120;
 
 	public function error($domain='EditorActions',$explanation='Error', $arguments=null,$debug_vars=null ){
 			$error=new error($domain,$explanation, $arguments,$debug_vars);
@@ -1146,9 +1147,25 @@ class epub3 {
 	    imagedestroy($image);
 	}
 	public function jepg2png($originalFile, $outputFile, $quality) {
+
 	    $image = imagecreatefromjpeg($originalFile);
-	    imagepng($image, $outputFile, $quality);
+		
+
+		list($width, $height) = getimagesize($originalFile);
+	    $percent = $this->thumbnail_width / $width ;
+		
+		$newheight = $height * $percent;
+
+		// Load
+		$thumb = imagecreatetruecolor($this->thumbnail_width, $newheight);
+		
+
+		// Resize
+		imagecopyresized($thumb, $image, 0, 0, 0, 0, $this->thumbnail_width , $newheight, $width, $height);
+
+	    imagepng($thumb, $outputFile, $quality);
 	    imagedestroy($image);
+	    imagedestroy($thumb);
 	}
 	public function createThumbnails(){
 
@@ -1175,7 +1192,8 @@ class epub3 {
 			$thumbImage = functions::save_base64_file ( $data , $page->page_id , $this->get_tmp_file(),$extension);
 			// if jpeg then convert to png
 			if ($ext2[1]=="jpeg"){
-				$this->jepg2png($thumbImage->filepath, str_replace(".jpeg", ".png",$thumbImage->filepath ),1 ); 
+				$this->jepg2png($thumbImage->filepath, str_replace(".jpeg", ".png",$thumbImage->filepath ),9 ); 
+				unlink($thumbImage->filepath);
 			}	
 
 		}

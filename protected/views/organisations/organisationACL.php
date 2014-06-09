@@ -301,8 +301,8 @@
 					×
 				</a>-->
 
-				<a class="fa fa-times-circle close" data-id="<?php echo $acl['id']; ?>" data-toggle="modal" data-target="#confirmation"></a>
-				<a class="fa fa-edit close" data-id="<?php echo base64_encode(json_encode($acl)); ?>" style="margin-right:5px" data-toggle="modal" data-target="#addAcl"></a>
+				<a class="fa fa-times-circle close tip" data-original-title="<?php _e('ACL\'i Kaldır'); ?>" data-id="<?php echo $acl['id']; ?>" data-toggle="modal" data-target="#confirmation"></a>
+				<a class="fa fa-edit close tip" data-original-title="<?php _e('ACL\'i Düzenle'); ?>" data-id="<?php echo base64_encode(json_encode($acl)); ?>" style="margin-right:5px" data-toggle="modal" data-target="#addAcl"></a>
 				
 
 				<p></p>

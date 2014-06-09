@@ -91,8 +91,11 @@ window.lindneo.tlingit = (function(window, $, undefined){
     loadPagesPreviews(response.result.component.page_id);
   };
 */
+  
+
   var componentHasUpdated = function ( component ) {
     //console.log(component);
+
     if( typeof  componentPreviosVersions[component.id] == "undefined"){
          
 
@@ -129,6 +132,14 @@ window.lindneo.tlingit = (function(window, $, undefined){
     }
      componentPreviosVersions[component.id]= JSON.parse(JSON.stringify(component)); 
     window.lindneo.tsimshian.componentUpdated(component);
+    if (typeof window.UpdateAgain == "undefined") window.UpdateAgain =true; 
+    if (window.UpdateAgain){
+        window.UpdateAgain=false;
+        updatePageCanvas(window.lindneo.currentPageId,function(){
+          setTimeout(function(){window.UpdateAgain =true;}, 10000);
+            
+        },true);
+        }
     
   };
 

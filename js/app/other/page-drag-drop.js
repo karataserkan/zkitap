@@ -558,7 +558,9 @@ $( document ).ready(function () {
 
     $( document ).on( "click","canvas.preview" ,function(event, ui) {
       console.log(event);
-      console.log($('.'+event.toElement.parentElement.children[1].className).attr('bpageTeplateId'));
+
+      window.scroll(0,0);
+
 
       $('.selected').trigger('unselect');
       
@@ -1033,5 +1035,3 @@ $( document ).ready(function () {
 
   }
 
-
-   
