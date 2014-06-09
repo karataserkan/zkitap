@@ -621,7 +621,6 @@ margin: 0 0 10px;
 
 
 .chat_button {
-	
 	width: 100%;
 	padding: 5px 0px;
 	left:0;
@@ -633,7 +632,7 @@ margin: 0 0 10px;
 	font-weight:bold;
 	display:block;
 	text-decoration:none;
-
+	position:absolute;
 }
 
 .chat_button:hover {
