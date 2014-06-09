@@ -277,8 +277,8 @@ class UserController extends Controller
 					$addWorkspaceUser->save();
 					$addUser = Yii::app()->db->createCommand();
 					if($addUser->insert('book_users', array(
-					    'user_id'=>$$user->id,
-					    'book_id'=>$isBookInvitation->id,
+					    'user_id'=>$user->id,
+					    'book_id'=>$isBookInvitation->organisation_id,
 					    'type'   =>"editor"
 					)))
 					{
