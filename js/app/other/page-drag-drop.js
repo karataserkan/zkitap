@@ -1,25 +1,29 @@
 $( document ).ready(function () {
-  /*
+
   $("#editor_view_pane").click(function(e){
     var control = true;
+    
     if(e.target.id != "current_page")
     {
       var children = $("#current_page").children();
       $.each(children, function(i,key){
 
         if($($($(key).children()[0]).children()[0]).attr("id") == e.target.id || $($(key).children()[0]).attr("id") == e.target.id){
-          //console.log($($($(key).children()[0]).children()[0]).attr("id")+" - "+e.target.id);
+          console.log(e.target.id);
+          console.log($($($(key).children()[0]).children()[0]).attr("id"));
+          console.log($($(key).children()[0]).attr("id"));
+          console.log($(key).attr("id"));
           control = false;
         }
       
       });
       if(control){
-        //console.log("deselect");
-         $('.selected').trigger('unselect');
+        console.log("deselect");
+        //$('.selected').trigger('unselect');
        }
     } 
   });
-*/
+
   bookPagePreviews();
 
   

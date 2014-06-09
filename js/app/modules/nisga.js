@@ -753,7 +753,7 @@ var textComponentBuilder = function( component ) {
 
   var videoComponentBuilder = function ( component ) {
     
-    var element  = $('<div class="video-controllers" style="width:100%; height:100%;"> </div>');
+    var element  = $('<div class="video-controllers" id="v_'+component.id+'" style="width:100%; height:100%;"> </div>');
     var elementWrap=$('<div title="'+j__("Video Aracı")+'"></div>');
     elementWrap.appendTo( page_div_selector );
     ////console.log(component);
