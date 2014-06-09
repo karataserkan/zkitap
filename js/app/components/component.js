@@ -50,8 +50,8 @@ $(document).ready(function(){
             $(this).resizable("option", "alsoResize",".selected");
            //var max_width = $("#current_page").width() - $(event.currentTarget).offset().left + 284;
            //var max_height = $("#current_page").height() - $(event.currentTarget).offset().top + 124;
-           console.log($(this));
-           console.log($(this).parent());
+           //console.log($(this));
+           //console.log($(this).parent());
           $(this).resizable({
             containment: "#current_page",
             //maxWidth: max_width,
@@ -67,15 +67,27 @@ $(document).ready(function(){
             that._resize(event, ui);
           },
           'resize':function(event,ui){
+            //console.log(this);
+            console.log("resize");
             if( typeof this.resize_pass != "undefined" )
               this.resize_pass(event,ui);
+
+            var component_width = ui.size.width;
+            if(that.options.component.type == "text" || that.options.component.type == "side-text"){
+              var component_height = ui.size.height + 14 ;
+            }
+            console.log(this);
+            console.log(component_height);
+            that.options.component.data.self.css.width = component_width + "px";
+            that.options.component.data.self.css.height = component_height + "px";
+            $("#"+that.options.component.id).height(component_height + "px");
+            $("#"+that.options.component.id).parent().height((component_height - 14) + "px");
             
             window.lindneo.toolbox.makeMultiSelectionBox();
           }
         };
       if(typeof params!='undefined'){
 
-        //console.log(that.options);
         that.options = this.extend ( that.options,params  ) ;
         //console.log(that.options);
          //if(typeof params.resizableParams!='undefined') {
@@ -654,8 +666,8 @@ $(document).ready(function(){
           if( data.attr ) that.element.parent().attr(data.attr);
 
         } else {
-          console.log(data);
-          console.log(that.element.parent().find(p));
+          //console.log(data);
+          //console.log(that.element.parent().find(p));
           if ( data != null){
                     if( data.css ) that.element.parent().find(p).css(data.css);
                     if( data.attr )  that.element.parent().find(p).attr(data.attr);
@@ -680,9 +692,12 @@ $(document).ready(function(){
     },
 
     _resize: function ( event, ui ) {
-    
-      this.options.component.data.self.css.width = ui.size.width + "px";
-      this.options.component.data.self.css.height = ui.size.height + "px";
+      
+      var component_width = ui.size.width;
+      var component_height = ui.size.height;
+      
+      this.options.component.data.self.css.width = component_width + "px";
+      this.options.component.data.self.css.height = component_height + "px";
    
       this._trigger('update', null, this.options.component );
       this._selected(event, ui)

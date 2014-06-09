@@ -85,7 +85,12 @@ class PageController extends Controller
 	public function actionCreate($book_id,$page_id=null,$pageTeplateId=null)
 	{
 		$currentPage=Page::model()->findByPk($page_id);
-		$chapter_id=$currentPage->chapter_id;
+
+		if ($currentPage) {
+			$chapter_id=$currentPage->chapter_id;
+		}else{
+			$chapter_id=$page_id;
+		}
 		
 		//$pages=Page::model()->findAll('chapter_id=:chapter_id and `order` >'.$currentPage->order,array('chapter_id'=>$chapter_id));
 
@@ -102,10 +107,10 @@ class PageController extends Controller
 		}
 		else
 		{
-			$chapter= new Chapter;
-			$chapter->chapter_id=functions::new_id();
-			$chapter->book_id=$book_id;
-			$chapter->save();
+				$chapter= new Chapter;
+				$chapter->chapter_id=functions::new_id();
+				$chapter->book_id=$book_id;
+				$chapter->save();
 		}
 		$model->chapter_id=$chapter->chapter_id;
 

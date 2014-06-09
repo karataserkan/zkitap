@@ -569,6 +569,17 @@ $( document ).ready(function () {
                     window.location.href = link;
                   }
             }
+      if(event.toElement.parentElement.children[1].className[0] == 'c'){
+        console.log("chapter copy");
+        ///page/create?book_id=".$model->book_id."&chapter_id=".$current_chapter->chapter_id."&pageTeplateId=".$template_page->page_id."
+        var book_id= $(event.toElement.parentElement.children[2]).attr('book-id');
+        var pageTeplateId=$(event.toElement.parentElement.children[2]).attr('pageTeplateId');
+        var chapter_id=$(this).attr('chapter_id');
+        var link="/page/create?book_id="+book_id+"&chapter_id="+chapter_id+"&pageTeplateId="+pageTeplateId;
+        //return;
+          
+              window.location.href = link;
+            }
       window.lindneo.tsimshian.pageCreated();
       //get page id from parent li 
       var page_id = $(this).parent().attr('page_id') ;
@@ -853,15 +864,16 @@ $( document ).ready(function () {
           $.each(result.chapters, function(index, key){
             var chapter_page = 0;
             //console.log(key);
+            if(!key.title) key.title = "";
             value += '<div class="chapter"  chapter_id="'+key.chapter_id+'">\
                             <div class="chapter-detail">\
                               <input type="text" class="chapter-title" placeholder='+j__("Bölüm adı")+' value="'+key.title+'">\
                               <a class="btn btn-danger  page-chapter-delete delete-chapter hidden-delete" style="float: right; margin-top: -23px;"><i class="icon-ok"></i></a>\
-                              <a class="page-chapter-delete_control hidden-delete" style="float: right; margin-top: -23px;"><i class="icon-delete"></i><i class="icon-delete"></i></a>\
-                            </div>\
-                            <ul class="pages" >';
+                              <a class="page-chapter-delete_control hidden-delete" style="float: right; margin-top: -23px;"><i class="icon-delete"></i></a>\
+                            </div>';
             //console.log(result.pages[key.chapter_id]);
             if(typeof result.pages[key.chapter_id] != "undefined"){
+              value+='<ul class="pages" >';
               $.each(result.pages[key.chapter_id], function(indexp, keyp){
                 //console.log(page_NUM);
                 //console.log(keyp);
@@ -874,9 +886,9 @@ $( document ).ready(function () {
                           </li>';
                 chapter_page++;
               });
-              value += '</ul></div>';
-              //console.log(value);
+              value += '</ul>';
             }
+            value+='</div>';
           });
           //value = $(value);
           //value.appendTo('.panel-body');
@@ -1052,4 +1064,4 @@ $( document ).ready(function () {
   }
 
 
-  
+   

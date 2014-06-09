@@ -23,7 +23,7 @@ $(document).ready(function(){
 	{
 		var html_data = this.options.component.data.html_inner;
 	}
-      console.log(this.options.component);
+      //console.log(this.options.component);
     
 
       if(this.options.component.data.html_inner){
@@ -32,6 +32,34 @@ $(document).ready(function(){
 
         var popupmessage=$('<div  id="message_'+componenthtmlid+'" style="overflow:hidden; width:100%; height:100%;" ><iframe id="if'+componenthtmlid+'" src="'+window.base_path+"/uploads/files/"+this.options.component.id+'.html" style="width:100%; height:100%; border:none;" /></iframe></div>');
         popupmessage.appendTo(this.element);
+
+        $(window).on('blur',function(e) {    
+            if($(this).data('mouseIn') != 'yes')return;
+            $('#if'+componenthtmlid).filter(function(){
+                return $(this).data('mouseIn') == 'yes';
+            }).trigger('iframeclick');    
+        });
+
+        $(window).mouseenter(function(){
+            $(this).data('mouseIn', 'yes');
+        }).mouseleave(function(){
+            $(this).data('mouseIn', 'no');
+        });
+
+        $('#if'+componenthtmlid).mouseenter(function(){
+            $(this).data('mouseIn', 'yes');
+            $(window).data('mouseIn', 'yes');
+        }).mouseleave(function(){
+            $(this).data('mouseIn', null);
+        });
+
+        $('#if'+componenthtmlid).on('iframeclick', function(){
+            //console.log(this);
+            $(this).parent().parent().parent().addClass("selected");
+            $(this).parent().parent().addClass("selected");
+            window.lindneo.toolbox.addComponentToSelection(that);
+        });
+
         //popupmessage.html(html_data);
         //this.element.html(html_data);
         //var iframe = document.getElementById('if'+componenthtmlid),
@@ -47,7 +75,7 @@ $(document).ready(function(){
 
     },
     _on : function () {
-      console.log(this.element);
+      //console.log(this.element);
        /* selectable =function(){
           stop: function() {
             var s = window.getSelection();
@@ -144,8 +172,8 @@ var createHtmlComponent = function ( event, ui, oldcomponent ) {
     
     add_button.click(function (){  
       
-      var width = html_popup.width();
-      var height = html_popup.height(); 
+      var width = "300px";
+      var height = "300px";
       //console.log(width);
       //console.log(height);      
       if(typeof oldcomponent == 'undefined'){
@@ -160,16 +188,14 @@ var createHtmlComponent = function ( event, ui, oldcomponent ) {
         oldcomponent.data.html_inner = $(".my-code-area").val();
 
       };
-      console.log($(".my-code-area").val());
+      //console.log($(".my-code-area").val());
       //return;
       var html_data = window.encodeURI($(".my-code-area").val());
-      console.log(html_data);
+      //console.log(html_data);
        var  component = {
           'type' : 'html',
           'data': {
             'html_inner': html_data ,
-            'width': width,
-            'height': height,
             'overflow': 'visible',
             'lock':'',
             'self': {
@@ -179,6 +205,8 @@ var createHtmlComponent = function ( event, ui, oldcomponent ) {
                 'left':  left ,
                 'overflow': 'visible',
                 'opacity': '1',
+                'width': width,
+                'height': height,
                 'z-index': 'first'
               }
             }
