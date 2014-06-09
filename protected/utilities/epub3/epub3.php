@@ -361,6 +361,7 @@ class epub3 {
 
 
 	public function prepareBookStructure(){
+		$this->BookPages=array();
 
 		$chapterModels = Chapter::model()->findAll( 
 			array('order'=>  '`order` asc ,  created asc', 
@@ -380,6 +381,7 @@ class epub3 {
 			
 			if(count($pagesOfChapter)>0){
 				foreach ($pagesOfChapter as $key => $page) {
+					$this->BookPages[]=$page;
 
 					$new_page=(object)$page->attributes;
 
@@ -1138,6 +1140,40 @@ class epub3 {
 		return $this->sanitized_filename;
 	}
 	public function createThumbnails(){
+
+
+		foreach ($this->BookPages as $key => $page) {
+			if ( $page->data )
+				$data = $page->data;
+			else
+				if ($page->pdf_data){
+									$data =  json_decode($page->pdf_data,true);
+									$data=$data['thumnail']['data'];
+								}
+				else
+					$data = null;
+
+		    $fi = new finfo(FILEINFO_MIME,'');
+			$mime_type = $fi->buffer(file_get_contents($data));
+
+			$ext1=explode(';', $mime_type);
+			$ext2=explode('/', $ext1[0]);
+			
+			
+			$extension='.'.$ext2[1];
+			$thumbImage = functions::save_base64_file ( $data , $page->page_id , $this->get_tmp_file(),$extension);
+
+		}
+
+
+		return true;
+
+
+
+
+
+
+
 		//error_log("Thumbnail\n");
 		//error_log($this->get_tmp_file());
 		//error_log(print_r(scandir($this->get_tmp_file()),1));

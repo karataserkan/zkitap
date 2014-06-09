@@ -554,19 +554,20 @@ $( document ).ready(function () {
 
     $( document ).on( "click","canvas.preview" ,function(event, ui) {
       console.log(event);
-      console.log($('.'+event.toElement.parentElement.children[1].className).attr('bpageTeplateId'));
 
       $('.selected').trigger('unselect');
-      
-      if(event.toElement.parentElement.children[1].className[0] == 'p'){
-          //console.log($(event.toElement.parentElement.children[2]).attr('book-id'));
-              var book_id= $(event.toElement.parentElement.children[2]).attr('book-id');
-              var pageTeplateId=$(event.toElement.parentElement.children[2]).attr('pageTeplateId');
-              //var chapter_id=$(this).attr('chapter_id');
-              var currentPageId=window.lindneo.currentPageId;
-              var link="/page/create?book_id="+book_id+"&page_id="+currentPageId+"&pageTeplateId="+pageTeplateId;
-              console.log(link);
-              window.location.href = link;
+      if (typeof  event.toElement !="undefined"){
+            console.log($('.'+event.toElement.parentElement.children[1].className).attr('bpageTeplateId'));
+            if(event.toElement.parentElement.children[1].className[0] == 'p'){
+                //console.log($(event.toElement.parentElement.children[2]).attr('book-id'));
+                    var book_id= $(event.toElement.parentElement.children[2]).attr('book-id');
+                    var pageTeplateId=$(event.toElement.parentElement.children[2]).attr('pageTeplateId');
+                    //var chapter_id=$(this).attr('chapter_id');
+                    var currentPageId=window.lindneo.currentPageId;
+                    var link="/page/create?book_id="+book_id+"&page_id="+currentPageId+"&pageTeplateId="+pageTeplateId;
+                    console.log(link);
+                    window.location.href = link;
+                  }
             }
       window.lindneo.tsimshian.pageCreated();
       //get page id from parent li 
@@ -605,7 +606,7 @@ $( document ).ready(function () {
     });
 
     $('.delete-page').click(function(){
-
+      alert ("siliniyor.");
       var delete_buttons = $('<i class="icon-delete"></i><i class="icon-delete"></i>');
 
       var page_id=$(this).parent().attr('page_id');
@@ -618,18 +619,29 @@ $( document ).ready(function () {
             control_value = 1;
           }
       });
-      if(control_value == 1)
-        return;
+     // if(control_value == 1)
+      //  return;
       //return;
-      window.lindneo.tlingit.PageHasDeleted( page_id );
-      //return;
+      window.lindneo.tlingit.PageHasDeleted( page_id , function(){
       //ekaratas start
       //sayfa silindiğinde sayfaya ait olan çalışma alanını kaldırdım
 
       if (page_id==window.lindneo.currentPageId) {
         $('#current_page').hide().remove();
 
-        var link=$("#chapters_pages_view > div:first-child > ul:first-child > li:first-child > a:nth-child(2)").attr('href');
+       
+
+        if ( $(this).parent().next() ){
+                  $(this).parent().next().children('canvas').click();
+                  return;
+                }
+        if ( $(this).parent().prev() ){
+                  $(this).parent().prev().children('canvas').click();
+                  return;
+                }
+
+
+         var link=$("#chapters_pages_view > div:first-child > ul:first-child > li:first-child > a:nth-child(2)").attr('href');
         
         var page_id = $(".page:first-child").attr("page_id");
         
@@ -649,6 +661,10 @@ $( document ).ready(function () {
 
       $('.page[page_id="'+page_id+'"]').hide('slow', function(){  $('.page[page_id="'+page_id+'"]').remove();});
       sortPages();
+
+
+      });
+
 
     });
 
@@ -973,34 +989,52 @@ $( document ).ready(function () {
             if(control_value == 1)
               return;
             //return;
-            window.lindneo.tlingit.PageHasDeleted( page_id );
-            //return;
+
+            var parent = $(this).parent();
+
+            window.lindneo.tlingit.PageHasDeleted( page_id , function(){
             //ekaratas start
             //sayfa silindiğinde sayfaya ait olan çalışma alanını kaldırdım
 
-            if (page_id==window.lindneo.currentPageId) {
-              $('#current_page').hide().remove();
+            if (parent.attr('page_id')==window.lindneo.currentPageId) {
+              $('#current_page').empty();
+              console.log(parent);
+              window.deneme=parent;
+              var refresh_page = true;
 
-              var link=$("#chapters_pages_view > div:first-child > ul:first-child > li:first-child > a:nth-child(2)").attr('href');
-              
-              var page_id = $(".page:first-child").attr("page_id");
-              
-              var link='?r=book/author&bookId='+window.lindneo.currentBookId+'&page='+page_id;
+              if ( parent.next("li").length != 0){
+                        parent.next("li").children('canvas').click();
+                        //refresh_page = false;
+                        
+                      }
+              if ( parent.prev("li").length != 0 ){
+                        parent.prev("li").children('canvas').click();
+                        //refresh_page = false;
+                      }
 
-              var slink='?r=chapter/create&book_id='+window.lindneo.currentBookId;
+              if(refresh_page ){
+                var link=$("#chapters_pages_view > div:first-child > ul:first-child > li:first-child > a:nth-child(2)").attr('href');
 
-              if (link != "") {
-                window.location.assign(link);
-              }
-              else
-                window.location.assign(slink);
+                var page_id = $(".page:first-child").attr("page_id");
 
+                var link='?r=book/author&bookId='+window.lindneo.currentBookId+'&page='+page_id;
 
+                var slink='?r=chapter/create&book_id='+window.lindneo.currentBookId;
+
+                if (link != "") {
+                  window.location.assign(link);
+                }
+                else
+                  window.location.assign(slink);
+                }
             };
             //ekaratas end
 
             $('.page[page_id="'+page_id+'"]').hide('slow', function(){  $('.page[page_id="'+page_id+'"]').remove();});
             sortPages();
+
+
+            });
 
           });
     
