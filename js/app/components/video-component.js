@@ -509,80 +509,10 @@ var createVideoComponent = function( event, ui, oldcomponent ) {
           var contenttypes = contentType.split('/');
           console.log(contenttypes[1]);
           
-          $("#video-add-dummy-close-button").trigger('click');
-                  var VideoSnapper = {
-      
-                      /**
-                       * Capture screen as canvas
-                       * @param {HTMLElement} video element 
-                       * @param {Object} options = width of screen, height of screen, time to seek
-                       * @param {Function} handle function with canvas element in param
-                       */
-                      captureAsCanvas: function(video, options, handle) {
-                      
-                          // Create canvas and call handle function
-                          var callback = function() {
-                              // Create canvas
-                              var canvas = $('<canvas />').attr({
-                                  width: options.width,
-                                  height: options.height
-                              })[0];
-                              // Get context and draw screen on it
-                              //video.crossOrigin = "Anonymous";
-                              canvas.getContext('2d').drawImage(video, 0, 0, options.width, options.height);
-                              // Seek video back if we have previous position 
-                              if (prevPos) {
-                                  // Unbind seeked event - against loop
-                                  $(video).unbind('seeked');
-                                  // Seek video to previous position
-                                  video.currentTime = prevPos;
-                              }
-                              // Call handle function (because of event)
-                              handle.call(this, canvas);    
-                          }
+          
 
-                          // If we have time in options 
-                          if (options.time && !isNaN(parseInt(options.time))) {
-                              // Save previous (current) video position
-                              var prevPos = video.currentTime;
-                              // Seek to any other time
-                              video.currentTime = options.time;
-                              // Wait for seeked event
-                              $(video).bind('seeked', callback);              
-                              return;
-                          }
-                          
-                          // Otherwise callback with video context - just for compatibility with calling in the seeked event
-                          return callback.apply(video);
-                      }
-                  };
-
-                $("<div class='popup ui-draggable' id='pop-video-poster' style='display: block; top:" + top + "; left: " + left + "; '> \
-                  <div class='popup-header'> \
-                  <i class='icon-m-video'></i> &nbsp;"+j__("Poster Ekle")+" \
-                  <i id='poster-add-dummy-close-button' class='icon-close size-10 popup-close-button'></i> \
-                  </div> \
-                    <div class='gallery-inner-holder' style='width:500px;'> \
-                      <video id='video' width='320' height='240' controls preload='none' onloadedmetadata=\"$(this).trigger('video_really_ready')\">\
-                        <source id='"+contenttypes[1]+"' src='"+videoURL+"' type='video/"+contenttypes[1]+"'>\
-                      </video><br><br>\
-                      <input type='button' id='capture' value='Capture' />    "+j__("Video'yu başlatarak istediğiniz anda görüntüyü yakalayabilirsiniz")+"<br><br>\
-                      <div id='screen'></div><br>\
-                      <a href='#' id='pop-poster-OK' class='btn bck-light-green white radius' id='add-poster' style='padding: 5px 30px;'>"+j__("Ekle")+"</a> \
-                    </div> \
-                  </div>\
-                  ").appendTo('body').draggable();
-
-                $('#poster-add-dummy-close-button').click(function() {
-
-                    $('#pop-video-poster').remove();
-
-                    if ($('#pop-video-poster').length) {
-                        $('#pop-video-poster').remove();
-                    }
-
-                });
-
+                
+/*
                $('#capture').click(function() {
                   var canvases = $('canvas');
                   VideoSnapper.captureAsCanvas(video, { width: 160, height: 68, time: 0 }, function(canvas) {
@@ -600,11 +530,13 @@ var createVideoComponent = function( event, ui, oldcomponent ) {
                       canvases.eq(0).remove();     
                   })
               }); 
-              $('#pop-poster-OK').click(function() {
+*/
+              //$('#pop-image-OK').click(function() {
               if(video_type == 'popup') video_width_height = '80%';
               else video_width_height = '100%';
               //console.log(contentType);
                     console.log(poster);
+                    poster="";
               var component = {
                 'type': 'video',
                 'data': {
@@ -649,8 +581,8 @@ var createVideoComponent = function( event, ui, oldcomponent ) {
 
             //console.log(component);
             window.lindneo.tlingit.componentHasCreated(component);
-            $("#poster-add-dummy-close-button").trigger('click');
-          });
+            $("#video-add-dummy-close-button").trigger('click');
+          //});
         }
       };
     });
