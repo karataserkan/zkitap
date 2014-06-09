@@ -282,11 +282,17 @@ $this->pageTitle=Yii::app()->name;
 //burada kullanıcıya hakları vermek için seçilmiş olan user | book | type il link oluşturup yönlendiriyorum											
 function sendRight(e){
     var b = e.id;
-    var userId=$('#' + b + '> #user').val();
-    var type=$('#' + b + '> #type').val();
+    var userId=$('#' + b + ' #user').val();
+    var newUser=$('#' + b + ' #newUser').val();
+    var type=$('#' + b + ' #type').val();
     var bookId=$('#' + b + ' > #book').val();
-    var link ='/site/right?userId='+userId+'&bookId='+bookId+'&type='+type;
+    if (newUser) {
+    	var link ='/site/right?userId='+newUser+'&bookId='+bookId+'&type='+type+'&newUser=1';
+    }else{
+    	var link ='/site/right?userId='+userId+'&bookId='+bookId+'&type='+type;
+    };
     window.location.assign(link);
+    //console.log(link);
     }
 </script>
 
@@ -449,7 +455,7 @@ $all_books= $this->getWorkspaceBooks($workspace->workspace_id);
 		<?php } endforeach; ?>
 		
 
-		<div style="background-color:#fff; height: 60px; padding:5px; margin:10px; color:#333; text-align:left;">
+		<div class="alert alert-info">
 			<?php
 				//owner ya da editor eklemek için siteController 3 tane değerin post edilmesini bekliyor
 				//user: eklenecek olan elemanın mail adresi
@@ -457,29 +463,54 @@ $all_books= $this->getWorkspaceBooks($workspace->workspace_id);
 				//type: owner | editor | user
 
 			?>
-			<span class="editor-name" ><?php echo __('Kullanıcı Ekle');?>:</span>
-			<br style="clear:both; margin-bottom:20px;">
-			<form id="a<?php echo $book->book_id; ?>" method="post">
+			<form class="form-horizontal" role="form" id="a<?php echo $book->book_id; ?>">
+			<h4 class="editor-name" ><?php echo __('Kullanıcı Ekle');?>:</h4>
 			<input id="book" value="<?php echo $book->book_id; ?>" style="display:none">
-			<select id="user" class="book-list-textbox radius grey-9 float-left"  style=" width: 280px;">
-				<?php
-					$workspaceUsers = $this->workspaceUsers($workspace->workspace_id);
-					
-					foreach ($workspaceUsers as $key => $workspaceUser) {
-						if ($workspaceUser['userid'] != Yii::app()->user->id) {
-							echo '<option value="'.$workspaceUser['userid'].'">'.$workspaceUser['name'].' '.$workspaceUser['surname'].'</option>';
-						}
-					}
-				 ?>
-			</select>
-			 <select id="type" class="book-list-textbox radius grey-9 float-left"  style=" width: 70px;" >
-			  <option value="editor"><?php echo __('Editör');?></option>
-			  <option value="owner"><?php echo __('Sahibi');?></option>
-			</select>
-			</form>
-			<a href="#" onclick="sendRight(a<?php echo $book->book_id; ?>)" class="btn white radius float-right" style="margin-left:20px; width:50px; text-align:center;">
-				Ekle
-			</a>
+			
+			<div class="form-group">
+				<label class="col-sm-3 control-label"><?php _e('Kayıtlı kullanıcılar: '); ?></label>
+				<div class="col-sm-7">
+					<select id="user" class="form-control">
+						<option value="0"><?php _e("Seç"); ?></option>
+						<?php
+							$workspaceUsers = $this->workspaceUsers($workspace->workspace_id);
+							
+							foreach ($workspaceUsers as $key => $workspaceUser) {
+								if ($workspaceUser['userid'] != Yii::app()->user->id) {
+									echo '<option value="'.$workspaceUser['userid'].'">'.$workspaceUser['name'].' '.$workspaceUser['surname'].'</option>';
+								}
+							}
+						 ?>
+					</select>
+				</div>
+			</div>
+
+			<h4 class="" style="text-align: center;"><?php _e("Veya"); ?></h4>
+
+
+			<div class="form-group">
+				<label class="col-sm-3 control-label"><?php _e('Yeni kullanıcı: '); ?></label>
+				<div class="col-sm-7">
+					<input class="form-control" id="newUser" type="text" placeholder="email">
+				</div>
+			</div>
+
+			<div class="form-group">
+				<label class="col-sm-3 control-label"><?php _e('Kullanıcı Tipi: '); ?></label>
+				<div class="col-sm-7">
+					 <select id="type" class="form-control">
+					  <option value="editor"><?php echo __('Editör');?></option>
+					  <option value="owner"><?php echo __('Sahibi');?></option>
+					</select>
+				</div>
+			</div>
+			
+			<div class="form-group" style="padding-left:130px">
+				<a class="btn btn-primary" href="#" onclick="sendRight(a<?php echo $book->book_id; ?>)" class="btn white radius float-right" style="margin-left:20px; width:50px; text-align:center;">
+					Ekle
+				</a>
+			</div>
+		</form>
 		</div>
 
 		</div>
