@@ -1,18 +1,14 @@
 $( document ).ready(function () {
-
+  /*
   $("#editor_view_pane").click(function(e){
     var control = true;
-    console.log(e.target.id);
     if(e.target.id != "current_page")
     {
       var children = $("#current_page").children();
       $.each(children, function(i,key){
 
         if($($($(key).children()[0]).children()[0]).attr("id") == e.target.id || $($(key).children()[0]).attr("id") == e.target.id){
-          console.log(e.target.id);
-          console.log($($($(key).children()[0]).children()[0]).attr("id"));
-          console.log($($(key).children()[0]).attr("id"));
-          console.log($(key).attr("id"));
+          //console.log($($($(key).children()[0]).children()[0]).attr("id")+" - "+e.target.id);
           control = false;
         }
       
@@ -23,7 +19,7 @@ $( document ).ready(function () {
        }
     } 
   });
-
+*/
   bookPagePreviews();
 
   
