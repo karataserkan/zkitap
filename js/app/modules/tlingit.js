@@ -30,11 +30,11 @@ window.lindneo.tlingit = (function(window, $, undefined){
     // co-worker'lara bildir
     oldcomponent_id = component_id;
     oldcomponent = component;
-    console.log(component.data.self.css);
+    //console.log(component.data.self.css);
     if(component.data.self.css['z-index'] == "first"){
         
         var zindex = window.lindneo.toolbox.findHighestZIndexToSet('[component-instance="true"]', component.id );
-        console.log(zindex);
+        //console.log(zindex);
         if(zindex == 1) zindex = 900;
         component.data.self.css['z-index'] = zindex;
         //console.log(component.data.self.css);
@@ -96,7 +96,7 @@ window.lindneo.tlingit = (function(window, $, undefined){
     if( typeof  componentPreviosVersions[component.id] == "undefined"){
          
 
-          console.log('firstUpdate');
+          //console.log('firstUpdate');
         
     
         window.lindneo.dataservice
@@ -114,7 +114,7 @@ window.lindneo.tlingit = (function(window, $, undefined){
     } else {
         
         var componentDiff = deepDiffMapper.map(component.data, componentPreviosVersions[component.id].data);
-        console.log(componentDiff);
+        //console.log(componentDiff);
          window.lindneo.dataservice
           .send( 'UpdateMappedComponentData', 
             { 
@@ -167,7 +167,7 @@ window.lindneo.tlingit = (function(window, $, undefined){
       //console.log(oldcomponent);
       //console.log(response.result);
       if(response.result){
-        window.lindneo.nisga.destroyComponent(oldcomponent, response.result.delete);
+        window.lindneo.nisga.destroyComponent(oldcomponent);
         window.lindneo.tsimshian.componentDestroyed(response.result.delete);
       }
     }
@@ -382,14 +382,14 @@ window.lindneo.tlingit = (function(window, $, undefined){
   }; 
 
   var PageHasCreated = function (pageId){
-    console.log("page created");
+    //console.log("page created");
     bookPagePreviews();
    
   };
 
 
   var PageHasDeleted = function (pageId){
-    console.log(pageId);
+    //console.log(pageId);
     window.lindneo.tsimshian.pageDestroyed( pageId );
     window.lindneo.dataservice
     .send( 'DeletePage', 
@@ -398,7 +398,7 @@ window.lindneo.tlingit = (function(window, $, undefined){
       },
       DeletePage,
       function(err){
-        //console.log('error:' + err);
+        console.log('error:' + err);
       });
 
    

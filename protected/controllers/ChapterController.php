@@ -65,14 +65,15 @@ class ChapterController extends Controller
 		$model=new Chapter;
 		
 		$model->book_id=$book_id;
-		$model->chapter_id=functions::new_id();//functions::get_random_string();
+		$model->chapter_id=functions::new_id();
+		//functions::get_random_string();
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
 
 		
 			
 			if($model->save())
-				$this->redirect(array('page/create','book_id'=>$book_id,'chapter_id'=>$model->chapter_id));
+				$this->redirect(array('page/create','book_id'=>$book_id,'page_id'=>$model->chapter_id));
 		
 	}
 
