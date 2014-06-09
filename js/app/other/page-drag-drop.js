@@ -554,7 +554,7 @@ $( document ).ready(function () {
 
     $( document ).on( "click","canvas.preview" ,function(event, ui) {
       console.log(event);
-
+      window.scroll(0,0);
       $('.selected').trigger('unselect');
       if (typeof  event.toElement !="undefined"){
             console.log($('.'+event.toElement.parentElement.children[1].className).attr('bpageTeplateId'));
