@@ -9209,7 +9209,7 @@ ul.stats li small {
 	background-color:#fff;
 	-webkit-box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 	box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-	border-radius:5px;
+	border-radius:3px;
 	float:left;
 	margin-right:20px;
 	margin-bottom:20px;
@@ -9219,8 +9219,8 @@ ul.stats li small {
 .reader_book_card_book_cover img{
 	width:198px;
 	max-height:292px;
-	border-top-left-radius:5px;
-	border-top-right-radius:5px;
+	border-top-left-radius:3px;
+	border-top-right-radius:3px;
 }
 
 .reader_book_card_info_container {
@@ -9295,8 +9295,8 @@ ul.stats li small {
 	font-size: 25px;
 	color: #fff;
 	opacity:0;
-	border-top-left-radius:5px;
-	border-top-right-radius:5px;
+	border-top-left-radius:3px;
+	border-top-right-radius:3px;
 }
 
 .editor_mybooks_book_settings:hover {
@@ -9850,6 +9850,12 @@ li.user .dropdown-menu li a:hover {
 	background-color:#f8f8f8 !important;
 }
 
+
+.page-header .btn {
+	margin-right:10px;	
+}
+
+
 /** END OF EDITOR GENERAL CSS *******************/
 
 
@@ -9906,8 +9912,8 @@ div.reader_book_category {
 .reader_book_card_book_cover {
 	width:198px;
 	height:292px;
-	border-top-right-radius:5px;
-	border-top-left-radius:5px;
+	border-top-right-radius:3px;
+	border-top-left-radius:3px;
 }
 
 .reader_market_page_row .nav-tabs {
