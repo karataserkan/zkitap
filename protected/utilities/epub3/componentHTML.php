@@ -908,22 +908,34 @@ class componentHTML {
 
 		if(isset($data->audio->attr))
 			foreach ($data->audio->attr as $attr_name => $attr_val ) {
+				if(trim($attr_name)!=''){
 				$container.=" $attr_name='$attr_val' ";
+				error_log(" $attr_name='$attr_val' "."\n\n");
+				}
 			}
 
-		$container.= $repeat_type.' = "'.$repeat_type.'" '.$auto_type.' = "'.$auto_type.'"';
-		
+		//$container.= $repeat_type.' = "'.$repeat_type.'" '.$auto_type.' = "'.$auto_type.'"';
+		if(trim($repeat_type)!=''){
+			$container.= $repeat_type.' = "'.$repeat_type.'" ';
+		}
+		if(trim($auto_type)!=''){
+			$container.=$auto_type.' = "'.$auto_type.'"';
+		}
 		
 		if(isset($data->audio->css)){
 			$container.=" style=' ";
 			foreach ($data->audio->css as $css_name => $css_val ) {
+				if(trim($css_name)!=''){
 				$container.="$css_name:$css_val;";
+				error_log(" css_name='$css_val' "."\n\n");
+				}
 			}
 			$container.="' "; 
 		}
 
 		$container.=" >";
-		
+
+		error_log("CONTAINER:".$container);		
 		
 
 
@@ -932,13 +944,21 @@ class componentHTML {
 		<source  class='audio'  ";
 		if(isset($data->source->attr))
 			foreach ($data->source->attr as $attr_name => $attr_val ) {
+				error_log(" $attr_name='$attr_val' "."\n\n");
+				if(trim($attr_name)!=''){
 				$source.=" $attr_name='$attr_val' ";
+				
+				}
 			}
+		error_log($source."\n");
 
 		if(isset($data->source->css)){
 			$source.=" style=' ";
 			foreach ($data->source->css as $css_name => $css_val ) {
+				if(trim($css_name)!=''){
 				$source.="$css_name:$css_val;";
+				error_log(" $css_name='$css_val' "."\n\n");
+				}
 			}
 			$source.="' ";
 		}
@@ -949,7 +969,7 @@ class componentHTML {
 		$container.= "$source</audio>";
 
 
-
+		error_log($container);
 		$this->html=str_replace('%component_inner%' ,$container, $this->html);
 		
 
@@ -1075,7 +1095,7 @@ class componentHTML {
 		$container.=" 
 
 			<div id='$html_id' ".$css.">
-				<iframe id='i".$html_id."' src ='$html_file' style='width:100%; height:100%;' ></iframe>
+				<iframe id='i".$html_id."' src ='$html_file' style='width:100%; height:100%;' frameborder='0' scrolling='no'></iframe>
 			</div>
 		
 		";
