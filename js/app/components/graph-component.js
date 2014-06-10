@@ -386,7 +386,7 @@ console.log(top);
       
           var newPieRow= $("<div class='pie-chart-slice-holder slice-holder data-row'> \
                       "+(i+1)+". "+j__("Dilim")+" <br> \
-                      %<input type='text' id='"+"pie-chart-"+i+"'class='chart-textbox radius grey-9 percent' value='"+(graph_values[i] != undefined ? graph_values[i]:(Math.floor((Math.random()*100)+1)))+"'><br> \
+                      "+j__("Değer")+":<input type='text' id='"+"pie-chart-"+i+"'class='chart-textbox radius grey-9 percent' value='"+(graph_values[i] != undefined ? graph_values[i]:(Math.floor((Math.random()*100)+1)))+"'><br> \
                       "+j__("Etiket")+"<input type='text' class='chart-textbox-wide radius grey-9 label' value='"+letters[i]+"'> \
                       <input type='color' class='color-picker-box radius color' value='"+ (graph_colors[i] != undefined ? graph_colors[i]:get_random_color())+"' placeholder='e.g. #bbbbbb'> \
               </div> \
