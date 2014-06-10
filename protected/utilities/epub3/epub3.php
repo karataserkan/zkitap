@@ -555,6 +555,8 @@ class epub3 {
 
 		}
 		$(window).load(function(){
+			var is_safari_or_uiwebview = /(iPhone|iPod|iPad).*AppleWebKit/i.test(navigator.userAgent);
+			if(is_safari_or_uiwebview){
 			var videos=$("video");
 			$.each(videos,function(i,item){
 				
@@ -571,6 +573,7 @@ class epub3 {
 				
 				}
 			});
+			}
 		});
 		$(document).ready(function() {
 			/*
