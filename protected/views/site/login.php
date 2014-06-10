@@ -108,7 +108,12 @@ $this->breadcrumbs=array(
 					<div class="row">
 						<div class="">
 							<div class="login-box">
-								
+								<?php if ($signUpError) { ?>
+									<div class="alert alert-danger">
+										<span><?php echo $signUpError; ?></span>
+									</div>
+								<?php }
+								?>
 								<?php $form=$this->beginWidget('CActiveForm', array(
 									'id'=>'user-form',
 									'enableAjaxValidation'=>false,
@@ -289,6 +294,12 @@ $this->breadcrumbs=array(
 				
 				
 			});
+
+			var signUpError="<?php echo $signUpError ?>";
+			if (signUpError) {
+				swapScreen('register_bg');
+			};
+
 			var passResetSuccess="<?php echo $passResetSuccess ?>";
 			if (passResetSuccess) {
 				swapScreen('forgot_bg');
