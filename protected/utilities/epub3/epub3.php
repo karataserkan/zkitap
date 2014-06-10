@@ -556,6 +556,10 @@ class epub3 {
 		}
 
 		$(document).ready(function() {
+			$("video").click(function(event){
+				console.log("kapi://"+btoa($(event.currentTarget).context.currentSrc));
+				window.location="kapi://"+btoa($(event.currentTarget).context.currentSrc);
+				});
 			$("video").each(function () { this.pause() });
 			$(window).focus(function(){
 				okutus_play();
