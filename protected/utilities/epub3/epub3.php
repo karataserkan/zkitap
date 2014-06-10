@@ -556,7 +556,18 @@ class epub3 {
 		}
 
 		$(document).ready(function() {
+			/*
 			$("video").click(function(event){
+				console.log("kapi://"+btoa($(event.currentTarget).context.currentSrc));
+				window.location="kapi://"+btoa($(event.currentTarget).context.currentSrc);
+				});*/
+			/*
+			$("div.video").click(function(event){var video_ios=$($(event.currentTarget).find("video"));
+				window.location="kapi://"+btoa(video_ios[0].currentSrc);
+			});*/
+			$("video").click(function(event){
+				event.preventDefault();
+				event.stopPropagation();
 				console.log("kapi://"+btoa($(event.currentTarget).context.currentSrc));
 				window.location="kapi://"+btoa($(event.currentTarget).context.currentSrc);
 				});
