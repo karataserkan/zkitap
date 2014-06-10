@@ -565,11 +565,18 @@ window.lindneo.toolbox = (function(window, $, undefined){
       //console.log(this.selectedComponents);
       //console.log('END');
       //return;
+
       $.each(this.selectedComponents, function( key, component ) {
-        if(typeof this.options.component.data.lock == "undefined" || this.options.component.data.lock == '') { 
-          if(typeof component.options.component.data.lock.username == "undefined"){
+      //console.log(component.options.component.data.lock);
+      //$('.toolbox.'+component.options.component.type+'-options, .toolbox.generic-options').show();
+      //console.log(component.options.component);
+        if(typeof component.options.component.data.lock == "undefined" || component.options.component.data.lock == '' || !component.options.component.data.lock) { 
+      //console.log(this.options.component.data.lock);
+      
+          //if(typeof component.options.component.data.lock.username == "undefined"){
+            //console.log("unlock");
             $('.toolbox.'+component.options.component.type+'-options, .toolbox.generic-options').show();
-          }
+          //}
         }
 
 
@@ -667,7 +674,7 @@ window.lindneo.toolbox = (function(window, $, undefined){
 
 
   var addComponentToSelection = function (component){
-      
+    //console.log(component);
     var newObject = component;
     this.removeComponentFromSelection(newObject);
       

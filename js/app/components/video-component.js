@@ -9,7 +9,7 @@ $(document).ready(function() {
             var that = this;
 
             
-            this.videoTag=$('<video poster="'+this.options.component.data.poster+'" style="width:100%; height:100%;"></video>');
+            this.videoTag=$('<video id="v_'+this.options.component.id+'" poster="'+this.options.component.data.poster+'" style="width:100%; height:100%;"></video>');
 
             if(this.options.component.data.video_type == 'popup'){
               
@@ -423,9 +423,12 @@ var createVideoComponent = function( event, ui, oldcomponent ) {
                 
                  $('#capture').click(function() {
                             var canvases = $('canvas');
-                            VideoSnapper.captureAsCanvas(video, { width: 160, height: 68, time: 0 }, function(canvas) {
+                            VideoSnapper.captureAsCanvas(video, { width: $("#current_page").width(), height: $("#current_page").height(), time: 0 }, function(canvas) {
                                 $('#screen').html("");
                                 $('#screen').append(canvas); 
+                                $('#screen canvas').addClass("caputure_image");
+                                $('.caputure_image').width(160);
+                                $('.caputure_image').height(68);
                                 var image = new Image();
                                 image.src = canvas.toDataURL();
                                 poster = image.src;
@@ -714,9 +717,13 @@ var createVideoComponent = function( event, ui, oldcomponent ) {
 
                $('#capture').click(function() {
                   var canvases = $('canvas');
-                  VideoSnapper.captureAsCanvas(video, { width: 160, height: 68, time: 0 }, function(canvas) {
+                  VideoSnapper.captureAsCanvas(video, { width: $("#current_page").width(), height: $("#current_page").height(), time: 0 }, function(canvas) {
+                    console.log(canvas);
                     $('#screen').html("");
                     $('#screen').append(canvas); 
+                    $('#screen canvas').addClass("caputure_image");
+                    $('.caputure_image').width(160);
+                    $('.caputure_image').height(68);
                     var image = new Image();
                     image.src = canvas.toDataURL();
                     poster = image.src;

@@ -1,25 +1,31 @@
 $( document ).ready(function () {
-  /*
+
   $("#editor_view_pane").click(function(e){
     var control = true;
+    
     if(e.target.id != "current_page")
     {
       var children = $("#current_page").children();
       $.each(children, function(i,key){
 
         if($($($(key).children()[0]).children()[0]).attr("id") == e.target.id || $($(key).children()[0]).attr("id") == e.target.id){
-          //console.log($($($(key).children()[0]).children()[0]).attr("id")+" - "+e.target.id);
+          //console.log(e.target.id);
+          //console.log($($($(key).children()[0]).children()[0]).attr("id"));
+          //console.log($($(key).children()[0]).attr("id"));
+          //console.log($(key).attr("id"));
           control = false;
         }
-      
+        else if($($($(key).children()[0]).children()[0]).attr("id") == e.target.id || $($(key).children()[0]).attr("id") == $("#"+e.target.id).parent().attr("id")){
+          control = false;
+        }
       });
       if(control){
         //console.log("deselect");
-         $('.selected').trigger('unselect');
+        $('.selected').trigger('unselect');
        }
     } 
   });
-*/
+
   bookPagePreviews();
 
   
@@ -226,6 +232,24 @@ $( document ).ready(function () {
     }
     else 
       $('.ruler, .vruler').hide();
+
+    var is_grid_checked = $('input:checkbox[name=grid]:checked').val();
+
+    if(is_grid_checked == "on"){
+      var image = $("#current_page").css('background-image');
+      if(!image)
+        $("#current_page").css("background-image", 'url("/css/images/gridpattern.png")');
+      else{
+        image = "url("+window.base_path+"/css/images/gridpattern.png), "+image;
+        $("#current_page").css("background-image", image);
+      }
+    }
+    else{
+      //$("#current_page").css("background-image", 'url("/css/images/gridpattern.png")');
+      var image = $("#current_page").css('background-image');
+      image = image.replace("url("+window.base_path+"/css/images/gridpattern.png), ","");
+      $("#current_page").css("background-image", image);
+    }
   });
   var termTemplate = "<span class='ui-autocomplete-term' style='display:inline-block'>%s</span>";
         
@@ -554,9 +578,7 @@ $( document ).ready(function () {
 
     $( document ).on( "click","canvas.preview" ,function(event, ui) {
       console.log(event);
-
-      window.scroll(0,0);
-
+      console.log($('.'+event.toElement.parentElement.children[1].className).attr('bpageTeplateId'));
 
       $('.selected').trigger('unselect');
       
@@ -1031,3 +1053,5 @@ $( document ).ready(function () {
 
   }
 
+
+   

@@ -240,6 +240,7 @@ $current_user=User::model()->findByPk(Yii::app()->user->id);
 					<ul>
 				     <li class="onoff"><a href='#'  ><input type="checkbox" name="cetvel" id="cetvelcheck" class="css-checkbox" /><label for="cetvelcheck" class="css-label"><?php _e('Cetvel') ?></label></a></li>
 			         <li class="onoff"><a href='#'  ><input type="checkbox" name="rehber" id="rehbercheck" class="css-checkbox" /><label for="rehbercheck" class="css-label"><?php _e('Rehber') ?></label></a></li>
+			         <li class="onoff"><a href='#'  ><input type="checkbox" name="grid" id="gridcheck" class="css-checkbox" /><label for="gridcheck" class="css-label"><?php _e('Grid') ?></label></a></li>
 			         <!--<li class="onoff"><a href='#'  ><input type="checkbox" name="yorumlar" id="yorumlarcheck" class="css-checkbox" /><label for="yorumlarcheck" class="css-label"><?php _e('Yorumlar') ?></label></a></li>-->
 			        </ul>
 			   </li>
@@ -2116,7 +2117,7 @@ $background= (!empty($img)) ? "background-image:url('".str_replace(" ", "", $img
 					<div id='current_page' page_id='<?php echo $page->page_id ;?>' style="<?php echo $background; ?>;border:thin solid rgb(146, 146, 146);zoom:1;
 					-webkit-box-shadow: 1px 1px 5px 2px rgba(6, 34, 63, 0.63);
 					-moz-box-shadow: 1px 1px 5px 2px rgba(6, 34, 63, 0.63);
-					box-shadow: 1px 1px 5px 2px rgba(6, 34, 63, 0.63); background-size:<?php echo $bookWidth; ?>px <?php echo $bookHeight; ?>px; height:<?php echo $bookHeight; ?>px;width:<?php echo $bookWidth; ?>px;position:relative"  >
+					box-shadow: 1px 1px 5px 2px rgba(6, 34, 63, 0.63); height:<?php echo $bookHeight; ?>px;width:<?php echo $bookWidth; ?>px;position:relative"  >
 						<div id="guide-h" class="guide"></div>
 						<div id="guide-v" class="guide"></div>
 					</div>
