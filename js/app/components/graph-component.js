@@ -386,7 +386,7 @@ console.log(top);
       
           var newPieRow= $("<div class='pie-chart-slice-holder slice-holder data-row'> \
                       "+(i+1)+". "+j__("Dilim")+" <br> \
-                      %<input type='text' class='chart-textbox radius grey-9 percent' value='"+(graph_values[i] != undefined ? graph_values[i]:(Math.floor((Math.random()*100)+1)))+"'><br> \
+                      %<input type='text' id='"+"pie-chart-"+i+"'class='chart-textbox radius grey-9 percent' value='"+(graph_values[i] != undefined ? graph_values[i]:(Math.floor((Math.random()*100)+1)))+"'><br> \
                       "+j__("Etiket")+"<input type='text' class='chart-textbox-wide radius grey-9 label' value='"+letters[i]+"'> \
                       <input type='color' class='color-picker-box radius color' value='"+ (graph_colors[i] != undefined ? graph_colors[i]:get_random_color())+"' placeholder='e.g. #bbbbbb'> \
               </div> \
@@ -395,7 +395,7 @@ console.log(top);
              "+(i+1)+". "+j__("sütun adı")+": \
             <input type='text' class='chart-textbox-wide radius grey-9 label ' value='"+letters[i]+"'><br> \
              "+(i+1)+". "+j__("sütun değeri")+":  \
-            <input type='text' class='chart-textbox-wide radius grey-9 value ' value='"+(graph_values[i] != undefined ? graph_values[i]:Math.floor((Math.random()*100)+1))+"'><br> \
+            <input type='text' id='"+"bar-chart-"+i+"' class='chart-textbox-wide radius grey-9 value ' value='"+(graph_values[i] != undefined ? graph_values[i]:Math.floor((Math.random()*100)+1))+"'><br> \
           </div> \
                 ");
           newBarRow.appendTo( $('#bar-chart-properties') );
@@ -408,8 +408,38 @@ console.log(top);
       $('#verisayisi').change();
       $('#graph_leading').change(function(){
         var str = "";
+        var chart;
+        var selected_item=$( "#graph_leading option:selected" ).val();
+        var list_bar_chart=$("."+$( "#graph_leading option:selected" ).val()+"-slice-holder").find('.value');
+        var list_pie_chart=$("."+$( "#graph_leading option:selected" ).val()+"-slice-holder").find('.percent');
+/*        chart=(list_bar_chart.length==0?list_pie_chart:list_bar_chart);
+        chart=(list_pie_chart.length==0?list_bar_chart:list_pie_chart);*/
+        if(list_bar_chart.length==0){
+        	chart=list_pie_chart;
+        }
+        else
+        {
+        	chart=list_bar_chart;	
+        }
+        console.log(list_bar_chart);
+        console.log(list_pie_chart);
+        console.log(chart);
+        for (var i = 0; i < chart.length; i++) {
+        	if(selected_item=='bar-chart')
+        	{
+        		console.log($('#pie-chart-'+i).val());
+        		$("#"+selected_item+"-"+i).val($('#pie-chart-'+i).val());
+        		console.log($("#"+selected_item+"-"+i).val(),$('#pie-chart-'+i).val());
+        	}
+        	else
+        	{
+  				$("#"+selected_item+"-"+i).val($('#bar-chart-'+i).val());  
+        		console.log($("#"+selected_item+"-"+i).val(),$('#pie-chart-'+i).val());   		
+        	}
+        }
         $( "#graph_leading option:selected" ).each(function() {
           str += $( this ).val() + " ";
+          
         });
         $('.chart_prop').hide();
         $('.chart_prop.' + str ).show();
