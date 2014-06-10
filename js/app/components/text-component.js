@@ -615,7 +615,8 @@ $(document).ready(function(){
             'font-style' : 'normal',
             'text-decoration' : 'none',
             'background-color' : 'transparent',
-             'overflow': (type == 'text' ? 'visible' : 'hidden' )
+             'overflow': (type == 'text' ? 'visible' : 'hidden' ),
+             'overflow-y': (type == 'text' ? 'visible' : 'auto' )
           } , 
           'attr': {
             'placeholder': j__("Metin Kutusu"),

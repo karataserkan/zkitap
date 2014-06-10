@@ -313,7 +313,7 @@ console.log(top);
         <label for='quiz_type'> "+j__("Soru Tipi")+": </label> \
         <select id='quiz_type' class='form-control'> \
           <option "+blank_selected+" value=''>"+j__("Lütfen Seçiniz")+"</option> \
-          <option "+text_selected+" value='text'>"+j__("Yazı")+"</option> \
+          <option "+text_selected+" value='text'>"+j__("Açık Uçlu")+"</option> \
           <option "+radio_selected+" value='multiple_choice'>"+j__("Çoktan Seçmeli")+"</option> \
           <option "+check_selected+" value='checkbox'>"+j__("Çoklu Seçmeli")+"</option> \
         </select> \
@@ -376,11 +376,16 @@ console.log(top);
           console.log(i+"--"+oldcomponent_answer);
           if(i == oldcomponent_answer) answer_selected="selected";
           console.log(answer_selected);
-          var multiple_answer = $('<div><input type="radio" '+answer_selected+' name="multipleradios" id="optionsRadios'+multiple_count+'" value="'+multiple_count+'" style="float:left; margin-right:10px;"><input class="form-control" id="mul_option'+multiple_count+'" type="text" value="'+key+'" placeholder="Cevap seçeneklerini giriniz..."style="float: left; width: 200px; margin-right: 10px;"><i id="delete_'+multiple_count+'" class="icon-close size-10 popup-close-button" style="float:left;" onclick="removeRow(\'multiple\','+multiple_count+');"></i><br><br></div>');
+          var multiple_answer = $('<div>\
+                                    <input type="radio" '+answer_selected+' name="multipleradios" id="optionsRadios'+multiple_count+'" value="'+multiple_count+'" style="float:left; margin-right:10px;">\
+                                    <input class="form-control" id="mul_option'+multiple_count+'" type="text" value="'+key+'" placeholder="Cevap seçeneklerini giriniz..."style="float: left; width: 200px; margin-right: 10px;">\
+                                    <i id="delete_'+multiple_count+'" class="icon-close size-10 popup-close-button" style="float:left;" onclick="removeRow(\'multiple\','+multiple_count+');"></i><br><br>\
+                                  </div>');
           multiple_answer.appendTo($('.quiz-inner'));
           multiple_count++;
           question_answers.push(multiple_answer);
         });
+        $('input:radio[name="multipleradios"]').filter('[value="'+oldcomponent_answer+'"]').attr('checked', true);
       }
       else if( $('#quiz_type').val() == "checkbox"){
         $('.quiz-inner').html('');
@@ -395,7 +400,9 @@ console.log(top);
           check_count++;
           question_answers.push(check_answer);
         });
-        
+        $.each(oldcomponent_answer, function(i,key){
+           $('input:checkbox[name="multichecks"]').filter('[value="'+key+'"]').prop('checked', true);
+        });
       }
       else if( $('#quiz_type').val() == "scale"){
         
@@ -485,8 +492,14 @@ console.log(top);
       else{
         top = oldcomponent.data.self.css.top;
         left = oldcomponent.data.self.css.left;
+        console.log(oldcomponent);
+        $("#"+oldcomponent.id).hide();
+        $("#"+oldcomponent.id).removeClass("selected");
+        $("#c_"+oldcomponent.id).removeClass("selected");
         window.lindneo.tlingit.componentHasDeleted( oldcomponent, oldcomponent.id );
+        
       };
+
       var quiz_type = $('#quiz_type').val();
       var question = $('#question').val();
       var answer = '';
@@ -505,6 +518,7 @@ console.log(top);
       else if(quiz_type == "multiple_choice"){
         console.log(question_answers.length);
         answer = $('input[name=multipleradios]:checked').val();
+
 
         if(typeof answer == "undefined"){
           alert("Doğru cevabı seçmediğiniz ekleme işlemi başarısız olmuştur.")
@@ -529,9 +543,18 @@ console.log(top);
         $('input:checkbox[name=multichecks]:checked').each(function() 
           {
              //alert( $(this).val());
-             answer.push($(this).val());
-             
+             var check = this;
+             $('input:checkbox[name=multichecks]:not(:checked)').each(function(){
+                console.log(check);
+                console.log(this);
+                if(check != this)
+                  answer.push($(check).val());
+             });
+             //answer.push($(this).val());
           });
+        console.log(answer);
+        //return;
+
         $.each( question_answers, function( key, value ) {
           
              
@@ -543,7 +566,7 @@ console.log(top);
         console.log(answer);
         //return;
         if(answer.length == 0){
-          alert("Doğru cevabları seçmediğiniz ekleme işlemi başarısız olmuştur.")
+          alert("Doğru cevapları seçmediğiniz ekleme işlemi başarısız olmuştur.")
           return;
         }
       }
