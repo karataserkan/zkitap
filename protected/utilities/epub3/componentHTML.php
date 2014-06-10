@@ -1257,6 +1257,9 @@ class componentHTML {
 		else if($component->data->link_area == "Y")
 			$container.=" 
 				$css ></a>";
+		else if($component->data->link_area == "Z")
+			$container.=" 
+				$css >".$component->data->link_text."</a>";
 
 		
 
