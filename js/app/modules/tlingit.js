@@ -95,7 +95,7 @@ window.lindneo.tlingit = (function(window, $, undefined){
 
   var componentHasUpdated = function ( component ) {
     //console.log(component);
-
+    window.lindneo.controls.pageLoaded=false;
     if( typeof  componentPreviosVersions[component.id] == "undefined"){
          
 
@@ -144,7 +144,7 @@ window.lindneo.tlingit = (function(window, $, undefined){
   };
 
   var updateArrivalComponent = function(res) {
-   
+    window.lindneo.controls.pageLoaded=true;
     //var response = responseFromJson(res);
     //console.log(response);
     //loadPagesPreviews(response.result.component.page_id);
@@ -187,6 +187,7 @@ window.lindneo.tlingit = (function(window, $, undefined){
 
   var loadComponents = function( res ) {
 
+    window.lindneo.controls.pageLoaded = true;
     //console.log("LOAD components");
     //console.log(window.lindneo.currentBookId);
     //console.log(res);
@@ -216,7 +217,6 @@ window.lindneo.tlingit = (function(window, $, undefined){
       }
       window.lindneo.nisga.createComponent( val );
     });
-
     if (window.lindneo.highlightComponent!=''){
       $('#'+window.lindneo.highlightComponent).parent().css('border','1px solid red');
     }
@@ -237,6 +237,7 @@ window.lindneo.tlingit = (function(window, $, undefined){
   };
 
   var loadPage = function (pageId){
+     window.lindneo.controls.pageLoaded = false;
      updatePageCanvas(window.lindneo.currentPageId, function(){
           $('#current_page').empty();
           window.lindneo.currentPageId=pageId;
@@ -431,6 +432,9 @@ window.lindneo.tlingit = (function(window, $, undefined){
   }
   var GenerateCurrentPagePreview = function (page_id,callback,async){
     if(typeof async == "undefined") async = true;
+    if (!window.lindneo.controls.pageLoaded) {
+      return callback();
+    }
     html2canvas($('#current_page')[0], {
       onrendered: function(canvas) {
          
@@ -496,6 +500,8 @@ var deepDiffMapper = function() {
         VALUE_DELETED: 'deleted',
         VALUE_UNCHANGED: 'unchanged',
         map: function(obj1, obj2) {
+          console.log(obj1);
+          console.log(obj2);
             if (this.isFunction(obj1) || this.isFunction(obj2)) {
                 throw 'Invalid argument. Function given, object expected.';
             }

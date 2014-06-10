@@ -577,6 +577,9 @@ $( document ).ready(function () {
     });
 
     $( document ).on( "click","canvas.preview" ,function(event, ui) {
+       if (!window.lindneo.controls.pageLoaded) return;
+
+     // window.lindneo.controls.pageLoaded = false;
       console.log(event);
       console.log($('.'+event.toElement.parentElement.children[1].className).attr('bpageTeplateId'));
 
