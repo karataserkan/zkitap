@@ -81,7 +81,7 @@ $host_config=array(
 
 return array(
 	'basePath'=>dirname(__FILE__).DIRECTORY_SEPARATOR.'..',
-	'name'=>'Squid Pacific',
+	'name'=>'Okutus Editör',
 	'sourceLanguage'=>'tr_TR',
 	'language'=>'en_US',
 	// preloading 'log' component
