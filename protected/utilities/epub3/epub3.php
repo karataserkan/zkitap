@@ -561,16 +561,18 @@ class epub3 {
 				console.log("kapi://"+btoa($(event.currentTarget).context.currentSrc));
 				window.location="kapi://"+btoa($(event.currentTarget).context.currentSrc);
 				});*/
-			/*
 			$("div.video").click(function(event){var video_ios=$($(event.currentTarget).find("video"));
+				event.stopPropagation();
 				window.location="kapi://"+btoa(video_ios[0].currentSrc);
-			});*/
+			});
+			/*
 			$("video").click(function(event){
 				event.preventDefault();
 				event.stopPropagation();
 				console.log("kapi://"+btoa($(event.currentTarget).context.currentSrc));
 				window.location="kapi://"+btoa($(event.currentTarget).context.currentSrc);
 				});
+			*/
 			$("video").each(function () { this.pause() });
 			$(window).focus(function(){
 				okutus_play();
