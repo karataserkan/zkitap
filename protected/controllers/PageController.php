@@ -90,7 +90,7 @@ class PageController extends Controller
 			$chapter_id=$currentPage->chapter_id;
 		}else{
 			$chapter_id=$page_id;
-		}
+		}	
 		
 		//$pages=Page::model()->findAll('chapter_id=:chapter_id and `order` >'.$currentPage->order,array('chapter_id'=>$chapter_id));
 

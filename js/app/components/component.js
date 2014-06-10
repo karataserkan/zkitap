@@ -68,7 +68,7 @@ $(document).ready(function(){
           },
           'resize':function(event,ui){
             //console.log(this);
-            console.log("resize");
+            //console.log("resize");
             if( typeof this.resize_pass != "undefined" )
               this.resize_pass(event,ui);
 
@@ -76,8 +76,8 @@ $(document).ready(function(){
             if(that.options.component.type == "text" || that.options.component.type == "side-text"){
               var component_height = ui.size.height + 14 ;
             }
-            console.log(this);
-            console.log(component_height);
+            //console.log(this);
+            //console.log(component_height);
             that.options.component.data.self.css.width = component_width + "px";
             that.options.component.data.self.css.height = component_height + "px";
             $("#"+that.options.component.id).height(component_height + "px");
@@ -265,8 +265,8 @@ $(document).ready(function(){
               window.lindneo.dataservice.popup_popup(event, ui, that.options.component);
             else if(that.options.component.type == 'grafik')
               window.lindneo.dataservice.graph_popup(event, ui, that.options.component);
-            else if(that.options.component.type == 'quiz')
-              window.lindneo.dataservice.quiz_popup(event, ui, that.options.component);
+            else if(that.options.component.type == 'mquiz')
+              window.lindneo.dataservice.mquiz_popup(event, ui, that.options.component);
             else if(that.options.component.type == 'html')
               window.lindneo.dataservice.html_popup(event, ui, that.options.component);
             else if(that.options.component.type == 'wrap')
@@ -280,7 +280,7 @@ $(document).ready(function(){
           .mouseenter(function(event){
             
              
-             if(that.options.component.data.lock == '')
+             if(that.options.component.data.lock == '' || !that.options.component.data.lock)
              var deleteButton = $('<a id="delete-button-' + that.options.component.id + '"class="icon-delete size-10" style="position: absolute; top: -20px; right: 5px;" ></a>');
              else
              var deleteButton=$('<a id="delete-button" class="icon-delete size-10" style="position: absolute; top: -20px; right: 5px;" hidden></a>');

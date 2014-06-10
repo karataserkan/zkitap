@@ -3,6 +3,8 @@
 window.lindneo = (function(window){
 
   var url = '/';
+  var controls = {};
+
   var currentPageId ;
   var currentComponent = {};
   var online_users = [];
@@ -113,7 +115,8 @@ window.lindneo = (function(window){
     selection_text: selection_text,
     currentPageId: currentPageId,
     currentComponent: currentComponent,
-    online_users: online_users
+    online_users: online_users,
+    controls: controls
   }; 
 
 })( window );

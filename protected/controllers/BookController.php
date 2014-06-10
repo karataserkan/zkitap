@@ -837,6 +837,7 @@ class BookController extends Controller
 	}
 
 	public function actionAuthor($bookId=null,$page=null,$component=null,$id=null,$id2=null){
+		$this->pageTitle = "Kitap Düzenleme";
 		$this->layout = '//layouts/author';
 		if($bookId==null){
 			$bookId=$id;
