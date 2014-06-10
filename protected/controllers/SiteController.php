@@ -36,11 +36,19 @@ class SiteController extends Controller
 		functions::event('tripData',NULL, function($var){
 
 		?>
-			/* Header */
+			/* Welcome */
 				{ 
-			       content : "Okutus Editor'e HoşGeldiniz, Tanıtım için ileriye basınız.",
+			       content : j__("Okutus Editor'e Hoşgeldiniz, tanıtım için ileriye basınız."),
 			       position:'screen-center',
 			       delay:-1
+			   },
+               
+          /* E-Posta Doğrulama */
+			   { 
+			       sel : $('a[data-id="confirmEmail"]'),
+			       content : j__("Öncelikle E-Posta Adresinizi Doğrulayın."),
+			       position:'s',
+                   delay:-1
 			   },
 		
 			/* Header */
