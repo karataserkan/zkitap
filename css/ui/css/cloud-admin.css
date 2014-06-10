@@ -10886,3 +10886,11 @@ video#bgvid {
 }
 
 /* END OF ADDITIONAL PART ************************************************************************************************/
+span#book_type label:hover{
+-webkit-box-shadow: 3px 3px 1px 0px rgba(50, 50, 50, 0.37);
+-moz-box-shadow:    3px 3px 1px 0px rgba(50, 50, 50, 0.37);
+box-shadow:         3px 3px 1px 0px rgba(50, 50, 50, 0.37);
+cursor:pointer;
+}
+
+
