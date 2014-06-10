@@ -1,0 +1,91 @@
+/**  BRAND COLOR ADJUSTMENT ***********************************/
+
+.login_page_reader_logo {
+	margin-left: auto;
+	margin-right: auto;
+	margin-top:50px;
+	width: 520px;
+	height: 250px;
+	background-image: url(../../../css/brands/linden/editor_login_logo.png);
+	background-repeat: no-repeat;
+	background-position: center;
+}
+
+.login_page_slogan {
+	margin-left: auto;
+	margin-right: auto;
+	height: 200px;
+	background-image: url(../../../css/brands/linden/editor_login_slogan.png);
+	background-size: contain;
+	background-repeat: no-repeat;
+	background-position: center;
+}
+
+.navbar_logo {
+	width: 180px;
+	height: 100%;
+	background-image: url(../../../css/brands/linden/editor_navbar_logo.png);
+	background-size: contain;
+	background-repeat: no-repeat;
+	background-position: center;
+	opacity: 0.8;
+	position: absolute;
+	margin-left: auto;
+	margin-right: auto;
+	left: 0;
+	right: 0;
+
+}
+
+.navbar_blue {
+	background: #2880b9; /* Old browsers */
+	background: -moz-linear-gradient(top,  #2880b9 0%, #0063A2 100%); /* FF3.6+ */
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#2880b9), color-stop(100%,#0063A2)); /* Chrome,Safari4+ */
+	background: -webkit-linear-gradient(top,  #2880b9 0%,#0063A2 100%); /* Chrome10+,Safari5.1+ */
+	background: -o-linear-gradient(top,  #2880b9 0%,#0063A2 100%); /* Opera 11.10+ */
+	background: -ms-linear-gradient(top,  #2880b9 0%,#0063A2 100%); /* IE10+ */
+	background: linear-gradient(to bottom,  #2880b9 0%,#0063A2 100%); /* W3C */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#2880b9', endColorstr='#006fb5',GradientType=0 ); /* IE6-9 */
+	border-bottom: 2px solid #00558B;
+}
+
+.solid_brand_color {
+	background-color:#2880b9 !important;
+}
+
+.brand_text_color {
+	color:#2880b9;
+}
+
+.brand_color_for_buttons {
+	background-color: #2880b9;
+	border-color: #226e99;
+	color:#fff;
+}
+
+
+.brand_color_for_buttons:hover {
+  color: #ffffff;
+  background-color: #226e99;
+  border-color: #1c597c;
+}
+
+.sidebar-menu > ul > li.current > a {
+	border-right:3px solid #2880b9;	
+}
+
+.sidebar-menu > ul > li.current:hover {
+	border-right:none;	
+}
+
+.navbar-right > li:hover{
+	background-color:#005F9B;
+}
+
+
+.brand_hover_color_for_navbar_components:hover {
+	background-color:#005F9B;	
+}
+
+
+/**  END OF BRAND COLOR ADJUSMENT ***********************************/
