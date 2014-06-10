@@ -9,17 +9,19 @@ $( document ).ready(function () {
       $.each(children, function(i,key){
 
         if($($($(key).children()[0]).children()[0]).attr("id") == e.target.id || $($(key).children()[0]).attr("id") == e.target.id){
-          console.log(e.target.id);
-          console.log($($($(key).children()[0]).children()[0]).attr("id"));
-          console.log($($(key).children()[0]).attr("id"));
-          console.log($(key).attr("id"));
+          //console.log(e.target.id);
+          //console.log($($($(key).children()[0]).children()[0]).attr("id"));
+          //console.log($($(key).children()[0]).attr("id"));
+          //console.log($(key).attr("id"));
           control = false;
         }
-      
+        else if($($($(key).children()[0]).children()[0]).attr("id") == e.target.id || $($(key).children()[0]).attr("id") == $("#"+e.target.id).parent().attr("id")){
+          control = false;
+        }
       });
       if(control){
-        console.log("deselect");
-        //$('.selected').trigger('unselect');
+        //console.log("deselect");
+        $('.selected').trigger('unselect');
        }
     } 
   });
@@ -558,9 +560,7 @@ $( document ).ready(function () {
 
     $( document ).on( "click","canvas.preview" ,function(event, ui) {
       console.log(event);
-
-      window.scroll(0,0);
-
+      console.log($('.'+event.toElement.parentElement.children[1].className).attr('bpageTeplateId'));
 
       $('.selected').trigger('unselect');
       
@@ -1035,3 +1035,5 @@ $( document ).ready(function () {
 
   }
 
+
+   
