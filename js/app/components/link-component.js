@@ -84,7 +84,7 @@ var createLinkComponent = function ( event, ui, oldcomponent ) {
       console.log('dene');
       var top = (ui.offset.top-$(event.target).offset().top ) + 'px';
       var left = ( ui.offset.left-$(event.target).offset().left ) + 'px';
-      var link_value = 'http://linden-tech.com';
+      var link_value = 'http://';
       var control_type = "N";
     }
     else{
@@ -144,13 +144,13 @@ console.log(top);
           <div class='gallery-inner-holder'> \
             <form id='video-url'> \
             <input id='link-url-text' class='input-textbox' type='url' placeholder='"+j__("URL Adresini Giriniz")+"'   value=" + link_value + "> \
-            <div class='type1' style='padding: 4px; display: inline-block;'>"+j__("Bağlantı belli br alanda mı etkili olsun?")+"\
+            <div class='type1' style='padding: 4px; display: inline-block;'>"+j__("Bağlantı alanı yayınlandığında gözükmeyecektir. Üstüne getirdiğiniz diğer araçlar ile kullanınız.")+"\
                   <div class='btn-group' data-toggle='buttons'><br>\
-                    <label class='btn btn-primary " + control_y_check_active + "'>\
-                      <input type='radio' name='link_area' id='repeat0' " + control_y_check + " value='Y'> "+j__("Evet")+"\
-                    </label>\
                     <label class='btn btn-primary " + control_n_check_active + "'>\
-                      <input type='radio' name='link_area' id='repeat1' " + control_n_check + " value='N'> "+j__("Hayır")+"\
+                      <input type='radio' name='link_area' id='repeat1' " + control_n_check + " value='N'> "+j__("Bağlantı Simgesi")+"\
+                    </label>\
+                    <label class='btn btn-primary " + control_y_check_active + "'>\
+                      <input type='radio' name='link_area' id='repeat0' " + control_y_check + " value='Y'> "+j__("Bağlantı Alanı")+"\
                     </label>\
                   </div>\
               </div><br><br>\

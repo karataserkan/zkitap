@@ -1,5 +1,5 @@
 $( document ).ready(function () {
-
+/*
   $("#editor_view_pane").click(function(e){
     var control = true;
     
@@ -25,7 +25,7 @@ $( document ).ready(function () {
        }
     } 
   });
-
+*/
   bookPagePreviews();
 
   

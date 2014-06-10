@@ -13,8 +13,8 @@ window.lindneo.dataservice = (function( $ ) {
       createGraphComponent( event, ui, component );
     };
 
-  var quiz_popup = function(event, ui, component){
-      createQuizComponent( event, ui, component );
+  var mquiz_popup = function(event, ui, component){
+      createMquizComponent( event, ui, component );
     };
 
   var image_popup = function(event, ui, component){
@@ -355,7 +355,7 @@ window.lindneo.dataservice = (function( $ ) {
     video_popup: video_popup,
     popup_popup: popup_popup,
     graph_popup: graph_popup,
-    quiz_popup: quiz_popup,
+    mquiz_popup: mquiz_popup,
     html_popup: html_popup,
     wrap_popup: wrap_popup,
     latex_popup: latex_popup,
