@@ -232,6 +232,24 @@ $( document ).ready(function () {
     }
     else 
       $('.ruler, .vruler').hide();
+
+    var is_grid_checked = $('input:checkbox[name=grid]:checked').val();
+
+    if(is_grid_checked == "on"){
+      var image = $("#current_page").css('background-image');
+      if(!image)
+        $("#current_page").css("background-image", 'url("/css/images/gridpattern.png")');
+      else{
+        image = "url("+window.base_path+"/css/images/gridpattern.png), "+image;
+        $("#current_page").css("background-image", image);
+      }
+    }
+    else{
+      //$("#current_page").css("background-image", 'url("/css/images/gridpattern.png")');
+      var image = $("#current_page").css('background-image');
+      image = image.replace("url("+window.base_path+"/css/images/gridpattern.png), ","");
+      $("#current_page").css("background-image", image);
+    }
   });
   var termTemplate = "<span class='ui-autocomplete-term' style='display:inline-block'>%s</span>";
         
