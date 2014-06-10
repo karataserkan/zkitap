@@ -9838,6 +9838,19 @@ li.users_page_categories a {
 
 /** EDITOR GENERAL CSS *******************/
 
+li.user span.username {
+	font-size:15px;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	overflow: hidden;
+	font-weight: normal !important;
+	float: left;
+	max-width: 280px;
+	margin-left: 10px;
+	line-height: 2em;
+	opacity:0.8;
+}
+
 li.user .dropdown-menu li a {
 	-webkit-transition: all 0.3s;
 	-moz-transition: all 0.3s;
@@ -9857,6 +9870,14 @@ li.user .dropdown-menu li a:hover {
 
 
 /** END OF EDITOR GENERAL CSS *******************/
+
+
+
+
+
+
+
+
 
 
 
@@ -10547,11 +10568,12 @@ span.reader_toc_dropdown_page_numbers {
 	cursor: pointer;
 	display: block;
 	padding: 0 10px;
-	position: relative;
+	position: relative !important;
 	float: right;
 	font-size: 26px;
 	height: 100%;
 	padding-top: 9px;
+	max-width:350px;
 }
 
 
