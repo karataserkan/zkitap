@@ -869,6 +869,10 @@ class componentHTML {
 
 
 			$video_source.=" />";
+			$video_source.="<a href=''> \
+				<img src='$poster' width='100%' height='100%'/>
+			</a>
+			";
 
 			$video_container.= "$video_source
 			</video>";
