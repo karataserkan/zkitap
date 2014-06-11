@@ -6,40 +6,30 @@ window.lindneo = (function(window){
   var controls = {
     
   };
-
+  var dontAllowToLoagPage = $('<div class = "dontAllowToLoagPage" style="width: 140px; height: 50px; background-color: #E54E45;top:20px;position: absolute;text-align: center;padding-top: 5px;margin-left:-10px;color: #830700;font-weight: bold;border-radius: 3px;border: 2px solid#A30900;">' + j__('İşlem tamamlanırken lütfen bekleyiniz..') + '</div>'  );
+  var pageCanvasHoverIn = function(e){dontAllowToLoagPage.appendTo( $(e.currentTarget) );};
+  var pageCanvasHoverOut = function(e){dontAllowToLoagPage.remove();};
   var pageLoaded = function(value){
-    var dontAllowToLoagPage = $('<div class = "dontAllowToLoagPage" style="width: 140px; height: 50px; background-color: #E54E45;top:20px;position: absolute;text-align: center;padding-top: 5px;margin-left:-10px;color: #830700;font-weight: bold;border-radius: 3px;border: 2px solid#A30900;">' + j__('İşlem tamamlanırken lütfen bekleyiniz..') + '</div>'  );
+
     if (typeof (value)!="undefined")
       if (value === true || value === false )
         window.lindneo.controls.pageLoaded = value;
 
     if (value===true){
-      $('.dontAllowToLoagPage').remove();
-      // TO DO
-      $("canvas.preview").parent().off( "mouseenter mouseleave" );
+      dontAllowToLoagPage.remove();
+
+      $("canvas.preview").parent().unbind("mouseenter",pageCanvasHoverIn);
+      $("canvas.preview").parent().unbind("mouseleave",pageCanvasHoverOut);
       //window.lindneo.controls.dontAllowToLoagPage;
     }
     else {
-      $("canvas.preview").parent().hover(
-        function(){dontAllowToLoagPage.appendTo( $(this) )},
-        function(){dontAllowToLoagPage.remove()
-         }
-        );
+      $("canvas.preview").parent().bind("mouseenter",pageCanvasHoverIn);
+      $("canvas.preview").parent().bind("mouseleave",pageCanvasHoverOut);
     }
-
-
+    
     return window.lindneo.controls.pageLoaded;
+  };
 
-  }
-  /*controls.watch ( "pageLoaded" function (id, oldval, newval) {
-    if(newval){
-      $('.dontClickForReload').remove();
-    } else {
-
-    }
-
-    return newval;
-  });*/
   var currentPageId ;
   var currentComponent = {};
   var online_users = [];
