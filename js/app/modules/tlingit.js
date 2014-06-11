@@ -194,8 +194,10 @@ window.lindneo.tlingit = (function(window, $, undefined){
     if(res){
       var response = responseFromJson(res);
       //console.log(oldcomponent);
-      //console.log(response.result);
+      console.log(response.result);
       if(response.result){
+        $('#'+ response.result.delete).parent().not('#current_page').remove();
+        $('#'+ response.result.delete).remove();
         window.lindneo.nisga.destroyComponent(oldcomponent);
         window.lindneo.tsimshian.componentDestroyed(response.result.delete);
       }
