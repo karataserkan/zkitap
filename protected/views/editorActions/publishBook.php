@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 <section>
 
 
@@ -17,8 +16,7 @@
 	      </div>
 		</div>
 	  </div>
-	</div>
- 
+	</div> 
 <!-- POPUP END -->
 				<div class="col-lg-12" id="content">
                     <div class="page-header">
