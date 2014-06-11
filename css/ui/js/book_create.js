@@ -132,10 +132,12 @@
 
 
 
+            $('#bookCreateWizard').find('.nextBtn').hide();
             $('#bookCreateWizard').bootstrapWizard({
                 'nextSelector': '.nextBtn',
                 'previousSelector': '.prevBtn',
                 onNext: function (tab, navigation, index) {
+                $('#bookCreateWizard').find('.nextBtn').show();
                     alert_success.hide();
                     alert_error.hide();
                     if (wizform.valid() == false) {
@@ -143,21 +145,21 @@
                     }
 
                     var total = navigation.find('li').length;
-                	var epub=$('#uniform-book_type_0 span.checked');
-                	var pdf=$('#uniform-book_type_1 span.checked');
+                    var epub=$('#uniform-book_type_0 span.checked');
+                    var pdf=$('#uniform-book_type_1 span.checked');
 
                     var current = index + 1;
                     
 
                     // if (current==2) {
-                    	
-                    // 	// if (pdf.length) {
-                    // 	// 	$('#bookCreateWizard').bootstrapWizard('remove', 2);
-                    // 	// 	$('#bookCreateWizard').bootstrapWizard('remove', 3);
-                    // 	// }
-                    // 	// else if (epub.length) {
-                    // 	// 	$('#bookCreateWizard').bootstrapWizard('remove', 5);
-                    // 	// };
+                        
+                    //  // if (pdf.length) {
+                    //  //  $('#bookCreateWizard').bootstrapWizard('remove', 2);
+                    //  //  $('#bookCreateWizard').bootstrapWizard('remove', 3);
+                    //  // }
+                    //  // else if (epub.length) {
+                    //  //  $('#bookCreateWizard').bootstrapWizard('remove', 5);
+                    //  // };
                     // };
 
                     $('.stepHeader', $('#bookCreateWizard')).text('Step ' + (index + 1) + ' of ' + total);
@@ -240,6 +242,7 @@
 				//$('#bookCreateWizard').bootstrapWizard('remove', 2, true);
 				$('#bookCreateWizard').bootstrapWizard('display', 4);
                 $('#bookCreateWizard').bootstrapWizard('show',1);
+                $('#bookCreateWizard').find('.nextBtn').show();
             });
             $('#uniform-book_type_0 span').on('click', function() {
                 $($('#uniform-book_type_0 span').children()[0]).find('input').attr('checked','checked');
@@ -248,6 +251,7 @@
                 $('#bookCreateWizard').bootstrapWizard('display', 3);
                 $('#bookCreateWizard').bootstrapWizard('display', 2);
                 $('#bookCreateWizard').bootstrapWizard('show',1);
+                $('#bookCreateWizard').find('.nextBtn').show();
 			});
 
 

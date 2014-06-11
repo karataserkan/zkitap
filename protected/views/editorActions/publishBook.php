@@ -65,7 +65,9 @@
 												 <li>
 													<a href="#money" data-toggle="tab" class="wiz-step">
 													<span class="step-number">4</span>
-													<span class="step-name"><i class="fa fa-check"></i> <?php _e('Fiyat Bilgileri'); ?> </span>   
+													<span class="step-name"><i class="fa fa-check"></i> <?php //_e('Fiyat Bilgileri');
+														_e('Erişim Bilgileri');
+													 ?> </span>   
 													</a> 
 												 </li>
 												 <li>
@@ -241,7 +243,7 @@
 														{
 															$categoryIds[$category->category_id]=$category->category_name;
 														}
-													}
+													}}
 													?>
 
 													<div class="form-group">
@@ -293,15 +295,15 @@
 														</div>
 													</div>
 												<!-- end if -->
-												<?php }
-												else
-												{ ?>
-												<p><?php _e("Eser kategorisi bulunamadı. Eser yayınlamadan önce lütfen bir kategori oluşturunuz ve seçiniz."); ?></p>
-												<?php } ?>	
+												<?php //}
+												//else
+												//{ ?>
+												<p><?php //_e("Eser kategorisi bulunamadı. Eser yayınlamadan önce lütfen bir kategori oluşturunuz ve seçiniz."); ?></p>
+												<?php //} ?>	
 												</div>
 												<div class="tab-pane" id="money">
 
-													<div class="form-group">
+													<div class="form-group" id="_contentIsForSale">
 														<label for="PublishBookForm_contentIsForSale" class="control-label col-md-3"><?php _e('Satılık mı?'); ?><span class="required">*</span></label>
 														<div class="col-md-4">
 														<?php echo $form->radioButtonList($model,'contentIsForSale',array('Yes'=>__('Evet'),'Free'=>__('Hayır')),array('class'=>'uniform','name'=>'contentIsForSale')); ?>
@@ -464,14 +466,14 @@
 															  <p class="form-control-static" data-display="categories"></p>
 														   </div>
 														</div>
-														<div class="form-group">
+														<div class="form-group" id="contentIsForSaleDisplay">
 														   <label class="control-label col-md-3"><?php _e('Satılık mı?'); ?>:</label>
 														   <div class="col-md-4">
 															  <p class="form-control-static" data-display="contentIsForSale"></p>
 														   </div>
 														</div>
 														
-														<div class="form-group">
+														<div class="form-group" id="contentPriceDisplay">
 														   <label class="control-label col-md-3"><?php _e('Eser Fiyatı') ?>:</label>
 														   <div class="col-md-4">
 															  <p class="form-control-static" data-display="contentPrice"></p>
@@ -520,15 +522,15 @@
 														<?php _e('Devam'); ?> <i class="fa fa-arrow-circle-right"></i>
 													   </a>
 													   <?php 
-													   if($budget==0)
-														   {
-														   		echo "Hesabınızda yeterli bakiye bulunmamaktadır.";
-														   }else{
+													   // if($budget==0)
+														  //  {
+														  //  		echo "Hesabınızda yeterli bakiye bulunmamaktadır.";
+														  //  }else{
 													   ?>
 													   <a href="javascript:;" class="btn btn-success submitBtn" id="publishBk">
 														<?php _e('Yayınla'); ?> <i class="fa fa-arrow-circle-right"></i>
 													   </a>
-													   <?php } ?>                            
+													   <?php //} ?>                            
 													</div>
 												 </div>
 											  </div>
