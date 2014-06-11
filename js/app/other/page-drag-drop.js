@@ -567,7 +567,10 @@ $( document ).ready(function () {
     });
 
     $('.delete-chapter').click(function(){
-
+      if ( $('#collapseThree .chapter').length < 2){
+        alert (j__("Kitabınız En az bir bölüme sahip olmalı"));
+        return ;
+      }
       var chapter_id=$(this).parent().parent().attr('chapter_id');
       
       $('.chapter[chapter_id="'+chapter_id+'"]').hide('slow', function(){  $('.chapter[chapter_id="'+chapter_id+'"]').remove();});
@@ -576,37 +579,35 @@ $( document ).ready(function () {
 
     });
 
-    $( document ).on( "click","canvas.preview" ,function(event, ui) {
-       if (!window.lindneo.pageLoaded()) return;
+    $('#addBlankPage').click(function(){
+        window.lindneo.tlingit.createPage( null);
+        $('#addPage').modal('toggle');
+    });
 
-      
-      console.log(event);
-      console.log($('.'+event.toElement.parentElement.children[1].className).attr('bpageTeplateId'));
+    $('#addBlankChapter').click(function(){
+        window.lindneo.tlingit.createChapter( null);
+        $('#addPage').modal('toggle');
+    });
+            
+
+    $( document ).on( "click","canvas.preview" ,function(event, ui) {
+      if (!window.lindneo.pageLoaded()) return;
 
       $('.selected').trigger('unselect');
       
       if(event.toElement.parentElement.children[1].className[0] == 'p'){
-          //console.log($(event.toElement.parentElement.children[2]).attr('book-id'));
-              var book_id= $(event.toElement.parentElement.children[2]).attr('book-id');
-              var pageTeplateId=$(event.toElement.parentElement.children[2]).attr('pageTeplateId');
-              //var chapter_id=$(this).attr('chapter_id');
-              var currentPageId=window.lindneo.currentPageId;
-              var link="/page/create?book_id="+book_id+"&page_id="+currentPageId+"&pageTeplateId="+pageTeplateId;
-              console.log(link);
-              window.location.href = link;
-            }
+          var pageTeplateId=$(event.toElement.parentElement.children[2]).attr('pageTeplateId');
+          window.lindneo.tlingit.createPage( null, pageTeplateId );
+          $('#addPage').modal('toggle');
+      }
       if(event.toElement.parentElement.children[1].className[0] == 'c'){
-        console.log("chapter copy");
-        ///page/create?book_id=".$model->book_id."&chapter_id=".$current_chapter->chapter_id."&pageTeplateId=".$template_page->page_id."
-        var book_id= $(event.toElement.parentElement.children[2]).attr('book-id');
-        var pageTeplateId=$(event.toElement.parentElement.children[2]).attr('pageTeplateId');
-        var chapter_id=$(this).attr('chapter_id');
-        var link="/page/create?book_id="+book_id+"&chapter_id="+chapter_id+"&pageTeplateId="+pageTeplateId;
-        //return;
-          
-              window.location.href = link;
-            }
-      window.lindneo.tsimshian.pageCreated();
+          var chapter_id=$(this).attr('chapter_id');
+          var pageTeplateId=$(event.toElement.parentElement.children[2]).attr('pageTeplateId');
+          window.lindneo.tlingit.createPage(chapter_id,pageTeplateId);
+          $('#addPage').modal('toggle');
+      }
+
+
       //get page id from parent li 
       var page_id = $(this).parent().attr('page_id') ;
       //sortPages();
@@ -656,9 +657,13 @@ $( document ).ready(function () {
             control_value = 1;
           }
       });
+      if (page_id==window.lindneo.currentPageId) {
+        alert(j__("Bulunduğunuz sayfayı silemezsiniz!"));
+        control_value = 1;
+      }
       if(control_value == 1)
         return;
-      //return;
+      return;
       window.lindneo.tlingit.PageHasDeleted( page_id );
       //return;
       //ekaratas start
@@ -980,7 +985,29 @@ $( document ).ready(function () {
           $('.delete-chapter').click(function(){
 
             var chapter_id=$(this).parent().parent().attr('chapter_id');
-            
+
+            var control_value = 0;
+            var parent = $(this).parent().parent();
+            window.parent = parent;
+
+            console.log(parent);
+            $.each(window.lindneo.book_users, function(index,key){
+              console.log(key); 
+              if(index != window.lindneo.tsimshian.socket.socket.sessionid)
+                if( parent.find('[page_id="'+key.pageid+'"]').length !== 0 ){
+                  alert("Başka bir kullanıcı bu bölümde çalıştığından bu sayfayı silemezsiniz!...");
+                  control_value = 1;
+                }
+            });
+
+            if (parent.has('.current_page').length !== 0) {
+              alert(j__("Bulunduğunuz bölümü silemezsiniz!"));
+              control_value = 1;
+            }
+
+            if(control_value == 1)
+              return;
+
             $('.chapter[chapter_id="'+chapter_id+'"]').hide('slow', function(){  $('.chapter[chapter_id="'+chapter_id+'"]').remove();});
             window.lindneo.tlingit.ChapterHasDeleted( chapter_id );
             sortPages();
@@ -1003,12 +1030,16 @@ $( document ).ready(function () {
             var control_value = 0;
             $.each(window.lindneo.book_users, function(index,key){
               console.log(key);
-              if(key.username != window.lindneo.user.username)
+              if(index != window.lindneo.tsimshian.socket.socket.sessionid)
                 if(key.pageid == page_id){
                   alert("Başka bir kullanıcı bu sayfada çalıştığından bu sayfayı silemezsiniz!...");
                   control_value = 1;
                 }
             });
+            if (page_id==window.lindneo.currentPageId) {
+              alert(j__("Bulunduğunuz sayfayı silemezsiniz!"));
+              control_value = 1;
+            }
             if(control_value == 1)
               return;
             //return;
