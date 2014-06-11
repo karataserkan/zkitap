@@ -22,8 +22,12 @@ $(document).ready(function(){
           newimage.appendTo(this.element);
         }
       }
-      else{
+      else if(this.options.component.data.link_area == "Y"){
         var blanklink=$('<div  id="message_'+componentlinkid+'"  style="overflow:hidden; border: solid yellow; width:100%; height:100%;"></div>');
+        blanklink.appendTo(this.element);
+      }
+      else{
+        var blanklink=$('<div  id="message_'+componentlinkid+'"  style="overflow:hidden; width:100%; height:100%;">'+this.options.component.data.link_text+'</div>');
         blanklink.appendTo(this.element);
       }
       
@@ -84,7 +88,7 @@ var createLinkComponent = function ( event, ui, oldcomponent ) {
       console.log('dene');
       var top = (ui.offset.top-$(event.target).offset().top ) + 'px';
       var left = ( ui.offset.left-$(event.target).offset().left ) + 'px';
-      var link_value = 'http://linden-tech.com';
+      var link_value = 'http://';
       var control_type = "N";
     }
     else{
@@ -109,11 +113,14 @@ var createLinkComponent = function ( event, ui, oldcomponent ) {
     var control_y_check_active = '';
     var control_n_check = '';
     var control_n_check_active = '';
+    var control_z_check = '';
+    var control_z_check_active = '';
 
     if(control_type == 'Y') { control_y_check = "checked='checked'"; control_y_check_active = 'active';}
-    else { control_n_check = "checked='checked'"; control_n_check_active = 'active'; }
+    else if(control_type == 'N'){ control_n_check = "checked='checked'"; control_n_check_active = 'active'; }
+    else if(control_type == 'Z'){ control_z_check = "checked='checked'"; control_z_check_active = 'active'; }
  
-    
+      
     var top=(event.pageY - 25);
     var left=(event.pageX-150);
 
@@ -141,19 +148,23 @@ console.log(top);
           </div> \
          \
         <!-- popup content--> \
-          <div class='gallery-inner-holder'> \
+          <div class='gallery-inner-holder' style='width:500px;'> \
             <form id='video-url'> \
             <input id='link-url-text' class='input-textbox' type='url' placeholder='"+j__("URL Adresini Giriniz")+"'   value=" + link_value + "> \
-            <div class='type1' style='padding: 4px; display: inline-block;'>"+j__("Bağlantı belli br alanda mı etkili olsun?")+"\
+            <div class='type1' style='padding: 4px; display: inline-block;'>"+j__("Bağlantı alanı yayınlandığında gözükmeyecektir. Üstüne getirdiğiniz diğer araçlar ile kullanınız.")+"\
                   <div class='btn-group' data-toggle='buttons'><br>\
-                    <label class='btn btn-primary " + control_y_check_active + "'>\
-                      <input type='radio' name='link_area' id='repeat0' " + control_y_check + " value='Y'> "+j__("Evet")+"\
-                    </label>\
                     <label class='btn btn-primary " + control_n_check_active + "'>\
-                      <input type='radio' name='link_area' id='repeat1' " + control_n_check + " value='N'> "+j__("Hayır")+"\
+                      <input type='radio' name='link_area' id='repeat1' " + control_n_check + " value='N'> "+j__("Bağlantı Simgesi")+"\
+                    </label>\
+                    <label class='btn btn-primary " + control_y_check_active + "'>\
+                      <input type='radio' name='link_area' id='repeat0' " + control_y_check + " value='Y'> "+j__("Bağlantı Alanı")+"\
+                    </label>\
+                    <label class='btn btn-primary " + control_z_check_active + "'>\
+                      <input type='radio' name='link_area' id='repeat2' " + control_z_check + " value='Z'> "+j__("Bağlantı Yazı Alanı")+"\
                     </label>\
                   </div>\
               </div><br><br>\
+              <div id='link_text'></div>\
             <a href='#' id='pop-image-OK' class='btn btn-info' id='add-image' >"+j__("Ekle")+"</a> \
             </form> \
           </div>     \
@@ -170,10 +181,19 @@ console.log(top);
         }
 
       });
+      $('input:radio[name="link_area"]').change(function(e){
+        if($('input:radio[name="link_area"]:checked').attr("value") == "Z"){
+          $('<input type="text" name="text_link" id="text_link" placeholder="'+j__("Bağlantı vereceğinizi yazıyı giriniz.")+'" style="width:250px;"><br><br>').appendTo("#link_text");
+        }
+        else{
+          $("#link_text").html("");
+        }
+      });
 
     $('#pop-image-OK').click(function (){   
     var targetURL = $("#link-url-text").val();
-    var link_area = $('input[name=link_area]:checked').val();
+    var link_area = $('input:radio[name="link_area"]:checked').attr("value");
+    var link_text = "";
 
       if (!IsURL (targetURL) ){
         alert (j__("Lütfen gecerli bir URL adresi giriniz."));
@@ -193,6 +213,10 @@ console.log(top);
         //window.lindneo.tlingit.componentHasDeleted( oldcomponent, oldcomponent.id );
         oldcomponent.data.self.attr.href = targetURL;
       };
+      if(link_area == "Z"){
+        link_text = $("#text_link").val();
+      }
+
        var  component = {
           'type' : 'link',
           'data': {
@@ -209,6 +233,7 @@ console.log(top);
             },
             'lock':'',
             'link_area': link_area,
+            'link_text': link_text,
             'self': {
               'css': {
                 'position':'absolute',

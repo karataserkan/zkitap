@@ -88,12 +88,14 @@
 																	</span>
 																<label for="book_type_1"><img src="../../../css/ui/img/bookcreate/pdf.png" /></label><br>
 																</div>
+																<!--
                                                                 <div class="" id="uniform-book_type_2">
 																	<span class="">
-																		<input class="uniform" id="book_type_2" value="word" type="radio" name="book_type">
+																		<div class="radio" id="uniform-book_type_2"><span><input class="uniform" id="book_type_2" value="word" type="radio" name="book_type"></span></div>
 																	</span>
-																<label for="book_type_2"><div class="coming_soon_layer">YAKINDA...</div><img src="../../../css/ui/img/bookcreate/word.png" /></label><br>
+																<label for="book_type_2"><div class="coming_soon_layer">YAKINDA...</div><img src="../../../css/ui/img/bookcreate/word.png"></label><br>
 																</div>
+																-->
 															</span>
 														</div>
 													</div>

@@ -250,7 +250,7 @@ console.log(top);
     top = top + "px";
     left = left + "px";
 
-    var html_popup = $("<div class='popup ui-draggable' id='pop-popup' style='display: block; top:" + top + "; left: " + left + "; width:500px; height:400px;'> \
+    var html_popup = $("<div class='popup ui-draggable' id='pop-popup' style='display: block; top:" + top + "; left: " + left + "; width:500px; height:400px;min-height:248px;min-width:300px;'> \
       </div>");
     html_popup.appendTo('body').draggable({cancel:'.drag-cancel'}).resizable();
     var poup_header = $("<div class='popup-header'><i class='icon-m-link'></i> &nbsp;"+j__("Latex Ekle")+" </div> ");
@@ -347,7 +347,7 @@ console.log(top);
           </div>\
         </div>");
     var popup_wrapper = $("<div class ='popup_wrapper drag-cancel' style='border: 1px #ccc solid;width: 100%; height: 100%; ' ></div> <br>");
-    var popup_detail = $('<textarea class="MathInput" id="MathInput" contenteditable="true" class="drag-cancel" style="width: 100%; margin-top:5px;" >'+popup_value+'</textarea>');
+    var popup_detail = $('<textarea class="MathInput" id="MathInput" contenteditable="true" class="drag-cancel" style="resize:none;width: 100%; margin-top:5px;" >'+popup_value+'</textarea>');
     var latex_preview = $('<div class="box" id="box" style="visibility:hidden">\
                             <div id="MathOutput" class="output"></div>\
                           </div>');
@@ -356,12 +356,12 @@ console.log(top);
     close_button.appendTo(poup_header);
     galery_inner.appendTo(html_popup);
     latex_temp.appendTo(popup_wrapper);
-    popup_wrapper.appendTo(galery_inner).resizable({alsoResize: galery_inner});
+    popup_wrapper.appendTo(galery_inner);//.resizable({alsoResize: galery_inner});
     
     popup_detail.appendTo(popup_wrapper);
     latex_preview.appendTo(popup_wrapper);
     add_button.appendTo(galery_inner);
-    popup_detail.resizable({alsoResize: galery_inner});
+    //popup_detail.resizable({alsoResize: galery_inner});
 
     $( "#mathsymbols" ).change(function() {
       insertLatexAtTextareaCursor('MathInput', $( "#mathsymbols option:selected" ).val());

@@ -68,7 +68,7 @@ $(document).ready(function(){
           },
           'resize':function(event,ui){
             //console.log(this);
-            console.log("resize");
+            //console.log("resize");
             if( typeof this.resize_pass != "undefined" )
               this.resize_pass(event,ui);
 
@@ -76,8 +76,8 @@ $(document).ready(function(){
             if(that.options.component.type == "text" || that.options.component.type == "side-text"){
               var component_height = ui.size.height + 14 ;
             }
-            console.log(this);
-            console.log(component_height);
+            //console.log(this);
+            //console.log(component_height);
             that.options.component.data.self.css.width = component_width + "px";
             that.options.component.data.self.css.height = component_height + "px";
             $("#"+that.options.component.id).height(component_height + "px");
@@ -265,8 +265,8 @@ $(document).ready(function(){
               window.lindneo.dataservice.popup_popup(event, ui, that.options.component);
             else if(that.options.component.type == 'grafik')
               window.lindneo.dataservice.graph_popup(event, ui, that.options.component);
-            else if(that.options.component.type == 'quiz')
-              window.lindneo.dataservice.quiz_popup(event, ui, that.options.component);
+            else if(that.options.component.type == 'mquiz')
+              window.lindneo.dataservice.mquiz_popup(event, ui, that.options.component);
             else if(that.options.component.type == 'html')
               window.lindneo.dataservice.html_popup(event, ui, that.options.component);
             else if(that.options.component.type == 'wrap')
@@ -280,7 +280,7 @@ $(document).ready(function(){
           .mouseenter(function(event){
             
              
-             if(that.options.component.data.lock == '')
+             if(that.options.component.data.lock == '' || !that.options.component.data.lock)
              var deleteButton = $('<a id="delete-button-' + that.options.component.id + '"class="icon-delete size-10" style="position: absolute; top: -20px; right: 5px;" ></a>');
              else
              var deleteButton=$('<a id="delete-button" class="icon-delete size-10" style="position: absolute; top: -20px; right: 5px;" hidden></a>');
@@ -297,7 +297,7 @@ $(document).ready(function(){
         commentButton
           .click(function(e){
               //$('#'+that.options.component.id).append('<div class="comment_window"></div>');
-              if ($.type(that.options.component.data.comments) == "undefined") that.options.component.data.comments=[]
+              if ($.type(that.options.component.data.comments) == "undefined") that.options.component.data.comments={}
               
               var isCommentBoxCreated=$('#commentBox_'+that.options.component.id).doesExist();
               
@@ -395,7 +395,7 @@ $(document).ready(function(){
                 that.newCommentBox_textarea.val("");
                 
 
-                that.options.component.data.comments.push(comment);
+                that.options.component.data.comments[comment_id] = comment ;
 
                 that._trigger('update', null, that.options.component );
 
@@ -574,9 +574,25 @@ $(document).ready(function(){
       var that = this;
       if ($.type(that.options.component.data.comments) == "undefined") 
         return;
+      if ( that.options.component.data.comments == null) return;
+      if ( that.options.component.data.comments.length == 0 ) return;
+      if ( window.lindneo.empty(that.options.component.data.comments) ) return;
+      
 
-      if ( that.options.component.data.comments.length == 0 ) 
-        return;
+      var showCommentBox = false;
+      var commentCleansing = false;
+      $.each(that.options.component.data.comments, function(i,value){
+        if (typeof that.options.component.data.comments[i].text != "undefined")
+          if (that.options.component.data.comments[i].text != ""){
+            showCommentBox=true;
+            return ;
+          }
+        delete that.options.component.data.comments[i];
+        commentCleansing=true;
+
+      });
+      if (commentCleansing ) this._trigger('update', null, this.options.component );
+      if (!showCommentBox) return;
 
       this.createCommentBox();
 
@@ -595,8 +611,8 @@ $(document).ready(function(){
       var line = comment.text;
       var activeUser = comment.user;
       var component_id = that.options.component.id;
-
-      if(line!=""){
+      if( typeof (activeUser) != "undefined" )
+      if(line!="" && activeUser != null ){
         var lineHtml = $('<div class="comment_card_user_name yellow_msg_box" id="yellow_msg_box_' + component_id + '">\
                             '+activeUser.name+': '+line+' \
                  </div>');
@@ -610,7 +626,7 @@ $(document).ready(function(){
             //console.log(comment);
             //console.log(val.comment_id);
             if (val.comment_id == comment.comment_id){
-              that.options.component.data.comments.splice(i,1);
+              delete that.options.component.data.comments[i];
               lineHtml.remove();
               that._trigger('update', null, that.options.component );
               return;

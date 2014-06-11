@@ -869,6 +869,10 @@ class componentHTML {
 
 
 			$video_source.=" />";
+			$video_source.="<a href=''> \
+				<img src='$poster' width='100%' height='100%'/>
+			</a>
+			";
 
 			$video_container.= "$video_source
 			</video>";
@@ -1257,6 +1261,9 @@ class componentHTML {
 		else if($component->data->link_area == "Y")
 			$container.=" 
 				$css ></a>";
+		else if($component->data->link_area == "Z")
+			$container.=" 
+				$css >".$component->data->link_text."</a>";
 
 		
 

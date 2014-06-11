@@ -554,8 +554,46 @@ class epub3 {
 				});
 
 		}
-
+		$(window).load(function(){
+			var is_safari_or_uiwebview = /(iPhone|iPod|iPad).*AppleWebKit/i.test(navigator.userAgent);
+			if(is_safari_or_uiwebview){
+			var videos=$("video");
+			$.each(videos,function(i,item){
+				
+				if(item.networkState==3)
+				{
+					
+					console.log(i,item.networkState);
+					console.log($(item).parent());
+					var source=$(item).find("source").attr("src");
+					var poster_img=$(item).attr("poster");
+					var poster="<a href=kapi://"+source+"\><img width=100% height=100% src="+poster_img+"></img></a>";
+					console.log(item);
+					$(item).parent().html(poster);
+				
+				}
+			});
+			}
+		});
 		$(document).ready(function() {
+			/*
+			$("video").click(function(event){
+				console.log("kapi://"+btoa($(event.currentTarget).context.currentSrc));
+				window.location="kapi://"+btoa($(event.currentTarget).context.currentSrc);
+				});*/
+			/*
+			$("div.video").click(function(event){var video_ios=$($(event.currentTarget).find("video"));
+				event.stopPropagation();
+				window.location="kapi://"+btoa(video_ios[0].currentSrc);
+			});*/
+			/*
+			$("video").click(function(event){
+				event.preventDefault();
+				event.stopPropagation();
+				console.log("kapi://"+btoa($(event.currentTarget).context.currentSrc));
+				window.location="kapi://"+btoa($(event.currentTarget).context.currentSrc);
+				});
+			*/
 			$("video").each(function () { this.pause() });
 			$(window).focus(function(){
 				okutus_play();

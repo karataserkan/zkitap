@@ -22,17 +22,19 @@ $this->breadcrumbs=array(
 <div class="ribbon_rectangle"></div>
 <div class="ribbon_arrow_down"></div>
 </div>
-<div class="login_linden_information_text">Seviye Dijital <font style="color:#FFC">Linden Dijital Yayıncılık A.Ş.</font> Tarafından Hazırlanmıştır. <br /> Bizi daha yakından tanımak için logomuza tıklayın.</div>
+<div class="login_linden_information_text">OKUTUS EDİTÖR <font style="color:#FFC">Linden Dijital Yayıncılık A.Ş.</font> Tarafından Hazırlanmıştır. <br /> Bizi daha yakından tanımak için logomuza tıklayın.</div>
 </a>
 </div>
 <!--- END OF login_linden_information -->
 
 
-
+<!--
 <video autoplay loop poster="../../../css/brands/linden/login_back.png" id="bgvid">
 <source src="../css/brands/linden/back.webm" type="video/webm">
 <source src="../css/brands/linden/back.mp4" type="video/mp4">
 </video>
+-->
+
 
    <div class="login_overlay"></div>     
 
@@ -108,7 +110,12 @@ $this->breadcrumbs=array(
 					<div class="row">
 						<div class="">
 							<div class="login-box">
-								
+								<?php if ($signUpError) { ?>
+									<div class="alert alert-danger">
+										<span><?php echo $signUpError; ?></span>
+									</div>
+								<?php }
+								?>
 								<?php $form=$this->beginWidget('CActiveForm', array(
 									'id'=>'user-form',
 									'enableAjaxValidation'=>false,
@@ -289,6 +296,12 @@ $this->breadcrumbs=array(
 				
 				
 			});
+
+			var signUpError="<?php echo $signUpError ?>";
+			if (signUpError) {
+				swapScreen('register_bg');
+			};
+
 			var passResetSuccess="<?php echo $passResetSuccess ?>";
 			if (passResetSuccess) {
 				swapScreen('forgot_bg');

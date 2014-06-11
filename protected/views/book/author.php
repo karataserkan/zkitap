@@ -49,8 +49,10 @@ $current_user=User::model()->findByPk(Yii::app()->user->id);
 
 	$(document).ready(function(){
 	
-	
-	
+		//$('#editor_view_pane').css({'margin-left':'200px'});
+		var adaptive_width=$('.components').width()+20+"px";
+		console.log(adaptive_width);
+		$('#editor_view_pane').css({'margin-left':adaptive_width});
 		options = {  
     reject : { // Rejection flags for specific browsers  
         all: false, // Covers Everything (Nothing blocked)  
@@ -211,7 +213,17 @@ $current_user=User::model()->findByPk(Yii::app()->user->id);
 			         <li><a href="<?php echo $this->createUrl('site/index');  ?>"><span><i class="icon-book"></i>Kitaplarım</span></a></li>
 			         <li><a href="<?php echo $this->createUrl("EditorActions/ExportPdfBook", array('bookId' => $model->book_id ));?>"> <i class="icon-doc-inv"></i><?php _e("PDF Olarak Aktar"); ?></i></a></li>
 			         <li><a href="<?php echo $this->createUrl("EditorActions/ExportBook", array('bookId' => $model->book_id ));?>"> <i class="icon-doc-inv"></i><?php _e("ePub Olarak Aktar"); ?></i></a></li>
-			         <li><a href="<?php echo $this->createUrl("EditorActions/publishBook/", array('bookId' => $model->book_id ));?>"> <i class="icon-doc-inv"></i><?php _e("Markette Yayınla"); ?></i></a></li>
+			         <li><a href="<?php echo $this->createUrl("EditorActions/publishBook/", array('bookId' => $model->book_id ));?>"> <i class="icon-doc-inv"></i><?php _e("Okutus Kütüphanesinde Yayınla"); ?></i></a></li>
+			         <li>
+			         	<?php
+			         		if ($budget==0) {
+			         			
+			         		}else{
+			         	 ?>
+			         	<a href="<?php echo $this->createUrl("EditorActions/ExportBook", array('bookId' => $model->book_id ));?>"><i class="icon-publish"></i><?php _e("Epub3 Olarak Aktar"); ?></a>
+			         	<?php } ?>
+			         </li>
+
 					</ul>
 			   </li>
 			   <li class='has-sub'><a href='#'><span>Düzenle</span></a>
@@ -230,6 +242,7 @@ $current_user=User::model()->findByPk(Yii::app()->user->id);
 					<ul>
 				     <li class="onoff"><a href='#'  ><input type="checkbox" name="cetvel" id="cetvelcheck" class="css-checkbox" /><label for="cetvelcheck" class="css-label"><?php _e('Cetvel') ?></label></a></li>
 			         <li class="onoff"><a href='#'  ><input type="checkbox" name="rehber" id="rehbercheck" class="css-checkbox" /><label for="rehbercheck" class="css-label"><?php _e('Rehber') ?></label></a></li>
+			         <li class="onoff"><a href='#'  ><input type="checkbox" name="grid" id="gridcheck" class="css-checkbox" /><label for="gridcheck" class="css-label"><?php _e('Grid') ?></label></a></li>
 			         <!--<li class="onoff"><a href='#'  ><input type="checkbox" name="yorumlar" id="yorumlarcheck" class="css-checkbox" /><label for="yorumlarcheck" class="css-label"><?php _e('Yorumlar') ?></label></a></li>-->
 			        </ul>
 			   </li>
@@ -725,12 +738,15 @@ $current_user=User::model()->findByPk(Yii::app()->user->id);
 				
 			</div>
 			<div class="generic-options toolbox float-left"  style="display:inline-block;">
+			<i class="icon-arrows-cw  grey-6" style="font-size:19px;"></i>
+			<input type="text" id="rotate_val" class="tool text radius textboxes" rel='rotate' rel='color' value="0" style="width:50px;" title="Nesne Dönme Derecesi">
+			<div class="vertical-line"></div>
 			<!--	<a href="#" class="bck-dark-blue white btn btn-default" id="pop-align"><i class="icon-align-center size-20"></i></a> -->
 
 				<a href="#" class="optbtn" id="pop-arrange" ><i style="vertical-align:bottom; color:#2C6185;" class="icon-send-backward size-15" title="Sırasını Değiştir"></i></a>
-				<input type="text" id="rotate_val" class="tool text radius" rel='rotate' rel='color' value="0" style="width:50px;" title="Nesne Dönme Derecesi">
-
+				
 			<!--	<a href="#" class="btn btn-info">Grupla</a>    -->
+			
 			</div>
 			
 			<div class="generic-options toolbox responsive_1"  style="display:inline-block;">
@@ -2016,7 +2032,7 @@ $current_user=User::model()->findByPk(Yii::app()->user->id);
 </div>
 
 <div id='author_pane_container' style=' width:100%'>
-	<div id='author_pane' style='position:relative;width:1240px; margin: 0 auto; '> <!-- Outhor Pane -->
+	<div id='author_pane' style='position:relative;margin: 0 auto; '> <!-- Outhor Pane -->
 		
 			<div class="hruler">
 			<!--<ul class="ruler" data-items="54"></ul>-->
@@ -2086,7 +2102,7 @@ $current_user=User::model()->findByPk(Yii::app()->user->id);
 		
 		<div id='guide'> 
 		</div> <!-- guide -->
-<div id='editor_view_pane' style=' padding:5px 130px;margin: 10px 5px 5px 5px;float:left;'>
+<div id='editor_view_pane' style=' /*padding:5px 130px;margin: 10px 5px 5px 5px;*/float:left;'>
 
 <?php
 $book_data=json_decode($model->data,true);
@@ -2106,7 +2122,7 @@ $background= (!empty($img)) ? "background-image:url('".str_replace(" ", "", $img
 					<div id='current_page' page_id='<?php echo $page->page_id ;?>' style="<?php echo $background; ?>;border:thin solid rgb(146, 146, 146);zoom:1;
 					-webkit-box-shadow: 1px 1px 5px 2px rgba(6, 34, 63, 0.63);
 					-moz-box-shadow: 1px 1px 5px 2px rgba(6, 34, 63, 0.63);
-					box-shadow: 1px 1px 5px 2px rgba(6, 34, 63, 0.63); background-size:<?php echo $bookWidth; ?>px <?php echo $bookHeight; ?>px; height:<?php echo $bookHeight; ?>px;width:<?php echo $bookWidth; ?>px;position:relative"  >
+					box-shadow: 1px 1px 5px 2px rgba(6, 34, 63, 0.63); height:<?php echo $bookHeight; ?>px;width:<?php echo $bookWidth; ?>px;position:relative"  >
 						<div id="guide-h" class="guide"></div>
 						<div id="guide-v" class="guide"></div>
 					</div>

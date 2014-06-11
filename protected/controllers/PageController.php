@@ -90,7 +90,7 @@ class PageController extends Controller
 			$chapter_id=$currentPage->chapter_id;
 		}else{
 			$chapter_id=$page_id;
-		}
+		}	
 		
 		//$pages=Page::model()->findAll('chapter_id=:chapter_id and `order` >'.$currentPage->order,array('chapter_id'=>$chapter_id));
 
@@ -116,7 +116,7 @@ class PageController extends Controller
 
 
 
-		if ($currentPage->order) {
+		if ($currentPage) {
 			$model->order=$currentPage->order+1;
 		}
 		// Uncomment the following line if AJAX validation is needed
