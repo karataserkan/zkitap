@@ -2247,16 +2247,6 @@ $background= (!empty($img)) ? "background-image:url('".str_replace(" ", "", $img
 							}
 						}
 						?>
-				<script type="text/javascript">
-					$('#addBlankPage').click(function(){
-						var book_id=window.lindneo.currentBookId;
-						var currentPageId=window.lindneo.currentPageId;
-						var link="/page/create?book_id="+book_id+"&page_id="+currentPageId;
-						
-						window.location.assign(link);
-
-					});
-				</script>
 						
 					<ul>	
 					
@@ -2295,17 +2285,7 @@ $background= (!empty($img)) ? "background-image:url('".str_replace(" ", "", $img
 						}
 
 						?>
-						<script type="text/javascript">
-							$('#addBlankChapter').click(function(){
-								//chapter/create?book_id=<?php echo $model->book_id; ?>
-								//var link="/page/create?book_id="+book_id+"&page_id="+currentPageId;
-								var book_id=window.lindneo.currentBookId;
-								var link="/chapter/create?book_id="+book_id;
-								
-								window.location.assign(link);
-
-							});
-						</script>
+						
 					</ul>
 
 					</div>
