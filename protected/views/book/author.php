@@ -1711,40 +1711,42 @@ $current_user=User::model()->findByPk(Yii::app()->user->id);
 					  url: '/book/getFastStyle',
 					}).done(function(res){
 				    	var inDb=jQuery.parseJSON(res);
-				    	console.log(inDb.font_size);
+				    	font_size='10px';
+						font_family='Arial';
+						line_height='150';
+						$("[name='fast_styles_text_decoration']").removeAttr("checked");
+						$("[name='fast_styles_font_weight']").removeAttr("checked");
+						$("[name='fast_styles_font_italic']").removeAttr("checked");
+						$("[name='fast_styles_text_align']").removeAttr("checked");
 
-				    	font_size='';
-						font_family='';
-						text_decoration='';
-						font_weight='';
-						font_italic='';
-						line_height='';
-						text_align='';
+						if (inDb) {
+					    	font_size=inDb.font_size;
+							font_family=inDb.font_family;
+							text_decoration=inDb.text_decoration;
+							font_weight=inDb.font_weight;
+							font_italic=inDb.font_italic;
+							line_height=inDb.line_height;
+							text_align=inDb.text_align;
 
-				    	font_size=inDb.font_size;
-						font_family=inDb.font_family;
-						text_decoration=inDb.text_decoration;
-						font_weight=inDb.font_weight;
-						font_italic=inDb.font_italic;
-						line_height=inDb.line_height;
-						text_align=inDb.text_align;
+							if (inDb.font_weight) {
+								$("[name='fast_styles_font_weight']").prop("checked","checked");
+							};
+							if (inDb.text_decoration) {
+								$("[name='fast_styles_text_decoration']").prop("checked","checked");
+							};
+							if (inDb.font_italic) {
+								$("[name='fast_styles_font_italic']").prop("checked","checked");
+							};
+							if (inDb.text_align) {
+								$("[name='fast_styles_text_align']").prop("checked","checked");
+							};
+						};
 
 				    	$("[name='fast_styles_font_size'][value='"+font_size+"']").attr("selected","selected");
 						$("[name='fast_styles_font_type'][value='"+font_family+"']").attr("selected","selected");
 						$("[name='fast_styles_line_height'][value='"+line_height+"']").attr("selected","selected");
-						
-						$("[name='fast_styles_text_decoration'][value='"+text_decoration+"']").attr("checked","checked");
-						$("[name='fast_styles_font_weight'][value='"+font_weight+"']").attr("checked","checked");
-						$("[name='fast_styles_font_italic'][value='"+font_italic+"']").attr("checked","checked")	
-						$("[name='fast_styles_text_align'][value='"+text_align+"']").attr("checked","checked");
 					});
-
-
-
 				});
-
-
-
 
 				// $('#fast_styles_line_height option').on("click",function(){
 				// 	line_height=this.val();
