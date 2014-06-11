@@ -49,6 +49,9 @@
 
 			<!-- Top Right Menu -->
 			<ul class="nav navbar-nav navbar-right">
+            <!-- 	<div class="fa fa-bell-o pull-left editor_notifications"><span class="notifications_badge">7</span></div>-->
+                
+            
 				<!-- User Login Dropdown -->
 				<li class="dropdown user" id="header-user">
 					<a href="#" class="dropdown-toggle read_page_user" data-toggle="dropdown">
@@ -64,7 +67,7 @@
 					</a>
 					<ul class="dropdown-menu">
 						<li><a href="/user/profile"><i class="fa fa-user"></i> <?php _e('Profil') ?></a></li>
-						<li><a href="/faq/index" onClick='tripStart();'><i class="fa fa-question"></i> <?php _e('Yardım') ?></a></li>
+						<li><a href="#" onClick='tripStart();'><i class="fa fa-question"></i> <?php _e('Yardım') ?></a></li>
 						<li><a href="/site/logout"><i class="fa fa-power-off"></i> <?php _e('Çıkış') ?></a></li>
 					</ul>
 				</li>

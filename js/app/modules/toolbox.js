@@ -197,7 +197,7 @@ window.lindneo.toolbox = (function(window, $, undefined){
     if(position == 'left'){
       $.each(this.selectedComponents, function( key, component ) {
         //console.log(component.options.component.data.self.css.left);
-        var object_left = parseInt(component.options.component.data.self.css.left.replace("px", ""));
+        var object_left = parseInt(component.options.component.data.self.css.left);
         if(value==0) value = object_left;
         if(value > object_left) value = object_left;
       });
@@ -207,7 +207,7 @@ window.lindneo.toolbox = (function(window, $, undefined){
     console.log(position);
       $.each(this.selectedComponents, function( key, component ) {
         //console.log(component.options.component.data.self.css.left);
-        var object_left = component.options.component.data.self.css.left.replace("px", "");
+        var object_left = component.options.component.data.self.css.left;
         object_left = parseInt(object_left);
         var object_value = object_left + parseInt(component.options.component.data.self.css.width);
         //alert(object_value);
@@ -221,7 +221,7 @@ window.lindneo.toolbox = (function(window, $, undefined){
       var value_min = 0;
       $.each(this.selectedComponents, function( key, component ) {
         //console.log(component.options.component.data.self.css.left);
-        var object_left = component.options.component.data.self.css.left.replace("px", "");
+        var object_left = component.options.component.data.self.css.left;
         object_left = parseInt(object_left);
         var object_value = parseInt(component.options.component.data.self.css.width);
         var object_right = object_left + object_value;
@@ -239,7 +239,7 @@ window.lindneo.toolbox = (function(window, $, undefined){
     else if(position == 'top'){
       $.each(this.selectedComponents, function( key, component ) {
         //console.log(component.options.component.data.self.css.left);
-        var object_top = parseInt(component.options.component.data.self.css.top.replace("px", ""));
+        var object_top = parseInt(component.options.component.data.self.css.top);
         if(value==0) value = object_top;
         if(value > object_top) value = object_top;
       });
@@ -249,7 +249,7 @@ window.lindneo.toolbox = (function(window, $, undefined){
     console.log(position);
       $.each(this.selectedComponents, function( key, component ) {
         //console.log(component.options.component.data.self.css.left);
-        var object_top = component.options.component.data.self.css.top.replace("px", "");
+        var object_top = component.options.component.data.self.css.top;
         object_top = parseInt(object_top);
         var object_value = object_top + parseInt(component.options.component.data.self.css.height);
         //alert(object_value);
@@ -263,7 +263,7 @@ window.lindneo.toolbox = (function(window, $, undefined){
       var value_min = 0;
       $.each(this.selectedComponents, function( key, component ) {
         //console.log(component.options.component.data.self.css.left);
-        var object_top = component.options.component.data.self.css.top.replace("px", "");
+        var object_top = component.options.component.data.self.css.top;
         object_top = parseInt(object_top);
         var object_value = parseInt(component.options.component.data.self.css.height);
         var object_bottom = object_top + object_value;
@@ -341,7 +341,7 @@ window.lindneo.toolbox = (function(window, $, undefined){
             component.component.data.self.css.top = div;
             
             window.lindneo.tlingit.componentHasUpdated(component.component);
-            window.lindneo.nisga.destroyComponent(component.component.id);
+            window.lindneo.nisga.destroyComponent(component.component);
               window.lindneo.nisga.createComponent(component.component);
               component_spaces[key] = component_spaces[key] + key_value;
               console.log(component_spaces[key]);
@@ -360,7 +360,7 @@ window.lindneo.toolbox = (function(window, $, undefined){
             component.component.data.self.css.top = div;
             console.log(component.component);
             window.lindneo.tlingit.componentHasUpdated(component.component);
-            window.lindneo.nisga.destroyComponent(component.component.id);
+            window.lindneo.nisga.destroyComponent(component.component);
               window.lindneo.nisga.createComponent(component.component);
               console.log(component_spaces[key]);
               component_spaces[key] = component_spaces[key] - key_value;
@@ -403,7 +403,7 @@ window.lindneo.toolbox = (function(window, $, undefined){
             component.component.data.self.css.left = div;
             //console.log(component.component);
             window.lindneo.tlingit.componentHasUpdated(component.component);
-            window.lindneo.nisga.destroyComponent(component.component.id);
+            window.lindneo.nisga.destroyComponent(component.component);
               window.lindneo.nisga.createComponent(component.component);
               console.log(component_spaces[key]);
               component_spaces[key] = component_spaces[key] + key_value;
@@ -422,7 +422,7 @@ window.lindneo.toolbox = (function(window, $, undefined){
             component.component.data.self.css.left = div;
             //console.log(component.component);
             window.lindneo.tlingit.componentHasUpdated(component.component);
-            window.lindneo.nisga.destroyComponent(component.component.id);
+            window.lindneo.nisga.destroyComponent(component.component);
               window.lindneo.nisga.createComponent(component.component);
               console.log(component_spaces[key]);
               component_spaces[key] = component_spaces[key] - key_value;

@@ -518,7 +518,7 @@ var deepDiffMapper = function() {
         VALUE_DELETED: 'deleted',
         VALUE_UNCHANGED: 'unchanged',
         map: function(obj1, obj2) {
-          
+
             if (this.isFunction(obj1) || this.isFunction(obj2)) {
                 throw 'Invalid argument. Function given, object expected.';
             }

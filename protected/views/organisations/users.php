@@ -109,13 +109,15 @@ if ($users) {
 			}
 		?>
 		<div class="users_frame">	
-		<a class="col-sm-2 delUser btn btn-xs btn-danger tip"  data-original-title="<?php _e('Kullanıcıyı Kaldır'); ?>" data-id="<?php echo $user->id; ?>" data-toggle="modal" data-target="#delUser" href="#" user="<?php echo $user->id; ?>" style="float: right;">
-			<i class="fa fa-trash-o"></i>
-		</a>
 		<img itemprop="image" class="col-sm-12 clearfix" src="<?php echo $avatarSrc; ?>">
 		<h5 class="col-sm-12" style="text-transform:capitalize;"><?php echo $user->name . "  " .$user->surname;?></h5>
+        <div class="clearfix"></div>
+        		<a class="col-sm-2 delUser btn btn-xs btn-danger tip"  data-original-title="<?php _e('Kullanıcıyı Kaldır'); ?>" data-id="<?php echo $user->id; ?>" data-toggle="modal" data-target="#delUser" href="#" user="<?php echo $user->id; ?>" style="float: right;">
+			<i class="fa fa-trash-o"></i>
+		</a>
+
 		<!-- <a class="col-sm-12" href="?r=organisations/deleteOrganisationUser&userId=<?php echo $user->id; ?>&organisationId=<?php echo $organisationId; ?>"><i class="fa fa-trash-o"></i>&nbsp;&nbsp;<?php _e('Kullanıcılardan Çıkar'); ?></a> -->
-		<div class="clearfix"></div>
+		
 		</div>
 		<?php
 	endforeach;

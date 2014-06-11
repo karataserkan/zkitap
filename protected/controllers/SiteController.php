@@ -1,5 +1,5 @@
 <?php
-
+ 
 class SiteController extends Controller
 {
 	public $layout = '//layouts/column2';
@@ -36,11 +36,19 @@ class SiteController extends Controller
 		functions::event('tripData',NULL, function($var){
 
 		?>
-			/* Header */
+			/* Welcome */
 				{ 
-			       content : "Okutus Editor'e HoşGeldiniz, Tanıtım için ileriye basınız.",
+			       content : j__("Okutus Editor'e Hoşgeldiniz, tanıtım için ileriye basınız."),
 			       position:'screen-center',
 			       delay:-1
+			   },
+               
+          /* E-Posta Doğrulama */
+			   { 
+			       sel : $('a[data-id="confirmEmail"]'),
+			       content : j__("Öncelikle E-Posta Adresinizi Doğrulayın."),
+			       position:'s',
+                   delay:-1
 			   },
 		
 			/* Header */
@@ -312,21 +320,27 @@ class SiteController extends Controller
 							$addUserToWorkspace->userid=$userId;
 							$addUserToWorkspace->added=date('Y-n-d g:i:s',time());
 							$addUserToWorkspace->owner="1";
-							if($addUserToWorkspace->save()){
-								$this->userBookAccess($userId,$bookId,$type);
-							}
+							$addUserToWorkspace->save();
 
+							$this->userBookAccess($userId,$bookId,$type);
 						}
 					}else{
 						//kullanıcı Organizasyona üye Değil
-						$this->sendInvitation($userId,$bookId,$user->email,$type);
+						$this->sendInvitation($userId,$bookId,$user->email);
 					}
 				}else{
-					$email=$userId;
-					
 					//kullanıcı editöre üye Değil
-					//user_id'yi 0 gönderiyorum, Üye olmadığını belirtmek için de newUser için 1 gönderiyorm
-					$this->sendInvitation(0,$bookId,$email,$type,1);
+					$addUser = new User;
+					$criteria=new CDbCriteria;
+					$criteria->select='max(id) AS maxColumn';
+					$row = $addUser->model()->find($criteria);
+					
+					$newUserId = $row['maxColumn']+1;//functions::new_id();
+					$addUser->id = $newUserId;
+					$addUser->email=$userId;
+					$addUser->save();
+					
+					$this->sendInvitation($newUserId,$bookId,$userId);
 
 				}
 			}else{
@@ -344,77 +358,78 @@ class SiteController extends Controller
 		//$this->render('index');
 	}
 
-	public function sendInvitation($userId,$bookId,$email,$type,$newUser=0){
+	public function sendInvitation($userId,$bookId,$email){
 		//yeni davetiye oluşturuyoruz
-		
-		$invitation= new Invitation;
-		$invitation->invitation_key=functions::new_id();
-		$invitation->type="book";
-		$invitation->type_id=$bookId;
-		$invitation->type_data=$type;
-		if ($newUser) {
-			$invitation->new_user=1;
-		}else{
-			$invitation->user_id=$userId;
-		}
+		$invitation= new OrganisationInvitation;
+		$invitation->organisation_id = $bookId;
+		$invitation->user_id = $userId;
+		$invitation->invitation_id = functions::new_id();
+		$invitation->save();
 
-		$invitation->inviter=Yii::app()->user->id;
-		$invitation->created=date('Y-n-d g:i:s',time());
+		$link=Yii::app()->getBaseUrl(true);
+		$link.='/user/invitation?key=';
+		//linke davetiye IDsini de ekliyorum
+		$link .= $invitation->invitation_id;
 
-		if ($invitation->save()) {
-			$link=Yii::app()->getBaseUrl(true);
-			$link.='/user/acceptInvitation?key=';
-			//linke davetiye IDsini de ekliyorum
-			$link .= $invitation->invitation_key;
+		$message="OKUTUS editöre katılım davetiyesi aldınız. İsteği kabul etmek için <a href='".$link."'>tıklayın</a>.<br>".$link;	
 
-			$message="OKUTUS editöre katılım davetiyesi aldınız. İsteği kabul etmek için <a href='".$link."'>tıklayın</a>.<br>".$link;	
-
-			//mail gönderiyorum
-			$mail=Yii::app()->Smtpmail;
-	        $mail->SetFrom(Yii::app()->params['noreplyEmail'], "OKUTUS");
-	        $mail->Subject    = 'OKUTUS Davetiye.';
-	        $mail->MsgHTML($message);
-	        $mail->AddAddress($email, "");
-	        
-	        if(!$mail->Send()) {
-	            echo "Mailer Error: " . $mail->ErrorInfo;
-	            $msg="ORGANISATIONS:ADD_USER:1:". json_encode(array(array('user'=>Yii::app()->user->id),array('userId'=>$userId,'organisationId'=>$bookId,'message'=>'Mailer Error'.$mail->ErrorInfo)));
-				Yii::log($msg,'info');
-				return 0;
-	        }else {
-	            $success=__("Kullanıcı davet edildi.");
-	            $msg="ORGANISATIONS:ADD_USER:0:". json_encode(array(array('user'=>Yii::app()->user->id),array('userId'=>$userId,'organisationId'=>$bookId)));
-				Yii::log($msg,'info');
-				return 1;
-	        }
-			
-		}else{
-			return 0;
-		}
-
+		//mail gönderiyorum
+		$mail=Yii::app()->Smtpmail;
+        $mail->SetFrom(Yii::app()->params['noreplyEmail'], "OKUTUS");
+        $mail->Subject    = 'OKUTUS Davetiye.';
+        $mail->MsgHTML($message);
+        $mail->AddAddress($email, "");
+        
+        if(!$mail->Send()) {
+            echo "Mailer Error: " . $mail->ErrorInfo;
+            $msg="ORGANISATIONS:ADD_USER:1:". json_encode(array(array('user'=>Yii::app()->user->id),array('userId'=>$userId,'organisationId'=>$bookId,'message'=>'Mailer Error'.$mail->ErrorInfo)));
+			Yii::log($msg,'info');
+        }else {
+            $success=__("Kullanıcı davet edildi.");
+            $msg="ORGANISATIONS:ADD_USER:0:". json_encode(array(array('user'=>Yii::app()->user->id),array('userId'=>$userId,'organisationId'=>$bookId)));
+			Yii::log($msg,'info');
+        }
 	}
 
 	public function userBookAccess($userId,$bookId,$type){
-
-		$bookUser=BookUsers::model()->find('user_id=:user_id AND book_id=:book_id',array('user_id'=>$userId,'book_id'=>$bookId));
-		if (!$bookUser) {
-			$bookUser=new BookUsers;
-			$bookUser->user_id=$userId;
-			$bookUser->book_id=$bookId;
-		}
-
-		$bookUser->type=$type;
-		$bookUser->created=date('Y-n-d g:i:s',time());
-
-		if ($bookUser->save()) {
-	    	$msg="SITE:RIGHT:0:". json_encode(array(array('user'=>Yii::app()->user->id),array('userId'=>$userId,'bookId'=>$bookId,'type'=>$type)));
-			Yii::log($msg,'info');
-			return 1;
-		}else{
-			$msg="SITE:RIGHT:1:". json_encode(array(array('user'=>Yii::app()->user->id),array('userId'=>$userId,'bookId'=>$bookId,'type'=>$type)));
-			Yii::log($msg,'info');
-			return 0;
-		}
+		$hasRight=Yii::app()->db
+			    ->createCommand("SELECT * FROM book_users WHERE user_id=:user_id AND book_id=:book_id")
+			    ->bindValues(array(':user_id' => $userId, ':book_id' => $bookId))
+			    ->execute();
+		    
+		    if ($hasRight) {
+			    if(Yii::app()->db
+			    ->createCommand("UPDATE book_users SET type = :type WHERE user_id=:user_id AND book_id=:book_id")
+			    ->bindValues(array(':type' => $type, ':user_id' => $userId, ':book_id' => $bookId))
+			    ->execute())
+			    {
+			    	$msg="SITE:RIGHT:0:". json_encode(array(array('user'=>Yii::app()->user->id),array('userId'=>$userId,'bookId'=>$bookId,'type'=>$type)));
+					Yii::log($msg,'info');
+			    }
+			    else
+			    {
+			    	$msg="SITE:RIGHT:1:". json_encode(array(array('user'=>Yii::app()->user->id),array('userId'=>$userId,'bookId'=>$bookId,'type'=>$type)));
+					Yii::log($msg,'info');
+			    }
+			}
+		    else
+		    {
+		    	$addUser = Yii::app()->db->createCommand();
+				if($addUser->insert('book_users', array(
+				    'user_id'=>$userId,
+				    'book_id'=>$bookId,
+				    'type'   =>$type
+				)))
+				{
+					$msg="SITE:RIGHT:0:". json_encode(array(array('user'=>Yii::app()->user->id),array('userId'=>$userId,'bookId'=>$bookId,'type'=>$type)));
+					Yii::log($msg,'info');
+				}
+				else
+				{
+					$msg="SITE:RIGHT:1:". json_encode(array(array('user'=>Yii::app()->user->id),array('userId'=>$userId,'bookId'=>$bookId,'type'=>$type)));
+					Yii::log($msg,'info');
+				}
+		    }
 	}
 
 	/**
@@ -571,7 +586,6 @@ class SiteController extends Controller
 	{
 		$this->layout = '//layouts/column1';
 		$model=new LoginForm;
-		$signUpError="";
 
 		$newUser = new User;
 		$criteria=new CDbCriteria;
@@ -824,7 +838,7 @@ class SiteController extends Controller
 								$model->email=$attributes['email'];
 								$model->validate();
 								$model->login();
-								$this->redirect(array('/site/index'));
+								$this->redirect(array('/site/index?id='.$workspace->workspace_id));
 							}
 							else
 							{
@@ -852,18 +866,12 @@ class SiteController extends Controller
 			}
 			else
 			{
-				$signUpError=__("Bu e-posta adresi başka bir kullanıcı tarafından kullanılmaktadır. Lütfen giriş yapmayı deneyiz ya da şifremi unuttum linkine tılayarak yeni şifrenizi belirleyiniz.");
 				$msg="SITE:LOGIN:SignUp:1:". json_encode(array('user'=> Yii::app()->user->name,'userId'=>Yii::app()->user->id,'message'=>'Duplicate email address'));
 				Yii::log($msg,'profile');
 			}
 		}
 		// display the login form
-		$this->render('login',array('model'=>$model,
-									'newUser'=>$newUser,
-									'passResetError'=>$passResetError,
-									'passResetSuccess'=>$passResetSuccess,
-									'loginError'=>$loginError,
-									'signUpError'=>$signUpError));
+		$this->render('login',array('model'=>$model,'newUser'=>$newUser,'passResetError'=>$passResetError,'passResetSuccess'=>$passResetSuccess,'loginError'=>$loginError));
 	}
 
 	/**

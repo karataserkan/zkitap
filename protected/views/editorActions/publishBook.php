@@ -81,11 +81,11 @@
 											  <div class="tab-content">
 												 <div class="alert alert-danger display-none">
 													<a class="close" aria-hidden="true" href="#" data-dismiss="alert">×</a>
-													Your form has errors. Please correct them to proceed.
+													Lütfen zorunlu alanları doldurunuz.
 												 </div>
 												 <div class="alert alert-success display-none">
 													<a class="close" aria-hidden="true" href="#" data-dismiss="alert">×</a>
-													Your form validation is successful!
+													Alanlar başarılı bir şekilde dolduruldu
 												 </div>
 
 												 
@@ -164,7 +164,7 @@
 
 													<div id="detailed">
 													<div class="form-group">
-														<label for="" class="control-label col-md-3"><?php _e('Google Analytics Code'); ?></label>
+														<label for="" class="control-label col-md-3"><?php _e('Google Analitik Kodu'); ?></label>
 														<div class="col-md-4">
 															<?php echo $form->textArea($model,'tracking',array('class'=>'form-control','name'=>'tracking')); ?>
 															<span class="error-span"></span>
