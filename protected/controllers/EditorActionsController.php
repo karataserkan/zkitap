@@ -769,6 +769,7 @@ class EditorActionsController extends Controller
 				switch ($value->mapped_type) {
 					case self::VALUE_CREATED :
 					case self::VALUE_UPDATED :
+						if($key != "mapped_data" && $key != "mapped_key" )
 						$original->{$key}=$value->mapped_data;
 						break;
 					case self::VALUE_DELETED :
