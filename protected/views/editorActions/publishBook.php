@@ -12,22 +12,23 @@
 		 	Eser yayınlanma kuyruğuna eklendi. Yayınlama işlemi bittiğinde e-posta ile bilgi verilecektir.
 		</div>
 	      <div class="modal-footer">
-	      	<a href="/site/index" class="btn btn-primary"><?php _e("Tamam"); ?></a>
+	      	<a href="/site/index" class="btn btn-primary brand_color_for_buttons"><?php _e("Tamam"); ?></a>
 	      </div>
 		</div>
 	  </div>
 	</div>
  
 <!-- POPUP END -->
+				<div class="col-lg-12" id="content">
+                    <div class="page-header">
+                        <h3 class="content-title pull-left">Eser Yayınlama</h3>
+                    </div>
 
-
-
-	<div class="row">
-							<div class="col-md-10">
+							<div class="col-md-10 publishing_book_box">
 								<!-- BOX -->
-								<div class="box border red" id="formWizard">
+								<div class="box border blue" id="formWizard">
 									<div class="box-title">
-										<h4><i class="fa fa-bars"></i><?php _e('Yayınlama'); ?> - <span class="stepHeader"><?php _e('Aşama'); ?> 1 / 5</h4>
+										<h4><i class="fa fa-bars"></i><?php _e('Yayınlama'); ?> - <span class="stepHeader"><?php _e('Aşama'); ?> 1 / 5</span></h4>
 									</div>
 									<div class="box-body form">
 										<!-- <form id="wizForm" action="#" class="form-horizontal" > -->
@@ -223,7 +224,7 @@
 													<div class="form-group">
 														<div class="col-md-3"></div>
 														<div class="col-md-4">
-															<a href="javascript:;" class="btn btn-primary detailBtn">
+															<a href="javascript:;" class="btn btn-primary detailBtn brand_color_for_buttons">
 																<?php _e('Detay'); ?> <i class="fa fa-arrow-circle-down"></i>
 														   </a>
 														</div>
@@ -353,7 +354,7 @@
 
 												 </div>
 												 <div class="tab-pane" id="confirm">
-												 	<h3 class="block">Detay Özeti <a href="javascript:;" class="btn btn-primary detayRevBtn">
+												 	<h3 class="block">Detay Özeti <a href="javascript:;" class="btn btn-primary detayRevBtn brand_color_for_buttons">
 																<i class="fa fa-arrow-circle-down"></i>
 														   </a></h3>
 													<div class="well" id="detayRev">
@@ -516,7 +517,7 @@
 													   <a href="javascript:;" class="btn btn-default prevBtn">
 														<i class="fa fa-arrow-circle-left"></i> <?php _e('Geri'); ?> 
 													   </a>
-													   <a href="javascript:;" class="btn btn-primary nextBtn">
+													   <a href="javascript:;" class="btn btn-primary nextBtn brand_color_for_buttons">
 														<?php _e('Devam'); ?> <i class="fa fa-arrow-circle-right"></i>
 													   </a>
 													   <?php 
@@ -540,7 +541,7 @@
 								</div>
 								<!-- /BOX -->
 							</div>
-						</div>
+				</div>		
 </section>
 <script>
 		jQuery(document).ready(function() {		
