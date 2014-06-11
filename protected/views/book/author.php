@@ -50,7 +50,7 @@ $current_user=User::model()->findByPk(Yii::app()->user->id);
 	$(document).ready(function(){
 	
 		//$('#editor_view_pane').css({'margin-left':'200px'});
-		var adaptive_width=$('.components').width()+20+"px";
+		var adaptive_width=$('.components').width()+50+"px";
 		console.log(adaptive_width);
 		$('#editor_view_pane').css({'margin-left':adaptive_width});
 		options = {  
@@ -259,7 +259,7 @@ $current_user=User::model()->findByPk(Yii::app()->user->id);
 			  	
 			   <li style="float:right; " class='has-sub'>
 			  
-					<a id='login_area' target='_blank' style='float:right;'>
+					<a id='login_area' style='float:right;'>
 						<?php
 						if(Yii::app()->user->isGuest){
 							echo CHtml::link(array('/site/login'));
@@ -271,7 +271,7 @@ $current_user=User::model()->findByPk(Yii::app()->user->id);
 			      <ul>
 
 			      	<?php if (!Yii::app()->user->isGuest) {?>
-			         <li><a href='/user/profile' target='_blank'><span><?php _e('Profil') ?></span></a></li>
+			         <li><a href='/user/profile'><span><?php _e('Profil') ?></span></a></li>
 			         <?php echo " <li>". CHtml::link(__("Çıkış"),"/site/logout") ."</li>"; ?>
 					<?php 
 						// foreach (Yii::app()->params->availableLanguages  as $lang_id => $lang_name) {
@@ -1711,42 +1711,40 @@ $current_user=User::model()->findByPk(Yii::app()->user->id);
 					  url: '/book/getFastStyle',
 					}).done(function(res){
 				    	var inDb=jQuery.parseJSON(res);
-				    	font_size='10px';
-						font_family='Arial';
-						line_height='150';
-						$("[name='fast_styles_text_decoration']").removeAttr("checked");
-						$("[name='fast_styles_font_weight']").removeAttr("checked");
-						$("[name='fast_styles_font_italic']").removeAttr("checked");
-						$("[name='fast_styles_text_align']").removeAttr("checked");
+				    	console.log(inDb.font_size);
 
-						if (inDb) {
-					    	font_size=inDb.font_size;
-							font_family=inDb.font_family;
-							text_decoration=inDb.text_decoration;
-							font_weight=inDb.font_weight;
-							font_italic=inDb.font_italic;
-							line_height=inDb.line_height;
-							text_align=inDb.text_align;
+				    	font_size='';
+						font_family='';
+						text_decoration='';
+						font_weight='';
+						font_italic='';
+						line_height='';
+						text_align='';
 
-							if (inDb.font_weight) {
-								$("[name='fast_styles_font_weight']").prop("checked","checked");
-							};
-							if (inDb.text_decoration) {
-								$("[name='fast_styles_text_decoration']").prop("checked","checked");
-							};
-							if (inDb.font_italic) {
-								$("[name='fast_styles_font_italic']").prop("checked","checked");
-							};
-							if (inDb.text_align) {
-								$("[name='fast_styles_text_align']").prop("checked","checked");
-							};
-						};
+				    	font_size=inDb.font_size;
+						font_family=inDb.font_family;
+						text_decoration=inDb.text_decoration;
+						font_weight=inDb.font_weight;
+						font_italic=inDb.font_italic;
+						line_height=inDb.line_height;
+						text_align=inDb.text_align;
 
 				    	$("[name='fast_styles_font_size'][value='"+font_size+"']").attr("selected","selected");
 						$("[name='fast_styles_font_type'][value='"+font_family+"']").attr("selected","selected");
 						$("[name='fast_styles_line_height'][value='"+line_height+"']").attr("selected","selected");
+						
+						$("[name='fast_styles_text_decoration'][value='"+text_decoration+"']").attr("checked","checked");
+						$("[name='fast_styles_font_weight'][value='"+font_weight+"']").attr("checked","checked");
+						$("[name='fast_styles_font_italic'][value='"+font_italic+"']").attr("checked","checked")	
+						$("[name='fast_styles_text_align'][value='"+text_align+"']").attr("checked","checked");
 					});
+
+
+
 				});
+
+
+
 
 				// $('#fast_styles_line_height option').on("click",function(){
 				// 	line_height=this.val();
@@ -2124,7 +2122,7 @@ $background= (!empty($img)) ? "background-image:url('".str_replace(" ", "", $img
 					<div id='current_page' page_id='<?php echo $page->page_id ;?>' style="<?php echo $background; ?>;border:thin solid rgb(146, 146, 146);zoom:1;
 					-webkit-box-shadow: 1px 1px 5px 2px rgba(6, 34, 63, 0.63);
 					-moz-box-shadow: 1px 1px 5px 2px rgba(6, 34, 63, 0.63);
-					box-shadow: 1px 1px 5px 2px rgba(6, 34, 63, 0.63); height:<?php echo $bookHeight; ?>px;width:<?php echo $bookWidth; ?>px;position:relative"  >
+					box-shadow: 1px 1px 5px 2px rgba(6, 34, 63, 0.63);background-size:37px; height:<?php echo $bookHeight; ?>px;width:<?php echo $bookWidth; ?>px;position:relative"  >
 						<div id="guide-h" class="guide"></div>
 						<div id="guide-v" class="guide"></div>
 					</div>
