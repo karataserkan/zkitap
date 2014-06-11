@@ -1,5 +1,6 @@
 <script type="text/javascript">
 	$(document).ready(function() {
+		$('#li_templates').addClass('current');
 var data_id = '';
   $('.remove_book').click(function () {
 

@@ -1,7 +1,8 @@
 
 
 <script>
-		jQuery(document).ready(function() {		
+		jQuery(document).ready(function() {	
+		$('#li_<?php echo $organisationId; ?>').addClass('current');	
 			// App.setPage("gallery");  //Set current page
 			// App.init(); //Initialise plugins and elements
 		});

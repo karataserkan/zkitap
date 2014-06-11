@@ -3,7 +3,8 @@
 /* @var $dataProvider CActiveDataProvider */
 ?>
 <script>
-		jQuery(document).ready(function() {		
+		jQuery(document).ready(function() {	
+			$('#li_faq').addClass('current');	
 			App.setPage("gallery");  //Set current page
 			App.init(); //Initialise plugins and elements
 		});
