@@ -11,6 +11,7 @@ margin-right: 20px;
 
 .selected .ui-rotatable-handle {
 	visibility: visible;
+	cursor: url(/css/images/cursor.png) 15 15, auto;
 }
 .ui-rotatable-handle {
 
@@ -23,7 +24,7 @@ margin-right: 20px;
 	cursor: pointer;
 	background-color: #39F;
 	background-size: 100%;
-	top: -30px;
-	left: 50%;
+	top: -19px;
+	left: 49%;
 	position: absolute;
 }

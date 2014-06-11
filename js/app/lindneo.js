@@ -3,7 +3,32 @@
 window.lindneo = (function(window){
 
   var url = '/';
-  var controls = {};
+  var controls = {
+    
+  };
+  var dontAllowToLoagPage = $('<div class = "dontAllowToLoagPage" style="width: 140px; height: 50px; background-color: #E54E45;top:20px;position: absolute;text-align: center;padding-top: 5px;margin-left:-10px;color: #830700;font-weight: bold;border-radius: 3px;border: 2px solid#A30900;">' + j__('İşlem tamamlanırken lütfen bekleyiniz..') + '</div>'  );
+  var pageCanvasHoverIn = function(e){dontAllowToLoagPage.appendTo( $(e.currentTarget) );};
+  var pageCanvasHoverOut = function(e){dontAllowToLoagPage.remove();};
+  var pageLoaded = function(value){
+
+    if (typeof (value)!="undefined")
+      if (value === true || value === false )
+        window.lindneo.controls.pageLoaded = value;
+
+    if (value===true){
+      dontAllowToLoagPage.remove();
+
+      $("canvas.preview").parent().unbind("mouseenter",pageCanvasHoverIn);
+      $("canvas.preview").parent().unbind("mouseleave",pageCanvasHoverOut);
+      //window.lindneo.controls.dontAllowToLoagPage;
+    }
+    else {
+      $("canvas.preview").parent().bind("mouseenter",pageCanvasHoverIn);
+      $("canvas.preview").parent().bind("mouseleave",pageCanvasHoverOut);
+    }
+    
+    return window.lindneo.controls.pageLoaded;
+  };
 
   var currentPageId ;
   var currentComponent = {};
@@ -61,6 +86,50 @@ window.lindneo = (function(window){
     };
   };
 
+  function empty(mixed_var) {
+    //  discuss at: http://phpjs.org/functions/empty/
+    // original by: Philippe Baumann
+    //    input by: Onno Marsman
+    //    input by: LH
+    //    input by: Stoyan Kyosev (http://www.svest.org/)
+    // bugfixed by: Kevin van Zonneveld (http://kevin.vanzonneveld.net)
+    // improved by: Onno Marsman
+    // improved by: Francesco
+    // improved by: Marc Jansen
+    // improved by: Rafal Kukawski
+    //   example 1: empty(null);
+    //   returns 1: true
+    //   example 2: empty(undefined);
+    //   returns 2: true
+    //   example 3: empty([]);
+    //   returns 3: true
+    //   example 4: empty({});
+    //   returns 4: true
+    //   example 5: empty({'aFunc' : function () { alert('humpty'); } });
+    //   returns 5: false
+
+    var undef, key, i, len;
+    var emptyValues = [undef, null, false, 0, '', '0'];
+
+    for (i = 0, len = emptyValues.length; i < len; i++) {
+      if (mixed_var === emptyValues[i]) {
+        return true;
+      }
+    }
+
+    if (typeof mixed_var === 'object') {
+      for (key in mixed_var) {
+        // TODO: should we check for own properties only?
+        //if (mixed_var.hasOwnProperty(key)) {
+        return false;
+        //}
+      }
+      return true;
+    }
+
+    return false;
+  };
+
   var base64Characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/';
 
   function base64Decode(data) {
@@ -116,7 +185,9 @@ window.lindneo = (function(window){
     currentPageId: currentPageId,
     currentComponent: currentComponent,
     online_users: online_users,
-    controls: controls
+    pageLoaded: pageLoaded,
+    controls: controls,
+    empty: empty
   }; 
 
 })( window );

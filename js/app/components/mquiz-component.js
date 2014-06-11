@@ -390,15 +390,18 @@ console.log(top);
       else if( $('#quiz_type').val() == "checkbox"){
         $('.quiz-inner').html('');
         $("<a href='#' class='btn btn-info' onclick='addRow(\"checkbox\");' >"+j__("Cevap Ekle")+"</a><br><br>").appendTo($('.quiz-inner'));
+        console.log(oldcomponent_answers);
         $.each(oldcomponent_answers, function(i,key){
-          var answer_selected = "";
-          console.log(i+"--"+oldcomponent_answer);
-          if(i == oldcomponent_answer) answer_selected="checked";
-          console.log(answer_selected);
-          var check_answer = $('<div><input type="checkbox" '+answer_selected+' name="multichecks" id="inlineCheckbox'+check_count+'" value="'+check_count+'" style="float:left; margin-right:10px;"><input class="form-control" id="check_option'+check_count+'" type="text" value="'+key+'" placeholder="Cevap seçeneklerini giriniz..."style="float: left; width: 200px; margin-right: 10px;"><i id="delete_'+check_count+'" class="icon-close size-10 popup-close-button" style="float:left;" onclick="removeRow(\'checkbox\','+check_count+');"></i><br><br></div>');
+
+          var check_answer = $('<div>\
+                                  <input type="checkbox" name="multichecks" id="inlineCheckbox'+check_count+'" value="'+check_count+'" style="float:left; margin-right:10px;">\
+                                  <input class="form-control" id="check_option'+check_count+'" type="text" value="'+key+'" placeholder="Cevap seçeneklerini giriniz..."style="float: left; width: 200px; margin-right: 10px;">\
+                                  <i id="delete_'+check_count+'" class="icon-close size-10 popup-close-button" style="float:left;" onclick="removeRow(\'checkbox\','+check_count+');"></i><br><br>\
+                                </div>');
           check_answer.appendTo($('.quiz-inner'));
           check_count++;
           question_answers.push(check_answer);
+          console.log(question_answers);
         });
         $.each(oldcomponent_answer, function(i,key){
            $('input:checkbox[name="multichecks"]').filter('[value="'+key+'"]').prop('checked', true);
@@ -496,7 +499,7 @@ console.log(top);
         $("#"+oldcomponent.id).hide();
         $("#"+oldcomponent.id).removeClass("selected");
         $("#c_"+oldcomponent.id).removeClass("selected");
-        window.lindneo.tlingit.componentHasDeleted( oldcomponent, oldcomponent.id );
+        //window.lindneo.tlingit.componentHasDeleted( oldcomponent, oldcomponent.id );
         
       };
 
@@ -538,22 +541,34 @@ console.log(top);
         
       }
       else if(quiz_type == "checkbox"){
-        console.log(question_answers);
+        //console.log(question_answers);
         answer=[];
         $('input:checkbox[name=multichecks]:checked').each(function() 
           {
              //alert( $(this).val());
              var check = this;
              $('input:checkbox[name=multichecks]:not(:checked)').each(function(){
-                console.log(check);
-                console.log(this);
+                //console.log(check);
+                //console.log(this);
                 if(check != this)
                   answer.push($(check).val());
              });
              //answer.push($(this).val());
           });
-        console.log(answer);
+        //console.log(answer);
         //return;
+
+        var fieldArray = [];
+        $.each(answer, function(i, item){
+          //console.log(item);
+          console.log($.inArray(item,fieldArray));
+          if ($.inArray(item,fieldArray) < 0){
+            console.log("first");
+            fieldArray.push(item);
+          }
+        });
+        console.log(fieldArray);
+        answer = fieldArray;
 
         $.each( question_answers, function( key, value ) {
           

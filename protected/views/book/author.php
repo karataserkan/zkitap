@@ -49,8 +49,10 @@ $current_user=User::model()->findByPk(Yii::app()->user->id);
 
 	$(document).ready(function(){
 	
-	
-	
+		//$('#editor_view_pane').css({'margin-left':'200px'});
+		var adaptive_width=$('.components').width()+20+"px";
+		console.log(adaptive_width);
+		$('#editor_view_pane').css({'margin-left':adaptive_width});
 		options = {  
     reject : { // Rejection flags for specific browsers  
         all: false, // Covers Everything (Nothing blocked)  
@@ -211,7 +213,7 @@ $current_user=User::model()->findByPk(Yii::app()->user->id);
 			         <li><a href="<?php echo $this->createUrl('site/index');  ?>"><span><i class="icon-book"></i>Kitaplarım</span></a></li>
 			         <li><a href="<?php echo $this->createUrl("EditorActions/ExportPdfBook", array('bookId' => $model->book_id ));?>"> <i class="icon-doc-inv"></i><?php _e("PDF Olarak Aktar"); ?></i></a></li>
 			         <li><a href="<?php echo $this->createUrl("EditorActions/ExportBook", array('bookId' => $model->book_id ));?>"> <i class="icon-doc-inv"></i><?php _e("ePub Olarak Aktar"); ?></i></a></li>
-			         <li><a href="<?php echo $this->createUrl("EditorActions/publishBook/", array('bookId' => $model->book_id ));?>"> <i class="icon-doc-inv"></i><?php _e("Markette Yayınla"); ?></i></a></li>
+			         <li><a href="<?php echo $this->createUrl("EditorActions/publishBook/", array('bookId' => $model->book_id ));?>"> <i class="icon-doc-inv"></i><?php _e("Okutus Kütüphanesinde Yayınla"); ?></i></a></li>
 			         <li>
 			         	<?php
 			         		if ($budget==0) {
@@ -2030,7 +2032,7 @@ $current_user=User::model()->findByPk(Yii::app()->user->id);
 </div>
 
 <div id='author_pane_container' style=' width:100%'>
-	<div id='author_pane' style='position:relative;width:1240px; margin: 0 auto; '> <!-- Outhor Pane -->
+	<div id='author_pane' style='position:relative;margin: 0 auto; '> <!-- Outhor Pane -->
 		
 			<div class="hruler">
 			<!--<ul class="ruler" data-items="54"></ul>-->
@@ -2100,7 +2102,7 @@ $current_user=User::model()->findByPk(Yii::app()->user->id);
 		
 		<div id='guide'> 
 		</div> <!-- guide -->
-<div id='editor_view_pane' style=' padding:5px 130px;margin: 10px 5px 5px 5px;float:left;'>
+<div id='editor_view_pane' style=' /*padding:5px 130px;margin: 10px 5px 5px 5px;*/float:left;'>
 
 <?php
 $book_data=json_decode($model->data,true);

@@ -34,26 +34,32 @@ $.ui.plugin.add("draggable", "alsoDrag", {
 					var var_also_drag
 					//Object {width: 382, height: 40, left: NaN, top: NaN}
 					if(typeof $(this).data("ui-draggable-alsoDrag") =='undefined'){
-						var_also_drag={'width':os.width,'height':os.height,'left':NaN,'top':NaN};
+						if (typeof os != "undefined" )
+							var_also_drag={'width':os.width,'height':os.height,'left':NaN,'top':NaN};
 
 					}
 					else{
 						var_also_drag=$(this).data("ui-draggable-alsoDrag");
 
 					}
-					if(isNaN(var_also_drag.top)||isNaN(var_also_drag.left))
-					{
-						var_also_drag.top=that.offset.top;
-						var_also_drag.left=that.offset.left;
+					if (typeof (var_also_drag) != "undefined")
+						if(isNaN(var_also_drag.top)||isNaN(var_also_drag.left))
+						{
+							var_also_drag.top=that.offset.top;
+							var_also_drag.left=that.offset.left;
 
-					}
+						}
 
 					var el = $(this), start = var_also_drag, style = {},
 						css = ["top", "left"];
 
 					$.each(css, function (i, prop) {
-						var sum = (start[prop]||0) + (delta[prop]||0);
-						style[prop] = sum || null;
+						if (typeof start != "undefined" && typeof delta != "undefined")
+						if (start.hasOwnProperty(prop) && delta.hasOwnProperty(prop)){
+							var sum = (start[prop]||0) + (delta[prop]||0);
+							style[prop] = sum || null;
+						}
+
 					});
 
 					el.css(style);

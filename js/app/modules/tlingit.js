@@ -28,6 +28,9 @@ window.lindneo.tlingit = (function(window, $, undefined){
     // create component
     // server'a post et
     // co-worker'lara bildir
+
+
+
     oldcomponent_id = component_id;
     oldcomponent = component;
     //console.log(component.data.self.css);
@@ -40,7 +43,11 @@ window.lindneo.tlingit = (function(window, $, undefined){
         //console.log(component.data.self.css);
         
       }
-    
+    if (typeof (component.data.comments) != "undefined" )
+      component.data.comments={};
+    if (component.data.comments == null )
+      component.data.comments={};
+
     var fakeComponent = JSON.parse(JSON.stringify(component));
     
     delete fakeComponent["data"];
@@ -95,8 +102,9 @@ window.lindneo.tlingit = (function(window, $, undefined){
 
   var componentHasUpdated = function ( component ) {
     //console.log(component);
-    window.lindneo.controls.pageLoaded=false;
-    if( typeof  componentPreviosVersions[component.id] == "undefined"){
+    window.lindneo.pageLoaded(false);
+    if( typeof  componentPreviosVersions[component.id] == "undefined" 
+      || component.type == "table"){
          
 
           //console.log('firstUpdate');
@@ -117,7 +125,18 @@ window.lindneo.tlingit = (function(window, $, undefined){
     } else {
         
         var componentDiff = deepDiffMapper.map(component.data, componentPreviosVersions[component.id].data);
-        //console.log(componentDiff);
+        
+        if(typeof componentDiff.comments != "undefined"){
+          $.each ( componentDiff.comments, function (key,value) {
+            if (value.mapped_type==deepDiffMapper.VALUE_CREATED){
+              value.mapped_type=deepDiffMapper.VALUE_DELETED;
+            } 
+            else if (value.mapped_type==deepDiffMapper.VALUE_DELETED){
+              value.mapped_type=deepDiffMapper.VALUE_CREATED;
+            }
+          });
+        }
+
          window.lindneo.dataservice
           .send( 'UpdateMappedComponentData', 
             { 
@@ -130,13 +149,13 @@ window.lindneo.tlingit = (function(window, $, undefined){
           });
 
     }
-     componentPreviosVersions[component.id]= JSON.parse(JSON.stringify(component)); 
+    componentPreviosVersions[component.id]= JSON.parse(JSON.stringify(component)); 
     window.lindneo.tsimshian.componentUpdated(component);
     if (typeof window.UpdateAgain == "undefined") window.UpdateAgain =true; 
     if (window.UpdateAgain){
         window.UpdateAgain=false;
         updatePageCanvas(window.lindneo.currentPageId,function(){
-          setTimeout(function(){window.UpdateAgain =true;}, 10000);
+          setTimeout(function(){window.UpdateAgain =true;}, 5000);
             
         },true);
         }
@@ -144,7 +163,7 @@ window.lindneo.tlingit = (function(window, $, undefined){
   };
 
   var updateArrivalComponent = function(res) {
-    window.lindneo.controls.pageLoaded=true;
+    window.lindneo.pageLoaded(true);
     //var response = responseFromJson(res);
     //console.log(response);
     //loadPagesPreviews(response.result.component.page_id);
@@ -176,10 +195,13 @@ window.lindneo.tlingit = (function(window, $, undefined){
     if(res){
       var response = responseFromJson(res);
       //console.log(oldcomponent);
-      //console.log(response.result);
+      console.log(response.result);
       if(response.result){
+        $('#'+ response.result.delete).parent().not('#current_page').remove();
+        $('#'+ response.result.delete).remove();
         window.lindneo.nisga.destroyComponent(oldcomponent);
         window.lindneo.tsimshian.componentDestroyed(response.result.delete);
+        window.lindneo.toolbox.removeComponentFromSelection( $('#'+ response.result.delete) );
       }
     }
     
@@ -187,7 +209,7 @@ window.lindneo.tlingit = (function(window, $, undefined){
 
   var loadComponents = function( res ) {
 
-    window.lindneo.controls.pageLoaded = true;
+    window.lindneo.pageLoaded(true);
     //console.log("LOAD components");
     //console.log(window.lindneo.currentBookId);
     //console.log(res);
@@ -237,7 +259,7 @@ window.lindneo.tlingit = (function(window, $, undefined){
   };
 
   var loadPage = function (pageId){
-     window.lindneo.controls.pageLoaded = false;
+     window.lindneo.pageLoaded(false);
      updatePageCanvas(window.lindneo.currentPageId, function(){
           $('#current_page').empty();
           window.lindneo.currentPageId=pageId;
@@ -432,9 +454,10 @@ window.lindneo.tlingit = (function(window, $, undefined){
   }
   var GenerateCurrentPagePreview = function (page_id,callback,async){
     if(typeof async == "undefined") async = true;
-    if (!window.lindneo.controls.pageLoaded) {
+   /* if (!window.lindneo.pageLoaded()) {
       return callback();
     }
+*/
     html2canvas($('#current_page')[0], {
       onrendered: function(canvas) {
          
@@ -500,8 +523,7 @@ var deepDiffMapper = function() {
         VALUE_DELETED: 'deleted',
         VALUE_UNCHANGED: 'unchanged',
         map: function(obj1, obj2) {
-          console.log(obj1);
-          console.log(obj2);
+
             if (this.isFunction(obj1) || this.isFunction(obj2)) {
                 throw 'Invalid argument. Function given, object expected.';
             }

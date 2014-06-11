@@ -263,7 +263,7 @@ var FormWizard = function () {
                     }
                 },
 				onTabClick: function (tab, navigation, index) {
-                    bootbox.alert('On Tab click is disabled');
+                    //bootbox.alert('On Tab click is disabled');
                     return false;
                 },
                 onTabShow: function (tab, navigation, index) {

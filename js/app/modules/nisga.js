@@ -239,15 +239,7 @@ window.lindneo.nisga = (function(window, $, undefined){
           //console.log(revision_array.revisions); 
         }
       }
-      else revision_value=0;
-      var delete_component_id = "";
-    if(component.id) delete_component_id = component.id;
-    else delete_component_id = oldcomponent_id;
-    //console.log(delete_component_id);
-    $('[id="'+delete_component_id+'"]').parent().not('#current_page').remove();
-    $('[id="'+delete_component_id+'"]').remove();
-    window.lindneo.toolbox.removeComponentFromSelection( $('#'+ delete_component_id) );
-    //window.lindneo.tlingit.componentHasDeleted( component.id );
+      else revision_value=0;   
   };
 
   var destroyByIdComponent = function ( componentID ) {
