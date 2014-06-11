@@ -1922,6 +1922,7 @@ display:inline-block;
 
 .quiz-component{
 outline: 10px solid rgb(235, 235, 235);
+overflow:hidden;
 padding: 20px;
 max-width: 400px;
 }
