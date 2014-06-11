@@ -838,7 +838,7 @@ $(document).ready(function(){
         
         //window.lindneo.tlingit.componentHasCreated( component );
         window.lindneo.tlingit.componentHasUpdated( component );
-        window.lindneo.nisga.destroyComponent(component, component.id);
+        window.lindneo.nisga.destroyByIdComponent(component.id);
         window.lindneo.nisga.createComponent(component);
 
 
@@ -877,7 +877,7 @@ $(document).ready(function(){
         console.log(component.data.table);
         //window.lindneo.tlingit.componentHasCreated( component );
         window.lindneo.tlingit.componentHasUpdated( component );
-        window.lindneo.nisga.destroyComponent(component, component.id);
+        window.lindneo.nisga.destroyByIdComponent(component.id);
         window.lindneo.nisga.createComponent(component);
       },
 
@@ -926,7 +926,7 @@ $(document).ready(function(){
           component.data.table.push(value);
         });
         window.lindneo.tlingit.componentHasUpdated( component );
-        window.lindneo.nisga.destroyComponent(component, component.id);
+        window.lindneo.nisga.destroyByIdComponent(component.id);
         window.lindneo.nisga.createComponent(component);
 
       },
@@ -978,7 +978,7 @@ $(document).ready(function(){
             
           });
         window.lindneo.tlingit.componentHasUpdated( component );
-        window.lindneo.nisga.destroyComponent(component, component.id);
+        window.lindneo.nisga.destroyByIdComponent(component.id);
         window.lindneo.nisga.createComponent(component);
       },
 

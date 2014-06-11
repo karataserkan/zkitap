@@ -496,10 +496,7 @@ console.log(top);
         top = oldcomponent.data.self.css.top;
         left = oldcomponent.data.self.css.left;
         console.log(oldcomponent);
-        $("#"+oldcomponent.id).hide();
-        $("#"+oldcomponent.id).removeClass("selected");
-        $("#c_"+oldcomponent.id).removeClass("selected");
-        //window.lindneo.tlingit.componentHasDeleted( oldcomponent, oldcomponent.id );
+        window.lindneo.tlingit.componentHasDeleted( oldcomponent, oldcomponent.id );
         
       };
 
