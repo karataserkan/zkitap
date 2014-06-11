@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <section>
 
 
@@ -12,22 +13,23 @@
 		 	Eser yayınlanma kuyruğuna eklendi. Yayınlama işlemi bittiğinde e-posta ile bilgi verilecektir.
 		</div>
 	      <div class="modal-footer">
-	      	<a href="/site/index" class="btn btn-primary"><?php _e("Tamam"); ?></a>
+	      	<a href="/site/index" class="btn btn-primary brand_color_for_buttons"><?php _e("Tamam"); ?></a>
 	      </div>
 		</div>
 	  </div>
 	</div>
  
 <!-- POPUP END -->
+				<div class="col-lg-12" id="content">
+                    <div class="page-header">
+                        <h3 class="content-title pull-left">Eser Yayınlama</h3>
+                    </div>
 
-
-
-	<div class="row">
-							<div class="col-md-10">
+							<div class="col-md-10 publishing_book_box">
 								<!-- BOX -->
-								<div class="box border red" id="formWizard">
+								<div class="box border blue" id="formWizard">
 									<div class="box-title">
-										<h4><i class="fa fa-bars"></i><?php _e('Yayınlama'); ?> - <span class="stepHeader"><?php _e('Aşama'); ?> 1 / 5</h4>
+										<h4><i class="fa fa-bars"></i><?php _e('Yayınlama'); ?> - <span class="stepHeader"><?php _e('Aşama'); ?> 1 / 5</span></h4>
 									</div>
 									<div class="box-body form">
 										<!-- <form id="wizForm" action="#" class="form-horizontal" > -->
@@ -65,9 +67,7 @@
 												 <li>
 													<a href="#money" data-toggle="tab" class="wiz-step">
 													<span class="step-number">4</span>
-													<span class="step-name"><i class="fa fa-check"></i> <?php //_e('Fiyat Bilgileri');
-														_e('Erişim Bilgileri');
-													 ?> </span>   
+													<span class="step-name"><i class="fa fa-check"></i> <?php _e('Fiyat Bilgileri'); ?> </span>   
 													</a> 
 												 </li>
 												 <li>
@@ -225,7 +225,7 @@
 													<div class="form-group">
 														<div class="col-md-3"></div>
 														<div class="col-md-4">
-															<a href="javascript:;" class="btn btn-primary detailBtn">
+															<a href="javascript:;" class="btn btn-primary detailBtn brand_color_for_buttons">
 																<?php _e('Detay'); ?> <i class="fa fa-arrow-circle-down"></i>
 														   </a>
 														</div>
@@ -243,7 +243,7 @@
 														{
 															$categoryIds[$category->category_id]=$category->category_name;
 														}
-													}}
+													}
 													?>
 
 													<div class="form-group">
@@ -295,15 +295,15 @@
 														</div>
 													</div>
 												<!-- end if -->
-												<?php //}
-												//else
-												//{ ?>
-												<p><?php //_e("Eser kategorisi bulunamadı. Eser yayınlamadan önce lütfen bir kategori oluşturunuz ve seçiniz."); ?></p>
-												<?php //} ?>	
+												<?php }
+												else
+												{ ?>
+												<p><?php _e("Eser kategorisi bulunamadı. Eser yayınlamadan önce lütfen bir kategori oluşturunuz ve seçiniz."); ?></p>
+												<?php } ?>	
 												</div>
 												<div class="tab-pane" id="money">
 
-													<div class="form-group" id="_contentIsForSale">
+													<div class="form-group">
 														<label for="PublishBookForm_contentIsForSale" class="control-label col-md-3"><?php _e('Satılık mı?'); ?><span class="required">*</span></label>
 														<div class="col-md-4">
 														<?php echo $form->radioButtonList($model,'contentIsForSale',array('Yes'=>__('Evet'),'Free'=>__('Hayır')),array('class'=>'uniform','name'=>'contentIsForSale')); ?>
@@ -355,7 +355,7 @@
 
 												 </div>
 												 <div class="tab-pane" id="confirm">
-												 	<h3 class="block">Detay Özeti <a href="javascript:;" class="btn btn-primary detayRevBtn">
+												 	<h3 class="block">Detay Özeti <a href="javascript:;" class="btn btn-primary detayRevBtn brand_color_for_buttons">
 																<i class="fa fa-arrow-circle-down"></i>
 														   </a></h3>
 													<div class="well" id="detayRev">
@@ -466,14 +466,14 @@
 															  <p class="form-control-static" data-display="categories"></p>
 														   </div>
 														</div>
-														<div class="form-group" id="contentIsForSaleDisplay">
+														<div class="form-group">
 														   <label class="control-label col-md-3"><?php _e('Satılık mı?'); ?>:</label>
 														   <div class="col-md-4">
 															  <p class="form-control-static" data-display="contentIsForSale"></p>
 														   </div>
 														</div>
 														
-														<div class="form-group" id="contentPriceDisplay">
+														<div class="form-group">
 														   <label class="control-label col-md-3"><?php _e('Eser Fiyatı') ?>:</label>
 														   <div class="col-md-4">
 															  <p class="form-control-static" data-display="contentPrice"></p>
@@ -518,19 +518,19 @@
 													   <a href="javascript:;" class="btn btn-default prevBtn">
 														<i class="fa fa-arrow-circle-left"></i> <?php _e('Geri'); ?> 
 													   </a>
-													   <a href="javascript:;" class="btn btn-primary nextBtn">
+													   <a href="javascript:;" class="btn btn-primary nextBtn brand_color_for_buttons">
 														<?php _e('Devam'); ?> <i class="fa fa-arrow-circle-right"></i>
 													   </a>
 													   <?php 
-													   // if($budget==0)
-														  //  {
-														  //  		echo "Hesabınızda yeterli bakiye bulunmamaktadır.";
-														  //  }else{
+													   if($budget==0)
+														   {
+														   		echo "Hesabınızda yeterli bakiye bulunmamaktadır.";
+														   }else{
 													   ?>
 													   <a href="javascript:;" class="btn btn-success submitBtn" id="publishBk">
 														<?php _e('Yayınla'); ?> <i class="fa fa-arrow-circle-right"></i>
 													   </a>
-													   <?php //} ?>                            
+													   <?php } ?>                            
 													</div>
 												 </div>
 											  </div>
@@ -542,7 +542,7 @@
 								</div>
 								<!-- /BOX -->
 							</div>
-						</div>
+				</div>		
 </section>
 <script>
 		jQuery(document).ready(function() {		
