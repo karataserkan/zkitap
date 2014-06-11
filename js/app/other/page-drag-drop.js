@@ -236,9 +236,10 @@ $( document ).ready(function () {
       $('.ruler, .vruler').hide();
 
     var is_grid_checked = $('input:checkbox[name=grid]:checked').val();
-
+    console.log(is_grid_checked);
     if(is_grid_checked == "on"){
       var image = $("#current_page").css('background-image');
+      if((image.split(',')[0])=="url("+window.base_path+"/css/images/gridpattern.png)"){return;}
       if(!image)
         $("#current_page").css("background-image", 'url("/css/images/gridpattern.png")');
       else{
