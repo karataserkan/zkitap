@@ -275,6 +275,9 @@ var FormWizard = function () {
                     });
                 }
             });
+            
+
+
             $('#contentIsForSale_1').click(function(){
                 if ($("span.checked [name='contentIsForSale']").val() == 'Free' ) {
                             $("[name='contentPrice']").parent().parent().hide();
@@ -289,6 +292,18 @@ var FormWizard = function () {
 
                         };
             });
+
+
+            //fiyatlandırmanın kapandığı yer
+
+            $("span.checked [name='contentIsForSale']").val("Free");
+            $("[name='contentPrice']").parent().parent().hide();
+            $("[name='contentCurrency']").parent().parent().hide();
+            $("#_contentIsForSale").hide();
+            $("#contentPriceDisplay").hide();
+            $("#contentIsForSaleDisplay").hide();
+
+            //fiyatlandırmanın kapandığı yer sonu
 
             $('#siraliSiraNo').hide();
             $('#siraliCiltNo').hide();

@@ -197,7 +197,7 @@ $( document ).ready(function () {
       $('.ruler, .vruler').show();
     }
   });
-  */  
+  */   
   $(':checkbox').change(function() {
     var is_checked = $('input:checkbox[name=cetvel]:checked').val();
     //console.log(is_checked);
@@ -212,7 +212,7 @@ $( document ).ready(function () {
 
       console.log("LEN:"+len);
       item = $(document.createElement("div"));
-      item.css({'width':'38px','float':'left', 'border-right': '1px solid #000','text-align':'left','padding-left':'2px'});
+      item.css({'width':'37px','float':'left', 'border-right': '1px solid #000','text-align':'left','padding-left':'2px'});
           for (i = 0; i < len; i++) 
           {
               ruler.append(item.clone().text(i));
@@ -226,17 +226,20 @@ $( document ).ready(function () {
             if(i==0){item.css({'border-top':'none'})}
               ruler_h.append(item.clone().text(i));
           }
-
-
+        var left_margin=$('#editor_view_pane').css('margin-left').replace('px', '')-15;
+        console.log(left_margin);
+       $('.hruler').css({'left':$('#editor_view_pane').css('margin-left')});
+       $('.vbruler').css({'left':left_margin+"px"});  
       $('.ruler, .vruler').show();
     }
     else 
       $('.ruler, .vruler').hide();
 
     var is_grid_checked = $('input:checkbox[name=grid]:checked').val();
-
+    console.log(is_grid_checked);
     if(is_grid_checked == "on"){
       var image = $("#current_page").css('background-image');
+      if((image.split(',')[0])=="url("+window.base_path+"/css/images/gridpattern.png)"){return;}
       if(!image)
         $("#current_page").css("background-image", 'url("/css/images/gridpattern.png")');
       else{

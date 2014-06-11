@@ -4,6 +4,7 @@
  ?>
  <script>
 	jQuery(document).ready(function() {		
+        $('#li_<?php echo $organisation->organisation_id; ?>').addClass('current');
 		App.setPage("gallery");  //Set current page
 		App.init(); //Initialise plugins and elements
 	});

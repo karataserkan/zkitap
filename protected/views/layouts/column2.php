@@ -88,13 +88,13 @@
 			<div class="sidebar-menu nav-collapse">
 				<!--=== Navigation ===-->
 				<ul>
-					<li class="current">
+					<li id="li_dashboard">
 						<a href="/site/dashboard">
 							<i class="fa fa-gear fa-fw"></i>
 							<span class="menu-text">Kontrol	Paneli</span>
 							</a>
 					</li>
-					<li>
+					<li id="li_book">
 						<a href="/site/index">
 							<i class="fa fa-book fa-fw"></i> <span class="menu-text">
 							<?php _e('Kitaplarım'); ?>
@@ -108,7 +108,7 @@
 						</a>
 					</li>
 					-->
-					<li>
+					<li id="li_faq">
 						<a href="/faq">
 							<i class="fa fa-medkit fa-fw"></i> <span class="menu-text">
 							Destek
@@ -116,7 +116,7 @@
 						</a>
 					</li>
 					
-					<li>
+					<li id="li_profile">
 						<a href="/user/profile">
 							<i class="fa fa-user fa-fw"></i> <span class="menu-text">
 							Profil
@@ -152,7 +152,7 @@
 								<li>
 									<a href="/organisations/templates/<?php echo $templates[0]; ?>">
 										<i class="fa fa-clipboard fa-fw"></i> <span class="menu-text">
-										<?php _e('Templates'); ?>
+										<?php _e('Şablonlar'); ?>
 									</span>
 									</a>
 								</li>
@@ -161,7 +161,7 @@
 							else
 							{
 								?>
-							<li class="has-sub">
+							<li class="has-sub" id="li_templates">
 								<a href="javascript:;" class="">
 									<i class="fa fa-clipboard fa-fw"></i>
 									<span class="menu-text"><?php echo __('Şablonlar');?></span>
@@ -171,7 +171,7 @@
 									<?php 
 										foreach ($templates as $a => $tem) {
 									?>
-									<li>
+									<li >
 										<a href="/organisations/templates/<?php echo $tem ?>">
 										<?php 
 										$organisation=Yii::app()->db->createCommand()
@@ -208,17 +208,17 @@
 							if($organisations)
 							{
 								foreach ($organisations as $key => $organisation) {
-							?>
-							
-							<li class="has-sub">
-								<a href="javascript:;" class="">
-									<i class="fa fa-briefcase fa-fw"></i>
-									<span class="menu-text"><?php 
 									$organisation_name=Yii::app()->db->createCommand()
 								    ->select("*")
 								    ->from("organisations")
 								    ->where("organisation_id=:organisation_id", array(':organisation_id' => $organisation["organisation_id"]))
 								    ->queryRow();
+							?>
+							
+							<li class="has-sub" id="li_<?php echo $organisation_name["organisation_id"]; ?>">
+								<a href="javascript:;" class="">
+									<i class="fa fa-briefcase fa-fw"></i>
+									<span class="menu-text"><?php 
 
 									echo $organisation_name["organisation_name"]; 
 									?></span>

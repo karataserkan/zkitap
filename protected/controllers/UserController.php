@@ -28,7 +28,7 @@ class UserController extends Controller
 	{
 		return array(
 			array('allow',  // allow all users to perform 'index' and 'view' actions
-				'actions'=>array('index','view','invitation','signup','forgetPassword','verifyEmail','respondBookInvitation','acceptInvitation'),
+				'actions'=>array('index','view','invitation','signup','forgetPassword','verifyEmail','respondBookInvitation','acceptInvitation','registerUser'),
 				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
@@ -238,6 +238,66 @@ class UserController extends Controller
 		$this->redirect(array('/site/index'));
 	}
 
+	public function actionRegisterUser()
+	{
+		if (isset($_POST['User'])) {
+			$attributes=$_POST['User'];
+			$newUser=new User;
+			$criteria=new CDbCriteria;
+			$criteria->select='max(id) AS maxColumn';
+			$row = $newUser->model()->find($criteria);		
+			$userId = $row['maxColumn']+1;
+			$loginError="";
+			$newUser->id=$userId;
+			$meta=new UserMeta;
+			$meta->user_id=$newUser->id;
+			$meta->meta_key='profilePicture';
+			$meta->meta_value=$attributes['data'];
+			$meta->created=time();
+			$meta->save();
+			
+			$detectSQLinjection=new detectSQLinjection($attributes['name']);
+			if (!$detectSQLinjection->ok()) {
+				error_log("detectSQLinjection SC:L:".$Yii::app()->user->id." attributes['name']: ".$attributes['name']);
+				$this->redirect('index');	
+			}
+
+			$detectSQLinjection=new detectSQLinjection($attributes['surname']);
+			if (!$detectSQLinjection->ok()) {
+				error_log("detectSQLinjection SC:L:".$Yii::app()->user->id." attributes['surname']: ".$attributes['surname']);
+				$this->redirect('index');	
+			}
+
+
+			$newUser->name=$attributes['name'];
+			$newUser->surname=$attributes['surname'];
+			$newUser->email=$attributes['email'];
+			$newUser->created=date('Y-n-d g:i:s',time());
+
+			
+
+			$hasEmail= User::model()->findAll('email=:email', 
+	    				array(':email' => $attributes['email']) );
+
+			if (empty($hasEmail)) {
+				if ($attributes['password']==$attributes['passwordR']) {
+					$newUser->password=md5(sha1($attributes['password']));
+					$newUser->save();
+					$model=new LoginForm;
+					$model->password=$attributes['password'];
+					$model->email=$attributes['email'];
+					$model->validate();
+					$model->login();
+					$invitation=Invitation::model()->find('invitation_key=:invitation_key',array('invitation_key'=>$attributes['key']));
+					$invitation->user_id=$newUser->id;
+					$invitation->new_user=0;
+					$invitation->save();
+					$this->redirect(array('respondBookInvitation','key'=>$attributes['key'],'respond'=>1));
+				}
+			}
+		}
+	}
+
 	public function actionAcceptInvitation($key){
 		if(!$key){
 			//404 sayfasına yönlenecek burda
@@ -255,7 +315,9 @@ class UserController extends Controller
 			if ($invitation->new_user) {
 				$this->render('registerUserForBook',array('key'=>$key));
 			}else{
-
+					print_r($_POST);
+				if (isset($_POST)) {
+				}
 				$this->render('newUserToBook',array('key'=>$key));
 			}
 		}elseif ($invitation->type="organisation") {

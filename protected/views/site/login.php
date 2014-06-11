@@ -116,6 +116,7 @@ $this->breadcrumbs=array(
 									</div>
 								<?php }
 								?>
+								<div style="display:none" id="signUpSent" class="alert alert-info"><h3>Lütfen Bekleyiniz...</h3></div>
 								<?php $form=$this->beginWidget('CActiveForm', array(
 									'id'=>'user-form',
 									'enableAjaxValidation'=>false,
@@ -262,6 +263,14 @@ $this->breadcrumbs=array(
 					swapScreen('forgot_bg');
 				};
 			};
+
+
+			$('#addUser').click(function(){
+				$('#signUpSent').show();
+				$('#user-form').hide();
+			});
+
+
 			var pass;
 			$('#User_password , #User_password_r').keyup(function(){
 				pass=$('#User_password').val();

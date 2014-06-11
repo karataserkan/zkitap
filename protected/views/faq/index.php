@@ -3,7 +3,8 @@
 /* @var $dataProvider CActiveDataProvider */
 ?>
 <script>
-		jQuery(document).ready(function() {		
+		jQuery(document).ready(function() {	
+			$('#li_faq').addClass('current');	
 			App.setPage("gallery");  //Set current page
 			App.init(); //Initialise plugins and elements
 		});
@@ -15,38 +16,35 @@
 	  <div class="modal-content">
 		<div class="modal-header">
 		  <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-		  <h4 class="modal-title"><?php _e("Destek iste"); ?></h4>
+		  <h4 class="modal-title"><i class="fa fa-exclamation-circle"></i> <?php _e("Destek iste"); ?></h4>
 		</div>
 		<div class="modal-body">
 		 	<form id="destek" class="form-horizontal">
-				<div class="form-group" id="dFeedback" style="display:none">
+				<div class="form-group centering_with_text_align support_alert_messages" id="dFeedback" style="display:none">
 					<div class="col-md-12">
 						<span class="alert alert-danger" id="feedback"></span>
 					</div>
 				</div>
-				<div class="form-group" id="dSuccessFeedback" style="display:none">
+				<div class="form-group centering_with_text_align support_alert_messages" id="dSuccessFeedback" style="display:none">
 					<div class="col-md-12">
 						<span class="alert alert-success" id="succesF"></span>
 					</div>
 				</div>
-
-
-				
 				
 				<div class="form-group">
-					<div class="col-md-8">
+					<div class="col-md-12">
 						<input class="form-control" name="konu" placeholder="Konu" id="konu" type="text">															
 					</div>
 				</div>	
 				<div class="form-group">
-					<div class="col-md-8">
+					<div class="col-md-12">
 						<textarea class="form-control" name="mesaj" placeholder="Mesaj" id="mesaj" type="text"></textarea>
 					</div>
 				</div>	
 		 	</form>
 		</div>
 	      <div class="modal-footer">
-	      	<button type="button" class="btn btn-primary" id="send_ticket"><?php _e("Gönder"); ?></a>
+	      	<button type="button" class="btn btn-primary brand_color_for_buttons" id="send_ticket"><?php _e("Gönder"); ?></a>
 	        <button type="button" class="btn btn-default" data-dismiss="modal"><?php _e("Vazgeç"); ?></button>
 	      </div>
 		</div>
@@ -75,11 +73,11 @@
 	            }).done(function(html){
 	            	console.log(html);
 	        		$('#dSuccessFeedback').show();
-					$('#succesF').text('Destek talebiniz alındı. En yakın zamanda iletişime geçeceğiz.');    	
+					$('#succesF').text('Destek talebiniz alındı. En yakın zamanda sizinle iletişime geçeceğiz.').prepend("<i class='fa fa-check'></i> ");    	
 	            });
 		}else{
 			$('#dFeedback').show();
-			$('#feedback').text('Lütfen bilgileri eksiksiz giriniz!');
+			$('#feedback').text('Lütfen bilgileri eksiksiz giriniz!').prepend("<i class='fa fa-exclamation-circle'></i> ");
 		};
 
 	});

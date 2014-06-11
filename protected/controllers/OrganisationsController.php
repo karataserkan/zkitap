@@ -543,6 +543,7 @@ class OrganisationsController extends Controller
 			$books= Book::model()->findAll(' ('.$qu.') AND publish_time IS NOT NULL AND publish_time!=0');
 		$this->render('published_books',array(
 			'books'=>$books,
+			'organisationId'=>$id
 			));
 	}
 
