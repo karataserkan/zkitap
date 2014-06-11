@@ -239,9 +239,7 @@ window.lindneo.nisga = (function(window, $, undefined){
           //console.log(revision_array.revisions); 
         }
       }
-      else revision_value=0;
-    window.lindneo.toolbox.removeComponentFromSelection( $('#'+ delete_component_id) );
-    
+      else revision_value=0;   
   };
 
   var destroyByIdComponent = function ( componentID ) {
