@@ -174,7 +174,7 @@ window.lindneo.tlingit = (function(window, $, undefined){
     if(typeof componentId != 'undefined')
       oldcomponent_id = componentId;
     oldcomponent = component;
-    //console.log(component);
+    console.log(component);
     //console.log(component.id);
     //console.log(componentId);
     if(typeof component != 'undefined'){
@@ -197,6 +197,8 @@ window.lindneo.tlingit = (function(window, $, undefined){
       //console.log(oldcomponent);
       console.log(response.result);
       if(response.result){
+        $("#"+response.result.delete).removeClass("selected");
+        $("#c_"+response.result.delete).removeClass("selected");
         $('#'+ response.result.delete).parent().not('#current_page').remove();
         $('#'+ response.result.delete).remove();
         window.lindneo.nisga.destroyComponent(oldcomponent);
