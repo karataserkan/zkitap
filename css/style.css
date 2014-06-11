@@ -1420,7 +1420,7 @@ display: none;
 font-weight: normal;
 }
 .hidden-delete:hover{
-
+	
 }
 
 .add-button-container{
@@ -2536,6 +2536,18 @@ box-shadow: 0 0 5px 0 rgba(0,0,0,0.5);
 }
 
 
+.page-chapter-delete {
+	height:23px;
+	width:23px;
+}
+
+.page-chapter-delete i.fa-trash-o{
+	margin-top: -5px;
+	margin-left: -5px;
+}
+
+
+
 div .ui-draggable>.icon-delete
 {
 background-color:rgba(236, 236, 236, 0.4);
@@ -2634,6 +2646,8 @@ border-bottom-left-radius: 5px;
 }
 	
 	
+
+
 
 
 
