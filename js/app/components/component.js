@@ -582,11 +582,12 @@ $(document).ready(function(){
       var showCommentBox = false;
       var commentCleansing = false;
       $.each(that.options.component.data.comments, function(i,value){
-        if (typeof that.options.component.data.comments[i].text != "undefined")
-          if (that.options.component.data.comments[i].text != ""){
-            showCommentBox=true;
-            return ;
-          }
+        if (that.options.component.data.comments[i] != null)
+          if (typeof that.options.component.data.comments[i].text != "undefined")
+            if (that.options.component.data.comments[i].text != ""){
+              showCommentBox=true;
+              return ;
+            }
         delete that.options.component.data.comments[i];
         commentCleansing=true;
 
