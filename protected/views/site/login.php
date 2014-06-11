@@ -116,6 +116,7 @@ $this->breadcrumbs=array(
 									</div>
 								<?php }
 								?>
+								<div style="display:none" id="signUpSent" class="alert alert-info"><h3>Lütfen Bekleyiniz...</h3></div>
 								<?php $form=$this->beginWidget('CActiveForm', array(
 									'id'=>'user-form',
 									'enableAjaxValidation'=>false,
@@ -265,7 +266,8 @@ $this->breadcrumbs=array(
 
 
 			$('#addUser').click(function(){
-				$('#addUser').hide();
+				$('#signUpSent').show();
+				$('#user-form').hide();
 			});
 
 
