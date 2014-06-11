@@ -116,7 +116,7 @@ class PageController extends Controller
 
 
 
-		if ($currentPage->order) {
+		if ($currentPage) {
 			$model->order=$currentPage->order+1;
 		}
 		// Uncomment the following line if AJAX validation is needed
