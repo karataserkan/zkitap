@@ -1922,7 +1922,6 @@ display:inline-block;
 
 .quiz-component{
 outline: 10px solid rgb(235, 235, 235);
-overflow:hidden;
 padding: 20px;
 max-width: 400px;
 }
@@ -2213,7 +2212,7 @@ border-right:1px solid #ddd;
   float: none;
   margin: 0px;
   padding: 0px;
-  width: 225px;
+  width: 235px;
 }
 #headermenu li:hover li a {
   background: none;

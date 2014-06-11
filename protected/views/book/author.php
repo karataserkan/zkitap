@@ -259,7 +259,7 @@ $current_user=User::model()->findByPk(Yii::app()->user->id);
 			  	
 			   <li style="float:right; " class='has-sub'>
 			  
-					<a id='login_area' style='float:right;'>
+					<a id='login_area' target='_blank' style='float:right;'>
 						<?php
 						if(Yii::app()->user->isGuest){
 							echo CHtml::link(array('/site/login'));
@@ -271,7 +271,7 @@ $current_user=User::model()->findByPk(Yii::app()->user->id);
 			      <ul>
 
 			      	<?php if (!Yii::app()->user->isGuest) {?>
-			         <li><a href='/user/profile'><span><?php _e('Profil') ?></span></a></li>
+			         <li><a href='/user/profile' target='_blank'><span><?php _e('Profil') ?></span></a></li>
 			         <?php echo " <li>". CHtml::link(__("Çıkış"),"/site/logout") ."</li>"; ?>
 					<?php 
 						// foreach (Yii::app()->params->availableLanguages  as $lang_id => $lang_name) {
