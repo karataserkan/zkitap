@@ -879,7 +879,7 @@ $( document ).ready(function () {
             value += '<div class="chapter"  chapter_id="'+key.chapter_id+'">\
                             <div class="chapter-detail">\
                               <input type="text" class="chapter-title" placeholder='+j__("Bölüm adı")+' value="'+key.title+'">\
-                              <a class="btn btn-danger  page-chapter-delete delete-chapter hidden-delete" style="float: right; margin-top: -23px;"><i class="icon-ok"></i></a>\
+                              <a class="btn btn-danger  page-chapter-delete delete-chapter hidden-delete" style="float: right; margin-top: -23px;"><i class="fa fa-trash-o"></i></a>\
                               <a class="page-chapter-delete_control hidden-delete" style="float: right; margin-top: -23px;"><i class="icon-delete"></i></a>\
                             </div>';
             //console.log(result.pages[key.chapter_id]);
