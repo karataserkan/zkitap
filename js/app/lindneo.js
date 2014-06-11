@@ -7,16 +7,8 @@ window.lindneo = (function(window){
     
   };
   var dontAllowToLoagPage = $('<div class = "dontAllowToLoagPage" style="width: 140px; height: 50px; background-color: #E54E45;top:20px;position: absolute;text-align: center;padding-top: 5px;margin-left:-10px;color: #830700;font-weight: bold;border-radius: 3px;border: 2px solid#A30900;">' + j__('İşlem tamamlanırken lütfen bekleyiniz..') + '</div>'  );
-  var pageCanvasHoverIn = function(e){
-    //console.log(e);
-    dontAllowToLoagPage.appendTo( $(e.currentTarget) )
-    ;}
-  var pageCanvasHoverOut = function(e){
-  //console.log(e);
-  dontAllowToLoagPage.remove()
-  ;
-  //dontAllowToLoagPage.appendTo( $(e.).parent() )
-  ;}
+  var pageCanvasHoverIn = function(e){dontAllowToLoagPage.appendTo( $(e.currentTarget) );};
+  var pageCanvasHoverOut = function(e){dontAllowToLoagPage.remove();};
   var pageLoaded = function(value){
 
     if (typeof (value)!="undefined")
@@ -24,7 +16,7 @@ window.lindneo = (function(window){
         window.lindneo.controls.pageLoaded = value;
 
     if (value===true){
-      $('.dontAllowToLoagPage').remove();
+      dontAllowToLoagPage.remove();
 
       $("canvas.preview").parent().unbind("mouseenter",pageCanvasHoverIn);
       $("canvas.preview").parent().unbind("mouseleave",pageCanvasHoverOut);
@@ -34,20 +26,10 @@ window.lindneo = (function(window){
       $("canvas.preview").parent().bind("mouseenter",pageCanvasHoverIn);
       $("canvas.preview").parent().bind("mouseleave",pageCanvasHoverOut);
     }
-
-
+    
     return window.lindneo.controls.pageLoaded;
+  };
 
-  }
-  /*controls.watch ( "pageLoaded" function (id, oldval, newval) {
-    if(newval){
-      $('.dontClickForReload').remove();
-    } else {
-
-    }
-
-    return newval;
-  });*/
   var currentPageId ;
   var currentComponent = {};
   var online_users = [];

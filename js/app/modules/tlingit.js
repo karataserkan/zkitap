@@ -125,7 +125,7 @@ window.lindneo.tlingit = (function(window, $, undefined){
     } else {
         
         var componentDiff = deepDiffMapper.map(component.data, componentPreviosVersions[component.id].data);
-        console.log(componentDiff);
+        
         if(typeof componentDiff.comments != "undefined"){
           $.each ( componentDiff.comments, function (key,value) {
             if (value.mapped_type==deepDiffMapper.VALUE_CREATED){
@@ -149,13 +149,13 @@ window.lindneo.tlingit = (function(window, $, undefined){
           });
 
     }
-     componentPreviosVersions[component.id]= JSON.parse(JSON.stringify(component)); 
+    componentPreviosVersions[component.id]= JSON.parse(JSON.stringify(component)); 
     window.lindneo.tsimshian.componentUpdated(component);
     if (typeof window.UpdateAgain == "undefined") window.UpdateAgain =true; 
     if (window.UpdateAgain){
         window.UpdateAgain=false;
         updatePageCanvas(window.lindneo.currentPageId,function(){
-          setTimeout(function(){window.UpdateAgain =true;}, 10000);
+          setTimeout(function(){window.UpdateAgain =true;}, 5000);
             
         },true);
         }
@@ -453,9 +453,10 @@ window.lindneo.tlingit = (function(window, $, undefined){
   }
   var GenerateCurrentPagePreview = function (page_id,callback,async){
     if(typeof async == "undefined") async = true;
-    if (!window.lindneo.pageLoaded()) {
+   /* if (!window.lindneo.pageLoaded()) {
       return callback();
     }
+*/
     html2canvas($('#current_page')[0], {
       onrendered: function(canvas) {
          
