@@ -81,11 +81,11 @@
 											  <div class="tab-content">
 												 <div class="alert alert-danger display-none">
 													<a class="close" aria-hidden="true" href="#" data-dismiss="alert">×</a>
-													Your form has errors. Please correct them to proceed.
+													Lütfen zorunlu alanları doldurunuz.
 												 </div>
 												 <div class="alert alert-success display-none">
 													<a class="close" aria-hidden="true" href="#" data-dismiss="alert">×</a>
-													Your form validation is successful!
+													Alanlar başarılı bir şekilde dolduruldu
 												 </div>
 
 												 
