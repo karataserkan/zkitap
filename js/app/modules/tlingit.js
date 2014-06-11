@@ -201,6 +201,7 @@ window.lindneo.tlingit = (function(window, $, undefined){
         $('#'+ response.result.delete).remove();
         window.lindneo.nisga.destroyComponent(oldcomponent);
         window.lindneo.tsimshian.componentDestroyed(response.result.delete);
+        window.lindneo.toolbox.removeComponentFromSelection( $('#'+ response.result.delete) );
       }
     }
     
