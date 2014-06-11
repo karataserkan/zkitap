@@ -6,7 +6,8 @@ $this->pageTitle=Yii::app()->name." - ". __("Kontrol Paneli");
 
 
 <script>
-	jQuery(document).ready(function() {		
+	jQuery(document).ready(function() {	
+		$('#li_dashboard').addClass('current');	
 		App.setPage("dashboard");  //Set current page
 		App.init(); //Initialise plugins and elements
 	});
