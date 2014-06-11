@@ -262,6 +262,13 @@ $this->breadcrumbs=array(
 					swapScreen('forgot_bg');
 				};
 			};
+
+
+			$('#addUser').click(function(){
+				$('#addUser').hide();
+			});
+
+
 			var pass;
 			$('#User_password , #User_password_r').keyup(function(){
 				pass=$('#User_password').val();
