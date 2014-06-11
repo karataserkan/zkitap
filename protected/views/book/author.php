@@ -2030,7 +2030,7 @@ $current_user=User::model()->findByPk(Yii::app()->user->id);
 </div>
 
 <div id='author_pane_container' style=' width:100%'>
-	<div id='author_pane' style='position:relative;width:1240px; margin: 0 auto; '> <!-- Outhor Pane -->
+	<div id='author_pane' style='position:relative;margin: 0 auto; '> <!-- Outhor Pane -->
 		
 			<div class="hruler">
 			<!--<ul class="ruler" data-items="54"></ul>-->
@@ -2100,7 +2100,7 @@ $current_user=User::model()->findByPk(Yii::app()->user->id);
 		
 		<div id='guide'> 
 		</div> <!-- guide -->
-<div id='editor_view_pane' style=' padding:5px 130px;margin: 10px 5px 5px 5px;float:left;'>
+<div id='editor_view_pane' style=' /*padding:5px 130px;margin: 10px 5px 5px 5px;*/float:left;'>
 
 <?php
 $book_data=json_decode($model->data,true);
