@@ -49,8 +49,10 @@ $current_user=User::model()->findByPk(Yii::app()->user->id);
 
 	$(document).ready(function(){
 	
-	
-	
+		//$('#editor_view_pane').css({'margin-left':'200px'});
+		var adaptive_width=$('.components').width()+20+"px";
+		console.log(adaptive_width);
+		$('#editor_view_pane').css({'margin-left':adaptive_width});
 		options = {  
     reject : { // Rejection flags for specific browsers  
         all: false, // Covers Everything (Nothing blocked)  
