@@ -212,7 +212,7 @@ $( document ).ready(function () {
 
       console.log("LEN:"+len);
       item = $(document.createElement("div"));
-      item.css({'width':'38px','float':'left', 'border-right': '1px solid #000','text-align':'left','padding-left':'2px'});
+      item.css({'width':'37px','float':'left', 'border-right': '1px solid #000','text-align':'left','padding-left':'2px'});
           for (i = 0; i < len; i++) 
           {
               ruler.append(item.clone().text(i));
@@ -226,8 +226,10 @@ $( document ).ready(function () {
             if(i==0){item.css({'border-top':'none'})}
               ruler_h.append(item.clone().text(i));
           }
-
-
+        var left_margin=$('#editor_view_pane').css('margin-left').replace('px', '')-15;
+        console.log(left_margin);
+       $('.hruler').css({'left':$('#editor_view_pane').css('margin-left')});
+       $('.vbruler').css({'left':left_margin+"px"});  
       $('.ruler, .vruler').show();
     }
     else 

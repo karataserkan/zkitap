@@ -503,15 +503,16 @@ table.table-component-table .bottom{
 /* ruler */
 .hruler{
 position:absolute;
-top:0; 
+top:16px; 
 left: 135px;
-
+/*z-index:999;*/
 }
 
 .vbruler{
 position:absolute;
-top: 15px;
+top: 30px;
 left: 118px;
+/*z-index:999;*/
 }
 
 #ruler .cm {
