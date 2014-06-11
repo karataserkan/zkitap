@@ -126,15 +126,16 @@ window.lindneo.tlingit = (function(window, $, undefined){
         
         var componentDiff = deepDiffMapper.map(component.data, componentPreviosVersions[component.id].data);
         console.log(componentDiff);
-        $.each ( componentDiff.comments, function (key,value) {
-          if (value.mapped_type==deepDiffMapper.VALUE_CREATED){
-            value.mapped_type=deepDiffMapper.VALUE_DELETED;
-          } 
-          else if (value.mapped_type==deepDiffMapper.VALUE_DELETED){
-            value.mapped_type=deepDiffMapper.VALUE_CREATED;
-          }
-        });
-
+        if(typeof componentDiff.comments != "undefined"){
+          $.each ( componentDiff.comments, function (key,value) {
+            if (value.mapped_type==deepDiffMapper.VALUE_CREATED){
+              value.mapped_type=deepDiffMapper.VALUE_DELETED;
+            } 
+            else if (value.mapped_type==deepDiffMapper.VALUE_DELETED){
+              value.mapped_type=deepDiffMapper.VALUE_CREATED;
+            }
+          });
+        }
 
          window.lindneo.dataservice
           .send( 'UpdateMappedComponentData', 
