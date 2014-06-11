@@ -197,7 +197,7 @@ $( document ).ready(function () {
       $('.ruler, .vruler').show();
     }
   });
-  */  
+  */   
   $(':checkbox').change(function() {
     var is_checked = $('input:checkbox[name=cetvel]:checked').val();
     //console.log(is_checked);
