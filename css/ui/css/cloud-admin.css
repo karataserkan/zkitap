@@ -491,7 +491,7 @@ cite {
   border-bottom: 1px solid #eeeeee;
 }
 .page-header h4, h3, h2{
-	color:#666 !important;
+	color:#7c7c7c !important;
 }
 ul,
 ol {
@@ -8370,8 +8370,9 @@ div[data-role="editor-toolbar"] {
 }
 .pricing_table .footer {
   padding: 15px;
-  background: #dbdbdb;
+  background: #fff;
   border-radius: 0 0 4px 4px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
 .price_block {
   text-align: center;
@@ -8404,7 +8405,7 @@ div[data-role="editor-toolbar"] {
 /*Price heads*/
 .pricing_table h3 {
   text-transform: uppercase;
-  padding: 5px 0;
+  padding: 10px 0;
   background: #555555;
   margin: 0;
   border-radius: 4px 4px 0 0;
@@ -8431,13 +8432,13 @@ div[data-role="editor-toolbar"] {
 }
 /*Features*/
 .features {
-  background: #e6e6e6;
-  color: #555555;
+  background: #fff;
+  color: #7c7c7c;
   padding: 0;
 }
 .features li {
   padding: 8px 15px;
-  border-bottom: 1px solid #ccc;
+  border-bottom: 1px solid #f0f0f0;
   font-size: 11px;
   list-style-type: none;
 }
@@ -9464,14 +9465,13 @@ li.mybooks_page_categories .dropdown-menu li:hover:nth-child(3){
 .myprofile_picture_container {
 	float:left;
 }
-
 .change_profile_picture{
 	width: 250px;
 	height: 250px;
 	border-radius: 100%;
 	background: rgba(0, 0, 0, 0);
 	position: absolute;
-	z-index: 9999;
+	z-index: 1;
 	-webkit-transition: all 0.3s;
 	-moz-transition: all 0.3s;
 	-o-transition: all 0.3s;
@@ -9974,6 +9974,30 @@ li.users_page_categories a {
 
 /** END OF EDITOR PUBLISHING BOOK PAGE *******************/
 
+
+/** EDITOR SELECT PLAN PAGE *******************/
+
+.select_plan h3 {
+	color:#fff !important;
+}
+
+.select_plan .trial_price {
+	background-color:#F3D570;	
+}
+
+.select_plan .individual_price {
+	background-color:#55C2BF;	
+}
+
+.select_plan .business_price {
+	background-color:#EB726B;	
+}
+
+.select_plan .corporate_price {
+	background-color:#6B5272;	
+}
+
+/** END OF EDITOR SELECT PLAN PAGE *******************/
 
 
 /** EDITOR GENERAL CSS *******************/
@@ -10895,25 +10919,6 @@ header.read_page_navbar i.fa, span.sb-icon-search {
 	float:left;
 }
 
-.change_profile_picture{
-	width: 250px;
-	height: 250px;
-	border-radius: 100%;
-	background: rgba(0, 0, 0, 0);
-	position: absolute;
-	z-index: 9999;
-	-webkit-transition: all 0.3s;
-	-moz-transition: all 0.3s;
-	-o-transition: all 0.3s;
-	transition: all 0.3s;
-	text-align: center;
-	font-size: 50px;
-	color: #fff;
-	padding-top: 100px;
-	opacity:0;
-	border: 5px solid #fff;
-}
-
 .change_profile_picture a{
 	color:#fff;
 }
@@ -11030,17 +11035,6 @@ header.read_page_navbar i.fa, span.sb-icon-search {
 
 .myprofile_information_components input {
 	border:1px solid #D6D6D6 !important;	
-}
-
-
-form#myprofile_info_edit > input {
-	border:0;
-	background-color:transparent;
-	width:380px;
-	padding-left:10px;
-	border:none !important;
-	border-radius:3px;
-	color:#333;	
 }
 
 

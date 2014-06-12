@@ -20,12 +20,12 @@
 	</div>
 	<!-- /PAGE HEADER -->
 	<div class="row">
- 		<div class="box-body">
+ 		<div class="box-body" style="margin-left:-20px;">
 										<ul class="pricing_table row">
 											
-											<li class="price_block col-md-3 col-xs-11">
-												<h3><?php _e('Başlangıç Paketi') ?></h3>
-												<div class="price green">
+											<li class="price_block col-md-3 select_plan">
+												<h3 class="trial_plan"><?php _e('Başlangıç Paketi') ?></h3>
+												<div class="price trial_price">
 													<div class="price_figure">
 														<span class="price_number"><?php _e('Ücretsiz') ?></span>
 													</div>
@@ -48,9 +48,9 @@
 
 
 
-											<li class="price_block col-md-3 col-xs-11">
-												<h3><?php _e('Temel Paket') ?></h3>
-												<div class="price green">
+											<li class="price_block col-md-3 select_plan">
+												<h3 class="individual_plan"><?php _e('Temel Paket') ?></h3>
+												<div class="price individual_price">
 													<div class="price_figure">
 														<span class="price_number"><?php _e('%s$','49.99') ?></span>
 														<span class="price_tenure"><?php _e('Aylık') ?></span>
@@ -72,9 +72,9 @@
 											</li>
 
 
-											<li class="price_block col-md-3 col-xs-11">
-												<h3><?php _e('Ayrıcalıklı Paket') ?></h3>
-												<div class="price green">
+											<li class="price_block col-md-3 select_plan">
+												<h3 class="business_plan"><?php _e('Ayrıcalıklı Paket') ?></h3>
+												<div class="price business_price">
 													<div class="price_figure">
 														<span class="price_number"><?php _e('%s$','199.99') ?></span>
 														<span class="price_tenure"><?php _e('Aylık') ?></span>
@@ -98,9 +98,9 @@
 											</li>
 
 
-											<li class="price_block col-md-3 col-xs-11">
-												<h3><?php _e('Kurumsal Paket') ?></h3>
-												<div class="price green">
+											<li class="price_block col-md-3 select_plan">
+												<h3 class="corporate_plan"><?php _e('Kurumsal Paket') ?></h3>
+												<div class="price corporate_price">
 													<div class="price_figure">
 														<span class="price_number"><?php _e('%s$','299.99') ?></span>
 														<span class="price_tenure"><?php _e('Aylık') ?></span>
