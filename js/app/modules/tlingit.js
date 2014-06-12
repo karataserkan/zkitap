@@ -467,6 +467,7 @@ window.lindneo.tlingit = (function(window, $, undefined){
   var DeleteChapter =function(response){
     var response = responseFromJson(response);
     window.lindneo.tsimshian.pageCreated();
+    
     //pass to nisga to destroy chapter
     //console.log(response);
 
