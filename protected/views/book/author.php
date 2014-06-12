@@ -1401,6 +1401,7 @@ $current_user=User::model()->findByPk(Yii::app()->user->id);
 				<li ctype="link" class="component " style=" background-image: url(<?php echo Yii::app()->getBaseUrl(true);?>/css/images/components/<?php echo Yii::app()->language;?>/link.png);"></li>
 				<li ctype="plink" class="component " style=" background-image: url(<?php echo Yii::app()->getBaseUrl(true);?>/css/images/components/<?php echo Yii::app()->language;?>/pagelink.png);"></li>
 				<li ctype="page" class="component " style=" background-image: url(<?php echo Yii::app()->getBaseUrl(true);?>/css/images/components/<?php echo Yii::app()->language;?>/pagenumber.png);"></li>
+				<li ctype="wrap" class="component " style=" background-image: url(<?php echo Yii::app()->getBaseUrl(true);?>/css/images/components/<?php echo Yii::app()->language;?>/pagenumber.png);"></li>
 				<!--<li ctype="quiz" class="component " style=" background-image: url(<?php echo Yii::app()->getBaseUrl(true);?>/css/images/components/<?php echo Yii::app()->language;?>/quiz.png);"></li>-->
 
 		</ul>	
