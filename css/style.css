@@ -1320,7 +1320,7 @@ z-index: 999999;
 #chapters_pages_view .page{
 
 width:120px;
-
+min-height:90px;
 position:relative;
 margin:10px 0px 0px 20px;
 -webkit-box-shadow: 0 0 4px 1px #DFDFDF;
