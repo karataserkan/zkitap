@@ -152,7 +152,7 @@
 		<div class="page-header">
 				<h3 class="content-title pull-left"><?php _e('Kategori Listesi'); ?></h3>
 					
-				<a class="btn pull-right btn-primary" data-id="addCategory" data-toggle="modal" data-target="#addCategory"><i class="fa fa-plus-circle"></i><span> Kategori Ekle</span></a>
+				<a class="btn pull-right pageheader_button_margin brand_color_for_buttons" data-id="addCategory" data-toggle="modal" data-target="#addCategory"><i class="fa fa-plus-circle"></i><span> Kategori Ekle</span></a>
 	
 			
 		</div>

@@ -222,7 +222,7 @@
 	<div class="col-sm-12">
 		<div class="page-header">
 				<h3 class="content-title pull-left"><?php _e('Erişim Kontrol Listesi (ACL)') ?></h3>
-				<a class="btn pull-right btn-primary" data-id="addAcl" data-toggle="modal" data-target="#addAcl" book-id="<?php echo $book->book_id; ?>"><i class="fa fa-plus-circle"></i><span> ACL Ekle</span></a>
+				<a class="btn pull-right pageheader_button_margin brand_color_for_buttons" data-id="addAcl" data-toggle="modal" data-target="#addAcl" book-id="<?php echo $book->book_id; ?>"><i class="fa fa-plus-circle"></i><span> ACL Ekle</span></a>
 	
 			
 		</div>

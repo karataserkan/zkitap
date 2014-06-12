@@ -10,9 +10,187 @@ window.lindneo = window.lindneo || {};
 
 // tlingit module
 window.lindneo.tlingit = (function(window, $, undefined){
+  var history  = [];
+  var history_seek_position ;
+  var history_seek_time ;
+  var history_should_record = true;
+  var updateTimeouts = [];
+  var originals_count = 0;
+
+
+  var newHistory = function (component, action){
+    if (action == "original") originals_count++;
+
+    if (!history_should_record) {
+      history_should_record=true;
+      return;
+    } 
+    if (history_seek_position!=0){
+      console.log(window.lindneo.tlingit.history);
+      //if (originals_count<=window.lindneo.tlingit.history.length);
+      window.lindneo.tlingit.history = window.lindneo.tlingit.history.slice(history_seek_position-1);
+      
+      console.log(window.lindneo.tlingit.history);
+    }
+
+    history_seek_position = 0;
+    history_seek_time = $.now();
+
+    window.lindneo.tlingit.history.unshift ( {
+      timestamp : $.now(), 
+      component : JSON.parse(JSON.stringify(component)), 
+      action: action
+    });
+
+  }
+  var getSeekPosition = function (){
+    console.log(history_seek_position);
+    console.log(history_seek_time);
+  }
+
+  var undo = function () {
+    var lastAction ;
+    var preSeekPosition  ;
+    var preSeekTime  ;
+    var nextSeekPosition  ;
+
+    $.each ( window.lindneo.tlingit.history , function (key,value) {
+      if (preSeekTime!=null)
+        if ( value.timestamp < preSeekTime -300)
+          return false;
+
+
+      if( key > history_seek_position ){
+        
+        console.log(key);
+        preSeekTime = value.timestamp;
+        preSeekPosition = key;
+        
+        lastAction = window.lindneo.tlingit.history[preSeekPosition];
+        
+        history_should_record = false;
+
+        switch (lastAction.action){
+          case "original":
+          case "updated":
+            componentHasUpdated( lastAction.component ) ;
+            window.lindneo.nisga.destroyByIdComponent(lastAction.component.id);
+            window.lindneo.nisga.createComponent(lastAction.component);
+          break;
+
+          case "created":
+            componentHasDeleted(lastAction.component)
+            window.lindneo.nisga.destroyByIdComponent(lastAction.component.id);
+          break;
+
+          case "deleted":
+            createComponent(lastAction.component,lastAction.component.id)
+            window.lindneo.nisga.createComponent(lastAction.component);
+          break;
+        }
+        
+        
+
+        
+
+      } 
+      
+       
+      
+      
+    });
+
+    if (preSeekPosition == null ) {
+      
+      console.log('No Undo');
+      return;
+
+    } 
+    
+    history_seek_time = preSeekTime;
+    history_seek_position = preSeekPosition;
+
+  }
+  var redo = function () {
+
+    if (history_seek_position==0){
+      console.log("no future history seek 0");
+      return;
+    }
+
+    var lastAction ;
+    var preSeekPosition  ;
+    var preSeekTime  ;
+    var nextSeekPosition  ;
+    var futureSlicePosition = window.lindneo.tlingit.history.length-history_seek_position-1;
+    var a = JSON.parse(JSON.stringify(window.lindneo.tlingit.history)).reverse();
+    var future  =  a.slice(futureSlicePosition);
+    var futureSeekPosition = 0;
+    
+    $.each ( future , function (key,value) {
+      if (preSeekTime!=null)
+        if ( value.timestamp > preSeekTime +300)
+          return false;
+
+
+      if( key > futureSeekPosition ){
+        
+        console.log(key);
+        preSeekTime = value.timestamp;
+        preSeekPosition = key ;
+        
+        lastAction = future[preSeekPosition];
+        
+        history_should_record = false;
+
+        switch (lastAction.action){
+          case "original":
+          case "updated":
+            componentHasUpdated( lastAction.component ) ;
+            window.lindneo.nisga.destroyByIdComponent(lastAction.component.id);
+            window.lindneo.nisga.createComponent(lastAction.component);
+          break;
+          case "created":
+            componentHasDeleted(lastAction.component)
+            window.lindneo.nisga.destroyByIdComponent(lastAction.component.id);
+          break;
+
+          case "deleted":
+            componentHasCreated(lastAction.component)
+            window.lindneo.nisga.createComponent(lastAction.component);
+          break;
+        }
+        
+        
+
+        
+
+      } 
+      
+       
+      
+      
+    });
+
+    if (preSeekPosition == null ) {
+      
+      console.log('No Redo');
+      return;
+
+    } 
+    
+    history_seek_time = preSeekTime;
+    console.log(futureSeekPosition);
+
+    history_seek_position = window.lindneo.tlingit.history.length - futureSlicePosition -  preSeekPosition-1;
+
+  }
+  var resetHistory = function (){
+    window.lindneo.tlingit.history  = [];
+  }
 
   var componentHasCreated = function (component){
- 
+    
     //co-workers have created a new component.
     
     createComponent(component);
@@ -66,11 +244,13 @@ window.lindneo.tlingit = (function(window, $, undefined){
               alert('hata'); 
               return;
             }  
-            
             response.result.component.data = component.data;
 
 
             componentHasUpdated (response.result.component);
+
+            newHistory(response.result.component, 'create');
+
 
             window.lindneo.nisga.createComponent( response.result.component, oldcomponent_id );
             window.lindneo.tsimshian.componentCreated( response.result.component );
@@ -147,11 +327,15 @@ window.lindneo.tlingit = (function(window, $, undefined){
 */
   
 
-  var componentHasUpdated = function ( component ) {
+  var componentHasUpdated = function ( component , force) {
+
+    if (typeof force == "undefined") force = false;
+
     //console.log(component);
+    newHistory(component, 'updated');
     window.lindneo.pageLoaded(false);
     if( typeof  componentPreviosVersions[component.id] == "undefined" 
-      || component.type == "table"){
+      || component.type == "table" || force){
          
 
           //console.log('firstUpdate');
@@ -196,8 +380,12 @@ window.lindneo.tlingit = (function(window, $, undefined){
           });
 
     }
+
     componentPreviosVersions[component.id]= JSON.parse(JSON.stringify(component)); 
+    
     window.lindneo.tsimshian.componentUpdated(component);
+    
+
     if (typeof window.UpdateAgain == "undefined") window.UpdateAgain =true; 
     if (window.UpdateAgain){
         window.UpdateAgain=false;
@@ -211,6 +399,7 @@ window.lindneo.tlingit = (function(window, $, undefined){
 
   var updateArrivalComponent = function(res) {
     window.lindneo.pageLoaded(true);
+
     //var response = responseFromJson(res);
     //console.log(response);
     //loadPagesPreviews(response.result.component.page_id);
@@ -222,6 +411,7 @@ window.lindneo.tlingit = (function(window, $, undefined){
       oldcomponent_id = componentId;
     oldcomponent = component;
     console.log(component);
+    newHistory(component, 'deleted');
     //console.log(component.id);
     //console.log(componentId);
     if(typeof component != 'undefined'){
@@ -252,6 +442,9 @@ window.lindneo.tlingit = (function(window, $, undefined){
           window.lindneo.nisga.destroyComponent(oldcomponent,oldcomponent_id);
         else
           window.lindneo.nisga.destroyComponent(oldcomponent);
+
+        
+
         window.lindneo.tsimshian.componentDestroyed(response.result.delete);
         window.lindneo.toolbox.removeComponentFromSelection( $('#'+ response.result.delete) );
       }
@@ -271,9 +464,11 @@ window.lindneo.tlingit = (function(window, $, undefined){
     if( response.result !== null ) {
       components = response.result.components;
     }
+
+
     //console.log( components );
     $.each(components, function(i, val){
-      
+      newHistory(val,"original"); 
 
       //console.log(val.page_id);
       if(val.type === "page"){
@@ -311,7 +506,10 @@ window.lindneo.tlingit = (function(window, $, undefined){
   };
 
   var loadPage = function (pageId){
+     
      window.lindneo.pageLoaded(false);
+     
+     resetHistory();
 
      window.lindneo.tsimshian.changePage(pageId);
      updatePageCanvas(window.lindneo.currentPageId, function(){
@@ -566,6 +764,10 @@ window.lindneo.tlingit = (function(window, $, undefined){
     createChapter: createChapter,
     DeleteChapter: DeleteChapter,
     pages: pages,
+    undo: undo,
+    redo: redo,
+    history: history,
+    getSeekPosition: getSeekPosition,
     componentPreviosVersions: componentPreviosVersions,
     updatePageCanvas: updatePageCanvas
   };
