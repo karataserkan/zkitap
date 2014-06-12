@@ -38,6 +38,11 @@
 					<span>Organizasyon İsmini Değiştir</span>
 				</a>
                 
+                <a class="btn btn-warning pull-right org_upgrade_packet">
+					<i class="fa fa-arrow-up"></i>
+					<span>Paketini Yükselt/Yenile</span>
+				</a>
+                
             </div>
 		</div>
 	</div>
@@ -47,7 +52,14 @@
         	<div class="account_info_plan_cards_container">                
                 <div class="account_info_plan_cards">
                     <div class="account_info_plan_title <?php echo $planClass?>">Geçerli Planınız</div>
-                    <div class="account_info_plan"><?php echo $planName?></div>
+                    <div class="account_info_plan"><?php echo $planName?>
+                    
+                    <a class="btn btn-warning pull-right org_upgrade_packet">
+                        <i class="fa fa-arrow-up"></i>
+                        <span>Paketini<br>Yükselt/Yenile</span>
+					</a>
+                    
+                    </div>
                 </div>
                 
                 <div class="account_info_plan_cards">
