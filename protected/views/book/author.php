@@ -1,4 +1,3 @@
-
 <?php
 /* @var $this BookController */
 /* @var $model Book */
@@ -2419,5 +2418,6 @@ $background= (!empty($img)) ? "background-image:url('".str_replace(" ", "", $img
                 });
 			};
 		});
+
 
 </script>
