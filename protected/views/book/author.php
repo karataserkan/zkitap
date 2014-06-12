@@ -1,4 +1,3 @@
-
 <?php
 /* @var $this BookController */
 /* @var $model Book */
@@ -214,23 +213,23 @@ $current_user=User::model()->findByPk(Yii::app()->user->id);
 			         <li><a href="<?php echo $this->createUrl('site/index');  ?>"><span><i class="icon-book"></i>Kitaplarım</span></a></li>
 			         <li><a href="<?php echo $this->createUrl("EditorActions/ExportPdfBook", array('bookId' => $model->book_id ));?>"> <i class="icon-doc-inv"></i><?php _e("PDF Olarak Aktar"); ?></i></a></li>
 			         <li><a href="<?php echo $this->createUrl("EditorActions/ExportBook", array('bookId' => $model->book_id ));?>"> <i class="icon-doc-inv"></i><?php _e("ePub Olarak Aktar"); ?></i></a></li>
-			         <li><a href="<?php echo $this->createUrl("EditorActions/publishBook/", array('bookId' => $model->book_id ));?>"> <i class="icon-doc-inv"></i><?php _e("Markette Yayınla"); ?></i></a></li>
-			         <!-- <li> -->
+			         <li><a href="<?php echo $this->createUrl("EditorActions/publishBook/", array('bookId' => $model->book_id ));?>"> <i class="icon-doc-inv"></i><?php _e("Kütüphanede Yayınla"); ?></i></a></li>
+			         <li>
 			         	<?php
-			         		// if ($budget==0) {
+			         		if ($budget==0) {
 			         			
-			         		// }else{
+			         		}else{
 			         	 ?>
-			         	<!-- <a href="<?php echo $this->createUrl("EditorActions/ExportBook", array('bookId' => $model->book_id ));?>"><i class="icon-publish"></i><?php _e("Epub3 Olarak Aktar"); ?></a> -->
-			         	<?php //} ?>
-			         <!-- </li> -->
+			         	<a href="<?php echo $this->createUrl("EditorActions/ExportBook", array('bookId' => $model->book_id ));?>"><i class="icon-publish"></i><?php _e("Epub3 Olarak Aktar"); ?></a>
+			         	<?php } ?>
+			         </li>
 
 					</ul>
 			   </li>
 			   <li class='has-sub'><a href='#'><span>Düzenle</span></a>
 			      <ul>
-			         <li><a href='#' id="undo"><i class="undo icon-undo size-10"></i><span>&nbsp;&nbsp;&nbsp;Geri Al</span></a></li>
-			         <li><a href='#' id="redo"><i class="redo icon-redo size-10"></i><span>&nbsp;&nbsp;&nbsp;İleri Al</span></a></li>
+			         <!-- <li><a href='#' id="undo"><i class="undo icon-undo size-10"></i><span>&nbsp;&nbsp;&nbsp;Geri Al</span></a></li>
+			         <li><a href='#' id="redo"><i class="redo icon-redo size-10"></i><span>&nbsp;&nbsp;&nbsp;İleri Al</span></a></li> -->
 
 			         <li><a href='#' id="generic-cut"><i class="generic-cut icon-cut size-20"></i><span>Kes</span></a></li>
 			         <li><a href='#' id="generic-copy"><i class="generic-copy icon-copy size-20"></i><span>Kopyala</span></a></li>
@@ -311,13 +310,13 @@ $current_user=User::model()->findByPk(Yii::app()->user->id);
 			</div>
 			<div class="styler_box dark-blue">
 			<!-- <ul id="text-styles" ></ul> -->
-            <div class="generic-options float-left"  style="display:inline-block; margin-right:5px;">
+            <div class="generic-options float-left"  style="display:inline-block; margin-right:5px; display:none;">
 
 				<a class="optbtn " id="undo" ><i style="vertical-align: bottom;" class="undo icon-undo size-15 dark-blue" title="İleri" ></i></a>
 				<a class="optbtn " id="redo" ><i style="vertical-align: bottom;" class="redo icon-redo size-15 dark-blue" title="Geri" ></i></a>
 			
 			</div>
-			<div class="vertical-line responsive_2"></div>
+			<!-- <div class="vertical-line responsive_2"></div> -->
 						
 			<div class="text-options wrap-options latex-options table-options toolbox" style="display:inline-block;">
 					
@@ -2419,5 +2418,6 @@ $background= (!empty($img)) ? "background-image:url('".str_replace(" ", "", $img
                 });
 			};
 		});
+
 
 </script>
