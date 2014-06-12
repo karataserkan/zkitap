@@ -752,10 +752,11 @@ $current_user=User::model()->findByPk(Yii::app()->user->id);
 			<div class="generic-options toolbox responsive_1"  style="display:inline-block;">
 				<a href="#" class="optbtn " id="pop-align"><i class="icon-align-center size-20 dark-blue" title="Hizalama"></i></a>
 				<div class="vertical-line responsive_2"></div>
-				<a href="#" class="optbtn " id="generic-disable" ><i style="margin-top:2px;" class="fa fa-lock size-20 dark-blue" title="Kilitle"></i></a>
+				<!-- <a href="#" class="optbtn " id="generic-disable" ><i style="margin-top:2px;" class="fa fa-lock size-20 dark-blue" title="Kilitle"></i></a>
 				<a href="#" class="optbtn " id="generic-undisable" ><i style="margin-top:2px;" class="fa fa-unlock-alt size-20 dark-blue" title="Kilidi Aç"></i></a>
+			
 				<div class="vertical-line responsive_2"></div>
-
+	-->
 				<a href="#" class="optbtn " id="generic-cut"><i class="generic-cut icon-cut size-25 dark-blue" title="Kes"></i></a>
 				<a href="#" class="optbtn " id="generic-copy"><i class="generic-copy icon-copy size-25 dark-blue" title="Kopyala"></i></a>
 
@@ -1406,9 +1407,10 @@ $current_user=User::model()->findByPk(Yii::app()->user->id);
 			
 			
 		<div class="clearfix"></div>
-		
+		<!--
 		<i class="icon-zoom grey-5" style="margin:5px;"></i>	
 		<div id='zoom-pane' class="zoom" style="margin-top: 10px; max-width:150px;"></div>
+		-->
 		</br>
 				
 			
