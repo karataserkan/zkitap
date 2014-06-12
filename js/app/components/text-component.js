@@ -29,10 +29,13 @@ $(document).ready(function(){
         else $(this.element).attr('title',j__("Yazı Kutusu Aracı"));
         
 
+        
         justify_element(this.element[0]);
         
-        
         this._super();
+        
+
+
           
       },
 
