@@ -227,7 +227,7 @@ $userType = $this->userType($book->book_id);
 	         <div class="reader_book_card_book_cover">
 	         
 	      <?php 
-				$thumbnailSrc="/css/images/default-cover.jpg";
+				$thumbnailSrc="/css/images/deneme_cover.jpg";
 				$bookData=json_decode($book->data,true);
 				 if (isset($bookData['thumbnail'])) {
 				 	$thumbnailSrc=$bookData['thumbnail'];
