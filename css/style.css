@@ -622,7 +622,7 @@ margin: 0 0 10px;
 
 
 .chat_button {
-	width: 100%;
+	width: 178px;
 	padding: 5px 0px;
 	left:0;
 	bottom:0;
@@ -633,7 +633,7 @@ margin: 0 0 10px;
 	font-weight:bold;
 	display:block;
 	text-decoration:none;
-	position:absolute;
+	position:fixed;
 }
 
 .chat_button:hover {
@@ -1015,6 +1015,10 @@ font-size:13px;
 padding:0px;
 overflow-x:visible;
 margin:0px;
+}
+
+ul.component_holder li:last-child{
+	margin-bottom:20px;
 }
 
 .nowDraggingParentComponent{
