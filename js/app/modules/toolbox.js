@@ -708,13 +708,14 @@ window.lindneo.toolbox = (function(window, $, undefined){
 
   var undoSelectedItemsClipboard = function () {
       //console.log("undooooo");
-      window.lindneo.nisga.undoComponent();
+      //window.lindneo.nisga.undoComponent();
+      window.lindneo.tlingit.undo();
  
   };
   
   var redoSelectedItemsClipboard = function () {
       //console.log("undooooo");
-      window.lindneo.nisga.redoComponent();
+      window.lindneo.tlingit.redo();
   };
 
   var lockSelectedItemsToClipboard = function () {
