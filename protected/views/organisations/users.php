@@ -81,7 +81,7 @@
                 
                 
                 
-				<a class="btn pull-right btn-primary"  data-id="addUser" data-toggle="modal" data-target="#addUser" >
+				<a class="btn pull-right brand_color_for_buttons"  data-id="addUser" data-toggle="modal" data-target="#addUser" >
 				<i class="fa fa-plus-circle"></i>
 				<span><?php _e('Kullanıcı Ekle'); ?></span>
 				</a>
