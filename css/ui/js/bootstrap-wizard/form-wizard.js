@@ -218,7 +218,7 @@ var FormWizard = function () {
 
                     var total = navigation.find('li').length;
                     var current = index + 1;
-                    $('.stepHeader', $('#formWizard')).text('Step ' + (index + 1) + ' of ' + total);
+                    $('.stepHeader', $('#formWizard')).text('Aşama ' + (index + 1) + ' of ' + total);
                     jQuery('li', $('#formWizard')).removeClass("done");
                     var li_list = navigation.find('li');
                     for (var i = 0; i < index; i++) {
@@ -243,7 +243,7 @@ var FormWizard = function () {
                     alert_error.hide();
                     var total = navigation.find('li').length;
                     var current = index + 1;
-                    $('.stepHeader', $('#formWizard')).text('Step ' + (index + 1) + ' of ' + total);
+                    $('.stepHeader', $('#formWizard')).text('Aşama ' + (index + 1) + ' of ' + total);
                     jQuery('li', $('#formWizard')).removeClass("done");
                     var li_list = navigation.find('li');
                     for (var i = 0; i < index; i++) {
