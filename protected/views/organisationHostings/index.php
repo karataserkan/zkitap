@@ -161,7 +161,7 @@
 		<div class="page-header">
 				<h3 class="content-title pull-left"><?php _e('Sunucu Listesi'); ?></h3>
 					
-				<a class="btn pull-right btn-primary" data-id="addServer" data-toggle="modal" data-target="#addServer"><i class="fa fa-plus-circle"></i><span> Sunucu Ekle</span></a>
+				<a class="btn pull-right pageheader_button_margin brand_color_for_buttons" data-id="addServer" data-toggle="modal" data-target="#addServer"><i class="fa fa-plus-circle"></i><span> Sunucu Ekle</span></a>
 	
 			
 		</div>

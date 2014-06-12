@@ -105,7 +105,7 @@ var createWrapComponent = function ( event, ui, oldcomponent ) {
       var top = (ui.offset.top-$(event.target).offset().top ) + 'px';
       var left = ( ui.offset.left-$(event.target).offset().left ) + 'px';
       var popup_value = 'http://linden-tech.com';
-      var old_cutoff = '';
+      var old_cutoff = '100';
       width = 'auto';
       height = 'auto';
       wrap_align = 'left';
@@ -151,7 +151,7 @@ var createWrapComponent = function ( event, ui, oldcomponent ) {
     var drag_file = $("<div class='add-image-drag-area' id='dummy-dropzone'> </div> ");
     var galery_inner = $("<div class='gallery-inner-holder' style='width: 700px; height: " + height + "px;'> \
         <div style='clear:both'></div> \
-        <div class='type' style='padding: 4px; display: inline-block;'>\
+        <div class='type' style='padding: 4px; '>\
                 <div class='btn-group'>\
                   <label class='btn btn-primary " + wrap_right_active + "'>\
                     <input type='radio' name='wrap_align' id='repeat0' " + wrap_right + " value='right'> "+j__("Sağ")+"\
@@ -159,7 +159,8 @@ var createWrapComponent = function ( event, ui, oldcomponent ) {
                   <label class='btn btn-primary " + wrap_left_active + "'>\
                     <input type='radio' name='wrap_align' id='repeat1' " + wrap_left + " value='left'> "+j__("Sol")+"\
                   </label>\
-                </div><br><br><input type='text' name='cutoff' id='cutoff' value='"+old_cutoff+"' placeholder='"+j__("Çözünürlik Toleransı giriniz")+"....'><br><br>\
+                </div><br><br>\
+                <input type='text' name='cutoff' id='cutoff' value='"+old_cutoff+"' onclick='this.select()' placeholder='"+j__("Çözünürlik Toleransı giriniz")+"....'><br><br>\
             </div>\
       </div> ");
     var popup_wrapper = $("<div class ='popup_wrapper drag-cancel' style='border: 1px #ccc solid; ' ></div> <br>");
@@ -292,32 +293,7 @@ var createWrapComponent = function ( event, ui, oldcomponent ) {
           return;
           
         }
-        else if(contentType == 'video'){
-         
-          var contentType = FileBinary.substr(0, FileBinary.indexOf(';'));
-          var videoType = contentType.substr(contentType.indexOf('/')+1);
-          //console.log(videoType);
-          var response = '';
-          var token = '';
-          videoContentType = videoType;
-          //console.log(videoContentType);
-          window.lindneo.dataservice.send( 'getFileUrl', {'type': videoType}, function(response) {
-            response=window.lindneo.tlingit.responseFromJson(response);
-          
-            window.lindneo.dataservice.send( 'UploadFile', {'token': response.result.token, 'file' : FileBinary} , function(data) {
-              //console.log('denemeee');
-              videoURL = response.result.URL;
-              var newVideo = $("<video controls='controls' style='width:80%'><source src='"+videoURL+"'></video>");
-
-              $('#popup-explanation').append(newVideo);
-              return;
-              
-                
-            });
-
-          });
-
-        }
+        
 
         
       };

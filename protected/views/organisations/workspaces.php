@@ -266,7 +266,7 @@ function sendUser(e){
 		<div class="page-header">
 				<h3 class="content-title pull-left"><?php _e('Çalışma Alanı Listesi'); ?></h3>
 					
-				<a class="btn pull-right btn-primary" data-id="addWorkspace" data-toggle="modal" data-target="#addWorkspace"><i class="fa fa-plus-circle"></i><span> Çalışma Alanı Ekle</span></a>
+				<a class="btn pull-right brand_color_for_buttons pageheader_button_margin" data-id="addWorkspace" data-toggle="modal" data-target="#addWorkspace"><i class="fa fa-plus-circle"></i><span> Çalışma Alanı Ekle</span></a>
 	
 			
 		</div>

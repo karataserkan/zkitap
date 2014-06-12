@@ -57,11 +57,11 @@ $this->pageTitle=Yii::app()->name." - ". __("Kontrol Paneli");
                     <div class="account_info_data_type">Yayın Kategorisi</div>
                 </div>
             
-            <div class="account_info_cards">
+           <!--  <div class="account_info_cards">
 	            <div class="account_info_icon"><i class="fa fa-dollar"></i></div>
 	            <div class="account_info_data_number"><?php echo $budget; ?></div>
 	            <div class="account_info_data_type">Yayın Üretme Bütçesi</div>
-            </div>
+            </div> -->
         </div>
         <!-- end of account_info_cards_container -->
 
@@ -232,7 +232,7 @@ $userType = $this->userType($book->book_id);
 	         <div class="reader_book_card_book_cover">
 	         
 	      <?php 
-				$thumbnailSrc="/css/images/default-cover.jpg";
+				$thumbnailSrc="/css/images/deneme_cover.jpg";
 				$bookData=json_decode($book->data,true);
 				 if (isset($bookData['thumbnail'])) {
 				 	$thumbnailSrc=$bookData['thumbnail'];

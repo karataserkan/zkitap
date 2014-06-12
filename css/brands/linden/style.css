@@ -71,7 +71,16 @@
 }
 
 .sidebar-menu > ul > li.current > a {
-	border-right:3px solid #2880b9;	
+	border-right:3px solid #2880b9;
+	color: #2880b9 !important;
+}
+
+.sidebar-menu > ul > li.current > a > i {
+	color: #2880b9 !important;
+}
+
+.sidebar-menu > ul > li.current span.arrow {
+	color: #2880b9 !important;
 }
 
 .sidebar-menu > ul > li.current:hover {

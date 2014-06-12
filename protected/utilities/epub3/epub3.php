@@ -325,7 +325,7 @@ class epub3 {
 
 		
 	</head>
-	<body style="width:'.$pageSize['width'].'px; height:'.$pageSize['height'].'px;">
+	<body style="box-shadow:0px 0px 0px 1px rgba(0,0,0,0.1);width:'.$pageSize['width'].'px; height:'.$pageSize['height'].'px;">
 		<div>
 
 			<img style=" width:'.$pageSize['width'].'px; height:'.$pageSize['height'].'px" src="' . $this->coverImage->filename . '"/>
@@ -642,7 +642,7 @@ class epub3 {
 		</style>
 
 	</head>
-	<body style="background-repeat:no-repeat; width:'.$width.'px; height:'.$height.'px;'.$background.';'.$background_size.';">
+	<body style="box-shadow:0px 0px 0px 1px rgba(0,0,0,0.1);background-repeat:no-repeat; width:'.$width.'px; height:'.$height.'px;'.$background.';'.$background_size.';">
 	<section epub:type="frontmatter titlepage">
 	%components%
 	</section>

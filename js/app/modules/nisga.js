@@ -495,7 +495,7 @@ var textComponentBuilder = function( component ) {
   var wrapComponentBuilder = function ( component ) {
     
     
-    var element  = $('<div class="wrap-controllers" style="width:100%; height:100%;"> </div>');
+    var element  = $('<div class="wrap-controllers" style="width:100%; height:100%; overflow:hidden;"> </div>');
     var elementWrap=$('<div  title="'+j__("Metin Sarma Aracı")+'"></div>');
     elementWrap.appendTo( page_div_selector );
 
