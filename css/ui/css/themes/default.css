@@ -461,7 +461,7 @@
   font-size: 13px;
 }
 .sidebar-menu > ul > li > a {
-  color: #555555 !important;
+  color: #7c7c7c !important;
   -webkit-transition: all 0.3s;
   -moz-transition: all 0.3s;
   -o-transition: all 0.3s;
@@ -475,7 +475,7 @@
 
 }
 .sidebar-menu > ul > li a i {
-  color: #555555;
+  color: #7c7c7c;
 }
 
 .sidebar-menu > ul > li.has-sub.open > ul > li.has-sub-sub.open > a {
@@ -491,7 +491,7 @@
 }
 .sidebar-menu ul > li > a .arrow:before,
 .sidebar-menu > ul > li > a .arrow.open:before {
-  color: #555555 !important;
+  color: #7c7c7c !important;
 }
 /*.sidebar-menu ul > li.active > a .arrow:before,
 .sidebar-menu > ul > li.active > a .arrow.open:before {  
