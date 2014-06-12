@@ -185,10 +185,6 @@ window.lindneo.tsimshian = (function(window, $, undefined){
 
        this.socket.on('userBookListUpdate', function(bookUserList){
 
-        if (typeof window.lindneo.controls.UpdateBookUserList == "undefined")  window.lindneo.controls.UpdateBookUserList=true;
-        //if (!window.lindneo.controls.UpdateBookUserList) return;
-        window.lindneo.controls.UpdateBookUserList=false;
-        setTimeout(function(){window.lindneo.controls.UpdateBookUserList=true},1000);
 
         console.log(bookUserList);
         var users = "";
@@ -201,6 +197,10 @@ window.lindneo.tsimshian = (function(window, $, undefined){
         window.lindneo.book_users = bookUserList;
         var a=0;
 
+        if (typeof window.lindneo.controls.UpdateBookUserList == "undefined")  window.lindneo.controls.UpdateBookUserList=true;
+        if (!window.lindneo.controls.UpdateBookUserList) return;
+        window.lindneo.controls.UpdateBookUserList=false;
+        setTimeout(function(){window.lindneo.controls.UpdateBookUserList=true},1000);
 
         $('#onlineUsers').empty();
         $.each( bookUserList, function( key, value ) {

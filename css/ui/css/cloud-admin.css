@@ -9234,7 +9234,6 @@ ul.stats li small {
 	width:198px;
 	height:108px;
 	position:absolute;
-	bottom:0;
 }
 
 
@@ -9647,6 +9646,21 @@ form#myprofile_info_edit > input {
 	margin-bottom:15px;
 }
 
+.account_info_plan_cards_container .org_upgrade_packet{
+	position:absolute;
+	left: 40px;
+	margin-top: -25px;
+	opacity:0;
+	-webkit-transition: all 0.3s;
+	-moz-transition: all 0.3s;
+	-o-transition: all 0.3s;
+	transition: all 0.3s;
+}
+
+.account_info_plan_cards_container .account_info_plan_cards:hover .org_upgrade_packet{
+	opacity:1;
+}
+
 .account_info_plan_cards {
 	width: 150px;
 	height: 200px;
@@ -9912,7 +9926,7 @@ li.users_page_categories a {
 
 
 
-/** EDITOR ORGANIZATIONS USERS PAGE *******************/
+/** EDITOR ORGANIZATIONS ACCONT PAGE *******************/
 
 .org_name_top {
 	margin-top:14px;
@@ -9926,8 +9940,12 @@ li.users_page_categories a {
 	margin-top:3px;	
 }
 
+.org_upgrade_packet {
+	margin-top:3px;	
+}
 
-/** END OF EDITOR ORGANIZATIONS USERS PAGE *******************/
+
+/** END OF EDITOR ORGANIZATIONS ACCOUNT PAGE *******************/
 
 
 

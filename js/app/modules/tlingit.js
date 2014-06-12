@@ -248,7 +248,10 @@ window.lindneo.tlingit = (function(window, $, undefined){
         $("#c_"+response.result.delete).removeClass("selected");
         $('#'+ response.result.delete).parent().not('#current_page').remove();
         $('#'+ response.result.delete).remove();
-        window.lindneo.nisga.destroyComponent(oldcomponent);
+        if(oldcomponent != "")
+          window.lindneo.nisga.destroyComponent(oldcomponent,oldcomponent_id);
+        else
+          window.lindneo.nisga.destroyComponent(oldcomponent);
         window.lindneo.tsimshian.componentDestroyed(response.result.delete);
         window.lindneo.toolbox.removeComponentFromSelection( $('#'+ response.result.delete) );
       }
@@ -464,6 +467,7 @@ window.lindneo.tlingit = (function(window, $, undefined){
   var DeleteChapter =function(response){
     var response = responseFromJson(response);
     window.lindneo.tsimshian.pageCreated();
+    
     //pass to nisga to destroy chapter
     //console.log(response);
 

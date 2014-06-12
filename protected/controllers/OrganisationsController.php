@@ -909,59 +909,61 @@ class OrganisationsController extends Controller
 		$success="";
 		//gönderilecek linkin ilk kısmını oluşturdum
 		$link=Yii::app()->getBaseUrl(true);
-		$link.='/user/invitation?key=';
+		$link.='/user/acceptInvitation?key=';
 		$organisation = Organisations::model()->findByPk($organisationId);
 
+
+		$invitation= new Invitation;
+		$invitation->invitation_key=functions::new_id();
+		$invitation->type="organisation";
+		$invitation->type_id=$organisationId;
+
+			//linke davetiye IDsini de ekliyorum
+		$link .= $invitation->invitation_key;
 		//email adresinin doğruluğunu check eden regexp
 		$regexp = "/^[^0-9][A-z0-9_]+([.][A-z0-9_]+)*[@][A-z0-9_-]+([.][A-z0-9_]+)*[.][A-z]{2,4}$/";
 		if (preg_match($regexp, $email)) {
 		    //Email address is valid
 			$user= User::model()->findByAttributes(array('email'=>$email) );
+
+			
 			if ($user) {
 				$userId = $user->id;
+				$invitation->user_id=$userId;
+				$isOrganizationUser=OrganisationUsers::model()->find('organisation_id=:organisation_id AND user_id=:user_id',array('organisation_id'=>$organisationId,'user_id'=>$user->id));
 			}
 			else
 			{
-				// a user has NOT this email in users table.
-				//we will create new user
-				$user = new User;
-				$criteria=new CDbCriteria;
-				$criteria->select='max(id) AS maxColumn';
-				$row = $user->model()->find($criteria);
-				
-				$userId = $row['maxColumn']+1;//functions::new_id();
-				$user->id = $userId;
-				$user->email=$email;
-				$user->save();
+				$invitation->new_user=1;
 			}
-			
-			//yeni davetiye oluşturuyoruz
-			$invitation= new OrganisationInvitation;
-			$invitation->organisation_id = $organisation->organisation_id;
-			$invitation->user_id = $userId;
-			$invitation->invitation_id = functions::new_id();
-			$invitation->save();
-			//linke davetiye IDsini de ekliyorum
-			$link .= $invitation->invitation_id;
 
-			$message=$organisation->organisation_name. " size editöre katılma isteği gönderdi. İsteği kabul etmek için <a href='".$link."'>tıklayın</a>.<br>".$link;	
+			$invitation->inviter=Yii::app()->user->id;
+			$invitation->created=date('Y-n-d g:i:s',time());
 
-			//mail gönderiyorum
-			$mail=Yii::app()->Smtpmail;
-	        $mail->SetFrom(Yii::app()->params['noreplyEmail'], $organisation->organisation_name);
-	        $mail->Subject    = $organisation->organisation_name.' davetiye.';
-	        $mail->MsgHTML($message);
-	        $mail->AddAddress($email, "");
-	        
-	        if(!$mail->Send()) {
-	            echo "Mailer Error: " . $mail->ErrorInfo;
-	            $msg="ORGANISATIONS:ADD_USER:1:". json_encode(array(array('user'=>Yii::app()->user->id),array('userId'=>$userId,'organisationId'=>$organisation->organisation_id,'message'=>'Mailer Error'.$mail->ErrorInfo)));
-				Yii::log($msg,'info');
-	        }else {
-	            $success=__("Kullanıcı davet edildi.");
-	            $msg="ORGANISATIONS:ADD_USER:0:". json_encode(array(array('user'=>Yii::app()->user->id),array('userId'=>$userId,'organisationId'=>$organisation->organisation_id)));
-				Yii::log($msg,'info');
-	        }
+			if (!$isOrganizationUser) {
+
+				if ($invitation->save()) {
+					$message=$organisation->organisation_name. " size editöre katılma isteği gönderdi. İsteği kabul etmek için <a href='".$link."'>tıklayın</a>.<br>".$link;	
+
+					//mail gönderiyorum
+					$mail=Yii::app()->Smtpmail;
+			        $mail->SetFrom(Yii::app()->params['noreplyEmail'], $organisation->organisation_name);
+			        $mail->Subject    = $organisation->organisation_name.' davetiye.';
+			        $mail->MsgHTML($message);
+			        $mail->AddAddress($email, "");
+			        if(!$mail->Send()) {
+			            echo "Mailer Error: " . $mail->ErrorInfo;
+			            $msg="ORGANISATIONS:ADD_USER:1:". json_encode(array(array('user'=>Yii::app()->user->id),array('userId'=>$userId,'organisationId'=>$organisation->organisation_id,'message'=>'Mailer Error'.$mail->ErrorInfo)));
+						Yii::log($msg,'info');
+			        }else {
+			            $success=__("Kullanıcı davet edildi.");
+			            $msg="ORGANISATIONS:ADD_USER:0:". json_encode(array(array('user'=>Yii::app()->user->id),array('userId'=>$userId,'organisationId'=>$organisation->organisation_id)));
+						Yii::log($msg,'info');
+			        }
+				}
+			}
+
+
 		} else {
 		    //Email address is NOT valid
 		    $error = __("Girdiğiniz e-posta adresi geçersiz.");

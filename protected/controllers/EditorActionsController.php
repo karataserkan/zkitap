@@ -1004,7 +1004,7 @@ class EditorActionsController extends Controller
 		$chapter=Chapter:: model()->findByPk($currentPage->chapter_id) ;
 		$bookId=$chapter->book_id;
 
-		if(strlen($searchTerm)<2) {
+		if(strlen($searchTerm)<1) {
 			$this->error("EA-SearchOnBook","Too Short Seach Term",func_get_args(),$searchTerm);
 			return null;
 		}
@@ -1013,31 +1013,55 @@ class EditorActionsController extends Controller
 		$sql="select * from component 
 right join page  using (page_id) 
 right join chapter using (chapter_id) 
-right join book using (book_id) where book_id='$bookId' and type!='image';";
+right join book using (book_id) where book_id='$bookId' and type IN ('rtext','text','table','mquiz','popup');";
  		//echo $sql;
 
 		$components = Component::model()->findAllBySql($sql);
+		//print_r($components);
 		foreach ($components as $keyz => &$value) {
+
 			$searchable="";
-			if ($value->get_data())
-			foreach ($value->get_data() as $key2 => $items) {
-				if ( is_array($items) || is_object($items) )
-				foreach ($items as $key => $value2) {
-					if($key!='css') $searchable.=serialize($value2);
-				}
-			}
- 
-			$searchable.=" ";
 
+			if ($value->data = $value->get_data())
 
-			$searchable=str_replace(array('O:',':','"','{','}',';'), ' ', $searchable);
-			$searchable_small=functions::ufalt($searchable);
+			switch ($value->type) {
+				case 'text':
+					$searchable = $value->data->textarea->val;
+					break;
+				case 'rtext':
+					$searchable = strip_tags(html_entity_decode($value->data->rtextdiv->val));
+					break;
+					
+				case 'table':
+					foreach ($value->data->table as $key1 => $row)
+						foreach ($row as $key2 => $col) {
+						$searchable = $col->attr->val;
+					}
+					break;
+				case 'mquiz':
+					$searchable = $value->data->question;
+					if (is_array($value->data->question_answers)){
+						foreach ($value->data->question_answers as $key => $answer) {
+							$searchable .= $answer;
+						}
+					}
+					elseif (is_string($value->data->question_answers)) {
+						$searchable .=$value->data->question_answers;
+					}
+					break;
+				case 'popup':
+					$searchable = $value->data->html_inner;
+					break;
 				
+			}
+
+			$searchable_small=functions::ufalt($searchable);
 			if( 
 			 	substr_count ( $searchable_small , functions::ufalt($searchTerm) )==0 
 			 ) 
 				unset($components[$keyz]);
 			else {
+				$searchable .= " ";
 
 
 				$value->data = $value->get_data();
@@ -1052,16 +1076,17 @@ right join book using (book_id) where book_id='$bookId' and type!='image';";
 
 				$value[search]->previous_space_position= strrpos(substr($searchable,0,$value[search]->position),' ' );
 
-
-
-				$value[search]->similar_result=substr($searchable,$value[search]->previous_space_position+1,  $value[search]->next_space_position - $value[search]->previous_space_position);
+				if(!$value[search]->next_space_position && !$value[search]->previous_space_position)
+					$value[search]->similar_result = $searchable;
+				else
+					$value[search]->similar_result=substr($searchable,$value[search]->previous_space_position,  $value[search]->next_space_position - $value[search]->previous_space_position);
 				$value[search]->similar_result_old=substr($searchable,$value[search]->position,  $value[search]->next_space_position - $value[search]->position);
 				
 
 			}
 		
 		} 
-		//new dBug($components);
+		
 		usort($components,'sortify');
 
 		return $components;
