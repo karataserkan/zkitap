@@ -302,7 +302,7 @@
 												</div>
 												<div class="tab-pane" id="money">
 
-													<div class="form-group">
+													<div class="form-group" style="display:none">
 														<label for="PublishBookForm_contentIsForSale" class="control-label col-md-3"><?php _e('Satılık mı?'); ?><span class="required">*</span></label>
 														<div class="col-md-4">
 														<?php echo $form->radioButtonList($model,'contentIsForSale',array('Yes'=>__('Evet'),'Free'=>__('Hayır')),array('class'=>'uniform','name'=>'contentIsForSale')); ?>
@@ -465,14 +465,14 @@
 															  <p class="form-control-static" data-display="categories"></p>
 														   </div>
 														</div>
-														<div class="form-group">
+														<div class="form-group" style="display:none">
 														   <label class="control-label col-md-3"><?php _e('Satılık mı?'); ?>:</label>
 														   <div class="col-md-4">
 															  <p class="form-control-static" data-display="contentIsForSale"></p>
 														   </div>
 														</div>
 														
-														<div class="form-group">
+														<div class="form-group" style="display:none">
 														   <label class="control-label col-md-3"><?php _e('Eser Fiyatı') ?>:</label>
 														   <div class="col-md-4">
 															  <p class="form-control-static" data-display="contentPrice"></p>
