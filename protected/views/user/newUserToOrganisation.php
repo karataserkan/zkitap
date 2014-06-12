@@ -11,11 +11,11 @@
 						<div class="col-md-3 item">
 
 <?php 
-	_e("Eser çalışma isteğini kabul ediyor musunuz?");
+	_e("Organizasyon katılma isteğini kabul ediyor musunuz?");
 ?>
 </div>
-<a href="/user/respondBookInvitation?key=<?php echo $key?>&respond=1" class="btn btn-success"><?php _e("Kabul Et"); ?></a>
-<a href="/user/respondBookInvitation?key=<?php echo $key?>&respond=0" class="btn btn-danger"><?php _e("Kabul Etme"); ?></a>
+<a href="/user/respondOrganisationInvitation?key=<?php echo $key?>&respond=1" class="btn btn-success"><?php _e("Kabul Et"); ?></a>
+<a href="/user/respondOrganisationInvitation?key=<?php echo $key?>&respond=0" class="btn btn-danger"><?php _e("Kabul Etme"); ?></a>
 <script>
 		jQuery(document).ready(function() {		
 			App.setPage("gallery");  //Set current page

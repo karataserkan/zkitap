@@ -28,7 +28,7 @@ class UserController extends Controller
 	{
 		return array(
 			array('allow',  // allow all users to perform 'index' and 'view' actions
-				'actions'=>array('index','view','invitation','signup','forgetPassword','verifyEmail','respondBookInvitation','acceptInvitation','registerUser'),
+				'actions'=>array('index','view','invitation','signup','forgetPassword','verifyEmail','respondBookInvitation','acceptInvitation','registerUser','respondOrganisationInvitation',),
 				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
@@ -182,6 +182,25 @@ class UserController extends Controller
 		));
 	}
 
+	public function actionRespondOrganisationInvitation($key,$respond){
+		$invitation=Invitation::model()->find('invitation_key=:invitation_key',array('invitation_key'=>$key));
+		if ($respond=="1") {
+			$organisationUser=OrganisationUsers::model()->find('organisation_id=:organisation_id AND user_id=:user_id',array('organisation_id'=>$invitation->type_id,'user_id'=>$invitation->user_id));
+			if (!$organisationUser) {
+				$organisationNewUser=new OrganisationUsers;
+				$organisationNewUser->user_id=$invitation->user_id;
+				$organisationNewUser->organisation_id=$invitation->type_id;
+				$organisationNewUser->role="user";
+				$organisationNewUser->save();
+			}
+			$invitation->status=1;
+		}else{
+			$invitation->status=2;
+		}
+		$invitation->save();
+		$this->redirect(array('/site/index'));
+	}
+
 	public function actionRespondBookInvitation($key,$respond){
 		
 
@@ -292,7 +311,11 @@ class UserController extends Controller
 					$invitation->user_id=$newUser->id;
 					$invitation->new_user=0;
 					$invitation->save();
-					$this->redirect(array('respondBookInvitation','key'=>$attributes['key'],'respond'=>1));
+					if ($invitation->type=="book") {
+						$this->redirect(array('respondBookInvitation','key'=>$attributes['key'],'respond'=>1));
+					}elseif ($invitation->type=="organisation") {
+						$this->redirect(array('respondOrganisationInvitation','key'=>$attributes['key'],'respond'=>1));
+					}
 				}
 			}
 		}
@@ -313,14 +336,17 @@ class UserController extends Controller
 
 		if ($invitation->type=="book") {
 			if ($invitation->new_user) {
-				$this->render('registerUserForBook',array('key'=>$key));
+				$this->render('newUserWithInvitation',array('key'=>$key));
 			}else{
-					print_r($_POST);
-				if (isset($_POST)) {
-				}
 				$this->render('newUserToBook',array('key'=>$key));
 			}
 		}elseif ($invitation->type="organisation") {
+			if ($invitation->new_user) {
+				$this->render('newUserWithInvitation',array('key'=>$key));
+			}else{
+				$this->render('newUserToOrganisation',array('key'=>$key));
+			}
+
 		}elseif ($invitation->type="workspace") {
 		}
 
