@@ -152,7 +152,7 @@ window.lindneo.nisga = (function(window, $, undefined){
   }; 
 
   var undoComponent = function() {
-    //console.log(revision_array.revisions);
+    console.log(revision_array.revisions);
     
       if(revision_id > 0){
         revision_id = revision_id - 1;
