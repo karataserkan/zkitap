@@ -9464,14 +9464,13 @@ li.mybooks_page_categories .dropdown-menu li:hover:nth-child(3){
 .myprofile_picture_container {
 	float:left;
 }
-
 .change_profile_picture{
 	width: 250px;
 	height: 250px;
 	border-radius: 100%;
 	background: rgba(0, 0, 0, 0);
 	position: absolute;
-	z-index: 9999;
+	z-index: 1;
 	-webkit-transition: all 0.3s;
 	-moz-transition: all 0.3s;
 	-o-transition: all 0.3s;
@@ -10895,25 +10894,6 @@ header.read_page_navbar i.fa, span.sb-icon-search {
 	float:left;
 }
 
-.change_profile_picture{
-	width: 250px;
-	height: 250px;
-	border-radius: 100%;
-	background: rgba(0, 0, 0, 0);
-	position: absolute;
-	z-index: 9999;
-	-webkit-transition: all 0.3s;
-	-moz-transition: all 0.3s;
-	-o-transition: all 0.3s;
-	transition: all 0.3s;
-	text-align: center;
-	font-size: 50px;
-	color: #fff;
-	padding-top: 100px;
-	opacity:0;
-	border: 5px solid #fff;
-}
-
 .change_profile_picture a{
 	color:#fff;
 }
@@ -11030,17 +11010,6 @@ header.read_page_navbar i.fa, span.sb-icon-search {
 
 .myprofile_information_components input {
 	border:1px solid #D6D6D6 !important;	
-}
-
-
-form#myprofile_info_edit > input {
-	border:0;
-	background-color:transparent;
-	width:380px;
-	padding-left:10px;
-	border:none !important;
-	border-radius:3px;
-	color:#333;	
 }
 
 
