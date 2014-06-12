@@ -38,7 +38,7 @@
 					<span>Organizasyon İsmini Değiştir</span>
 				</a>
                 
-                <a class="btn btn-warning pull-right org_upgrade_packet">
+                <a class="btn btn-warning pull-right org_upgrade_packet" href="/organisations/selectPlan?id=<?php echo $id?>&current=<?php echo $plan->transaction_explanation?>">
 					<i class="fa fa-arrow-up"></i>
 					<span>Paketini Yükselt/Yenile</span>
 				</a>
@@ -54,7 +54,7 @@
                     <div class="account_info_plan_title <?php echo $planClass?>">Geçerli Planınız</div>
                     <div class="account_info_plan"><?php echo $planName?>
                     
-                    <a class="btn btn-warning pull-right org_upgrade_packet">
+                    <a class="btn btn-warning pull-right org_upgrade_packet" href="/organisations/selectPlan?id=<?php echo $id?>&current=<?php echo $plan->transaction_explanation?>">
                         <i class="fa fa-arrow-up"></i>
                         <span>Paketini<br>Yükselt/Yenile</span>
 					</a>
