@@ -9797,7 +9797,6 @@ ul.users_category_actions {
 
 ul.users_category_actions li {
 	height: 100%;
-	padding: 0px 15px;
 	list-style: none;
 	line-height: 3.1em;
 	font-size: 15px;
@@ -10068,6 +10067,10 @@ li.user .dropdown-menu li a:hover {
 	line-height: 1.35em;	
 }
 
+
+.pageheader_button_margin {
+	margin-top:3px;	
+}
 
 /** END OF EDITOR GENERAL CSS *******************/
 
