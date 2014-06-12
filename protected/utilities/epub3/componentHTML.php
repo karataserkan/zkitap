@@ -1190,6 +1190,16 @@ class componentHTML {
 
 		$data=$component->data;
 
+		$css="";
+		if(isset($data->self->css)){
+			$css.=" style=' ";
+			foreach ($data->self->css as $css_name => $css_val ) {
+					$css.="$css_name:$css_val;";
+
+			}
+			$css.=" font-family: Helvetica; font-size: 16px; z-index:9999; position:relative;' ";
+		}
+
 		$wrap_id= "wrap".$component->id;
 
 		/*$component->data->html_inner = str_replace('&lt;', '<', $component->data->html_inner);
@@ -1206,7 +1216,7 @@ class componentHTML {
 		$component->data->html_inner = html_entity_decode($component->data->html_inner,null,"UTF-8");
 		$container.="
 
-			<div id='".$wrap_id."' style='font-family: Helvetica; font-size: 16px; z-index:9999; position:relative;'>
+			<div id='".$wrap_id."' $css>
 				".$component->data->html_inner."
 			</div>
 			<script type='text/javascript'>

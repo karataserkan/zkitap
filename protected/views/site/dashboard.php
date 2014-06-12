@@ -8,7 +8,7 @@ $this->pageTitle=Yii::app()->name." - ". __("Kontrol Paneli");
 <script>
 	jQuery(document).ready(function() {	
 		$('#li_dashboard').addClass('current');	
-		App.setPage("dashboard");  //Set current page
+		App.setPage("index");  //Set current page
 		App.init(); //Initialise plugins and elements
 	});
 </script>
@@ -68,7 +68,7 @@ $this->pageTitle=Yii::app()->name." - ". __("Kontrol Paneli");
 	</div>
 	<br><br>
 <div class="separator"></div>
-<!-- Dashboard Grafik Arayüzü -->
+<?php /*?><!-- Dashboard Grafik Arayüzü -->
 
 <!-- DASHBOARD CONTENT -->
 						<div class="row">
@@ -220,7 +220,7 @@ $this->pageTitle=Yii::app()->name." - ". __("Kontrol Paneli");
 						</div>
 						<!-- /HERO GRAPH -->
 
-<!-- /Dashboard Grafik Arayüzü -->
+<!-- /Dashboard Grafik Arayüzü --><?php */?>
 
 	<div id="filter-items" class="mybooks_page_book_filter row">
 <?php
@@ -232,7 +232,7 @@ $userType = $this->userType($book->book_id);
 	         <div class="reader_book_card_book_cover">
 	         
 	      <?php 
-				$thumbnailSrc="/css/images/default-cover.jpg";
+				$thumbnailSrc="/css/images/deneme_cover.jpg";
 				$bookData=json_decode($book->data,true);
 				 if (isset($bookData['thumbnail'])) {
 				 	$thumbnailSrc=$bookData['thumbnail'];

@@ -1,3 +1,4 @@
+
 <?php
 /* @var $this BookController */
 /* @var $model Book */
@@ -242,16 +243,16 @@ $current_user=User::model()->findByPk(Yii::app()->user->id);
 					<ul>
 				     <li class="onoff"><a href='#'  ><input type="checkbox" name="cetvel" id="cetvelcheck" class="css-checkbox" /><label for="cetvelcheck" class="css-label"><?php _e('Cetvel') ?></label></a></li>
 			         <li class="onoff"><a href='#'  ><input type="checkbox" name="rehber" id="rehbercheck" class="css-checkbox" /><label for="rehbercheck" class="css-label"><?php _e('Rehber') ?></label></a></li>
-			         <!--/*<li class="onoff"><a href='#'  ><input type="checkbox" name="grid" id="gridcheck" class="css-checkbox" /><label for="gridcheck" class="css-label"><?php _e('Grid') ?></label></a></li>*/-->
+			         <li class="onoff"><a href='#'  ><input type="checkbox" name="grid" id="gridcheck" class="css-checkbox" /><label for="gridcheck" class="css-label"><?php _e('Grid') ?></label></a></li>
 			         <!--<li class="onoff"><a href='#'  ><input type="checkbox" name="yorumlar" id="yorumlarcheck" class="css-checkbox" /><label for="yorumlarcheck" class="css-label"><?php _e('Yorumlar') ?></label></a></li>-->
 			        </ul>
 			   </li>
 				
 			    
 			   <li><a href='#'>
-			   <form action='/book/author/<?php echo $model->book_id; ?>' id='searchform' style="float:left;" method="post">
+			   
 					<input type="text" id="searchn" name='component' class="search radius ui-autocomplete-input" placeholder="Ara" autocomplete="on">
-				</form>
+			
 			   <!--
 			   <input type="text" id="searchn" name="component" style="display:none;" class="search radius ui-autocomplete-input" placeholder="Ara" autocomplete="on">
 			   -->
@@ -752,10 +753,11 @@ $current_user=User::model()->findByPk(Yii::app()->user->id);
 			<div class="generic-options toolbox responsive_1"  style="display:inline-block;">
 				<a href="#" class="optbtn " id="pop-align"><i class="icon-align-center size-20 dark-blue" title="Hizalama"></i></a>
 				<div class="vertical-line responsive_2"></div>
-				<a href="#" class="optbtn " id="generic-disable" ><i style="margin-top:2px;" class="fa fa-lock size-20 dark-blue" title="Kilitle"></i></a>
+				<!-- <a href="#" class="optbtn " id="generic-disable" ><i style="margin-top:2px;" class="fa fa-lock size-20 dark-blue" title="Kilitle"></i></a>
 				<a href="#" class="optbtn " id="generic-undisable" ><i style="margin-top:2px;" class="fa fa-unlock-alt size-20 dark-blue" title="Kilidi Aç"></i></a>
+			
 				<div class="vertical-line responsive_2"></div>
-
+	-->
 				<a href="#" class="optbtn " id="generic-cut"><i class="generic-cut icon-cut size-25 dark-blue" title="Kes"></i></a>
 				<a href="#" class="optbtn " id="generic-copy"><i class="generic-copy icon-copy size-25 dark-blue" title="Kopyala"></i></a>
 
@@ -1400,15 +1402,17 @@ $current_user=User::model()->findByPk(Yii::app()->user->id);
 				<li ctype="link" class="component " style=" background-image: url(<?php echo Yii::app()->getBaseUrl(true);?>/css/images/components/<?php echo Yii::app()->language;?>/link.png);"></li>
 				<li ctype="plink" class="component " style=" background-image: url(<?php echo Yii::app()->getBaseUrl(true);?>/css/images/components/<?php echo Yii::app()->language;?>/pagelink.png);"></li>
 				<li ctype="page" class="component " style=" background-image: url(<?php echo Yii::app()->getBaseUrl(true);?>/css/images/components/<?php echo Yii::app()->language;?>/pagenumber.png);"></li>
+				<li ctype="wrap" class="component " style=" background-image: url(<?php echo Yii::app()->getBaseUrl(true);?>/css/images/components/<?php echo Yii::app()->language;?>/wrap.png);"></li>
 				<!--<li ctype="quiz" class="component " style=" background-image: url(<?php echo Yii::app()->getBaseUrl(true);?>/css/images/components/<?php echo Yii::app()->language;?>/quiz.png);"></li>-->
 
 		</ul>	
 			
 			
 		<div class="clearfix"></div>
-		
+		<!--
 		<i class="icon-zoom grey-5" style="margin:5px;"></i>	
 		<div id='zoom-pane' class="zoom" style="margin-top: 10px; max-width:150px;"></div>
+		-->
 		</br>
 				
 			
@@ -2122,7 +2126,9 @@ $background= (!empty($img)) ? "background-image:url('".str_replace(" ", "", $img
 					<div data-book-type='<?php echo $book_type;?>' id='current_page' page_id='<?php echo $page->page_id ;?>' style="<?php echo $background; ?>;border:thin solid rgb(146, 146, 146);zoom:1;
 					-webkit-box-shadow: 1px 1px 5px 2px rgba(6, 34, 63, 0.63);
 					-moz-box-shadow: 1px 1px 5px 2px rgba(6, 34, 63, 0.63);
-					box-shadow: 1px 1px 5px 2px rgba(6, 34, 63, 0.63);/*background-size:37px;*/ height:<?php echo $bookHeight; ?>px;width:<?php echo $bookWidth; ?>px;position:relative"  >
+					box-shadow: 1px 1px 5px 2px rgba(6, 34, 63, 0.63);
+					background-size:<?php echo $bookWidth; ?>px <?php echo $bookHeight; ?>px;
+					 height:<?php echo $bookHeight; ?>px;width:<?php echo $bookWidth; ?>px;position:relative"  >
 						<div id="guide-h" class="guide"></div>
 						<div id="guide-v" class="guide"></div>
 					</div>

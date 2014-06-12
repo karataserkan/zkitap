@@ -162,7 +162,7 @@
                     //  // };
                     // };
 
-                    $('.stepHeader', $('#bookCreateWizard')).text('Step ' + (index + 1) + ' of ' + total);
+                    $('.stepHeader', $('#bookCreateWizard')).text('Aşama ' + (index + 1) + ' of ' + total);
                     jQuery('li', $('#bookCreateWizard')).removeClass("done");
                     var li_list = navigation.find('li');
                     for (var i = 0; i < index; i++) {
@@ -196,7 +196,7 @@
                     // 	$('.pdf_select').hide();
                     // };
 
-                    $('.stepHeader', $('#bookCreateWizard')).text('Step ' + (index + 1) + ' of ' + total);
+                    $('.stepHeader', $('#bookCreateWizard')).text('Aşama ' + (index + 1) + ' of ' + total);
                     jQuery('li', $('#bookCreateWizard')).removeClass("done");
                     var li_list = navigation.find('li');
                     for (var i = 0; i < index; i++) {

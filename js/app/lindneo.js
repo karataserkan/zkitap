@@ -4,11 +4,27 @@ window.lindneo = (function(window){
 
   var url = '/';
   var controls = {
-    
+    onPageLoadedFunctions: []
   };
+
   var dontAllowToLoagPage = $('<div class = "dontAllowToLoagPage" style="width: 140px; height: 50px; background-color: #E54E45;top:20px;position: absolute;text-align: center;padding-top: 5px;margin-left:-10px;color: #830700;font-weight: bold;border-radius: 3px;border: 2px solid#A30900;">' + j__('İşlem tamamlanırken lütfen bekleyiniz..') + '</div>'  );
+  var bindPageLoaded = function (function_value,once){
+    if (typeof once == "undefined") once = false;
+    if (once == true) 
+      once =true;
+    else 
+      once = false;
+    var newUserFunction = {
+      function_value: function_value,
+      type :  once
+    }
+    window.lindneo.controls.onPageLoadedFunctions.push(newUserFunction);
+
+  }
+
   var pageCanvasHoverIn = function(e){dontAllowToLoagPage.appendTo( $(e.currentTarget) );};
   var pageCanvasHoverOut = function(e){dontAllowToLoagPage.remove();};
+
   var pageLoaded = function(value){
 
     if (typeof (value)!="undefined")
@@ -20,13 +36,19 @@ window.lindneo = (function(window){
 
       $("canvas.preview").parent().unbind("mouseenter",pageCanvasHoverIn);
       $("canvas.preview").parent().unbind("mouseleave",pageCanvasHoverOut);
-      //window.lindneo.controls.dontAllowToLoagPage;
+      $('.current_page').removeClass('current_page');
+      $('.chapter ul.pages li.page[page_id="'+window.lindneo.currentPageId+'"]').addClass('current_page');
+      $.each(window.lindneo.controls.onPageLoadedFunctions , function(index,userfunctions) {
+          if (typeof (userfunctions) == "undefined") return;
+          userfunctions.function_value();
+          if (userfunctions.type=== true) delete window.lindneo.controls.onPageLoadedFunctions[index];
+      });
     }
-    else {
+    else if (value===false) {
       $("canvas.preview").parent().bind("mouseenter",pageCanvasHoverIn);
       $("canvas.preview").parent().bind("mouseleave",pageCanvasHoverOut);
     }
-    
+
     return window.lindneo.controls.pageLoaded;
   };
 
@@ -237,6 +259,7 @@ window.lindneo = (function(window){
     base64Encode:base64Encode,
     base64Decode:base64Decode,
     online_users: online_users,
+    bindPageLoaded: bindPageLoaded,
     pageLoaded: pageLoaded,
     controls: controls,
     empty: empty

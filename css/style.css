@@ -1320,7 +1320,7 @@ z-index: 999999;
 #chapters_pages_view .page{
 
 width:120px;
-
+min-height:90px;
 position:relative;
 margin:10px 0px 0px 20px;
 -webkit-box-shadow: 0 0 4px 1px #DFDFDF;
@@ -2200,7 +2200,7 @@ border-right:1px solid #ddd;
   margin: 0px;
   border: 0px;
   position: absolute;
-  width: 225px;
+ 
   z-index: 200;
   /*top:1em;
 	/*left:0;*/
@@ -2522,9 +2522,20 @@ font-size: 20px;
 	margin-top: 7px;
 	border-top-left-radius: 0px;
 	border-top-right-radius: 0px;
-	top:35px;
-	width:200px;	
+	top:35px !important;
+	left:435px !important;
+	width:207px !important;
 }
+
+
+.ui-autocomplete.ui-widget-content li{
+	padding:7px 5px;
+}
+
+.ui-autocomplete.ui-widget-content li:hover{
+	border:0;
+}
+
 
 /** END OF AUTHOR PAGE ***********************************/
 
