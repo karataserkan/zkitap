@@ -189,7 +189,7 @@ class UserController extends Controller
 		
 		if ($respond=="1") {
 			$book=Book::model()->findByPk($invitation->type_id);
-			$workspaceUser=WorkspacesUsers::model()->find('workspace_id');
+			$workspaceUser=WorkspacesUsers::model()->find('workspace_id=:workspace_id AND userid=:userid',array('workspace_id'=>$book->workspace_id,'userid'=>$invitation->user_id));
 			$organisationWorkspaces=OrganisationWorkspaces::model()->find('workspace_id=:workspace_id',array('workspace_id'=>$book->workspace_id));
 
 			$organisationUser=OrganisationUsers::model()->find('organisation_id=:organisation_id AND user_id=:user_id',array('organisation_id'=>$organisationWorkspaces->organisation_id,'user_id'=>$invitation->user_id));
@@ -210,7 +210,7 @@ class UserController extends Controller
 				$newWorkspaceUser->save();
 			}
 
-			$bookUser=BookUsers::model()->find('user_id=:user_id AND book_id=:book_id',array('user_id'=>$invitation->user_id,'book_id'=>$bookId));
+			$bookUser=BookUsers::model()->find('user_id=:user_id AND book_id=:book_id',array('user_id'=>$invitation->user_id,'book_id'=>$invitation->type_id));
 			if (!$bookUser) {
 				$bookUser=new BookUsers;
 				$bookUser->user_id=$invitation->user_id;
@@ -304,7 +304,7 @@ class UserController extends Controller
 			die();
 		}
 
-		$invitation=Invitation::model()->find('invitation_key=:invitation_key',array('invitation_key'=>$key));
+		$invitation=Invitation::model()->find('invitation_key=:invitation_key AND status=:status',array('invitation_key'=>$key,'status'=>0));
 
 		if (!$invitation) {
 			//404 sayfasına yönlenecek burda
