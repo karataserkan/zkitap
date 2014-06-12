@@ -39,8 +39,9 @@ window.lindneo = (function(window){
       $('.current_page').removeClass('current_page');
       $('.chapter ul.pages li.page[page_id="'+window.lindneo.currentPageId+'"]').addClass('current_page');
       $.each(window.lindneo.controls.onPageLoadedFunctions , function(index,userfunctions) {
+          if (typeof (userfunctions) == "undefined") return;
           userfunctions.function_value();
-          if (userfunctions.type== "once") delete window.lindneo.controls.onPageLoadedFunctions[index];
+          if (userfunctions.type=== true) delete window.lindneo.controls.onPageLoadedFunctions[index];
       });
     }
     else if (value===false) {

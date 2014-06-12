@@ -1004,7 +1004,7 @@ class EditorActionsController extends Controller
 		$chapter=Chapter:: model()->findByPk($currentPage->chapter_id) ;
 		$bookId=$chapter->book_id;
 
-		if(strlen($searchTerm)<2) {
+		if(strlen($searchTerm)<1) {
 			$this->error("EA-SearchOnBook","Too Short Seach Term",func_get_args(),$searchTerm);
 			return null;
 		}
@@ -1029,7 +1029,7 @@ right join book using (book_id) where book_id='$bookId' and type IN ('rtext','te
 					$searchable = $value->data->textarea->val;
 					break;
 				case 'rtext':
-					$searchable = $value->data->rtextdiv->val;
+					$searchable = strip_tags(html_entity_decode($value->data->rtextdiv->val));
 					break;
 					
 				case 'table':
@@ -1056,7 +1056,6 @@ right join book using (book_id) where book_id='$bookId' and type IN ('rtext','te
 			}
 
 			$searchable_small=functions::ufalt($searchable);
-				
 			if( 
 			 	substr_count ( $searchable_small , functions::ufalt($searchTerm) )==0 
 			 ) 

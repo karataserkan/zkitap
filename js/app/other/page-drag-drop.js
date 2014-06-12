@@ -276,7 +276,7 @@ $( document ).ready(function () {
     });
     $('#searchn').autocomplete({
       appendTo: "#page" ,
-      minLength: 3, 
+      minLength: 1, 
       autoFocus: true,
       source: function( request, response ) {
                 //console.log('request:'+request);
@@ -336,7 +336,7 @@ $( document ).ready(function () {
 
               }, 100);
 
-            });
+            },true);
 
           }
 
