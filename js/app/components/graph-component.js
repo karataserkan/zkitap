@@ -266,7 +266,7 @@ console.log(top);
         <div class='popup-header'> \
           <i class='icon-m-charts'></i> &nbsp;"+j__("Grafik Ekle")+" \
           <i id='graph-add-dummy-close-button' class='icon-close size-10 popup-close-button'></i>\
-		    </div> \
+        </div> \
           <div class='gallery-inner-holder'> \
             <div class='gallery-inner-holder'> \
          \
@@ -415,27 +415,27 @@ console.log(top);
 /*        chart=(list_bar_chart.length==0?list_pie_chart:list_bar_chart);
         chart=(list_pie_chart.length==0?list_bar_chart:list_pie_chart);*/
         if(list_bar_chart.length==0){
-        	chart=list_pie_chart;
+          chart=list_pie_chart;
         }
         else
         {
-        	chart=list_bar_chart;	
+          chart=list_bar_chart; 
         }
         console.log(list_bar_chart);
         console.log(list_pie_chart);
         console.log(chart);
         for (var i = 0; i < chart.length; i++) {
-        	if(selected_item=='bar-chart')
-        	{
-        		console.log($('#pie-chart-'+i).val());
-        		$("#"+selected_item+"-"+i).val($('#pie-chart-'+i).val());
-        		console.log($("#"+selected_item+"-"+i).val(),$('#pie-chart-'+i).val());
-        	}
-        	else
-        	{
-  				$("#"+selected_item+"-"+i).val($('#bar-chart-'+i).val());  
-        		console.log($("#"+selected_item+"-"+i).val(),$('#pie-chart-'+i).val());   		
-        	}
+          if(selected_item=='bar-chart')
+          {
+            console.log($('#pie-chart-'+i).val());
+            $("#"+selected_item+"-"+i).val($('#pie-chart-'+i).val());
+            console.log($("#"+selected_item+"-"+i).val(),$('#pie-chart-'+i).val());
+          }
+          else
+          {
+          $("#"+selected_item+"-"+i).val($('#bar-chart-'+i).val());  
+            console.log($("#"+selected_item+"-"+i).val(),$('#pie-chart-'+i).val());       
+          }
         }
         $( "#graph_leading option:selected" ).each(function() {
           str += $( this ).val() + " ";
@@ -456,7 +456,7 @@ console.log(top);
     else{
       top = oldcomponent.data.self.css.top;
       left = oldcomponent.data.self.css.left;
-      window.lindneo.tlingit.componentHasDeleted( oldcomponent, oldcomponent.id );
+      //window.lindneo.tlingit.componentHasDeleted( oldcomponent, oldcomponent.id );
     };
 
       var str ='';
@@ -525,7 +525,7 @@ console.log(top);
           'data': {
             'type': graphType,
             'series':  valueables ,
-            'self': {
+            'self': { 
               'css': {
                 'position':'absolute',
                 'top': top ,
@@ -539,9 +539,17 @@ console.log(top);
             }
           }
         };
-        
-         window.lindneo.tlingit.componentHasCreated( component );
-        
+        if (typeof oldcomponent == "undefined"){
+          window.lindneo.tlingit.componentHasCreated( component );  
+        } else { 
+          delete oldcomponent["data"];
+          oldcomponent.data = component.data;
+          console.log(component.data);
+          console.log(oldcomponent.data);
+          window.lindneo.nisga.destroyByIdComponent(oldcomponent.id);
+          window.lindneo.nisga.createComponent(oldcomponent);
+          window.lindneo.tlingit.componentHasUpdated( oldcomponent, true );
+        }
         $("#graph-add-dummy-close-button").trigger('click');
 
     });

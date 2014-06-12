@@ -472,6 +472,10 @@ class EditorActionsController extends Controller
 			//know bug : component type validation
 
 
+			
+			if (isset($component_attribs->id)) 
+				$new_component->id=$component_attribs->id;
+			
 			$new_component->type=$component_attribs->type;
 			$new_component->set_data($component_attribs->data);
 			//new dBug($component_attribs);

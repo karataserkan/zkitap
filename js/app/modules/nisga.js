@@ -39,14 +39,17 @@ window.lindneo.nisga = (function(window, $, undefined){
       ////console.log(revision_value);
     //console.log(component);
     ////console.log(revision_array);
+    /*
     $.each(revision_array.revisions, function(index,value){ 
         if (value.component_id == oldcomponent_id ){
             revision_array.revisions[index].component_id = component.id;
             revision_array.revisions[index].component.id = component.id;
           }
     });
+    */
     ////console.log(revision_array);
     componentBuilder( component );  
+    /*
     if(revision_value==0){
       if(typeof oldcomponent_id == 'undefined')  {
         revision_array.revisions.push({component_id: component.id, component: component, revision_date: $.now(), even_type: 'CREATE'});
@@ -54,6 +57,7 @@ window.lindneo.nisga = (function(window, $, undefined){
       }
     }
     else revision_value=0;
+    */
     //if(typeof oldcomponent_id != 'undefined') revision_array.revisions.pop();
     ////console.log(revision_array);
   };
