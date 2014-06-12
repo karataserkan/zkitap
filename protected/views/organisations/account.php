@@ -38,10 +38,10 @@
 					<span>Organizasyon İsmini Değiştir</span>
 				</a>
                 
-                <a class="btn btn-warning pull-right org_upgrade_packet" href="/organisations/selectPlan?id=<?php echo $id?>&current=<?php echo $plan->transaction_explanation?>">
+                <!-- <a class="btn btn-warning pull-right org_upgrade_packet" href="/organisations/selectPlan?id=<?php echo $id?>&current=<?php echo $plan->transaction_explanation?>">
 					<i class="fa fa-arrow-up"></i>
 					<span>Paketini Yükselt/Yenile</span>
-				</a>
+				</a> -->
                 
             </div>
 		</div>
@@ -49,7 +49,7 @@
 	<!-- /PAGE HEADER -->
  
         <div class="account_info_cards_container">
-        	<div class="account_info_plan_cards_container">                
+        	<!-- <div class="account_info_plan_cards_container">                
                 <div class="account_info_plan_cards">
                     <div class="account_info_plan_title <?php echo $planClass?>">Geçerli Planınız</div>
                     <div class="account_info_plan"><?php echo $planName?>
@@ -71,7 +71,7 @@
                     <div class="account_info_plan_title <?php echo $planClass?>">Kalan<br>Gün</div>
                     <div class="account_info_plan_day_left"><?php echo $remainDay?></div>
                 </div>
-           </div>     
+           </div>   -->   
             <!-- end of account_info_plan_cards_container -->
             
             <div class="account_spacer"></div>
@@ -108,13 +108,13 @@
                 </div>
             </a>
             
-            <a href="/site/index">
+            <!-- <a href="/site/index">
             <div class="account_info_cards">
             <div class="account_info_icon"><i class="fa fa-dollar"></i></div>
             <div class="account_info_data_number"><?php echo $budget; ?></div>
             <div class="account_info_data_type">Yayın Üretme Bütçesi</div>
             </div>
-            </a>
+            </a> -->
         </div>
         <!-- end of account_info_cards_container -->
 </div>

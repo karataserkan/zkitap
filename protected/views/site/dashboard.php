@@ -57,11 +57,11 @@ $this->pageTitle=Yii::app()->name." - ". __("Kontrol Paneli");
                     <div class="account_info_data_type">Yayın Kategorisi</div>
                 </div>
             
-            <div class="account_info_cards">
+           <!--  <div class="account_info_cards">
 	            <div class="account_info_icon"><i class="fa fa-dollar"></i></div>
 	            <div class="account_info_data_number"><?php echo $budget; ?></div>
 	            <div class="account_info_data_type">Yayın Üretme Bütçesi</div>
-            </div>
+            </div> -->
         </div>
         <!-- end of account_info_cards_container -->
 
