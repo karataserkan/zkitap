@@ -79,6 +79,10 @@
 	color: #2880b9 !important;
 }
 
+.sidebar-menu > ul > li.current span.arrow {
+	color: #2880b9 !important;
+}
+
 .sidebar-menu > ul > li.current:hover {
 	border-right:none;	
 }
