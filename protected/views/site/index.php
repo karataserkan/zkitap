@@ -88,8 +88,8 @@
 
 
 <script type="text/javascript">
-	$(document).ready(function() {
 
+	$(document).ready(function() {
 		$("#telNumber").intlTelInput();
 
 		var confirmation="<?php echo $confirmation ?>";
@@ -247,7 +247,7 @@
 
 	
 $(document).ready(function() {
-
+		$('#li_book').addClass('current');
 var data_id = '';
   $('.remove_book').click(function () {
 
@@ -644,8 +644,13 @@ foreach ($workspacesOfUser as $key => $workspace) {
 
 <script type="text/javascript">
 	$().ready(function(){
+<<<<<<< HEAD
 		if( $('.reader_book_card').length<=1 ) {
 			tripStart();
+=======
+		if( $('.reader_book_card').length==0 ) {
+			//tripStart();
+>>>>>>> dae484c6eb83f3641046e1004d393b747d3db4f1
 		}
 	});
 </script>

@@ -26,16 +26,16 @@ window.lindneo.tsimshian = (function(window, $, undefined){
 
 
   var componentUpdated = function (component) {    
-
+    
     window.lindneo.tsimshian.myComponent = component.id;
-    //console.log('Sending');
-    //console.log(window.lindneo.tsimshian.myComponent);
+    console.log('Sending');
+    
     this.socket.emit('updateComponent', component);
 
   };
 
   var componentCreated = function (component) {    
-
+          if (! window.lindneo.pageLoaded() ) return;
           window.lindneo.tsimshian.myComponent = component.id;
           this.socket.emit('newComponent', component);
 
@@ -56,8 +56,8 @@ window.lindneo.tsimshian = (function(window, $, undefined){
   };
 
   var pageCreated = function(){
-    console.log("page");
-    window.lindneo.tsimshian.socket.emit('createPage');
+    
+    this.socket.emit('createPage');
   };
 
   var emitSelectedComponent = function ( component ) {
@@ -80,7 +80,7 @@ window.lindneo.tsimshian = (function(window, $, undefined){
    
  
    
-    window.lindneo.tsimshian.socket.emit('changePage',user);
+    this.socket.emit('changePage',user);
   };
 
   var init = function (serverName){
@@ -131,13 +131,14 @@ window.lindneo.tsimshian = (function(window, $, undefined){
        } );
 
        this.socket.on('updateComponent', function(component){
-   
+          if (! window.lindneo.pageLoaded() ) return; 
           window.lindneo.nisga.destroyByIdComponent(component.id);
           window.lindneo.nisga.createComponent(component);
   
        } );
 
       this.socket.on('emitSelectedComponent', function( select_item ) {
+          if (! window.lindneo.pageLoaded() ) return;
           var componentId=select_item.componentId;
           var activeUser=select_item.user;
           window.lindneo.nisga.setBgColorOfSelectedComponent( componentId,activeUser );
@@ -183,19 +184,29 @@ window.lindneo.tsimshian = (function(window, $, undefined){
        });
 
        this.socket.on('userBookListUpdate', function(bookUserList){
-        //console.log('dasdasd');
+
+        if (typeof window.lindneo.controls.UpdateBookUserList == "undefined")  window.lindneo.controls.UpdateBookUserList=true;
+        //if (!window.lindneo.controls.UpdateBookUserList) return;
+        window.lindneo.controls.UpdateBookUserList=false;
+        setTimeout(function(){window.lindneo.controls.UpdateBookUserList=true},1000);
+
+        console.log(bookUserList);
         var users = "";
         
-        $('#onlineUsers').html('');
+        
         if(bookUserList!=""){
                   book_user_list = {book_id: window.lindneo.currentBookId, users: bookUserList};
                 }
-                //console.log(bookUserList) ;
+                
         window.lindneo.book_users = bookUserList;
-         
+        var a=0;
+
+
+        $('#onlineUsers').empty();
         $.each( bookUserList, function( key, value ) {
           //console.log(value.username);
-          
+          console.log(++a);
+
           window.lindneo.dataservice.send('ProfilePhoto', {'email': value.username}, function( response ) {
                     
                     //console.log(response);

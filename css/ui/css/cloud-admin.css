@@ -9927,11 +9927,47 @@ li.users_page_categories a {
 }
 
 
-
 /** END OF EDITOR ORGANIZATIONS USERS PAGE *******************/
 
 
+
+
+/** EDITOR SUPPORT (FAQ) PAGE *******************/
+
+.support_alert_messages {
+	margin-bottom:30px;
+	margin-top:10px;
+}
+
+/** END OF EDITOR SUPPORT (FAQ) PAGE *******************/
+
+
+
+
+/** EDITOR PUBLISHING BOOK PAGE *******************/
+
+.publishing_book_box {
+	position: absolute;
+	margin-left: auto;
+	margin-right: auto;
+	left: 0;
+	right: 0;	
+}
+
+/** END OF EDITOR PUBLISHING BOOK PAGE *******************/
+
+
+
 /** EDITOR GENERAL CSS *******************/
+
+.centering_with_margin {
+	margin-left:auto;
+	margin-right:auto;	
+}
+
+.centering_with_text_align {
+	text-align:center;	
+}
 
 li.user span.username {
 	font-size:15px;

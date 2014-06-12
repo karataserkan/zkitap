@@ -154,7 +154,9 @@ function sendUser(e){
 </script>
 
 <script>
-		jQuery(document).ready(function() {		
+		jQuery(document).ready(function() {
+		console.log("<?php echo $organisationId; ?>");	
+		    $('#li_<?php echo $organisationId; ?>').addClass('current');	
 			App.setPage("gallery");  //Set current page
 			App.init(); //Initialise plugins and elements
 

@@ -503,15 +503,16 @@ table.table-component-table .bottom{
 /* ruler */
 .hruler{
 position:absolute;
-top:0; 
+top:16px; 
 left: 135px;
-
+/*z-index:999;*/
 }
 
 .vbruler{
 position:absolute;
-top: 15px;
+top: 30px;
 left: 118px;
+/*z-index:999;*/
 }
 
 #ruler .cm {
@@ -1419,7 +1420,7 @@ display: none;
 font-weight: normal;
 }
 .hidden-delete:hover{
-
+	
 }
 
 .add-button-container{
@@ -1922,6 +1923,7 @@ display:inline-block;
 
 .quiz-component{
 outline: 10px solid rgb(235, 235, 235);
+overflow:hidden;
 padding: 20px;
 max-width: 400px;
 }
@@ -2212,7 +2214,7 @@ border-right:1px solid #ddd;
   float: none;
   margin: 0px;
   padding: 0px;
-  width: 225px;
+  width: 235px;
 }
 #headermenu li:hover li a {
   background: none;
@@ -2532,6 +2534,120 @@ font-size: 20px;
 box-shadow: 0 0 5px 0 rgba(0,0,0,0.5);
 	
 }
+
+
+.page-chapter-delete {
+	height:23px;
+	width:23px;
+}
+
+.page-chapter-delete i.fa-trash-o{
+	margin-top: -5px;
+	margin-left: -5px;
+}
+
+
+
+div .ui-draggable>.icon-delete
+{
+background-color:rgba(236, 236, 236, 0.4);
+color:#c1272d;
+padding:5px;
+font-size:13px;
+top:-23px!important;
+right:0!important;
+-webkit-border-top-right-radius: 5px;
+-webkit-border-bottom-right-radius: 5px;
+-moz-border-radius-topright: 5px;
+-moz-border-radius-bottomright: 5px;
+border-top-right-radius: 5px;
+border-bottom-right-radius: 5px;
+}
+
+div .ui-draggable>.icon-delete:hover
+{
+background-color:rgba(210, 210, 210, 0.4);
+}
+
+div .ui-draggable>.icon-down-arrow:hover
+{
+background-color:rgba(210, 210, 210, 0.4);
+}
+
+div .ui-draggable>.icon-down-arrow
+{		
+background-color:rgba(236, 236, 236, 0.4);
+color:#2880b9;
+padding:8px 5px 5px 5px;
+font-size:9px;
+width:25px;
+top:-23px!important;
+right:23px!important;
+border-right:1px solid #ddd;
+-webkit-border-top-left-radius: 5px;
+-webkit-border-bottom-left-radius: 5px;
+-moz-border-radius-topleft: 5px;
+-moz-border-radius-bottomleft: 5px;
+border-top-left-radius: 5px;
+border-bottom-left-radius: 5px;
+}
+	
+	
+	
+	
+	
+	
+
+
+
+
+div .ui-wrapper>.icon-delete
+{
+background-color:rgba(236, 236, 236, 0.4);
+color:#c1272d;
+padding:5px;
+font-size:13px;
+top:-23px!important;
+right:0!important;
+-webkit-border-top-right-radius: 5px;
+-webkit-border-bottom-right-radius: 5px;
+-moz-border-radius-topright: 5px;
+-moz-border-radius-bottomright: 5px;
+border-top-right-radius: 5px;
+border-bottom-right-radius: 5px;
+}
+
+div .ui-wrapper>.icon-delete:hover
+{
+background-color:rgba(210, 210, 210, 0.4);
+}
+
+div .ui-wrapper>.icon-down-arrow:hover
+{
+background-color:rgba(210, 210, 210, 0.4);
+}
+
+div .ui-wrapper>.icon-down-arrow
+{		
+background-color:rgba(236, 236, 236, 0.4);
+color:#2880b9;
+padding:8px 5px 5px 5px;
+font-size:9px;
+width:25px;
+top:-23px!important;
+right:23px!important;
+border-right:1px solid #ddd;
+-webkit-border-top-left-radius: 5px;
+-webkit-border-bottom-left-radius: 5px;
+-moz-border-radius-topleft: 5px;
+-moz-border-radius-bottomleft: 5px;
+border-top-left-radius: 5px;
+border-bottom-left-radius: 5px;
+}
+	
+	
+
+
 
 
 

@@ -50,7 +50,7 @@ $current_user=User::model()->findByPk(Yii::app()->user->id);
 	$(document).ready(function(){
 	
 		//$('#editor_view_pane').css({'margin-left':'200px'});
-		var adaptive_width=$('.components').width()+20+"px";
+		var adaptive_width=$('.components').width()+50+"px";
 		console.log(adaptive_width);
 		$('#editor_view_pane').css({'margin-left':adaptive_width});
 		options = {  
@@ -213,7 +213,7 @@ $current_user=User::model()->findByPk(Yii::app()->user->id);
 			         <li><a href="<?php echo $this->createUrl('site/index');  ?>"><span><i class="icon-book"></i>Kitaplarım</span></a></li>
 			         <li><a href="<?php echo $this->createUrl("EditorActions/ExportPdfBook", array('bookId' => $model->book_id ));?>"> <i class="icon-doc-inv"></i><?php _e("PDF Olarak Aktar"); ?></i></a></li>
 			         <li><a href="<?php echo $this->createUrl("EditorActions/ExportBook", array('bookId' => $model->book_id ));?>"> <i class="icon-doc-inv"></i><?php _e("ePub Olarak Aktar"); ?></i></a></li>
-			         <li><a href="<?php echo $this->createUrl("EditorActions/publishBook/", array('bookId' => $model->book_id ));?>"> <i class="icon-doc-inv"></i><?php _e("Okutus Kütüphanesinde Yayınla"); ?></i></a></li>
+			         <li><a href="<?php echo $this->createUrl("EditorActions/publishBook/", array('bookId' => $model->book_id ));?>"> <i class="icon-doc-inv"></i><?php _e("Markette Yayınla"); ?></i></a></li>
 			         <li>
 			         	<?php
 			         		if ($budget==0) {
@@ -2102,7 +2102,7 @@ $current_user=User::model()->findByPk(Yii::app()->user->id);
 		
 		<div id='guide'> 
 		</div> <!-- guide -->
-<div id='editor_view_pane' style=' /*padding:5px 130px;margin: 10px 5px 5px 5px;*/float:left;'>
+<div id='editor_view_pane' style=' margin-top:30px;/*padding:5px 130px;margin: 10px 5px 5px 5px;*/float:left;'>
 
 <?php
 $book_data=json_decode($model->data,true);
@@ -2122,7 +2122,7 @@ $background= (!empty($img)) ? "background-image:url('".str_replace(" ", "", $img
 					<div id='current_page' page_id='<?php echo $page->page_id ;?>' style="<?php echo $background; ?>;border:thin solid rgb(146, 146, 146);zoom:1;
 					-webkit-box-shadow: 1px 1px 5px 2px rgba(6, 34, 63, 0.63);
 					-moz-box-shadow: 1px 1px 5px 2px rgba(6, 34, 63, 0.63);
-					box-shadow: 1px 1px 5px 2px rgba(6, 34, 63, 0.63); height:<?php echo $bookHeight; ?>px;width:<?php echo $bookWidth; ?>px;position:relative"  >
+					box-shadow: 1px 1px 5px 2px rgba(6, 34, 63, 0.63);background-size:37px; height:<?php echo $bookHeight; ?>px;width:<?php echo $bookWidth; ?>px;position:relative"  >
 						<div id="guide-h" class="guide"></div>
 						<div id="guide-v" class="guide"></div>
 					</div>
@@ -2247,16 +2247,6 @@ $background= (!empty($img)) ? "background-image:url('".str_replace(" ", "", $img
 							}
 						}
 						?>
-				<script type="text/javascript">
-					$('#addBlankPage').click(function(){
-						var book_id=window.lindneo.currentBookId;
-						var currentPageId=window.lindneo.currentPageId;
-						var link="/page/create?book_id="+book_id+"&page_id="+currentPageId;
-						
-						window.location.assign(link);
-
-					});
-				</script>
 						
 					<ul>	
 					
@@ -2295,17 +2285,7 @@ $background= (!empty($img)) ? "background-image:url('".str_replace(" ", "", $img
 						}
 
 						?>
-						<script type="text/javascript">
-							$('#addBlankChapter').click(function(){
-								//chapter/create?book_id=<?php echo $model->book_id; ?>
-								//var link="/page/create?book_id="+book_id+"&page_id="+currentPageId;
-								var book_id=window.lindneo.currentBookId;
-								var link="/chapter/create?book_id="+book_id;
-								
-								window.location.assign(link);
-
-							});
-						</script>
+						
 					</ul>
 
 					</div>

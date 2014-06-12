@@ -197,7 +197,7 @@ $( document ).ready(function () {
       $('.ruler, .vruler').show();
     }
   });
-  */  
+  */   
   $(':checkbox').change(function() {
     var is_checked = $('input:checkbox[name=cetvel]:checked').val();
     //console.log(is_checked);
@@ -212,7 +212,7 @@ $( document ).ready(function () {
 
       console.log("LEN:"+len);
       item = $(document.createElement("div"));
-      item.css({'width':'38px','float':'left', 'border-right': '1px solid #000','text-align':'left','padding-left':'2px'});
+      item.css({'width':'37px','float':'left', 'border-right': '1px solid #000','text-align':'left','padding-left':'2px'});
           for (i = 0; i < len; i++) 
           {
               ruler.append(item.clone().text(i));
@@ -226,17 +226,20 @@ $( document ).ready(function () {
             if(i==0){item.css({'border-top':'none'})}
               ruler_h.append(item.clone().text(i));
           }
-
-
+        var left_margin=$('#editor_view_pane').css('margin-left').replace('px', '')-15;
+        console.log(left_margin);
+       $('.hruler').css({'left':$('#editor_view_pane').css('margin-left')});
+       $('.vbruler').css({'left':left_margin+"px"});  
       $('.ruler, .vruler').show();
     }
     else 
       $('.ruler, .vruler').hide();
 
     var is_grid_checked = $('input:checkbox[name=grid]:checked').val();
-
+    console.log(is_grid_checked);
     if(is_grid_checked == "on"){
       var image = $("#current_page").css('background-image');
+      if((image.split(',')[0])=="url("+window.base_path+"/css/images/gridpattern.png)"){return;}
       if(!image)
         $("#current_page").css("background-image", 'url("/css/images/gridpattern.png")');
       else{
@@ -567,7 +570,10 @@ $( document ).ready(function () {
     });
 
     $('.delete-chapter').click(function(){
-
+      if ( $('#collapseThree .chapter').length < 2){
+        alert (j__("Kitabınız En az bir bölüme sahip olmalı"));
+        return ;
+      }
       var chapter_id=$(this).parent().parent().attr('chapter_id');
       
       $('.chapter[chapter_id="'+chapter_id+'"]').hide('slow', function(){  $('.chapter[chapter_id="'+chapter_id+'"]').remove();});
@@ -576,37 +582,35 @@ $( document ).ready(function () {
 
     });
 
-    $( document ).on( "click","canvas.preview" ,function(event, ui) {
-       if (!window.lindneo.pageLoaded()) return;
+    $('#addBlankPage').click(function(){
+        window.lindneo.tlingit.createPage( null);
+        $('#addPage').modal('toggle');
+    });
 
-      
-      console.log(event);
-      console.log($('.'+event.toElement.parentElement.children[1].className).attr('bpageTeplateId'));
+    $('#addBlankChapter').click(function(){
+        window.lindneo.tlingit.createChapter( null);
+        $('#addPage').modal('toggle');
+    });
+            
+
+    $( document ).on( "click","canvas.preview" ,function(event, ui) {
+      if (!window.lindneo.pageLoaded()) return;
 
       $('.selected').trigger('unselect');
       
       if(event.toElement.parentElement.children[1].className[0] == 'p'){
-          //console.log($(event.toElement.parentElement.children[2]).attr('book-id'));
-              var book_id= $(event.toElement.parentElement.children[2]).attr('book-id');
-              var pageTeplateId=$(event.toElement.parentElement.children[2]).attr('pageTeplateId');
-              //var chapter_id=$(this).attr('chapter_id');
-              var currentPageId=window.lindneo.currentPageId;
-              var link="/page/create?book_id="+book_id+"&page_id="+currentPageId+"&pageTeplateId="+pageTeplateId;
-              console.log(link);
-              window.location.href = link;
-            }
+          var pageTeplateId=$(event.toElement.parentElement.children[2]).attr('pageTeplateId');
+          window.lindneo.tlingit.createPage( null, pageTeplateId );
+          $('#addPage').modal('toggle');
+      }
       if(event.toElement.parentElement.children[1].className[0] == 'c'){
-        console.log("chapter copy");
-        ///page/create?book_id=".$model->book_id."&chapter_id=".$current_chapter->chapter_id."&pageTeplateId=".$template_page->page_id."
-        var book_id= $(event.toElement.parentElement.children[2]).attr('book-id');
-        var pageTeplateId=$(event.toElement.parentElement.children[2]).attr('pageTeplateId');
-        var chapter_id=$(this).attr('chapter_id');
-        var link="/page/create?book_id="+book_id+"&chapter_id="+chapter_id+"&pageTeplateId="+pageTeplateId;
-        //return;
-          
-              window.location.href = link;
-            }
-      window.lindneo.tsimshian.pageCreated();
+          var chapter_id=$(this).attr('chapter_id');
+          var pageTeplateId=$(event.toElement.parentElement.children[2]).attr('pageTeplateId');
+          window.lindneo.tlingit.createPage(chapter_id,pageTeplateId);
+          $('#addPage').modal('toggle');
+      }
+
+
       //get page id from parent li 
       var page_id = $(this).parent().attr('page_id') ;
       //sortPages();
@@ -656,9 +660,13 @@ $( document ).ready(function () {
             control_value = 1;
           }
       });
+      if (page_id==window.lindneo.currentPageId) {
+        alert(j__("Bulunduğunuz sayfayı silemezsiniz!"));
+        control_value = 1;
+      }
       if(control_value == 1)
         return;
-      //return;
+      return;
       window.lindneo.tlingit.PageHasDeleted( page_id );
       //return;
       //ekaratas start
@@ -879,7 +887,7 @@ $( document ).ready(function () {
             value += '<div class="chapter"  chapter_id="'+key.chapter_id+'">\
                             <div class="chapter-detail">\
                               <input type="text" class="chapter-title" placeholder='+j__("Bölüm adı")+' value="'+key.title+'">\
-                              <a class="btn btn-danger  page-chapter-delete delete-chapter hidden-delete" style="float: right; margin-top: -23px;"><i class="icon-ok"></i></a>\
+                              <a class="btn btn-danger  page-chapter-delete delete-chapter hidden-delete" style="float: right; margin-top: -23px;"><i class="fa fa-trash-o"></i></a>\
                               <a class="page-chapter-delete_control hidden-delete" style="float: right; margin-top: -23px;"><i class="icon-delete"></i></a>\
                             </div>';
             //console.log(result.pages[key.chapter_id]);
@@ -980,7 +988,29 @@ $( document ).ready(function () {
           $('.delete-chapter').click(function(){
 
             var chapter_id=$(this).parent().parent().attr('chapter_id');
-            
+
+            var control_value = 0;
+            var parent = $(this).parent().parent();
+            window.parent = parent;
+
+            console.log(parent);
+            $.each(window.lindneo.book_users, function(index,key){
+              console.log(key); 
+              if(index != window.lindneo.tsimshian.socket.socket.sessionid)
+                if( parent.find('[page_id="'+key.pageid+'"]').length !== 0 ){
+                  alert("Başka bir kullanıcı bu bölümde çalıştığından bu sayfayı silemezsiniz!...");
+                  control_value = 1;
+                }
+            });
+
+            if (parent.has('.current_page').length !== 0) {
+              alert(j__("Bulunduğunuz bölümü silemezsiniz!"));
+              control_value = 1;
+            }
+
+            if(control_value == 1)
+              return;
+
             $('.chapter[chapter_id="'+chapter_id+'"]').hide('slow', function(){  $('.chapter[chapter_id="'+chapter_id+'"]').remove();});
             window.lindneo.tlingit.ChapterHasDeleted( chapter_id );
             sortPages();
@@ -1003,12 +1033,16 @@ $( document ).ready(function () {
             var control_value = 0;
             $.each(window.lindneo.book_users, function(index,key){
               console.log(key);
-              if(key.username != window.lindneo.user.username)
+              if(index != window.lindneo.tsimshian.socket.socket.sessionid)
                 if(key.pageid == page_id){
                   alert("Başka bir kullanıcı bu sayfada çalıştığından bu sayfayı silemezsiniz!...");
                   control_value = 1;
                 }
             });
+            if (page_id==window.lindneo.currentPageId) {
+              alert(j__("Bulunduğunuz sayfayı silemezsiniz!"));
+              control_value = 1;
+            }
             if(control_value == 1)
               return;
             //return;
