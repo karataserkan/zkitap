@@ -249,9 +249,9 @@ $current_user=User::model()->findByPk(Yii::app()->user->id);
 				
 			    
 			   <li><a href='#'>
-			   <form action='/book/author/<?php echo $model->book_id; ?>' id='searchform' style="float:left;" method="post">
+			   
 					<input type="text" id="searchn" name='component' class="search radius ui-autocomplete-input" placeholder="Ara" autocomplete="on">
-				</form>
+			
 			   <!--
 			   <input type="text" id="searchn" name="component" style="display:none;" class="search radius ui-autocomplete-input" placeholder="Ara" autocomplete="on">
 			   -->

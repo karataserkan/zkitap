@@ -291,15 +291,26 @@ $( document ).ready(function () {
                     data=window.lindneo.tlingit.responseFromJson(data);
 
                     //console.log(data);
-                    
+                    //'rtext','text','table','mquiz','popup'
                   if (data.result==null) return;
-                 
+                  var type_labels = {
+                    'text' : j__('Metin'),
+                    'rtext' : j__('Zengin Metin'),
+                    'table' : j__('Tablo'),
+                    'mquiz' : j__('Soru'),
+                    'popup' : j__('Açılır Pencere')
+                  };
+
+
                   response( $.map( 
                     data.result.components, function( item ) {
                       //console.log(item.search);
                       var result={
-                        'label': item.search.similar_result,
-                        'value': item.id
+                        'label': item.search.similar_result.trim(),
+                        'value': item.search.similar_result.trim(),
+                        'page_id': item.page_id,
+                        'component_id': item.id,
+                        'desc': type_labels[item.type] + ", " + j__('Sayfa: ') + ( parseInt($('#collapseThree  li[page_id="'+item.page_id+'"]').index('#collapseThree  li.page') )  +1 )
                       };
                       //console.log('REsult'+result);
                       return result;
@@ -313,37 +324,54 @@ $( document ).ready(function () {
             },
       select: function( event, ui ) {
 
-          //console.log(event);
           if (ui.item) {
-            $('#searchform').submit();
+            $('.selected').trigger('unselect');
+            window.lindneo.tlingit.loadPage(ui.item.page_id); 
+            window.lindneo.bindPageLoaded(function(){
+              console.log("BindWOrks");
+              setTimeout(function(){
+                console.log('[component-instance="true"][id="'+ui.item.component_id+'"]');
+
+                $('[component-instance="true"][id="'+ui.item.component_id+'"]').select();
+
+              }, 100);
+
+            });
+
           }
 
           
         },   
 
         open: function(e,ui) {
-            var acData = $(this).data('uiAutocomplete');
-    
+            var termTemplate = "<span style='font-weight: bold;'>%s</span>";
+            var acData = $(this).data('ui-autocomplete');
+            console.log(acData);
+
+            var styledTerm = termTemplate.replace('%s', acData.term);
+
+
             acData
                 .menu
                 .element
-                .find('a')
+                .find('li')
                 .each(function() {
-                    var me = $(this);
-                    var str = me.text() ;
-                    var patt1 = new RegExp(acData.term,'i');
+                  var me = $(this);
+                  console.log(me);
 
-                    var result = str.match(patt1);
-                    var styledTerm = termTemplate.replace('%s', result);
+                  console.log(me.html().replace(acData.term, styledTerm));
 
-                    //console.log(me.html( me.text().replace(result, styledTerm) ));
-                    me.html( me.text().replace(result, styledTerm) );
+                  me.html( me.html().replace(acData.term, styledTerm) );
                 });
         }
 
         
 
-      });
+      }).data( "ui-autocomplete" )._renderItem = function( ul, item ) {
+      return $( "<li>" )
+        .append( item.label + "<br/><div class='autocomplete-desc' align='right' style='font-style:italic' >" + item.desc + '</div>' )
+        .appendTo( ul );
+      };
 	
   
   
@@ -602,23 +630,25 @@ $( document ).ready(function () {
           var pageTeplateId=$(event.toElement.parentElement.children[2]).attr('pageTeplateId');
           window.lindneo.tlingit.createPage( null, pageTeplateId );
           $('#addPage').modal('toggle');
+          return;
       }
       if(event.toElement.parentElement.children[1].className[0] == 'c'){
           var chapter_id=$(this).attr('chapter_id');
           var pageTeplateId=$(event.toElement.parentElement.children[2]).attr('pageTeplateId');
           window.lindneo.tlingit.createPage(chapter_id,pageTeplateId);
           $('#addPage').modal('toggle');
+          return;
       }
 
 
       //get page id from parent li 
       var page_id = $(this).parent().attr('page_id') ;
-      //sortPages();
-      console.log(window.lindneo.tlingit.pages);
+     
+     
       //Load Page
       window.lindneo.tlingit.loadPage(page_id);
 
-      //console.log(window.lindneo.currentPageId);
+    
 
       //Remove Current Page
       $('.page').removeClass('current_page');
@@ -631,13 +661,13 @@ $( document ).ready(function () {
       }).done(function(page_data){
         
         var page_background = JSON.parse(page_data);
-        //console.log(page_background.result);
+       
         if(page_background.result){
-                //$('#current_page').css('background-image', 'url()');
+                
                 $('#current_page').css('background-image', 'url("'+page_background.result.replace(/\s/g, '')+'")');
         }
         else{
-          //console.log('bu ne');
+         
           $('#current_page').css('background-image', 'url()');
           $('#current_page').css('background-color', 'white');
         }
@@ -648,7 +678,7 @@ $( document ).ready(function () {
 
     $('.delete-page').click(function(){
 
-      var delete_buttons = $('<i class="icon-delete"></i><i class="icon-delete"></i>');
+      var delete_buttons = $('<i class="fa fa-trash-o"></i><i class="fa fa-trash-o"></i>');
 
       var page_id=$(this).parent().attr('page_id');
       var control_value = 0;
@@ -876,8 +906,8 @@ $( document ).ready(function () {
       cache: false,
       success: function (result) {
 
-          //console.log(result.chapters); 
-          //console.log(result.pages); 
+          console.log(result.chapters); 
+          console.log(result.pages); 
           var value = "";
           var page_NUM = 0; 
           $.each(result.chapters, function(index, key){
@@ -888,19 +918,20 @@ $( document ).ready(function () {
                             <div class="chapter-detail">\
                               <input type="text" class="chapter-title" placeholder='+j__("Bölüm adı")+' value="'+key.title+'">\
                               <a class="btn btn-danger  page-chapter-delete delete-chapter hidden-delete" style="float: right; margin-top: -23px;"><i class="fa fa-trash-o"></i></a>\
-                              <a class="page-chapter-delete_control hidden-delete" style="float: right; margin-top: -23px;"><i class="icon-delete"></i></a>\
+                              <a class="page-chapter-delete_control hidden-delete" style="float: right; margin-top: -23px;"><i class="fa fa-trash-o"></i></a>\
                             </div>';
             //console.log(result.pages[key.chapter_id]);
             if(typeof result.pages[key.chapter_id] != "undefined"){
               value+='<ul class="pages" >';
               $.each(result.pages[key.chapter_id], function(indexp, keyp){
                 //console.log(page_NUM);
-                //console.log(keyp);
+                console.log(keyp);
+                console.log(window.lindneo.currentPageId);
                 page_NUM++;
                 var page_link = "/book/author/"+window.lindneo.currentBookId+'/'+result.pages[key.chapter_id][indexp];
 
                 value += '<li class="page ' + (window.lindneo.currentPageId == keyp  ? "current_page": "") +'" chapter_id="' + key.chapter_id + '" page_id="' + keyp + '" >\
-                            <a class="btn btn-danger page-chapter-delete delete-page hidden-delete "  style="top: 0px;right: 0px; position: absolute;"><i class="icon-delete"></i></a>\
+                            <a class="btn btn-danger page-chapter-delete delete-page hidden-delete "  style="top: 0px;right: 0px; position: absolute;"><i class="fa fa-trash-o"></i></a>\
                             <a id="page_'+page_NUM+'" href="/book/author/'+ window.lindneo.currentBookId +'/'+ keyp +'"/></a>\
                           </li>';
                 chapter_page++;
@@ -926,6 +957,7 @@ $( document ).ready(function () {
               sortPages();
             }  
           });
+          $('.chapter ul.pages li.page[page_id="'+window.lindneo.currentPageId+'"]').addClass('current_page');
 
           var last_timeout;
           $('.pages .page').hover(
@@ -1011,9 +1043,10 @@ $( document ).ready(function () {
             if(control_value == 1)
               return;
 
-            $('.chapter[chapter_id="'+chapter_id+'"]').hide('slow', function(){  $('.chapter[chapter_id="'+chapter_id+'"]').remove();});
+            $('.chapter[chapter_id="'+chapter_id+'"]').hide('slow', function(){  $('.chapter[chapter_id="'+chapter_id+'"]').remove();sortPages();});
             window.lindneo.tlingit.ChapterHasDeleted( chapter_id );
-            sortPages();
+
+            
 
           });
 
@@ -1027,7 +1060,7 @@ $( document ).ready(function () {
 
           $('.delete-page').click(function(){
       
-            var delete_buttons = $('<i class="icon-delete"></i><i class="icon-delete"></i>');
+            var delete_buttons = $('<i class="fa fa-trash-o"></i><i class="fa fa-trash-o"></i>');
 
             var page_id=$(this).parent().attr('page_id');
             var control_value = 0;
