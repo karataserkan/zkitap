@@ -9032,8 +9032,6 @@ ul.stats li small {
   position:fixed;
   background:url(../../../css/brands/linden/login_back.png) no-repeat;
   background-size:cover;
-  background-size: cover;
-  background-position-y: -250px;
 }
 
 .login_page_container a{
