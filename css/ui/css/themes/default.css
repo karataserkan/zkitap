@@ -491,7 +491,7 @@
 }
 .sidebar-menu ul > li > a .arrow:before,
 .sidebar-menu > ul > li > a .arrow.open:before {
-  color: #7c7c7c !important;
+  color:;
 }
 /*.sidebar-menu ul > li.active > a .arrow:before,
 .sidebar-menu > ul > li.active > a .arrow.open:before {  
