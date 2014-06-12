@@ -633,7 +633,7 @@ margin: 0 0 10px;
 	font-weight:bold;
 	display:block;
 	text-decoration:none;
-	position:absolute;
+	position:relative;
 }
 
 .chat_button:hover {
