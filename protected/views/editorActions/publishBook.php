@@ -246,6 +246,7 @@
 
 													<div class="form-group">
 														<?php
+															/*
 															$general_categories=array(
 																				"Science"=>__('Bilim'),
 																				"Children"=>__('Çocuk'),
@@ -261,7 +262,7 @@
 																				"Technology"=>__('Teknoloji'));
 															foreach ($general_categories as $key => $category) {
 																$categoryIds[$key]=$category;
-															}
+															}*/
 														 ?>
 														
 														<label  class="col-md-1 control-label">

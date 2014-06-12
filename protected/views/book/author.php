@@ -2119,10 +2119,10 @@ if ($book_type=="pdf") {
 $background= (!empty($img)) ? "background-image:url('".str_replace(" ", "", $img)."')" : "background:white";
 ?>
 
-					<div id='current_page' page_id='<?php echo $page->page_id ;?>' style="<?php echo $background; ?>;border:thin solid rgb(146, 146, 146);zoom:1;
+					<div data-book-type='<?php echo $book_type;?>' id='current_page' page_id='<?php echo $page->page_id ;?>' style="<?php echo $background; ?>;border:thin solid rgb(146, 146, 146);zoom:1;
 					-webkit-box-shadow: 1px 1px 5px 2px rgba(6, 34, 63, 0.63);
 					-moz-box-shadow: 1px 1px 5px 2px rgba(6, 34, 63, 0.63);
-					box-shadow: 1px 1px 5px 2px rgba(6, 34, 63, 0.63);background-size:37px; height:<?php echo $bookHeight; ?>px;width:<?php echo $bookWidth; ?>px;position:relative"  >
+					box-shadow: 1px 1px 5px 2px rgba(6, 34, 63, 0.63);/*background-size:37px;*/ height:<?php echo $bookHeight; ?>px;width:<?php echo $bookWidth; ?>px;position:relative"  >
 						<div id="guide-h" class="guide"></div>
 						<div id="guide-v" class="guide"></div>
 					</div>
@@ -2247,16 +2247,6 @@ $background= (!empty($img)) ? "background-image:url('".str_replace(" ", "", $img
 							}
 						}
 						?>
-				<script type="text/javascript">
-					$('#addBlankPage').click(function(){
-						var book_id=window.lindneo.currentBookId;
-						var currentPageId=window.lindneo.currentPageId;
-						var link="/page/create?book_id="+book_id+"&page_id="+currentPageId;
-						
-						window.location.assign(link);
-
-					});
-				</script>
 						
 					<ul>	
 					
@@ -2295,17 +2285,7 @@ $background= (!empty($img)) ? "background-image:url('".str_replace(" ", "", $img
 						}
 
 						?>
-						<script type="text/javascript">
-							$('#addBlankChapter').click(function(){
-								//chapter/create?book_id=<?php echo $model->book_id; ?>
-								//var link="/page/create?book_id="+book_id+"&page_id="+currentPageId;
-								var book_id=window.lindneo.currentBookId;
-								var link="/chapter/create?book_id="+book_id;
-								
-								window.location.assign(link);
-
-							});
-						</script>
+						
 					</ul>
 
 					</div>

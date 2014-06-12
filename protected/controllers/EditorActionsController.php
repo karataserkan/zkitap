@@ -755,6 +755,108 @@ class EditorActionsController extends Controller
 
 	}
 
+	public function createPage ($bookId,$page_id=null,$pageTeplateId=null){
+
+		$currentPage=Page::model()->findByPk($page_id);
+
+		if ($currentPage) {
+			$chapter_id=$currentPage->chapter_id;
+		}else{
+			$chapter_id=$page_id;
+		}	
+		
+		//$pages=Page::model()->findAll('chapter_id=:chapter_id and `order` >'.$currentPage->order,array('chapter_id'=>$chapter_id));
+
+		// foreach ($pages as $key => $page) {
+		// 	$page->order+=1;
+		// 	$page->save();
+		// }
+
+		$model=new Page;
+		$new_id=functions::new_id();
+		$model->page_id=$new_id;
+		if ($chapter_id) {
+			$chapter=Chapter::model()->findByPk($chapter_id);
+		}
+		else
+		{
+				$chapter= new Chapter;
+				$chapter->chapter_id=functions::new_id();
+				$chapter->book_id=$book_id;
+				$chapter->save();
+		}
+		$model->chapter_id=$chapter->chapter_id;
+
+
+
+		if ($currentPage) {
+			$model->order=$currentPage->order+1;
+		}
+		// Uncomment the following line if AJAX validation is needed
+		// $this->performAjaxValidation($model);
+
+		
+		//$model->attributes=$_POST['Page'];
+		if($model->save())
+		{
+			if (isset($pageTeplateId)) {
+					$components = Component::model()->findAll(array(
+						'condition' => 'page_id=:page_id',
+						'params' => array(':page_id'=> $pageTeplateId)
+						));
+
+					if ($components) {
+						foreach ($components as $ckey => $component) {
+							$newComponent = new Component;
+							$newComponent->id=functions::new_id();
+							$newComponent->type=$component->type;
+							$newComponent->data=$component->data;
+							$newComponent->created=date("Y-m-d H:i:s");
+							$newComponent->page_id=$new_id;
+							$newComponent->save();
+						}
+					}
+				}
+			return $model->attributes;
+
+			}
+			return false;
+
+	}
+
+	public function createChapter($bookId,$pageTeplateId=null){
+		$model=new Chapter;
+		$model->book_id=$bookId;
+		$model->chapter_id=functions::new_id();
+
+		if($model->save())
+		{
+			if ($result = $this->createPage ($bookId,$model->chapter_id,$pageTeplateId) ){
+				return $result;
+				
+			}
+
+		}
+		return false;
+	}	
+	public function actionCreateNewChapter ($bookId,$pageTeplateId=null){
+		$response=false;
+		if ($response['page']=$this->createChapter ( $bookId, $pageTeplateId ) )
+			return $this->response($response);
+
+		$this->error("EA-CrNeCH","Chapter Not Created",func_get_args(),$response);
+		return false;
+	}
+
+
+	public function actionCreateNewPage ($bookId,$page_id=null,$pageTeplateId=null) {
+		$response=false;
+		if ($response['page']=$this->createPage ( $bookId, $page_id,$pageTeplateId ))
+			return $this->response($response);
+		$this->error("EA-CrNePa","Page Not Created",func_get_args(),$response);
+			return false;
+	}
+
 
 	public function recontstructFromMappedData ($mapped,&$original){
 

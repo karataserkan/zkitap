@@ -83,6 +83,53 @@ window.lindneo.tlingit = (function(window, $, undefined){
 
 
   };
+  
+  var createChapter = function (pageTeplateId){
+    var newChapterData = {
+      "bookId"  : window.lindneo.currentBookId
+    };
+    if (typeof pageTeplateId !== "undefined")
+      newChapterData.pageTeplateId = pageTeplateId;
+
+    window.lindneo.dataservice.send( 'createNewChapter', 
+        newChapterData,
+        function (res){
+          var response = responseFromJson(res);
+          if (!response.result) return;
+          window.lindneo.tlingit.PageHasCreated();
+          window.lindneo.tsimshian.pageCreated();
+          
+        },
+        function(err){
+          
+      });
+  };
+
+  var createPage = function (page_id,pageTeplateId){
+    var newPageCreateData = {
+      "bookId"  : window.lindneo.currentBookId
+    };
+
+    if (page_id===null)
+      newPageCreateData.page_id = window.lindneo.currentPageId;
+
+    if (typeof pageTeplateId !== "undefined")
+      newPageCreateData.pageTeplateId = pageTeplateId;
+    
+
+    window.lindneo.dataservice.send( 'createNewPage', 
+        newPageCreateData,
+        function (res){
+          var response = responseFromJson(res);
+          if (!response.result) return;
+          window.lindneo.tlingit.PageHasCreated();
+          window.lindneo.tsimshian.pageCreated();
+          
+        },
+        function(err){
+          
+      });
+  };
 
 /*
   var newArrivalComponent = function (res) {
@@ -201,7 +248,10 @@ window.lindneo.tlingit = (function(window, $, undefined){
         $("#c_"+response.result.delete).removeClass("selected");
         $('#'+ response.result.delete).parent().not('#current_page').remove();
         $('#'+ response.result.delete).remove();
-        window.lindneo.nisga.destroyComponent(oldcomponent);
+        if(oldcomponent != "")
+          window.lindneo.nisga.destroyComponent(oldcomponent,oldcomponent_id);
+        else
+          window.lindneo.nisga.destroyComponent(oldcomponent);
         window.lindneo.tsimshian.componentDestroyed(response.result.delete);
         window.lindneo.toolbox.removeComponentFromSelection( $('#'+ response.result.delete) );
       }
@@ -262,6 +312,8 @@ window.lindneo.tlingit = (function(window, $, undefined){
 
   var loadPage = function (pageId){
      window.lindneo.pageLoaded(false);
+
+     window.lindneo.tsimshian.changePage(pageId);
      updatePageCanvas(window.lindneo.currentPageId, function(){
           $('#current_page').empty();
           window.lindneo.currentPageId=pageId;
@@ -363,6 +415,7 @@ window.lindneo.tlingit = (function(window, $, undefined){
 
   var UpdatePage =function(response){
     var response = responseFromJson(response);
+    window.lindneo.tsimshian.pageCreated();
     //pass to nisga new chapter
     //console.log(response);
 
@@ -389,6 +442,7 @@ window.lindneo.tlingit = (function(window, $, undefined){
   };
 
   var UpdateChapter =function(response){
+    window.lindneo.tsimshian.pageCreated();
     responseFromJson(response);
     //pass to nisga new chapter
     //console.log(response);
@@ -412,6 +466,7 @@ window.lindneo.tlingit = (function(window, $, undefined){
 
   var DeleteChapter =function(response){
     var response = responseFromJson(response);
+    window.lindneo.tsimshian.pageCreated();
     //pass to nisga to destroy chapter
     //console.log(response);
 
@@ -443,6 +498,7 @@ window.lindneo.tlingit = (function(window, $, undefined){
   };
 
   var DeletePage =function(response){
+    window.lindneo.tsimshian.pageCreated();
     //var response = responseFromJson(response);
     //pass to nisga to destroy page
     //console.log(response);
@@ -456,10 +512,7 @@ window.lindneo.tlingit = (function(window, $, undefined){
   }
   var GenerateCurrentPagePreview = function (page_id,callback,async){
     if(typeof async == "undefined") async = true;
-   /* if (!window.lindneo.pageLoaded()) {
-      return callback();
-    }
-*/
+
     html2canvas($('#current_page')[0], {
       onrendered: function(canvas) {
          
@@ -507,7 +560,9 @@ window.lindneo.tlingit = (function(window, $, undefined){
     ChapterHasDeleted: ChapterHasDeleted,
     PageHasDeleted: PageHasDeleted,
     PageHasCreated: PageHasCreated,
+    createPage: createPage,
     DeletePage: DeletePage,
+    createChapter: createChapter,
     DeleteChapter: DeleteChapter,
     pages: pages,
     componentPreviosVersions: componentPreviosVersions,
