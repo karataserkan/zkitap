@@ -1,3 +1,4 @@
+
 <?php
 /* @var $this BookController */
 /* @var $model Book */
