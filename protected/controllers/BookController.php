@@ -499,6 +499,23 @@ class BookController extends Controller
 					    'type'   =>'owner'
 					));
 
+					$newchapterid=functions::new_id();//functions::get_random_string();
+					$newChapter=new Chapter;
+					$newChapter->book_id=$model->book_id;
+					$newChapter->chapter_id=$newchapterid;
+					$newChapter->title='Bölüm 1';
+					$newChapter->order=0;
+					$newChapter->created=date("Y-m-d H:i:s");
+					$newChapter->save();
+
+					$newpageid=functions::new_id();//functions::get_random_string();
+					$newPage= new Page;
+					$newPage->page_id=$newpageid;
+					$newPage->created=date("Y-m-d H:i:s");
+					$newPage->chapter_id=$newchapterid;
+					$newPage->order=0;
+					$newPage->save();
+
 					$this->redirect('/book/author/'.$model->book_id);
 				}				
 				//{"book_type":"pdf","size":{"width":1275,"height":1650}}
