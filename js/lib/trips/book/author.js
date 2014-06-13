@@ -22,12 +22,12 @@
 	},
 	{ 
 		sel:'#headermenu>ul>li:eq(2)',
-		content : j__("Dosya bölümünden kitaplığınıza dönebilir,<br> PDF ekleyebilir, yayınlarınızı <br> PDF veya EPUB formatında <br>yayınlayabilirsiniz."),
+		content : j__("Dosya bölümünden kitaplığınıza dönebilir,<br> yayınlarınızı  PDF veya EPUB3 formatında <br>yayınlayabilirsiniz."),
 		position:'s',
 	},
 	{ 
 		sel:'#headermenu>ul>li:eq(3)',
-		content : j__("Düzen bölümünden yaptığınız işlemi geri-ileri alabilir ve   <br> kes, kopyala, yapıştır ile sayfa  <br> üzerindeki nesneleri yönetebilirsiniz."),
+		content : j__("Düzen bölümünden kes, kopyala, yapıştır ile sayfa  <br> üzerindeki nesneleri yönetebilirsiniz."),
 		position:'s',
 	},
 	{ 
@@ -49,7 +49,7 @@
 
 	{ 
 		sel:'#headermenu>ul>li:eq(7)',
-		content : j__("Yaptığınız işlemlerin <br>sonucunu buradan takip edebilirsiniz. <br> Yeşil-> Herşey yolunda, <br> Mavi -> İşlem yapılıyor, <br> Kırmızı -> İnternet Bağlantısı Problemi <br> demektir. j__("),
+		content : j__("Yaptığınız işlemlerin <br>sonucunu buradan takip edebilirsiniz. <br> Yeşil-> Herşey yolunda, <br> Mavi -> İşlem yapılıyor, <br> Kırmızı -> İnternet Bağlantısı Problemi <br> demektir."),
 		position:'s',
 		delay:10000
 	},
@@ -78,7 +78,7 @@
 					
 					'-webkit-box-shadow': 'rgba(0, 0, 0, 0.74902) 10px 12px 24px -7px',
 					'background-color': 'rgb(244, 244, 244)',
-					'background-image': 'url(http://ugur.dev.lindneo.com/css/images/components/image.png)',
+					'background-image': 'url(/css/images/components/tr_TR/image.png)',
 					'background-position': '50% 50%',
 					'background-repeat': 'no-repeat',
 					'background-size': 'contain',
@@ -86,7 +86,7 @@
 					'border-bottom-right-radius': '5px',
 					'border-top-left-radius': '5px',
 					'border-top-right-radius': '5px',
-					'background-image': 'url(http://ugur.dev.lindneo.com/css/images/components/image.png)',
+					'background-image': 'url(/css/images/components/tr_TR/image.png)',
 					'background-position': '50% 50%',
 					'background-repeat': 'no-repeat',
 					'background-size': 'contain',
@@ -137,13 +137,13 @@
 
 	},
 
-	{ 
+/*	{ 
 		sel:'.icon-zoom.grey-5',
 		content : j__("Büyüteç aracı ile sayfayı büyütebilirsiniz."),
 		position:'e'
 
 	},
-
+*/
 	{ 
 		sel:'.chat_button',
 		content : j__("Bu bölümden yazarlar aynı yayın üzerinde çoklu çalışma yaparken sohbet edebilirler."),
@@ -169,7 +169,7 @@
 	},
 	{ 
 		sel:'#chapters_pages_view > .box-body > .panel-group > .panel:eq(1)',
-		content : j__("Buraya tıklayarak yayınınızın markette görüneceği öngörüntüsünü ekleyebilirsiniz."),
+		content : j__("Buraya tıklayarak yayınınızın kütüphanede görüneceği öngörüntüsünü ekleyebilirsiniz."),
 		position:'w'
 
 	},
@@ -181,7 +181,7 @@
 	},
 	{ 
 		sel:'#chapters_pages_view > .box-body > .panel-group > .panel:eq(3)',
-		content : j__("Sayfalar bölümünden yeni bölüm başlıklarını değiştirebilir, sayfları ve bölümleri sıralayabilirsiniz."),
+		content : j__("Sayfalar bölümünden yeni bölüm başlıklarını değiştirebilir, sayfaları ve bölümleri sıralayabilirsiniz."),
 		position:'w'
 
 	},

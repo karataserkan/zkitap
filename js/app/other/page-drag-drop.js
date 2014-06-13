@@ -1111,8 +1111,8 @@ $( document ).ready(function () {
             };
             //ekaratas end
 
-            $('.page[page_id="'+page_id+'"]').hide('slow', function(){  $('.page[page_id="'+page_id+'"]').remove();});
-            sortPages();
+            $('.page[page_id="'+page_id+'"]').hide('slow', function(){  $('.page[page_id="'+page_id+'"]').remove();sortPages();});
+            
 
           });
     

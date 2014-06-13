@@ -275,6 +275,18 @@
 			tripData=[<?php functions::event('tripData'); ?>];
 			//tripStart();
 		});
+
+		if ($('a[data-id="confirmEmail"]').length>0)
+			tripData.splice(2, 0, /* E-Posta Doğrulama */
+			   { 
+			       sel : $('a[data-id="confirmEmail"]'),
+			       content : j__("Öncelikle E-Posta Adresinizi Doğrulayın."),
+			       position:'s',
+                   delay:-1
+			   });
+
+		
+	
 		</script>
 
 

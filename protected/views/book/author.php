@@ -272,6 +272,7 @@ $current_user=User::model()->findByPk(Yii::app()->user->id);
 
 			      	<?php if (!Yii::app()->user->isGuest) {?>
 			         <li><a href='/user/profile'><span><?php _e('Profil') ?></span></a></li>
+			         <li><a href='#' onClick='tripStart();'><span><?php _e('Yardım') ?></span></a></li>
 			         <?php echo " <li>". CHtml::link(__("Çıkış"),"/site/logout") ."</li>"; ?>
 					<?php 
 						// foreach (Yii::app()->params->availableLanguages  as $lang_id => $lang_name) {
