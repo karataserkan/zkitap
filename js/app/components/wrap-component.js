@@ -28,7 +28,7 @@ console.log(html_data);
 
       
       $('.wrapReady.withSourceImage').slickWrap({
-                    sourceImage: true,cutoff: wrap_cutoff, resolution: 1
+                    sourceImage: true,cutoff: wrap_cutoff
                 });
       this._super();       
 
