@@ -232,7 +232,7 @@ window.lindneo.tlingit = (function(window, $, undefined){
     delete fakeComponent["page_id"];
     delete fakeComponent["created"];
 
-    //delete fakeComponent["data"];
+    delete fakeComponent["data"];
     //console.log(fakeComponent);
     console.log(oldcomponent_id);
     window.lindneo.dataservice

@@ -83,14 +83,17 @@ $( document ).ready(function () {
                 }).done(function(result) {
                   //console.log(result);
                   var update_component = window.lindneo.tlingit.responseFromJson(result);
-                  update_component.data = window.lindneo.tlingit.responseFromJson(update_component.data);
-                  update_component.data.self.css.left = update_component.data.self.css.left.replace('px','');
-                  update_component.data.self.css.left = update_component.data.self.css.left - moved;
-                  update_component.data.self.css.left = update_component.data.self.css.left+'px';
-                  console.log(update_component.data.self.css.left);
-                  window.lindneo.tlingit.componentHasUpdated(update_component);
-                  $('#'+update_component.id).parent().css('left',update_component.data.self.css.left);
-                  
+
+                  if(update_component.type != "text" || update_component.type != "rtext"){
+
+                    update_component.data = window.lindneo.tlingit.responseFromJson(update_component.data);
+                    update_component.data.self.css.left = update_component.data.self.css.left.replace('px','');
+                    update_component.data.self.css.left = update_component.data.self.css.left - moved;
+                    update_component.data.self.css.left = update_component.data.self.css.left+'px';
+                    console.log(update_component.data.self.css.left);
+                    window.lindneo.tlingit.componentHasUpdated(update_component);
+                    $('#'+update_component.id).parent().css('left',update_component.data.self.css.left);
+                  }
                 });
                       console.log(i);
                       i++;
@@ -107,14 +110,15 @@ $( document ).ready(function () {
                 }).done(function(result) {
                   //console.log(result);
                   var update_component = window.lindneo.tlingit.responseFromJson(result);
-                  update_component.data = window.lindneo.tlingit.responseFromJson(update_component.data);
-                  update_component.data.self.css.top = update_component.data.self.css.top.replace('px','');
-                  update_component.data.self.css.top = update_component.data.self.css.top - moved;
-                  update_component.data.self.css.top = update_component.data.self.css.top+'px';
-                  console.log(update_component.data.self.css.top);
-                  window.lindneo.tlingit.componentHasUpdated(update_component);
-                  $('#'+update_component.id).parent().css('top',update_component.data.self.css.top);
-                  
+                  if(update_component.type != "text" || update_component.type != "rtext"){
+                    update_component.data = window.lindneo.tlingit.responseFromJson(update_component.data);
+                    update_component.data.self.css.top = update_component.data.self.css.top.replace('px','');
+                    update_component.data.self.css.top = update_component.data.self.css.top - moved;
+                    update_component.data.self.css.top = update_component.data.self.css.top+'px';
+                    console.log(update_component.data.self.css.top);
+                    window.lindneo.tlingit.componentHasUpdated(update_component);
+                    $('#'+update_component.id).parent().css('top',update_component.data.self.css.top);
+                  }
                 });
                       console.log(i);
                       i++;
@@ -131,14 +135,15 @@ $( document ).ready(function () {
                 }).done(function(result) {
                   //console.log(result);
                   var update_component = window.lindneo.tlingit.responseFromJson(result);
-                  update_component.data = window.lindneo.tlingit.responseFromJson(update_component.data);
-                  update_component.data.self.css.left = update_component.data.self.css.left.replace('px','');
-                  update_component.data.self.css.left = parseInt(update_component.data.self.css.left,10) + moved;
-                  update_component.data.self.css.left = update_component.data.self.css.left+'px';
-                  console.log(update_component.data.self.css.left);
-                  window.lindneo.tlingit.componentHasUpdated(update_component);
-                  $('#'+update_component.id).parent().css('left',update_component.data.self.css.left);
-                  
+                  if(update_component.type != "text" || update_component.type != "rtext"){
+                    update_component.data = window.lindneo.tlingit.responseFromJson(update_component.data);
+                    update_component.data.self.css.left = update_component.data.self.css.left.replace('px','');
+                    update_component.data.self.css.left = parseInt(update_component.data.self.css.left,10) + moved;
+                    update_component.data.self.css.left = update_component.data.self.css.left+'px';
+                    console.log(update_component.data.self.css.left);
+                    window.lindneo.tlingit.componentHasUpdated(update_component);
+                    $('#'+update_component.id).parent().css('left',update_component.data.self.css.left);
+                  }
                 });
                       console.log(i);
                       i++;
@@ -155,14 +160,15 @@ $( document ).ready(function () {
                 }).done(function(result) {
                   //console.log(result);
                   var update_component = window.lindneo.tlingit.responseFromJson(result);
-                  update_component.data = window.lindneo.tlingit.responseFromJson(update_component.data);
-                  update_component.data.self.css.top = update_component.data.self.css.top.replace('px','');
-                  update_component.data.self.css.top = parseInt(update_component.data.self.css.top,10) + moved;
-                  update_component.data.self.css.top = update_component.data.self.css.top+'px';
-                  console.log(update_component.data.self.css.top);
-                  window.lindneo.tlingit.componentHasUpdated(update_component);
-                  $('#'+update_component.id).parent().css('top',update_component.data.self.css.top);
-                  
+                  if(update_component.type != "text" || update_component.type != "rtext"){
+                    update_component.data = window.lindneo.tlingit.responseFromJson(update_component.data);
+                    update_component.data.self.css.top = update_component.data.self.css.top.replace('px','');
+                    update_component.data.self.css.top = parseInt(update_component.data.self.css.top,10) + moved;
+                    update_component.data.self.css.top = update_component.data.self.css.top+'px';
+                    console.log(update_component.data.self.css.top);
+                    window.lindneo.tlingit.componentHasUpdated(update_component);
+                    $('#'+update_component.id).parent().css('top',update_component.data.self.css.top);
+                  }
                 });
                       console.log(i);
                       i++;
