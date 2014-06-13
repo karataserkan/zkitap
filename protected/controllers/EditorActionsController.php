@@ -1548,7 +1548,7 @@ right join book using (book_id) where book_id='$bookId' and type IN ('rtext','te
 				}
 
 
-				$message=$data['contentTitle']." yayınlandı. reader.okutus.com adresinden kitabınızı inceleyebilirsiniz. Reader'da yayınladığınız kitapları görmek için üye değilseniz kayıt olarak giriş yapabilirsiniz.";
+				$message=$data['contentTitle']." yayınlandı. Okuyucuda yayınladığınız kitapları görmek için üye değilseniz kayıt olarak giriş yapabilirsiniz.";
 		        $mail->MsgHTML($message);
 		        $mail->Send();
 
