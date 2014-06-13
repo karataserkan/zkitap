@@ -1290,7 +1290,8 @@ console.log(top);
                       'height': '100%',
                       'background-color': 'transparent',
                       'overflow': 'visible',
-                      'zindex': 'first'
+                      'zindex': 'first',
+                      'opacity':'1'
                     }
                   }
                 

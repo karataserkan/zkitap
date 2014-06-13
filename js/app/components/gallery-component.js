@@ -303,7 +303,8 @@ console.log(top);
                 'background-color': 'transparent',
                 'width': image_width,
                 'height': image_height,
-                'z-index': 'first'
+                'z-index': 'first',
+                'opacity':'1'
 
               }
             }
