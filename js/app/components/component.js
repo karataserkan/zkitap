@@ -933,7 +933,7 @@ $(document).ready(function(){
           this.options.component.data.self.css['height']="auto";
         break;
         default:
-          
+          console.log(propertyName);
           this.getSettable().css[propertyName]=propertyValue;
           return this.getProperty(propertyName) ;
           break;
@@ -943,7 +943,7 @@ $(document).ready(function(){
       this._setProperty(propertyName,propertyValue);
     },
     _setProperty : function (propertyName,propertyValue){
-        //console.log(propertyName);
+        console.log(propertyName);
         //console.log(propertyValue);
         this.setPropertyofObject(propertyName,propertyValue);
         this.setFromData();
