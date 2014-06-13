@@ -43,13 +43,6 @@ class SiteController extends Controller
 			       delay:-1
 			   },
                
-          /* E-Posta Doğrulama */
-			   { 
-			       sel : $('a[data-id="confirmEmail"]'),
-			       content : j__("Öncelikle E-Posta Adresinizi Doğrulayın."),
-			       position:'s',
-                   delay:-1
-			   },
 		
 			/* Header */
 			   { 
@@ -112,12 +105,12 @@ class SiteController extends Controller
 			       content : 'Organizasyonunuzu Yönetebilirsiniz.',
 			       position:'e',
 			       //expose: true,
-			       callback:function(){$($('#sidebar >div> ul>li')[5]).find('a').click();}
+			       callback:function(){$('.mybooks_page_categories').find('i').click();}
 			   },
 
 			 /* Content */
 			   { 
-			       sel : $('#filter-controls'),
+			       sel : $('.mybooks_page_categories .dropdown-menu'),
 			       content : 'Çalışma Alanı Hızlı Filtrelerini kullanarak kitaplarınıza hızlı erişebilirsiniz.',
 			       position:'s',
 			       expose: true,
