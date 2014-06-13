@@ -71,10 +71,10 @@ $this->pageTitle=Yii::app()->name;
 						<div class="row">
 							<div class="col-sm-12">
 								<div class="page-header">
-										<h3 class="content-title pull-left"><?php _e('Templates') ?></h3>
+										<h3 class="content-title pull-left"><?php _e('Şablonlar') ?></h3>
 										<a class="btn pull-right pageheader_button_margin brand_color_for_buttons" href="/book/createTemplate/<?php echo $workspace_id;?>">
 							<i class="fa fa-plus-circle"></i>
-							<span>Template Ekle</span>
+							<span>Şablon Ekle</span>
 						</a>
 									
 								</div>

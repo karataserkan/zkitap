@@ -28,7 +28,7 @@ console.log(html_data);
 
       
       $('.wrapReady.withSourceImage').slickWrap({
-                    sourceImage: true,cutoff: wrap_cutoff
+                    sourceImage: true,cutoff: wrap_cutoff, resolution: 1
                 });
       this._super();       
 
@@ -146,7 +146,7 @@ var createWrapComponent = function ( event, ui, oldcomponent ) {
     var pop_popup = $("<div class='popup ui-draggable' id='pop-popup' style='display: block; top:" + top + "; left: " + left + "; width:700px;'> \
       </div>");
     pop_popup.appendTo('body').draggable({cancel:'.drag-cancel'}).resizable();
-    var poup_header = $("<div class='popup-header'><i class='icon-m-link'></i> &nbsp;"+j__("Metin Sarma Ekle")+" </div> ");
+    var poup_header = $("<div class='popup-header'><i class='icon-m-link'></i> &nbsp;"+j__("Metinle Çevrele Ekle")+" </div> ");
     var close_button = $("<i id='popup-add-dummy-close-button' class='icon-close size-10 popup-close-button'></i> ");
     var drag_file = $("<div class='add-image-drag-area' id='dummy-dropzone'> </div> ");
     var galery_inner = $("<div class='gallery-inner-holder' style='width: 700px; height: " + height + "px;'> \
@@ -160,7 +160,11 @@ var createWrapComponent = function ( event, ui, oldcomponent ) {
                     <input type='radio' name='wrap_align' id='repeat1' " + wrap_left + " value='left'> "+j__("Sol")+"\
                   </label>\
                 </div><br><br>\
-                <input type='text' name='cutoff' id='cutoff' value='"+old_cutoff+"' onclick='this.select()' placeholder='"+j__("Çözünürlik Toleransı giriniz")+"....'><br><br>\
+                <p>\
+                  <label for='cutoff'>"+j__("Tolerans değerini belirleyin")+" (0 - 200) </label>\
+                  <input type='text' name='cutoff' id='cutoff' value='"+old_cutoff+"' style='border:0; color:#f6931f; font-weight:bold;' onclick='this.select()' placeholder='"+j__("Çözünürlik Toleransı giriniz")+"....'><br><br>\
+                </p>\
+                <div id='slider'></div>\
             </div>\
       </div> ");
     var popup_wrapper = $("<div class ='popup_wrapper drag-cancel' style='border: 1px #ccc solid; ' ></div> <br>");
@@ -190,6 +194,16 @@ var createWrapComponent = function ( event, ui, oldcomponent ) {
 
     });
 
+    $( "#slider" ).slider({
+      value: old_cutoff,
+      min: 0,
+      max: 200,
+      step: 10,
+      slide: function( event, ui ) {
+        $( "#cutoff" ).val( ui.value );
+      }
+    });
+    $( "#cutoff" ).val( $( "#slider" ).slider( "value" ) );
     
     
     

@@ -341,6 +341,7 @@ var createImageComponent = function ( event, ui ,oldcomponent) {
                 'padding': '0px',
                 'border': 'none 0px',
                 'outline': 'none',
+                'opacity': '1',
                 'background-color': 'transparent'
               } , 
               'image_type' : image_type,
