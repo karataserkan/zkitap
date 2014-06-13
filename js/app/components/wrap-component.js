@@ -104,7 +104,7 @@ var createWrapComponent = function ( event, ui, oldcomponent ) {
       //console.log('dene');
       var top = (ui.offset.top-$(event.target).offset().top ) + 'px';
       var left = ( ui.offset.left-$(event.target).offset().left ) + 'px';
-      var popup_value = 'http://linden-tech.com';
+      var popup_value = 'Lütfen yazı giriniz!';
       var old_cutoff = '100';
       width = 'auto';
       height = 'auto';
