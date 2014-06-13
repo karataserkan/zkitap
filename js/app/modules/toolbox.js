@@ -806,7 +806,7 @@ window.lindneo.toolbox = (function(window, $, undefined){
          
         });
 
-        //console.log(newClipboard);
+        console.log(newClipboard);
         return this.setClipboardItems(newClipboard);
  
   };
@@ -822,6 +822,7 @@ window.lindneo.toolbox = (function(window, $, undefined){
 
         newClipboard.push(component);
         $('.copy-paste').css('display','none');
+        console.log(component);
         window.lindneo.tlingit.componentHasCreated( component );
       });
       return this.setClipboardItems(newClipboard);
