@@ -609,7 +609,8 @@ console.log(top);
               'position':'absolute',
               'top': top ,
               'left':  left ,
-              'z-index': 'first'
+              'z-index': 'first',
+              'opacity':'1'
             }
           }
         }

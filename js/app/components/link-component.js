@@ -244,7 +244,8 @@ console.log(top);
                 'height': '128px',
                 'background-color': 'transparent',
                 'overflow': 'visible',
-                'z-index': 'first'
+                'z-index': 'first',
+                'opacity':'1'
               },
               'attr':{
                 'href': targetURL

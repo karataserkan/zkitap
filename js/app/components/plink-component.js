@@ -293,7 +293,8 @@ console.log(top);
                 'opacity': '1',
                 'z-index': 'first',
                 'width':width,
-                'height':height
+                'height':height,
+                'opacity':'1'
               }
             }
           }
