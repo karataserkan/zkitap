@@ -225,6 +225,8 @@ var removeRow = function(type, row_number){
 };
 
   var createMquizComponent = function ( event, ui, oldcomponent ) {
+
+    var checkBoxAnswers = [];
     multiple_count = 0;
     check_count = 0;
     question_answers = [];
@@ -391,18 +393,62 @@ console.log(top);
         $('.quiz-inner').html('');
         $("<a href='#' class='btn btn-info' onclick='addRow(\"checkbox\");' >"+j__("Cevap Ekle")+"</a><br><br>").appendTo($('.quiz-inner'));
         console.log(oldcomponent_answers);
+        
+        var answers;
+
         $.each(oldcomponent_answers, function(i,key){
 
-          var check_answer = $('<div>\
-                                  <input type="checkbox" name="multichecks" id="inlineCheckbox'+check_count+'" value="'+check_count+'" style="float:left; margin-right:10px;">\
-                                  <input class="form-control" id="check_option'+check_count+'" type="text" value="'+key+'" placeholder="Cevap seçeneklerini giriniz..."style="float: left; width: 200px; margin-right: 10px;">\
-                                  <i id="delete_'+check_count+'" class="icon-close size-10 popup-close-button" style="float:left;" onclick="removeRow(\'checkbox\','+check_count+');"></i><br><br>\
-                                </div>');
+          var check_answer = $('<div>');
+          
+          var answerCheckBox = $('<input type="checkbox" name="multichecks" style="float:left; margin-right:10px;"/>');
+          check_answer.answerCheckBox=answerCheckBox;
+          check_answer.append(answerCheckBox);
+
+
+         
+          var answerInput = $('<input class="form-control" type="text" value="'+key+'" placeholder="Cevap seçeneklerini giriniz..."style="float: left; width: 200px; margin-right: 10px;">');
+          check_answer.answerInput=answerInput;
+          check_answer.append(answerInput);
+          
+          var answerDeleteBtn = $('<i class="icon-close size-10 popup-close-button" style="float:left;"></i>');
+          check_answer.answerDeleteBtn=answerDeleteBtn;
+          check_answer.append(answerDeleteBtn);
+          
+          check_answer.append($('<br>').append($('<br>');
+
+
+          checkBoxAnswers[i]=check_answer;
+          window.oldcomponent_answer=oldcomponent_answer;
+          if ( oldcomponent_answer.indexOf(i.toString())> -1 ) {
+            answerCheckBox.prop('checked', true);
+            checkBoxAnswers[i].answer_value=true;
+          }
+
+          answerCheckBox.click(function(){
+            checkBoxAnswers[i].answer_value = $(this).is(':checked')  ;
+            console.log(checkBoxAnswers);
+          });
+          answerInput.change(function(){
+            checkBoxAnswers[i].answer_text = $(this).val();
+            console.log(checkBoxAnswers);
+          });
+          answerDeleteBtn.click(function(){
+            delete checkBoxAnswers[i];
+            check_answer.remove();
+            console.log(checkBoxAnswers);
+          });
+          
+
+
           check_answer.appendTo($('.quiz-inner'));
           check_count++;
+
           question_answers.push(check_answer);
           console.log(question_answers);
+
         });
+
+
         $.each(oldcomponent_answer, function(i,key){
            $('input:checkbox[name="multichecks"]').filter('[value="'+key+'"]').prop('checked', true);
         });
