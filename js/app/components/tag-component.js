@@ -143,7 +143,8 @@ var createTagComponent = function (event,ui){
                 'top': (ui.offset.top-$(event.target).offset().top ) + 'px',
                 'left':  ( ui.offset.left-$(event.target).offset().left ) + 'px',
                 'background-color': 'transparent',
-                'z-index': 'first'
+                'z-index': 'first',
+                'opacity':'1'
               }
             }
           }

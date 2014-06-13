@@ -453,7 +453,8 @@ var createImageComponent = function ( event, ui ,oldcomponent) {
                 'padding': '0px',
                 'border': 'none 0px',
                 'outline': 'none',
-                'background-color': 'transparent'
+                'background-color': 'transparent',
+                'opacity':1
               } , 
               'image_type' : image_type,
               'marker' : marker,

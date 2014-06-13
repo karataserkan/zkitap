@@ -542,7 +542,7 @@ $(document).ready(function(){
             case 'text-decoration': 
             case 'text-align':
             case 'text-justify':      
-            
+            case 'opacity':
 
                 switch (propertyName){
                   case 'text-align':
@@ -569,8 +569,10 @@ $(document).ready(function(){
                   case 'text-justify':
                     var default_val='normal';
                     break;
+                    case 'opacity':
+                    var default_val='1';
+                    break;
                 }
-
                 var return_val=this.getSettable().css[propertyName];
 
                 return ( return_val ? return_val : default_val );
