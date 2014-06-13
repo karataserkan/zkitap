@@ -13,8 +13,8 @@ $(document).ready(function(){
     
 
 
-        console.log(this.element);
-        console.log(that.options.component.data);
+        //console.log(this.element);
+        //console.log(that.options.component.data);
 
         $("<div  class='quiz-component' style=''> \
             <div class='question-text'></div> \
@@ -558,24 +558,30 @@ console.log(top);
         var fieldArray = [];
         $.each(answer, function(i, item){
           //console.log(item);
-          console.log($.inArray(item,fieldArray));
+          //console.log($.inArray(item,fieldArray));
           if ($.inArray(item,fieldArray) < 0){
-            console.log("first");
+            //console.log("first");
             fieldArray.push(item);
           }
         });
-        console.log(fieldArray);
+        //console.log(fieldArray);
         answer = fieldArray;
 
         $.each( question_answers, function( key, value ) {
-          
-             
-            answers.push($($(value[0]).children()[1])[0].value);
-             
+            var new_value = "";
+            //console.log(value);
+            //console.log($($(value[0]).children()[1])[0]);
+            if(typeof $($(value[0]).children()[1])[0] == "undefined")
+              new_value = value;
+            else
+              new_value = $($(value[0]).children()[1])[0].value;
+            //console.log(new_value);
+
+             answers.push(new_value);
           });
         
         question_answers = answers;
-        console.log(answer);
+        //console.log(answer);
         //return;
         if(answer.length == 0){
           alert("Doğru cevapları seçmediğiniz ekleme işlemi başarısız olmuştur.")
@@ -621,7 +627,7 @@ console.log(top);
       }
   */
       $('#create-mquiz-close-button').trigger('click');
-      console.log(component);
+      //console.log(component);
       
       window.lindneo.tlingit.componentHasCreated( component );
     });
