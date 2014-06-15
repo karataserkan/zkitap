@@ -499,7 +499,7 @@ class epub3 {
 
 		<meta name="viewport" content="width='.$width.', height='.$height.'"/>
 
-
+ 
 
 
 		<link rel="stylesheet" href="stylesheet.css" type="text/css"/>
