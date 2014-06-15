@@ -610,12 +610,37 @@ class epub3 {
 						"currentSrc":$(item).find("source").attr("src"),
 						"poster":$(item).attr("poster")
 					}
-					var poster="<a href=iosEpub://"+base64_encode(JSON.stringify(ios_video))+"\><img width=100% height=100% src="+ios_video.poster+"></img></a>";
+					//var poster="<a href=iosEpub://"+base64_encode(JSON.stringify(ios_video))+"\><img width=100% height=100% src="+ios_video.poster+"></img></a>";
+					var poster="<a href=iosEpub://"+base64_encode(JSON.stringify(ios_video))+"\><div style=\'position:absolute; width:100%; height:100%\'><img width=100% height=100% src="+ios_video.poster+"></img></div><div style=\'position:absolute; width:100%; height:100%\'><img width=100% height=100% src=\'video_play.png\'></img></div></a>";
 					$(item).parent().html(poster);
 
 				
 				}
 			});
+
+			var audios=$("audio");
+			console.log(audios);
+			$.each(audios,function(i,item){
+				console.log("audios");
+				if(item.networkState==3)
+				{
+					var ios_audio=
+					{
+						"type":"audio",
+						"loop":item.loop,
+						"autoPlay":item.autoplay,
+						"currentSrc":$(item).find("source").attr("src"),
+						"poster":"audio_play.png"
+					}
+
+					var poster="<a href=iosEpub://"+base64_encode(JSON.stringify(ios_audio))+"\><img height=100% src="+ios_audio.poster+"></img></a>";
+					$(item).parent().html(poster);
+
+				
+				}
+			});
+
+
 			}
 		});
 		$(document).ready(function() {
