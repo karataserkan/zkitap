@@ -499,7 +499,7 @@ class epub3 {
 
 		<meta name="viewport" content="width='.$width.', height='.$height.'"/>
 
-
+ 
 
 
 		<link rel="stylesheet" href="stylesheet.css" type="text/css"/>
@@ -533,6 +533,39 @@ class epub3 {
 		<link rel="stylesheet" type="text/css" href="facybox/facybox_urls.css" media="screen" />
 		<script type="text/javascript">
 		//<![CDATA[
+		function base64_encode(data) {
+		  var b64 = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=";
+		  var o1, o2, o3, h1, h2, h3, h4, bits, i = 0,
+		    ac = 0,
+		    enc = "",
+		    tmp_arr = [];
+
+		  if (!data) {
+		    return data;
+		  }
+
+		  do { // pack three octets into four hexets
+		    o1 = data.charCodeAt(i++);
+		    o2 = data.charCodeAt(i++);
+		    o3 = data.charCodeAt(i++);
+
+		    bits = o1 << 16 | o2 << 8 | o3;
+
+		    h1 = bits >> 18 & 0x3f;
+		    h2 = bits >> 12 & 0x3f;
+		    h3 = bits >> 6 & 0x3f;
+		    h4 = bits & 0x3f;
+
+		    // use hexets to index into b64, and append result to encoded string
+		    tmp_arr[ac++] = b64.charAt(h1) + b64.charAt(h2) + b64.charAt(h3) + b64.charAt(h4);
+		  } while (i < data.length);
+
+		  enc = tmp_arr.join("");
+
+		  var r = data.length % 3;
+
+		  return (r ? enc.slice(0, r - 3) : enc) + "===".slice(r || 3);
+		}
 		function okutus_play(){
 			
 				$("audio.reader_base_paused").each(function(){
@@ -562,17 +595,52 @@ class epub3 {
 				
 				if(item.networkState==3)
 				{
-					
+					/*
 					console.log(i,item.networkState);
 					console.log($(item).parent());
 					var source=$(item).find("source").attr("src");
 					var poster_img=$(item).attr("poster");
 					var poster="<a href=kapi://"+source+"\><img width=100% height=100% src="+poster_img+"></img></a>";
 					console.log(item);
+					$(item).parent().html(poster);*/
+					var ios_video=
+					{
+						"loop":item.loop,
+						"autoPlay":item.autoplay,
+						"currentSrc":$(item).find("source").attr("src"),
+						"poster":$(item).attr("poster")
+					}
+					//var poster="<a href=iosEpub://"+base64_encode(JSON.stringify(ios_video))+"\><img width=100% height=100% src="+ios_video.poster+"></img></a>";
+					var poster="<a href=iosEpub://"+base64_encode(JSON.stringify(ios_video))+"\><div style=\'position:absolute; width:100%; height:100%\'><img width=100% height=100% src="+ios_video.poster+"></img></div><div style=\'position:absolute; width:100%; height:100%\'><img width=100% height=100% src=\'video_play.png\'></img></div></a>";
 					$(item).parent().html(poster);
+
 				
 				}
 			});
+
+			var audios=$("audio");
+			console.log(audios);
+			$.each(audios,function(i,item){
+				console.log("audios");
+				if(item.networkState==3)
+				{
+					var ios_audio=
+					{
+						"type":"audio",
+						"loop":item.loop,
+						"autoPlay":item.autoplay,
+						"currentSrc":$(item).find("source").attr("src"),
+						"poster":"audio_play.png"
+					}
+
+					var poster="<a href=iosEpub://"+base64_encode(JSON.stringify(ios_audio))+"\><img height=100% src="+ios_audio.poster+"></img></a>";
+					$(item).parent().html(poster);
+
+				
+				}
+			});
+
+
 			}
 		});
 		$(document).ready(function() {
