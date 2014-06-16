@@ -294,7 +294,6 @@ console.log(top);
                 'z-index': 'first',
                 'width':width,
                 'height':height,
-                'opacity':'1'
               }
             }
           }

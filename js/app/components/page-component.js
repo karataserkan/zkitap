@@ -147,6 +147,8 @@ $(document).ready(function(){
 
 
   var createPageComponent = function ( event, ui ,type) {
+    var page_number = $('.pages li.page.current_page').index()+1;
+    console.log(page_number);
 
     var component = {
       'type' : 'page',
@@ -172,7 +174,7 @@ $(document).ready(function(){
           'attr': {
             'placeholder': j__("Sayfa Numarası"),
           },
-          'val': ''
+          'val': page_number
         },
         'lock':'',
         'self': {
