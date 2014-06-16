@@ -113,7 +113,7 @@ var createWrapComponent = function ( event, ui, oldcomponent ) {
       //console.log('dene');
       var top = (ui.offset.top-$(event.target).offset().top ) + 'px';
       var left = ( ui.offset.left-$(event.target).offset().left ) + 'px';
-      var popup_value = 'Lütfen yazı giriniz!';
+      var popup_value = '';
       var image_data = '';
       var old_cutoff = '100';
       width = 'auto';
@@ -180,7 +180,7 @@ var createWrapComponent = function ( event, ui, oldcomponent ) {
       </div> ");
     var popup_wrapper = $("<div class ='popup_wrapper drag-cancel' style='border: 1px #ccc solid; ' ></div> <br>");
     var popup_image = $("<div  id='popup-image' contenteditable='true' class='drag-cancel' style='width:200px; height200px;'>" + image_data + "</div>");
-    var popup_detail = $("<div  id='popup-explanation' contenteditable='true' class='drag-cancel' style='min-height:300px;'>" + popup_value + "</div>");
+    var popup_detail = $("<div  id='popup-explanation' contenteditable='true' data-ph='Lütfen İçeriği buraya giriniz...' class='drag-cancel' style='min-height:300px;'>" + popup_value + "</div><style>[contentEditable=true]:empty:not(:focus):before{content:attr(data-ph)}</style>");
     var add_button = $("<a href='#' id='pop-image-OK' class='btn btn-info' style='padding: 5px 30px;'>"+j__("Ekle")+"</a> ");
     poup_header.appendTo(pop_popup);
     close_button.appendTo(poup_header);
