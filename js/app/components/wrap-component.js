@@ -39,7 +39,11 @@ console.log(html_data);
                     sourceImage: true,cutoff: wrap_cutoff, resolution: 1
                 });
       this._super();       
-
+      var position = $("#message_"+componentpopupid).css("background-position");
+      var px_pos = position.indexOf("px");
+      var value = parseInt(position.substr(0,px_pos));
+      position = position.replace(value, value -250);
+      $("#message_"+componentpopupid).css("background-position", position);
 
     },
 
@@ -124,7 +128,7 @@ var createWrapComponent = function ( event, ui, oldcomponent ) {
       top = oldcomponent.data.self.css.top;
       left = oldcomponent.data.self.css.left;
       popup_value = oldcomponent.data.html_inner;
-      image_data = "<img style='float:left; padding: 10px; border: 1px solid red; margin: 0 10px;' src='"+oldcomponent.data.image_data+"' >";
+      image_data = "<img style='float:left; padding: 10px; border: 1px solid red; margin: 0 10px; width:150px;' src='"+oldcomponent.data.image_data+"' >";
       old_cutoff = oldcomponent.data.cutoff;
       width = oldcomponent.data.width ;
       height = oldcomponent.data.height;
@@ -179,8 +183,8 @@ var createWrapComponent = function ( event, ui, oldcomponent ) {
             </div>\
       </div> ");
     var popup_wrapper = $("<div class ='popup_wrapper drag-cancel' style='border: 1px #ccc solid; ' ></div> <br>");
-    var popup_image = $("<div  id='popup-image' contenteditable='true' class='drag-cancel' style='width:200px; height200px;'>" + image_data + "</div>");
-    var popup_detail = $("<div  id='popup-explanation' contenteditable='true' data-ph='Lütfen İçeriği buraya giriniz...' class='drag-cancel' style='min-height:300px;'>" + popup_value + "</div><style>[contentEditable=true]:empty:not(:focus):before{content:attr(data-ph)}</style>");
+    var popup_image = $("<div  id='popup-image' contenteditable='true' class='drag-cancel' style='width:150px;'>" + image_data + "</div>");
+    var popup_detail = $("<div  id='popup-explanation' contenteditable='true' data-ph='Lütfen İçeriği buraya giriniz...' class='drag-cancel' style='height:300px; overflow-x:hidden; overflow-y:auto;'>" + popup_value + "</div><style>[contentEditable=true]:empty:not(:focus):before{content:attr(data-ph)}</style>");
     var add_button = $("<a href='#' id='pop-image-OK' class='btn btn-info' style='padding: 5px 30px;'>"+j__("Ekle")+"</a> ");
     poup_header.appendTo(pop_popup);
     close_button.appendTo(poup_header);
@@ -323,7 +327,7 @@ var createWrapComponent = function ( event, ui, oldcomponent ) {
         if(contentType == 'image'){
           var imageBinary = FileBinary;
           image_data = imageBinary;
-          var newImage = $("<img style='float:left; padding: 10px; border: 1px solid red; margin: 0 10px;' src='"+imageBinary+"' >");
+          var newImage = $("<img style='float:left; padding: 10px; border: 1px solid red; margin: 0 10px; width:150px;' src='"+imageBinary+"' >");
 
           $('#popup-image').append(newImage);
           return;
