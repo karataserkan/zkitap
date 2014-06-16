@@ -12,6 +12,8 @@ $(document).ready(function(){
 
       var that = this;
       var html_data = html_tag_replace(this.options.component.data.html_inner);
+      console.log(html_data);
+      
       var wrap_cutoff = this.options.component.data.cutoff;
       //html_data = html_data + '<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc justo massa, mattis in imperdiet in, pellentesque sit amet elit. Fusce vitae pulvinar nisi. Ut sed justo nec est congue cursus vestibulum eu dolor. Donec at mauris felis, sit amet ultrices odio. Aliquam erat volutpat. Nullam faucibus metus eu elit luctus sed malesuada risus molestie. Mauris nulla quam, tristique at lobortis at, fringilla quis nibh. Ut sapien mauris, imperdiet eget tincidunt semper, consectetur a augue. Donec vitae nibh augue, ut rhoncus elit. Nullam volutpat lorem sed odio lacinia non aliquet erat consequat. In ac libero turpis. In commodo nisl id diam dapibus varius. Sed lobortis ultricies ligula, quis auctor arcu imperdiet eget. Donec vel ipsum dui. In justo purus, molestie sit amet mattis sed, cursus non orci. Nullam ac massa vel tortor scelerisque blandit quis a sapien.</p><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc justo massa, mattis in imperdiet in, pellentesque sit amet elit. Fusce vitae pulvinar nisi. Ut sed justo nec est congue cursus vestibulum eu dolor. Donec at mauris felis, sit amet ultrices odio. Aliquam erat volutpat. Nullam faucibus metus eu elit luctus sed malesuada risus molestie. Mauris nulla quam, tristique at lobortis at, fringilla quis nibh. Ut sapien mauris, imperdiet eget tincidunt semper, consectetur a augue. Donec vitae nibh augue, ut rhoncus elit. Nullam volutpat lorem sed odio lacinia non aliquet erat consequat. In ac libero turpis. In commodo nisl id diam dapibus varius. Sed lobortis ultricies ligula, quis auctor arcu imperdiet eget. Donec vel ipsum dui. In justo purus, molestie sit amet mattis sed, cursus non orci. Nullam ac massa vel tortor scelerisque blandit quis a sapien.</p>'
       console.log(html_data);
@@ -23,14 +25,19 @@ console.log(html_data);
       if(this.options.component.data.html_inner){
         var popupmessage=$('<div  id="message_'+componentpopupid+'" style="display:block; font-family: Helvetica; font-size: 16px;" >'+html_data+'</div>');
         popupmessage.appendTo(this.element);
+       //$($("#message_"+componentpopupid).find("img")).css("float",this.options.component.data.wrap_align);
+      
       }
 
+      //$($("#message_popupxbJ8GPriRdlVmYCy1zxTCzJXikXS7iIswGEJyrT8ck4Z").find("img")).css("float","left")
 
       
+      
       $('.wrapReady.withSourceImage').slickWrap({
-                    sourceImage: true,cutoff: wrap_cutoff
+                    sourceImage: true,cutoff: wrap_cutoff, resolution: 1
                 });
       this._super();       
+
 
     },
 
@@ -211,10 +218,11 @@ var createWrapComponent = function ( event, ui, oldcomponent ) {
       
       //var width = pop_popup.width();
       //var height = pop_popup.height(); 
-      console.log(width);
-      console.log(height);  
+      //console.log(width);
+      //console.log(height);  
       wrap_align=$('input[name=wrap_align]:checked').val();
-      console.log(wrap_align);    
+      //console.log(wrap_align);    
+      var html_inner = $("#popup-explanation").html();
       if(typeof oldcomponent == 'undefined'){
         //console.log('dene');
         var top = (ui.offset.top-$(event.target).offset().top ) + 'px';
@@ -225,19 +233,23 @@ var createWrapComponent = function ( event, ui, oldcomponent ) {
       else{
         top = oldcomponent.data.self.css.top;
         left = oldcomponent.data.self.css.left;
-        window.lindneo.tlingit.componentHasDeleted( oldcomponent, oldcomponent.id );
-        oldcomponent.data.html_inner = $("#popup-explanation").html();
+        //window.lindneo.tlingit.componentHasDeleted( oldcomponent, oldcomponent.id );
+        //oldcomponent.data.html_inner = $("#popup-explanation").html();
+        console.log(oldcomponent.data.wrap_align);
+        html_inner.replace(oldcomponent.data.wrap_align,wrap_align);
+        console.log(wrap_align);
+        console.log(html_inner);
         var self_width = oldcomponent.data.self.css.width ;
         var self_height = oldcomponent.data.self.css.height;
 
       };
+      
       console.log(self_width);
       console.log(self_height);
-
        var  component = {
           'type' : 'wrap',
           'data': {
-            'html_inner':  $("#popup-explanation").html(),
+            'html_inner':  html_inner,
             'cutoff':  $("#cutoff").val(),
             'wrap_align':  wrap_align,
             'width': self_width,
@@ -252,8 +264,7 @@ var createWrapComponent = function ( event, ui, oldcomponent ) {
                 'height': self_height,
                 'background-color': 'transparent',
                 'overflow': 'visible',
-                'z-index': 'first',
-                'opacity':'1'
+                'z-index': 'first'
               }
             }
           }
@@ -302,7 +313,7 @@ var createWrapComponent = function ( event, ui, oldcomponent ) {
         //console.log(contentType);
         if(contentType == 'image'){
           var imageBinary = FileBinary;
-          var newImage = $("<img class='wrapReady withSourceImage "+wrap_align+"' style='float:"+wrap_align+";padding:30px;' src='"+imageBinary+"' >");
+          var newImage = $("<img class='wrapReady withSourceImage "+wrap_align+"' style='float:"+wrap_align+"; padding:30px;' src='"+imageBinary+"' >");
 
           $('#popup-explanation').append(newImage);
           return;
