@@ -1197,7 +1197,7 @@ class componentHTML {
 					$css.="$css_name:$css_val;";
 
 			}
-			$css.=" font-family: Helvetica; font-size: 16px; z-index:9999; position:relative;' ";
+			$css.=" font-family: Helvetica; font-size: 16px; z-index:9999; position:relative; overflow:auto;' ";
 		}
 
 		$wrap_id= "wrap".$component->id;
@@ -1214,13 +1214,15 @@ class componentHTML {
 		$component->data->html_inner = str_replace('font-size: 11px;', 'font-size: 16px;', $component->data->html_inner);
 
 		$component->data->html_inner = html_entity_decode($component->data->html_inner,null,"UTF-8");
+
+		
 		$container.="
 
 			<div id='".$wrap_id."' $css>
 				".$component->data->html_inner."
 			</div>
 			<script type='text/javascript'>
-		       	
+		       	$('span .wrapReady').css('float','".$component->data->wrap_align."');
 				$('.wrapReady.withSourceImage').slickWrap({
                     sourceImage: true,cutoff: 180
                 });
