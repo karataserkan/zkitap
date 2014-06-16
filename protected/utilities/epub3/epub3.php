@@ -645,6 +645,10 @@ class epub3 {
 			}
 		});
 		$(document).ready(function() {
+			$("body").each(function() {
+			    var $this = $(this);
+			    $this.html($this.html().replace(/&nbsp;/g, "&#160;"));
+			 });
 			/*
 			$("video").click(function(event){
 				console.log("kapi://"+btoa($(event.currentTarget).context.currentSrc));
@@ -730,7 +734,7 @@ class epub3 {
 		$page_file_inside=str_replace(array(
 			'%components%','%style%'
 			), array($components_html,$page_styles), $page_structure);
-
+		$page_file_inside = preg_replace( "#(^(&nbsp;|\s)+|(&nbsp;|\s)+$)#", "", $page_file_inside );
 		return $page_file_inside;
 
 	}

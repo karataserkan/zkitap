@@ -38,13 +38,14 @@ console.log(html_data);
       $('.wrapReady.withSourceImage').slickWrap({
                     sourceImage: true,cutoff: wrap_cutoff, resolution: 1
                 });
-      this._super();       
-      var position = $("#message_"+componentpopupid).css("background-position");
-      var px_pos = position.indexOf("px");
-      var value = parseInt(position.substr(0,px_pos));
-      position = position.replace(value, value -250);
-      $("#message_"+componentpopupid).css("background-position", position);
-
+      this._super();  
+      if(this.options.component.data.wrap_align == "right"){     
+        var position = $("#message_"+componentpopupid).css("background-position");
+        var px_pos = position.indexOf("px");
+        var value = parseInt(position.substr(0,px_pos));
+        position = position.replace(value, value -250);
+        $("#message_"+componentpopupid).css("background-position", position);
+      }
     },
 
     field: function(key, value){
@@ -277,7 +278,8 @@ var createWrapComponent = function ( event, ui, oldcomponent ) {
                 'height': self_height,
                 'background-color': 'transparent',
                 'overflow': 'visible',
-                'z-index': 'first'
+                'z-index': 'first',
+                'opacity':'1'
               }
             }
           }
