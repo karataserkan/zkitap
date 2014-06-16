@@ -164,6 +164,7 @@
 		<!-- Page JS Codes -->
 		<script src="<?php echo Yii::app()->request->baseUrl; ?>/js/app/other/page-drag-drop.js"></script>
 		<script src="<?php echo Yii::app()->request->baseUrl; ?>/js/app/other/page-load.js"></script>
+		<script src="<?php echo Yii::app()->request->baseUrl; ?>/js/app/other/componentBuilder.js"></script>
 
 
 
