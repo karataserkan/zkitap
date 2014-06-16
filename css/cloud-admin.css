@@ -292,7 +292,7 @@ img {
   height: auto;
 }
 .img-rounded {
-  border-radius: 6px;
+  border-radius: 100%;
 }
 .img-thumbnail {
   padding: 4px;

@@ -177,7 +177,7 @@ var addRow = function(type){
       question_answers.push(multiple_answer);
     }
   else if(type == "checkbox" ){
-      var check_answer = $('<div><input type="checkbox" name="multichecks" id="inlineCheckbox'+check_count+'" value="'+check_count+'" style="float:left; margin-right:10px;"><input class="form-control" id="check_option'+check_count+'" type="text" placeholder="Cevap seçeneklerini giriniz..."style="float: left; width: 200px; margin-right: 10px;"><i id="delete_'+check_count+'" class="icon-close size-10 popup-close-button" style="float:left;" onclick="removeRow(\'checkbox\','+check_count+');"></i><br><br></div>');
+      var check_answer = $('<div><input type="checkbox" name="multichecks" id="inlineCheckbox'+check_count+'" value="'+check_count+'" style="float:left; margin-right:10px;"><input class="form-control" id="check_option'+check_count+'" type="text" placeholder="Cevap seçeneklerini giriniz..."style="float: left; width: 200px; margin-right: 10px;"><i id="delete_'+check_count+'" class="icon-close size-10 popup-close-button" style="float:left;" onclick="removeRow(\'checkbox\','+check_count+');"></i><br><br></div><br>');
       check_answer.appendTo($('.quiz-inner'));
       check_count++;
       question_answers.push(check_answer);
@@ -225,53 +225,26 @@ var removeRow = function(type, row_number){
 };
 
   var createMquizComponent = function ( event, ui, oldcomponent ) {
-    multiple_count = 0;
-    check_count = 0;
-    question_answers = [];
+
+    var checkBoxAnswers = [];
+    var questionWindowElement ;
+
+
 
     if(typeof oldcomponent == 'undefined'){
       var top = (ui.offset.top-$(event.target).offset().top ) + 'px';
       var left = ( ui.offset.left-$(event.target).offset().left ) + 'px';
-      //var question = j__("Soru kökünü buraya yazınız.");
-      var question = "";
-      var oldcomponent_answers = [];
-      var oldcomponent_type = "";
-      var oldcomponent_answer = "";
     }
-    else{
-      console.log(oldcomponent);
+    else
+    {
       top = oldcomponent.data.self.css.top;
       left = oldcomponent.data.self.css.left;
-      question = oldcomponent.data.question;
-      oldcomponent_answers = oldcomponent.data.question_answers;
-      oldcomponent_answer = oldcomponent.data.answer;
-      oldcomponent_type = oldcomponent.data.quiz_type;
-
     };
     
     var blank_selected = "selected"
     var text_selected = "";
     var radio_selected = "";
     var check_selected = "";
-
-    if(oldcomponent_type == "text"){
-      blank_selected = ""
-      text_selected = "selected";
-      radio_selected = "";
-      check_selected = "";
-    }
-    else if(oldcomponent_type == "multiple_choice"){
-      blank_selected = ""
-      text_selected = "";
-      radio_selected = "selected";
-      check_selected = "";
-    }
-    else if(oldcomponent_type == "checkbox"){
-      blank_selected = ""
-      text_selected = "";
-      radio_selected = "";
-      check_selected = "selected";
-    }
 
     var min_left = $("#current_page").offset().left;
     var min_top = $("#current_page").offset().top;
@@ -286,8 +259,6 @@ var removeRow = function(type, row_number){
     var top=(event.pageY - 25);
     var left=(event.pageX-150);
 
-    console.log(top);
-
     if(left < min_left)
       left = min_left;
     else if(left+220 > max_left)
@@ -298,17 +269,22 @@ var removeRow = function(type, row_number){
     else if(top+430 > max_top)
       top = max_top - 430;
 
-console.log(top);
 
     top = top + "px";
     left = left + "px";
 
-      $("<div class='popup ui-draggable' id='pop-mquiz-popup' style='display: block; top:" + top  + "; left: " + left  + "; width:300px;'> \
-      <div class='popup-header'> \
-        &nbsp;"+j__("Soru Ekle")+" \
-        <i id='create-mquiz-close-button' class='icon-close size-10 popup-close-button'></i> \
-      </div> \
-      <!-- popup content --> \
+
+    questionWindowElement.body = $("<div class='popup ui-draggable' style='display: block; top:" + top  + "; left: " + left  + "; width:300px;'>");
+    questionWindowElement.header = $( "<div class='popup-header'>"+j__("Soru Ekle")+"</div>");
+    questionWindowElement.exitBtn = $("<i id='create-mquiz-close-button' class='icon-close size-10 popup-close-button'></i>");
+
+
+      )
+
+
+      $("
+      
+      
       <div class='gallery-inner-holder' style='width:100%'> \
         <label for='quiz_type'> "+j__("Soru Tipi")+": </label> \
         <select id='quiz_type' class='form-control'> \
@@ -324,8 +300,10 @@ console.log(top);
         </div> \
         <a href='#' class='btn btn-info' id='add-quiz' >Ekle</a> \
       </div> \
-      <!-- popup content--> \
-    </div>").appendTo('body').draggable();
+    ")
+
+
+.appendTo('body').draggable();
   /*
     // initialize options
     var n = $('#leading-option-count').val();
@@ -389,20 +367,24 @@ console.log(top);
       }
       else if( $('#quiz_type').val() == "checkbox"){
         $('.quiz-inner').html('');
-        $("<a href='#' class='btn btn-info' onclick='addRow(\"checkbox\");' >"+j__("Cevap Ekle")+"</a><br><br>").appendTo($('.quiz-inner'));
-        console.log(oldcomponent_answers);
-        $.each(oldcomponent_answers, function(i,key){
+        
 
-          var check_answer = $('<div>\
-                                  <input type="checkbox" name="multichecks" id="inlineCheckbox'+check_count+'" value="'+check_count+'" style="float:left; margin-right:10px;">\
-                                  <input class="form-control" id="check_option'+check_count+'" type="text" value="'+key+'" placeholder="Cevap seçeneklerini giriniz..."style="float: left; width: 200px; margin-right: 10px;">\
-                                  <i id="delete_'+check_count+'" class="icon-close size-10 popup-close-button" style="float:left;" onclick="removeRow(\'checkbox\','+check_count+');"></i><br><br>\
-                                </div>');
-          check_answer.appendTo($('.quiz-inner'));
-          check_count++;
-          question_answers.push(check_answer);
-          console.log(question_answers);
+
+        $("<a href='#' class='btn btn-info'  >"+j__("Cevap Ekle")+"</a><br><br>")
+          .appendTo($('.quiz-inner'))
+          .click( function(){
+            check_answer=createNewAnswerLine("checkbox", false, "");
+            checkBoxAnswers.push(check_answer);
+            check_answer.appendTo($('.quiz-inner'));
         });
+        
+        $.each(oldcomponent_answers, function(i,key){
+          check_answer=createNewAnswerLine("checkbox", (oldcomponent_answer.indexOf(i) > -1 ? true : false), key);
+          checkBoxAnswers.push(check_answer);
+          check_answer.appendTo($('.quiz-inner'));
+        });
+
+
         $.each(oldcomponent_answer, function(i,key){
            $('input:checkbox[name="multichecks"]').filter('[value="'+key+'"]').prop('checked', true);
         });
@@ -449,7 +431,7 @@ console.log(top);
       else if($(this).val() == "checkbox"){
         $('.quiz-inner').html('');
         $("<a href='#' class='btn btn-info' onclick='addRow(\"checkbox\");' >"+j__("Cevap Ekle")+"</a><br><br>").appendTo($('.quiz-inner'));
-        var check_answer = $('<div><input type="checkbox" name="multichecks" id="inlineCheckbox'+check_count+'" value="'+check_count+'" style="float:left; margin-right:10px;"><input class="form-control" id="check_option'+check_count+'" type="text" placeholder="Cevap seçeneklerini giriniz..."style="float: left; width: 200px; margin-right: 10px;"><i id="delete_'+check_count+'" class="icon-close size-10 popup-close-button" style="float:left;" onclick="removeRow(\'checkbox\','+check_count+');"></i><br><br></div>');
+        var check_answer = $('<div><input type="checkbox" name="multichecks" id="inlineCheckbox'+check_count+'" value="'+check_count+'" style="float:left; margin-right:10px;"><input class="form-control" id="check_option'+check_count+'" type="text" placeholder="Cevap seçeneklerini giriniz..."style="float: left; width: 200px; margin-right: 10px;"><i id="delete_'+check_count+'" class="icon-close size-10 popup-close-button" style="float:left;" onclick="removeRow(\'checkbox\','+check_count+');"></i><br><br></div><br>');
         check_answer.appendTo($('.quiz-inner'));
         check_count++;
         question_answers.push(check_answer);
@@ -634,4 +616,60 @@ console.log(top);
     });
 
 
+  };
+
+  function resetAnswers(){
+    $('.quiz-inner').html('');
+  }
+
+  function createNewAnswerLine(type,value,label){
+    switch (type){
+      case:"checkbox":
+       var check_answer = $('<div>');
+
+          var answerCheckBox = $('<input type="checkbox" name="multichecks" style="float:left; margin-right:10px;"/>');
+          check_answer.answerCheckBox=answerCheckBox;
+          check_answer.append(answerCheckBox);
+
+
+         
+          var answerInput = $('<input class="form-control" type="text" value="'+label+'" placeholder="Cevap seçeneklerini giriniz..."style="float: left; width: 200px; margin-right: 10px;">');
+          check_answer.answerInput=answerInput;
+          check_answer.append(answerInput);
+          
+          var answerDeleteBtn = $('<i class="icon-close size-10 popup-close-button" style="float:left;"></i>');
+          check_answer.answerDeleteBtn=answerDeleteBtn;
+          check_answer.append(answerDeleteBtn);
+          
+          check_answer.append($('<br>'));
+
+
+          
+          window.oldcomponent_answer=oldcomponent_answer;
+
+          if ( value ) {
+            answerCheckBox.prop('checked', true);
+            check_answer.answer_value=true;
+          } else {
+            check_answer.answer_value=false;
+          }
+
+          answerCheckBox.click(function(){
+            check_answer.answer_value = $(this).is(':checked')  ;
+            console.log(checkBoxAnswers);
+          });
+          answerInput.change(function(){
+            check_answer.answer_text = $(this).val();
+            console.log(checkBoxAnswers);
+          });
+          answerDeleteBtn.click(function(){
+            check_answer.remove();
+            delete check_answer;
+            console.log(checkBoxAnswers);
+          });
+
+          return check_answer;
+        break;
+
+    }
   };
