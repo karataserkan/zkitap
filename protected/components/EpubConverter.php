@@ -27,10 +27,10 @@ class EpubConverter
 			error_log("EpubConverter:number of processes should be less than number of pages but it is ok and fixed!\n");
 		}
 		$counter=(int)((sizeof($files)/$this->process_count));
-		for($i=0;$i< $this->process_count;$i++)
+		for($i=0;$i< ($this->process_count)-1;$i++)
 			{
 				error_log("EpubConverter:process number: $i\n");
-				if($i==$this->process_count-1)
+				if($i==$this->process_count-2)
 				{
 					$temp_files=array_slice($files,$start_point);
 				}
