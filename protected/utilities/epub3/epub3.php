@@ -605,13 +605,14 @@ class epub3 {
 					$(item).parent().html(poster);*/
 					var ios_video=
 					{
+						"type":"video",
 						"loop":item.loop,
 						"autoPlay":item.autoplay,
 						"currentSrc":$(item).find("source").attr("src"),
 						"poster":$(item).attr("poster")
 					}
-					//var poster="<a href=iosEpub://"+base64_encode(JSON.stringify(ios_video))+"\><img width=100% height=100% src="+ios_video.poster+"></img></a>";
-					var poster="<a href=iosEpub://"+base64_encode(JSON.stringify(ios_video))+"\><div style=\'position:absolute; width:100%; height:100%\'><img width=100% height=100% src="+ios_video.poster+"></img></div><div style=\'position:absolute; width:100%; height:100%\'><img width=100% height=100% src=\'video_play.png\'></img></div></a>";
+					//var poster="<a href=iosepub://"+base64_encode(JSON.stringify(ios_video))+"\><img width=100% height=100% src="+ios_video.poster+"></img></a>";
+					var poster="<a href=iosepub://"+base64_encode(JSON.stringify(ios_video))+"\><div style=\'position:absolute; width:100%; height:100%\'><img width=100% height=100% src="+ios_video.poster+"></img></div><div style=\'position:absolute; width:100%; height:100%\'><img width=100% height=100% src=\'video_play.png\'></img></div></a>";
 					$(item).parent().html(poster);
 
 				
@@ -633,7 +634,7 @@ class epub3 {
 						"poster":"audio_play.png"
 					}
 
-					var poster="<a href=iosEpub://"+base64_encode(JSON.stringify(ios_audio))+"\><img height=100% src="+ios_audio.poster+"></img></a>";
+					var poster="<a href=iosepub://"+base64_encode(JSON.stringify(ios_audio))+"\><img height=100% src="+ios_audio.poster+"></img></a>";
 					$(item).parent().html(poster);
 
 				
@@ -644,6 +645,10 @@ class epub3 {
 			}
 		});
 		$(document).ready(function() {
+			$("body").each(function() {
+			    var $this = $(this);
+			    $this.html($this.html().replace(/&nbsp;/g, "&#160;"));
+			 });
 			/*
 			$("video").click(function(event){
 				console.log("kapi://"+btoa($(event.currentTarget).context.currentSrc));
@@ -729,7 +734,7 @@ class epub3 {
 		$page_file_inside=str_replace(array(
 			'%components%','%style%'
 			), array($components_html,$page_styles), $page_structure);
-
+		$page_file_inside = preg_replace( "#(^(&nbsp;|\s)+|(&nbsp;|\s)+$)#", "", $page_file_inside );
 		return $page_file_inside;
 
 	}
