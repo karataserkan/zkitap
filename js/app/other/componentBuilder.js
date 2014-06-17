@@ -94,7 +94,7 @@ $.widget( "nmk.componentBuilder", {
                 minWidth : that.options.minWidth,
                 maxWidth : that.options.maxWidth
             })
-            .draggable();
+            .draggable({"cancel":".gallery-inner-holder > div"});
 
         this.options.onComplete(this.inner);
 

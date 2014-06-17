@@ -633,6 +633,7 @@ var removeRow = function(type, row_number){
              switch(question_type){
               case "text":
                   addNewAnswer(oldcomponent.data.question_answers,oldcomponent.data.question_answers);
+                break;
               case "multiple_choice":
               case "checkbox":
                 $.each(oldcomponent.data.question_answers,function(index,answer){
