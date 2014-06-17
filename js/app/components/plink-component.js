@@ -293,11 +293,7 @@ console.log(top);
                 'opacity': '1',
                 'z-index': 'first',
                 'width':width,
-<<<<<<< HEAD
-                'height':height,
-=======
                 'height':height
->>>>>>> ffaf27f0c79c60c3a18db435e643c8b10d620b66
               }
             }
           }
