@@ -237,8 +237,8 @@ var removeRow = function(type, row_number){
     }
     else
     {
-      top = oldcomponent.data.self.css.top;
-      left = oldcomponent.data.self.css.left;
+      var top = oldcomponent.data.self.css.top;
+      var left = oldcomponent.data.self.css.left;
     };
     
     var blank_selected = "selected"
@@ -272,62 +272,393 @@ var removeRow = function(type, row_number){
 
     top = top + "px";
     left = left + "px";
+    var multipleGroupName = "radioG"+$.now();
+
+    var createNewAnswerLine = function(type,value,label,onDelete){
+          switch (type){
+            case "text":
+              var check_answer = $('<div class="input-group">');
+
+              var answerInput = $("<input type='text' class='form-control'>")
+                .attr("placeholder", j__("Cevap giriniz...") )
+                .val(label);
+                check_answer.append(answerInput);
+
+                check_answer.answerInput=answerInput;
+                check_answer.answer_text = label;
+                check_answer.answer_value = label;
+
+                answerInput.change(function(){
+                  check_answer.answer_text = $(this).val();
+                  check_answer.answer_value = $(this).val();
+                });
+
+                var addOnDelete = $( '<span class="input-group-addon">')
+                  .appendTo(check_answer);
+
+                var answerDeleteBtn = $('<i class="icon-close size-10 popup-close-button"></i>')
+                  .appendTo(addOnDelete);
+
+                check_answer.answerDeleteBtn=answerDeleteBtn;
+
+                answerDeleteBtn.click(function(){
+                  check_answer.remove();
+                  onDelete(type);
+                });
+
+                return check_answer;
+
+              break;
+
+            case "checkbox":
+                var check_answer = $('<div class="input-group">');
+                var addOnSpan = $("<span class='input-group-addon'>")
+                  .appendTo(check_answer);
+     
+                var answerCheckBox = $('<input type="checkbox" name="multichecks" style="margin-right:10px;"/>')
+                  .appendTo(addOnSpan);
+
+                check_answer.answerCheckBox=answerCheckBox;
+
+                check_answer.answer_text = label;
+                check_answer.answer_value = value;
+
+                var answerInput = $('<input class="form-control" type="text">')
+                  .attr("placeholder", j__("Cevap giriniz...") )
+                  .val(label);
+
+                check_answer.answerInput=answerInput;
+                check_answer.append(answerInput);
+
+                var addOnDelete = $( '<span class="input-group-addon">')
+                  .appendTo(check_answer);
+
+                var answerDeleteBtn = $('<i class="icon-close size-10 popup-close-button"></i>')
+                  .appendTo(addOnDelete);
+                check_answer.answerDeleteBtn=answerDeleteBtn;
+                
+                if ( value ) {
+                  answerCheckBox.prop('checked', true);
+                  check_answer.answer_value=true;
+                } else {
+                  check_answer.answer_value=false;
+                }
+
+                answerCheckBox.click(function(){
+                  check_answer.answer_value = $(this).is(':checked')  ;
+                });
+
+                answerInput.change(function(){
+                  check_answer.answer_text = $(this).val();
+                });
+
+                answerDeleteBtn.click(function(){
+                  check_answer.remove();
+                  onDelete();
+                });
+
+                return check_answer;
+              break;
+
+          case "multiple_choice":
+             var multipleRadioValue = "radioV"+$.now();
+             var check_answer = $('<div class="input-group">');
+                var addOnSpan = $("<span class='input-group-addon'>")
+                  .appendTo(check_answer);
+            
+                var answerRadio = $('<input type="radio">')
+                  .attr('name',multipleGroupName)
+                  .attr('value',multipleRadioValue)
+                  .appendTo(addOnSpan);
+
+                check_answer.radioid=multipleRadioValue;
+                check_answer.answerRadio=answerRadio;
+
+                check_answer.answer_text = label;
+                check_answer.answer_value = value;
+                
+                var answerInput = $('<input class="form-control" type="text">')
+                  .attr("placeholder", j__("Cevap giriniz...") )
+                  .val(label);
+
+                check_answer.answerInput=answerInput;
+                check_answer.append(answerInput);
+
+                var addOnDelete = $( '<span class="input-group-addon">')
+                  .appendTo(check_answer);
+
+                var answerDeleteBtn = $('<i class="icon-close size-10 popup-close-button"></i>')
+                  .appendTo(addOnDelete);
+                check_answer.answerDeleteBtn=answerDeleteBtn;
+                
+                if ( value ) {
+                  answerRadio.prop('checked', true);
+                  check_answer.answer_value=true;
+                } else {
+                  check_answer.answer_value=false;
+                }
 
 
-    questionWindowElement.body = $("<div class='popup ui-draggable' style='display: block; top:" + top  + "; left: " + left  + "; width:300px;'>");
-    questionWindowElement.header = $( "<div class='popup-header'>"+j__("Soru Ekle")+"</div>");
-    questionWindowElement.exitBtn = $("<i id='create-mquiz-close-button' class='icon-close size-10 popup-close-button'></i>");
+                $( document ).on( "click",'input[name="'+ multipleGroupName +'"]',function(){
+                  //alert("changed");
+                  console.log(check_answer.radioid);
+                  console.log($('input[name='+ multipleGroupName +']:radio:checked').val());
+                  if( $('input[name='+ multipleGroupName +']:radio:checked').val() == check_answer.radioid)
+                    check_answer.answer_value = true;
+                  else
+                    check_answer.answer_value = false;
+                });
+
+                answerInput.change(function(){
+                  check_answer.answer_text = $(this).val();
+                });
+
+                answerDeleteBtn.click(function(){
+                  check_answer.remove();
+                  onDelete();
+                });
+
+                return check_answer;
+              break;
+
+          }
+        };
+    
+    var answers = [];
+    var question;
+    var question_type;
+
+    $('<div>').componentBuilder({
+      top:top,
+      left:left,
+      title: j__("Soru Ekle"),
+      btnTitle : j__("Ekle"), 
+      beforeClose : function () {
+        /* Warn about not saved work */
+        /* Dont allow*/
+        return confirm(j__("Yaptığınız değişiklikler kaydedilmeyecektir. Kapatmak istediğinize emin misiniz?"));
+      },
+      onBtnClick: function(){
+        console.log(answers);
 
 
-      )
+        var arrayCorrectAnswers=[];     
+        var arrayAnswers=[];
+
+        /* Controls Here */
+        var correctAnswer = false;
+        var emptyAnswer = true;
+        var emptyQuestion = false;
+        var componentAnswers = $()
+
+        if(typeof question == "string" && question!=""){emptyQuestion=true;}
+        
+        $.each(answers,function(index,answer){
+          
+          //Convert to component store;
+          arrayAnswers.push(answer.line.answer_text);
+
+          if(answer.line.answer_value){
+              arrayCorrectAnswers.push(index);
+              correctAnswer=true;
+          }
+
+          if(typeof answer.line.answer_text != "string"){emptyAnswer=false;}
+          if(answer.line.answer_text==""){emptyAnswer=false;}
 
 
-      $("
-      
-      
-      <div class='gallery-inner-holder' style='width:100%'> \
-        <label for='quiz_type'> "+j__("Soru Tipi")+": </label> \
-        <select id='quiz_type' class='form-control'> \
-          <option "+blank_selected+" value=''>"+j__("Lütfen Seçiniz")+"</option> \
-          <option "+text_selected+" value='text'>"+j__("Açık Uçlu")+"</option> \
-          <option "+radio_selected+" value='multiple_choice'>"+j__("Çoktan Seçmeli")+"</option> \
-          <option "+check_selected+" value='checkbox'>"+j__("Çoklu Seçmeli")+"</option> \
-        </select> \
-        <label for='question'> "+j__("Soru")+": </label> \
-        <textarea class='form-control' id='question' rows='3' placeholder='"+j__("Soru kökünü buraya yazınız")+"...'>"+question+"</textarea>\
-        <br /><br /> \
-        <div class='quiz-inner'> \
-        </div> \
-        <a href='#' class='btn btn-info' id='add-quiz' >Ekle</a> \
-      </div> \
-    ")
+
+        });
+        if (!emptyQuestion){
+          alert( j__("Soru metini boş olmamalı. Lütfen Soru kutusunu doldurduğunuza emin olunuz.") );
+          return false;
+        }
+        else if (!emptyAnswer){
+          alert( j__("Cevap metini boş olmamalı. Lütfen cevap kutularının hepsini doldurduğunuza emin olunuz.") );
+          return false;
+        }
+        else if (!correctAnswer){
+          alert( j__("Doğru cevabı seçmediniz. Lütfen bir cevabı doğru olarak işaretleyiniz.") );
+          return false;
+        } 
 
 
-.appendTo('body').draggable();
-  /*
-    // initialize options
-    var n = $('#leading-option-count').val();
-    $('#selection-options-container').empty();
-    $('#leading-answer-selection').empty();  
-    var appendedText = "";    
-    var appendAnswerText = "";
-    for(var i = 0; i < parseInt(n); i++ ){
-      var answer = answers[i];
-      if(typeof answer == 'undefined') answer = '';
-      appendedText +=  (i + 1) + ". seçenek <textarea class='popup-choices-area' id='selection-option-index-" + i + "'>" + answer + "</textarea> <br>";
+        var finalCorrectAnswers;
+        var finalAnswers;
+        switch(question_type){
+          case "text":
+            finalCorrectAnswers = arrayCorrectAnswers[0];
+            finalAnswers = arrayAnswers[0];
+            break;
+          case "multiple_choice":
+          case "checkbox":
+            finalCorrectAnswers = arrayCorrectAnswers;
+            finalAnswers = arrayAnswers;
+          break;
+        }
 
-      appendAnswerText += (i === 0) ? "<option selected value='" + ( i + 1 ) + "'>"+ ( i + 1 ) +"</option>" : "<option value='" + ( i + 1 ) + "'>"+ ( i + 1 ) +"</option>";  
-    }
-    $('#selection-options-container').append(appendedText);
-    $('#leading-answer-selection').append(appendAnswerText);      
-*/
-    // attach close event to close button
-    $('#create-mquiz-close-button').click(function(){
-      $('#pop-mquiz-popup').remove();  
-      if ( $('#pop-mquiz-popup').length ){
-        $('#pop-mquiz-popup').remove();  
-      }
-    });
+        if(typeof oldcomponent == 'undefined'){
+          var top = (ui.offset.top-$(event.target).offset().top ) + 'px';
+          var left = ( ui.offset.left-$(event.target).offset().left ) + 'px';
+        }
+        else
+        {
+          var top = oldcomponent.data.self.css.top;
+          var left = oldcomponent.data.self.css.left;
+          window.lindneo.tlingit.componentHasDeleted( oldcomponent, oldcomponent.id );
+        };
+
+        var component = {
+          'type' : 'mquiz',
+          'data': {
+            'a': {
+              'css': {
+              },
+              'text': j__("Sorunuzu giriniz...")  
+            },
+            'quiz_type':question_type,
+            'question_answers':finalAnswers,
+            'question':question,
+            'answer':finalCorrectAnswers,
+            'lock':'',
+            'self': {
+              'css': {
+                'position':'absolute',
+                'top': top ,
+                'left':  left ,
+                'z-index': 'first',
+                'opacity':'1'
+              }
+            }
+          }
+        };
+
+        window.lindneo.tlingit.componentHasCreated( component );
+
+      },
+      onComplete:function (ui){
+        questionWindowElement = ui ;
+
+        var quizTypes = [
+          {val : "text", text: j__("Açık Uçlu") },
+          {val : "multiple_choice", text: j__("Çoktan Seçmeli") },
+          {val : "checkbox", text: j__("Çoklu Seçmeli") }
+        ];
+
+        var quizTypeSelector = $('<select>').appendTo(questionWindowElement);
+
+        $(quizTypes).each(function() {
+         quizTypeSelector.append($("<option>").attr('value',this.val).text(this.text));
+        });
+
+        var quizTypeSelectorLabel = $('<label>')
+          .text(j__("Soru Tipi") + ":")
+          .prependTo(questionWindowElement)
+          .click(function(){ 
+            quizTypeSelector.mousedown();
+          });
+
+  
+        var questionTextArea = $("<textarea rows='3' >")
+          .attr('placeholder',j__("Soru kökünü buraya yazınız"))
+          .addClass("form-control")
+          .appendTo(questionWindowElement)
+          .change(function(){
+            question = $(this).val();
+          });
+
+        var questionsArea = $("<div>").appendTo(questionWindowElement);
+
+        var clearQuestions = function (type){
+          addNewAnswerBtn.show();
+          answers = [];
+          questionsArea.empty();
+          addNewAnswer(null,null);
+        }
+
+        quizTypeSelector.change(function (event){
+          question_type = $(this).val()
+          clearQuestions(question_type);
+        });
+
+        var quizFooter = $('<div>')
+          .css({'padding':'20px 0'})
+          .appendTo(questionWindowElement);
+
+        var addNewAnswerBtn = $("<a class='btn btn-info'/>")
+          .text(j__("+ Cevap"))
+          .appendTo(quizFooter)
+          .click(function(){
+            addNewAnswer(null,null);
+          });
+
+
+        var addNewAnswer = function (value,label){
+           var newAnswer = {} ;
+           newAnswer.id= $.now();
+
+           var onDeleted=function(type){
+            $.each(answers,function(i,answer ){
+              if (type=="text") addNewAnswerBtn.show();
+              if ( newAnswer.id == answer.id){
+                answers.splice(i,1);
+                return false;
+              }
+            });
+           };
+
+           switch(question_type){
+            case "text":
+              addNewAnswerBtn.hide();
+            case "multiple_choice":
+            case "checkbox":
+              var newLine = createNewAnswerLine(question_type,value,label,onDeleted);
+              break;
+           }
+
+           newAnswer.line=newLine;
+           newLine.appendTo(questionsArea);
+           answers.push(newAnswer);  
+        };
+
+        /* Set required values here */
+        
+        if(typeof oldcomponent != 'undefined'){
+          question_type = oldcomponent.data.quiz_type;
+          quizTypeSelector.val(question_type);
+
+          question = oldcomponent.data.question;
+          questionTextArea.val(question);
+          
+             switch(question_type){
+              case "text":
+                  addNewAnswer(oldcomponent.data.question_answers,oldcomponent.data.question_answers);
+              case "multiple_choice":
+              case "checkbox":
+                $.each(oldcomponent.data.question_answers,function(index,answer){
+                  addNewAnswer( (oldcomponent.data.answer.indexOf(index) > -1 ? true :false) ,answer);
+                });
+                break;
+             }
+        }
+        else {
+          quizTypeSelector.change();
+        }
+
+
+
+
+
+      } 
+    }).appendTo('body');
+
+
+  return;
+
+
+
+
+
 
     if(typeof oldcomponent != 'undefined'){
 
@@ -453,21 +784,7 @@ var removeRow = function(type, row_number){
 
     // when option count change, reorganize options according to that value
     // warning! previouse option texts will be deleted.
-    /*
-    $('#leading-option-count').change(function(e){
-      var n = $(this).val();
-      $('#selection-options-container').empty();
-      $('#leading-answer-selection').empty();
-      var appendedText = "";    
-      var appendAnswerText = "";
-      for(var i = 0; i < parseInt(n); i++ ){
-        appendedText +=  (i + 1) + ". seçenek <textarea class='popup-choices-area' id='selection-option-index-" + i + "'></textarea> <br>";
-        appendAnswerText += (i === 0) ? "<option selected value='" + ( i + 1 ) + "'>"+ ( i + 1 ) +"</option>" : "<option value='" + ( i + 1 ) + "'>"+ ( i + 1 ) +"</option>";
-      }
-      $('#selection-options-container').append(appendedText);
-      $('#leading-answer-selection').append(appendAnswerText);
-    });
-  */
+
     $('#add-quiz').click(function(){
       if(typeof oldcomponent == 'undefined'){
         var top = (ui.offset.top-$(event.target).offset().top ) + 'px';
@@ -477,9 +794,7 @@ var removeRow = function(type, row_number){
       else{
         top = oldcomponent.data.self.css.top;
         left = oldcomponent.data.self.css.left;
-        console.log(oldcomponent);
         window.lindneo.tlingit.componentHasDeleted( oldcomponent, oldcomponent.id );
-        
       };
 
       var quiz_type = $('#quiz_type').val();
@@ -576,10 +891,8 @@ var removeRow = function(type, row_number){
         'data': {
           'a': {
             'css': {
-
             },
-            'text': j__("Sorunuzu giriniz...")
-			
+            'text': j__("Sorunuzu giriniz...")	
           },
           'quiz_type':quiz_type,
           'question_answers':question_answers,
@@ -618,58 +931,5 @@ var removeRow = function(type, row_number){
 
   };
 
-  function resetAnswers(){
-    $('.quiz-inner').html('');
-  }
+  
 
-  function createNewAnswerLine(type,value,label){
-    switch (type){
-      case:"checkbox":
-       var check_answer = $('<div>');
-
-          var answerCheckBox = $('<input type="checkbox" name="multichecks" style="float:left; margin-right:10px;"/>');
-          check_answer.answerCheckBox=answerCheckBox;
-          check_answer.append(answerCheckBox);
-
-
-         
-          var answerInput = $('<input class="form-control" type="text" value="'+label+'" placeholder="Cevap seçeneklerini giriniz..."style="float: left; width: 200px; margin-right: 10px;">');
-          check_answer.answerInput=answerInput;
-          check_answer.append(answerInput);
-          
-          var answerDeleteBtn = $('<i class="icon-close size-10 popup-close-button" style="float:left;"></i>');
-          check_answer.answerDeleteBtn=answerDeleteBtn;
-          check_answer.append(answerDeleteBtn);
-          
-          check_answer.append($('<br>'));
-
-
-          
-          window.oldcomponent_answer=oldcomponent_answer;
-
-          if ( value ) {
-            answerCheckBox.prop('checked', true);
-            check_answer.answer_value=true;
-          } else {
-            check_answer.answer_value=false;
-          }
-
-          answerCheckBox.click(function(){
-            check_answer.answer_value = $(this).is(':checked')  ;
-            console.log(checkBoxAnswers);
-          });
-          answerInput.change(function(){
-            check_answer.answer_text = $(this).val();
-            console.log(checkBoxAnswers);
-          });
-          answerDeleteBtn.click(function(){
-            check_answer.remove();
-            delete check_answer;
-            console.log(checkBoxAnswers);
-          });
-
-          return check_answer;
-        break;
-
-    }
-  };
