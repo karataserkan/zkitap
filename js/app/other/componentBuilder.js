@@ -6,6 +6,10 @@ $.widget( "nmk.componentBuilder", {
         modal: false,
         top : "200px",
         left : "200px",
+        minHeight: 300,
+        maxHeight: 768,
+        minWidth: 300,
+        maxWidth: 1024,
         width:"600px",
         height:"480px",
         "z-index":9999999,
@@ -15,6 +19,7 @@ $.widget( "nmk.componentBuilder", {
         component: null,
         beforeClose : function () {},
         onClose : function (){},
+        onComplete : function (inner){}
     },
  
     _create: function() {
@@ -59,8 +64,10 @@ $.widget( "nmk.componentBuilder", {
             .appendTo(this.element);
         
         this.inner = $("<div>")
-            .css({'width':'100%',overflow:'scroll'})
+            .css({'width':'100%','height':'100%',overflow:'auto',position:'relative',padding:"0 10px",border: "1px solid #eee", "border-radius": "5px"})
             .appendTo(this.innerWrap);
+        
+        this.options.innerArea = this.inner;
 
         this.footer = $("<div class='popup-footer'></div>")
             .appendTo(this.element)
@@ -81,14 +88,20 @@ $.widget( "nmk.componentBuilder", {
 
 
         this.element
-            .resizable()
+            .resizable({
+                minHeight : that.options.minHeight,
+                maxHeight : that.options.maxHeight,
+                minWidth : that.options.minWidth,
+                maxWidth : that.options.maxWidth
+            })
             .draggable();
 
+        this.options.onComplete(this.inner);
 
         return this;
 
     },
- 
+
     _setOption: function( key, value ) {
         this.options[ key ] = value;
         this._update();
