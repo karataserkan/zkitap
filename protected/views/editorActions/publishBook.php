@@ -503,13 +503,17 @@
 															  <input type="checkbox" id="rights" name="rights" class="uniform" value="accepted" checked /> 
 														   </div>
 														   
-														   <label class="control-label col-md-3" style="text-align:left"> Kullanıcı Sözleşmesini Kabul Ediyorum.</label>
+														   <label class="control-label col-md-3" style="text-align:left"> <a>Kullanıcı Sözleşmesini</a> Kabul Ediyorum.</label>
+															
 														</div>
 													</div>
 													
 												 </div>
 											  </div>
 										   </div>
+										 
+										   
+														
 										   <div class="wizard-buttons">
 											  <div class="row">
 												 <div class="col-md-12">
