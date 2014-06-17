@@ -608,6 +608,10 @@ $( document ).ready(function () {
         alert (j__("Kitabınız En az bir bölüme sahip olmalı"));
         return ;
       }
+
+      if (!confirm(j__("Bölüm silinecek onaylıyor musunuz?"))){
+        return;
+      }
       var chapter_id=$(this).parent().parent().attr('chapter_id');
       
       $('.chapter[chapter_id="'+chapter_id+'"]').hide('slow', function(){  $('.chapter[chapter_id="'+chapter_id+'"]').remove();});
@@ -685,7 +689,9 @@ $( document ).ready(function () {
     $('.delete-page').click(function(){
 
       var delete_buttons = $('<i class="fa fa-trash-o"></i><i class="fa fa-trash-o"></i>');
-
+      if (!confirm(j__("Sayfa silinecek onaylıyor musunuz?"))){
+        return;
+      }
       var page_id=$(this).parent().attr('page_id');
       var control_value = 0;
       $.each(window.lindneo.book_users, function(index,key){
@@ -1026,7 +1032,9 @@ $( document ).ready(function () {
           $('.delete-chapter').click(function(){
 
             var chapter_id=$(this).parent().parent().attr('chapter_id');
-
+            if (!confirm(j__("Bölüm silinecek onaylıyor musunuz?"))){
+              return;
+            }
             var control_value = 0;
             var parent = $(this).parent().parent();
             window.parent = parent;
@@ -1067,7 +1075,9 @@ $( document ).ready(function () {
           $('.delete-page').click(function(){
       
             var delete_buttons = $('<i class="fa fa-trash-o"></i><i class="fa fa-trash-o"></i>');
-
+            if (!confirm(j__("Sayfa silinecek onaylıyor musunuz?"))){
+              return;
+            }
             var page_id=$(this).parent().attr('page_id');
             var control_value = 0;
             $.each(window.lindneo.book_users, function(index,key){
