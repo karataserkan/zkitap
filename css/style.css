@@ -14,7 +14,16 @@ select {
     display: inline-block;
     cursor:pointer;
 }
-; 
+
+::selection
+{
+color:#226b92;
+}
+::-moz-selection
+{
+color:#226b92;
+}
+
 /* Targetting Webkit browsers only. FF will show the dropdown arrow with so much padding. */
 @media screen and (-webkit-min-device-pixel-ratio:0) {
     select {padding-right:25px}
@@ -2159,7 +2168,9 @@ outline:0px;
 max-width:150px;
 white-space:nowrap;
 overflow-x:hidden;
+font-style:italic;
 }
+
 #headermenu .left-border{
 border-left:1px solid #ddd;
 }
@@ -2170,27 +2181,33 @@ border-left:1px solid #ddd;
   font-weight: normal;
   line-height: 42px;
   margin: 0px;
-  padding: 0px 15px;
+  padding: 0px 10px;
   text-align: center;
   text-decoration: none;
 }
 
-
+.author_headermenu_vertical_line {
+	width: 1px;
+	height: 30px;
+	margin: 6px;
+	background-color: #E7E7E7;
+}
 
 #headermenu > ul > li > a {
-  color: #6d6e70;
+  color:#a7a7a7;
 }
 
-#headermenu > ul > li {
-border-right:1px solid #ddd;
+#headermenu > ul > li:first-child a{
+	padding:0 5px;
 }
+
 #headermenu ul ul a {
   color: #6d6e70;
 }
 #headermenu li > a:hover,
 #headermenu ul li:hover > a {
-  background: #e6e7e8;
-  color: #333333;
+  background: #f8f8f8;
+  color: #666;
   text-decoration: none;
 }
 #headermenu li ul {
@@ -2235,9 +2252,9 @@ border-right:1px solid #ddd;
 
 #headermenu li ul a:hover,
 #headermenu li ul li:hover > a {
-  background: #e6e7e8 ;
+  background: #f8f8f8 ;
   border: 0px;
-  color: #333333;
+  color: #666;
   text-decoration: none;
 }
 #headermenu p {

@@ -211,7 +211,7 @@ window.lindneo.tlingit = (function(window, $, undefined){
 
     oldcomponent_id = component_id;
     oldcomponent = component;
-    //console.log(component.data.self.css);
+    
     if(component.data.self.css['z-index'] == "first"){
         
         var zindex = window.lindneo.toolbox.findHighestZIndexToSet('[component-instance="true"]', component.id );
@@ -227,9 +227,14 @@ window.lindneo.tlingit = (function(window, $, undefined){
       component.data.comments={};
 
     var fakeComponent = JSON.parse(JSON.stringify(component));
-    
-    delete fakeComponent["data"];
+    console.log(fakeComponent);
+    delete fakeComponent["id"];
+    delete fakeComponent["page_id"];
+    delete fakeComponent["created"];
 
+    delete fakeComponent["data"];
+    //console.log(fakeComponent);
+    console.log(oldcomponent_id);
     window.lindneo.dataservice
       .send( 'AddComponent', 
         { 

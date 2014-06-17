@@ -122,6 +122,7 @@ $userid=Yii::app()->user->id;
 	             <div class="editor_mybooks_book_settings">
 	                 <i class="fa fa-trash-o tip removeBookModal" data-original-title="Yayından Kaldır" data-id="remove_bookModal" data-toggle="modal" data-target="#remove_bookModal" book-id="<?php echo $book->book_id; ?>"></i>
 	                 <i class="fa fa-copy tip copyThisBook" data-original-title="Çoğalt" data-id="copyBook" data-toggle="modal" data-target="#copyBook" book-id="<?php echo $book->book_id; ?>"></i>
+	                 <a href="<?php echo Yii::app()->getBaseUrl(true);?>/EditorActions/ExportBook?bookId=<?php echo $book->book_id; ?>"><i class="fa fa-cloud-download tip" data-original-title="İndir"  book-id="<?php echo $book->book_id; ?>"> </i></a>
 	             </div>
 	             <img src="<?php echo $thumbnailSrc; ?>" />
 	         </div>					

@@ -980,11 +980,15 @@ class BookController extends Controller
 		}
 	}
 
-	public function actionUpdateBookTitle($bookId,$title,$author)
+	public function actionUpdateBookTitle($bookId,$title=null,$author=null)
 	{
 		$book=$this->loadModel($bookId);
-		$book->title=$title;
-		$book->author=$author;
+		if ($title) {
+			$book->title=$title;
+		}
+		if ($author) {
+			$book->author=$author;
+		}
 		$book->save();
 		$this->redirect(array('site/index'));
 	}

@@ -35,7 +35,7 @@ $(document).ready(function(){
 
 
 
-
+document.execCommand
       
       
       this._super(); 
@@ -77,7 +77,8 @@ var IsURL = function (url) {
         + "[a-z]{2,6})" // first level domain- .com or .museum
         + "(:[0-9]{1,4})?" // 端口- :80
         + "((/?)|" // a slash isn't required if there is no file name
-        + "(/[0-9a-z_!~*'().;?:@&=+$,%#-]+)+/?)$";
+        + "(/[0-9a-z_!~*'().;?:@&=+$,%#-]+)+/?)"
+        + "(.*){0,}$";
      var re=new RegExp(strRegex);
      return re.test(url);
  }
@@ -243,7 +244,8 @@ console.log(top);
                 'height': '128px',
                 'background-color': 'transparent',
                 'overflow': 'visible',
-                'z-index': 'first'
+                'z-index': 'first',
+                'opacity':'1'
               },
               'attr':{
                 'href': targetURL

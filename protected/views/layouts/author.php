@@ -1,6 +1,4 @@
 <?php /* @var $this Controller */ ?>
-
-
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="tr">
 <head>
@@ -166,6 +164,7 @@
 		<!-- Page JS Codes -->
 		<script src="<?php echo Yii::app()->request->baseUrl; ?>/js/app/other/page-drag-drop.js"></script>
 		<script src="<?php echo Yii::app()->request->baseUrl; ?>/js/app/other/page-load.js"></script>
+		<script src="<?php echo Yii::app()->request->baseUrl; ?>/js/app/other/componentBuilder.js"></script>
 
 
 
@@ -174,7 +173,7 @@
 		<link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/js/lib/trip.css" />
 		<script type="text/javascript">
 		var trip,tripData;
-		var options={
+		var Toptions={
 			    tripTheme : "white",
 			    onTripStart : function() {
 			      console.log("onTripStart");
@@ -189,7 +188,7 @@
 			      console.log("onTripChange");
 			    },
 			    backToTopWhenEnded : true,
-			    delay : 5000,
+			    delay : 8000,
 			    prevLabel: 'Geri',
 			    nextLabel: 'İleri',
 			    finishLabel: 'Bitir',
@@ -236,7 +235,7 @@
 			}
 
 			 function tripStart(){
-				trip= new Trip(tripData, options);
+				trip= new Trip(tripData, Toptions);
 			    trip.start();
 			}
 			$(document).ready(function(){

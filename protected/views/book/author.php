@@ -208,12 +208,14 @@ $current_user=User::model()->findByPk(Yii::app()->user->id);
 			<ul>
 			   <li><a style="height:42px;" href="<?php echo $this->createUrl('site/index');  ?>"><img  src="/css/linden_logo.png" ></a></li>
 			   <li><a contenteditable="true"> <?php echo $model->title; ?></a></li>
+               <li class="author_headermenu_vertical_line"></li>
 			   <li class='has-sub'><a href='#'><span>Dosya</span></a>
 					<ul>
 			         <li><a href="<?php echo $this->createUrl('site/index');  ?>"><span><i class="icon-book"></i>Kitaplarım</span></a></li>
 			         <li><a href="<?php echo $this->createUrl("EditorActions/ExportPdfBook", array('bookId' => $model->book_id ));?>"> <i class="icon-doc-inv"></i><?php _e("PDF Olarak Aktar"); ?></i></a></li>
 			         <li><a href="<?php echo $this->createUrl("EditorActions/ExportBook", array('bookId' => $model->book_id ));?>"> <i class="icon-doc-inv"></i><?php _e("ePub Olarak Aktar"); ?></i></a></li>
 			         <li><a href="<?php echo $this->createUrl("EditorActions/publishBook/", array('bookId' => $model->book_id ));?>"> <i class="icon-doc-inv"></i><?php _e("Kütüphanede Yayınla"); ?></i></a></li>
+               
 			         <!--<li>
 			         	<?php
 			         		if ($budget==0) {
@@ -247,6 +249,7 @@ $current_user=User::model()->findByPk(Yii::app()->user->id);
 			        </ul>
 			   </li>
 				
+               <li class="author_headermenu_vertical_line"></li>
 			    
 			   <li><a href='#'>
 			   
@@ -272,6 +275,7 @@ $current_user=User::model()->findByPk(Yii::app()->user->id);
 
 			      	<?php if (!Yii::app()->user->isGuest) {?>
 			         <li><a href='/user/profile'><span><?php _e('Profil') ?></span></a></li>
+			         <li><a href='#' onClick='tripStart();'><span><?php _e('Yardım') ?></span></a></li>
 			         <?php echo " <li>". CHtml::link(__("Çıkış"),"/site/logout") ."</li>"; ?>
 					<?php 
 						// foreach (Yii::app()->params->availableLanguages  as $lang_id => $lang_name) {

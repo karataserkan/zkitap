@@ -31,6 +31,7 @@ $(document).ready(function(){
         })
 
         var rtextmessage=$('<div  id="message_'+componentrtextid+'" contenteditable="true" style="width100%; height:100%; overflow:hidden;">'+this.options.component.data.rtextdiv.val+'</div>');
+        this.rtextElement = rtextmessage;
         rtextmessage.appendTo(this.element);
         var capture_selection= function(){
           localStorage.setItem("selection_text", window.getSelection().toString());
@@ -124,54 +125,67 @@ $(document).ready(function(){
 
         switch (propertyName){
           case 'color':
+            this.rtextElement.focus();
+            document.execCommand("foreColor", false, propertyValue);
 
+            /*
             var content_text = '<span style="color: '+propertyValue+';">'+localStorage.getItem("selection_text")+'</span>';
             $('#message_rtext'+this.options.component.id).html(this.options.component.data.rtextdiv.val.replace(localStorage.getItem("selection_text"), content_text));  
             that._change( $('#message_rtext'+this.options.component.id).html());
             //localStorage.setItem("selection_text", '');
-
+            */
           break;
           case 'font-weight':
-
+            /*this.rtextElement.focus();
+            document.execCommand("bold", false, null);
+            */
             var content_text = '<span style="font-weight: '+propertyValue+';">'+localStorage.getItem("selection_text")+'</span>';
             $('#message_rtext'+this.options.component.id).html(this.options.component.data.rtextdiv.val.replace(localStorage.getItem("selection_text"), content_text));  
             that._change( $('#message_rtext'+this.options.component.id).html());
             //localStorage.setItem("selection_text", '');
-
+            
           break;
 
           case 'font-style':
-
-            var content_text = '<span style="font-style: '+propertyValue+';">'+localStorage.getItem("selection_text")+'</span>';
+            /*this.rtextElement.focus();
+            document.execCommand("italic", false, null); 
+            */var content_text = '<span style="font-style: '+propertyValue+';">'+localStorage.getItem("selection_text")+'</span>';
             $('#message_rtext'+this.options.component.id).html(this.options.component.data.rtextdiv.val.replace(localStorage.getItem("selection_text"), content_text));  
-             
+            
           break;
 
           case 'text-decoration':
-
+            this.rtextElement.focus();
+            document.execCommand("underline", false, null); 
+            /*
             var content_text = '<span style="text-decoration: '+propertyValue+';">'+localStorage.getItem("selection_text")+'</span>';
             $('#message_rtext'+this.options.component.id).html(this.options.component.data.rtextdiv.val.replace(localStorage.getItem("selection_text"), content_text));  
             that._change( $('#message_rtext'+this.options.component.id).html());
             //localStorage.setItem("selection_text", '');
-             
+             */
           break;
 
           case 'font-size':
-            
+            this.rtextElement.focus();
+            document.execCommand("fontSize", false, propertyValue);
+            /*
             var content_text = '<span style="font-size: '+propertyValue+';">'+localStorage.getItem("selection_text")+'</span>';
             $('#message_rtext'+this.options.component.id).html(this.options.component.data.rtextdiv.val.replace(localStorage.getItem("selection_text"), content_text));  
             that._change( $('#message_rtext'+this.options.component.id).html());
             //localStorage.setItem("selection_text", '');
-             
+            */
           break;
 
           case 'font-family':
+            this.rtextElement.focus();
+            document.execCommand("fontName", false, propertyValue);
+            /*
             //console.log('deneme');
             var content_text = '<span style="font-family: '+propertyValue+';">'+localStorage.getItem("selection_text")+'</span>';
             $('#message_rtext'+this.options.component.id).html(this.options.component.data.rtextdiv.val.replace(localStorage.getItem("selection_text"), content_text));  
             that._change( $('#message_rtext'+this.options.component.id).html());
             //localStorage.setItem("selection_text", '');
-             
+             */
           break;
 
           case 'line-height':

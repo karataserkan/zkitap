@@ -12,6 +12,10 @@ $(document).ready(function(){
 
       var that = this;
       var html_data = html_tag_replace(this.options.component.data.html_inner);
+      var image_data = "<img class='wrapReady withSourceImage "+this.options.component.data.wrap_align+"' style='float:"+this.options.component.data.wrap_align+"; padding: 10px; border: 1px solid red; margin: 0 10px;' src='"+this.options.component.data.image_data+"' >";
+      html_data = image_data +html_data;
+      console.log(html_data);
+      
       var wrap_cutoff = this.options.component.data.cutoff;
       //html_data = html_data + '<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc justo massa, mattis in imperdiet in, pellentesque sit amet elit. Fusce vitae pulvinar nisi. Ut sed justo nec est congue cursus vestibulum eu dolor. Donec at mauris felis, sit amet ultrices odio. Aliquam erat volutpat. Nullam faucibus metus eu elit luctus sed malesuada risus molestie. Mauris nulla quam, tristique at lobortis at, fringilla quis nibh. Ut sapien mauris, imperdiet eget tincidunt semper, consectetur a augue. Donec vitae nibh augue, ut rhoncus elit. Nullam volutpat lorem sed odio lacinia non aliquet erat consequat. In ac libero turpis. In commodo nisl id diam dapibus varius. Sed lobortis ultricies ligula, quis auctor arcu imperdiet eget. Donec vel ipsum dui. In justo purus, molestie sit amet mattis sed, cursus non orci. Nullam ac massa vel tortor scelerisque blandit quis a sapien.</p><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc justo massa, mattis in imperdiet in, pellentesque sit amet elit. Fusce vitae pulvinar nisi. Ut sed justo nec est congue cursus vestibulum eu dolor. Donec at mauris felis, sit amet ultrices odio. Aliquam erat volutpat. Nullam faucibus metus eu elit luctus sed malesuada risus molestie. Mauris nulla quam, tristique at lobortis at, fringilla quis nibh. Ut sapien mauris, imperdiet eget tincidunt semper, consectetur a augue. Donec vitae nibh augue, ut rhoncus elit. Nullam volutpat lorem sed odio lacinia non aliquet erat consequat. In ac libero turpis. In commodo nisl id diam dapibus varius. Sed lobortis ultricies ligula, quis auctor arcu imperdiet eget. Donec vel ipsum dui. In justo purus, molestie sit amet mattis sed, cursus non orci. Nullam ac massa vel tortor scelerisque blandit quis a sapien.</p>'
       console.log(html_data);
@@ -23,15 +27,25 @@ console.log(html_data);
       if(this.options.component.data.html_inner){
         var popupmessage=$('<div  id="message_'+componentpopupid+'" style="display:block; font-family: Helvetica; font-size: 16px;" >'+html_data+'</div>');
         popupmessage.appendTo(this.element);
+       //$($("#message_"+componentpopupid).find("img")).css("float",this.options.component.data.wrap_align);
+      
       }
 
+      //$($("#message_popupxbJ8GPriRdlVmYCy1zxTCzJXikXS7iIswGEJyrT8ck4Z").find("img")).css("float","left")
 
       
+      
       $('.wrapReady.withSourceImage').slickWrap({
-                    sourceImage: true,cutoff: wrap_cutoff
+                    sourceImage: true,cutoff: wrap_cutoff, resolution: 1
                 });
-      this._super();       
-
+      this._super();  
+      if(this.options.component.data.wrap_align == "right"){     
+        var position = $("#message_"+componentpopupid).css("background-position");
+        var px_pos = position.indexOf("px");
+        var value = parseInt(position.substr(0,px_pos));
+        position = position.replace(value, value -250);
+        $("#message_"+componentpopupid).css("background-position", position);
+      }
     },
 
     field: function(key, value){
@@ -104,7 +118,8 @@ var createWrapComponent = function ( event, ui, oldcomponent ) {
       //console.log('dene');
       var top = (ui.offset.top-$(event.target).offset().top ) + 'px';
       var left = ( ui.offset.left-$(event.target).offset().left ) + 'px';
-      var popup_value = 'http://linden-tech.com';
+      var popup_value = '';
+      var image_data = '';
       var old_cutoff = '100';
       width = 'auto';
       height = 'auto';
@@ -114,6 +129,7 @@ var createWrapComponent = function ( event, ui, oldcomponent ) {
       top = oldcomponent.data.self.css.top;
       left = oldcomponent.data.self.css.left;
       popup_value = oldcomponent.data.html_inner;
+      image_data = "<img style='float:left; padding: 10px; border: 1px solid red; margin: 0 10px; width:150px;' src='"+oldcomponent.data.image_data+"' >";
       old_cutoff = oldcomponent.data.cutoff;
       width = oldcomponent.data.width ;
       height = oldcomponent.data.height;
@@ -146,7 +162,7 @@ var createWrapComponent = function ( event, ui, oldcomponent ) {
     var pop_popup = $("<div class='popup ui-draggable' id='pop-popup' style='display: block; top:" + top + "; left: " + left + "; width:700px;'> \
       </div>");
     pop_popup.appendTo('body').draggable({cancel:'.drag-cancel'}).resizable();
-    var poup_header = $("<div class='popup-header'><i class='icon-m-link'></i> &nbsp;"+j__("Metin Sarma Ekle")+" </div> ");
+    var poup_header = $("<div class='popup-header'><i class='icon-m-link'></i> &nbsp;"+j__("Metinle Çevrele Ekle")+" </div> ");
     var close_button = $("<i id='popup-add-dummy-close-button' class='icon-close size-10 popup-close-button'></i> ");
     var drag_file = $("<div class='add-image-drag-area' id='dummy-dropzone'> </div> ");
     var galery_inner = $("<div class='gallery-inner-holder' style='width: 700px; height: " + height + "px;'> \
@@ -160,17 +176,23 @@ var createWrapComponent = function ( event, ui, oldcomponent ) {
                     <input type='radio' name='wrap_align' id='repeat1' " + wrap_left + " value='left'> "+j__("Sol")+"\
                   </label>\
                 </div><br><br>\
-                <input type='text' name='cutoff' id='cutoff' value='"+old_cutoff+"' onclick='this.select()' placeholder='"+j__("Çözünürlik Toleransı giriniz")+"....'><br><br>\
+                <p>\
+                  <label for='cutoff'>"+j__("Tolerans değerini belirleyin")+" (0 - 200) </label>\
+                  <input type='text' name='cutoff' id='cutoff' value='"+old_cutoff+"' style='border:0; color:#f6931f; font-weight:bold;' onclick='this.select()' placeholder='"+j__("Çözünürlik Toleransı giriniz")+"....'><br><br>\
+                </p>\
+                <div id='slider'></div>\
             </div>\
       </div> ");
     var popup_wrapper = $("<div class ='popup_wrapper drag-cancel' style='border: 1px #ccc solid; ' ></div> <br>");
-    var popup_detail = $("<div  id='popup-explanation' contenteditable='true' class='drag-cancel' style='min-height:300px;'>" + popup_value + "</div>");
+    var popup_image = $("<div  id='popup-image' contenteditable='true' class='drag-cancel' style='width:150px;'>" + image_data + "</div>");
+    var popup_detail = $("<div  id='popup-explanation' contenteditable='true' data-ph='Lütfen İçeriği buraya giriniz...' class='drag-cancel' style='height:300px; overflow-x:hidden; overflow-y:auto;'>" + popup_value + "</div><style>[contentEditable=true]:empty:not(:focus):before{content:attr(data-ph)}</style>");
     var add_button = $("<a href='#' id='pop-image-OK' class='btn btn-info' style='padding: 5px 30px;'>"+j__("Ekle")+"</a> ");
     poup_header.appendTo(pop_popup);
     close_button.appendTo(poup_header);
     galery_inner.appendTo(pop_popup);
     popup_wrapper.appendTo(galery_inner).resizable({alsoResize: galery_inner});
     drag_file.prependTo(popup_wrapper);
+    popup_image.appendTo(popup_wrapper);
     popup_detail.appendTo(popup_wrapper);
     add_button.appendTo(galery_inner);
     popup_detail.resizable({alsoResize: galery_inner});
@@ -190,17 +212,28 @@ var createWrapComponent = function ( event, ui, oldcomponent ) {
 
     });
 
+    $( "#slider" ).slider({
+      value: old_cutoff,
+      min: 0,
+      max: 200,
+      step: 10,
+      slide: function( event, ui ) {
+        $( "#cutoff" ).val( ui.value );
+      }
+    });
+    $( "#cutoff" ).val( $( "#slider" ).slider( "value" ) );
     
-    
-    
+    var image_data ="";
+
     add_button.click(function (){  
       
       //var width = pop_popup.width();
       //var height = pop_popup.height(); 
-      console.log(width);
-      console.log(height);  
+      //console.log(width);
+      //console.log(height);  
       wrap_align=$('input[name=wrap_align]:checked').val();
-      console.log(wrap_align);    
+      //console.log(wrap_align);    
+      var html_inner = $("#popup-explanation").html();
       if(typeof oldcomponent == 'undefined'){
         //console.log('dene');
         var top = (ui.offset.top-$(event.target).offset().top ) + 'px';
@@ -213,17 +246,24 @@ var createWrapComponent = function ( event, ui, oldcomponent ) {
         left = oldcomponent.data.self.css.left;
         window.lindneo.tlingit.componentHasDeleted( oldcomponent, oldcomponent.id );
         oldcomponent.data.html_inner = $("#popup-explanation").html();
+        console.log(oldcomponent.data.wrap_align);
+        html_inner.replace(oldcomponent.data.wrap_align,wrap_align);
+        console.log(wrap_align);
+        console.log(html_inner);
         var self_width = oldcomponent.data.self.css.width ;
         var self_height = oldcomponent.data.self.css.height;
 
       };
+      if(image_data == "" && oldcomponent.data.image_data != "")
+        image_data = oldcomponent.data.image_data;
+      
       console.log(self_width);
       console.log(self_height);
-
        var  component = {
           'type' : 'wrap',
           'data': {
-            'html_inner':  $("#popup-explanation").html(),
+            'html_inner':  html_inner,
+            'image_data':image_data,
             'cutoff':  $("#cutoff").val(),
             'wrap_align':  wrap_align,
             'width': self_width,
@@ -238,7 +278,8 @@ var createWrapComponent = function ( event, ui, oldcomponent ) {
                 'height': self_height,
                 'background-color': 'transparent',
                 'overflow': 'visible',
-                'z-index': 'first'
+                'z-index': 'first',
+                'opacity':'1'
               }
             }
           }
@@ -287,9 +328,10 @@ var createWrapComponent = function ( event, ui, oldcomponent ) {
         //console.log(contentType);
         if(contentType == 'image'){
           var imageBinary = FileBinary;
-          var newImage = $("<img class='wrapReady withSourceImage "+wrap_align+"' style='float:"+wrap_align+";padding:30px;' src='"+imageBinary+"' >");
+          image_data = imageBinary;
+          var newImage = $("<img style='float:left; padding: 10px; border: 1px solid red; margin: 0 10px; width:150px;' src='"+imageBinary+"' >");
 
-          $('#popup-explanation').append(newImage);
+          $('#popup-image').append(newImage);
           return;
           
         }
