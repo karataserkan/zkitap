@@ -1961,7 +1961,7 @@ $current_user=User::model()->findByPk(Yii::app()->user->id);
 			  <div class="panel panel-default">
 				 <div class="panel-heading">
 					<h3 class="panel-title"> <a class="accordion-toggle " data-toggle="collapse" data-parent="#accordion" href="#collapseThree"><i class="fa fa-file-text-o light-blue"></i>&nbsp;&nbsp;&nbsp;Sayfalar</a>
-					<a data-toggle="modal" data-target="#addPage" class="btn btn-info pull-right clearfix" style="margin-top: -22px;" ><i class="fa fa-plus white"></i></a> </h3>
+					<a data-toggle="modal" data-target="#addPage" class="btn btn-info pull-right clearfix" style="margin-top: -18px;padding: 1px 10px;" ><i class="fa fa-plus white"></i></a> </h3>
 
 				 </div>
 				 <div id="collapseThree" class="panel-collapse collapse in">
