@@ -2537,25 +2537,7 @@ font-size: 20px;
 
 /** AUTHOR PAGE ********************************************/
 
-.ui-autocomplete.ui-widget-content {
-	position: absolute;
-	z-index: 9999999;
-	margin-top: 7px;
-	border-top-left-radius: 0px;
-	border-top-right-radius: 0px;
-	top:35px !important;
-	left:435px !important;
-	width:207px !important;
-}
 
-
-.ui-autocomplete.ui-widget-content li{
-	padding:7px 5px;
-}
-
-.ui-autocomplete.ui-widget-content li:hover{
-	border:0;
-}
 
 
 /** END OF AUTHOR PAGE ***********************************/

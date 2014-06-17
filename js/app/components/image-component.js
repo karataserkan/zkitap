@@ -11,7 +11,7 @@ $(document).ready(function(){
 
       var that = this;
       
-      //console.log(this.options.component);
+      console.log(this.options.component);
       var componentimageid='image'+this.options.component.id;
         if(this.options.component.data.img.image_type == 'popup'){
           console.log(this.options.marker);
