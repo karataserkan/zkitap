@@ -18,10 +18,11 @@ $(document).ready(function(){
       
       var wrap_cutoff = this.options.component.data.cutoff;
       //html_data = html_data + '<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc justo massa, mattis in imperdiet in, pellentesque sit amet elit. Fusce vitae pulvinar nisi. Ut sed justo nec est congue cursus vestibulum eu dolor. Donec at mauris felis, sit amet ultrices odio. Aliquam erat volutpat. Nullam faucibus metus eu elit luctus sed malesuada risus molestie. Mauris nulla quam, tristique at lobortis at, fringilla quis nibh. Ut sapien mauris, imperdiet eget tincidunt semper, consectetur a augue. Donec vitae nibh augue, ut rhoncus elit. Nullam volutpat lorem sed odio lacinia non aliquet erat consequat. In ac libero turpis. In commodo nisl id diam dapibus varius. Sed lobortis ultricies ligula, quis auctor arcu imperdiet eget. Donec vel ipsum dui. In justo purus, molestie sit amet mattis sed, cursus non orci. Nullam ac massa vel tortor scelerisque blandit quis a sapien.</p><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc justo massa, mattis in imperdiet in, pellentesque sit amet elit. Fusce vitae pulvinar nisi. Ut sed justo nec est congue cursus vestibulum eu dolor. Donec at mauris felis, sit amet ultrices odio. Aliquam erat volutpat. Nullam faucibus metus eu elit luctus sed malesuada risus molestie. Mauris nulla quam, tristique at lobortis at, fringilla quis nibh. Ut sapien mauris, imperdiet eget tincidunt semper, consectetur a augue. Donec vitae nibh augue, ut rhoncus elit. Nullam volutpat lorem sed odio lacinia non aliquet erat consequat. In ac libero turpis. In commodo nisl id diam dapibus varius. Sed lobortis ultricies ligula, quis auctor arcu imperdiet eget. Donec vel ipsum dui. In justo purus, molestie sit amet mattis sed, cursus non orci. Nullam ac massa vel tortor scelerisque blandit quis a sapien.</p>'
-      console.log(html_data);
+      //console.log(html_data);
       html_data = html_data.replace('font-family: Arial, Helvetica, sans;', 'font-family: Helvetica;');
       html_data = html_data.replace('font-size: 11px;', 'font-size: 16px;');
-console.log(html_data);
+      //console.log(html_data);
+
       var componentpopupid='popup'+this.options.component.id;
 
       if(this.options.component.data.html_inner){
@@ -107,164 +108,65 @@ while( str.indexOf('<span style="line-height: 1.428571429;">') > -1)
    //console.log(str);  <span style="line-height: 1.428571429;">
    return str;
 };
-var width='';
-var height='';
-var wrap_align='';
+
 
 var createWrapComponent = function ( event, ui, oldcomponent ) {  
-//console.log(oldcomponent); 
- 
+  var width = 'auto';
+  var height = 'auto';
+  var wrap_align='left';
+  var image_data;
+  var multipleGroupName = "radioG"+$.now();
+  var popup_value = '';
+  var tolerance = 100;
+  var html_inner = "";
+  var self_width = "400px";
+  var self_height = "300px";
+  var top;
+  var left;
+
   if(typeof oldcomponent == 'undefined'){
-      //console.log('dene');
-      var top = (ui.offset.top-$(event.target).offset().top ) + 'px';
-      var left = ( ui.offset.left-$(event.target).offset().left ) + 'px';
-      var popup_value = '';
-      var image_data = '';
-      var old_cutoff = '100';
-      width = 'auto';
-      height = 'auto';
-      wrap_align = 'left';
+      top = (ui.offset.top-$(event.target).offset().top ) + 'px';
+      left = ( ui.offset.left-$(event.target).offset().left ) + 'px';
     }
-    else{
+    else
+    {
       top = oldcomponent.data.self.css.top;
       left = oldcomponent.data.self.css.left;
-      popup_value = oldcomponent.data.html_inner;
-      image_data = "<img style='float:left; padding: 10px; border: 1px solid red; margin: 0 10px; width:150px;' src='"+oldcomponent.data.image_data+"' >";
-      old_cutoff = oldcomponent.data.cutoff;
+      html_inner = oldcomponent.data.html_inner;
+      image_data = oldcomponent.data.image_data;
+      tolerance = oldcomponent.data.cutoff;
       width = oldcomponent.data.width ;
       height = oldcomponent.data.height;
       wrap_align = oldcomponent.data.wrap_align;
     };
 
-    var wrap_right = '';
-    var wrap_right_active = '';
-    var wrap_left = '';
-    var wrap_left_active = '';
 
-    if(wrap_align == 'right') { wrap_right = "checked='checked'"; wrap_right_active = 'active';}
-    else { wrap_left = "checked='checked'"; wrap_left_active = 'active'; }
-   /* $("<div class='popup ui-draggable' id='pop-image-popup' style='display: block; top:" + top + "; left: " + left + ";'> \
-      <div class='popup-header'> \
-      Görsel/Video Ekle \
-      <i id='popup-add-dummy-close-button' class='icon-close size-10 popup-close-button'></i> \
-      </div> \
-        <div class='gallery-inner-holder' style='width: " + width + "px; height: " + height + "px;'> \
-        <div style='clear:both'></div> \
-        <div class='add-image-drag-area' id='dummy-dropzone'> </div> \
-        <div class ='popup_wrapper drag-cancel' style='border: 1px #ccc solid; ' > \
-          <div  id='popup-explanation' style='width:100%;height:100%; ' contenteditable='true' class='drag-cancel'>" + popup_value + ". \
-         </div>  \
-        </div> <br>\
-        <a href='#' id='pop-image-OK' class='btn bck-light-green white radius' style='padding: 5px 30px;'>Ekle</a> \
-      </div> \
-      </div>").appendTo('body').draggable({cancel:'.drag-cancel'}).resizable();*/
-    
-    var pop_popup = $("<div class='popup ui-draggable' id='pop-popup' style='display: block; top:" + top + "; left: " + left + "; width:700px;'> \
-      </div>");
-    pop_popup.appendTo('body').draggable({cancel:'.drag-cancel'}).resizable();
-    var poup_header = $("<div class='popup-header'><i class='icon-m-link'></i> &nbsp;"+j__("Metinle Çevrele Ekle")+" </div> ");
-    var close_button = $("<i id='popup-add-dummy-close-button' class='icon-close size-10 popup-close-button'></i> ");
-    var drag_file = $("<div class='add-image-drag-area' id='dummy-dropzone'> </div> ");
-    var galery_inner = $("<div class='gallery-inner-holder' style='width: 700px; height: " + height + "px;'> \
-        <div style='clear:both'></div> \
-        <div class='type' style='padding: 4px; '>\
-                <div class='btn-group'>\
-                  <label class='btn btn-primary " + wrap_right_active + "'>\
-                    <input type='radio' name='wrap_align' id='repeat0' " + wrap_right + " value='right'> "+j__("Sağ")+"\
-                  </label>\
-                  <label class='btn btn-primary " + wrap_left_active + "'>\
-                    <input type='radio' name='wrap_align' id='repeat1' " + wrap_left + " value='left'> "+j__("Sol")+"\
-                  </label>\
-                </div><br><br>\
-                <p>\
-                  <label for='cutoff'>"+j__("Tolerans değerini belirleyin")+" (0 - 200) </label>\
-                  <input type='text' name='cutoff' id='cutoff' value='"+old_cutoff+"' style='border:0; color:#f6931f; font-weight:bold;' onclick='this.select()' placeholder='"+j__("Çözünürlik Toleransı giriniz")+"....'><br><br>\
-                </p>\
-                <div id='slider'></div>\
-            </div>\
-      </div> ");
-    var popup_wrapper = $("<div class ='popup_wrapper drag-cancel' style='border: 1px #ccc solid; ' ></div> <br>");
-    var popup_image = $("<div  id='popup-image' contenteditable='true' class='drag-cancel' style='width:150px;'>" + image_data + "</div>");
-    var popup_detail = $("<div  id='popup-explanation' contenteditable='true' data-ph='Lütfen İçeriği buraya giriniz...' class='drag-cancel' style='height:300px; overflow-x:hidden; overflow-y:auto;'>" + popup_value + "</div><style>[contentEditable=true]:empty:not(:focus):before{content:attr(data-ph)}</style>");
-    var add_button = $("<a href='#' id='pop-image-OK' class='btn btn-info' style='padding: 5px 30px;'>"+j__("Ekle")+"</a> ");
-    poup_header.appendTo(pop_popup);
-    close_button.appendTo(poup_header);
-    galery_inner.appendTo(pop_popup);
-    popup_wrapper.appendTo(galery_inner).resizable({alsoResize: galery_inner});
-    drag_file.prependTo(popup_wrapper);
-    popup_image.appendTo(popup_wrapper);
-    popup_detail.appendTo(popup_wrapper);
-    add_button.appendTo(galery_inner);
-    popup_detail.resizable({alsoResize: galery_inner});
+    $('<div>').componentBuilder({
+      top:top,
+      left:left,
+      title: j__("Metinle Çevrele"),
+      btnTitle : j__("Ekle"), 
+      beforeClose : function () {
+        /* Warn about not saved work */
+        /* Dont allow if not confirmed */
+        return confirm(j__("Yaptığınız değişiklikler kaydedilmeyecektir. Kapatmak istediğinize emin misiniz?"));
+      },
+      onBtnClick: function(){
+        if (!image_data) {
+          alert (j__("Lütfen bir resim ekleyiniz"));
+          return false;
+        }
+        else if (html_inner == "") {
+          alert (j__("Lütfen metin giriniz"));
+          return false;
+        }
 
-    $("input[name=wrap_align]:radio").change(function () {
-        wrap_align=$('input[name=wrap_align]:checked').val();
-        console.log(wrap_align);
-      });
-
-    close_button.click(function(){
-
-      pop_popup.remove();  
-
-      if ( pop_popup.length ){
-        pop_popup.remove();  
-      }
-
-    });
-
-    $( "#slider" ).slider({
-      value: old_cutoff,
-      min: 0,
-      max: 200,
-      step: 10,
-      slide: function( event, ui ) {
-        $( "#cutoff" ).val( ui.value );
-      }
-    });
-    $( "#cutoff" ).val( $( "#slider" ).slider( "value" ) );
-    
-    var image_data ="";
-
-    add_button.click(function (){  
-      
-      //var width = pop_popup.width();
-      //var height = pop_popup.height(); 
-      //console.log(width);
-      //console.log(height);  
-      wrap_align=$('input[name=wrap_align]:checked').val();
-      //console.log(wrap_align);    
-      var html_inner = $("#popup-explanation").html();
-      if(typeof oldcomponent == 'undefined'){
-        //console.log('dene');
-        var top = (ui.offset.top-$(event.target).offset().top ) + 'px';
-        var left = ( ui.offset.left-$(event.target).offset().left ) + 'px';
-        var self_width = 'auto';
-        var self_height = 'auto';
-      }
-      else{
-        top = oldcomponent.data.self.css.top;
-        left = oldcomponent.data.self.css.left;
-        window.lindneo.tlingit.componentHasDeleted( oldcomponent, oldcomponent.id );
-        oldcomponent.data.html_inner = $("#popup-explanation").html();
-        console.log(oldcomponent.data.wrap_align);
-        html_inner.replace(oldcomponent.data.wrap_align,wrap_align);
-        console.log(wrap_align);
-        console.log(html_inner);
-        var self_width = oldcomponent.data.self.css.width ;
-        var self_height = oldcomponent.data.self.css.height;
-
-      };
-      if(image_data == "" && oldcomponent.data.image_data != "")
-        image_data = oldcomponent.data.image_data;
-      
-      console.log(self_width);
-      console.log(self_height);
-       var  component = {
+        var  component = {
           'type' : 'wrap',
           'data': {
             'html_inner':  html_inner,
             'image_data':image_data,
-            'cutoff':  $("#cutoff").val(),
+            'cutoff':  tolerance,
             'wrap_align':  wrap_align,
             'width': self_width,
             'height': self_height,
@@ -284,64 +186,181 @@ var createWrapComponent = function ( event, ui, oldcomponent ) {
             }
           }
         };
-        //console.log(component);
+        if(typeof oldcomponent !== 'undefined'){
+          window.lindneo.tlingit.componentHasDeleted( oldcomponent, oldcomponent.id );
+        };
         window.lindneo.tlingit.componentHasCreated( component );
-        
-        close_button.trigger('click');
+      },
+      onComplete:function (ui){
+        var compeleteForm = $("<form>")
+          .attr("role","form")
+          .appendTo(ui);
 
-    });
-    
-    var el = document.getElementById("dummy-dropzone");
-    var FileBinary = '';
+        var alingmentDiv = $('<div>')
+          .addClass("form-group")
+          .append( $("<label >").text( j__("Resim Pozisyonunu")+":").addClass("col-sm-4"))
+          .appendTo(compeleteForm);
 
-    el.addEventListener("dragenter", function(e){
-      e.stopPropagation();
-      e.preventDefault();
-    }, false);
+          var alignmetBtnGrp = $('<div>')
+            .addClass("btn-group")
+            .addClass("col-sm-8")
+            .appendTo(alingmentDiv);
+            
+            var alignLeftLbl = $("<label>")
+              .addClass("btn btn-primary")
+              .text(j__("Sol"))
+              .appendTo(alignmetBtnGrp);
+              
+              var alignLeftInput = $("<input type='radio'>")
+                .val('left')
+                .attr('name',multipleGroupName)
+                .prependTo(alignLeftLbl);
 
-    el.addEventListener("dragexit", function(e){
-      e.stopPropagation();
-      e.preventDefault();
-    },false);
+            var alignRightLbl = $("<label>")
+              .addClass("btn btn-primary")
+              .text(j__("Sağ"))
+              .appendTo(alignmetBtnGrp);
+              
+              var alignRightInput = $("<input type='radio'>")
+                .val('right')
+                .attr('name',multipleGroupName)
+                .prependTo(alignRightLbl);
 
-    el.addEventListener("dragover", function(e){
-      e.stopPropagation();
-      e.preventDefault();
-    }, false);
+         
 
-    el.addEventListener("drop", function(e){
+        var tolaranceDiv = $('<div>')
+          .appendTo(compeleteForm);
 
-      e.stopPropagation();
-      e.preventDefault();
 
-      var reader = new FileReader();
-      var component = {};
-      var imageBinary = '';
-      var videoContentType = '';
-      var videoURL = '';
-      //console.log(reader);
-      reader.onload = function (evt) {
+          var toleranceLbl = $("<label>")
+            .addClass("col-sm-4")
+            .append(j__("Tolerans değeri")+":")
+            .appendTo(tolaranceDiv);
 
-        FileBinary = evt.target.result;
-        var contentType = FileBinary.substr(5, FileBinary.indexOf('/')-5);
-        
-        //console.log(contentType);
-        if(contentType == 'image'){
-          var imageBinary = FileBinary;
-          image_data = imageBinary;
-          var newImage = $("<img style='float:left; padding: 10px; border: 1px solid red; margin: 0 10px; width:150px;' src='"+imageBinary+"' >");
+          var toleranceValue = $('<span>')
+            .addClass("col-sm-2")
+            .addClass("integer")
+            .addClass("bold")
+            .text(tolerance);
+            
 
-          $('#popup-image').append(newImage);
-          return;
-          
-        }
-        
+          var toleranceSlider = $('<div>')
+            .addClass("col-sm-6")
+            .slider({
+              value: tolerance,
+              min: 0,
+              max: 200,
+              step: 10,
+              slide: function( event, ui ) {
+                tolerance = ui.value;
+                toleranceValue.text( tolerance );
+              }
+            }).appendTo(tolaranceDiv);
 
-        
-      };
+          toleranceValue.appendTo(tolaranceDiv);
 
-      reader.readAsDataURL( e.dataTransfer.files[0] );
+          var mainDiv = $("<div>")
+            .addClass('col-sm-12')
+            .appendTo(compeleteForm);
 
-    }, false);
+            var imageArea  = $("<div>")
+              .addClass('col-sm-4')
+              .appendTo(mainDiv);
+
+              
+
+              var removeImgBtn = $("<div>")
+                .addClass("fa fa-trash-o")
+                .click(function(){
+                  image.hide();
+                  $(this).hide();
+                  drag_file.show();
+                })
+                .hide()
+                .appendTo(imageArea);
+
+
+              var image = $("<img>")
+                .width("100%")
+                .appendTo(imageArea)
+                .hide();
+
+              var drag_file = $("<div>")
+                .addClass('add-image-drag-area')
+                .appendTo(imageArea)
+                ;
+
+            var textArea  = $("<div>")
+              .addClass('col-sm-8')
+              .appendTo(mainDiv);
+
+              var textdiv  = $("<div>")
+                .attr("contenteditable",true)
+                .attr("placeholder",j__("Metini buraya giriniz"))
+                .css({'height':'300px'})
+                .html(html_inner)
+                .appendTo(textArea);
+
+        textdiv.on('blur keyup paste input', function() {
+          html_inner = $(this).html();
+        });
+
+        $(document).on('click','input[name="' + multipleGroupName + '"]', function(){
+          wrap_align = $('input[name="' + multipleGroupName + '"]:checked').val();
+          if (wrap_align=="left")
+            imageArea.after(textArea);
+          else
+            imageArea.before(textArea);
+        });
+
+        var loadImage = function(image_data){
+          image.attr("src",image_data);
+          removeImgBtn.show();
+          image.show();
+          drag_file.hide();
+        };
+
+          var el = drag_file[0];
+          var FileBinary = '';
+          el.addEventListener("dragenter", function(e){
+            e.stopPropagation();
+            e.preventDefault();
+          }, false);
+
+          el.addEventListener("dragexit", function(e){
+            e.stopPropagation();
+            e.preventDefault();
+          },false);
+
+          el.addEventListener("dragover", function(e){
+            e.stopPropagation();
+            e.preventDefault();
+          }, false);
+          el.addEventListener("drop", function(e){
+            e.stopPropagation();
+            e.preventDefault();
+            var reader = new FileReader();    
+            reader.onload = function (evt) {
+              FileBinary = evt.target.result;
+              var contentType = FileBinary.substr(5, FileBinary.indexOf('/')-5);
+              if(contentType == 'image'){
+                var imageBinary = FileBinary;
+                image_data = imageBinary;
+                loadImage(image_data);
+                return;         
+              } 
+            };
+            reader.readAsDataURL( e.dataTransfer.files[0] );
+          }, false);
+
+        /* Set values from empty or old component */
+        if(image_data) loadImage(image_data);
+        if(tolerance) toleranceSlider.slider( "option", "value",tolerance);
+        if(html_inner) textdiv.html(html_inner);
+
+
+
+      }
+    }).appendTo('body');
 
   };
