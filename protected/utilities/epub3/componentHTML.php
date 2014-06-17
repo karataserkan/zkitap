@@ -70,11 +70,11 @@ class componentHTML {
 			  case 'slider':
 			    $this->sliderInner($component);
 			    break;
-
+			*/
 			  case 'tag':
 			    $this->tagInner($component);
 			    break;
-			    */
+			    
 			default:
 				$this->someOther_inner($component->data);			
 
@@ -1071,6 +1071,32 @@ class componentHTML {
 
 	}
 
+	public function tagInner($component){
+
+		$data=$component->data;
+
+		$tag_id= "tag".functions::get_random_string();
+
+
+		$component->data->html_inner= str_replace('">', '"/>', $component->data->html_inner);
+		$component->data->html_inner= str_replace('<br>', '</br>', $component->data->html_inner);
+
+		$container.=" 
+			
+			<a href='#".$popup_id."' rel='facybox'><img src='popupmarker.png' style='width:100%; height:100%;' /></a>
+			
+			<div id='$popup_id' style='display:none; z-index:9999999; position:relative;'>
+				".$component->data->html_inner."
+			</div>
+	
+		
+		";
+
+		$this->html=str_replace('%component_inner%' ,$container, $this->html);
+		
+
+	}
+
 	public function htmlInner($component){
 
 		$file_contents = file_get_contents(Yii::app()->params['storage'].$component->id.'.html');
@@ -1194,9 +1220,9 @@ class componentHTML {
 
 	public function wrapInner($component){
 
-		//$file = functions::save_base64_file ( $component->data->image_data , $component->id , $this->outputFolder);
-		//$this->epub->files->others[] = $file;
-		//$component->data->image_data = $file->filename;
+		$file = functions::save_base64_file ( $component->data->image_data , $component->id , $this->outputFolder);
+		$this->epub->files->others[] = $file;
+		$component->data->image_data = $file->filename;
 		/*
 		$file_contents = file_get_contents($component->data->image_data);
 
