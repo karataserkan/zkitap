@@ -31,6 +31,17 @@ html {
   -ms-text-size-adjust: 100%;
   -webkit-text-size-adjust: 100%;
 }
+
+::selection
+{
+color:#226b92;
+}
+::-moz-selection
+{
+color:#226b92;
+}
+
+
 body {
   margin: 0;
 }
@@ -292,7 +303,7 @@ img {
   height: auto;
 }
 .img-rounded {
-  border-radius: 6px;
+  border-radius: 100%;
 }
 .img-thumbnail {
   padding: 4px;

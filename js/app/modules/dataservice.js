@@ -80,44 +80,61 @@ window.lindneo.dataservice = (function( $ ) {
         var contentType = FileBinary.substr(5, FileBinary.indexOf('/')-5);
         //console.log(contentType);
         if(contentType == 'image'){
-          var size = window.lindneo.findBestSize({'w':image_width,'h':image_height});
-          var image_width = size.w;
-          var image_height = size.h;
-        
-          //console.log(image_width);
+          var image = new Image();
+          image.src = evt.target.result;
 
-          component = {
-            'type' : 'image',
-            'data': {
-              'img':{
-                'css' : {
-                  'width':'100%',
-                  'height':'100%',
-                  'margin': '0',
-                  'padding': '0px',
-                  'border': 'none 0px',
-                  'outline': 'none',
-                  'background-color': 'transparent'
-                } , 
-                'src': FileBinary
-              },
-              'lock':'',
-              'self': {
-                'css': {
-                  'position':'absolute',
-                  'top': (e.offsetY ) + 'px',
-                  'left':  ( e.offsetX ) + 'px',
-                  'width': image_width,
-                  'height': image_height,
-                  'background-color': 'transparent',
-                  'overflow': 'visible',
-                  'z-index': '990'
+          image.onload = function() {
+            // access image size here 
+            
+            image_width = this.width;
+            image_height = this.height;
+
+            image_width = this.width;
+            image_height = this.height;
+            //console.log(image_width);
+            //console.log(image_height);
+
+            var size = window.lindneo.findBestSize({'w':image_width,'h':image_height});
+            image_width = size.w;
+            image_height = size.h;
+            //console.log(image_width);
+            //console.log(image_height);
+            
+            //console.log(image_width);
+            component = {
+              'type' : 'image',
+              'data': {
+                'img':{
+                  'css' : {
+                    'width':'100%',
+                    'height':'100%',
+                    'margin': '0',
+                    'padding': '0px',
+                    'border': 'none 0px',
+                    'outline': 'none',
+                    'opacity': '1',
+                    'background-color': 'transparent'
+                  } , 
+                  'src': FileBinary
+                },
+                'lock':'',
+                'self': {
+                  'css': {
+                    'position':'absolute',
+                    'top': (e.offsetY ) + 'px',
+                    'left':  ( e.offsetX ) + 'px',
+                    'width': image_width,
+                    'height': image_height,
+                    'background-color': 'transparent',
+                    'overflow': 'visible',
+                    'z-index': 'first'
+                  }
                 }
               }
-            }
-          };
-
-          window.lindneo.tlingit.componentHasCreated( component );
+            };
+            
+            window.lindneo.tlingit.componentHasCreated( component );
+          }
         }
         else if(contentType == 'video'){
           var contentType = FileBinary.substr(0, FileBinary.indexOf(';'));

@@ -1354,8 +1354,6 @@ right join book using (book_id) where book_id='$bookId' and type IN ('rtext','te
 
 	private function SendFileToCatalog(){
 		ob_start();
-
-		
 		$QueueBooks=PublishQueue::model()->findAll('is_in_progress=:is_in_progress AND timestamp > (NOW() - INTERVAL 10 MINUTE)',array('is_in_progress'=>1));
 		if(count($QueueBooks)>0){echo "Already in progress!";die();}
 		$Queue=PublishQueue::model()->find('is_in_progress=:is_in_progress',array('is_in_progress'=>0));

@@ -11,7 +11,7 @@ $(document).ready(function(){
 
       var that = this;
       
-      //console.log(this.options.component);
+      console.log(this.options.component);
       var componentimageid='image'+this.options.component.id;
         if(this.options.component.data.img.image_type == 'popup'){
           console.log(this.options.marker);
@@ -125,8 +125,8 @@ $(document).ready(function(){
 
 var createImageComponent = function ( event, ui ,oldcomponent) {
 
-  var marker = window.base_path+'/css/popupmarker.svg';
-  var video_marker=window.base_path+'/css/image_play_trans.svg';
+  var marker = window.base_path+'/css/popupmarker.png';
+  var video_marker=window.base_path+'/css/image_play_trans.png';
   var image_width_height = '';
   var image_type_image = function(){
       var image_type = $('input[name=image_type]:checked').val();

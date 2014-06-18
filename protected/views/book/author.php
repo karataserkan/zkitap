@@ -208,12 +208,14 @@ $current_user=User::model()->findByPk(Yii::app()->user->id);
 			<ul>
 			   <li><a style="height:42px;" href="<?php echo $this->createUrl('site/index');  ?>"><img  src="/css/linden_logo.png" ></a></li>
 			   <li><a contenteditable="true"> <?php echo $model->title; ?></a></li>
+               <li class="author_headermenu_vertical_line"></li>
 			   <li class='has-sub'><a href='#'><span>Dosya</span></a>
 					<ul>
 			         <li><a href="<?php echo $this->createUrl('site/index');  ?>"><span><i class="icon-book"></i>Kitaplarım</span></a></li>
 			         <li><a href="<?php echo $this->createUrl("EditorActions/ExportPdfBook", array('bookId' => $model->book_id ));?>"> <i class="icon-doc-inv"></i><?php _e("PDF Olarak Aktar"); ?></i></a></li>
 			         <li><a href="<?php echo $this->createUrl("EditorActions/ExportBook", array('bookId' => $model->book_id ));?>"> <i class="icon-doc-inv"></i><?php _e("ePub Olarak Aktar"); ?></i></a></li>
 			         <li><a href="<?php echo $this->createUrl("EditorActions/publishBook/", array('bookId' => $model->book_id ));?>"> <i class="icon-doc-inv"></i><?php _e("Kütüphanede Yayınla"); ?></i></a></li>
+               
 			         <!--<li>
 			         	<?php
 			         		if ($budget==0) {
@@ -247,6 +249,7 @@ $current_user=User::model()->findByPk(Yii::app()->user->id);
 			        </ul>
 			   </li>
 				
+               <li class="author_headermenu_vertical_line"></li>
 			    
 			   <li><a href='#'>
 			   
@@ -1403,6 +1406,7 @@ $current_user=User::model()->findByPk(Yii::app()->user->id);
 				<li ctype="plink" class="component " style=" background-image: url(<?php echo Yii::app()->getBaseUrl(true);?>/css/images/components/<?php echo Yii::app()->language;?>/pagelink.png);"></li>
 				<li ctype="page" class="component " style=" background-image: url(<?php echo Yii::app()->getBaseUrl(true);?>/css/images/components/<?php echo Yii::app()->language;?>/pagenumber.png);"></li>
 				<li ctype="wrap" class="component " style=" background-image: url(<?php echo Yii::app()->getBaseUrl(true);?>/css/images/components/<?php echo Yii::app()->language;?>/wrap.png);"></li>
+				<li ctype="tag" class="component " style=" background-image: url(<?php echo Yii::app()->getBaseUrl(true);?>/css/images/components/<?php echo Yii::app()->language;?>/wrap.png);"></li>
 				<!--<li ctype="quiz" class="component " style=" background-image: url(<?php echo Yii::app()->getBaseUrl(true);?>/css/images/components/<?php echo Yii::app()->language;?>/quiz.png);"></li>-->
 
 		</ul>	
@@ -1957,7 +1961,7 @@ $current_user=User::model()->findByPk(Yii::app()->user->id);
 			  <div class="panel panel-default">
 				 <div class="panel-heading">
 					<h3 class="panel-title"> <a class="accordion-toggle " data-toggle="collapse" data-parent="#accordion" href="#collapseThree"><i class="fa fa-file-text-o light-blue"></i>&nbsp;&nbsp;&nbsp;Sayfalar</a>
-					<a data-toggle="modal" data-target="#addPage" class="btn btn-info pull-right clearfix" style="margin-top: -22px;" ><i class="fa fa-plus white"></i></a> </h3>
+					<a data-toggle="modal" data-target="#addPage" class="btn btn-info pull-right clearfix" style="margin-top: -18px;padding: 1px 10px;" ><i class="fa fa-plus white"></i></a> </h3>
 
 				 </div>
 				 <div id="collapseThree" class="panel-collapse collapse in">

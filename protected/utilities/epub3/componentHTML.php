@@ -63,15 +63,18 @@ class componentHTML {
 			 case 'rtext':
 			    $this->rtextInner($component);
 			    break;
+			 case 'page':
+			    $this->pageInner($component);
+			    break;
 			  /*
 			  case 'slider':
 			    $this->sliderInner($component);
 			    break;
-
+			*/
 			  case 'tag':
 			    $this->tagInner($component);
 			    break;
-			    */
+			    
 			default:
 				$this->someOther_inner($component->data);			
 
@@ -1068,6 +1071,32 @@ class componentHTML {
 
 	}
 
+	public function tagInner($component){
+
+		$data=$component->data;
+
+		$tag_id= "tag".functions::get_random_string();
+
+
+		$component->data->html_inner= str_replace('">', '"/>', $component->data->html_inner);
+		$component->data->html_inner= str_replace('<br>', '</br>', $component->data->html_inner);
+
+		$container.=" 
+			
+			<a href='#".$popup_id."' rel='facybox'><img src='popupmarker.png' style='width:100%; height:100%;' /></a>
+			
+			<div id='$popup_id' style='display:none; z-index:9999999; position:relative;'>
+				".$component->data->html_inner."
+			</div>
+	
+		
+		";
+
+		$this->html=str_replace('%component_inner%' ,$container, $this->html);
+		
+
+	}
+
 	public function htmlInner($component){
 
 		$file_contents = file_get_contents(Yii::app()->params['storage'].$component->id.'.html');
@@ -1137,7 +1166,9 @@ class componentHTML {
 		else if($component->data->selected_tab == "#plink_area")
 			$container.=" 
 				<div id='$plink_id' ".$css." style='width:".$component->data->width."; height:".$component->data->height."; z-index:999999;'>
-					<a href='".$component->data->page_link.".html'><div style='width:".$component->data->self->css->width."; height:".$component->data->self->css->height.";'></div></a>
+					<a href='".$component->data->page_link.".html'>
+						<div style='width:".$component->data->self->css->width."; height:".$component->data->self->css->height.";'></div>
+					</a>
 				</div>
 		
 			
@@ -1145,12 +1176,14 @@ class componentHTML {
 		else 
 			$container.=" 
 				<div id='$plink_id' ".$css." >
-					<a href='".$component->data->page_link.".html'><div style='width:".$component->data->self->css->width."; height:".$component->data->self->css->height.";'></a>
+					<a href='".$component->data->page_link.".html'>
+						<div style='width:".$component->data->self->css->width."; height:".$component->data->self->css->height.";'>".$component->data->plink_data."</div>
+					</a>
 				</div>
 		
 			";
 			
-		
+
 		$this->html=$container;
 		
 	}
@@ -1187,7 +1220,23 @@ class componentHTML {
 
 	public function wrapInner($component){
 
+		$file = functions::save_base64_file ( $component->data->image_data , $component->id , $this->outputFolder);
+		$this->epub->files->others[] = $file;
+		$component->data->image_data = $file->filename;
+		/*
+		$file_contents = file_get_contents($component->data->image_data);
 
+		$URL=parse_url($component->data->image_data);
+		$URL=pathinfo($URL[path]);
+		$ext=$URL['extension'];
+
+		$file=new file( $component->id.'.'.$ext , $this->outputFolder );
+		$file->writeLine($file_contents);
+		$file->closeFile();
+
+		$this->epub->files->others[] = $file;
+		$component->data->image_data=$file->filename;
+		*/
 		$data=$component->data;
 
 		$css="";
@@ -1197,7 +1246,7 @@ class componentHTML {
 					$css.="$css_name:$css_val;";
 
 			}
-			$css.=" font-family: Helvetica; font-size: 16px; z-index:9999; position:relative;' ";
+			$css.=" font-family: Helvetica; font-size: 16px; z-index:9999; overflow-y:auto; overflow-x:hidden;' ";
 		}
 
 		$wrap_id= "wrap".$component->id;
@@ -1214,24 +1263,27 @@ class componentHTML {
 		$component->data->html_inner = str_replace('font-size: 11px;', 'font-size: 16px;', $component->data->html_inner);
 
 		$component->data->html_inner = html_entity_decode($component->data->html_inner,null,"UTF-8");
+
+		$image_data = "<img class='wrapReady withSourceImage ".$component->data->wrap_align."' style='float:".$component->data->wrap_align."; padding: 10px; border: 1px solid red; margin: 0 10px;' src='".$component->data->image_data."' ></img>";
+		$component->data->html_inner = $image_data.$component->data->html_inner;		
 		$container.="
 
 			<div id='".$wrap_id."' $css>
 				".$component->data->html_inner."
 			</div>
 			<script type='text/javascript'>
-		       	
+		       	$('span .wrapReady').css('float','".$component->data->wrap_align."');
 				$('.wrapReady.withSourceImage').slickWrap({
-                    sourceImage: true,cutoff: 180
+                    sourceImage: true,cutoff: 180, resolution: 1
                 });
-				
+			
 			</script>
 
 			";
 
 
 
-
+			echo "";
 
 		$this->html=$container;
 	
@@ -1405,9 +1457,37 @@ class componentHTML {
 			array('%component_inner%', '%component_text%') , 
 			array($container, str_replace("\n", "<br/>",   htmlspecialchars($this->textSanitize($data->textarea->val),null,"UTF-8")  ) )
 			, $this->html);
+	}
+	
+	public function pageInner($component){
+
+		$container='';
+		$data = $component->data;
+
+		if(isset($data->textarea->attr))
+			foreach ($data->textarea->attr as $attr_name => $attr_val ) {
+				if (trim(strtolower($attr_name))!='contenteditable' && trim($attr_name)!='componentType' && $attr_name!='placeholder' && $attr_name!='fast-style')	
+					$container.=" $attr_name='$attr_val' ";
+			}
+
+		if(isset($data->textarea->css)){
+			$container.=" style=' ";
+			foreach ($data->textarea->css as $css_name => $css_val ) {
+				$container.="$css_name:$css_val;";
+			}
+			$container.="' ";
+		}
 
 
+		$container = "<div class='plink textarea' $container  >%component_text% </div>";
+				
 
+		$data->textarea->val = html_entity_decode(str_replace(" ", "&nbsp; ",$data->textarea->val),null,"UTF-8");
+
+		$this->html=str_replace(
+			array('%component_inner%', '%component_text%') , 
+			array($container, str_replace("\n", "<br/>",   htmlspecialchars($this->textSanitize($data->textarea->val),null,"UTF-8")  ) )
+			, $this->html);
 	}
 
 	public function rtextInner($component){
@@ -1455,7 +1535,7 @@ if ($data->self->attr->componentType == "side-text" ){
 		$tidy = new tidy;
 		$tidy->parseString($component->data->rtextdiv->val, $tidy_config, 'utf8');
 		$tidy->cleanRepair();
-
+		$tidy = preg_replace( "#(^(&nbsp;|\s)+|(&nbsp;|\s)+$)#", "", $tidy );
 		$container.=" 
 		<div id='$rtext_id' ".$attr." ".$css." class='widgets-rw panel-scrolling-rw scroll-horizontal-rw exclude-auto-rw'>
 

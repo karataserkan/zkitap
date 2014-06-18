@@ -37,10 +37,10 @@ $(document).ready(function(){
 
       this._super({resizableParams:{
         "handles":"e",
-        "maxHeight":60,
+        /*"maxHeight":60,*/
         "minHeight":60,
       }});
-      this.element.height(60);
+      //this.element.height(60);
 
 
     },
@@ -178,8 +178,8 @@ $(document).ready(function(){
                   'controls':'controls'
                 },
                 'css': {
-                  'width' : '100%',
-                  'height': '30px',
+                  'width' : '100%'/*,
+                  'height': '30px',*/
                 },
                 'name': $('#pop-sound-name').val()
               },
@@ -202,7 +202,7 @@ $(document).ready(function(){
                   'top': (ui.offset.top-$(event.target).offset().top ) + 'px',
                   'left':  ( ui.offset.left-$(event.target).offset().left ) + 'px',
                   'width': '250px',
-                  'height': '60px',
+                  /*'height': '60px',*/
                   'background-color': 'transparent',
                   'overflow': 'visible',
                   'z-index': 'first',
