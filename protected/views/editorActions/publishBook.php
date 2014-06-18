@@ -102,7 +102,7 @@
 												 <li>
 													<a href="#money" data-toggle="tab" class="wiz-step">
 													<span class="step-number">4</span>
-													<span class="step-name"><i class="fa fa-check"></i> <?php _e('Fiyat Bilgileri'); ?> </span>   
+													<span class="step-name"><i class="fa fa-check"></i> <?php _e('ACL Bilgileri'); ?> </span>   
 													</a> 
 												 </li>
 												 <li>
