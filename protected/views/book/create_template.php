@@ -99,6 +99,7 @@
 													</div>
 												</div>
 												<div class="tab-pane" id="save">
+													<span style="width:100%; text-align:center; margin:25px 0">Şablon bilgileri ve sayfa boyutları alındı. Son olarak oluştur butonuna tıklayınız.</span>
 												</div>
 										   </div>
 										   <div class="wizard-buttons">
