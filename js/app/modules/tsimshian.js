@@ -93,12 +93,25 @@ window.lindneo.tsimshian = (function(window, $, undefined){
     }
 
     this.socket = io.connect(window.location.origin+":1881");
+     var logged_in = {
+            sid : sid,
+            username :username
+          };
+     this.socket.on('logout',function () {
+          window.location.assign(logoutURL);
+     });
+
+    this.socket.emit('logged_in',logged_in);
     this.socket.on('connection', function (data) {
+     
+
+          
+
       var user=window.lindneo.tsimshian.getCurrentUser();
        this.socket.emit('changePage',user);
 
     });
-  
+
         
   
        this.socket.on('newComponent', function(component){
