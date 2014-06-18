@@ -562,15 +562,14 @@
 														<?php _e('Devam'); ?> <i class="fa fa-arrow-circle-right"></i>
 													   </a>
 													   <?php 
-													   if($budget==0)
-														   {
-														   		echo "Hesabınızda yeterli bakiye bulunmamaktadır.";
-														   }else{
+													  // if($budget==0)
+														   //{
+														   	//	echo "Hesabınızda yeterli bakiye bulunmamaktadır.";
+														 //  }else{
 													   ?>
 													   <a href="javascript:;" class="btn btn-success submitBtn" id="publishBk">
 														<?php _e('Yayınla'); ?> <i class="fa fa-arrow-circle-right"></i>
 													   </a>
-													   <?php } ?>                            
 													</div>
 												 </div>
 											  </div>
