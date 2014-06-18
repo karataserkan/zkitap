@@ -1574,21 +1574,29 @@ right join book using (book_id) where book_id='$bookId' and type IN ('rtext','te
 			$bookId=$id;
 		}
 		
-
 		$response=false;
+		
+		$isInQueue=PublishQueue::model()->findByPk($bookId);
 
-		if($return=$this->SendFileToQueue($bookId) ){
-			if ($return=="budgetError") {
-				$response="budgetError";
-			}
-			else
-			{
-				$response['sendFileInfo']=$return; 
-				$response['sendFile']=true;		
-			}
+		if ($isInQueue) {
+			$response['queue']="error";
 		}else{
-			$response['sendFile']=false;
-		}	
+			if($return=$this->SendFileToQueue($bookId) ){
+				if ($return=="budgetError") {
+					$response="budgetError";
+				}
+				else
+				{
+					$response['sendFileInfo']=$return; 
+					$response['sendFile']=true;		
+					$response['queue']="success";
+				}
+			}else{
+				$response['sendFile']=false;
+			}	
+		}
+
+
 		
 
 		return $this->response($response);
