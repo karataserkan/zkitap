@@ -2,6 +2,7 @@
 
 
 <!-- POPUP EDITORS -->
+<!--
 <div class="modal fade" id="publishedbookModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 <div class="modal-dialog">
   <div class="modal-content">
@@ -53,7 +54,7 @@
       </div>
 	</div>
   </div>
-</div> 
+</div> -->
 <!-- POPUP END -->
 				<div class="col-lg-12" id="content">
                     <div class="page-header">
@@ -540,7 +541,7 @@
 															  <input type="checkbox" id="rights" name="rights" class="uniform" value="accepted" checked /> 
 														   </div>
 														   
-														   <label class="control-label col-md-3" style="text-align:left"> <a data-id="publishedbookModal" data-toggle="modal" data-target="#publishedbookModal" >Kullanıcı Sözleşmesini</a> Kabul Ediyorum.</label>
+														   <label class="control-label col-md-3" style="text-align:left"> Kullanıcı Sözleşmesini Kabul Ediyorum.</label>
 															
 														</div>
 													</div>
