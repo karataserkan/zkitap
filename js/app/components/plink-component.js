@@ -299,7 +299,7 @@ console.log(top);
             }
           }
         };
-       
+        
         window.lindneo.tlingit.componentHasCreated( component );
         
         close_button.trigger('click');
