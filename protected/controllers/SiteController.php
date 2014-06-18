@@ -33,6 +33,8 @@ class SiteController extends Controller
 	public function actionIndex()
 	{
 
+		
+
 		functions::event('tripData',NULL, function($var){
 
 		?>
@@ -43,13 +45,6 @@ class SiteController extends Controller
 			       delay:-1
 			   },
                
-          /* E-Posta Doğrulama */
-			   { 
-			       sel : $('a[data-id="confirmEmail"]'),
-			       content : j__("Öncelikle E-Posta Adresinizi Doğrulayın."),
-			       position:'s',
-                   delay:-1
-			   },
 		
 			/* Header */
 			   { 
@@ -112,12 +107,12 @@ class SiteController extends Controller
 			       content : 'Organizasyonunuzu Yönetebilirsiniz.',
 			       position:'e',
 			       //expose: true,
-			       callback:function(){$($('#sidebar >div> ul>li')[5]).find('a').click();}
+			       callback:function(){$('.mybooks_page_categories').find('i').click();}
 			   },
 
 			 /* Content */
 			   { 
-			       sel : $('#filter-controls'),
+			       sel : $('.mybooks_page_categories .dropdown-menu'),
 			       content : 'Çalışma Alanı Hızlı Filtrelerini kullanarak kitaplarınıza hızlı erişebilirsiniz.',
 			       position:'s',
 			       expose: true,
@@ -772,7 +767,7 @@ class SiteController extends Controller
 							$workspaceUser->owner=$newUser->id;
 
 							$bk=new BookController(1);
-							$bk->duplicateBookBody("hUPIOvvB6u3hpfWDFPFVynCDYBP7Fv92tEH8rahaUCj1", $workspace->workspace_id,"Demo Kitap",$newUser->id);
+							$bk->duplicateBookBody("OgrBCZ5ErK1u1hVGIAgsJXmG2CIkIPsqBqKjUNjzxsaz", $workspace->workspace_id,"Demo Kitap",$newUser->id);
 
 							$addWorkspaceOrganization = Yii::app()->db->createCommand();
 							if($addWorkspaceOrganization->insert('organisation_workspaces', array(
@@ -881,3 +876,4 @@ class SiteController extends Controller
 		
 	}
 }
+>>>>>>> 8c91f92ba04f9d0e9364b2b90622c751abfa35f2

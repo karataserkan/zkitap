@@ -1149,10 +1149,10 @@ right join book using (book_id) where book_id='$bookId' and type IN ('rtext','te
 		
 
 		if (!empty($_POST)) {
-			$budget=$this->getOrganisationEpubBudget($_POST['PublishBookForm']['organisationId']);
-			if ($budget<=0) {
-				return "budgetError";
-			}
+			// $budget=$this->getOrganisationEpubBudget($_POST['PublishBookForm']['organisationId']);
+			// if ($budget<=0) {
+			// 	return "budgetError";
+			// }
 		
 
 			$data['organisationId']=$_POST['PublishBookForm']['organisationId'];
