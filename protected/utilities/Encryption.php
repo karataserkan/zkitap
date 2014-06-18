@@ -47,12 +47,12 @@ class Encryption
             $saveas=$filepath;
         }
         $openFile = file_get_contents($filepath) ;
-        if (!$openFile) return fasle;
+        if (!$openFile) return false;
         
         if ( file_put_contents( $saveas , self::encrypt($key, $openFile ) ) ){
             return true;
         } 
-        return fasle;
+        return false;
     }
 
     public function encryptFolder($folder){

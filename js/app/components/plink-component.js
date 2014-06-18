@@ -72,7 +72,7 @@ $(document).ready(function(){
 var createPlinkComponent = function ( event, ui, oldcomponent ) {  
 
   var book_data='';
-  var marker = window.base_path+'/css/popupmarker.svg';
+  var marker = window.base_path+'/css/popupmarker.png';
   var video_marker=window.base_path+'/css/image_play_trans.png';
   if(typeof oldcomponent == 'undefined'){
       //console.log('dene');
