@@ -785,7 +785,7 @@ var textComponentBuilder = function( component ) {
     var element  = $('<div class="sound-controllers"> </div>');
     var elementWrap=$('<div title="'+j__("Ses Aracı")+'"></div>');
     elementWrap.appendTo( page_div_selector );
-
+    console.log('Ses ARACI',component);
     element
     .appendTo( elementWrap )
     .soundComponent({
