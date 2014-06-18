@@ -73,7 +73,7 @@ var createPlinkComponent = function ( event, ui, oldcomponent ) {
 
   var book_data='';
   var marker = window.base_path+'/css/popupmarker.svg';
-  var video_marker=window.base_path+'/css/image_play_trans.svg';
+  var video_marker=window.base_path+'/css/image_play_trans.png';
   if(typeof oldcomponent == 'undefined'){
       //console.log('dene');
       var top = (ui.offset.top-$(event.target).offset().top ) + 'px';
