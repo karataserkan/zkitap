@@ -39,6 +39,12 @@
 		<script src="<?php echo Yii::app()->request->baseUrl; ?>/js/lib/nprogress.js"></script>
 		<script src="<?php echo Yii::app()->request->baseUrl; ?>/js/lib/jquery-collision.min.js"></script>
 		<script src="<?php echo Yii::app()->request->baseUrl; ?>/js/lib/jquery.reject.js"></script>
+		<script type="text/javascript">
+			var sid = "<?php echo  md5(session_id()); ?>";
+			var username = "<?php echo md5(Yii::app()->user->name); ?>";
+			var logoutURL = "<?php echo Yii::app()->createAbsoluteUrl('site/logout'); ?>";
+
+		</script>
 		
 		<!-- Localization -->
 		<script type="text/javascript">
