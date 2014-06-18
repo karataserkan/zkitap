@@ -67,7 +67,7 @@ var left = 0;
 
 var createVideoComponent = function( event, ui, oldcomponent ) {
 
-  var marker = window.base_path+'/css/popupmarker.svg';
+  var marker = window.base_path+'/css/popupmarker.png';
   var video_marker=window.base_path+'/css/video_play_trans.svg';
   var video_width_height = '';
   var video_type_video = function(){
