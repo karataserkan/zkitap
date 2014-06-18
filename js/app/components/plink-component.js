@@ -130,7 +130,8 @@ console.log(top);
   
   
 
-  var html_popup = $("<div class='popup ui-draggable' id='pop-plink-popup' style='display: block; top:" + top + "; left: " + left + "; width:550px;'> \
+
+  var html_popup = $("<div class='popup ui-draggable' id='pop-plink-popup' style='display: block; top:" + top + "; left: " + left + "; width:550px;min-width: 596px;min-height: 562px;'> \
       </div>");
   html_popup.appendTo('body').draggable({cancel:'.drag-cancel'}).resizable();
   var poup_header = $("<div class='popup-header'><i class='icon-m-link'></i> &nbsp;"+j__("Sayfa Bağlantısı Ekle")+" </div> ");
@@ -149,7 +150,7 @@ console.log(top);
                           </div>\
                           <div class='tab-content'>\
                             <div class='tab-pane fade in active' id='plink_name'><br>\
-                              <div  id='popup-explanation' contenteditable='true' class='drag-cancel'><textarea row='2' cols='30' id='baslik' name='baslik' placeholder='"+j__("Başlığı buraya giriniz")+"...'></textarea></div> \
+                              <div  id='popup-explanation' contenteditable='true' class='drag-cancel'><textarea row='2' cols='30' id='baslik' style='resize:none;width:100%' name='baslik' placeholder='"+j__("Başlığı buraya giriniz")+"...'></textarea></div> \
                             </div>\
                             <div class='tab-pane fade' id='plink_icon'><br>\
                               <span id='plink_image'>\
@@ -166,7 +167,7 @@ console.log(top);
                             </div>\
                           </div>\
                         </div> <br>");
-  var add_button = $("<br><a href='#' id='pop-image-OK' class='btn btn-info' style='padding: 5px 30px;'>"+j__("Ekle")+"</a> ");
+  var add_button = $("<br><div style='margin-left:-70px'><a href='#' id='pop-image-OK' class='btn btn-info' style='position:absolute;bottom:30px;padding: 5px 30px;'>"+j__("Ekle")+"</a></div> ");
   poup_header.appendTo(html_popup);
   close_button.appendTo(poup_header);
   galery_inner.appendTo(html_popup);
