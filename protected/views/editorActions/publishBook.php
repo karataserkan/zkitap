@@ -2,21 +2,59 @@
 
 
 <!-- POPUP EDITORS -->
+<!--
 <div class="modal fade" id="publishedbookModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-	<div class="modal-dialog">
-	  <div class="modal-content">
-		<div class="modal-header">
-		  <h4 class="modal-title"><?php _e("Eser Yayınlama"); ?></h4>
-		</div>
-		<div class="modal-body">
-		 	Eser yayınlanma kuyruğuna eklendi. Yayınlama işlemi bittiğinde e-posta ile bilgi verilecektir.
-		</div>
-	      <div class="modal-footer">
-	      	<a href="/site/index" class="btn btn-primary brand_color_for_buttons"><?php _e("Tamam"); ?></a>
-	      </div>
-		</div>
-	  </div>
-	</div> 
+<div class="modal-dialog">
+  <div class="modal-content">
+	<div class="modal-header">
+	  <h4 class="modal-title"><?php _e("GENEL HÜKÜM VE KOŞULLAR "); ?></h4>
+	</div>
+	<div class="modal-body"><p>AŞAĞIDA YER ALAN HUKUKİ ANLAŞMALAR SİZ (BUNDAN SONRA “KULLANICI” OLARAK ANILACAKTIR) VE IHLAMUR DİJİTAL YAYINCILIK BİLİŞİM SANAYİ VE TİCARET A.Ş. (BUNDAN SONRA “LİNDEN” OLARAK ANILACAKTIR) ARASINDADIR VE TÜM OKUTUS YAZILIMLARININ (BUNDAN SONRA KISACA “OKUTUS” OLARAK ANILACAKTIR) KULLANIMINI DÜZENLEMEKTEDİR. OKUTUS'U KULLANARAK BU HÜKÜM VE KOŞULLARI KABUL ETMİŞ SAYILIRSINIZ. BU KOŞULLARI KABUL ETMİYORSANIZ, OKUTUS'U KULLANMAYINIZ AYRICA DİĞER KONULAR İLE İLGİLİ LİNDEN İLE İLETİŞİME GEÇİNİZ. BU SÖZLEŞME, ÖRNEĞİN OKUTUS'UN KULLANIMINA İLİŞKİN OLARAK ANLAŞMASINI YAPMIŞ OLDUĞUMUZ YAZILIM LİSANSLARINA HALEL GELMEKSİZİN UYGULANACAKTIR.</p>
+			<p>Lütfen bu metni dikkatlice okuyunuz. Eğer anlamadığınız ve merak ettiğiniz bir yer olursa, size yardımcı olmaktan memnun oluruz. Lütfen bizimle <a href="mailto:info@linden-tech.com">info@linden-tech.com</a> adresinden iletişime geçiniz.</p>
+			<h4>Kullanım Koşulları Değişiklikleri</h4>
+			<p>LİNDEN bu şartları herhangi bir zamanda değiştirme, düzenleme ve ihtiyaç duyulduğunda yeni maddeler ekleme hakkını saklı tutar.</p>
+			<p>LİNDEN Hizmet koşulları üzerinde herhangi bir güncelleme yaparsa bu değişiklikleri internet sayfasından duyurur.</p>
+			<h4>KULLANICI Hesabı</h4>
+			<p>KULLANICI hesap oluştururken LİNDEN'e sağladığı e-posta adresi ile LİNDEN'in KULLANICI ile bu e-posta adresi üzerinden iletişim kurmasına izin vermiş olur. LİNDEN, KULLANICI'NIN e-posta üzerinden kullanıcı hesabı ile alakalı işlemler, bilgilendirmeler ve uyarılar için KULLANICI ile iletişim kurar. Kayıtlı kullanıcı e-posta adresinin geçerli olması KULLANICI'NIN sorumluluğundadır. Her ne nedenle olursa olsun geçerliliği biten veya artık kullanılmayan/kullanılamayan e-posta adresinin sistemden değiştirilmesi veya konu ile alakalı olarak LİNDEN ile iletişime geçmesi KULLANICI'NIN sorumluluğundadır. KULLANICI, LİNDEN'den e-posta almak istemiyorsa&nbsp; <a href="mailto:info@linden-tech.com">info@linden-tech.com</a> e-posta adresinden LİNDEN ile iletişime geçer.</p>
+			<p>KULLANICI, kullanıcı adı ve şifresinin güvenliğinden, gizliliğinden, kullanımından ve kullanımı için izin verdiği tüm 3.şahısların kullanımından sorumludur.</p>
+			<p>Eğer KULLANICI, kullanıcı hesabının izinsiz/yetkisiz olarak kullanıldığını düşünüyor ise mümkün olan en kısa zamanda, konuyu LİNDEN'e bildirmek ile yükümlüdür. KULLANICI, OKUTUS üzerindeki bilgilerinin ve tercihlerinin doğru, tam ve güncel olmasından sorumludur.</p>
+			<h4>İçerik Kullanımı</h4>
+			<p>KULLANICI, OKUTUS üzerine yüklenecek ve/veya OKUTUS üzerinden dağıtılacak olan her türlü metin, görsel, video gibi bunlarla kısıtlı olmayan fakat bunları da kapsayan tüm içeriklerin sahipliğinden, doğruluğundan, telif hakkı veya izinsiz kullanımından doğabilecek bütün hukuki sorumluluklarından sorumludur. LİNDEN yukarıda belirtilen OKUTUS üzerine yüklenmiş ve yayınlanmış tüm içeriklerin sahipliğinden, doğruluğundan, telif hakkından veya izinsiz kullanımından doğabilecek bütün hukuki sorumluluklarından feragat eder.</p>
+			<p>LİNDEN hukuki olarak takip edilmesi gereken durumlarda yetkili merciler ile gerekli olan tüm işbirliklerine giderek, böyle bir durumda KULLANICI'ya bildirim yapılmaksızın, içerik, kullanım ve kişisel bilgilerin dâhil her türlü bilgiyi yetkili mercilere iletilme hakkını saklı ve “Kişisel Bilgilerin Korunması” koşulları kapsamının dışında tutar.</p>
+			<h4>Fikri Mülkiyet</h4>
+			<p>OKUTUS yazılımının tüm fikri ve sınai hakları LİNDEN'e aittir. KULLANICI bu hususta herhangi bir hak iddiasında bulunamaz. KULLANICI, OKUTUS’un tüm yasal, hukuki ve teknik haklarının LİNDEN’e ait olduğunu LİNDEN’in izni olmadan üzerinde hiçbir değişiklik yapamayacağını kabul eder.</p>
+			<h4>Fesih</h4>
+			<p>İşbu Sözleşmenin hükümlerinden herhangi birine KULLANICI'nın uymaması, ya da LİNDEN bu konuda şüphesi olması halinde, LİNDEN kendi takdirine bağlı olarak ve KULLANICI'ya bildirimde bulunmaksızın bu Sözleşmeyi ve/veya KULLANICI'nın kullanıcı hesabını feshedebilir ve KULLANICI'nın fesih tarihine(1 ay süre) kadar hesabına biriken bütün miktarları ödeme yükümlülüğü devam eder. KULLANICI bu 1 ay süre sonunda ödemesini hala gerçekleştirmediği durumlarda; LİNDEN taahhüt ettiği hizmeti ertelemek, durdurmak, OKUTUS'un kullanımını tamamen dondurup kullanım dışı bırakmak veya iptal etmek haklarına sahiptir.</p>
+			<p>LİNDEN'in izni olmadan ürünün 3.şahıslara açılması; anlaşma kapsamına giren yayın sayısından daha fazla üretimde bulunulması; anlaşmaya girmediği halde hizmetten gelir elde etmesi; farklı kurum, kuruluş, yazar veya kişilere kiralaması ve satış yapması; yazılım kodlarıyla oynanması veya kopyalanması gibi durumlarda LİNDEN ilgili KULLANICI’ya uyarı, yazılım erişiminin sınırlandırılması veya süresiz kapatılması şeklinde yaptırım uygulayabilir. Bu durumda sözleşme fesh edilecektir ve KULLANICI hakkında gerekli ceza yaptırımı uygulanacaktır.</p>
+			<h4>Kişisel Bilgilerin Korunması</h4>
+			<p>LİNDEN kişisel bilgilerinizi kaybolma, çalınma, kötüye kullanma, yetkisiz erişim, ifşa, değiştirme ve yok etmeye karşı korumak için – yönetimsel, teknik ve fiziksel tedbirler dâhil – önlemler alır.</p>
+			<p>OKUTUS gibi LİNDEN'in çevrimiçi hizmetleri, kişisel bilgilerin toplandığı tüm Internet sayfalarında SSL şifrelemesi kullanmaktadır. KULLANICI bu hizmetlerden satın alma yapabilmek için mutlaka SSL-uyumlu bir tarayıcı kullanmalıdır. Bu şekilde hareket edilmesi, kişisel bilgilerin Internet üzerinden aktarılırken, bu bilgilerin gizliliğini korur. Ayrıca LİNDEN, OKUTUS üzerinden KULLANICI'nın yapacağı her işlemde, sunucular arasındaki bilgi aktarımda LDDP(Linden Digital Distribution Protocol) şifrelemesi ile KULLANICI bilgilerinin güvenliğini sağlar.</p>
+			<h4>Kabul Edilebilir Kullanım</h4>
+			<p>LİNDEN kabul edilebilir kullanım çerçevesinde OKUTUS'un herhangi bir KULLANICI tarafından yapıldığı zaman KULLANICI'nın tüm sözleşmelerde ve anlaşmalardaki haklarından feragat edeceği durum ve hareketleri tanımlar. LİNDEN'in, OKUTUS dâhil tüm hizmetlerinin; yasadışı, kötü eğilimli, suiistimal aracı ve diğer tüm tarafların işlerine, ticaretlerine ve aktivitelerine müdahale edilebilecek tüm kullanımları yasaklar. Aşağıdaki liste yasaklanan kullanım şekillerine örnektir ve aşağıdaki liste sadece örnek olarak verilmiştir, tüm kullanım türlerini kapsamayabilir.</p>
+			<ul>
+			<li>OKUTUS’un herhangi bir güvenlik mekanizmasını atlamaya veya kırmaya çalışmak ve risk teşkil edecek eylemlerde bulunmak.</li>
+			<li>OKUTUS üzerinde test veya filtreleme amaçlı güvenlik açıklarını bulmak.</li>
+			<li>OKUTUS üzerinden yüksek boyutlu dosya transfer etmek veya dosya tranferleri için kullanılması.</li>
+			<li>OKUTUS’un herhangi bir servisi üzerinde istemli veya istemsiz olarak OKUTUS’un güvenilirliğini, istikrarını veya kullanılabilirliğini etkileyecek bir saldırıda bulunmak.</li>
+			<li>OKUTUS’a karşı virüsler, trojanlar, solucanlar veya herhangi diğer kötü niyetli, zararlı veya zararlı programlar içeren bir etkileşimde bulunmak.</li>
+			<li>LİNDEN ile anlaşma dışında OKUTUS üzerinden reklam, pazarlama veya diğer faaliyetlerde bulunmak.</li>
+			<li>(Ticari veya başka türlü) dâhil olmak üzere istenmeyen veya birey haklarına taciz ile bağlantılı içerikler yükleme veya yayınlama.</li>
+			<li>LİNDEN’e ait hesapları kullanma veya başka e-posta adresleri ve telefon numaraları dâhil olmak üzere başkaları hakkında bilgi toplamak.</li>
+			<li>OKUTUS kullanarak 3. Şahıslara karşı hileli faaliyetlerde bulunmak.</li>
+			<li>Veri veya yazılım iletimi ile alakalı yerli veya yabancı hukukun ihlali veya ihlalinin kolaylaştırılması.</li>
+			<li>Fikri mülkiyet haklarını ya da 3. şahısların diğer haklarını ihlal eden herhangi bir eylemde bulunmak.</li>
+			<li>İftira niteliğinde, küçük düşürücü, ayrımcı ya da başka kötü niyetli ya da herhangi bir kişi veya kuruma zararlı herhangi bir içerik kullanılması.</li>
+			<li>OKUTUS üzerinde sahte ya da başkasına ait hesap bilgilerinin kullanılması.</li>
+			<li>OKUTUS kullanılarak elektronik ortama aktarılan yayınların LİNDEN ile yapılan anlaşma kapsamı dışında satılması veya ticari gelir elde edilmesi.</li>
+			<li>Bu Kabul Edilebilir Kullanım Politikası ile yasaklanan faaliyetleri teşvik etmek veya desteklemek için herhangi bir eylemde bulunmak.</li>
+			</ul>
+	</div>
+      <div class="modal-footer">
+      	<a data-dismiss="modal" class="btn btn-primary brand_color_for_buttons"><?php _e("Tamam"); ?></a>
+      </div>
+	</div>
+  </div>
+</div> -->
 <!-- POPUP END -->
 				<div class="col-lg-12" id="content">
                     <div class="page-header">
@@ -65,7 +103,7 @@
 												 <li>
 													<a href="#money" data-toggle="tab" class="wiz-step">
 													<span class="step-number">4</span>
-													<span class="step-name"><i class="fa fa-check"></i> <?php _e('Fiyat Bilgileri'); ?> </span>   
+													<span class="step-name"><i class="fa fa-check"></i> <?php _e('ACL Bilgileri'); ?> </span>   
 													</a> 
 												 </li>
 												 <li>
@@ -503,7 +541,7 @@
 															  <input type="checkbox" id="rights" name="rights" class="uniform" value="accepted" checked /> 
 														   </div>
 														   
-														   <label class="control-label col-md-3" style="text-align:left"> <a>Kullanıcı Sözleşmesini</a> Kabul Ediyorum.</label>
+														   <label class="control-label col-md-3" style="text-align:left"> Kullanıcı Sözleşmesini Kabul Ediyorum.</label>
 															
 														</div>
 													</div>
@@ -525,15 +563,14 @@
 														<?php _e('Devam'); ?> <i class="fa fa-arrow-circle-right"></i>
 													   </a>
 													   <?php 
-													   if($budget==0)
-														   {
-														   		echo "Hesabınızda yeterli bakiye bulunmamaktadır.";
-														   }else{
+													  // if($budget==0)
+														   //{
+														   	//	echo "Hesabınızda yeterli bakiye bulunmamaktadır.";
+														 //  }else{
 													   ?>
 													   <a href="javascript:;" class="btn btn-success submitBtn" id="publishBk">
 														<?php _e('Yayınla'); ?> <i class="fa fa-arrow-circle-right"></i>
 													   </a>
-													   <?php } ?>                            
 													</div>
 												 </div>
 											  </div>

@@ -1149,10 +1149,10 @@ right join book using (book_id) where book_id='$bookId' and type IN ('rtext','te
 		
 
 		if (!empty($_POST)) {
-			$budget=$this->getOrganisationEpubBudget($_POST['PublishBookForm']['organisationId']);
-			if ($budget<=0) {
-				return "budgetError";
-			}
+			// $budget=$this->getOrganisationEpubBudget($_POST['PublishBookForm']['organisationId']);
+			// if ($budget<=0) {
+			// 	return "budgetError";
+			// }
 		
 
 			$data['organisationId']=$_POST['PublishBookForm']['organisationId'];
@@ -1354,8 +1354,6 @@ right join book using (book_id) where book_id='$bookId' and type IN ('rtext','te
 
 	private function SendFileToCatalog(){
 		ob_start();
-
-		
 		$QueueBooks=PublishQueue::model()->findAll('is_in_progress=:is_in_progress AND timestamp > (NOW() - INTERVAL 10 MINUTE)',array('is_in_progress'=>1));
 		if(count($QueueBooks)>0){echo "Already in progress!";die();}
 		$Queue=PublishQueue::model()->find('is_in_progress=:is_in_progress',array('is_in_progress'=>0));
@@ -1576,21 +1574,29 @@ right join book using (book_id) where book_id='$bookId' and type IN ('rtext','te
 			$bookId=$id;
 		}
 		
-
 		$response=false;
+		
+		$isInQueue=PublishQueue::model()->findByPk($bookId);
 
-		if($return=$this->SendFileToQueue($bookId) ){
-			if ($return=="budgetError") {
-				$response="budgetError";
-			}
-			else
-			{
-				$response['sendFileInfo']=$return; 
-				$response['sendFile']=true;		
-			}
+		if ($isInQueue) {
+			$response['queue']="error";
 		}else{
-			$response['sendFile']=false;
-		}	
+			if($return=$this->SendFileToQueue($bookId) ){
+				if ($return=="budgetError") {
+					$response="budgetError";
+				}
+				else
+				{
+					$response['sendFileInfo']=$return; 
+					$response['sendFile']=true;		
+					$response['queue']="success";
+				}
+			}else{
+				$response['sendFile']=false;
+			}	
+		}
+
+
 		
 
 		return $this->response($response);

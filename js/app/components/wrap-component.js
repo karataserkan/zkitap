@@ -135,8 +135,8 @@ var createWrapComponent = function ( event, ui, oldcomponent ) {
       html_inner = oldcomponent.data.html_inner;
       image_data = oldcomponent.data.image_data;
       tolerance = oldcomponent.data.cutoff;
-      width = oldcomponent.data.width ;
-      height = oldcomponent.data.height;
+      self_width = oldcomponent.data.self.css.width ;
+      self_height = oldcomponent.data.self.css.height;
       wrap_align = oldcomponent.data.wrap_align;
     };
 

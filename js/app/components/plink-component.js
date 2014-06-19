@@ -35,7 +35,6 @@ $(document).ready(function(){
         popupmessage.html('<img src="'+this.options.component.data.marker+'" style="width:100%; height:100%;"/>');
       }
       else if(selected_tab == "area"){
-        console.log("GELIYO");
         console.log(this.options.component.data.height);
         console.log(this.options.component.data.self.css);
         var width = this.options.component.data.self.css.width;
@@ -123,10 +122,9 @@ var createPlinkComponent = function ( event, ui, oldcomponent ) {
   else if(top+650 > max_top)
     top = max_top - 650;
 
-console.log(top);
-
     top = top + "px";
     left = left + "px";
+ 
 
   var idPre = $.now();
 

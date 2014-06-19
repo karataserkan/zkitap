@@ -472,7 +472,7 @@ var textComponentBuilder = function( component ) {
     .appendTo( elementWrap )
     .popupComponent({
       'component': component,
-      'marker': window.base_path+'/css/popupmarker.svg'  ,
+      'marker': window.base_path+'/css/popupmarker.png'  ,
       'update': function ( event, component ) {
         if(revision_value==0){
         var newObject = jQuery.extend(true, {}, component);
@@ -503,7 +503,7 @@ var textComponentBuilder = function( component ) {
     .appendTo( elementWrap )
     .wrapComponent({
       'component': component,
-      'marker': window.base_path+'/css/popupmarker.svg'  ,
+      'marker': window.base_path+'/css/popupmarker.png'  ,
       'update': function ( event, component ) {
         if(revision_value==0){
         var newObject = jQuery.extend(true, {}, component);
@@ -785,7 +785,7 @@ var textComponentBuilder = function( component ) {
     var element  = $('<div class="sound-controllers"> </div>');
     var elementWrap=$('<div title="'+j__("Ses Aracı")+'"></div>');
     elementWrap.appendTo( page_div_selector );
-
+    console.log('Ses ARACI',component);
     element
     .appendTo( elementWrap )
     .soundComponent({

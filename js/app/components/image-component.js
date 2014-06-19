@@ -125,7 +125,7 @@ $(document).ready(function(){
 
 var createImageComponent = function ( event, ui ,oldcomponent) {
 
-  var marker = window.base_path+'/css/popupmarker.svg';
+  var marker = window.base_path+'/css/popupmarker.png';
   var video_marker=window.base_path+'/css/image_play_trans.png';
   var image_width_height = '';
   var image_type_image = function(){

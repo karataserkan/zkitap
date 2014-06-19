@@ -14,7 +14,7 @@ $(document).ready(function() {
             if(this.options.component.data.video_type == 'popup'){
               
               if(typeof this.options.marker ==="undefined" ) {
-                this.options.marker = "http://" + window.location.hostname + "/css/video_play_trans.svg";
+                this.options.marker = "http://" + window.location.hostname + "/css/video_play_trans.png";
               }
 
               var componentvideoid='popup'+this.options.component.id;
@@ -67,8 +67,8 @@ var left = 0;
 
 var createVideoComponent = function( event, ui, oldcomponent ) {
 
-  var marker = window.base_path+'/css/popupmarker.svg';
-  var video_marker=window.base_path+'/css/video_play_trans.svg';
+  var marker = window.base_path+'/css/popupmarker.png';
+  var video_marker=window.base_path+'/css/video_play_trans.png';
   var video_width_height = '';
   var video_type_video = function(){
       var video_type = $('input[name=video_type]:checked').val();

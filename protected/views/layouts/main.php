@@ -158,7 +158,38 @@
   		<!-- Trip.js Tutorial-->
 		<script type="text/javascript" src="<?php echo Yii::app()->request->baseUrl; ?>/js/lib/trip.min.js"></script>
 		
+
+
+		<script src="<?php echo Yii::app()->request->hostInfo; ?>:1881/socket.io/socket.io.js"></script>
 		
+
+		<?php 
+		if (! Yii::app()->user->isGuest ){
+		?>
+		<script type="text/javascript">
+			var sid = "<?php echo  md5(session_id()); ?>";
+			var username = "<?php echo md5(Yii::app()->user->name); ?>";
+			var logoutURL = "<?php echo Yii::app()->createAbsoluteUrl('site/logout'); ?>";
+
+			var socket = io.connect(window.location.origin+":1881");
+			  
+		  	var logged_in = {
+		  		sid : sid,
+		  		username :username
+		  	};
+
+		  	socket.emit('logged_in',logged_in);
+
+			  	
+			 
+
+			socket.on('logout',function () {
+					window.location.assign("<?php echo Yii::app()->createAbsoluteUrl('site/logout'); ?>");
+			});
+
+		</script>
+
+		<?php } ?>
 
 
 		<link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/js/lib/trip.css" />

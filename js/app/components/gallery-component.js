@@ -31,7 +31,7 @@ $(document).ready(function(){
             //var image= $('<img class="galery_component_image" style="display: block; margin: auto; min-width: 50%; min-height: 50%; " src="'+value.src+ '" />'); 
             //var container=$('<li class="galery_component_li" style="float:left; position: absolute; width: 200%; height: 200%; left: -50%;'+ (counter==1 ? ''  : 'display:none;')+ '" ></li>');
             if( that.options.component.data.galery_type=='inner'){
-              var image= $('<img class="galery_component_image" style="display: block; margin: auto auto; height:auto; padding:0; position:absolute; top:0; right:0; bottom:0; left:0; " src="'+value.src+ '" />'); 
+              var image= $('<img class="galery_component_image" style="display: block; margin: auto auto; height:100%; padding:0; position:absolute; top:0; right:0; bottom:0; left:0; " src="'+value.src+ '" />'); 
               var container=$('<li class="galery_component_li" style="background-color:black; float:left; position: relative; clear:both; width: 100%; height: 100%; '+ (counter==1 ? ''  : 'display:none;')+ '" ></li>');
               image.galleryContainer=container;
               that.imageDOMs.push(image);
@@ -152,7 +152,7 @@ console.log(top);
         <div style='clear:both'></div> \
         <div class='tabbable'>\
           <ul class='nav nav-tabs' id='myTab'>\
-            <li><a href='#galery_drag' data-toggle='tab'>"+j__("Resim Sürükle")+"</a></li>\
+            <li class='active'><a href='#galery_drag' data-toggle='tab'>"+j__("Resim Sürükle")+"</a></li>\
             <li><a href='#galery_upload' data-toggle='tab'>"+j__("Resim Yükle")+"</a></li>\
           </ul>\
         </div>\

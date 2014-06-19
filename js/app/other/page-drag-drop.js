@@ -695,7 +695,7 @@ $( document ).ready(function () {
       var page_id=$(this).parent().attr('page_id');
       var control_value = 0;
       $.each(window.lindneo.book_users, function(index,key){
-        console.log(key);
+        //console.log(key);
         if(key.username != window.lindneo.user.username)
           if(key.pageid == page_id){
             alert("Başka bir kullanıcı bu sayfada çalıştığından bu sayfayı silemezsiniz!...");
@@ -866,11 +866,11 @@ $( document ).ready(function () {
 
   function sortPages(){
     var pageNum=0;
-    console.log("sort page");
+    //console.log("sort page");
     $('#chapters_pages_view .page').each(function(e){
       if(pageNum==0) window.lindneo.tlingit.pages=[];
       pageNum++;
-      console.log({"page_id": $(this).attr('page_id'), "page_num": pageNum});
+      //console.log({"page_id": $(this).attr('page_id'), "page_num": pageNum});
       window.lindneo.tlingit.pages.push({"page_id": $(this).attr('page_id'), "page_num": pageNum});
       $(this).find('.page-number').html(pageNum);
       //console.log($(this).attr('page_id'));
@@ -879,7 +879,7 @@ $( document ).ready(function () {
         var new_num = pageNum;
         var page_component_id = $("#current_page").find('.page_number').attr('id');
 
-        console.log(page_component_id);
+        //console.log(page_component_id);
         $.ajax({
           url: "/page/getComponent/"+page_component_id
         }).done(function(result) {
@@ -888,7 +888,7 @@ $( document ).ready(function () {
           var data = window.lindneo.tlingit.responseFromJson(update_component.data);
           data.textarea.val = new_num;
           update_component.data = data;
-          console.log(update_component);
+          //console.log(update_component);
           window.lindneo.tlingit.componentHasUpdated(update_component);
         });
       }
@@ -918,8 +918,8 @@ $( document ).ready(function () {
       cache: false,
       success: function (result) {
 
-          console.log(result.chapters); 
-          console.log(result.pages); 
+          //console.log(result.chapters); 
+          //console.log(result.pages); 
           var value = "";
           var page_NUM = 0; 
           $.each(result.chapters, function(index, key){
@@ -937,8 +937,8 @@ $( document ).ready(function () {
               value+='<ul class="pages" >';
               $.each(result.pages[key.chapter_id], function(indexp, keyp){
                 //console.log(page_NUM);
-                console.log(keyp);
-                console.log(window.lindneo.currentPageId);
+                //console.log(keyp);
+                //console.log(window.lindneo.currentPageId);
                 page_NUM++;
                 var page_link = "/book/author/"+window.lindneo.currentBookId+'/'+result.pages[key.chapter_id][indexp];
 

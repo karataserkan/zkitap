@@ -33,6 +33,8 @@ class SiteController extends Controller
 	public function actionIndex()
 	{
 
+		
+
 		functions::event('tripData',NULL, function($var){
 
 		?>
