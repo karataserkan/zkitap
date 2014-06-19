@@ -76,24 +76,14 @@
 														<div class="col-md-4">
 														<input id="ytsize" type="hidden" value="" name="size">
 															<span id="size">
-																<div class="" id="uniform-size_0">
-																	<span class="checked">
-																		<input class="uniform" id="size_0" value="1024x768" checked="checked" type="radio" name="size">
-																	</span>
+
+																<input id="size_0" value="1024x768" checked="checked" type="radio" name="size">
 																<label for="size_0">1024 X 768</label><br>
-																</div>
-																<div class="" id="uniform-size_1">
-																	<span class="">
-																		<input class="uniform" id="size_1" value="800x600" type="radio" name="size">
-																	</span>
+
+																		<input id="size_1" value="800x600" type="radio" name="size">
 																<label for="size_1">800 X 600</label><br>
-																</div>
-																<div class="" id="uniform-size_2">
-																	<span class="">
-																		<input class="uniform" id="size_2" value="1280x960" type="radio" name="size">
-																	</span>
+																		<input id="size_2" value="1280x960" type="radio" name="size">
 																<label for="size_2">1280 X 960</label>
-																</div>
 															</span>
 														</div>
 													</div>
