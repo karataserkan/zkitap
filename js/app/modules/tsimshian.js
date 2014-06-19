@@ -28,7 +28,7 @@ window.lindneo.tsimshian = (function(window, $, undefined){
   var componentUpdated = function (component) {    
     
     window.lindneo.tsimshian.myComponent = component.id;
-    console.log('Sending');
+    //console.log('Sending');
     
     this.socket.emit('updateComponent', component);
 
@@ -51,7 +51,7 @@ window.lindneo.tsimshian = (function(window, $, undefined){
   };
 
   var pageDestroyed = function(pageId){
-    console.log(pageId);
+    //console.log(pageId);
     this.socket.emit('destroyPage', pageId);
   };
 
@@ -130,7 +130,7 @@ window.lindneo.tsimshian = (function(window, $, undefined){
        } );
 
        this.socket.on('destroyPage', function(pageId){
-          console.log(pageId);
+          //console.log(pageId);
           window.lindneo.nisga.destroyPage(pageId);
           sortPages();
           window.lindneo.tlingit.loadAllPagesPreviews();
@@ -199,7 +199,7 @@ window.lindneo.tsimshian = (function(window, $, undefined){
        this.socket.on('userBookListUpdate', function(bookUserList){
 
 
-        console.log(bookUserList);
+        //console.log(bookUserList);
         var users = "";
         
         
@@ -218,7 +218,7 @@ window.lindneo.tsimshian = (function(window, $, undefined){
         $('#onlineUsers').empty();
         $.each( bookUserList, function( key, value ) {
           //console.log(value.username);
-          console.log(++a);
+          //console.log(++a);
 
           window.lindneo.dataservice.send('ProfilePhoto', {'email': value.username}, function( response ) {
                     

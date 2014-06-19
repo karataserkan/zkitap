@@ -645,6 +645,11 @@ class epub3 {
 			}
 		});
 		$(document).ready(function() {
+			$("body").each(function() {
+			    var $this = $(this);
+			    $this.html($this.html().replace(/&nbsp;/g, "&#160;"));
+			 });
+			$("#facybox_overlay").css("position","absolute");
 			/*
 			$("video").click(function(event){
 				console.log("kapi://"+btoa($(event.currentTarget).context.currentSrc));
@@ -725,7 +730,6 @@ class epub3 {
 		</script>
 	</body>
 </html>';
-
 
 		$page_file_inside=str_replace(array(
 			'%components%','%style%'
