@@ -139,8 +139,8 @@
 												</div>
 												<div class="tab-pane" id="book_res">
 													<div class="form-group">
-														<label for="radio" class="control-label col-md-6"><?php _e('Boyutlar'); ?><span class="required">*</span></label>
-														<div class="col-md-6">
+														<label for="radio" class="control-label col-md-5"><?php _e('Boyutlar'); ?><span class="required">*</span></label>
+														<div class="col-md-7">
 
 																<input id="book_size_1" value="800x600" type="radio" class="book_size" name="book_size">
 																<label for="book_size_1">800 X 600</label><br>
@@ -157,8 +157,8 @@
 												</div>
 												<div class="tab-pane" id="book_templates">
 													<div class="form-group">
-														<label for="radio" class="control-label col-md-6"><?php _e('Şablonlar'); ?></label>
-														<div class="col-md-6">
+														<label for="radio" class="control-label col-md-5"><?php _e('Şablonlar'); ?></label>
+														<div class="col-md-7">
 															<input id="ytsize" type="hidden" value="" name="templates">
 															<span id="templates">
 
