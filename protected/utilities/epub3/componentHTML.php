@@ -209,13 +209,19 @@ class componentHTML {
 	}
 
 	public function mquizInner($component){
-
-
+		$css="";
+		if(isset($component->data->self->css)){
+			$css.=" style=' ";
+			foreach ($component->data->textarea->css as $css_name => $css_val ) {
+				$css.="$css_name:$css_val;";
+			}
+			$css.="' ";
+		}
 
 	        //die;
 		$container.="
 		
-        <div  class='quiz-component' style=''> 
+        <div  class='quiz-component' $css> 
             <div class='question-text'>".$component->data->question."</div> 
             <div class='question-options-container'>";
         $answer=$component->data->answer;
@@ -540,22 +546,25 @@ class componentHTML {
 
 	public function graphInner($component){
 		$container ="
-		<canvas id='canvas_".$component->id."' class='canvas' ";
+		<canvas id='canvas_".$component->id."' style='width:".$component->data->self->css->width."; height:".$component->data->self->css->height."' class='canvas' ";
 		$data=$component->data;
-
+		echo $component->data->self->css->width;
+		echo $component->data->self->css->height;
+      //die();
+		/*
 		if(isset($data->textarea->attr))
 			foreach ($data->textarea->attr as $attr_name => $attr_val ) {
 				$container.=" $attr_name='$attr_val' ";
 			}
-
-		if(isset($data->textarea->css)){
+		
+		if(isset($data->self->css)){
 			$container.=" style=' ";
-			foreach ($data->textarea->css as $css_name => $css_val ) {
+			foreach ($data->self->css as $css_name => $css_val ) {
 				$container.="$css_name:$css_val;";
 			}
 			$container.="' ";
 		}
-
+		*/
 
 		$container.=" >
 			<img src='video-play.png' />
@@ -713,10 +722,10 @@ class componentHTML {
           break;
 }
 
-
+		$('#canvas_'+ component.id ).css('width','".$component->data->self->css->width."');
+		$('#canvas_'+ component.id ).css('height','".$component->data->self->css->height."');
       </script>
       ";
-
 
 
 		$this->html=str_replace(array('%component_inner%', '%component_text%') , array($container, str_replace("\n", "<br/>", $data->textarea->val) ), $this->html);
@@ -1638,7 +1647,8 @@ if ($data->self->attr->componentType == "side-text" ){
 	}
 
 	public function create_container($component){
-		//print_r($component);die;
+		//print_r($component);
+		//echo "<br>";//die;
 				$container ="
 		<div id='a".$component->id."' class='{$component->type}' ";
 		if(isset($component->data->self->attr))
@@ -1646,22 +1656,22 @@ if ($data->self->attr->componentType == "side-text" ){
 				if (trim(strtolower($attr_name))!='contenteditable' && trim($attr_name)!='componentType' && $attr_name!='placeholder' && $attr_name!='fast-style' && $attr_name!='href')
 					$container.=" $attr_name='$attr_val' ";
 			}
-
+		
 		if(isset($component->data->self->css)){
+
 			$container.=" style=' ";
 			foreach ($component->data->self->css as $css_name => $css_val ) {
-				if($css_name == 'z-index' && !$css_val) $css_val = '1000';
-				if($component->type == "link" && $css_name == 'z-index') $css_val = '999999';
 				$container.="$css_name:$css_val;";
 			}
 			$container.="' ";
+
 		}
-
-
+		
 		$container.=" >
 			%component_inner%
 		</div>
 		";
+
 		$this->html=$container;
 	}
 
