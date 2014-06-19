@@ -51,7 +51,7 @@ $current_user=User::model()->findByPk(Yii::app()->user->id);
 	
 		//$('#editor_view_pane').css({'margin-left':'200px'});
 		var adaptive_width=$('.components').width()+50+"px";
-		console.log(adaptive_width);
+		//console.log(adaptive_width);
 		$('#editor_view_pane').css({'margin-left':adaptive_width});
 		options = {  
     reject : { // Rejection flags for specific browsers  
@@ -1405,8 +1405,8 @@ $current_user=User::model()->findByPk(Yii::app()->user->id);
 				<li ctype="link" class="component " style=" background-image: url(<?php echo Yii::app()->getBaseUrl(true);?>/css/images/components/<?php echo Yii::app()->language;?>/link.png);"></li>
 				<li ctype="plink" class="component " style=" background-image: url(<?php echo Yii::app()->getBaseUrl(true);?>/css/images/components/<?php echo Yii::app()->language;?>/pagelink.png);"></li>
 				<li ctype="page" class="component " style=" background-image: url(<?php echo Yii::app()->getBaseUrl(true);?>/css/images/components/<?php echo Yii::app()->language;?>/pagenumber.png);"></li>
-				<li ctype="wrap" class="component " style=" background-image: url(<?php echo Yii::app()->getBaseUrl(true);?>/css/images/components/<?php echo Yii::app()->language;?>/wrap.png);"></li>
-				<li ctype="tag" class="component " style=" background-image: url(<?php echo Yii::app()->getBaseUrl(true);?>/css/images/components/<?php echo Yii::app()->language;?>/wrap.png);"></li>
+				<!--<li ctype="wrap" class="component " style=" background-image: url(<?php echo Yii::app()->getBaseUrl(true);?>/css/images/components/<?php echo Yii::app()->language;?>/wrap.png);"></li>-->
+				
 				<!--<li ctype="quiz" class="component " style=" background-image: url(<?php echo Yii::app()->getBaseUrl(true);?>/css/images/components/<?php echo Yii::app()->language;?>/quiz.png);"></li>-->
 
 		</ul>	
@@ -1509,9 +1509,9 @@ $current_user=User::model()->findByPk(Yii::app()->user->id);
 			$("#right_close").click(function() {
 			$("#chapters_pages_view" ).toggle( "slide",{direction: "right"}, 100 );
 			$( "#right_close" ).hide( "slide",{direction: "right"}, 100 );
-			console.log(position);
+			//console.log(position);
 			$("#collapseThree").animate({scrollTop: position});
-			console.log(document.getElementById('collapseThree').scrollTop);
+			//console.log(document.getElementById('collapseThree').scrollTop);
 			});
 		</script>
 		
@@ -1538,7 +1538,7 @@ $current_user=User::model()->findByPk(Yii::app()->user->id);
 	var position;
 		$( "#right_open" ).click(function() {
 			position=document.getElementById('collapseThree').scrollTop;
-			console.log('position:'+position);
+			//console.log('position:'+position);
 			$( "#chapters_pages_view" ).toggle( "slide",{direction: "right"}, 100 );
 			$( "#right_close" ).show( "slide",{direction: "right"}, 100 );
 		});
@@ -1719,7 +1719,7 @@ $current_user=User::model()->findByPk(Yii::app()->user->id);
 					  url: '/book/getFastStyle',
 					}).done(function(res){
 				    	var inDb=jQuery.parseJSON(res);
-				    	console.log(inDb.font_size);
+				    	//console.log(inDb.font_size);
 
 				    	font_size='';
 						font_family='';
@@ -1921,14 +1921,14 @@ $current_user=User::model()->findByPk(Yii::app()->user->id);
 					});
 					$('.chapter-detail').hover(
 						function(){
-							console.log('hover started');
+							//console.log('hover started');
 							var timeout;
 							var page_thumb_item = $(this);
 
 							//$(this).find('.page-chapter-delete').hide();
 							timeout = setTimeout(function(){ 
 								page_thumb_item.find('.page-chapter-delete').eq(0).show();
-								console.log('hover-timeout');
+								//console.log('hover-timeout');
 								clearTimeout(timeout);
 							},1000);
 
@@ -1937,7 +1937,7 @@ $current_user=User::model()->findByPk(Yii::app()->user->id);
 							},2000); 
 
 							last_timeout = timeout;
-							console.log('hover-out');
+							//console.log('hover-out');
 							//setTimeout(function(){alert("OK");}, 3000);
 
 					},	
