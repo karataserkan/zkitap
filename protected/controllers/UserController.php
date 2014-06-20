@@ -60,19 +60,17 @@ class UserController extends Controller
 		
 		$meta->meta_value=$verifyEmailId;
 		if($meta->save()){
-			$mail=Yii::app()->Smtpmail;
-	        $mail->SetFrom(Yii::app()->params['noreplyEmail'], "OKUTUS");
-
-	        $mail->Subject= "E-posta doğrulama";
-	        $mail->AddAddress($user->email, "");
-	    	
 	    	$link=Yii::app()->getBaseUrl(true);
 			$link .='/user/verifyEmail/';
 			$link .= $verifyEmailId;
 			
-			$message="Okutusa hoşgeldin. E-postanızı doğrulamak için <a href='".$link."'>buraya tıklayınız</a>.<br>".$link;
-	        $mail->MsgHTML($message);
-	        if($mail->Send()){
+	        $mail=new Email;
+			$mail->setTo(array($user->email));
+			$mail->setSubject('E-posta adresinizi doğrulayın');
+			$mail->setFile('6Verify_Your_Email.tr_TR.html');
+			$mail->setAttributes(array('title'=>'E-posta adresinizi doğrulayın','link'=>$link));
+
+	        if($mail->sendMail()){
 	        	echo "0";
 	        }else{
 	        	echo "1";
@@ -302,6 +300,16 @@ class UserController extends Controller
 				if ($attributes['password']==$attributes['passwordR']) {
 					$newUser->password=md5(sha1($attributes['password']));
 					$newUser->save();
+
+					$welcomelink=Yii::app()->getBaseUrl(true);
+					
+					$welcomeMail=new Email;
+					$welcomeMail->setTo(array($newUser->email));
+					$welcomeMail->setSubject('OKUTUS\'a Hoş Geldiniz');
+					$welcomeMail->setFile('7WelcomeMail.tr_TR.html');
+					$welcomeMail->setAttributes(array('title'=>'OKUTUS\'a Hoş Geldiniz','link'=>$welcomelink,'username'=>$newUser->name.' '.$newUser->surname));
+					$welcomeMail->sendMail();
+
 					$model=new LoginForm;
 					$model->password=$attributes['password'];
 					$model->email=$attributes['email'];
@@ -476,18 +484,20 @@ class UserController extends Controller
 
 	public function actionForgetPassword($id=null)
 	{
-		$id=base64_decode($id);
+		$userMeta=UserMeta::model()->find('meta_key=:meta_key AND meta_value=:meta_value',array('meta_key'=>'passwordReset','meta_value'=>$id));
 		$this->deleteOldKeys();
 		$result=0;
-		$meta= Yii::app()->db->createCommand()
-    		->select('*')
-    		->from('user_meta')
-    		->where('id=:id', array(':id'=>$id))
-    		->andWhere('meta_key=:meta_key', array(':meta_key'=>"passwordReset"))
-    		->queryRow()
-		;
-		if (!empty($meta)) {
-			$created=$meta['created'];
+		
+		// $id=base64_decode($id);
+		// $meta= Yii::app()->db->createCommand()
+  //   		->select('*')
+  //   		->from('user_meta')
+  //   		->where('id=:id', array(':id'=>$id))
+  //   		->andWhere('meta_key=:meta_key', array(':meta_key'=>"passwordReset"))
+  //   		->queryRow()
+		// ;
+		if ($userMeta) {
+			$created=$userMeta->created;
 			$now=time();
 			
 		  	$time = ($now-$created)/60;
@@ -498,9 +508,18 @@ class UserController extends Controller
 					$attributes=$_POST['Reset'];
 					if ($attributes['password']==$attributes['password2']) {
 						$newpassword=md5(sha1($attributes['password']));
-						$user=User::model()->findByPk($meta['user_id']);
+						$user=User::model()->findByPk($userMeta->user_id);
 						$user->password=$newpassword;
 						$user->save();
+
+						$mail=new Email;
+						$mail->setTo(array($user->email));
+						$mail->setSubject('Okutus Editör hesabının şifresi değiştirildi');
+						$mail->setFile('3Password_Changed.tr_TR.html');
+						$mail->setAttributes(array('title'=>'Okutus Editör hesabının şifresi değiştirildi'));
+						$mail->sendMail();
+
+
 						$result=1;
 					}
 
@@ -596,6 +615,33 @@ class UserController extends Controller
 			}
 			if ($_POST['email']) {
 				$user->email=$_POST['email'];
+
+
+
+				$meta=UserMeta::model()->find('user_id=:user_id AND meta_key=:meta_key',array('user_id'=>$user->id,'meta_key'=>'emailVerify'));
+				if (!$meta) {
+					$meta=new UserMeta;
+					$meta->user_id=$user->id;
+					$meta->meta_key='emailVerify';
+				}
+
+				$resetId=functions::new_id(20);
+
+				$link=Yii::app()->getBaseUrl(true);
+				$link.='/user/verifyEmail/';
+				$meta->meta_value=$resetId;
+		        $meta->created=time();
+	        	$meta->save();
+
+				$link .= $resetId;
+
+	        	$mail=new Email;
+				$mail->setTo(array($user->email));
+				$mail->setSubject('OKUTUS E-post Adresi Doğrulama');
+				$mail->setFile('1email_adress_changed_please_verify_tr_TR.html');
+				$mail->setAttributes(array('title'=>'OKUTUS Şifre Sıfırlama','link'=>$link));
+		        $mail->sendMail();
+
 			}
 
 			if ($_POST['passwordEski']) {
@@ -603,6 +649,12 @@ class UserController extends Controller
 				if ($user->password==$passOld) {
 					if ($_POST['passwordYeni']==$_POST['passwordYeni2']) {
 						$user->password=md5(sha1($_POST['passwordYeni']));
+						$mail=new Email;
+						$mail->setTo(array($user->email));
+						$mail->setSubject('Okutus Editör hesabının şifresi değiştirildi');
+						$mail->setFile('3Password_Changed.tr_TR.html');
+						$mail->setAttributes(array('title'=>'Okutus Editör hesabının şifresi değiştirildi'));
+						$mail->sendMail();
 					}
 					else
 					{

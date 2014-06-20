@@ -253,6 +253,45 @@ class SiteController extends Controller
 		$this->render('dashboard',array('books'=>$books,'organisation'=>$organisation['n'],'book'=>$book['n'],'workspace'=>$workspace['n'],'host'=>$hostN,'budget'=>$budgetN,'category'=>$categoryN));
 	}
 
+
+	public function actionSendMail(){
+		$bookId="R8Comok4FYQG9NvUJQnA1jdtBromi7evy4vgvVXXnn91";
+		$book=Book::model()->findByPk($bookId);
+		
+		//echo '<img src="'.$thumbnailSrc.'" />';
+        
+
+		$thumbnailSrc=base64_encode(file_get_contents("/css/images/deneme_cover.jpg"));
+		$bookData=json_decode($book->data,true);
+		 if (isset($bookData['thumbnail'])) {
+		 	$thumbnailSrc=$bookData['thumbnail'];
+		 }
+
+        
+		define('UPLOAD_DIR', 'thumbnails/');
+		$img = $thumbnailSrc;
+		$exp=explode(";", $img);
+		$ext=explode("/", $exp[0]);
+		$extension = $ext[1]; 
+		$img = str_replace('data:image/'.$extension.';base64,', '', $img);
+		$img = str_replace(' ', '+', $img);
+		$data = base64_decode($img);
+		$file = UPLOAD_DIR . $bookId . '.'.$extension;
+		$success = file_put_contents($file, $data);
+		$im = file_get_contents($file);
+
+
+
+        $thumbnail=Yii::app()->getBaseUrl(true)."/thumbnails/".$bookId.".".$extension;
+        $link=Yii::app()->params['reader_host'];
+        $mail=new Email;
+		$mail->setTo(array('ekaratas@linden-tech.com'));
+		$mail->setSubject(' kitabınız yayınlandı.');
+		$mail->setFile('9Your_book_published_successfuly.tr_TR.html');
+		$mail->setAttributes(array('title'=>' kitabınız yayınlandı.','link'=>$link,'bookname'=>$book->title,'bookauthor'=>$book->author,'thumbnail'=>$thumbnail));
+		$mail->sendMail();
+	}
+
 	public function actionRemoveUser($userId,$bookId)
 	{
 		$command = Yii::app()->db->createCommand();
@@ -347,6 +386,7 @@ class SiteController extends Controller
 
 	public function sendInvitation($userId,$bookId,$email,$type,$newUser=0){
 		//yeni davetiye oluşturuyoruz
+		$book=Book::model()->findByPk($bookId);
 		$invitation= new Invitation;
 		$invitation->invitation_key=functions::new_id();
 		$invitation->type="book";
@@ -367,18 +407,15 @@ class SiteController extends Controller
 			//linke davetiye IDsini de ekliyorum
 			$link .= $invitation->invitation_key;
 
-			$message="OKUTUS editöre katılım davetiyesi aldınız. İsteği kabul etmek için <a href='".$link."'>tıklayın</a>.<br>".$link;	
+			//mail
+			$mail=new Email;
+			$mail->setTo(array($email));
+			$mail->setSubject('OKUTUS Davetiye');
+			$mail->setFile('2Invitation.tr_TR.html');
+			$mail->setAttributes(array('title'=>'OKUTUS Davetiye','link'=>$link,'bookname'=>$book->title));
 
-			//mail gönderiyorum
-			$mail=Yii::app()->Smtpmail;
-	        $mail->SetFrom(Yii::app()->params['noreplyEmail'], "OKUTUS");
-	        $mail->Subject    = 'OKUTUS Davetiye.';
-	        $mail->MsgHTML($message);
-	        $mail->AddAddress($email, "");
-	        
-	        if(!$mail->Send()) {
-	            echo "Mailer Error: " . $mail->ErrorInfo;
-	            $msg="ORGANISATIONS:ADD_USER:1:". json_encode(array(array('user'=>Yii::app()->user->id),array('userId'=>$userId,'organisationId'=>$bookId,'message'=>'Mailer Error'.$mail->ErrorInfo)));
+	        if(!$mail->sendMail()) {
+	            $msg="ORGANISATIONS:ADD_USER:1:". json_encode(array(array('user'=>Yii::app()->user->id),array('userId'=>$userId,'organisationId'=>$bookId)));
 				Yii::log($msg,'info');
 				return 0;
 	        }else {
@@ -600,24 +637,23 @@ class SiteController extends Controller
 				$meta=new UserMeta;
 				$meta->user_id=$user->id;
 				$meta->meta_key='passwordReset';
+
+				$resetId=functions::new_id(20);
+
 				$link=Yii::app()->getBaseUrl(true);
 				$link.='/user/forgetPassword?id=';
-				$meta->meta_value=$email;
+				$meta->meta_value=$resetId;
 		        $meta->created=time();
 	        	$meta->save();
 
+				$link .= $resetId;
 
-				$mail=Yii::app()->Smtpmail;
-		        $mail->SetFrom(Yii::app()->params['noreplyEmail'], "OKUTUS");
-
-		        $mail->Subject= "Password Reset";
-		        $mail->AddAddress($email, "");
-	        	
-				$link .= base64_encode($meta->id);
-				$message="Şifre sıfırlama isteği gönderdiniz. <a href='".$link."'>Buraya tıklayarak</a> şifrenizi değiştirebilirsiniz. Şifre değiştirme isteğiniz 10 dakika sonra geçersiz olacaktır.<br>".$link;
-		        $mail->MsgHTML($message);
-
-		        if($mail->Send()) {
+	        	$mail=new Email;
+				$mail->setTo(array($email));
+				$mail->setSubject('OKUTUS Şifre Sıfırlama');
+				$mail->setFile('4password_reset.tr_TR.html');
+				$mail->setAttributes(array('adsoyad'=>$user->name.' '.$user->surname,'title'=>'OKUTUS Şifre Sıfırlama','link'=>$link));
+		        if($mail->sendMail()) {
 		        	$passResetSuccess=__("Şifre yenileme maili gönderildi. Mailinizdeki linke tıklayarak 10 dakika içerisinde şifrenizi yeniden oluşturabilirsiniz.");
 	        	}
 	        	else
@@ -719,19 +755,26 @@ class SiteController extends Controller
 						$emailMeta->created=time();
 						$emailMeta->save();
 
-						$mail=Yii::app()->Smtpmail;
-				        $mail->SetFrom(Yii::app()->params['noreplyEmail'], "OKUTUS");
+						$welcomelink=Yii::app()->getBaseUrl(true);
+						$welcomeMail=new Email;
+						$welcomeMail->setTo(array($newUser->email));
+						$welcomeMail->setSubject('OKUTUS\'a Hoş Geldiniz');
+						$welcomeMail->setFile('7WelcomeMail.tr_TR.html');
+						$welcomeMail->setAttributes(array('title'=>'OKUTUS\'a Hoş Geldiniz','link'=>$welcomelink,'username'=>$newUser->name.' '.$newUser->surname));
+						$welcomeMail->sendMail();
 
-				        $mail->Subject= "E-posta doğrulama";
-				        $mail->AddAddress($newUser->email, "");
-			        	
+
+
 			        	$link=Yii::app()->getBaseUrl(true);
 						$link .='/user/verifyEmail/';
 						$link .= $verifyEmailId;
 						
-						$message="Okutusa hoşgeldin. E-postanızı doğrulamak için <a href='".$link."'>buraya tıklayınız</a>.<br>".$link;
-				        $mail->MsgHTML($message);
-				        $mail->Send();
+				        $mail=new Email;
+						$mail->setTo(array($newUser->email));
+						$mail->setSubject('E-posta adresinizi doğrulayın');
+						$mail->setFile('6Verify_Your_Email.tr_TR.html');
+						$mail->setAttributes(array('title'=>'E-posta adresinizi doğrulayın','link'=>$link));
+						$mail->sendMail();
 
 						$userConfirmation=new UserMeta;
 						$userConfirmation->user_id=$newUser->id;

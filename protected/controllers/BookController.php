@@ -32,7 +32,7 @@ class BookController extends Controller
 	{
 		return array(
 			array('allow',  // allow all users to perform 'index' and 'view' actions
-				'actions'=>array('mybooks'),
+				'actions'=>array('mybooks','getBookThumbnail'),
 				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
@@ -921,7 +921,42 @@ class BookController extends Controller
 		)); 
 	}
 
-	
+	public function actionGetBookThumbnail($bookId){
+		$book=Book::model()->findByPk($bookId);
+		$thumbnailSrc=base64_encode(file_get_contents("/css/images/deneme_cover.jpg"));
+		$bookData=json_decode($book->data,true);
+		 if (isset($bookData['thumbnail'])) {
+		 	$thumbnailSrc=$bookData['thumbnail'];
+		 }
+
+		// $exp=explode(";", $thumbnailSrc);
+		// $ext=explode("/", $exp[0]);
+		// $extension = $ext[1]; 
+		// //header('Content-Type: image/'.$extension);
+		//   echo '<img src="'.$thumbnailSrc.'">'; 
+
+
+
+		define('UPLOAD_DIR', 'thumbnails/');
+		$img = $thumbnailSrc;
+		$exp=explode(";", $img);
+		$ext=explode("/", $exp[0]);
+		$extension = $ext[1]; 
+		$img = str_replace('data:image/'.$extension.';base64,', '', $img);
+		$img = str_replace(' ', '+', $img);
+		$data = base64_decode($img);
+		$file = UPLOAD_DIR . $bookId . '.'.$extension;
+		$success = file_put_contents($file, $data);
+		$im = file_get_contents($file);
+    	//$imdata = 'data:image/jpeg;base64,'.base64_encode($im);
+		
+
+     	//header('Content-Type: image/'.$extension);
+		 //unlink($file);
+
+
+
+	}
 
 	public function actionSelectLayout($bookId){
 

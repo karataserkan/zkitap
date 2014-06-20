@@ -1,0 +1,987 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"><head>
+    	<!-- NAME: 1 COLUMN - BANDED -->
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>%title%</title>
+        
+    <style type="text/css">
+		body,#bodyTable,#bodyCell{
+			height:100% !important;
+			margin:0;
+			padding:0;
+			width:100% !important;
+		}
+		table{
+			border-collapse:collapse;
+		}
+		img,a img{
+			border:0;
+			outline:none;
+			text-decoration:none;
+		}
+		h1,h2,h3,h4,h5,h6{
+			margin:0;
+			padding:0;
+		}
+		p{
+			margin:1em 0;
+			padding:0;
+		}
+		a{
+			word-wrap:break-word;
+		}
+		.ReadMsgBody{
+			width:100%;
+		}
+		.ExternalClass{
+			width:100%;
+		}
+		.ExternalClass,.ExternalClass p,.ExternalClass span,.ExternalClass font,.ExternalClass td,.ExternalClass div{
+			line-height:100%;
+		}
+		table,td{
+			mso-table-lspace:0pt;
+			mso-table-rspace:0pt;
+		}
+		#outlook a{
+			padding:0;
+		}
+		img{
+			-ms-interpolation-mode:bicubic;
+		}
+		body,table,td,p,a,li,blockquote{
+			-ms-text-size-adjust:100%;
+			-webkit-text-size-adjust:100%;
+		}
+		#bodyCell{
+			padding:0;
+		}
+		.mcnImage{
+			vertical-align:bottom;
+		}
+		.mcnTextContent img{
+			height:auto !important;
+		}
+	/*
+	@tab Page
+	@section background style
+	@tip Set the background color and top border for your email. You may want to choose colors that match your company's branding.
+	*/
+		body,#bodyTable{
+			/*@editable*/background-color:#eeeeee;
+		}
+	/*
+	@tab Page
+	@section background style
+	@tip Set the background color and top border for your email. You may want to choose colors that match your company's branding.
+	*/
+		#bodyCell{
+			/*@editable*/border-top:0;
+		}
+	/*
+	@tab Page
+	@section heading 1
+	@tip Set the styling for all first-level headings in your emails. These should be the largest of your headings.
+	@style heading 1
+	*/
+		h1{
+			/*@editable*/color:#606060 !important;
+			display:block;
+			/*@editable*/font-family:Helvetica;
+			/*@editable*/font-size:40px;
+			/*@editable*/font-style:normal;
+			/*@editable*/font-weight:bold;
+			/*@editable*/line-height:125%;
+			/*@editable*/letter-spacing:-1px;
+			margin:0;
+			/*@editable*/text-align:left;
+		}
+	/*
+	@tab Page
+	@section heading 2
+	@tip Set the styling for all second-level headings in your emails.
+	@style heading 2
+	*/
+		h2{
+			/*@editable*/color:#404040 !important;
+			display:block;
+			/*@editable*/font-family:Helvetica;
+			/*@editable*/font-size:26px;
+			/*@editable*/font-style:normal;
+			/*@editable*/font-weight:bold;
+			/*@editable*/line-height:125%;
+			/*@editable*/letter-spacing:-.75px;
+			margin:0;
+			/*@editable*/text-align:left;
+		}
+	/*
+	@tab Page
+	@section heading 3
+	@tip Set the styling for all third-level headings in your emails.
+	@style heading 3
+	*/
+		h3{
+			/*@editable*/color:#606060 !important;
+			display:block;
+			/*@editable*/font-family:Helvetica;
+			/*@editable*/font-size:18px;
+			/*@editable*/font-style:normal;
+			/*@editable*/font-weight:bold;
+			/*@editable*/line-height:125%;
+			/*@editable*/letter-spacing:-.5px;
+			margin:0;
+			/*@editable*/text-align:left;
+		}
+	/*
+	@tab Page
+	@section heading 4
+	@tip Set the styling for all fourth-level headings in your emails. These should be the smallest of your headings.
+	@style heading 4
+	*/
+		h4{
+			/*@editable*/color:#808080 !important;
+			display:block;
+			/*@editable*/font-family:Helvetica;
+			/*@editable*/font-size:16px;
+			/*@editable*/font-style:normal;
+			/*@editable*/font-weight:bold;
+			/*@editable*/line-height:125%;
+			/*@editable*/letter-spacing:normal;
+			margin:0;
+			/*@editable*/text-align:left;
+		}
+	/*
+	@tab Preheader
+	@section preheader style
+	@tip Set the background color and borders for your email's preheader area.
+	*/
+		#templatePreheader{
+			/*@editable*/background-color:#FFFFFF;
+			/*@editable*/border-top:0;
+			/*@editable*/border-bottom:0;
+		}
+	/*
+	@tab Preheader
+	@section preheader text
+	@tip Set the styling for your email's preheader text. Choose a size and color that is easy to read.
+	*/
+		.preheaderContainer .mcnTextContent,.preheaderContainer .mcnTextContent p{
+			/*@editable*/color:#606060;
+			/*@editable*/font-family:Helvetica;
+			/*@editable*/font-size:11px;
+			/*@editable*/line-height:125%;
+			/*@editable*/text-align:left;
+		}
+	/*
+	@tab Preheader
+	@section preheader link
+	@tip Set the styling for your email's header links. Choose a color that helps them stand out from your text.
+	*/
+		.preheaderContainer .mcnTextContent a{
+			/*@editable*/color:#606060;
+			/*@editable*/font-weight:normal;
+			/*@editable*/text-decoration:underline;
+		}
+	/*
+	@tab Header
+	@section header style
+	@tip Set the background color and borders for your email's header area.
+	*/
+		#templateHeader{
+			/*@editable*/background-color:#FFFFFF;
+			/*@editable*/border-top:0;
+			/*@editable*/border-bottom:0;
+		}
+	/*
+	@tab Header
+	@section header text
+	@tip Set the styling for your email's header text. Choose a size and color that is easy to read.
+	*/
+		.headerContainer .mcnTextContent,.headerContainer .mcnTextContent p{
+			/*@editable*/color:#606060;
+			/*@editable*/font-family:Helvetica;
+			/*@editable*/font-size:15px;
+			/*@editable*/line-height:150%;
+			/*@editable*/text-align:left;
+		}
+	/*
+	@tab Header
+	@section header link
+	@tip Set the styling for your email's header links. Choose a color that helps them stand out from your text.
+	*/
+		.headerContainer .mcnTextContent a{
+			/*@editable*/color:#6DC6DD;
+			/*@editable*/font-weight:normal;
+			/*@editable*/text-decoration:underline;
+		}
+	/*
+	@tab Body
+	@section body style
+	@tip Set the background color and borders for your email's body area.
+	*/
+		#templateBody{
+			/*@editable*/background-color:#ffffff;
+			/*@editable*/border-top:0;
+			/*@editable*/border-bottom:0;
+		}
+	/*
+	@tab Body
+	@section body text
+	@tip Set the styling for your email's body text. Choose a size and color that is easy to read.
+	*/
+		.bodyContainer .mcnTextContent,.bodyContainer .mcnTextContent p{
+			/*@editable*/color:#606060;
+			/*@editable*/font-family:Helvetica;
+			/*@editable*/font-size:15px;
+			/*@editable*/line-height:150%;
+			/*@editable*/text-align:left;
+		}
+	/*
+	@tab Body
+	@section body link
+	@tip Set the styling for your email's body links. Choose a color that helps them stand out from your text.
+	*/
+		.bodyContainer .mcnTextContent a{
+			/*@editable*/color:#6DC6DD;
+			/*@editable*/font-weight:normal;
+			/*@editable*/text-decoration:underline;
+		}
+	/*
+	@tab Footer
+	@section footer style
+	@tip Set the background color and borders for your email's footer area.
+	*/
+		#templateFooter{
+			/*@editable*/background-color:#F2F2F2;
+			/*@editable*/border-top:0;
+			/*@editable*/border-bottom:0;
+		}
+	/*
+	@tab Footer
+	@section footer text
+	@tip Set the styling for your email's footer text. Choose a size and color that is easy to read.
+	*/
+		.footerContainer .mcnTextContent,.footerContainer .mcnTextContent p{
+			/*@editable*/color:#606060;
+			/*@editable*/font-family:Helvetica;
+			/*@editable*/font-size:11px;
+			/*@editable*/line-height:125%;
+			/*@editable*/text-align:left;
+		}
+	/*
+	@tab Footer
+	@section footer link
+	@tip Set the styling for your email's footer links. Choose a color that helps them stand out from your text.
+	*/
+		.footerContainer .mcnTextContent a{
+			/*@editable*/color:#606060;
+			/*@editable*/font-weight:normal;
+			/*@editable*/text-decoration:underline;
+		}
+	@media only screen and (max-width: 480px){
+		body,table,td,p,a,li,blockquote{
+			-webkit-text-size-adjust:none !important;
+		}
+
+}	@media only screen and (max-width: 480px){
+		body{
+			width:100% !important;
+			min-width:100% !important;
+		}
+
+}	@media only screen and (max-width: 480px){
+		table[class=mcnTextContentContainer]{
+			width:100% !important;
+		}
+
+}	@media only screen and (max-width: 480px){
+		table[class=mcnBoxedTextContentContainer]{
+			width:100% !important;
+		}
+
+}	@media only screen and (max-width: 480px){
+		table[class=mcpreview-image-uploader]{
+			width:100% !important;
+			display:none !important;
+		}
+
+}	@media only screen and (max-width: 480px){
+		img[class=mcnImage]{
+			width:100% !important;
+		}
+
+}	@media only screen and (max-width: 480px){
+		table[class=mcnImageGroupContentContainer]{
+			width:100% !important;
+		}
+
+}	@media only screen and (max-width: 480px){
+		td[class=mcnImageGroupContent]{
+			padding:9px !important;
+		}
+
+}	@media only screen and (max-width: 480px){
+		td[class=mcnImageGroupBlockInner]{
+			padding-bottom:0 !important;
+			padding-top:0 !important;
+		}
+
+}	@media only screen and (max-width: 480px){
+		tbody[class=mcnImageGroupBlockOuter]{
+			padding-bottom:9px !important;
+			padding-top:9px !important;
+		}
+
+}	@media only screen and (max-width: 480px){
+		table[class=mcnCaptionTopContent],table[class=mcnCaptionBottomContent]{
+			width:100% !important;
+		}
+
+}	@media only screen and (max-width: 480px){
+		table[class=mcnCaptionLeftTextContentContainer],table[class=mcnCaptionRightTextContentContainer],table[class=mcnCaptionLeftImageContentContainer],table[class=mcnCaptionRightImageContentContainer],table[class=mcnImageCardLeftTextContentContainer],table[class=mcnImageCardRightTextContentContainer]{
+			width:100% !important;
+		}
+
+}	@media only screen and (max-width: 480px){
+		td[class=mcnImageCardLeftImageContent],td[class=mcnImageCardRightImageContent]{
+			padding-right:18px !important;
+			padding-left:18px !important;
+			padding-bottom:0 !important;
+		}
+
+}	@media only screen and (max-width: 480px){
+		td[class=mcnImageCardBottomImageContent]{
+			padding-bottom:9px !important;
+		}
+
+}	@media only screen and (max-width: 480px){
+		td[class=mcnImageCardTopImageContent]{
+			padding-top:18px !important;
+		}
+
+}	@media only screen and (max-width: 480px){
+		td[class=mcnImageCardLeftImageContent],td[class=mcnImageCardRightImageContent]{
+			padding-right:18px !important;
+			padding-left:18px !important;
+			padding-bottom:0 !important;
+		}
+
+}	@media only screen and (max-width: 480px){
+		td[class=mcnImageCardBottomImageContent]{
+			padding-bottom:9px !important;
+		}
+
+}	@media only screen and (max-width: 480px){
+		td[class=mcnImageCardTopImageContent]{
+			padding-top:18px !important;
+		}
+
+}	@media only screen and (max-width: 480px){
+		table[class=mcnCaptionLeftContentOuter] td[class=mcnTextContent],table[class=mcnCaptionRightContentOuter] td[class=mcnTextContent]{
+			padding-top:9px !important;
+		}
+
+}	@media only screen and (max-width: 480px){
+		td[class=mcnCaptionBlockInner] table[class=mcnCaptionTopContent]:last-child td[class=mcnTextContent]{
+			padding-top:18px !important;
+		}
+
+}	@media only screen and (max-width: 480px){
+		td[class=mcnBoxedTextContentColumn]{
+			padding-left:18px !important;
+			padding-right:18px !important;
+		}
+
+}	@media only screen and (max-width: 480px){
+		td[class=mcnTextContent]{
+			padding-right:18px !important;
+			padding-left:18px !important;
+		}
+
+}	@media only screen and (max-width: 480px){
+	/*
+	@tab Mobile Styles
+	@section template width
+	@tip Make the template fluid for portrait or landscape view adaptability. If a fluid layout doesn't work for you, set the width to 300px instead.
+	*/
+		table[class=templateContainer]{
+			/*@tab Mobile Styles
+@section template width
+@tip Make the template fluid for portrait or landscape view adaptability. If a fluid layout doesn't work for you, set the width to 300px instead.*/max-width:600px !important;
+			/*@editable*/width:100% !important;
+		}
+
+}	@media only screen and (max-width: 480px){
+	/*
+	@tab Mobile Styles
+	@section heading 1
+	@tip Make the first-level headings larger in size for better readability on small screens.
+	*/
+		h1{
+			/*@editable*/font-size:24px !important;
+			/*@editable*/line-height:125% !important;
+		}
+
+}	@media only screen and (max-width: 480px){
+	/*
+	@tab Mobile Styles
+	@section heading 2
+	@tip Make the second-level headings larger in size for better readability on small screens.
+	*/
+		h2{
+			/*@editable*/font-size:20px !important;
+			/*@editable*/line-height:125% !important;
+		}
+
+}	@media only screen and (max-width: 480px){
+	/*
+	@tab Mobile Styles
+	@section heading 3
+	@tip Make the third-level headings larger in size for better readability on small screens.
+	*/
+		h3{
+			/*@editable*/font-size:18px !important;
+			/*@editable*/line-height:125% !important;
+		}
+
+}	@media only screen and (max-width: 480px){
+	/*
+	@tab Mobile Styles
+	@section heading 4
+	@tip Make the fourth-level headings larger in size for better readability on small screens.
+	*/
+		h4{
+			/*@editable*/font-size:16px !important;
+			/*@editable*/line-height:125% !important;
+		}
+
+}	@media only screen and (max-width: 480px){
+	/*
+	@tab Mobile Styles
+	@section Boxed Text
+	@tip Make the boxed text larger in size for better readability on small screens. We recommend a font size of at least 16px.
+	*/
+		table[class=mcnBoxedTextContentContainer] td[class=mcnTextContent],td[class=mcnBoxedTextContentContainer] td[class=mcnTextContent] p{
+			/*@editable*/font-size:18px !important;
+			/*@editable*/line-height:125% !important;
+		}
+
+}	@media only screen and (max-width: 480px){
+	/*
+	@tab Mobile Styles
+	@section Preheader Visibility
+	@tip Set the visibility of the email's preheader on small screens. You can hide it to save space.
+	*/
+		table[id=templatePreheader]{
+			/*@editable*/display:block !important;
+		}
+
+}	@media only screen and (max-width: 480px){
+	/*
+	@tab Mobile Styles
+	@section Preheader Text
+	@tip Make the preheader text larger in size for better readability on small screens.
+	*/
+		td[class=preheaderContainer] td[class=mcnTextContent],td[class=preheaderContainer] td[class=mcnTextContent] p{
+			/*@editable*/font-size:14px !important;
+			/*@editable*/line-height:115% !important;
+		}
+
+}	@media only screen and (max-width: 480px){
+	/*
+	@tab Mobile Styles
+	@section Header Text
+	@tip Make the header text larger in size for better readability on small screens.
+	*/
+		td[class=headerContainer] td[class=mcnTextContent],td[class=headerContainer] td[class=mcnTextContent] p{
+			/*@editable*/font-size:18px !important;
+			/*@editable*/line-height:125% !important;
+		}
+
+}	@media only screen and (max-width: 480px){
+	/*
+	@tab Mobile Styles
+	@section Body Text
+	@tip Make the body text larger in size for better readability on small screens. We recommend a font size of at least 16px.
+	*/
+		td[class=bodyContainer] td[class=mcnTextContent],td[class=bodyContainer] td[class=mcnTextContent] p{
+			/*@editable*/font-size:18px !important;
+			/*@editable*/line-height:125% !important;
+		}
+
+}	@media only screen and (max-width: 480px){
+	/*
+	@tab Mobile Styles
+	@section footer text
+	@tip Make the body content text larger in size for better readability on small screens.
+	*/
+		td[class=footerContainer] td[class=mcnTextContent],td[class=footerContainer] td[class=mcnTextContent] p{
+			/*@editable*/font-size:14px !important;
+			/*@editable*/line-height:115% !important;
+		}
+
+}	@media only screen and (max-width: 480px){
+		td[class=footerContainer] a[class=utilityLink]{
+			display:block !important;
+		}
+
+}</style></head>
+    <body leftmargin="0" marginwidth="0" topmargin="0" marginheight="0" offset="0" style="background-color: #f2f2f2;margin: 0;padding: 0;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;height: 100% !important;width: 100% !important;">
+        <center>
+            <table align="center" border="0" cellpadding="0" cellspacing="0" height="100%" width="100%" id="bodyTable" style="border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;margin: 0;padding: 0;background-color: #eeeeee;height: 100% !important;width: 100% !important;">
+                <tbody><tr>
+                    <td align="center" valign="top" id="bodyCell" style="mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;margin: 0;padding: 0;border-top: 0;height: 100% !important;width: 100% !important;">
+                        <!-- BEGIN TEMPLATE // -->
+                        <table border="0" cellpadding="0" cellspacing="0" width="100%" style="border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;">
+                            <tbody>
+                            <tr style="
+    background-color: #F2F2F2;
+">
+                                <td align="center" valign="top" style="mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;">
+                                    <!-- BEGIN HEADER // -->
+                                    <table border="0" cellpadding="0" cellspacing="0" width="100%" id="templateHeader" style="background-color: #f1f1f1;border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;border-top: 0;border-bottom: 0;">
+                                        <tbody><tr>
+                                            <td align="center" valign="top" style="mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;">
+                                                <table border="0" cellpadding="0" cellspacing="0" width="600" class="templateContainer" style="border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;">
+                                                    <tbody><tr>
+                                                        <td valign="top" class="headerContainer" style="padding-top: 20px;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;"><table border="0" cellpadding="0" cellspacing="0" width="100%" class="mcnImageBlock" style="border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;">
+    <tbody class="mcnImageBlockOuter">
+            <tr>
+                <td valign="top" style="mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;" class="mcnImageBlockInner">
+                    <table align="left" width="100%" border="0" cellpadding="0" cellspacing="0" class="mcnImageContentContainer" style="border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;">
+                        <tbody><tr>
+                            <td class="mcnImageContent" valign="top" style="padding: 0px;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;">
+                                
+                                    
+                                        <img align="left" alt="" src="http://gallery.mailchimp.com/13a9a8dced53ae26eb94bc4a8/images/ee322c97-796f-4b2e-8fef-1996aed9f35d.png" width="564" style="/* max-width: 800px;*/ padding-bottom: 0;display: inline !important;vertical-align: bottom;width: 600px;border: 0;outline: none;text-decoration: none;-ms-interpolation-mode: bicubic;" class="mcnImage">
+                                    
+                                
+                            </td>
+                        </tr>
+                    </tbody></table>
+                </td>
+            </tr>
+    </tbody>
+</table></td>
+                                                    </tr>
+                                                </tbody></table>
+                                            </td>
+                                        </tr>
+                                    </tbody></table>
+                                    <!-- // END HEADER -->
+                                </td>
+                            </tr>
+                            <tr>
+                                <td align="center" valign="top" style="mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;">
+                                    <!-- BEGIN BODY // -->
+                                    <table border="0" cellpadding="0" cellspacing="0" width="100%" id="templateBody" style="border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;background-color: #ffffff;border-top: 0;border-bottom: 0;">
+                                        <tbody><tr>
+                                            <td align="center" valign="top" style="mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;">
+                                                <table border="0" cellpadding="0" cellspacing="0" width="600" class="templateContainer" style="background-color: white;border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;">
+                                                    <tbody><tr>
+                                                        <td valign="top" class="bodyContainer" style="padding-top: 10px;padding-bottom: 10px;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;"><table border="0" cellpadding="0" cellspacing="0" width="100%" class="mcnTextBlock" style="border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;">
+    <tbody class="mcnTextBlockOuter">
+        <tr>
+            <td valign="top" class="mcnTextBlockInner" style="mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;">
+                
+                <table align="left" border="0" cellpadding="0" cellspacing="0" width="600" class="mcnTextContentContainer" style="border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;">
+                    <tbody><tr>
+                        
+                        <td valign="top" class="mcnTextContent" style="padding: 9px 18px;color: #007FFF;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;font-family: Helvetica;font-size: 15px;line-height: 150%;text-align: left;">
+                        
+                            <h1 style="margin: 0;padding: 0;display: block;font-family: Helvetica;font-size: 40px;font-style: normal;font-weight: bold;line-height: 125%;letter-spacing: -1px;text-align: left;color: #606060 !important;">Hoş Geldiniz</h1>
+
+<h3 style="margin: 0;padding: 0;display: block;font-family: Helvetica;font-size: 18px;font-style: normal;font-weight: bold;line-height: 125%;letter-spacing: -.5px;text-align: left;color: #606060 !important;">Sayın %username%<br>
+<span style="font-size:13px; line-height:1.6em">Okutus'a katıldığınız için teşekkürler</span></h3>
+
+<p style="margin: 1em 0;padding: 0;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;color: #606060;font-family: Helvetica;font-size: 15px;line-height: 150%;text-align: left;">Aşağıdaki bilgileri kullanarak editöre giriş yapabilir, hemen ücretsiz yayınlarınızı oluşturabilirsiniz.<br>
+<br>
+<a href="%link% " target="_blank" style="word-wrap: break-word;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;color: #6DC6DD;font-weight: normal;text-decoration: underline;">%link%</a> adresinden giriş yapabilirsiniz.<br>
+&nbsp;</p>
+
+                        </td>
+                    </tr>
+                </tbody></table>
+                
+            </td>
+        </tr>
+    </tbody>
+</table><table border="0" cellpadding="0" cellspacing="0" width="100%" class="mcnDividerBlock" style="background-color: #FFFFFF;border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;">
+    <tbody class="mcnDividerBlockOuter">
+        <tr>
+            <td class="mcnDividerBlockInner" style="padding: 18px;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;">
+                <table class="mcnDividerContent" border="0" cellpadding="0" cellspacing="0" width="100%" style="border-top-width: 1px;border-top-style: groove;border-top-color: #999999;border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;">
+                    <tbody><tr>
+                        <td style="mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;">
+                            <span></span>
+                        </td>
+                    </tr>
+                </tbody></table>
+            </td>
+        </tr>
+    </tbody>
+</table><table border="0" cellpadding="0" cellspacing="0" width="100%" class="mcnTextBlock" style="border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;">
+    <tbody class="mcnTextBlockOuter">
+        <tr>
+            <td valign="top" class="mcnTextBlockInner" style="mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;">
+                
+                <table align="left" border="0" cellpadding="0" cellspacing="0" width="600" class="mcnTextContentContainer" style="border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;">
+                    <tbody><tr>
+                        
+                        <td valign="top" class="mcnTextContent" style="padding: 9px 18px;text-align: center;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;color: #606060;font-family: Helvetica;font-size: 15px;line-height: 150%;">
+                        
+                            <h2 style="text-align: center;color: #2980b9;margin: 0;padding: 0;display: block;font-family: Helvetica;font-size: 26px;font-style: normal;font-weight: bold;line-height: 125%;letter-spacing: -.75px;">Okutus ile&nbsp;Kolay ve Hızlı Başlangıç</h2>
+
+                        </td>
+                    </tr>
+                </tbody></table>
+                
+            </td>
+        </tr>
+    </tbody>
+</table><table border="0" cellpadding="0" cellspacing="0" width="100%" class="mcnCaptionBlock" style="border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;">
+    <tbody class="mcnCaptionBlockOuter">
+        <tr>
+            <td class="mcnCaptionBlockInner" valign="top" style="padding: 9px;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;">
+                
+
+
+
+<table border="0" cellpadding="0" cellspacing="0" class="mcnCaptionRightContentOuter" width="100%" style="border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;">
+    <tbody><tr>
+        <td valign="top" class="mcnCaptionRightContentInner" style="padding: 0 9px;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;">
+            <table align="left" border="0" cellpadding="0" cellspacing="0" class="mcnCaptionRightImageContentContainer" style="border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;">
+                <tbody><tr>
+                    <td class="mcnCaptionRightImageContent" valign="top" style="mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;">
+                    
+                        
+
+                        <img alt="" src="http://gallery.mailchimp.com/13a9a8dced53ae26eb94bc4a8/images/642cee52-5c0c-4fd0-8162-2d15a762ee0d.png" width="264" style="max-width: 625px;border: 0;outline: none;text-decoration: none;-ms-interpolation-mode: bicubic;vertical-align: bottom;" class="mcnImage">
+                        
+
+                    
+                    </td>
+                </tr>
+            </tbody></table>
+            <table class="mcnCaptionRightTextContentContainer" align="right" border="0" cellpadding="0" cellspacing="0" width="264" style="border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;">
+                <tbody><tr>
+                    <td valign="top" class="mcnTextContent" style="mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;color: #606060;font-family: Helvetica;font-size: 15px;line-height: 150%;text-align: left;">
+                        <h3 class="null" style="margin: 0;padding: 0;display: block;font-family: Helvetica;font-size: 18px;font-style: normal;font-weight: bold;line-height: 125%;letter-spacing: -.5px;text-align: left;color: #606060 !important;">Kitabınızı hazır şablonlar&nbsp;seçerek oluşturun</h3>
+Okutus Editör içerisinde bulunan onlarca şablondan birini seçerek kitabınızı oluşturmaya başlayabilirsiniz.&nbsp;
+                    </td>
+                </tr>
+            </tbody></table>
+        </td>
+    </tr>
+</tbody></table>
+
+
+
+
+            </td>
+        </tr>
+    </tbody>
+</table><table border="0" cellpadding="0" cellspacing="0" width="100%" class="mcnCaptionBlock" style="border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;">
+    <tbody class="mcnCaptionBlockOuter">
+        <tr>
+            <td class="mcnCaptionBlockInner" valign="top" style="padding: 9px;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;">
+                
+
+<table border="0" cellpadding="0" cellspacing="0" class="mcnCaptionLeftContentOuter" width="100%" style="border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;">
+    <tbody><tr>
+        <td valign="top" class="mcnCaptionLeftContentInner" style="padding: 0 9px;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;">
+            <table align="right" border="0" cellpadding="0" cellspacing="0" class="mcnCaptionLeftImageContentContainer" style="border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;">
+                <tbody><tr>
+                    <td class="mcnCaptionLeftImageContent" valign="top" style="mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;">
+                    
+                        
+                        <img alt="" src="http://gallery.mailchimp.com/13a9a8dced53ae26eb94bc4a8/images/37969ca3-1084-42a8-890e-1e40bd111bf2.png" width="264" style="max-width: 625px;border: 0;outline: none;text-decoration: none;-ms-interpolation-mode: bicubic;vertical-align: bottom;" class="mcnImage">
+                        
+                    
+                    </td>
+                </tr>
+            </tbody></table>
+            <table class="mcnCaptionLeftTextContentContainer" align="left" border="0" cellpadding="0" cellspacing="0" width="264" style="border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;">
+                <tbody><tr>
+                    <td valign="top" class="mcnTextContent" style="mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;color: #606060;font-family: Helvetica;font-size: 15px;line-height: 150%;text-align: left;">
+                        <h3 class="null" style="margin: 0;padding: 0;display: block;font-family: Helvetica;font-size: 18px;font-style: normal;font-weight: bold;line-height: 125%;letter-spacing: -.5px;text-align: left;color: #606060 !important;">Sürükle bırak ile kitabınızı düzenleyin</h3>
+Okutus Editör içerisinde bulunan onlarca şablondan birini seçerek kitabınızı oluşturmaya başlayabilirsiniz.&nbsp;
+                    </td>
+                </tr>
+            </tbody></table>
+        </td>
+    </tr>
+</tbody></table>
+
+
+
+
+
+            </td>
+        </tr>
+    </tbody>
+</table><table border="0" cellpadding="0" cellspacing="0" width="100%" class="mcnCaptionBlock" style="border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;">
+    <tbody class="mcnCaptionBlockOuter">
+        <tr>
+            <td class="mcnCaptionBlockInner" valign="top" style="padding: 9px;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;">
+                
+
+
+
+<table border="0" cellpadding="0" cellspacing="0" class="mcnCaptionRightContentOuter" width="100%" style="border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;">
+    <tbody><tr>
+        <td valign="top" class="mcnCaptionRightContentInner" style="padding: 0 9px;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;">
+            <table align="left" border="0" cellpadding="0" cellspacing="0" class="mcnCaptionRightImageContentContainer" style="border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;">
+                <tbody><tr>
+                    <td class="mcnCaptionRightImageContent" valign="top" style="mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;">
+                    
+                        
+
+                        <img alt="" src="http://gallery.mailchimp.com/13a9a8dced53ae26eb94bc4a8/images/af0da731-0149-4582-8607-4bdf0a041f35.png" width="264" style="max-width: 625px;border: 0;outline: none;text-decoration: none;-ms-interpolation-mode: bicubic;vertical-align: bottom;" class="mcnImage">
+                        
+
+                    
+                    </td>
+                </tr>
+            </tbody></table>
+            <table class="mcnCaptionRightTextContentContainer" align="right" border="0" cellpadding="0" cellspacing="0" width="264" style="border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;">
+                <tbody><tr>
+                    <td valign="top" class="mcnTextContent" style="mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;color: #606060;font-family: Helvetica;font-size: 15px;line-height: 150%;text-align: left;">
+                        <h3 class="null" style="margin: 0;padding: 0;display: block;font-family: Helvetica;font-size: 18px;font-style: normal;font-weight: bold;line-height: 125%;letter-spacing: -.5px;text-align: left;color: #606060 !important;">Hazırladığınız yayın Web, IOS ve Android platformlarından okunabilir olsun.</h3>
+Okutus ile oluşturduğunuz e-Pub formatındaki dosyayı ister Okutus ile isterseniz Android ve IOS marketlerinde yayınlayabilirsiniz.
+                    </td>
+                </tr>
+            </tbody></table>
+        </td>
+    </tr>
+</tbody></table>
+
+
+
+
+            </td>
+        </tr>
+    </tbody>
+</table><table border="0" cellpadding="0" cellspacing="0" width="100%" class="mcnButtonBlock" style="border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;">
+    <tbody class="mcnButtonBlockOuter">
+        <tr>
+            <td style="padding-top: 0;padding-right: 18px;padding-bottom: 18px;padding-left: 18px;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;" valign="top" align="center" class="mcnButtonBlockInner">
+                <table border="0" cellpadding="0" cellspacing="0" class="mcnButtonContentContainer" style="border-collapse: separate !important;border-top-left-radius: 5px;border-top-right-radius: 5px;border-bottom-right-radius: 5px;border-bottom-left-radius: 5px;background-color: #2880B9;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;">
+                    <tbody>
+                        <tr>
+                            <td align="center" valign="middle" class="mcnButtonContent" style="font-family: Arial;font-size: 16px;padding: 16px;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;">
+                                <a class="mcnButton " title="Hemen Başlayın" href="%link%" target="_blank" style="font-weight: bold;letter-spacing: normal;line-height: 100%;text-align: center;text-decoration: none;color: #FFFFFF;word-wrap: break-word;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;">Hemen Başlayın</a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </td>
+        </tr>
+    </tbody>
+</table><table border="0" cellpadding="0" cellspacing="0" width="100%" class="mcnFollowBlock" style="border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;">
+    <tbody class="mcnFollowBlockOuter">
+        <tr>
+            <td align="center" valign="top" style="padding: 9px;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;" class="mcnFollowBlockInner">
+                <table border="0" cellpadding="0" cellspacing="0" width="100%" class="mcnFollowContentContainer" style="border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;">
+    <tbody><tr>
+        <td align="center" style="padding-left: 9px;padding-right: 9px;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;">
+            <table border="0" cellpadding="0" cellspacing="0" width="100%" class="mcnFollowContent" style="border: 1px solid #EEEEEE;background-color: #FAFAFA;border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;">
+                <tbody><tr>
+                    <td align="center" valign="top" style="padding-top: 9px;padding-right: 9px;padding-left: 9px;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;">
+						<table border="0" cellpadding="0" cellspacing="0" style="border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;">
+							<tbody><tr>
+								<td valign="top" style="mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;">
+			                        
+			                            
+			                                <table align="left" border="0" cellpadding="0" cellspacing="0" class="mcnFollowStacked" style="border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;">
+			                                     
+			                                    <tbody><tr>
+			                                        <td align="center" valign="top" class="mcnFollowIconContent" style="padding-right: 10px;padding-bottom: 5px;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;">
+			                                            <a href="http://linden-tech.com/" target="_blank" style="word-wrap: break-word;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;"><img src="http://cdn-images.mailchimp.com/icons/social-block/color-link-128.png" alt="Website" class="mcnFollowBlockIcon" width="48" style="width: 48px;max-width: 48px;display: block;border: 0;outline: none;text-decoration: none;-ms-interpolation-mode: bicubic;"></a>
+			                                        </td>
+			                                    </tr>
+			                                    
+			                                    
+			                                    <tr>
+			                                        <td align="center" valign="top" class="mcnFollowTextContent" style="padding-right: 10px;padding-bottom: 9px;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;">
+			                                            <a href="http://linden-tech.com/" target="_blank" style="color: #606060;font-family: Arial;font-size: 11px;font-weight: normal;line-height: 100%;text-align: center;text-decoration: none;word-wrap: break-word;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;">Website</a>
+			                                        </td>
+			                                    </tr>
+			                                    
+			                                </tbody></table>
+			                            
+			                            
+								<!--[if gte mso 6]>
+								</td>
+						    	<td align="left" valign="top">
+								<![endif]-->
+			                        
+			                            
+			                                <table align="left" border="0" cellpadding="0" cellspacing="0" class="mcnFollowStacked" style="border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;">
+			                                     
+			                                    <tbody><tr>
+			                                        <td align="center" valign="top" class="mcnFollowIconContent" style="padding-right: 10px;padding-bottom: 5px;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;">
+			                                            <a href="https://www.facebook.com/lindenDigitalPublishing" target="_blank" style="word-wrap: break-word;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;"><img src="http://cdn-images.mailchimp.com/icons/social-block/color-facebook-128.png" alt="Facebook" class="mcnFollowBlockIcon" width="48" style="width: 48px;max-width: 48px;display: block;border: 0;outline: none;text-decoration: none;-ms-interpolation-mode: bicubic;"></a>
+			                                        </td>
+			                                    </tr>
+			                                    
+			                                    
+			                                    <tr>
+			                                        <td align="center" valign="top" class="mcnFollowTextContent" style="padding-right: 10px;padding-bottom: 9px;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;">
+			                                            <a href="https://www.facebook.com/lindenDigitalPublishing" target="_blank" style="color: #606060;font-family: Arial;font-size: 11px;font-weight: normal;line-height: 100%;text-align: center;text-decoration: none;word-wrap: break-word;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;">Facebook</a>
+			                                        </td>
+			                                    </tr>
+			                                    
+			                                </tbody></table>
+			                            
+			                            
+								<!--[if gte mso 6]>
+								</td>
+						    	<td align="left" valign="top">
+								<![endif]-->
+			                        
+			                            
+			                                <table align="left" border="0" cellpadding="0" cellspacing="0" class="mcnFollowStacked" style="border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;">
+			                                     
+			                                    <tbody><tr>
+			                                        <td align="center" valign="top" class="mcnFollowIconContent" style="padding-right: 10px;padding-bottom: 5px;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;">
+			                                            <a href="https://plus.google.com/+Lindentech_LindenDijitalYay%C4%B1nc%C4%B1l%C4%B1k/posts" target="_blank" style="word-wrap: break-word;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;"><img src="http://cdn-images.mailchimp.com/icons/social-block/color-googleplus-128.png" alt="Google Plus" class="mcnFollowBlockIcon" width="48" style="width: 48px;max-width: 48px;display: block;border: 0;outline: none;text-decoration: none;-ms-interpolation-mode: bicubic;"></a>
+			                                        </td>
+			                                    </tr>
+			                                    
+			                                    
+			                                    <tr>
+			                                        <td align="center" valign="top" class="mcnFollowTextContent" style="padding-right: 10px;padding-bottom: 9px;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;">
+			                                            <a href="https://plus.google.com/+Lindentech_LindenDijitalYay%C4%B1nc%C4%B1l%C4%B1k/posts" target="_blank" style="color: #606060;font-family: Arial;font-size: 11px;font-weight: normal;line-height: 100%;text-align: center;text-decoration: none;word-wrap: break-word;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;">Google Plus</a>
+			                                        </td>
+			                                    </tr>
+			                                    
+			                                </tbody></table>
+			                            
+			                            
+								<!--[if gte mso 6]>
+								</td>
+						    	<td align="left" valign="top">
+								<![endif]-->
+			                        
+			                            
+			                                <table align="left" border="0" cellpadding="0" cellspacing="0" class="mcnFollowStacked" style="border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;">
+			                                     
+			                                    <tbody><tr>
+			                                        <td align="center" valign="top" class="mcnFollowIconContent" style="padding-right: 10px;padding-bottom: 5px;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;">
+			                                            <a href="http://tr.linkedin.com/pub/linden-digital-publishing/7a/8a8/554" target="_blank" style="word-wrap: break-word;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;"><img src="http://cdn-images.mailchimp.com/icons/social-block/color-linkedin-128.png" alt="LinkedIn" class="mcnFollowBlockIcon" width="48" style="width: 48px;max-width: 48px;display: block;border: 0;outline: none;text-decoration: none;-ms-interpolation-mode: bicubic;"></a>
+			                                        </td>
+			                                    </tr>
+			                                    
+			                                    
+			                                    <tr>
+			                                        <td align="center" valign="top" class="mcnFollowTextContent" style="padding-right: 10px;padding-bottom: 9px;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;">
+			                                            <a href="http://tr.linkedin.com/pub/linden-digital-publishing/7a/8a8/554" target="_blank" style="color: #606060;font-family: Arial;font-size: 11px;font-weight: normal;line-height: 100%;text-align: center;text-decoration: none;word-wrap: break-word;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;">LinkedIn</a>
+			                                        </td>
+			                                    </tr>
+			                                    
+			                                </tbody></table>
+			                            
+			                            
+								<!--[if gte mso 6]>
+								</td>
+						    	<td align="left" valign="top">
+								<![endif]-->
+			                        
+			                            
+			                                <table align="left" border="0" cellpadding="0" cellspacing="0" class="mcnFollowStacked" style="border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;">
+			                                     
+			                                    <tbody><tr>
+			                                        <td align="center" valign="top" class="mcnFollowIconContent" style="padding-right: 0;padding-bottom: 5px;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;">
+			                                            <a href="http://www.youtube.com/user/LindenDigitalPublish" target="_blank" style="word-wrap: break-word;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;"><img src="http://cdn-images.mailchimp.com/icons/social-block/color-youtube-128.png" alt="YouTube" class="mcnFollowBlockIcon" width="48" style="width: 48px;max-width: 48px;display: block;border: 0;outline: none;text-decoration: none;-ms-interpolation-mode: bicubic;"></a>
+			                                        </td>
+			                                    </tr>
+			                                    
+			                                    
+			                                    <tr>
+			                                        <td align="center" valign="top" class="mcnFollowTextContent" style="padding-right: 0;padding-bottom: 9px;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;">
+			                                            <a href="http://www.youtube.com/user/LindenDigitalPublish" target="_blank" style="color: #606060;font-family: Arial;font-size: 11px;font-weight: normal;line-height: 100%;text-align: center;text-decoration: none;word-wrap: break-word;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;">YouTube</a>
+			                                        </td>
+			                                    </tr>
+			                                    
+			                                </tbody></table>
+			                            
+			                            
+								<!--[if gte mso 6]>
+								</td>
+						    	<td align="left" valign="top">
+								<![endif]-->
+			                        
+								</td>
+							</tr>
+						</tbody></table>
+                    </td>
+                </tr>
+            </tbody></table>
+        </td>
+    </tr>
+</tbody></table>
+
+            </td>
+        </tr>
+    </tbody>
+</table></td>
+                                                    </tr>
+                                                </tbody></table>
+                                            </td>
+                                        </tr>
+                                    </tbody></table>
+                                    <!-- // END BODY -->
+                                </td>
+                            </tr>
+                            <tr>
+                                <td align="center" valign="top" style="mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;">
+                                    <!-- BEGIN FOOTER // -->
+                                    <table border="0" cellpadding="0" cellspacing="0" width="100%" id="templateFooter" style="border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;background-color: #F2F2F2;border-top: 0;border-bottom: 0;">
+                                        <tbody><tr>
+                                            <td align="center" valign="top" style="mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;">
+                                                <table border="0" cellpadding="0" cellspacing="0" width="600" class="templateContainer" style="border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;">
+                                                    <tbody><tr>
+                                                        <td valign="top" class="footerContainer" style="padding-top: 10px;padding-bottom: 10px;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;"><table border="0" cellpadding="0" cellspacing="0" width="100%" class="mcnTextBlock" style="border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;">
+    <tbody class="mcnTextBlockOuter">
+        <tr>
+            <td valign="top" class="mcnTextBlockInner" style="mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;">
+                
+                <table align="left" border="0" cellpadding="0" cellspacing="0" width="600" class="mcnTextContentContainer" style="border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;">
+                    <tbody><tr>
+                        
+                        <td valign="top" class="mcnTextContent" style="padding-top: 9px;padding-right: 18px;padding-bottom: 9px;padding-left: 18px;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;color: #606060;font-family: Helvetica;font-size: 11px;line-height: 125%;text-align: left;">
+                        
+                            <em>Copyright © 2014 Linden Dijital Yayın, Tüm hakları saklıdır.</em><br>
+<br>
+<strong>İletişim için mail adresimiz:</strong><br>
+info@linden-tech.com<br>
+<!-- <br>
+<a class="utilityLink" href="*|UNSUB|*" style="word-wrap: break-word;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;color: #606060;font-weight: normal;text-decoration: underline;">unsubscribe from this list</a>&nbsp;&nbsp;&nbsp; <a class="utilityLink" href="*|UPDATE_PROFILE|*" style="word-wrap: break-word;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;color: #606060;font-weight: normal;text-decoration: underline;">update subscription preferences</a>&nbsp;<br>
+<br> -->
+&nbsp;
+                        </td>
+                    </tr>
+                </tbody></table>
+                
+            </td>
+        </tr>
+    </tbody>
+</table></td>
+                                                    </tr>
+                                                </tbody></table>
+                                            </td>
+                                        </tr>
+                                    </tbody></table>
+                                    <!-- // END FOOTER -->
+                                </td>
+                            </tr>
+                        </tbody></table>
+                        <!-- // END TEMPLATE -->
+                    </td>
+                </tr>
+            </tbody></table>
+        </center>
+    
+</body></html>
