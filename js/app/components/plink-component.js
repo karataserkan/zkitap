@@ -336,6 +336,50 @@ var createPlinkComponent = function ( event, ui, oldcomponent ) {
 
                 var pIconDragImage = $ ('<div>')
                   .addClass("add-image-drag-area")
+                  .on('dragenter', function (e) 
+                    {
+                        e.stopPropagation();
+                        e.preventDefault();
+                    })
+                    .on('dragexit', function (e) 
+                    {
+                        e.stopPropagation();
+                        e.preventDefault();
+                    })
+                    .on('dragover', function (e) 
+                    {
+                         e.stopPropagation();
+                         e.preventDefault();
+                    })
+                    .on('drop', function (e) 
+                    {
+                     
+                      e.stopPropagation();
+                      e.preventDefault();
+
+                      var reader = new FileReader();
+                      var component = {};
+                      
+                      reader.onload = function (evt) {
+
+                        FileBinary = evt.target.result;
+                        var contentType = FileBinary.substr(5, FileBinary.indexOf('/')-5);
+
+                        if(contentType == 'image'){
+                          var imageBinary = FileBinary;
+                          pIconNewImage.html('');
+                          var newImage = $("<img style='width:70px; height:70px;' src='"+imageBinary+"' />");
+                          marker=imageBinary;
+                          pIconNewImage.append(newImage);
+                          return;
+                          
+                        }
+                        
+                      };
+                      //console.log(e.originalEvent.dataTransfer.files[0]);
+                      reader.readAsDataURL( e.originalEvent.dataTransfer.files[0] );
+
+                    })
                   .appendTo(pIconContent);
 
                 $('<br>').appendTo(pageIconDiv);
