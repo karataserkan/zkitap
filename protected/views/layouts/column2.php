@@ -90,8 +90,8 @@
 				<ul>
 					<li id="li_dashboard">
 						<a href="/site/dashboard">
-							<i class="fa fa-gear fa-fw"></i>
-							<span class="menu-text">Kontrol	Paneli</span>
+							<i class="fa fa-cogs fa-fw"></i>
+							<span class="menu-text">Genel Bakış</span>
 							</a>
 					</li>
 					<li id="li_book">
