@@ -98,404 +98,450 @@ var image_height;
 
 var createGaleryComponent = function (event,ui, oldcomponent){
 
+  var galery_type = "";
+  var images = "";
+  var imagesDiv;
+
+    
+
+  var min_left = $("#current_page").offset().left;
+  var min_top = $("#current_page").offset().top;
+  var max_left = $("#current_page").width() + min_left;
+  var max_top = $("#current_page").height() + min_top;
+  var window_width = $( window ).width();
+  var window_height = $( window ).height();
+
+  if(max_top > window_height) max_top = window_height;
+  if(max_left > window_width) max_top = window_width;
+
+  var top=(event.pageY - 25);
+  var left=(event.pageX-150);
+
+  var control_y_check ="";
+  var control_y_check_active ="";
+  var control_n_check ="";
+  var control_n_check_active ="";
+  if(galery_type == 'inner') { control_y_check = "checked='checked'"; control_y_check_active = 'active';}
+  else { control_n_check = "checked='checked'"; control_n_check_active = 'active'; }
+  
+  //console.log(min_top);
+  //console.log(max_top);
+  if(left < min_left)
+    left = min_left;
+  else if(left+310 > max_left)
+    left = max_left - 310;
+
+  if(top < min_top)
+    top = min_top;
+  else if(top+500 > max_top)
+    top = max_top - 500;
+
+  top = top + "px";
+  left = left + "px";
+
   if(typeof oldcomponent == "undefined"){
-    var galery_type = "inner";
+    galery_type = "inner";
+    image_width = "200px";
+    image_height = "200px";
+    
   }
   else{
-    var galery_type = oldcomponent.data.galery_type;
+    galery_type = oldcomponent.data.galery_type;
+    image_width = oldcomponent.data.self.css.width;
+    image_height = oldcomponent.data.self.css.height;
+    top = oldcomponent.data.self.css.top;
+    left = oldcomponent.data.self.css.left;
+    //console.log(top);
   }
-    
 
-    var min_left = $("#current_page").offset().left;
-    var min_top = $("#current_page").offset().top;
-    var max_left = $("#current_page").width() + min_left;
-    var max_top = $("#current_page").height() + min_top;
-    var window_width = $( window ).width();
-    var window_height = $( window ).height();
+  var idPre = $.now();
 
-    if(max_top > window_height) max_top = window_height;
-    if(max_left > window_width) max_top = window_width;
+  $('<div>').componentBuilder({
 
-    var top=(event.pageY - 25);
-    var left=(event.pageX-150);
-
-    var control_y_check ="";
-    var control_y_check_active ="";
-    var control_n_check ="";
-    var control_n_check_active ="";
-    if(galery_type == 'inner') { control_y_check = "checked='checked'"; control_y_check_active = 'active';}
-    else { control_n_check = "checked='checked'"; control_n_check_active = 'active'; }
-    
-    console.log(min_top);
-    console.log(max_top);
-    if(left < min_left)
-      left = min_left;
-    else if(left+310 > max_left)
-      left = max_left - 310;
-
-    if(top < min_top)
-      top = min_top;
-    else if(top+500 > max_top)
-      top = max_top - 500;
-
-console.log(top);
-
-    top = top + "px";
-    left = left + "px";
-
-    $("<div class='popup ui-draggable' id='pop-image-popup' style='display: block; top:" + top + "; left: " + left + ";'> \
-      <div class='popup-header'> \
-        <i class='icon-m-galery'></i> &nbsp;"+j__("Galeri Ekle")+" \
-        <i id='galery-add-dummy-close-button' class='icon-close size-10 popup-close-button'></i>\
-      </div> \
-      <div class='gallery-inner-holder'> \
-        <div style='clear:both'></div> \
-        <div class='tabbable'>\
-          <ul class='nav nav-tabs' id='myTab'>\
-            <li class='active'><a href='#galery_drag' data-toggle='tab'>"+j__("Resim Sürükle")+"</a></li>\
-            <li><a href='#galery_upload' data-toggle='tab'>"+j__("Resim Yükle")+"</a></li>\
-          </ul>\
-        </div>\
-        <div class='tab-content'>\
-          <div class='tab-pane fade in active' id='galery_drag'><br>\
-            <div class='add-image-drag-area' id='dummy-dropzone'> </div> \
-          </div>\
-          <div class='tab-pane fade' id='galery_upload'><br>\
-            <!--<input type='file' name='image_file' id='image_file' value='' >-->\
-            <span class='btn btn-success fileinput-button'>\
-              <i class='fa fa-plus'></i>\
-              <span>"+j__("Resim Ekle")+"</span>\
-              <input type='file' name='files[]' id='image_file' multiple>\
-            </span><br><br>\
-          </div>\
-        </div>\
-      </div> \
-      <ul id='galery-popup-images' style='width: 250px;'> \
-      </ul> \
-     <div style='clear:both' > </div> \
-     <div class='type1' style='padding: 4px; display: inline-block;'>\
-        <div class='btn-group' data-toggle='buttons'>"+j__("Galeri Tipi")+"<br>\
-          <label class='btn btn-primary " + control_y_check_active + "'>\
-            <input type='radio' name='galery_type' id='repeat0' " + control_y_check + " value='inner'> "+j__("İçe Yaslı")+"\
-          </label>\
-          <label class='btn btn-primary " + control_n_check_active + "'>\
-            <input type='radio' name='galery_type' id='repeat1' " + control_n_check + " value='outer'> "+j__("dışa Yaslı")+"\
-          </label>\
-        </div>\
-    </div><br><br>\
-     <a id='pop-image-OK' class='btn btn-info' >"+j__("Tamam")+"</a>\
-    </div> ").appendTo('body').draggable();
-    
-    $("#galery-add-dummy-close-button").click(function(){
-
-      $('#pop-image-popup').remove();  
-
-      if ( $('#pop-image-popup').length ){
-        $('#pop-image-popup').remove();  
-      }
-
-    });
-
-    $(".fileinput-button").css({"position": "relative", "overflow": "hidden"});
-    $(".fileinput-button input[type=file]").css({"position": "absolute", "top": "0", "right": "0", "min-width": "100%", "min-height": "100%", "font-size": "999px", "text-align": "right", "filter": "alpha(opacity=0)", "opacity": "0", "outline": "none", "background": "white", "cursor": "inherit", "display": "block"});    
-    if(typeof oldcomponent != "undefined"){
-      
-      $.each(oldcomponent.data.ul.imgs, function(i,val){
-        //console.log(val.src);
-        $('#galery-popup-images').append('<li style="height:60px; width:60px; margin:10px; border : 1px dashed #ccc; float:left;"><a class="btn btn-info size-10 icon-delete galey-image-delete  " style="margin-left: 42px; position:absolute;"></a>\
-            <img style="height:100%; " src='+val.src+' /> \
-          </li>');
-      });
-      var top = oldcomponent.data.self.css.top;
-      var left = oldcomponent.data.self.css.left;
-      //console.log(top);
-      //console.log(oldcomponent.data.self.css.width);
-      $('#galery-popup-images').sortable({
-          placeholder: "ui-state-highlight"
-        });
-      $('#galery-popup-images').disableSelection(); 
-      
-    }
-    else{
-      top = (ui.offset.top-$(event.target).offset().top )+ 'px';
-      left = ( ui.offset.left-$(event.target).offset().left )+ 'px';
-    }
-
-    $('.galey-image-delete').click(function(){
-
-      //console.log(this);
-      $(this).parent().remove();
-
-    });
-
-
-
-    $('#pop-image-OK').click(function (){
-
-      if(typeof oldcomponent != "undefined"){
-        window.lindneo.tlingit.componentHasDeleted( oldcomponent, oldcomponent.id );
-        //console.log(oldcomponent.data.self.css.width);
-        image_width = oldcomponent.data.self.css.width;
-        image_height = oldcomponent.data.self.css.height;
-      }
-      else{
-        image_width = "200px";
-        image_height = "200px";
-      }
-      var galery_type = $('input[name=galery_type]:checked').val();
+    top:top,
+    left:left,
+    title: j__("Galeri"),
+    btnTitle : j__("Ekle"), 
+    beforeClose : function () {
+      /* Warn about not saved work */
+      /* Dont allow if not confirmed */
+      return confirm(j__("Yaptığınız değişiklikler kaydedilmeyecektir. Kapatmak istediğinize emin misiniz?"));
+    },
+    onBtnClick: function(){
+      /*if (!plink_data) {
+          alert (j__("Lütfen başlığı giriniz"));
+          return false;
+        }
+      else 
+      if (!page_link) {
+          alert (j__("Lütfen bir sayfa linki seçiniz"));
+          return false;
+        }
+        */
+        //console.log(top);
       var imgs=[];
-        $('#galery-popup-images img').each(function( index ) {
-          var img={
-              'css' : {
+      imagesDiv.find("img").each(function( index ) {
+        var img={
+            'css' : {
+              'height':'100%',
+              'margin': '0',
+              'border': 'none 0px',
+              'outline': 'none',
+              'background-color': 'transparent'
+            } , 
+            'src': $( this ).attr('src')
+          }
+          imgs.push(img);
 
-                'height':'100%',
-                'margin': '0',
-                
-                'border': 'none 0px',
-                'outline': 'none',
-                'background-color': 'transparent'
-              } , 
-              'src': $( this ).attr('src')
-            }
-            imgs.push(img);
+        //console.log( index + ": " + $( this ).text() );
+      });
 
-          console.log( index + ": " + $( this ).text() );
-        });
-
-      //console.log(image_width);
-      //return;
       var component = {
-          'type' : 'galery',
-          'data': {
-            'some_gallery':{
-              'css': {
-                'width': '100%',
-                'height': '100%',
-                'min-height':'100px',
-                'min-width':'100px',
-              }
+        'type' : 'galery',
+        'data': {
+          'some_gallery':{
+            'css': {
+              'width': '100%',
+              'height': '100%',
+              'min-height':'100px',
+              'min-width':'100px',
+            }
+          },
+          'galery_type': galery_type,
+          'ul':{
+            'css': {
+              'overflow':'hidden',
+              'margin': '0',
+              'padding': '0',
+              'position': 'relative',
+              'min-height':'100px',
+              'min-width':'100px',
+              'width': '100%',
+              'height': '100%'
             },
-            'galery_type': galery_type,
-            'ul':{
-              'css': {
-                'overflow':'hidden',
-                'margin': '0',
-                'padding': '0',
-                'position': 'relative',
-                'min-height':'100px',
-                'min-width':'100px',
-                'width': '100%',
-                'height': '100%'
-                
+          'imgs':imgs
+          },
+          'lock':'',
+          'self': {
+            'css': {
+              'position':'absolute',
+              'top': top ,
+              'left':  left ,
+              'background-color': 'transparent',
+              'width': image_width,
+              'height': image_height,
+              'z-index': 'first',
+              'opacity':'1'
 
-
-              },
-            'imgs':imgs
-            
-         
-            },
-            'lock':'',
-            'self': {
-              'css': {
-                'position':'absolute',
-                'top': top ,
-                'left':  left ,
-                'background-color': 'transparent',
-                'width': image_width,
-                'height': image_height,
-                'z-index': 'first',
-                'opacity':'1'
-
-              }
             }
           }
-        };
-
-         window.lindneo.tlingit.componentHasCreated( component );
-         $("#galery-add-dummy-close-button").trigger('click');
-
-    });
-
-    var control_val = 0;
-    
-    var el = document.getElementById("dummy-dropzone");
-    var imageBinary = '';
-
-
-  //$('#image_file').change(function(){
-    var filesInput = document.getElementById("image_file");
-        
-    filesInput.addEventListener("change", function(event){
-
-    var image_type = $('input[name=image_type]:checked').val();
-
-    var files = event.target.files;
-    console.log(files);
-
-    for(var i = 0; i< files.length; i++)
-    {
-        var file = files[i];
-        
-        //Only pics
-        if(!file.type.match('image'))
-          continue;
-        
-        var picReader = new FileReader();
-        
-        picReader.addEventListener("load",function(event){
-            
-            var picFile = event.target;
-            
-            //var div = document.createElement("div");
-            
-            //div.innerHTML = "<img class='thumbnail' src='" + picFile.result + "'" +
-                    //"title='" + picFile.name + "'/>";
-            
-            //output.insertBefore(div,null);            
-            imageBinary = picFile.result;
-       
-        $('#galery-popup-images').append('<li style="height:60px; width:60px; margin:10px; border : 1px dashed #ccc; float:left;"><a class="btn btn-info size-10 icon-delete galey-image-delete  " style="margin-left: 42px; position:absolute;"></a>\
-            <img style="height:100%; " src='+imageBinary+' /> \
-          </li>');
-        $('.galey-image-delete').click(function(){
-
-          //console.log(this);
-          $(this).parent().remove();
-
-        });
-        $('#galery-popup-images').sortable({
-          placeholder: "ui-state-highlight"
-        });
-        $('#galery-popup-images').disableSelection();
-        
-        });
-        
-         //Read the image
-        picReader.readAsDataURL(file);
-    }   
-    //console.log(image_type);
-    //console.log(marker);
-    /*
-    var image_width = '200px';
-    var image_height = '150px';
-    var file = this.files[0];
-    var name = file.name;
-    var size = file.size;
-    var type = file.type;
-    
-    var reader = new FileReader();
-    var component = {};
-    reader.readAsDataURL(file);
-    //console.log(reader);
-    reader.onload = function(_file) {
-      //console.log(_file);
-      var image = new Image();
-        image.src = _file.target.result;
-
-        image.onload = function() {
-            // access image size here 
-          if(control_val == 0)
-            {
-              //console.log(this.width);
-              image_width = this.width;
-              image_height = this.height;
-              var size = window.lindneo.findBestSize({'w':image_width,'h':image_height});
-              image_width = size.w;
-              image_height = size.h;
-              control_val++;
-            }
-        
-        //console.log(image_width);
-        //console.log(control_val);
-        imageBinary = image.src;
-       
-        $('#galery-popup-images').append('<li style="height:60px; width:60px; margin:10px; border : 1px dashed #ccc; float:left;"><a class="btn btn-info size-10 icon-delete galey-image-delete  " style="margin-left: 42px; position:absolute;"></a>\
-            <img style="height:100%; " src='+imageBinary+' /> \
-          </li>');
-        $('.galey-image-delete').click(function(){
-
-          //console.log(this);
-          $(this).parent().remove();
-
-        });
-        $('#galery-popup-images').sortable({
-          placeholder: "ui-state-highlight"
-        });
-        $('#galery-popup-images').disableSelection();      
-            
+        }
       };
-    };
-    */
-});
+      if(typeof oldcomponent !== 'undefined'){
+        window.lindneo.tlingit.componentHasDeleted( oldcomponent, oldcomponent.id );
+      };
+      window.lindneo.tlingit.componentHasCreated( component );
+    },
+    onComplete:function (ui){
 
-    el.addEventListener("dragenter", function(e){
-      e.stopPropagation();
-      e.preventDefault();
-    }, false);
+       var mainDiv = $('<div>')
+          .appendTo(ui);
 
-    el.addEventListener("dragexit", function(e){
-      e.stopPropagation();
-      e.preventDefault();
-    },false);
+          var tabDiv = $ ('<div>')
+            .addClass("tabbable")
+            .appendTo(mainDiv);
 
-    el.addEventListener("dragover", function(e){
-      e.stopPropagation ();
-      e.preventDefault();
-    }, false);
+            var tabUl = $ ('<ul>')
+              .addClass("nav nav-tabs")
+              .appendTo (tabDiv);
 
-    el.addEventListener("drop", function(e){
-      
-      e.stopPropagation();
-      e.preventDefault();
-
-      var reader = new FileReader();
-      var component = {};
-      
-      
-      reader.onload = function (evt) {
+              var tabGaleryDragLi = $('<li>')
+                .addClass("active")
+                .appendTo(tabUl);
+                
+                var tabGaleryDragA = $ ('<a>')
+                  .attr('href','#'+idPre+'drag')
+                  .attr('data-toggle','tab')
+                  .text(j__("Resim Sürükle"))
+                  .appendTo(tabGaleryDragLi);
 
               
-        
-        var image = new Image();
-        image.src = evt.target.result;
+              var tabGaleryUploadLi = $('<li>')
+                .appendTo(tabUl);
 
-        image.onload = function() {
-           
-            // access image size here 
-            if(control_val == 0)
-            {
-              //console.log(this.width);
-              image_width = this.width;
-              image_height = this.height;
-              var size = window.lindneo.findBestSize({'w':image_width,'h':image_height});
-              image_width = size.w;
-              image_height = size.h;
-              control_val++;
-            }
-        
-        //console.log(image_width);
-        //console.log(control_val);
-        imageBinary = evt.target.result;
-        $('#galery-popup-images').append('<li style="height:60px; width:60px; margin:10px; border : 1px dashed #ccc; float:left;"><a class="btn btn-info size-10 icon-delete galey-image-delete  " style="margin-left: 42px; position:absolute;"></a>\
-            <img style="height:100%; " src='+imageBinary+' /> \
-          </li>');
-        $('.galey-image-delete').click(function(){
+                var tabGaleryUploadA = $ ('<a>')
+                  .attr('href','#'+idPre+'upload')
+                  .attr('data-toggle','tab')
+                  .text(j__("Resim Yükle"))
+                  .appendTo(tabGaleryUploadLi);
 
-          //console.log(this);
-          $(this).parent().remove();
+              $('<br>').appendTo(tabDiv);
 
+              var galeryDiv = $ ('<div>')
+                .addClass("tab-content")
+                .appendTo(tabDiv);
+
+                var galeryDragDiv = $ ('<div>')
+                  .addClass("tab-pane fade")
+                  .addClass("active in")
+                  .attr('id',idPre+'drag')
+                  .appendTo(galeryDiv);
+
+                  $('<br>').appendTo(galeryDragDiv);
+
+                  var galeryDragContent = $ ('<div>')
+                    .addClass("add-image-drag-area")
+                    .on('dragenter', function (e) 
+                    {
+                        e.stopPropagation();
+                        e.preventDefault();
+                    })
+                    .on('dragexit', function (e) 
+                    {
+                        e.stopPropagation();
+                        e.preventDefault();
+                    })
+                    .on('dragover', function (e) 
+                    {
+                         e.stopPropagation();
+                         e.preventDefault();
+                    })
+                    .on('drop', function (e) 
+                    {
+                     
+                      e.stopPropagation();
+                      e.preventDefault();
+
+                      var reader = new FileReader();
+                      var component = {};
+                      
+                      reader.onload = function (evt) {
+
+                        var image = new Image();
+                        image.src = evt.target.result;
+
+                        image.onload = function() {
+                         
+                          // access image size here 
+                          if(control_val == 0)
+                          {
+                            //console.log(this.width);
+                            image_width = this.width;
+                            image_height = this.height;
+                            var size = window.lindneo.findBestSize({'w':image_width,'h':image_height});
+                            image_width = size.w;
+                            image_height = size.h;
+                            control_val++;
+                          }
+                      
+                        //console.log(image_width);
+                        //console.log(control_val);
+                        imageBinary = evt.target.result;
+                        var newimageLI = $ ('<div>')
+                          .css({"height":"60px", "width":"60px", "margin":"10px", "border": "1px dashed #ccc", "float":"left"})
+                          .appendTo(imagesDiv);
+
+                          var newimageA = $ ('<a>')
+                          .addClass("btn btn-info size-10 icon-delete galey-image-delete")
+                          .css({"margin-left": "42px", "position":"absolute"})
+                          .click(function(){
+                              $(this).parent().remove();
+                          })
+                          .appendTo(newimageLI);
+
+                          var newimageIMG = $ ('<img>')
+                          .css("height","100%")
+                          .attr("src",imageBinary)
+                          .appendTo(newimageLI);
+                            
+                          imagesDiv.sortable({
+                            placeholder: "ui-state-highlight"
+                          });
+                          imagesDiv.disableSelection();
+                     
+
+                        }; 
+                      };
+                      //console.log(e.originalEvent.dataTransfer.files[0]);
+                      reader.readAsDataURL( e.originalEvent.dataTransfer.files[0] );
+
+                    })
+                    .appendTo(galeryDragDiv);
+
+                var galeryUploadDiv = $ ('<div>')
+                  .addClass("tab-pane fade")
+                  .attr('id',idPre+'upload')
+                  .appendTo(galeryDiv);
+
+                  $('<br>').appendTo(galeryUploadDiv);
+
+                  var galeryuploadContent = $ ('<span>')
+                    .addClass("btn btn-success fileinput-button")
+                    .css({"position": "relative", "overflow": "hidden"})
+                    .appendTo(galeryUploadDiv);
+
+                    var galeryuploadContentI = $ ('<i>')
+                      .addClass("fa fa-plus")
+                      .appendTo(galeryuploadContent);
+
+                    var galeryuploadContentSpan = $ ('<span>')
+                      .text(j__("Resim Ekle"))
+                      .appendTo(galeryuploadContent);
+
+                    var galeryuploadContentInput = $ ('<input type="file" multiple>')
+                      .attr("name","files[]")
+                      .css({"position": "absolute", "top": "0", "right": "0", "min-width": "100%", "min-height": "100%", "font-size": "999px", "text-align": "right", "filter": "alpha(opacity=0)", "opacity": "0", "outline": "none", "background": "white", "cursor": "inherit", "display": "block"})
+                      .change(function(event){
+
+                        var image_type = $('input[name=image_type]:checked').val();
+
+                        var files = event.target.files;
+                        //console.log(files);
+
+                        for(var i = 0; i< files.length; i++)
+                        {
+                            var file = files[i];
+                            
+                            //Only pics
+                            if(!file.type.match('image'))
+                              continue;
+                            
+                            var picReader = new FileReader();
+                            
+                            picReader.addEventListener("load",function(event){
+                                
+                                var picFile = event.target;
+                                
+                                //var div = document.createElement("div");
+                                
+                                //div.innerHTML = "<img class='thumbnail' src='" + picFile.result + "'" +
+                                        //"title='" + picFile.name + "'/>";
+                                
+                                //output.insertBefore(div,null);            
+                                imageBinary = picFile.result;
+
+                              var newimageLI = $ ('<div>')
+                                .css({"height":"60px", "width":"60px", "margin":"10px", "border": "1px dashed #ccc", "float":"left"})
+                                .appendTo(imagesDiv);
+
+                                var newimageA = $ ('<a>')
+                                .addClass("btn btn-info size-10 icon-delete galey-image-delete")
+                                .css({"margin-left": "42px", "position":"absolute"})
+                                .click(function(){
+                                    $(this).parent().remove();
+                                })
+                                .appendTo(newimageLI);
+
+                                var newimageIMG = $ ('<img>')
+                                .css("height","100%")
+                                .attr("src",imageBinary)
+                                .appendTo(newimageLI);
+                            
+                              imagesDiv.sortable({
+                                placeholder: "ui-state-highlight"
+                              });
+                              imagesDiv.disableSelection();
+                            
+                            });
+                            
+                             //Read the image
+                            picReader.readAsDataURL(file);
+                        }   
+                      })
+                      .appendTo(galeryuploadContent);
+
+                    $('<br><br>').appendTo(galeryUploadDiv);
+
+            imagesDiv = $ ('<ul>')
+            .css("width","100%")
+            .appendTo(mainDiv)
+            .sortable({
+              placeholder: "ui-state-highlight"
+            })
+            .disableSelection();
+
+          var typeDiv = $ ('<div>')
+            .addClass("type1")
+            .css({"padding": "4px", "display": "inline-block", "width": "100%"})
+            .appendTo(mainDiv);
+
+            var typeDivContent = $ ('<div>')
+              .addClass("btn-group")
+              .attr("data-toggle","buttons")
+              .text(j__("Galeri Tipi"))
+              .appendTo(typeDiv);
+            $('<br>').appendTo(typeDivContent);
+
+              var typeDivInner = $ ('<label>')
+                .addClass("btn btn-primary "+control_y_check_active)
+                .appendTo(typeDivContent);
+
+                var typeDivInnerInput = $ ('<input type="radio">')
+                  .attr("name","galery_type")
+                  .attr("value","inner")
+                  .change(function () {
+                    galery_type = $(this)[0].value;
+                  })
+                  .appendTo(typeDivInner);
+
+                var typeDivInnerName = $('<span>')
+                  .text(j__("İçe Yaslı"))
+                  .appendTo(typeDivInner);
+
+              var typeDivOuter = $ ('<label>')
+                .addClass("btn btn-primary "+control_n_check_active)
+                .appendTo(typeDivContent);
+
+                var typeDivOuterInput = $ ('<input type="radio">')
+                  .attr("name","galery_type")
+                  .attr("value","outer")
+                  .change(function () {
+                    galery_type = $(this)[0].value;
+                  })
+                  .appendTo(typeDivOuter);
+                  
+                var typeDivOuterName = $('<span>')
+                  .text(j__("dışa Yaslı"))
+                  .appendTo(typeDivOuter);
+
+      var control_val = 0;
+    
+      var el = galeryDragContent;
+      var imageBinary = '';
+
+      if(typeof oldcomponent != "undefined"){
+      
+        $.each(oldcomponent.data.ul.imgs, function(i,val){
+          //console.log(val.src);
+          var newimageLI = $ ('<div>')
+            .css({"height":"60px", "width":"60px", "margin":"10px", "border": "1px dashed #ccc", "float":"left"})
+            .appendTo(imagesDiv);
+
+            var newimageA = $ ('<a>')
+            .addClass("btn btn-info size-10 icon-delete galey-image-delete")
+            .css({"margin-left": "42px", "position":"absolute"})
+            .click(function(){
+                $(this).parent().remove();
+            })
+            .appendTo(newimageLI);
+
+            var newimageIMG = $ ('<img>')
+            .css("height","100%")
+            .attr("src",val.src)
+            .appendTo(newimageLI);
+          
         });
-        $('#galery-popup-images').sortable({
+
+        imagesDiv.sortable({
           placeholder: "ui-state-highlight"
         });
-        $('#galery-popup-images').disableSelection();
-     
+        imagesDiv.disableSelection();
+      }
 
-      }; 
-      };
 
-      reader.readAsDataURL( e.dataTransfer.files[0] );
 
-    }, false);
+    }
 
-  };
+  }).appendTo('body');
+
+};

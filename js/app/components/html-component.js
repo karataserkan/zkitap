@@ -96,128 +96,111 @@ $(document).ready(function(){
 
 
 var createHtmlComponent = function ( event, ui, oldcomponent ) {  
-//console.log(oldcomponent);  
+
+  var htmlContent;
+
   if(typeof oldcomponent == 'undefined'){
       //console.log('dene');
       var top = (ui.offset.top-$(event.target).offset().top ) + 'px';
       var left = ( ui.offset.left-$(event.target).offset().left ) + 'px';
-      var popup_value = '';
       var width = 'auto';
       var height = 'auto';
     }
     else{
       top = oldcomponent.data.self.css.top;
       left = oldcomponent.data.self.css.left;
-      popup_value = window.decodeURI(oldcomponent.data.html_inner);
       var width = oldcomponent.data.width ;
       var height = oldcomponent.data.height;
     };
-    //console.log(width);
-    //console.log(height);
-   /* $("<div class='popup ui-draggable' id='pop-image-popup' style='display: block; top:" + top + "; left: " + left + ";'> \
-      <div class='popup-header'> \
-      Görsel/Video Ekle \
-      <i id='popup-add-dummy-close-button' class='icon-close size-10 popup-close-button'></i> \
-      </div> \
-        <div class='gallery-inner-holder' style='width: " + width + "px; height: " + height + "px;'> \
-        <div style='clear:both'></div> \
-        <div class='add-image-drag-area' id='dummy-dropzone'> </div> \
-        <div class ='popup_wrapper drag-cancel' style='border: 1px #ccc solid; ' > \
-          <div  id='popup-explanation' style='width:100%;height:100%; ' contenteditable='true' class='drag-cancel'>" + popup_value + ". \
-         </div>  \
-        </div> <br>\
-        <a href='#' id='pop-image-OK' class='btn bck-light-green white radius' style='padding: 5px 30px;'>Ekle</a> \
-      </div> \
-      </div>").appendTo('body').draggable({cancel:'.drag-cancel'}).resizable();*/ 
+
     var page_off=$('#current_page').offset();
     top=page_off.top;
     left=page_off.left;
     width=$('#current_page').width();
     height=$('#current_page').height();
-    var html_popup = $("<div class='popup ui-draggable' id='pop-popup' style='display: block; top:"+top+"px; left: "+left+"px; width: "+width+"px; height:"+(height-10)+"px; z-index:99999;'> \
-      </div>");
-    html_popup.appendTo('body').draggable({cancel:'.drag-cancel'});
-    var poup_header = $("<div class='popup-header'><i class='icon-m-link'></i> &nbsp;"+j__("Html Ekle")+" </div> ");
-    var close_button = $("<i id='html-add-dummy-close-button' class='icon-close size-10 popup-close-button'></i> ");
-    
-    var galery_inner = $("<div class='gallery-inner-holder' > \
-        <div style='clear:both'></div> \
-      </div> ");
-    var popup_wrapper = $("<div class ='popup_wrapper drag-cancel' style='border: 1px #ccc solid; ' ></div> <br>");
-    var popup_detail = $('<textarea class="my-code-area" style="width: '+(width-50)+'px; height:'+(height-120)+'px; overflow:auto; text-align: left;">'+popup_value+'</textarea>\
-                            <script>\
-                              $(".my-code-area").ace({ theme: "twilight", lang: "html" })\
-                            </script>');
-    var add_button = $("<a href='#' id='pop-image-OK' class='btn btn-info' style='padding: 5px 30px; margin-left: 480px;'>"+j__("Ekle")+"</a> ");
-    poup_header.appendTo(html_popup);
-    close_button.appendTo(poup_header);
-    galery_inner.appendTo(html_popup);
-    popup_wrapper.appendTo(galery_inner);
-    
-    popup_detail.appendTo(popup_wrapper);
-    add_button.appendTo(galery_inner);
-    popup_detail;
-    close_button.click(function(){
 
-      html_popup.remove();  
+    var idPre = $.now();
 
-      if ( html_popup.length ){
-        html_popup.remove();  
-      }
+  $('<div>').componentBuilder({
 
-    });
-
-    
-    
-    
-    add_button.click(function (){  
-      
+    top:top,
+    left:left,
+    title: j__("HTML"),
+    btnTitle : j__("Ekle"), 
+    beforeClose : function () {
+      /* Warn about not saved work */
+      /* Dont allow if not confirmed */
+      return confirm(j__("Yaptığınız değişiklikler kaydedilmeyecektir. Kapatmak istediğinize emin misiniz?"));
+    },
+    onBtnClick: function(){
+      /*if (!plink_data) {
+          alert (j__("Lütfen başlığı giriniz"));
+          return false;
+        }
+      else */
+        console.log(htmlContent);
+      if (!htmlContent) {
+          alert (j__("Lütfen bir html kodu giriniz"));
+          return false;
+        }
       var width = "300px";
       var height = "300px";
-      //console.log(width);
-      //console.log(height);      
-      if(typeof oldcomponent == 'undefined'){
-        //console.log('dene');
-        var top = (ui.offset.top-$(event.target).offset().top ) + 'px';
-        var left = ( ui.offset.left-$(event.target).offset().left ) + 'px';
-      }
-      else{
-        top = oldcomponent.data.self.css.top;
-        left = oldcomponent.data.self.css.left;
-        window.lindneo.tlingit.componentHasDeleted( oldcomponent, oldcomponent.id );
-        oldcomponent.data.html_inner = $(".my-code-area").val();
 
-      };
-      //console.log($(".my-code-area").val());
-      //return;
-      var html_data = window.encodeURI($(".my-code-area").val());
+      var html_data = window.encodeURI(htmlContent.val());
       //console.log(html_data);
-       var  component = {
-          'type' : 'html',
-          'data': {
-            'html_inner': html_data ,
-            'overflow': 'visible',
-            'lock':'',
-            'self': {
-              'css': {
-                'position':'absolute',
-                'top': top ,
-                'left':  left ,
-                'overflow': 'visible',
-                'opacity': '1',
-                'width': width,
-                'height': height,
-                'z-index': 'first'
-              }
+      var  component = {
+        'type' : 'html',
+        'data': {
+          'html_inner': html_data ,
+          'overflow': 'visible',
+          'lock':'',
+          'self': {
+            'css': {
+              'position':'absolute',
+              'top': top ,
+              'left':  left ,
+              'overflow': 'visible',
+              'opacity': '1',
+              'width': width,
+              'height': height,
+              'z-index': 'first'
             }
-          }
-        };
-       
-        window.lindneo.tlingit.componentHasCreated( component );
+          } 
+        }
+     };
+     if(typeof oldcomponent !== 'undefined'){
+        window.lindneo.tlingit.componentHasDeleted( oldcomponent, oldcomponent.id );
+      };
+      window.lindneo.tlingit.componentHasCreated( component );
+    },
+    onComplete:function (ui){
+      console.log($(ui).parent().parent());
+      $(ui).parent().parent().css({"width":$('#current_page').width(),"height":$('#current_page').height()});
+      var mainDiv = $('<div>')
+        .appendTo(ui);
+
+        var galleryInnerDiv = $('<div>')
+          .addClass("gallery-inner-holder")
+          .appendTo(mainDiv);
+
+          var wrapperDiv = $('<div>')
+            .addClass("popup_wrapper drag-cancel")
+            .css({"border": "1px #ccc solid" })
+            .appendTo(galleryInnerDiv);
+
+            htmlContent = $('<textarea>')
+              .addClass("my-code-area")
+              .css({"width": (width-50)+"px", "height": (height-120)+"px", "overflow":"auto", "text-align": "left" })
+              .appendTo(wrapperDiv);
+
         
-        close_button.trigger('click');
+        if(typeof oldcomponent !== 'undefined'){
+          console.log(window.decodeURI(oldcomponent.data.html_inner));
+          console.log(htmlContent)
+          htmlContent.val(window.decodeURI(oldcomponent.data.html_inner));
+        }
+        htmlContent.ace({ theme: "twilight", lang: "html" });
+    }
 
-    });
-    
-
-  };
+  }).appendTo('body');
+};
