@@ -7,12 +7,12 @@ do
 	elif [ "$count" -eq "2" ]; then
 		path=$1
 	elif [ "$count" -eq "3" ]; then
-		xvfb-run -a -s "-screen 0 1024x768x24" wkhtmltopdf $path"/"$1 $path"/"temp_$1.pdf
+		xvfb-run -a -s "-screen 0 1024x768x24" -w 1000 wkhtmltopdf $path"/"$1 $path"/"temp_$1.pdf
 		pdfcrop $path"/"temp_$1.pdf $path"/"$1.pdf
 		`pdftk $path"/"$1.pdf cat output $path"/"$output.pdf`
 		rm -f $path"/"$1.pdf $path"/"temp_$1.pdf 
 	else
-		xvfb-run -a -s "-screen 0 1024x768x24" wkhtmltopdf $path"/"$1 $path"/"temp_$1.pdf
+		xvfb-run -a -s "-screen 0 1024x768x24" -w 1000 wkhtmltopdf $path"/"$1 $path"/"temp_$1.pdf
                 pdfcrop $path"/"temp_$1.pdf $path"/"$1.pdf
                 `pdftk $path"/"$output.pdf $path"/"$1.pdf cat output $path"/"output_$1.pdf`
 		mv $path"/"output_$1.pdf $path"/"$output.pdf
