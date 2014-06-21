@@ -679,7 +679,7 @@ var createGraphComponent = function ( event, ui, oldcomponent ) {
 
         if(oldcomponent.data.type == "pie-chart")
           propertyPieDiv.show();
-        else if(oldcomponent.data.type == "pie-chart")
+        else if(oldcomponent.data.type == "bar-chart")
           propertyDiv.show();
       }
       else{
