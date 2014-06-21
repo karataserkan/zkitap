@@ -65,12 +65,17 @@ $(document).ready(function(){
 
           var labels= [];
           var serie=[];
+          var max_value ;
 
            
           $.each(this.options.component.data.series.datasets.data, function(p,value){
+            if (typeof max_value == "undefined") max_value = parseInt(value.value);
+            if (max_value < parseInt(value.value) ) max_value=parseInt(value.value);
+            console.log(max_value);
             serie.push( parseInt( value.value) ) ;
             labels.push(value.label);
           });
+
           var seriesdata = {
                 fillColor : "rgba(" + hexToRgb(this.options.component.data.series.colors.background).r + "," +
                             hexToRgb(this.options.component.data.series.colors.background).g + "," +
@@ -80,83 +85,96 @@ $(document).ready(function(){
                             hexToRgb(this.options.component.data.series.colors.stroke).b + ",1)",
                 data : serie
             };
+
           var barData = {
              'labels' : labels,
               'datasets' : [seriesdata]
           };
-          console.log(barData);
+          
+          max_value = parseInt(max_value * 1.2);
+          var Steppers = max_value.toString().length -2 ;
+          if ( Steppers < 0) Steppers = 0;
+          
+          console.log(Steppers);
+          
+          max_value = parseInt( parseInt(max_value / Math.pow(10, Steppers) ) * Math.pow(10, Steppers) );
+
+
+
+
+
+          console.log(max_value);
           this.options.barOptions = {
-                
-          //Boolean - If we show the scale above the chart data     
-          scaleOverlay : false,
-          
-          //Boolean - If we want to override with a hard coded scale
-          scaleOverride : false,
-          
-          //** Required if scaleOverride is true **
-          //Number - The number of steps in a hard coded scale
-          scaleSteps : 1,
-          //Number - The value jump in the hard coded scale
-          scaleStepWidth : 1,
-          //Number - The scale starting value
-          scaleStartValue : 0,
+              //Boolean - If we show the scale above the chart data     
+              scaleOverlay : false,
+              
+              //Boolean - If we want to override with a hard coded scale
+              scaleOverride : true,
+              
+              //** Required if scaleOverride is true **
+              //Number - The number of steps in a hard coded scale
+              scaleSteps : 5,
+              //Number - The value jump in the hard coded scale
+              scaleStepWidth : parseInt(max_value/5),
+              //Number - The scale starting value
+              scaleStartValue : 0,
 
-          //String - Colour of the scale line 
-          scaleLineColor : "rgba(0,0,0,.1)",
-          
-          //Number - Pixel width of the scale line  
-          scaleLineWidth : 1,
+              //String - Colour of the scale line 
+              scaleLineColor : "rgba(0,0,0,.1)",
+              
+              //Number - Pixel width of the scale line  
+              scaleLineWidth : 1,
 
-          //Boolean - Whether to show labels on the scale 
-          scaleShowLabels : true,
-          
-          //Interpolated JS string - can access value
-          scaleLabel : "<%=value%>",
-          
-          //String - Scale label font declaration for the scale label
-          scaleFontFamily : "'Arial'",
-          
-          //Number - Scale label font size in pixels  
-          scaleFontSize : 12,
-          
-          //String - Scale label font weight style  
-          scaleFontStyle : "normal",
-          
-          //String - Scale label font colour  
-          scaleFontColor : "#666",  
-          
-          ///Boolean - Whether grid lines are shown across the chart
-          scaleShowGridLines : true,
-          
-          //String - Colour of the grid lines
-          scaleGridLineColor : "rgba(0,0,0,.05)",
-          
-          //Number - Width of the grid lines
-          scaleGridLineWidth : 1, 
+              //Boolean - Whether to show labels on the scale 
+              scaleShowLabels : true,
+              
+              //Interpolated JS string - can access value
+              scaleLabel : "<%=value%>",
+              
+              //String - Scale label font declaration for the scale label
+              scaleFontFamily : "'Arial'",
+              
+              //Number - Scale label font size in pixels  
+              scaleFontSize : 12,
+              
+              //String - Scale label font weight style  
+              scaleFontStyle : "normal",
+              
+              //String - Scale label font colour  
+              scaleFontColor : "#666",  
+              
+              ///Boolean - Whether grid lines are shown across the chart
+              scaleShowGridLines : true,
+              
+              //String - Colour of the grid lines
+              scaleGridLineColor : "rgba(0,0,0,.05)",
+              
+              //Number - Width of the grid lines
+              scaleGridLineWidth : 1, 
 
-          //Boolean - If there is a stroke on each bar  
-          barShowStroke : true,
-          
-          //Number - Pixel width of the bar stroke  
-          barStrokeWidth : 2,
-          
-          //Number - Spacing between each of the X value sets
-          barValueSpacing : 5,
-          
-          //Number - Spacing between data sets within X values
-          barDatasetSpacing : 1,
-          
-          //Boolean - Whether to animate the chart
-          animation : true,
+              //Boolean - If there is a stroke on each bar  
+              barShowStroke : true,
+              
+              //Number - Pixel width of the bar stroke  
+              barStrokeWidth : 2,
+              
+              //Number - Spacing between each of the X value sets
+              barValueSpacing : 5,
+              
+              //Number - Spacing between data sets within X values
+              barDatasetSpacing : 1,
+              
+              //Boolean - Whether to animate the chart
+              animation : true,
 
-          //Number - Number of animation steps
-          animationSteps : 60,
-          
-          //String - Animation easing effect
-          animationEasing : "easeOutQuart",
+              //Number - Number of animation steps
+              animationSteps : 60,
+              
+              //String - Animation easing effect
+              animationEasing : "easeOutQuart",
 
-          //Function - Fires when the animation is complete
-          onAnimationComplete : null
+              //Function - Fires when the animation is complete
+              onAnimationComplete : null
           
         }
           this.options.barGraph = new Chart(this.options.context).Bar(barData,this.options.barOptions);

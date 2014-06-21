@@ -246,7 +246,7 @@ window.lindneo.tlingit = (function(window, $, undefined){
             var response = responseFromJson(res);
             
             if( response.result === null ) {
-              alert('hata'); 
+              alert(j__("Araç oluşturulamadı. Lütfen önce bir sayfa ekleyiniz!")); 
               return;
             }  
             response.result.component.data = component.data;

@@ -573,7 +573,12 @@ var removeRow = function(type, row_number){
           addNewAnswerBtn.show();
           answers = [];
           questionsArea.empty();
+          var Multiples = ["checkbox", "multiple_choice" ];
           addNewAnswer(null,null);
+          if (Multiples.indexOf(question_type) > -1 ){
+            addNewAnswer(null,null);
+            addNewAnswer(null,null);
+          }
         }
 
         quizTypeSelector.change(function (event){
