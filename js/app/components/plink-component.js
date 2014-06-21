@@ -12,7 +12,7 @@ $(document).ready(function(){
 
       var that = this;
 
-      console.log(this.options.component.data);
+      //console.log(this.options.component.data);
       //return;
 
       var componentplinkid='plink'+this.options.component.id;
@@ -22,7 +22,7 @@ $(document).ready(function(){
       var page_link = this.options.component.data.page_link;
       var marker = this.options.component.data.marker;
       var selected_tab = this.options.component.data.selected_tab;
-      console.log(plink_data);
+      //console.log(plink_data);
       
       if(selected_tab == "name"){
         var popupmessage=$('<div  id="message_'+componentplinkid+'"  style="overflow:hidden; width:100%; height:100%; "></div>');
@@ -35,8 +35,8 @@ $(document).ready(function(){
         popupmessage.html('<img src="'+this.options.component.data.marker+'" style="width:100%; height:100%;"/>');
       }
       else if(selected_tab == "area"){
-        console.log(this.options.component.data.height);
-        console.log(this.options.component.data.self.css);
+        //console.log(this.options.component.data.height);
+        //console.log(this.options.component.data.self.css);
         var width = this.options.component.data.self.css.width;
         var height = this.options.component.data.self.css.height; 
         if(this.options.component.data.height!=0){
@@ -52,7 +52,7 @@ $(document).ready(function(){
       
     },
     _on : function (event, ui) {
-      console.log(this.options.component.id);
+      //console.log(this.options.component.id);
       
     },
     field: function(key, value){
@@ -367,7 +367,7 @@ var createPlinkComponent = function ( event, ui, oldcomponent ) {
                 .appendTo(pLinkDiv);
 
           $.each( book_data, function( key, value ) {
-            console.log(value.title);
+            //console.log(value.title);
             var title = value.title;
             if(!value.title) title = deger + ". "+j__("Bölüm");
 
