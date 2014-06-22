@@ -229,20 +229,41 @@ class SiteController extends Controller
 
 		 $userId=Yii::app()->user->id;
 
+		$userOrganisations=OrganisationUsers::model()->findAll('user_id=:user_id',array('user_id'=>$userId));
+
+		$organisationsForUser=array();
+
+		foreach ($userOrganisations as $key => $userOrganisation) {
+			$organisationsForUser[]=Organisations::model()->find('organisation_id=:organisation_id',array('organisation_id'=>$userOrganisation->organisation_id));
+		}
 
 		$organisation=Yii::app()->db->createCommand("SELECT count(*) as n FROM `organisation_users` WHERE `user_id`='".$userId."'")->queryRow();
 		$book=Yii::app()->db->createCommand("SELECT count(*) as n FROM `book_users` WHERE `user_id`='".$userId."'")->queryRow();
 		$workspace=Yii::app()->db->createCommand("SELECT count(*) as n FROM `workspaces_users` WHERE `userid`='".$userId."'")->queryRow();
 
+		$userWorkspaces=WorkspacesUsers::model()->findAll('userid=:userid',array('userid'=>$userId));
+
+		$workspacesForUser=array();
+
+		foreach ($userWorkspaces as $key => $userWorkspace) {
+			$workspacesForUser[]=Workspaces::model()->find('workspace_id=:workspace_id',array('workspace_id'=>$userWorkspace->workspace_id));
+		}
+
+
 		$hostN=0;
 		$categoryN=0;
 		$budgetN=0;
+
+		$organisationHostings=array();
+		$organisationCategories=array();
 
 		$organisations=Yii::app()->db->createCommand("SELECT * FROM `organisation_users` WHERE `user_id`='".$userId."'")->queryAll();
 		foreach ($organisations as $key => $org) {
 			$organisationId=$org['organisation_id'];
 			$host=Yii::app()->db->createCommand("SELECT count(*) as n FROM `organisation_hostings` WHERE `organisation_id`='".$organisationId."'")->queryRow();
+			$organisationHostings[$organisationId]=OrganisationHostings::model()->findAll('organisation_id=:organisation_id',array('organisation_id'=>$organisationId));
 			$category=Yii::app()->db->createCommand("SELECT count(*) as n FROM `book_categories` WHERE `organisation_id`='".$organisationId."'")->queryRow();
+			$organisationCategories[]=BookCategories::model()->findAll('organisation_id=:organisation_id',array('organisation_id'=>$organisationId));
 			$budget=$this->getOrganisationEpubBudget($organisationId);
 			$budgetN+=$budget;
 			$categoryN+=$category['n'];
@@ -250,7 +271,17 @@ class SiteController extends Controller
 		}
 
 
-		$this->render('dashboard',array('books'=>$books,'organisation'=>$organisation['n'],'book'=>$book['n'],'workspace'=>$workspace['n'],'host'=>$hostN,'budget'=>$budgetN,'category'=>$categoryN));
+		$this->render('dashboard',array('books'=>$books,
+										'organisation'=>$organisation['n'],
+										'book'=>$book['n'],
+										'workspace'=>$workspace['n'],
+										'host'=>$hostN,
+										'budget'=>$budgetN,
+										'category'=>$categoryN,
+										'organisationsForUser'=>$organisationsForUser,
+										'workspacesForUser'=>$workspacesForUser,
+										'organisationHostings'=>$organisationHostings,
+										'organisationCategories'=>$organisationCategories));
 	}
 
 
