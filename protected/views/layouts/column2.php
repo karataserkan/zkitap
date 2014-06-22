@@ -62,7 +62,7 @@
 								$avatarSrc=$userProfileMeta->meta_value;
 							}
 						?>
-						<img alt="" src="<?php echo $avatarSrc; ?>" />
+						<img id="top_user_profile_image" alt="" src="<?php echo $avatarSrc; ?>" />
                         <span class="username"><?php echo Yii::app()->user->name; ?></span>					
 					</a>
 					<ul class="dropdown-menu">
