@@ -6,6 +6,9 @@ do
 		output=$1
 	elif [ "$count" -eq "2" ]; then
 		path=$1
+		SCRIPT=$(readlink -f "$0")
+		SCRIPTPATH=`dirname "$SCRIPT"`
+		unzip -o $SCRIPTPATH/MathJax-2.4-latest.zip 'MathJax-2.4-latest/*' -d $path; mv $path"/"MathJax-2.4-latest $path"/"mathjax;
 	elif [ "$count" -eq "3" ]; then
 		xvfb-run -a -s "-screen 0 1024x768x24" -w 1000 wkhtmltopdf $path"/"$1 $path"/"temp_$1.pdf
 		pdfcrop $path"/"temp_$1.pdf $path"/"$1.pdf
