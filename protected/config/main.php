@@ -179,7 +179,7 @@ return array(
 	// application-level parameters that can be accessed
 	// using Yii::app()->params['paramName'] 
 	'params'=>array(
-		'listPerPage' => 5,
+		'listPerPage' => 15,
 		// this is used in contact page
 		'adminEmail'=>'pacific@linden-tech.com',
 		'noreplyEmail'=>'noreply@okutus.com',
