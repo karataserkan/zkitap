@@ -458,6 +458,12 @@ class epub3 {
 				case 'latex':
 					$page_extra_scripts.='<script type="text/x-mathjax-config">
 					      MathJax.Hub.Config({
+					      	config: ["MMLorHTML.js"],
+							  jax: ["input/TeX","input/MathML","output/HTML-CSS","output/NativeMML"],
+							  extensions: ["tex2jax.js","mml2jax.js","MathMenu.js","MathZoom.js"],
+							  TeX: {
+							    extensions: ["AMSmath.js","AMSsymbols.js","noErrors.js","noUndefined.js"]
+							  },
 					        tex2jax: {
 					          inlineMath: [["$","$"],["\\(","\\)"]]
 					        }
@@ -479,7 +485,7 @@ class epub3 {
 							  VARIANT["-tex-mathit"].fonts.unshift("MathJax_SansSerif-italic");
 							});*/
 					    </script>
-						<script src="mathjax/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>';
+						<script src="mathjax/MathJax.js"></script>';
 					break;
 				
 				default:
@@ -718,7 +724,7 @@ class epub3 {
 		</style>
 
 	</head>
-	<body style="box-shadow:0px 0px 0px 1px rgba(0,0,0,0.1);background-repeat:no-repeat; width:'.$width.'px; height:'.$height.'px;'.$background.';'.$background_size.';">
+	<body style="box-shadow:0px 0px 0px 1px rgba(0,0,0,0.1);background-repeat:no-repeat; width:'.$width.'px; height:'.$height.'px;'.$background.';'.$background_size.';overflow:hidden;">
 	<section epub:type="frontmatter titlepage">
 	%components%
 	</section>
