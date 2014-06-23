@@ -205,8 +205,8 @@ var createImageComponent = function ( event, ui ,oldcomponent) {
         left = oldcomponent.data.self.css.left;
 
       };
-      if(image_type == 'popup') image_width_height = '80%';
-      else image_width_height = '100%';
+      
+      image_width_height = '100%';
       var component = {
           'type' : 'image',
           'data': {
