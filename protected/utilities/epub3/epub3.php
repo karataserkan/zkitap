@@ -462,6 +462,7 @@ class epub3 {
 					          inlineMath: [["$","$"],["\\(","\\)"]]
 					        }
 					      });
+
 							/*
 					      MathJax.Hub.Register.StartupHook("HTML-CSS Jax Ready",function () {
 							  var VARIANT = MathJax.OutputJax["HTML-CSS"].FONTDATA.VARIANT;
