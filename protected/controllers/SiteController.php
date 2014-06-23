@@ -158,7 +158,8 @@ class SiteController extends Controller
 		// using the default layout 'protected/views/layouts/main.php'
 		if(Yii::app()->user->isGuest)
 			$this->redirect( array('site/login' ) );
-
+		if(Yii::app()->user->name == "admin")
+			$this->redirect( array('management/index' ) );
 		$workspaces=$this->getUserWorkspaces();
 
 		$userConfirmation=UserMeta::model()->find('user_id=:user_id and meta_key=:meta_key',array('user_id'=>Yii::app()->user->id,'meta_key'=>'confirm'));
@@ -217,6 +218,9 @@ class SiteController extends Controller
 
 	public function actionDashboard()
 	{
+		if(Yii::app()->user->name == "admin")
+			$this->redirect( array('management/index' ) );
+		
 		$meta_books= Yii::app()->db
 		    ->createCommand("SELECT * FROM user_meta WHERE user_id=:user_id AND meta_key=:meta_key ORDER BY created DESC LIMIT 7")
 		    ->bindValues(array(':user_id' => Yii::app()->user->id, ':meta_key' => 'lastEditedBook'))

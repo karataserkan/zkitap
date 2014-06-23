@@ -1661,6 +1661,7 @@ right join book using (book_id) where book_id='$bookId' and type IN ('rtext','te
 	}
 
 	public function actionExportPdfBook($bookId=null){
+		ob_start();
 		$book=Book::model()->findByPk($bookId);
 		$ebook=new epub3($book);
 		//echo $ebook->getEbookFile();
@@ -1669,6 +1670,7 @@ right join book using (book_id) where book_id='$bookId' and type IN ('rtext','te
 		//die();
 		$converter=new EpubConverter($ebook->getEbookFile(), $ebook->getNiceName('pdf'),5);
 		$converter->extract();
+		ob_end_clean();
 		header("Content-type: application/pdf");
 		header("Content-Disposition: attachment; filename=".$ebook->getSanitizedFilename());
 		header("Pragma: no-cache");
