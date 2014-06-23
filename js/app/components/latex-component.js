@@ -111,11 +111,13 @@ var html_tag_replace = function (str){
    //console.log(str);
    return str;
 };
-
+var wrapperOutputDiv;
+var wrapperBoxDiv;
+var wrapperTextarea;
 
 var QUEUE = MathJax.Hub.queue;  // shorthand for the queue
-var box = document.getElementById("box");
-
+var box = $(wrapperBoxDiv).get(0);
+console.log(box);
 var HIDEBOX = function () {box.style.visibility = "hidden"}
 var SHOWBOX = function () {box.style.visibility = "visible"}
 
@@ -124,15 +126,14 @@ var SHOWBOX = function () {box.style.visibility = "visible"}
     //console.log($('#MathOutput'));
     
     QUEUE.Push(function(){
-      box = document.getElementById("box");
+      box = $(wrapperBoxDiv).get(0);
     });
     
-
-    document.getElementById("MathOutput").innerHTML = "$"+TeX+"$";
+    
+    document.getElementById(wrapperOutputDiv[0].id).innerHTML = "$"+TeX+"$";
 
     //reprocess the MathOutput Element
-    QUEUE.Push(HIDEBOX, ["Typeset",MathJax.Hub,"MathOutput"], SHOWBOX);
-    
+    QUEUE.Push(HIDEBOX, ["Typeset",MathJax.Hub,wrapperOutputDiv[0].id], SHOWBOX);
 
     /*
     document.getElementById("MathOutput").innerHTML = "\\displaystyle{"+TeX+"}";
@@ -151,7 +152,7 @@ var SHOWBOX = function () {box.style.visibility = "visible"}
 var insertLatexAtTextareaCursor = function (ID,text) {
     //var txtarea = document.getElementById(areaId);
     console.log();
-    var txtarea = $("#"+ID)[0];
+    var txtarea = $(wrapperTextarea).get(0);
     var scrollPos = txtarea.scrollTop;
     var strPos = 0;
     var br = ((txtarea.selectionStart || txtarea.selectionStart == '0') ? 
@@ -184,224 +185,77 @@ var insertLatexAtTextareaCursor = function (ID,text) {
     txtarea.scrollTop = scrollPos;
 }
 
-var createLatexComponent = function ( event, ui, oldcomponent ) {  
-//console.log(oldcomponent);  
+var createLatexComponent = function ( event, ui, oldcomponent ) { 
+  
+
+
   if(typeof oldcomponent == 'undefined'){
-      //console.log('dene');
-      var top = (ui.offset.top-$(event.target).offset().top ) + 'px';
-      var left = ( ui.offset.left-$(event.target).offset().left ) + 'px';
-      var popup_value = '';
-      var width = '400';
-      var height = '300';
-    }
-    else{
-      top = oldcomponent.data.self.css.top;
-      left = oldcomponent.data.self.css.left;
-      popup_value = oldcomponent.data.html_inner;
+    //console.log('dene');
+    var top = (ui.offset.top-$(event.target).offset().top ) + 'px';
+    var left = ( ui.offset.left-$(event.target).offset().left ) + 'px';
+    var popup_value = '';
+    var width = '400';
+    var height = '300';
+  }
+  else{
+    top = oldcomponent.data.self.css.top;
+    left = oldcomponent.data.self.css.left;
+    popup_value = oldcomponent.data.html_inner;
 
-      var width = oldcomponent.data.width ;
-      var height = oldcomponent.data.height;
-    }; 
-    //console.log(width);
-    //console.log(height);
-   /* $("<div class='popup ui-draggable' id='pop-image-popup' style='display: block; top:" + top + "; left: " + left + ";'> \
-      <div class='popup-header'> \
-      Görsel/Video Ekle \
-      <i id='popup-add-dummy-close-button' class='icon-close size-10 popup-close-button'></i> \
-      </div> \
-        <div class='gallery-inner-holder' style='width: " + width + "px; height: " + height + "px;'> \
-        <div style='clear:both'></div> \
-        <div class='add-image-drag-area' id='dummy-dropzone'> </div> \
-        <div class ='popup_wrapper drag-cancel' style='border: 1px #ccc solid; ' > \
-          <div  id='MathInput' style='width:100%;height:100%; ' contenteditable='true' class='drag-cancel'>" + popup_value + ". \
-         </div>  \
-        </div> <br>\
-        <a href='#' id='pop-image-OK' class='btn bck-light-green white radius' style='padding: 5px 30px;'>Ekle</a> \
-      </div> \
-      </div>").appendTo('body').draggable({cancel:'.drag-cancel'}).resizable();*/
-    
-    var min_left = $("#current_page").offset().left;
-    var min_top = $("#current_page").offset().top;
-    var max_left = $("#current_page").width() + min_left;
-    var max_top = $("#current_page").height() + min_top;
-    var window_width = $( window ).width();
-    var window_height = $( window ).height();
+    var width = oldcomponent.data.width ;
+    var height = oldcomponent.data.height;
+  }; 
 
-    if(max_top > window_height) max_top = window_height;
-    if(max_left > window_width) max_top = window_width;
-    
-    var top=(event.pageY - 25);
-    var left=(event.pageX-150);
+  var min_left = $("#current_page").offset().left;
+  var min_top = $("#current_page").offset().top;
+  var max_left = $("#current_page").width() + min_left;
+  var max_top = $("#current_page").height() + min_top;
+  var window_width = $( window ).width();
+  var window_height = $( window ).height();
 
-    console.log(top);
+  if(max_top > window_height) max_top = window_height;
+  if(max_left > window_width) max_top = window_width;
+  
+  var top=(event.pageY - 25);
+  var left=(event.pageX-150);
 
-    if(left < min_left)
-      left = min_left;
-    else if(left+510 > max_left)
-      left = max_left - 510;
+  console.log(top);
 
-    if(top < min_top)
-      top = min_top;
-    else if(top+510 > max_top)
-      top = max_top - 510;
+  if(left < min_left)
+    left = min_left;
+  else if(left+510 > max_left)
+    left = max_left - 510;
 
-console.log(top);
+  if(top < min_top)
+    top = min_top;
+  else if(top+510 > max_top)
+    top = max_top - 510;
 
-    top = top + "px";
-    left = left + "px";
+  console.log(top);
 
-    var html_popup = $("<div class='popup ui-draggable' id='pop-popup' style='display: block; top:" + top + "; left: " + left + "; width:500px; height:400px;min-height:248px;min-width:300px;'> \
-      </div>");
-    html_popup.appendTo('body').draggable({cancel:'.drag-cancel'}).resizable();
-    var poup_header = $("<div class='popup-header'><i class='icon-m-link'></i> &nbsp;"+j__("Latex Ekle")+" </div> ");
-    var close_button = $("<i id='html-add-dummy-close-button' class='icon-close size-10 popup-close-button'></i> ");
-    
-    var galery_inner = $("<div class='gallery-inner-holder' style='width: 100%; height: 75%;'> \
-        <div style='clear:both'></div> \
-      </div> ");
-    var latex_temp = $("<div  style='width: 100%; '>\
-          <div style='width:49%; float:left;'>\
-            <select class='form-control' id='mathsymbols' title='"+j__("Genel Latex Sembolleri")+"'>\
-              <option value=''>"+j__("Semboller")+"</option>\
-              <option title= '\\sqrt{x}' value='\\sqrt{x}'>√</option>\
-              <option title= '\\sqrt[n]{x}' value='\\sqrt[n]{x}'>∛</option>\
-              <option title= 'x^n' value='x^n'>x²</option>\
-              <option title= 'x_n' value='x_n'>x₂</option>\
-              <option title= 'x_a^b' value='x_a^b'>x₂²</option>\
-              <option title= '\\frac{a}{b}' value='\\frac{a}{b}'>÷</option>\
-              <option title= '\\lim_{x \\to 0}' value='\\lim_{x \\to 0}'>limit</option>\
-              <option title= '\\sum_{a}^{b}' value='\\sum_{a}^{b}'>∑</option>\
-              <option title= '\\int_{a}^{b}' value='\\int_{a}^{b}'>∫</option>\
-              <option title= '\\oint_{a}^{b}' value='\\oint_{a}^{b}'>∮</option>\
-              <option title= '\\prod_{a}^{b}' value='\\prod_{a}^{b}'>∏</option>\
-              <option title= '\\binom{n}{k}' value='\\binom{n}{k}'>binom</option>\
-              <option title= '\\left( \\right)' value='\\left( \\right)'>( )</option>\
-              <option title= '\\left[ \\right]' value='\\left[ \\right]'>[ ]</option>\
-              <option title= '\\lceil x \\rceil' value='\\lceil x \\rceil'>⌈ x ⌉</option>\
-              <option title= '\\lfloor x \\rfloor' value='\\lfloor x \\rfloor'>⌊ x ⌋</option>\
-              <option title= '\\left\\{ \\right\\}' value='\\left\\{ \\right\\}'>{ }</option>\
-              <option title= '\\bigcup_{\\alpha\\in S}' value='\\bigcup_{\\alpha\\in S}'>⋃</option>\
-              <option title= '\\bigcap_{\\alpha\\in S}' value='\\bigcap_{\\alpha\\in S}'>⋂</option>\
-              <option title= '\\partial' value='\\partial'>∂</option>\
-              <option title= '\\infty' value='\\infty'>∞</option>\
-              <option title= '\\therefore' value='\\therefore'>∴</option>\
-              <option title= '\\displaystyle' value='\\displaystyle'>displaystyle</option>\
-              <option title= '\\textstyle' value='\\textstyle'>textstyle</option>\
-              <option title= '\\scriptstyle' value='\\scriptstyle'>scriptstyle</option>\
-              <option title= '\\text{}' value='\\text{}'>text</option>\
-              <option title= '\\textbf{}' value='\\textbf{}'>bold</option>\
-              <option title= '\\textit{}' value='\\textit{}'>ital</option>\
-              <option title= '\\textrm{}' value='\\textrm{}'>roman</option>\
-              <option title= '{\\color{red} }' value='{\\color{red} }'>R</option>\
-              <option title= '{\\color{green} }' value='{\\color{green} }'>G</option>\
-              <option title= '{\\color{blue} }' value='{\\color{blue} }'>B</option>\
-            </select>\
-          </div>\
-          <div style='width:49%; margin-left:5px; float:left;'>\
-            <select class='form-control' id='greeksymbols' title='"+j__("Harf Karekterleri")+"'>\
-              <option title=''>"+j__("Harfler")+"</option>\
-                  <optgroup label= 'Lowercase'>\
-                    <option title= '\\alpha' value='\\alpha'>ɑ</option>\
-                    <option title= '\\beta' value='\\beta'>β</option>\
-                    <option title= '\\gamma' value='\\gamma'>ɣ</option>\
-                    <option title= '\\delta' value='\\delta'>δ</option>\
-                    <option title= '\\epsilon' value='\\epsilon'>ϵ</option>\
-                    <option title= '\\varepsilon' value='\\varepsilon'>ε</option>\
-                    <option title= '\\zeta' value='\\zeta'>ζ</option>\
-                    <option title= '\\eta' value='\\eta'>η</option>\
-                    <option title= '\\theta' value='\\theta'>θ</option>\
-                    <option title= '\\vartheta' value='\\vartheta'>ϑ</option>\
-                    <option title= '\\iota' value='\\iota'>ι</option>\
-                    <option title= '\\kappa' value='\\kappa'>κ</option>\
-                    <option title= '\\lambda' value='\\lambda'>λ</option>\
-                    <option title= '\\mu' value='\\mu'>μ</option>\
-                    <option title= '\\nu' value='\\nu'>ν</option>\
-                    <option title= '\\xi' value='\\xi'>ξ</option>\
-                    <option title= '\\pi' value='\\pi'>π</option>\
-                    <option title= '\\varpi' value='\\varpi'>ϖ</option>\
-                    <option title= '\\rho' value='\\rho'>ρ</option>\
-                    <option title= '\\varrho' value='\\varrho'>ϱ</option>\
-                    <option title= '\\sigma' value='\\sigma'>σ</option>\
-                    <option title= '\\varsigma' value='\\varsigma'>ς</option>\
-                    <option title= '\\tau' value='\\tau'>τ</option>\
-                    <option title= '\\upsilon' value='\\upsilon'>υ</option>\
-                    <option title= '\\phi' value='\\phi'>ϕ</option>\
-                    <option title= '\\varphi' value='\\varphi'>φ</option>\
-                    <option title= '\\chi' value='\\chi'>χ</option>\
-                    <option title= '\\psi' value='\\psi'>ψ</option>\
-                    <option title='\\omega' value='\\omega'>ω</option>\
-                  </optgroup>\
-                  <optgroup label='Uppercase'>\
-                    <option title= '\\Gamma' value='\\Gamma'>Ɣ</option>\
-                    <option title= '\\Delta' value='\\Delta'>Δ</option>\
-                    <option title= '\\Theta' value='\\Theta'>Θ</option>\
-                    <option title= '\\Lambda' value='\\Lambda'>Λ</option>\
-                    <option title= '\\Xi' value='\\Xi'>Ξ</option>\
-                    <option title= '\\Pi' value='\\Pi'>Π</option>\
-                    <option title= '\\Sigma' value='\\Sigma'>Σ</option>\
-                    <option title= '\\Upsilon' value='\\Upsilon'>Υ</option>\
-                    <option title= '\\Psi' value='\\Psi'>Ψ</option>\
-                    <option title= '\\Omega' value='\\Omega'>Ω</option>\
-                  </optgroup>\
-            </select>\
-          </div>\
-        </div>");
-    var popup_wrapper = $("<div class ='popup_wrapper drag-cancel' style='border: 1px #ccc solid;width: 100%; height: 100%; ' ></div> <br>");
-    var popup_detail = $('<textarea class="MathInput" id="MathInput" contenteditable="true" class="drag-cancel" style="resize:none;width: 100%; margin-top:5px;" >'+popup_value+'</textarea>');
-    var latex_preview = $('<div class="box" id="box" style="visibility:hidden">\
-                            <div id="MathOutput" class="output"></div>\
-                          </div>');
-    var add_button = $("<a href='#' id='pop-image-OK' class='btn btn-info' style='padding: 5px 30px;'>"+j__("Ekle")+"</a> ");
-    poup_header.appendTo(html_popup);
-    close_button.appendTo(poup_header);
-    galery_inner.appendTo(html_popup);
-    latex_temp.appendTo(popup_wrapper);
-    popup_wrapper.appendTo(galery_inner);//.resizable({alsoResize: galery_inner});
-    
-    popup_detail.appendTo(popup_wrapper);
-    latex_preview.appendTo(popup_wrapper);
-    add_button.appendTo(galery_inner);
-    //popup_detail.resizable({alsoResize: galery_inner});
+  top = top + "px";
+  left = left + "px";
 
-    $( "#mathsymbols" ).change(function() {
-      insertLatexAtTextareaCursor('MathInput', $( "#mathsymbols option:selected" ).val());
+   var idPre = $.now();
 
-      UpdateMath($("#MathInput").val());
-    });
-    $( "#greeksymbols" ).change(function() {
-      insertLatexAtTextareaCursor('MathInput', $( "#greeksymbols option:selected" ).val());
+  $('<div>').componentBuilder({
 
-      UpdateMath($("#MathInput").val());
-    });
+    top:top,
+    left:left,
+    title: j__("Latex"),
+    btnTitle : j__("Ekle"), 
+    beforeClose : function () {
+      /* Warn about not saved work */
+      /* Dont allow if not confirmed */
+      return confirm(j__("Yaptığınız değişiklikler kaydedilmeyecektir. Kapatmak istediğinize emin misiniz?"));
+    },
+    onBtnClick: function(){
 
-    close_button.click(function(){
-
-      html_popup.remove();  
-
-      if ( html_popup.length ){
-        html_popup.remove();  
+      if (wrapperTextarea.val() == "") {
+        alert (j__("Lütfen latex ile ilgili veri girişinizi yapınız"));
+        return false;
       }
 
-    });
-
-    $('#MathInput').bind('input propertychange', function() {
-      //console.log(this.value);
-      UpdateMath(this.value);
-    });
-
-    if (MathJax.Hub.Browser.isMSIE) {
-      MathInput.onkeypress = function () {
-        if (window.event && window.event.keyCode === 13) {this.blur(); this.focus()}
-      }
-    }
-    
-    
-    add_button.click(function (){  
-      
-      var width = html_popup.width();
-      var height = html_popup.height(); 
-      //console.log(width);
-      //console.log(height);      
       if(typeof oldcomponent == 'undefined'){
         //console.log('dene');
         var top = (ui.offset.top-$(event.target).offset().top ) + 'px';
@@ -414,34 +268,191 @@ console.log(top);
         oldcomponent.data.html_inner = $(".MathInput").html();
 
       };
-      //console.log($(".MathInput").val());
-      //return;
-       var  component = {
-          'type' : 'latex',
-          'data': {
-            'html_inner':  $(".MathInput").val(),
-            'width': width,
-            'height': height,
-            'lock':'',
-            'self': {
-              'css': {
-                'position':'absolute',
-                'top': top ,
-                'left':  left ,
-                'overflow': 'visible',
-                'opacity': '1', 
-                'z-index': 'first'
-              }
+
+      var  component = {
+        'type' : 'latex',
+        'data': {
+          'html_inner':  $(wrapperTextarea).val(),
+          'width': width,
+          'height': height,
+          'lock':'',
+          'self': {
+            'css': {
+              'position':'absolute',
+              'top': top ,
+              'left':  left ,
+              'overflow': 'visible',
+              'opacity': '1', 
+              'z-index': 'first'
             }
           }
-        };
-       
-        //console.log(component);
-        window.lindneo.tlingit.componentHasCreated( component );
-        
-        close_button.trigger('click');
+        }
+      };
 
-    });
-    
 
-  };
+      if(typeof oldcomponent !== 'undefined'){
+        window.lindneo.tlingit.componentHasDeleted( oldcomponent, oldcomponent.id );
+      };
+      window.lindneo.tlingit.componentHasCreated( component );
+    },
+    onComplete:function (ui){
+
+      var mainDiv = $('<div>')
+        .css({"width":"100%", "height":"100%"})
+        .appendTo(ui);
+
+          var symbolDiv = $('<div>')
+            .css({"width":"49%", "float":"left"})
+            .appendTo(mainDiv);
+
+            var symbolSelect = $('<select>')
+              .attr("title",j__("Genel Latex Sembolleri"))
+              .addClass("form-control")
+              .appendTo(symbolDiv);
+
+              var symbolOption = $("<option value=''>"+j__("Semboller")+"</option>\
+                                    <option title= '\\sqrt{x}' value='\\sqrt{x}'>√</option>\
+                                    <option title= '\\sqrt[n]{x}' value='\\sqrt[n]{x}'>∛</option>\
+                                    <option title= 'x^n' value='x^n'>x²</option>\
+                                    <option title= 'x_n' value='x_n'>x₂</option>\
+                                    <option title= 'x_a^b' value='x_a^b'>x₂²</option>\
+                                    <option title= '\\frac{a}{b}' value='\\frac{a}{b}'>÷</option>\
+                                    <option title= '\\lim_{x \\to 0}' value='\\lim_{x \\to 0}'>limit</option>\
+                                    <option title= '\\sum_{a}^{b}' value='\\sum_{a}^{b}'>∑</option>\
+                                    <option title= '\\int_{a}^{b}' value='\\int_{a}^{b}'>∫</option>\
+                                    <option title= '\\oint_{a}^{b}' value='\\oint_{a}^{b}'>∮</option>\
+                                    <option title= '\\prod_{a}^{b}' value='\\prod_{a}^{b}'>∏</option>\
+                                    <option title= '\\binom{n}{k}' value='\\binom{n}{k}'>binom</option>\
+                                    <option title= '\\left( \\right)' value='\\left( \\right)'>( )</option>\
+                                    <option title= '\\left[ \\right]' value='\\left[ \\right]'>[ ]</option>\
+                                    <option title= '\\lceil x \\rceil' value='\\lceil x \\rceil'>⌈ x ⌉</option>\
+                                    <option title= '\\lfloor x \\rfloor' value='\\lfloor x \\rfloor'>⌊ x ⌋</option>\
+                                    <option title= '\\left\\{ \\right\\}' value='\\left\\{ \\right\\}'>{ }</option>\
+                                    <option title= '\\bigcup_{\\alpha\\in S}' value='\\bigcup_{\\alpha\\in S}'>⋃</option>\
+                                    <option title= '\\bigcap_{\\alpha\\in S}' value='\\bigcap_{\\alpha\\in S}'>⋂</option>\
+                                    <option title= '\\partial' value='\\partial'>∂</option>\
+                                    <option title= '\\infty' value='\\infty'>∞</option>\
+                                    <option title= '\\therefore' value='\\therefore'>∴</option>\
+                                    <option title= '\\displaystyle' value='\\displaystyle'>displaystyle</option>\
+                                    <option title= '\\textstyle' value='\\textstyle'>textstyle</option>\
+                                    <option title= '\\scriptstyle' value='\\scriptstyle'>scriptstyle</option>\
+                                    <option title= '\\text{}' value='\\text{}'>text</option>\
+                                    <option title= '\\textbf{}' value='\\textbf{}'>bold</option>\
+                                    <option title= '\\textit{}' value='\\textit{}'>ital</option>\
+                                    <option title= '\\textrm{}' value='\\textrm{}'>roman</option>\
+                                    <option title= '{\\color{red} }' value='{\\color{red} }'>R</option>\
+                                    <option title= '{\\color{green} }' value='{\\color{green} }'>G</option>\
+                                    <option title= '{\\color{blue} }' value='{\\color{blue} }'>B</option>")
+                .appendTo(symbolSelect);
+
+
+          var greekDiv = $('<div>')
+            .css({"width":"49%", "float":"left","margin-left":"5px"})
+            .appendTo(mainDiv);
+
+            var greekSelect = $('<select>')
+              .attr("title",j__("Harf Karekterleri"))
+              .addClass("form-control")
+              .appendTo(greekDiv);
+
+              var greekOption = $("<option title=''>"+j__("Harfler")+"</option>\
+                                      <optgroup label= 'Lowercase'>\
+                                        <option title= '\\alpha' value='\\alpha'>ɑ</option>\
+                                        <option title= '\\beta' value='\\beta'>β</option>\
+                                        <option title= '\\gamma' value='\\gamma'>ɣ</option>\
+                                        <option title= '\\delta' value='\\delta'>δ</option>\
+                                        <option title= '\\epsilon' value='\\epsilon'>ϵ</option>\
+                                        <option title= '\\varepsilon' value='\\varepsilon'>ε</option>\
+                                        <option title= '\\zeta' value='\\zeta'>ζ</option>\
+                                        <option title= '\\eta' value='\\eta'>η</option>\
+                                        <option title= '\\theta' value='\\theta'>θ</option>\
+                                        <option title= '\\vartheta' value='\\vartheta'>ϑ</option>\
+                                        <option title= '\\iota' value='\\iota'>ι</option>\
+                                        <option title= '\\kappa' value='\\kappa'>κ</option>\
+                                        <option title= '\\lambda' value='\\lambda'>λ</option>\
+                                        <option title= '\\mu' value='\\mu'>μ</option>\
+                                        <option title= '\\nu' value='\\nu'>ν</option>\
+                                        <option title= '\\xi' value='\\xi'>ξ</option>\
+                                        <option title= '\\pi' value='\\pi'>π</option>\
+                                        <option title= '\\varpi' value='\\varpi'>ϖ</option>\
+                                        <option title= '\\rho' value='\\rho'>ρ</option>\
+                                        <option title= '\\varrho' value='\\varrho'>ϱ</option>\
+                                        <option title= '\\sigma' value='\\sigma'>σ</option>\
+                                        <option title= '\\varsigma' value='\\varsigma'>ς</option>\
+                                        <option title= '\\tau' value='\\tau'>τ</option>\
+                                        <option title= '\\upsilon' value='\\upsilon'>υ</option>\
+                                        <option title= '\\phi' value='\\phi'>ϕ</option>\
+                                        <option title= '\\varphi' value='\\varphi'>φ</option>\
+                                        <option title= '\\chi' value='\\chi'>χ</option>\
+                                        <option title= '\\psi' value='\\psi'>ψ</option>\
+                                        <option title='\\omega' value='\\omega'>ω</option>\
+                                      </optgroup>\
+                                      <optgroup label='Uppercase'>\
+                                        <option title= '\\Gamma' value='\\Gamma'>Ɣ</option>\
+                                        <option title= '\\Delta' value='\\Delta'>Δ</option>\
+                                        <option title= '\\Theta' value='\\Theta'>Θ</option>\
+                                        <option title= '\\Lambda' value='\\Lambda'>Λ</option>\
+                                        <option title= '\\Xi' value='\\Xi'>Ξ</option>\
+                                        <option title= '\\Pi' value='\\Pi'>Π</option>\
+                                        <option title= '\\Sigma' value='\\Sigma'>Σ</option>\
+                                        <option title= '\\Upsilon' value='\\Upsilon'>Υ</option>\
+                                        <option title= '\\Psi' value='\\Psi'>Ψ</option>\
+                                        <option title= '\\Omega' value='\\Omega'>Ω</option>\
+                                      </optgroup>")
+                .appendTo(greekSelect);
+
+          var wrapperDiv = $('<div>')
+            .css({"border":"1px #ccc solid","width": "100%", "height": "100%"})
+            .addClass("popup_wrapper drag-cancel")
+            .appendTo(mainDiv);
+
+            wrapperTextarea = $('<textarea>')
+              .css({"resize":"none","width": "100%", "margin-top":"5px"})
+              .attr("contenteditable","true")
+              .attr("rows","5")
+              .addClass("MathInput drag-cancel")
+              .val( popup_value )
+              .appendTo(wrapperDiv);
+
+            wrapperBoxDiv = $('<div>')
+              .css({"visibility":"hidden"})
+              .addClass("box")
+              .appendTo(wrapperDiv);
+
+              wrapperOutputDiv = $('<div>')
+                .addClass("output")
+                .attr("id","MathOutput"+idPre)
+                .appendTo(wrapperBoxDiv);
+
+
+      symbolSelect.change(function() {
+        insertLatexAtTextareaCursor('MathInput', $( this ).val());
+
+        UpdateMath(wrapperTextarea.val());
+      });
+
+      greekSelect.change(function() {
+        insertLatexAtTextareaCursor('MathInput', $( this ).val());
+
+        UpdateMath(wrapperTextarea.val());
+      });
+
+      wrapperTextarea.bind('input propertychange', function() {
+        //console.log(this.value);
+        UpdateMath(this.value);
+      });
+
+      if (MathJax.Hub.Browser.isMSIE) {
+        MathInput.onkeypress = function () {
+          if (window.event && window.event.keyCode === 13) {this.blur(); this.focus()}
+        }
+      }
+              
+
+
+
+    }
+
+  }).appendTo('body');
+
+};
