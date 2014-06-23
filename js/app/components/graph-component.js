@@ -10,8 +10,10 @@ $(document).ready(function(){
     _create: function(){
 
       var that = this;
+      //that.resizable_resize = function (){console.log('oldu')};
       this._super();
-      
+      this.element[0].width = parseInt(this.options.component.data.self.css.width);
+      this.element[0].height = parseInt(this.options.component.data.self.css.height);
       this.element.resizable( "option", "aspectRatio", true );
       
 
@@ -42,7 +44,11 @@ $(document).ready(function(){
 
             var aRow = {
               'value' : parseInt(value.value),
-              'color' : value.color
+              'color' : value.color,
+              'label' : value.label,
+              'labelColor' : '#666',
+              'labelAlign': 'right',
+              'labelFontSize' : '12'
             };
             var aLabel = {
               'label' : value.label,
@@ -58,6 +64,13 @@ $(document).ready(function(){
           this.options.pieData = pieData;
     
           this.options.pieGraph = new Chart(this.options.context).Pie(this.options.pieData);
+          that.resizable_stop = function (width,height){
+            that._create();
+            this.element[0].width = parseInt(that.options.component.data.self.css.width);
+            this.element[0].height = parseInt(that.options.component.data.self.css.height);
+            
+            that.options.pieGraph = new Chart(that.options.context).Pie(that.options.pieData);
+          }
           
           break;
         case 'bar-chart':
@@ -178,7 +191,13 @@ $(document).ready(function(){
           
         }
           this.options.barGraph = new Chart(this.options.context).Bar(barData,this.options.barOptions);
-        
+          that.resizable_stop = function (width,height){
+            console.log(width + " " +height);
+            this.element[0].width = parseInt(that.options.component.data.self.css.width);
+            this.element[0].height = parseInt(that.options.component.data.self.css.height);
+            
+            that.options.barGraph = new Chart(that.options.context).Bar(barData,that.options.barOptions);
+          }
           break;
 
         default:
@@ -236,20 +255,16 @@ var createGraphComponent = function ( event, ui, oldcomponent ) {
   var graph_colors=[];
   var graph_values=[];
 
+
+  var letters= ["A","B","C","D","E","F","G","H","I","J","K"];
+  
   if(typeof oldcomponent == 'undefined'){
     console.log('dene');
     var top = (ui.offset.top-$(event.target).offset().top ) + 'px';
     var left = ( ui.offset.left-$(event.target).offset().left ) + 'px';
     var graph_value = {};
   }
-  else{
 
-    top = oldcomponent.data.self.css.top;
-    left = oldcomponent.data.self.css.left;
-  };
-  
-    var letters= ["A","B","C","D","E","F","G","H","I","J","K"];
-  
   var min_left = $("#current_page").offset().left;
   var min_top = $("#current_page").offset().top;
   var max_left = $("#current_page").width() + min_left;
@@ -279,6 +294,12 @@ var createGraphComponent = function ( event, ui, oldcomponent ) {
   top = top + "px";
   left = left + "px";
      var color_for_barchart;
+
+  if(typeof oldcomponent !== 'undefined'){
+    top = oldcomponent.data.self.css.top;
+    left = oldcomponent.data.self.css.left;
+  };
+  
   try
   {
     color_for_barchart=oldcomponent.data.series.colors;
@@ -293,6 +314,26 @@ var createGraphComponent = function ( event, ui, oldcomponent ) {
   }
 
   var idPre = $.now();
+  var chartType = "pie-chart" ;
+  var rows = {};
+
+  var size = function(obj) {
+    var size = 0, key;
+    for (key in obj) {
+        if (obj.hasOwnProperty(key)) size++;
+    }
+    return size;
+  };
+
+  var RowCount ;
+  var graphProperties = {
+    pie: {},
+    bar: {}
+  };
+
+  if(typeof oldcomponent !== 'undefined'){
+    chartType = oldcomponent.data.type;
+  };
 
   $('<div>').componentBuilder({
 
@@ -307,79 +348,86 @@ var createGraphComponent = function ( event, ui, oldcomponent ) {
     },
     onBtnClick: function(){
 
-      var str ='';
-      graphTypeLabel.find("option:selected").each(function() {
-      str += $( this ).val() + "";
-      });
 
-     
-      if(str=='pie-chart'){
-       var valueables=[];
+      var negativeControl = false;
+      var labelControl = false;
 
-
-      $('.pie-chart-slice-holder').each(function(){
-        if( typeof( $(this).find('.percent').val() ) != "undefined" ){
-
-          var newPie = { 
-            'color': $(this).find('.color').val(),
-            'label': $(this).find('.label').val(),
-            'value' : $(this).find('.percent').val()
-          };
-          valueables.push(newPie);
-
+      $.each(rows,function(index,item){
+        if(item.value<0) {
+          negativeControl=true;
+          return false;
         }
-
-      });
-     
-    }
-
-    if(str=='bar-chart'){
-      var seriesdata=[]
-      $('.bar-chart-slice-holder').each(function(){
-        if( typeof( $(this).find('.value').val() ) != "undefined" ){
-
-          var newBar = { 
-            'label': $(this).find('.label').val(),
-            'value' : $(this).find('.value').val()
-          };
-          seriesdata.push(newBar);
-
+        if(item.label=="" || typeof item.label == "undefined") {
+          labelControl=true;
+          return false;
         }
-
-
+      });
+      
+      if (negativeControl) {
+        alert (j__("Lütfen tüm veriler için pozitif bir tam sayı değeri giriniz."));
+        return false;
+      }
+      if (labelControl) {
+        alert (j__("Lütfen tüm veriler için bir etiket değeri giriniz."));
+        return false;
+      }
+      var data = [];
+      $.each(rows,function(index,item){
+        data.push({
+          label:item.label,
+          value:item.value,
+          color:item.color
+        });
       });
 
-     var valueables={
-        'colors': { 
-                    'background': propertyContentBackground.val(),
-                    'stroke': propertyContentStroke.val(),
-                  },
-         'datasets' : {
-                    'data': seriesdata
-         }
-         
-      };
+      console.log(data);
+      
 
-    }
 
-    var graphType='';
+      switch (chartType){
+          case "pie-chart":
+            var series=data;
+          break;
+          case "bar-chart":
+            var series={
+                'colors': { 
+                            'background': propertyContentBackground.val(),
+                            'stroke': propertyContentStroke.val(),
+                          },
+                 'datasets' : {
+                            'data': data
+                 }
+                 
+          };
+          break;
+      }
 
-    graphTypeLabel.find("option:selected").each(function() {
-    graphType += $( this ).val() + "";
-    });
 
-     var  component = {
+
+    
+
+
+      var width = "300px";
+      var height ="150px";
+      if(typeof oldcomponent !== 'undefined'){
+
+        width = oldcomponent.data.self.css.width;
+        height =oldcomponent.data.self.css.height;
+        window.lindneo.tlingit.componentHasDeleted( oldcomponent, oldcomponent.id );
+      };   
+
+     var component = {
         'type' : 'grafik',
         'data': {
-          'type': graphType,
-          'series':  valueables ,
+          'type': chartType,
+          'series':  series ,
           'self': { 
             'css': {
               'position':'absolute',
               'top': top ,
               'left':  left ,
-              'width': '300px', 
-              'height': '150px',
+              'width': width, 
+              'height': height,
               'background-color': 'transparent',
               'overflow': 'visible',
               'z-index': 'first',
@@ -388,6 +436,9 @@ var createGraphComponent = function ( event, ui, oldcomponent ) {
           }
         }
       };
+
+      console.log(oldcomponent);
+
       if(typeof oldcomponent !== 'undefined'){
         window.lindneo.tlingit.componentHasDeleted( oldcomponent, oldcomponent.id );
       };
@@ -406,45 +457,6 @@ var createGraphComponent = function ( event, ui, oldcomponent ) {
 
             graphTypeSelect = $('<select>')
               .addClass("radius")
-              .change(function(){
-                var str = "";
-                var chart;
-                var selected_item = graphTypeLabel.find("option:selected").val();
-                var list_bar_chart=$("."+selected_item+"-slice-holder").find('.value');
-                var list_pie_chart=$("."+selected_item+"-slice-holder").find('.percent');
-        /*        chart=(list_bar_chart.length==0?list_pie_chart:list_bar_chart);
-                chart=(list_pie_chart.length==0?list_bar_chart:list_pie_chart);*/
-                if(list_bar_chart.length==0){
-                  chart=list_pie_chart;
-                }
-                else
-                {
-                  chart=list_bar_chart; 
-                }
-                console.log(list_bar_chart);
-                console.log(list_pie_chart);
-                console.log(chart);
-                for (var i = 0; i < chart.length; i++) {
-                  if(selected_item=='bar-chart')
-                  {
-                    //$("#"+selected_item+"-"+i).val($('#pie-chart-'+i).val());
-                    newBarRowValueInput.val(newPieRowValueInput.val());
-                    
-                  }
-                  else
-                  {
-                    //$("#"+selected_item+"-"+i).val($('#bar-chart-'+i).val());
-                    newPieRowValueInput.val(newBarRowValueInput.val());       
-                  }
-                }
-                graphTypeLabel.find("option:selected").each(function() {
-                  str += $( this ).val() + " ";
-                  
-                });
-                $('.chart_prop').hide();
-                console.log(str);
-                $('.chart_prop.' + str ).show();
-              })
               .appendTo(graphTypeLabel);
 
               var graphTypeOption = $('<option>')
@@ -452,122 +464,43 @@ var createGraphComponent = function ( event, ui, oldcomponent ) {
                 .text(j__("Pasta"))
                 .appendTo(graphTypeSelect);
 
-              var graphTypeOption = $('<option>')
+        var graphTypeOption = $('<option>')
                 .attr("value","bar-chart")
                 .text(j__("Çubuk"))
                 .appendTo(graphTypeSelect);
-
-          graphDataCountSelect = $('<select>')
+                graphDataCountSelect = $('<select>')
             .addClass("radius")
             .change(function(){
-              console.log("de");
-              var str = "";
-              graphDataCountSelect.find("option:selected" ).each(function() {
-                str += $( this ).val() + " ";
-              });
-              var newlenght=parseInt(str);
-              var current= $( '.chart_prop').first().children('.data-row').length;
 
-              console.log(newlenght );
-              console.log(current );
+              var RowSize = size(rows);
+                console.log(RowSize);
+              var that = this;
+              var newLenght = $(this).val();
+                console.log(newLenght);
 
-              if ( current  > newlenght ) {
-                console.log ((current  - newlenght) + 'Silinecek');
-
-                $('.chart_prop').each (function () {
-                  $(this).children('.data-row').each(function (index) {
-                    if(index > newlenght -1 ){
-                      $(this).remove();     
-                    }
-                  });
+              if(RowSize>newLenght){
+                console.log('Silme');
+                var counter = 0;
+                console.log(rows);
+                
+                $.each(rows, function (index,item){
+                  console.log(counter);
+                  counter++;
+                  if (counter>newLenght){
+                        var silinecek = item.elements;
+                        silinecek.remove();
+                        delete rows[index];
+                      }
                 });
+              }
+              else if(RowSize<newLenght){
+                for (var counter = RowSize; counter <$(that).val();counter++ ){
 
-              } else 
-              if ( current  < newlenght ) {
-               
-              console.log ((newlenght - current) +  ' tane Eklenecek ');
-              for (var i= current ;i <  newlenght; i++){
-              /*
-                  var newPieRow= $("<div class='pie-chart-slice-holder slice-holder data-row'> \
-                              "+(i+1)+". "+j__("Dilim")+" <br> \
-                              "+j__("Değer")+":<input type='text' id='"+"pie-chart-"+i+"'class='chart-textbox radius grey-9 percent' value='"+(graph_values[i] != undefined ? graph_values[i]:(Math.floor((Math.random()*100)+1)))+"'><br> \
-                              "+j__("Etiket")+"<input type='text' class='chart-textbox-wide radius grey-9 label' value='"+letters[i]+"'> \
-                              <input type='color' class='color-picker-box radius color' value='"+ (graph_colors[i] != undefined ? graph_colors[i]:get_random_color())+"' placeholder='e.g. #bbbbbb'> \
-                      </div> \
-                      ");
-                 var newBarRow= $("<div class='bar-chart-slice-holder slice-holder data-row'> \
-                     "+(i+1)+". "+j__("sütun adı")+": \
-                    <input type='text' class='chart-textbox-wide radius grey-9 label ' value='"+letters[i]+"'><br> \
-                     "+(i+1)+". "+j__("sütun değeri")+":  \
-                    <input type='text' id='"+"bar-chart-"+i+"' class='chart-textbox-wide radius grey-9 value ' value='"+(graph_values[i] != undefined ? graph_values[i]:Math.floor((Math.random()*100)+1))+"'><br> \
-                  </div> \
-                        ");
-                 */
-                 var newPieRow = $('<div>')
-                  .addClass("pie-chart-slice-holder slice-holder data-row")
-                  .text((i+1)+". "+j__("Dilim"))
-                  .appendTo(propertyPieDiv);
-
-                  $("<br>").appendTo(newPieRow);
-
-                  var newPieRowValue = $('<span>')
-                    .text(j__("Değer"))
-                    .appendTo(newPieRow);
-
-                  newPieRowValueInput = $('<input type="text">')
-                    .addClass("chart-textbox radius grey-9 percent")
-                    .attr("value",(graph_values[i] != undefined ? graph_values[i]:(Math.floor((Math.random()*100)+1))))
-                    .appendTo(newPieRow);
-                  $("<br>").appendTo(newPieRow);
-
-                  var newPieRowLabel = $('<span>')
-                    .text(j__("Etiket"))
-                    .appendTo(newPieRow);
-
-                  var newPieRowLabelInput = $('<input type="text">')
-                    .addClass("chart-textbox-wide radius grey-9 label")
-                    .attr("value",letters[i])
-                    .appendTo(newPieRow);
-
-                  var newPieRowColor = $('<input type="color">')
-                    .addClass("color-picker-box radius color")
-                    .val((graph_colors[i] != undefined ? graph_colors[i]:get_random_color()))
-                    .attr("placeholder","e.g. #bbbbbb")
-                    .appendTo(newPieRow);
-
-                var newBarRow = $('<div>')
-                .addClass("bar-chart-slice-holder slice-holder data-row")
-                .appendTo(propertyDiv);
-
-                  $("<br>").appendTo(newBarRow);
-
-                  var newBarRowLabel = $('<span>')
-                    .text((i+1)+". "+j__("sütun adı"))
-                    .appendTo(newBarRow);
-
-                  var newBarRowLabelInput = $('<input type="text">')
-                    .addClass("chart-textbox-wide radius grey-9 label")
-                    .attr("value",letters[i])
-                    .appendTo(newBarRow);
-
-                  $("<br>").appendTo(newBarRow);
-
-                  var newBarRowValue = $('<span>')
-                    .text((i+1)+". "+j__("sütun değeri"))
-                    .appendTo(newBarRow);
-
-                  newBarRowValueInput = $('<input type="text">')
-                    .addClass("chart-textbox-wide radius grey-9 value")
-                    .attr("value",(graph_values[i] != undefined ? graph_values[i]:Math.floor((Math.random()*100)+1)))
-                    .appendTo(newBarRow);
-
-                  
-                  //newBarRow.appendTo( propertyDiv );
-                  //newPieRow.appendTo( propertyPieDiv );
-              
-                  }
+                  addNewLine();
                 }
-              })
+              }
+
+            })
             .appendTo(mainDiv);
 
             var graphTypeOption1 = $('<option>')
@@ -608,29 +541,33 @@ var createGraphComponent = function ( event, ui, oldcomponent ) {
               .text(9)
               .appendTo(graphDataCountSelect);
 
-          var propertyDiv = $('<div>')
-            .addClass("chart_prop bar-chart")
+          var propertyBarDiv = $('<div>')
+            .addClass("chart_prop")
             .css("display","none")
             .appendTo(mainDiv);
 
             var propertyContentDiv = $('<div>')
               .addClass("bar-chart-slice-holder slice-holder")
-              .text(j__("Arkaplan Rengi"))
-              .appendTo(propertyDiv);
+              .text(j__("Arkaplan Rengi:"))
+              .appendTo(propertyBarDiv);
 
               propertyContentBackground = $('<input type="color">')
                 .addClass("color-picker-box radius color")
-                .val(color_for_barchart.background)
                 .attr('placeholder',"#bbbbbb")
+                .change(function(){
+                  graphProperties.bar.background=$(this).val();
+                })
                 .appendTo(propertyContentDiv);
 
-              var propertyContentInput = $('<div>')
-                .text(j__("Arkaplan Rengi"))
+              var propertyContentInput = $('<span>')
+                .text(j__("Çizgi Rengi:"))
                 .appendTo(propertyContentDiv);   
 
               propertyContentStroke = $('<input type="color">')
                 .addClass("color-picker-box radius color")
-                .val(color_for_barchart.stroke)
+                .change(function(){
+                  graphProperties.bar.stroke=$(this).val();
+                })
                 .attr('placeholder',"#bbbbbb")
                 .appendTo(propertyContentDiv); 
           
@@ -639,54 +576,191 @@ var createGraphComponent = function ( event, ui, oldcomponent ) {
             .css("display","none")
             .appendTo(mainDiv);
 
-      
+          var getNewPieRow = function(item){
+            var newPieRow = $('<div>')
+                  .addClass("pie-chart-slice-holder slice-holder data-row")
+                  .appendTo(propertyPieDiv);
 
-      if(typeof oldcomponent !== 'undefined'){
-        type_for_update=oldcomponent.data.type;
-        length_for_update=(type_for_update=='bar-chart'?oldcomponent.data.series.datasets.data.length:oldcomponent.data.series.length);
-        console.log("update");
-        console.log(oldcomponent.data);
-        console.log(length_for_update);
 
-        console.log(graphDataCountSelect);
-        console.log(graphTypeSelect);
-        
-        graphDataCountSelect.val(length_for_update);
-        graphTypeSelect.val(type_for_update);
-        
-        var bar_chart_data;
-        try{
-            bar_chart_data=oldcomponent.data.series.datasets.data==undefined?oldcomponent.data.series:oldcomponent.data.series.datasets.data;
+                
+
+                    var newPieRowLabel = $('<span>')
+                      .text(j__("Etiket:"))
+                      .appendTo(newPieRow);
+                   
+
+                    var newPieRowLabelInput = $('<input type="text">')
+                      .addClass("chart-textbox-wide radius grey-9 data-label")
+                      .val( item.label )
+                      .change( function (){
+                        item.label = $(this).val()
+                      }).appendTo(newPieRow);
+
+                    var newPieRowValue = $('<span>')
+                      .text(j__("Değer:"))
+                      .appendTo(newPieRow);
+                    newPieRowValueInput = $('<input type="text">')
+                      .addClass("chart-textbox radius grey-9 value")
+                      .val( item.value )
+                      .change( function (){
+                        item.value = $(this).val()
+                      })
+                      .appendTo(newPieRow);
+                   
+                    
+                    var newPieRowColorLbl = $('<label>')
+                      .text(j__("Renk:"))
+                       .appendTo(newPieRow);
+                    var newPieRowColor = $('<input type="color">')
+                      .addClass("color-picker-box radius color")
+                      .val(item.color)
+                      .attr("placeholder","e.g. #bbbbbb")
+                      .change( function (){
+                        item.color = $(this).val()
+                      })
+                      .appendTo(newPieRowColorLbl);
+
+             return newPieRow;
+
+          };
+
+          var getNewBarRow = function(item){
+            var newBarRow = $('<div>')
+                .addClass("bar-chart-slice-holder slice-holder data-row")
+                .appendTo(propertyBarDiv);
+
+                  var newBarRowLabel = $('<span>')
+                      .text(j__("Etiket:"))
+                    .appendTo(newBarRow);
+
+                  var newBarRowLabelInput = $('<input type="text">')
+                    .addClass("chart-textbox-wide radius grey-9 data-label")
+                    .val( item.label )
+                    .change( function (){
+                        item.label = $(this).val()
+                      })
+                    .appendTo(newBarRow);
+
+                  var newBarRowValue = $('<span>')
+                      .text(j__("Değer:"))
+                    .appendTo(newBarRow);
+
+                  newBarRowValueInput = $('<input type="text">')
+                    .addClass("chart-textbox-wide radius grey-9 value")
+                    .val( item.value )
+                    .change( function (){
+                        item.value = $(this).val()
+                    })
+                    .appendTo(newBarRow);
+
+              return newBarRow;
+
+          };
+
+          var addNewLine = function (item){
+            if (typeof item == "undefined" )
+            var item = {
+              value:Math.floor((Math.random()*100)+1),
+              label:letters[size(rows)],
+              color:get_random_color()
+            };
+           
+
+            switch (chartType){
+              case "pie-chart":
+                item.elements = getNewPieRow(item);
+              break;
+              case "bar-chart":
+                item.elements = getNewBarRow(item);
+              break;
+
+
+            }
+            rows[$.now()]=item;
+           console.log(rows);
           }
-          catch(err)
-          {
-            bar_chart_data=oldcomponent.data.series;
-          }
-        data_for_update=(type_for_update=='bar-chart'?bar_chart_data:oldcomponent.data.series);
 
-        for(var data_key in data_for_update){
-          if((data_for_update[data_key]).color!='undefined')
-              graph_colors.push((data_for_update[data_key]).color);
-              console.log(data_for_update[data_key]);
-              graph_values.push((data_for_update[data_key]).value);
+        graphTypeSelect.change(function(){
+
+
+                chartType = $(this).val();
+                var newItems = [];
+
+                $.each( rows, function (index,item){
+                  newItems.push(
+                  {
+                    value:item.value,
+                    label:item.label,
+                    color:item.color
+                  });
+                  item.elements.remove();
+                  delete rows[index];
+                });
+
+                $.each(newItems,function (index,item){
+                  addNewLine(item);
+                });
+
+                switch (chartType){
+                  case "pie-chart":
+                    ui.find('.chart_prop').hide();
+                    propertyPieDiv.show();
+                  break;
+                  case "bar-chart":
+                    ui.find('.chart_prop').hide();
+                    propertyBarDiv.show();
+                  break;
+                }
+              })
+
+           
+       if(typeof oldcomponent !== 'undefined'){
+        var defaultValues ; 
+        chartType =oldcomponent.data.type;
+        graphTypeSelect.val(chartType);
+        graphTypeSelect.change();
+        $.each( rows, function (index,item){
+                  newItems.push(
+                  {
+                    value:item.value,
+                    label:item.label,
+                    color:item.color
+                  });
+                  item.elements.remove();
+                  delete rows[index];
+                });
+        switch (chartType){
+          case "bar-chart":
+           defaultValues = oldcomponent.data.series.datasets.data;
+           propertyContentBackground.val(oldcomponent.data.series.colors.background);
+           propertyContentStroke.val(oldcomponent.data.series.colors.stroke);
+          break;
+          case "pie-chart":
+           defaultValues = oldcomponent.data.series;
+          break;
         }
-        console.log(graph_colors);
-        console.log(graph_values);
 
-        graphTypeSelect.val(type_for_update);
+        graphDataCountSelect.val(defaultValues.length);
+        
+        $.each(defaultValues, function(index,value){
+            addNewLine({
+                    value:value.value,
+                    label:value.label,
+                    color:value.color
+                  });
+        });
+      } else {
+        graphTypeSelect.val(chartType);
         graphTypeSelect.change();
+        graphDataCountSelect.val(2);
         graphDataCountSelect.change();
+        propertyContentBackground.val(get_random_color());
+        propertyContentStroke.val(get_random_color());
+        
+      }
 
-        if(oldcomponent.data.type == "pie-chart")
-          propertyPieDiv.show();
-        else if(oldcomponent.data.type == "bar-chart")
-          propertyDiv.show();
-      }
-      else{
-        graphDataCountSelect.change();
-        graphTypeSelect.change();
-        propertyPieDiv.show();
-      }
+      return ;
+        
     }
 
   }).appendTo('body');
