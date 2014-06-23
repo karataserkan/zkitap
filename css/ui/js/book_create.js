@@ -213,7 +213,7 @@
                     };
                 },
 				onTabClick: function (tab, navigation, index) {
-                    bootbox.alert('On Tab click is disabled');
+                    //bootbox.alert('');
                     return false;
                 },
                 onTabShow: function (tab, navigation, index) {

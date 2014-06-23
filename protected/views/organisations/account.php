@@ -107,14 +107,6 @@
                     <div class="account_info_data_type">Yayın Kategorisi</div>
                 </div>
             </a>
-            
-            <!-- <a href="/site/index">
-            <div class="account_info_cards">
-            <div class="account_info_icon"><i class="fa fa-dollar"></i></div>
-            <div class="account_info_data_number"><?php echo $budget; ?></div>
-            <div class="account_info_data_type">Yayın Üretme Bütçesi</div>
-            </div>
-            </a> -->
         </div>
         <!-- end of account_info_cards_container -->
 </div>
