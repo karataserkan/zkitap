@@ -66,9 +66,7 @@ $(document).ready(function(){
           this.options.pieGraph = new Chart(this.options.context).Pie(this.options.pieData);
           that.resizable_stop = function (width,height){
             that._create();
-            this.element[0].width = parseInt(that.options.component.data.self.css.width);
-            this.element[0].height = parseInt(that.options.component.data.self.css.height);
-            
+    
             that.options.pieGraph = new Chart(that.options.context).Pie(that.options.pieData);
           }
           
