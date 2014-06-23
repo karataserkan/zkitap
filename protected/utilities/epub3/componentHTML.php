@@ -628,7 +628,7 @@ class componentHTML {
           var max_value ;
 
            
-          $.each(this.options.component.data.series.datasets.data, function(p,value){
+          $.each(component.data.series.datasets.data, function(p,value){
             if (typeof max_value == 'undefined') max_value = parseInt(value.value);
             if (max_value < parseInt(value.value) ) max_value=parseInt(value.value);
             console.log(max_value);
@@ -637,12 +637,12 @@ class componentHTML {
           });
 
           var seriesdata = {
-                fillColor : 'rgba(' + hexToRgb(this.options.component.data.series.colors.background).r + ',' +
-                            hexToRgb(this.options.component.data.series.colors.background).g + ',' +
-                            hexToRgb(this.options.component.data.series.colors.background).b + ',0.5)',
-                strokeColor : 'rgba(' + hexToRgb(this.options.component.data.series.colors.stroke).r + ',' +
-                            hexToRgb(this.options.component.data.series.colors.stroke).g + ',' +
-                            hexToRgb(this.options.component.data.series.colors.stroke).b + ',1)',
+                fillColor : 'rgba(' + hexToRgb(component.data.series.colors.background).r + ',' +
+                            hexToRgb(component.data.series.colors.background).g + ',' +
+                            hexToRgb(component.data.series.colors.background).b + ',0.5)',
+                strokeColor : 'rgba(' + hexToRgb(component.data.series.colors.stroke).r + ',' +
+                            hexToRgb(component.data.series.colors.stroke).g + ',' +
+                            hexToRgb(component.data.series.colors.stroke).b + ',1)',
                 data : serie
             };
 
