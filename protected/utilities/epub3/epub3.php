@@ -462,6 +462,7 @@ class epub3 {
 					          inlineMath: [["$","$"],["\\(","\\)"]]
 					        }
 					      });
+							/*
 					      MathJax.Hub.Register.StartupHook("HTML-CSS Jax Ready",function () {
 							  var VARIANT = MathJax.OutputJax["HTML-CSS"].FONTDATA.VARIANT;
 							  VARIANT["normal"].fonts.unshift("MathJax_Arial");
@@ -475,7 +476,7 @@ class epub3 {
 							  VARIANT["bold"].fonts.unshift("MathJax_SansSerif-bold");
 							  VARIANT["italic"].fonts.unshift("MathJax_SansSerif-italic");
 							  VARIANT["-tex-mathit"].fonts.unshift("MathJax_SansSerif-italic");
-							});
+							});*/
 					    </script>
 						<script src="mathjax/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>';
 					break;
