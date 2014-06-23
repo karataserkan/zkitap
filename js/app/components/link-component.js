@@ -337,8 +337,6 @@ var createLinkComponent = function ( event, ui, oldcomponent ) {
 
     }
 
-
   }).appendTo('body');
-
 
 };
