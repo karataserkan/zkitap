@@ -574,6 +574,7 @@ class componentHTML {
 
 
 		<script type='text/javascript'>
+		//<![CDATA[
 		var hexToRgb  = function(hex) {
 		  console.log(hex);
 		    var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
@@ -598,7 +599,11 @@ class componentHTML {
 
             var aRow = {
               'value' : parseInt(value.value),
-              'color' : value.color
+              'color' : value.color,
+              'label' : value.label,
+              'labelColor' : '#666',
+              'labelAlign': 'right',
+              'labelFontSize' : '12'
             };
             var aLabel = {
               'label' : value.label,
@@ -620,47 +625,65 @@ class componentHTML {
 
           var labels= [];
           var serie=[];
+          var max_value ;
 
            
-          $.each(component.data.series.datasets.data, function(p,value){
+          $.each(this.options.component.data.series.datasets.data, function(p,value){
+            if (typeof max_value == 'undefined') max_value = parseInt(value.value);
+            if (max_value < parseInt(value.value) ) max_value=parseInt(value.value);
+            console.log(max_value);
             serie.push( parseInt( value.value) ) ;
             labels.push(value.label);
           });
+
           var seriesdata = {
-                fillColor : 'rgba(' + hexToRgb(component.data.series.colors.background).r + ',' +
-                            hexToRgb(component.data.series.colors.background).g + ',' +
-                            hexToRgb(component.data.series.colors.background).b + ',0.5)',
-                strokeColor : 'rgba(' + hexToRgb(component.data.series.colors.stroke).r + ',' +
-                            hexToRgb(component.data.series.colors.stroke).g + ',' +
-                            hexToRgb(component.data.series.colors.stroke).b + ',1)',
+                fillColor : 'rgba(' + hexToRgb(this.options.component.data.series.colors.background).r + ',' +
+                            hexToRgb(this.options.component.data.series.colors.background).g + ',' +
+                            hexToRgb(this.options.component.data.series.colors.background).b + ',0.5)',
+                strokeColor : 'rgba(' + hexToRgb(this.options.component.data.series.colors.stroke).r + ',' +
+                            hexToRgb(this.options.component.data.series.colors.stroke).g + ',' +
+                            hexToRgb(this.options.component.data.series.colors.stroke).b + ',1)',
                 data : serie
             };
+
           var barData = {
              'labels' : labels,
               'datasets' : [seriesdata]
           };
-          console.log(barData);
-          options.barOptions = {
-                
-          //Boolean - If we show the scale above the chart data     
-          scaleOverlay : false,
           
-          //Boolean - If we want to override with a hard coded scale
-          scaleOverride : false,
+          max_value = parseInt(max_value * 1.2);
+          var Steppers = max_value.toString().length -2 ;
+          if ( Steppers < 0) Steppers = 0;
           
-          //** Required if scaleOverride is true **
-          //Number - The number of steps in a hard coded scale
-          scaleSteps : 1,
-          //Number - The value jump in the hard coded scale
-          scaleStepWidth : 1,
-          //Number - The scale starting value
-          scaleStartValue : 0,
+          console.log(Steppers);
+          
+          max_value = parseInt( parseInt(max_value / Math.pow(10, Steppers) ) * Math.pow(10, Steppers) );
 
-          //String - Colour of the scale line 
-          scaleLineColor : 'rgba(0,0,0,.1)',
-          
-          //Number - Pixel width of the scale line  
-          scaleLineWidth : 1,
+
+
+
+
+          console.log(max_value);
+          this.options.barOptions = {
+              //Boolean - If we show the scale above the chart data     
+              scaleOverlay : false,
+              
+              //Boolean - If we want to override with a hard coded scale
+              scaleOverride : true,
+              
+              //** Required if scaleOverride is true **
+              //Number - The number of steps in a hard coded scale
+              scaleSteps : 5,
+              //Number - The value jump in the hard coded scale
+              scaleStepWidth : parseInt(max_value/5),
+              //Number - The scale starting value
+              scaleStartValue : 0,
+
+              //String - Colour of the scale line 
+              scaleLineColor : 'rgba(0,0,0,.1)',
+              
+              //Number - Pixel width of the scale line  
+              scaleLineWidth : 1,
 
           //Boolean - Whether to show labels on the scale 
           scaleShowLabels : true,
@@ -724,6 +747,7 @@ class componentHTML {
 
 		$('#canvas_'+ component.id ).css('width','".$component->data->self->css->width."');
 		$('#canvas_'+ component.id ).css('height','".$component->data->self->css->height."');
+		//]]>
       </script>
       ";
 
