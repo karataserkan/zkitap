@@ -533,6 +533,8 @@ class UserController extends Controller
 	public function actionProfile()
 	{
 		//echo Yii::app()->user->id;
+		if(Yii::app()->user->name == "admin")
+			$this->redirect( array('management/index' ) );
 		$user=User::model()->findByPk(Yii::app()->user->id);
 		$userProfileMeta=UserMeta::model()->find('user_id=:user_id AND meta_key=:meta_key',array('user_id'=>Yii::app()->user->id,'meta_key'=>'profilePicture'));
 		$this->render('profile',array('user'=>$user,'userProfileMeta'=>$userProfileMeta));
