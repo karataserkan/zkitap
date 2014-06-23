@@ -85,138 +85,104 @@ var IsURL = function (url) {
  
 var createLinkComponent = function ( event, ui, oldcomponent ) {
 
-    if(typeof oldcomponent == 'undefined'){
-      console.log('dene');
-      var top = (ui.offset.top-$(event.target).offset().top ) + 'px';
-      var left = ( ui.offset.left-$(event.target).offset().left ) + 'px';
-      var link_value = 'http://';
-      var control_type = "N";
-    }
-    else{
-      top = oldcomponent.data.self.css.top;
-      left = oldcomponent.data.self.css.left;
-      link_value = oldcomponent.data.self.attr.href;
-    };
-    console.log(top);
-    console.log(left);
+  var radioTextInputText;
+
+  if(typeof oldcomponent == 'undefined'){
+    console.log('dene');
+    var top = (ui.offset.top-$(event.target).offset().top ) + 'px';
+    var left = ( ui.offset.left-$(event.target).offset().left ) + 'px';
+    var link_value = 'http://';
+    var targetURL;
+    var link_area = "N";
     
-    var min_left = $("#current_page").offset().left;
-    var min_top = $("#current_page").offset().top;
-    var max_left = $("#current_page").width() + min_left;
-    var max_top = $("#current_page").height() + min_top;
-    var window_width = $( window ).width();
-    var window_height = $( window ).height();
-
-    if(max_top > window_height) max_top = window_height;
-    if(max_left > window_width) max_top = window_width;
-
-    var control_y_check = '';
-    var control_y_check_active = '';
-    var control_n_check = '';
-    var control_n_check_active = '';
-    var control_z_check = '';
-    var control_z_check_active = '';
-
-    if(control_type == 'Y') { control_y_check = "checked='checked'"; control_y_check_active = 'active';}
-    else if(control_type == 'N'){ control_n_check = "checked='checked'"; control_n_check_active = 'active'; }
-    else if(control_type == 'Z'){ control_z_check = "checked='checked'"; control_z_check_active = 'active'; }
- 
-      
-    var top=(event.pageY - 25);
-    var left=(event.pageX-150);
-
-    console.log(top);
-
-    if(left < min_left)
-      left = min_left;
-    else if(left+310 > max_left)
-      left = max_left - 310;
-
-    if(top < min_top)
-      top = min_top;
-    else if(top+300 > max_top)
-      top = max_top - 300;
-
-console.log(top);
-
-    top = top + "px";
-    left = left + "px";
-
-      $("<div class='popup ui-draggable' id='pop-image-link' style='display: block; top:" + top + "; left: " + left + ";'> \
-          <div class='popup-header'> \
-          <i class='icon-m-link'></i> &nbsp;"+j__("Bağlantı Ekle")+" \
-          <i id='link-add-dummy-close-button' class='icon-close size-10 popup-close-button'></i> \
-          </div> \
-         \
-        <!-- popup content--> \
-          <div class='gallery-inner-holder' style='width:500px;'> \
-            <form id='video-url'> \
-            <input id='link-url-text' class='input-textbox' type='url' placeholder='"+j__("URL Adresini Giriniz")+"'   value=" + link_value + "> \
-            <div class='type1' style='padding: 4px; display: inline-block;'>"+j__("Bağlantı alanı yayınlandığında gözükmeyecektir. Üstüne getirdiğiniz diğer araçlar ile kullanınız.")+"\
-                  <div class='btn-group' data-toggle='buttons'><br>\
-                    <label class='btn btn-primary " + control_n_check_active + "'>\
-                      <input type='radio' name='link_area' id='repeat1' " + control_n_check + " value='N'> "+j__("Bağlantı Simgesi")+"\
-                    </label>\
-                    <label class='btn btn-primary " + control_y_check_active + "'>\
-                      <input type='radio' name='link_area' id='repeat0' " + control_y_check + " value='Y'> "+j__("Bağlantı Alanı")+"\
-                    </label>\
-                    <label class='btn btn-primary " + control_z_check_active + "'>\
-                      <input type='radio' name='link_area' id='repeat2' " + control_z_check + " value='Z'> "+j__("Bağlantı Yazı Alanı")+"\
-                    </label>\
-                  </div>\
-              </div><br><br>\
-              <div id='link_text'></div>\
-            <a href='#' id='pop-image-OK' class='btn btn-info' id='add-image' >"+j__("Ekle")+"</a> \
-            </form> \
-          </div>     \
-           \
-        <!-- popup content--> \
-        </div>").appendTo('body').draggable();
-
-      $('#link-add-dummy-close-button').click(function(){
-
-        $('#pop-image-link').remove();  
-
-        if ( $('#pop-image-link').length ){
-          $('#pop-image-link').remove();  
-        }
-
-      });
-      $('input:radio[name="link_area"]').change(function(e){
-        if($('input:radio[name="link_area"]:checked').attr("value") == "Z"){
-          $('<input type="text" name="text_link" id="text_link" placeholder="'+j__("Bağlantı vereceğinizi yazıyı giriniz.")+'" style="width:250px;"><br><br>').appendTo("#link_text");
-        }
-        else{
-          $("#link_text").html("");
-        }
-      });
-
-    $('#pop-image-OK').click(function (){   
-    var targetURL = $("#link-url-text").val();
-    var link_area = $('input:radio[name="link_area"]:checked').attr("value");
     var link_text = "";
+  }
+  else{
+    top = oldcomponent.data.self.css.top;
+    left = oldcomponent.data.self.css.left;
+    link_value = oldcomponent.data.self.attr.href;
+    link_area = oldcomponent.data.link_area;
+    link_text = oldcomponent.data.link_text;
+    targetURL = oldcomponent.data.self.attr.href;
+  };
+  console.log(targetURL);
+  var min_left = $("#current_page").offset().left;
+  var min_top = $("#current_page").offset().top;
+  var max_left = $("#current_page").width() + min_left;
+  var max_top = $("#current_page").height() + min_top;
+  var window_width = $( window ).width();
+  var window_height = $( window ).height();
+
+  if(max_top > window_height) max_top = window_height;
+  if(max_left > window_width) max_top = window_width;
+
+  var control_y_check = '';
+  var control_y_check_active = '';
+  var control_n_check = '';
+  var control_n_check_active = '';
+  var control_z_check = '';
+  var control_z_check_active = '';
+
+  if(link_area == 'Y') { control_y_check = "checked"; control_y_check_active = 'active';}
+  else if(link_area == 'N'){ control_n_check = "checked"; control_n_check_active = 'active'; }
+  else if(link_area == 'Z'){ control_z_check = "checked"; control_z_check_active = 'active'; }
+
+    
+  var top=(event.pageY - 25);
+  var left=(event.pageX-150);
+
+  console.log(top);
+
+  if(left < min_left)
+    left = min_left;
+  else if(left+310 > max_left)
+    left = max_left - 310;
+
+  if(top < min_top)
+    top = min_top;
+  else if(top+300 > max_top)
+    top = max_top - 300;
+
+  top = top + "px";
+  left = left + "px";
+
+  var idPre = $.now();
+
+  $('<div>').componentBuilder({
+    top:top,
+    left:left,
+    title: j__("Bağlantı"),
+    btnTitle : j__("Ekle"), 
+    beforeClose : function () {
+      /* Warn about not saved work */
+      /* Dont allow if not confirmed */
+      return confirm(j__("Yaptığınız değişiklikler kaydedilmeyecektir. Kapatmak istediğinize emin misiniz?"));
+    },
+    onBtnClick: function(){
+      console.log(targetURL);
+
+      if (targetURL == "") {
+          alert (j__("Lütfen bir URL adresi giriniz"));
+          return false;
+      }
 
       if (!IsURL (targetURL) ){
         alert (j__("Lütfen gecerli bir URL adresi giriniz."));
-        return;
+        return false;
 
       }
-      if(typeof oldcomponent == 'undefined'){
-        console.log('dene');
-        var top = (ui.offset.top-$(event.target).offset().top ) + 'px';
-        var left = ( ui.offset.left-$(event.target).offset().left ) + 'px';
-        var link_value = 'http://linden-tech.com';
-      }
-      else{
+
+      if(typeof oldcomponent != 'undefined'){
+        
         top = oldcomponent.data.self.css.top;
         left = oldcomponent.data.self.css.left;
-        link_value = oldcomponent.data.self.attr.href;
-        //window.lindneo.tlingit.componentHasDeleted( oldcomponent, oldcomponent.id );
-        oldcomponent.data.self.attr.href = targetURL;
-      };
-      if(link_area == "Z"){
-        link_text = $("#text_link").val();
       }
+      
+      if(link_area == "Z"){
+        link_text = radioTextInputText.val();
+      }
+
+      console.log(link_area);
 
        var  component = {
           'type' : 'link',
@@ -253,14 +219,124 @@ console.log(top);
             }
           }
         };
-        if(typeof oldcomponent == 'undefined')
-          window.lindneo.tlingit.componentHasCreated( component );
-        else
-          window.lindneo.tlingit.componentHasUpdated( oldcomponent );
-        $("#link-add-dummy-close-button").trigger('click');
+      if(typeof oldcomponent !== 'undefined'){
+        window.lindneo.tlingit.componentHasDeleted( oldcomponent, oldcomponent.id );
+      };
+      window.lindneo.tlingit.componentHasCreated( component );
+    },
+    onComplete:function (ui){
+      var mainDiv = $('<div>')
+        .appendTo(ui);
 
-    });
+        var form = $('<form>')
+          .appendTo(mainDiv);
 
+          var linkURL = $('<input type="url">')
+            .addClass("input-textbox")
+            .attr("placeholder",j__("URL Adresini Giriniz"))
+            .val(link_value)
+            .change(function(){
+              targetURL = $(this).val();
+            })
+            .appendTo(form);
 
+          var typeDiv = $('<div>')
+            .addClass("type1")
+            .css({"padding": "4px", "display": "inline-block"})
+            .text(j__("Bağlantı alanı yayınlandığında gözükmeyecektir. Üstüne getirdiğiniz diğer araçlar ile kullanınız."))
+            .appendTo(form);
 
-  };
+           $("<br>").appendTo(typeDiv);
+
+            var radioDiv = $('<div>')
+              .addClass("btn-group")
+              .attr("data-toggle","buttons")
+              .appendTo(typeDiv);
+
+              var radioIconLabel = $('<label>')
+                .addClass("btn btn-primary " + control_n_check_active)
+                .appendTo(radioDiv);
+
+                var radioIconInput = $('<input type="radio">')
+                  .attr("name","link_area")
+                  .attr("checked",control_n_check)
+                  .val("N")
+                  .change(function(){
+                    linkTextDiv.html("");
+                    link_area = $(this).val()
+                  })
+                  .appendTo(radioIconLabel);
+
+                var radioIconInput = $('<span>')
+                  .text(j__("Bağlantı Simgesi"))
+                  .appendTo(radioIconLabel);
+
+              var radioAreaLabel = $('<label>')
+                .addClass("btn btn-primary " + control_y_check_active)
+                .appendTo(radioDiv);
+
+                var radioAreaInput = $('<input type="radio">')
+                  .attr("name","link_area")
+                  .attr("checked",control_y_check)
+                  .val("Y")
+                  .change(function(){
+                    linkTextDiv.html("");
+                    //console.log($(this).val());
+                    link_area = $(this).val();
+                  })
+                  .appendTo(radioAreaLabel);
+
+                var radioAreaInput = $('<span>')
+                  .text(j__("Bağlantı Alanı"))
+                  .appendTo(radioAreaLabel);
+
+              var radioTextLabel = $('<label>')
+                .addClass("btn btn-primary " + control_z_check_active)
+                .appendTo(radioDiv);
+
+                var radioTextInput = $('<input type="radio">')
+                  .attr("name","link_area")
+                  .attr("checked",control_z_check)
+                  .val("Z")
+                  .change(function(){
+                    radioTextInputText = $('<input type="text">')
+                      .attr("name","text_link")
+                      .attr("placeholder",j__("Bağlantı vereceğinizi yazıyı giriniz."))
+                      .css("width","250px")
+                      .val(link_text)
+                      .appendTo(linkTextDiv);
+                    link_area = $(this).val();
+                    console.log("zzzzzzzzzzzzzz");
+                  })
+                  .appendTo(radioTextLabel);
+
+                var radioTextInput = $('<span>')
+                  .text(j__("Bağlantı Yazı Alanı"))
+                  .appendTo(radioTextLabel);
+
+          var linkTextDiv = $('<div>')
+            .appendTo(form);
+
+          radioTextInput.change(function(){
+                    radioTextInputText = $('<input type="text">')
+                      .attr("name","text_link")
+                      .attr("placeholder",j__("Bağlantı vereceğinizi yazıyı giriniz."))
+                      .css("width","250px")
+                      .val(link_text)
+                      .appendTo(linkTextDiv);
+                    //link_area = $(this).val();
+                    console.log("zzzzzzzzzzzzzz");
+                  });
+
+        if(typeof oldcomponent !== 'undefined'){
+          console.log(oldcomponent.data.link_area)
+          if(oldcomponent.data.link_area == "N") radioIconInput.change();
+          else if(oldcomponent.data.link_area == "Y") radioAreaInput.change(); 
+          else if(oldcomponent.data.link_area == "Z") {radioTextInput.change();  console.log("asdasdasd");}
+        };
+
+    }
+
+  }).appendTo('body');
+
+};
