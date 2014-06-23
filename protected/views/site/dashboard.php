@@ -1,7 +1,7 @@
 
 <?php
 
-$this->pageTitle=Yii::app()->name." - ". __("Kontrol Paneli");
+$this->pageTitle=Yii::app()->name." - ". __("Genel Bakış");
 ?>
 
 
@@ -19,7 +19,7 @@ $this->pageTitle=Yii::app()->name." - ". __("Kontrol Paneli");
 <div class="row">
 	<div class="col-sm-12">
 		<div class="page-header">
-			<h3 class="content-title pull-left">Kontrol Paneli</h3>
+			<h3 class="content-title pull-left"><?php  echo __("Genel Bakış") ?></h3>
 		</div>
 	</div>
 </div>
@@ -27,34 +27,68 @@ $this->pageTitle=Yii::app()->name." - ". __("Kontrol Paneli");
 <div class="row">
  
         <div class="account_info_cards_container" style="width:1380px">
-                <div class="account_info_cards">
+                <div class="account_info_cards" style="height:100%">
                     <div class="account_info_icon"><i class="fa fa-building-o"></i></div>
                     <div class="account_info_data_number"><?php echo $organisation; ?></div>
-                    <div class="account_info_data_type">Organizasyon</div>
+                    <div class="account_info_data_type">
+                    	Organizasyon
+                    </div>
+                    <div>
+                    	<ul>
+	                    	<?php foreach ($organisationsForUser as $key => $organisationForUser) { ?>
+	                			<li><span><?php echo $organisationForUser->organisation_name; ?></span></li>
+	                		<?php } ?>
+                    	</ul>
+                    </div>
                 </div>
 
-                <div class="account_info_cards">
+                <div class="account_info_cards" style="height:100%">
                     <div class="account_info_icon"><i class="fa fa-book"></i></div>
                     <div class="account_info_data_number"><?php echo $book; ?></div>
                     <div class="account_info_data_type">Kitap</div>
                 </div>
 
-                <div class="account_info_cards">
+                <div class="account_info_cards" style="height:100%">
                     <div class="account_info_icon"><i class="fa fa-suitcase"></i></div>
                     <div class="account_info_data_number"><?php echo $workspace; ?></div>
                     <div class="account_info_data_type">Çalışma Alanı</div>
+                    <div>
+                    	<ul>
+	                    	<?php foreach ($workspacesForUser as $key => $workspaceForUser) { ?>
+	                			<li><span><?php echo $workspaceForUser->workspace_name; ?></span></li>
+	                		<?php } ?>
+                    	</ul>
+                    </div>
                 </div>
             
-                <div class="account_info_cards">
+                <div class="account_info_cards" style="height:100%">
                     <div class="account_info_icon"><i class="fa fa-desktop"></i></div>
                     <div class="account_info_data_number"><?php echo $host; ?></div>
                     <div class="account_info_data_type">Sunucu</div>
+                    <div>
+                    	<ul>
+	                    	<?php foreach ($organisationHostings as $key => $organisations) { ?>
+	                    		<?php foreach ($organisations as $key => $hosting) { ?>
+	                				<li><span><?php echo $hosting->hosting_client_IP; ?></span></li>
+	                			<?php } ?>
+	                		<?php } ?>
+                    	</ul>
+                    </div>
                 </div>
             
-                <div class="account_info_cards">
+                <div class="account_info_cards" style="height:100%">
                     <div class="account_info_icon"><i class="fa fa-file-text"></i></div>
                     <div class="account_info_data_number"><?php echo $category; ?></div>
                     <div class="account_info_data_type">Yayın Kategorisi</div>
+                    <div>
+                    	<ul>
+	                    	<?php foreach ($organisationCategories as $key => $categories) { ?>
+	                    		<?php foreach ($categories as $key => $category) { ?>
+	                				<li><span><?php echo $category->category_name; ?></span></li>
+	                			<?php } ?>
+	                		<?php } ?>
+                    	</ul>
+                    </div>
                 </div>
             
            <!--  <div class="account_info_cards">

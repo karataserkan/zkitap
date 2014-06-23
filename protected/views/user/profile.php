@@ -94,10 +94,10 @@
 		<div class="modal-body">
 			<video id="video" style="width:200px; height:200px"></video>
 			<br>
-			<a id="capture" class="btn btn-success">Fotograf Çek</a>
+			<a id="capture" class="btn btn-success">Fotoğraf Çek</a>
 			<input class="file-cover-up" name="logo" type="file" />
 			<br><br>
-			<img class="upload-cover-preview" id="upload-cover-preview">
+			<img class="upload-cover-preview" id="upload-cover-preview" style="width:100%">
 			
 		</div>
 		<div class="modal-footer">
@@ -122,6 +122,8 @@
                 }).done(function(hmtl){
                 	$("#userImage").attr('src',image_base64);
                 	$('#box-cover').modal('toggle');
+                    document.getElementById('profile_img').src = image_base64;
+                    document.getElementById('top_user_profile_image').src = image_base64;
                 });
 			};
 		});
@@ -187,7 +189,7 @@ window.addEventListener('load',function(){
             //set preview image src to dataURL
             document.getElementById('upload-cover-preview').src = dataURL;
 
-            document.getElementById('profile_img').src = dataURL;
+            
             image_base64=dataURL;
             // place the image value in the text box
             //document.getElementById('User_data').value = dataURL;
