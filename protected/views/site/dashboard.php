@@ -1,7 +1,7 @@
 
 <?php
 
-$this->pageTitle=Yii::app()->name." - ". __("Kontrol Paneli");
+$this->pageTitle=Yii::app()->name." - ". __("Genel Bakış");
 ?>
 
 
@@ -19,7 +19,7 @@ $this->pageTitle=Yii::app()->name." - ". __("Kontrol Paneli");
 <div class="row">
 	<div class="col-sm-12">
 		<div class="page-header">
-			<h3 class="content-title pull-left">Kontrol Paneli</h3>
+			<h3 class="content-title pull-left"><?php  echo __("Genel Bakış") ?></h3>
 		</div>
 	</div>
 </div>
