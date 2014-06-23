@@ -12,7 +12,7 @@ $(document).ready(function(){
 
       var that = this;
 
-      console.log(this.options.component.data);
+      //console.log(this.options.component.data);
       //return;
 
       var componentplinkid='plink'+this.options.component.id;
@@ -22,7 +22,7 @@ $(document).ready(function(){
       var page_link = this.options.component.data.page_link;
       var marker = this.options.component.data.marker;
       var selected_tab = this.options.component.data.selected_tab;
-      console.log(plink_data);
+      //console.log(plink_data);
       
       if(selected_tab == "name"){
         var popupmessage=$('<div  id="message_'+componentplinkid+'"  style="overflow:hidden; width:100%; height:100%; "></div>');
@@ -35,8 +35,8 @@ $(document).ready(function(){
         popupmessage.html('<img src="'+this.options.component.data.marker+'" style="width:100%; height:100%;"/>');
       }
       else if(selected_tab == "area"){
-        console.log(this.options.component.data.height);
-        console.log(this.options.component.data.self.css);
+        //console.log(this.options.component.data.height);
+        //console.log(this.options.component.data.self.css);
         var width = this.options.component.data.self.css.width;
         var height = this.options.component.data.self.css.height; 
         if(this.options.component.data.height!=0){
@@ -52,7 +52,7 @@ $(document).ready(function(){
       
     },
     _on : function (event, ui) {
-      console.log(this.options.component.id);
+      //console.log(this.options.component.id);
       
     },
     field: function(key, value){
@@ -336,6 +336,50 @@ var createPlinkComponent = function ( event, ui, oldcomponent ) {
 
                 var pIconDragImage = $ ('<div>')
                   .addClass("add-image-drag-area")
+                  .on('dragenter', function (e) 
+                    {
+                        e.stopPropagation();
+                        e.preventDefault();
+                    })
+                    .on('dragexit', function (e) 
+                    {
+                        e.stopPropagation();
+                        e.preventDefault();
+                    })
+                    .on('dragover', function (e) 
+                    {
+                         e.stopPropagation();
+                         e.preventDefault();
+                    })
+                    .on('drop', function (e) 
+                    {
+                     
+                      e.stopPropagation();
+                      e.preventDefault();
+
+                      var reader = new FileReader();
+                      var component = {};
+                      
+                      reader.onload = function (evt) {
+
+                        FileBinary = evt.target.result;
+                        var contentType = FileBinary.substr(5, FileBinary.indexOf('/')-5);
+
+                        if(contentType == 'image'){
+                          var imageBinary = FileBinary;
+                          pIconNewImage.html('');
+                          var newImage = $("<img style='width:70px; height:70px;' src='"+imageBinary+"' />");
+                          marker=imageBinary;
+                          pIconNewImage.append(newImage);
+                          return;
+                          
+                        }
+                        
+                      };
+                      //console.log(e.originalEvent.dataTransfer.files[0]);
+                      reader.readAsDataURL( e.originalEvent.dataTransfer.files[0] );
+
+                    })
                   .appendTo(pIconContent);
 
                 $('<br>').appendTo(pageIconDiv);
@@ -367,7 +411,7 @@ var createPlinkComponent = function ( event, ui, oldcomponent ) {
                 .appendTo(pLinkDiv);
 
           $.each( book_data, function( key, value ) {
-            console.log(value.title);
+            //console.log(value.title);
             var title = value.title;
             if(!value.title) title = deger + ". "+j__("Bölüm");
 

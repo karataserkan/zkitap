@@ -123,49 +123,49 @@
 				$('#confirm').show();
 		});
 
-		var mytheme = 'future';
-		var mypos = 'messenger-on-bottom';
-		//Set theme
-		Messenger.options = {
-			extraClasses: 'messenger-fixed '+mypos,
-			theme: mytheme
-		}
-		var msg;
-		msg = Messenger().post({
-		  message: 'Telefon ile hesabınızı aktif hale getirmediniz.',
-		hideAfter: 150,
-		  type: 'error',
-		  actions: {
-			cancel: {
-			  label: 'Aktive et',
-			  action: function() {
+		// var mytheme = 'future';
+		// var mypos = 'messenger-on-bottom';
+		// //Set theme
+		// Messenger.options = {
+		// 	extraClasses: 'messenger-fixed '+mypos,
+		// 	theme: mytheme
+		// }
+		// var msg;
+		// msg = Messenger().post({
+		//   message: 'Telefon ile hesabınızı aktif hale getirmediniz.',
+		// hideAfter: 150,
+		//   type: 'error',
+		//   actions: {
+		// 	cancel: {
+		// 	  label: 'Aktive et',
+		// 	  action: function() {
 			  	
-			  	if (confirmation==2) {
-			  		confirmationFeedback.show();
-			  		refreshCode.show();
-			  		confirmationFeedback.removeClass('alert-danger').removeClass('alert-success');
-			  		confirmationFeedback.addClass('alert-warning');
-			  		confirmationFeedback.text("Daha önce aktivasyon kodu almışsınız. Hesabınızı aktive etmek için telefonunuza gelen aktivasyon kodunu girin.");
-					sendConfirmationId.hide();
-	  				confirmationTel.hide();
-				}else{
-			  		checkConfirmationId.hide();
-			  		confirmationCode.hide();
-				};
+		// 	  	if (confirmation==2) {
+		// 	  		confirmationFeedback.show();
+		// 	  		refreshCode.show();
+		// 	  		confirmationFeedback.removeClass('alert-danger').removeClass('alert-success');
+		// 	  		confirmationFeedback.addClass('alert-warning');
+		// 	  		confirmationFeedback.text("Daha önce aktivasyon kodu almışsınız. Hesabınızı aktive etmek için telefonunuza gelen aktivasyon kodunu girin.");
+		// 			sendConfirmationId.hide();
+	 //  				confirmationTel.hide();
+		// 		}else{
+		// 	  		checkConfirmationId.hide();
+		// 	  		confirmationCode.hide();
+		// 		};
 
-				$('#confirm').addClass('in');
-				$('#confirm').show();
-				Messenger().hideAll()
-			  }
-			},
-			open: {
-			  label: 'Kapat',
-			  action:function() {
-			  	Messenger().hideAll()
-			  }
-			}
-		  }
-		});
+		// 		$('#confirm').addClass('in');
+		// 		$('#confirm').show();
+		// 		Messenger().hideAll()
+		// 	  }
+		// 	},
+		// 	open: {
+		// 	  label: 'Kapat',
+		// 	  action:function() {
+		// 	  	Messenger().hideAll()
+		// 	  }
+		// 	}
+		//   }
+		// });
 
 		
 		refreshCode.click(function(){
@@ -547,7 +547,7 @@ $all_books= $this->getWorkspaceBooks($workspace->workspace_id);
                                             </li>
                                         </ul>
                                         
-										<a class="btn pull-right brand_color_for_buttons" id='addNewBookBtn' href="/book/bookCreate" <?php echo ($confirmation !=0 AND $confirmation !=3 AND $verifiedEmail!=0)? "disabled":""; ?>>
+										<a class="btn pull-right brand_color_for_buttons" id='addNewBookBtn' href="/book/bookCreate" <?php //echo ($confirmation !=0 AND $confirmation !=3 AND $verifiedEmail!=0)? "disabled":""; ?>>
 											<i class="fa fa-plus-circle"></i>
 											<span><?php _e('Kitap Ekle') ?></span>
 										</a>

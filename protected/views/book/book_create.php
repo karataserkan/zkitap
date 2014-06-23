@@ -110,7 +110,7 @@
 																foreach ($workspaces as $workspace_id => $workspace_name): ?>
 																<div class="" id="uniform-workspaces_<?php echo $i; ?>">
 																	<span class="checked">
-																		<input class="uniform" id="workspaces_<?php echo $i; ?>" value="<?php echo $workspace_id; ?>" checked="checked" type="radio" name="workspaces">
+																		<input id="workspaces_<?php echo $i; ?>" value="<?php echo $workspace_id; ?>" checked="checked" type="radio" name="workspaces">
 																	</span>
 																<label for="workspaces_<?php echo $i; ?>"><?php echo $workspace_name; ?></label><br>
 																</div>
@@ -139,36 +139,26 @@
 												</div>
 												<div class="tab-pane" id="book_res">
 													<div class="form-group">
-														<label for="radio" class="control-label col-md-6"><?php _e('Boyutlar'); ?><span class="required">*</span></label>
-														<div class="col-md-6">
-														<input id="ytsize" type="hidden" value="" name="book_size">
-															<span id="book_size">
-																<div class="" id="uniform-book_size_0">
-																	<span class="">
-																		<input class="uniform" id="book_size_1" value="800x600" type="radio" name="book_size">
-																	</span>
+														<label for="radio" class="control-label col-md-5"><?php _e('Boyutlar'); ?><span class="required">*</span></label>
+														<div class="col-md-7">
+
+																<input id="book_size_1" value="800x600" type="radio" class="book_size" name="book_size">
 																<label for="book_size_1">800 X 600</label><br>
-																</div>
-																<div class="" id="uniform-book_size_1">
-																	<span class="">
-																		<input class="uniform" id="book_size_0" value="1024x768" type="radio" name="book_size">
-																	</span>
+																
+
+																<input id="book_size_0" value="1024x768" type="radio" class="book_size" name="book_size">
 																<label for="book_size_0">1024 X 768</label><br>
-																</div>
-																<div class="" id="uniform-book_size_2">
-																	<span class="">
-																		<input class="uniform" id="book_size_2" value="1280x960" type="radio" name="book_size">
-																	</span>
+																
+																<input id="book_size_2" value="1280x960" type="radio" class="book_size" name="book_size">
 																<label for="book_size_2">1280 X 960</label>
-																</div>
-															</span>
+															
 														</div>
 													</div>
 												</div>
 												<div class="tab-pane" id="book_templates">
 													<div class="form-group">
-														<label for="radio" class="control-label col-md-6"><?php _e('Şablonlar'); ?></label>
-														<div class="col-md-6">
+														<label for="radio" class="control-label col-md-5"><?php _e('Şablonlar'); ?></label>
+														<div class="col-md-7">
 															<input id="ytsize" type="hidden" value="" name="templates">
 															<span id="templates">
 

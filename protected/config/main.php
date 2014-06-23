@@ -74,7 +74,7 @@ return array(
 		'application.controllers.*', 
 		'application.components.*',
 		'application.utilities.*',
-		'application.utilities.epub3.*'		
+		'application.utilities.epub3.*',
 	),
 
 	'modules'=>array(

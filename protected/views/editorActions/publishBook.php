@@ -175,12 +175,13 @@
 														</div>
 													</div>
 
-													<div class="form-group">
+													<div class="form-group" style="display:none!important">
 														<label class="control-label col-md-3" for="PublishBookForm_contentType"><?php _e('Eser Tipi') ?><span class="required">*</span></label>
 														<div class="col-md-4">
 															<?php echo $form->radioButtonList($model,'contentType',array('epub'=>'Epub','epdf'=>'Epdf','pdf'=>'pdf'),array('class'=>'uniform','name'=>'contentType')); ?>
 														</div>
 													</div>
+													
 
 													<div class="form-group">
 														<label class="control-label col-md-3"><?php _e('Eser Açıklaması'); ?><span class="required">*</span></label>
@@ -303,7 +304,7 @@
 															}*/
 														 ?>
 														
-														<label  class="col-md-1 control-label">
+														<label  class="col-md-3 control-label">
 														<?php _e("Kategoriler"); ?>
 														</label>
 														<div class="col-md-5">
@@ -485,7 +486,7 @@
 															  <p class="form-control-static" data-display="contentTitle"></p>
 														   </div>
 														</div>
-														<div class="form-group">
+														<div class="form-group" style="display:none!important">
 														   <label class="control-label col-md-3"><?php _e('Eser Tipi') ?>:</label>
 														   <div class="col-md-4">
 															  <p class="form-control-static" data-display="contentType"></p>

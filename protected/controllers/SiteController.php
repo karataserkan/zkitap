@@ -876,4 +876,3 @@ class SiteController extends Controller
 		
 	}
 }
-

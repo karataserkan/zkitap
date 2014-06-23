@@ -1525,36 +1525,48 @@ right join book using (book_id) where book_id='$bookId' and type IN ('rtext','te
 				$transaction->save();
 
 
-
 				$deleteFromQueue=PublishQueue::model()->findByPk($bookId);
 				$deleteFromQueue->delete();
 				functions::delTree($ebook->tempdirParent);
 
-
-
-
-				$mail=Yii::app()->Smtpmail;
-		        $mail->SetFrom(Yii::app()->params['noreplyEmail'], "OKUTUS");
-		        $mail->Subject= $data['contentTitle']." kitabınız yayınlandı.";
-
-
 				$users=UserBook::model()->findAll('book_id=:book_id',array('book_id'=>$bookId));
 
+
+				$thumbnailSrc=base64_encode(file_get_contents("/css/images/deneme_cover.jpg"));
+				$bookData=json_decode($book->data,true);
+				 if (isset($bookData['thumbnail'])) {
+				 	$thumbnailSrc=$bookData['thumbnail'];
+				 }
+
+		        
+				define('UPLOAD_DIR', 'thumbnails/');
+				$img = $thumbnailSrc;
+				$exp=explode(";", $img);
+				$ext=explode("/", $exp[0]);
+				$extension = $ext[1]; 
+				$img = str_replace('data:image/'.$extension.';base64,', '', $img);
+				$img = str_replace(' ', '+', $img);
+				$data = base64_decode($img);
+				$file = UPLOAD_DIR . $bookId . '.'.$extension;
+				$success = file_put_contents($file, $data);
+				$im = file_get_contents($file);
+
+
+				$mailUsers=array();
 				foreach ($users as $key => $user) {
 					$userInfo=User::model()->findByPk($user->user_id);
-		        	$mail->AddAddress($userInfo->email, "");
+		        	$mailUsers[]=$userInfo->email;
 				}
 
 
-				$message=$data['contentTitle']." yayınlandı. Okuyucuda yayınladığınız kitapları görmek için üye değilseniz kayıt olarak giriş yapabilirsiniz.";
-		        $mail->MsgHTML($message);
-		        $mail->Send();
-
-
-
-
-
-
+		        $thumbnail=Yii::app()->getBaseUrl(true)."/thumbnails/".$bookId.".".$extension;
+		        $link=Yii::app()->params['reader_host'];
+		        $mail=new Email;
+				$mail->setTo($mailUsers);
+				$mail->setSubject($data['contentTitle'].' kitabınız yayınlandı.');
+				$mail->setFile('9Your_book_published_successfuly.tr_TR.html');
+				$mail->setAttributes(array('title'=>$data['contentTitle'].' kitabınız yayınlandı.','link'=>$link,'bookname'=>$book->title,'bookauthor'=>$book->author,'thumbnail'=>$thumbnail));
+				$mail->sendMail();
 
 			}
 			else

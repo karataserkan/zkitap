@@ -246,7 +246,7 @@ window.lindneo.tlingit = (function(window, $, undefined){
             var response = responseFromJson(res);
             
             if( response.result === null ) {
-              alert('hata'); 
+              alert(j__("Araç oluşturulamadı. Lütfen önce bir sayfa ekleyiniz!")); 
               return;
             }  
             response.result.component.data = component.data;
@@ -340,7 +340,7 @@ window.lindneo.tlingit = (function(window, $, undefined){
     newHistory(component, 'updated');
     window.lindneo.pageLoaded(false);
     if( typeof  componentPreviosVersions[component.id] == "undefined" 
-      || component.type == "table" || force){
+      || component.type == "table" || component.type == "html" || force){
          
 
           //console.log('firstUpdate');

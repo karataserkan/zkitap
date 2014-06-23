@@ -65,6 +65,7 @@ $(document).ready(function(){
           },
           'stop': function( event, ui ){
             that._resize(event, ui);
+            if ( typeof that.resizable_stop != "undefined") that.resizable_stop() ;
           },
           'resize':function(event,ui){
             //console.log(this);
@@ -73,6 +74,7 @@ $(document).ready(function(){
               this.resize_pass(event,ui);
 
             var component_width = ui.size.width;
+            var component_height = ui.size.height- 14;
             if(that.options.component.type == "text" || that.options.component.type == "side-text"){
               var component_height = ui.size.height + 14 ;
             }
@@ -84,6 +86,7 @@ $(document).ready(function(){
             $("#"+that.options.component.id).parent().height((component_height - 14) + "px");
             
             window.lindneo.toolbox.makeMultiSelectionBox();
+            if ( typeof that.resizable_resize != "undefined") that.resizable_resize(component_width,component_height) ;
           }
         };
       if(typeof params!='undefined'){
