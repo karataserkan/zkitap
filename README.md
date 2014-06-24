@@ -76,8 +76,8 @@ apt-get install curl
 
 wkhtmltopdf Installation
 -----------------------------------------------------------------
-apt-get install wkhtmltopdf
-
+Eski olanı(xvfb ile kullanılır)->apt-get install wkhtmltopdf
+Yeni olanı(xvfb gerektirmez)->http://wkhtmltopdf.org/downloads.html .deb indir ve dpkg -i <package_name.deb>
 
 pdf2htmlex
 -----------------------------------------------------------------
