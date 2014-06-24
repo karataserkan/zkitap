@@ -59,26 +59,40 @@ $(document).ready(function(){
 
 
 
- var createSoundComponent = function (event,ui){
+var createSoundComponent = function (event,ui){
   var imageBinary = '';
   var auto_y_check = '';
   var auto_y_check_active = '';
   var auto_n_check = '';
   var auto_n_check_active = '';
+  var repeat_y_check = '';
+  var repeat_y_check_active = '';
+  var repeat_n_check = '';
+  var repeat_n_check_active = '';
+  var auto_type;
+  var repeat_type;
+  var sound_name;
 
   if(typeof oldcomponent == 'undefined'){
     var top = (ui.offset.top-$(event.target).offset().top ) + 'px';
     var left = ( ui.offset.left-$(event.target).offset().left ) + 'px';
-    var auto_type = 'N';
+    auto_type = 'N';
+    repeat_type = 'N';
+    sound_name = "";
   }
   else{
     top = oldcomponent.data.self.css.top;
     left = oldcomponent.data.self.css.left;
     auto_type = oldcomponent.data.auto_type;
+    repeat_type = oldcomponent.data.repeat_type;
+    sound_name = oldcomponent.data.audio.name;
   };
  
-  if(auto_type == 'Y') { auto_y_check = "checked='checked'"; auto_y_check_active = 'active';}
-    else { auto_n_check = "checked='checked'"; auto_n_check_active = 'active'; }
+  if(auto_type == 'Y') { auto_y_check = "checked'"; auto_n_check = ''; auto_y_check_active = 'active'; auto_n_check_active =""; }
+    else { auto_n_check = "checked"; auto_y_check = ''; auto_n_check_active = 'active'; auto_y_check_active = ""; }
+
+  if(repeat_type == 'Y') { repeat_y_check = "checked'"; repeat_n_check = ''; repeat_y_check_active = 'active'; repeat_n_check_active =""; }
+    else { repeat_n_check = "checked"; repeat_y_check = ''; repeat_n_check_active = 'active'; repeat_y_check_active = ""; }
   
   var min_left = $("#current_page").offset().left;
   var min_top = $("#current_page").offset().top;
@@ -109,175 +123,296 @@ $(document).ready(function(){
 
   top = top + "px";
   left = left + "px";
-  $("<div class='popup ui-draggable' id='pop-image-popup' style='display: block; width:355px; top:" + top + "; left: " + left + ";'> \
-    <div class='popup-header' style='width:100%;'> \
-    <i class='icon-m-sound'></i> &nbsp;"+j__("Ses Ekle")+" \
-    <i id='sound-add-dummy-close-button' class='icon-close size-10 popup-close-button'></i> \
-    </div> \
-      <div class='gallery-inner-holder' style='width:100%;'> \
-        <div style='clear:both'></div> \
-        <div class='tabbable'>\
-            <ul class='nav nav-tabs' id='mySoundTab'>\
-              <li><a href='#sound_drag' data-toggle='tab'>"+j__("Ses Dosyası Sürükle")+"</a></li>\
-              <li><a href='#upload' data-toggle='tab'>"+j__("Ses Dosyası Yükle")+"</a></li>\
-            </ul>\
-          </div>\
-          <div class='tab-content'>\
-            <div class='tab-pane fade in active' id='sound_drag'><br>\
-              <div class='add-image-drag-area' id='dummy-dropzone'> </div> \
-            </div>\
-            <div class='tab-pane fade' id='upload'><br>\
-              <input type='file' name='sound_file' id='sound_file' value='' ><br><br>\
-            </div>\
-          </div>\
-          <div class='type' style='padding: 4px; display: inline-block;'>\
-              <div class='btn-group' data-toggle='buttons'>"+j__("Otomatik Başlama")+"<br>\
-                <label class='btn btn-primary " + auto_y_check_active + "'>\
-                  <input type='radio' name='auto_type' id='repeat0' " + auto_y_check + " value='Y'> Evet\
-                </label>\
-                <label class='btn btn-primary " + auto_n_check_active + "'>\
-                  <input type='radio' name='auto_type' id='repeat1' " + auto_n_check + " value='N'> Hayır\
-                </label>\
-              </div>\
-              <div class='btn-group' data-toggle='buttons'>"+j__("Tekrar et")+"<br>\
-                <label class='btn btn-primary " + auto_y_check_active + "'>\
-                  <input type='radio' name='repeat_type' id='repeat0' " + auto_y_check + " value='Y'> Evet\
-                </label>\
-                <label class='btn btn-primary " + auto_n_check_active + "'>\
-                  <input type='radio' name='repeat_type' id='repeat1' " + auto_n_check + " value='N'> Hayır\
-                </label>\
-              </div>\
-          </div>\
-      </div> \
-       <input type='text' class='input-textbox' id='pop-sound-name' placeholder='Ses Adı'  /> \
-      <div style='clear:both' > </div> \
-     <a id='pop-image-OK' class='btn btn-info' >"+j__("Ekle")+"</a>\
-    </div>").appendTo('body').draggable();
 
-    $('#sound-add-dummy-close-button').click(function(){
+  var idPre = $.now();
 
-      $('#pop-image-popup').remove();  
+  $('<div>').componentBuilder({
 
-      if ( $('#pop-image-popup').length ){
-        $('#pop-image-popup').remove();  
-      }
+    top:top,
+    left:left,
+    title: j__("Ses"),
+    btnTitle : j__("Ekle"), 
+    beforeClose : function () {
+      /* Warn about not saved work */
+      /* Dont allow if not confirmed */
+      return confirm(j__("Yaptığınız değişiklikler kaydedilmeyecektir. Kapatmak istediğinize emin misiniz?"));
+    },
+    onBtnClick: function(){
 
-    });
-    $('#mySoundTab a:first').tab('show');
+      if(typeof oldcomponent != 'undefined'){
+        
+        top = oldcomponent.data.self.css.top;
+        left = oldcomponent.data.self.css.left;
+      }  
 
-    $('#pop-image-OK').click(function (){
-
-      var auto_type = $('input[name=auto_type]:checked').val();
-      var repeat_type = $('input[name=repeat_type]:checked').val();
+      console.log(auto_type);
+      console.log(repeat_type);
 
       var component = {
-          'type' : 'sound',
-          'data': {
-              'audio':{
-                'attr': {
-                  'controls':'controls'
-                },
-                'css': {
-                  'width' : '100%'/*,
-                  'height': '30px',*/
-                },
-                'name': $('#pop-sound-name').val()
+        'type' : 'sound',
+        'data': {
+            'audio':{
+              'attr': {
+                'controls':'controls'
               },
-              'auto_type' : auto_type,
-              'repeat_type': repeat_type,
-              'source': {
-                'attr': {
-                  'src':imageBinary
-                }
+              'css': {
+                'width' : '100%'/*,
+                'height': '30px',*/
               },
-              '.audio-name': {
-                'css': {
-                  'width':'100%'
-                }
-              },
-              'lock':'',
-              'self': {
-                'css': {
-                  'position':'absolute',
-                  'top': (ui.offset.top-$(event.target).offset().top ) + 'px',
-                  'left':  ( ui.offset.left-$(event.target).offset().left ) + 'px',
-                  'width': '250px',
-                  /*'height': '60px',*/
-                  'background-color': 'transparent',
-                  'overflow': 'visible',
-                  'z-index': 'first',
-                  'opacity':'1'
-                }
+              'name': sound_name
+            },
+            'auto_type' : auto_type,
+            'repeat_type': repeat_type,
+            'source': {
+              'attr': {
+                'src':imageBinary
               }
-            
-          }
-        };
-        //console.log(component);
-        //return;
-
-        window.lindneo.tlingit.componentHasCreated( component );
-        $("#sound-add-dummy-close-button").trigger('click');
-
-
-    });
-
-    
-   $('#sound_file').change(function(){
-    var file = this.files[0];
-    var name = file.name;
-    var size = file.size;
-    var type = file.type;
-    
-    var reader = new FileReader();
-    var component = {};
-    reader.readAsDataURL(file);
-    //console.log(reader);
-    reader.onload = function(_file) {
-      //console.log(_file);
-      
-      imageBinary = _file.target.result;
-      console.log(imageBinary);
-
-    };
-
-  });
-
-    var el = document.getElementById("dummy-dropzone");
-    
-
-    el.addEventListener("dragenter", function(e){
-      e.stopPropagation();
-      e.preventDefault();
-    }, false);
-
-    el.addEventListener("dragexit", function(e){
-      e.stopPropagation();
-      e.preventDefault();
-    },false);
-
-    el.addEventListener("dragover", function(e){
-      e.stopPropagation();
-      e.preventDefault();
-    }, false);
-
-    el.addEventListener("drop", function(e){
-      
-      e.stopPropagation();
-      e.preventDefault();
-
-      var reader = new FileReader();
-      var component = {};
-
-      reader.onload = function (evt) {
-
-         imageBinary = evt.target.result;  
-         console.log(imageBinary);      
-        
-        
+            },
+            '.audio-name': {
+              'css': {
+                'width':'100%'
+              }
+            },
+            'lock':'',
+            'self': {
+              'css': {
+                'position':'absolute',
+                'top': (ui.offset.top-$(event.target).offset().top ) + 'px',
+                'left':  ( ui.offset.left-$(event.target).offset().left ) + 'px',
+                'width': '250px',
+                /*'height': '60px',*/
+                'background-color': 'transparent',
+                'overflow': 'visible',
+                'z-index': 'first',
+                'opacity':'1'
+              }
+            }
+          
+        }
       };
+      if(typeof oldcomponent !== 'undefined'){
+        window.lindneo.tlingit.componentHasDeleted( oldcomponent, oldcomponent.id );
+      };
+      window.lindneo.tlingit.componentHasCreated( component );
+    },
+    onComplete:function (ui){
 
-      reader.readAsDataURL( e.dataTransfer.files[0] );
+      $(ui).parent().parent().css({"height":"550px"});
 
-    }, false);
+      var mainDiv = $('<div>')
+        .appendTo(ui);
 
-  };
+        var tabDiv = $ ('<div>')
+            .addClass("tabbable")
+            .appendTo(mainDiv);
+
+            var tabUl = $ ('<ul>')
+              .addClass("nav nav-tabs")
+              .appendTo (tabDiv);
+
+              var tabSoundDragLi = $('<li>')
+                .addClass("active")
+                .appendTo(tabUl);
+                
+                var tabSoundDragA = $ ('<a>')
+                  .attr('href','#'+idPre+'drag')
+                  .attr('data-toggle','tab')
+                  .text(j__("Ses Dosyası Sürükle"))
+                  .appendTo(tabSoundDragLi);
+
+              
+              var tabSoundUploadLi = $('<li>')
+                .appendTo(tabUl);
+
+                var tabSoundUploadA = $ ('<a>')
+                  .attr('href','#'+idPre+'upload')
+                  .attr('data-toggle','tab')
+                  .text(j__("Ses Dosyası Yükle"))
+                  .appendTo(tabSoundUploadLi);
+
+              $('<br>').appendTo(tabDiv);
+
+            var soundDiv = $ ('<div>')
+                .addClass("tab-content")
+                .appendTo(tabDiv);
+
+                var imageDragDiv = $ ('<div>')
+                  .addClass("tab-pane fade")
+                  .addClass("active in")
+                  .attr('id',idPre+'drag')
+                  .appendTo(soundDiv);
+
+                  $('<br>').appendTo(imageDragDiv);
+
+                  var soundDragContent = $ ('<div>')
+                    .addClass("add-image-drag-area")
+                    .on('dragenter', function (e) 
+                    {
+                        e.stopPropagation();
+                        e.preventDefault();
+                    })
+                    .on('dragexit', function (e) 
+                    {
+                        e.stopPropagation();
+                        e.preventDefault();
+                    })
+                    .on('dragover', function (e) 
+                    {
+                         e.stopPropagation();
+                         e.preventDefault();
+                    })
+                    .on('drop', function (e) 
+                    {
+                     
+                      e.stopPropagation();
+                      e.preventDefault();
+
+                      var reader = new FileReader();
+                      var component = {};
+                      
+                      reader.onload = function (evt) {
+                        imageBinary = evt.target.result;  
+                        console.log(imageBinary);
+                      };
+                      //console.log(e.originalEvent.dataTransfer.files[0]);
+                      reader.readAsDataURL( e.originalEvent.dataTransfer.files[0] );
+
+                    })
+                    .appendTo(imageDragDiv);
+
+
+                var soundUploadDiv = $ ('<div>')
+                  .addClass("tab-pane fade")
+                  .attr('id',idPre+'upload')
+                  .appendTo(soundDiv);
+
+                  var soundUploadDiv = $ ('<input type="file">')
+                    .attr("name","image_file")
+                    .change(function(){
+                      var file = this.files[0];
+                      var name = file.name;
+                      var size = file.size;
+                      var type = file.type;
+                      
+                      var reader = new FileReader();
+                      var component = {};
+                      reader.readAsDataURL(file);
+                      //console.log(reader);
+                      reader.onload = function(_file) {
+                        //console.log(_file);
+                        
+                        imageBinary = _file.target.result;
+                        console.log(imageBinary);
+
+                      };
+                    })
+                    .appendTo(soundUploadDiv);
+
+          var typeDiv = $ ('<div>')
+            .addClass("type")
+            .css({"padding": "4px", "display": "inline-block"})
+            .appendTo(mainDiv);
+
+            var typeAutoDiv = $ ('<div>')
+              .addClass("btn-group")
+              .attr("data-toggle","buttons")
+              .text(j__("Otomatik Başlama"))
+              .appendTo(typeDiv);
+
+              $("<br>").appendTo(typeAutoDiv);
+
+              var typeAutoLabelY = $ ('<label>')
+                .addClass("btn btn-primary " + auto_y_check_active)
+                .appendTo(typeAutoDiv);
+
+                var typeAutoInputY = $ ('<input type="radio">')
+                  .attr("name","auto_type")
+                  .attr("checked",auto_y_check)
+                  .val("Y")
+                  .change(function(){
+                    auto_type = $(this).val();
+                  })
+                  .appendTo(typeAutoLabelY);
+
+                var typeAutoSpanY = $ ('<span>')
+                  .text(j__("Evet"))
+                  .appendTo(typeAutoLabelY);
+
+              var typeAutoLabelN = $ ('<label>')
+                .addClass("btn btn-primary " + auto_n_check_active)
+                .appendTo(typeAutoDiv);
+
+                var typeAutoInputN = $ ('<input type="radio">')
+                  .attr("name","auto_type")
+                  .attr("checked",auto_n_check)
+                  .val("N")
+                  .change(function(){
+                    auto_type = $(this).val();
+                  })
+                  .appendTo(typeAutoLabelN);
+
+                var typeAutoSpanY = $ ('<span>')
+                  .text(j__("Hayır"))
+                  .appendTo(typeAutoLabelN);
+
+              var typeRepeatDiv = $ ('<div>')
+                .addClass("btn-group")
+                .css("margin-left", "100px")
+                .attr("data-toggle","buttons")
+                .text(j__("Tekrar Et"))
+                .appendTo(typeDiv);
+
+                $("<br>").appendTo(typeRepeatDiv);
+
+                var typeRepeatLabelY = $ ('<label>')
+                  .addClass("btn btn-primary " + repeat_y_check_active)
+                  .appendTo(typeRepeatDiv);
+
+                  var typeRepeatInputY = $ ('<input type="radio">')
+                    .attr("name","repeat_type")
+                    .attr("checked",repeat_y_check)
+                    .val("Y")
+                    .change(function(){
+                      repeat_type = $(this).val();
+                    })
+                    .appendTo(typeRepeatLabelY);
+
+                  var typeRepeatSpanY = $ ('<span>')
+                    .text(j__("Evet"))
+                    .appendTo(typeRepeatLabelY);
+
+                var typeRepeatLabelN = $ ('<label>')
+                  .addClass("btn btn-primary " + repeat_n_check_active)
+                  .appendTo(typeRepeatDiv);
+
+                  var typeRepeatInputN = $ ('<input type="radio">')
+                    .attr("name","repeat_type")
+                    .attr("checked",repeat_n_check)
+                    .val("N")
+                    .change(function(){
+                      repeat_type = $(this).val();
+                    })
+                    .appendTo(typeRepeatLabelN);
+
+                  var typeRepeatSpanY = $ ('<span>')
+                    .text(j__("Hayır"))
+                    .appendTo(typeRepeatLabelN); 
+
+          $("<br>").appendTo(mainDiv);
+
+          var soundText = $ ('<input type="text">')
+            .addClass("input-textbox")
+            .attr("placeholder","Ses Adı")
+            .change(function(){
+              sound_name = $(this).val();
+            })
+            .appendTo(mainDiv);
+
+
+
+
+    }
+
+  }).appendTo('body');
+  
+};
