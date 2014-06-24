@@ -156,118 +156,151 @@ $(document).ready(function(){
 
   
 var createShapeComponent = function ( event, ui ) {
-    var min_left = $("#current_page").offset().left;
-    var min_top = $("#current_page").offset().top;
-    var max_left = $("#current_page").width() + min_left;
-    var max_top = $("#current_page").height() + min_top;
-    var window_width = $( window ).width();
-    var window_height = $( window ).height();
 
-    if(max_top > window_height) max_top = window_height;
-    if(max_left > window_width) max_top = window_width;
+  var type;
+
+  var min_left = $("#current_page").offset().left;
+  var min_top = $("#current_page").offset().top;
+  var max_left = $("#current_page").width() + min_left;
+  var max_top = $("#current_page").height() + min_top;
+  var window_width = $( window ).width();
+  var window_height = $( window ).height();
+
+  if(max_top > window_height) max_top = window_height;
+  if(max_left > window_width) max_top = window_width;
+  
+  var top=(event.pageY - 25);
+  var left=(event.pageX-150);
+
+  if(left < min_left)
+    left = min_left;
+  else if(left+210 > max_left)
+    left = max_left - 210;
+
+  if(top < min_top)
+    top = min_top;
+  else if(top+230 > max_top)
+    top = max_top - 230;
+
+  top = top + "px";
+  left = left + "px";
     
-    var top=(event.pageY - 25);
-    var left=(event.pageX-150);
+  var idPre = $.now();
 
-    console.log(top);
+  $('<div>').componentBuilder({
 
-    if(left < min_left)
-      left = min_left;
-    else if(left+210 > max_left)
-      left = max_left - 210;
+    top:top,
+    left:left,
+    title: j__("Şekil"),
+    btnTitle : j__("Ekle"), 
+    beforeClose : function () {
+      /* Warn about not saved work */
+      /* Dont allow if not confirmed */
+      return confirm(j__("Yaptığınız değişiklikler kaydedilmeyecektir. Kapatmak istediğinize emin misiniz?"));
+    },
+    onBtnClick: function(){
+      console.log(type);
+      if(typeof oldcomponent != 'undefined'){
+        
+        top = oldcomponent.data.self.css.top;
+        left = oldcomponent.data.self.css.left;
+      }  
 
-    if(top < min_top)
-      top = min_top;
-    else if(top+230 > max_top)
-      top = max_top - 230;
-
-console.log(top);
-
-    top = top + "px";
-    left = left + "px";
-    $("<div class='popup ui-draggable' id='pop-image-popup' style='display: block; top:" + top + "; left: " + left + ";'> \
-      <div class='popup-header'> \
-<i class='icon-m-galery'></i> &nbsp;"+j__("Şekil Ekle")+" \
-<i id='shape-add-dummy-close-button' class='icon-close size-10 popup-close-button'></i> \
-</div> \
-<!--  popup content --> \
-<br> \
-  <div class='popup-even'> \
-    <i rel='circle' id='shape-circle' class='icon-s-circle shape-select size-20 dark-blue'></i> \
-    <i rel='triangle' id='shape-triangle' class='icon-s-triangle shape-select  size-20 dark-blue'></i> \
-    <i rel='square' id='shape-square' class='icon-s-square  shape-select  size-20 dark-blue'></i> \
-    <i rel='line' id='shape-line' class='icon-s-line shape-select  size-20 dark-blue'></i> \
-  </div> \
-<!--  popup content --> \
-</div>").appendTo('body').draggable();
-
-    $('#shape-add-dummy-close-button').click(function(){
-
-      $('#pop-image-popup').remove();  
-
-      if ( $('#pop-image-popup').length ){
-        $('#pop-image-popup').remove();  
-      }
-
-    });
-
-    $('.shape-select').click(function () {
-       var type = $(this).attr('rel');
-       $("#shape-add-dummy-close-button").trigger('click');
-
-        var component = {
-          'type' : 'shape',
-          'data': {
-            'canvas':{
-              'css' : {
-                'width':'100%',
-                'height':'100%',
-                'margin': '0',
-                'padding': '0px',
-                'border': 'none 0px',
-                'outline': 'none',
-                'background-color': 'transparent'
-              } , 
-              'attr':{
-                'width': '1000',
-                'height': '1000',
-              }
-            },
-            'fillStyle': 'black',
-            'strokeStyle': 'black',
-            'shapeType': type ,
-            'lock':'',
-            'self': {
-              'css': {
-                'position':'absolute',
-                'top': (ui.offset.top-$(event.target).offset().top ) + 'px',
-                'left':  ( ui.offset.left-$(event.target).offset().left ) + 'px',
-                'width': '100px',
-                'height': '100px',
-                'background-color': 'transparent',
-                'overflow': 'visible',
-                'opacity': '1',
-                'z-index': 'first'
-                  }
-              
-              }
+      var component = {
+        'type' : 'shape',
+        'data': {
+          'canvas':{
+            'css' : {
+              'width':'100%',
+              'height':'100%',
+              'margin': '0',
+              'padding': '0px',
+              'border': 'none 0px',
+              'outline': 'none',
+              'background-color': 'transparent'
+            } , 
+            'attr':{
+              'width': '1000',
+              'height': '1000',
+            }
+          },
+          'fillStyle': 'black',
+          'strokeStyle': 'black',
+          'shapeType': type ,
+          'lock':'',
+          'self': {
+            'css': {
+              'position':'absolute',
+              'top': (ui.offset.top-$(event.target).offset().top ) + 'px',
+              'left':  ( ui.offset.left-$(event.target).offset().left ) + 'px',
+              'width': '100px',
+              'height': '100px',
+              'background-color': 'transparent',
+              'overflow': 'visible',
+              'opacity': '1',
+              'z-index': 'first'
+                }
             
-          }
-        };
+            }
+          
+        }
+      };
+      if(typeof oldcomponent !== 'undefined'){
+        window.lindneo.tlingit.componentHasDeleted( oldcomponent, oldcomponent.id );
+      };
+      window.lindneo.tlingit.componentHasCreated( component );
+    },
+    onComplete:function (ui){
+      console.log();
+      $(ui).parent().parent().css({"width":"250px","height":"170px"});
+      $($(ui).parent().parent()).find(".popup-footer").css("display","none");
+      var mainDiv = $('<div>')
+        .css({"width":"100%","height":"100%"})
+        .appendTo(ui);
 
-        window.lindneo.tlingit.componentHasCreated( component );
-        
+        var typeDiv = $('<div>')
+          .addClass("popup-even")
+          .appendTo(mainDiv);
 
-    });
+          var circleI = $('<i>')
+            .addClass("icon-s-circle shape-select size-20 dark-blue")
+            .attr("rel","circle")
+            .click(function(){
+              type = "circle";
+              $($($(ui).parent().parent()).find(".popup-footer")).find("a").click();
+            })
+            .appendTo(typeDiv);
 
-  
-        
-      
+          var triangleI = $('<i>')
+            .addClass("icon-s-triangle shape-select  size-20 dark-blue")
+            .attr("rel","triangle")
+            .click(function(){
+              type = "triangle";
+              $($($(ui).parent().parent()).find(".popup-footer")).find("a").click();
+            })
+            .appendTo(typeDiv);
 
-  
-        
-       
+          var squareI = $('<i>')
+            .addClass("icon-s-square  shape-select  size-20 dark-blue")
+            .attr("rel","square")
+            .click(function(){
+              type = "square";
+              $($($(ui).parent().parent()).find(".popup-footer")).find("a").click();
+            })
+            .appendTo(typeDiv);
 
-   
+          var lineI = $('<i>')
+            .addClass("icon-s-line shape-select  size-20 dark-blue")
+            .attr("rel","line")
+            .click(function(){
+              type = "line";
+              $($($(ui).parent().parent()).find(".popup-footer")).find("a").click();
+            })
+            .appendTo(typeDiv);
 
-  };
+    }
+
+
+  }).appendTo('body');
+
+};
