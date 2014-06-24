@@ -1185,183 +1185,180 @@ $(document).ready(function(){
 
 
  
- var createTableComponent = function (event,ui){
+var createTableComponent = function (event,ui){
+
+  var tableData = [];
+  var TableSelection = null;
   
-    var min_left = $("#current_page").offset().left;
-    var min_top = $("#current_page").offset().top;
-    var max_left = $("#current_page").width() + min_left;
-    var max_top = $("#current_page").height() + min_top;
-    var window_width = $( window ).width();
-    var window_height = $( window ).height();
+  var min_left = $("#current_page").offset().left;
+  var min_top = $("#current_page").offset().top;
+  var max_left = $("#current_page").width() + min_left;
+  var max_top = $("#current_page").height() + min_top;
+  var window_width = $( window ).width();
+  var window_height = $( window ).height();
 
-    if(max_top > window_height) max_top = window_height;
-    if(max_left > window_width) max_top = window_width;
-    
-    var top=(event.pageY - 25);
-    var left=(event.pageX-150);
+  if(max_top > window_height) max_top = window_height;
+  if(max_left > window_width) max_top = window_width;
+  
+  var top=(event.pageY - 25);
+  var left=(event.pageX-150);
 
-    console.log(top);
+  console.log(top);
 
-    if(left < min_left)
-      left = min_left;
-    else if(left+310 > max_left)
-      left = max_left - 310;
+  if(left < min_left)
+    left = min_left;
+  else if(left+310 > max_left)
+    left = max_left - 310;
 
-    if(top < min_top)
-      top = min_top;
-    else if(top+380 > max_top)
-      top = max_top - 380;
+  if(top < min_top)
+    top = min_top;
+  else if(top+380 > max_top)
+    top = max_top - 380;
 
-console.log(top);
+  top = top + "px";
+  left = left + "px";
 
-    top = top + "px";
-    left = left + "px";
+  var idPre = $.now();
 
-  $("<div class='popup ui-draggable' id='pop-image-popup' style='display: block; top:" +top+ "; left: " + left + ";'> \
-    <div class='popup-header'> \
-    "+j__("Tablo Ekle")+" \
-    <i id='table-add-dummy-close-button' class='icon-close size-10 popup-close-button'></i> \
-    </div> \
-      <div class='gallery-inner-holder' id='componentTableSelector'> \
-      </div> \
-      <div style='clear:both' > </div> \
-    </div>").appendTo('body').draggable();
+  $('<div>').componentBuilder({
 
-    var newTable = $("<table id='componentTableSelectorTable' class=''></table>");
-    var newTbody = $("<tbody></tbody>");
-    var TableSelectionDisplay = $("<div class='selections_display'></div>");
-    var TableSelection = null;
+    top:top,
+    left:left,
+    title: j__("Tablo"),
+    btnTitle : j__("Ekle"), 
+    beforeClose : function () {
+      /* Warn about not saved work */
+      /* Dont allow if not confirmed */
+      return confirm(j__("Yaptığınız değişiklikler kaydedilmeyecektir. Kapatmak istediğinize emin misiniz?"));
+    },
+    onBtnClick: function(){
 
-    newTbody.appendTo(newTable);
-    for ( var i = 0; i < 10; i++ ) {
-      var newRow = $("<tr></tr>");
-      newRow.appendTo(newTbody);
-      for ( var k = 0; k < 10; k++ ) { 
-
-
-        var newColumn = $("<td></td>");
-        newColumn.appendTo(newRow);
-
-        newColumn
-
-          .click(function(){
-            if (typeof TableSelection === null) return;
-            var tableData = [];
-
-              for ( var i = 0; i < TableSelection.rows; i++ ) {
-                tableData[i] = [];
-                for ( var k = 0; k < TableSelection.columns; k++ ) { 
-                  var newCellData = {
-                    'attr': {
-                      'val': '',
-                      'class' : 'tableComponentCell'
-                    },
-                   'css' : {
-                      'width':'100px',
-                      'height': '30px',            
-                      'color' : '#000',
-                      'font-size' : '14px',
-                      'font-family' : 'Arial',
-                      'font-weight' : 'normal',
-                      'font-style' : 'normal',
-                      'text-decoration' : 'none'
-                    },
-                    'format':'standart',
-                    'function':''
-                  };
-                  
-                  tableData[i][k]= newCellData;
-
-                }
+      var component = {
+        'type' : 'table',
+        'data': {
+            'table': tableData,
+            'lock':'',
+            'self': {
+              'css': {
+                'position':'absolute',
+                'top': (ui.offset.top-$(event.target).offset().top ) + 'px',
+                'left':  ( ui.offset.left-$(event.target).offset().left ) + 'px',
+                'width': '100%',
+                'height': '100%',
+                'background-color': 'transparent',
+                'overflow': 'visible',
+                'zindex': 'first',
+                'opacity':'1'
               }
+            }
+          
+        }
+      };
+      if(typeof oldcomponent !== 'undefined'){
+        window.lindneo.tlingit.componentHasDeleted( oldcomponent, oldcomponent.id );
+      };
+      window.lindneo.tlingit.componentHasCreated( component );
+    },
+    onComplete:function (ui){
 
+      $($(ui).parent().parent()).find(".popup-footer").css("display","none");
+
+      var mainDiv = $('<div>')
+        .css({"width":"100%","height":"100%"})
+        .appendTo(ui);
+
+        var newTable = $('<table>')
+          .css({"width":"100%","height":"90%"})
+          .appendTo(mainDiv);
+
+          var newTbody = $('<tbody>')
+            .appendTo(newTable);
+
+        var TableSelectionDisplay = $('<div>')
+          .addClass("selections_display")
+          .appendTo(mainDiv);
+
+
+        for ( var i = 0; i < 10; i++ ) {
+
+          var newRow = $('<tr>')
+            .appendTo(newTbody);
+          
+          for ( var k = 0; k < 10; k++ ) { 
+
+            var newColumn = $('<td>')
+              .css({"border": "thin solid #d6d6d6","width": "13px","height": "13px"})
+              .appendTo(newRow);
             
-            var component = {
-              'type' : 'table',
-              'data': {
-                  'table': tableData,
-                  'lock':'',
-                  'self': {
-                    'css': {
-                      'position':'absolute',
-                      'top': (ui.offset.top-$(event.target).offset().top ) + 'px',
-                      'left':  ( ui.offset.left-$(event.target).offset().left ) + 'px',
-                      'width': '100%',
-                      'height': '100%',
-                      'background-color': 'transparent',
-                      'overflow': 'visible',
-                      'zindex': 'first',
-                      'opacity':'1'
+            newColumn
+              .click(function(){
+
+                  for ( var i = 0; i < TableSelection.rows; i++ ) {
+                    tableData[i] = [];
+                    for ( var k = 0; k < TableSelection.columns; k++ ) { 
+                      var newCellData = {
+                        'attr': {
+                          'val': '',
+                          'class' : 'tableComponentCell'
+                        },
+                       'css' : {
+                          'width':'100px',
+                          'height': '30px',            
+                          'color' : '#000',
+                          'font-size' : '14px',
+                          'font-family' : 'Arial',
+                          'font-weight' : 'normal',
+                          'font-style' : 'normal',
+                          'text-decoration' : 'none'
+                        },
+                        'format':'standart',
+                        'function':''
+                      };
+                      
+                      tableData[i][k]= newCellData;
+
                     }
                   }
                 
-              }
-            };
-            
-            console.log(component);
-            window.lindneo.tlingit.componentHasCreated( component );
-            $("#table-add-dummy-close-button").trigger('click');
-
-                
-          })
-          .mouseover(function () {
+                $($($(ui).parent().parent()).find(".popup-footer")).find("a").click();
+                    
+              })
+              .mouseover(function () {
 
 
-            TableSelection = {
-              'rows':$(this).parent().prevAll().length+1,
-              'columns':$(this).prevAll().length+1
-            };
-            $('#componentTableSelectorTable td').removeClass('active');
-            var selections_rows=newTbody.children('tr').slice(0,TableSelection.rows);
-           
-            $.each (selections_rows, function(row_index,row_element){
-              var selections_columns = $(row_element).children('td').slice(0,TableSelection.columns);
-              
-               $.each (selections_columns, function(column_index,cell_element){
-                $(cell_element).addClass('active');
-               });
-            });
-            TableSelectionDisplay.text(TableSelection.rows + ' x ' +TableSelection.columns );
+                TableSelection = {
+                  'rows':$(this).parent().prevAll().length+1,
+                  'columns':$(this).prevAll().length+1
+                };
+                $( newTable ).find("td").removeClass('active');
+                $( newTable ).find("td").css({"border": "thin solid #d6d6d6","width": "13px","height": "13px","background": "none"});
+                var selections_rows=newTbody.children('tr').slice(0,TableSelection.rows);
+               
+                $.each (selections_rows, function(row_index,row_element){
+                  var selections_columns = $(row_element).children('td').slice(0,TableSelection.columns);
+                  
+                   $.each (selections_columns, function(column_index,cell_element){
+                    $(cell_element).addClass('active');
+                    $(cell_element).css({"border-color": "#a1a1a1","background": "#c8def4"});
+                   });
+                });
+                TableSelectionDisplay.text(TableSelection.rows + ' x ' +TableSelection.columns );
 
 
-         
+             
 
 
-          })
+              });
 
-          ;
+          }
 
-      }
-
+        }
+        
 
     }
-    newTable.appendTo('#componentTableSelector');
-    TableSelectionDisplay.appendTo('#componentTableSelector');
 
 
+  }).appendTo('body');
+  
 
-
-    $('#table-add-dummy-close-button').click(function(){
-
-      $('#pop-image-popup').remove();  
-
-      if ( $('#pop-image-popup').length ){
-        $('#pop-image-popup').remove();  
-      }
-
-    });
-
-
-
-
-
-
-      
-
-      
-
-
-
-
-
-  };
+};
