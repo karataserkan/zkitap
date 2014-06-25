@@ -740,7 +740,7 @@ class epub3 {
 	</head>
 	<body style="box-shadow:0px 0px 0px 1px rgba(0,0,0,0.1);background-repeat:no-repeat; width:'.$width.'px; height:'.$height.'px;'.$background.';'.$background_size.';overflow:hidden;">
 	<section epub:type="frontmatter titlepage">
-	<span>
+	<span style="display:none">
 \begin{align}
  
 \end{align}
