@@ -1418,13 +1418,16 @@ class componentHTML {
 			//var_dump($data->img->src);
 			//exit();
 			$image_id= "popup".functions::get_random_string();
+			$opacity ="";
 			$image_container ="
 			<img  class='image' src='".$data->img->src."'";
 
 			if(isset($data->img->css)){
 				$image_container.=" style=' ";
 				foreach ($data->img->css as $css_name => $css_val ) {
-					$image_container.="$css_name:$css_val;";
+					if($css_name!="opacity")
+						$image_container.="$css_name:$css_val;";
+					else $opacity ="$css_name:$css_val;";
 				}
 				$image_container.="' ";
 			}
@@ -1437,7 +1440,7 @@ class componentHTML {
 
 			$container.=" 
 				
-				<a href='#".$image_id."' rel='facybox'><img src='".$component->data->img->marker."' style='width:100%; height:100%;' /></a>
+				<a href='#".$image_id."' rel='facybox'><img src='".$component->data->img->marker."' style='width:100%; height:100%;$opacity' /></a>
 				
 				<div id='$image_id' style='position:relative; display:none;'>
 					 ".$image_container."
