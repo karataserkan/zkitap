@@ -11,7 +11,6 @@ do
 		pdfcrop $path"/"temp_$1.pdf $path"/"$1.pdf
 		`pdftk $path"/"$1.pdf cat output $path"/"$output.pdf`
 		rm -f $path"/"$1.pdf $path"/"temp_$1.pdf
-		touch $path"/egemen.txt" 
 	else
 		wkhtmltopdf --javascript-delay 15000 $path"/"$1 $path"/"temp_$1.pdf >> /var/log/epubtopdf
                 pdfcrop $path"/"temp_$1.pdf $path"/"$1.pdf
