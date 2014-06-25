@@ -18,7 +18,7 @@ class EpubConverter
 		$start_point=0;
 		$extract_folder=$this->getUnique();
 		$pdf='/tmp/'.$extract_folder;
-		exec('unzip -o -j '.$this->epub_path.' -d '.$pdf);
+		exec('unzip -o '.$this->epub_path.' -d '.$pdf);
 		$files=array();
 		$this->getFiles($pdf.'/package.opf',$files);
 		error_log(print_r($files,1));		
@@ -46,8 +46,9 @@ class EpubConverter
 				$sh_string.='sh '.(Yii::app()->params['epubtopdf']).$output_text.' '.$pdf.' '.$this->getWithSpace($temp_files).'&';
 			}
 			$sh_string.='wait;`pdftk '.$this->getWithSpace($merge).' cat output '.$this->pdf_path.'`';
+			error_log($sh_string);
 			exec($sh_string,$result);
-			
+			error_log($result);
 			return $this->check_success($this->pdf_path);
 	}
 
