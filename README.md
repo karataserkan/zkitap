@@ -78,6 +78,7 @@ wkhtmltopdf Installation
 -----------------------------------------------------------------
 Eski olanı(xvfb ile kullanılır)->apt-get install wkhtmltopdf
 Yeni olanı(xvfb gerektirmez)->http://wkhtmltopdf.org/downloads.html .deb indir ve dpkg -i <package_name.deb>
+touch /var/log/epubtopdf; chmod 777 /var/log/epubtopdf
 
 pdf2htmlex
 -----------------------------------------------------------------
