@@ -9,7 +9,7 @@ $(document).ready(function() {
             var that = this;
 
             
-            this.videoTag=$('<video id="v_'+this.options.component.id+'" poster="'+this.options.component.data.poster+'" style="width:100%; height:100%;"></video>');
+            this.videoTag=$('<video width="100%" height="100%" id="v_'+this.options.component.id+'" poster="'+this.options.component.data.poster+'" ></video>');
 
             if(this.options.component.data.video_type == 'popup'){
               
@@ -45,7 +45,8 @@ $(document).ready(function() {
             } else {
               this.element.append(this.videoTag);
             }
-
+            this.videoTag.css({"width":"100%", "height":"100%"});
+            console.log(this.videoTag.css({"width":"100%", "height":"100%"}));
             this._super({resizableParams:{handles:"e, s, se"}});
         },
         field: function(key, value) {
@@ -70,237 +71,108 @@ var createVideoComponent = function( event, ui, oldcomponent ) {
   var marker = window.base_path+'/css/popupmarker.png';
   var video_marker=window.base_path+'/css/video_play_trans.png';
   var video_width_height = '';
-  var video_type_video = function(){
-      var video_type = $('input[name=video_type]:checked').val();
-        if(video_type == 'popup'){
-          $("<span id='type_video'>\
-                <input type='radio' id='video_type0' name='video_image_type' value='video_type0'><button id='button0' style='background:url(\""+marker+"\") no-repeat center center;-moz-background-size: cover; -webkit-background-size: cover; -o-background-size: cover; background-size: cover; width:70px; height:70px;'></button>\
-                <input type='radio' id='video_type1' name='video_image_type' value='link'><button id='button1' style='background:url(\""+video_marker+"\") no-repeat center center; -moz-background-size: cover; -webkit-background-size: cover; -o-background-size: cover; background-size: cover; width:70px; height:70px;'></button>\
-                <a href='#' onclick='document.getElementById(\"video_image_file\").click(); return false;' class='icon-upload dark-blue size-40' style='padding-left:15px;'></a>\
-                <input type='file' name='video_image_file' id='video_image_file' value='' style='visibility: hidden;' >\
-                <div id='new_image'></div>\
-              </span>").appendTo('.typev');
-          $( "button" ).button();
-          $('#button0').click(function(){$("#video_type0").prop("checked", true); console.log(marker);});
-          $('#button1').click(function(){$("#video_type1").prop("checked", true); marker = video_marker; console.log(marker);});
-        }
-        else{ 
-          $('#type_video').remove();
-        }
-    };
-    var video_url = "http://lindneo.com/5.mp4";
-    if(typeof oldcomponent == 'undefined'){
-      var top = (ui.offset.top-$(event.target).offset().top ) + 'px';
-      var left = ( ui.offset.left-$(event.target).offset().left ) + 'px';
-      
-      var video_type = 'link';
-      var auto_type = 'N';
-      var control_type = 'Y';
-    }
-    else{
-      top = oldcomponent.data.self.css.top;
-      left = oldcomponent.data.self.css.left;
-      //video_url = oldcomponent.data.source.attr.src;
-      video_type = oldcomponent.data.video_type;
-      auto_type = oldcomponent.data.auto_type;
-      control_type = oldcomponent.data.control_type;
-      marker = oldcomponent.data.marker;
-    };
-    var link_check = '';
-    var link_check_active = '';
-    var popup_check = '';
-    var popup_check_active = '';
+  var contentType;
+  var videoType;
+  var videoURL = "http://lindneo.com/5.mp4";
+  var token = '';
+  var poster = '';
+  var selectd_tab;
+  var selected_marker;
 
-    var auto_y_check = '';
-    var auto_y_check_active = '';
-    var auto_n_check = '';
-    var auto_n_check_active = '';
-
-    var control_y_check = '';
-    var control_y_check_active = '';
-    var control_n_check = '';
-    var control_n_check_active = '';
-
-    if(video_type == 'link') { link_check = "checked='checked'"; link_check_active = 'active';}
-    else { popup_check = "checked='checked'"; popup_check_active = 'active'; }
-
-    if(auto_type == 'Y') { auto_y_check = "checked='checked'"; auto_y_check_active = 'active';}
-    else { auto_n_check = "checked='checked'"; auto_n_check_active = 'active'; }
-
-    if(control_type == 'Y') { control_y_check = "checked='checked'"; control_y_check_active = 'active';}
-    else { control_n_check = "checked='checked'"; control_n_check_active = 'active'; }
- 
-    //console.log(link_check);
-    //console.log(popup_check);
+  if(typeof oldcomponent == 'undefined'){
+    var top = (ui.offset.top-$(event.target).offset().top ) + 'px';
+    var left = ( ui.offset.left-$(event.target).offset().left ) + 'px';
     
+    var video_type = 'link';
+    var auto_type = 'N';
+    var control_type = 'Y';
+  }
+  else{
+    top = oldcomponent.data.self.css.top;
+    left = oldcomponent.data.self.css.left;
+    video_url = oldcomponent.data.source.attr.src;
+    videoURL = oldcomponent.data.source.attr.src;
+    console.log(videoURL);
+    video_type = oldcomponent.data.video_type;
+    auto_type = oldcomponent.data.auto_type;
+    control_type = oldcomponent.data.control_type;
+    selected_marker = oldcomponent.data.marker;
+  };
 
-    var min_left = $("#current_page").offset().left;
-    var min_top = $("#current_page").offset().top;
-    var max_left = $("#current_page").width() + min_left;
-    var max_top = $("#current_page").height() + min_top;
-    var window_width = $( window ).width();
-    var window_height = $( window ).height();
+  var video_url = "http://lindneo.com/5.mp4";
+  var link_check = '';
+  var link_check_active = '';
+  var popup_check = '';
+  var popup_check_active = '';
 
-    if(max_top > window_height) max_top = window_height;
-    if(max_left > window_width) max_top = window_width;
-    
-    var top=(event.pageY - 25);
-    var left=(event.pageX-150);
+  var auto_y_check = '';
+  var auto_y_check_active = '';
+  var auto_n_check = '';
+  var auto_n_check_active = '';
 
-    //console.log(top);
+  var control_y_check = '';
+  var control_y_check_active = '';
+  var control_n_check = '';
+  var control_n_check_active = '';
 
-    if(left < min_left)
-      left = min_left;
-    else if(left+510 > max_left)
-      left = max_left - 510;
+  if(video_type == 'link') { link_check = "checked='checked'"; link_check_active = 'active';}
+  else { popup_check = "checked='checked'"; popup_check_active = 'active'; }
 
-    if(top < min_top)
-      top = min_top;
-    else if(top+700 > max_top)
-      top = max_top - 700;
+  if(auto_type == 'Y') { auto_y_check = "checked='checked'"; auto_y_check_active = 'active';}
+  else { auto_n_check = "checked='checked'"; auto_n_check_active = 'active'; }
 
-//console.log(top);
+  if(control_type == 'Y') { control_y_check = "checked='checked'"; control_y_check_active = 'active';}
+  else { control_n_check = "checked='checked'"; control_n_check_active = 'active'; }
 
-    top = top + "px";
-    left = left + "px";
+  //console.log(link_check);
+  //console.log(popup_check);
+  
 
-      $("<div class='popup ui-draggable' id='pop-video-popup' style='display: block; top:" + top + "; left: " + left + "; '> \
-        <div class='popup-header'> \
-        <i class='icon-m-video'></i> &nbsp;"+j__("Video Ekle")+" \
-        <i id='video-add-dummy-close-button' class='icon-close size-10 popup-close-button'></i> \
-        </div> \
-          <div class='gallery-inner-holder' style='width:500px;'> \
-            <div style='clear:both'></div> \
-            <div class='typev' style='padding: 4px; display: inline-block;'>\
-                <div class='btn-group' data-toggle='buttons'>\
-                  <label class='btn btn-primary " + link_check_active + "'>\
-                    <input type='radio' name='video_type' id='repeat0' " + link_check + " value='link'> "+j__("Sayfada")+"\
-                  </label>\
-                  <label class='btn btn-primary " + popup_check_active + "'>\
-                    <input type='radio' name='video_type' id='repeat1' " + popup_check + " value='popup'> "+j__("Açılır Pencerede")+"\
-                  </label>\
-                </div><br><br>\
-            </div>\
-            <div class='tabbable'>\
-              <ul class='nav nav-tabs' id='myTab'>\
-                <li><a href='#video_drag' data-toggle='tab'>"+j__("Video Sürükle")+"</a></li>\
-                <li><a href='#video_upload' data-toggle='tab'>"+j__("Video Yükle")+"</a></li>\
-                <li><a href='#video_link' data-toggle='tab'>"+j__("Video Bağlantı")+"</a></li>\
-              </ul>\
-            </div>\
-            <div class='tab-content'>\
-              <div class='tab-pane active' id='video_drag'>\
-                <div class='divide-10'></div>\
-                <div class='add-image-drag-area' id='dummy-dropzone'> </div> \
-              </div>\
-              <div class='tab-pane ' id='video_upload'>\
-                <div class='divide-10'></div>\
-                <input type='file' name='video_file' id='video_file' value='' ><br><br>\
-              </div>\
-              <div class='tab-pane ' id='video_link'>\
-                <div class='divide-10'></div>\
-                <input id='video-url-text' class='input-textbox' type='url' placeholder='"+j__("URL Adresini Giriniz")+"'   value='" + video_url + "'> \
-              </div>\
-            </div>\
-            <div class='gallery-inner-holder' style='width:500px;'> \
-              <div style='clear:both'></div> \
-              <div class='type1' style='padding: 4px; display: inline-block;'>\
-                  <div class='btn-group' data-toggle='buttons'>"+j__("Otomatik Başlama")+"<br>\
-                    <label class='btn btn-primary " + auto_y_check_active + "'>\
-                      <input type='radio' name='auto_type' id='repeat0' " + auto_y_check + " value='Y'> "+j__("Evet")+"\
-                    </label>\
-                    <label class='btn btn-primary " + auto_n_check_active + "'>\
-                      <input type='radio' name='auto_type' id='repeat1' " + auto_n_check + " value='N'> "+j__("Hayır")+"\
-                    </label>\
-                  </div>\
-                </div>\
-                <div class='type1' style='padding: 4px; display: inline-block;'>\
-                  <div class='btn-group' data-toggle='buttons'>"+j__("Kontrol Panel Görünümü")+"<br>\
-                    <label class='btn btn-primary " + control_y_check_active + "'>\
-                      <input type='radio' name='control_type' id='repeat0' " + control_y_check + " value='Y'> "+j__("Evet")+"\
-                    </label>\
-                    <label class='btn btn-primary " + control_n_check_active + "'>\
-                      <input type='radio' name='control_type' id='repeat1' " + control_n_check + " value='N'> "+j__("Hayır")+"\
-                    </label>\
-                  </div>\
-              </div>\
-            </div>\
-            <a href='#' id='pop-image-OK' class='btn bck-light-green white radius' id='add-image' style='padding: 5px 30px;'>"+j__("Ekle")+"</a> \
-          </div> \
-        </div>").appendTo('body').draggable();
-    if(video_type == 'popup') video_type_video();
+  var min_left = $("#current_page").offset().left;
+  var min_top = $("#current_page").offset().top;
+  var max_left = $("#current_page").width() + min_left;
+  var max_top = $("#current_page").height() + min_top;
+  var window_width = $( window ).width();
+  var window_height = $( window ).height();
 
-      $('#video-add-dummy-close-button').click(function() {
+  if(max_top > window_height) max_top = window_height;
+  if(max_left > window_width) max_top = window_width;
+  
+  var top=(event.pageY - 25);
+  var left=(event.pageX-150);
 
-          $('#pop-video-popup').remove();
+  //console.log(top);
 
-          if ($('#pop-video-popup').length) {
-              $('#pop-video-popup').remove();
-          }
+  if(left < min_left)
+    left = min_left;
+  else if(left+510 > max_left)
+    left = max_left - 510;
 
-      });
-     $('.btn').button();
-     $('#myTab a:first').tab('show');
-    
-   //$('#dialog').dialog();
-   /*\
-            <div id='dialog' title='Video'>\
-  <video controls='controls' style='width: 100%; height: 100%;''><source src='http://lindneo.com/5.mp4'></video><br><br>\
-</div>\*/
-    var changeimage = false;
-    var change = false;
-    var that = '';
-    $('#video_file').change(function(){
-          change = true;
-          that = this;
-        });
-    var imageBinary = '';
-    $(document ).on('change','#video_image_file' , function(){
-          changeimage = true;
-          that = this;
-          var file = that.files[0];
-          var name = file.name;
-          var size = file.size;
-          var type = file.type;
-          var token = '';
-          var reader = new FileReader();
-          //console.log(reader);
-          var component = {};
-          var videoURL = '';
-          reader.readAsDataURL(file);
-          //console.log(reader);
-          reader.onload = function(_file) {
-            imageBinary = _file.target.result;
-            //console.log(imageBinary);
-            $('#new_image').html('');
-            $("<input type='radio' id='video_type2' name='video_image_type' value='video_type2' checked='checked'><button id='button2' style='background:url(" + imageBinary +") no-repeat center center; no-repeat center center; -moz-background-size: cover; -webkit-background-size: cover; -o-background-size: cover; background-size: cover; width:70px; height:70px;'></button><br><br>").appendTo('#new_image');
-            $( "button" ).button();
-            marker = imageBinary;
-            //console.log(marker);
-          }
-          //console.log(marker);
-        });
+  if(top < min_top)
+    top = min_top;
+  else if(top+700 > max_top)
+    top = max_top - 700;
 
-    $("input[name=video_type]:radio").change(function () {
-        video_type_video();
-      });
-    
-    if(changeimage){
-          //console.log(that);
-          var file = that.files[0];
-          var name = file.name;
-          var size = file.size;
-          var type = file.type;
-        };
+  top = top + "px";
+  left = left + "px";
 
-    $('#pop-image-OK').click(function() {
-        var poster = "";
-        var video_type = $('input[name=video_type]:checked').val();
-        var auto_type = $('input[name=auto_type]:checked').val();
-        var control_type = $('input[name=control_type]:checked').val();
-        //console.log(auto_type);
-        //console.log(control_type);
-        
+  var idPre = $.now();
+
+  $('<div>').componentBuilder({
+
+    top:top,
+    left:left,
+    title: j__("Video"),
+    btnTitle : j__("Ekle"), 
+    beforeClose : function () {
+      /* Warn about not saved work */
+      /* Dont allow if not confirmed */
+      return confirm(j__("Yaptığınız değişiklikler kaydedilmeyecektir. Kapatmak istediğinize emin misiniz?"));
+    },
+    onBtnClick: function(){
+
+      if(selectd_tab == "link"){
+
         if(typeof oldcomponent == 'undefined'){
           
           var top = (ui.offset.top-$(event.target).offset().top ) + 'px';
@@ -313,495 +185,671 @@ var createVideoComponent = function( event, ui, oldcomponent ) {
           window.lindneo.tlingit.componentHasDeleted( oldcomponent, oldcomponent.id );
         };
         
-
-        if(change){
-          //console.log(that);
-          var file = that.files[0];
-          var name = file.name;
-          var size = file.size;
-          var type = file.type;
-          var token = '';
-          var reader = new FileReader();
-          //console.log(reader);
-          var component = {};
-          var videoURL = '';
-          reader.readAsDataURL(file);
-          //console.log(reader);
-          reader.onload = function(_file) {
-            var videoBinary = _file.target.result;
-            var contentType = videoBinary.substr(0, videoBinary.indexOf(';'));
-            var videoType = contentType.substr(contentType.indexOf('/')+1);
-          
-            var response = '';
-            var videoURL = '';
-            var token = '';
-
-            //console.log(videoBinary);
-            window.lindneo.dataservice.send( 'getFileUrl', {'type': videoType}, function(response) {
-              response=window.lindneo.tlingit.responseFromJson(response);
-            
-              window.lindneo.dataservice.send( 'UploadFile',{'token': response.result.token, 'file' : videoBinary} , function(data) {
-                videoURL = response.result.URL;
-                
-                $("#video-add-dummy-close-button").trigger('click');
-                var VideoSnapper = {
-    
-                    /**
-                     * Capture screen as canvas
-                     * @param {HTMLElement} video element 
-                     * @param {Object} options = width of screen, height of screen, time to seek
-                     * @param {Function} handle function with canvas element in param
-                     */
-                    captureAsCanvas: function(video, options, handle) {
-                    
-                        // Create canvas and call handle function
-                        var callback = function() {
-                            // Create canvas
-                            var canvas = $('<canvas />').attr({
-                                width: options.width,
-                                height: options.height
-                            })[0];
-                            // Get context and draw screen on it
-                            
-                            canvas.getContext('2d').drawImage(video, 0, 0, options.width, options.height);
-                            // Seek video back if we have previous position 
-                            if (prevPos) {
-                                // Unbind seeked event - against loop
-                                $(video).unbind('seeked');
-                                // Seek video to previous position
-                                video.currentTime = prevPos;
-                            }
-                            // Call handle function (because of event)
-                            handle.call(this, canvas);    
-                        }
-
-                        // If we have time in options 
-                        if (options.time && !isNaN(parseInt(options.time))) {
-                            // Save previous (current) video position
-                            var prevPos = video.currentTime;
-                            // Seek to any other time
-                            video.currentTime = options.time;
-                            // Wait for seeked event
-                            $(video).bind('seeked', callback);              
-                            return;
-                        }
-                        
-                        // Otherwise callback with video context - just for compatibility with calling in the seeked event
-                        return callback.apply(video);
-                    }
-                };
-
-           
-                        
-                   
-
-                $("<div class='popup ui-draggable' id='pop-video-poster' style='display: block; top:" + top + "; left: " + left + "; '> \
-                  <div class='popup-header'> \
-                  <i class='icon-m-video'></i> &nbsp;"+j__("Poster Ekle")+" \
-                  <i id='poster-add-dummy-close-button' class='icon-close size-10 popup-close-button'></i> \
-                  </div> \
-                    <div class='gallery-inner-holder' style='width:500px;'> \
-                      <video id='video' width='320' height='240' controls preload='none' onloadedmetadata=\"$(this).trigger('video_really_ready')\">\
-                        <source id='"+videoType+"' src='"+videoURL+"' type='video/"+videoType+"'>\
-                      </video><br><br>\
-                      <input type='button' id='capture' value='Capture' />    "+j__("Video'yu başlatarak istediğiniz anda görüntüyü yakalayabilirsiniz")+"<br><br>\
-                      <div id='screen'></div><br>\
-                      <a href='#' id='pop-poster-OK' class='btn bck-light-green white radius' id='add-poster' style='padding: 5px 30px;'>"+j__("Ekle")+"</a> \
-                    </div> \
-                  </div>\
-                  ").appendTo('body').draggable();
-                  
-                $('#poster-add-dummy-close-button').click(function() {
-
-                    $('#pop-video-poster').remove();
-
-                    if ($('#pop-video-poster').length) {
-                        $('#pop-video-poster').remove();
-                    }
-
-                });
-                
-                 $('#capture').click(function() {
-                            var canvases = $('canvas');
-                            VideoSnapper.captureAsCanvas(video, { width: $("#current_page").width(), height: $("#current_page").height(), time: 0 }, function(canvas) {
-                                $('#screen').html("");
-                                $('#screen').append(canvas); 
-                                $('#screen canvas').addClass("caputure_image");
-                                $('.caputure_image').width(160);
-                                $('.caputure_image').height(68);
-                                var image = new Image();
-                                image.src = canvas.toDataURL();
-                                poster = image.src;
-                                //console.log(image.src);
-                                //console.log(canvas);
-                       
-                                if (canvases.length == 4) 
-                                    canvases.eq(0).remove();     
-                            })
-                        }); 
-                $('#pop-poster-OK').click(function() {         
-                if(video_type == 'popup') video_width_height = '80%';
-                else video_width_height = '100%';
-
-                    var component = {
-                        'type': 'video',
-                        'data': {
-                            'video': {
-                                'css': {
-                                    'width': video_width_height,
-                                    'height': video_width_height,
-                                },
-                                'contentType': contentType
-                            },
-                            'poster': poster,
-                            'video_type' : video_type,
-                            'auto_type' : auto_type,
-                            'control_type' : control_type,
-                            'marker' : marker,
-                            'source': {
-                                'attr': {
-                                    'src': videoURL
-                                }
-                            },
-                            '.audio-name': {
-                                'css': {
-                                    'width': '100%'
-                                }
-                            },
-                            'self': {
-                                'css': {
-                                    'position': 'absolute',
-                                    'top': top,
-                                    'left':  left,
-                                    'width': 'auto',
-                                    'height': '60px',
-                                    'background-color': 'transparent',
-                                    'overflow': 'visible',
-                                    'z-index': 'first'
-                                }
-                            }
-
-                        }
-                    };
-
-                    //console.log(component);
-                    window.lindneo.tlingit.componentHasCreated( component );
-                    $("#poster-add-dummy-close-button").trigger('click');
-                  });
-                });
-
-            });
-
-
-          
-
+        var component = {
+          'type': 'video',
+          'data': {
+              'video': {
+                  'css': {
+                      'width': video_width_height,
+                      'height': video_width_height,
+                  },
+                  'contentType': contentType
+              },
+              'poster': poster,
+              'video_type' : video_type,
+              'auto_type' : auto_type,
+              'control_type' : control_type,
+              'marker' : selected_marker,
+              'source': {
+                  'attr': {
+                      'src': videoURL
+                  }
+              },
+              '.audio-name': {
+                  'css': {
+                      'width': '100%'
+                  }
+              },
+              'self': {
+                  'css': {
+                      'position': 'absolute',
+                      'top': top,
+                      'left':  left,
+                      'width': 'auto',
+                      'height': '60px',
+                      'background-color': 'transparent',
+                      'overflow': 'visible',
+                      'z-index': 'first'
+                  }
+              }
+            }
+          };
+        if(typeof oldcomponent !== 'undefined'){
+          window.lindneo.tlingit.componentHasDeleted( oldcomponent, oldcomponent.id );
         };
-
+        window.lindneo.tlingit.componentHasCreated( component );
       }
       else{
-        if($($("#myTab").find(".active")).children().attr("href") == "#video_link"){
-          var poster = "";
-          var video_type = $('input[name=video_type]:checked').val();
-          var req = new XMLHttpRequest();
-          var videoURL = $('#video-url-text').val();
 
-          req.open('HEAD', videoURL, false);
-          req.send(null);
-          var headers = req.getAllResponseHeaders().toLowerCase();
-          var contentType = req.getResponseHeader('content-type');
-          var contenttypes = contentType.split('/');
-          console.log(contenttypes[1]);
-          
-          
+        $('<div>').componentBuilder({
 
-                
-/*
-               $('#capture').click(function() {
-                  var canvases = $('canvas');
-                  VideoSnapper.captureAsCanvas(video, { width: 160, height: 68, time: 0 }, function(canvas) {
-                    $('#screen').html("");
-                    $('#screen').append(canvas); 
-                    var image = new Image();
-                    image.src = canvas.toDataURL();
-                    poster = image.src;
-                    //console.log(image.src);
-                    //console.log(canvas);
-                    console.log(poster);
-                    return;
-           
-                    if (canvases.length == 4) 
-                      canvases.eq(0).remove();     
-                  })
-              }); 
-*/
-              //$('#pop-image-OK').click(function() {
-              if(video_type == 'popup') video_width_height = '80%';
-              else video_width_height = '100%';
-              //console.log(contentType);
-                    console.log(poster);
-                    poster="";
-              var component = {
-                'type': 'video',
-                'data': {
-                    'video': {
-                        'css': {
-                            'width': video_width_height,
-                            'height': video_width_height,
-                        },
-                        'contentType': contentType
+        top:top,
+        left:left,
+        title: j__("Video Poster"),
+        btnTitle : j__("Ekle"), 
+        beforeClose : function () {
+          /* Warn about not saved work */
+          /* Dont allow if not confirmed */
+          return confirm(j__("Yaptığınız değişiklikler kaydedilmeyecektir. Kapatmak istediğinize emin misiniz?"));
+        },
+        onBtnClick: function(){
+
+          if(typeof oldcomponent == 'undefined'){
+            
+            var top = (ui.offset.top-$(event.target).offset().top ) + 'px';
+            var left = ( ui.offset.left-$(event.target).offset().left ) + 'px';
+            
+          }
+          else{
+            top = oldcomponent.data.self.css.top;
+            left = oldcomponent.data.self.css.left;
+            window.lindneo.tlingit.componentHasDeleted( oldcomponent, oldcomponent.id );
+          };
+          
+          var component = {
+            'type': 'video',
+            'data': {
+                'video': {
+                    'css': {
+                        'width': video_width_height,
+                        'height': video_width_height,
                     },
-                    'poster': poster,
-                    'video_type' : video_type,
-                    'auto_type' : auto_type,
-                    'control_type' : control_type,
-                    'marker' : marker,
-                    'source': {
-                        'attr': {
-                            'src': videoURL
-                        }
-                    },
-                    '.audio-name': {
-                        'css': {
-                            'width': '100%'
-                        }
-                    },
-                    'lock':'',
-                    'self': {
-                        'css': {
-                            'position': 'absolute',
-                            'top': top ,
-                            'left': left ,
-                            'width': 'auto',
-                            'height': '60px',
-                            'background-color': 'transparent',
-                            'overflow': 'visible',
-                            'z-index': 'first'
-                        }
+                    'contentType': contentType
+                },
+                'poster': poster,
+                'video_type' : video_type,
+                'auto_type' : auto_type,
+                'control_type' : control_type,
+                'marker' : selected_marker,
+                'source': {
+                    'attr': {
+                        'src': videoURL
                     }
-
+                },
+                '.audio-name': {
+                    'css': {
+                        'width': '100%'
+                    }
+                },
+                'self': {
+                    'css': {
+                        'position': 'absolute',
+                        'top': top,
+                        'left':  left,
+                        'width': 'auto',
+                        'height': '60px',
+                        'background-color': 'transparent',
+                        'overflow': 'visible',
+                        'z-index': 'first'
+                    }
                 }
+              }
             };
 
-            //console.log(component);
-            window.lindneo.tlingit.componentHasCreated(component);
-            $("#video-add-dummy-close-button").trigger('click');
-          //});
-        }
-      };
-    });
-    // http://bekir.dev.lindneo.com/index.php?r=EditorActions/getFileUrl&type=mp4
-    //drag video file
-    var el = document.getElementById("dummy-dropzone");
-    var videoBinary = '';
+            if(typeof oldcomponent !== 'undefined'){
+              window.lindneo.tlingit.componentHasDeleted( oldcomponent, oldcomponent.id );
+            };
+            window.lindneo.tlingit.componentHasCreated( component );
 
-    el.addEventListener("dragenter", function(e) {
-        e.stopPropagation();
-        e.preventDefault();
-    }, false);
+        },
+        onComplete:function (ui){
 
-    el.addEventListener("dragexit", function(e) {
-        e.stopPropagation();
-        e.preventDefault();
-    }, false);
+          $(ui).parent().parent().css({"height":"550px"});
 
-    el.addEventListener("dragover", function(e) {
-        e.stopPropagation();
-        e.preventDefault();
-    }, false);
-
-    el.addEventListener("drop", function(e) {
-
-        e.stopPropagation();
-        e.preventDefault();
-
-        var token = '';
-        var poster = '';
-        var video_type = $('input[name=video_type]:checked').val();
-        var reader = new FileReader();
-        var component = {};
-        var videoURL = '';
-        reader.onload = function(evt) {
           
-          var videoBinary = evt.target.result;
-          var contentType = videoBinary.substr(0, videoBinary.indexOf(';'));
-          var videoType = contentType.substr(contentType.indexOf('/')+1);
-        
-          var response = '';
-          var videoURL = '';
-          var token = '';
-
-          var top = (ui.offset.top-$(event.target).offset().top ) + 'px';
-          var left = ( ui.offset.left-$(event.target).offset().left ) + 'px';
-
-
-          window.lindneo.dataservice.send( 'getFileUrl', {'type': videoType}, function(response) {
-            response=window.lindneo.tlingit.responseFromJson(response);
+          var VideoSnapper = {
           
-            window.lindneo.dataservice.send( 'UploadFile',{'token': response.result.token, 'file' : videoBinary} , function(data) {
-              videoURL = response.result.URL;
-                if($($("#myTab").find(".active")).children().attr("href") == "#video_drag"){
-                  console.log("12313123");
-                  $("#video-add-dummy-close-button").trigger('click');
-                  var VideoSnapper = {
-      
-                      /**
-                       * Capture screen as canvas
-                       * @param {HTMLElement} video element 
-                       * @param {Object} options = width of screen, height of screen, time to seek
-                       * @param {Function} handle function with canvas element in param
-                       */
-                      captureAsCanvas: function(video, options, handle) {
-                      
-                          // Create canvas and call handle function
-                          var callback = function() {
-                              // Create canvas
-                              var canvas = $('<canvas />').attr({
-                                  width: options.width,
-                                  height: options.height
-                              })[0];
-                              // Get context and draw screen on it
-                              
-                              canvas.getContext('2d').drawImage(video, 0, 0, options.width, options.height);
-                              // Seek video back if we have previous position 
-                              if (prevPos) {
-                                  // Unbind seeked event - against loop
-                                  $(video).unbind('seeked');
-                                  // Seek video to previous position
-                                  video.currentTime = prevPos;
-                              }
-                              // Call handle function (because of event)
-                              handle.call(this, canvas);    
-                          }
-
-                          // If we have time in options 
-                          if (options.time && !isNaN(parseInt(options.time))) {
-                              // Save previous (current) video position
-                              var prevPos = video.currentTime;
-                              // Seek to any other time
-                              video.currentTime = options.time;
-                              // Wait for seeked event
-                              $(video).bind('seeked', callback);              
-                              return;
-                          }
-                          
-                          // Otherwise callback with video context - just for compatibility with calling in the seeked event
-                          return callback.apply(video);
-                      }
-                  };
-
-                $("<div class='popup ui-draggable' id='pop-video-poster' style='display: block; top:" + top + "; left: " + left + "; '> \
-                  <div class='popup-header'> \
-                  <i class='icon-m-video'></i> &nbsp;"+j__("Poster Ekle")+" \
-                  <i id='poster-add-dummy-close-button' class='icon-close size-10 popup-close-button'></i> \
-                  </div> \
-                    <div class='gallery-inner-holder' style='width:500px;'> \
-                      <video id='video' width='320' height='240' controls preload='none' onloadedmetadata=\"$(this).trigger('video_really_ready')\">\
-                        <source id='"+videoType+"' src='"+videoURL+"' type='video/"+videoType+"'>\
-                      </video><br><br>\
-                      <input type='button' id='capture' value='Capture' />    "+j__("Video'yu başlatarak istediğiniz anda görüntüyü yakalayabilirsiniz")+"<br><br>\
-                      <div id='screen'></div><br>\
-                      <a href='#' id='pop-poster-OK' class='btn bck-light-green white radius' id='add-poster' style='padding: 5px 30px;'>"+j__("Ekle")+"</a> \
-                    </div> \
-                  </div>\
-                  ").appendTo('body').draggable();
-
-                $('#poster-add-dummy-close-button').click(function() {
-
-                    $('#pop-video-poster').remove();
-
-                    if ($('#pop-video-poster').length) {
-                        $('#pop-video-poster').remove();
-                    }
-
-                });
-
-               $('#capture').click(function() {
-                  var canvases = $('canvas');
-                  VideoSnapper.captureAsCanvas(video, { width: $("#current_page").width(), height: $("#current_page").height(), time: 0 }, function(canvas) {
+            
+            captureAsCanvas: function(video, options, handle) {
+            
+                // Create canvas and call handle function
+                var callback = function() {
+                    // Create canvas
+                    var canvas = $('<canvas />').attr({
+                        width: options.width,
+                        height: options.height
+                    })[0];
+                    // Get context and draw screen on it
+                    console.log($(video)[0]);
                     console.log(canvas);
-                    $('#screen').html("");
-                    $('#screen').append(canvas); 
-                    $('#screen canvas').addClass("caputure_image");
-                    $('.caputure_image').width(160);
-                    $('.caputure_image').height(68);
-                    var image = new Image();
-                    image.src = canvas.toDataURL();
-                    poster = image.src;
-                    //console.log(image.src);
-                    //console.log(canvas);
-           
-                    if (canvases.length == 4) 
-                      canvases.eq(0).remove();     
-                  })
-              }); 
-              $('#pop-poster-OK').click(function() {
-                    console.log("dede");
 
-                    var component = {
-                        'type': 'video',
-                        'data': {
-                            'video': {
-                                'css': {
-                                    'width': '100%',
-                                    'height': '100%',
-                                },
-                                'contentType': contentType
-                            },
-                            'poster' : poster,
-                            'video_type' : video_type,
-                            'auto_type' : auto_type,
-                            'control_type' : control_type,
-                            'marker' : marker,
-                            'source': {
-                                'attr': {
-                                    'src': response.result.URL
-                                }
-                            },
-                            '.audio-name': {
-                                'css': {
-                                    'width': '100%'
-                                }
-                            },
-                            'self': {
-                                'css': {
-                                    'position': 'absolute',
-                                    'top': top,
-                                    'left':  left,
-                                    'width': 'auto',
-                                    'height': '60px',
-                                    'background-color': 'transparent',
-                                    'overflow': 'visible',
-                                    'z-index': 'first',
-                                    'opacity':'1'
-                                }
-                            }
-
-                        }
-                    };
-
-
-                    if(typeof oldcomponent == 'undefined'){
-                      window.lindneo.tlingit.componentHasCreated( component );
-                      
-                      }
-                    else{
-                      oldcomponent.data.video.contentType = contentType;
-                      oldcomponent.data.source.attr.src = videoURL;
-                      window.lindneo.tlingit.componentHasUpdated( oldcomponent );
+                    canvas.getContext("2d").drawImage($(video)[0], 0, 0, options.width, options.height);
+                    // Seek video back if we have previous position 
+                    if (prevPos) {
+                        // Unbind seeked event - against loop
+                        $(video).unbind('seeked');
+                        // Seek video to previous position
+                        video.currentTime = prevPos;
                     }
-                    $("#poster-add-dummy-close-button").trigger('click');
-                  });
+                    // Call handle function (because of event)
+                    handle.call(this, canvas);    
                 }
+
+                // If we have time in options 
+                if (options.time && !isNaN(parseInt(options.time))) {
+                    // Save previous (current) video position
+                    var prevPos = video.currentTime;
+                    // Seek to any other time
+                    video.currentTime = options.time;
+                    // Wait for seeked event
+                    $(video).bind('seeked', callback);              
+                    return;
+                }
+                
+                // Otherwise callback with video context - just for compatibility with calling in the seeked event
+                return callback.apply(video);
+              }
+          };
+          /*
+          console.log(videoType);
+          console.log(videoURL);
+          $("<div class='popup ui-draggable' id='pop-video-poster' style='display: block; top:" + top + "; left: " + left + "; '> \
+              <div class='popup-header'> \
+              <i class='icon-m-video'></i> &nbsp;"+j__("Poster Ekle")+" \
+              <i id='poster-add-dummy-close-button' class='icon-close size-10 popup-close-button'></i> \
+              </div> \
+                <div class='gallery-inner-holder' style='width:500px;'> \
+                  <video id='video' width='320' height='240' controls preload='none' onloadedmetadata=\"$(this).trigger('video_really_ready')\">\
+                    <source id='"+videoType+"' src='"+videoURL+"' type='video/"+videoType+"'>\
+                  </video><br><br>\
+                  <input type='button' id='capture' value='Capture' />    "+j__("Video'yu başlatarak istediğiniz anda görüntüyü yakalayabilirsiniz")+"<br><br>\
+                  <div id='screen'></div><br>\
+                  <a href='#' id='pop-poster-OK' class='btn bck-light-green white radius' id='add-poster' style='padding: 5px 30px;'>"+j__("Ekle")+"</a> \
+                </div> \
+              </div>\
+              ").appendTo('body').draggable();
+
+           $('#capture').click(function() {
+              var canvases = $('canvas');
+              VideoSnapper.captureAsCanvas(video, { width: $("#current_page").width(), height: $("#current_page").height(), time: 0 }, function(canvas) {
+                console.log(canvas);
+                $('#screen').html("");
+                $('#screen').append(canvas); 
+                $('#screen canvas').addClass("caputure_image");
+                $('.caputure_image').width(160);
+                $('.caputure_image').height(68);
+                var image = new Image();
+                image.src = canvas.toDataURL();
+                poster = image.src;
+                //console.log(image.src);
+                //console.log(canvas);
+       
+                if (canvases.length == 4) 
+                  canvases.eq(0).remove();     
+              })
             });
+          */
 
-          });
+          var mainDiv = $('<div>')
+            .appendTo(ui);
+
+            var captureVideo = $('<video>')
+              .attr("width","320")
+              .attr("height","240")
+              .attr("controls","controls")
+              .attr("preload","none")
+              .attr("onloadedmetadata","$(this).trigger('video_really_ready')")
+              .appendTo(mainDiv);
+
+              var captureSource = $('<source>')
+                .attr("src",videoURL)
+                .appendTo(captureVideo);
+            $("<br>").appendTo(mainDiv);
+
+            var captureIput = $('<input type="button">')
+              .val("Capture")
+              .click(function() {
+                var canvases = $('canvas');
+                VideoSnapper.captureAsCanvas(captureVideo, { width: $("#current_page").width(), height: $("#current_page").height(), time: 0 }, function(canvas) {
+                  console.log(canvas);
+                  screen.html("");
+                  screen.append(canvas); 
+                  $(screen).find("canvas").addClass("caputure_image");
+                  $('.caputure_image').width(160);
+                  $('.caputure_image').height(68);
+                  var image = new Image();
+                  image.src = canvas.toDataURL();
+                  poster = image.src;
+                  //console.log(image.src);
+                  //console.log(canvas);
+         
+                  if (canvases.length == 4) 
+                    canvases.eq(0).remove();     
+                })
+              })
+              .appendTo(mainDiv);
+
+            var captureSpan = $('<span>')
+              .text(j__("Video'yu başlatarak istediğiniz anda görüntüyü yakalayabilirsiniz"))
+              .appendTo(mainDiv);
+
+            $("<br>").appendTo(mainDiv);
+
+            var screen = $('<div>')
+              .appendTo(mainDiv);
+
+          }
+        }).appendTo('body');
+      }
+    },
+    onComplete:function (ui){
+
+      $(ui).parent().parent().css({"height":"550px"});
+
+      var mainDiv = $('<div>')
+        .appendTo(ui);
+
+        var videoTypeDiv = $('<div>')
+          .addClass("typei")
+          .css({"padding": "4px", "display": "inline-block"})
+          .appendTo(mainDiv);
+
+        var popupDiv = $('<div>')
+          .appendTo(mainDiv);
+
+          var videoTypeRadioDiv = $('<div>')
+            .addClass("btn-group")
+            .attr("data-toggle","buttons")
+            .appendTo(videoTypeDiv);
+
+            var videoTypeLinkLabel = $('<label>')
+              .addClass("btn btn-primary " + link_check_active)
+              .appendTo(videoTypeRadioDiv);
+
+              var videoTypeLinkInput = $('<input type="radio">')
+                .attr("name","video_type")
+                .val("link")
+                .change(function () {
+                  video_type = $(this)[0].value;
+                })
+                .appendTo(videoTypeLinkLabel);
+
+              var videoTypeLinkText = $('<span>')
+                .text(j__("Sayfada"))
+                .appendTo(videoTypeLinkLabel);
+
+            var videoTypePopupLabel = $('<label>')
+              .addClass("btn btn-primary " + popup_check_active)
+              .appendTo(videoTypeRadioDiv);
+
+              var videoTypePopupInput = $('<input type="radio">')
+                .attr("name","video_type")
+                .val("popup")
+                .change(function () {
+                  video_type = $(this)[0].value;
+
+                  var videoPopupDiv = $('<span>')
+                    .appendTo(popupDiv); 
+
+                      var pIconRadioFirst = $('<input type="radio">')
+                        .attr("name","plink_video_type")
+                        .appendTo(videoPopupDiv);
+
+                      var pIconButtonFirst = $('<button>')
+                        .css({"background":"url('"+marker+"') ","-moz-background-size": "cover", "-webkit-background-size": "cover", "-o-background-size": "cover", "background-size": "cover", "width":"70px", "height":"70px"})
+                        .appendTo(videoPopupDiv);
+
+                      var pIconRadioSecond = $('<input type="radio">')
+                        .attr("name","plink_video_type")
+                        .appendTo(videoPopupDiv);
+                      var pIconButtonSecond = $('<button>')
+                        .css({"background":"url('"+video_marker+"') ","-moz-background-size": "cover", "-webkit-background-size": "cover", "-o-background-size": "cover", "background-size": "cover", "width":"70px", "height":"70px"})
+                        .appendTo(videoPopupDiv);
+
+                      pIconButtonFirst.click(function(){pIconRadioFirst.prop("checked", true); selected_marker = marker; console.log(marker);});
+                      pIconButtonSecond.click(function(){pIconRadioSecond.prop("checked", true); selected_marker = video_marker; console.log(marker);});
+
+                      var pIconNewLink = $('<a>')
+                        .addClass("icon-upload dark-blue size-40")
+                        .click(function(){
+                          pIconFile.click();
+                        })
+                        .css("padding-left","15px")
+                        .appendTo(videoPopupDiv);
+
+                      var pIconNewImage = $ ('<div>')
+                        .appendTo(videoPopupDiv);
+
+                      var pIconFile = $('<input type="file">')
+                        .css("visibility","hidden")
+                        .change(function(){
+
+                          var file = this.files[0];
+                          var name = file.name;
+                          var size = file.size;
+                          var type = file.type;
+                          
+                          var reader = new FileReader();
+                          reader.readAsDataURL(file);
+                          //console.log(reader);
+                          reader.onload = function(evt) {
+                            var FileBinary = evt.target.result;
+                            var contentTypeImage = FileBinary.substr(5, FileBinary.indexOf('/')-5);
+                              
+                            //console.log(contentType);
+                            if(contentTypeImage == 'image'){
+                              
+                              pIconNewImage.html('');
+                              var newIconImage = $("<img style='width:70px; height:70px;' src='"+FileBinary+"' />");
+                              selected_marker=FileBinary;
+                              pIconNewImage.append(newIconImage);
+                              return;
+                              
+                            }
+                          };
+
+                        })
+                      .appendTo(videoPopupDiv);
+                })
+                .appendTo(videoTypePopupLabel);
+
+              var imageTypePopupText = $('<span>')
+                .text(j__("Açılır Pencerede"))
+                .appendTo(videoTypePopupLabel);
+
+        var tabDiv = $ ('<div>')
+            .addClass("tabbable")
+            .appendTo(mainDiv);
+
+            var tabUl = $ ('<ul>')
+              .addClass("nav nav-tabs")
+              .appendTo (tabDiv);
+
+              var tabVideoDragLi = $('<li>')
+                .addClass("active")
+                .appendTo(tabUl);
+                
+                var tabVideoDragA = $ ('<a>')
+                  .attr('href','#'+idPre+'drag')
+                  .attr('data-toggle','tab')
+                  .text(j__("Video Sürükle"))
+                  .click(function(){
+                    selectd_tab = "drag";
+                    console.log(selectd_tab);
+                  })
+                  .appendTo(tabVideoDragLi);
+
+              
+              var tabVideoUploadLi = $('<li>')
+                .appendTo(tabUl);
+
+                var tabVideoUploadA = $ ('<a>')
+                  .attr('href','#'+idPre+'upload')
+                  .attr('data-toggle','tab')
+                  .text(j__("Video Yükle"))
+                  .click(function(){
+                    selectd_tab = "upload";
+                    console.log(selectd_tab);
+                  })
+                  .appendTo(tabVideoUploadLi);
+
+              var tabVideoLinkLi = $('<li>')
+                .appendTo(tabUl);
+
+                var tabVideoLinkA = $ ('<a>')
+                  .attr('href','#'+idPre+'link')
+                  .attr('data-toggle','tab')
+                  .text(j__("Video Bağlantı"))
+                  .click(function(){
+                    selectd_tab = "link";
+                    console.log(selectd_tab);
+                  })
+                  .appendTo(tabVideoLinkLi);
+
+              $('<br>').appendTo(tabDiv);
+
+            var videoDiv = $ ('<div>')
+                .addClass("tab-content")
+                .appendTo(tabDiv);
+
+                var videoDragDiv = $ ('<div>')
+                  .addClass("tab-pane fade")
+                  .addClass("active in")
+                  .attr('id',idPre+'drag')
+                  .appendTo(videoDiv);
+
+                  $('<br>').appendTo(videoDragDiv);
+
+                  var videoDragContent = $ ('<div>')
+                    .addClass("add-image-drag-area")
+                    .on('dragenter', function (e) 
+                    {
+                        e.stopPropagation();
+                        e.preventDefault();
+                    })
+                    .on('dragexit', function (e) 
+                    {
+                        e.stopPropagation();
+                        e.preventDefault();
+                    })
+                    .on('dragover', function (e) 
+                    {
+                         e.stopPropagation();
+                         e.preventDefault();
+                    })
+                    .on('drop', function (e) 
+                    {
+                      e.stopPropagation();
+                      e.preventDefault();
+
+                      var token = '';
+                      var poster = '';
+                      var reader = new FileReader();
+                      var component = {};
+                      videoURL = '';
+                      reader.onload = function(evt) {
+                        
+                        var videoBinary = evt.target.result;
+                        contentType = videoBinary.substr(0, videoBinary.indexOf(';'));
+                        videoType = contentType.substr(contentType.indexOf('/')+1);
+                      
+                        var response = '';
+                        var token = '';
+
+                        var top = (ui.offset.top-$(event.target).offset().top ) + 'px';
+                        var left = ( ui.offset.left-$(event.target).offset().left ) + 'px';
 
 
-        //$("#video-add-dummy-close-button").trigger('click');
+                        window.lindneo.dataservice.send( 'getFileUrl', {'type': videoType}, function(response) {
+                          response=window.lindneo.tlingit.responseFromJson(response);
+                        
+                          window.lindneo.dataservice.send( 'UploadFile',{'token': response.result.token, 'file' : videoBinary} , function(data) {
 
-        };
-        reader.readAsDataURL(e.dataTransfer.files[0]);
+                            videoURL = response.result.URL;
+                            console.log(videoURL);
+                            if(!videoURL)
+                              $($($(ui).parent().parent()).find(".popup-footer")).find("a").click();
 
-    }, false);
+                          });
 
+                        });
+
+                      };
+                      reader.readAsDataURL( e.originalEvent.dataTransfer.files[0] );
+                    })
+                    .appendTo(videoDragDiv);
+
+
+                var videoUploadDiv = $ ('<div>')
+                  .addClass("tab-pane fade")
+                  .attr('id',idPre+'upload')
+                  .appendTo(videoDiv);
+
+                  var videoUploadDiv = $ ('<input type="file">')
+                    .attr("name","image_file")
+                    .change(function(){
+
+                      //console.log(that);
+                      var that = this;
+                      var file = that.files[0];
+                      var name = file.name;
+                      var size = file.size;
+                      var type = file.type;
+                      var token = '';
+                      var reader = new FileReader();
+                      //console.log(reader);
+                      var component = {};
+                      videoURL = '';
+                      reader.readAsDataURL(file);
+                      //console.log(reader);
+                      reader.onload = function(_file) {
+                        var videoBinary = _file.target.result;
+                        contentType = videoBinary.substr(0, videoBinary.indexOf(';'));
+                        videoType = contentType.substr(contentType.indexOf('/')+1);
+                      
+                        var response = '';
+                        var token = '';
+
+                        console.log(contentType);
+                        window.lindneo.dataservice.send( 'getFileUrl', {'type': videoType}, function(response) {
+                          response=window.lindneo.tlingit.responseFromJson(response);
+                        
+                          window.lindneo.dataservice.send( 'UploadFile',{'token': response.result.token, 'file' : videoBinary} , function(data) {
+                            
+                            videoURL = response.result.URL;
+                            console.log(videoURL);
+                            if(!videoURL)
+                              $($($(ui).parent().parent()).find(".popup-footer")).find("a").click();
+                            });
+
+                        });
+                      }
+                    })
+                    .appendTo(videoUploadDiv);
+
+                var videoLinkDiv = $ ('<div>')
+                  .addClass("tab-pane fade")
+                  .attr('id',idPre+'link')
+                  .appendTo(videoDiv);
+
+                  var videoLinkDiv = $ ('<input type="url">')
+                    .addClass("input-textbox")
+                    .attr("placeholder",j__("URL Adresini Giriniz"))
+                    .val(video_url)
+                    .change(function(){
+                      var poster = "";
+                      var req = new XMLHttpRequest();
+                      videoURL = $(this).val();
+                      console.log(videoURL);
+                      req.open('HEAD', videoURL, false);
+                      req.send(null);
+                      var headers = req.getAllResponseHeaders().toLowerCase();
+                      contentType = req.getResponseHeader('content-type');
+                      var contenttypes = contentType.split('/');
+                      console.log(videoURL);
+                      if(!videoURL)
+                        $($($(ui).parent().parent()).find(".popup-footer")).find("a").click();
+                    })
+                    .appendTo(videoLinkDiv);
+
+
+        if(typeof oldcomponent !== 'undefined'){
+          if(oldcomponent.data.video_type == "popup")
+            videoTypePopupInput.change();
+        }
+
+        var typeDiv = $ ('<div>')
+            .addClass("type")
+            .css({"padding": "4px", "display": "inline-block"})
+            .appendTo(mainDiv);
+
+            var typeAutoDiv = $ ('<div>')
+              .addClass("btn-group")
+              .attr("data-toggle","buttons")
+              .text(j__("Otomatik Başlama"))
+              .appendTo(typeDiv);
+
+              $("<br>").appendTo(typeAutoDiv);
+
+              var typeAutoLabelY = $ ('<label>')
+                .addClass("btn btn-primary " + auto_y_check_active)
+                .appendTo(typeAutoDiv);
+
+                var typeAutoInputY = $ ('<input type="radio">')
+                  .attr("name","auto_type")
+                  .attr("checked",auto_y_check)
+                  .val("Y")
+                  .change(function(){
+                    auto_type = $(this).val();
+                  })
+                  .appendTo(typeAutoLabelY);
+
+                var typeAutoSpanY = $ ('<span>')
+                  .text(j__("Evet"))
+                  .appendTo(typeAutoLabelY);
+
+              var typeAutoLabelN = $ ('<label>')
+                .addClass("btn btn-primary " + auto_n_check_active)
+                .appendTo(typeAutoDiv);
+
+                var typeAutoInputN = $ ('<input type="radio">')
+                  .attr("name","auto_type")
+                  .attr("checked",auto_n_check)
+                  .val("N")
+                  .change(function(){
+                    auto_type = $(this).val();
+                  })
+                  .appendTo(typeAutoLabelN);
+
+                var typeAutoSpanY = $ ('<span>')
+                  .text(j__("Hayır"))
+                  .appendTo(typeAutoLabelN);
+
+              var typeControlDiv = $ ('<div>')
+                .addClass("btn-group")
+                .css("margin-left", "100px")
+                .attr("data-toggle","buttons")
+                .text(j__("Kontrol Panel Görünümü"))
+                .appendTo(typeDiv);
+
+                $("<br>").appendTo(typeControlDiv);
+
+                var typeControlLabelY = $ ('<label>')
+                  .addClass("btn btn-primary " + control_y_check_active)
+                  .appendTo(typeControlDiv);
+
+                  var typeControlInputY = $ ('<input type="radio">')
+                    .attr("name","control_type")
+                    .attr("checked",control_y_check)
+                    .val("Y")
+                    .change(function(){
+                      control_type = $(this).val();
+                    })
+                    .appendTo(typeControlLabelY);
+
+                  var typeControlSpanY = $ ('<span>')
+                    .text(j__("Evet"))
+                    .appendTo(typeControlLabelY);
+
+                var typeControlLabelN = $ ('<label>')
+                  .addClass("btn btn-primary " + control_n_check_active)
+                  .appendTo(typeControlDiv);
+
+                  var typeControlInputN = $ ('<input type="radio">')
+                    .attr("name","control_type")
+                    .attr("checked",control_n_check)
+                    .val("N")
+                    .change(function(){
+                      control_type = $(this).val();
+                    })
+                    .appendTo(typeControlLabelN);
+
+                  var typeControlSpanY = $ ('<span>')
+                    .text(j__("Hayır"))
+                    .appendTo(typeControlLabelN);
+
+    }
+
+  }).appendTo('body');
+      
 };
