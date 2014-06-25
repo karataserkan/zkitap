@@ -345,7 +345,7 @@ var createImageComponent = function ( event, ui ,oldcomponent) {
                               return;
                               
                             }
-                          };
+                          };  
 
                         })
                       .appendTo(imagePopupDiv);
