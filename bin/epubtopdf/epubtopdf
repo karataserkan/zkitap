@@ -6,11 +6,8 @@ do
 		output=$1
 	elif [ "$count" -eq "2" ]; then
 		path=$1
-		SCRIPT=$(readlink -f "$0")
-		SCRIPTPATH=`dirname "$SCRIPT"`
-		unzip -o $SCRIPTPATH/MathJax-2.4-latest.zip 'MathJax-2.4-latest/*' -d $path; mv $path"/"MathJax-2.4-latest $path"/"mathjax;
 	elif [ "$count" -eq "3" ]; then
-		wkhtmltopdf --javascript-delay 15000  $path"/"$1 $path"/"temp_$1.pdf >> /var/log/epubtopdf
+		wkhtmltopdf --javascript-delay 15000 $path"/"$1 $path"/"temp_$1.pdf >> /var/log/epubtopdf
 		pdfcrop $path"/"temp_$1.pdf $path"/"$1.pdf
 		`pdftk $path"/"$1.pdf cat output $path"/"$output.pdf`
 		rm -f $path"/"$1.pdf $path"/"temp_$1.pdf 

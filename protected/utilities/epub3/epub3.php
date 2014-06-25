@@ -457,6 +457,19 @@ class epub3 {
 			switch ($component->type) {
 				case 'latex':
 					$page_extra_scripts.='<script type="text/x-mathjax-config">
+						  MathJax.Hub.Config({
+							    extensions: ["tex2jax.js"],
+							    jax: ["input/TeX","output/HTML-CSS"],
+							    menuSettings: {zoom: "Double-Click", zscale: "300%"},
+							    tex2jax: {inlineMath: [["$","$"],["\\(","\\)"]]},
+							    MathMenu: {showRenderer: false},
+							    "HTML-CSS": {
+							        availableFonts: ["TeX"],
+							        preferredFont: "TeX",
+							        imageFont: null
+							    }
+							  });
+						/*
 					      MathJax.Hub.Config({
 					      	config: ["MMLorHTML.js"],
 							  jax: ["input/TeX","input/MathML","output/HTML-CSS","output/NativeMML"],
@@ -467,7 +480,8 @@ class epub3 {
 					        tex2jax: {
 					          inlineMath: [["$","$"],["\\(","\\)"]]
 					        }
-					      });
+					      });*/
+
 
 							/*
 					      MathJax.Hub.Register.StartupHook("HTML-CSS Jax Ready",function () {
@@ -726,6 +740,11 @@ class epub3 {
 	</head>
 	<body style="box-shadow:0px 0px 0px 1px rgba(0,0,0,0.1);background-repeat:no-repeat; width:'.$width.'px; height:'.$height.'px;'.$background.';'.$background_size.';overflow:hidden;">
 	<section epub:type="frontmatter titlepage">
+	<span>
+\begin{align}
+ 
+\end{align}
+</span>
 	%components%
 	</section>
 		<script>
