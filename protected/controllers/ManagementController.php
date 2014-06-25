@@ -42,6 +42,11 @@ class ManagementController extends Controller
 		$this->render('index');
 
 	}
+	public function actionUsers(){
+		 $this->render('users');
+	}
+
+
 	public function actionOrganisations(){
 		$page =(int) (isset($_GET['page']) ? $_GET['page'] : 1);  // define the variable to “LIMIT” the query
         
