@@ -8,3 +8,9 @@ protected/config/*
 uploads/files/*
 protected/config/main.php
 timestamps/
+assets/*
+!assets/.gitignore
+protected/runtime/*
+!protected/runtime/.gitignore
+protected/data/*.db
+themes/classic/views/
