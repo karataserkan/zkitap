@@ -1,3 +1,13 @@
+.ssh/
+.bash_history
+.*
+*.log
+protected/config/*
+/nbproject/private/
+*.mp4
+uploads/files/*
+protected/config/main.php
+timestamps/
 assets/*
 !assets/.gitignore
 protected/runtime/*

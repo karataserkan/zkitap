@@ -1,0 +1,8 @@
+Run html2pdf script
+Adjust link according to architecture of the system i386 or amd64
+
+If Error "cannot connect to X server "
+then install xvfb
+by 
+sudo apt-get install xvfb
+

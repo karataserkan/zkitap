@@ -1,0 +1,22 @@
+#!/bin/bash
+BASEDIR=$(dirname $0)
+executable_list=''
+BASEDIR=`( cd "$BASEDIR" && pwd )`
+count=1;
+while [ "$1" ]
+do
+	if [ "$count" -eq "1" ]; then
+		output=$1
+	else
+		xvfb-run -a -s "-screen 0 1024x768x24 -noreset" /usr/bin/python $BASEDIR"/"webkit2png.py  $output"/"$1".html"| convert - -thumbnail x200 $output"/"$1".png" &
+		executable_list="$executable_list $1"
+		if [ $(($count % 99)) -eq 0 ]
+        then
+        	wait
+    	fi
+	fi
+shift
+	count=$((count+1))
+done
+wait
+echo "Successfully thumbnails created!"

@@ -1,0 +1,23 @@
+Squid Pacific 0.1
+====================
+#Instructions:#
+
+##Folders:##
+dev folder contains the application files.
+dump folder contains the yii framework core.
+dev and dump goes to public web service directory.
+
+coworking: can be put anywhere.
+
+##Requirements:##
+Apache2 and PHP5.4 lib required to serve the application.
+NodeJS and Socket.io lib are required to serve collaboration sockets.
+
+##Configuration:##
+In web service hosts add a vhost points dev folder. It should be configured respectly.
+
+##Service:##
+After web service configured work run command:
+	
+	coworking/service.sh start
+

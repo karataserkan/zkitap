@@ -1,0 +1,289 @@
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+
+body {
+	color:#FFF;
+	/*background-color:#2c3e50;*/
+	background-image:url(images/new_book_background2.jpg);
+	background-size:cover;
+	font-family:Arial, Helvetica, sans-serif;
+}
+
+a {
+	color:#FFF;
+}
+
+
+
+
+
+
+.templates_holder {
+	width:1280px;
+	margin-top:10%;
+	margin-left:auto;
+	margin-right:auto;
+
+}
+
+
+.template_box {
+	width:420px;
+	height:400px;
+	float:left;
+	border-radius:5px;
+	-moz-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+	-webkit-transition: all 0.5s ease;
+    transition: all 0.5s ease;
+}
+
+
+.template_box:hover {
+	background-color:rgba(255,255,255,0.15);
+	border-radius:10px;
+}
+
+
+
+.template_title {
+	width:400px;
+	height:50px;
+	margin-left:auto;
+	margin-right:auto;
+	margin-top:20px;
+	text-align:center;
+	font-size:35px;
+	vertical-align:middle;
+
+}
+
+.template_thumbnail {
+	width:400px;
+	height:300px;
+	margin-left:auto;
+	margin-right:auto;
+	background-color:#fff;
+	border-radius:10px;
+}
+
+.template_thumbnail img{
+	border-radius:10px;
+}
+
+
+
+
+/* PROCCESS BAR ---------------------------------- */ 
+    ol.steps{
+		width:710px;
+		list-style:none;
+		margin:0;
+		padding:0;
+		font-size:13px;
+		line-height:20px;
+		font-weight:bold;
+		counter-reset:li;
+		margin-left:auto;
+		margin-right:auto;
+		left:0;
+		right:0;
+		margin-top:120px; 
+		position:absolute;
+		}
+		
+	ol.steps li{
+		list-style-image:none;
+		list-style-type:none;
+		margin-left:0;
+		text-align:center;
+		color:#bbbdc0;
+		background:rgba(255,255,255, 0.3);
+		position:relative;
+		margin-left:43px;
+		}
+		
+	ol.steps li:first-child{
+		width:160px;
+		margin-left:15px;
+		}
+		
+	ol.steps li:first-child span:after{
+		display:none;
+		}
+		
+	ol.steps li:after{
+		position:absolute;
+		top:50%;
+		left:100%;
+		content:" ";
+		height:0;
+		width:0;
+		pointer-events:none;
+		border:solid transparent;
+		border-left-color:rgba(255,255,255, 0.3);
+		border-width:19px;
+		margin-top:-19px
+		}
+		
+	ol.steps li span{
+		display:block;
+		padding:9px 28px 9px 9px
+		}
+		
+	ol.steps li span:after{
+		position:absolute;
+		top:50%;
+		right:100%;
+		content:" ";
+		height:0;
+		width:0;
+		pointer-events:none;
+		border:solid rgba(255,255,255, 0.3);
+		border-left-color:transparent;
+		border-width:19px;
+		margin-top:-19px
+		}
+		
+	ol.steps li span:before{
+		content:counter(li) ") ";
+		counter-increment:li
+		}
+		
+	ol.steps > li{
+		float:left
+		}
+		
+	ol.steps li.current{
+		color:#666;
+		background:#fff;
+		}
+		
+	ol.steps li.current:after{
+		border-left-color:#fff;
+		}
+		
+	ol.steps li.current span:after{
+			border-color:#fff;
+			border-left-color:transparent
+			}
+			
+	ol.steps li.step1{
+		z-index:9
+		}
+		
+	ol.steps li.step2{
+		z-index:8
+		}
+	
+	ol.steps li.step3{
+		z-index:7
+		}
+		
+	ol.steps li.step4{
+		z-index:6
+		}
+		
+	ol.steps li.step5{
+		z-index:5
+		}
+		
+	ol.steps li.step6{
+		z-index:4
+		}
+		
+	ol.steps li.step7{
+		z-index:3
+		}
+		
+	ol.steps li.step8{
+		z-index:2
+		}
+		
+	ol.steps li.step9{
+		z-index:1
+		}
+		
+	ol.steps li.step10{
+		z-index:0
+		}
+/* PROCCESS BAR ---------------------------------- */
+
+
+
+
+/* NEW BOOK PAGE EPUB AND PDF SELECTION */
+
+.new_book_page_content {
+margin-top:250px;
+margin-left:auto; 
+margin-right:auto; 
+width:700px; 
+position:absolute; 
+left:0; 
+right:0;
+}
+
+
+.epub {
+	width:250px;
+	height:300px;
+	background:rgba(255,255,255, 0.1);
+	float:left;
+	border-radius:10px;
+	background-image:url(images/epublogo.png);
+	background-position:center;
+	background-size:150px;
+	background-repeat:no-repeat;
+	-moz-transition:all 0.3s;
+    -webkit-transition:all 0.3s;
+    -o-transition:all 0.3s;
+    transition:all 0.3s;
+}
+
+.epub:hover {
+	-webkit-box-shadow: 0px 0px 60px 0px rgba(255, 255, 255, 0.4);
+	box-shadow: 0px 0px 60px 0px rgba(255, 255, 255, 0.4);	
+}
+
+
+.pdf {
+	width:250px;
+	height:300px;
+	background:rgba(255,255,255, 0.1);
+	float:right;
+	border-radius:10px;
+	background-image:url(images/pdflogo.png);
+	background-position:center;
+	background-size:150px;
+	background-repeat:no-repeat;
+	-moz-transition:all 0.3s;
+    -webkit-transition:all 0.3s;
+    -o-transition:all 0.3s;
+    transition:all 0.3s;
+}
+
+.pdf:hover {
+	-webkit-box-shadow: 0px 0px 60px 0px rgba(255, 255, 255, 0.4);
+	box-shadow: 0px 0px 60px 0px rgba(255, 255, 255, 0.4);	
+}
+
+/* NEW BOOK PAGE EPUB AND PDF SELECTION */

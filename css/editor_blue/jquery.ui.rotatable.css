@@ -1,0 +1,30 @@
+.circle {
+border-radius: 50%;
+display: inline-block;
+margin-right: 20px;
+}
+
+.ui-rotatable-handle {
+	visibility: hidden;
+}
+
+
+.selected .ui-rotatable-handle {
+	visibility: visible;
+	cursor: url(/css/images/cursor.png) 15 15, auto;
+}
+.ui-rotatable-handle {
+
+	border-radius: 50%;
+	display: inline-block;
+	margin-right: 20px;
+
+	height: 10px;
+	width: 10px;
+	cursor: pointer;
+	background-color: #39F;
+	background-size: 100%;
+	top: -19px;
+	left: 49%;
+	position: absolute;
+}
