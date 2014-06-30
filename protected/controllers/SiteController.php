@@ -220,7 +220,8 @@ class SiteController extends Controller
 	{
 		if(Yii::app()->user->name == "admin")
 			$this->redirect( array('management/index' ) );
-		
+		if(Yii::app()->user->isGuest) 
+			$this->redirect( array('/site/index' ) );
 		$meta_books= Yii::app()->db
 		    ->createCommand("SELECT * FROM user_meta WHERE user_id=:user_id AND meta_key=:meta_key ORDER BY created DESC LIMIT 7")
 		    ->bindValues(array(':user_id' => Yii::app()->user->id, ':meta_key' => 'lastEditedBook'))
@@ -661,11 +662,12 @@ class SiteController extends Controller
 		if (isset($_GET['Reset'])) {
 			$email=$_GET['Reset']['email'];
 
-		$detectSQLinjection=new detectSQLinjection($email);
+		/*$detectSQLinjection=new detectSQLinjection($email);
 		if (!$detectSQLinjection->ok()) {
 			error_log("detectSQLinjection SC:L:".$Yii::app()->user->id." email: ".$email);
 			$this->redirect('index');	
 		}
+		*/
 			$user= User::model()->find('email=:email', 
 	    				array(':email' => $email) );
 			if (!empty($user)) {
@@ -704,6 +706,8 @@ class SiteController extends Controller
 		}
 
 		// collect user input data
+		error_log(var_export($_POST,true));
+		
 		if(isset($_POST['LoginForm']))
 		{
 			$login_history=new LoginHistory;
@@ -721,8 +725,11 @@ class SiteController extends Controller
 				$login_history->status=0;
 				$login_history->message=$msg;
 				Yii::log($msg,'profile');
-				$login_history->save();
-				$this->redirect(Yii::app()->user->returnUrl);
+				error_log(var_export($login_history->attributes,true));
+
+				//$login_history->save();
+				
+				$this->redirect('index');
 			}
 			else
 			{
@@ -932,6 +939,16 @@ class SiteController extends Controller
 				Yii::log($msg,'profile');
 			}
 		}
+
+		if (isset($_SERVER['HTTP_COOKIE'])) {
+    $cookies = explode(';', $_SERVER['HTTP_COOKIE']);
+    foreach($cookies as $cookie) {
+        $parts = explode('=', $cookie);
+        $name = trim($parts[0]);
+        setcookie($name, '', time()-1000);
+        setcookie($name, '', time()-1000, '/');
+    }
+}
 		// display the login form
 		$this->render('login',array('model'=>$model,
 									'newUser'=>$newUser,

@@ -1,10 +1,16 @@
 <?php
-	
+
+if(gethostname()=='z-kitap'){
+ini_set('session.cookie_domain', 'zkitap-editor.eba.gov.tr');
+session_name('okutus_session');
+session_start();
+}	
 // uncomment the following to define a path alias
 // Yii::setPathOfAlias('local','path/to/local-folder');
 
 // This is the main Web application configuration. Any writable
 // CWebApplication properties can be configured here.
+
 
 require_once(dirname(__FILE__).'/../includes/localization.php');
 
